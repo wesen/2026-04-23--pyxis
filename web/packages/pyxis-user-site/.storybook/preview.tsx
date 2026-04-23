@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react';
 import React from 'react';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { seedArchive, seedShows, seedStats } from 'pyxis-components/mocks/handlers';
 import '../src/styles/global.css';
 import '../../pyxis-components/src/tokens/tokens.css';
 import '../../pyxis-components/src/atoms/Button/Button.css';
@@ -26,6 +27,10 @@ const preview: Preview = {
           },
         },
       });
+      queryClient.setQueryData(['shows', 'upcoming'], seedShows);
+      for (const show of seedShows) queryClient.setQueryData(['shows', show.id], show);
+      queryClient.setQueryData(['archive', undefined], seedArchive);
+      queryClient.setQueryData(['archive', 'stats'], seedStats);
 
       return (
         <QueryClientProvider client={queryClient}>
