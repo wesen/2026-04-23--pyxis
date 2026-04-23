@@ -1,27 +1,24 @@
 ---
-Title: 'Pyxis user-facing site: component system + frontend'
-Ticket: PYXIS-USER-SITE
-Status: complete
+Title: 'Pyxis: screenshot + CSS extraction from prototype HTML'
+Ticket: PYXIS-SCREENSHOT-EXTRACTION
+Status: active
 Topics:
-    - component-library
-    - storybook
-    - react
-    - frontend
-    - pnpm-workspace
     - pyxis
+    - screenshot
+    - css
+    - prototype
 DocType: index
 Intent: long-term
 Owners: []
 RelatedFiles: []
 ExternalSources: []
 Summary: ""
-LastUpdated: 2026-04-23T13:59:33.974683802-04:00
+LastUpdated: 2026-04-23T14:08:32.545556256-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
 
-
-# Pyxis user-facing site: component system + frontend
+# Pyxis: screenshot + CSS extraction from prototype HTML
 
 ## Overview
 
@@ -38,12 +35,10 @@ Current status: **active**
 
 ## Topics
 
-- component-library
-- storybook
-- react
-- frontend
-- pnpm-workspace
 - pyxis
+- screenshot
+- css
+- prototype
 
 ## Tasks
 
