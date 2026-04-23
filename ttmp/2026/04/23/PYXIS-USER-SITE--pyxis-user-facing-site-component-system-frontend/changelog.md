@@ -56,3 +56,25 @@ feat(web): scaffold workspace + build phases 1-5 — workspace, tokens, atoms, m
 - PubNav CSS import removed from component (Vite bundles all CSS into dist/style.css)
 - MSW intercepts /api/* in Storybook and tests
 - Loading skeletons and error states for all async pages
+
+## 2026-04-23 (Phase 9+10 committed as `c621e19`)
+
+### Phase 9 continued: Performance + Accessibility
+- App.tsx — lazy-loaded route chunks (code-split per page) with Suspense + PageLoader
+- robots.txt + sitemap.xml + favicon.svg in public/
+- Google Fonts preconnect in index.html
+- pyxis-components/.storybook/main.ts — removed staticDirs
+
+### Phase 10: Deployment scaffolding
+- .env.example + .env.production.example
+- vercel.json — build config, env vars, iad1 region
+- .github/workflows/preview.yml — Vercel preview + prod CI
+- web/README.md — workspace quick-start + architecture docs
+
+### Bugs fixed
+- Unused `React` import removed from App.tsx (new JSX transform)
+- Unused `ReactNode` import removed from Seo.tsx
+
+---
+
+**All phases complete** — 4 commits, 3 branches deep.

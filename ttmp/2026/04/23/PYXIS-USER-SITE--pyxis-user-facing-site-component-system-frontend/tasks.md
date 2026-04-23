@@ -15,5 +15,5 @@
 - [x] Phase 7 — API Integration: Set up API client with RTK Query, define TypeScript types, create React Query hooks, implement MSW handlers for mock data, add error handling and loading states
 - [x] Phase 8 — Pages (Part 1): Build Layout component with PubNav/PubFooter, build Shows page (/), build ShowDetail page (/shows/:id)
 - [x] Phase 8 — Pages (Part 2): Build Archive page (/archive), Book page (/book), BookSuccess page (/book/success), About page (/about), 404/error page
-- [ ] Phase 9 — Polish: Add meta tags/SEO, favicon, sitemap.xml, robots.txt, performance optimization, accessibility audit, cross-browser testing
-- [ ] Phase 10 — Deployment: Set up preview deployments (Vercel/Netlify), configure production environment variables, set up custom domain, enable analytics, set up Sentry error tracking
+- [x] Phase 9 — Polish: Add meta tags/SEO, favicon, sitemap.xml, robots.txt, performance optimization, accessibility audit, cross-browser testing
+- [x] Phase 10 — Deployment: Set up preview deployments (Vercel/Netlify), configure production environment variables, set up custom domain, enable analytics, set up Sentry error tracking
