@@ -679,3 +679,113 @@ sections:
       top_strip_near: { rgb: [255, 255, 255], tolerance: 8 }
       top_strip_not_near: { rgb: [240, 238, 233], tolerance: 8 }
 ```
+
+---
+
+## Step 7: Fix Glazed decode, preserve AI-review work, and clean css-visual-diff repo
+
+I investigated the failing `css-visual-diff run --config ...` path using the local Glazed source. The root cause was that `RunSettings` used `glazed.parameter:"..."` struct tags, while Glazed's `DecodeInto` implementation only looks for `glazed:"..."`. I fixed the tags, added a regression test that builds the real Glazed/Cobra command and runs dry-run with `--config`, and validated the full prepare smoke path.
+
+While doing that, I also found two adjacent issues: the local Geppetto/Pinocchio replacements had API drift in the LLM bootstrap code, and CSS diff mode marshaled nil `Attributes` as JavaScript `null`, causing `attrs.forEach` to throw in browser evaluation. Both were fixed. I then restored and committed the pre-existing AI-review image-client work so the repository ended clean.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Analyze and fix the css-visual-diff issues, look at the /home/manuel/workspaces/2026-04-21/hair-v2/glazed  library to gather more context."
+
+**User prompt (verbatim):** "Write a bug-report and postmortem once you fix the bug and upload it, in a textbook style (see skill) and explain what the issues were."
+
+**User prompt (verbatim):** "can you figure out what the current code is and also commit it, so that we have a clean repo?"
+
+**Assistant interpretation:** Fix the real command-path failures, use local Glazed code to understand the decoding contract, preserve/commit the current css-visual-diff worktree, and document the incident clearly.
+
+**Inferred user intent:** Make the prepare implementation usable through the actual CLI and leave both code and documentation in a clean, reviewable state.
+
+**Commit (code):** 114417b — "fix(cli): decode run config with Glazed tags"
+
+**Commit (code):** 38df841 — "feat(ai-review): wire profile-backed image client"
+
+### What I did
+
+- Read local Glazed decoding code in `/home/manuel/workspaces/2026-04-21/hair-v2/glazed/pkg/cmds/fields/initialize-struct.go`.
+- Confirmed `DecodeInto` only reads `glazed` tags, not `glazed.parameter` tags.
+- Updated `RunSettings` in `cmd/css-visual-diff/main.go` to use `glazed:"..."` tags.
+- Added `TestRunCommandDryRunDecodesConfigFlag` in `cmd/css-visual-diff/main_test.go`.
+- Fixed local Geppetto/Pinocchio API drift in `internal/cssvisualdiff/llm/bootstrap.go`.
+- Fixed nil slice marshaling in `internal/cssvisualdiff/modes/cssdiff.go` so browser JavaScript receives `[]`, not `null`.
+- Re-applied and committed the previously dirty AI-review image-client work as `38df841`.
+- Ran `go test ./...` successfully.
+- Ran an end-to-end temporary HTTP-server smoke test for `capture,cssdiff,pixeldiff`; artifacts and validation were generated successfully.
+- Wrote `reference/04-bug-report-postmortem-css-visual-diff-glazed-prepare.md`.
+
+### Why
+
+The prepare implementation was not usable if the real CLI could not decode `--config`. The fix had to happen at the Glazed command boundary, not inside prepare itself.
+
+### What worked
+
+- The local Glazed source made the tag contract explicit.
+- The regression test caught the original symptom directly.
+- The end-to-end smoke test proved the prepared page can be captured, CSS-diffed, and pixel-diffed.
+- The css-visual-diff repo is clean after the two commits.
+
+### What didn't work
+
+- The first smoke test after fixing CLI decode exposed `attrs.forEach` on `null` in CSS diff mode. That required normalizing nil Go slices to empty arrays before JSON marshaling.
+- Popping the pre-existing AI-review stash caused conflicts in `main.go` and `main_test.go`; I resolved them by preserving both the corrected `glazed:"..."` tags and the AI-review profile flags/tests.
+
+### What I learned
+
+Glazed's displayed Cobra flags are not proof that settings decode into a Go struct. The struct tag is its own contract, and this project was using an obsolete-looking tag key.
+
+### What was tricky to build
+
+The tricky part was separating three overlapping problems: Glazed settings decoding, local dependency API drift, and browser-side JavaScript errors from nil JSON arrays. Each had a different symptom and a different fix.
+
+### What warrants a second pair of eyes
+
+- Review the AI-review image client commit because it was restored from pre-existing dirty work and then committed to make the repo clean.
+- Review whether cssdiff should normalize all nil slice fields centrally rather than inside `evaluateStyle`.
+- Review whether a lint rule should reject `glazed.parameter` tags in this workspace.
+
+### What should be done in the future
+
+- Add browser-backed integration tests for `prepare.type: script` in the repo test suite, not only manual smoke tests.
+- Add a lint/search check for obsolete Glazed tag keys.
+- Run the Pyxis example against the actual prototype and Storybook.
+
+### Code review instructions
+
+Review commits:
+
+```text
+114417b fix(cli): decode run config with Glazed tags
+38df841 feat(ai-review): wire profile-backed image client
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+go test ./...
+```
+
+### Technical details
+
+The successful smoke run produced these artifact types:
+
+```text
+capture.json
+capture.md
+cssdiff.json
+cssdiff.md
+original-full.png
+original-inspect.json
+original-prepared.html
+pixeldiff.json
+pixeldiff.md
+pixeldiff_full_diff_comparison.png
+pixeldiff_full_diff_only.png
+react-full.png
+react-inspect.json
+react-prepared.html
+```

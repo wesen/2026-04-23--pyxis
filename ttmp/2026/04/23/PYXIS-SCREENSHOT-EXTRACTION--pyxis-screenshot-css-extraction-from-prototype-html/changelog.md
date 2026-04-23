@@ -118,3 +118,19 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 
 ### Known issue
 - Attempted an end-to-end CLI smoke run, but `css-visual-diff run --config=...` currently reports `Error: --config is required` despite the flag being present. This appears tied to pre-existing uncommitted CLI/AI-review changes in the css-visual-diff repository and was not fixed in the prepare commits.
+
+## 2026-04-23 — Fixed css-visual-diff CLI decode and completed postmortem
+
+### Fixed in `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff`
+- Fixed `run --config` decoding by changing `RunSettings` tags from `glazed.parameter:"..."` to `glazed:"..."` (`114417b`).
+- Added a regression test that builds the Glazed/Cobra run command and verifies `--config` dry-run decoding (`114417b`).
+- Fixed local Geppetto/Pinocchio API drift in LLM bootstrap code (`114417b`).
+- Fixed CSS diff browser evaluation when optional attributes are omitted by marshaling nil slices as empty arrays (`114417b`).
+- Restored and committed AI-review profile-backed image client work so the css-visual-diff repo is clean (`38df841`).
+
+### Added
+- Added textbook-style bug report/postmortem at `reference/04-bug-report-postmortem-css-visual-diff-glazed-prepare.md`.
+
+### Validation
+- Ran `go test ./...` successfully in css-visual-diff.
+- Ran an end-to-end local prepare smoke test with `capture,cssdiff,pixeldiff`; validation statuses were `ok` and all expected artifacts were generated.
