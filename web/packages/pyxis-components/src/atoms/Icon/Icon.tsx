@@ -59,7 +59,7 @@ const paths: Record<IconName, React.ReactNode> = {
   pin:       <><path d="M12.5 3.5 16.5 7.5M11.8 4.2 7 9l-2.2-.5c-.6-.2-1 .5-.6.9l6.4 6.4c.4.4 1.1 0 .9-.6L11 13l4.8-4.8"/><path d="m7.5 12.5-3 3"/></>,
   door:      <><rect x="5" y="3" width="10" height="14" rx=".5"/><path d="M12.5 10.5v.5"/></>,
   music:     <><path d="M8 14V5l8-1.5V13"/><circle cx="6.5" cy="14.5" r="1.6"/><circle cx="14.5" cy="13" r="1.6"/></>,
-  discord:   <><path d="M15.3 5.7a12.7 12.7 0 0 0-3.1-.9l-.2.4a10 10 0 0 0-3.5 0l-.2-.4a12.7 12.7 0 0 0-3.1.9C3 9 2.5 12 2.8 15a12.9 12.9 0 0 0 3.8 1.9l.8-1.2a8 8 0 0 1-1.2-.6l.2-.2c2.5 1.1 5.3 1.1 7.7 0l.2.2a8 8 0 0 1-1.2.6l.8 1.2a12.9 12.9 0 0 0 3.8-1.9c.4-3.2-.3-6.2-2.4-9.3Z" fill="currentColor" stroke="none"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="11" r="1.1" fill="currentColor" stroke="none"/></>,
+  discord:   <><path d="M15.3 5.7a12.7 12.7 0 0 0-3.1-.9l-.2.4a10 10 0 0 0-3.5 0l-.2-.4a12.7 12.7 0 0 0-3.1.9C3 9 2.5 12 2.8 15a12.9 12.9 0 0 0 3.8 1.9l.8-1.2a8 8 0 0 1-1.2-.6l.2-.2c2.5 1.1 5.3 1.1 7.7 0l.2.2a8 8 0 0 1-1.2.6l.8 1.2a12.9 12.9 0 0 0 3.8-1.9c.4-3.2-.3-6.2-2.4-9.3Z" fill="currentColor" stroke="none"/><circle cx="7.5" cy="11" r="1.1" fill="var(--color-canvas)" stroke="none"/><circle cx="12.5" cy="11" r="1.1" fill="var(--color-canvas)" stroke="none"/></>,
   edit:      <><path d="M4 16h3l8-8-3-3-8 8v3ZM12 5l3 3"/></>,
   trash:     <><path d="M4 6h12M8 6V4.5A1 1 0 0 1 9 3.5h2a1 1 0 0 1 1 1V6M6 6l.8 10a1 1 0 0 0 1 1h4.4a1 1 0 0 0 1-1L14 6"/></>,
   external:  <><path d="M8 4H4v12h12v-4M11 4h5v5M10 10l6-6"/></>,
@@ -232,6 +232,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
         className={clsx('pyxis-icon', `pyxis-icon--${name}`, className)}
         aria-label={ariaLabel}
         data-part={dataPart}
+        style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle' }}
       >
         {path}
       </svg>

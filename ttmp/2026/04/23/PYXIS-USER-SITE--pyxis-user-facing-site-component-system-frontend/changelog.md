@@ -83,3 +83,22 @@ feat(web): scaffold workspace + build phases 1-5 — workspace, tokens, atoms, m
 
 Ticket closed
 
+
+## 2026-04-23 — Start Storybook/page parity pass and repair atoms
+
+### Added
+- Added detailed Phase 11–16 task list for user-site Storybook coverage, atom parity, page visual-diff configs, page repair, and backend-readiness handoff.
+
+### Changed
+- Repaired atom-level prototype parity for Button, Badge, Tag, Avatar, Icon, IconButton, Input, and Select.
+- Updated the atom diff fixture to compare equivalent input states.
+
+### Validated
+- `pnpm --filter pyxis-components typecheck`
+- `11-run-pyxis-atom-diff.sh`
+
+### Result
+- Atom diff coverage: 22/22 selectors present and visible.
+- Configured CSS diffs: resolved to zero.
+- Button/badge/tag/avatar-md/icon/select pixel diffs: zero.
+- Remaining pixel noise: input-search 0.526%, input-error 0.3111%, avatar-lg 0.0434%, full 0.4769%.

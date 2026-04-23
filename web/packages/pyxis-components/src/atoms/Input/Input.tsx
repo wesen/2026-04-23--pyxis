@@ -59,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           data-has-error={hasError ? 'true' : undefined}
         >
           {icon && iconPosition === 'left' && (
-            <Icon name={icon} size={15} className="pyxis-field__icon" aria-hidden />
+            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden />
           )}
           <input
             ref={ref}
@@ -73,7 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...rest}
           />
           {icon && iconPosition === 'right' && (
-            <Icon name={icon} size={15} className="pyxis-field__icon" aria-hidden />
+            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden />
           )}
         </div>
         {hasError && (

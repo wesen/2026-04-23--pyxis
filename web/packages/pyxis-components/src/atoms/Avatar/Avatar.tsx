@@ -10,7 +10,7 @@ export type AvatarProps = {
 };
 
 const sizeMap = { sm: 28, md: 36, lg: 48, xl: 64 };
-const fontMap = { sm: 11, md: 13, lg: 16, xl: 22 };
+const fontMap = { sm: 11.2, md: 14.4, lg: 19.2, xl: 25.6 };
 
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
@@ -32,8 +32,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           width: dim, height: dim, borderRadius: '50%',
           background: color ?? 'var(--color-ink)',
           color: 'var(--color-text-inverse)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: fs, fontWeight: 500, flexShrink: 0,
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: fs, fontWeight: 600, letterSpacing: '.02em', flexShrink: 0,
           fontFamily: 'var(--font-body)',
         }}
         aria-label={name}

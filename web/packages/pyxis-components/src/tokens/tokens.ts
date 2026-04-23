@@ -205,9 +205,9 @@ export const buttonVariants = {
 export type ButtonVariant = keyof typeof buttonVariants;
 
 export const buttonSizes = {
-  sm: { height: 32, padding: '5px 12px',  fontSize: text.sm  },
-  md: { height: 40, padding: '7px 16px', fontSize: text.base },
-  lg: { height: 48, padding: '11px 22px', fontSize: text.lg  },
+  sm: { height: 'auto', padding: '6px 12px',  fontSize: '12px' },
+  md: { height: 'auto', padding: '8px 16px',  fontSize: text.sm },
+  lg: { height: 'auto', padding: '11px 22px', fontSize: text.sm },
 } as const;
 
 export type ButtonSize = keyof typeof buttonSizes;

@@ -21,21 +21,21 @@
 /* ─── Sizes ─────────────────────────────────────────── */
 
 [data-part='btn'][data-size='sm'] {
-  height: 32px;
-  padding: 5px 12px;
-  font-size: var(--text-sm);
+  height: auto;
+  padding: 6px 12px;
+  font-size: 12px;
 }
 
 [data-part='btn'][data-size='md'] {
-  height: 40px;
-  padding: 7px 16px;
-  font-size: var(--text-base);
+  height: auto;
+  padding: 8px 16px;
+  font-size: var(--text-sm);
 }
 
 [data-part='btn'][data-size='lg'] {
-  height: 48px;
+  height: auto;
   padding: 11px 22px;
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
 }
 
 /* ─── Variants ────────────────────────────────────────── */

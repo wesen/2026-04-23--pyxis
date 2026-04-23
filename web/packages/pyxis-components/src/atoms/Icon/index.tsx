@@ -22,7 +22,7 @@ export type IconButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ icon, size = 'md', label, tooltip, className, 'data-part': dataPart, ...rest }, ref) => {
-    const dimMap = { sm: 28, md: 32, lg: 40 } as const;
+    const dimMap = { sm: 28, md: 30, lg: 40 } as const;
     const dim = dimMap[size];
 
     return (
@@ -36,7 +36,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         style={{ width: dim, height: dim }}
         {...rest}
       >
-        <Icon name={icon} size={Math.max(12, dim - 8)} aria-hidden />
+        <Icon name={icon} size={dim / 2} aria-hidden />
       </button>
     );
   }

@@ -207,3 +207,77 @@ Committed Phase 7 as `536c7b1`.
 4. Vite CSS bundling: `import './PubNav.css'` in dist'd PubNav.js can't resolve → removed CSS import, all CSS goes into dist/style.css
 
 ### Next: Phase 9 (Polish) + Phase 10 (Deployment)
+
+---
+
+## Step 12: Start prototype-parity repair with atom components
+
+The next phase is to make the whole public site Storybook-covered and visually close to the prototype before wiring the real backend. I first added a detailed task breakdown to the user-site ticket covering Storybook infrastructure, atom parity, every public page in desktop/mobile, page-level visual-diff configs, and backend-readiness handoff.
+
+Then I repaired the atom-level components against the prototype fixture using the atom `css-visual-diff` report. This was the right starting point because button, badge, tag, input, select, icon, and avatar differences would otherwise create noise in every page-level screenshot.
+
+### Prompt Context
+
+**User prompt (verbatim):** "alright, continue fixing it all. Feel free to add more stories to the storybook, for all the pages in Pyxis Public.html . We want the whole page covered in storybook before we wire it up with the real backend. Add detailed list of tasks to the ticket to cover all the pages and then work through them task by task, using the tools you built, committing at appropriate intervals, keeping a frequent diary."
+
+**Assistant interpretation:** Create an explicit page-by-page Storybook/visual-parity task plan, then start working through it with the existing atom/page visual-diff tools.
+
+### What changed
+
+- Added detailed Phase 11–16 task plan to `PYXIS-USER-SITE/tasks.md`.
+- Cross-linked Storybook readiness subtasks in `PYXIS-SCREENSHOT-EXTRACTION/tasks.md`.
+- Repaired atom parity for:
+  - `Button`
+  - `Badge`
+  - `Tag`
+  - `Avatar`
+  - `Icon`
+  - `IconButton`
+  - `Input`
+  - `Select`
+- Adjusted the atom diff fixture so the React `input-error` example matches the prototype fixture state instead of adding an unmatched error message.
+
+### Commands run
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis/web
+pnpm --filter pyxis-components typecheck
+
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/11-run-pyxis-atom-diff.sh
+```
+
+### Results
+
+The atom diff report now has all configured computed CSS diffs resolved to zero. Remaining pixel differences are very small and likely come from browser antialiasing/native input rendering:
+
+```text
+input-search 0.5260%
+full         0.4769%
+input-error  0.3111%
+avatar-lg    0.0434%
+all buttons  0.0000%
+badges       0.0000%
+tags         0.0000%
+avatar-md    0.0000%
+icons        0.0000% except residual fixture/full antialiasing
+select       0.0000%
+```
+
+Coverage stayed clean:
+
+```text
+total: 22
+original_missing: 0
+react_missing: 0
+original_hidden: 0
+react_hidden: 0
+```
+
+### Notes
+
+One important finding: the `llm-review` test that used `react-prepared.html` showed a false `border-radius: 0px`/`font-weight: 400` issue because prepared HTML does not carry the Storybook CSS variable definitions. The live atom `cssdiff.json` showed the true state. For CSS repair, the live atom report is the source of truth; standalone prepared HTML needs embedded token CSS before it can be used for accurate recapture.
+
+### Next
+
+Commit the atom parity repair, then move to Storybook infrastructure/page coverage for all public pages: shows, detail, archive, book, and about in desktop and mobile sizes.

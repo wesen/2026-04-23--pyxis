@@ -3,14 +3,16 @@
 [data-part='field'] {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 /* Label */
 .pyxis-field__label {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  color: var(--color-text-primary);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .06em;
 }
 
 .pyxis-field__label[data-has-error='true'] {
@@ -25,11 +27,11 @@
 }
 
 .pyxis-field__input-wrap[data-icon='left'] .pyxis-field__input {
-  padding-left: 36px;
+  padding-left: 32px;
 }
 
 .pyxis-field__input-wrap[data-icon='right'] .pyxis-field__input {
-  padding-right: 36px;
+  padding-right: 32px;
 }
 
 /* Icon inside input */
@@ -40,11 +42,11 @@
 }
 
 .pyxis-field__input-wrap[data-icon='left'] .pyxis-field__icon {
-  left: 11px;
+  left: 10px;
 }
 
 .pyxis-field__input-wrap[data-icon='right'] .pyxis-field__icon {
-  right: 11px;
+  right: 10px;
 }
 
 /* Base input */
@@ -52,8 +54,8 @@
   width: 100%;
   padding: 8px 11px;
   font-family: inherit;
-  font-size: var(--text-base);
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: normal;
   color: var(--color-text-primary);
   background: var(--color-surface-raised);
   border: 1px solid var(--color-border);

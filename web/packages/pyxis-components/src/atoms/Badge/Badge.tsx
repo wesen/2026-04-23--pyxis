@@ -39,10 +39,10 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
           gap: '5px',
           background: bg,
           color: fg,
-          fontSize: 'var(--text-xs)',
+          fontSize: '11px',
           fontWeight: 'var(--weight-medium)',
           padding: '2px 9px',
-          borderRadius: 'var(--radius-full)',
+          borderRadius: '999px',
           whiteSpace: 'nowrap',
           lineHeight: 1.6,
         }}

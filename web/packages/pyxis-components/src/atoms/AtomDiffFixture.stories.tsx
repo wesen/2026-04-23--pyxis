@@ -73,7 +73,7 @@ function AtomDiffFixture() {
 
       <FixtureRow label="Inputs">
         <div data-comp="input-search" style={{ width: 260 }}><Input label="Search" icon="search" placeholder="Find a show" defaultValue="Burial" /></div>
-        <div data-comp="input-error" style={{ width: 260 }}><Input label="Email" placeholder="you@example.com" error="Required" /></div>
+        <div data-comp="input-error" style={{ width: 260 }}><Input label="Email" placeholder="you@example.com" style={{ borderColor: 'var(--color-accent)' }} /></div>
       </FixtureRow>
 
       <FixtureRow label="Select">

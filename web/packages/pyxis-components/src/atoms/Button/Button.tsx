@@ -44,8 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const v = buttonVariants[variant];
     const s = buttonSizes[size];
     const isDisabled = disabled || isLoading;
-    // Convert rem fontSize string to px number for Icon size prop
-    const iconSize = parseFloat(s.fontSize.replace('rem', '')) * 16 + 2;
+    const iconSize = getIconSizeFromFontSize(s.fontSize);
 
     return (
       <button
@@ -93,6 +92,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 /* ─── Spinner ──────────────────────────────────────────── */
+
+function getIconSizeFromFontSize(fontSize: string) {
+  const numeric = parseFloat(fontSize);
+  if (Number.isNaN(numeric)) return 15;
+  return fontSize.endsWith('rem') ? numeric * 16 + 2 : numeric + 2;
+}
 
 function Spinner() {
   return (

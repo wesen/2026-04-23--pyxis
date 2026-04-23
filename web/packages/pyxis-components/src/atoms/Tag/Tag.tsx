@@ -24,15 +24,15 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
       className={clsx('pyxis-tag', className)}
       data-part={dataPart ?? 'tag'}
       style={{
-        display: 'inline-block',
-        fontSize: 'var(--text-xs)',
+        display: 'inline',
+        fontSize: '11px',
         color: color ?? 'var(--color-text-secondary)',
         background: 'var(--color-surface-raised)',
         border: '1px solid var(--color-border)',
         padding: '2px 8px',
         borderRadius: 'var(--radius-xs)',
         whiteSpace: 'nowrap',
-        lineHeight: 1.6,
+        lineHeight: 'normal',
       }}
     >
       {children}

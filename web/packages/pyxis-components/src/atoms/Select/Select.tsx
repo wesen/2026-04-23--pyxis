@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
-import { Icon } from '../Icon';
 
 export type SelectProps = Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> & {
   label?: string;
@@ -23,7 +22,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {placeholder && <option value="">{placeholder}</option>}
             {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
-          <Icon name="chevron-down" size={14} className="pyxis-field__select-icon" aria-hidden />
         </div>
         {hasError && <span className="pyxis-field__message" data-status="error">{error}</span>}
         {!hasError && hint && <span className="pyxis-field__message">{hint}</span>}

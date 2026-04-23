@@ -1,11 +1,11 @@
 /* Select — shares field styles, adds custom arrow */
 [data-part='select'] {
-  appearance: none;
+  appearance: auto;
   width: 100%;
-  padding: 8px 36px 8px 11px;
+  padding: 8px 11px;
   font-family: inherit;
-  font-size: var(--text-base);
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: normal;
   color: var(--color-text-primary);
   background: var(--color-surface-raised);
   border: 1px solid var(--color-border);
@@ -24,6 +24,7 @@
   align-items: center;
 }
 .pyxis-field__select-icon {
+  display: none;
   position: absolute;
   right: 11px;
   color: var(--color-text-tertiary);

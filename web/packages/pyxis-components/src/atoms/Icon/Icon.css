@@ -50,8 +50,8 @@
 }
 
 [data-part='icon-btn'][data-size='md'] {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
 }
 
 [data-part='icon-btn'][data-size='lg'] {
