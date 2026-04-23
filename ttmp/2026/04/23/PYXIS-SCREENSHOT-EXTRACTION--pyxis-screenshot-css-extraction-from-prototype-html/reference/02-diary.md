@@ -1266,3 +1266,26 @@ http://localhost:8794/test.html
 ### Why this exists
 
 The full `css-visual-diff` reports are still the source of truth, but they are heavy and focused on one comparison config. This overview gives a compact manual review page that is easy to open while iterating on page parity.
+
+---
+
+## Step 17: Store next-developer handoff instructions in the ticket
+
+A new long-form handoff/playbook was created specifically for the next developer continuing the Pyxis parity work. This document focuses on practical continuation rather than historical narrative. It explains:
+
+- how to start the right servers,
+- how to run prototype-only, atom-level, and page-level comparisons,
+- how to capture a section from Storybook or from HTML,
+- how to choose selectors,
+- where CSS variables live,
+- how to update tokens safely,
+- how to interpret `test.html`, `cssdiff`, and matched-styles outputs,
+- and what the current next implementation target is.
+
+New document:
+
+```text
+playbooks/01-next-developer-handoff-visual-comparison-and-storybook-parity.md
+```
+
+This complements the broader comparison playbook and the longer css-visual-diff project report in the Obsidian vault. The ticket-local handoff is the project-facing continuation note.

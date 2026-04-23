@@ -212,3 +212,15 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 ### Result
 - Served compact overview at `http://localhost:8794/test.html`.
 - Page lists all added public page stories and embeds current Shows Desktop A/B image triptychs.
+
+## 2026-04-23 — Add next-developer handoff playbook
+
+### Added
+- Added `playbooks/01-next-developer-handoff-visual-comparison-and-storybook-parity.md`.
+
+### Contents
+- Exact commands and ports for prototype, Storybook, reports, and A/B overview.
+- How to capture sections from Storybook or arbitrary HTML targets.
+- Selector guidance and current Storybook page coverage.
+- Where tokens and CSS variables are defined and how to update them safely.
+- Current parity status and the simplest continuation recipe.
