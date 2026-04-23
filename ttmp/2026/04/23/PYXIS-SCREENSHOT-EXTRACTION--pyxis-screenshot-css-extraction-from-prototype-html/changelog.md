@@ -170,3 +170,22 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 
 ### Notes
 - The React `main` section currently fails the configured text expectation `Upcoming`; this is evidence for the next repair phase, not a blocker for the report.
+
+## 2026-04-23 — Atom-level prototype-vs-Storybook diff
+
+### Added
+- Added `web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx`.
+- Added `scripts/10-atom-original-prepare.js` for prototype-side atom rendering.
+- Added `scripts/11-run-pyxis-atom-diff.sh` to run isolated atom diffs.
+- Added `scripts/12-serve-atom-diff-report.sh` to serve the atom report.
+- Added css-visual-diff config `examples/pyxis-atoms-prototype-vs-storybook.yaml` in the css-visual-diff repo (`155f685`).
+
+### Ran
+- Ran `pnpm --filter pyxis-components typecheck`.
+- Ran `11-run-pyxis-atom-diff.sh`.
+- Served `http://localhost:8792/test.html`.
+
+### Results
+- Coverage: 22/22 selectors present and visible.
+- Largest pixel diffs: icons, buttons, tags, badges.
+- Main CSS diffs: button height/font size, badge/tag font size/line-height, avatar font metrics, input/select padding/font size.

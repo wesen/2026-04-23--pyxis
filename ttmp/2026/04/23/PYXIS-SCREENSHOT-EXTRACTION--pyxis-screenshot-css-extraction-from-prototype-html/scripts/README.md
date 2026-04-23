@@ -29,6 +29,9 @@ the sequence of the investigation and follow-up comparison runs.
 - `07-pyxis-app-server.mjs` — static/API server for the built `pyxis-user-site` app with local SVG flyer data URLs to avoid external image hangs.
 - `08-run-pyxis-prototype-vs-app.sh` — build the app, serve it, and run the real prepared-prototype-vs-current-app comparison.
 - `09-serve-css-visual-diff-report.sh` — serve a generated report directory and expose `test.html` in the browser.
+- `10-atom-original-prepare.js` — prototype-side atom fixture renderer used by css-visual-diff `prepare.script_file`.
+- `11-run-pyxis-atom-diff.sh` — restart Storybook, then compare prototype atoms vs Storybook atoms.
+- `12-serve-atom-diff-report.sh` — serve the atom diff report at `test.html`.
 
 ## Scripts
 

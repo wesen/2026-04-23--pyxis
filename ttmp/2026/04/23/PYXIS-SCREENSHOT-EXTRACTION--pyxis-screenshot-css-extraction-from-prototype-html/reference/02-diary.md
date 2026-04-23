@@ -1012,3 +1012,137 @@ Then open:
 ```text
 http://localhost:8789/test.html
 ```
+
+---
+
+## Step 10: Run atom-level prototype-vs-Storybook diffs
+
+After validating the full-page report, the user suggested moving to smaller atoms first: avatar, button, badge, icon, input, select, tag, and related variants. I added a Storybook atom fixture that renders these components in isolation with stable `data-comp` selectors, then added numbered scripts and a css-visual-diff config to compare that Storybook fixture against a prototype-rendered atom fixture.
+
+This lets us repair low-level tokens and atom styles before debugging page layout. The first atom run produced a much more actionable list of differences: button heights/font sizes, badge/tag font sizes and line heights, input/select padding, avatar font weight, icon display behavior, and icon-button dimensions.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, let's do diff on avatar / button / badge / icon / input / select / tag  etc... because that will make things simpler."
+
+**Assistant interpretation:** Build and run atom-level visual/CSS diffs before fixing page-level CSS.
+
+**Inferred user intent:** Reduce the problem from whole-page mismatch to smaller component-level deltas that can be fixed systematically.
+
+**Commit (code):** pending — Pyxis Storybook fixture and scripts will be committed after this diary update.
+
+**Commit (css-visual-diff):** 155f685 — "docs(examples): add Pyxis atom diff config"
+
+### What I did
+
+- Added `web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx`.
+- Added `scripts/10-atom-original-prepare.js`, the prototype-side atom fixture used by css-visual-diff `prepare.script_file`.
+- Added `scripts/11-run-pyxis-atom-diff.sh`, which restarts Storybook, waits for the fixture story, and runs css-visual-diff.
+- Added `scripts/12-serve-atom-diff-report.sh`, which serves the atom report as `test.html`.
+- Added `examples/pyxis-atoms-prototype-vs-storybook.yaml` to css-visual-diff.
+- Ran `pnpm --filter pyxis-components typecheck` successfully.
+- Ran the atom diff successfully.
+- Served the atom report at `http://localhost:8792/test.html`.
+
+### Why
+
+The page-level diff is useful but too broad. Atom-level diffs reveal token and primitive component mismatches that affect every page. Fixing atoms first should reduce noise in later page-level diffs.
+
+### What worked
+
+The atom run completed successfully:
+
+```text
+capture: ok
+cssdiff: ok
+pixeldiff: ok
+html-report: ok
+coverage total: 22
+missing/hidden: 0
+```
+
+Report:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-atoms-prototype-vs-storybook/test.html
+```
+
+Served URL:
+
+```text
+http://localhost:8792/test.html
+```
+
+Top pixel diffs:
+
+```text
+icon-calendar   45.8333%
+icon-ticket     35.2083%
+button-primary  33.2812%
+button-success  32.7778%
+button-dark     29.7348%
+tag-default     27.8933%
+tag-accent      27.5294%
+badge-confirmed 25.7978%
+badge-archived  24.9114%
+icon-discord    23.7500%
+```
+
+CSS diffs showed actionable primitive mismatches:
+
+```text
+button-primary: height 33.5938px -> 40px; font-size 13px -> 14px; line-height 15.6px -> 16.8px
+badge-confirmed: font-size 11px -> 12px; line-height 17.6px -> 19.2px
+tag-default: display inline -> inline-block; font-size 11px -> 12px
+avatar-md: font-size 14.4px -> 13px; font-weight 600 -> 500
+input-search: left padding 32px -> 36px; font-size 13px -> 14px
+select-status: padding 8px 11px -> 8px 36px 8px 11px; font-size 13px -> 14px
+```
+
+### What didn't work
+
+The first typecheck failed because `IconButton` requires a `label` prop, not just `aria-label`. I fixed the fixture to use:
+
+```tsx
+<IconButton icon="edit" label="Edit" />
+```
+
+### What I learned
+
+The atom comparison confirms that several React atoms intentionally or accidentally drifted from the prototype tokens. The biggest primitive deltas are not layout bugs; they are token/size differences.
+
+### What was tricky to build
+
+The prototype fixture has to be rendered through a plain JavaScript prepare script because `css-visual-diff` evaluates it in the browser, not through Babel/TSX. I used `React.createElement` and the prototype globals (`window.Btn`, `window.Badge`, `window.Input`, etc.) exported by `prototype-design/lib/components.jsx`.
+
+### What warrants a second pair of eyes
+
+- Whether React should match the prototype exactly for atoms or preserve the larger 40px design-system button height.
+- Whether input/select CSS files should be imported globally by the component library rather than only in the fixture/story.
+- Whether icon pixel diffs are meaningful; SVG antialiasing and fill differences may inflate the percentages.
+
+### What should be done in the future
+
+- Inspect `http://localhost:8792/test.html`.
+- Decide which atom differences are intentional and which should be corrected.
+- Fix atom tokens/styles before returning to full-page page diffs.
+
+### Code review instructions
+
+Review:
+
+```text
+web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx
+ttmp/.../scripts/10-atom-original-prepare.js
+ttmp/.../scripts/11-run-pyxis-atom-diff.sh
+ttmp/.../scripts/12-serve-atom-diff-report.sh
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/pyxis-atoms-prototype-vs-storybook.yaml
+```
+
+Re-run with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/11-run-pyxis-atom-diff.sh
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/12-serve-atom-diff-report.sh
+```
