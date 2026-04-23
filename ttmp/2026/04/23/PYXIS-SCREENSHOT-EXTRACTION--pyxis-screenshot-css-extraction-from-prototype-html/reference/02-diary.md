@@ -1213,3 +1213,56 @@ ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-fro
 ```
 
 Check that a new contributor can follow the commands without needing conversation context.
+
+---
+
+## Step 16: Build lightweight Storybook A/B overview page in ticket `escripts/`
+
+The user asked for a small HTML page like the earlier artifact reports that answers two questions quickly:
+
+1. which new public-page Storybook stories exist, and
+2. what does the current prototype-vs-Storybook A/B look like.
+
+To support that, I created a new `escripts/` folder under the screenshot-extraction ticket and stored the new helper scripts there instead of the older `scripts/` folder.
+
+New scripts:
+
+```text
+escripts/15-build-storybook-ab-overview.sh
+escripts/16-serve-storybook-ab-overview.sh
+```
+
+### What the overview does
+
+- Reads the built `pyxis-user-site` Storybook `index.json`.
+- Lists all `Public Site/Pages` story IDs and links.
+- Copies the current Shows Desktop prototype-vs-Storybook images into a ticket-local `various/storybook-ab-overview/assets/` folder.
+- Writes a lightweight static `test.html` / `index.html` page showing:
+  - the added story list,
+  - current Shows Desktop pixel-diff summary,
+  - A/B images for full page, main content, and navigation.
+
+### Commands run
+
+```bash
+escripts/15-build-storybook-ab-overview.sh
+escripts/16-serve-storybook-ab-overview.sh
+```
+
+### Output
+
+Built page:
+
+```text
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/various/storybook-ab-overview/test.html
+```
+
+Served at:
+
+```text
+http://localhost:8794/test.html
+```
+
+### Why this exists
+
+The full `css-visual-diff` reports are still the source of truth, but they are heavy and focused on one comparison config. This overview gives a compact manual review page that is easy to open while iterating on page parity.

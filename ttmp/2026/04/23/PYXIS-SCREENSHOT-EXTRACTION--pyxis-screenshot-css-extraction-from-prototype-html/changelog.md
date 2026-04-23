@@ -201,3 +201,14 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Explains how to read `test.html`, CSS diffs, pixel diffs, validation, and generated artifacts.
 - Gives recommended repair order and common failure modes.
 - Lists quick commands and a pre-fix checklist for new contributors.
+
+## 2026-04-23 — Add Storybook A/B overview page
+
+### Added
+- Added `escripts/15-build-storybook-ab-overview.sh`.
+- Added `escripts/16-serve-storybook-ab-overview.sh`.
+- Added lightweight manual review page under `various/storybook-ab-overview/test.html`.
+
+### Result
+- Served compact overview at `http://localhost:8794/test.html`.
+- Page lists all added public page stories and embeds current Shows Desktop A/B image triptychs.
