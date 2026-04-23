@@ -38,6 +38,39 @@ export type { TopBarProps } from './organisms/TopBar';
 export { Modal } from './organisms/Modal';
 export type { ModalProps } from './organisms/Modal';
 
+// Public site components
+export { PubNav } from './public/PubNav';
+export type { PubNavProps } from './public/PubNav';
+export { PubFooter } from './public/PubFooter';
+export { PubHero } from './public/PubHero';
+export type { PubHeroProps } from './public/PubHero';
+export { PubShowRow } from './public/PubShowRow';
+export type { PubShowRowProps } from './public/PubShowRow';
+export { LineupRow } from './public/LineupRow';
+export type { LineupRowProps } from './public/LineupRow';
+export { TicketStub } from './public/TicketStub';
+export type { TicketStubProps } from './public/TicketStub';
+export { VenueCard } from './public/VenueCard';
+export type { VenueCardProps } from './public/VenueCard';
+export { BookingForm } from './public/BookingForm';
+export type { BookingFormProps } from './public/BookingForm';
+export { BookingSuccess } from './public/BookingSuccess';
+export type { BookingSuccessProps } from './public/BookingSuccess';
+export { MailingListCTA } from './public/MailingListCTA';
+export type { MailingListCTAProps } from './public/MailingListCTA';
+export { ArchiveStats } from './public/ArchiveStats';
+export type { ArchiveStatsProps } from './public/ArchiveStats';
+export { YearGroup } from './public/YearGroup';
+export type { YearGroupProps } from './public/YearGroup';
+export { SpaceInfo } from './public/SpaceInfo';
+export type { SpaceInfoProps } from './public/SpaceInfo';
+export { BookingRules } from './public/BookingRules';
+export type { BookingRulesProps } from './public/BookingRules';
+export { AboutHero } from './public/AboutHero';
+export type { AboutHeroProps } from './public/AboutHero';
+export { EthosStrip } from './public/EthosStrip';
+export type { EthosStripProps } from './public/EthosStrip';
+
 // Tokens
 export {
   tokens, color, font, radius, shadow, space, text, leading, tracking,
