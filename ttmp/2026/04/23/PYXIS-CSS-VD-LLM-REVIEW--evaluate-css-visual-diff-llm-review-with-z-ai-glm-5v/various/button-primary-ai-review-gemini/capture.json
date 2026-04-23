@@ -1,0 +1,131 @@
+{
+  "original": {
+    "name": "prototype-prepared-atoms",
+    "url": "http://localhost:8792/original-prepared.html",
+    "full_screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-CSS-VD-LLM-REVIEW--evaluate-css-visual-diff-llm-review-with-z-ai-glm-5v/various/button-primary-ai-review-gemini/original-full.png",
+    "sections": [
+      {
+        "name": "button-primary",
+        "selector": "[data-comp='button-primary']",
+        "exists": true,
+        "visible": true,
+        "bounds": {
+          "x": 178,
+          "y": 77,
+          "width": 117.421875,
+          "height": 33.59375
+        },
+        "text_start": "Get tickets",
+        "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-CSS-VD-LLM-REVIEW--evaluate-css-visual-diff-llm-review-with-z-ai-glm-5v/various/button-primary-ai-review-gemini/original-button-primary.png",
+        "png": {
+          "width": 117,
+          "height": 34,
+          "top_strip_average": [
+            204,
+            57,
+            33
+          ],
+          "bottom_strip_average": [
+            204,
+            58,
+            34
+          ]
+        }
+      }
+    ]
+  },
+  "react": {
+    "name": "storybook-prepared-atoms",
+    "url": "http://localhost:8792/react-prepared.html",
+    "full_screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-CSS-VD-LLM-REVIEW--evaluate-css-visual-diff-llm-review-with-z-ai-glm-5v/various/button-primary-ai-review-gemini/react-full.png",
+    "sections": [
+      {
+        "name": "button-primary",
+        "selector": "[data-comp='button-primary']",
+        "exists": true,
+        "visible": true,
+        "bounds": {
+          "x": 178,
+          "y": 77,
+          "width": 123.140625,
+          "height": 40
+        },
+        "text_start": "Get tickets",
+        "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-CSS-VD-LLM-REVIEW--evaluate-css-visual-diff-llm-review-with-z-ai-glm-5v/various/button-primary-ai-review-gemini/react-button-primary.png",
+        "png": {
+          "width": 123,
+          "height": 40,
+          "top_strip_average": [
+            202,
+            48,
+            23
+          ],
+          "bottom_strip_average": [
+            203,
+            51,
+            26
+          ]
+        }
+      }
+    ]
+  },
+  "coverage": {
+    "total": 1,
+    "original_missing": 0,
+    "react_missing": 0,
+    "original_hidden": 0,
+    "react_hidden": 0
+  },
+  "validation": [
+    {
+      "target": "original",
+      "section": "button-primary",
+      "status": "ok",
+      "png": {
+        "width": 117,
+        "height": 34,
+        "top_strip_average": [
+          204,
+          57,
+          33
+        ],
+        "bottom_strip_average": [
+          204,
+          58,
+          34
+        ]
+      },
+      "bounds": {
+        "x": 178,
+        "y": 77,
+        "width": 117.421875,
+        "height": 33.59375
+      }
+    },
+    {
+      "target": "react",
+      "section": "button-primary",
+      "status": "ok",
+      "png": {
+        "width": 123,
+        "height": 40,
+        "top_strip_average": [
+          202,
+          48,
+          23
+        ],
+        "bottom_strip_average": [
+          203,
+          51,
+          26
+        ]
+      },
+      "bounds": {
+        "x": 178,
+        "y": 77,
+        "width": 123.140625,
+        "height": 40
+      }
+    }
+  ]
+}

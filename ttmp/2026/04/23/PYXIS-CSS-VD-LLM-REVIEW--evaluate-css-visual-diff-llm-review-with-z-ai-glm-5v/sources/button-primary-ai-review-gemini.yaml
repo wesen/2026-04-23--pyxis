@@ -1,0 +1,38 @@
+metadata:
+  slug: pyxis-button-primary-ai-review-gemini
+  title: Pyxis button-primary AI review smoke test
+  description: Minimal css-visual-diff run-mode ai-review test using prepared atom fixture HTML.
+
+original:
+  name: prototype-prepared-atoms
+  url: http://localhost:8792/original-prepared.html
+  wait_ms: 500
+  viewport:
+    width: 1200
+    height: 1200
+
+react:
+  name: storybook-prepared-atoms
+  url: http://localhost:8792/react-prepared.html
+  wait_ms: 500
+  viewport:
+    width: 1200
+    height: 1200
+
+sections:
+  - name: button-primary
+    selector: "[data-comp='button-primary']"
+    ocr_question: "Describe this primary button visually. Mention size, label, colors, icon/arrow, and any visible CSS issues. Do not compare to the other target; only describe this screenshot."
+
+output:
+  dir: ../various/button-primary-ai-review-gemini
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: false
+  write_inspect_json: false
+  validate_pngs: true
+
+modes:
+  - capture
+  - ai-review

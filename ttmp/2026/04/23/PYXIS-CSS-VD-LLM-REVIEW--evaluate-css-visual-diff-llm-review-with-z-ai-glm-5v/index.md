@@ -1,0 +1,60 @@
+---
+Title: Evaluate css-visual-diff LLM Review with Z.ai GLM-5V
+Ticket: PYXIS-CSS-VD-LLM-REVIEW
+Status: active
+Topics:
+    - pyxis
+    - css-visual-diff
+    - llm
+    - visual-regression
+    - z-ai
+DocType: index
+Intent: long-term
+Owners: []
+RelatedFiles: []
+ExternalSources: []
+Summary: ""
+LastUpdated: 2026-04-23T17:02:02.697239524-04:00
+WhatFor: ""
+WhenToUse: ""
+---
+
+# Evaluate css-visual-diff LLM Review with Z.ai GLM-5V
+
+## Overview
+
+<!-- Provide a brief overview of the ticket, its goals, and current status -->
+
+## Key Links
+
+- **Related Files**: See frontmatter RelatedFiles field
+- **External Sources**: See frontmatter ExternalSources field
+
+## Status
+
+Current status: **active**
+
+## Topics
+
+- pyxis
+- css-visual-diff
+- llm
+- visual-regression
+- z-ai
+
+## Tasks
+
+See [tasks.md](./tasks.md) for the current task list.
+
+## Changelog
+
+See [changelog.md](./changelog.md) for recent changes and decisions.
+
+## Structure
+
+- design/ - Architecture and design documents
+- reference/ - Prompt packs, API contracts, context summaries
+- playbooks/ - Command sequences and test procedures
+- scripts/ - Temporary code and tooling
+- various/ - Working notes and research
+- archive/ - Deprecated or reference-only artifacts
