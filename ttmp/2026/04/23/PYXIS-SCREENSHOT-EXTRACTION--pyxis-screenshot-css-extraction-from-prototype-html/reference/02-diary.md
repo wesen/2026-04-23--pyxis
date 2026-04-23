@@ -403,3 +403,67 @@ GOWORK=off go run ./cmd/css-visual-diff --help
 GOWORK=off go run ./cmd/css-visual-diff compare --help
 GOWORK=off go run ./cmd/css-visual-diff run --help
 ```
+
+---
+
+## Step 5: Prepare hook and PNG export implementation guide
+
+I wrote a focused implementation guide for adding `prepare` hooks and robust PNG export/validation to `css-visual-diff`. The guide turns the earlier architecture discussion into concrete tasks: config structs, validation rules, driver helpers, prepare execution, mode wiring, root-selector screenshots, prepared HTML export, inspect JSON export, DOM validation, PNG validation, and Pyxis example config.
+
+A key correction from the user was to avoid reaching for Tesseract/OCR as the first-line way to validate screenshots. The guide now explicitly recommends DOM validation first, PNG structural checks second, `understand_image` or human visual review for semantic screenshot correctness, and OCR only as a later optional CI fallback.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, let's create an implementation guide and detailed tasks to implement the prepare and png export (if necessary) in css-visual-diff, in detail. Also make sure that we properly analyze the images (no need to use understand_images if you need to take a look yourself, because it will make it easier to recognize cutoff stuff)."
+
+**Assistant interpretation:** Create a precise implementation guide and task list for adding prepare hooks and reliable screenshot export/validation to css-visual-diff.
+
+**Inferred user intent:** The user wants the next engineer to be able to implement the feature without rediscovering the DesignCanvas failure mode or trusting bad PNGs.
+
+**Commit (code):** pending — documentation/tasks update will be committed after upload.
+
+### What I did
+
+- Wrote `design/03-css-visual-diff-prepare-and-png-export-implementation-guide.md`.
+- Added a 15-phase implementation task list to `tasks.md`.
+- Included detailed pseudocode for `PrepareSpec`, `prepareTarget`, `script` prepare, `direct-react-global` prepare, PNG validation, and DOM text validation.
+- Added explicit image validation guidance prioritizing DOM checks and `understand_image` over OCR/Tesseract.
+
+### Why
+
+The previous docs explained the architecture but did not yet give a concrete implementation checklist. This guide is meant to let an intern or implementer start making changes in `css-visual-diff` directly.
+
+### What worked
+
+- The existing `css-visual-diff` code structure maps cleanly to phases: config, driver, modes, tests.
+- The Pyxis failure case gives concrete acceptance criteria: original full screenshot must start with the real `ppxis` header and include the footer.
+
+### What didn't work
+
+- No code was implemented yet; this is a design/task handoff document.
+
+### What I learned
+
+Image validation should be layered. Correct image dimensions are necessary but insufficient. For screenshot correctness, combine DOM expectations, PNG stats, and visual review.
+
+### What was tricky to build
+
+The subtle part is specifying validation that catches the actual failure without overfitting to Pyxis. The guide therefore proposes generic mechanisms (`expect_text`, `expect_png`, top/bottom strip stats) and then shows Pyxis-specific values as examples.
+
+### What warrants a second pair of eyes
+
+- Whether the first implementation should support only `prepare.type: script` before adding `direct-react-global`.
+- Whether validation should live inside `capture` or as a separate `validate` mode.
+
+### What should be done in the future
+
+Implement the tasks in order, starting with minimal script prepare, then Pyxis direct-react-global convenience prepare.
+
+### Code review instructions
+
+Review:
+
+- `design/03-css-visual-diff-prepare-and-png-export-implementation-guide.md`
+- `tasks.md`
+
+Validate by checking that the task list covers config, driver, prepare hook, mode wiring, PNG export, validation, Pyxis example config, and Storybook readiness.

@@ -86,3 +86,14 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Pyxis direct-render extraction solves clean original baseline generation.
 - `css-visual-diff` solves comparison, CSS diffing, matched cascade inspection, pixel diff artifacts, Storybook discovery, and reports.
 - The correct combined system should direct-render original prototypes, render Storybook iframe stories at matching widths, then run capture/cssdiff/matched-styles/pixeldiff across stable selectors.
+
+## 2026-04-23 — Prepare hook + robust PNG export implementation guide
+
+### Added
+- Added `design/03-css-visual-diff-prepare-and-png-export-implementation-guide.md`.
+- Added detailed implementation tasks to `tasks.md` covering config schema, driver helpers, prepare hooks, root PNG export, prepared HTML/inspect JSON export, DOM validation, PNG validation, visual review, Pyxis example config, Storybook readiness, and report UX.
+
+### Validation guidance
+- Clarified that image correctness should not be judged by dimensions alone.
+- Recommended validation order: DOM text checks, PNG structural checks, visual inspection/`understand_image`, and only then optional OCR/Tesseract if deterministic offline OCR is ever needed.
+- Explicitly documented that Tesseract should not be the first-line tool for detecting screenshot cutoff or canvas chrome.
