@@ -467,3 +467,215 @@ Review:
 - `tasks.md`
 
 Validate by checking that the task list covers config, driver, prepare hook, mode wiring, PNG export, validation, Pyxis example config, and Storybook readiness.
+
+---
+
+## Step 6: Implement css-visual-diff prepare hooks and capture validation
+
+I implemented the first working slice of the `css-visual-diff` prepare system in the external `hair-v2/css-visual-diff` repository. The implementation now has config schema support, browser wait helpers, script/direct React-global prepare hooks, wiring into capture/CSS/matched-style modes, root-selector PNG capture, prepared HTML export, inspect JSON export, DOM text validation, PNG dimension/color-strip validation, tests, README documentation, and a Pyxis example config.
+
+The work was committed in small pieces so each layer can be reviewed independently. The end-to-end CLI smoke run could not complete because the repository already had uncommitted CLI/AI-review changes and `css-visual-diff run --config=...` currently decodes an empty config setting, producing `Error: --config is required` even though the flag is present. I did not modify those pre-existing dirty CLI files because they appear to belong to another active workstream.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Implement the css-visual-diff prepare. task by task, comit at appropriate intervals, keep a diary."
+
+**Assistant interpretation:** Implement the prepare-hook and PNG/capture-validation plan in the css-visual-diff codebase, commit at logical intervals, and record the work in the ticket diary.
+
+**Inferred user intent:** Turn the design guide into working code that can prepare non-clean prototype URLs before comparison, then capture trustworthy PNG/CSS artifacts for Storybook porting.
+
+**Commit (code):** fba0b73 — "feat(config): add prepare target schema"
+
+**Commit (code):** 6bf1b62 — "feat(modes): run prepare hooks before capture and style diffs"
+
+**Commit (code):** 36c9eb6 — "feat(capture): screenshot prepared root when configured"
+
+**Commit (code):** 151c6eb — "feat(capture): export prepared html and inspect json"
+
+**Commit (code):** 86dee7b — "feat(capture): validate DOM text and PNG structure"
+
+**Commit (code):** 0a36bb0 — "test(capture): cover selector and text validation helpers"
+
+**Commit (code):** 665b94f — "docs: document prepare workflow and Pyxis example"
+
+### What I did
+
+- Added `PrepareSpec` to `internal/cssvisualdiff/config/config.go`.
+- Added `Target.Prepare` and `Target.RootSelector`.
+- Added validation for `prepare.type: script` and `prepare.type: direct-react-global`.
+- Added config tests for valid and invalid prepare specs.
+- Added driver helpers `Eval` and `WaitForFunction` in `internal/cssvisualdiff/driver/chrome.go`.
+- Added `internal/cssvisualdiff/modes/prepare.go` with:
+  - `prepareTarget`
+  - `runScriptPrepare`
+  - `runDirectReactGlobalPrepare`
+  - `buildDirectReactGlobalScript`
+- Wired prepare hooks into:
+  - `capture.go`
+  - `cssdiff.go`
+  - `matched_styles.go`
+- Changed capture mode so full screenshots use `target.root_selector` or `target.prepare.root_selector` when available.
+- Added `write_prepared_html`, `write_inspect_json`, and `validate_pngs` output options.
+- Added prepared HTML export and recursive inspect-tree JSON export.
+- Added section DOM text expectations with includes/excludes.
+- Added PNG stats and expectations for width, height, min/max dimensions, top strip color, and bottom strip color.
+- Added validation results to `capture.json` and `capture.md`.
+- Added tests for config parsing, direct-react script generation, root selector selection, selector targeting, text validation, and PNG validation.
+- Added README documentation for prepare workflows.
+- Added `examples/pyxis-public-shows.yaml`.
+- Updated the ticket task list to mark completed phases and note partial/blocked phases.
+
+### Why
+
+The Pyxis prototype URL does not render a clean comparison target by default; it renders a DesignCanvas shell. Prepare hooks let `css-visual-diff` load the URL, wait for prototype globals, replace the shell DOM with a clean root, and then run the existing capture/CSS/pixel-diff machinery against the correct artifact.
+
+PNG validation is necessary because the earlier failed Pyxis screenshots had plausible dimensions but wrong content. The new validation path gives us DOM text checks and PNG strip/dimension checks before trusting exported baselines.
+
+### What worked
+
+- Unit tests pass:
+  - `go test ./internal/cssvisualdiff/config`
+  - `go test ./internal/cssvisualdiff/driver ./internal/cssvisualdiff/modes`
+  - `go test ./...`
+- The code now builds and tests with the new prepare schema and mode wiring.
+- The implementation remained isolated from the pre-existing dirty AI-review/CLI changes in the css-visual-diff repository.
+- The prepared-root screenshot behavior maps directly to the Pyxis `#capture-root` approach.
+
+### What didn't work
+
+I attempted a local end-to-end smoke run with a temporary HTTP server and a config using `prepare.type: script`:
+
+```bash
+GOWORK=off go run ./cmd/css-visual-diff run --config "$TMP/config.yaml" --modes capture,cssdiff,pixeldiff
+```
+
+and also:
+
+```bash
+GOWORK=off go run ./cmd/css-visual-diff run --config=$TMP/c.yaml --dry-run --modes=capture
+```
+
+Both failed with:
+
+```text
+Error: --config is required
+exit status 1
+```
+
+The flag is present in `run --help`, but `RunIntoGlazeProcessor` receives an empty `settings.Config`. The repository already had uncommitted changes in `cmd/css-visual-diff/main.go`, `cmd/css-visual-diff/main_test.go`, `go.mod`, `internal/cssvisualdiff/llm/*`, `internal/cssvisualdiff/modes/ai_review.go`, and `internal/cssvisualdiff/runner/runner.go`; I treated those as someone else's active work and did not include a CLI fix in the prepare commits.
+
+### What I learned
+
+The cleanest implementation path was to keep `compare` mode unchanged and wire prepare into the config-driven `run` modes first. This keeps the CLI surface small and makes prepared targets an advanced config feature, which matches the Pyxis use case.
+
+Validation should be recorded in the capture artifact itself. That way later `pixeldiff`, AI review, or human review steps can see whether a screenshot was generated from a valid DOM/PNG state.
+
+### What was tricky to build
+
+The main ordering constraint is:
+
+```text
+set viewport → navigate → wait_ms → wait_for → prepare → after_wait → export/capture/diff
+```
+
+If prepare runs before the prototype globals exist, `direct-react-global` fails. If screenshotting uses full-page capture instead of root-selector capture after prepare, the tool can still include unrelated browser document content. If validation only checks dimensions, it misses the exact DesignCanvas failure that prompted this work.
+
+Another tricky point was avoiding unrelated dirty files in the css-visual-diff repo. I staged and committed only the files touched by the prepare implementation, leaving the pre-existing AI-review/CLI changes uncommitted.
+
+### What warrants a second pair of eyes
+
+- `WaitForFunction` currently polls by repeatedly evaluating `Boolean(<expr>)`; review whether this should use `chromedp.Poll` instead.
+- `direct-react-global` assumes the component exists on `window[component]` and ReactDOM has either `createRoot` or `render`; this is correct for Pyxis, but future prototypes may need custom scripts.
+- `writeInspectJSON` exports a useful but fixed computed-style subset and depth limit; review whether the list should be configurable.
+- PNG validation does not yet implement blank-image detection despite the task-list wording.
+- The CLI config decoding issue needs separate review before end-to-end runs can be launched through `css-visual-diff run`.
+
+### What should be done in the future
+
+- Fix or investigate the pre-existing `run --config` decoding issue.
+- Add blank/near-blank PNG detection.
+- Add a true HTML/contact-sheet report that embeds original, React, and diff images per section.
+- Run the Pyxis example against the actual prototype server and Storybook once the CLI issue is resolved.
+- Consider adding a browser-backed integration test for `prepare.type: script` once CLI/config decoding is stable.
+
+### Code review instructions
+
+Start review in the css-visual-diff repository:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+```
+
+Review commits in order:
+
+```text
+fba0b73
+6bf1b62
+36c9eb6
+151c6eb
+86dee7b
+0a36bb0
+665b94f
+```
+
+Key files:
+
+```text
+internal/cssvisualdiff/config/config.go
+internal/cssvisualdiff/config/config_test.go
+internal/cssvisualdiff/driver/chrome.go
+internal/cssvisualdiff/modes/prepare.go
+internal/cssvisualdiff/modes/prepare_test.go
+internal/cssvisualdiff/modes/capture.go
+internal/cssvisualdiff/modes/capture_test.go
+internal/cssvisualdiff/modes/png_validation.go
+internal/cssvisualdiff/modes/png_validation_test.go
+internal/cssvisualdiff/modes/cssdiff.go
+internal/cssvisualdiff/modes/matched_styles.go
+README.md
+examples/pyxis-public-shows.yaml
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+go test ./...
+```
+
+### Technical details
+
+Example prepared target config:
+
+```yaml
+original:
+  name: pyxis-prototype
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  viewport: { width: 1200, height: 2200 }
+  prepare:
+    type: direct-react-global
+    wait_for: "window.React && window.ReactDOM && window.PPXDesktop"
+    component: PPXDesktop
+    props: { page: shows }
+    root_selector: "#capture-root"
+    width: 920
+    background: "#fff"
+    after_wait_ms: 1000
+```
+
+Example validation config:
+
+```yaml
+sections:
+  - name: full
+    selector_original: "#capture-root"
+    selector_react: "[data-page='shows']"
+    expect_text_original:
+      includes: ["ppxis", "Upcoming shows", "Instagram"]
+      excludes: ["01 · Desktop", "Poster-grid shell"]
+    expect_png_original:
+      width: 920
+      min_height: 1700
+      top_strip_near: { rgb: [255, 255, 255], tolerance: 8 }
+      top_strip_not_near: { rgb: [240, 238, 233], tolerance: 8 }
+```

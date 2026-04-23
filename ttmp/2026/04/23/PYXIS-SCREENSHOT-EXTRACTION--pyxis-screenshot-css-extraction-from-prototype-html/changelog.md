@@ -97,3 +97,24 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Clarified that image correctness should not be judged by dimensions alone.
 - Recommended validation order: DOM text checks, PNG structural checks, visual inspection/`understand_image`, and only then optional OCR/Tesseract if deterministic offline OCR is ever needed.
 - Explicitly documented that Tesseract should not be the first-line tool for detecting screenshot cutoff or canvas chrome.
+
+## 2026-04-23 — Implemented css-visual-diff prepare hooks
+
+### Added in `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff`
+- `PrepareSpec` config schema and validation (`fba0b73`).
+- Browser wait/eval helpers and prepare hook execution (`6bf1b62`).
+- Config-driven `script` prepare and `direct-react-global` prepare (`6bf1b62`).
+- Prepare wiring for capture, CSS diff, and matched-styles modes (`6bf1b62`).
+- Prepared-root screenshot capture via `root_selector` (`36c9eb6`).
+- Prepared HTML and inspect JSON export (`151c6eb`).
+- DOM text validation and PNG dimension/color-strip validation (`86dee7b`).
+- Additional helper tests (`0a36bb0`).
+- README documentation and `examples/pyxis-public-shows.yaml` (`665b94f`).
+
+### Validation
+- Ran `go test ./internal/cssvisualdiff/config`.
+- Ran `go test ./internal/cssvisualdiff/driver ./internal/cssvisualdiff/modes`.
+- Ran `go test ./...` successfully.
+
+### Known issue
+- Attempted an end-to-end CLI smoke run, but `css-visual-diff run --config=...` currently reports `Error: --config is required` despite the flag being present. This appears tied to pre-existing uncommitted CLI/AI-review changes in the css-visual-diff repository and was not fixed in the prepare commits.

@@ -7,18 +7,36 @@ DocType: ""
 Intent: ""
 Owners: []
 RelatedFiles:
+    - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/README.md
+      Note: Prepare and validation usage documentation
+    - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/examples/pyxis-public-shows.yaml
+      Note: Concrete Pyxis prepare and validation example config
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/config/config.go
-      Note: PrepareSpec and Target schema implementation target
+      Note: |-
+        PrepareSpec and Target schema implementation target
+        Implemented PrepareSpec
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/driver/chrome.go
-      Note: Driver helpers needed for wait_for/evaluate/root screenshots
+      Note: |-
+        Driver helpers needed for wait_for/evaluate/root screenshots
+        Implemented Eval and WaitForFunction prepare helpers
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/capture.go
-      Note: Prepare hook wiring and root PNG export target
+      Note: |-
+        Prepare hook wiring and root PNG export target
+        Implemented prepared root screenshots
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/cssdiff.go
-      Note: Prepare hook wiring before computed CSS extraction
+      Note: |-
+        Prepare hook wiring before computed CSS extraction
+        Prepare hook now runs before computed CSS extraction
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/matched_styles.go
-      Note: Prepare hook wiring before matched cascade extraction
+      Note: |-
+        Prepare hook wiring before matched cascade extraction
+        Prepare hook now runs before matched cascade extraction
     - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/pixeldiff.go
       Note: Existing PNG diff artifacts and validation/report integration point
+    - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/png_validation.go
+      Note: Implemented PNG dimension and color-strip validation helpers
+    - Path: ../../../../../../../../../workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/prepare.go
+      Note: Implemented script and direct-react-global prepare hooks
     - Path: prototype-design/comp/01-desktop-shows-full.png
       Note: Known-bad DesignCanvas screenshot used as validation failure example
     - Path: prototype-design/direct/home/desktop-shows-full.png
@@ -29,6 +47,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Implementation Guide: css-visual-diff Prepare Hooks and Robust PNG Export
