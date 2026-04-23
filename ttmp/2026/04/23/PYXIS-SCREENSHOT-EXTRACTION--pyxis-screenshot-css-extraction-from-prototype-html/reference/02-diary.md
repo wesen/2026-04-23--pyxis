@@ -1146,3 +1146,70 @@ cd /home/manuel/code/wesen/2026-04-23--pyxis
 ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/11-run-pyxis-atom-diff.sh
 ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/12-serve-atom-diff-report.sh
 ```
+
+---
+
+## Step 11: Write css-visual-diff Pyxis comparison playbook
+
+I wrote a new long-form playbook for someone new to the Pyxis project who needs to use `css-visual-diff` from beginning to end. The playbook explains the mental model, the two repositories involved, why prepare hooks are necessary for Pyxis, the numbered ticket scripts, and the recommended workflow from prototype-only validation through atom diffs and full-page comparisons.
+
+The document emphasizes a small-to-large repair loop: validate the prototype capture first, then work on atoms, then page sections, then full-page layout. It also explains how to read `test.html`, when to trust pixel percentages, when to read computed CSS diffs, and how to avoid common failure modes like capturing DesignCanvas chrome or using brittle selectors.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Write a detailed playbook in the ticket on how to use css-visual-diff to do site comparisons, from the beginning to end, for someone working on the pyxis site who is new to the project."
+
+**Assistant interpretation:** Create a detailed onboarding/runbook document in the ticket that teaches the full css-visual-diff workflow for Pyxis.
+
+**Inferred user intent:** Make the visual-diff process repeatable by future contributors without requiring them to reconstruct the context from conversation history.
+
+**Commit (code):** pending — documentation-only change to be committed after this diary update.
+
+### What I did
+
+- Added `reference/05-css-visual-diff-pyxis-site-comparison-playbook.md`.
+- Updated `changelog.md`.
+- Documented prototype-only, atom-level, and full-page workflows.
+- Added command references for the numbered scripts.
+- Explained report interpretation and repair loops.
+- Captured common failure modes and guardrails.
+
+### Why
+
+The project now has enough moving pieces—prototype server, app fixture server, Storybook, prepare hooks, output reports, numbered scripts—that future work needs a clear playbook rather than scattered notes.
+
+### What worked
+
+The existing numbered scripts and recent run outputs made it possible to write a concrete playbook with real commands and real paths.
+
+### What didn't work
+
+N/A — documentation-only step.
+
+### What I learned
+
+The playbook clarified the intended workflow: atom diffs should precede full-page repair because primitive token drift creates noisy page diffs.
+
+### What was tricky to build
+
+The main challenge was explaining the prototype-only mirrored-target workflow without confusing it with a real comparison. The playbook explicitly states that prototype-only mode is an extraction sanity check, not a pixel comparison.
+
+### What warrants a second pair of eyes
+
+- Whether the recommended repair order matches the team's design priorities.
+- Whether additional page configs should be added before CSS repair starts.
+
+### What should be done in the future
+
+- Add new sections to the playbook when archive/book/about page configs are created.
+- Add screenshots or embedded report examples if the playbook is later exported as training material.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/reference/05-css-visual-diff-pyxis-site-comparison-playbook.md
+```
+
+Check that a new contributor can follow the commands without needing conversation context.

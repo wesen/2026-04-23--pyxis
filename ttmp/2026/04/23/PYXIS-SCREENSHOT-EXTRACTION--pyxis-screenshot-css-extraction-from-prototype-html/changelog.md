@@ -189,3 +189,15 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Coverage: 22/22 selectors present and visible.
 - Largest pixel diffs: icons, buttons, tags, badges.
 - Main CSS diffs: button height/font size, badge/tag font size/line-height, avatar font metrics, input/select padding/font size.
+
+## 2026-04-23 — Added css-visual-diff Pyxis comparison playbook
+
+### Added
+- Added `reference/05-css-visual-diff-pyxis-site-comparison-playbook.md`.
+
+### Contents
+- Explains the comparison mental model and why Pyxis uses prepare hooks.
+- Documents prototype-only, atom-level, and full-page comparison workflows.
+- Explains how to read `test.html`, CSS diffs, pixel diffs, validation, and generated artifacts.
+- Gives recommended repair order and common failure modes.
+- Lists quick commands and a pre-fix checklist for new contributors.
