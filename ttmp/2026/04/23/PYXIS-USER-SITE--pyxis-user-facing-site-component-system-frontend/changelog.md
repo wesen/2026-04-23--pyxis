@@ -132,3 +132,18 @@ Ticket closed
 - Coverage: 5/5 selectors present and visible.
 - Pixel diffs: shows-content 76.1516%, main 59.2671%, full 54.5223%, nav 32.9085%, footer 6.8826%.
 - Next target: rebuild Shows page toward prototype poster-grid layout.
+
+## 2026-04-23 — Align public nav/footer shell
+
+### Changed
+- Updated `PubNav` to match the prototype `PPXNav`: white sticky shell, 920px inner width, `ppxis` text mark, active nav pill, no nav CTA.
+- Updated `PubFooter` to match the prototype footer brand/address/link content.
+
+### Validated
+- `pnpm --filter pyxis-components typecheck`
+- `pnpm --filter pyxis-user-site typecheck`
+- `STORYBOOK_DISABLE_TELEMETRY=1 pnpm --filter pyxis-user-site build-storybook`
+- `14-run-pyxis-storybook-shows-desktop.sh`
+
+### Result
+- Shows desktop nav pixel diff improved from 32.9085% to 6.7418%.

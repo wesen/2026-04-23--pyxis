@@ -415,3 +415,46 @@ The page-level comparison is now technically working, but the visual gap is larg
 ### Next
 
 Start Shows desktop repair by aligning the shell/nav/main layout and replacing the hero/list page structure with the prototype-style poster grid.
+
+---
+
+## Step 15: Align public nav/footer closer to prototype shell
+
+After the first Shows desktop Storybook diff, the largest structural differences were expected in `main`, but the nav was also noisy: `nav` pixel diff was around 32.9%. I aligned the public navigation component to the prototype shell: white background, 920px inner width, 60px height, text-only `ppxis` wordmark, prototype active pill treatment, and no separate `Get tickets` CTA in the nav.
+
+I also rewrote `PubFooter` to match the prototype footer content and spacing: `ppxis`, "a music artist space", Manton Ave address, and the three links `Instagram`, `Discord`, `Mailing list`.
+
+### Validation
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis/web
+pnpm --filter pyxis-components typecheck
+pnpm --filter pyxis-user-site typecheck
+STORYBOOK_DISABLE_TELEMETRY=1 pnpm --filter pyxis-user-site build-storybook
+
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/14-run-pyxis-storybook-shows-desktop.sh
+```
+
+### Results
+
+Page comparison still has large content diffs because Shows is still a hero/list implementation, not the prototype poster grid. But nav improved substantially:
+
+```text
+before nav diff: 32.9085%
+after nav diff:   6.7418%
+```
+
+Current page-level diffs:
+
+```text
+shows-content 76.1516%
+main          59.2079%
+full          54.3796%
+footer         6.8826%
+nav            6.7418%
+```
+
+### Next
+
+The next meaningful fix is the Shows page itself: replace the current hero/list layout with the prototype poster-grid layout and prototype-like data/poster rendering.

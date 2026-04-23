@@ -1,5 +1,4 @@
 import { clsx } from 'clsx';
-import { PyxisLogo } from '../../atoms/Icon';
 
 export type PubNavProps = {
   currentPage: 'shows' | 'archive' | 'book' | 'about';
@@ -22,16 +21,14 @@ export const PubNav = ({ currentPage, onNavigate, className, 'data-part': dataPa
       data-part={dataPart ?? 'pub-nav'}
     >
       <div className="pyxis-pub-nav__inner">
-        {/* Logo */}
         <button
           className="pyxis-pub-nav__logo"
           onClick={() => onNavigate?.('shows')}
           aria-label="Go to home"
         >
-          <PyxisLogo size={22} />
+          ppxis
         </button>
 
-        {/* Nav links */}
         <nav className="pyxis-pub-nav__links" aria-label="Main navigation">
           {navLinks.map((link) => {
             const isActive = link.id === currentPage;
@@ -46,12 +43,6 @@ export const PubNav = ({ currentPage, onNavigate, className, 'data-part': dataPa
               </button>
             );
           })}
-          <button
-            className="pyxis-pub-nav__cta"
-            onClick={() => onNavigate?.('book')}
-          >
-            Get tickets
-          </button>
         </nav>
       </div>
     </header>

@@ -1,20 +1,18 @@
-/* PubNav — public site navigation bar */
+/* PubNav — public site navigation bar, aligned to PPX prototype */
 
 [data-part='pub-nav'] {
-  background: rgba(243, 241, 235, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  background: #fff;
+  border-bottom: 1px solid #EAE7E0;
   position: sticky;
   top: 0;
   z-index: 50;
 }
 
 .pyxis-pub-nav__inner {
-  max-width: 980px;
+  max-width: 920px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 62px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,8 +23,11 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  display: flex;
-  align-items: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #1F1E1C;
 }
 
 .pyxis-pub-nav__links {
@@ -39,60 +40,28 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px 14px;
+  padding: 6px 14px;
   font-family: inherit;
-  font-size: var(--text-base);
-  font-weight: 500;
-  color: var(--color-text-tertiary);
-  position: relative;
-  transition: color var(--duration-fast) var(--ease-default);
+  font-size: 13px;
+  font-weight: 400;
+  color: #8E887E;
+  border-radius: 6px;
+  transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
 }
 
 .pyxis-pub-nav__link:hover {
-  color: var(--color-text-primary);
+  color: #1F1E1C;
 }
 
 .pyxis-pub-nav__link--active {
-  color: var(--color-text-primary);
+  background: #F3F1EC;
+  color: #1F1E1C;
   font-weight: 600;
 }
 
-.pyxis-pub-nav__link--active::after {
-  content: '';
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 4px;
-  height: 1.5px;
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-}
-
-.pyxis-pub-nav__link:focus-visible {
+.pyxis-pub-nav__link:focus-visible,
+.pyxis-pub-nav__logo:focus-visible {
   outline: var(--ring-width) solid var(--ring-color);
   outline-offset: 2px;
-  border-radius: var(--radius-xs);
-}
-
-.pyxis-pub-nav__cta {
-  margin-left: 14px;
-  background: var(--color-ink);
-  color: var(--color-text-inverse);
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 8px 18px;
-  font-family: inherit;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-default);
-}
-
-.pyxis-pub-nav__cta:hover {
-  background: #2D2B28;
-}
-
-.pyxis-pub-nav__cta:focus-visible {
-  outline: var(--ring-width) solid var(--ring-color);
-  outline-offset: 2px;
+  border-radius: 6px;
 }
