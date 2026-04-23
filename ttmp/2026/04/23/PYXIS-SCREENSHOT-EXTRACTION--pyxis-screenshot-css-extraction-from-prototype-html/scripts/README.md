@@ -14,6 +14,22 @@ python3 -m http.server 7070 &
 # Prototype will be available at http://localhost:7070/Pyxis%20Public%20Site.html
 ```
 
+## Numbered workflow
+
+Numbered scripts are the traceable workflow used during this ticket. The original
+unnumbered scripts are preserved for compatibility; numbered copies/wrappers show
+the sequence of the investigation and follow-up comparison runs.
+
+- `01-screenshot-prototype.mjs` — first DesignCanvas screenshot attempt.
+- `02-screenshot-components.mjs` — first component clipping attempt.
+- `03-analyze-prototype.mjs` — prototype DOM/artboard analysis helper.
+- `04-capture-direct-render.mjs` — direct-render prototype extractor that bypasses DesignCanvas.
+- `05-serve-pyxis-prototype.sh` — serve `prototype-design/` on port 7070.
+- `06-run-pyxis-prototype-only.sh` — run css-visual-diff against the prepared prototype mirrored into both targets; use this to validate extraction only.
+- `07-pyxis-app-server.mjs` — static/API server for the built `pyxis-user-site` app with local SVG flyer data URLs to avoid external image hangs.
+- `08-run-pyxis-prototype-vs-app.sh` — build the app, serve it, and run the real prepared-prototype-vs-current-app comparison.
+- `09-serve-css-visual-diff-report.sh` — serve a generated report directory and expose `test.html` in the browser.
+
 ## Scripts
 
 ### `analyze-prototype.mjs`

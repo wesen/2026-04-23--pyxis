@@ -886,3 +886,129 @@ Open:
 ```text
 /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-only/index.html
 ```
+
+---
+
+## Step 9: Number scripts retroactively and run real prototype-vs-app comparison
+
+The user asked that every script I write be saved in the ticket `scripts/` folder with an incrementing numerical prefix, including retroactive scripts. I copied the earlier ad-hoc extraction scripts into numbered equivalents and added new numbered scripts for serving the prototype, running prototype-only inspection, serving the built app fixture, running the real prototype-vs-app comparison, and serving generated reports.
+
+After that I ran the real comparison through the numbered script instead of an ad-hoc shell command. The generated report includes `test.html`, which is the user-facing entry point for validating the current prototype-vs-app artifacts before any CSS fixes are made.
+
+### Prompt Context
+
+**User prompt (verbatim):** "save all the scripts you write in the scripts/ folder of the ticket, with an incrementing numerical prefix, so we can trace your steps. Do it retroactively too. then continue"
+
+**Assistant interpretation:** Move all one-off helper scripts into the ticket scripts folder, number them in order, document the workflow, then continue with the actual comparison run.
+
+**Inferred user intent:** Make the investigation reproducible and auditable, so later runs are not hidden in ephemeral `/tmp` files or terminal history.
+
+**Commit (code):** pending — ticket scripts/docs will be committed after this diary update.
+
+### What I did
+
+- Added numbered copies of the earlier scripts:
+  - `01-screenshot-prototype.mjs`
+  - `02-screenshot-components.mjs`
+  - `03-analyze-prototype.mjs`
+  - `04-capture-direct-render.mjs`
+- Added new workflow scripts:
+  - `05-serve-pyxis-prototype.sh`
+  - `06-run-pyxis-prototype-only.sh`
+  - `07-pyxis-app-server.mjs`
+  - `08-run-pyxis-prototype-vs-app.sh`
+  - `09-serve-css-visual-diff-report.sh`
+- Updated `scripts/README.md` with the numbered workflow.
+- Updated `07-pyxis-app-server.mjs` to serve the built app with API responses and local SVG flyer data URLs, avoiding external image/network hangs.
+- Ran `08-run-pyxis-prototype-vs-app.sh`.
+- Served the generated report with `09-serve-css-visual-diff-report.sh`.
+
+### Why
+
+The previous command history included useful scripts in `/tmp` and inline shell blocks. That is not traceable enough for a ticket workflow. Numbered scripts make it possible to reproduce exactly what was run and in what sequence.
+
+### What worked
+
+The real comparison run completed successfully:
+
+```text
+capture: ok
+cssdiff: ok
+pixeldiff: ok
+html-report: ok
+```
+
+Generated report:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-vs-app/test.html
+```
+
+Served report:
+
+```text
+http://localhost:8789/test.html
+```
+
+Pixel diff summary:
+
+```text
+main   34.4200%
+full   31.8982%
+nav     8.1399%
+header  7.6107%
+footer  4.3483%
+```
+
+### What didn't work
+
+The first pre-script ad-hoc real comparison timed out. The likely cause was a combination of an ad-hoc app fixture and remote flyer image URLs. I moved the app server into `07-pyxis-app-server.mjs` and changed it to return local SVG data URLs for flyer images. The numbered `08` script then completed.
+
+The React `main` validation currently fails one expectation:
+
+```text
+missing expected text "Upcoming"
+```
+
+This does not block report generation; it is useful evidence that the current React implementation is structurally/content-wise different from the prototype.
+
+### What I learned
+
+For screenshot tooling, local deterministic assets are important. Remote placeholder image URLs can make browser automation slow or flaky and can obscure whether the comparison tool itself works.
+
+### What was tricky to build
+
+The comparison script has to coordinate three moving pieces: prototype server, built React app/API fixture server, and css-visual-diff. Restarting the app fixture every run avoids accidentally using stale `/tmp` server code from a previous attempt.
+
+### What warrants a second pair of eyes
+
+- Whether the app fixture data should more closely mirror the prototype poster data before CSS repair begins.
+- Whether the React validation expectation should look for a different current text marker than `Upcoming`.
+
+### What should be done in the future
+
+- Open `http://localhost:8789/test.html` and validate the report visually.
+- Once validated, start repairing React components/CSS against the prototype baseline.
+- Consider adding first-class single-target mode to css-visual-diff instead of mirrored prototype configs.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/
+```
+
+Re-run with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/08-run-pyxis-prototype-vs-app.sh
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/09-serve-css-visual-diff-report.sh /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-vs-app
+```
+
+Then open:
+
+```text
+http://localhost:8789/test.html
+```

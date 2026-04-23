@@ -149,3 +149,24 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Generated report: `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-only/index.html`.
 - Served report: `http://localhost:8788/index.html`.
 - Validation statuses: all `ok`.
+
+## 2026-04-23 — Numbered ticket scripts and real prototype-vs-app run
+
+### Added
+- Added numbered script copies/wrappers `01` through `09` in the ticket `scripts/` folder.
+- Added `07-pyxis-app-server.mjs` to serve the built React app with local API fixtures and local SVG flyer data URLs.
+- Added `08-run-pyxis-prototype-vs-app.sh` to run the real comparison reproducibly.
+- Added `09-serve-css-visual-diff-report.sh` to serve generated `test.html` reports.
+- Updated `scripts/README.md` with the numbered workflow.
+
+### Ran
+- Ran `08-run-pyxis-prototype-vs-app.sh` successfully.
+- Served the result with `09-serve-css-visual-diff-report.sh`.
+
+### Output
+- Report: `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-vs-app/test.html`.
+- Served URL: `http://localhost:8789/test.html`.
+- Pixel diff percentages: main 34.4200%, full 31.8982%, nav 8.1399%, header 7.6107%, footer 4.3483%.
+
+### Notes
+- The React `main` section currently fails the configured text expectation `Upcoming`; this is evidence for the next repair phase, not a blocker for the report.
