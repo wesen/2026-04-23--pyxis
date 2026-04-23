@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pyxis · Mobile</title>
+<meta name="viewport" content="width=1600" />
+<style>
+  html, body { margin: 0; padding: 0; background: #E8E4DA; font-family: "Inter", -apple-system, sans-serif; }
+  #root { min-height: 100vh; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="lib/tokens.js"></script>
+<script src="lib/data.js"></script>
+<script type="text/babel" src="lib/components.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="screens/mobile.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const IPHONE_W = 390, IPHONE_H = 844;
+
+function App() {
+  return (
+    <DesignCanvas initialZoom={0.55}>
+      <DCSection id="entry" title="01 · Entry" subtitle="Sign-in only — no setup wizard needed on mobile">
+        <DCArtboard id="login" label="Login · Continue with Discord" width={IPHONE_W} height={IPHONE_H}>
+          <MLogin />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="program" title="02 · Program" subtitle="Day-to-day: dashboard, shows, calendar, bookings">
+        <DCArtboard id="home" label="Home · Dashboard" width={IPHONE_W} height={IPHONE_H}>
+          <MHome />
+        </DCArtboard>
+        <DCArtboard id="shows" label="Shows · Index" width={IPHONE_W} height={IPHONE_H}>
+          <MShows />
+        </DCArtboard>
+        <DCArtboard id="show-detail" label="Show · Detail" width={IPHONE_W} height={IPHONE_H}>
+          <MShowDetail />
+        </DCArtboard>
+        <DCArtboard id="calendar" label="Calendar · May 2025" width={IPHONE_W} height={IPHONE_H}>
+          <MCalendar />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="bookings" title="03 · Bookings" subtitle="Review queue for artist submissions">
+        <DCArtboard id="bookings-list" label="Bookings · Queue" width={IPHONE_W} height={IPHONE_H}>
+          <MBookings />
+        </DCArtboard>
+        <DCArtboard id="booking-review" label="Booking · Review" width={IPHONE_W} height={IPHONE_H}>
+          <MBookingReview />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="roster" title="04 · Roster & Log" subtitle="Artists, history, and post-show reporting">
+        <DCArtboard id="artists" label="Artists · Roster" width={IPHONE_W} height={IPHONE_H}>
+          <MArtists />
+        </DCArtboard>
+        <DCArtboard id="artist" label="Artist · Detail" width={IPHONE_W} height={IPHONE_H}>
+          <MArtistDetail />
+        </DCArtboard>
+        <DCArtboard id="post-show" label="Post-show · Log" width={IPHONE_W} height={IPHONE_H}>
+          <MPostShow />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="more" title="05 · More" subtitle="Profile, integrations, history">
+        <DCArtboard id="settings" label="More · Settings" width={IPHONE_W} height={IPHONE_H}>
+          <MSettings />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

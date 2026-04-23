@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pyxis — Full App Design</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Tokens & data -->
+<script src="lib/tokens.js"></script>
+<script src="lib/data.js"></script>
+
+<!-- Components -->
+<script type="text/babel" src="lib/components.jsx"></script>
+
+<!-- Screens -->
+<script type="text/babel" src="screens/system.jsx"></script>
+<script type="text/babel" src="screens/auth-dash.jsx"></script>
+<script type="text/babel" src="screens/shows-bookings.jsx"></script>
+<script type="text/babel" src="screens/roster.jsx"></script>
+<script type="text/babel" src="screens/settings-discord.jsx"></script>
+
+<!-- Canvas -->
+<script type="text/babel" src="design-canvas.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  const APP_W = 1240, APP_H = 760;
+
+  function Canvas() {
+    return (
+      <DesignCanvas
+        title="Pyxis"
+        subtitle="Staff portal for a small music space · component system + full app · 10 screens"
+      >
+        <DCSection id="foundations" title="01 · Foundations" subtitle="Tokens, type, color, atoms, molecules">
+          <DCArtboard id="system" label="Component system" width={1240} height={2650}>
+            <SystemPage />
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="entry" title="02 · Entry & onboarding" subtitle="First impressions — auth and setup">
+          <DCArtboard id="login" label="Login · Sign-in" width={APP_W} height={APP_H}>
+            <LoginScreen />
+          </DCArtboard>
+          <DCArtboard id="setup" label="Setup · Wizard step 3" width={APP_W} height={APP_H}>
+            <SetupScreen />
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="program" title="03 · Program" subtitle="The core working surfaces">
+          <DCArtboard id="dashboard" label="Dashboard · Home" width={APP_W} height={APP_H}>
+            <DashboardScreen />
+          </DCArtboard>
+          <DCArtboard id="shows" label="Shows · Index" width={APP_W} height={APP_H}>
+            <ShowsScreen />
+          </DCArtboard>
+          <DCArtboard id="calendar" label="Calendar · May 2025" width={APP_W} height={APP_H}>
+            <CalendarScreen />
+          </DCArtboard>
+          <DCArtboard id="bookings" label="Bookings · Queue" width={APP_W} height={APP_H}>
+            <BookingsScreen />
+          </DCArtboard>
+          <DCArtboard id="modal" label="Shows · New show modal" width={APP_W} height={APP_H}>
+            <ModalShowcase />
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="roster" title="04 · Roster & history" subtitle="Artists and post-show records">
+          <DCArtboard id="artists" label="Artists · Roster" width={APP_W} height={APP_H}>
+            <ArtistsScreen />
+          </DCArtboard>
+          <DCArtboard id="attendance" label="Post-show log" width={APP_W} height={APP_H}>
+            <AttendanceScreen />
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="operate" title="05 · Operate" subtitle="Settings, integrations, history">
+          <DCArtboard id="log" label="Audit log" width={APP_W} height={APP_H}>
+            <AuditLogScreen />
+          </DCArtboard>
+          <DCArtboard id="discord" label="Discord · Channel mapping" width={APP_W} height={APP_H}>
+            <DiscordScreen />
+          </DCArtboard>
+          <DCArtboard id="settings" label="Settings · Space" width={APP_W} height={APP_H}>
+            <SettingsScreen />
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<Canvas />);
+</script>
+</body>
+</html>
