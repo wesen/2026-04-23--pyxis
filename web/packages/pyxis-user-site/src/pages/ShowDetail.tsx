@@ -19,9 +19,9 @@ export function ShowDetail() {
     new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
-    <div>
+    <div data-page="show-detail">
       {/* Dark hero */}
-      <div style={{ background: 'var(--color-ink)', color: 'var(--color-text-inverse)', padding: '48px 0 64px' }}>
+      <div data-section="show-detail-hero" style={{ background: 'var(--color-ink)', color: 'var(--color-text-inverse)', padding: '48px 0 64px' }}>
         <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px' }}>
           <button onClick={() => navigate('/')} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--text-sm)', marginBottom: 32 }}>
             ← All shows
@@ -38,7 +38,7 @@ export function ShowDetail() {
       </div>
 
       {/* Content */}
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '48px 32px', display: 'grid', gridTemplateColumns: '1fr 320px', gap: 48 }}>
+      <div data-section="show-detail-content" style={{ maxWidth: 980, margin: '0 auto', padding: '48px 32px', display: 'grid', gridTemplateColumns: '1fr 320px', gap: 48 }}>
         {/* Left column */}
         <div>
           {show.description && (

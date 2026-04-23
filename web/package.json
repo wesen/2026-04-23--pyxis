@@ -7,6 +7,8 @@
     "build": "pnpm --filter pyxis-user-site build",
     "preview": "pnpm --filter pyxis-user-site preview",
     "storybook": "pnpm --filter pyxis-components storybook",
+    "storybook:user-site": "pnpm --filter pyxis-user-site storybook",
+    "build-storybook:user-site": "pnpm --filter pyxis-user-site build-storybook",
     "build:components": "pnpm --filter pyxis-components build",
     "build:components:watch": "pnpm --filter pyxis-components build:watch",
     "lint": "pnpm -r lint",

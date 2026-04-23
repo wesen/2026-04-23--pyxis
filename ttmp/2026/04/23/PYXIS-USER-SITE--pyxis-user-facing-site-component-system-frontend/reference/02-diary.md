@@ -281,3 +281,65 @@ One important finding: the `llm-review` test that used `react-prepared.html` sho
 ### Next
 
 Commit the atom parity repair, then move to Storybook infrastructure/page coverage for all public pages: shows, detail, archive, book, and about in desktop and mobile sizes.
+
+---
+
+## Step 13: Add user-site Storybook coverage for every public page
+
+After atom parity, I added a Storybook setup for `pyxis-user-site` itself. Previously the user-site package had stories in `web/packages/pyxis-user-site/stories/`, but no active `.storybook` config under the package, so the page stories were not actually part of a runnable user-site Storybook.
+
+### What changed
+
+- Added `web/packages/pyxis-user-site/.storybook/main.ts`.
+- Added `web/packages/pyxis-user-site/.storybook/preview.tsx`.
+- Added `web/packages/pyxis-user-site/public/mockServiceWorker.js`.
+- Added `web/packages/pyxis-user-site/stories/PublicPages.stories.tsx` with ten page stories:
+  - Shows desktop
+  - Shows mobile
+  - Show detail desktop
+  - Show detail mobile
+  - Archive desktop
+  - Archive mobile
+  - Book desktop
+  - Book mobile
+  - About desktop
+  - About mobile
+- Added `storybook` and `build-storybook` scripts to `pyxis-user-site`.
+- Added root workspace convenience scripts for user-site Storybook.
+- Added a package export for `pyxis-components/mocks/handlers` so the user-site Storybook can import deterministic MSW handlers.
+- Added stable selectors to public route surfaces:
+  - `data-page-shell="public"`
+  - `data-region="nav|main|footer"`
+  - page roots like `data-page="shows|show-detail|archive|book|about"`
+  - page sections like `data-section="shows-hero"`, `archive-years`, etc.
+
+### Validation
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis/web
+pnpm --filter pyxis-user-site typecheck
+STORYBOOK_DISABLE_TELEMETRY=1 pnpm --filter pyxis-user-site build-storybook
+```
+
+Both passed. Storybook IDs generated for the new full-page stories include:
+
+```text
+public-site-pages--shows-desktop
+public-site-pages--shows-mobile
+public-site-pages--show-detail-desktop
+public-site-pages--show-detail-mobile
+public-site-pages--archive-desktop
+public-site-pages--archive-mobile
+public-site-pages--book-desktop
+public-site-pages--book-mobile
+public-site-pages--about-desktop
+public-site-pages--about-mobile
+```
+
+### Notes
+
+The page stories are now covered, but the mock data still uses the existing seed API data rather than an exact clone of the prototype `P_SHOWS` data/poster visuals. That remains a task before true page-level parity.
+
+### Next
+
+Commit this Storybook coverage, then create page-level `css-visual-diff` configs/scripts starting with Shows desktop.

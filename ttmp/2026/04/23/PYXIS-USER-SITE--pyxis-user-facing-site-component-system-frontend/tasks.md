@@ -24,11 +24,11 @@ Goal: before wiring the real backend, every public Pyxis page from `prototype-de
 
 ### Phase 11 — Storybook infrastructure for the user site
 
-- [ ] 11.1 Create/restore `pyxis-user-site` Storybook config (`.storybook/main.ts`, `.storybook/preview.tsx`) so page stories under `web/packages/pyxis-user-site/stories/` are actually indexed and runnable.
-- [ ] 11.2 Add Storybook decorators for `QueryClientProvider`, `MemoryRouter`, Pyxis global CSS, component tokens, and MSW handlers.
-- [ ] 11.3 Add viewport parameters for exact prototype sizes: desktop `920px` content shell / `1200px` viewport and mobile `390x844`.
+- [x] 11.1 Create/restore `pyxis-user-site` Storybook config (`.storybook/main.ts`, `.storybook/preview.tsx`) so page stories under `web/packages/pyxis-user-site/stories/` are actually indexed and runnable.
+- [x] 11.2 Add Storybook decorators for `QueryClientProvider`, `MemoryRouter`, Pyxis global CSS, component tokens, and MSW handlers.
+- [x] 11.3 Add viewport parameters for exact prototype sizes: desktop `920px` content shell / `1200px` viewport and mobile `390x844`.
 - [ ] 11.4 Add a deterministic mock-data layer that matches prototype page content and poster ordering, not generic seed data.
-- [ ] 11.5 Add stable page-level selectors (`data-page`, `data-region`, `data-section`) to layout/page roots so visual diff configs do not rely on brittle DOM selectors.
+- [x] 11.5 Add stable page-level selectors (`data-page`, `data-region`, `data-section`) to layout/page roots so visual diff configs do not rely on brittle DOM selectors.
 
 ### Phase 12 — Atom parity before page repair
 
@@ -44,17 +44,17 @@ Goal: before wiring the real backend, every public Pyxis page from `prototype-de
 
 ### Phase 13 — Page Storybook coverage for every public prototype page
 
-- [ ] 13.1 Shows desktop story: `PPXDesktop({ page: 'shows' })` equivalent at 920px, poster grid, nav, footer, deterministic shows.
-- [ ] 13.2 Shows mobile story: `PPXMobile({ page: 'shows' })` equivalent at 390x844.
-- [ ] 13.3 Show detail desktop story: `page: 'detail'` equivalent, event hero/detail content, ticket CTA, related/meta sections.
-- [ ] 13.4 Show detail mobile story.
-- [ ] 13.5 Archive desktop story: `page: 'archive'` equivalent, year groups and archived shows.
-- [ ] 13.6 Archive mobile story.
-- [ ] 13.7 Book desktop story: `page: 'book'` equivalent, booking form/rules/space info.
-- [ ] 13.8 Book mobile story.
-- [ ] 13.9 About desktop story: `page: 'about'` equivalent, about hero, ethos strip, space info.
-- [ ] 13.10 About mobile story.
-- [ ] 13.11 Add error/loading/empty state stories for each route where API state can affect layout.
+- [x] 13.1 Shows desktop story: `PPXDesktop({ page: 'shows' })` equivalent at 920px, poster grid, nav, footer, deterministic shows.
+- [x] 13.2 Shows mobile story: `PPXMobile({ page: 'shows' })` equivalent at 390x844.
+- [x] 13.3 Show detail desktop story: `page: 'detail'` equivalent, event hero/detail content, ticket CTA, related/meta sections.
+- [x] 13.4 Show detail mobile story.
+- [x] 13.5 Archive desktop story: `page: 'archive'` equivalent, year groups and archived shows.
+- [x] 13.6 Archive mobile story.
+- [x] 13.7 Book desktop story: `page: 'book'` equivalent, booking form/rules/space info.
+- [x] 13.8 Book mobile story.
+- [x] 13.9 About desktop story: `page: 'about'` equivalent, about hero, ethos strip, space info.
+- [x] 13.10 About mobile story.
+- [x] 13.11 Add error/loading/empty state stories for each route where API state can affect layout.
 
 ### Phase 14 — Page-level css-visual-diff configs and scripts
 

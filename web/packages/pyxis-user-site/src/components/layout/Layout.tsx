@@ -15,12 +15,12 @@ export function Layout() {
   const currentPage = pageMap[location.pathname] ?? 'shows';
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <PubNav currentPage={currentPage} />
-      <main style={{ flex: 1 }}>
+    <div data-page-shell="public" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div data-region="nav"><PubNav currentPage={currentPage} /></div>
+      <main data-region="main" style={{ flex: 1 }}>
         <Outlet />
       </main>
-      <PubFooter />
+      <div data-region="footer"><PubFooter /></div>
     </div>
   );
 }

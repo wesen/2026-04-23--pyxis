@@ -9,9 +9,9 @@ export function Archive() {
   const { data: stats } = useArchiveStats();
 
   return (
-    <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px' }}>
+    <div data-page="archive" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px' }}>
       {/* Header */}
-      <div style={{ padding: '48px 0 32px' }}>
+      <div data-section="archive-header" style={{ padding: '48px 0 32px' }}>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 500, margin: '0 0 8px', letterSpacing: '-0.03em' }}>
           Archive
         </h1>
@@ -33,14 +33,14 @@ export function Archive() {
 
       {/* Stats */}
       {stats && (
-        <div style={{ marginBottom: 48 }}>
+        <div data-section="archive-stats" style={{ marginBottom: 48 }}>
           <ArchiveStats stats={stats} />
         </div>
       )}
 
       {/* Year groups */}
       {shows.length > 0 ? (
-        <YearGroups shows={shows} />
+        <div data-section="archive-years"><YearGroups shows={shows} /></div>
       ) : (
         <p style={{ textAlign: 'center', color: 'var(--color-text-tertiary)', padding: '64px 0' }}>
           No shows found{search ? ` for "${search}"` : ''}.

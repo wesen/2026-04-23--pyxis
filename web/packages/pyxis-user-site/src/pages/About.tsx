@@ -2,17 +2,17 @@ import { AboutHero, EthosStrip, Button } from 'pyxis-components';
 
 export function About() {
   return (
-    <div>
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px' }}>
+    <div data-page="about">
+      <div data-section="about-hero" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px' }}>
         <AboutHero />
       </div>
 
       {/* Hero image placeholder */}
-      <div style={{ background: 'var(--color-border)', height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-disabled)', marginBottom: 64 }}>
+      <div data-section="about-image" style={{ background: 'var(--color-border)', height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-disabled)', marginBottom: 64 }}>
         [Hero image — venue interior]
       </div>
 
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+      <div data-section="about-content" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
         <div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', fontWeight: 500, marginBottom: 16 }}>What we do</h2>
           <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
@@ -37,9 +37,9 @@ export function About() {
         </div>
       </div>
 
-      <EthosStrip />
+      <div data-section="about-ethos"><EthosStrip /></div>
 
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '64px 32px', textAlign: 'center' }}>
+      <div data-section="about-cta" style={{ maxWidth: 980, margin: '0 auto', padding: '64px 32px', textAlign: 'center' }}>
         <Button variant="primary" iconRight="chevron-right">Book the space</Button>
       </div>
     </div>

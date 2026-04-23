@@ -102,3 +102,18 @@ Ticket closed
 - Configured CSS diffs: resolved to zero.
 - Button/badge/tag/avatar-md/icon/select pixel diffs: zero.
 - Remaining pixel noise: input-search 0.526%, input-error 0.3111%, avatar-lg 0.0434%, full 0.4769%.
+
+## 2026-04-23 — Add user-site Storybook public page coverage
+
+### Added
+- Added `pyxis-user-site` Storybook config and preview decorators.
+- Added `PublicPages.stories.tsx` covering shows/detail/archive/book/about in desktop and mobile story variants.
+- Added user-site Storybook scripts and MSW service worker.
+- Exported `pyxis-components/mocks/handlers` for user-site Storybook consumption.
+
+### Changed
+- Added stable page/region/section selectors to public layout and pages for future visual diff configs.
+
+### Validated
+- `pnpm --filter pyxis-user-site typecheck`
+- `STORYBOOK_DISABLE_TELEMETRY=1 pnpm --filter pyxis-user-site build-storybook`

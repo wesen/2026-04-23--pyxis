@@ -29,9 +29,9 @@
 - [x] Phase 11 — Pyxis example config: Create a concrete `pyxis-public-shows.yaml` showing original `direct-react-global` prepare, Storybook iframe target, sections (full/header/nav/heading/grid/footer), style props, validation expectations, and output options.
 
 - [ ] Phase 12 — Storybook readiness: Add or update Pyxis Storybook page stories at exact prototype widths (`920px` desktop, `390px` mobile), ensure fonts/tokens/MSW data are deterministic, and add stable `data-region`/`data-part` selectors for comparison.
-  - [ ] 12.1 User-site Storybook config and decorators are active.
-  - [ ] 12.2 Storybook covers all `PPXDesktop` pages: shows, detail, archive, book, about.
-  - [ ] 12.3 Storybook covers all `PPXMobile` pages: shows, detail, archive, book, about.
+  - [x] 12.1 User-site Storybook config and decorators are active.
+  - [x] 12.2 Storybook covers all `PPXDesktop` pages: shows, detail, archive, book, about.
+  - [x] 12.3 Storybook covers all `PPXMobile` pages: shows, detail, archive, book, about.
   - [x] 12.4 Atom diff report is used to repair Button, Badge, Tag, Input, Select, Icon/IconButton, Avatar before page repair.
   - [ ] 12.5 Page diff configs exist for every page/viewport pair and can be run from numbered ticket scripts.
 

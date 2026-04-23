@@ -17,18 +17,20 @@ export function Shows() {
   const [hero, ...rest] = shows;
 
   return (
-    <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px' }}>
+    <div data-page="shows" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px' }}>
       {/* Hero section for the next show */}
       {hero && (
+        <div data-section="shows-hero">
         <PubHero
           show={hero}
           onTicketClick={() => navigate(`/shows/${hero.id}`)}
           onShowClick={() => navigate(`/shows/${hero.id}`)}
         />
+        </div>
       )}
 
       {/* Show list */}
-      <section style={{ marginTop: 48 }}>
+      <section data-section="shows-list" style={{ marginTop: 48 }}>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', fontWeight: 500, marginBottom: 24 }}>
           Upcoming shows
           {shows.length > 1 && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-tertiary)', fontWeight: 400, marginLeft: 8 }}>{shows.length - 1} more</span>}
@@ -45,7 +47,7 @@ export function Shows() {
       </section>
 
       {/* Mailing list */}
-      <div style={{ marginTop: 64 }}>
+      <div data-section="mailing-list" style={{ marginTop: 64 }}>
         <MailingListCTA />
       </div>
     </div>

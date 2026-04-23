@@ -11,7 +11,15 @@
       "types": "./dist/index.d.ts"
     },
     "./tokens": "./dist/tokens/index.js",
-    "./theme": "./dist/theme/index.js"
+    "./theme": "./dist/theme/index.js",
+    "./mocks/handlers": {
+      "import": "./src/mocks/handlers.ts",
+      "types": "./src/mocks/handlers.ts"
+    },
+    "./mocks/types": {
+      "import": "./src/mocks/types.ts",
+      "types": "./src/mocks/types.ts"
+    }
   },
   "files": ["dist"],
   "scripts": {

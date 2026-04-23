@@ -12,10 +12,10 @@ export function Book() {
   };
 
   return (
-    <div style={{ maxWidth: 980, margin: '0 auto', padding: '48px 32px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 48 }}>
+    <div data-page="book" style={{ maxWidth: 980, margin: '0 auto', padding: '48px 32px' }}>
+      <div data-section="book-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 48 }}>
         {/* Left: form */}
-        <div>
+        <div data-section="book-form">
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-5xl)', fontWeight: 500, letterSpacing: '-0.03em', marginBottom: 12 }}>
             Book us
           </h1>
@@ -30,7 +30,7 @@ export function Book() {
         </div>
 
         {/* Right: info */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div data-section="book-info" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <SpaceInfo />
           <BookingRules />
         </div>
