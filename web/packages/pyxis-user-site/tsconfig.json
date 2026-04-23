@@ -4,11 +4,23 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "pyxis-components": ["../pyxis-components/src"],
-      "pyxis-components/*": ["../pyxis-components/src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "pyxis-components": [
+        "../pyxis-components/src"
+      ],
+      "pyxis-components/*": [
+        "../pyxis-components/src/*"
+      ]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src",
+    "src/vite-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

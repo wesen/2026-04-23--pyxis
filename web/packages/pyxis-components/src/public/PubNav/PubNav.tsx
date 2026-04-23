@@ -1,4 +1,3 @@
-import './PubNav.css';
 import { clsx } from 'clsx';
 import { PyxisLogo } from '../../atoms/Icon';
 

@@ -1,0 +1,60 @@
+/* Global styles — reset + tokens + base typography */
+
+/* Tokens (duplicated from pyxis-components/tokens.css for standalone builds) */
+:root {
+  --color-canvas:          #F3F1EB;
+  --color-surface:         #FFFFFF;
+  --color-surface-raised: #FAF8F2;
+  --color-border:          #EAE6DD;
+  --color-border-subtle:   #F0EDE4;
+  --color-text-primary:   #1A1A18;
+  --color-text-secondary: #555048;
+  --color-text-tertiary:  #8A857B;
+  --color-text-disabled:  #B8B2A5;
+  --color-text-inverse:  #FFFFFF;
+  --color-accent:         #C8270D;
+  --color-accent-subtle:  #FCEFEB;
+  --color-ink:            #1A1A18;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+  --text-5xl: 2.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+  --color-success: #3C7A4F;
+  --color-warning: #C97A0F;
+  --color-warning-subtle: #FBF1DC;
+  --color-info: #2E5D9E;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background: var(--color-canvas);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Utility */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
