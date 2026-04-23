@@ -134,3 +134,18 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 ### Validation
 - Ran `go test ./...` successfully in css-visual-diff.
 - Ran an end-to-end local prepare smoke test with `capture,cssdiff,pixeldiff`; validation statuses were `ok` and all expected artifacts were generated.
+
+## 2026-04-23 — Added artifact browser and ran Pyxis prototype-only inspection
+
+### Added in css-visual-diff
+- Added `html-report` mode that writes a static artifact browser to `<output.dir>/index.html` (`623a5f1`).
+- Added `examples/pyxis-prototype-only.yaml` for prototype-only inspection using mirrored targets (`623a5f1`).
+- Added `examples/out/` to `.gitignore` for generated reports (`c27654e`).
+
+### Ran
+- Ran `GOWORK=off go run ./cmd/css-visual-diff run --config examples/pyxis-prototype-only.yaml --modes capture,cssdiff,matched-styles,html-report --output json`.
+
+### Output
+- Generated report: `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-only/index.html`.
+- Served report: `http://localhost:8788/index.html`.
+- Validation statuses: all `ok`.

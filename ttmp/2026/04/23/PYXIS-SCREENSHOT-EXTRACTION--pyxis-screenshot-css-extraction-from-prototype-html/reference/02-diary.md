@@ -789,3 +789,100 @@ react-full.png
 react-inspect.json
 react-prepared.html
 ```
+
+---
+
+## Step 8: Add artifact browser and run Pyxis prototype-only inspection
+
+I added a static `html-report` mode to `css-visual-diff` before doing any React/CSS repair. This produces an `index.html` in the output directory that lets a human browse generated PNGs, validation results, prepared HTML, inspect JSON, computed CSS diffs, matched-style output, and all raw files from a run.
+
+The tool is still comparison-shaped internally, so for prototype-only inspection I added a documented mirror-target configuration: both `original` and `react` point at the Pyxis prototype HTML and use the same `direct-react-global` prepare hook. This is not meant for interpreting pixel diffs; it is meant to validate that the prototype extraction itself is clean before comparing it against Storybook.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead, run the pyxis thing, but before fixing anything, make a demo html that allows me to browse the generated PNGs and extracted CSS and such, so I can validate that the tool works correctly by myself."
+
+**User prompt (verbatim):** "can you run it only against theprototype html btw? or is it only in comparison with another site?"
+
+**Assistant interpretation:** Add a browsable artifact report and run a prototype-only Pyxis extraction/inspection before making any CSS changes.
+
+**Inferred user intent:** The user wants to manually verify that the screenshot/extraction tool captures the right prototype artifact before trusting it for React repair work.
+
+**Commit (code):** 623a5f1 — "feat(report): add static artifact browser"
+
+**Commit (code):** c27654e — "chore: ignore generated example reports"
+
+### What I did
+
+- Added `internal/cssvisualdiff/modes/html_report.go` in css-visual-diff.
+- Added `html-report` mode to the runner and documented it in README.
+- Added `examples/pyxis-prototype-only.yaml`.
+- Ran the Pyxis prototype-only config against `http://localhost:7070/Pyxis%20Public%20Site.html`.
+- Generated the artifact browser at:
+  `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-only/index.html`
+- Served the report locally at:
+  `http://localhost:8788/index.html`
+- Verified in the browser that the page loads and shows the extracted prototype screenshots.
+- Added `examples/out/` to css-visual-diff `.gitignore` so generated reports remain local artifacts instead of polluting the repo.
+
+### Why
+
+Before comparing the prototype to Storybook, we need confidence that the prototype-side capture is correct. The report gives the user a direct way to inspect the generated artifacts without opening many files manually.
+
+### What worked
+
+- `capture`, `cssdiff`, `matched-styles`, and `html-report` completed for prototype-only inspection.
+- All validation entries were `ok`.
+- The report displayed the prepared Pyxis page screenshots without DesignCanvas chrome.
+- The report includes links to raw PNG, JSON, HTML, and Markdown artifacts.
+
+### What didn't work
+
+- The tool is not truly single-target yet; prototype-only mode mirrors the prototype into the `react` target because config validation still requires both targets.
+- The first report-only run omitted `cssdiff` and `matched-styles`, so I reran with those modes included to populate extracted CSS/style sections.
+
+### What I learned
+
+The comparison-shaped data model is reusable for prototype-only validation as long as the second target is clearly documented as a mirror. A future first-class single-target mode would make the UI less confusing, but it is not required to validate extraction.
+
+### What was tricky to build
+
+The artifact browser had to be useful even when some JSON files do not exist yet. It therefore loads each known artifact opportunistically and renders missing sections as explanatory messages instead of failing.
+
+### What warrants a second pair of eyes
+
+- Whether `html-report` should become part of `full` by default. I added it to `full`, but reviewers should confirm that is desirable.
+- Whether prototype-only mirror config is acceptable or whether we should add a first-class optional `react` target.
+
+### What should be done in the future
+
+- Add a true single-target `inspect` or `capture-one` mode.
+- Add thumbnails/contact-sheet controls or collapsible JSON previews in the report.
+- Run the actual Storybook comparison after the user validates the prototype-only report.
+
+### Code review instructions
+
+Review in css-visual-diff:
+
+```text
+internal/cssvisualdiff/modes/html_report.go
+internal/cssvisualdiff/runner/runner.go
+cmd/css-visual-diff/main.go
+README.md
+examples/pyxis-prototype-only.yaml
+.gitignore
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+go test ./...
+GOWORK=off go run ./cmd/css-visual-diff run --config examples/pyxis-prototype-only.yaml --modes capture,cssdiff,matched-styles,html-report --output json
+```
+
+Open:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-prototype-only/index.html
+```
