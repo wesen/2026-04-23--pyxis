@@ -1,0 +1,28 @@
+{
+  "name": "pyxis",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "pnpm --filter pyxis-user-site dev",
+    "build": "pnpm --filter pyxis-user-site build",
+    "preview": "pnpm --filter pyxis-user-site preview",
+    "storybook": "pnpm --filter pyxis-components storybook",
+    "build:components": "pnpm --filter pyxis-components build",
+    "build:components:watch": "pnpm --filter pyxis-components build:watch",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm -r test:watch",
+    "typecheck": "pnpm -r typecheck",
+    "format": "pnpm -r format",
+    "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

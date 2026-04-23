@@ -1,0 +1,104 @@
+/* Field / Input styles */
+
+[data-part='field'] {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Label */
+.pyxis-field__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.pyxis-field__label[data-has-error='true'] {
+  color: var(--color-accent);
+}
+
+/* Input wrapper (for icon positioning) */
+.pyxis-field__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pyxis-field__input-wrap[data-icon='left'] .pyxis-field__input {
+  padding-left: 36px;
+}
+
+.pyxis-field__input-wrap[data-icon='right'] .pyxis-field__input {
+  padding-right: 36px;
+}
+
+/* Icon inside input */
+.pyxis-field__icon {
+  position: absolute;
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.pyxis-field__input-wrap[data-icon='left'] .pyxis-field__icon {
+  left: 11px;
+}
+
+.pyxis-field__input-wrap[data-icon='right'] .pyxis-field__icon {
+  right: 11px;
+}
+
+/* Base input */
+[data-part='input'] {
+  width: 100%;
+  padding: 8px 11px;
+  font-family: inherit;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+
+[data-part='input']::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+[data-part='input']:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(200, 39, 13, 0.12);
+}
+
+/* Error state */
+[data-part='input'] {
+  /* default border */
+}
+
+.pyxis-field__input-wrap[data-has-error='true'] [data-part='input'] {
+  border-color: var(--color-accent);
+}
+
+.pyxis-field__input-wrap[data-has-error='true'] [data-part='input']:focus {
+  box-shadow: 0 0 0 3px rgba(200, 39, 13, 0.15);
+}
+
+/* Disabled */
+[data-part='input']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-border-subtle);
+}
+
+/* Hint / error messages */
+.pyxis-field__message {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+.pyxis-field__message[data-status='error'] {
+  color: var(--color-accent);
+}

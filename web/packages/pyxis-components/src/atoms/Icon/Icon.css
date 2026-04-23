@@ -1,0 +1,60 @@
+/* Icon component styles */
+
+/* Base icon — thin, custom-drawn inline SVG */
+[data-part='icon'] {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* PyxisMark (logo) */
+[data-part='pyxis-mark'] {
+  display: inline-block;
+}
+
+/* ─── Icon button (wraps Icon + button-like click area) ─── */
+
+[data-part='icon-btn'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default);
+}
+
+[data-part='icon-btn']:hover {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+[data-part='icon-btn']:focus-visible {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
+
+[data-part='icon-btn']:active {
+  background: var(--color-border-subtle);
+}
+
+[data-part='icon-btn'][data-size='sm'] {
+  width: 28px;
+  height: 28px;
+}
+
+[data-part='icon-btn'][data-size='md'] {
+  width: 32px;
+  height: 32px;
+}
+
+[data-part='icon-btn'][data-size='lg'] {
+  width: 40px;
+  height: 40px;
+}

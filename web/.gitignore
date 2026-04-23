@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.pnp/
+.pnp.js
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vite/
+.storybook/
+storybook-static/
+coverage/
+.turbo/
+.cache/

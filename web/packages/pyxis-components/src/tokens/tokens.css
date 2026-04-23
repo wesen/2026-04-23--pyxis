@@ -1,0 +1,234 @@
+/**
+ * Pyxis design tokens — CSS custom properties.
+ * All visual decisions are expressed as CSS variables here.
+ * Components reference these, never hardcoded values.
+ *
+ * Usage in a .css file:
+ *   .my-component {
+ *     background: var(--color-surface);
+ *     border: 1px solid var(--color-border);
+ *     color: var(--color-text-primary);
+ *     padding: var(--space-4);
+ *     border-radius: var(--radius-md);
+ *   }
+ *
+ * Usage in inline styles (JSX):
+ *   <div style={{ backgroundColor: 'var(--color-surface)' }}>
+ */
+
+/* ─── FONTS ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── COLORS ─────────────────────────────────────────── */
+
+/* Canvas — the warm paper background, everywhere */
+:root,
+[data-theme="light"] {
+  /* Canvas */
+  --color-canvas:          #F3F1EB;
+  --color-canvas-rgb:      243, 241, 235;
+
+  /* Surfaces */
+  --color-surface:         #FFFFFF;
+  --color-surface-raised: #FAF8F2;
+
+  /* Borders */
+  --color-border:          #EAE6DD;
+  --color-border-subtle:   #F0EDE4;
+  --color-border-strong:   #CCC7BB;
+
+  /* Text */
+  --color-text-primary:   #1A1A18;
+  --color-text-secondary: #555048;
+  --color-text-tertiary:  #8A857B;
+  --color-text-disabled:  #B8B2A5;
+  --color-text-inverse:  #FFFFFF;
+  --color-text-inverse-muted: rgba(255, 255, 255, 0.7);
+
+  /* Accent (single crimson) */
+  --color-accent:         #C8270D;
+  --color-accent-hover:   #A81F09;
+  --color-accent-subtle:  #FCEFEB;
+  --color-accent-strong:  #8E1B08;
+
+  /* Semantic: success */
+  --color-success:        #3C7A4F;
+  --color-success-hover:  #2E5F3C;
+  --color-success-subtle: #EAF3EC;
+
+  /* Semantic: warning */
+  --color-warning:        #C97A0F;
+  --color-warning-subtle: #FBF1DC;
+
+  /* Semantic: info */
+  --color-info:           #2E5D9E;
+  --color-info-subtle:    #E6EDF7;
+
+  /* Semantic: muted */
+  --color-muted:          #6B6459;
+  --color-muted-subtle:   #EEEAE0;
+
+  /* Discord brand */
+  --color-discord:        #5865F2;
+
+  /* Inverse — for dark backgrounds */
+  --color-ink:            #1A1A18;
+  --color-ink-subtle:     #F0EDE4;
+}
+
+/* Dark theme (inverted) */
+[data-theme="dark"] {
+  --color-canvas:          #1A1A18;
+  --color-canvas-rgb:      26, 26, 24;
+
+  --color-surface:         #252420;
+  --color-surface-raised:  #302D28;
+
+  --color-border:          #3A3730;
+  --color-border-subtle:   #2D2A26;
+  --color-border-strong:   #4E4A43;
+
+  --color-text-primary:   #F3F1EB;
+  --color-text-secondary: #B8B2A5;
+  --color-text-tertiary:  #8A857B;
+  --color-text-disabled:  #555048;
+  --color-text-inverse:  #1A1A18;
+  --color-text-inverse-muted: rgba(26, 26, 24, 0.7);
+
+  /* Accent stays crimson on dark bg for readability */
+  --color-accent-subtle:  rgba(200, 39, 13, 0.15);
+}
+
+/* ─── TYPOGRAPHY ──────────────────────────────────────── */
+
+:root {
+  /* Font families */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", "IBM Plex Mono", "SF Mono", ui-monospace, monospace;
+
+  /* Type scale */
+  --text-xs:    0.75rem;      /* 12px */
+  --text-sm:    0.8125rem;    /* 13px */
+  --text-base:  0.875rem;     /* 14px */
+  --text-lg:    1rem;         /* 16px */
+  --text-xl:    1.125rem;     /* 18px */
+  --text-2xl:   1.25rem;      /* 20px */
+  --text-3xl:   1.5rem;       /* 24px */
+  --text-4xl:   1.875rem;     /* 30px */
+  --text-5xl:   2.25rem;      /* 36px */
+  --text-6xl:   3rem;         /* 48px */
+  --text-7xl:   3.75rem;      /* 60px */
+  --text-8xl:   4.5rem;       /* 72px */
+
+  /* Line heights */
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter spacing */
+  --tracking-tightest: -0.04em;
+  --tracking-tight:    -0.02em;
+  --tracking-normal:    0;
+  --tracking-wide:      0.02em;
+  --tracking-wider:     0.04em;
+  --tracking-widest:    0.08em;
+
+  /* Font weights */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+}
+
+/* ─── SPACING ──────────────────────────────────────────── */
+
+:root {
+  --space-px:  1px;
+  --space-0:   0;
+  --space-1:   0.25rem;   /* 4px */
+  --space-2:   0.5rem;    /* 8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;  /* 20px */
+  --space-6:   1.5rem;   /* 24px */
+  --space-7:   2rem;     /* 32px */
+  --space-8:   2.5rem;   /* 40px */
+  --space-9:   3.5rem;   /* 56px */
+  --space-10:  4.5rem;   /* 72px */
+  --space-11:  6rem;     /* 96px */
+  --space-12:  8rem;     /* 128px */
+}
+
+/* ─── RADII ───────────────────────────────────────────── */
+
+:root {
+  --radius-xs:   0.25rem;   /* 4px */
+  --radius-sm:   0.375rem;  /* 6px */
+  --radius-md:   0.5rem;    /* 8px */
+  --radius-lg:   0.75rem;   /* 12px */
+  --radius-xl:   1rem;      /* 16px */
+  --radius-2xl:  1.5rem;    /* 24px */
+  --radius-full: 9999px;    /* Pills */
+}
+
+/* ─── SHADOWS ─────────────────────────────────────────── */
+
+:root {
+  --shadow-xs:  0 1px 2px rgba(26, 24, 22, 0.04);
+  --shadow-sm:  0 1px 3px rgba(26, 24, 22, 0.06), 0 1px 2px rgba(26, 24, 22, 0.04);
+  --shadow-md:  0 2px 10px rgba(26, 24, 22, 0.06), 0 1px 3px rgba(26, 24, 22, 0.04);
+  --shadow-lg:  0 8px 32px rgba(26, 24, 22, 0.10), 0 2px 8px rgba(26, 24, 22, 0.06);
+  --shadow-xl:  0 20px 60px rgba(26, 24, 22, 0.18), 0 8px 24px rgba(26, 24, 22, 0.10);
+  --shadow-none: none;
+}
+
+/* ─── TRANSITIONS ──────────────────────────────────────── */
+
+:root {
+  --duration-instant: 50ms;
+  --duration-fast:    100ms;
+  --duration-normal:   200ms;
+  --duration-slow:    300ms;
+  --duration-slower:  400ms;
+
+  --ease-default:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:           cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:          cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce:       cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Z-INDEX ─────────────────────────────────────────── */
+
+:root {
+  --z-base:     0;
+  --z-raised:   10;
+  --z-overlay:  20;
+  --z-modal:    30;
+  --z-toast:    40;
+  --z-tooltip:  50;
+}
+
+/* ─── FOCUS ────────────────────────────────────────────── */
+
+:root {
+  --ring-width:   2px;
+  --ring-offset:   2px;
+  --ring-color:   rgba(200, 39, 13, 0.4);
+}
+
+/* ─── BASE RESET (partial) ──────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Use tokens via CSS var() in your components:
+   .btn { background: var(--color-accent); color: var(--color-text-inverse); }
+*/

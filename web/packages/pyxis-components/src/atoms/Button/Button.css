@@ -1,0 +1,105 @@
+/* Button component styles */
+
+/* Base button */
+[data-part='btn'] {
+  font-family: inherit;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default),
+    transform var(--duration-instant) var(--ease-default),
+    opacity var(--duration-fast) var(--ease-default);
+  line-height: 1.2;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Sizes ─────────────────────────────────────────── */
+
+[data-part='btn'][data-size='sm'] {
+  height: 32px;
+  padding: 5px 12px;
+  font-size: var(--text-sm);
+}
+
+[data-part='btn'][data-size='md'] {
+  height: 40px;
+  padding: 7px 16px;
+  font-size: var(--text-base);
+}
+
+[data-part='btn'][data-size='lg'] {
+  height: 48px;
+  padding: 11px 22px;
+  font-size: var(--text-lg);
+}
+
+/* ─── Variants ────────────────────────────────────────── */
+
+/* Primary */
+[data-part='btn'][data-variant='primary']:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+/* Dark */
+[data-part='btn'][data-variant='dark']:hover {
+  background: var(--btn-hover, var(--color-ink));
+}
+
+/* Outline */
+[data-part='btn'][data-variant='outline']:hover {
+  background: var(--color-surface-raised);
+}
+
+/* Ghost */
+[data-part='btn'][data-variant='ghost']:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-text-primary);
+}
+
+/* Danger */
+[data-part='btn'][data-variant='danger']:hover {
+  background: var(--color-accent-subtle);
+}
+
+/* Success */
+[data-part='btn'][data-variant='success']:hover {
+  background: var(--color-success-hover);
+  border-color: var(--color-success-hover);
+}
+
+/* Discord */
+[data-part='btn'][data-variant='discord']:hover {
+  background: #4752C4;
+  border-color: #4752C4;
+}
+
+/* ─── States ──────────────────────────────────────────── */
+
+/* Disabled / loading */
+[data-part='btn']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus */
+[data-part='btn']:focus-visible {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
+
+/* Active/pressed — tiny scale-down for tactile feedback */
+[data-part='btn']:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Full width */
+[data-part='btn'][data-full-width='true'] {
+  width: 100%;
+}

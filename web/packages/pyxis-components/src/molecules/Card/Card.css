@@ -1,0 +1,45 @@
+/* Card component styles */
+
+[data-part='card'] {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-normal) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+}
+
+/* Padding variants */
+[data-part='card'][data-padding='sm'] .pyxis-card__body { padding: 16px; }
+[data-part='card'][data-padding='md'] .pyxis-card__body { padding: 22px; }
+[data-part='card'][data-padding='lg'] .pyxis-card__body { padding: 32px; }
+
+/* Card with only body (no slots) — apply padding to body */
+[data-part='card'] > .pyxis-card__body:first-child { }
+
+/* Header / footer */
+.pyxis-card__header {
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pyxis-card__footer {
+  padding: 16px 22px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Interactive */
+[data-part='card'].pyxis-card--interactive {
+  cursor: pointer;
+}
+
+[data-part='card'].pyxis-card--interactive:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+[data-part='card'].pyxis-card--interactive:focus-within {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: var(--ring-offset);
+}
