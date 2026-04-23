@@ -57,15 +57,10 @@ cp packages/pyxis-user-site/.env.example packages/pyxis-user-site/.env
 
 ## Deployment
 
-The user-site deploys to Vercel on every push to `main` (production) and PR (preview).
+No deployment target is configured yet. The user-site is a Vite SPA and should be deployed according to the backend/hosting plan chosen later.
 
-Required secrets in the GitHub repo:
-- `VERCEL_TOKEN` — Vercel API token
-- `VERCEL_ORG_ID` — Vercel org ID
-- `VERCEL_PROJECT_ID` — Vercel project ID
-- `VITE_API_URL` — production API base URL (also set in Vercel dashboard)
-
-See `.github/workflows/preview.yml` and `packages/pyxis-user-site/vercel.json`.
+Required environment variable for any production deployment:
+- `VITE_API_URL` — production API base URL
 
 ## Adding new components
 
