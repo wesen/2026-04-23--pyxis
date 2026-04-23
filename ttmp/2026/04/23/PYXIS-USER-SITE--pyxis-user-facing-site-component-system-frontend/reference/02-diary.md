@@ -343,3 +343,75 @@ The page stories are now covered, but the mock data still uses the existing seed
 ### Next
 
 Commit this Storybook coverage, then create page-level `css-visual-diff` configs/scripts starting with Shows desktop.
+
+---
+
+## Step 14: Add and run first page-level Storybook visual diff
+
+With user-site Storybook building and all public pages represented as stories, I added the first page-level comparison config: prototype Shows desktop vs user-site Storybook Shows Desktop.
+
+### Added
+
+- css-visual-diff config:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/pyxis-storybook-shows-desktop.yaml
+```
+
+- Numbered ticket scripts:
+
+```text
+scripts/13-serve-user-site-storybook-static.sh
+scripts/14-run-pyxis-storybook-shows-desktop.sh
+```
+
+### Command run
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/14-run-pyxis-storybook-shows-desktop.sh
+```
+
+### Results
+
+The run completed successfully:
+
+```text
+capture: ok
+cssdiff: ok
+matched-styles: ok
+pixeldiff: ok
+html-report: ok
+coverage total: 5
+missing/hidden: 0
+```
+
+Report:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/examples/out/pyxis-storybook-shows-desktop/test.html
+```
+
+Served for inspection at:
+
+```text
+http://localhost:8793/test.html
+```
+
+Pixel diffs:
+
+```text
+shows-content 76.1516%
+main          59.2671%
+full          54.5223%
+nav           32.9085%
+footer         6.8826%
+```
+
+### Interpretation
+
+The page-level comparison is now technically working, but the visual gap is large because the React Shows page is still the earlier hero/list implementation, while the prototype is the poster-grid public page. This confirms the next repair target: rebuild/adjust the Shows page and its public components to match the prototype poster-grid layout and data.
+
+### Next
+
+Start Shows desktop repair by aligning the shell/nav/main layout and replacing the hero/list page structure with the prototype-style poster grid.

@@ -58,7 +58,7 @@ Goal: before wiring the real backend, every public Pyxis page from `prototype-de
 
 ### Phase 14 — Page-level css-visual-diff configs and scripts
 
-- [ ] 14.1 Add css-visual-diff config for Storybook Shows desktop vs prototype Shows desktop.
+- [x] 14.1 Add css-visual-diff config for Storybook Shows desktop vs prototype Shows desktop.
 - [ ] 14.2 Add config for Shows mobile.
 - [ ] 14.3 Add config for Show detail desktop/mobile.
 - [ ] 14.4 Add config for Archive desktop/mobile.

@@ -32,6 +32,8 @@ the sequence of the investigation and follow-up comparison runs.
 - `10-atom-original-prepare.js` — prototype-side atom fixture renderer used by css-visual-diff `prepare.script_file`.
 - `11-run-pyxis-atom-diff.sh` — restart Storybook, then compare prototype atoms vs Storybook atoms.
 - `12-serve-atom-diff-report.sh` — serve the atom diff report at `test.html`.
+- `13-serve-user-site-storybook-static.sh` — serve the built `pyxis-user-site` Storybook static bundle on port `6007`.
+- `14-run-pyxis-storybook-shows-desktop.sh` — compare prototype Shows desktop against the user-site Storybook Shows Desktop story.
 
 ## Scripts
 

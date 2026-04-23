@@ -117,3 +117,18 @@ Ticket closed
 ### Validated
 - `pnpm --filter pyxis-user-site typecheck`
 - `STORYBOOK_DISABLE_TELEMETRY=1 pnpm --filter pyxis-user-site build-storybook`
+
+## 2026-04-23 — Add first page-level Storybook visual diff
+
+### Added
+- Added css-visual-diff config `examples/pyxis-storybook-shows-desktop.yaml` in the css-visual-diff repo.
+- Added numbered scripts `13-serve-user-site-storybook-static.sh` and `14-run-pyxis-storybook-shows-desktop.sh`.
+
+### Ran
+- Ran prototype Shows desktop vs user-site Storybook Shows Desktop comparison.
+- Served report at `http://localhost:8793/test.html`.
+
+### Results
+- Coverage: 5/5 selectors present and visible.
+- Pixel diffs: shows-content 76.1516%, main 59.2671%, full 54.5223%, nav 32.9085%, footer 6.8826%.
+- Next target: rebuild Shows page toward prototype poster-grid layout.
