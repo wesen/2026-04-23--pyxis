@@ -3,7 +3,6 @@
  * Usage: <Seo title="Show Archive" description="..." />
  * Falls back to site defaults if props are omitted.
  */
-import type { ReactNode } from 'react';
 
 interface SeoProps {
   title?: string;

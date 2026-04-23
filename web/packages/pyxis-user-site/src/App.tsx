@@ -1,14 +1,17 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Layout } from './components/layout/Layout';
-import { Shows } from './pages/Shows';
-import { ShowDetail } from './pages/ShowDetail';
-import { Archive } from './pages/Archive';
-import { Book } from './pages/Book';
-import { BookSuccess } from './pages/BookSuccess';
-import { About } from './pages/About';
 import { NotFound } from './pages/NotFound';
+
+// Lazy-loaded pages — each route is a separate JS chunk
+const Shows       = lazy(() => import('./pages/Shows').then(m => ({ default: m.Shows })));
+const ShowDetail  = lazy(() => import('./pages/ShowDetail').then(m => ({ default: m.ShowDetail })));
+const Archive     = lazy(() => import('./pages/Archive').then(m => ({ default: m.Archive })));
+const Book        = lazy(() => import('./pages/Book').then(m => ({ default: m.Book })));
+const BookSuccess = lazy(() => import('./pages/BookSuccess').then(m => ({ default: m.BookSuccess })));
+const About       = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,20 +29,91 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
         <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Shows />} />
-            <Route path="shows" element={<Shows />} />
-            <Route path="shows/:id" element={<ShowDetail />} />
-            <Route path="archive" element={<Archive />} />
-            <Route path="book" element={<Book />} />
-            <Route path="book/success" element={<BookSuccess />} />
-            <Route path="about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <Suspense fallback={<PageLoader />}><Shows /></Suspense>
+                }
+              />
+              <Route
+                path="shows"
+                element={
+                  <Suspense fallback={<PageLoader />}><Shows /></Suspense>
+                }
+              />
+              <Route
+                path="shows/:id"
+                element={
+                  <Suspense fallback={<PageLoader />}><ShowDetail /></Suspense>
+                }
+              />
+              <Route
+                path="archive"
+                element={
+                  <Suspense fallback={<PageLoader />}><Archive /></Suspense>
+                }
+              />
+              <Route
+                path="book"
+                element={
+                  <Suspense fallback={<PageLoader />}><Book /></Suspense>
+                }
+              />
+              <Route
+                path="book/success"
+                element={
+                  <Suspense fallback={<PageLoader />}><BookSuccess /></Suspense>
+                }
+              />
+              <Route
+                path="about"
+                element={
+                  <Suspense fallback={<PageLoader />}><About /></Suspense>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<PageLoader />}><NotFound /></Suspense>
+                }
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </ErrorBoundary>
     </QueryClientProvider>
+  );
+}
+
+/** Shown while a page chunk is loading */
+function PageLoader() {
+  return (
+    <div
+      aria-label="Loading page…"
+      role="status"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '50vh',
+        color: 'var(--color-text-tertiary)',
+        fontFamily: 'var(--font-body)',
+        fontSize: 'var(--text-sm)',
+        gap: 8,
+      }}
+    >
+      <svg
+        width="16" height="16" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+      Loading…
+    </div>
   );
 }
