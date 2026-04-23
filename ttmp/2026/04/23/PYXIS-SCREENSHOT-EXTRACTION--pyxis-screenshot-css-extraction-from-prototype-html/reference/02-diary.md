@@ -314,3 +314,92 @@ node ../ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extrac
 ### Technical details
 
 The direct-render mechanism waits until `window.PPXDesktop` and `window.PPXMobile` are available, replaces `document.body.innerHTML`, creates `#capture-root`, and renders `React.createElement(PPXDesktop, { page: 'shows' })` into it.
+
+---
+
+## Step 4: Compare Pyxis extraction with css-visual-diff and design the combined Storybook workbench
+
+I inspected the existing Go `css-visual-diff` repository and compared it against the Pyxis direct-render extraction work. The review found that the two systems solve adjacent parts of the same problem: Pyxis direct-render creates clean original baselines, while `css-visual-diff` compares two clean browser targets with screenshots, pixel diffs, computed CSS, matched-style/cascade inspection, and reports.
+
+The result is a new intern-oriented design document for a combined workflow: direct-render original prototypes, render matching Storybook iframe stories at the same width, then run visual and CSS comparisons region by region until the port is pixel-perfect.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Analyze /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff and compare with the work you did, and see where the overlap and diferences are. I want to have a tool that allows me to work with storybook and an original design side by side until the ported react is pixel perfect.
+
+Write a detailed analysis and comparison document.
+
+reate a detailed analysis / design / implementation guide that is very detailed for a new intern, explaining all the parts of the system needed to understand what it is, with prose paragraphs and bullet point sand pseudocode and diagrams and api references and file
+  references.
+  It should be very clear and detailed. Store in the ticket and the nupload to remarkable."
+
+**Assistant interpretation:** Study the prior visual-diff tool, compare it to the Pyxis extraction approach, and write a detailed design/implementation guide for a future integrated Storybook-original-design pixel-perfect workflow.
+
+**Inferred user intent:** The user wants a reusable system, not an ad hoc screenshot script: a workflow that can compare original design outputs with Storybook/React implementations side-by-side, diagnose differences, and guide iterative CSS fixes.
+
+**Commit (code):** pending — documentation update will be committed after upload.
+
+### What I did
+
+- Read `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/README.md` and `AGENT.md`.
+- Inspected CLI entrypoint `cmd/css-visual-diff/main.go` and ran CLI help.
+- Inspected config model, browser driver, capture, compare, cssdiff, pixeldiff, matched-styles, story discovery, and agent brief code.
+- Compared those capabilities to Pyxis `capture-direct-render.mjs` and `prototype-design/direct/home/*` outputs.
+- Wrote `design/02-storybook-design-side-by-side-visual-diff-system.md`.
+
+### Why
+
+The Pyxis work alone can create clean original screenshots, HTML, and computed style trees, but it does not compare them against Storybook. `css-visual-diff` already contains much of the comparison machinery needed for that next step.
+
+### What worked
+
+- `css-visual-diff` has a strong config model and modes that map directly to Storybook comparison work.
+- It already supports separate original/react selectors, computed CSS diffs, matched-style winner diffs, pixel diff images, and Storybook story discovery.
+- The design document identifies a clear integration point: add a target `prepare` hook or pre-generate clean original fixtures from Pyxis direct render.
+
+### What didn't work
+
+- `css-visual-diff` currently assumes both sides are ordinary URLs. For Pyxis, the original URL renders DesignCanvas, which is not the clean product UI. A prepare/direct-render layer is required.
+- The Pyxis direct-render script is currently hard-coded to the home page and not yet a generalized CLI.
+
+### What I learned
+
+The right architecture is not to replace `css-visual-diff`; it is to feed it clean original targets or extend it with a prepare hook. The tools are complementary: extraction first, comparison second.
+
+### What was tricky to build
+
+The central conceptual split was important: “extract original baseline” and “compare two baselines” are distinct phases. Combining them too early risks embedding Pyxis-specific prototype logic into a general visual-diff engine. The design therefore proposes an adapter boundary (`prepare`) rather than hard-wiring `PPXDesktop` into the comparison engine.
+
+### What warrants a second pair of eyes
+
+- Whether to implement the direct-render prepare hook inside Go/chromedp or keep it as a Playwright/JS pre-step.
+- Whether `css-visual-diff` should grow recursive inspect-tree output, or whether the direct-render extractor should own that artifact.
+- How to keep Storybook selector mappings stable across refactors.
+
+### What should be done in the future
+
+- Generalize `capture-direct-render.mjs` to all pages and components.
+- Add a `PrepareSpec` to `css-visual-diff` target config.
+- Add Storybook page stories at exact prototype widths.
+- Add `data-region`/`data-part` selectors to React components for stable comparison.
+
+### Code review instructions
+
+Start with:
+
+- `design/02-storybook-design-side-by-side-visual-diff-system.md`
+- `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/config/config.go`
+- `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/compare.go`
+- `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/matched_styles.go`
+- `scripts/capture-direct-render.mjs`
+
+### Technical details
+
+Useful commands used during the investigation:
+
+```bash
+cd /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+GOWORK=off go run ./cmd/css-visual-diff --help
+GOWORK=off go run ./cmd/css-visual-diff compare --help
+GOWORK=off go run ./cmd/css-visual-diff run --help
+```

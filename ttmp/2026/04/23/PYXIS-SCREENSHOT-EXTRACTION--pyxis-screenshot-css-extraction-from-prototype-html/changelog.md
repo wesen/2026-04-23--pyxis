@@ -73,3 +73,16 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 
 ### Analysis document
 - Added `design/01-review-and-recommended-capture-approach.md` explaining the failure mode and proposed reusable extraction tool.
+
+## 2026-04-23 — css-visual-diff comparison + Storybook workbench design
+
+### Analysis document
+- Added `design/02-storybook-design-side-by-side-visual-diff-system.md`.
+- Compared the Pyxis direct-render extraction approach with `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff`.
+- Documented overlap, differences, and a combined architecture for Storybook-vs-original pixel-perfect workflows.
+- Included intern-oriented prose, diagrams, pseudocode, config examples, CLI examples, implementation phases, and file/API references.
+
+### Key conclusion
+- Pyxis direct-render extraction solves clean original baseline generation.
+- `css-visual-diff` solves comparison, CSS diffing, matched cascade inspection, pixel diff artifacts, Storybook discovery, and reports.
+- The correct combined system should direct-render original prototypes, render Storybook iframe stories at matching widths, then run capture/cssdiff/matched-styles/pixeldiff across stable selectors.
