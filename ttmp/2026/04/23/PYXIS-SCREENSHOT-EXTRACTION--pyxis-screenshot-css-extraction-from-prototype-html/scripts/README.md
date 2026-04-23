@@ -34,12 +34,33 @@ node ../ttmp/.../scripts/screenshot-prototype.mjs
 ```
 
 ### `screenshot-components.mjs`
-Screenshots individual sub-components. Edit the `SHOTS` array in the script to add
-or change targets. Saves to `prototype-design/comp/*.png`.
+Screenshots individual sub-components from the DesignCanvas. This was the first approach and is now considered fragile because DesignCanvas is transform/pan based, not page-scroll based. Prefer `capture-direct-render.mjs` for public-site pages.
 
 ```bash
 cd ../../../web/
 node ../ttmp/.../scripts/screenshot-components.mjs
+```
+
+### `capture-direct-render.mjs` — recommended
+Loads the prototype HTML, waits for `PPXDesktop`/`PPXMobile` globals, discards the DesignCanvas DOM, directly renders `PPXDesktop({ page: 'shows' })` into `#capture-root`, then exports PNG, HTML, and computed-style JSON.
+
+```bash
+cd ../../../web/
+node ../ttmp/.../scripts/capture-direct-render.mjs
+```
+
+Outputs:
+
+```text
+prototype-design/direct/home/desktop-shows-full.png
+prototype-design/direct/home/header.png
+prototype-design/direct/home/nav.png
+prototype-design/direct/home/main.png
+prototype-design/direct/home/heading-block.png
+prototype-design/direct/home/shows-grid.png
+prototype-design/direct/home/footer.png
+prototype-design/direct/home/desktop-shows.html
+prototype-design/direct/home/desktop-shows.inspect.json
 ```
 
 ## Artboard canvas positions

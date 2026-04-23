@@ -52,3 +52,24 @@ All scripts live in `scripts/` and are run from `web/` workspace:
 - Babel standalone takes ~8s to compile on first load — must wait before interacting
 - Viewport must be wider than artboard width (e.g. 1100px for 920px artboard) to avoid edge cutoff
 - Artboard positions are canvas/page coordinates — subtract scroll offset when computing clip coords
+
+## 2026-04-23 — Big-brother review + corrected direct-render strategy
+
+### Visual review
+- Inspected old home-page screenshots and confirmed they are not valid baselines.
+- Old `prototype-design/comp/01-desktop-shows-full.png` starts with DesignCanvas chrome and cuts off before the footer.
+- Created comparison evidence: `prototype-design/direct/review/home-old-vs-direct.png`.
+
+### Corrected capture approach
+- Added `scripts/capture-direct-render.mjs`.
+- This script loads the prototype HTML only to compile globals, then directly renders `PPXDesktop({ page: 'shows' })` into a clean `#capture-root`.
+- Generated clean home-page baseline under `prototype-design/direct/home/`.
+
+### New extraction outputs
+- `prototype-design/direct/home/desktop-shows-full.png` — validated clean page baseline.
+- `prototype-design/direct/home/{header,nav,main,heading-block,shows-grid,footer}.png` — stable region clips.
+- `prototype-design/direct/home/desktop-shows.html` — extracted DOM.
+- `prototype-design/direct/home/desktop-shows.inspect.json` — recursive computed style + layout tree.
+
+### Analysis document
+- Added `design/01-review-and-recommended-capture-approach.md` explaining the failure mode and proposed reusable extraction tool.
