@@ -2505,3 +2505,15 @@ Additional changes:
 - `CollectiveList` was aligned to the current abbreviated fixture, reducing `6.0465%` to `5.1793%`.
 
 Current remaining higher residuals are mostly due to anti-aliasing/text wrapping, fixture abbreviations, or selector-probe quirks rather than missing component coverage. Public page-level work can now proceed with a much lower-noise component base, though exact acceptance decisions should still be reviewed target by target.
+
+## Step 24: Step back and assess modular/themable/data foundation
+
+Created a full architecture assessment before moving to page-level comparisons. The review evaluates whether the current work is still moving toward a React modular, themable, Storybook-ready, application-level foundation and calls out a major data-layer clarification: the current app uses TanStack React Query, while the stated target mentions RTK Query.
+
+Assessment document:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/05-react-modular-rtk-query-themable-foundation-assessment.md
+```
+
+Key conclusion: the visual parity work produced a valuable design inventory and regression harness, but the implementation needs a stabilization pass around component taxonomy, tokenized CSS/theming, and data-fetching strategy before page-level work.

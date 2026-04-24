@@ -1,8 +1,6 @@
 import { pyxisPart } from '../../utils/parts';
 import React from 'react';
 import type { BookingFormData } from '../../mocks/types';
-import { ShowTypeChips } from '../ShowTypeChips';
-import { SaferSpaceAgreement } from '../SaferSpaceAgreement';
 
 export type BookingFormProps = {
   onSubmit?: (data: BookingFormData) => Promise<void>;

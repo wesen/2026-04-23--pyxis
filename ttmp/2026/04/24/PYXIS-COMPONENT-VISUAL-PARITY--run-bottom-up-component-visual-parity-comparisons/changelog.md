@@ -368,3 +368,13 @@ Continued tuning public molecules/organisms before page-level comparisons. Impro
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/Poster/Poster.tsx — Closer redroom poster details
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx — Adjusted YearGroup fixture
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Refreshed public comparison stats/statuses
+
+
+## 2026-04-24
+
+Added a foundation assessment before page-level comparisons, focusing on modular React architecture, theming, Storybook, component taxonomy, and the TanStack Query vs RTK Query decision.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/05-react-modular-rtk-query-themable-foundation-assessment.md — Full architecture assessment
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Step 24 diary entry
