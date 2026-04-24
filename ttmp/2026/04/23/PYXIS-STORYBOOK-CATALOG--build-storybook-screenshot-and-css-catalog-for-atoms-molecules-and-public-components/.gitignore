@@ -1,0 +1,9 @@
+# Generated Storybook catalog artifacts are reproducible from scripts/.
+various/story-catalog/artifacts/
+various/story-catalog/test-inspect/
+various/story-catalog/index.html
+various/story-catalog/index.md
+various/story-catalog/status.tsv
+various/story-catalog/failures.tsv
+various/prototype-baseline/artifacts/
+various/prototype-baseline/sample/

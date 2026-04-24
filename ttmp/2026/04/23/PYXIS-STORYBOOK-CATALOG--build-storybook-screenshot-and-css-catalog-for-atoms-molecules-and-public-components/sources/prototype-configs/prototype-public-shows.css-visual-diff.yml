@@ -1,0 +1,103 @@
+# Prototype baseline catalog config for Pyxis poster-grid public Shows page.
+# Source: prototype-design/Pyxis Public Site.html -> PPXDesktop({ page: "shows" }).
+metadata:
+  slug: prototype-public-shows
+  title: Prototype Public Site / Shows baseline
+  source_html: prototype-design/Pyxis Public Site.html
+  source_component: PPXDesktop
+  source_page: shows
+
+original:
+  name: prototype-public-shows
+  url: "http://localhost:7070/Pyxis%20Public%20Site.html"
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1800 }
+  root_selector: "#capture-root"
+  prepare:
+    type: direct-react-global
+    wait_for: "window.React && window.ReactDOM && window.PPXDesktop"
+    component: PPXDesktop
+    root_selector: "#capture-root"
+    props: { page: "shows" }
+    width: 920
+    min_height: 1460
+    background: "#FFFFFF"
+    after_wait_ms: 500
+
+react:
+  name: prototype-public-shows
+  url: "http://localhost:7070/Pyxis%20Public%20Site.html"
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1800 }
+  root_selector: "#capture-root"
+  prepare:
+    type: direct-react-global
+    wait_for: "window.React && window.ReactDOM && window.PPXDesktop"
+    component: PPXDesktop
+    root_selector: "#capture-root"
+    props: { page: "shows" }
+    width: 920
+    min_height: 1460
+    background: "#FFFFFF"
+    after_wait_ms: 500
+
+styles:
+  - name: full-page
+    selector: "#capture-root"
+    include_bounds: true
+    props: [display,width,height,font-family,font-size,color,background-color]
+  - name: nav
+    selector: "#capture-root header"
+    include_bounds: true
+    props: [display,width,height,padding,background-color,border,font-family,font-size,color]
+  - name: nav-wordmark
+    selector: "#capture-root header button:first-child"
+    include_bounds: true
+    props: [display,width,height,padding,font-family,font-size,font-weight,letter-spacing,color,background-color,border]
+  - name: nav-active-pill
+    selector: "#capture-root header nav button:first-child"
+    include_bounds: true
+    props: [display,width,height,padding,font-family,font-size,font-weight,color,background-color,border,border-radius]
+  - name: main
+    selector: "#capture-root main"
+    include_bounds: true
+    props: [display,width,height,margin,padding,font-family,font-size,color,background-color]
+  - name: page-header
+    selector: "#capture-root main > div:first-child"
+    include_bounds: true
+    props: [display,width,height,margin,padding,font-family,font-size,color,background-color]
+  - name: show-grid
+    selector: "#capture-root main div[style*='grid-template-columns']"
+    include_bounds: true
+    props: [display,width,height,gap,grid-template-columns,margin,padding]
+  - name: first-show-tile
+    selector: "#capture-root main div[style*='grid-template-columns'] > div:first-child"
+    include_bounds: true
+    props: [display,width,height,margin,padding,font-family,font-size,color,background-color,border,border-radius,cursor]
+  - name: first-poster
+    selector: "#capture-root main div[style*='grid-template-columns'] > div:first-child > div:first-child"
+    include_bounds: true
+    props: [display,width,height,aspect-ratio,background-color,border-radius,overflow]
+  - name: first-show-title
+    selector: "#capture-root main div[style*='grid-template-columns'] > div:first-child > div:nth-child(2) > div:first-child"
+    include_bounds: true
+    props: [display,width,height,margin,font-size,font-weight,letter-spacing,color]
+  - name: first-ticket-pill
+    selector: "#capture-root main div[style*='grid-template-columns'] > div:first-child button"
+    include_bounds: true
+    props: [display,width,height,padding,font-family,font-size,font-weight,color,background-color,border,border-radius]
+  - name: footer
+    selector: "#capture-root footer"
+    include_bounds: true
+    props: [display,width,height,margin,padding,background-color,border,font-family,font-size,color]
+
+output:
+  dir: "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/artifacts/public/shows"
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture]
