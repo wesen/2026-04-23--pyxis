@@ -2432,3 +2432,19 @@ Batches:
 - Batch D: about-page components (`AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`).
 
 The purpose is to preserve a clear implementation queue and make it obvious which standalone prototype page each batch comes from.
+
+## Step 21: Implement remaining standalone public-page components and parity coverage
+
+Implemented all remaining batched standalone public-page components: shared page header, detail-page parts, archive filters/rows/list, book-page chips/aside/agreement, and about-page intro/ethos/collective/find-us blocks.
+
+Validation:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+passed.
+
+Created Storybook stories for each new component, exported them from the package barrel, added all components to `PublicDiffFixture`, added matching prototype fixture states, generated 15 parity configs, and ran full `css-visual-diff` modes for each config.
+
+All 15 comparison configs have valid coverage (`total: 2`, no missing/hidden selectors). Notable exact/near-exact results include `PublicPageHeader`, `ShowDetailHeader`, `ShowMetaStrip`, `ShowTypeChips`, `ArchiveShowRow`, and `ArchiveShowList`. `BookingSpaceAside` remains high-diff because the prototype fixture currently includes abbreviated aside content while the React component includes the fuller specs list.

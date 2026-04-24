@@ -309,3 +309,29 @@ Added explicit task batches for the remaining standalone public-page design elem
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/tasks.md — Added public standalone page implementation batches
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Added Step 20 diary entry
+
+
+## 2026-04-24
+
+Implemented all remaining standalone public-page molecules/organisms from detail/archive/book/about and added visual parity coverage for each.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicPageHeader — New shared page header component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ReserveTicketCard — New detail-page ticket card component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowDetailHeader — New detail-page header component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowMetaStrip — New detail-page meta strip component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/SafetyNote — New detail-page safety note component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ArchiveSearchFilters — New archive filter component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ArchiveShowRow — New archive row component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ArchiveShowList — New archive list component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowTypeChips — New booking show-type chips component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingSpaceAside — New booking space aside component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/SaferSpaceAgreement — New safer-space agreement component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/AboutIntro — New about intro component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/EthosGrid — New about ethos grid component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/CollectiveList — New collective list component
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/FindUsBlock — New find-us block component
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public — Added 15 comparison configs
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added 15 parity entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/tasks.md — Marked batches complete

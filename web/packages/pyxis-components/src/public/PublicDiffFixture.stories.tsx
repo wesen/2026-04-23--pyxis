@@ -20,6 +20,22 @@ import { Poster } from './Poster';
 import { ShowTile, type ShowTileShow } from './ShowTile';
 import { ShowGrid } from './ShowGrid';
 
+import { PublicPageHeader } from './PublicPageHeader';
+import { ReserveTicketCard } from './ReserveTicketCard';
+import { ShowDetailHeader } from './ShowDetailHeader';
+import { ShowMetaStrip } from './ShowMetaStrip';
+import { SafetyNote } from './SafetyNote';
+import { ArchiveSearchFilters } from './ArchiveSearchFilters';
+import { ArchiveShowRow } from './ArchiveShowRow';
+import { ArchiveShowList } from './ArchiveShowList';
+import { ShowTypeChips } from './ShowTypeChips';
+import { BookingSpaceAside } from './BookingSpaceAside';
+import { SaferSpaceAgreement } from './SaferSpaceAgreement';
+import { AboutIntro } from './AboutIntro';
+import { EthosGrid } from './EthosGrid';
+import { CollectiveList } from './CollectiveList';
+import { FindUsBlock } from './FindUsBlock';
+
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: 16, alignItems: 'start' }}>
@@ -152,6 +168,38 @@ function PublicDiffFixture() {
       <FixtureRow label="Booking">
         <div data-comp="public-booking-rules-default" style={{ width: 320 }}><BookingRules /></div>
         <div data-comp="public-booking-success-default" style={{ width: 420 }}><BookingSuccess artistName="sable witch" /></div>
+      </FixtureRow>
+
+
+
+      <FixtureRow label="Page header">
+        <div data-comp="public-page-header-default" style={{ width: 856 }}><PublicPageHeader kicker="Since 2023" title="The archive" /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Detail parts">
+        <div data-comp="public-reserve-ticket-card-default" style={{ width: 340 }}><ReserveTicketCard /></div>
+        <div data-comp="public-show-detail-header-default" style={{ width: 520 }}><ShowDetailHeader /></div>
+        <div data-comp="public-show-meta-strip-default" style={{ width: 480 }}><ShowMetaStrip /></div>
+        <div data-comp="public-safety-note-default" style={{ width: 480 }}><SafetyNote /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Archive parts">
+        <div data-comp="public-archive-search-filters-default" style={{ width: 720 }}><ArchiveSearchFilters /></div>
+        <div data-comp="public-archive-show-row-default" style={{ width: 720 }}><ArchiveShowRow date="Dec 12" name="Winter Solstice Rave" tag="Electronic" /></div>
+        <div data-comp="public-archive-show-list-default" style={{ width: 720 }}><ArchiveShowList /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Book extras">
+        <div data-comp="public-show-type-chips-default" style={{ width: 560 }}><ShowTypeChips /></div>
+        <div data-comp="public-booking-space-aside-default" style={{ width: 300 }}><BookingSpaceAside /></div>
+        <div data-comp="public-safer-space-agreement-default" style={{ width: 560 }}><SaferSpaceAgreement /></div>
+      </FixtureRow>
+
+      <FixtureRow label="About extras">
+        <div data-comp="public-about-intro-default" style={{ width: 620 }}><AboutIntro /></div>
+        <div data-comp="public-ethos-grid-default" style={{ width: 856 }}><EthosGrid /></div>
+        <div data-comp="public-collective-list-default" style={{ width: 400 }}><CollectiveList /></div>
+        <div data-comp="public-find-us-block-default" style={{ width: 400 }}><FindUsBlock /></div>
       </FixtureRow>
 
       <FixtureRow label="Booking form">

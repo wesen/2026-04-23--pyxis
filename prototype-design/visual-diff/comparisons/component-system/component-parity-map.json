@@ -1074,6 +1074,426 @@
       },
       "confidence": "medium",
       "notes": "New React ShowGrid organism covering the desktop public Shows poster grid. Coverage valid; currently only first three fixture shows in the component-system fixture."
+    },
+    {
+      "slug": "public-molecules-public-page-header-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "PublicPageHeader",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-page-header-default']",
+        "styleSelector": "[data-comp='public-page-header-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-page-header-default']",
+        "styleSelector": "[data-comp='public-page-header-default'] [data-pyxis-component='public-page-header'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/public-page-header-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/public-page-header-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/public-page-header-default/index.html",
+        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-reserve-ticket-card-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ReserveTicketCard",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-reserve-ticket-card-default']",
+        "styleSelector": "[data-comp='public-reserve-ticket-card-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-reserve-ticket-card-default']",
+        "styleSelector": "[data-comp='public-reserve-ticket-card-default'] [data-pyxis-component='reserve-ticket-card'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/reserve-ticket-card-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/reserve-ticket-card-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/reserve-ticket-card-default/index.html",
+        "pixelDiff": "component 1.1681%; root 1.1681%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-show-detail-header-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ShowDetailHeader",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-show-detail-header-default']",
+        "styleSelector": "[data-comp='public-show-detail-header-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-show-detail-header-default']",
+        "styleSelector": "[data-comp='public-show-detail-header-default'] [data-pyxis-component='show-detail-header'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-detail-header-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-detail-header-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-detail-header-default/index.html",
+        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-show-meta-strip-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ShowMetaStrip",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-show-meta-strip-default']",
+        "styleSelector": "[data-comp='public-show-meta-strip-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-show-meta-strip-default']",
+        "styleSelector": "[data-comp='public-show-meta-strip-default'] [data-pyxis-component='show-meta-strip'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-meta-strip-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-meta-strip-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-meta-strip-default/index.html",
+        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-safety-note-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "SafetyNote",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-safety-note-default']",
+        "styleSelector": "[data-comp='public-safety-note-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-safety-note-default']",
+        "styleSelector": "[data-comp='public-safety-note-default'] [data-pyxis-component='safety-note'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/safety-note-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/safety-note-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/safety-note-default/index.html",
+        "pixelDiff": "component 10.2790%; root 10.2790%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-archive-search-filters-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ArchiveSearchFilters",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-archive-search-filters-default']",
+        "styleSelector": "[data-comp='public-archive-search-filters-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-archive-search-filters-default']",
+        "styleSelector": "[data-comp='public-archive-search-filters-default'] [data-pyxis-component='archive-search-filters'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-search-filters-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-search-filters-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-search-filters-default/index.html",
+        "pixelDiff": "root 4.2631%; component 2.3980%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-archive-show-row-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ArchiveShowRow",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-archive-show-row-default']",
+        "styleSelector": "[data-comp='public-archive-show-row-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-archive-show-row-default']",
+        "styleSelector": "[data-comp='public-archive-show-row-default'] [data-pyxis-component='archive-show-row'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-show-row-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-show-row-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-show-row-default/index.html",
+        "pixelDiff": "component 0.2671%; root 0.2671%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-organisms-archive-show-list-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "ArchiveShowList",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-archive-show-list-default']",
+        "styleSelector": "[data-comp='public-archive-show-list-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-archive-show-list-default']",
+        "styleSelector": "[data-comp='public-archive-show-list-default'] [data-pyxis-component='archive-show-list'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/archive-show-list-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/archive-show-list-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/archive-show-list-default/index.html",
+        "pixelDiff": "component 0.4888%; root 0.4888%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-show-type-chips-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ShowTypeChips",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-show-type-chips-default']",
+        "styleSelector": "[data-comp='public-show-type-chips-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-show-type-chips-default']",
+        "styleSelector": "[data-comp='public-show-type-chips-default'] [data-pyxis-component='show-type-chips'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-type-chips-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-type-chips-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-type-chips-default/index.html",
+        "pixelDiff": "component 0.0102%; root 0.0102%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-organisms-booking-space-aside-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "BookingSpaceAside",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-booking-space-aside-default']",
+        "styleSelector": "[data-comp='public-booking-space-aside-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-booking-space-aside-default']",
+        "styleSelector": "[data-comp='public-booking-space-aside-default'] [data-pyxis-component='booking-space-aside'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-space-aside-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-space-aside-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-space-aside-default/index.html",
+        "pixelDiff": "component 64.0453%; root 64.0453%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-safer-space-agreement-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "SaferSpaceAgreement",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-safer-space-agreement-default']",
+        "styleSelector": "[data-comp='public-safer-space-agreement-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-safer-space-agreement-default']",
+        "styleSelector": "[data-comp='public-safer-space-agreement-default'] [data-pyxis-component='safer-space-agreement'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/safer-space-agreement-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/safer-space-agreement-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/safer-space-agreement-default/index.html",
+        "pixelDiff": "component 1.6353%; root 1.6353%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-about-intro-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "AboutIntro",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-about-intro-default']",
+        "styleSelector": "[data-comp='public-about-intro-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-about-intro-default']",
+        "styleSelector": "[data-comp='public-about-intro-default'] [data-pyxis-component='about-intro'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/about-intro-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/about-intro-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/about-intro-default/index.html",
+        "pixelDiff": "root 4.5559%; component 4.3161%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-organisms-ethos-grid-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "EthosGrid",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-ethos-grid-default']",
+        "styleSelector": "[data-comp='public-ethos-grid-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-ethos-grid-default']",
+        "styleSelector": "[data-comp='public-ethos-grid-default'] [data-pyxis-component='ethos-grid'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/ethos-grid-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-grid-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-grid-default/index.html",
+        "pixelDiff": "component 5.9015%; root 5.9015%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-collective-list-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "CollectiveList",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-collective-list-default']",
+        "styleSelector": "[data-comp='public-collective-list-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-collective-list-default']",
+        "styleSelector": "[data-comp='public-collective-list-default'] [data-pyxis-component='collective-list'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/collective-list-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/collective-list-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/collective-list-default/index.html",
+        "pixelDiff": "component 6.0465%; root 6.0465%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+    },
+    {
+      "slug": "public-molecules-find-us-block-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "FindUsBlock",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-find-us-block-default']",
+        "styleSelector": "[data-comp='public-find-us-block-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-find-us-block-default']",
+        "styleSelector": "[data-comp='public-find-us-block-default'] [data-pyxis-component='find-us-block'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/find-us-block-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/find-us-block-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/find-us-block-default/index.html",
+        "pixelDiff": "component 4.5967%; root 4.5967%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
     }
   ]
 }
