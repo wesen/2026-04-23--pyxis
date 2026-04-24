@@ -172,3 +172,76 @@ PPXMobile
 PPXShell
 P_SHOWS
 ```
+
+## Step 2: Force-add the component Storybook preview config
+
+The catalog work exposed a reproducibility problem: `web/.gitignore` ignores all `.storybook/` directories, but the component Storybook preview controls the CSS imports used by the catalog screenshots. In particular, Card styling only appeared after importing `Card.css` in the local preview file. If that file remains ignored, future catalog output can silently differ from this machine.
+
+I therefore force-added the component Storybook config. Although the user specifically asked for `preview.tsx`, I also staged `main.ts` because Storybook needs both files to be reproducible from a clean checkout. I removed an unused `withTests` import from `preview.tsx` before staging.
+
+### Prompt Context
+
+**User prompt (verbatim):** "force add the .storybook preview.tsx"
+
+**Assistant interpretation:** Track the ignored component Storybook preview file so the catalog's CSS import environment is reproducible.
+
+**Inferred user intent:** Ensure the Storybook-side catalog is not dependent on local ignored files, especially the preview CSS imports needed for accurate component screenshots.
+
+### What I did
+
+- Read `web/packages/pyxis-components/.storybook/preview.tsx`.
+- Read `web/packages/pyxis-components/.storybook/main.ts`.
+- Removed the unused `withTests` import from `preview.tsx`.
+- Force-added both `.storybook/preview.tsx` and `.storybook/main.ts` to git.
+
+### Why
+
+The Storybook catalog screenshots depend on preview-level CSS imports:
+
+```text
+../src/tokens/tokens.css
+../src/atoms/Button/Button.css
+../src/atoms/Icon/Icon.css
+../src/atoms/Input/Input.css
+../src/atoms/Select/Select.css
+../src/atoms/Textarea/Textarea.css
+../src/molecules/Card/Card.css
+../src/public/PubNav/PubNav.css
+```
+
+Without tracking the preview file, Card and other stylesheet-dependent components can render differently for the next developer.
+
+### What worked
+
+The files were force-added despite the global `.storybook/` ignore rule.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The catalog work made Storybook preview imports part of the visual testing surface. Ignored Storybook config is not acceptable once screenshots become a baseline artifact.
+
+### What was tricky to build
+
+The tricky part is repository hygiene: `web/.gitignore` ignores `.storybook/` globally, which probably made sense early on, but it hides config that is now essential for visual catalog reproducibility.
+
+### What warrants a second pair of eyes
+
+Confirm that `main.ts` should be tracked alongside `preview.tsx`. I included it because a tracked preview without a tracked main config is incomplete for a clean checkout.
+
+### What should be done in the future
+
+Consider narrowing `web/.gitignore` so package `.storybook/` directories are no longer ignored, or add explicit negation rules for package-level Storybook config.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-components/.storybook/main.ts
+web/packages/pyxis-components/.storybook/preview.tsx
+```
+
+Check that the preview imports every CSS file needed for catalog rendering.

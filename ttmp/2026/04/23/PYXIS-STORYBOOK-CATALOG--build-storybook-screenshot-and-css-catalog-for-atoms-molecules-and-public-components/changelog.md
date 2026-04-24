@@ -20,3 +20,15 @@
 ### Notes
 - We do not yet have a complete baseline catalog for all public pages/components; this is the first structured baseline layer.
 - `Pyxis Full App.html` should contribute only the Foundations/SystemPage section to this ticket, not backend/admin workflow screens.
+
+## 2026-04-24 — Track component Storybook preview config
+
+### Added
+- Force-added `web/packages/pyxis-components/.storybook/preview.tsx` so visual catalog CSS imports are reproducible.
+- Force-added `web/packages/pyxis-components/.storybook/main.ts` as the companion Storybook config needed by a clean checkout.
+
+### Changed
+- Removed an unused `withTests` import from `preview.tsx`.
+
+### Why
+- The Storybook catalog depends on preview-level CSS imports, including `Card.css`; leaving preview ignored makes catalog screenshots machine-local and non-reproducible.
