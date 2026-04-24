@@ -990,6 +990,90 @@
       },
       "confidence": "medium",
       "notes": "Coverage target for the larger public booking workflow. Prototype form has fewer/different fields and underline controls; React BookingForm uses current atom inputs/selects/textareas and additional fields, so this remains needs-review rather than a pixel-tuning target until taxonomy/field parity is decided."
+    },
+    {
+      "slug": "public-molecules-poster-redroom",
+      "domain": "public",
+      "level": "molecule",
+      "component": "Poster",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/shows.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-poster-redroom']",
+        "styleSelector": "[data-comp='public-poster-redroom'] > div"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-poster-redroom']",
+        "styleSelector": "[data-comp='public-poster-redroom'] [data-pyxis-component='poster'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/poster-redroom",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/poster-redroom/index.html",
+        "pixelDiff": "component/root 6.8201%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "New React Poster component covering the prototype flyer/poster design element from standalone public Shows. Coverage valid; needs further variant fidelity tuning."
+    },
+    {
+      "slug": "public-molecules-show-tile-redroom",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ShowTile",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/shows.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-show-tile-redroom']",
+        "styleSelector": "[data-comp='public-show-tile-redroom'] > div"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-show-tile-redroom']",
+        "styleSelector": "[data-comp='public-show-tile-redroom'] [data-pyxis-component='show-tile'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-tile-redroom",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-tile-redroom/index.html",
+        "pixelDiff": "component/root 5.2514%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "New React ShowTile component covering the prototype flyer + metadata + ticket pill tile from public Shows. Coverage valid; close but needs poster text/detail tuning."
+    },
+    {
+      "slug": "public-organisms-show-grid-desktop",
+      "domain": "public",
+      "level": "organism",
+      "component": "ShowGrid",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/standalone/public/shows.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-show-grid-desktop']",
+        "styleSelector": "[data-comp='public-show-grid-desktop']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-show-grid-desktop']",
+        "styleSelector": "[data-comp='public-show-grid-desktop'] [data-pyxis-component='show-grid'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/show-grid-desktop",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/show-grid-desktop/index.html",
+        "pixelDiff": "component/root 4.1504%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "New React ShowGrid organism covering the desktop public Shows poster grid. Coverage valid; currently only first three fixture shows in the component-system fixture."
     }
   ]
 }

@@ -2287,3 +2287,135 @@ cd ..
 css-visual-diff run   --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml   --modes capture,cssdiff,matched-styles,pixeldiff,html-report
 ```
 
+
+## Step 19: Add missing public Shows poster/tile/grid React components
+
+This step addressed the missing design elements from `prototype-design/standalone/public/shows.html`: the flyer/poster, the show tile that combines poster + metadata + ticket pill, and the desktop poster grid.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, what about molecules / organisms for Shows (file:///home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/standalone/public/shows.html) do we already have them for the show with the flyer?"
+
+Follow-up:
+
+**User prompt (verbatim):** "ok, let's go through missing react components, including the poster one, and add them. be thorough"
+
+**Assistant interpretation:** The new public molecule/organism coverage missed prototype Shows-page poster/flyer components. Add missing React components and parity coverage rather than only recording the gap.
+
+### What I did
+
+- Confirmed existing coverage did not include `Poster`, `ShowTile`, or `ShowGrid` in the new component-system parity map.
+- Confirmed older configs under `prototype-design/visual-diff/public-components/` are prototype-only captures for `PPXCatalogPoster`, `PPXCatalogShowTile`, and `PPXCatalogShowGrid`, not React parity configs.
+- Added React public components:
+
+```text
+web/packages/pyxis-components/src/public/Poster/Poster.tsx
+web/packages/pyxis-components/src/public/ShowTile/ShowTile.tsx
+web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.tsx
+```
+
+- Added component indexes and Storybook stories:
+
+```text
+web/packages/pyxis-components/src/public/Poster/index.ts
+web/packages/pyxis-components/src/public/Poster/Poster.stories.tsx
+web/packages/pyxis-components/src/public/ShowTile/index.ts
+web/packages/pyxis-components/src/public/ShowTile/ShowTile.stories.tsx
+web/packages/pyxis-components/src/public/ShowGrid/index.ts
+web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.stories.tsx
+```
+
+- Exported the new components from:
+
+```text
+web/packages/pyxis-components/src/index.ts
+```
+
+- Added poster/tile/grid states to the public diff fixture:
+
+```text
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+```
+
+- Added parity configs:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml
+```
+
+- Ran typecheck successfully after loosening `ShowTileShow.age` to support prototype age strings like `25+`:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Ran full css-visual-diff modes for the three new targets.
+- Inspected the generated show tile PNG comparison.
+- Updated the parity map with three new entries.
+
+### Results
+
+All three configs have valid coverage:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Pixel results:
+
+```text
+public-molecules-poster-redroom       component/root 6.8201%
+public-molecules-show-tile-redroom    component/root 5.2514%
+public-organisms-show-grid-desktop    component/root 4.1504%
+```
+
+All remain `needs-review`.
+
+### Why this matters
+
+The prototype Shows page is fundamentally poster-grid based. Before this step, the React component library only exposed list/hero components (`PubHero`, `PubShowRow`) and did not have a first-class poster/flyer molecule. This made the public Shows page impossible to align with `standalone/public/shows.html` bottom-up.
+
+### What worked
+
+The first pass components are now visible in Storybook and in the component-system parity map. They are close enough to validate the intended comparison path and expose remaining visual drift.
+
+### What didn't work / caveats
+
+- The React `Poster` currently uses a reusable variant data model rather than verbatim one-off JSX for every prototype poster. This is maintainable but not yet pixel-perfect for each poster.
+- The prototype fixture for `ShowGrid` currently covers a small desktop subset in the component-system fixture, not the full six-show standalone page grid.
+- The user-site `Shows` page still renders the existing `PubHero` + `PubShowRow` layout. Wiring `ShowGrid` into the actual page should be a separate product/design decision.
+
+### What warrants a second pair of eyes
+
+- Whether the public site should switch back to the poster-grid Shows page design.
+- Whether `Poster` should support more per-variant slots/renderers for exact flyer designs.
+- Whether `ShowTile` should be the canonical replacement for `PubShowRow` on the Shows page.
+
+### Code review instructions
+
+Review the new component API and Storybook taxonomy first:
+
+```text
+web/packages/pyxis-components/src/public/Poster/Poster.tsx
+web/packages/pyxis-components/src/public/ShowTile/ShowTile.tsx
+web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.tsx
+web/packages/pyxis-components/src/public/*/*.stories.tsx
+```
+
+Then validate parity:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+for cfg in \
+  prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml \
+  prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml \
+  prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml; do
+  css-visual-diff run --config "$cfg" --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+done
+```

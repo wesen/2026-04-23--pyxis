@@ -1,0 +1,62 @@
+metadata:
+  slug: public-molecules-show-tile-redroom
+  title: Public molecule show-tile-redroom — prototype vs Storybook
+  domain: public
+  level: molecule
+  component: ShowTile
+  state: default
+  storybook_story_id: public-fixtures-public-diff-fixture--default
+
+original:
+  name: prototype-public-show-tile-redroom
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1000 }
+  root_selector: "#public-capture-root"
+  prepare:
+    type: script
+    wait_for: "document.body"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-public-show-tile-redroom
+  url: http://localhost:6006/iframe.html?id=public-fixtures-public-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1000 }
+  root_selector: "[data-fixture='pyxis-public']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-public\"] [data-comp=\"public-show-tile-redroom\"]')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='public-show-tile-redroom']"
+    selector_react: "[data-comp='public-show-tile-redroom']"
+  - name: root
+    selector_original: "[data-comp='public-show-tile-redroom'] > div"
+    selector_react: "[data-comp='public-show-tile-redroom'] [data-pyxis-component='show-tile'][data-pyxis-part='root']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='public-show-tile-redroom'] > div"
+    selector_react: "[data-comp='public-show-tile-redroom'] [data-pyxis-component='show-tile'][data-pyxis-part='root']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, display, position, aspect-ratio, grid-template-columns, align-items, justify-content, gap, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius, overflow]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/public/molecules/show-tile-redroom
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]

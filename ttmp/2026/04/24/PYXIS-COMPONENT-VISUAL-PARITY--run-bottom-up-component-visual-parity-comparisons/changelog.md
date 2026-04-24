@@ -277,3 +277,25 @@ Added public BookingForm workflow coverage as a separate public organism target.
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added BookingForm parity entry
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 18 diary entry
 
+
+
+## 2026-04-24
+
+Added missing public Shows poster/flyer components to React and covered them with visual parity configs. This fills the gap for `prototype-design/standalone/public/shows.html`, whose main design language is poster tiles and a poster grid.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/Poster/Poster.tsx — New public poster/flyer molecule
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowTile/ShowTile.tsx — New public show tile molecule
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.tsx — New public show grid organism
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/Poster/Poster.stories.tsx — New Storybook coverage
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowTile/ShowTile.stories.tsx — New Storybook coverage
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.stories.tsx — New Storybook coverage
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/index.ts — Exported new public components
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx — Added poster/tile/grid fixture states
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js — Added prototype poster/tile/grid fixture states
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml — New parity config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml — New parity config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml — New parity config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added Poster, ShowTile, and ShowGrid entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 19 diary entry

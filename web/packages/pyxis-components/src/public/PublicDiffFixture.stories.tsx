@@ -16,6 +16,9 @@ import { MailingListCTA } from './MailingListCTA';
 import { BookingRules } from './BookingRules';
 import { BookingSuccess } from './BookingSuccess';
 import { BookingForm } from './BookingForm';
+import { Poster } from './Poster';
+import { ShowTile, type ShowTileShow } from './ShowTile';
+import { ShowGrid } from './ShowGrid';
 
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -52,6 +55,12 @@ const archiveShow = {
   updated_at: '2025-01-01T00:00:00Z',
 };
 
+const tileShows: ShowTileShow[] = [
+  { artist: 'Redroom Inferno', date: 'Fri, Feb 14', doors_time: '9:00 PM', age: '25+', price: '$10 adv / $15 door', kind: 'tickets', poster: 'redroom' },
+  { artist: '808 Collective', date: 'Fri, Feb 21', doors_time: '8:00 PM', age: '21+', price: '$12', kind: 'tickets', poster: 'pixel808' },
+  { artist: 'Petals of Love', date: 'Sat, Feb 28', doors_time: '6:30 PM', age: 'All Ages', price: '$15', kind: 'tickets', poster: 'petals' },
+];
+
 function PublicDiffFixture() {
   return (
     <div
@@ -79,6 +88,15 @@ function PublicDiffFixture() {
         <div data-comp="public-ticket-stub-default" style={{ width: 260 }}>
           <TicketStub show={show} />
         </div>
+      </FixtureRow>
+
+      <FixtureRow label="Poster/tile">
+        <div data-comp="public-poster-redroom" style={{ width: 270 }}><Poster kind="redroom" /></div>
+        <div data-comp="public-show-tile-redroom" style={{ width: 270 }}><ShowTile show={tileShows[0]} /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Show grid">
+        <div data-comp="public-show-grid-desktop" style={{ width: 856 }}><ShowGrid shows={tileShows} /></div>
       </FixtureRow>
 
       <FixtureRow label="Archive stats">
