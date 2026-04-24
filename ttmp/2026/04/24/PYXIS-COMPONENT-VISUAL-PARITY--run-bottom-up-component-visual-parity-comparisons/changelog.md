@@ -351,3 +351,20 @@ Tuned the first batch of public molecule/organism mismatches before moving to pa
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/VenueCard/VenueCard.tsx — Dark venue aside motif
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js — Expanded BookingSpaceAside prototype fixture
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated tuned public comparison results
+
+
+## 2026-04-24
+
+Continued tuning public molecules/organisms before page-level comparisons. Improved AboutHero, SpaceInfo, MailingListCTA, PubHero, BookingForm, YearGroup, Poster, ShowTile, and CollectiveList comparisons; refreshed public parity-map pixel results and acceptance statuses for near-exact targets.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/AboutHero/AboutHero.tsx — Prototype-style about header/intro
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/SpaceInfo/SpaceInfo.tsx — Smaller find-us/contact block
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/MailingListCTA/MailingListCTA.tsx — Plain public CTA motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PubHero/PubHero.tsx — Simple public hero motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingForm/BookingForm.tsx — Prototype underline-control form shape
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/YearGroup/YearGroup.tsx — Prototype year header
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/Poster/Poster.tsx — Closer redroom poster details
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx — Adjusted YearGroup fixture
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Refreshed public comparison stats/statuses

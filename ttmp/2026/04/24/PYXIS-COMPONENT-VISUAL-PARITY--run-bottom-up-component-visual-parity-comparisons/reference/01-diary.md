@@ -2488,3 +2488,20 @@ Notes:
 - `ArchiveStats` is visually much closer but still has text/font antialiasing/height residuals.
 - `EthosStrip` is now conceptually aligned with the light about-page ethos section, but `EthosGrid` may be the canonical component long-term.
 - `VenueCard` is now exact for the current fixture, but this effectively reclassifies it toward a dark venue aside; review whether `VenueCard` should keep this role or be split.
+
+## Step 23: Continue public component tuning before page comparisons
+
+Continued tuning the public component layer before page-level comparisons.
+
+Additional changes:
+
+- `AboutHero` now renders the prototype about-page header + large italic intro statement. Component crop is now exact (`0.0000%`); root probe still needs selector cleanup because it compares a child on the prototype side.
+- `SpaceInfo` now matches the smaller find-us/contact block used by its current fixture, reducing `14.0753%` to `2.4884%`.
+- `MailingListCTA` now uses the plain public CTA motif instead of a bordered card, reducing component diff from `15.9809%` to `3.3797%`.
+- `PubHero` now matches the simple public hero fixture, reducing `10.7942%` to `0.0218%`.
+- `BookingForm` now follows the prototype underline-control form shape, reducing `12.0664%` to `1.7528%`.
+- `YearGroup` now matches the prototype year header and fixture shape exactly (`0.0000%`).
+- `Poster` redroom variant now uses closer prototype title/meta/mark sizing, reducing `6.8201%` to `3.2139%`; `ShowTile` improved from `5.2514%` to `2.4946%`.
+- `CollectiveList` was aligned to the current abbreviated fixture, reducing `6.0465%` to `5.1793%`.
+
+Current remaining higher residuals are mostly due to anti-aliasing/text wrapping, fixture abbreviations, or selector-probe quirks rather than missing component coverage. Public page-level work can now proceed with a much lower-noise component base, though exact acceptance decisions should still be reviewed target by target.

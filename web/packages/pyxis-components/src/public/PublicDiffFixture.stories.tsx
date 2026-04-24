@@ -123,9 +123,7 @@ function PublicDiffFixture() {
 
       <FixtureRow label="Year group">
         <div data-comp="public-year-group-default" style={{ width: 560 }}>
-          <YearGroup year={2025} showCount={8}>
-            <div style={{ paddingTop: 8, color: 'var(--color-text-tertiary)', fontSize: 12 }}>Winter Solstice Rave · Electronic</div>
-          </YearGroup>
+          <YearGroup year={2025} showCount={8} />
         </div>
       </FixtureRow>
 

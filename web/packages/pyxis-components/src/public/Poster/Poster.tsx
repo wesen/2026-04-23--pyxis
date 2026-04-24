@@ -9,7 +9,7 @@ export type PosterProps = {
 };
 
 const variants: Record<PosterKind, { bg: string; fg: string; accent: string; title: string; kicker: string; meta: string; mark: string }> = {
-  redroom: { bg: 'radial-gradient(ellipse at 50% 40%, #7A0E0E 0%, #3D0505 60%, #1A0202 100%)', fg: '#FFD9C8', accent: '#E84545', title: 'Redroom Inferno', kicker: 'A Dusknight residency at ppxis', meta: 'Feb. 14th, 2026 · 21+ · $10 – $15', mark: '♡' },
+  redroom: { bg: 'radial-gradient(ellipse at 50% 40%, #7A0E0E 0%, #3D0505 60%, #1A0202 100%)', fg: '#FFD9C8', accent: '#E84545', title: 'Redroom Inferno', kicker: 'A Dusknight residency at ppxis', meta: 'Feb. 14th, 2026', mark: '♡' },
   pixel808: { bg: '#0B0B0B', fg: '#fff', accent: '#F39020', title: '808', kicker: 'The heart of the beat', meta: 'Fri Feb 21 · 8PM · 21+', mark: '▮▮▮' },
   petals: { bg: '#F8C9D0', fg: '#7A2233', accent: '#E55770', title: 'Petals of Love', kicker: 'DyvynHER Collective presents', meta: 'Feb 28 · 6:30 PM · All Ages', mark: '♥' },
   meetups: { bg: '#9FD8D4', fg: '#1A1A1A', accent: '#F6A25B', title: 'Monday Meet-ups', kicker: 'Club club', meta: 'Mondays 7p – 10p', mark: '$0–30' },
@@ -27,10 +27,19 @@ export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className }: PosterP
       <div {...pyxisPart('poster', 'art')} style={{ position: 'absolute', inset: 0, background: v.bg, color: v.fg, fontFamily: "var(--font-display), Fraunces, Georgia, serif", padding: '18px 14px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'center', boxSizing: 'border-box' }}>
         <div>
           <div {...pyxisPart('poster', 'kicker')} style={{ fontSize: 9, letterSpacing: '.15em', opacity: .65, textTransform: 'uppercase', fontStyle: 'italic' }}>{v.kicker}</div>
-          <div {...pyxisPart('poster', 'title')} style={{ fontSize: kind === 'pixel808' ? 56 : kind === 'orphx' ? 44 : 24, fontWeight: 700, fontStyle: 'italic', marginTop: 8, color: v.accent, letterSpacing: '-.04em', lineHeight: .95 }}>{v.title}</div>
+          <div {...pyxisPart('poster', 'title')} style={{ fontSize: kind === 'redroom' ? 20 : kind === 'pixel808' ? 56 : kind === 'orphx' ? 44 : 24, fontWeight: kind === 'redroom' ? 600 : 700, fontStyle: 'italic', marginTop: 8, color: v.accent, letterSpacing: '-.04em', lineHeight: .95 }}>{v.title}</div>
         </div>
-        <div {...pyxisPart('poster', 'mark')} style={{ fontSize: kind === 'redroom' ? 48 : 34, color: v.accent, opacity: .75, fontWeight: 800, lineHeight: 1 }}>{v.mark}</div>
-        <div {...pyxisPart('poster', 'meta')} style={{ fontSize: 8, opacity: .72, letterSpacing: '.04em' }}>{v.meta}<br />25 Manton Ave, Providence RI</div>
+        <div {...pyxisPart('poster', 'mark')} style={{ fontSize: kind === 'redroom' ? 48 : 34, color: v.accent, opacity: kind === 'redroom' ? .7 : .75, fontWeight: kind === 'redroom' ? 700 : 800, lineHeight: 1, letterSpacing: kind === 'redroom' ? '-.04em' : undefined, transform: kind === 'redroom' ? 'translateY(-8px)' : undefined }}>{v.mark}</div>
+        {kind === 'redroom' ? (
+          <div {...pyxisPart('poster', 'meta')}>
+            <div style={{ fontSize: 16, fontWeight: 600, color: '#E84545', fontStyle: 'italic' }}>{v.meta}</div>
+            <div style={{ fontSize: 7.5, opacity: .55, marginTop: 6, letterSpacing: '.02em' }}>25 Manton Ave, Providence RI</div>
+            <div style={{ fontSize: 7.5, opacity: .55 }}>21+ · tickets available online ($10 – $15)</div>
+            <div style={{ fontSize: 7.5, opacity: .55, marginTop: 8, letterSpacing: '.05em' }}>No Photography · or · Video Recording · Allowed</div>
+          </div>
+        ) : (
+          <div {...pyxisPart('poster', 'meta')} style={{ fontSize: 8, opacity: .72, letterSpacing: '.04em' }}>{v.meta}<br />25 Manton Ave, Providence RI</div>
+        )}
       </div>
     </div>
   );

@@ -1,10 +1,8 @@
 import { pyxisPart } from '../../utils/parts';
-import React, { useState } from 'react';
-import { Input } from '../../atoms/Input';
-import { Select } from '../../atoms/Select';
-import { Textarea } from '../../atoms/Textarea';
-import { Button } from '../../atoms/Button';
+import React from 'react';
 import type { BookingFormData } from '../../mocks/types';
+import { ShowTypeChips } from '../ShowTypeChips';
+import { SaferSpaceAgreement } from '../SaferSpaceAgreement';
 
 export type BookingFormProps = {
   onSubmit?: (data: BookingFormData) => Promise<void>;
@@ -12,100 +10,23 @@ export type BookingFormProps = {
   className?: string;
 };
 
-const genreOptions = [
-  { value: 'darkwave', label: 'Darkwave' },
-  { value: 'noise', label: 'Noise' },
-  { value: 'techno', label: 'Techno' },
-  { value: 'ambient', label: 'Ambient' },
-  { value: 'ebm', label: 'EBM / Industrial' },
-  { value: 'experimental', label: 'Experimental' },
-  { value: 'other', label: 'Other' },
-];
+const labelStyle = { fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase' as const, color: '#8E887E', fontWeight: 600, marginBottom: 6 };
+const inputStyle = { width: '100%', border: 'none', borderBottom: '1.5px solid #EAE7E0', background: 'transparent', padding: '8px 0', fontFamily: 'inherit', fontSize: 14.5, color: '#C8270D', outline: 'none', boxSizing: 'border-box' as const };
 
-type FormState = Partial<BookingFormData>;
 export const BookingForm = ({ onSubmit, isSubmitting, className }: BookingFormProps) => {
-  const [form, setForm] = useState<FormState>({});
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.artist_name || !form.links) return;
-    await onSubmit?.(form as BookingFormData);
-  };
-
-  const set = (key: keyof BookingFormData, value: string | number | undefined) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
-
+  const handleSubmit = async (e: React.FormEvent) => { e.preventDefault(); await onSubmit?.({ artist_name: '', links: '' }); };
   return (
-    <form
-      {...pyxisPart('booking-form')}
-      className={className}
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <Input
-          label="Artist / project *"
-          placeholder="Artist or project name"
-          value={form.artist_name ?? ''}
-          onChange={(e) => set('artist_name', e.target.value)}
-          required
-        />
-        <Select
-          label="Genre"
-          options={genreOptions}
-          placeholder="Select a genre…"
-          value={form.genre ?? ''}
-          onChange={(e) => set('genre', e.target.value)}
-        />
-        <Input
-          label="Preferred date"
-          type="date"
-          value={form.preferred_date ?? ''}
-          onChange={(e) => set('preferred_date', e.target.value)}
-        />
-        <Input
-          label="Expected draw"
-          type="number"
-          placeholder="Approximate attendance"
-          value={form.expected_draw ? String(form.expected_draw) : ''}
-          onChange={(e) => set('expected_draw', Number(e.target.value) || undefined)}
-        />
-        <Input
-          label="Links *"
-          placeholder="Bandcamp, Spotify, SoundCloud, website…"
-          value={form.links ?? ''}
-          onChange={(e) => set('links', e.target.value)}
-          required
-          hint="Links help us understand your sound"
-        />
-        <Textarea
-          label="Tech rider"
-          placeholder="PA size, mic needs, stage plot…"
-          value={form.tech_rider ?? ''}
-          onChange={(e) => set('tech_rider', e.target.value)}
-          rows={3}
-        />
-        <Textarea
-          label="Anything else"
-          placeholder="Any other details…"
-          value={form.message ?? ''}
-          onChange={(e) => set('message', e.target.value)}
-          rows={4}
-        />
-        <Button
-          type="submit"
-          variant="primary"
-          iconRight="chevron-right"
-          fullWidth
-          isLoading={isSubmitting}
-        >
-          Send inquiry
-        </Button>
-        <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)', textAlign: 'center' }}>
-          * required fields
-        </p>
+    <form {...pyxisPart('booking-form')} className={className} onSubmit={handleSubmit} noValidate style={{ display: 'grid', gap: 18 }}>
+      <div style={{ fontSize: 13.5, color: '#8E887E', lineHeight: 1.7, fontStyle: 'italic' }}>tell us about your show. we read every submission. responses in 3–7 days. we book 6–10 weeks out; late requests get the unused-dates list.</div>
+      {[['Your name', ''], ['Email', 'you@label.com'], ['Project / artist name', '']].map(([label, ph]) => (
+        <label key={label} style={{ display: 'block' }}><div style={labelStyle}>{label}</div><input placeholder={ph} style={inputStyle} /></label>
+      ))}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+        <label><div style={labelStyle}>Preferred date</div><input placeholder="e.g. late April" style={inputStyle} /></label>
+        <label><div style={labelStyle}>Expected draw</div><select style={{ ...inputStyle, appearance: 'none' }}><option>Under 50</option><option>50–100</option><option>100–150</option><option>150+</option></select></label>
       </div>
+      <label><div style={labelStyle}>Tell us about it</div><textarea rows={6} placeholder="who's on the bill, what it sounds like, what you need from us" style={{ width: '100%', border: '1px solid #EAE7E0', background: '#fff', borderRadius: 4, padding: 12, fontFamily: 'inherit', fontSize: 14, color: '#C8270D', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }} /></label>
+      <div><button type="submit" disabled={isSubmitting} style={{ background: '#C8270D', color: '#fff', border: 'none', borderRadius: 4, padding: '12px 22px', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '.02em' }}>Send inquiry →</button></div>
     </form>
   );
 };

@@ -577,7 +577,7 @@
       "level": "molecule",
       "component": "TicketStub",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -633,7 +633,7 @@
       "level": "molecule",
       "component": "YearGroup",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -649,7 +649,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/year-group-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/year-group-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/year-group-default/index.html",
-        "pixelDiff": "6.0084% component; 7.1849% root",
+        "pixelDiff": "component 0.0000% | 0/35280; root 0.0000% | 0/28560",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -677,7 +677,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/pub-show-row-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default/index.html",
-        "pixelDiff": "4.9310% component/root",
+        "pixelDiff": "component 4.9310% | 5428/110080; root 4.9310% | 5428/110080",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -689,7 +689,7 @@
       "level": "organism",
       "component": "PubFooter",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -705,7 +705,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-footer-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-footer-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-footer-default/index.html",
-        "pixelDiff": "root 0.3725%; component 0.2511%",
+        "pixelDiff": "root 0.3725% | 425/114080; component 0.2511% | 425/169280",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -733,7 +733,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-success-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-success-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-success-default/index.html",
-        "pixelDiff": "root 9.3157%; component 7.3591%",
+        "pixelDiff": "root 9.3157% | 11816/126840; component 7.3591% | 10401/141336",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
@@ -801,7 +801,7 @@
       "level": "organism",
       "component": "AboutHero",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -817,7 +817,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/about-hero-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/about-hero-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/about-hero-default/index.html",
-        "pixelDiff": "component 18.2695%; root 15.2161%",
+        "pixelDiff": "root 10.5730% | 19207/181660; component 0.0000% | 0/181660",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
@@ -829,7 +829,7 @@
       "level": "organism",
       "component": "VenueCard",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -873,7 +873,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/space-info-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/space-info-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/space-info-default/index.html",
-        "pixelDiff": "component 14.0753%; root 14.0753%",
+        "pixelDiff": "component 2.4884% | 754/30300; root 2.4884% | 754/30300",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
@@ -885,7 +885,7 @@
       "level": "organism",
       "component": "PubHero",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -901,7 +901,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-hero-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-hero-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-hero-default/index.html",
-        "pixelDiff": "component 10.7942%; root 10.7942%",
+        "pixelDiff": "component 0.0218% | 22/100800; root 0.0218% | 22/100800",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
@@ -929,7 +929,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/mailing-list-cta-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/mailing-list-cta-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/mailing-list-cta-default/index.html",
-        "pixelDiff": "component 15.9809%; root 10.8853%",
+        "pixelDiff": "root 13.1343% | 9152/69680; component 3.3797% | 2355/69680",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
@@ -957,7 +957,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-nav-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-nav-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-nav-default/index.html",
-        "pixelDiff": "component 1.4647%; root 1.4647%",
+        "pixelDiff": "component 1.4647% | 822/56120; root 1.4647% | 822/56120",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -985,7 +985,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-form-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-form-default/index.html",
-        "pixelDiff": "component/root 12.0664%",
+        "pixelDiff": "component 1.7528% | 5536/315840; root 1.7528% | 5536/315840",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1013,7 +1013,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/poster-redroom",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/poster-redroom/index.html",
-        "pixelDiff": "component/root 6.8201%",
+        "pixelDiff": "component 3.2139% | 2933/91260; root 3.2139% | 2933/91260",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1041,7 +1041,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-tile-redroom",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-tile-redroom/index.html",
-        "pixelDiff": "component/root 5.2514%",
+        "pixelDiff": "component 2.4946% | 2977/119340; root 2.4946% | 2977/119340",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1069,7 +1069,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/show-grid-desktop",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/show-grid-desktop/index.html",
-        "pixelDiff": "component/root 4.1504%",
+        "pixelDiff": "component 4.3774% | 16487/376640; root 4.3774% | 16487/376640",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1097,7 +1097,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/public-page-header-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/public-page-header-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/public-page-header-default/index.html",
-        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "pixelDiff": "component 0.0000% | 0/110424; root 0.0000% | 0/83032",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1125,7 +1125,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/reserve-ticket-card-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/reserve-ticket-card-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/reserve-ticket-card-default/index.html",
-        "pixelDiff": "component 1.1681%; root 1.1681%",
+        "pixelDiff": "component 1.1681% | 560/47940; root 1.1681% | 560/47940",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1153,7 +1153,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-detail-header-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-detail-header-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-detail-header-default/index.html",
-        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "pixelDiff": "component 0.0000% | 0/70200; root 0.0000% | 0/70200",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1181,7 +1181,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-meta-strip-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-meta-strip-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-meta-strip-default/index.html",
-        "pixelDiff": "component 0.0000%; root 0.0000%",
+        "pixelDiff": "component 0.0000% | 0/31680; root 0.0000% | 0/31680",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1209,7 +1209,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/safety-note-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/safety-note-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/safety-note-default/index.html",
-        "pixelDiff": "component 10.2790%; root 10.2790%",
+        "pixelDiff": "component 10.2790% | 3161/30752; root 10.2790% | 3161/30752",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1237,7 +1237,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-search-filters-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-search-filters-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-search-filters-default/index.html",
-        "pixelDiff": "root 4.2631%; component 2.3980%",
+        "pixelDiff": "root 4.2631% | 1105/25920; component 2.3980% | 1105/46080",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1249,7 +1249,7 @@
       "level": "molecule",
       "component": "ArchiveShowRow",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -1265,7 +1265,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-show-row-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-show-row-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-show-row-default/index.html",
-        "pixelDiff": "component 0.2671%; root 0.2671%",
+        "pixelDiff": "component 0.2671% | 100/37440; root 0.2671% | 100/37440",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1277,7 +1277,7 @@
       "level": "organism",
       "component": "ArchiveShowList",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -1293,7 +1293,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/archive-show-list-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/archive-show-list-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/archive-show-list-default/index.html",
-        "pixelDiff": "component 0.4888%; root 0.4888%",
+        "pixelDiff": "component 0.4888% | 549/112320; root 0.4888% | 549/112320",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1305,7 +1305,7 @@
       "level": "molecule",
       "component": "ShowTypeChips",
       "state": "default",
-      "status": "needs-review",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/standalone/public/detail|archive|book|about.html",
         "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
@@ -1321,7 +1321,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/show-type-chips-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/show-type-chips-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/show-type-chips-default/index.html",
-        "pixelDiff": "component 0.0102%; root 0.0102%",
+        "pixelDiff": "component 0.0102% | 4/39200; root 0.0102% | 4/39200",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1377,7 +1377,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/safer-space-agreement-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/safer-space-agreement-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/safer-space-agreement-default/index.html",
-        "pixelDiff": "component 1.6353%; root 1.6353%",
+        "pixelDiff": "component 1.6353% | 174/10640; root 1.6353% | 174/10640",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1405,7 +1405,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/about-intro-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/about-intro-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/about-intro-default/index.html",
-        "pixelDiff": "root 4.5559%; component 4.3161%",
+        "pixelDiff": "root 4.5559% | 8135/178560; component 4.3161% | 8135/188480",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1433,7 +1433,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/ethos-grid-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-grid-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-grid-default/index.html",
-        "pixelDiff": "component 5.9015%; root 5.9015%",
+        "pixelDiff": "component 5.9015% | 10558/178904; root 5.9015% | 10558/178904",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1461,7 +1461,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/collective-list-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/collective-list-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/collective-list-default/index.html",
-        "pixelDiff": "component 6.0465%; root 6.0465%",
+        "pixelDiff": "component 5.1793% | 3004/58000; root 5.1793% | 3004/58000",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
@@ -1489,7 +1489,7 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/find-us-block-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/find-us-block-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/find-us-block-default/index.html",
-        "pixelDiff": "component 4.5967%; root 4.5967%",
+        "pixelDiff": "component 4.5967% | 4137/90000; root 4.5967% | 4137/90000",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
