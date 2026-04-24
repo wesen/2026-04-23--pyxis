@@ -84,3 +84,54 @@
 - Used `css-visual-diff inspect --all-styles` against `standalone/public/shows.html`.
 - Used `css-visual-diff inspect --all-styles` against `standalone/foundations/system.html`.
 - Inspected sample PNGs with the `read` image tool.
+
+## 2026-04-24 — Expand prototype baseline catalog and fail fast on missing selectors
+
+### Added
+- Added `scripts/11-generate-prototype-baseline-configs.mjs` to generate the extensive prototype baseline config matrix.
+- Added `scripts/12-build-prototype-baseline-index.mjs` to build a browsable prototype baseline manifest.
+- Added `scripts/13-serve-prototype-baseline-index.sh` to serve the generated prototype baseline index.
+- Added generated prototype configs for all public standalone pages, public component variants, poster variants, nav/footer variants, show grids, and show tiles.
+
+### Changed
+- Updated Foundations/SystemPage baseline generation to use card-level probes instead of individual `badge`, `tag`, button, and form-control selectors.
+- Updated the prototype baseline sample runner to exercise a broader representative catalog sample.
+- Updated the full prototype baseline runner to recurse through subdirectories and report failures.
+- Updated page selectors to account for `PageHeader` rendering a heading block plus divider before page content.
+
+### Validated
+- Regenerated 29 prototype baseline configs.
+- Ran the expanded prototype baseline sample successfully.
+- Built the prototype baseline index.
+- Inspected representative PNGs with the `read` image tool.
+
+### Related tooling fix
+- Patched `css-visual-diff inspect` so selector-backed artifact formats preflight selector existence before screenshotting.
+- Verified missing selectors now fail immediately instead of waiting for the shell timeout.
+- Ran `go test ./internal/cssvisualdiff/modes ./cmd/css-visual-diff` and `make install` in the css-visual-diff repo.
+
+## 2026-04-24 — Add extensive catalog postmortem report
+
+### Added
+- Added `reference/02-postmortem-extensive-prototype-catalog-and-css-visual-diff.md`.
+
+### Contents
+- Explains the prototype baseline catalog system for a new intern.
+- Documents the catalog architecture, generated config counts, artifact model, extraction pipeline, and runner workflow.
+- Records encountered problems: invalid `[data-part]` prototype selectors, missing-selector screenshot hangs, and page selector shifts caused by `PageHeader` fragments.
+- Documents css-visual-diff improvements made and future optimization/documentation recommendations.
+
+### Publishing
+- Prepared for upload to reMarkable under `/ai/2026/04/23/PYXIS-STORYBOOK-CATALOG/`.
+
+## 2026-04-24 — Run full prototype baseline extraction
+
+### Added
+- Generated full prototype baseline artifacts under `various/prototype-baseline/artifacts/`.
+- Rebuilt `various/prototype-baseline/index.html` and `index.md`.
+
+### Validated
+- Full extraction completed for all 29 generated configs.
+- Generated 165 screenshot bundles, 165 computed CSS Markdown files, 165 prepared HTML files, and 165 inspect JSON files.
+- Served the baseline index at `http://localhost:8795/index.html`.
+- Inspected representative PNGs from About, Book, and poster baselines with the `read` image tool.

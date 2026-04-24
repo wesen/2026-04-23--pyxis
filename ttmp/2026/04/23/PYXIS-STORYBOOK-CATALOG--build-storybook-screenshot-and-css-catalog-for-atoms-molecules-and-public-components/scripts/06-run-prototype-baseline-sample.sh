@@ -19,16 +19,34 @@ if ! curl -fsS "http://localhost:$PORT/Pyxis%20Public%20Site.html" >/dev/null 2>
   sleep 1
 fi
 
-FOUNDATIONS_CFG="$TICKET_ROOT/sources/prototype-configs/prototype-foundations-system.css-visual-diff.yml"
-PUBLIC_CFG="$TICKET_ROOT/sources/prototype-configs/prototype-public-shows.css-visual-diff.yml"
 BASE_OUT="$TICKET_ROOT/various/prototype-baseline/sample"
 rm -rf "$BASE_OUT"
 mkdir -p "$BASE_OUT"
 
-css-visual-diff inspect --config "$FOUNDATIONS_CFG" --side original --style primary-button --out "$BASE_OUT/foundations-primary-button"
-css-visual-diff inspect --config "$FOUNDATIONS_CFG" --side original --style form-fields-card --out "$BASE_OUT/foundations-form-fields-card"
-css-visual-diff inspect --config "$PUBLIC_CFG" --side original --style nav --out "$BASE_OUT/public-nav"
-css-visual-diff inspect --config "$PUBLIC_CFG" --side original --style first-show-tile --out "$BASE_OUT/public-first-show-tile"
-css-visual-diff inspect --config "$PUBLIC_CFG" --side original --style first-poster --out "$BASE_OUT/public-first-poster"
+SAMPLE_CFGS=(
+  "$TICKET_ROOT/sources/prototype-configs/prototype-foundations-system.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-shows.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-shows-mobile.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-detail.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-archive.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-book.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/prototype-public-about.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/nav-desktop.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/nav-mobile.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/footer-desktop.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/footer-mobile.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/page-header-shows.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/show-grid-desktop.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/show-grid-mobile.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/poster-redroom.css-visual-diff.yml"
+  "$TICKET_ROOT/sources/prototype-configs/public-components/show-tile-redroom.css-visual-diff.yml"
+)
 
-find "$BASE_OUT" -maxdepth 2 -type f | sort
+for cfg in "${SAMPLE_CFGS[@]}"; do
+  slug=$(basename "$cfg" .css-visual-diff.yml)
+  out="$BASE_OUT/$slug"
+  echo "== $slug =="
+  timeout 120s css-visual-diff inspect --config "$cfg" --side original --all-styles --out "$out"
+done
+
+find "$BASE_OUT" -maxdepth 3 -type f | sort

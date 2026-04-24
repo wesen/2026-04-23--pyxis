@@ -8,3 +8,6 @@ various/story-catalog/failures.tsv
 various/prototype-baseline/artifacts/
 various/prototype-baseline/sample/
 various/prototype-baseline/sample-public-components/
+various/prototype-baseline/index.html
+various/prototype-baseline/index.md
+various/prototype-baseline/manifest.json

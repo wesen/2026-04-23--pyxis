@@ -537,3 +537,227 @@ Validate with:
 python3 -m http.server 7070 --directory prototype-design
 # open http://localhost:7070/standalone/index.html
 ```
+
+## Step 6: Expand prototype baseline configs and fix missing-selector hangs
+
+I continued the extensive catalog work by adding a generated prototype baseline config matrix and a browsable prototype baseline index. During validation, the first sample run exposed a tooling and catalog-design issue: the generated Foundations config had individual `badge`/`tag` selectors using `[data-part]`, but the prototype `Badge` and `Tag` functions in `prototype-design/lib/components.jsx` do not emit `data-part` attributes. `css-visual-diff inspect --all-styles` reached the missing `badge` selector and hung inside `chromedp.Screenshot` until the shell timeout killed the run.
+
+The fix had two parts.
+
+First, I changed the catalog generator to use card-level Foundations probes instead of individual `badge`, `tag`, `button`, and input probes. The Foundations baseline now captures stable cards such as `badges-tags-card`, `buttons-card`, `form-fields-card`, `stats-card`, `icons-card`, `navigation-card`, and so on. This matches the user's request to use card-level probes and avoids pretending the prototype has the same selector API as the React implementation.
+
+Second, I patched `/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff` so `inspect` preflights selector existence before selector-backed artifacts such as PNG, HTML, inspect JSON, or bundle output. A missing selector now fails immediately with a clear error like:
+
+```text
+flag "selector" selector did not match: #missing
+```
+
+instead of waiting for `chromedp.Screenshot` to time out.
+
+### Prompt Context
+
+**User prompt (verbatim):** "use card-level probes. Also fix css-visual-diff so that it doesn't timeout if the selector is not there."
+
+**Assistant interpretation:** Do not add prototype-side data attributes for foundation atoms right now; use broader, stable card-level extraction for Foundations. Also improve the css-visual-diff inspect implementation so bad selectors fail fast.
+
+### What I did
+
+- Added `scripts/11-generate-prototype-baseline-configs.mjs`.
+- Added `scripts/12-build-prototype-baseline-index.mjs`.
+- Added `scripts/13-serve-prototype-baseline-index.sh`.
+- Updated `scripts/06-run-prototype-baseline-sample.sh` to run a broader representative sample.
+- Updated `scripts/07-run-prototype-baseline-full.sh` to recurse through all prototype config subdirectories and continue collecting failures.
+- Generated 29 prototype baseline configs covering:
+  - Foundations/SystemPage card-level probes,
+  - public pages desktop/mobile,
+  - poster variants,
+  - nav/footer desktop/mobile,
+  - page header,
+  - show grid desktop/mobile,
+  - show tile desktop/compact.
+- Fixed public page structural selectors after `PageHeader` introduced two sibling nodes before page content.
+- Built the prototype baseline index under `various/prototype-baseline/index.html` and `index.md`.
+- Patched `css-visual-diff` inspect selector preflight in `internal/cssvisualdiff/modes/inspect.go`.
+- Added a small unit test in `internal/cssvisualdiff/modes/inspect_test.go` for selector-backed format classification.
+- Ran `go test ./internal/cssvisualdiff/modes ./cmd/css-visual-diff` successfully.
+- Ran `make install` in the css-visual-diff repo.
+- Verified a missing selector now fails immediately using a temporary local HTTP page and config.
+- Re-ran the expanded Pyxis prototype baseline sample successfully.
+- Inspected sample PNGs with the `read` image tool:
+  - Foundations badges/tags card,
+  - public Shows grid,
+  - show tile poster crop.
+
+### What worked
+
+- `inspect --all-styles` does reuse a single loaded/prepared page for all styles in one config; the original slowness was not per-style page reload.
+- The new selector preflight produces immediate clear failures for missing selectors.
+- Card-level Foundations probes avoid the missing `[data-part]` issue and still provide useful visual/CSS evidence for the baseline catalog.
+- The expanded sample now completes and generates the expected PNG/CSS/HTML/inspect bundles.
+
+### What didn't work
+
+- The first generated Foundations config used individual prototype selectors such as `[data-part="badge"]`; those do not exist in the prototype.
+- Several initial page selectors assumed that `PageHeader` was a single DOM child. It actually renders two siblings: a header block and a divider rule. Public page selectors had to be shifted so page content starts at `main > :nth-child(3)`.
+
+### What I learned
+
+- `css-visual-diff inspect --all-styles` has the correct broad shape: one navigation and prepare per config, then multiple probes on the same page.
+- Missing selectors need explicit preflight before screenshotting because `chromedp.Screenshot(selector)` can wait for a selector instead of returning immediately.
+- Prototype baseline selectors should not reuse React implementation selectors unless the prototype actually exposes them.
+
+### What was tricky to build
+
+The correct fix was split across two repos: the Pyxis catalog generator needed less brittle selectors, while css-visual-diff needed a defensive failure mode. Fixing only one side would not be enough: good configs still deserve better tool errors, and better tool errors would still expose bad configs.
+
+### What warrants a second pair of eyes
+
+- Whether `inspectFormatRequiresExistingSelector` should also make CSS-only formats fail on missing selectors. I left CSS JSON/Markdown able to report `exists: false`, because that can be useful for scripts.
+- Whether the Foundations baseline should eventually add prototype-side `data-proto-part` selectors for atom-level probes. For now the user requested card-level probes.
+
+### What should be done in the future
+
+- Run the full prototype baseline extraction with `scripts/07-run-prototype-baseline-full.sh`.
+- Serve and manually review `various/prototype-baseline/index.html`.
+- Consider adding a comparison index mapping prototype baseline entries to Storybook entries.
+
+### Code review instructions
+
+Review Pyxis catalog changes first:
+
+```text
+scripts/11-generate-prototype-baseline-configs.mjs
+scripts/06-run-prototype-baseline-sample.sh
+scripts/07-run-prototype-baseline-full.sh
+sources/prototype-configs/prototype-foundations-system.css-visual-diff.yml
+```
+
+Then review css-visual-diff changes:
+
+```text
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/inspect.go
+/home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff/internal/cssvisualdiff/modes/inspect_test.go
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/workspaces/2026-04-21/hair-v2/css-visual-diff
+go test ./internal/cssvisualdiff/modes ./cmd/css-visual-diff
+make install
+
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/06-run-prototype-baseline-sample.sh
+```
+
+## Step 7: Run the full prototype baseline extraction
+
+After the catalog generator and missing-selector fixes were validated against the expanded sample, I ran the full prototype baseline extraction. This executed every generated prototype config, including Foundations/SystemPage, all desktop/mobile public pages, and all public component/widget baselines.
+
+The full run completed successfully. It wrote artifacts under `various/prototype-baseline/artifacts/`, rebuilt the browsable index, and served the index locally for review. I also inspected representative PNGs from the full output with the `read` image tool to make sure the extraction produced meaningful visual crops rather than empty wrappers or wrong DOM nodes.
+
+### Prompt Context
+
+**User prompt (verbatim):** "run the full extraction"
+
+**Assistant interpretation:** Execute the full 29-config prototype baseline extraction, rebuild the index, and make the artifacts inspectable.
+
+**Inferred user intent:** Move from sample validation to a complete baseline artifact set that can be reviewed and used for future Storybook/React comparison work.
+
+### What I did
+
+- Ran:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/07-run-prototype-baseline-full.sh
+```
+
+- Rebuilt the prototype baseline index:
+
+```bash
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/12-build-prototype-baseline-index.mjs
+```
+
+- Counted generated artifact totals:
+
+```text
+artifact_dirs: 29
+screenshots: 165
+computed_css_md: 165
+prepared_html: 165
+inspect_json: 165
+```
+
+- Served the baseline index:
+
+```bash
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/13-serve-prototype-baseline-index.sh
+```
+
+- Index URL:
+
+```text
+http://localhost:8795/index.html
+```
+
+- Visually inspected representative full-run PNGs:
+  - `artifacts/prototype-public-about/about-ethos/screenshot.png`
+  - `artifacts/prototype-public-book/book-layout/screenshot.png`
+  - `artifacts/poster-zola/poster/screenshot.png`
+
+### Why
+
+The sample run was sufficient for validating selectors, but the catalog is only useful for future comparison work once the full artifact set exists. Running the full extraction confirms that all generated configs can execute end to end with the current `css-visual-diff` behavior.
+
+### What worked
+
+- All 29 configs completed.
+- All 165 configured style probes produced screenshot, CSS Markdown, prepared HTML, and inspect JSON bundles.
+- The index was rebuilt and served at `http://localhost:8795/index.html`.
+- Representative PNGs showed the intended page/component regions.
+
+### What didn't work
+
+N/A for this run. No selector failures occurred in the full extraction.
+
+### What I learned
+
+The generator, card-level Foundations probes, shifted page selectors, and css-visual-diff selector preflight fixes are now sufficient for full-catalog extraction. The artifact count matches the configured probe count, which is a useful sanity check.
+
+### What was tricky to build
+
+The full extraction depended on several earlier fixes: missing selectors had to fail fast, Foundations had to avoid invalid React-only `[data-part]` selectors, and page sections had to account for `PageHeader` returning two siblings. Without those fixes, the full run would either hang or stop on the first bad selector.
+
+### What warrants a second pair of eyes
+
+- Review the served index manually to spot any overly broad or overly narrow crops.
+- Verify whether per-style `prepared.html` is still worth the artifact volume for full catalog runs.
+- Consider whether a future index should show thumbnails instead of only config/output counts.
+
+### What should be done in the future
+
+- Use this full artifact set as the baseline for mapping prototype entries to Storybook entries.
+- Add page-level prototype-vs-Storybook comparison configs using these baseline selectors and outputs.
+- Consider implementing css-visual-diff batch mode or root-once prepared HTML to reduce full-run time and artifact volume.
+
+### Code review instructions
+
+Start with the generated index:
+
+```text
+http://localhost:8795/index.html
+```
+
+Then inspect representative artifacts under:
+
+```text
+various/prototype-baseline/artifacts/
+```
+
+Validation commands:
+
+```bash
+find ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/artifacts -name 'screenshot.png' | wc -l
+find ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/artifacts -name 'computed-css.md' | wc -l
+```

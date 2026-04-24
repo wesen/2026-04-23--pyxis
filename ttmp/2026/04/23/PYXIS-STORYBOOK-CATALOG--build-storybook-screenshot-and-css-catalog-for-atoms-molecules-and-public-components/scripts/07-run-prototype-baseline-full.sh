@@ -19,13 +19,23 @@ if ! curl -fsS "http://localhost:$PORT/Pyxis%20Public%20Site.html" >/dev/null 2>
   sleep 1
 fi
 
-for cfg in "$TICKET_ROOT"/sources/prototype-configs/*.css-visual-diff.yml; do
+mapfile -t CONFIGS < <(find "$TICKET_ROOT/sources/prototype-configs" -type f -name '*.css-visual-diff.yml' | sort)
+
+failed=0
+for cfg in "${CONFIGS[@]}"; do
   slug=$(basename "$cfg" .css-visual-diff.yml)
   out="$TICKET_ROOT/various/prototype-baseline/artifacts/$slug"
   echo "== $slug =="
   rm -rf "$out"
-  css-visual-diff inspect --config "$cfg" --side original --all-styles --out "$out"
+  if ! timeout 180s css-visual-diff inspect --config "$cfg" --side original --all-styles --out "$out"; then
+    echo "!! failed: $slug" >&2
+    failed=1
+  fi
 done
 
-echo "Prototype baseline artifacts written under:"
-echo "$TICKET_ROOT/various/prototype-baseline/artifacts"
+printf 'Prototype baseline artifacts written under:\n%s\n' "$TICKET_ROOT/various/prototype-baseline/artifacts"
+
+if (( failed )); then
+  echo "One or more prototype baseline configs failed." >&2
+  exit 1
+fi
