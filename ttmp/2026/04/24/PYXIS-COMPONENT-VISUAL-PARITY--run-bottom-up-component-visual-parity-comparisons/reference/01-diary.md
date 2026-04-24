@@ -1061,3 +1061,434 @@ prototype-design/visual-comparisons/component-system/molecules/empty-cta/
 
 Generated comparison output should remain uncommitted.
 
+## Step 10: Commit molecule batch, then start organisms with TopBar
+
+This step first created a checkpoint commit for the completed atom/molecule workflow before moving upward. After the commit, I started the organism layer with `TopBar default`, using the same fixture-map-config-run pattern that worked for atoms and molecules.
+
+TopBar was a good first organism because it is still small enough to reason about, but it combines multiple atoms and layout rules: breadcrumb text, display title, subtitle, two button actions, spacing, background, and bottom border.
+
+### Prompt Context
+
+**User prompt (verbatim):** "actually commit first.
+
+then continue"
+
+**Assistant interpretation:** Commit the completed work before proceeding, then continue the bottom-up parity task.
+
+**Inferred user intent:** Preserve the validated atom/molecule checkpoint in git before starting the next layer so future organism changes do not mix with the already working batch.
+
+### What I did
+
+- Reviewed status/diff and confirmed generated visual comparison output is ignored by `.gitignore`.
+- Staged the completed atom/molecule workflow files intentionally, excluding the just-created organism fixture until after the commit.
+- Committed:
+
+```text
+731c88571405cca9749d78639bd66623002a05b4 Add bottom-up component visual parity workflow
+```
+
+- Added the prototype organism fixture:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js
+```
+
+- Added the matching Storybook organism fixture:
+
+```text
+web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx
+```
+
+- Added the TopBar comparison config:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/organisms/topbar-default.css-visual-diff.yml
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Captured and inspected TopBar screenshots with `read`.
+- Fixed React TopBar visual drift in:
+
+```text
+web/packages/pyxis-components/src/organisms/TopBar/TopBar.tsx
+```
+
+- Ran full deterministic modes for TopBar.
+- Updated the parity map and playbook with the accepted organism result.
+
+### Why
+
+The commit separates the completed atom/molecule layer from the next escalation. TopBar then exercises the next level of composition without jumping all the way to pages.
+
+### What worked
+
+The first TopBar screenshots immediately showed the drift: React used a sans-serif, smaller, heavier title and a shorter top bar. After aligning React to the prototype’s padding, title font, font sizes, subtitle spacing, and action gap, the screenshots matched.
+
+Final TopBar result:
+
+```text
+topbar-default component | 0.0000% | 0/78280
+topbar-default root      | 0.0000% | 0/78280
+title-group              | 0.0000% | 0/17112
+actions                  | 0.0000% | 0/4452
+```
+
+### What didn't work
+
+Initial screenshot dimensions showed drift:
+
+```text
+original (760, 103)
+react    (760, 97)
+```
+
+The visual mismatch was real, not a selector problem. The title font and top-bar vertical metrics differed from the prototype.
+
+### What I learned
+
+The organism workflow is viable: the same `data-comp` wrapper plus side-specific probes approach scales from molecules to TopBar. The first organism was also a useful reminder that a visually small component can encode high-level typography choices, especially display font selection.
+
+### What was tricky to build
+
+The main tricky point was part naming. The original React TopBar accidentally used the root `pyxisPart('top-bar')` for the actions container. The config needed a stable `actions` part, so I changed React to expose `data-pyxis-part="actions"`, plus explicit `breadcrumb` and `subtitle` parts for future CSS probes.
+
+CSS diff still reports content-box versus border-box bounds after pixel parity. As with molecules, this is recorded as an accepted CSS-model difference because the rendered screenshots are exact.
+
+### What warrants a second pair of eyes
+
+- Whether TopBar should intentionally use the prototype’s Fraunces display title everywhere, or whether any app-specific contexts expected the previous sans-serif title.
+- Whether the added `breadcrumb`, `subtitle`, and `actions` part names should become part of the formal component capture contract.
+
+### What should be done in the future
+
+- Add and compare the next organism target, likely `Modal default`, once a stable prototype fixture state is defined.
+- Consider a config generator now that atoms, molecules, and the first organism all share the same YAML shape.
+
+### Code review instructions
+
+Review the committed checkpoint first:
+
+```bash
+git show --stat 731c88571405cca9749d78639bd66623002a05b4
+```
+
+Then review new organism work:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js
+web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/organisms/topbar-default.css-visual-diff.yml
+web/packages/pyxis-components/src/organisms/TopBar/TopBar.tsx
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/organisms/topbar-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+Generated TopBar report:
+
+```text
+prototype-design/visual-comparisons/component-system/organisms/topbar-default/index.html
+```
+
+Generated TopBar screenshots:
+
+```text
+prototype-design/visual-comparisons/component-system/organisms/topbar-default/original-component.png
+prototype-design/visual-comparisons/component-system/organisms/topbar-default/react-component.png
+prototype-design/visual-comparisons/component-system/organisms/topbar-default/pixeldiff_component_diff_comparison.png
+```
+
+## Step 11: Document LLM review failure modes for css-visual-diff maintainer
+
+This step paused implementation work and turned the GLM-5V/GPT-5 review experiments into a maintainer-facing report. The goal is to make the lessons actionable for `css-visual-diff`, not just record that the model answers were wrong.
+
+The resulting report explains the Pyxis visual parity context, how deterministic config-run evidence accepted TopBar at zero pixel diff, how standalone `llm-review` produced different evidence, and why models then generated plausible but misleading recommendations.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, write a detailed report on llm-review so we can improve it in the future. We will hand it to the css-visual-diff maintainer, so it needs a lot of context and defailt."
+
+**Assistant interpretation:** Write a detailed, context-rich report for the css-visual-diff maintainer covering llm-review behavior, failures, and improvement recommendations.
+
+**Inferred user intent:** Preserve the debugging lessons from the LLM-review experiments so the tool can be improved later, especially around evidence alignment, prompt control, and visual-first review behavior.
+
+### What I did
+
+- Wrote:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/03-css-visual-diff-llm-review-maintainer-report.md
+```
+
+- Included context on:
+  - Pyxis prototype-to-Storybook parity workflow,
+  - accepted atom/molecule/TopBar deterministic results,
+  - prior GLM-5V profile setup ticket,
+  - current `llm-review` implementation shape,
+  - TopBar deterministic config and accepted pixel result,
+  - GLM-5V, GPT-5 Nano, and GPT-5 Mini experiments,
+  - observed failure modes,
+  - maintainer recommendations.
+
+### Why
+
+The LLM answers were not just “bad model outputs.” They exposed tool-design issues: standalone `llm-review` recomputes evidence that can disagree with config-run artifacts; prepared HTML may not preserve Storybook/theme context; triptych images are ambiguous to smaller vision models; and prompt customization is too limited.
+
+A maintainer report is the right artifact because the fixes are mostly in `css-visual-diff`, not in Pyxis component code.
+
+### What worked
+
+The report now has concrete paths, commands, model-specific observations, and prioritized recommendations. It should be usable by a maintainer without needing the full terminal scrollback.
+
+### What didn't work
+
+N/A for writing the report. The underlying tool issues remain unresolved.
+
+### What I learned
+
+The most important distinction is evidence alignment. Multimodal model quality matters, but even a good model will produce misleading advice if the review command gives it a comparison artifact that differs from the deterministic run developers already accepted.
+
+### What was tricky to build
+
+The tricky part was being fair to the models. GLM-5V was not simply wrong in the prepared-HTML run: it correctly described a broken rendering. The problem was that the broken rendering was an artifact of how `react-prepared.html` was reloaded. The report therefore separates model failure from tool/evidence failure.
+
+### What warrants a second pair of eyes
+
+- Whether the recommended artifact-based `llm-review` mode should be a new command or a `run` mode.
+- Whether the proposed visual-first default prompt is strong enough.
+- Whether generated prepared HTML should be made self-contained or deemphasized for LLM review.
+
+### What should be done in the future
+
+- Hand the report to the `css-visual-diff` maintainer.
+- Consider patching `css-visual-diff` to expose `--system-prompt` and artifact-based review.
+- Archive any generated LLM-review output directories if they need to survive beyond local gitignored artifacts.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/03-css-visual-diff-llm-review-maintainer-report.md
+```
+
+Check that the report distinguishes:
+
+```text
+validated deterministic config-run evidence
+standalone llm-review evidence
+model interpretation quality
+tool improvement recommendations
+```
+
+### Technical details
+
+The report intentionally references generated artifacts under:
+
+```text
+prototype-design/visual-comparisons/component-system/organisms/
+```
+
+Those outputs are gitignored, so they may need to be archived separately if the maintainer needs exact images/JSON files.
+
+## Step 12: Continue organisms with Modal default
+
+This step returned to the main visual parity workflow after the LLM-review maintainer report. I added `Modal default` as the next organism comparison target after `TopBar default`.
+
+Modal is more complex than TopBar because the prototype modal is an absolutely positioned overlay inside a bounded parent, while the React Modal uses a fixed-position overlay. To avoid comparing viewport overlay behavior too early, I focused the comparison on the modal panel and its major internal regions: header, body, and footer.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue with the main thing"
+
+**Assistant interpretation:** Resume bottom-up component visual parity work rather than continuing the LLM-review investigation.
+
+**Inferred user intent:** Keep progressing through organism-level parity targets after documenting the LLM-review issues.
+
+### What I did
+
+- Extended the prototype organism fixture:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js
+```
+
+with `modal-default`.
+
+- Extended the Storybook organism fixture:
+
+```text
+web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx
+```
+
+with a matching `modal-default` state.
+
+- Added a Modal comparison config:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Captured and inspected Modal screenshots with the image `read` path.
+- Fixed React Modal visual drift in:
+
+```text
+web/packages/pyxis-components/src/organisms/Modal/Modal.tsx
+```
+
+including:
+
+```text
+md width 520-ish prototype parity
+backdrop color/blur
+panel border radius/border/shadow
+header padding/title/subtitle/close icon
+body padding
+footer padding/gap/background
+```
+
+- Ran full deterministic modes:
+
+```bash
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+- Updated the parity map and playbook with Modal as `needs-review`, not accepted.
+
+### Why
+
+Modal is the next obvious organism after TopBar. It combines already-validated atoms/molecules (`Button`, `Field`, `Input`) with a larger composition and surface layout.
+
+I intentionally compared the panel/header/body/footer rather than the full fixed overlay because overlay positioning semantics differ between prototype and React and would make the first pass noisier.
+
+### What worked
+
+The config is valid and all sections exist:
+
+```text
+coverage total: 4
+original_missing: 0
+react_missing: 0
+```
+
+After React alignment, header and body reached zero pixel diff:
+
+```text
+header | 0.0000% | 0/37960
+body   | 0.0000% | 0/58240
+```
+
+This means the modal title/subtitle/close area and the form body are now visually aligned.
+
+### What didn't work
+
+The panel is not fully accepted yet:
+
+```text
+panel  | 1.2820% | 1673/130500
+footer | 1.9902% | 652/32760
+```
+
+The remaining diff is localized to the panel/footer region. Header/body are exact. The issue appears to be a combination of content-box versus border-box rounding, a one-pixel panel/footer crop difference, and footer button-region pixels.
+
+### What I learned
+
+For overlay organisms, comparing the semantic inner panel can be much more useful than comparing the whole overlay. It let us get header/body to zero without first solving fixed-vs-absolute overlay semantics.
+
+The Modal also shows that organism parity may need a `near-match / needs-review` status. Not every first pass should be forced into accepted or failed; here the component is much closer after fixes, but the remaining footer/panel pixels deserve another pass.
+
+### What was tricky to build
+
+The prototype Modal selector shape was not obvious. My first selector used:
+
+```text
+[data-comp='modal-default'] > div > div:nth-child(2)
+```
+
+but the actual prototype DOM is:
+
+```text
+[data-comp='modal-default'] > div          # overlay
+[data-comp='modal-default'] > div > div    # panel
+```
+
+I had to inspect prepared HTML to correct the selectors. This is exactly why the inspect-first workflow matters.
+
+The second tricky part was React Modal's fixed positioning. Because the component does not portal but uses `position: fixed`, it renders relative to the viewport even inside a fixture wrapper. The current comparison avoids that by targeting the panel directly.
+
+### What warrants a second pair of eyes
+
+- Whether React Modal should use `md: 522` to match the prototype panel's content-box width plus border, or whether the prototype fixture/config should normalize the crop differently.
+- Whether the remaining footer diff is acceptable rounding or should be driven to zero.
+- Whether comparing Modal's full overlay should wait until panel parity is complete.
+
+### What should be done in the future
+
+- Do a second Modal pass focused only on footer/panel rounding.
+- Consider adding more Modal CSS probes for close button and footer buttons.
+- Only mark `modal-default` accepted after panel/footer reach zero or an explicit accepted-difference rationale is agreed.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js
+web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml
+web/packages/pyxis-components/src/organisms/Modal/Modal.tsx
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+Generated report:
+
+```text
+prototype-design/visual-comparisons/component-system/organisms/modal-default/index.html
+```
+
+Important images:
+
+```text
+prototype-design/visual-comparisons/component-system/organisms/modal-default/original-panel.png
+prototype-design/visual-comparisons/component-system/organisms/modal-default/react-panel.png
+prototype-design/visual-comparisons/component-system/organisms/modal-default/pixeldiff_panel_diff_comparison.png
+prototype-design/visual-comparisons/component-system/organisms/modal-default/pixeldiff_footer_diff_comparison.png
+```
+

@@ -130,3 +130,43 @@ Completed the recommended first molecule batch after Card by adding Field defaul
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated known-good molecule list
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 9 diary entry
 
+
+## 2026-04-24
+
+Committed the completed atom/molecule workflow as `731c88571405cca9749d78639bd66623002a05b4`, then started the organism layer with TopBar default. Added prototype and Storybook organism fixtures, added the TopBar comparison config, aligned React TopBar typography/spacing/parts to the prototype, and reached 0.0000% pixel diff.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js — New organism prototype fixture prepare script
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx — New Storybook organism fixture
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/organisms/topbar-default.css-visual-diff.yml — TopBar organism comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/TopBar/TopBar.tsx — Aligned TopBar with prototype and added stable part selectors
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Recorded accepted TopBar organism result
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated known-good organism list
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 10 diary entry
+
+
+## 2026-04-24
+
+Wrote a detailed maintainer-facing report on `css-visual-diff llm-review` based on Pyxis TopBar experiments with GLM-5V, GPT-5 Nano, and GPT-5 Mini. The report documents evidence mismatch, prepared HTML pitfalls, CSS over-indexing, triptych misinterpretation, prompt-control gaps, and recommended tool improvements.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/03-css-visual-diff-llm-review-maintainer-report.md — Maintainer report for future `llm-review` improvements
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 11 diary entry
+
+
+## 2026-04-24
+
+Continued the main organism parity workflow with Modal default. Added prototype and Storybook Modal fixture states plus a Modal comparison config, aligned React Modal panel/header/body/footer styling toward the prototype, and recorded the result as needs-review: header/body are pixel-perfect, panel/footer still have localized residual diffs.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js — Added Modal default fixture state
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/OrganismDiffFixture.stories.tsx — Added matching Modal default Storybook state
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml — Modal organism comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/Modal/Modal.tsx — Aligned Modal dimensions, backdrop, panel, header, body, footer styling toward prototype
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Recorded Modal default as needs-review
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated organism status list with Modal follow-up state
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 12 diary entry
+

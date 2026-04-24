@@ -400,6 +400,67 @@
           "reason": "Prototype reports content-box CSS dimensions while React reports border-box dimensions; screenshot bounds and pixels match exactly."
         }
       ]
+    },
+    {
+      "slug": "organisms-topbar-default",
+      "level": "organism",
+      "component": "topbar",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js",
+        "sectionSelector": "[data-comp='topbar-default']",
+        "styleSelector": "[data-comp='topbar-default'] > div"
+      },
+      "storybook": {
+        "storyId": "organisms-organism-diff-fixture--default",
+        "sectionSelector": "[data-comp='topbar-default']",
+        "styleSelector": "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/organisms/topbar-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/organisms/topbar-default",
+        "report": "prototype-design/visual-comparisons/component-system/organisms/topbar-default/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none except accepted box-sizing/bounds semantic differences from prototype content-box vs React border-box reset"
+      },
+      "confidence": "high",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing/width/height",
+          "reason": "Prototype reports content-box CSS dimensions while React reports border-box dimensions; screenshot bounds and pixels match exactly."
+        }
+      ],
+      "notes": "First organism comparison accepted. React TopBar typography, padding, title font, action gap, and part selectors were aligned to prototype before reaching 0.0000% pixel diff."
+    },
+    {
+      "slug": "organisms-modal-default",
+      "level": "organism",
+      "component": "modal",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js",
+        "sectionSelector": "[data-comp='modal-default'] > div > div",
+        "styleSelector": "[data-comp='modal-default'] > div > div"
+      },
+      "storybook": {
+        "storyId": "organisms-organism-diff-fixture--default",
+        "sectionSelector": "[data-comp='modal-default'] [data-pyxis-component='modal'][data-pyxis-part='panel']",
+        "styleSelector": "[data-comp='modal-default'] [data-pyxis-component='modal'][data-pyxis-part='panel']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/organisms/modal-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/organisms/modal-default",
+        "report": "prototype-design/visual-comparisons/component-system/organisms/modal-default/index.html",
+        "pixelDiff": "panel 1.2820%; header 0.0000%; body 0.0000%; footer 1.9902%",
+        "cssDiff": "mostly box-sizing/bounds differences after React alignment; remaining visible diff localized to footer/panel rounding and button region"
+      },
+      "confidence": "medium",
+      "notes": "Modal default is close but not accepted. Header/body are pixel-perfect; panel/footer still differ due 1px crop/rounding and footer/button-region pixels after React Modal alignment. Needs a second pass before marking accepted."
     }
   ]
 }

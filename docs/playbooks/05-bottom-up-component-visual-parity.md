@@ -183,3 +183,15 @@ field-error
 stat-default
 empty-cta
 ```
+
+Accepted organism targets currently at `0.0000%` pixel diff:
+
+```text
+topbar-default
+```
+
+Organism targets currently needing a follow-up pass:
+
+```text
+modal-default — header/body 0.0000%; panel 1.2820%; footer 1.9902%
+```

@@ -1,0 +1,78 @@
+metadata:
+  slug: organisms-topbar-default
+  title: Organism TopBar default — prototype vs Storybook
+  level: organism
+  component: topbar
+  state: default
+  prototype_source: prototype-design/Pyxis Public Site.html
+  storybook_story_id: organisms-organism-diff-fixture--default
+
+original:
+  name: prototype-topbar-default
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 520 }
+  root_selector: "#organism-capture-root"
+  prepare:
+    type: script
+    wait_for: "window.React && window.ReactDOM && window.TopBar && window.Btn"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/organism-fixture-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-topbar-default
+  url: http://localhost:6006/iframe.html?id=organisms-organism-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 520 }
+  root_selector: "[data-fixture='pyxis-organisms']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-organisms\"] [data-comp=\"topbar-default\"] [data-pyxis-component=\"top-bar\"][data-pyxis-part=\"root\"]') && (!document.fonts || document.fonts.status === 'loaded')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='topbar-default']"
+    selector_react: "[data-comp='topbar-default']"
+  - name: root
+    selector_original: "[data-comp='topbar-default'] > div"
+    selector_react: "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='root']"
+  - name: title-group
+    selector_original: "[data-comp='topbar-default'] > div > div:first-child"
+    selector_react: "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='title-group']"
+  - name: actions
+    selector_original: "[data-comp='topbar-default'] > div > div:last-child"
+    selector_react: "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='actions']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='topbar-default'] > div"
+    selector_react: "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='root']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, display, align-items, justify-content, gap, color, background, background-color, border, border-bottom, border-bottom-color, border-bottom-width, border-bottom-style]
+  - name: title
+    selector_original: "[data-comp='topbar-default'] h1"
+    selector_react: "[data-comp='topbar-default'] h1"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color]
+  - name: subtitle
+    selector_original: "[data-comp='topbar-default'] > div > div:first-child > div:last-child"
+    selector_react: "[data-comp='topbar-default'] [data-pyxis-component='top-bar'][data-pyxis-part='subtitle']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/organisms/topbar-default
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]
