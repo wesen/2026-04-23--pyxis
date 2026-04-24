@@ -9,3 +9,4 @@
 - [ ] Extract PNG/CSS/HTML/inspect bundles for atoms, molecules, organisms, and public components
 - [ ] Publish a browsable manifest for the catalog and document how to rerun it
 - [x] Add prototype baseline catalog configs for Pyxis Public Site and Full App foundations
+- [x] Export public prototype catalog globals and validate component-level baseline samples

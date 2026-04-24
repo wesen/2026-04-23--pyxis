@@ -245,3 +245,128 @@ web/packages/pyxis-components/.storybook/preview.tsx
 ```
 
 Check that the preview imports every CSS file needed for catalog rendering.
+
+## Step 3: Export prototype public-site catalog globals
+
+I added catalog-only wrapper globals to the poster-grid public-site prototype so `css-visual-diff` can render individual public components directly, rather than always cropping them out of a whole page. This keeps the existing `PPXDesktop` and `PPXMobile` render paths unchanged while giving the catalog stable `data-catalog` selectors.
+
+The first sample run caught a selector issue: `poster-redroom` succeeded, but `show-tile-redroom` hung during `--all-styles` because the `title` selector did not match the actual nested ShowTile DOM. I stopped the loop, narrowed the failure to `show-tile-redroom`, fixed the selectors, added a timeout guard to the sample runner, and then reran the three-component sample successfully.
+
+### Prompt Context
+
+**User prompt (verbatim):** "1. yes do the window global thing"
+
+**Assistant interpretation:** Implement the proposed `window` exports/catalog wrappers in the prototype so individual public-site parts can be rendered by `css-visual-diff`.
+
+**Inferred user intent:** Make the prototype baseline catalog cleaner and less brittle by replacing page-crop selectors with direct component fixture renders.
+
+### What I did
+
+- Edited `prototype-design/screens/ppxis.jsx`.
+- Added catalog-only wrappers:
+  - `PPXCatalogFrame`
+  - `PPXCatalogPoster`
+  - `PPXCatalogShowTile`
+  - `PPXCatalogNav`
+  - `PPXCatalogFooter`
+  - `PPXCatalogPageHeader`
+  - `PPXCatalogShowGrid`
+- Exported existing raw public components to `window`:
+  - `Poster`
+  - `PPXNav`
+  - `PPXFooter`
+  - `ShowTile`
+  - `PageHeader`
+- Exported the new catalog wrappers to `window`.
+- Added sample component configs under `sources/prototype-configs/public-components/`:
+  - `poster-redroom.css-visual-diff.yml`
+  - `show-tile-redroom.css-visual-diff.yml`
+  - `nav-desktop.css-visual-diff.yml`
+- Added `scripts/08-run-prototype-public-component-sample.sh`.
+- Ran the component sample and inspected PNGs with the `read` image tool.
+
+### Why
+
+The earlier prototype baseline config used whole-page selectors such as:
+
+```css
+#capture-root main div[style*='grid-template-columns'] > div:first-child button
+```
+
+Those selectors work, but they are brittle. The new wrappers allow selectors like:
+
+```css
+[data-catalog='show-tile'] > div
+[data-catalog='nav'] header
+[data-catalog='poster'] > div
+```
+
+That is safer and clearer for a long-lived baseline catalog.
+
+### What worked
+
+- `PPXCatalogPoster` rendered directly via `direct-react-global`.
+- `PPXCatalogShowTile` rendered directly after correcting nested selectors.
+- `PPXCatalogNav` rendered directly.
+- The sample produced PNG and CSS bundles for poster, show tile, and nav.
+
+### What didn't work
+
+The first `show-tile-redroom` run hung on a missing selector. The bad selectors assumed that `[data-catalog='show-tile']` directly contained the poster/title/button structure. In reality, the catalog wrapper contains the existing ShowTile root div, so selectors need one additional `> div` hop.
+
+Bad example:
+
+```css
+[data-catalog='show-tile'] > div:nth-child(2) > div:first-child
+```
+
+Fixed example:
+
+```css
+[data-catalog='show-tile'] > div > div:nth-child(2) > div:first-child
+```
+
+### What I learned
+
+- `css-visual-diff inspect --all-styles` currently can hang for a long time when a selector does not match during artifact generation, so sample runners should use `timeout` while configs are being authored.
+- Direct prototype component fixtures are much easier to reason about than page-crop selectors, but wrapper depth still matters.
+
+### What was tricky to build
+
+The wrappers must not change the existing prototype pages. To keep that invariant, I added new fixture components at the bottom of `ppxis.jsx` and only extended `Object.assign(window, ...)`. Existing `Poster`, `ShowTile`, `PPXNav`, `PPXFooter`, and page logic were not modified.
+
+### What warrants a second pair of eyes
+
+- Whether the wrapper widths (`270`, `920`, `390`, `856`) are the right canonical catalog widths.
+- Whether additional `data-catalog` attributes should be inserted deeper into fixture wrappers to reduce selectors further.
+- Whether `css-visual-diff inspect` should get a selector timeout to avoid long hangs on missing selectors.
+
+### What should be done in the future
+
+- Add configs for footer, page header, show grid, mobile nav, mobile show tile, and each poster variant.
+- Add a generated prototype component catalog index like the Storybook catalog index.
+- Consider improving `css-visual-diff` so missing selectors fail fast in artifact mode.
+
+### Code review instructions
+
+Start with:
+
+```text
+prototype-design/screens/ppxis.jsx
+sources/prototype-configs/public-components/show-tile-redroom.css-visual-diff.yml
+scripts/08-run-prototype-public-component-sample.sh
+```
+
+Validate with:
+
+```bash
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
+```
+
+Then inspect:
+
+```text
+various/prototype-baseline/sample-public-components/poster-redroom/poster/screenshot.png
+various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
+various/prototype-baseline/sample-public-components/nav-desktop/nav/screenshot.png
+```

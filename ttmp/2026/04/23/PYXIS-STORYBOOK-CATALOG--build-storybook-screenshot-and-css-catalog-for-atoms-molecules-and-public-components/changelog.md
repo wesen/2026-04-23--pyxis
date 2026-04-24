@@ -32,3 +32,25 @@
 
 ### Why
 - The Storybook catalog depends on preview-level CSS imports, including `Card.css`; leaving preview ignored makes catalog screenshots machine-local and non-reproducible.
+
+## 2026-04-24 — Add public prototype component catalog globals
+
+### Added
+- Added catalog-only public-site wrappers in `prototype-design/screens/ppxis.jsx`:
+  - `PPXCatalogPoster`
+  - `PPXCatalogShowTile`
+  - `PPXCatalogNav`
+  - `PPXCatalogFooter`
+  - `PPXCatalogPageHeader`
+  - `PPXCatalogShowGrid`
+- Exported raw public-site components and catalog wrappers to `window` for `direct-react-global` rendering.
+- Added sample component baseline configs for poster, show tile, and nav.
+- Added `scripts/08-run-prototype-public-component-sample.sh`.
+
+### Validated
+- Ran the public component sample successfully after correcting ShowTile selectors.
+- Inspected sample PNGs with the `read` image tool.
+
+### Fixed while authoring
+- Corrected `show-tile-redroom` nested selectors after the first sample run hung on a missing title selector.
+- Added a `timeout 90s` guard to the sample runner to avoid long waits while authoring selectors.

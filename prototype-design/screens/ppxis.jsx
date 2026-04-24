@@ -757,4 +757,92 @@ function PPXMobile({ page = "shows" }) {
   return <PPXShell page={page} compact />;
 }
 
-Object.assign(window, { PPXDesktop, PPXMobile, PPXShell, P_SHOWS });
+/* ───────── Catalog-only fixtures ─────────
+ * These wrappers expose individual public-site parts to browser globals so
+ * css-visual-diff can render stable prototype baselines without brittle
+ * whole-page DOM crops. They intentionally do not change the user-facing
+ * PPXDesktop/PPXMobile render paths above.
+ */
+
+function PPXCatalogFrame({ children, width = 320, background = "#fff" }) {
+  return (
+    <div data-catalog="frame" style={{ width, background, fontFamily: "'Inter', sans-serif", color: PINK }}>
+      {children}
+    </div>
+  );
+}
+
+function PPXCatalogPoster({ kind = "redroom", width = 270 }) {
+  return (
+    <PPXCatalogFrame width={width}>
+      <div data-catalog="poster" style={{ width }}>
+        <Poster kind={kind} />
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+function PPXCatalogShowTile({ index = 0, compact = false, width }) {
+  const show = P_SHOWS[index] || P_SHOWS[0];
+  const w = width || (compact ? 354 : 270);
+  return (
+    <PPXCatalogFrame width={w}>
+      <div data-catalog="show-tile" style={{ width: w }}>
+        <ShowTile show={show} compact={compact} onClick={() => {}} />
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+function PPXCatalogNav({ page = "shows", compact = false }) {
+  const width = compact ? 390 : 920;
+  return (
+    <PPXCatalogFrame width={width}>
+      <div data-catalog="nav" style={{ width }}>
+        <PPXNav page={page} compact={compact} onNav={() => {}} />
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+function PPXCatalogFooter({ compact = false }) {
+  const width = compact ? 390 : 920;
+  return (
+    <PPXCatalogFrame width={width}>
+      <div data-catalog="footer" style={{ width }}>
+        <PPXFooter compact={compact} />
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+function PPXCatalogPageHeader({ kicker = "Providence, RI", title = "Upcoming shows", compact = false }) {
+  const width = compact ? 354 : 856;
+  return (
+    <PPXCatalogFrame width={width}>
+      <div data-catalog="page-header" style={{ width }}>
+        <PageHeader kicker={kicker} title={title} compact={compact} />
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+function PPXCatalogShowGrid({ compact = false, count }) {
+  const width = compact ? 354 : 856;
+  const shows = P_SHOWS.slice(0, count || (compact ? 3 : 6));
+  return (
+    <PPXCatalogFrame width={width}>
+      <div data-catalog="show-grid" style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(3, 1fr)", gap: compact ? 24 : "32px 24px", width }}>
+        {shows.map(s => <ShowTile key={s.id} show={s} compact={compact} onClick={() => {}} />)}
+      </div>
+    </PPXCatalogFrame>
+  );
+}
+
+Object.assign(window, {
+  PPXDesktop, PPXMobile, PPXShell, P_SHOWS,
+  Poster, PPXNav, PPXFooter, ShowTile, PageHeader,
+  PPXCatalogFrame, PPXCatalogPoster, PPXCatalogShowTile,
+  PPXCatalogNav, PPXCatalogFooter, PPXCatalogPageHeader,
+  PPXCatalogShowGrid,
+});

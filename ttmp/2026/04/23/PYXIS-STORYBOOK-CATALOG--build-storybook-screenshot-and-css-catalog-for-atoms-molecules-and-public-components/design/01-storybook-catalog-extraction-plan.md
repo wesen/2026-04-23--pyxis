@@ -16,7 +16,9 @@ RelatedFiles:
     - Path: prototype-design/Pyxis Public Site.html
       Note: Prototype public-site HTML baseline entrypoint
     - Path: prototype-design/screens/ppxis.jsx
-      Note: Poster-grid public site component/page definitions
+      Note: |-
+        Poster-grid public site component/page definitions
+        Exports public-site catalog wrappers for direct component baseline extraction
     - Path: prototype-design/screens/system.jsx
       Note: Full App Foundations/SystemPage component system baseline
     - Path: scripts/01-generate-story-catalog-configs.mjs
@@ -25,10 +27,14 @@ RelatedFiles:
       Note: Runs standalone css-visual-diff inspect bundles for selected or all stories
     - Path: scripts/03-build-story-catalog-index.mjs
       Note: Builds browsable HTML/Markdown index over generated PNG/CSS bundles
+    - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
+      Note: Sample runner for direct public component catalog fixtures
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/prototype-foundations-system.css-visual-diff.yml
       Note: Full App Foundations prototype baseline config
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/prototype-public-shows.css-visual-diff.yml
       Note: Public Shows prototype baseline config
+    - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/public-components/show-tile-redroom.css-visual-diff.yml
+      Note: Sample direct ShowTile baseline config using data-catalog selectors
     - Path: web/packages/pyxis-components/storybook-static/index.json
       Note: Built Storybook story inventory consumed by the catalog generator
 ExternalSources: []
@@ -37,6 +43,7 @@ LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: Use this when continuing the Storybook screenshot/CSS catalog work.
 WhenToUse: Before running the full extraction, changing selectors, or deciding whether css-visual-diff needs source changes.
 ---
+
 
 
 # Storybook catalog extraction plan
@@ -82,6 +89,7 @@ The ticket contains the reusable scripts under `scripts/`:
 | `05-run-full-story-catalog.sh` | Orchestrates build/serve/generate/inspect/index for the full Storybook-side run. |
 | `06-run-prototype-baseline-sample.sh` | Runs a small prototype baseline sample before expensive/full runs. |
 | `07-run-prototype-baseline-full.sh` | Runs all configured prototype baseline probes. |
+| `08-run-prototype-public-component-sample.sh` | Runs direct public component fixture samples for poster, show tile, and nav. |
 
 Generated, reproducible artifacts are intentionally ignored by ticket `.gitignore`:
 
@@ -248,7 +256,24 @@ The public poster-grid site in `screens/ppxis.jsx` contains these reusable piece
   - `PPXDesktop`
   - `PPXMobile`
 
-Only `PPXDesktop`, `PPXMobile`, `PPXShell`, and `P_SHOWS` are explicitly exported to `window`. Individual atoms like `ShowTile` and `Poster` are not yet exported, so the current baseline uses direct page render plus selectors. If we want a cleaner per-component prototype catalog, we should either export those functions for cataloging or add a prepare script that renders wrapper components inside the same script scope.
+`PPXDesktop`, `PPXMobile`, `PPXShell`, and `P_SHOWS` were the original explicit `window` exports. The catalog workflow now also exports raw public-site parts and catalog-only wrappers:
+
+```text
+Poster
+PPXNav
+PPXFooter
+ShowTile
+PageHeader
+PPXCatalogFrame
+PPXCatalogPoster
+PPXCatalogShowTile
+PPXCatalogNav
+PPXCatalogFooter
+PPXCatalogPageHeader
+PPXCatalogShowGrid
+```
+
+The wrappers are preferred for baseline extraction because they provide stable `data-catalog` roots and hide awkward props/callbacks from YAML.
 
 ## Full App Foundations inventory
 
