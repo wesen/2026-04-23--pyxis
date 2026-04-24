@@ -24,3 +24,14 @@ Iteration 1: added first atom parity map and Button primary comparison config; i
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml — First runnable atom comparison config
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Initial hand-curated atom parity map
 
+
+## 2026-04-24
+
+Iteration 2: added Badge confirmed comparison, ran full deterministic modes, got 0% pixel diff, adjusted CSS prop list to avoid harmless auto-size width/height differences, and updated the guide with validated workflow corrections.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml — Second atom comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated accepted Button and Badge parity statuses
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md — Updated validated workflow notes
+

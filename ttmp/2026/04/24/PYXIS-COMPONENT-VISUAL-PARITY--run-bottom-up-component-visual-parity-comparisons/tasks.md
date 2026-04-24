@@ -10,5 +10,5 @@
 - [x] Use CSS diff and pixel diff artifacts to tune React/Button implementation, then rerun comparison
 - [ ] Promote working atom comparison pattern to Badge, Tag, Input, and Select
 - [x] Iteration 1 — Run Button primary prototype-vs-Storybook comparison end-to-end and update the playbook with any workflow corrections
-- [ ] Iteration 2 — Run Badge confirmed or Tag default comparison end-to-end using the refined workflow
-- [ ] After two atom iterations, update the parity guide with validated command sequence, known css-visual-diff limitations, and next batch recommendations
+- [x] Iteration 2 — Run Badge confirmed or Tag default comparison end-to-end using the refined workflow
+- [x] After two atom iterations, update the parity guide with validated command sequence, known css-visual-diff limitations, and next batch recommendations

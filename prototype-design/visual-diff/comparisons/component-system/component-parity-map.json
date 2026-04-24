@@ -7,7 +7,7 @@
       "level": "atom",
       "component": "button",
       "state": "primary-with-chevron",
-      "status": "ready-to-run",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
@@ -21,17 +21,20 @@
       },
       "comparison": {
         "config": "prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml",
-        "output": "prototype-design/visual-comparisons/component-system/atoms/button-primary"
+        "output": "prototype-design/visual-comparisons/component-system/atoms/button-primary",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/button-primary/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
       },
       "confidence": "high",
-      "notes": "Both sides render the same fixture label, primary style, Get tickets text, and chevron/right icon in the atom diff fixture."
+      "notes": "Both sides render the same fixture label, primary style, Get tickets text, and chevron/right icon in the atom diff fixture. Completed first iteration successfully."
     },
     {
       "slug": "atoms-badge-confirmed",
       "level": "atom",
       "component": "badge",
       "state": "confirmed",
-      "status": "candidate-next",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
@@ -45,10 +48,13 @@
       },
       "comparison": {
         "config": "prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml",
-        "output": "prototype-design/visual-comparisons/component-system/atoms/badge-confirmed"
+        "output": "prototype-design/visual-comparisons/component-system/atoms/badge-confirmed",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/badge-confirmed/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none after removing auto-size width/height/box-sizing probes from root style props"
       },
       "confidence": "high",
-      "notes": "Good second iteration candidate after Button because both sides share the atom fixture wrapper and state."
+      "notes": "Good second iteration candidate after Button because both sides share the atom fixture wrapper and state. Completed second iteration successfully; use component-aware CSS prop lists."
     },
     {
       "slug": "atoms-tag-default",

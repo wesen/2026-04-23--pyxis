@@ -14,16 +14,21 @@ Owners: []
 RelatedFiles:
     - Path: .gitignore
       Note: Keeps generated comparison outputs out of git status
+    - Path: prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml
+      Note: Second atom comparison config and CSS prop-list adjustment
     - Path: prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml
       Note: First runnable atom comparison config
     - Path: prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
       Note: Initial atom parity map
+    - Path: ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md
+      Note: Guide updated with validated atom iteration corrections
 ExternalSources: []
 Summary: Chronological implementation diary for bottom-up prototype-to-Storybook component visual parity work.
 LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Diary
@@ -228,4 +233,97 @@ Key artifacts reviewed:
 cssdiff.md
 pixeldiff.md
 pixeldiff_button_diff_comparison.png
+```
+
+## Step 3: Run Badge confirmed parity comparison and update the guide
+
+The second atom iteration reused the same atom fixture strategy for Badge confirmed. This gave us a better test than Button because the visual diff was perfect, but the first CSS probe list still reported differences for `box-sizing`, `width`, and `height`.
+
+That turned into a useful workflow correction: for auto-sized inline widgets, computed `width` and `height` can differ because of `box-sizing` semantics even when the rendered pixels and visual bounds are identical. I adjusted the Badge config's CSS property list to focus on visual style properties and kept `include_bounds: true` for geometry evidence.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Complete a second atom comparison and update the implementation guide based on real workflow findings.
+
+**Inferred user intent:** Validate that the parity process generalizes beyond Button before applying it to more components.
+
+### What I did
+
+- Added `prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml`.
+- Inspected original and React badge screenshots.
+- Inspected original and React computed CSS.
+- Ran full modes: `capture`, `cssdiff`, `matched-styles`, `pixeldiff`, `html-report`.
+- Updated the Badge CSS probe property list after identifying harmless auto-size computed CSS differences.
+- Updated `component-parity-map.json` with accepted Button and Badge results.
+- Updated the analysis guide with validated workflow corrections.
+
+### Why
+
+A second atom iteration tells us whether the workflow catches real issues and whether the playbook needs adjustment before wider adoption.
+
+### What worked
+
+The final Badge run succeeded with:
+
+```text
+component: 0.0000% changed, 0/2016 pixels
+badge:     0.0000% changed, 0/1848 pixels
+cssdiff:   no configured property differences after prop-list adjustment
+```
+
+### What didn't work
+
+The first Badge CSS diff reported:
+
+```text
+box-sizing: content-box vs border-box
+width:      65.7344px vs 83.7344px
+height:     17.5938px vs 21.5938px
+```
+
+This was not a visual bug because pixel diff was 0%. It was a CSS-probe design issue: content-box vs border-box changes computed `width`/`height` semantics even when visual size matches.
+
+### What I learned
+
+CSS diff prop lists must be component-aware. Fixed-size components can include width/height as explicit parity properties. Auto-sized inline components should usually rely on `include_bounds: true` for geometry and compare visual properties such as padding, gap, typography, color, background, border, and radius.
+
+### What was tricky to build
+
+The tricky part was distinguishing implementation bugs from comparison-instrumentation noise. The pixel diff and screenshot review said the Badge was identical. The CSS diff highlighted real computed CSS differences, but not differences that should drive a React change.
+
+### What warrants a second pair of eyes
+
+Review whether the Badge config should permanently omit width/height/box-sizing, or whether future css-visual-diff should distinguish computed CSS property differences from visual bounds differences more explicitly.
+
+### What should be done in the future
+
+- Add Tag, Input, and Select configs using component-aware CSS prop lists.
+- Consider a small config-generation helper that chooses default props by component category.
+
+### Code review instructions
+
+Start with:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md
+```
+
+Validate with:
+
+```bash
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+Generated but ignored outputs are under:
+
+```text
+prototype-design/visual-comparisons/component-system/atoms/badge-confirmed/
 ```

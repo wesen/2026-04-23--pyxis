@@ -195,6 +195,8 @@ prototype-design/visual-comparisons/
 
 Generated comparison outputs should be ignored if they are large/noisy. Configs, manifests, and documentation should be committed.
 
+**Validated workflow correction:** when `css-visual-diff run` loads a YAML config, relative `output.dir` values are resolved relative to the config file's directory. During the first Button iteration, `output.dir: prototype-design/visual-comparisons/...` produced nested output under `prototype-design/visual-diff/comparisons/...`. For hand-authored Pyxis comparison configs, use an absolute `output.dir` during validation, or generate configs with a known repo-root-aware output path.
+
 ## 5. The unit of work: a parity pair
 
 Every comparison starts as a parity pair:
@@ -328,7 +330,7 @@ prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
 
 ### Step 4: inspect both sides independently
 
-Before comparing, use the inspect workflow.
+Before comparing, use the inspect workflow. This step is not optional. In the Button and Badge atom iterations it caught selector and output-path assumptions before scaling the workflow.
 
 Prepared HTML:
 
@@ -482,6 +484,8 @@ Use a strict decision tree:
 8. Rerun the exact same config.
 
 Do not tune React CSS against a bad comparison pair.
+
+**Validated workflow correction:** CSS diff can report differences that are not visual bugs. In the Badge confirmed iteration, pixel diff was 0%, but CSS diff initially reported `box-sizing`, `width`, and `height` differences because the prototype badge used content-box computed width/height while the React badge used border-box. The visual bounds were identical. For auto-sized inline components, prefer `include_bounds: true` plus visual properties such as padding, gap, font, color, background, border, and radius; avoid treating computed `width`/`height` as mandatory parity unless fixed dimensions are part of the component contract.
 
 ### Step 9: record the result
 
@@ -748,7 +752,37 @@ A component reaches parity-ready when:
 - remaining differences are either fixed or documented as accepted,
 - component parity map is updated.
 
-## 13. Immediate next actions
+## 13. Validated atom iteration notes
+
+Two atom iterations have now validated the basic YAML `run` workflow:
+
+| Component | Config | Result | Lesson |
+| --- | --- | --- | --- |
+| Button primary | `prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff | Workflow works for exact atom fixture states. Use absolute output paths. |
+| Badge confirmed | `prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff after pruning auto-size width/height props | CSS property lists must be component-aware; pixel parity can coexist with harmless computed CSS differences. |
+
+Validated command sequence:
+
+```bash
+# 1. Inspect crops and styles first.
+css-visual-diff screenshot --config <config.yml> --side original --section <section> --output-file /tmp/original.png
+css-visual-diff screenshot --config <config.yml> --side react --section <section> --output-file /tmp/react.png
+css-visual-diff css-md --config <config.yml> --side original --style root --output-file /tmp/original-css.md
+css-visual-diff css-md --config <config.yml> --side react --style root --output-file /tmp/react-css.md
+
+# 2. Run deterministic comparison modes.
+css-visual-diff run --config <config.yml> --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+Next recommended atom configs:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml
+```
+
+## 14. Immediate next actions
 
 1. Create comparison directory structure:
 
