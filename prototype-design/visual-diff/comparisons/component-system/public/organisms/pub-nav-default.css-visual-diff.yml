@@ -1,0 +1,62 @@
+metadata:
+  slug: public-organisms-pub-nav-default
+  title: Public organism pub-nav-default — prototype vs Storybook
+  domain: public
+  level: organism
+  component: pub-nav
+  state: default
+  storybook_story_id: public-fixtures-public-diff-fixture--default
+
+original:
+  name: prototype-public-pub-nav-default
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1200 }
+  root_selector: "#public-capture-root"
+  prepare:
+    type: script
+    wait_for: "document.body"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-public-pub-nav-default
+  url: http://localhost:6006/iframe.html?id=public-fixtures-public-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 1200 }
+  root_selector: "[data-fixture='pyxis-public']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-public\"] [data-comp=\"public-pub-nav-default\"]')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='public-pub-nav-default']"
+    selector_react: "[data-comp='public-pub-nav-default']"
+  - name: root
+    selector_original: "[data-comp='public-pub-nav-default'] > *"
+    selector_react: "[data-comp='public-pub-nav-default'] [data-pyxis-component='pub-nav'][data-pyxis-part='root']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='public-pub-nav-default'] > *"
+    selector_react: "[data-comp='public-pub-nav-default'] [data-pyxis-component='pub-nav'][data-pyxis-part='root']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, display, grid-template-columns, align-items, justify-content, gap, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/public/organisms/pub-nav-default
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]

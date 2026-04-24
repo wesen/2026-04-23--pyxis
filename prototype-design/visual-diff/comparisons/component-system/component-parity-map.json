@@ -682,6 +682,286 @@
       },
       "confidence": "medium",
       "notes": "Prototype archive row vs React show row are related but not identical: React includes door/price/age stack. Coverage valid; may need separate archive-row vs upcoming-show-row taxonomy."
+    },
+    {
+      "slug": "public-organisms-pub-footer-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "PubFooter",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-pub-footer-default']",
+        "styleSelector": "[data-comp='public-pub-footer-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-pub-footer-default']",
+        "styleSelector": "[data-comp='public-pub-footer-default'] [data-pyxis-component='pub-footer'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-footer-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-footer-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-footer-default/index.html",
+        "pixelDiff": "root 0.3725%; component 0.2511%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Very close public shell component; residual logo color/text anti-aliasing differences remain, kept needs-review pending intentional accepted-difference decision."
+    },
+    {
+      "slug": "public-organisms-booking-success-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "BookingSuccess",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-booking-success-default']",
+        "styleSelector": "[data-comp='public-booking-success-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-booking-success-default']",
+        "styleSelector": "[data-comp='public-booking-success-default'] [data-pyxis-component='booking-success'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-success-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-success-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-success-default/index.html",
+        "pixelDiff": "root 9.3157%; component 7.3591%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Coverage target; success state is implementation-only/hand-rendered prototype approximation."
+    },
+    {
+      "slug": "public-organisms-booking-rules-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "BookingRules",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-booking-rules-default']",
+        "styleSelector": "[data-comp='public-booking-rules-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-booking-rules-default']",
+        "styleSelector": "[data-comp='public-booking-rules-default'] [data-pyxis-component='booking-rules'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-rules-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-rules-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-rules-default/index.html",
+        "pixelDiff": "component 69.4857%; root 69.4857%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Major mismatch: prototype booking aside copy/dark card vs React light rules list."
+    },
+    {
+      "slug": "public-organisms-ethos-strip-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "EthosStrip",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-ethos-strip-default']",
+        "styleSelector": "[data-comp='public-ethos-strip-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-ethos-strip-default']",
+        "styleSelector": "[data-comp='public-ethos-strip-default'] [data-pyxis-component='ethos-strip'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/ethos-strip-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-strip-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-strip-default/index.html",
+        "pixelDiff": "root 99.5322%; component 99.5143%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Major design mismatch: prototype ethos is light about-page section; React EthosStrip is dark full-width strip."
+    },
+    {
+      "slug": "public-organisms-about-hero-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "AboutHero",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-about-hero-default']",
+        "styleSelector": "[data-comp='public-about-hero-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-about-hero-default']",
+        "styleSelector": "[data-comp='public-about-hero-default'] [data-pyxis-component='about-hero'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/about-hero-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/about-hero-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/about-hero-default/index.html",
+        "pixelDiff": "component 18.2695%; root 15.2161%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Coverage target only; prototype combines PageHeader/about intro while React AboutHero is simplified tagline hero."
+    },
+    {
+      "slug": "public-organisms-venue-card-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "VenueCard",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-venue-card-default']",
+        "styleSelector": "[data-comp='public-venue-card-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-venue-card-default']",
+        "styleSelector": "[data-comp='public-venue-card-default'] [data-pyxis-component='venue-card'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/venue-card-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/venue-card-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/venue-card-default/index.html",
+        "pixelDiff": "component 50.9131%; root 50.9131%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Large taxonomy/style mismatch: prototype source is dark booking space aside while React VenueCard is light card/map placeholder."
+    },
+    {
+      "slug": "public-organisms-space-info-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "SpaceInfo",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-space-info-default']",
+        "styleSelector": "[data-comp='public-space-info-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-space-info-default']",
+        "styleSelector": "[data-comp='public-space-info-default'] [data-pyxis-component='space-info'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/space-info-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/space-info-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/space-info-default/index.html",
+        "pixelDiff": "component 14.0753%; root 14.0753%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Coverage target; prototype find-us text block vs React info card have related content but different structure/style."
+    },
+    {
+      "slug": "public-organisms-pub-hero-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "PubHero",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-pub-hero-default']",
+        "styleSelector": "[data-comp='public-pub-hero-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-pub-hero-default']",
+        "styleSelector": "[data-comp='public-pub-hero-default'] [data-pyxis-component='pub-hero'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-hero-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-hero-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-hero-default/index.html",
+        "pixelDiff": "component 10.7942%; root 10.7942%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Coverage target only; prototype hand-rendered public hero differs from React hero structure/actions."
+    },
+    {
+      "slug": "public-organisms-mailing-list-cta-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "MailingListCta",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-mailing-list-cta-default']",
+        "styleSelector": "[data-comp='public-mailing-list-cta-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-mailing-list-cta-default']",
+        "styleSelector": "[data-comp='public-mailing-list-cta-default'] [data-pyxis-component='mailing-list-cta'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/mailing-list-cta-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/mailing-list-cta-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/mailing-list-cta-default/index.html",
+        "pixelDiff": "component 15.9809%; root 10.8853%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "low",
+      "notes": "Coverage target; prototype fixture is hand-rendered CTA motif, React is bordered card with form controls."
+    },
+    {
+      "slug": "public-organisms-pub-nav-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "PubNav",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-pub-nav-default']",
+        "styleSelector": "[data-comp='public-pub-nav-default'] > *"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-pub-nav-default']",
+        "styleSelector": "[data-comp='public-pub-nav-default'] [data-pyxis-component='pub-nav'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-nav-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/pub-nav-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/pub-nav-default/index.html",
+        "pixelDiff": "component 1.4647%; root 1.4647%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Close but not accepted: logo color differs in React/root evidence and small spacing/font differences remain."
     }
   ]
 }

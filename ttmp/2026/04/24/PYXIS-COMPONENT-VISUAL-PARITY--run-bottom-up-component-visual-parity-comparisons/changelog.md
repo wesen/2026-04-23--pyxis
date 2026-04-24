@@ -242,3 +242,25 @@ Started public-site parity coverage by adding a dedicated public prototype fixtu
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added public molecule parity entries
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 16 diary entry
 
+
+## 2026-04-24
+
+Added broad public organism coverage for ten public section components. Diagnosed an apparent css-visual-diff hang as a recursive Storybook fixture bug caused by accidentally inserting fixture rows inside the `FixtureRow` helper. Fixed the fixture, reran typecheck, ran full visual-diff modes, and recorded all targets as needs-review.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx — Added public organism fixture states and fixed recursive render bug
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js — Added prototype public organism fixture states
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/about-hero-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-rules-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-success-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/ethos-strip-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/mailing-list-cta-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-footer-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-hero-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-nav-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/space-info-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/organisms/venue-card-default.css-visual-diff.yml — New comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added public organism parity entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 17 diary entry
+

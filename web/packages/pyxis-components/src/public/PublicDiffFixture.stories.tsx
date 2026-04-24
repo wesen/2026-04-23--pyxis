@@ -5,6 +5,16 @@ import { LineupRow } from './LineupRow';
 import { PubShowRow } from './PubShowRow';
 import { TicketStub } from './TicketStub';
 import { YearGroup } from './YearGroup';
+import { PubNav } from './PubNav';
+import { PubFooter } from './PubFooter';
+import { PubHero } from './PubHero';
+import { AboutHero } from './AboutHero';
+import { VenueCard } from './VenueCard';
+import { SpaceInfo } from './SpaceInfo';
+import { EthosStrip } from './EthosStrip';
+import { MailingListCTA } from './MailingListCTA';
+import { BookingRules } from './BookingRules';
+import { BookingSuccess } from './BookingSuccess';
 
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -88,6 +98,41 @@ function PublicDiffFixture() {
         <div data-comp="public-pub-show-row-default" style={{ width: 640 }}>
           <PubShowRow show={archiveShow} />
         </div>
+      </FixtureRow>
+
+
+      <FixtureRow label="Nav">
+        <div data-comp="public-pub-nav-default" style={{ width: 920 }}><PubNav currentPage="shows" /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Footer">
+        <div data-comp="public-pub-footer-default" style={{ width: 920 }}><PubFooter /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Hero">
+        <div data-comp="public-pub-hero-default" style={{ width: 720 }}><PubHero show={{ ...show, description: 'A Valentine noise ritual with hardware, fog, and red light.' }} /></div>
+      </FixtureRow>
+
+      <FixtureRow label="About hero">
+        <div data-comp="public-about-hero-default" style={{ width: 620 }}><AboutHero tagline="a music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum." /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Venue/space">
+        <div data-comp="public-venue-card-default" style={{ width: 300 }}><VenueCard /></div>
+        <div data-comp="public-space-info-default" style={{ width: 300 }}><SpaceInfo email="book@ppxis.space" /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Ethos">
+        <div data-comp="public-ethos-strip-default" style={{ width: 860 }}><EthosStrip /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Mailing list">
+        <div data-comp="public-mailing-list-cta-default" style={{ width: 520 }}><MailingListCTA /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Booking">
+        <div data-comp="public-booking-rules-default" style={{ width: 320 }}><BookingRules /></div>
+        <div data-comp="public-booking-success-default" style={{ width: 420 }}><BookingSuccess artistName="sable witch" /></div>
       </FixtureRow>
     </div>
   );

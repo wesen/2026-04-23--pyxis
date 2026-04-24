@@ -2029,3 +2029,159 @@ prototype-design/visual-comparisons/component-system/public/molecules/year-group
 prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default/index.html
 ```
 
+## Step 17: Add broad public organism coverage batch
+
+This step continued the public-site coverage pass and added comparison coverage for ten public organism/section components.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue, do as many as you can."
+
+Then, after the first run appeared stuck:
+
+**User prompt (verbatim):** "it seems that we're hanging on something? I also installed a new version of css-visual-diff, hopefully it still works after all the changes we did (add js support). Sourcecode is: /home/manuel/code/wesen/corporate-headquarters/css-visual-diff"
+
+**Assistant interpretation:** Continue broad coverage, diagnose the apparent hang, and account for the newly installed `css-visual-diff` behavior.
+
+### What I did
+
+- Added public organism states to the existing Storybook public diff fixture:
+
+```text
+PubNav
+PubFooter
+PubHero
+AboutHero
+VenueCard
+SpaceInfo
+EthosStrip
+MailingListCTA
+BookingRules
+BookingSuccess
+```
+
+- Added matching prototype fixture states to:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+```
+
+- Generated ten public organism configs under:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/public/organisms/
+```
+
+- Ran typecheck successfully:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Ran full css-visual-diff modes for all ten public organism configs:
+
+```text
+capture
+cssdiff
+matched-styles
+pixeldiff
+html-report
+```
+
+- Updated the parity map with ten new public organism entries, all `needs-review`.
+- Inspected selected PNG comparison images for `PubNav`, `PubFooter`, and `EthosStrip`.
+
+### Hang diagnosis
+
+The apparent hang was not primarily a `css-visual-diff` regression. I accidentally inserted the organism fixture rows inside the `FixtureRow` helper component in `PublicDiffFixture.stories.tsx`, which made `FixtureRow` recursively render itself. Storybook could load the iframe HTML, but the story render never reached the expected selector, so `css-visual-diff` waited until the external timeout killed it.
+
+Fix:
+
+- Removed the recursive fixture rows from inside `FixtureRow`.
+- Kept the organism rows only inside `PublicDiffFixture`.
+- Re-ran typecheck and visual-diff successfully.
+
+One observation remains useful for tool maintenance: a missing selector or story-render failure can still look like a hang when an outer `timeout` kills the process. `css-visual-diff` should ideally fail fast and clearly when `wait_for_timeout_ms` is reached; this is worth rechecking against the new JS-support build later.
+
+### Results
+
+All ten configs have valid coverage:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Pixel results:
+
+```text
+public-organisms-about-hero-default          component 18.2695%; root 15.2161%
+public-organisms-booking-rules-default       component/root 69.4857%
+public-organisms-booking-success-default     component 7.3591%; root 9.3157%
+public-organisms-ethos-strip-default         component 99.5143%; root 99.5322%
+public-organisms-mailing-list-cta-default    component 15.9809%; root 10.8853%
+public-organisms-pub-footer-default          component 0.2511%; root 0.3725%
+public-organisms-pub-hero-default            component/root 10.7942%
+public-organisms-pub-nav-default             component/root 1.4647%
+public-organisms-space-info-default          component/root 14.0753%
+public-organisms-venue-card-default          component/root 50.9131%
+```
+
+### What worked
+
+The broad coverage approach worked after fixing the recursive fixture bug. `PubNav` and `PubFooter` are already quite close, and the deterministic artifacts make it clear which public organisms are implementation-only approximations versus close prototype matches.
+
+### What didn't work
+
+Some public organism matches are intentionally rough:
+
+- `EthosStrip` compares a light prototype about-page ethos section to a dark React strip, producing ~99% diff.
+- `VenueCard` compares a dark booking aside motif to a light React venue card/map placeholder.
+- `BookingRules` compares a dark prototype booking aside copy block to a light React rules list.
+- `AboutHero` compares a prototype PageHeader/about intro combination to the simplified React `AboutHero` component.
+
+These are useful coverage targets but not ready for tuning without taxonomy/design decisions.
+
+### What I learned
+
+The public component folder contains several components that are only loosely grounded in prototype-named elements. Coverage is still valuable, but the parity map must clearly mark low-confidence targets where the prototype fixture is a hand-rendered approximation.
+
+### What was tricky to build
+
+The public fixture became large, and a naive string replacement inserted JSX in the wrong function. This caused an infinite render recursion. Future edits to fixture files should prefer direct `read` + exact `edit`, not broad string replacement.
+
+### What warrants a second pair of eyes
+
+- Whether `EthosStrip` should be dark in React or light like the prototype about page.
+- Whether `VenueCard` and `BookingRules` should map to the dark booking-space aside instead of separate light cards.
+- Whether `PubFooter` can be accepted with a small logo color/anti-aliasing difference after review.
+- Whether `PubNav` should be tuned/accepted soon; it is close.
+
+### What should be done in the future
+
+- Commit this public organism coverage batch.
+- Add `BookingForm` coverage separately, because it is a larger workflow component.
+- Then consider public page-level coverage only after all lower-level elements are represented.
+
+### Code review instructions
+
+Review:
+
+```text
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+prototype-design/visual-diff/comparisons/component-system/public/organisms/*.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+for cfg in prototype-design/visual-diff/comparisons/component-system/public/organisms/*.css-visual-diff.yml; do
+  timeout 90s css-visual-diff run --config "$cfg" --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+done
+```
+

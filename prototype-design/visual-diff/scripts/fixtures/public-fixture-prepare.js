@@ -89,6 +89,68 @@
       ),
     ]),
 
+
+
+    row('Nav', [
+      e('div', { 'data-comp': 'public-pub-nav-default', style: { width: '920px' } },
+        e('header', { style: { background: '#fff', borderBottom: `1px solid ${PRULE}`, position: 'sticky', top: '0', zIndex: '50' } },
+          e('div', { style: { maxWidth: '920px', margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '60px', boxSizing: 'border-box' } },
+            e('button', { style: { background: 'none', border: 'none', cursor: 'pointer', padding: '0', fontFamily: "'Fraunces', serif", fontSize: '24px', fontWeight: '700', letterSpacing: '-.025em', color: PINK } }, 'ppxis'),
+            e('nav', { style: { display: 'flex', gap: '2px' } }, ['Shows','Archive','Book us','About'].map((l,i)=>e('button',{style:{background:i===0?'#F3F1EC':'none',border:'none',cursor:'pointer',fontFamily:'inherit',padding:'6px 14px',fontSize:'13px',fontWeight:i===0?'600':'400',borderRadius:'6px',color:i===0?PINK:PMUTE}},l))),
+          ),
+        ),
+      ),
+    ]),
+
+    row('Footer', [
+      e('div', { 'data-comp': 'public-pub-footer-default', style: { width: '920px' } },
+        e('footer', { style: { borderTop: `1px solid ${PRULE}`, marginTop: '60px', padding: '28px 32px' } },
+          e('div', { style: { maxWidth: '920px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px' } },
+            e('div', null, e('div', { style: { fontFamily: "'Fraunces', serif", fontSize: '20px', fontWeight: '700', letterSpacing: '-.025em', color: PINK } }, 'ppxis'), e('div', { style: { fontSize: '11.5px', color: PMUTE, fontStyle: 'italic', lineHeight: '1.65', marginTop: '4px' } }, 'a music artist space', e('br'), '25 Manton Ave, Providence RI 02909')),
+            e('div', { style: { display: 'flex', gap: '32px', flexWrap: 'wrap' } }, ['Instagram','Discord','Mailing list'].map(l=>e('a',{href:'#',style:{fontSize:'13px',color:PMUTE,textDecoration:'none'}},l))),
+          ),
+        ),
+      ),
+    ]),
+
+    row('About hero', [
+      e('div', { 'data-comp': 'public-about-hero-default', style: { width: '620px', padding: '48px 0 32px' } },
+        e('p', { style: { fontSize: '11px', fontWeight: '600', letterSpacing: '.14em', color: PMUTE, textTransform: 'uppercase', margin: '0 0 10px' } }, 'Est. 2023'),
+        e('h1', { style: { fontFamily: "'Fraunces', serif", fontSize: '42px', fontWeight: '700', letterSpacing: '-.025em', lineHeight: '1.05', margin: '0', color: PINK } }, 'About ppxis'),
+        e('p', { style: { fontFamily: "'Fraunces', serif", fontSize: '30px', fontWeight: '400', fontStyle: 'italic', letterSpacing: '-.015em', lineHeight: '1.3', color: PINK, margin: '28px 0 0' } }, 'a music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.'),
+      ),
+    ]),
+
+    row('Hero', [
+      e('div', { 'data-comp': 'public-pub-hero-default', style: { width: '720px' } },
+        e('section', { style: { borderTop: `1px solid ${PRULE}`, padding: '24px 0', display: 'grid', gridTemplateColumns: '80px 1fr', gap: '24px' } },
+          e('div', { style: { color: PMUTE, fontVariantNumeric: 'tabular-nums' } }, e('div',{style:{fontSize:'12px',textTransform:'uppercase',letterSpacing:'.12em'}},'Feb'), e('div',{style:{fontFamily:"'Fraunces', serif",fontSize:'42px',color:PINK,lineHeight:'1'}},'14')),
+          e('div', null, e('h2',{style:{fontFamily:"'Fraunces', serif",fontSize:'34px',fontWeight:'700',letterSpacing:'-.025em',margin:'0 0 6px',color:PINK}},'Redroom Inferno'), e('p',{style:{fontSize:'13px',color:PMUTE,margin:'0 0 12px'}},'electronic / noise'), e('div',{style:{fontSize:'12.5px',color:PMUTE}},'Doors 9:00 PM · 21+ · $10 adv / $15 door')),
+        ),
+      ),
+    ]),
+
+    row('Venue/space', [
+      e('div', { 'data-comp': 'public-venue-card-default', style: { width: '300px' } }, e('aside',{style:{background:'#1F1E1C',color:'#E8E3D8',padding:'26px',borderRadius:'6px',fontSize:'13px',lineHeight:'1.7'}}, e('div',{style:{fontFamily:"'Fraunces', serif",fontSize:'22px',fontWeight:'500',fontStyle:'italic',letterSpacing:'-.02em',marginBottom:'14px'}},'the space'), e('div',{style:{color:'#BCB7AD'}},'150 standing · 80 seated'))),
+      e('div', { 'data-comp': 'public-space-info-default', style: { width: '300px' } }, e('div',{style:{fontSize:'14px',color:'#4A463E',lineHeight:'1.8'}}, '25 Manton Ave, Unit #2', e('br'), 'Providence, RI 02909', e('br'), e('br'), e('span',{style:{color:PINK}},'book@ppxis.space'))),
+    ]),
+
+    row('Ethos', [
+      e('div', { 'data-comp': 'public-ethos-strip-default', style: { width: '860px', marginTop: '56px', borderTop: `1px solid ${PRULE}`, paddingTop: '36px' } },
+        e('div',{style:{fontSize:'11px',fontWeight:'600',letterSpacing:'.14em',color:PMUTE,textTransform:'uppercase',marginBottom:'28px'}},'Our ethos'),
+        e('div',{style:{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'28px'}}, ['Artists first','A safer room','Loud by design'].map((h,i)=>e('div',null,e('div',{style:{fontFamily:"'Fraunces', serif",fontSize:'44px',fontWeight:'500',fontStyle:'italic',color:PINK,lineHeight:'1'}},`0${i+1}`),e('div',{style:{fontFamily:"'Fraunces', serif",fontSize:'20px',fontWeight:'500',color:PINK,marginTop:'10px'}},h),e('div',{style:{fontSize:'13px',color:'#4A463E',lineHeight:'1.65',marginTop:'8px'}},'we exist to book weird shows and pay the people who play them.')))),
+      ),
+    ]),
+
+    row('Mailing list', [
+      e('div', { 'data-comp': 'public-mailing-list-cta-default', style: { width: '520px', borderTop: `1px solid ${PRULE}`, paddingTop: '28px' } }, e('h3',{style:{fontFamily:"'Fraunces', serif",fontSize:'24px',fontWeight:'500',color:PINK,margin:'0 0 8px'}},'Stay in the loop'), e('p',{style:{fontSize:'13px',color:PMUTE,margin:'0 0 16px'}},'Get show announcements and venue news.'), e('div',{style:{display:'flex',gap:'8px'}}, e('input',{placeholder:'your@email.com',style:{flex:'1',border:`1px solid ${PRULE}`,padding:'9px 12px'}}), e('button',{style:{background:'#1F1E1C',color:'#fff',border:'none',borderRadius:'4px',padding:'9px 14px'}},'Subscribe'))),
+    ]),
+
+    row('Booking', [
+      e('div', { 'data-comp': 'public-booking-rules-default', style: { width: '320px' } }, e('aside',{style:{background:'#1F1E1C',color:'#E8E3D8',padding:'26px',borderRadius:'6px',fontSize:'13px',lineHeight:'1.7'}}, e('div',{style:{fontFamily:"'Fraunces', serif",fontSize:'22px',fontWeight:'500',fontStyle:'italic',marginBottom:'14px'}},'the space'), e('div',{style:{color:'#BCB7AD'}},'we book 6–10 weeks out; late requests get the unused-dates list.'))),
+      e('div', { 'data-comp': 'public-booking-success-default', style: { width: '420px', textAlign: 'center', padding: '48px 24px' } }, e('h2',{style:{fontFamily:"'Fraunces', serif",fontSize:'24px',fontWeight:'500',color:PINK,margin:'0 0 8px'}},'Inquiry sent — sable witch'), e('p',{style:{color:PMUTE,margin:'0 0 24px'}},"We'll be in touch within a week or two.")),
+    ]),
+
     row('Show row', [
       e('div', { 'data-comp': 'public-pub-show-row-default', style: { width: '640px' } },
         e('a', { style: { display: 'grid', gridTemplateColumns: '80px 1fr auto auto', gap: '18px', padding: '14px 0', textDecoration: 'none', alignItems: 'baseline', borderTop: `1px solid ${PRULE}` } },
