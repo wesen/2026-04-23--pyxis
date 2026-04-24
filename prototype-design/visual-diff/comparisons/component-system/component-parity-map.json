@@ -1,0 +1,78 @@
+{
+  "generatedAt": "2026-04-24T00:00:00Z",
+  "purpose": "Hand-curated first atom parity pairs for validating prototype-to-Storybook css-visual-diff workflow.",
+  "entries": [
+    {
+      "slug": "atoms-button-primary",
+      "level": "atom",
+      "component": "button",
+      "state": "primary-with-chevron",
+      "status": "ready-to-run",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "sectionSelector": "[data-comp='button-primary']",
+        "styleSelector": "[data-comp='button-primary'] button"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default",
+        "sectionSelector": "[data-comp='button-primary']",
+        "styleSelector": "[data-comp='button-primary'] [data-pyxis-component='button'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/button-primary"
+      },
+      "confidence": "high",
+      "notes": "Both sides render the same fixture label, primary style, Get tickets text, and chevron/right icon in the atom diff fixture."
+    },
+    {
+      "slug": "atoms-badge-confirmed",
+      "level": "atom",
+      "component": "badge",
+      "state": "confirmed",
+      "status": "candidate-next",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "sectionSelector": "[data-comp='badge-confirmed']",
+        "styleSelector": "[data-comp='badge-confirmed'] > span"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default",
+        "sectionSelector": "[data-comp='badge-confirmed']",
+        "styleSelector": "[data-comp='badge-confirmed'] [data-pyxis-component='badge'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/badge-confirmed"
+      },
+      "confidence": "high",
+      "notes": "Good second iteration candidate after Button because both sides share the atom fixture wrapper and state."
+    },
+    {
+      "slug": "atoms-tag-default",
+      "level": "atom",
+      "component": "tag",
+      "state": "default-darkwave",
+      "status": "candidate-next",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "sectionSelector": "[data-comp='tag-default']",
+        "styleSelector": "[data-comp='tag-default'] > span"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default",
+        "sectionSelector": "[data-comp='tag-default']",
+        "styleSelector": "[data-comp='tag-default'] [data-pyxis-component='tag'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/tag-default"
+      },
+      "confidence": "high",
+      "notes": "Alternative second iteration candidate if Badge exposes unexpected text/state mismatch."
+    }
+  ]
+}

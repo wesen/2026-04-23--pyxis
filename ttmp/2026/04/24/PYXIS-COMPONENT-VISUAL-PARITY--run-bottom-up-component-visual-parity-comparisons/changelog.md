@@ -13,3 +13,14 @@ Created bottom-up visual parity implementation guide covering baseline extractio
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md — Primary analysis and implementation guide
 
+
+## 2026-04-24
+
+Iteration 1: added first atom parity map and Button primary comparison config; inspected both sides and ran capture/cssdiff/matched-styles/pixeldiff/html-report successfully with 0% pixel diff; noted output.dir relative-path pitfall.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/.gitignore — Ignore generated comparison outputs
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml — First runnable atom comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Initial hand-curated atom parity map
+

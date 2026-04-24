@@ -9,3 +9,6 @@ prototype-design/baseline/sample-full-app/
 .playwright-mcp/
 prototype-design/storybook-catalog/artifacts/
 prototype-design/storybook-catalog/sample-atoms/
+
+# Generated prototype-vs-Storybook comparison outputs
+prototype-design/visual-comparisons/
