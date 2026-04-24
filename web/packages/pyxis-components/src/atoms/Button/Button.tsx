@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from '../Icon';
 import { buttonVariants, buttonSizes, type ButtonVariant, type ButtonSize } from '../../tokens';
+import { pyxisPart } from '../../utils/parts';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -10,7 +11,6 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   iconRight?: IconName;
   isLoading?: boolean;
   fullWidth?: boolean;
-  'data-part'?: string;
 };
 
 /**
@@ -36,7 +36,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       children,
       disabled,
-      'data-part': dataPart,
       ...rest
     },
     ref
@@ -51,7 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={isDisabled}
         className={clsx('pyxis-btn', `pyxis-btn--${variant}`, `pyxis-btn--${size}`, className)}
-        data-part={dataPart ?? 'btn'}
+        {...pyxisPart('button')}
         data-variant={variant}
         data-size={size}
         data-full-width={fullWidth ? 'true' : undefined}
@@ -80,9 +79,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <Spinner />
         ) : (
           <>
-            {iconLeft && <Icon name={iconLeft} size={iconSize} aria-hidden />}
-            {children}
-            {iconRight && <Icon name={iconRight} size={iconSize} aria-hidden />}
+            {iconLeft && <Icon name={iconLeft} size={iconSize} aria-hidden {...pyxisPart('button', 'icon-start')} />}
+            <span {...pyxisPart('button', 'label')}>{children}</span>
+            {iconRight && <Icon name={iconRight} size={iconSize} aria-hidden {...pyxisPart('button', 'icon-end')} />}
           </>
         )}
       </button>
@@ -107,6 +106,7 @@ function Spinner() {
       viewBox="0 0 20 20"
       fill="none"
       aria-hidden
+      {...pyxisPart('button', 'spinner')}
       style={{ animation: 'pyxis-spin 0.7s linear infinite', flexShrink: 0 }}
     >
       <circle

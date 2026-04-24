@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from '../Icon';
+import { pyxisPart } from '../../utils/parts';
 
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   /** Label text */
@@ -13,7 +14,6 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size
   icon?: IconName;
   /** Icon position. Default: 'left' */
   iconPosition?: 'left' | 'right';
-  'data-part'?: string;
 };
 
 /**
@@ -33,7 +33,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       icon,
       iconPosition = 'left',
       className,
-      'data-part': dataPart,
       id,
       ...rest
     },
@@ -43,12 +42,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasError = !!error;
 
     return (
-      <div className={clsx('pyxis-field', className)} data-part={dataPart ?? 'field'}>
+      <div className={clsx('pyxis-field', className)} {...pyxisPart('input')}>
         {label && (
           <label
             htmlFor={inputId}
             className="pyxis-field__label"
             data-has-error={hasError ? 'true' : undefined}
+            {...pyxisPart('input', 'label')}
           >
             {label}
           </label>
@@ -57,9 +57,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className="pyxis-field__input-wrap"
           data-icon={icon ? iconPosition : undefined}
           data-has-error={hasError ? 'true' : undefined}
+          {...pyxisPart('input', 'control-shell')}
         >
           {icon && iconPosition === 'left' && (
-            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden />
+            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden {...pyxisPart('input', 'icon')} />
           )}
           <input
             ref={ref}
@@ -69,20 +70,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-describedby={
               hasError ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
             }
-            data-part="input"
+            {...pyxisPart('input', 'control')}
             {...rest}
           />
           {icon && iconPosition === 'right' && (
-            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden />
+            <Icon name={icon} size={14} className="pyxis-field__icon" aria-hidden {...pyxisPart('input', 'icon')} />
           )}
         </div>
         {hasError && (
-          <span id={`${inputId}-error`} className="pyxis-field__message" data-status="error">
+          <span id={`${inputId}-error`} className="pyxis-field__message" data-status="error" {...pyxisPart('input', 'error')}>
             {error}
           </span>
         )}
         {!hasError && hint && (
-          <span id={`${inputId}-hint`} className="pyxis-field__message">
+          <span id={`${inputId}-hint`} className="pyxis-field__message" {...pyxisPart('input', 'hint')}>
             {hint}
           </span>
         )}

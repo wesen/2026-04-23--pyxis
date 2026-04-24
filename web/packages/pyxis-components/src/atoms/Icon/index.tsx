@@ -2,13 +2,13 @@ import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from './Icon';
 import type { ButtonSize } from '../../tokens';
+import { pyxisPart } from '../../utils/parts';
 
 export type IconButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> & {
   icon: IconName;
   size?: ButtonSize;
   label: string;
   tooltip?: string;
-  'data-part'?: string;
 };
 
 /**
@@ -21,7 +21,7 @@ export type IconButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
  * ```
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon, size = 'md', label, tooltip, className, 'data-part': dataPart, ...rest }, ref) => {
+  ({ icon, size = 'md', label, tooltip, className, ...rest }, ref) => {
     const dimMap = { sm: 28, md: 30, lg: 40 } as const;
     const dim = dimMap[size];
 
@@ -31,12 +31,12 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         aria-label={label}
         title={tooltip ?? label}
         className={clsx('pyxis-icon-btn', className)}
-        data-part="icon-btn"
+        {...pyxisPart('icon-button')}
         data-size={size}
         style={{ width: dim, height: dim }}
         {...rest}
       >
-        <Icon name={icon} size={dim / 2} aria-hidden />
+        <Icon name={icon} size={dim / 2} aria-hidden {...pyxisPart('icon-button', 'icon')} />
       </button>
     );
   }

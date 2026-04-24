@@ -37,3 +37,7 @@
 - [ ] Phase 6 — Create prototype-public-vs-storybook comparison configs for public nav/footer/page-header/show-grid/show-tile before full page comparisons
 - [ ] Phase 6 — Add page-level Storybook comparison configs for public Shows, Show Detail, Archive, Book, and About desktop/mobile after component-level public parity is inspectable
 - [ ] Phase 7 — Keep a detailed diary after each Storybook capture/story-expansion phase, including commands, failures, screenshot paths inspected, artifact counts, and commit hashes
+- [x] Intermediate Phase — Document and implement canonical Storybook capture selector contract using data-pyxis-component/data-pyxis-part before broad Storybook extraction
+- [x] Intermediate Phase — Replace ad hoc atom data-part attributes with canonical namespaced component/part attributes and update atom CSS selectors
+- [x] Intermediate Phase — Update Storybook config generator to emit capture-target probes based on data-pyxis-component roots instead of broad component-focus wrappers
+- [x] Intermediate Phase — Validate focused Storybook extraction for representative atoms with read image screenshots, especially Badge, Button, Tag, Input, Avatar/Icon

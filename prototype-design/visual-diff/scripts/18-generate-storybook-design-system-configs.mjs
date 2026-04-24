@@ -44,7 +44,27 @@ function style(name, selector) {
     `    props: [${props.join(', ')}]`,
   ].join('\n');
 }
+
+function componentSlugFromTitle(title) {
+  const raw = String(title || '').split('/').slice(1).join('-');
+  const slug = slugPart(raw);
+  if (slug === 'atom-diff-fixture') return '';
+  if (slug === 'icon') return 'icon';
+  return slug;
+}
+
+function captureTargetSelector(entry) {
+  const title = String(entry.title || '');
+  const storyName = String(entry.name || '').toLowerCase();
+  if (title === 'Atoms/Atom Diff Fixture') return '#storybook-root > *:first-child';
+  if (/all|sizes|variants|statuses|colors|icons/.test(storyName)) return '#storybook-root > *:first-child';
+  const component = componentSlugFromTitle(title);
+  if (component) return `#storybook-root [data-pyxis-component="${component}"][data-pyxis-part="root"]`;
+  return '#storybook-root > *:first-child';
+}
+
 function configFor(entry, relOut) {
+  const captureSelector = captureTargetSelector(entry);
   const url = `${storybookUrl}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`;
   const viewport = { width: 960, height: 720 };
   const prep = [
@@ -91,7 +111,7 @@ function configFor(entry, relOut) {
     '',
     `styles:`,
     style('story-root', '#storybook-root'),
-    style('component-focus', '#storybook-root > *:first-child'),
+    style('capture-target', captureSelector),
     '',
     `output:`,
     `  dir: ${q(path.join(catalogRoot, 'artifacts', relOut))}`,

@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 import { clsx } from 'clsx';
+import { pyxisPart } from '../../utils/parts';
 
 export type AvatarProps = {
   name: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: string;
   className?: string;
-  'data-part'?: string;
 };
 
 const sizeMap = { sm: 28, md: 36, lg: 48, xl: 64 };
@@ -19,14 +19,14 @@ function getInitials(name: string): string {
 }
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ name, size = 'md', color, className, 'data-part': dataPart }, ref) => {
+  ({ name, size = 'md', color, className }, ref) => {
     const dim = sizeMap[size];
     const fs = fontMap[size];
     return (
       <div
         ref={ref}
         className={clsx('pyxis-avatar', className)}
-        data-part={dataPart ?? 'avatar'}
+        {...pyxisPart('avatar')}
         data-size={size}
         style={{
           width: dim, height: dim, borderRadius: '50%',

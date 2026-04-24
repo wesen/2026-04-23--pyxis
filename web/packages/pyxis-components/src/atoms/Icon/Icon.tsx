@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
+import { pyxisPart } from '../../utils/parts';
 
 /* ─── SVG icon paths (thin, custom-drawn at 20×20 viewBox) ─── */
 
@@ -76,7 +77,7 @@ const paths: Record<IconName, React.ReactNode> = {
 
 /* ─── PyxisMark (logo mark) ─────────────────────────── */
 
-type PyxisMarkProps = {
+type PyxisMarkProps = React.SVGAttributes<SVGSVGElement> & {
   size?: number;
   color?: string;
   className?: string;
@@ -87,7 +88,7 @@ type PyxisMarkProps = {
  * Used as the favicon, the nav logo, and anywhere a compact brand mark is needed.
  */
 export const PyxisMark = forwardRef<SVGSVGElement, PyxisMarkProps>(
-  ({ size = 28, color = 'currentColor', className }, ref) => (
+  ({ size = 28, color = 'currentColor', className, ...rest }, ref) => (
     <svg
       ref={ref}
       width={size}
@@ -100,6 +101,8 @@ export const PyxisMark = forwardRef<SVGSVGElement, PyxisMarkProps>(
       strokeLinejoin="round"
       className={clsx('pyxis-mark', className)}
       aria-label="Pyxis"
+      {...pyxisPart('pyxis-mark')}
+      {...rest}
     >
       <rect x="3.5" y="3.5" width="25" height="25" rx="2" />
       <circle cx="16" cy="16" r="8" />
@@ -113,7 +116,7 @@ PyxisMark.displayName = 'PyxisMark';
 
 /* ─── PyxisLogo ─────────────────────────────────────── */
 
-type PyxisLogoProps = {
+type PyxisLogoProps = React.HTMLAttributes<HTMLDivElement> & {
   size?: number;
   color?: string;
   stack?: boolean;
@@ -125,11 +128,13 @@ type PyxisLogoProps = {
  * Use in the nav bar or wherever the full brand needs to appear.
  */
 export const PyxisLogo = forwardRef<HTMLDivElement, PyxisLogoProps>(
-  ({ size = 28, color = 'currentColor', stack = false, className }, ref) => (
+  ({ size = 28, color = 'currentColor', stack = false, className, ...rest }, ref) => (
     <div
       ref={ref}
       className={clsx('pyxis-logo', className)}
       style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+      {...pyxisPart('pyxis-logo')}
+      {...rest}
     >
       <PyxisMark size={size} color={color} />
       <div style={{ lineHeight: 1 }}>
@@ -166,14 +171,13 @@ PyxisLogo.displayName = 'PyxisLogo';
 
 /* ─── Icon ──────────────────────────────────────────── */
 
-export type IconProps = {
+export type IconProps = Omit<React.SVGAttributes<SVGSVGElement>, 'color' | 'name'> & {
   name: IconName;
   size?: number;
   color?: string;
   strokeWidth?: number;
   className?: string;
   'aria-label'?: string;
-  'data-part'?: string;
 };
 
 /**
@@ -193,7 +197,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
       strokeWidth = 1.6,
       className,
       'aria-label': ariaLabel,
-      'data-part': dataPart,
+      ...rest
     },
     ref
   ) => {
@@ -211,7 +215,8 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
           strokeWidth="1.6"
           className={clsx('pyxis-icon', 'pyxis-icon--unknown', className)}
           aria-label={`Unknown icon: ${name}`}
-          data-part={dataPart}
+          {...pyxisPart('icon')}
+          {...rest}
         >
           <rect x="4" y="4" width="12" height="12" rx="2" strokeDasharray="2 1" />
         </svg>
@@ -231,8 +236,9 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
         strokeLinejoin="round"
         className={clsx('pyxis-icon', `pyxis-icon--${name}`, className)}
         aria-label={ariaLabel}
-        data-part={dataPart}
-        style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle' }}
+        {...pyxisPart('icon')}
+        {...rest}
+        style={{ flexShrink: 0, display: 'inline-block', verticalAlign: 'middle', ...rest.style }}
       >
         {path}
       </svg>

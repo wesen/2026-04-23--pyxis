@@ -311,3 +311,37 @@ Step 11: added the non-foundations Full App baseline export workflow and generat
 - The component taxonomy uses two axes: composition level and domain.
 - `VenueCard` is documented as a public-site organism, not a generic design-system organism.
 - Some generic `component-focus` crops remain broad for full-width stories and may later need story-specific probes.
+
+## 2026-04-24 — Implement Storybook capture selector contract for atoms
+
+### Added
+- Added `design/02-storybook-capture-contract-and-cleanup-plan.md`.
+- Added `web/packages/pyxis-components/src/utils/parts.ts` with the canonical `pyxisPart()` helper.
+- Added `docs/playbooks/04-storybook-component-capture-playbook.md`.
+
+### Changed
+- Updated atom components to use `data-pyxis-component` and `data-pyxis-part` instead of ad hoc `data-part` roots:
+  - Button
+  - Badge
+  - Tag
+  - Avatar
+  - Icon
+  - IconButton
+  - Input
+  - Select
+  - Textarea
+- Updated atom CSS selectors to use namespaced Pyxis part attributes.
+- Updated `Card` and its CSS as the currently-storied molecule so molecule configs work with the same selector contract.
+- Updated Storybook design-system generator to emit `capture-target` instead of `component-focus`.
+- Expanded the atom sample runner to validate Select, Textarea, Avatar, and Icon in addition to Badge/Button/Tag/Input.
+
+### Validated
+- Ran `pnpm --filter pyxis-components typecheck`.
+- Ran `pnpm --filter pyxis-components build-storybook`.
+- Regenerated Storybook design-system configs.
+- Reran the atom sample extraction.
+- Visually inspected focused `capture-target` PNGs with `read` for Badge, Button, Tag, Input, Avatar, Icon, Select, Textarea, and Card.
+
+### Result
+- Badge capture is now tightly scoped to the badge itself instead of the Storybook wrapper.
+- Storybook configs now use the namespaced selector contract for single-widget atom stories.

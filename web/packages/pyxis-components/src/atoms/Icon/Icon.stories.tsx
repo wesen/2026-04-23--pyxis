@@ -20,7 +20,7 @@ A thin-line SVG icon system built from the original Pyxis design language.
 - No icon font dependencies — pure inline SVG
 - Accessible: always provide \`aria-label\` when used as a standalone interactive icon
 - Responsive: \`size\` prop scales uniformly
-- Data-part selectors for CSS targeting: \`[data-part="icon"]\`
+- Pyxis part selectors for CSS/screenshot targeting: \`[data-pyxis-component="icon"][data-pyxis-part="root"]\`
 
 **Usage:**
 \`\`\`tsx

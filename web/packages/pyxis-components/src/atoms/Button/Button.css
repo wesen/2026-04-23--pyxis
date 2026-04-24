@@ -1,7 +1,7 @@
 /* Button component styles */
 
 /* Base button */
-[data-part='btn'] {
+[data-pyxis-component='button'][data-pyxis-part='root'] {
   font-family: inherit;
   font-weight: var(--weight-medium);
   cursor: pointer;
@@ -20,19 +20,19 @@
 
 /* ─── Sizes ─────────────────────────────────────────── */
 
-[data-part='btn'][data-size='sm'] {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-size='sm'] {
   height: auto;
   padding: 6px 12px;
   font-size: 12px;
 }
 
-[data-part='btn'][data-size='md'] {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-size='md'] {
   height: auto;
   padding: 8px 16px;
   font-size: var(--text-sm);
 }
 
-[data-part='btn'][data-size='lg'] {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-size='lg'] {
   height: auto;
   padding: 11px 22px;
   font-size: var(--text-sm);
@@ -41,40 +41,40 @@
 /* ─── Variants ────────────────────────────────────────── */
 
 /* Primary */
-[data-part='btn'][data-variant='primary']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='primary']:hover {
   background: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
 }
 
 /* Dark */
-[data-part='btn'][data-variant='dark']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='dark']:hover {
   background: var(--btn-hover, var(--color-ink));
 }
 
 /* Outline */
-[data-part='btn'][data-variant='outline']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='outline']:hover {
   background: var(--color-surface-raised);
 }
 
 /* Ghost */
-[data-part='btn'][data-variant='ghost']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='ghost']:hover {
   background: var(--color-surface-raised);
   color: var(--color-text-primary);
 }
 
 /* Danger */
-[data-part='btn'][data-variant='danger']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='danger']:hover {
   background: var(--color-accent-subtle);
 }
 
 /* Success */
-[data-part='btn'][data-variant='success']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='success']:hover {
   background: var(--color-success-hover);
   border-color: var(--color-success-hover);
 }
 
 /* Discord */
-[data-part='btn'][data-variant='discord']:hover {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-variant='discord']:hover {
   background: #4752C4;
   border-color: #4752C4;
 }
@@ -82,24 +82,24 @@
 /* ─── States ──────────────────────────────────────────── */
 
 /* Disabled / loading */
-[data-part='btn']:disabled {
+[data-pyxis-component='button'][data-pyxis-part='root']:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
 
 /* Focus */
-[data-part='btn']:focus-visible {
+[data-pyxis-component='button'][data-pyxis-part='root']:focus-visible {
   outline: var(--ring-width) solid var(--ring-color);
   outline-offset: var(--ring-offset);
 }
 
 /* Active/pressed — tiny scale-down for tactile feedback */
-[data-part='btn']:active:not(:disabled) {
+[data-pyxis-component='button'][data-pyxis-part='root']:active:not(:disabled) {
   transform: scale(0.97);
 }
 
 /* Full width */
-[data-part='btn'][data-full-width='true'] {
+[data-pyxis-component='button'][data-pyxis-part='root'][data-full-width='true'] {
   width: 100%;
 }

@@ -1,6 +1,6 @@
 /* Field / Input styles */
 
-[data-part='field'] {
+[data-pyxis-part='root'][data-pyxis-component='input'], [data-pyxis-part='root'][data-pyxis-component='select'], [data-pyxis-part='root'][data-pyxis-component='textarea'] {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -50,7 +50,7 @@
 }
 
 /* Base input */
-[data-part='input'] {
+[data-pyxis-component='input'][data-pyxis-part='control'] {
   width: 100%;
   padding: 8px 11px;
   font-family: inherit;
@@ -66,30 +66,30 @@
     box-shadow var(--duration-fast) var(--ease-default);
 }
 
-[data-part='input']::placeholder {
+[data-pyxis-component='input'][data-pyxis-part='control']::placeholder {
   color: var(--color-text-tertiary);
 }
 
-[data-part='input']:focus {
+[data-pyxis-component='input'][data-pyxis-part='control']:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(200, 39, 13, 0.12);
 }
 
 /* Error state */
-[data-part='input'] {
+[data-pyxis-component='input'][data-pyxis-part='control'] {
   /* default border */
 }
 
-.pyxis-field__input-wrap[data-has-error='true'] [data-part='input'] {
+.pyxis-field__input-wrap[data-has-error='true'] [data-pyxis-component='input'][data-pyxis-part='control'] {
   border-color: var(--color-accent);
 }
 
-.pyxis-field__input-wrap[data-has-error='true'] [data-part='input']:focus {
+.pyxis-field__input-wrap[data-has-error='true'] [data-pyxis-component='input'][data-pyxis-part='control']:focus {
   box-shadow: 0 0 0 3px rgba(200, 39, 13, 0.15);
 }
 
 /* Disabled */
-[data-part='input']:disabled {
+[data-pyxis-component='input'][data-pyxis-part='control']:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   background: var(--color-border-subtle);

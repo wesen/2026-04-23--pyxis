@@ -1,4 +1,4 @@
-[data-part='textarea'] {
+[data-pyxis-component='textarea'][data-pyxis-part='control'] {
   width: 100%;
   padding: 8px 11px;
   font-family: inherit;
@@ -12,8 +12,8 @@
   resize: vertical;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
 }
-[data-part='textarea']::placeholder { color: var(--color-text-tertiary); }
-[data-part='textarea']:focus {
+[data-pyxis-component='textarea'][data-pyxis-part='control']::placeholder { color: var(--color-text-tertiary); }
+[data-pyxis-component='textarea'][data-pyxis-part='control']:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(200, 39, 13, 0.12);
 }

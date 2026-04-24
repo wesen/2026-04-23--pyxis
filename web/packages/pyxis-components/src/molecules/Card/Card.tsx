@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
+import { pyxisPart } from '../../utils/parts';
 
 export type CardProps = {
   children: React.ReactNode;
@@ -12,7 +13,6 @@ export type CardProps = {
   /** Optional footer slot */
   footer?: React.ReactNode;
   className?: string;
-  'data-part'?: string;
 };
 
 
@@ -36,7 +36,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       header,
       footer,
       className,
-      'data-part': dataPart,
       ...rest
     },
     ref
@@ -45,13 +44,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={clsx('pyxis-card', interactive && 'pyxis-card--interactive', className)}
-        data-part={dataPart ?? 'card'}
+        {...pyxisPart('card')}
         data-padding={padding}
         {...rest}
       >
-        {header && <div className="pyxis-card__header">{header}</div>}
-        <div className="pyxis-card__body">{children}</div>
-        {footer && <div className="pyxis-card__footer">{footer}</div>}
+        {header && <div className="pyxis-card__header" {...pyxisPart('card', 'header')}>{header}</div>}
+        <div className="pyxis-card__body" {...pyxisPart('card', 'body')}>{children}</div>
+        {footer && <div className="pyxis-card__footer" {...pyxisPart('card', 'footer')}>{footer}</div>}
       </div>
     );
   }

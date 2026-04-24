@@ -15,6 +15,8 @@ RelatedFiles:
       Note: Textbook-style component taxonomy reference
     - Path: docs/playbooks/03-pyxis-full-app-baseline-handover.md
       Note: Implementation handover followed for the Full App baseline extraction
+    - Path: docs/playbooks/04-storybook-component-capture-playbook.md
+      Note: Reusable Storybook capture authoring and extraction playbook
     - Path: prototype-design/storybook-catalog/inventory.json
       Note: Machine-readable Storybook inventory for future config generation
     - Path: prototype-design/storybook-catalog/inventory.md
@@ -32,9 +34,19 @@ RelatedFiles:
     - Path: prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
       Note: Runs Full App-only baseline export into prototype-design/baseline
     - Path: prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
-      Note: Generates Storybook design-system css-visual-diff configs
+      Note: |-
+        Generates Storybook design-system css-visual-diff configs
+        Generates capture-target selectors from data-pyxis-component roots
     - Path: prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
       Note: Runs the first atom Storybook capture sample
+    - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/design/02-storybook-capture-contract-and-cleanup-plan.md
+      Note: Detailed design for the Storybook capture selector contract
+    - Path: web/packages/pyxis-components/src/atoms/Badge/Badge.tsx
+      Note: Representative atom proving focused Badge capture
+    - Path: web/packages/pyxis-components/src/molecules/Card/Card.tsx
+      Note: Current molecule story updated to the canonical capture selector contract
+    - Path: web/packages/pyxis-components/src/utils/parts.ts
+      Note: Canonical pyxisPart helper for component roots and internal parts
     - Path: web/packages/pyxis-components/storybook-static/index.json
       Note: Source Storybook index parsed for the inventory
 ExternalSources: []
@@ -43,6 +55,8 @@ LastUpdated: 2026-04-23T22:48:55.940608831-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
+
 
 
 
@@ -1400,6 +1414,134 @@ Validate with:
 
 ```bash
 cd /home/manuel/code/wesen/2026-04-23--pyxis
+node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
+```
+
+## Step 14: Implement the canonical Storybook capture contract for atoms
+
+The first Badge capture was too large because `component-focus` selected the Storybook wrapper instead of the rendered badge. I used Playwright to inspect the Storybook iframe DOM and confirmed that the actual badge was a small descendant of a large wrapper. Rather than keep adding ad hoc selector exceptions, I implemented the selector contract described in the design note: component roots now expose `data-pyxis-component` and `data-pyxis-part="root"`, and the extraction generator now emits a `capture-target` probe.
+
+This pass focused on atoms because those are the lowest-level widgets and the first things we need to compare accurately. The result is that Badge, Button, Tag, Avatar, Icon, Input, Select, and Textarea now expose canonical capture roots. The rerun atom sample produced focused widget screenshots; the Badge capture is now badge-sized.
+
+### Prompt Context
+
+**User prompt (verbatim):** "save this as detailed design / implementation document in the ticket, add a new intermediate phase to handle the storybook cleanup and unification, and do it. 
+
+Once you are done with al lthe components and have validated the extraction for a few widgets, write a detailed document on how to create and extract storybook components in docs/playbooks"
+
+**Assistant interpretation:** Store the selector-contract proposal as a ticket design doc, add explicit cleanup tasks, implement the canonical selector contract for current components starting with atoms, validate focused extraction, and write a reusable Storybook extraction playbook.
+
+**Inferred user intent:** Make the Storybook screenshot workflow reliable and repeatable before scaling it to molecules, public components, and public-site comparisons.
+
+### What I did
+
+- Added ticket design doc:
+  - `design/02-storybook-capture-contract-and-cleanup-plan.md`
+- Added intermediate-phase ticket tasks for selector contract cleanup and validation.
+- Added React selector helper:
+  - `web/packages/pyxis-components/src/utils/parts.ts`
+- Updated atom components to emit `data-pyxis-component` / `data-pyxis-part`:
+  - `Button`
+  - `Badge`
+  - `Tag`
+  - `Avatar`
+  - `Icon`
+  - `IconButton`
+  - `Input`
+  - `Select`
+  - `Textarea`
+- Updated atom CSS selectors away from unnamespaced `data-part` selectors.
+- Updated `Card` as the currently-storied molecule so generated molecule configs remain valid under the new contract.
+- Updated the Storybook config generator to emit `capture-target` instead of `component-focus`.
+- Regenerated 52 Storybook design-system configs.
+- Rebuilt `pyxis-components` Storybook static output.
+- Reran the atom sample.
+- Inspected focused widget screenshots with `read`.
+- Added reusable playbook:
+  - `docs/playbooks/04-storybook-component-capture-playbook.md`
+
+### Why
+
+The workflow must compare equivalent objects. A prototype badge should compare to a Storybook badge, not to a Storybook wrapper. Canonical component/part attributes make that possible without fragile structural selectors.
+
+### What worked
+
+The rerun atom sample produced tight `capture-target` screenshots for representative widgets:
+
+```text
+Badge:     prototype-design/storybook-catalog/sample-atoms/atoms/badge/default/capture-target/screenshot.png
+Button:    prototype-design/storybook-catalog/sample-atoms/atoms/button/default/capture-target/screenshot.png
+Tag:       prototype-design/storybook-catalog/sample-atoms/atoms/tag/default/capture-target/screenshot.png
+Input:     prototype-design/storybook-catalog/sample-atoms/atoms/input/default/capture-target/screenshot.png
+Avatar:    prototype-design/storybook-catalog/sample-atoms/atoms/avatar/default/capture-target/screenshot.png
+Icon:      prototype-design/storybook-catalog/sample-atoms/atoms/icon/default/capture-target/screenshot.png
+Select:    prototype-design/storybook-catalog/sample-atoms/atoms/select/default/capture-target/screenshot.png
+Textarea:  prototype-design/storybook-catalog/sample-atoms/atoms/textarea/default/capture-target/screenshot.png
+Card:      prototype-design/storybook-catalog/sample-atoms/molecules/card/default/capture-target/screenshot.png
+```
+
+The Badge screenshot is now tightly scoped to the badge itself.
+
+Validation commands run:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd web && pnpm --filter pyxis-components build-storybook
+node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
+```
+
+### What didn't work
+
+The old `component-focus` probe was too broad for small components. It selected a Storybook story wrapper. This was visible in the Badge screenshot, which was viewport-sized instead of badge-sized.
+
+### What I learned
+
+`data-part` was not enough because it was both unnamespaced and semantically inconsistent (`btn`, `badge`, `field`, `input`, `icon-btn`). The new contract makes every root look the same:
+
+```text
+data-pyxis-component="<component>"
+data-pyxis-part="root"
+```
+
+The generator can now infer capture targets for single-widget stories without maintaining a large exception table.
+
+### What was tricky to build
+
+The tricky part was updating CSS at the same time as React. Since we do not need backwards compatibility, the atom CSS selectors were migrated to the new namespaced attributes. The form controls needed special care because `Input`, `Select`, and `Textarea` share some `.pyxis-field` styling but now have different `data-pyxis-component` values.
+
+### What warrants a second pair of eyes
+
+- Review whether `Input`, `Select`, and `Textarea` roots should capture the whole field, as currently implemented, or whether later comparison configs should target `control` for some prototype atom comparisons.
+- Review whether multi-widget stories should get a `StoryFrame` helper next, so variant stories use `[data-pyxis-story-root]` instead of wrapper fallbacks.
+
+### What should be done in the future
+
+- Apply the same selector contract to molecules, organisms, and public components.
+- Add `StoryFrame` for variant-grid stories.
+- Add full Storybook catalog runner and browsable index.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-components/src/utils/parts.ts
+web/packages/pyxis-components/src/atoms/Badge/Badge.tsx
+web/packages/pyxis-components/src/atoms/Button/Button.tsx
+web/packages/pyxis-components/src/atoms/Input/Input.tsx
+prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+docs/playbooks/04-storybook-component-capture-playbook.md
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis/web
+pnpm --filter pyxis-components typecheck
+pnpm --filter pyxis-components build-storybook
+cd ..
 node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
 prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
 ```

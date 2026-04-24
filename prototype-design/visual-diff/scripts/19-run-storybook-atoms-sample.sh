@@ -36,6 +36,10 @@ SAMPLE_CONFIGS=(
   "$CONFIG_DIR/atoms/badge/default/config.css-visual-diff.yml"
   "$CONFIG_DIR/atoms/tag/default/config.css-visual-diff.yml"
   "$CONFIG_DIR/atoms/input/default/config.css-visual-diff.yml"
+  "$CONFIG_DIR/atoms/select/default/config.css-visual-diff.yml"
+  "$CONFIG_DIR/atoms/textarea/default/config.css-visual-diff.yml"
+  "$CONFIG_DIR/atoms/avatar/default/config.css-visual-diff.yml"
+  "$CONFIG_DIR/atoms/icon/default/config.css-visual-diff.yml"
 )
 
 for cfg in "${SAMPLE_CONFIGS[@]}"; do

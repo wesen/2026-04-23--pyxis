@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { badgeColors, type BadgeStatus } from '../../tokens';
+import { pyxisPart } from '../../utils/parts';
 
 export type BadgeProps = {
   /** Which status to display */
@@ -10,7 +11,6 @@ export type BadgeProps = {
   /** Custom dot color (overrides status color) */
   dotColor?: string;
   className?: string;
-  'data-part'?: string;
 };
 
 /**
@@ -25,14 +25,14 @@ export type BadgeProps = {
  * ```
  */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ status, children, dotColor, className, 'data-part': dataPart }, ref) => {
+  ({ status, children, dotColor, className }, ref) => {
     const { bg, fg, label } = badgeColors[status];
 
     return (
       <span
         ref={ref}
         className={clsx('pyxis-badge', `pyxis-badge--${status}`, className)}
-        data-part={dataPart ?? 'badge'}
+        {...pyxisPart('badge')}
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -48,6 +48,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         }}
       >
         <span
+          {...pyxisPart('badge', 'indicator')}
           style={{
             width: 5,
             height: 5,
@@ -57,7 +58,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
           }}
           aria-hidden
         />
-        {children ?? label}
+        <span {...pyxisPart('badge', 'label')}>{children ?? label}</span>
       </span>
     );
   }
