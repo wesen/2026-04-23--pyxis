@@ -335,3 +335,19 @@ Implemented all remaining standalone public-page molecules/organisms from detail
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public — Added 15 comparison configs
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added 15 parity entries
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/tasks.md — Marked batches complete
+
+
+## 2026-04-24
+
+Tuned the first batch of public molecule/organism mismatches before moving to pages. Improved ArchiveStats, TicketStub, LineupRow, EthosStrip, BookingRules, VenueCard, and BookingSpaceAside comparisons and updated parity-map results.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.tsx — Flat public archive stat strip
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/TicketStub/TicketStub.tsx — Styled ticket card motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/LineupRow/LineupRow.tsx — Prototype-style lineup row layout
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/EthosStrip/EthosStrip.tsx — Light ethos grid motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingRules/BookingRules.tsx — Dark booking aside motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/VenueCard/VenueCard.tsx — Dark venue aside motif
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js — Expanded BookingSpaceAside prototype fixture
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated tuned public comparison results

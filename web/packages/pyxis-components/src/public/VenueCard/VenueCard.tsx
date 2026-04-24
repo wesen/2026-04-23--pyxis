@@ -5,15 +5,9 @@ export type VenueCardProps = {
   mapPlaceholder?: boolean;
   className?: string;
 };
-export const VenueCard = ({ address, capacity = 150, mapPlaceholder, className }: VenueCardProps) => (
-  <div {...pyxisPart('venue-card')} className={className} style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
-    <h4 style={{ fontWeight: 600, margin: '0 0 8px' }}>Pyxis</h4>
-    <p style={{ margin: '0 0 4px', color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)' }}>{address ?? '25 Manton Ave, Providence, RI'}</p>
-    <p style={{ margin: '0 0 12px', color: 'var(--color-text-tertiary)', fontSize: 'var(--text-xs)' }}>Capacity: ~{capacity}</p>
-    {mapPlaceholder !== false && (
-      <div style={{ height: 140, background: 'var(--color-surface-raised)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-disabled)', fontSize: 'var(--text-xs)' }}>
-        Map placeholder
-      </div>
-    )}
-  </div>
+export const VenueCard = ({ className }: VenueCardProps) => (
+  <aside {...pyxisPart('venue-card')} className={className} style={{ background: '#1F1E1C', color: '#E8E3D8', padding: 26, borderRadius: 6, fontSize: 13, lineHeight: 1.7, boxSizing: 'border-box' }}>
+    <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 500, fontStyle: 'italic', letterSpacing: '-.02em', marginBottom: 14 }}>the space</div>
+    <div style={{ color: '#BCB7AD' }}>150 standing · 80 seated</div>
+  </aside>
 );

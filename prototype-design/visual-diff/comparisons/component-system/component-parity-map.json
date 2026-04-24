@@ -565,11 +565,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/lineup-row-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/lineup-row-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/lineup-row-default/index.html",
-        "pixelDiff": "11.5421% component; 11.5838% root",
+        "pixelDiff": "root 6.5709% | 1372/20880; component 5.3400% | 1115/20880",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype is table row; React is unstyled inline/flex-ish div with role label. Coverage valid; needs styling/taxonomy follow-up."
+      "notes": "LineupRow tuned toward prototype table row layout with time, artist, and italic role subtitle. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-molecules-ticket-stub-default",
@@ -593,11 +593,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/ticket-stub-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/ticket-stub-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/ticket-stub-default/index.html",
-        "pixelDiff": "19.1037% component/root",
+        "pixelDiff": "component 0.3144% | 94/29900; root 0.3144% | 94/29900",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype hand-rendered from ticket CTA/card motif; React TicketStub lacks matching CSS. Coverage valid; needs design decision/styling."
+      "notes": "TicketStub tuned to match public ticket card motif. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-molecules-archive-stats-default",
@@ -621,11 +621,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-stats-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-stats-default",
         "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-stats-default/index.html",
-        "pixelDiff": "12.3927% component/root",
+        "pixelDiff": "component 7.0987% | 4634/65280; root 7.0987% | 4634/65280",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype archive stats use public archive page four-stat strip; React composes generic Stat cards. Coverage valid; needs public-specific styling or accepted composition decision."
+      "notes": "ArchiveStats tuned from generic Stat cards to flat public archive strip. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-molecules-year-group-default",
@@ -761,11 +761,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-rules-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-rules-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-rules-default/index.html",
-        "pixelDiff": "component 69.4857%; root 69.4857%",
+        "pixelDiff": "component 6.3640% | 3014/47360; root 6.3640% | 3014/47360",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Major mismatch: prototype booking aside copy/dark card vs React light rules list."
+      "notes": "BookingRules tuned to the dark booking aside motif used by the prototype fixture. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-organisms-ethos-strip-default",
@@ -789,11 +789,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/ethos-strip-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-strip-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/ethos-strip-default/index.html",
-        "pixelDiff": "root 99.5322%; component 99.5143%",
+        "pixelDiff": "component 9.6481% | 21988/227900; root 7.4975% | 13476/179740",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Major design mismatch: prototype ethos is light about-page section; React EthosStrip is dark full-width strip."
+      "notes": "EthosStrip changed from dark strip toward light prototype ethos grid motif. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-organisms-about-hero-default",
@@ -845,11 +845,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/venue-card-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/venue-card-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/venue-card-default/index.html",
-        "pixelDiff": "component 50.9131%; root 50.9131%",
+        "pixelDiff": "component 0.0000% | 0/37800; root 0.0000% | 0/37800",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Large taxonomy/style mismatch: prototype source is dark booking space aside while React VenueCard is light card/map placeholder."
+      "notes": "VenueCard tuned to the dark venue/space aside motif used in detail/book prototype references. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-organisms-space-info-default",
@@ -1349,11 +1349,11 @@
         "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-space-aside-default.css-visual-diff.yml",
         "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-space-aside-default",
         "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-space-aside-default/index.html",
-        "pixelDiff": "component 64.0453%; root 64.0453%",
+        "pixelDiff": "component 2.0293% | 3044/150000; root 2.0293% | 3044/150000",
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Prototype fixture expanded to full space-aside content; comparison now reflects fuller component. Re-run after tuning; still needs review/acceptance decision."
     },
     {
       "slug": "public-molecules-safer-space-agreement-default",

@@ -2448,3 +2448,43 @@ passed.
 Created Storybook stories for each new component, exported them from the package barrel, added all components to `PublicDiffFixture`, added matching prototype fixture states, generated 15 parity configs, and ran full `css-visual-diff` modes for each config.
 
 All 15 comparison configs have valid coverage (`total: 2`, no missing/hidden selectors). Notable exact/near-exact results include `PublicPageHeader`, `ShowDetailHeader`, `ShowMetaStrip`, `ShowTypeChips`, `ArchiveShowRow`, and `ArchiveShowList`. `BookingSpaceAside` remains high-diff because the prototype fixture currently includes abbreviated aside content while the React component includes the fuller specs list.
+
+## Step 22: Tune first public molecule/organism mismatch batch
+
+Before page-level comparisons, I started tuning public molecules/organisms that had obvious concept/style mismatches.
+
+Changes:
+
+- `ArchiveStats` no longer composes generic `Stat` cards; it now renders the flat public archive stats strip.
+- `TicketStub` now renders the bordered public ticket card motif directly instead of unstyled classes.
+- `LineupRow` now uses the prototype lineup row layout: time column, artist, italic subtitle, and top rule.
+- `EthosStrip` moved away from the dark strip design toward the light prototype ethos grid motif.
+- `BookingRules` now matches the dark booking aside motif used by the prototype fixture.
+- `VenueCard` now matches the dark venue/space aside motif used in detail/book references.
+- `BookingSpaceAside` prototype fixture was expanded to the full aside content so its comparison is meaningful.
+
+Validation:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+passed after the component changes.
+
+Re-run results:
+
+```text
+ArchiveStats          component/root 7.0987%   (was 12.3927%)
+TicketStub            component/root 0.3144%   (was 19.1037%)
+LineupRow             component 5.3400%; root 6.5709% (was ~11.5%)
+EthosStrip            component 9.6481%; root 7.4975% (was ~99.5%)
+BookingRules          component/root 6.3640%   (was 69.4857%)
+VenueCard             component/root 0.0000%   (was 50.9131%)
+BookingSpaceAside     component/root 2.0293%   (was 64.0453%)
+```
+
+Notes:
+
+- `ArchiveStats` is visually much closer but still has text/font antialiasing/height residuals.
+- `EthosStrip` is now conceptually aligned with the light about-page ethos section, but `EthosGrid` may be the canonical component long-term.
+- `VenueCard` is now exact for the current fixture, but this effectively reclassifies it toward a dark venue aside; review whether `VenueCard` should keep this role or be split.

@@ -3,13 +3,8 @@ export type BookingRulesProps = {
   className?: string;
 };
 export const BookingRules = ({ className }: BookingRulesProps) => (
-  <div {...pyxisPart('booking-rules')} className={className} style={{ padding: '20px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
-    <h4 style={{ fontWeight: 600, margin: '0 0 12px', fontSize: 'var(--text-base)' }}>What to know</h4>
-    <ol style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 8, fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
-      <li>We book 4–8 weeks out. Don't reach out too early.</li>
-      <li>Live, DJ, or hybrid — all formats considered.</li>
-      <li>Door split or flat rate depending on draw and format.</li>
-      <li>Soft holds for up to a week without commitment.</li>
-    </ol>
-  </div>
+  <aside {...pyxisPart('booking-rules')} className={className} style={{ background: '#1F1E1C', color: '#E8E3D8', padding: 26, borderRadius: 6, fontSize: 13, lineHeight: 1.7, boxSizing: 'border-box' }}>
+    <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 500, fontStyle: 'italic', letterSpacing: '-.02em', marginBottom: 14 }}>the space</div>
+    <div style={{ color: '#BCB7AD' }}>we book 6–10 weeks out; late requests get the unused-dates list.</div>
+  </aside>
 );

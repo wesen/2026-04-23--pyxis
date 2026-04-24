@@ -6,27 +6,28 @@ export type LineupRowProps = {
   className?: string;
 };
 
-const roleColors: Record<LineupEntry['role'], string> = {
-  headline: 'var(--color-accent)',
-  support:  'var(--color-text-secondary)',
-  dj:       'var(--color-info)',
-};
-
 const roleLabels: Record<LineupEntry['role'], string> = {
-  headline: 'Headline',
-  support:  'Support',
-  dj:       'DJ',
+  headline: 'headline · dj set',
+  support:  'opener · dj set',
+  dj:       'dj set',
 };
 
 export const LineupRow = ({ entry, className }: LineupRowProps) => (
-  <div className={className} {...pyxisPart('lineup-row')}>
-    <span className="pyxis-lineup-row__time">{entry.start_time}</span>
-    <span className="pyxis-lineup-row__artist">{entry.artist}</span>
-    <span
-      className="pyxis-lineup-row__role"
-      style={{ color: roleColors[entry.role] }}
-    >
-      {roleLabels[entry.role]}
-    </span>
+  <div
+    className={className}
+    {...pyxisPart('lineup-row')}
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '60px 1fr',
+      borderTop: '1px solid #EAE7E0',
+      fontSize: 14,
+      color: '#1F1E1C',
+    }}
+  >
+    <div style={{ padding: '12px 12px 12px 0', color: '#8E887E', fontVariantNumeric: 'tabular-nums', verticalAlign: 'top' }}>{entry.start_time}</div>
+    <div style={{ padding: '12px 0', color: '#C8270D', fontWeight: 600, verticalAlign: 'top' }}>
+      {entry.artist}
+      <div style={{ fontSize: 11.5, color: '#8E887E', fontWeight: 400, marginTop: 2, fontStyle: 'italic' }}>{roleLabels[entry.role]}</div>
+    </div>
   </div>
 );
