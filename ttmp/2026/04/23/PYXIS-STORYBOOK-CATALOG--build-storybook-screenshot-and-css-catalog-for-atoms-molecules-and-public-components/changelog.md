@@ -69,3 +69,18 @@
 - How to avoid long hangs with `timeout` while authoring configs.
 - How to store generated artifacts and what not to commit.
 - Checklist for adding new baseline configs.
+
+## 2026-04-24 — Add standalone prototype HTML pages
+
+### Added
+- Added generated standalone public prototype pages under `prototype-design/standalone/public/`.
+- Added desktop and mobile standalone HTML for shows, detail, archive, book, and about.
+- Added standalone Foundations/SystemPage HTML under `prototype-design/standalone/foundations/system.html`.
+- Added scripts:
+  - `scripts/09-generate-standalone-public-html.mjs`
+  - `scripts/10-generate-standalone-foundations-html.mjs`
+
+### Validated
+- Used `css-visual-diff inspect --all-styles` against `standalone/public/shows.html`.
+- Used `css-visual-diff inspect --all-styles` against `standalone/foundations/system.html`.
+- Inspected sample PNGs with the `read` image tool.

@@ -24,8 +24,18 @@ RelatedFiles:
       Note: |-
         Public poster-grid prototype components and catalog globals
         Public prototype globals and catalog fixture wrappers used by direct-react-global
+    - Path: prototype-design/standalone/foundations/system.html
+      Note: Standalone Full App Foundations/SystemPage entrypoint
+    - Path: prototype-design/standalone/public/detail.html
+      Note: Standalone public Show Detail page entrypoint
+    - Path: prototype-design/standalone/public/shows.html
+      Note: Standalone public Shows page entrypoint for direct baseline extraction
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
       Note: Sample-first validation runner referenced by the playbook
+    - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/09-generate-standalone-public-html.mjs
+      Note: Regenerates standalone public page HTML files
+    - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/10-generate-standalone-foundations-html.mjs
+      Note: Regenerates standalone Foundations/SystemPage HTML
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/prototype-public-shows.css-visual-diff.yml
       Note: Page-level public Shows baseline config
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/public-components/show-tile-redroom.css-visual-diff.yml
@@ -38,6 +48,7 @@ LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: Use this before comparing Storybook implementation components to the prototype baseline.
 WhenToUse: When adding or updating prototype baseline configs from Pyxis HTML prototype files.
 ---
+
 
 
 # HTML Prototype Baseline Extraction Playbook
@@ -123,7 +134,54 @@ and:
 ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
 ```
 
-## 3. Never trust the DesignCanvas screenshot directly
+## 3. Standalone HTML entrypoints
+
+For convenience, the prototype now has clean standalone HTML pages that bypass `DesignCanvas` entirely:
+
+```text
+prototype-design/standalone/index.html
+prototype-design/standalone/public/index.html
+prototype-design/standalone/public/shows.html
+prototype-design/standalone/public/detail.html
+prototype-design/standalone/public/archive.html
+prototype-design/standalone/public/book.html
+prototype-design/standalone/public/about.html
+prototype-design/standalone/public/shows-mobile.html
+prototype-design/standalone/public/detail-mobile.html
+prototype-design/standalone/public/archive-mobile.html
+prototype-design/standalone/public/book-mobile.html
+prototype-design/standalone/public/about-mobile.html
+prototype-design/standalone/foundations/system.html
+```
+
+Generate or refresh them with:
+
+```bash
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/09-generate-standalone-public-html.mjs
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/10-generate-standalone-foundations-html.mjs
+```
+
+These pages still load the shared prototype scripts (`lib/tokens.js`, `lib/components.jsx`, `screens/ppxis.jsx`, or `screens/system.jsx`), but they render only one page/root. They are useful when you want a clean URL for capture without a `prepare` hook.
+
+Example standalone capture URL:
+
+```text
+http://localhost:7070/standalone/public/shows.html
+```
+
+A direct HTML standalone page can be inspected with a simple config:
+
+```yaml
+original:
+  url: "http://localhost:7070/standalone/public/shows.html"
+  wait_ms: 1000
+  viewport: { width: 1000, height: 1600 }
+  root_selector: "#root"
+```
+
+Use standalone HTML when the full page is the target. Use `direct-react-global` fixture rendering when you need a smaller component baseline such as a poster, show tile, nav, or footer.
+
+## 4. Never trust the DesignCanvas screenshot directly
 
 Both Pyxis prototype HTML files render a design canvas with multiple artboards. For example, `Pyxis Public Site.html` contains desktop and mobile artboards. `Pyxis Full App.html` contains sections like Foundations, Entry, Program, Roster, and Operate.
 

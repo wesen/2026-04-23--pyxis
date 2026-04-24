@@ -449,3 +449,91 @@ Then validate the commands referenced in the playbook with:
 ```bash
 ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
 ```
+
+## Step 5: Generate standalone public and foundations HTML pages
+
+I added generated standalone prototype HTML entrypoints so top-level pages can be opened and captured directly without the DesignCanvas wrapper. These files are useful when the baseline target is a full page rather than an individual catalog fixture.
+
+The public standalone pages render `PPXDesktop` or `PPXMobile` directly. The foundations standalone page renders `SystemPage` directly from the Full App prototype source files.
+
+### Prompt Context
+
+**User prompt (verbatim):** "can you transform each top level page into its own html as standalone? like Shows and Show detail etc..."
+
+**Assistant interpretation:** Create standalone HTML files for the prototype top-level public pages so each page has a clean URL for screenshot/CSS extraction.
+
+**Inferred user intent:** Make baseline extraction easier by eliminating the need to prepare/bypass DesignCanvas for full-page captures.
+
+### What I did
+
+- Added `scripts/09-generate-standalone-public-html.mjs`.
+- Generated standalone public desktop and mobile pages:
+  - `prototype-design/standalone/public/shows.html`
+  - `prototype-design/standalone/public/detail.html`
+  - `prototype-design/standalone/public/archive.html`
+  - `prototype-design/standalone/public/book.html`
+  - `prototype-design/standalone/public/about.html`
+  - plus `*-mobile.html` variants.
+- Added `prototype-design/standalone/public/index.html`.
+- Added `scripts/10-generate-standalone-foundations-html.mjs`.
+- Generated `prototype-design/standalone/foundations/system.html`.
+- Added `prototype-design/standalone/index.html` as a top-level standalone index.
+- Validated `standalone/public/shows.html` with `css-visual-diff inspect --all-styles`.
+- Validated `standalone/foundations/system.html` with `css-visual-diff inspect --all-styles`.
+- Read sample PNG outputs with the `read` image tool.
+
+### Why
+
+Direct standalone pages give simple stable URLs like:
+
+```text
+http://localhost:7070/standalone/public/shows.html
+```
+
+This is easier to use for full-page baselines than loading the DesignCanvas page and relying on `direct-react-global` prepare hooks every time.
+
+### What worked
+
+- The standalone Shows page rendered correctly and produced expected nav and first show tile screenshots.
+- The standalone Foundations page rendered `SystemPage` and produced the expected primary button screenshot.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+Standalone pages and `direct-react-global` fixtures serve different purposes:
+
+- standalone pages are best for full pages,
+- catalog fixture globals are best for small component baselines.
+
+### What was tricky to build
+
+Relative script paths matter. Because the public pages live under `prototype-design/standalone/public/`, their shared script imports use `../../lib/...` and `../../screens/...`, which resolve to `/lib/...` and `/screens/...` when served from `prototype-design/`.
+
+### What warrants a second pair of eyes
+
+Confirm whether standalone pages should be committed as source artifacts or generated only on demand. I committed them because they are useful human-facing prototype entrypoints and not large binary artifacts.
+
+### What should be done in the future
+
+Add css-visual-diff configs that target the standalone page URLs directly for page-level baseline extraction.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/standalone/public/*.html
+prototype-design/standalone/foundations/system.html
+scripts/09-generate-standalone-public-html.mjs
+scripts/10-generate-standalone-foundations-html.mjs
+```
+
+Validate with:
+
+```bash
+python3 -m http.server 7070 --directory prototype-design
+# open http://localhost:7070/standalone/index.html
+```
