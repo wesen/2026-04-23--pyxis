@@ -13,6 +13,10 @@ Owners: []
 RelatedFiles:
     - Path: docs/playbooks/03-pyxis-full-app-baseline-handover.md
       Note: Implementation handover followed for the Full App baseline extraction
+    - Path: prototype-design/storybook-catalog/inventory.json
+      Note: Machine-readable Storybook inventory for future config generation
+    - Path: prototype-design/storybook-catalog/inventory.md
+      Note: Human-readable Storybook inventory and coverage gaps
     - Path: prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
       Note: Generates the new full-app-screen css-visual-diff configs
     - Path: prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
@@ -23,12 +27,15 @@ RelatedFiles:
       Note: Runs targeted Full App sample extraction without recomputing existing baselines
     - Path: prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
       Note: Runs Full App-only baseline export into prototype-design/baseline
+    - Path: web/packages/pyxis-components/storybook-static/index.json
+      Note: Source Storybook index parsed for the inventory
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-04-23T22:48:55.940608831-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Diary
@@ -1162,4 +1169,123 @@ prototype-design/baseline/artifacts/full-app/bookings/inspect/original/full-scre
 prototype-design/baseline/artifacts/full-app/log/inspect/original/activity-card/screenshot.png
 prototype-design/baseline/artifacts/full-app/artists/inspect/original/full-screen/screenshot.png
 prototype-design/baseline/artifacts/full-app/setup/inspect/original/full-screen/screenshot.png
+```
+
+## Step 12: Inventory the current Storybook component catalog
+
+I pivoted from prototype baseline extraction to the Storybook implementation side and created the first Storybook catalog artifact directory. The first requested task was intentionally lightweight: inspect the current `pyxis-components` static Storybook index and store an inventory file under the new Storybook catalog directory before generating capture configs.
+
+The inventory confirms that Storybook currently has strong atom coverage and public component coverage, but very thin molecule/organism coverage. This matches the expected next phase: capture the existing design-system stories first, then add missing stories for Field, Stat, Table, Empty, LogRow, Modal, and TopBar before returning to public-site parity work.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead, do the inventory, store as file in the storybook-catalog directory"
+
+**Assistant interpretation:** Create `prototype-design/storybook-catalog/`, parse the current `pyxis-components` Storybook static inventory, classify the stories, and write the results as durable files.
+
+**Inferred user intent:** Establish a factual baseline of the current Storybook implementation coverage before adding capture scripts or new stories.
+
+### What I did
+
+- Read `web/packages/pyxis-components/storybook-static/index.json`.
+- Listed current co-located story files under `web/packages/pyxis-components/src/`.
+- Created `prototype-design/storybook-catalog/`.
+- Wrote:
+  - `prototype-design/storybook-catalog/inventory.json`
+  - `prototype-design/storybook-catalog/inventory.md`
+- Classified Storybook entries by group:
+  - atoms
+  - molecules
+  - public
+- Identified component directories without co-located stories.
+- Added a recommended first capture sample based on story IDs that actually exist in the static Storybook index.
+- Checked ticket task 13.
+
+### Why
+
+Before writing Storybook capture configs, we need to know which stories exist, which groups are covered, and which component states are missing. This prevents config generators from being based on stale assumptions.
+
+### What worked
+
+The static Storybook index was present and parseable:
+
+```text
+web/packages/pyxis-components/storybook-static/index.json
+```
+
+Inventory totals:
+
+```text
+Index entries: 97
+Story entries: 72
+Docs entries: 25
+Story files: 26
+Design-system stories: 52
+Public stories: 20
+```
+
+Group breakdown:
+
+```text
+atoms: 9 components, 47 stories, 8 docs
+molecules: 1 component, 5 stories, 1 docs
+public: 16 components, 20 stories, 16 docs
+```
+
+### What didn't work
+
+N/A. This was a read/generate documentation step only.
+
+### What I learned
+
+Current Storybook coverage is uneven:
+
+- Atoms are well covered.
+- Public components exist but mostly only have one story each, except `PubNav`.
+- Molecules only have `Card` stories.
+- Organisms currently have no Storybook stories even though `Modal` and `TopBar` components exist.
+
+Components without co-located stories detected:
+
+```text
+molecules/CardHead
+molecules/Empty
+molecules/Field
+molecules/LogRow
+molecules/Stat
+molecules/Table
+organisms/Modal
+organisms/TopBar
+```
+
+### What was tricky to build
+
+The inventory needed to derive both Storybook-side coverage from `index.json` and source-tree gaps from component directories. `index.json` alone tells us what Storybook knows about; the source tree tells us which implemented components are missing stories entirely.
+
+### What warrants a second pair of eyes
+
+- Confirm whether `CardHead` should get its own Storybook story or remain covered through `Card` composition stories.
+- Confirm whether organisms should include only `Modal` and `TopBar`, since `Sidebar`/`NavItem` are not currently present under `pyxis-components/src/organisms/`.
+
+### What should be done in the future
+
+- Add the Storybook design-system config generator and use `inventory.json` as its input.
+- Add missing molecule and organism stories before treating the Storybook design-system catalog as complete.
+- Later expand public component story states before mapping back to `prototype-design/Pyxis Public Site.html`.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/storybook-catalog/inventory.md
+prototype-design/storybook-catalog/inventory.json
+```
+
+Validate by rerunning the inventory generation logic or manually checking:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+node -e "const i=require('./web/packages/pyxis-components/storybook-static/index.json'); console.log(Object.values(i.entries).filter(e => e.type === 'story').length)"
+find web/packages/pyxis-components/src -name '*.stories.*' | sort
 ```

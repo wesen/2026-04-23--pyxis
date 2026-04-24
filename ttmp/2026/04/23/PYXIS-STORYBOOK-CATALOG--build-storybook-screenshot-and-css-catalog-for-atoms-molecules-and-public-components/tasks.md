@@ -15,7 +15,7 @@
 - [x] Run targeted Full App baseline sample and visually inspect representative PNGs
 - [x] Run Full App-only baseline extraction into prototype-design/baseline/artifacts/full-app
 - [x] Update baseline index/manifest and ticket diary/changelog for Full App export
-- [ ] Phase 1 — Audit current pyxis-components Storybook inventory from storybook-static/index.json and classify stories by atoms, molecules, organisms, public components, fixtures, and missing coverage
+- [x] Phase 1 — Audit current pyxis-components Storybook inventory from storybook-static/index.json and classify stories by atoms, molecules, organisms, public components, fixtures, and missing coverage
 - [ ] Phase 1 — Define canonical Storybook catalog output layout next to prototype-design/baseline, e.g. prototype-design/storybook-catalog/{manifest.json,index.html,index.md,artifacts/}
 - [ ] Phase 1 — Add Storybook design-system config generator under prototype-design/visual-diff/scripts that emits css-visual-diff inspect configs for pyxis-components Storybook stories
 - [ ] Phase 1 — Add Storybook design-system sample/full/index/serve scripts with targeted sample mode before full extraction

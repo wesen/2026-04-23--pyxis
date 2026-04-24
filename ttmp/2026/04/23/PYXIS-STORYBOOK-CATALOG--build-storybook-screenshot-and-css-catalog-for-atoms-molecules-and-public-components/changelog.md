@@ -267,3 +267,28 @@ Step 11: added the non-foundations Full App baseline export workflow and generat
 - Phase 5: expand public-site component stories.
 - Phase 6: refocus on `prototype-design/Pyxis Public Site.html` for component-level and page-level comparisons.
 - Phase 7: keep diary/changelog updated after each capture/story-expansion phase.
+
+## 2026-04-24 — Add Storybook component inventory
+
+### Added
+- Added `prototype-design/storybook-catalog/inventory.json`.
+- Added `prototype-design/storybook-catalog/inventory.md`.
+
+### Inventory summary
+- Parsed `web/packages/pyxis-components/storybook-static/index.json`.
+- Current totals:
+  - index entries: `97`
+  - story entries: `72`
+  - docs entries: `25`
+  - story files: `26`
+  - design-system stories: `52`
+  - public stories: `20`
+- Group breakdown:
+  - atoms: `9` components, `47` stories
+  - molecules: `1` component, `5` stories
+  - public: `16` components, `20` stories
+
+### Gaps identified
+- Missing molecule stories for `CardHead`, `Empty`, `Field`, `LogRow`, `Stat`, and `Table`.
+- Missing organism stories for `Modal` and `TopBar`.
+- Public components mostly have one story each and will need prototype-equivalent variants before public-site comparison.

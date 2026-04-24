@@ -1,0 +1,968 @@
+{
+  "generatedAt": "2026-04-24T15:27:18.178Z",
+  "sourceIndex": "web/packages/pyxis-components/storybook-static/index.json",
+  "sourceStoryFiles": [
+    "web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Avatar/Avatar.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Badge/Badge.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Button/Button.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Icon/Icon.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Input/Input.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Select/Select.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Tag/Tag.stories.tsx",
+    "web/packages/pyxis-components/src/atoms/Textarea/Textarea.stories.tsx",
+    "web/packages/pyxis-components/src/molecules/Card/Card.stories.tsx",
+    "web/packages/pyxis-components/src/public/AboutHero/AboutHero.stories.tsx",
+    "web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.stories.tsx",
+    "web/packages/pyxis-components/src/public/BookingForm/BookingForm.stories.tsx",
+    "web/packages/pyxis-components/src/public/BookingRules/BookingRules.stories.tsx",
+    "web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.stories.tsx",
+    "web/packages/pyxis-components/src/public/EthosStrip/EthosStrip.stories.tsx",
+    "web/packages/pyxis-components/src/public/LineupRow/LineupRow.stories.tsx",
+    "web/packages/pyxis-components/src/public/MailingListCTA/MailingListCTA.stories.tsx",
+    "web/packages/pyxis-components/src/public/PubFooter/PubFooter.stories.tsx",
+    "web/packages/pyxis-components/src/public/PubHero/PubHero.stories.tsx",
+    "web/packages/pyxis-components/src/public/PubNav/PubNav.stories.tsx",
+    "web/packages/pyxis-components/src/public/PubShowRow/PubShowRow.stories.tsx",
+    "web/packages/pyxis-components/src/public/SpaceInfo/SpaceInfo.stories.tsx",
+    "web/packages/pyxis-components/src/public/TicketStub/TicketStub.stories.tsx",
+    "web/packages/pyxis-components/src/public/VenueCard/VenueCard.stories.tsx",
+    "web/packages/pyxis-components/src/public/YearGroup/YearGroup.stories.tsx"
+  ],
+  "totals": {
+    "entries": 97,
+    "stories": 72,
+    "docs": 25,
+    "storyFiles": 26,
+    "designSystemStories": 52,
+    "publicStories": 20
+  },
+  "groups": {
+    "atoms": {
+      "storyCount": 47,
+      "docsCount": 8,
+      "components": {
+        "Atom Diff Fixture": {
+          "title": "Atoms/Atom Diff Fixture",
+          "importPath": "./src/atoms/AtomDiffFixture.stories.tsx",
+          "componentPath": "",
+          "stories": [
+            {
+              "id": "atoms-atom-diff-fixture--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test"
+              ]
+            }
+          ]
+        },
+        "Avatar": {
+          "title": "Atoms/Avatar",
+          "importPath": "./src/atoms/Avatar/Avatar.stories.tsx",
+          "componentPath": "./src/atoms/Avatar/Avatar.tsx",
+          "stories": [
+            {
+              "id": "atoms-avatar--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-avatar--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-avatar--sizes",
+              "name": "Sizes",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Badge": {
+          "title": "Atoms/Badge",
+          "importPath": "./src/atoms/Badge/Badge.stories.tsx",
+          "componentPath": "./src/atoms/Badge/Badge.tsx",
+          "stories": [
+            {
+              "id": "atoms-badge--all-statuses",
+              "name": "All Statuses",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-badge--custom-text",
+              "name": "Custom Text",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-badge--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-badge--live-indicator",
+              "name": "Live Indicator",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-badge--on-dark-background",
+              "name": "On Dark Background",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-badge--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Button": {
+          "title": "Atoms/Button",
+          "importPath": "./src/atoms/Button/Button.stories.tsx",
+          "componentPath": "./src/atoms/Button/Button.tsx",
+          "stories": [
+            {
+              "id": "atoms-button--all-sizes",
+              "name": "All Sizes",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--all-variants",
+              "name": "All Variants",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--danger-variant",
+              "name": "Danger Variant",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--disabled",
+              "name": "Disabled",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--discord-variant",
+              "name": "Discord Variant",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--full-width",
+              "name": "Full Width",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--icon-only",
+              "name": "Icon Only",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--loading",
+              "name": "Loading",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-button--with-icons",
+              "name": "With Icons",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Icon": {
+          "title": "Atoms/Icon",
+          "importPath": "./src/atoms/Icon/Icon.stories.tsx",
+          "componentPath": "./src/atoms/Icon/Icon.tsx",
+          "stories": [
+            {
+              "id": "atoms-icon--all-icons",
+              "name": "All Icons",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--colors",
+              "name": "Colors",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--in-button",
+              "name": "In Button",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--pyxis-logo",
+              "name": "PyxisLogo",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--pyxis-mark",
+              "name": "PyxisMark",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--sizes",
+              "name": "Sizes",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-icon--with-inline-text",
+              "name": "With Inline Text",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Input": {
+          "title": "Atoms/Input",
+          "importPath": "./src/atoms/Input/Input.stories.tsx",
+          "componentPath": "./src/atoms/Input/Input.tsx",
+          "stories": [
+            {
+              "id": "atoms-input--all-variants",
+              "name": "All Variants",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--disabled",
+              "name": "Disabled",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--password",
+              "name": "Password",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--with-error",
+              "name": "With Error",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--with-hint",
+              "name": "With Hint",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-input--with-icon",
+              "name": "With Icon",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Select": {
+          "title": "Atoms/Select",
+          "importPath": "./src/atoms/Select/Select.stories.tsx",
+          "componentPath": "./src/atoms/Select/Select.tsx",
+          "stories": [
+            {
+              "id": "atoms-select--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-select--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Tag": {
+          "title": "Atoms/Tag",
+          "importPath": "./src/atoms/Tag/Tag.stories.tsx",
+          "componentPath": "./src/atoms/Tag/Tag.tsx",
+          "stories": [
+            {
+              "id": "atoms-tag--colored-tags",
+              "name": "Colored Tags",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-tag--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-tag--genre-tags",
+              "name": "Genre Tags",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-tag--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "Textarea": {
+          "title": "Atoms/Textarea",
+          "importPath": "./src/atoms/Textarea/Textarea.stories.tsx",
+          "componentPath": "./src/atoms/Textarea/Textarea.tsx",
+          "stories": [
+            {
+              "id": "atoms-textarea--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-textarea--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "atoms-textarea--with-error",
+              "name": "With Error",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        }
+      },
+      "componentCount": 9
+    },
+    "molecules": {
+      "storyCount": 5,
+      "docsCount": 1,
+      "components": {
+        "Card": {
+          "title": "Molecules/Card",
+          "importPath": "./src/molecules/Card/Card.stories.tsx",
+          "componentPath": "./src/molecules/Card/Card.tsx",
+          "stories": [
+            {
+              "id": "molecules-card--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "molecules-card--interactive",
+              "name": "Interactive",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "molecules-card--playground",
+              "name": "Playground",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "molecules-card--sizes",
+              "name": "Sizes",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "molecules-card--with-header",
+              "name": "With Header",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        }
+      },
+      "componentCount": 1
+    },
+    "public": {
+      "storyCount": 20,
+      "docsCount": 16,
+      "components": {
+        "AboutHero": {
+          "title": "Public/AboutHero",
+          "importPath": "./src/public/AboutHero/AboutHero.stories.tsx",
+          "componentPath": "./src/public/AboutHero/AboutHero.tsx",
+          "stories": [
+            {
+              "id": "public-abouthero--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "ArchiveStats": {
+          "title": "Public/ArchiveStats",
+          "importPath": "./src/public/ArchiveStats/ArchiveStats.stories.tsx",
+          "componentPath": "./src/public/ArchiveStats/ArchiveStats.tsx",
+          "stories": [
+            {
+              "id": "public-archivestats--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "BookingForm": {
+          "title": "Public/BookingForm",
+          "importPath": "./src/public/BookingForm/BookingForm.stories.tsx",
+          "componentPath": "./src/public/BookingForm/BookingForm.tsx",
+          "stories": [
+            {
+              "id": "public-bookingform--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "BookingRules": {
+          "title": "Public/BookingRules",
+          "importPath": "./src/public/BookingRules/BookingRules.stories.tsx",
+          "componentPath": "./src/public/BookingRules/BookingRules.tsx",
+          "stories": [
+            {
+              "id": "public-bookingrules--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "BookingSuccess": {
+          "title": "Public/BookingSuccess",
+          "importPath": "./src/public/BookingSuccess/BookingSuccess.stories.tsx",
+          "componentPath": "./src/public/BookingSuccess/BookingSuccess.tsx",
+          "stories": [
+            {
+              "id": "public-bookingsuccess--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "EthosStrip": {
+          "title": "Public/EthosStrip",
+          "importPath": "./src/public/EthosStrip/EthosStrip.stories.tsx",
+          "componentPath": "./src/public/EthosStrip/EthosStrip.tsx",
+          "stories": [
+            {
+              "id": "public-ethosstrip--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "LineupRow": {
+          "title": "Public/LineupRow",
+          "importPath": "./src/public/LineupRow/LineupRow.stories.tsx",
+          "componentPath": "./src/public/LineupRow/LineupRow.tsx",
+          "stories": [
+            {
+              "id": "public-lineuprow--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "MailingListCTA": {
+          "title": "Public/MailingListCTA",
+          "importPath": "./src/public/MailingListCTA/MailingListCTA.stories.tsx",
+          "componentPath": "./src/public/MailingListCTA/MailingListCTA.tsx",
+          "stories": [
+            {
+              "id": "public-mailinglistcta--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "PubFooter": {
+          "title": "Public/PubFooter",
+          "importPath": "./src/public/PubFooter/PubFooter.stories.tsx",
+          "componentPath": "./src/public/PubFooter/PubFooter.tsx",
+          "stories": [
+            {
+              "id": "public-pubfooter--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "PubHero": {
+          "title": "Public/PubHero",
+          "importPath": "./src/public/PubHero/PubHero.stories.tsx",
+          "componentPath": "./src/public/PubHero/PubHero.tsx",
+          "stories": [
+            {
+              "id": "public-pubhero--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "PubNav": {
+          "title": "Public/PubNav",
+          "importPath": "./src/public/PubNav/PubNav.stories.tsx",
+          "componentPath": "./src/public/PubNav/PubNav.tsx",
+          "stories": [
+            {
+              "id": "public-pubnav--about-active",
+              "name": "About Active",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "public-pubnav--archive-active",
+              "name": "Archive Active",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "public-pubnav--book-active",
+              "name": "Book Active",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "public-pubnav--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            },
+            {
+              "id": "public-pubnav--interactive",
+              "name": "Interactive",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "PubShowRow": {
+          "title": "Public/PubShowRow",
+          "importPath": "./src/public/PubShowRow/PubShowRow.stories.tsx",
+          "componentPath": "./src/public/PubShowRow/PubShowRow.tsx",
+          "stories": [
+            {
+              "id": "public-pubshowrow--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "SpaceInfo": {
+          "title": "Public/SpaceInfo",
+          "importPath": "./src/public/SpaceInfo/SpaceInfo.stories.tsx",
+          "componentPath": "./src/public/SpaceInfo/SpaceInfo.tsx",
+          "stories": [
+            {
+              "id": "public-spaceinfo--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "TicketStub": {
+          "title": "Public/TicketStub",
+          "importPath": "./src/public/TicketStub/TicketStub.stories.tsx",
+          "componentPath": "./src/public/TicketStub/TicketStub.tsx",
+          "stories": [
+            {
+              "id": "public-ticketstub--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "VenueCard": {
+          "title": "Public/VenueCard",
+          "importPath": "./src/public/VenueCard/VenueCard.stories.tsx",
+          "componentPath": "./src/public/VenueCard/VenueCard.tsx",
+          "stories": [
+            {
+              "id": "public-venuecard--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        },
+        "YearGroup": {
+          "title": "Public/YearGroup",
+          "importPath": "./src/public/YearGroup/YearGroup.stories.tsx",
+          "componentPath": "./src/public/YearGroup/YearGroup.tsx",
+          "stories": [
+            {
+              "id": "public-yeargroup--default",
+              "name": "Default",
+              "tags": [
+                "dev",
+                "test",
+                "autodocs"
+              ]
+            }
+          ]
+        }
+      },
+      "componentCount": 16
+    }
+  },
+  "missingStoryComponents": [
+    {
+      "area": "molecules",
+      "name": "CardHead",
+      "dir": "web/packages/pyxis-components/src/molecules/CardHead",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "molecules",
+      "name": "Empty",
+      "dir": "web/packages/pyxis-components/src/molecules/Empty",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "molecules",
+      "name": "Field",
+      "dir": "web/packages/pyxis-components/src/molecules/Field",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "molecules",
+      "name": "LogRow",
+      "dir": "web/packages/pyxis-components/src/molecules/LogRow",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "molecules",
+      "name": "Stat",
+      "dir": "web/packages/pyxis-components/src/molecules/Stat",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "molecules",
+      "name": "Table",
+      "dir": "web/packages/pyxis-components/src/molecules/Table",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "organisms",
+      "name": "Modal",
+      "dir": "web/packages/pyxis-components/src/organisms/Modal",
+      "hasStory": false,
+      "hasComponent": true
+    },
+    {
+      "area": "organisms",
+      "name": "TopBar",
+      "dir": "web/packages/pyxis-components/src/organisms/TopBar",
+      "hasStory": false,
+      "hasComponent": true
+    }
+  ],
+  "recommendedFirstCapture": [
+    "atoms-atom-diff-fixture--default",
+    "atoms-button--default",
+    "atoms-badge--default",
+    "atoms-tag--default",
+    "atoms-input--default",
+    "atoms-select--default",
+    "atoms-textarea--default",
+    "atoms-avatar--default",
+    "atoms-icon--default",
+    "molecules-card--default",
+    "molecules-card--with-header"
+  ],
+  "notes": [
+    "Capture design-system groups (atoms/molecules/organisms) before public components.",
+    "Use #storybook-root and #storybook-root > *:first-child as initial probes for each story.",
+    "Public components should be expanded after component-system primitives are validated against prototype foundations."
+  ]
+}
