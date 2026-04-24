@@ -2,7 +2,11 @@
 
 ## TODO
 
-- [ ] Add tasks here
+- [ ] Public standalone page batch A — add shared `PublicPageHeader` and detail-page molecules (`ReserveTicketCard`, `ShowDetailHeader`, `ShowMetaStrip`, `SafetyNote`) with Storybook and parity coverage
+- [ ] Public standalone page batch B — add archive molecules/organisms (`ArchiveSearchFilters`, `ArchiveShowRow`, `ArchiveShowList`) with Storybook and parity coverage
+- [ ] Public standalone page batch C — add book-page molecules/organisms (`ShowTypeChips`, `BookingSpaceAside`, `SaferSpaceAgreement`) with Storybook and parity coverage
+- [ ] Public standalone page batch D — add about-page molecules/organisms (`AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`) with Storybook and parity coverage
+- [ ] Update public parity map, diary, and changelog after each batch; commit at stable checkpoints
 
 - [x] Create component parity map for first atom batch: button-primary, badge-confirmed, tag-default, input-default, select-status
 - [x] Author and inspect first atom comparison config for Button primary before running full comparison modes

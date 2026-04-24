@@ -2419,3 +2419,16 @@ for cfg in \
   css-visual-diff run --config "$cfg" --modes capture,cssdiff,matched-styles,pixeldiff,html-report
 done
 ```
+
+## Step 20: Task missing standalone public-page components in batches
+
+The remaining public-page molecules/organisms from `detail.html`, `archive.html`, `book.html`, and `about.html` were converted into explicit task batches before implementation.
+
+Batches:
+
+- Batch A: shared `PublicPageHeader` and detail-page molecules (`ReserveTicketCard`, `ShowDetailHeader`, `ShowMetaStrip`, `SafetyNote`).
+- Batch B: archive components (`ArchiveSearchFilters`, `ArchiveShowRow`, `ArchiveShowList`).
+- Batch C: book-page components (`ShowTypeChips`, `BookingSpaceAside`, `SaferSpaceAgreement`).
+- Batch D: about-page components (`AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`).
+
+The purpose is to preserve a clear implementation queue and make it obvious which standalone prototype page each batch comes from.
