@@ -199,3 +199,29 @@ Reframed LogRow coverage to compare React LogRow against a hand-rendered prototy
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Clarified LogRow coverage status
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 14 diary entry
 
+
+## 2026-04-24
+
+Prepared the public-site component parity handoff and reorganized public Storybook story titles into `Public/Molecules/*` and `Public/Organisms/*` subdirectories. The handoff explains the public-domain ladder, recommended comparison order, fixture/config layout, and immediate next task.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md — Next-developer public-site parity handoff
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/AboutHero/AboutHero.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.stories.tsx — Moved Storybook title under Public/Molecules
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingForm/BookingForm.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingRules/BookingRules.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/EthosStrip/EthosStrip.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/LineupRow/LineupRow.stories.tsx — Moved Storybook title under Public/Molecules
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/MailingListCTA/MailingListCTA.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PubFooter/PubFooter.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PubHero/PubHero.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PubNav/PubNav.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PubShowRow/PubShowRow.stories.tsx — Moved Storybook title under Public/Molecules
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/SpaceInfo/SpaceInfo.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/TicketStub/TicketStub.stories.tsx — Moved Storybook title under Public/Molecules
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/VenueCard/VenueCard.stories.tsx — Moved Storybook title under Public/Organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/YearGroup/YearGroup.stories.tsx — Moved Storybook title under Public/Molecules
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 15 diary entry
+

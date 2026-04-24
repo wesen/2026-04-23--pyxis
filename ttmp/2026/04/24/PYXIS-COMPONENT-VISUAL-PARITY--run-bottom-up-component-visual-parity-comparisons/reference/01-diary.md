@@ -1758,3 +1758,124 @@ Generated report:
 prototype-design/visual-comparisons/component-system/molecules/log-row-default/index.html
 ```
 
+## Step 15: Prepare public-site component parity handoff and Storybook taxonomy
+
+This step finished the generic molecule coverage checkpoint by documenting the next phase: public-site component parity. It also reorganized public Storybook titles into `Public/Molecules` and `Public/Organisms` so the domain-specific ladder is visible before adding public comparison configs.
+
+The key decision is that public-site components should not be forced into the generic molecule/organism ladder. They have their own domain ladder that should be compared bottom-up before full public pages.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, create a handoff document so the next developer can tackle the public site and make subdirectories for the stories in the Public storybook section (molecules / organisms)"
+
+**Assistant interpretation:** Write a public-site parity handoff for the next developer and reorganize public Storybook story titles into molecule/organism subgroups.
+
+**Inferred user intent:** Create a clean transition point from generic component parity to public-site parity, with Storybook taxonomy reflecting the next workflow layer.
+
+### What I did
+
+- Wrote the handoff document:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md
+```
+
+- Updated public Storybook story titles from:
+
+```text
+Public/<Component>
+```
+
+to:
+
+```text
+Public/Molecules/<Component>
+Public/Organisms/<Component>
+```
+
+- Public/Molecules:
+
+```text
+ArchiveStats
+LineupRow
+PubShowRow
+TicketStub
+YearGroup
+```
+
+- Public/Organisms:
+
+```text
+AboutHero
+BookingForm
+BookingRules
+BookingSuccess
+EthosStrip
+MailingListCTA
+PubFooter
+PubHero
+PubNav
+SpaceInfo
+VenueCard
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+### Why
+
+The next developer needs a clear handoff that says: generic molecules are covered; public components are next; do not jump to full pages; create public-domain fixture/config directories.
+
+Storybook should reflect this taxonomy because the visual parity workflow is easier when Storybook mirrors the comparison ladder.
+
+### What worked
+
+Typecheck passed after the Storybook title changes.
+
+The handoff now gives a concrete next step: start with `LineupRow`, then proceed through smaller public molecules before public organisms and pages.
+
+### What didn't work
+
+N/A. This was documentation and story taxonomy work, not comparison execution.
+
+### What I learned
+
+The public directory is not a flat bag of components. It has a clear internal hierarchy, and the visual parity workflow should preserve that structure.
+
+### What was tricky to build
+
+Classifying some public components is a judgment call. For now, `PubShowRow` is classified as a public molecule, while larger section/workflow components like `VenueCard`, `BookingForm`, and `PubHero` are public organisms.
+
+### What warrants a second pair of eyes
+
+- Whether `PubShowRow` should remain under `Public/Molecules` or move to `Public/Organisms` later.
+- Whether `ArchiveStats`/`YearGroup` should be considered molecules or sections once their prototype references are inspected.
+
+### What should be done in the future
+
+- Create `public-fixture-prepare.js` and `PublicDiffFixture.stories.tsx`.
+- Start with `public-molecules-lineup-row-default`.
+- Add public comparison configs under `prototype-design/visual-diff/comparisons/component-system/public/...`.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md
+web/packages/pyxis-components/src/public/*/*.stories.tsx
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+### Technical details
+
+Storybook title-only changes should not affect runtime component behavior, but they will change Storybook IDs for public stories. Future scripts should use the new `public-molecules-*` / `public-organisms-*` story IDs generated from these titles.
+
