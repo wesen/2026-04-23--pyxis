@@ -7,3 +7,5 @@ prototype-design/baseline/sample-full-app/
 # Local IDE / Playwright MCP state.
 .idea/
 .playwright-mcp/
+prototype-design/storybook-catalog/artifacts/
+prototype-design/storybook-catalog/sample-atoms/

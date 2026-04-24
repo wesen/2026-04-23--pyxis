@@ -292,3 +292,22 @@ Step 11: added the non-foundations Full App baseline export workflow and generat
 - Missing molecule stories for `CardHead`, `Empty`, `Field`, `LogRow`, `Stat`, and `Table`.
 - Missing organism stories for `Modal` and `TopBar`.
 - Public components mostly have one story each and will need prototype-equivalent variants before public-site comparison.
+
+## 2026-04-24 — Document component taxonomy and start atom Storybook capture
+
+### Added
+- Added `docs/component-system-and-public-site-components.md` as a textbook-style reference for the Pyxis component taxonomy.
+- Added `prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs`.
+- Added `prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh`.
+- Generated Storybook design-system configs under `prototype-design/visual-diff/storybook-components/`.
+- Generated `prototype-design/storybook-catalog/manifest.json`.
+
+### Validated
+- Ran the first atom sample against `pyxis-components` Storybook on port 6006.
+- Captured AtomDiffFixture, Button, Badge, Tag, and Input stories with `story-root` and `component-focus` probes.
+- Visually inspected representative PNGs with `read`.
+
+### Notes
+- The component taxonomy uses two axes: composition level and domain.
+- `VenueCard` is documented as a public-site organism, not a generic design-system organism.
+- Some generic `component-focus` crops remain broad for full-width stories and may later need story-specific probes.

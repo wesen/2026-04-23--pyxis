@@ -11,12 +11,16 @@ DocType: reference
 Intent: long-term
 Owners: []
 RelatedFiles:
+    - Path: docs/component-system-and-public-site-components.md
+      Note: Textbook-style component taxonomy reference
     - Path: docs/playbooks/03-pyxis-full-app-baseline-handover.md
       Note: Implementation handover followed for the Full App baseline extraction
     - Path: prototype-design/storybook-catalog/inventory.json
       Note: Machine-readable Storybook inventory for future config generation
     - Path: prototype-design/storybook-catalog/inventory.md
       Note: Human-readable Storybook inventory and coverage gaps
+    - Path: prototype-design/storybook-catalog/manifest.json
+      Note: Storybook catalog manifest generated from current design-system stories
     - Path: prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
       Note: Generates the new full-app-screen css-visual-diff configs
     - Path: prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
@@ -27,6 +31,10 @@ RelatedFiles:
       Note: Runs targeted Full App sample extraction without recomputing existing baselines
     - Path: prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
       Note: Runs Full App-only baseline export into prototype-design/baseline
+    - Path: prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+      Note: Generates Storybook design-system css-visual-diff configs
+    - Path: prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
+      Note: Runs the first atom Storybook capture sample
     - Path: web/packages/pyxis-components/storybook-static/index.json
       Note: Source Storybook index parsed for the inventory
 ExternalSources: []
@@ -35,6 +43,7 @@ LastUpdated: 2026-04-23T22:48:55.940608831-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -1288,4 +1297,109 @@ Validate by rerunning the inventory generation logic or manually checking:
 cd /home/manuel/code/wesen/2026-04-23--pyxis
 node -e "const i=require('./web/packages/pyxis-components/storybook-static/index.json'); console.log(Object.values(i.entries).filter(e => e.type === 'story').length)"
 find web/packages/pyxis-components/src -name '*.stories.*' | sort
+```
+
+## Step 13: Document the component taxonomy and start atom Storybook captures
+
+I wrote a developer/designer reference that explains how Pyxis uses Atomic Design vocabulary without flattening every component into one global hierarchy. The document introduces the two-axis model we will use from here on: composition level and domain. That lets us say that `Button` is a generic atom, `Field` is a generic molecule, `Modal` is a generic organism, and `VenueCard` is a public-site organism.
+
+I then started the Storybook-side catalog implementation by generating css-visual-diff configs for the current design-system stories and running a small atom-focused sample. The sample confirmed that the Storybook iframe route and the basic `#storybook-root` probes work for the first atoms.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, write a detailed document in docs about how the component system works, and how we use the term public site components (and later on for the other pages), using the textbook style (see skill), as reference for future developers and designers.
+
+Then, start working on the first few atoms"
+
+**Assistant interpretation:** Write an educational reference on the component taxonomy, then begin implementing the Storybook-side design-system capture workflow with initial atom captures.
+
+**Inferred user intent:** Align future developers/designers on vocabulary before creating more stories and visual catalog outputs, then begin validating the lowest-level Storybook components.
+
+### What I did
+
+- Read the textbook-authoring skill.
+- Wrote:
+  - `docs/component-system-and-public-site-components.md`
+- Added Storybook design-system config generator:
+  - `prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs`
+- Generated 52 Storybook design-system configs under:
+  - `prototype-design/visual-diff/storybook-components/`
+- Wrote Storybook catalog manifest:
+  - `prototype-design/storybook-catalog/manifest.json`
+- Added atom sample runner:
+  - `prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh`
+- Ran the atom sample for:
+  - AtomDiffFixture default
+  - Button default
+  - Badge default
+  - Tag default
+  - Input default
+- Visually inspected sample PNGs with `read`.
+- Updated `.gitignore` so generated Storybook catalog artifacts do not dirty git status.
+
+### Why
+
+The taxonomy document prevents confusion between generic design-system components and public-site domain components. The atom sample validates the technical path before we scale to all atoms/molecules.
+
+### What worked
+
+- The generator parsed `web/packages/pyxis-components/storybook-static/index.json` and generated configs for 52 design-system stories:
+  - atoms: 47
+  - molecules: 5
+- The Storybook static server was started on port 6006 when needed.
+- `css-visual-diff inspect --side original --all-styles` successfully produced PNG/CSS/HTML/inspect bundles for the first five atom configs.
+- The inspected PNGs showed the expected Storybook-rendered atom content with no Storybook manager chrome.
+
+### What didn't work
+
+Nothing failed in this first atom sample. One observation: `component-focus` is still broad for some stories, such as `Input`, because the story root itself is full-width. That is acceptable for the first pass, but later story-specific selectors may be useful for tighter crops.
+
+### What I learned
+
+The current generic probe pair is good enough to start:
+
+```text
+story-root        -> #storybook-root
+component-focus   -> #storybook-root > *:first-child
+```
+
+This captures the implementation state without requiring story-specific selector authoring yet.
+
+### What was tricky to build
+
+The important subtlety is that this is extraction-only. The generated configs still include both `original` and `react` targets because css-visual-diff is comparison-shaped, but the runner only uses:
+
+```bash
+css-visual-diff inspect --config CONFIG --side original --all-styles
+```
+
+### What warrants a second pair of eyes
+
+- Review whether `component-focus` should remain generic or become story-specific for full-width stories.
+- Review whether `prototype-design/storybook-catalog/manifest.json` should represent only extracted artifacts or all generated configs, including not-yet-extracted ones.
+
+### What should be done in the future
+
+- Add the full Storybook design-system runner.
+- Add a Storybook catalog index builder.
+- Expand missing molecule and organism stories after the first design-system extraction.
+
+### Code review instructions
+
+Review:
+
+```text
+docs/component-system-and-public-site-components.md
+prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
+prototype-design/visual-diff/storybook-components/atoms/button/default/config.css-visual-diff.yml
+prototype-design/storybook-catalog/manifest.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
 ```
