@@ -77,6 +77,22 @@ export type { AboutHeroProps } from './public/AboutHero';
 export { EthosStrip } from './public/EthosStrip';
 export type { EthosStripProps } from './public/EthosStrip';
 
+export { PublicPageHeader } from './public/PublicPageHeader';
+export { ReserveTicketCard } from './public/ReserveTicketCard';
+export { ShowDetailHeader } from './public/ShowDetailHeader';
+export { ShowMetaStrip } from './public/ShowMetaStrip';
+export { SafetyNote } from './public/SafetyNote';
+export { ArchiveSearchFilters } from './public/ArchiveSearchFilters';
+export { ArchiveShowRow } from './public/ArchiveShowRow';
+export { ArchiveShowList } from './public/ArchiveShowList';
+export { ShowTypeChips } from './public/ShowTypeChips';
+export { BookingSpaceAside } from './public/BookingSpaceAside';
+export { SaferSpaceAgreement } from './public/SaferSpaceAgreement';
+export { AboutIntro } from './public/AboutIntro';
+export { EthosGrid } from './public/EthosGrid';
+export { CollectiveList } from './public/CollectiveList';
+export { FindUsBlock } from './public/FindUsBlock';
+
 // Tokens
 export {
   tokens, color, font, radius, shadow, space, text, leading, tracking,

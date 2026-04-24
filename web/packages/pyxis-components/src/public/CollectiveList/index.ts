@@ -1,0 +1,1 @@
+export { CollectiveList } from './CollectiveList';
