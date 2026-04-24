@@ -1,0 +1,62 @@
+metadata:
+  slug: atoms-input-search
+  title: Atom Input search-with-value — prototype vs Storybook
+  level: atom
+  component: input
+  state: search-with-value
+  prototype_source: prototype-design/Pyxis Public Site.html
+  storybook_story_id: atoms-atom-diff-fixture--default
+
+original:
+  name: prototype-input-search
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 420 }
+  root_selector: "#atom-capture-root"
+  prepare:
+    type: script
+    wait_for: "window.React && window.ReactDOM && window.Btn && window.Badge && window.Input && window.Select && window.Avatar"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-input-search
+  url: http://localhost:6006/iframe.html?id=atoms-atom-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 420 }
+  root_selector: "[data-fixture='pyxis-atoms']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-atoms\"] [data-comp=\"input-search\"] [data-pyxis-component=\"input\"][data-pyxis-part=\"control\"]') && (!document.fonts || document.fonts.status === 'loaded')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='input-search']"
+    selector_react: "[data-comp='input-search']"
+  - name: input
+    selector_original: "[data-comp='input-search'] input"
+    selector_react: "[data-comp='input-search'] [data-pyxis-component='input'][data-pyxis-part='control']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='input-search'] input"
+    selector_react: "[data-comp='input-search'] [data-pyxis-component='input'][data-pyxis-part='control']"
+    include_bounds: true
+    props: [position, box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius, box-shadow, opacity]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/atoms/input-search
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]

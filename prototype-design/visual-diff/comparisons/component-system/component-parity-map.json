@@ -61,7 +61,7 @@
       "level": "atom",
       "component": "tag",
       "state": "default-darkwave",
-      "status": "candidate-next",
+      "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
         "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
@@ -75,10 +75,59 @@
       },
       "comparison": {
         "config": "prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml",
-        "output": "prototype-design/visual-comparisons/component-system/atoms/tag-default"
+        "output": "prototype-design/visual-comparisons/component-system/atoms/tag-default",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/tag-default/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
       },
       "confidence": "high",
-      "notes": "Alternative second iteration candidate if Badge exposes unexpected text/state mismatch."
+      "notes": "Alternative second iteration candidate if Badge exposes unexpected text/state mismatch. Accepted in atom promotion batch."
+    },
+    {
+      "slug": "atoms-input-search",
+      "level": "atom",
+      "component": "input",
+      "state": "search-with-value",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/input-search",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/input-search/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
+      },
+      "confidence": "high",
+      "notes": "Accepted in atom promotion batch.",
+      "status": "accepted"
+    },
+    {
+      "slug": "atoms-select-status",
+      "level": "atom",
+      "component": "select",
+      "state": "confirmed",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/select-status",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/select-status/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
+      },
+      "confidence": "high",
+      "notes": "Accepted in atom promotion batch.",
+      "status": "accepted"
     }
   ]
 }

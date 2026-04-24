@@ -315,7 +315,33 @@ Direct visual comparison works only if both sides are scoped to equivalent objec
 
 ---
 
-## 10. Public-site component capture
+## 10. Running prototype-vs-Storybook comparisons
+
+For repeatable parity work, prefer YAML-driven `css-visual-diff run` configs over the low-level `compare` flags. The YAML path supports prototype prepare hooks, side-specific selectors, CSS probes, pixel diffs, and HTML reports.
+
+Use this inspect-first sequence for every new pair:
+
+```bash
+css-visual-diff screenshot --config <config.yml> --side original --section <section> --output-file /tmp/original.png
+css-visual-diff screenshot --config <config.yml> --side react --section <section> --output-file /tmp/react.png
+css-visual-diff css-md --config <config.yml> --side original --style root --output-file /tmp/original-css.md
+css-visual-diff css-md --config <config.yml> --side react --style root --output-file /tmp/react-css.md
+```
+
+Only then run:
+
+```bash
+css-visual-diff run --config <config.yml> --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+Two workflow details are now validated from atom iterations:
+
+- `output.dir` in YAML is resolved relative to the config file directory. Use an absolute output path while hand-authoring Pyxis comparison configs, or generate repo-root-aware paths.
+- CSS property lists must be component-aware. Auto-sized inline components can render pixel-perfect while computed `width`, `height`, or `box-sizing` differ. Use `include_bounds: true` for geometry evidence and compare visual properties such as padding, gap, typography, color, background, border, and radius unless fixed dimensions are part of the component contract.
+
+---
+
+## 11. Public-site component capture
 
 Public-site components use the same selector contract as design-system components:
 
@@ -345,7 +371,7 @@ Do public-site comparison in this order:
 3. Compare equivalent scopes first, such as PubNav ↔ prototype nav, VenueCard/SpaceInfo ↔ prototype space info, BookingForm ↔ prototype booking form.
 4. Only then compare full public pages.
 
-## 11. Common mistakes
+## 12. Common mistakes
 
 Do not use `#storybook-root > *:first-child` as the primary comparison target for single-widget stories. It is a fallback, not a contract.
 
@@ -362,7 +388,7 @@ Do not trust screenshot dimensions alone. Use `read` to visually inspect represe
 
 ---
 
-## 12. Checklist for a new component
+## 13. Checklist for a new component
 
 When adding a component that should be captured:
 

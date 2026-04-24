@@ -14,20 +14,29 @@ Owners: []
 RelatedFiles:
     - Path: .gitignore
       Note: Keeps generated comparison outputs out of git status
+    - Path: docs/playbooks/04-storybook-component-capture-playbook.md
+      Note: Validated comparison workflow notes from atom iterations
     - Path: prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml
       Note: Second atom comparison config and CSS prop-list adjustment
     - Path: prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml
       Note: First runnable atom comparison config
+    - Path: prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml
+      Note: Input search parity config
     - Path: prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
       Note: Initial atom parity map
     - Path: ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md
       Note: Guide updated with validated atom iteration corrections
+    - Path: web/packages/pyxis-components/src/atoms/Input/Input.css
+      Note: Input content-box sizing and icon positioning parity fix
+    - Path: web/packages/pyxis-components/src/atoms/Input/Input.tsx
+      Note: Input icon wrapper parity fix
 ExternalSources: []
 Summary: Chronological implementation diary for bottom-up prototype-to-Storybook component visual parity work.
 LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -326,4 +335,121 @@ Generated but ignored outputs are under:
 
 ```text
 prototype-design/visual-comparisons/component-system/atoms/badge-confirmed/
+```
+
+## Step 4: Promote atom comparison pattern to Tag, Input, and Select
+
+After Button and Badge validated the workflow, I promoted the same pattern to the remaining first-batch atom candidates: Tag default, Input search, and Select status. Tag and Select were immediately pixel-perfect; Input exposed a real React-side implementation mismatch against the prototype.
+
+The Input diff was useful: CSS and pixels showed that the React input used border-box/flex sizing and positioned the search icon directly as an absolute SVG, while the prototype used content-box input sizing and an absolute wrapper around the inline SVG icon. I adjusted the React Input implementation to match the prototype, reran the comparison, and reached 0% pixel diff.
+
+### Prompt Context
+
+**User prompt (verbatim):** "anything to update in our playbook document? otherwise continue"
+
+**Assistant interpretation:** Check whether the reusable playbook needs new validated notes, then continue executing the open atom promotion task.
+
+**Inferred user intent:** Keep documentation aligned with discoveries while continuing the bottom-up parity workflow.
+
+### What I did
+
+- Updated `docs/playbooks/04-storybook-component-capture-playbook.md` with validated comparison workflow details:
+  - inspect-first comparison sequence,
+  - `output.dir` relative path caveat,
+  - component-aware CSS prop list guidance.
+- Added comparison configs:
+  - `tag-default.css-visual-diff.yml`
+  - `input-search.css-visual-diff.yml`
+  - `select-status.css-visual-diff.yml`
+- Ran inspect screenshots/CSS for Tag, Input, and Select.
+- Ran full deterministic comparison modes for Tag, Input, and Select.
+- Fixed React Input CSS/markup to match the prototype atom fixture.
+- Updated the parity map with accepted statuses.
+
+### Why
+
+Task 6 asked us to promote the pattern beyond the first two atoms. Input was especially important because it tested whether the workflow can find and guide a real React-side repair.
+
+### What worked
+
+Final results:
+
+```text
+tag-default:    0.0000% pixel diff, no CSS diff
+input-search:   0.0000% pixel diff, no CSS diff
+select-status:  0.0000% pixel diff, no CSS diff
+```
+
+Validation commands included:
+
+```bash
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### What didn't work
+
+The first Input run showed a real mismatch:
+
+```text
+input:     3.4812% changed, 361/10370 pixels
+component: 0.5260% changed, 93/17680 pixels
+```
+
+CSS diff identified sizing differences:
+
+```text
+display:    inline-block vs block
+box-sizing: content-box vs border-box
+height:     16px vs 34px
+```
+
+After changing the React input to content-box sizing, there was still a small icon diff. The prototype wrapped the SVG in an absolutely positioned element and let the SVG render inline inside it; React positioned the SVG itself. Wrapping the React icon in a span matched the prototype.
+
+### What I learned
+
+The visual parity loop can drive implementation fixes rather than just reporting drift. Pixel diff localized the remaining Input mismatch to the search icon after sizing was fixed. CSS diff alone was not enough for that last step; the diff image made the icon problem obvious.
+
+### What was tricky to build
+
+The Input fix was subtle because the component initially looked almost right. The main input box needed `box-sizing: content-box` plus `flex: 0 0 auto` to match prototype sizing inside the flex wrapper. The icon also needed a wrapper span because absolutely positioned SVGs are blockified differently from an inline SVG inside an absolutely positioned wrapper.
+
+### What warrants a second pair of eyes
+
+- The Input change intentionally aligns React with the prototype's content-box input sizing. Review whether this should be the long-term component contract for all layouts.
+- The icon wrapper changes DOM shape; review accessibility semantics and ensure `aria-hidden` on the wrapper is acceptable.
+
+### What should be done in the future
+
+- Add Textarea, Avatar, Icon, and IconButton comparison configs.
+- Start Batch B molecules only after deciding whether Input content-box sizing is acceptable across public pages.
+
+### Code review instructions
+
+Review:
+
+```text
+docs/playbooks/04-storybook-component-capture-playbook.md
+web/packages/pyxis-components/src/atoms/Input/Input.tsx
+web/packages/pyxis-components/src/atoms/Input/Input.css
+prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-components build-storybook
+cd ..
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+Generated outputs remain ignored under:
+
+```text
+prototype-design/visual-comparisons/component-system/atoms/
 ```

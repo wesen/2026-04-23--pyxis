@@ -37,6 +37,8 @@
 /* Icon inside input */
 .pyxis-field__icon {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-tertiary);
   pointer-events: none;
 }
@@ -51,6 +53,8 @@
 
 /* Base input */
 [data-pyxis-component='input'][data-pyxis-part='control'] {
+  box-sizing: content-box;
+  flex: 0 0 auto;
   width: 100%;
   padding: 8px 11px;
   font-family: inherit;
