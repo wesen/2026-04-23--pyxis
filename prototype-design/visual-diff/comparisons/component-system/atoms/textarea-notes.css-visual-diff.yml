@@ -17,7 +17,7 @@ original:
     type: script
     wait_for: "window.React && window.ReactDOM && window.Textarea"
     wait_for_timeout_ms: 30000
-    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js
     after_wait_ms: 1000
 
 react:

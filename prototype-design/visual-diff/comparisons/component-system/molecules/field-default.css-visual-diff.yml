@@ -1,0 +1,86 @@
+metadata:
+  slug: molecules-field-default
+  title: Molecule Field default — prototype vs Storybook
+  level: molecule
+  component: field
+  state: default
+  prototype_source: prototype-design/Pyxis Public Site.html
+  storybook_story_id: molecules-molecule-diff-fixture--default
+
+original:
+  name: prototype-field-default
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 760 }
+  root_selector: "#molecule-capture-root"
+  prepare:
+    type: script
+    wait_for: "window.React && window.ReactDOM && window.Card && window.Field && window.Input && window.Stat && window.Empty && window.Btn"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-field-default
+  url: http://localhost:6006/iframe.html?id=molecules-molecule-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 760 }
+  root_selector: "[data-fixture='pyxis-molecules']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-molecules\"] [data-comp=\"field-default\"]') && (!document.fonts || document.fonts.status === 'loaded')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='field-default']"
+    selector_react: "[data-comp='field-default']"
+  - name: root
+    selector_original: "[data-comp='field-default'] > div"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='root']"
+  - name: label
+    selector_original: "[data-comp='field-default'] label"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='label']"
+  - name: control
+    selector_original: "[data-comp='field-default'] input"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='input'][data-pyxis-part='control']"
+  - name: hint
+    selector_original: "[data-comp='field-default'] div div:last-child"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='hint']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='field-default'] > div"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='root']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius, box-shadow, opacity]
+  - name: label
+    selector_original: "[data-comp='field-default'] label"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='label']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color, text-transform]
+  - name: control
+    selector_original: "[data-comp='field-default'] input"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='input'][data-pyxis-part='control']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius, box-shadow, opacity]
+  - name: hint
+    selector_original: "[data-comp='field-default'] div div:last-child"
+    selector_react: "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='hint']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, font-family, font-size, font-weight, line-height, letter-spacing, color, text-transform]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/molecules/field-default
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]

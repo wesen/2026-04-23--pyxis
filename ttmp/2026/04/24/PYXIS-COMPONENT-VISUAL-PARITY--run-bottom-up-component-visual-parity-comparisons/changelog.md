@@ -66,3 +66,67 @@ Updated the implementation guide with final atom sweep results and moved next re
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md — Atom sweep results and next molecule recommendations
 
+
+## 2026-04-24
+
+Wrote end-of-week postmortem and next-developer handoff covering completed atom parity workflow, problems, lessons, current process, documentation consolidation recommendation, next steps, and tooling improvement ideas.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md — Postmortem and handoff document
+
+
+## 2026-04-24
+
+Expanded the postmortem into a textbook-style handoff chapter with conceptual foundations, validated workflow, atom sweep evidence, lessons, documentation consolidation plan, next-day quick start, and tooling improvement recommendations.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md — Expanded textbook-style postmortem handoff
+
+
+## 2026-04-24
+
+Attempted reMarkable upload of the expanded postmortem. Local PDF generation succeeded, but remarquee/rmapi upload failed with HTTP 400 even for a tiny test PDF; this is recorded as a tooling/environment issue to retry later.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Upload failure recorded
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md — Document intended for reMarkable upload
+
+
+## 2026-04-24
+
+Switched the parity workflow guidance from static Storybook builds served by Python to a live Storybook dev server in tmux; explained the parity map; promoted atom fixture script to a canonical path; added the first molecule fixture/config for Card default; ran the comparison successfully with 0.0000% pixel diff; wrote the canonical bottom-up parity playbook.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Canonical daily workflow playbook
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js — Canonical atom prototype fixture prepare script
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js — New molecule prototype fixture prepare script
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx — New Storybook molecule fixture
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml — First molecule comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated parity map with accepted Card default result
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 8 diary entry
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md — Updated handoff guidance
+
+
+## 2026-04-24
+
+Completed the recommended first molecule batch after Card by adding Field default, Field error, Stat default, and Empty with CTA fixture states/configs; repaired React Field, Stat, and Empty visual drift; all four new molecule comparisons now report 0.0000% pixel diff.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js — Added Field, Stat, and Empty fixture states
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx — Added matching Storybook molecule states
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/field-default.css-visual-diff.yml — Field default comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/field-error.css-visual-diff.yml — Field error comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/stat-default.css-visual-diff.yml — Stat default comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/empty-cta.css-visual-diff.yml — Empty with CTA comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Field/Field.tsx — Aligned Field label/message spacing and typography with prototype
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Stat/Stat.tsx — Aligned Stat typography, spacing, shadow, and part attributes with prototype
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Empty/Empty.tsx — Aligned Empty state icon, spacing, typography, and action layout with prototype
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Recorded accepted molecule results and accepted CSS differences
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated known-good molecule list
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 9 diary entry
+

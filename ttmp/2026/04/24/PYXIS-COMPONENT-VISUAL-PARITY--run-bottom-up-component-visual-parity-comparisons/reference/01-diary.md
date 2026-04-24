@@ -560,3 +560,504 @@ css-visual-diff run --config prototype-design/visual-diff/comparisons/component-
 ### Technical details
 
 The accepted atom parity map now includes Button, Badge, Tag, Input, Select, Avatar, Icon, IconButton, and Textarea states.
+
+## Step 6: Write textbook-style postmortem and attempt reMarkable upload
+
+At the end of the week, I rewrote the postmortem as a standalone, textbook-style handoff rather than a terse status report. The goal was to make the workflow understandable from first principles: why bottom-up comparison matters, how prototype and Storybook fixtures relate, how `css-visual-diff` artifacts should be interpreted, and what the next developer should do first tomorrow.
+
+The document is now the best single ticket-local starting point for resuming this work. Upload to reMarkable was attempted, but the rmapi-backed upload path failed with HTTP 400 even for a tiny test PDF, which indicates an environment/cloud-tool issue rather than a problem with this document.
+
+### Prompt Context
+
+**User prompt (verbatim):** "write this in full detail (see textbook skills)"
+
+**Assistant interpretation:** Expand the postmortem into a richer educational handoff using the textbook-authoring style: foundational prose, concrete examples, command sequences, lessons, and next steps.
+
+**Inferred user intent:** Make the end-of-week handoff durable enough that tomorrow's team can restart without reconstructing today's context from chat history.
+
+### What I did
+
+- Read the textbook authoring skill.
+- Rewrote `reference/02-postmortem-and-next-developer-handoff.md` as a detailed chapter-style handoff.
+- Added sections on:
+  - system context,
+  - bottom-up strategy,
+  - selector contract,
+  - Storybook catalog vs parity comparisons,
+  - validated atom fixture strategy,
+  - current workflow,
+  - atom sweep evidence,
+  - problems and lessons,
+  - documentation consolidation,
+  - next-developer first hour,
+  - molecule next steps,
+  - workflow/tooling improvements,
+  - css-visual-diff alpha-tester feedback.
+- Generated a local PDF with `pandoc` for upload testing.
+- Attempted upload through `remarquee upload md`, `remarquee cloud put`, and `rmapi put`.
+
+### Why
+
+A short postmortem would not be enough for resuming this work. The workflow has several non-obvious details: prepared prototype fixtures, Storybook fixture wrappers, component-aware CSS prop lists, output path semantics, stale Storybook static builds, and interpretation of harmless CSS differences. The handoff needed to teach those patterns, not merely list them.
+
+### What worked
+
+The markdown document was written successfully and `pandoc` produced a PDF:
+
+```text
+/tmp/pyxis-parity-upload/pyxis-parity-postmortem.pdf
+```
+
+### What didn't work
+
+reMarkable upload failed with HTTP 400 in multiple forms:
+
+```bash
+remarquee upload md "$DOC" --name "Pyxis Component Visual Parity Postmortem" --remote-dir "/ai/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY"
+# Error: failed to create remote directory "PYXIS-COMPONENT-VISUAL-PARITY" under "24": request failed with status 400
+
+remarquee upload md "$DOC" --name "Pyxis Component Visual Parity Postmortem" --remote-dir "/ai/2026/04/24"
+# Error: failed to upload file [...]: request failed with status 400
+
+rmapi put /tmp/test-rm.pdf /ai/2026/04/24
+# failed to upload file [/tmp/test-rm.pdf] request failed with status 400
+```
+
+`remarquee status` and `remarquee cloud account --non-interactive` both worked, so the failure appears to be in the upload/cloud API path rather than local PDF generation.
+
+### What I learned
+
+The reMarkable upload path needs separate troubleshooting. Since even a tiny generated PDF failed, retrying this document with different names or folders is unlikely to help until the rmapi/remarquee cloud upload issue is fixed.
+
+### What was tricky to build
+
+The tricky part in the writing was balancing narrative and operational detail. The document needed to explain why the workflow exists, but also provide exact commands and file paths. The textbook style helped: introduce the mental model first, then show commands and concrete examples.
+
+### What warrants a second pair of eyes
+
+- Review whether the new postmortem is now too long for daily use and should be distilled into `docs/playbooks/05-bottom-up-component-visual-parity.md`.
+- Investigate rmapi/remarquee upload failures separately.
+
+### What should be done in the future
+
+- Create the canonical repo playbook from this postmortem.
+- Retry reMarkable upload after rmapi/remarquee upload is fixed.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md
+```
+
+Validate PDF generation locally:
+
+```bash
+pandoc ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md \
+  -o /tmp/pyxis-parity-postmortem.pdf \
+  --pdf-engine=xelatex \
+  -V mainfont='DejaVu Sans' \
+  -V monofont='DejaVu Sans Mono'
+```
+
+### Technical details
+
+Local PDF generation emitted one font warning for a checkmark glyph but otherwise succeeded. Upload failed independently of document size/content because a tiny test PDF also failed.
+
+## Step 8: Switch to live Storybook and accept the first molecule comparison
+
+This step converted the handoff guidance into the workflow we should actually use tomorrow: a real Storybook dev server in `tmux`, not a static build served with Python. That matters because the component visual-diff loop is iterative; if Storybook is stale, every pixel diff is suspect.
+
+I also answered the “parity map” question in the docs and pushed the recommended sequence forward: promoted the atom prepare script into a canonical repo path, added a first molecule fixture on both prototype and Storybook sides, and ran the `card-default` comparison end to end.
+
+### Prompt Context
+
+**User prompt (verbatim):** "update the document to take into account:
+- run the real storybook in a tmux, it should autorefresh, instead of building + serving with ython
+
+questions:
+- what's the parity map?
+
+then continue with the recommended steps, keep a detailed diary as you go."
+
+**Assistant interpretation:** Update the postmortem/handoff so the daily loop uses live Storybook in tmux, explain the parity map, then continue the recommended bottom-up work while recording details in the diary.
+
+**Inferred user intent:** Make the parity workflow faster and less stale, clarify the core tracking artifact, and keep moving from atom validation into molecule validation with enough notes for a future developer to continue.
+
+### What I did
+
+- Read the handoff document, existing diary, component parity map, atom config, component package scripts, and relevant Card/Field/Stat source files.
+- Started the real Storybook dev server in tmux:
+
+```bash
+tmux new-session -d -s pyxis-components-storybook \
+  'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-components storybook'
+```
+
+- Verified Storybook reported:
+
+```text
+Storybook 8.6.18 for react-vite started
+Local: http://localhost:6006/
+```
+
+- Promoted the atom prototype fixture script from the old ticket path to:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js
+```
+
+- Rewrote atom configs and parity-map prototype prepare paths to use the canonical fixture path.
+- Added the first molecule prototype fixture script:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+```
+
+- Added the matching Storybook molecule fixture:
+
+```text
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+```
+
+- Added the first molecule comparison config:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml
+```
+
+- Updated the parity map with `molecules-card-default` and then marked it accepted after the run.
+- Wrote the canonical repo playbook:
+
+```text
+docs/playbooks/05-bottom-up-component-visual-parity.md
+```
+
+- Updated the handoff document to explain:
+  - live Storybook in tmux instead of static Storybook plus Python server,
+  - what the parity map is,
+  - that new molecule work should use the live Storybook loop.
+
+### Why
+
+The previous handoff still recommended rebuilding Storybook and serving `storybook-static/` with `python3 -m http.server`. The user correctly pointed out that this is the wrong default for active component work. Live Storybook reduces stale-build mistakes and keeps the visual-diff loop closer to how Storybook is meant to be used.
+
+The parity map also needed a plain-language explanation. It is the queue/inventory/verdict file for comparison pairs, not generated output. The developer should update it whenever a component state moves from planned to in-progress to accepted.
+
+### What worked
+
+- Storybook dev server started successfully in `tmux` and served `localhost:6006`.
+- The new `MoleculeDiffFixture` appeared in Storybook `index.json`:
+
+```text
+has_molecule_fixture= True
+```
+
+- TypeScript passed:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Card screenshots were captured successfully:
+
+```bash
+css-visual-diff screenshot \
+  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --side original \
+  --section component \
+  --output-file /tmp/card-default-original.png
+
+css-visual-diff screenshot \
+  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --side react \
+  --section component \
+  --output-file /tmp/card-default-react.png
+```
+
+- Both crops had the same dimensions:
+
+```text
+/tmp/card-default-original.png (260, 66)
+/tmp/card-default-react.png (260, 66)
+```
+
+- The full deterministic run completed:
+
+```bash
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+- Pixel diff was zero:
+
+```text
+component | 0.0000% | 0/17160
+root      | 0.0000% | 0/17160
+```
+
+- I used the `read` tool to inspect the generated PNG comparison image directly, per the corrected tool guidance.
+
+### What didn't work
+
+- No command failed in this step, but the CSS diff is not clean. It reports implementation-shape differences for Card:
+
+```text
+box-sizing: content-box vs border-box
+width: 214px vs 260px
+height: 20px vs 66px
+padding: 22px vs 0px
+box-shadow: one layer vs two layers
+cursor: default vs auto
+```
+
+These are not currently visual bugs because the pixel diff is `0.0000%`; they come from the React Card splitting root and body responsibilities while the prototype applies padding directly to the root.
+
+### What I learned
+
+The first molecule validates that the atom workflow scales one level up, but it also proves why the parity map needs accepted differences. A molecule can be visually identical while the CSS ownership is distributed differently between root and body.
+
+The Card fixture also reinforced the value of matching fixture wrappers. The prototype and React DOM internals differ, but both sides expose `data-comp="card-default"`, so screenshot sections remain straightforward.
+
+### What was tricky to build
+
+The tricky part was deciding whether Card's CSS differences should block acceptance. The root screenshot is pixel-perfect, but the CSS probe compares prototype root styles against React root styles even though React delegates padding to `[data-pyxis-part='body']`. Treating every CSS row as a failure would cause unnecessary React churn.
+
+The solution was to keep the evidence, mark the comparison accepted based on the zero pixel diff, and record accepted CSS differences in `component-parity-map.json` so the next developer does not rediscover the same root/body split.
+
+### What warrants a second pair of eyes
+
+- Whether `Card` should eventually mimic the prototype by applying padding directly to the root when no header/footer slots exist, or whether the current root/body split should remain the React design-system contract.
+- Whether the Card CSS probe should be split into clearer `root` and `body` profiles to avoid noisy root-only comparisons.
+- Whether `css-visual-diff` should support accepted-difference filtering directly from the parity map.
+
+### What should be done in the future
+
+- Continue molecule Batch B with `Field default`, `Field error`, `Stat default`, and `Empty with CTA`.
+- Add those molecule states to `molecule-fixture-prepare.js` and `MoleculeDiffFixture.stories.tsx` before writing configs.
+- Keep using live Storybook in `tmux`; do not return to static rebuilds for the active loop.
+
+### Code review instructions
+
+Start with the workflow docs:
+
+```text
+docs/playbooks/05-bottom-up-component-visual-parity.md
+ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/02-postmortem-and-next-developer-handoff.md
+```
+
+Then inspect the new molecule files:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+The Card result lives under:
+
+```text
+prototype-design/visual-comparisons/component-system/molecules/card-default/
+```
+
+The key generated reports are:
+
+```text
+prototype-design/visual-comparisons/component-system/molecules/card-default/pixeldiff.md
+prototype-design/visual-comparisons/component-system/molecules/card-default/cssdiff.md
+prototype-design/visual-comparisons/component-system/molecules/card-default/index.html
+```
+
+The generated output is evidence only and should not be committed.
+
+## Step 9: Complete the first molecule batch
+
+This step continued the bottom-up move from atoms into molecules. After Card proved the molecule fixture shape, I added the remaining recommended molecule states: `Field default`, `Field error`, `Stat default`, and `Empty with CTA`.
+
+The useful part of this batch was that it produced both straightforward parity and real React repairs. Field needed its molecule wrapper typography/spacing aligned to the prototype. Stat and Empty had the right semantic shape but still carried visual drift in text sizing, spacing, icon treatment, and shadows; the screenshot loop made those issues obvious and small enough to fix.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the recommended molecule parity steps from the previous diary entry, keeping the detailed diary current.
+
+**Inferred user intent:** Keep executing the bottom-up parity plan rather than stopping after Card; validate more molecule states and repair real drift as it appears.
+
+### What I did
+
+- Extended the prototype molecule fixture:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+```
+
+with:
+
+```text
+field-default
+field-error
+stat-default
+empty-cta
+```
+
+- Extended the Storybook molecule fixture:
+
+```text
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+```
+
+with the same `data-comp` wrappers.
+
+- Added comparison configs:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/molecules/field-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/field-error.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/stat-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/empty-cta.css-visual-diff.yml
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Captured and inspected screenshots for the new targets with `css-visual-diff screenshot` and the `read` image tool path.
+- Fixed React molecule implementations:
+
+```text
+web/packages/pyxis-components/src/molecules/Field/Field.tsx
+web/packages/pyxis-components/src/molecules/Stat/Stat.tsx
+web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
+```
+
+- Ran full deterministic comparisons for all four new configs.
+- Updated `component-parity-map.json` with accepted statuses and accepted CSS differences.
+- Updated the canonical playbook’s current known-good molecule list.
+
+### Why
+
+The next recommended sequence after Card was Field, Stat, and Empty. These molecules sit directly above the atom set we already validated, so they are the right scale-up test before organisms or public components.
+
+Adding all four states to the same molecule fixture keeps the workflow consistent with atoms: same logical wrapper on both sides, side-specific selectors inside each wrapper, and a parity-map entry for the verdict.
+
+### What worked
+
+After fixes, all four new molecule comparisons reached zero pixel diff:
+
+```text
+field-default | component 0.0000% | 0/22620
+field-error   | component 0.0000% | 0/22620
+stat-default  | component 0.0000% | 0/27940
+empty-cta     | component 0.0000% | 0/73920
+```
+
+The `read` image inspections were especially useful. For Field, the original showed uppercase compact labels while React initially showed title-case labels. For Stat, the text block and card height were visibly off. For Empty, React initially used a tiny dot icon and too much vertical spacing.
+
+### What didn't work
+
+Initial screenshot dimensions exposed drift:
+
+```text
+field-default original (260, 87), react (260, 75)
+field-error   original (260, 87), react (260, 75)
+stat-default  original (220, 127), react (220, 132)
+empty-cta     original (320, 231), react (320, 244)
+```
+
+The first full run before Stat/Empty fixes showed non-zero pixel diffs:
+
+```text
+stat-default component | 6.4050% | 1860/29040
+empty-cta    component | 7.9905% | 6239/78080
+```
+
+These were real visual bugs, not selector issues.
+
+### What I learned
+
+The molecule workflow is now validated beyond Card. It catches real drift quickly, and live Storybook in tmux makes the fix/retry loop much faster than static rebuilds.
+
+The batch also showed that CSS diffs remain noisy around `box-sizing` and bounds even when pixels match. The parity map now records these accepted differences rather than treating them as unresolved work.
+
+### What was tricky to build
+
+The tricky part was separating visual drift from CSS model differences. For Stat and Empty, the first non-zero pixel diffs were real; after the fixes, CSS still reports `content-box` versus `border-box` bounds because the prototype and React global reset compute dimensions differently. Since the screenshots are the same size and the pixel diff is exactly zero, those remaining CSS rows are accepted implementation differences.
+
+The other tricky part was Field error semantics. The prototype does not have a distinct `error` prop on `Field`; the fixture creates the error state by combining the normal Field hint/message shape with a red-bordered Input. React keeps an explicit `error` slot, but for parity it now renders with the prototype’s spacing and message typography.
+
+### What warrants a second pair of eyes
+
+- Whether changing `Field`, `Stat`, and `Empty` to match the prototype is acceptable for all existing Storybook stories and downstream consumers.
+- Whether `Field error` should remain visually prototype-compatible with a tertiary-colored message, or whether the design system should intentionally diverge and use accent-colored error text.
+- Whether `Stat` and `Empty` need more specific CSS probes for internal parts now that their root pixels match.
+
+### What should be done in the future
+
+- Re-run the whole molecule batch after any token/CSS reset change.
+- Continue upward to organisms only after adding any missing molecule states that public/app components depend on.
+- Consider generating these repetitive molecule configs from the parity map.
+
+### Code review instructions
+
+Review implementation changes first:
+
+```text
+web/packages/pyxis-components/src/molecules/Field/Field.tsx
+web/packages/pyxis-components/src/molecules/Stat/Stat.tsx
+web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
+```
+
+Then review fixture/config wiring:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/molecules/*.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+for target in field-default field-error stat-default empty-cta; do
+  css-visual-diff run \
+    --config prototype-design/visual-diff/comparisons/component-system/molecules/$target.css-visual-diff.yml \
+    --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+done
+```
+
+### Technical details
+
+Generated reports live under:
+
+```text
+prototype-design/visual-comparisons/component-system/molecules/field-default/
+prototype-design/visual-comparisons/component-system/molecules/field-error/
+prototype-design/visual-comparisons/component-system/molecules/stat-default/
+prototype-design/visual-comparisons/component-system/molecules/empty-cta/
+```
+
+Generated comparison output should remain uncommitted.
+

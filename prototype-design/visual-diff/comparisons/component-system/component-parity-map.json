@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-04-24T00:00:00Z",
-  "purpose": "Hand-curated first atom parity pairs for validating prototype-to-Storybook css-visual-diff workflow.",
+  "purpose": "Hand-curated parity pairs for bottom-up prototype-to-Storybook css-visual-diff workflow. Acts as the source-of-truth queue/inventory for comparison configs, selectors, status, outputs, and accepted differences.",
   "entries": [
     {
       "slug": "atoms-button-primary",
@@ -10,7 +10,7 @@
       "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js",
         "sectionSelector": "[data-comp='button-primary']",
         "styleSelector": "[data-comp='button-primary'] button"
       },
@@ -37,7 +37,7 @@
       "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js",
         "sectionSelector": "[data-comp='badge-confirmed']",
         "styleSelector": "[data-comp='badge-confirmed'] > span"
       },
@@ -64,7 +64,7 @@
       "status": "accepted",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js",
         "sectionSelector": "[data-comp='tag-default']",
         "styleSelector": "[data-comp='tag-default'] > span"
       },
@@ -90,7 +90,7 @@
       "state": "search-with-value",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -113,7 +113,7 @@
       "state": "confirmed",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -136,7 +136,7 @@
       "state": "md-initials",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -159,7 +159,7 @@
       "state": "calendar",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -182,7 +182,7 @@
       "state": "edit",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -205,7 +205,7 @@
       "state": "notes-rows-2",
       "prototype": {
         "sourceHtml": "prototype-design/Pyxis Public Site.html",
-        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js"
       },
       "storybook": {
         "storyId": "atoms-atom-diff-fixture--default"
@@ -220,6 +220,186 @@
       "confidence": "high",
       "notes": "Accepted in remaining atom batch.",
       "status": "accepted"
+    },
+    {
+      "slug": "molecules-card-default",
+      "level": "molecule",
+      "component": "card",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js",
+        "sectionSelector": "[data-comp='card-default']",
+        "styleSelector": "[data-comp='card-default'] > div"
+      },
+      "storybook": {
+        "storyId": "molecules-molecule-diff-fixture--default",
+        "sectionSelector": "[data-comp='card-default']",
+        "styleSelector": "[data-comp='card-default'] [data-pyxis-component='card'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/molecules/card-default",
+        "report": "prototype-design/visual-comparisons/component-system/molecules/card-default/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "accepted implementation-shape differences: React Card root uses border-box and delegates padding/background to body; box-shadow string differs while screenshots are pixel-identical at threshold 30"
+      },
+      "confidence": "high",
+      "notes": "First molecule comparison accepted. Screenshot crops are 260x66 on both sides; pixeldiff reports 0/17160 changed pixels for component and root. CSS differences are implementation-shape differences rather than visual drift.",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing/width/height/padding",
+          "reason": "Prototype Card applies padding directly on a content-box root; React Card uses a border-box root plus padded body slot. Bounds and pixels match."
+        },
+        {
+          "kind": "css",
+          "property": "box-shadow",
+          "reason": "Tokenized React shadow serializes as two layers while pixel diff is 0.0000% for the fixture crop."
+        },
+        {
+          "kind": "css",
+          "property": "cursor",
+          "reason": "Prototype root explicitly sets default; React non-interactive root inherits auto/default behavior with identical pixels."
+        }
+      ]
+    },
+    {
+      "slug": "molecules-field-default",
+      "level": "molecule",
+      "component": "field",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js",
+        "sectionSelector": "[data-comp='field-default']",
+        "styleSelector": "[data-comp='field-default'] > div"
+      },
+      "storybook": {
+        "storyId": "molecules-molecule-diff-fixture--default",
+        "sectionSelector": "[data-comp='field-default']",
+        "styleSelector": "[data-comp='field-default'] [data-pyxis-component='field'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/molecules/field-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/molecules/field-default",
+        "report": "prototype-design/visual-comparisons/component-system/molecules/field-default/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none except harmless box-sizing differences on wrapper/label/hint"
+      },
+      "confidence": "high",
+      "notes": "Accepted in molecule batch after React parity fixes and deterministic css-visual-diff run.",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing",
+          "reason": "Prototype labels/messages are content-box and React global CSS uses border-box; pixels match exactly."
+        }
+      ]
+    },
+    {
+      "slug": "molecules-field-error",
+      "level": "molecule",
+      "component": "field",
+      "state": "error",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js",
+        "sectionSelector": "[data-comp='field-error']",
+        "styleSelector": "[data-comp='field-error'] > div"
+      },
+      "storybook": {
+        "storyId": "molecules-molecule-diff-fixture--default",
+        "sectionSelector": "[data-comp='field-error']",
+        "styleSelector": "[data-comp='field-error'] [data-pyxis-component='field'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/molecules/field-error.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/molecules/field-error",
+        "report": "prototype-design/visual-comparisons/component-system/molecules/field-error/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none except harmless box-sizing differences on wrapper/label/message"
+      },
+      "confidence": "high",
+      "notes": "Accepted in molecule batch after React parity fixes and deterministic css-visual-diff run.",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing",
+          "reason": "Prototype labels/messages are content-box and React global CSS uses border-box; pixels match exactly."
+        }
+      ]
+    },
+    {
+      "slug": "molecules-stat-default",
+      "level": "molecule",
+      "component": "stat",
+      "state": "default",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js",
+        "sectionSelector": "[data-comp='stat-default']",
+        "styleSelector": "[data-comp='stat-default'] > div"
+      },
+      "storybook": {
+        "storyId": "molecules-molecule-diff-fixture--default",
+        "sectionSelector": "[data-comp='stat-default']",
+        "styleSelector": "[data-comp='stat-default'] [data-pyxis-component='stat'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/molecules/stat-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/molecules/stat-default",
+        "report": "prototype-design/visual-comparisons/component-system/molecules/stat-default/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "accepted box-sizing/bounds semantic differences: content-box prototype vs border-box React; rendered pixels match"
+      },
+      "confidence": "high",
+      "notes": "Accepted in molecule batch after React parity fixes and deterministic css-visual-diff run.",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing/width/height",
+          "reason": "Prototype reports content-box CSS dimensions while React reports border-box dimensions; screenshot bounds and pixels match exactly."
+        }
+      ]
+    },
+    {
+      "slug": "molecules-empty-cta",
+      "level": "molecule",
+      "component": "empty",
+      "state": "with-cta",
+      "status": "accepted",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js",
+        "sectionSelector": "[data-comp='empty-cta']",
+        "styleSelector": "[data-comp='empty-cta'] > div"
+      },
+      "storybook": {
+        "storyId": "molecules-molecule-diff-fixture--default",
+        "sectionSelector": "[data-comp='empty-cta']",
+        "styleSelector": "[data-comp='empty-cta'] [data-pyxis-component='empty'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/molecules/empty-cta.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/molecules/empty-cta",
+        "report": "prototype-design/visual-comparisons/component-system/molecules/empty-cta/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "accepted box-sizing/bounds semantic differences: content-box prototype vs border-box React; rendered pixels match"
+      },
+      "confidence": "high",
+      "notes": "Accepted in molecule batch after React parity fixes and deterministic css-visual-diff run.",
+      "acceptedDifferences": [
+        {
+          "kind": "css",
+          "property": "box-sizing/width/height",
+          "reason": "Prototype reports content-box CSS dimensions while React reports border-box dimensions; screenshot bounds and pixels match exactly."
+        }
+      ]
     }
   ]
 }

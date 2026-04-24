@@ -7,10 +7,25 @@ export type FieldProps = {
   children: React.ReactNode;
 };
 export const Field = ({ label, hint, error, children }: FieldProps) => (
-  <div {...pyxisPart('field')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-    {label && <label {...pyxisPart('field', 'label')} style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: error ? 'var(--color-accent)' : 'var(--color-text-primary)' }}>{label}</label>}
+  <div {...pyxisPart('field')} style={{ marginBottom: 14 }}>
+    {label && (
+      <label
+        {...pyxisPart('field', 'label')}
+        style={{
+          display: 'block',
+          fontSize: 11,
+          fontWeight: 600,
+          color: 'var(--color-text-secondary)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          marginBottom: 6,
+        }}
+      >
+        {label}
+      </label>
+    )}
     {children}
-    {error && <span {...pyxisPart('field', 'error')} style={{ fontSize: 'var(--text-xs)', color: 'var(--color-accent)' }}>{error}</span>}
-    {!error && hint && <span {...pyxisPart('field', 'hint')} style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>{hint}</span>}
+    {error && <div {...pyxisPart('field', 'error')} style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginTop: 5 }}>{error}</div>}
+    {!error && hint && <div {...pyxisPart('field', 'hint')} style={{ fontSize: 11, color: 'var(--color-text-tertiary)', marginTop: 5 }}>{hint}</div>}
   </div>
 );
