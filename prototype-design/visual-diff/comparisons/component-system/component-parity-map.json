@@ -542,6 +542,146 @@
       },
       "confidence": "medium",
       "notes": "Newly added coverage target; not tuned yet."
+    },
+    {
+      "slug": "public-molecules-lineup-row-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "LineupRow",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-lineup-row-default']",
+        "styleSelector": "[data-comp='public-lineup-row-default'] tr"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-lineup-row-default']",
+        "styleSelector": "[data-comp='public-lineup-row-default'] [data-pyxis-component='lineup-row'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/lineup-row-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/lineup-row-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/lineup-row-default/index.html",
+        "pixelDiff": "11.5421% component; 11.5838% root",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Prototype is table row; React is unstyled inline/flex-ish div with role label. Coverage valid; needs styling/taxonomy follow-up."
+    },
+    {
+      "slug": "public-molecules-ticket-stub-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "TicketStub",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-ticket-stub-default']",
+        "styleSelector": "[data-comp='public-ticket-stub-default'] > div"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-ticket-stub-default']",
+        "styleSelector": "[data-comp='public-ticket-stub-default'] [data-pyxis-component='ticket-stub'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/ticket-stub-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/ticket-stub-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/ticket-stub-default/index.html",
+        "pixelDiff": "19.1037% component/root",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Prototype hand-rendered from ticket CTA/card motif; React TicketStub lacks matching CSS. Coverage valid; needs design decision/styling."
+    },
+    {
+      "slug": "public-molecules-archive-stats-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "ArchiveStats",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-archive-stats-default']",
+        "styleSelector": "[data-comp='public-archive-stats-default']"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-archive-stats-default']",
+        "styleSelector": "[data-comp='public-archive-stats-default'] [data-pyxis-component='archive-stats'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-stats-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/archive-stats-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/archive-stats-default/index.html",
+        "pixelDiff": "12.3927% component/root",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Prototype archive stats use public archive page four-stat strip; React composes generic Stat cards. Coverage valid; needs public-specific styling or accepted composition decision."
+    },
+    {
+      "slug": "public-molecules-year-group-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "YearGroup",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-year-group-default']",
+        "styleSelector": "[data-comp='public-year-group-default'] > div"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-year-group-default']",
+        "styleSelector": "[data-comp='public-year-group-default'] [data-pyxis-component='year-group'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/year-group-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/year-group-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/year-group-default/index.html",
+        "pixelDiff": "6.0084% component; 7.1849% root",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Prototype year header from archive page; React has close structure but token/font/spacing differences. Coverage valid."
+    },
+    {
+      "slug": "public-molecules-pub-show-row-default",
+      "domain": "public",
+      "level": "molecule",
+      "component": "PubShowRow",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-pub-show-row-default']",
+        "styleSelector": "[data-comp='public-pub-show-row-default'] > a"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-pub-show-row-default']",
+        "styleSelector": "[data-comp='public-pub-show-row-default'] [data-pyxis-component='pub-show-row'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/molecules/pub-show-row-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default/index.html",
+        "pixelDiff": "4.9310% component/root",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Prototype archive row vs React show row are related but not identical: React includes door/price/age stack. Coverage valid; may need separate archive-row vs upcoming-show-row taxonomy."
     }
   ]
 }

@@ -225,3 +225,20 @@ Prepared the public-site component parity handoff and reorganized public Storybo
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/YearGroup/YearGroup.stories.tsx — Moved Storybook title under Public/Molecules
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 15 diary entry
 
+
+## 2026-04-24
+
+Started public-site parity coverage by adding a dedicated public prototype fixture script, a Storybook public diff fixture, and five public molecule comparison configs. Ran typecheck and full css-visual-diff modes for all five targets; all have valid selector coverage and are recorded as needs-review.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js — New prototype fixture for public-site components
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx — New Storybook fixture for public-site components
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/lineup-row-default.css-visual-diff.yml — New public molecule comparison
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/ticket-stub-default.css-visual-diff.yml — New public molecule comparison
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-stats-default.css-visual-diff.yml — New public molecule comparison
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/year-group-default.css-visual-diff.yml — New public molecule comparison
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/public/molecules/pub-show-row-default.css-visual-diff.yml — New public molecule comparison
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Added public molecule parity entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 16 diary entry
+

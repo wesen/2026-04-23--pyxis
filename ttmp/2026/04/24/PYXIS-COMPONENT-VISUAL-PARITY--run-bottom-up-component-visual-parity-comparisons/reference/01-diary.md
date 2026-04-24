@@ -1879,3 +1879,153 @@ cd web && pnpm --filter pyxis-components typecheck
 
 Storybook title-only changes should not affect runtime component behavior, but they will change Storybook IDs for public stories. Future scripts should use the new `public-molecules-*` / `public-organisms-*` story IDs generated from these titles.
 
+## Step 16: Add public molecule fixture and first coverage batch
+
+This step began the public-site parity ladder after reading the public handoff. I committed the handoff/story taxonomy checkpoint first, then created the first public fixture pair and covered the P1 public molecules.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Continue with the work, read @ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md 
+
+Commit at appropriate intervals, keep a diary at frequent intervals. let's go through and cover all our design elements."
+
+**Assistant interpretation:** Read the handoff, commit the pending public taxonomy/handoff work, then continue bottom-up coverage into public-site design elements with frequent diary updates.
+
+**Inferred user intent:** Move from generic component coverage into systematic public-site coverage, prioritizing runnable comparison targets over immediate pixel-perfect tuning.
+
+### What I did
+
+- Read the full public-site handoff.
+- Committed the handoff and Storybook taxonomy change:
+
+```text
+b62f9a928c46d26e50d8239cbbf35abdb06c072d Organize public Storybook component taxonomy
+```
+
+- Created the prototype public fixture script:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+```
+
+- Created the Storybook public fixture:
+
+```text
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+```
+
+- Added first public molecule comparison configs:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/public/molecules/lineup-row-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/molecules/ticket-stub-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-stats-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/molecules/year-group-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/public/molecules/pub-show-row-default.css-visual-diff.yml
+```
+
+- Ran typecheck successfully after fixing the fixture Show mock shape:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Ran full visual diff modes for all five public molecule configs.
+- Updated the parity map with five `domain: public`, `level: molecule`, `needs-review` entries.
+- Inspected generated PNG comparisons for LineupRow, TicketStub, and PubShowRow with the image-reading path.
+
+### Results
+
+All five configs have valid selector coverage:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Pixel diff results:
+
+```text
+public-molecules-lineup-row-default       component 11.5421%; root 11.5838%
+public-molecules-ticket-stub-default      component/root 19.1037%
+public-molecules-archive-stats-default    component/root 12.3927%
+public-molecules-year-group-default       component 6.0084%; root 7.1849%
+public-molecules-pub-show-row-default     component/root 4.9310%
+```
+
+All are currently `needs-review`.
+
+### Why
+
+The public-site ladder needs the same coverage-first inventory as atoms/molecules. These first targets are the smallest public pieces and appear inside larger public pages or sections.
+
+### What worked
+
+The fixture architecture worked: a dedicated prototype script plus a dedicated Storybook fixture is cleaner than mixing public components into the generic molecule fixture.
+
+The public configs can live under:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/public/molecules/
+```
+
+without disturbing existing generic molecule configs.
+
+### What didn't work
+
+The first typecheck failed because my Storybook fixture mock `Show` objects used string IDs and omitted `created_at`/`updated_at`. I fixed them to match `web/packages/pyxis-components/src/mocks/types.ts`.
+
+### What I learned
+
+Several public components are not yet styled with dedicated CSS. For example, `LineupRow`, `TicketStub`, and `PubShowRow` render semantic markup/classes but currently have little or no matching public CSS, so diffs are expected.
+
+`PubShowRow` may be comparing two adjacent but not identical concepts: prototype archive row vs React public show row. This should be revisited before pixel tuning.
+
+### What was tricky to build
+
+The tricky part was choosing prototype equivalents for components that are not one-to-one with named prototype functions. For this first pass I hand-rendered closest public-page shapes from `ppxis.jsx`.
+
+### What warrants a second pair of eyes
+
+- Whether `TicketStub` has a stronger prototype reference than the hand-rendered ticket card motif.
+- Whether `PubShowRow` should be split into archive row vs upcoming show row.
+- Whether `ArchiveStats` should compose generic `Stat` cards or have public-specific styling.
+
+### What should be done in the future
+
+- Commit this P1 public molecule coverage batch.
+- Start public organism coverage with `PubNav`, `PubFooter`, `PubHero`, and `AboutHero`.
+- Later return to tune public molecules after taxonomy/design decisions.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/public/molecules/*.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+for cfg in prototype-design/visual-diff/comparisons/component-system/public/molecules/*.css-visual-diff.yml; do
+  css-visual-diff run --config "$cfg" --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+done
+```
+
+Generated reports:
+
+```text
+prototype-design/visual-comparisons/component-system/public/molecules/lineup-row-default/index.html
+prototype-design/visual-comparisons/component-system/public/molecules/ticket-stub-default/index.html
+prototype-design/visual-comparisons/component-system/public/molecules/archive-stats-default/index.html
+prototype-design/visual-comparisons/component-system/public/molecules/year-group-default/index.html
+prototype-design/visual-comparisons/component-system/public/molecules/pub-show-row-default/index.html
+```
+

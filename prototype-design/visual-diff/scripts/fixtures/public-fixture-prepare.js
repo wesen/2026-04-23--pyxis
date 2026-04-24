@@ -1,0 +1,108 @@
+(() => {
+  const root = document.createElement('div');
+  root.id = 'public-capture-root';
+  root.style.cssText = [
+    'width: 920px',
+    'padding: 24px',
+    'background: #F3F1EB',
+    'color: #1F1E1C',
+    "font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    'display: flex',
+    'flex-direction: column',
+    'gap: 22px',
+    'box-sizing: border-box',
+  ].join(';');
+
+  const PINK = '#C8270D';
+  const PMUTE = '#8E887E';
+  const PRULE = '#EAE7E0';
+
+  const e = (tag, attrs = {}, ...children) => {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (key === 'style' && value && typeof value === 'object') Object.assign(node.style, value);
+      else if (key.startsWith('data-')) node.setAttribute(key, value);
+      else node[key] = value;
+    }
+    for (const child of children.flat()) {
+      if (child == null) continue;
+      node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+    }
+    return node;
+  };
+
+  const row = (label, children) => e('div', { style: { display: 'grid', gridTemplateColumns: '140px 1fr', gap: '16px', alignItems: 'start' } },
+    e('div', { style: { fontSize: '12px', color: PMUTE, paddingTop: '8px' } }, label),
+    e('div', { style: { display: 'flex', gap: '18px', alignItems: 'flex-start', flexWrap: 'wrap' } }, children),
+  );
+
+  root.append(
+    e('h1', { style: { margin: '0', fontFamily: "'Fraunces', serif", fontSize: '24px', fontWeight: '500' } }, 'Public diff fixture'),
+
+    row('Lineup', [
+      e('div', { 'data-comp': 'public-lineup-row-default', style: { width: '360px' } },
+        e('table', { style: { width: '100%', borderCollapse: 'collapse', fontSize: '14px' } },
+          e('tbody', null,
+            e('tr', { style: { borderTop: `1px solid ${PRULE}` } },
+              e('td', { style: { padding: '12px 12px 12px 0', color: PMUTE, fontVariantNumeric: 'tabular-nums', width: '60px', verticalAlign: 'top' } }, '9:45'),
+              e('td', { style: { padding: '12px 0', color: PINK, fontWeight: '600', verticalAlign: 'top' } },
+                'sable witch',
+                e('div', { style: { fontSize: '11.5px', color: PMUTE, fontWeight: '400', marginTop: '2px', fontStyle: 'italic' } }, 'opener · dj set'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ]),
+
+    row('Ticket', [
+      e('div', { 'data-comp': 'public-ticket-stub-default', style: { width: '260px' } },
+        e('div', { style: { border: `1px solid ${PRULE}`, borderRadius: '4px', background: '#fff', padding: '14px', display: 'grid', gap: '8px' } },
+          e('div', { style: { fontSize: '10.5px', letterSpacing: '.14em', textTransform: 'uppercase', color: PMUTE, fontWeight: '600' } }, 'Admit one'),
+          e('div', { style: { fontFamily: "'Fraunces', serif", fontSize: '22px', fontWeight: '600', color: PINK, letterSpacing: '-.02em' } }, 'Redroom Inferno'),
+          e('div', { style: { height: '1px', background: PRULE, margin: '2px 0' } }),
+          e('div', { style: { display: 'flex', justifyContent: 'space-between', color: PMUTE, fontSize: '12.5px' } },
+            e('span', null, '$10 adv / $15 door'),
+            e('span', null, '25+'),
+          ),
+        ),
+      ),
+    ]),
+
+    row('Archive stats', [
+      e('div', { 'data-comp': 'public-archive-stats-default', style: { width: '680px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', padding: '18px 0', borderTop: `1px solid ${PRULE}`, borderBottom: `1px solid ${PRULE}` } },
+        [['194', 'shows'], ['312', 'artists'], ['31', 'residencies'], ['0', 'cops called']].map(([n, l]) =>
+          e('div', null,
+            e('div', { style: { fontFamily: "'Fraunces', serif", fontSize: '34px', fontWeight: '600', color: PINK, letterSpacing: '-.02em', fontVariantNumeric: 'tabular-nums' } }, n),
+            e('div', { style: { fontSize: '11px', color: PMUTE, letterSpacing: '.12em', textTransform: 'uppercase', marginTop: '2px' } }, l),
+          ),
+        ),
+      ),
+    ]),
+
+    row('Year group', [
+      e('div', { 'data-comp': 'public-year-group-default', style: { width: '560px' } },
+        e('div', { style: { display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '12px', borderBottom: `1px solid ${PRULE}`, paddingBottom: '8px' } },
+          e('div', { style: { fontFamily: "'Fraunces', serif", fontSize: '34px', fontWeight: '500', color: PINK, letterSpacing: '-.02em' } }, '2025'),
+          e('div', { style: { fontSize: '11px', color: PMUTE, letterSpacing: '.12em', textTransform: 'uppercase' } }, '8 shows'),
+        ),
+      ),
+    ]),
+
+    row('Show row', [
+      e('div', { 'data-comp': 'public-pub-show-row-default', style: { width: '640px' } },
+        e('a', { style: { display: 'grid', gridTemplateColumns: '80px 1fr auto auto', gap: '18px', padding: '14px 0', textDecoration: 'none', alignItems: 'baseline', borderTop: `1px solid ${PRULE}` } },
+          e('div', { style: { fontSize: '12px', color: PMUTE, fontVariantNumeric: 'tabular-nums', letterSpacing: '.05em' } }, 'Dec 12'),
+          e('div', { style: { fontFamily: "'Fraunces', serif", fontSize: '18px', color: PINK, fontWeight: '500' } }, 'Winter Solstice Rave'),
+          e('div', { style: { fontSize: '11.5px', color: PMUTE, fontStyle: 'italic' } }, 'Electronic'),
+          e('div', { style: { fontSize: '11.5px', color: PMUTE } }, 'recap →'),
+        ),
+      ),
+    ]),
+  );
+
+  document.body.innerHTML = '';
+  document.body.style.margin = '0';
+  document.body.style.background = '#F3F1EB';
+  document.body.appendChild(root);
+})();
