@@ -370,3 +370,82 @@ various/prototype-baseline/sample-public-components/poster-redroom/poster/screen
 various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
 various/prototype-baseline/sample-public-components/nav-desktop/nav/screenshot.png
 ```
+
+## Step 4: Write the HTML prototype baseline extraction playbook
+
+After adding direct public prototype catalog fixtures, I wrote a ticket-local playbook that explains the end-to-end method for extracting trustworthy baselines from `.html` prototype files. The playbook focuses on the distinction between DesignCanvas screenshots and prepared component/page render roots, and it records the sample-first workflow that prevented runaway full-catalog runs while selectors were still being authored.
+
+The document is intentionally practical: it includes command examples, YAML patterns, artifact expectations, selector debugging steps, timeout guidance, and a checklist for committing new baseline configs.
+
+### Prompt Context
+
+**User prompt (verbatim):** "write a detailed playbook on how to do this baseline screenshotting / extracting from a .html file. Store in ticket"
+
+**Assistant interpretation:** Create a durable ticket-local guide for extracting prototype baseline PNG/CSS/HTML/inspect artifacts from Pyxis prototype HTML files using css-visual-diff.
+
+**Inferred user intent:** Enable the next developer to repeat and extend the prototype baseline catalog without relying on chat history or fragile ad hoc commands.
+
+### What I did
+
+- Added `playbooks/02-html-prototype-baseline-extraction-playbook.md`.
+- Covered:
+  - serving prototype HTML,
+  - why not to trust DesignCanvas screenshots,
+  - `direct-react-global` prepare hooks,
+  - page-level baselines,
+  - Full App Foundations baseline extraction,
+  - direct component fixture baselines,
+  - YAML authoring patterns,
+  - sample-first loop,
+  - manual PNG inspection with the `read` image tool,
+  - prepared HTML debugging,
+  - timeout guards for selector authoring,
+  - storage conventions,
+  - adding new component baselines,
+  - comparing baselines to Storybook later.
+
+### Why
+
+The prototype baseline workflow is now central to the Pyxis pixel-perfect work. It needs to be explicit and reproducible inside the ticket, especially because the workflow crosses prototype HTML, browser globals, css-visual-diff configs, generated artifacts, and Storybook repair work.
+
+### What worked
+
+The playbook now documents the exact lessons from the previous sample runs, including the `show-tile-redroom` selector hang and the corrected nested selectors.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The baseline extraction workflow is easiest to teach when framed as a three-layer process:
+
+1. prepare the `.html` into a clean render root,
+2. extract a small trusted sample,
+3. only then expand to a component/page matrix.
+
+### What was tricky to build
+
+The playbook must be clear that extraction-only configs still duplicate `original` and `react` targets because css-visual-diff remains comparison-shaped. The actual extraction command uses one side, usually `--side original`.
+
+### What warrants a second pair of eyes
+
+Review whether the playbook's recommended output/storage paths match the long-term docmgr artifact policy.
+
+### What should be done in the future
+
+Keep the playbook current as new prototype fixture wrappers and configs are added.
+
+### Code review instructions
+
+Start with:
+
+```text
+playbooks/02-html-prototype-baseline-extraction-playbook.md
+```
+
+Then validate the commands referenced in the playbook with:
+
+```bash
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/scripts/08-run-prototype-public-component-sample.sh
+```

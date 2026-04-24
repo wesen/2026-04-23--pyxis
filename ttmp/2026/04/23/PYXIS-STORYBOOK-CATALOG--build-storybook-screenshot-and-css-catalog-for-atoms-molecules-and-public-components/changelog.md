@@ -54,3 +54,18 @@
 ### Fixed while authoring
 - Corrected `show-tile-redroom` nested selectors after the first sample run hung on a missing title selector.
 - Added a `timeout 90s` guard to the sample runner to avoid long waits while authoring selectors.
+
+## 2026-04-24 — Add HTML prototype baseline extraction playbook
+
+### Added
+- Added `playbooks/02-html-prototype-baseline-extraction-playbook.md`.
+
+### Contents
+- How to serve prototype `.html` files.
+- Why to bypass DesignCanvas and use prepared render roots.
+- How to use `direct-react-global` for page and component baselines.
+- How to author YAML configs and inspect artifacts.
+- How to debug selectors via `prepared.html`.
+- How to avoid long hangs with `timeout` while authoring configs.
+- How to store generated artifacts and what not to commit.
+- Checklist for adding new baseline configs.
