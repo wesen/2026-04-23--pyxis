@@ -170,3 +170,32 @@ Continued the main organism parity workflow with Modal default. Added prototype 
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated organism status list with Modal follow-up state
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 12 diary entry
 
+
+## 2026-04-24
+
+Returned focus to molecule coverage rather than pixel-perfect tuning. Added missing molecule fixture states and comparison configs for CardHead default, LogRow default, and Table default. Ran each config through deterministic modes and recorded all three as needs-review in the parity map.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js — Added CardHead, LogRow, and Table fixture states
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx — Added matching Storybook molecule states
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/card-head-default.css-visual-diff.yml — CardHead comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml — LogRow comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/table-default.css-visual-diff.yml — Table comparison config
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Recorded new molecule targets as needs-review
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Updated wired-but-not-tuned molecule list
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 13 diary entry
+
+
+## 2026-04-24
+
+Reframed LogRow coverage to compare React LogRow against a hand-rendered prototype show-detail lineup row instead of the prototype audit/activity LogRow helper. Re-ran the LogRow comparison and kept it as needs-review for future taxonomy/styling decisions.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js — Updated LogRow prototype fixture to a show-detail lineup row
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml — Updated prototype root selector for lineup row fixture
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated LogRow notes and pixel result
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Clarified LogRow coverage status
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/01-diary.md — Detailed Step 14 diary entry
+

@@ -33,6 +33,13 @@
       e('div', { 'data-comp': 'card-default', style: { width: 260 } },
         e(window.Card, null, 'Basic card content'),
       ),
+      e('div', { 'data-comp': 'card-head-default', style: { width: 360 } },
+        e(window.CardHead, {
+          title: 'Upcoming shows',
+          subtitle: 'Confirmed and tentative holds for this month.',
+          action: e(window.Btn, { variant: 'outline', size: 'sm' }, 'View all'),
+        }),
+      ),
     ]),
 
     row('Fields', [
@@ -60,6 +67,40 @@
           title: 'No bookings yet',
           sub: 'When artists submit booking requests, they will appear here.',
           action: e(window.Btn, { variant: 'primary', size: 'sm' }, 'Create hold'),
+        }),
+      ),
+    ]),
+
+    row('Rows', [
+      e('div', { 'data-comp': 'log-row-default', style: { width: 420 } },
+        e('table', { style: { width: '100%', borderCollapse: 'collapse', fontSize: 14 } },
+          e('tbody', null,
+            e('tr', { style: { borderTop: '1px solid #EAE7E0' } },
+              e('td', { style: { padding: '12px 12px 12px 0', color: '#8E887E', fontVariantNumeric: 'tabular-nums', width: 60, verticalAlign: 'top' } }, '21:30'),
+              e('td', { style: { padding: '12px 0', color: '#1F1E1C', fontWeight: 600, verticalAlign: 'top' } },
+                'Luna Mesa',
+                e('div', { style: { fontSize: 11.5, color: '#8E887E', fontWeight: 400, marginTop: 2, fontStyle: 'italic' } }, 'headline'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ]),
+
+    row('Tables', [
+      e('div', { 'data-comp': 'table-default', style: { width: 520 } },
+        e(window.Table, {
+          cols: [
+            { key: 'date', label: 'Date', width: 100 },
+            { key: 'artist', label: 'Artist' },
+            { key: 'status', label: 'Status', render: r => e(window.Badge, { status: r.status }, r.status) },
+            { key: 'capacity', label: 'Capacity', width: 120 },
+          ],
+          rows: [
+            { date: 'May 03', artist: 'Luna Mesa', status: 'confirmed', capacity: '122 / 150' },
+            { date: 'May 11', artist: 'Red Room DJs', status: 'pending', capacity: '88 / 150' },
+            { date: 'May 18', artist: 'Zola Sings', status: 'declined', capacity: '—' },
+          ],
         }),
       ),
     ]),

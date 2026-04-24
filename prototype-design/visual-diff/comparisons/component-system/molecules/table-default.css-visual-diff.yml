@@ -1,0 +1,62 @@
+metadata:
+  slug: molecules-table-default
+  title: Molecule table default — prototype vs Storybook
+  level: molecule
+  component: table
+  state: default
+  prototype_source: prototype-design/Pyxis Public Site.html
+  storybook_story_id: molecules-molecule-diff-fixture--default
+
+original:
+  name: prototype-table-default
+  url: http://localhost:7070/Pyxis%20Public%20Site.html
+  wait_ms: 1000
+  viewport: { width: 1200, height: 900 }
+  root_selector: "#molecule-capture-root"
+  prepare:
+    type: script
+    wait_for: "window.React && window.ReactDOM && window.CardHead && window.LogRow && window.Table && window.Badge && window.Btn"
+    wait_for_timeout_ms: 30000
+    script_file: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+    after_wait_ms: 1000
+
+react:
+  name: storybook-table-default
+  url: http://localhost:6006/iframe.html?id=molecules-molecule-diff-fixture--default&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 900 }
+  root_selector: "[data-fixture='pyxis-molecules']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-fixture=\"pyxis-molecules\"] [data-comp=\"table-default\"]') && (!document.fonts || document.fonts.status === 'loaded')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#F3F1EB';
+    after_wait_ms: 250
+
+sections:
+  - name: component
+    selector_original: "[data-comp='table-default']"
+    selector_react: "[data-comp='table-default']"
+  - name: root
+    selector_original: "[data-comp='table-default'] table"
+    selector_react: "[data-comp='table-default'] [data-pyxis-component='table'][data-pyxis-part='table']"
+
+styles:
+  - name: root
+    selector_original: "[data-comp='table-default'] table"
+    selector_react: "[data-comp='table-default'] [data-pyxis-component='table'][data-pyxis-part='table']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, display, align-items, justify-content, gap, font-family, font-size, font-weight, line-height, letter-spacing, color, background, background-color, border, border-color, border-width, border-style, border-radius]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/component-system/molecules/table-default
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]

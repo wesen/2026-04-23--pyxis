@@ -1,11 +1,15 @@
 import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Badge } from '../atoms/Badge';
 import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
 import { Card } from './Card';
+import { CardHead } from './CardHead';
 import { Empty } from './Empty';
 import { Field } from './Field';
+import { LogRow } from './LogRow';
 import { Stat } from './Stat';
+import { Table, type Column } from './Table';
 import '../atoms/Button/Button.css';
 import '../atoms/Input/Input.css';
 import './Card/Card.css';
@@ -18,6 +22,21 @@ function FixtureRow({ label, children }: { label: string; children: React.ReactN
     </div>
   );
 }
+
+type ShowRow = { date: string; artist: string; status: 'confirmed' | 'pending' | 'declined'; capacity: string };
+
+const tableRows: ShowRow[] = [
+  { date: 'May 03', artist: 'Luna Mesa', status: 'confirmed', capacity: '122 / 150' },
+  { date: 'May 11', artist: 'Red Room DJs', status: 'pending', capacity: '88 / 150' },
+  { date: 'May 18', artist: 'Zola Sings', status: 'declined', capacity: '—' },
+];
+
+const tableColumns: Column<ShowRow>[] = [
+  { key: 'date', label: 'Date', width: '100px' },
+  { key: 'artist', label: 'Artist' },
+  { key: 'status', label: 'Status', render: (row) => <Badge status={row.status}>{row.status}</Badge> },
+  { key: 'capacity', label: 'Capacity', width: '120px' },
+];
 
 function MoleculeDiffFixture() {
   return (
@@ -38,6 +57,13 @@ function MoleculeDiffFixture() {
 
       <FixtureRow label="Cards">
         <div data-comp="card-default" style={{ width: 260 }}><Card>Basic card content</Card></div>
+        <div data-comp="card-head-default" style={{ width: 360 }}>
+          <CardHead
+            title="Upcoming shows"
+            subtitle="Confirmed and tentative holds for this month."
+            action={<Button variant="outline" size="sm">View all</Button>}
+          />
+        </div>
       </FixtureRow>
 
       <FixtureRow label="Fields">
@@ -66,6 +92,18 @@ function MoleculeDiffFixture() {
             description="When artists submit booking requests, they will appear here."
             action={<Button variant="primary" size="sm">Create hold</Button>}
           />
+        </div>
+      </FixtureRow>
+
+      <FixtureRow label="Rows">
+        <div data-comp="log-row-default" style={{ width: 420 }}>
+          <LogRow artist="Luna Mesa" role="headline" startTime="21:30" />
+        </div>
+      </FixtureRow>
+
+      <FixtureRow label="Tables">
+        <div data-comp="table-default" style={{ width: 520 }}>
+          <Table columns={tableColumns} rows={tableRows} />
         </div>
       </FixtureRow>
     </div>

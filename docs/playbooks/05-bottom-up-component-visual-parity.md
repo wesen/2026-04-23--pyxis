@@ -190,6 +190,14 @@ Accepted organism targets currently at `0.0000%` pixel diff:
 topbar-default
 ```
 
+Molecule targets currently wired but needing a future parity pass:
+
+```text
+card-head-default — config/report exists; not tuned yet
+log-row-default — config/report exists; now compared to a prototype show-detail lineup row; CSS still needs future alignment
+table-default — config/report exists; not tuned yet
+```
+
 Organism targets currently needing a follow-up pass:
 
 ```text

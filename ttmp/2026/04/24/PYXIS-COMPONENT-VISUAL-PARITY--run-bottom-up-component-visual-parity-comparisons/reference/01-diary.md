@@ -1492,3 +1492,269 @@ prototype-design/visual-comparisons/component-system/organisms/modal-default/pix
 prototype-design/visual-comparisons/component-system/organisms/modal-default/pixeldiff_footer_diff_comparison.png
 ```
 
+## Step 13: Add missing molecule coverage targets without tuning
+
+This step corrected the workflow priority: instead of continuing upward into public components or trying to make every new target pixel-perfect immediately, I returned to the generic molecule layer and added coverage for the molecules that were still missing from the shared molecule diff fixture.
+
+The goal was coverage, not acceptance. Each missing molecule now has a prototype fixture state, a Storybook fixture state, a comparison config, generated reports, and a parity-map entry marked `needs-review`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "focus right now is to go through all the molecules and adding the ones missing, not getting them pixel perfect"
+
+**Assistant interpretation:** Stop polishing or moving upward; make sure all generic molecules have parity fixture/config coverage, even if the initial diffs are non-zero.
+
+**Inferred user intent:** Build the comparison inventory first so later work can cycle back and tune components systematically.
+
+### What I did
+
+- Added missing molecule states to:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+```
+
+- Added these missing molecule targets:
+
+```text
+card-head-default
+log-row-default
+table-default
+```
+
+- Wrote comparison configs:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/molecules/card-head-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/table-default.css-visual-diff.yml
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Ran full deterministic modes for each new target:
+
+```bash
+css-visual-diff run --config ... --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+- Updated `component-parity-map.json` with the three targets as `needs-review`.
+- Updated the playbook status list with the newly wired-but-not-tuned molecules.
+
+### Why
+
+The bottom-up map is more useful if the layer is complete before moving upward. Missing molecule configs create blind spots: later organism/page diffs can be noisy because a nested molecule has never been compared in isolation.
+
+### What worked
+
+All three new configs are runnable and have section coverage:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Initial pixel results:
+
+```text
+card-head-default component 15.8700%; root 16.3729%
+log-row-default   component/root 16.3240%
+table-default     component/root 9.6013%
+```
+
+These are intentionally recorded as `needs-review`, not failures.
+
+### What didn't work
+
+These are not tuned. In particular, `log-row-default` is probably a semantic mismatch: the prototype `LogRow` is an audit/activity row (`time`, `user`, `action`, `type`) while the React `LogRow` is a lineup row (`artist`, `role`, `startTime`). That mismatch should be resolved before trying to make it pixel-perfect.
+
+### What I learned
+
+Coverage-first and parity-first are different modes. The current phase should prefer getting every molecule into the parity map, even if the first diff is ugly, because it creates an explicit queue for future tuning.
+
+### What was tricky to build
+
+The tricky part was choosing prototype fixture states for components whose semantics have drifted. `CardHead` and `Table` are straightforward. `LogRow` needs a design decision: either React should represent the prototype audit row, or the prototype fixture should add a lineup-row analogue.
+
+### What warrants a second pair of eyes
+
+- Decide whether `LogRow` should mean audit row, lineup row, or whether these should be separate components.
+- Confirm whether `CardHead` should be considered a standalone molecule or folded into `Card` only.
+- Confirm which table state should be canonical for future tuning.
+
+### What should be done in the future
+
+- Cycle back to `card-head-default`, `log-row-default`, and `table-default` after the molecule inventory is complete.
+- Resolve the `LogRow` semantic mismatch before styling it.
+- Consider adding molecule targets for any remaining exported molecules discovered later.
+
+### Code review instructions
+
+Review fixture/config coverage:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+web/packages/pyxis-components/src/molecules/MoleculeDiffFixture.stories.tsx
+prototype-design/visual-diff/comparisons/component-system/molecules/card-head-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/table-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+for target in card-head-default log-row-default table-default; do
+  css-visual-diff run \
+    --config prototype-design/visual-diff/comparisons/component-system/molecules/$target.css-visual-diff.yml \
+    --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+done
+```
+
+### Technical details
+
+Generated reports:
+
+```text
+prototype-design/visual-comparisons/component-system/molecules/card-head-default/index.html
+prototype-design/visual-comparisons/component-system/molecules/log-row-default/index.html
+prototype-design/visual-comparisons/component-system/molecules/table-default/index.html
+```
+
+## Step 14: Reframe LogRow as a show-detail lineup row
+
+This step incorporated the clarification that React `LogRow` appears to correspond to lineup rows from the public show detail page, not the prototype's generic audit/activity `LogRow` helper. I adjusted the prototype molecule fixture accordingly.
+
+The goal remains coverage rather than pixel perfection. The important outcome is that `log-row-default` now compares against a semantically closer prototype fixture, even though its CSS is still very different.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue. the LogRow seems to be the lineup rows fromt he show detail page but the CSS is very different. It's probably something that the designer made up and is not present elsewhere.
+
+Let's continue"
+
+**Assistant interpretation:** Update the LogRow comparison target to reflect that React LogRow should be compared to the public show-detail lineup row style, then continue the coverage-first molecule workflow.
+
+**Inferred user intent:** Avoid treating the prototype audit-row helper as the source of truth for React LogRow; keep building the comparison map without trying to force pixel-perfect fixes now.
+
+### What I did
+
+- Updated the prototype molecule fixture for `log-row-default` in:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+```
+
+- Replaced the previous prototype `window.LogRow` audit-row render with a hand-rendered show-detail-style lineup table row:
+
+```text
+time cell: 21:30
+artist cell: Luna Mesa
+role/subtitle: headline
+```
+
+- Updated the LogRow comparison config selector:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml
+```
+
+so the prototype root probe targets:
+
+```text
+[data-comp='log-row-default'] tr
+```
+
+- Re-ran the LogRow comparison with full modes.
+- Updated the parity map and playbook notes.
+
+### Why
+
+The original coverage config compared React `LogRow` against the wrong prototype concept. The React component API is:
+
+```text
+artist, role, startTime
+```
+
+That is closer to the public show-detail lineup table than to the prototype audit `LogRow`, whose API is:
+
+```text
+time, user, action, type
+```
+
+### What worked
+
+The updated comparison is runnable and semantically closer:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Updated pixel result:
+
+```text
+log-row-default component | 7.3399% | 1788/24360
+log-row-default root      | 7.1972% | 1723/23940
+```
+
+This is substantially better than the earlier ~16% mismatch and now reflects real CSS/layout differences rather than a wholly wrong source concept.
+
+### What didn't work
+
+The component is still not tuned. The screenshot shows the prototype row as a table-style lineup entry and React as a flex row with role text on the right. This is expected for now and remains `needs-review`.
+
+### What I learned
+
+Some prototype shapes are not reusable components; they are designer-made local page patterns. For coverage, it is still useful to hand-render the closest prototype fixture state, but the parity map should flag that the source is a local page pattern rather than a global prototype helper.
+
+### What was tricky to build
+
+The tricky part was preserving the coverage-first discipline. It would be tempting to rewrite React `LogRow` immediately, but the current task is to make missing molecule targets visible and runnable. The semantic correction was necessary; pixel tuning can wait.
+
+### What warrants a second pair of eyes
+
+- Whether React `LogRow` should be renamed to `LineupRow` or reconciled with the public `LineupRow` component.
+- Whether this molecule should remain in generic molecules at all if it belongs to show-detail/public domain UI.
+
+### What should be done in the future
+
+- Decide whether to keep `LogRow` generic, move it, or split audit-row and lineup-row concepts.
+- Tune `log-row-default` only after that component taxonomy decision.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
+prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate with:
+
+```bash
+css-visual-diff run \
+  --config prototype-design/visual-diff/comparisons/component-system/molecules/log-row-default.css-visual-diff.yml \
+  --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+Generated report:
+
+```text
+prototype-design/visual-comparisons/component-system/molecules/log-row-default/index.html
+```
+
