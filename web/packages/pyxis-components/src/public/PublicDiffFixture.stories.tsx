@@ -15,6 +15,7 @@ import { EthosStrip } from './EthosStrip';
 import { MailingListCTA } from './MailingListCTA';
 import { BookingRules } from './BookingRules';
 import { BookingSuccess } from './BookingSuccess';
+import { BookingForm } from './BookingForm';
 
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -133,6 +134,10 @@ function PublicDiffFixture() {
       <FixtureRow label="Booking">
         <div data-comp="public-booking-rules-default" style={{ width: 320 }}><BookingRules /></div>
         <div data-comp="public-booking-success-default" style={{ width: 420 }}><BookingSuccess artistName="sable witch" /></div>
+      </FixtureRow>
+
+      <FixtureRow label="Booking form">
+        <div data-comp="public-booking-form-default" style={{ width: 560 }}><BookingForm /></div>
       </FixtureRow>
     </div>
   );

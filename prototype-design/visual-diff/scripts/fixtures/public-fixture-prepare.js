@@ -151,6 +151,33 @@
       e('div', { 'data-comp': 'public-booking-success-default', style: { width: '420px', textAlign: 'center', padding: '48px 24px' } }, e('h2',{style:{fontFamily:"'Fraunces', serif",fontSize:'24px',fontWeight:'500',color:PINK,margin:'0 0 8px'}},'Inquiry sent — sable witch'), e('p',{style:{color:PMUTE,margin:'0 0 24px'}},"We'll be in touch within a week or two.")),
     ]),
 
+    row('Booking form', [
+      e('div', { 'data-comp': 'public-booking-form-default', style: { width: '560px' } },
+        e('form', { style: { display: 'grid', gap: '18px' } },
+          e('div', { style: { fontSize: '13.5px', color: PMUTE, lineHeight: '1.7', fontStyle: 'italic' } }, 'tell us about your show. we read every submission. responses in 3–7 days. we book 6–10 weeks out; late requests get the unused-dates list.'),
+          ['Your name', 'Email', 'Project / artist name'].map((label, i) =>
+            e('label', { style: { display: 'block' } },
+              e('div', { style: { fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: PMUTE, fontWeight: '600', marginBottom: '6px' } }, label),
+              e('input', { placeholder: i === 1 ? 'you@label.com' : '', style: { width: '100%', border: 'none', borderBottom: `1.5px solid ${PRULE}`, background: 'transparent', padding: '8px 0', fontFamily: 'inherit', fontSize: '14.5px', color: PINK, outline: 'none', boxSizing: 'border-box' } }),
+            ),
+          ),
+          e('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '18px' } },
+            ['Preferred date', 'Expected draw'].map((label) =>
+              e('label', null,
+                e('div', { style: { fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: PMUTE, fontWeight: '600', marginBottom: '6px' } }, label),
+                e(label === 'Expected draw' ? 'select' : 'input', { placeholder: label === 'Preferred date' ? 'e.g. late April' : '', style: { width: '100%', border: 'none', borderBottom: `1.5px solid ${PRULE}`, background: 'transparent', padding: '8px 0', fontFamily: 'inherit', fontSize: '14.5px', color: PINK, outline: 'none', boxSizing: 'border-box' } }, label === 'Expected draw' ? e('option', null, 'Under 50') : null),
+              ),
+            ),
+          ),
+          e('label', null,
+            e('div', { style: { fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: PMUTE, fontWeight: '600', marginBottom: '6px' } }, 'Tell us about it'),
+            e('textarea', { rows: 6, placeholder: "who's on the bill, what it sounds like, what you need from us", style: { width: '100%', border: `1px solid ${PRULE}`, background: '#fff', borderRadius: '4px', padding: '12px', fontFamily: 'inherit', fontSize: '14px', color: PINK, outline: 'none', resize: 'vertical', boxSizing: 'border-box' } }),
+          ),
+          e('button', { type: 'submit', style: { justifySelf: 'start', background: PINK, color: '#fff', border: 'none', borderRadius: '4px', padding: '12px 22px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit', letterSpacing: '.02em' } }, 'Send inquiry →'),
+        ),
+      ),
+    ]),
+
     row('Show row', [
       e('div', { 'data-comp': 'public-pub-show-row-default', style: { width: '640px' } },
         e('a', { style: { display: 'grid', gridTemplateColumns: '80px 1fr auto auto', gap: '18px', padding: '14px 0', textDecoration: 'none', alignItems: 'baseline', borderTop: `1px solid ${PRULE}` } },

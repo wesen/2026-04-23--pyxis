@@ -962,6 +962,34 @@
       },
       "confidence": "medium",
       "notes": "Close but not accepted: logo color differs in React/root evidence and small spacing/font differences remain."
+    },
+    {
+      "slug": "public-organisms-booking-form-default",
+      "domain": "public",
+      "level": "organism",
+      "component": "BookingForm",
+      "state": "default",
+      "status": "needs-review",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js",
+        "sectionSelector": "[data-comp='public-booking-form-default']",
+        "styleSelector": "[data-comp='public-booking-form-default'] > form"
+      },
+      "storybook": {
+        "storyId": "public-fixtures-public-diff-fixture--default",
+        "sectionSelector": "[data-comp='public-booking-form-default']",
+        "styleSelector": "[data-comp='public-booking-form-default'] [data-pyxis-component='booking-form'][data-pyxis-part='root']"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/public/organisms/booking-form-default",
+        "report": "prototype-design/visual-comparisons/component-system/public/organisms/booking-form-default/index.html",
+        "pixelDiff": "component/root 12.0664%",
+        "cssDiff": "see cssdiff.md"
+      },
+      "confidence": "medium",
+      "notes": "Coverage target for the larger public booking workflow. Prototype form has fewer/different fields and underline controls; React BookingForm uses current atom inputs/selects/textareas and additional fields, so this remains needs-review rather than a pixel-tuning target until taxonomy/field parity is decided."
     }
   ]
 }

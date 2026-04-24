@@ -2185,3 +2185,105 @@ for cfg in prototype-design/visual-diff/comparisons/component-system/public/orga
 done
 ```
 
+## Step 18: Add BookingForm workflow coverage
+
+This step added coverage for the remaining larger public workflow component, `BookingForm`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the public-site design-element coverage pass after the public organism batch, starting with the explicitly deferred `BookingForm` workflow.
+
+### What I did
+
+- Added `BookingForm` to the Storybook public diff fixture:
+
+```text
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+```
+
+- Added a hand-rendered prototype booking form state to:
+
+```text
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+```
+
+- Added a comparison config:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml
+```
+
+- Ran typecheck successfully:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+- Ran full css-visual-diff modes:
+
+```text
+capture
+cssdiff
+matched-styles
+pixeldiff
+html-report
+```
+
+- Inspected the generated PNG comparison with the image-reading path.
+- Updated the parity map with `public-organisms-booking-form-default`.
+
+### Result
+
+Coverage is valid:
+
+```text
+coverage total: 2
+original_missing: 0
+react_missing: 0
+```
+
+Pixel result:
+
+```text
+public-organisms-booking-form-default component/root 12.0664% | 46219/383040
+```
+
+Status: `needs-review`.
+
+### Why it remains needs-review
+
+The prototype booking form and React `BookingForm` are related but not identical. The prototype has the public-site underline form style and fewer/different fields. React uses the current atom `Input`, `Select`, `Textarea`, and `Button` components, includes required/hint text, and has additional fields such as genre, links, tech rider, and anything else.
+
+The comparison is useful coverage, but it should not be tuned blindly until field taxonomy and public booking-form requirements are decided.
+
+### What worked
+
+The new `css-visual-diff` build ran successfully for this target after the earlier fixture recursion was fixed.
+
+### What warrants a second pair of eyes
+
+- Whether public booking forms should use underline public styling or generic atom field styling.
+- Whether React `BookingForm` should match the prototype field set more closely.
+- Whether prototype form controls should become public-specific atoms/molecules.
+
+### Code review instructions
+
+Review:
+
+```text
+web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx
+prototype-design/visual-diff/scripts/fixtures/public-fixture-prepare.js
+prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd ..
+css-visual-diff run   --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml   --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
