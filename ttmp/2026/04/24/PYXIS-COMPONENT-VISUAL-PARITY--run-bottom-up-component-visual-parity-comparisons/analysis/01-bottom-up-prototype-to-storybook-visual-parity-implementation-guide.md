@@ -760,6 +760,13 @@ Two atom iterations have now validated the basic YAML `run` workflow:
 | --- | --- | --- | --- |
 | Button primary | `prototype-design/visual-diff/comparisons/component-system/atoms/button-primary.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff | Workflow works for exact atom fixture states. Use absolute output paths. |
 | Badge confirmed | `prototype-design/visual-diff/comparisons/component-system/atoms/badge-confirmed.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff after pruning auto-size width/height props | CSS property lists must be component-aware; pixel parity can coexist with harmless computed CSS differences. |
+| Tag default | `prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff | Simple inline atoms work well with focused wrapper selectors. |
+| Input search | `prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml` | `0.0000%` pixel diff after React sizing/icon wrapper fixes | Pixel diff localized a real React implementation mismatch after CSS diff identified sizing drift. |
+| Select status | `prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff after omitting display | Browser default control display can differ while pixels match; compare the visually meaningful control properties. |
+| Avatar md | `prototype-design/visual-diff/comparisons/component-system/atoms/avatar-md.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff after omitting box-sizing | Auto-sized visual equality can coexist with box-model bookkeeping differences. |
+| Icon calendar | `prototype-design/visual-diff/comparisons/component-system/atoms/icon-calendar.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff after omitting box-sizing | SVG icon geometry and stroke props are more meaningful than global box-sizing. |
+| IconButton edit | `prototype-design/visual-diff/comparisons/component-system/atoms/icon-button.css-visual-diff.yml` | `0.0000%` pixel diff; no CSS diff | Button-like icon controls compare cleanly with root probes. |
+| Textarea notes | `prototype-design/visual-diff/comparisons/component-system/atoms/textarea-notes.css-visual-diff.yml` | `0.0000%` pixel diff after adding fixture coverage and React CSS fix | Missing parity states should be added to both prototype and Storybook fixtures before comparing.
 
 Validated command sequence:
 
@@ -774,13 +781,16 @@ css-visual-diff css-md --config <config.yml> --side react --style root --output-
 css-visual-diff run --config <config.yml> --modes capture,cssdiff,matched-styles,pixeldiff,html-report
 ```
 
-Next recommended atom configs:
+Next recommended work is to move up one level to molecules:
 
 ```text
-prototype-design/visual-diff/comparisons/component-system/atoms/tag-default.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/component-system/atoms/select-status.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/field-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/stat-default.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/component-system/molecules/empty-default.css-visual-diff.yml
 ```
+
+Before broad molecule work, promote the atom fixture prepare script out of the older ticket workspace and into the canonical `prototype-design/visual-diff/scripts/` tree.
 
 ## 14. Immediate next actions
 

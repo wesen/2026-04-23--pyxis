@@ -128,6 +128,98 @@
       "confidence": "high",
       "notes": "Accepted in atom promotion batch.",
       "status": "accepted"
+    },
+    {
+      "slug": "atoms-avatar-md",
+      "level": "atom",
+      "component": "avatar",
+      "state": "md-initials",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/avatar-md.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/avatar-md",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/avatar-md/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none after omitting harmless box-sizing probe"
+      },
+      "confidence": "high",
+      "notes": "Accepted in remaining atom batch.",
+      "status": "accepted"
+    },
+    {
+      "slug": "atoms-icon-calendar",
+      "level": "atom",
+      "component": "icon",
+      "state": "calendar",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/icon-calendar.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/icon-calendar",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/icon-calendar/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none after omitting harmless box-sizing probe"
+      },
+      "confidence": "high",
+      "notes": "Accepted in remaining atom batch.",
+      "status": "accepted"
+    },
+    {
+      "slug": "atoms-icon-button",
+      "level": "atom",
+      "component": "icon-button",
+      "state": "edit",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/icon-button.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/icon-button",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/icon-button/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
+      },
+      "confidence": "high",
+      "notes": "Accepted in remaining atom batch.",
+      "status": "accepted"
+    },
+    {
+      "slug": "atoms-textarea-notes",
+      "level": "atom",
+      "component": "textarea",
+      "state": "notes-rows-2",
+      "prototype": {
+        "sourceHtml": "prototype-design/Pyxis Public Site.html",
+        "prepareScript": "ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js"
+      },
+      "storybook": {
+        "storyId": "atoms-atom-diff-fixture--default"
+      },
+      "comparison": {
+        "config": "prototype-design/visual-diff/comparisons/component-system/atoms/textarea-notes.css-visual-diff.yml",
+        "output": "prototype-design/visual-comparisons/component-system/atoms/textarea-notes",
+        "report": "prototype-design/visual-comparisons/component-system/atoms/textarea-notes/index.html",
+        "pixelDiff": "0.0000%",
+        "cssDiff": "none"
+      },
+      "confidence": "high",
+      "notes": "Accepted in remaining atom batch.",
+      "status": "accepted"
     }
   ]
 }

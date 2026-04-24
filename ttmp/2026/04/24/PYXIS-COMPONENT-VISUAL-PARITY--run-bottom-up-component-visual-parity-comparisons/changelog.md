@@ -46,3 +46,23 @@ Promoted atom comparison workflow to Tag default, Input search, and Select statu
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/atoms/Input/Input.css — Input sizing and icon positioning aligned to prototype
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/atoms/Input/Input.tsx — Input icon now uses a wrapper like the prototype
 
+
+## 2026-04-24
+
+Completed remaining AtomDiffFixture atom comparisons for Avatar, Icon, IconButton, and Textarea. Extended both prototype and Storybook atom fixtures for Textarea, fixed React Textarea CSS, and reached 0% pixel diff for all added atom configs.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/comparisons/component-system/component-parity-map.json — Updated accepted remaining atom entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx — Added Textarea fixture row
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/atoms/Textarea/Textarea.css — Aligned Textarea sizing and typography to prototype
+
+
+## 2026-04-24
+
+Updated the implementation guide with final atom sweep results and moved next recommendation to molecule comparisons plus promoting the atom fixture prepare script to canonical prototype-design scripts.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md — Atom sweep results and next molecule recommendations
+

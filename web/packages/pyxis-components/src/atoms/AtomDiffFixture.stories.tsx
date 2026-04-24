@@ -7,10 +7,12 @@ import { Icon, IconButton } from './Icon';
 import { Input } from './Input';
 import { Select } from './Select';
 import { Tag } from './Tag';
+import { Textarea } from './Textarea';
 import './Button/Button.css';
 import './Icon/Icon.css';
 import './Input/Input.css';
 import './Select/Select.css';
+import './Textarea/Textarea.css';
 
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -88,6 +90,12 @@ function AtomDiffFixture() {
             ]}
             onChange={() => {}}
           />
+        </div>
+      </FixtureRow>
+
+      <FixtureRow label="Textarea">
+        <div data-comp="textarea-notes" style={{ width: 260 }}>
+          <Textarea label="Notes" rows={2} defaultValue="Very loud — warn neighbours." />
         </div>
       </FixtureRow>
     </div>

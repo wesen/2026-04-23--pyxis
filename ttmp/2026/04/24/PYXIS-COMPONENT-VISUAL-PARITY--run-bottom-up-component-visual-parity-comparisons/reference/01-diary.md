@@ -22,20 +22,29 @@ RelatedFiles:
       Note: First runnable atom comparison config
     - Path: prototype-design/visual-diff/comparisons/component-system/atoms/input-search.css-visual-diff.yml
       Note: Input search parity config
+    - Path: prototype-design/visual-diff/comparisons/component-system/atoms/textarea-notes.css-visual-diff.yml
+      Note: Textarea atom parity config
     - Path: prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
       Note: Initial atom parity map
+    - Path: ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js
+      Note: Prototype atom fixture extended with Textarea
     - Path: ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md
       Note: Guide updated with validated atom iteration corrections
+    - Path: web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx
+      Note: Storybook atom fixture extended with Textarea
     - Path: web/packages/pyxis-components/src/atoms/Input/Input.css
       Note: Input content-box sizing and icon positioning parity fix
     - Path: web/packages/pyxis-components/src/atoms/Input/Input.tsx
       Note: Input icon wrapper parity fix
+    - Path: web/packages/pyxis-components/src/atoms/Textarea/Textarea.css
+      Note: Textarea parity CSS fix
 ExternalSources: []
 Summary: Chronological implementation diary for bottom-up prototype-to-Storybook component visual parity work.
 LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -453,3 +462,101 @@ Generated outputs remain ignored under:
 ```text
 prototype-design/visual-comparisons/component-system/atoms/
 ```
+
+## Step 5: Complete remaining AtomDiffFixture atom comparisons
+
+I continued the atom parity sweep with Avatar, Icon, IconButton, and Textarea. Avatar, Icon, and IconButton already had matching prototype and Storybook fixture examples, so they only needed comparison configs and the same inspect/run loop.
+
+Textarea was not present in the shared atom fixture, even though both prototype and React component libraries have a Textarea atom. I extended both the prototype prepare script and Storybook AtomDiffFixture with a matching `textarea-notes` row, then used the diff output to align React Textarea sizing/typography with the prototype.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue executing the atom visual parity workflow and close out the remaining atom coverage tasks where possible.
+
+**Inferred user intent:** Keep applying the validated workflow to build confidence before moving up to molecules.
+
+### What I did
+
+- Added comparison configs:
+  - `avatar-md.css-visual-diff.yml`
+  - `icon-calendar.css-visual-diff.yml`
+  - `icon-button.css-visual-diff.yml`
+  - `textarea-notes.css-visual-diff.yml`
+- Extended Storybook `AtomDiffFixture` with a Textarea row.
+- Extended the prototype atom prepare script with the same Textarea row.
+- Ran screenshot inspection for Avatar, Icon, IconButton, and Textarea.
+- Ran full deterministic comparison modes for all four.
+- Fixed React Textarea CSS to match prototype sizing/typography.
+- Updated the parity map and checked the remaining atom/Textarea tasks.
+
+### Why
+
+The first atom batch should cover the primitives already present in the fixture before we start molecule work. Textarea needed fixture coverage because otherwise we would compare a Storybook standalone story against no equivalent prototype atom fixture.
+
+### What worked
+
+Final results:
+
+```text
+avatar-md:       0.0000% pixel diff
+icon-calendar:   0.0000% pixel diff
+icon-button:     0.0000% pixel diff
+textarea-notes:  0.0000% pixel diff
+```
+
+Textarea initially differed, then matched after aligning React CSS:
+
+```text
+box-sizing: border-box -> content-box
+font-size:  14px      -> 13px
+line-height: 1.5      -> normal
+```
+
+### What didn't work
+
+Avatar and Icon had harmless `box-sizing: content-box vs border-box` CSS differences despite 0% pixel diff. As with Badge, I removed `box-sizing` from those atom configs because it is not a meaningful visual parity requirement for those auto-sized elements.
+
+Textarea was missing from the atom fixture, so the parity config could not be created without updating both prototype and Storybook fixture sources.
+
+### What I learned
+
+The atom fixture approach is very effective when both sides share the same `data-comp` wrapper names. It also makes missing coverage obvious: if the prototype fixture does not expose a state, the right fix is to add the same state to both fixtures rather than comparing unrelated stories.
+
+### What was tricky to build
+
+Textarea parity required touching both source-of-truth fixture layers. The prototype Textarea atom uses the shared `fldBase` style with `content-box`, `13px`, and `line-height: normal`. React Textarea had diverged to `border-box`, `14px`, and `1.5` line-height. The CSS diff made that exact divergence easy to fix.
+
+### What warrants a second pair of eyes
+
+- Review whether Textarea should follow the same content-box sizing contract as Input.
+- Review whether the old prototype prepare script under the previous ticket is still the right canonical home for the atom fixture, or whether we should promote it under `prototype-design/visual-diff/scripts/`.
+
+### What should be done in the future
+
+- Promote the atom fixture prepare script to a canonical repo-root script before building larger batches.
+- Start molecule Batch B with Card, Field, Stat, and Empty.
+
+### Code review instructions
+
+Review:
+
+```text
+web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx
+web/packages/pyxis-components/src/atoms/Textarea/Textarea.css
+ttmp/2026/04/23/PYXIS-SCREENSHOT-EXTRACTION--pyxis-screenshot-css-extraction-from-prototype-html/scripts/10-atom-original-prepare.js
+prototype-design/visual-diff/comparisons/component-system/atoms/textarea-notes.css-visual-diff.yml
+```
+
+Validate:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-components build-storybook
+cd ..
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/atoms/textarea-notes.css-visual-diff.yml --modes capture,cssdiff,matched-styles,pixeldiff,html-report
+```
+
+### Technical details
+
+The accepted atom parity map now includes Button, Badge, Tag, Input, Select, Avatar, Icon, IconButton, and Textarea states.

@@ -81,6 +81,14 @@
         ],
       })),
     ]),
+
+    row('Textarea', [
+      field('textarea-notes', 'Notes', e(window.Textarea, {
+        rows: 2,
+        value: 'Very loud — warn neighbours.',
+        onChange: () => {},
+      })),
+    ]),
   );
 
   if (window.ReactDOM.createRoot) {
