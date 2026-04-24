@@ -1,0 +1,429 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "full-screen",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.510450004Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(232, 228, 218)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "786.156px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 786.15625
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/full-screen/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/full-screen/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/full-screen/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.60260208Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background": "rgb(243, 241, 235) none repeat scroll 0% 0% / auto padding-box border-box",
+          "background-color": "rgb(243, 241, 235)",
+          "border": "0px none rgb(26, 26, 24)",
+          "border-color": "rgb(26, 26, 24)",
+          "border-radius": "0px",
+          "border-style": "none",
+          "border-width": "0px",
+          "box-shadow": "none",
+          "box-sizing": "content-box",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "flex-direction": "column",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "786.156px",
+          "justify-content": "normal",
+          "letter-spacing": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "max-height": "none",
+          "max-width": "none",
+          "min-height": "0px",
+          "min-width": "0px",
+          "opacity": "1",
+          "overflow": "hidden",
+          "padding": "0px",
+          "position": "relative",
+          "text-align": "start",
+          "text-transform": "none",
+          "white-space": "normal",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 786.15625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "status-bar",
+        "selector": "#root \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.675235551Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "63.5px",
+          "padding": "21px 24px 19px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 63.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/status-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/status-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/status-bar/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-body",
+        "selector": "#root \u003e div \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.717373969Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "gap": "normal",
+          "height": "722.656px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 722.65625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-body/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-body/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/screen-body/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.839482085Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "44px",
+          "padding": "8px 18px 10px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 62
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "month-header",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.88803926Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "48px",
+          "line-height": "normal",
+          "padding": "4px 22px 14px",
+          "width": "346px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 125.5,
+          "width": 390,
+          "height": 66
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/month-header/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/month-header/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/month-header/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "calendar-grid",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.922846643Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "display": "block",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "281.031px",
+          "padding": "0px 14px",
+          "width": "362px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 191.5,
+          "width": 390,
+          "height": 281.03125
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/calendar-grid/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/calendar-grid/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/calendar-grid/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "week-list",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(5)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:35.989119437Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "display": "block",
+          "gap": "normal",
+          "height": "204px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 510.53125,
+          "width": 390,
+          "height": 204
+        },
+        "attributes": {
+          "class": "px-scroll",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/week-list/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/week-list/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/week-list/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-calendar",
+        "url": "http://localhost:7070/standalone/mobile/calendar.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "tab-bar",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:last-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:36.018462045Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(255, 255, 255, 0.92)",
+          "border-top": "1px solid rgb(234, 230, 221)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "36.625px",
+          "padding": "8px 8px 26px",
+          "width": "374px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 714.53125,
+          "width": 390,
+          "height": 71.625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/tab-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/tab-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/calendar/inspect/original/tab-bar/inspect.json"
+    }
+  ]
+}

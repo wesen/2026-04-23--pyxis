@@ -1,0 +1,190 @@
+{
+  "attributes": {
+    "style": "max-width: 620px;"
+  },
+  "bounds": {
+    "height": 422.5,
+    "width": 354,
+    "x": 18,
+    "y": 174.5
+  },
+  "children": [
+    {
+      "attributes": {
+        "style": "font-family: Fraunces, serif; font-size: 24px; font-weight: 400; font-style: italic; letter-spacing: -0.015em; line-height: 1.3; color: rgb(31, 30, 28); margin: 0px 0px 28px;"
+      },
+      "bounds": {
+        "height": 124.75,
+        "width": 354,
+        "x": 18,
+        "y": 174.5
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(31, 30, 28)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(31, 30, 28)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Fraunces, serif",
+        "fontSize": "24px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "124.75px",
+        "justifyContent": "normal",
+        "lineHeight": "31.2px",
+        "margin": "0px 0px 28px",
+        "padding": "0px",
+        "position": "static",
+        "width": "354px"
+      },
+      "id": "",
+      "tag": "p",
+      "text": "a music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum."
+    },
+    {
+      "attributes": {
+        "style": "font-size: 14.5px; color: rgb(74, 70, 62); line-height: 1.75; margin: 0px 0px 16px;"
+      },
+      "bounds": {
+        "height": 152.25,
+        "width": 354,
+        "x": 18,
+        "y": 327.25
+      },
+      "children": [
+        {
+          "attributes": {},
+          "bounds": {
+            "height": 17,
+            "width": 17.59375,
+            "x": 335.5625,
+            "y": 382
+          },
+          "children": [],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(74, 70, 62)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(74, 70, 62)",
+            "display": "inline",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "14.5px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "auto",
+            "justifyContent": "normal",
+            "lineHeight": "25.375px",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "auto"
+          },
+          "id": "",
+          "tag": "em",
+          "text": "go"
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(74, 70, 62)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(74, 70, 62)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "14.5px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "152.25px",
+        "justifyContent": "normal",
+        "lineHeight": "25.375px",
+        "margin": "0px 0px 16px",
+        "padding": "0px",
+        "position": "static",
+        "width": "354px"
+      },
+      "id": "",
+      "tag": "p",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "style": "font-size: 14.5px; color: rgb(74, 70, 62); line-height: 1.75; margin: 0px 0px 16px;"
+      },
+      "bounds": {
+        "height": 101.5,
+        "width": 354,
+        "x": 18,
+        "y": 495.5
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(74, 70, 62)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(74, 70, 62)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "14.5px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "101.5px",
+        "justifyContent": "normal",
+        "lineHeight": "25.375px",
+        "margin": "0px 0px 16px",
+        "padding": "0px",
+        "position": "static",
+        "width": "354px"
+      },
+      "id": "",
+      "tag": "p",
+      "text": "we are a worker-run collective. we split door evenly. we do not book shows that conflict with our safer-space policy, and we do not tolerate bullshit at ours."
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(31, 30, 28)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "422.5px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "0px",
+    "position": "static",
+    "width": "354px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

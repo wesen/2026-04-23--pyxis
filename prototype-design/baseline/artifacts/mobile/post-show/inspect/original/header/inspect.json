@@ -1,0 +1,116 @@
+{
+  "attributes": {
+    "style": "padding: 0px 22px 16px;"
+  },
+  "bounds": {
+    "height": 62.296875,
+    "width": 390,
+    "x": 0,
+    "y": 125.5
+  },
+  "children": [
+    {
+      "attributes": {
+        "class": "px-serif",
+        "style": "font-size: 26px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.05;"
+      },
+      "bounds": {
+        "height": 27.296875,
+        "width": 346,
+        "x": 22,
+        "y": 125.5
+      },
+      "children": [],
+      "class_name": "px-serif",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(26, 26, 24)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(26, 26, 24)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "fontSize": "26px",
+        "fontWeight": "500",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "27.2969px",
+        "justifyContent": "normal",
+        "lineHeight": "27.3px",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "346px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": "Planning for Burial"
+    },
+    {
+      "attributes": {
+        "style": "font-size: 12px; color: rgb(138, 133, 123); margin-top: 4px;"
+      },
+      "bounds": {
+        "height": 15,
+        "width": 346,
+        "x": 22,
+        "y": 156.796875
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(138, 133, 123)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(138, 133, 123)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontSize": "12px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "15px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "4px 0px 0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "346px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": "Fri, Mar 14, 2025 · #40"
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(26, 26, 24)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(26, 26, 24)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "46.2969px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "0px 22px 16px",
+    "position": "static",
+    "width": "346px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

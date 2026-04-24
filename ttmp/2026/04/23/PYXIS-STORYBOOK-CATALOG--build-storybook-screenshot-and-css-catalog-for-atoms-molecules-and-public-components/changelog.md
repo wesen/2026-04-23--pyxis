@@ -135,3 +135,65 @@
 - Generated 165 screenshot bundles, 165 computed CSS Markdown files, 165 prepared HTML files, and 165 inspect JSON files.
 - Served the baseline index at `http://localhost:8795/index.html`.
 - Inspected representative PNGs from About, Book, and poster baselines with the `read` image tool.
+
+## 2026-04-24 — Relocate baseline to prototype-design/baseline
+
+### Changed
+- Moved the generated prototype baseline out of the ticket-local `various/prototype-baseline/` directory into `prototype-design/baseline/`.
+- Updated baseline generator/index/server/sample/full-run scripts to use `prototype-design/baseline/`.
+- Added a root `.gitignore` entry for `prototype-design/baseline/` so generated baseline artifacts do not dirty git status.
+
+### Fixed
+- Fixed the browsable index showing `0 screenshots` for many entries. The bug was that `scripts/07-run-prototype-baseline-full.sh` overrode config output directories with slug-based `--out` paths that did not match the manifest/index paths. The full extraction now writes to the config-defined output directories under `prototype-design/baseline/artifacts/`.
+
+### Validated
+- Regenerated the prototype baseline manifest in `prototype-design/baseline/manifest.json`.
+- Re-ran the full 29-config extraction into `prototype-design/baseline/artifacts/`.
+- Rebuilt `prototype-design/baseline/index.html` and confirmed the index now contains non-zero screenshot counts.
+- Re-served the baseline index at `http://localhost:8795/index.html`.
+
+## 2026-04-24 — Move prototype baseline YAMLs and script copies into prototype-design/visual-diff
+
+### Changed
+- Moved the generated prototype baseline YAML configs from the ticket-local `sources/prototype-configs/` directory into `prototype-design/visual-diff/`.
+- Copied the prototype baseline helper scripts into `prototype-design/visual-diff/scripts/` so the baseline configs and execution helpers are self-contained under `prototype-design/`.
+- Regenerated `prototype-design/baseline/manifest.json` and rebuilt the baseline index so config links now point at `prototype-design/visual-diff/*.css-visual-diff.yml`.
+
+### New canonical locations
+- Configs: `prototype-design/visual-diff/`
+- Script copies: `prototype-design/visual-diff/scripts/`
+- Artifacts/index: `prototype-design/baseline/`
+
+## 2026-04-24 — Add Pyxis Mobile prototype baseline workflow
+
+### Added
+- Added standalone mobile screen HTML generator at `prototype-design/visual-diff/scripts/14-generate-standalone-mobile-html.mjs`.
+- Generated standalone mobile entrypoints under `prototype-design/standalone/mobile/` for:
+  - login
+  - home
+  - shows
+  - show-detail
+  - calendar
+  - bookings
+  - booking-review
+  - artists
+  - artist-detail
+  - post-show
+  - settings
+- Extended `prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs` with 11 mobile-screen baseline configs sourced from `prototype-design/Pyxis Mobile.html`.
+- Added a new `Mobile app screens` section to the baseline index.
+
+### Changed
+- Updated `prototype-design/standalone/index.html` to link to the new mobile standalone page index.
+- Updated `prototype-design/visual-diff/scripts/06-run-prototype-baseline-sample.sh` to include representative mobile screen configs.
+
+### Validated
+- Regenerated the baseline manifest and index.
+- Re-ran the full baseline extraction with mobile included.
+- Current totals:
+  - configs: `40`
+  - screenshots: `261`
+  - computed CSS Markdown: `261`
+  - prepared HTML: `261`
+  - inspect JSON: `261`
+- Visually inspected representative mobile artifacts for Home, Login, Settings, Calendar, and Shows.

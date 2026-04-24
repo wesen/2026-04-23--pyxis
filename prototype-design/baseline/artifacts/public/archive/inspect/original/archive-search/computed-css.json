@@ -1,0 +1,22 @@
+{
+  "exists": true,
+  "computed": {
+    "align-items": "center",
+    "display": "flex",
+    "gap": "10px",
+    "height": "36px",
+    "margin": "0px 0px 28px",
+    "padding": "0px",
+    "width": "856px"
+  },
+  "bounds": {
+    "x": 32,
+    "y": 366.09375,
+    "width": 856,
+    "height": 36
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

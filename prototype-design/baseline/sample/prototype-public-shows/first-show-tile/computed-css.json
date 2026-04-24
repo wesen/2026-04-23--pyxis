@@ -1,0 +1,26 @@
+{
+  "exists": true,
+  "computed": {
+    "background-color": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(31, 30, 28)",
+    "border-radius": "0px",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "font-family": "Inter, sans-serif",
+    "font-size": "16px",
+    "height": "440.672px",
+    "margin": "0px",
+    "padding": "0px",
+    "width": "269.328px"
+  },
+  "bounds": {
+    "x": 32,
+    "y": 230.09375,
+    "width": 269.328125,
+    "height": 440.671875
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

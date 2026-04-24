@@ -1,0 +1,23 @@
+{
+  "exists": true,
+  "computed": {
+    "background-color": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(234, 230, 221)",
+    "border-radius": "12px",
+    "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+    "display": "block",
+    "height": "419.391px",
+    "padding": "22px",
+    "width": "1194px"
+  },
+  "bounds": {
+    "x": 32,
+    "y": 606.65625,
+    "width": 1240,
+    "height": 465.390625
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

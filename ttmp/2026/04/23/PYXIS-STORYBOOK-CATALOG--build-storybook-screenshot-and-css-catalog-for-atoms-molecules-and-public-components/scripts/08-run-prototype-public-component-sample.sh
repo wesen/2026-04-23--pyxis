@@ -2,11 +2,11 @@
 set -euo pipefail
 
 REPO_ROOT="${PYXIS_REPO_ROOT:-/home/manuel/code/wesen/2026-04-23--pyxis}"
-TICKET_ROOT="${PYXIS_STORYBOOK_CATALOG_TICKET:-$REPO_ROOT/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components}"
 PROTOTYPE_DIR="$REPO_ROOT/prototype-design"
+BASELINE_DIR="$REPO_ROOT/prototype-design/baseline"
 PORT="${PYXIS_PROTOTYPE_PORT:-7070}"
-CONFIG_DIR="$TICKET_ROOT/sources/prototype-configs/public-components"
-OUT_ROOT="$TICKET_ROOT/various/prototype-baseline/sample-public-components"
+CONFIG_DIR="$REPO_ROOT/prototype-design/visual-diff/public-components"
+OUT_ROOT="$BASELINE_DIR/sample-public-components"
 
 if ! command -v css-visual-diff >/dev/null 2>&1; then
   echo "css-visual-diff executable not found on PATH" >&2

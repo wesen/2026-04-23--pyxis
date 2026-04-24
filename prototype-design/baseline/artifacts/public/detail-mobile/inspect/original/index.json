@@ -1,0 +1,472 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "full-shell",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.067107538Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1608.11px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1608.109375
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/full-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/full-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/full-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.448062523Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1608.11px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1608.109375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e header",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.575811708Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "",
+          "border-radius": "0px",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "52px",
+          "line-height": "normal",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 53
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "back-link",
+        "selector": "#root \u003e div \u003e main \u003e :first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.597265518Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "20px",
+          "margin": "0px 0px 18px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 79,
+          "width": 354,
+          "height": 20
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/back-link/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/back-link/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/back-link/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "detail-grid",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.651394178Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "start",
+          "display": "grid",
+          "gap": "24px",
+          "grid-template-columns": "354px",
+          "height": "1281.17px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 117,
+          "width": 354,
+          "height": 1281.171875
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-grid/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-grid/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-grid/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "poster-strip",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.739958664Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "0px",
+          "display": "block",
+          "height": "599.5px",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 117,
+          "width": 354,
+          "height": 599.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/poster-strip/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/poster-strip/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/poster-strip/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "ticket-card",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(2) \u003e div:first-child \u003e div:last-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.815129346Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(248, 246, 241)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "6px",
+          "box-shadow": "none",
+          "display": "block",
+          "height": "113px",
+          "margin": "16px 0px 0px",
+          "padding": "14px 16px",
+          "width": "322px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 575.5,
+          "width": 354,
+          "height": 141
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/ticket-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/ticket-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/ticket-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "detail-body",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(2) \u003e div:last-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.857594558Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "657.672px",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 740.5,
+          "width": 354,
+          "height": 657.671875
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-body/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-body/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/detail-body/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "main",
+        "selector": "#root \u003e div \u003e main",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:17.9352042Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "1319.17px",
+          "margin": "0px",
+          "padding": "26px 18px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 53,
+          "width": 390,
+          "height": 1345.171875
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/main/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/main/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/main/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-detail-mobile",
+        "url": "http://localhost:7070/standalone/public/detail-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1680
+        },
+        "name": "footer",
+        "selector": "#root \u003e div \u003e footer",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:18.008604875Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "100.938px",
+          "margin": "60px 0px 0px",
+          "padding": "24px 18px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 1458.171875,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/footer/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/footer/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/detail-mobile/inspect/original/footer/inspect.json"
+    }
+  ]
+}

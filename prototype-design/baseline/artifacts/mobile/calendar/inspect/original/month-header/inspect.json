@@ -1,0 +1,440 @@
+{
+  "attributes": {
+    "style": "display: flex; align-items: center; justify-content: space-between; padding: 4px 22px 14px;"
+  },
+  "bounds": {
+    "height": 66,
+    "width": 390,
+    "x": 0,
+    "y": 125.5
+  },
+  "children": [
+    {
+      "attributes": {},
+      "bounds": {
+        "height": 48,
+        "width": 161.625,
+        "x": 22,
+        "y": 129.5
+      },
+      "children": [
+        {
+          "attributes": {
+            "class": "px-serif",
+            "style": "font-size: 26px; font-weight: 500; letter-spacing: -0.02em;"
+          },
+          "bounds": {
+            "height": 32,
+            "width": 161.625,
+            "x": 22,
+            "y": 129.5
+          },
+          "children": [],
+          "class_name": "px-serif",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(26, 26, 24)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(26, 26, 24)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Fraunces, Georgia, \"Times New Roman\", serif",
+            "fontSize": "26px",
+            "fontWeight": "500",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "32px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "161.625px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": "May 2025"
+        },
+        {
+          "attributes": {
+            "style": "font-size: 11.5px; color: rgb(138, 133, 123); margin-top: 2px;"
+          },
+          "bounds": {
+            "height": 14,
+            "width": 161.625,
+            "x": 22,
+            "y": 163.5
+          },
+          "children": [],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(138, 133, 123)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(138, 133, 123)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "fontSize": "11.5px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "14px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "2px 0px 0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "161.625px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": "5 confirmed · 1 hold · 24 open"
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(26, 26, 24)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(26, 26, 24)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "48px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "161.625px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "style": "display: flex; gap: 6px;"
+      },
+      "bounds": {
+        "height": 32,
+        "width": 70,
+        "x": 298,
+        "y": 137.5
+      },
+      "children": [
+        {
+          "attributes": {
+            "style": "width: 30px; height: 30px; border-radius: 6px; border: 1px solid rgb(234, 230, 221); display: flex; align-items: center; justify-content: center;"
+          },
+          "bounds": {
+            "height": 32,
+            "width": 32,
+            "x": 298,
+            "y": 137.5
+          },
+          "children": [
+            {
+              "attributes": {
+                "fill": "none",
+                "height": "14",
+                "stroke": "#555048",
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-width": "1.6",
+                "style": "flex-shrink: 0; display: inline-block; vertical-align: middle;",
+                "viewBox": "0 0 20 20",
+                "width": "14"
+              },
+              "bounds": {
+                "height": 14,
+                "width": 14,
+                "x": 307,
+                "y": 146.5
+              },
+              "children": [
+                {
+                  "attributes": {
+                    "d": "m7.5 5 5 5-5 5"
+                  },
+                  "bounds": {
+                    "height": 7,
+                    "width": 3.5,
+                    "x": 312.25,
+                    "y": 150
+                  },
+                  "children": [],
+                  "class_name": {},
+                  "computed": {
+                    "alignItems": "normal",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "border": "0px none rgb(26, 26, 24)",
+                    "borderRadius": "0px",
+                    "boxSizing": "content-box",
+                    "color": "rgb(26, 26, 24)",
+                    "display": "inline",
+                    "flexDirection": "row",
+                    "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                    "fontSize": "16px",
+                    "fontWeight": "400",
+                    "gap": "normal",
+                    "gridTemplateColumns": "none",
+                    "height": "auto",
+                    "justifyContent": "normal",
+                    "lineHeight": "normal",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "position": "static",
+                    "width": "auto"
+                  },
+                  "id": "",
+                  "tag": "path",
+                  "text": ""
+                }
+              ],
+              "class_name": {},
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(26, 26, 24)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(26, 26, 24)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                "fontSize": "16px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "14px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "14px"
+              },
+              "id": "",
+              "tag": "svg",
+              "text": ""
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "center",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "1px solid rgb(234, 230, 221)",
+            "borderRadius": "6px",
+            "boxSizing": "content-box",
+            "color": "rgb(26, 26, 24)",
+            "display": "flex",
+            "flexDirection": "row",
+            "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "30px",
+            "justifyContent": "center",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "30px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": ""
+        },
+        {
+          "attributes": {
+            "style": "width: 30px; height: 30px; border-radius: 6px; border: 1px solid rgb(234, 230, 221); display: flex; align-items: center; justify-content: center;"
+          },
+          "bounds": {
+            "height": 32,
+            "width": 32,
+            "x": 336,
+            "y": 137.5
+          },
+          "children": [
+            {
+              "attributes": {
+                "fill": "none",
+                "height": "14",
+                "stroke": "#555048",
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-width": "1.6",
+                "style": "flex-shrink: 0; display: inline-block; vertical-align: middle;",
+                "viewBox": "0 0 20 20",
+                "width": "14"
+              },
+              "bounds": {
+                "height": 14,
+                "width": 14,
+                "x": 345,
+                "y": 146.5
+              },
+              "children": [
+                {
+                  "attributes": {
+                    "d": "m7.5 5 5 5-5 5"
+                  },
+                  "bounds": {
+                    "height": 7,
+                    "width": 3.5,
+                    "x": 350.25,
+                    "y": 150
+                  },
+                  "children": [],
+                  "class_name": {},
+                  "computed": {
+                    "alignItems": "normal",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "border": "0px none rgb(26, 26, 24)",
+                    "borderRadius": "0px",
+                    "boxSizing": "content-box",
+                    "color": "rgb(26, 26, 24)",
+                    "display": "inline",
+                    "flexDirection": "row",
+                    "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                    "fontSize": "16px",
+                    "fontWeight": "400",
+                    "gap": "normal",
+                    "gridTemplateColumns": "none",
+                    "height": "auto",
+                    "justifyContent": "normal",
+                    "lineHeight": "normal",
+                    "margin": "0px",
+                    "padding": "0px",
+                    "position": "static",
+                    "width": "auto"
+                  },
+                  "id": "",
+                  "tag": "path",
+                  "text": ""
+                }
+              ],
+              "class_name": {},
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(26, 26, 24)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(26, 26, 24)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                "fontSize": "16px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "14px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "14px"
+              },
+              "id": "",
+              "tag": "svg",
+              "text": ""
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "center",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "1px solid rgb(234, 230, 221)",
+            "borderRadius": "6px",
+            "boxSizing": "content-box",
+            "color": "rgb(26, 26, 24)",
+            "display": "flex",
+            "flexDirection": "row",
+            "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "30px",
+            "justifyContent": "center",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "30px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": ""
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(26, 26, 24)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(26, 26, 24)",
+        "display": "flex",
+        "flexDirection": "row",
+        "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "gap": "6px",
+        "gridTemplateColumns": "none",
+        "height": "32px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "70px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": ""
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "center",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(26, 26, 24)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(26, 26, 24)",
+    "display": "flex",
+    "flexDirection": "row",
+    "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "48px",
+    "justifyContent": "space-between",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "4px 22px 14px",
+    "position": "static",
+    "width": "346px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

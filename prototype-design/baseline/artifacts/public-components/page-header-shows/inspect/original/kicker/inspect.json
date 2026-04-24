@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "style": "font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: rgb(142, 136, 126); text-transform: uppercase; margin-bottom: 10px;"
+  },
+  "bounds": {
+    "height": 14,
+    "width": 856,
+    "x": 0,
+    "y": 0
+  },
+  "children": [],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(142, 136, 126)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(142, 136, 126)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "11px",
+    "fontWeight": "600",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "14px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px 0px 10px",
+    "padding": "0px",
+    "position": "static",
+    "width": "856px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": "Providence, RI"
+}

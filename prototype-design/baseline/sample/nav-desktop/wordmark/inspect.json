@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "style": "background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 0px; font-family: Fraunces, serif; font-size: 24px; font-weight: 700; letter-spacing: -0.025em; color: rgb(31, 30, 28);"
+  },
+  "bounds": {
+    "height": 29,
+    "width": 61.296875,
+    "x": 32,
+    "y": 15.5
+  },
+  "children": [],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(31, 30, 28)",
+    "borderRadius": "0px",
+    "boxSizing": "border-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Fraunces, serif",
+    "fontSize": "24px",
+    "fontWeight": "700",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "29px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "0px",
+    "position": "static",
+    "width": "61.2969px"
+  },
+  "id": "",
+  "tag": "button",
+  "text": "ppxis"
+}

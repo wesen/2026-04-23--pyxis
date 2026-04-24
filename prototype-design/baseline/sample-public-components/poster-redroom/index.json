@@ -1,0 +1,91 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 360,
+          "Height": 460
+        },
+        "name": "frame",
+        "selector": "[data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:39:58.371034871Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "337.5px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 337.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/frame/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/frame/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/frame/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 360,
+          "Height": 460
+        },
+        "name": "poster",
+        "selector": "[data-catalog='poster'] \u003e div",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:39:58.474715656Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "aspect-ratio": "4 / 5",
+          "background-color": "rgb(17, 17, 17)",
+          "border-radius": "4px",
+          "display": "block",
+          "height": "337.5px",
+          "overflow": "hidden",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 337.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/poster/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/poster/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/poster-redroom/poster/inspect.json"
+    }
+  ]
+}

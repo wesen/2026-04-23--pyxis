@@ -1,0 +1,180 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/nav-desktop",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 1120,
+          "Height": 340
+        },
+        "name": "frame",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:18.473704642Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "61px",
+          "padding": "0px",
+          "width": "920px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 920,
+          "height": 61
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/frame/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/frame/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/frame/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/nav-desktop",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 1120,
+          "Height": 340
+        },
+        "name": "nav-shell",
+        "selector": "#capture-root [data-catalog='nav'] header",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:18.523408373Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "60px",
+          "padding": "0px",
+          "width": "920px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 920,
+          "height": 61
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/nav-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/nav-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/nav-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/nav-desktop",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 1120,
+          "Height": 340
+        },
+        "name": "wordmark",
+        "selector": "#capture-root [data-catalog='nav'] header button:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:18.569375022Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Fraunces, serif",
+          "font-size": "24px",
+          "font-weight": "700",
+          "height": "29px",
+          "letter-spacing": "-0.6px",
+          "padding": "0px",
+          "width": "61.2969px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 15.5,
+          "width": 61.296875,
+          "height": 29
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/wordmark/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/wordmark/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/wordmark/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/nav-desktop",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 1120,
+          "Height": 340
+        },
+        "name": "menu",
+        "selector": "#capture-root [data-catalog='nav'] header nav, #capture-root [data-catalog='nav'] header button:last-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:18.61965787Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(31, 30, 28)",
+          "color": "rgb(31, 30, 28)",
+          "display": "flex",
+          "gap": "2px",
+          "height": "28px",
+          "padding": "0px",
+          "width": "292.844px"
+        },
+        "bounds": {
+          "x": 595.15625,
+          "y": 16,
+          "width": 292.84375,
+          "height": 28
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/menu/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/menu/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/nav-desktop/menu/inspect.json"
+    }
+  ]
+}

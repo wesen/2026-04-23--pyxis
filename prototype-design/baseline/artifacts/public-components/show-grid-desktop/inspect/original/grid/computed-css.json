@@ -1,0 +1,21 @@
+{
+  "exists": true,
+  "computed": {
+    "display": "block",
+    "gap": "normal",
+    "grid-template-columns": "none",
+    "height": "440.672px",
+    "padding": "0px",
+    "width": "269.328px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 269.328125,
+    "height": 440.671875
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

@@ -1,0 +1,632 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "full-system-page",
+        "selector": "#capture-root",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:21.801602117Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(243, 241, 235)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "\"Times New Roman\"",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "3054.73px",
+          "line-height": "normal",
+          "padding": "0px",
+          "width": "1240px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1240,
+          "height": 3054.734375
+        },
+        "attributes": {
+          "class": "",
+          "id": "capture-root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/full-system-page/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/full-system-page/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/full-system-page/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "header",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(1)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.054702702Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "24px",
+          "height": "159.656px",
+          "line-height": "normal",
+          "margin": "0px 0px 28px",
+          "padding": "0px",
+          "width": "1240px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 32,
+          "width": 1240,
+          "height": 159.65625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/header/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/header/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/header/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "color-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(1)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.114901856Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "321px",
+          "padding": "22px",
+          "width": "1194px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 219.65625,
+          "width": 1240,
+          "height": 367
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/color-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/color-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/color-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "typography-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.16607704Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "419.391px",
+          "padding": "22px",
+          "width": "1194px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 606.65625,
+          "width": 1240,
+          "height": 465.390625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/typography-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/typography-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/typography-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "badges-tags-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.242998973Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "183.781px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 1092.046875,
+          "width": 610,
+          "height": 229.78125
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/badges-tags-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/badges-tags-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/badges-tags-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "buttons-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(4)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.288071446Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "183.781px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 662,
+          "y": 1092.046875,
+          "width": 610,
+          "height": 229.78125
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/buttons-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/buttons-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/buttons-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "form-fields-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(5)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.351901847Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "298px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 1341.828125,
+          "width": 610,
+          "height": 344
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/form-fields-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/form-fields-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/form-fields-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "stats-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(6)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.39482732Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "298px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 662,
+          "y": 1341.828125,
+          "width": 610,
+          "height": 344
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/stats-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/stats-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/stats-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "icons-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(7)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.448435491Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "325px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 1705.828125,
+          "width": 610,
+          "height": 371
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/icons-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/icons-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/icons-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "radii-elevation-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(8)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.51821414Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "325px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 662,
+          "y": 1705.828125,
+          "width": 610,
+          "height": 371
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/radii-elevation-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/radii-elevation-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/radii-elevation-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "navigation-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(9)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.580281723Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "410px",
+          "overflow": "hidden",
+          "padding": "0px",
+          "width": "608px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 2096.828125,
+          "width": 610,
+          "height": 412
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/navigation-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/navigation-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/navigation-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "log-rows-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(10)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.636350353Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "366px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 662,
+          "y": 2096.828125,
+          "width": 610,
+          "height": 412
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/log-rows-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/log-rows-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/log-rows-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "empty-state-card",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(11)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.683819187Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "box-shadow": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "display": "block",
+          "height": "256.594px",
+          "padding": "22px",
+          "width": "564px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 2528.828125,
+          "width": 610,
+          "height": 302.59375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/empty-state-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/empty-state-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/empty-state-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-foundations-system",
+        "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+        "viewport": {
+          "Width": 1440,
+          "Height": 2870
+        },
+        "name": "principles",
+        "selector": "#capture-root \u003e div \u003e div:nth-of-type(3)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:22.737020969Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "161.312px",
+          "margin": "30px 0px 0px",
+          "padding": "0px",
+          "width": "1240px"
+        },
+        "bounds": {
+          "x": 32,
+          "y": 2861.421875,
+          "width": 1240,
+          "height": 161.3125
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/principles/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/principles/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/foundations/system/inspect/original/principles/inspect.json"
+    }
+  ]
+}

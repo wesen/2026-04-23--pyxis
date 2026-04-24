@@ -1,0 +1,187 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 380,
+          "Height": 620
+        },
+        "name": "show-tile",
+        "selector": "[data-catalog='show-tile'] \u003e div",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:40:00.620976296Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "0px",
+          "color": "rgb(31, 30, 28)",
+          "cursor": "pointer",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "441.5px",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 441.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 380,
+          "Height": 620
+        },
+        "name": "poster",
+        "selector": "[data-catalog='show-tile'] \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:40:00.674810256Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "aspect-ratio": "4 / 5",
+          "background-color": "rgb(17, 17, 17)",
+          "border-radius": "4px",
+          "display": "block",
+          "height": "337.5px",
+          "overflow": "hidden",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 337.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/poster/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/poster/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/poster/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 380,
+          "Height": 620
+        },
+        "name": "title",
+        "selector": "[data-catalog='show-tile'] \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:40:00.740315278Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-size": "16px",
+          "font-weight": "700",
+          "height": "20px",
+          "letter-spacing": "-0.08px",
+          "margin": "0px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 351.5,
+          "width": 270,
+          "height": 20
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/title/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/title/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/title/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-component",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 380,
+          "Height": 620
+        },
+        "name": "ticket-pill",
+        "selector": "[data-catalog='show-tile'] \u003e div button",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T03:40:00.7736394Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 242, 239)",
+          "border": "0px none rgb(200, 39, 13)",
+          "border-radius": "999px",
+          "color": "rgb(200, 39, 13)",
+          "display": "inline-block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "11.5px",
+          "font-weight": "600",
+          "height": "24px",
+          "padding": "5px 12px",
+          "width": "79.0781px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 417.5,
+          "width": 79.078125,
+          "height": 24
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/ticket-pill/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/ticket-pill/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/sample-public-components/show-tile-redroom/ticket-pill/inspect.json"
+    }
+  ]
+}

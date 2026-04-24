@@ -1,0 +1,33 @@
+{
+  "exists": true,
+  "computed": {
+    "align-items": "normal",
+    "background-color": "rgb(232, 228, 218)",
+    "border": "0px none rgb(0, 0, 0)",
+    "border-radius": "0px",
+    "box-shadow": "none",
+    "color": "rgb(0, 0, 0)",
+    "display": "block",
+    "font-family": "Inter, -apple-system, sans-serif",
+    "font-size": "16px",
+    "font-weight": "400",
+    "gap": "normal",
+    "grid-template-columns": "none",
+    "height": "754.797px",
+    "justify-content": "normal",
+    "line-height": "normal",
+    "margin": "0px",
+    "padding": "0px",
+    "width": "390px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 754.796875
+  },
+  "attributes": {
+    "class": "",
+    "id": "root"
+  }
+}

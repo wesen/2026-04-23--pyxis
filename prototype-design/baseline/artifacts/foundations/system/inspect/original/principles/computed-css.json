@@ -1,0 +1,24 @@
+{
+  "exists": true,
+  "computed": {
+    "background-color": "rgba(0, 0, 0, 0)",
+    "color": "rgb(26, 26, 24)",
+    "display": "block",
+    "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "font-size": "16px",
+    "height": "161.312px",
+    "margin": "30px 0px 0px",
+    "padding": "0px",
+    "width": "1240px"
+  },
+  "bounds": {
+    "x": 32,
+    "y": 2861.421875,
+    "width": 1240,
+    "height": 161.3125
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

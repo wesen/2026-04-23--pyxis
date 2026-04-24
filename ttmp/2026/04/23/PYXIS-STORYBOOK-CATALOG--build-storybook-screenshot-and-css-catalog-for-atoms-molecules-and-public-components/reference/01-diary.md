@@ -761,3 +761,217 @@ Validation commands:
 find ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/artifacts -name 'screenshot.png' | wc -l
 find ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/various/prototype-baseline/artifacts -name 'computed-css.md' | wc -l
 ```
+
+## Step 8: Relocate the complete baseline to prototype-design/baseline and fix the index counts
+
+The baseline should not live only under the ticket workspace. I moved the generated baseline to `prototype-design/baseline/`, updated the generator and helper scripts to treat that directory as the canonical baseline root, and fixed the index-count bug that had been showing `0 screenshots` for many entries.
+
+### What I changed
+
+- Canonical baseline root is now:
+
+```text
+prototype-design/baseline/
+```
+
+- Updated scripts:
+  - `scripts/11-generate-prototype-baseline-configs.mjs`
+  - `scripts/12-build-prototype-baseline-index.mjs`
+  - `scripts/13-serve-prototype-baseline-index.sh`
+  - `scripts/06-run-prototype-baseline-sample.sh`
+  - `scripts/07-run-prototype-baseline-full.sh`
+  - `scripts/08-run-prototype-public-component-sample.sh`
+
+- Added root ignore:
+
+```text
+.gitignore
+```
+
+with:
+
+```text
+prototype-design/baseline/
+```
+
+### Root cause of the bad index counts
+
+The index builder reads screenshot counts from the manifest output paths. The manifest pointed at structured paths such as:
+
+```text
+prototype-design/baseline/artifacts/public/shows
+```
+
+but the old full-run script overrode those config-defined output paths with slug-based `--out` directories like:
+
+```text
+.../various/prototype-baseline/artifacts/prototype-public-shows
+```
+
+So the screenshots existed, but not where the manifest/index expected them. That is why the index showed `0 screenshots`.
+
+### Validation
+
+I regenerated the configs/manifest, reran the full extraction, rebuilt the index, and confirmed the new baseline location and counts:
+
+```text
+prototype-design/baseline/index.html
+prototype-design/baseline/manifest.json
+prototype-design/baseline/artifacts/
+```
+
+Served URL:
+
+```text
+http://localhost:8795/index.html
+```
+
+Sanity-check totals after rerun:
+
+```text
+screenshots: 165
+computed_css_md: 165
+prepared_html: 165
+inspect_json: 165
+```
+
+I also confirmed the rebuilt HTML index contains non-zero screenshot labels such as `14 screenshots`, `9 screenshots`, `5 screenshots`, and `2 screenshots`.
+
+## Step 9: Move baseline YAML configs into prototype-design/visual-diff and copy the scripts there
+
+To make the prototype baseline workflow self-contained under `prototype-design/`, I moved the generated `css-visual-diff` YAML configs into `prototype-design/visual-diff/` and copied the baseline helper scripts into `prototype-design/visual-diff/scripts/`.
+
+### Canonical locations
+
+```text
+prototype-design/visual-diff/
+prototype-design/visual-diff/public-components/
+prototype-design/visual-diff/scripts/
+prototype-design/baseline/
+```
+
+### What I changed
+
+- Ran the copied generator from:
+
+```text
+prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+```
+
+- This regenerated all 29 baseline YAML configs under `prototype-design/visual-diff/`.
+- Copied these helper scripts into `prototype-design/visual-diff/scripts/`:
+  - `06-run-prototype-baseline-sample.sh`
+  - `07-run-prototype-baseline-full.sh`
+  - `08-run-prototype-public-component-sample.sh`
+  - `11-generate-prototype-baseline-configs.mjs`
+  - `12-build-prototype-baseline-index.mjs`
+  - `13-serve-prototype-baseline-index.sh`
+- Adjusted the copied scripts so they resolve the repo root relative to their own location instead of depending on the ticket path.
+- Removed the old ticket-local YAML directory:
+
+```text
+ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/sources/prototype-configs/
+```
+
+### Result
+
+The prototype baseline workflow is now organized like this:
+
+- **Prototype HTML and standalone pages:** `prototype-design/`
+- **Prototype visual-diff configs:** `prototype-design/visual-diff/`
+- **Prototype visual-diff scripts:** `prototype-design/visual-diff/scripts/`
+- **Generated baseline artifacts and index:** `prototype-design/baseline/`
+
+The rebuilt manifest now points at config paths such as:
+
+```text
+prototype-design/visual-diff/prototype-public-shows.css-visual-diff.yml
+prototype-design/visual-diff/public-components/poster-redroom.css-visual-diff.yml
+```
+
+## Step 10: Add baseline extraction for `prototype-design/Pyxis Mobile.html`
+
+After moving the baseline/config workflow into `prototype-design/`, I extended it to cover the mobile prototype HTML. The mobile prototype is another DesignCanvas-based file, so the same lesson applies: do not capture the canvas directly. Instead, generate clean standalone HTML entrypoints for each mobile screen and run `css-visual-diff inspect --all-styles` against those standalone pages.
+
+### What I changed
+
+- Added a new generator:
+
+```text
+prototype-design/visual-diff/scripts/14-generate-standalone-mobile-html.mjs
+```
+
+- Generated standalone mobile pages under:
+
+```text
+prototype-design/standalone/mobile/
+```
+
+for these screens:
+
+```text
+login
+home
+shows
+show-detail
+calendar
+bookings
+booking-review
+artists
+artist-detail
+post-show
+settings
+```
+
+- Extended the canonical baseline config generator:
+
+```text
+prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+```
+
+with 11 new `mobile-screen` configs sourced from:
+
+```text
+prototype-design/Pyxis Mobile.html
+```
+
+- Added a dedicated `Mobile app screens` section to the browsable baseline index.
+- Updated the sample runner to include a few representative mobile screens.
+
+### Why this approach
+
+The mobile file follows the same DesignCanvas pattern as the public-site prototype. That means the cleanest long-term extraction path is not a viewport screenshot of `Pyxis Mobile.html`; it is a set of generated standalone roots that render one named screen each. This keeps selectors small, the prepared DOM easy to inspect, and the baseline reproducible.
+
+### Validation
+
+I ran:
+
+```bash
+node prototype-design/visual-diff/scripts/14-generate-standalone-mobile-html.mjs
+node prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+prototype-design/visual-diff/scripts/06-run-prototype-baseline-sample.sh
+prototype-design/visual-diff/scripts/07-run-prototype-baseline-full.sh
+prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
+```
+
+Current totals after adding mobile screens:
+
+```text
+configs: 40
+screenshots: 261
+computed_css_md: 261
+prepared_html: 261
+inspect_json: 261
+```
+
+I visually inspected representative mobile artifacts including:
+
+```text
+prototype-design/baseline/sample/prototype-mobile-home/full-screen/screenshot.png
+prototype-design/baseline/sample/prototype-mobile-login/full-screen/screenshot.png
+prototype-design/baseline/sample/prototype-mobile-shows/first-show-row/screenshot.png
+prototype-design/baseline/artifacts/mobile/settings/inspect/original/full-screen/screenshot.png
+prototype-design/baseline/artifacts/mobile/calendar/inspect/original/full-screen/screenshot.png
+```
+
+The captures looked correct: clean standalone mobile screens, no DesignCanvas chrome, and meaningful screen/section crops.

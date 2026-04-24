@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "public-components/show-tile-redroom",
+  "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+  "viewport": {
+    "Width": 470,
+    "Height": 650
+  },
+  "name": "ticket-pill",
+  "selector": "#capture-root [data-catalog='show-tile'] \u003e div \u003e div:nth-child(2) \u003e button",
+  "selector_source": "style",
+  "root_selector": "#capture-root",
+  "prepare_type": "direct-react-global",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:57:31.598877216Z"
+}

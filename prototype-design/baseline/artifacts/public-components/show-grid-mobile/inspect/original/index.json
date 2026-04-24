@@ -1,0 +1,175 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-grid-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 554,
+          "Height": 1040
+        },
+        "name": "compact-shell",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:24.17975478Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "1684.5px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 354,
+          "height": 1684.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/compact-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/compact-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/compact-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-grid-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 554,
+          "Height": 1040
+        },
+        "name": "frame",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:24.311067433Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "1684.5px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 354,
+          "height": 1684.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/frame/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/frame/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/frame/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-grid-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 554,
+          "Height": 1040
+        },
+        "name": "grid",
+        "selector": "#capture-root [data-catalog='show-grid'] \u003e div",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:24.402720513Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "display": "block",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "545.5px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 354,
+          "height": 545.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/grid/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/grid/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/grid/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-grid-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 554,
+          "Height": 1040
+        },
+        "name": "first-tile",
+        "selector": "#capture-root [data-catalog='show-grid'] \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:24.453413042Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "442.5px",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 354,
+          "height": 442.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/first-tile/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/first-tile/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-grid-mobile/inspect/original/first-tile/inspect.json"
+    }
+  ]
+}

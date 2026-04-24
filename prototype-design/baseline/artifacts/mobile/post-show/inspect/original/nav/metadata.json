@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "prototype-mobile-post-show",
+  "url": "http://localhost:7070/standalone/mobile/post-show.html",
+  "viewport": {
+    "Width": 390,
+    "Height": 1024
+  },
+  "name": "nav",
+  "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+  "selector_source": "style",
+  "root_selector": "#root",
+  "prepare_type": "script",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:55:44.055282066Z"
+}

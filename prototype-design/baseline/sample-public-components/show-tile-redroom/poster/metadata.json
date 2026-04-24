@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "prototype-public-component",
+  "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+  "viewport": {
+    "Width": 380,
+    "Height": 620
+  },
+  "name": "poster",
+  "selector": "[data-catalog='show-tile'] \u003e div \u003e div:first-child",
+  "selector_source": "style",
+  "root_selector": "#capture-root",
+  "prepare_type": "direct-react-global",
+  "format": "bundle",
+  "created_at": "2026-04-24T03:40:00.674810256Z"
+}

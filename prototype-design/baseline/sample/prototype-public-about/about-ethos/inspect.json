@@ -1,0 +1,569 @@
+{
+  "attributes": {
+    "style": "margin-top: 56px; border-top: 1px solid rgb(234, 231, 224); padding-top: 36px;"
+  },
+  "bounds": {
+    "height": 251.75,
+    "width": 856,
+    "x": 32,
+    "y": 573.96875
+  },
+  "children": [
+    {
+      "attributes": {
+        "style": "font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: rgb(142, 136, 126); text-transform: uppercase; margin-bottom: 28px;"
+      },
+      "bounds": {
+        "height": 14,
+        "width": 856,
+        "x": 32,
+        "y": 610.96875
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(142, 136, 126)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(142, 136, 126)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "11px",
+        "fontWeight": "600",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "14px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px 0px 28px",
+        "padding": "0px",
+        "position": "static",
+        "width": "856px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": "Our ethos"
+    },
+    {
+      "attributes": {
+        "style": "display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;"
+      },
+      "bounds": {
+        "height": 172.75,
+        "width": 856,
+        "x": 32,
+        "y": 652.96875
+      },
+      "children": [
+        {
+          "attributes": {},
+          "bounds": {
+            "height": 172.75,
+            "width": 266.65625,
+            "x": 32,
+            "y": 652.96875
+          },
+          "children": [
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 44px; font-weight: 500; font-style: italic; color: rgb(200, 39, 13); line-height: 1; letter-spacing: -0.02em;"
+              },
+              "bounds": {
+                "height": 44,
+                "width": 266.65625,
+                "x": 32,
+                "y": 652.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(200, 39, 13)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(200, 39, 13)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "44px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "44px",
+                "justifyContent": "normal",
+                "lineHeight": "44px",
+                "margin": "0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "01"
+            },
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 20px; font-weight: 500; color: rgb(31, 30, 28); margin-top: 10px; letter-spacing: -0.015em;"
+              },
+              "bounds": {
+                "height": 25,
+                "width": 266.65625,
+                "x": 32,
+                "y": 706.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(31, 30, 28)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(31, 30, 28)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "20px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "25px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "10px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "Artists first"
+            },
+            {
+              "attributes": {
+                "style": "font-size: 13px; color: rgb(74, 70, 62); line-height: 1.65; margin-top: 8px;"
+              },
+              "bounds": {
+                "height": 64.3125,
+                "width": 266.65625,
+                "x": 32,
+                "y": 739.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(74, 70, 62)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(74, 70, 62)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "64.3125px",
+                "justifyContent": "normal",
+                "lineHeight": "21.45px",
+                "margin": "8px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "we exist to book weird shows and pay the people who play them. 100% of door to artists for all local shows under 100 cap."
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(31, 30, 28)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(31, 30, 28)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "172.75px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "266.656px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": ""
+        },
+        {
+          "attributes": {},
+          "bounds": {
+            "height": 172.75,
+            "width": 266.671875,
+            "x": 326.65625,
+            "y": 652.96875
+          },
+          "children": [
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 44px; font-weight: 500; font-style: italic; color: rgb(200, 39, 13); line-height: 1; letter-spacing: -0.02em;"
+              },
+              "bounds": {
+                "height": 44,
+                "width": 266.671875,
+                "x": 326.65625,
+                "y": 652.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(200, 39, 13)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(200, 39, 13)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "44px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "44px",
+                "justifyContent": "normal",
+                "lineHeight": "44px",
+                "margin": "0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.672px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "02"
+            },
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 20px; font-weight: 500; color: rgb(31, 30, 28); margin-top: 10px; letter-spacing: -0.015em;"
+              },
+              "bounds": {
+                "height": 25,
+                "width": 266.671875,
+                "x": 326.65625,
+                "y": 706.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(31, 30, 28)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(31, 30, 28)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "20px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "25px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "10px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.672px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "A safer room"
+            },
+            {
+              "attributes": {
+                "style": "font-size: 13px; color: rgb(74, 70, 62); line-height: 1.65; margin-top: 8px;"
+              },
+              "bounds": {
+                "height": 64.3125,
+                "width": 266.671875,
+                "x": 326.65625,
+                "y": 739.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(74, 70, 62)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(74, 70, 62)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "64.3125px",
+                "justifyContent": "normal",
+                "lineHeight": "21.45px",
+                "margin": "8px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.672px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "no racism, no transphobia, no bullshit. we enforce it. we mean it. the room has to be safe before it can be anything else."
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(31, 30, 28)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(31, 30, 28)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "172.75px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "266.672px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": ""
+        },
+        {
+          "attributes": {},
+          "bounds": {
+            "height": 172.75,
+            "width": 266.65625,
+            "x": 621.328125,
+            "y": 652.96875
+          },
+          "children": [
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 44px; font-weight: 500; font-style: italic; color: rgb(200, 39, 13); line-height: 1; letter-spacing: -0.02em;"
+              },
+              "bounds": {
+                "height": 44,
+                "width": 266.65625,
+                "x": 621.328125,
+                "y": 652.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(200, 39, 13)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(200, 39, 13)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "44px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "44px",
+                "justifyContent": "normal",
+                "lineHeight": "44px",
+                "margin": "0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "03"
+            },
+            {
+              "attributes": {
+                "style": "font-family: Fraunces, serif; font-size: 20px; font-weight: 500; color: rgb(31, 30, 28); margin-top: 10px; letter-spacing: -0.015em;"
+              },
+              "bounds": {
+                "height": 25,
+                "width": 266.65625,
+                "x": 621.328125,
+                "y": 706.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(31, 30, 28)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(31, 30, 28)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Fraunces, serif",
+                "fontSize": "20px",
+                "fontWeight": "500",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "25px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "10px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "Loud by design"
+            },
+            {
+              "attributes": {
+                "style": "font-size: 13px; color: rgb(74, 70, 62); line-height: 1.65; margin-top: 8px;"
+              },
+              "bounds": {
+                "height": 85.75,
+                "width": 266.65625,
+                "x": 621.328125,
+                "y": 739.96875
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(74, 70, 62)",
+                "borderRadius": "0px",
+                "boxSizing": "content-box",
+                "color": "rgb(74, 70, 62)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "85.75px",
+                "justifyContent": "normal",
+                "lineHeight": "21.45px",
+                "margin": "8px 0px 0px",
+                "padding": "0px",
+                "position": "static",
+                "width": "266.656px"
+              },
+              "id": "",
+              "tag": "div",
+              "text": "the PA is tuned for real volume. we honor ear protection (free at the door) and we start on time. respect the room, respect each other."
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(31, 30, 28)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(31, 30, 28)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "172.75px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "266.656px"
+          },
+          "id": "",
+          "tag": "div",
+          "text": ""
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(31, 30, 28)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(31, 30, 28)",
+        "display": "grid",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "gap": "28px",
+        "gridTemplateColumns": "266.656px 266.672px 266.656px",
+        "height": "172.75px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "856px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": ""
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "214.75px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "56px 0px 0px",
+    "padding": "36px 0px 0px",
+    "position": "static",
+    "width": "856px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

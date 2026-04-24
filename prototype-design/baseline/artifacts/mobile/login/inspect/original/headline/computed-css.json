@@ -1,0 +1,23 @@
+{
+  "exists": true,
+  "computed": {
+    "color": "rgb(255, 255, 255)",
+    "display": "block",
+    "font-family": "Fraunces, Georgia, \"Times New Roman\", serif",
+    "font-size": "38px",
+    "font-weight": "500",
+    "height": "77.5px",
+    "line-height": "38.76px",
+    "width": "334px"
+  },
+  "bounds": {
+    "x": 28,
+    "y": 138.5,
+    "width": 334,
+    "height": 77.5
+  },
+  "attributes": {
+    "class": "px-serif",
+    "id": ""
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "full-screen",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:32.896641839Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(232, 228, 218)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "817.75px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 817.75
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/full-screen/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/full-screen/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/full-screen/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:32.95747214Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background": "rgb(243, 241, 235) none repeat scroll 0% 0% / auto padding-box border-box",
+          "background-color": "rgb(243, 241, 235)",
+          "border": "0px none rgb(26, 26, 24)",
+          "border-color": "rgb(26, 26, 24)",
+          "border-radius": "0px",
+          "border-style": "none",
+          "border-width": "0px",
+          "box-shadow": "none",
+          "box-sizing": "content-box",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "flex-direction": "column",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "817.75px",
+          "justify-content": "normal",
+          "letter-spacing": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "max-height": "none",
+          "max-width": "none",
+          "min-height": "0px",
+          "min-width": "0px",
+          "opacity": "1",
+          "overflow": "hidden",
+          "padding": "0px",
+          "position": "relative",
+          "text-align": "start",
+          "text-transform": "none",
+          "white-space": "normal",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 817.75
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "status-bar",
+        "selector": "#root \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.021534688Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "63.5px",
+          "padding": "21px 24px 19px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 63.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/status-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/status-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/status-bar/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-body",
+        "selector": "#root \u003e div \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.069334851Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "gap": "normal",
+          "height": "754.25px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 754.25
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-body/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-body/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/screen-body/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.123824585Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "44px",
+          "padding": "8px 18px 10px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 62
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "hero",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.166057066Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "54.625px",
+          "line-height": "normal",
+          "padding": "6px 20px 14px",
+          "width": "350px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 125.5,
+          "width": 390,
+          "height": 74.625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/hero/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/hero/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/hero/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "segments",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.199786532Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(250, 248, 242)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "8px",
+          "display": "flex",
+          "height": "29px",
+          "padding": "3px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 14,
+          "y": 200.125,
+          "width": 362,
+          "height": 37
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/segments/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/segments/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/segments/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "first-booking-card",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(4) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.249254709Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "1px solid rgb(234, 230, 221)",
+          "border-radius": "12px",
+          "color": "rgb(26, 26, 24)",
+          "display": "block",
+          "height": "115px",
+          "padding": "16px",
+          "width": "328px"
+        },
+        "bounds": {
+          "x": 14,
+          "y": 253.125,
+          "width": 362,
+          "height": 149
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/first-booking-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/first-booking-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/first-booking-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-bookings",
+        "url": "http://localhost:7070/standalone/mobile/bookings.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "tab-bar",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:last-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:55:33.302134631Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(255, 255, 255, 0.92)",
+          "border-top": "1px solid rgb(234, 230, 221)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "36.625px",
+          "padding": "8px 8px 26px",
+          "width": "374px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 746.125,
+          "width": 390,
+          "height": 71.625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/tab-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/tab-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/mobile/bookings/inspect/original/tab-bar/inspect.json"
+    }
+  ]
+}

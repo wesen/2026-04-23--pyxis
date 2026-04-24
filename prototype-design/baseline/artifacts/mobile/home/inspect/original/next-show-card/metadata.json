@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "prototype-mobile-home",
+  "url": "http://localhost:7070/standalone/mobile/home.html",
+  "viewport": {
+    "Width": 390,
+    "Height": 1024
+  },
+  "name": "next-show-card",
+  "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2) \u003e div:nth-child(2)",
+  "selector_source": "style",
+  "root_selector": "#root",
+  "prepare_type": "script",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:55:38.516752328Z"
+}

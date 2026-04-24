@@ -1,0 +1,150 @@
+{
+  "attributes": {},
+  "bounds": {
+    "height": 64.9375,
+    "width": 201.890625,
+    "x": 18,
+    "y": 85
+  },
+  "children": [
+    {
+      "attributes": {
+        "style": "font-family: Fraunces, serif; font-size: 18px; font-weight: 700; letter-spacing: -0.025em; color: rgb(31, 30, 28);"
+      },
+      "bounds": {
+        "height": 23,
+        "width": 201.890625,
+        "x": 18,
+        "y": 85
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(31, 30, 28)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(31, 30, 28)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Fraunces, serif",
+        "fontSize": "18px",
+        "fontWeight": "700",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "23px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "201.891px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": "ppxis"
+    },
+    {
+      "attributes": {
+        "style": "font-size: 11.5px; color: rgb(142, 136, 126); font-style: italic; line-height: 1.65; margin-top: 4px;"
+      },
+      "bounds": {
+        "height": 37.9375,
+        "width": 201.890625,
+        "x": 18,
+        "y": 112
+      },
+      "children": [
+        {
+          "attributes": {},
+          "bounds": {
+            "height": 14,
+            "width": 0,
+            "x": 126.765625,
+            "y": 114
+          },
+          "children": [],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(142, 136, 126)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(142, 136, 126)",
+            "display": "inline",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "11.5px",
+            "fontWeight": "400",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "auto",
+            "justifyContent": "normal",
+            "lineHeight": "18.975px",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "auto"
+          },
+          "id": "",
+          "tag": "br",
+          "text": ""
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(142, 136, 126)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(142, 136, 126)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "11.5px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "37.9375px",
+        "justifyContent": "normal",
+        "lineHeight": "18.975px",
+        "margin": "4px 0px 0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "201.891px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": ""
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(31, 30, 28)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "64.9375px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "0px",
+    "position": "static",
+    "width": "201.891px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

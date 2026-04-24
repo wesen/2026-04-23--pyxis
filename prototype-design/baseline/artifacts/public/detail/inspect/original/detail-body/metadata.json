@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "prototype-public-detail",
+  "url": "http://localhost:7070/standalone/public/detail.html",
+  "viewport": {
+    "Width": 920,
+    "Height": 1300
+  },
+  "name": "detail-body",
+  "selector": "#root \u003e div \u003e main \u003e :nth-child(2) \u003e div:last-child",
+  "selector_source": "style",
+  "root_selector": "#root",
+  "prepare_type": "script",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:56:14.708003126Z"
+}

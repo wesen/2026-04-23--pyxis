@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "style": "margin: 0px 14px 18px; height: 160px; border-radius: 12px; background: repeating-linear-gradient(135deg, rgb(238, 234, 224) 0px, rgb(238, 234, 224) 10px, rgb(250, 248, 242) 10px, rgb(250, 248, 242) 20px); border: 1px solid rgb(234, 230, 221); display: flex; align-items: center; justify-content: center; color: rgb(138, 133, 123); font-family: \"JetBrains Mono\", \"IBM Plex Mono\", \"SF Mono\", ui-monospace, monospace; font-size: 11px;"
+  },
+  "bounds": {
+    "height": 162,
+    "width": 362,
+    "x": 14,
+    "y": 231.765625
+  },
+  "children": [],
+  "class_name": "",
+  "computed": {
+    "alignItems": "center",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "1px solid rgb(234, 230, 221)",
+    "borderRadius": "12px",
+    "boxSizing": "content-box",
+    "color": "rgb(138, 133, 123)",
+    "display": "flex",
+    "flexDirection": "row",
+    "fontFamily": "\"JetBrains Mono\", \"IBM Plex Mono\", \"SF Mono\", ui-monospace, monospace",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "160px",
+    "justifyContent": "center",
+    "lineHeight": "normal",
+    "margin": "0px 14px 18px",
+    "padding": "0px",
+    "position": "static",
+    "width": "360px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": "poster · 1080×1080"
+}

@@ -1,0 +1,221 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/footer-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 590,
+          "Height": 440
+        },
+        "name": "compact-shell",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:32.287193256Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "149.938px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 60,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/compact-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/compact-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/compact-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/footer-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 590,
+          "Height": 440
+        },
+        "name": "frame",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:32.338346872Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "149.938px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 60,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/frame/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/frame/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/frame/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/footer-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 590,
+          "Height": 440
+        },
+        "name": "footer-shell",
+        "selector": "#capture-root [data-catalog='footer'] footer",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:32.364490787Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "100.938px",
+          "margin": "60px 0px 0px",
+          "padding": "24px 18px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 60,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/footer-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/footer-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/footer-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/footer-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 590,
+          "Height": 440
+        },
+        "name": "brand",
+        "selector": "#capture-root [data-catalog='footer'] footer div:first-child \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:32.417551238Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "64.9375px",
+          "letter-spacing": "normal",
+          "width": "201.891px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 85,
+          "width": 201.890625,
+          "height": 64.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/brand/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/brand/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/brand/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/footer-mobile",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 590,
+          "Height": 440
+        },
+        "name": "links",
+        "selector": "#capture-root [data-catalog='footer'] footer a",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:32.46613263Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(142, 136, 126)",
+          "display": "block",
+          "font-size": "13px",
+          "height": "16px",
+          "text-decoration": "none",
+          "width": "61.2188px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 169.9375,
+          "width": 61.21875,
+          "height": 16
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/links/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/links/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/footer-mobile/inspect/original/links/inspect.json"
+    }
+  ]
+}

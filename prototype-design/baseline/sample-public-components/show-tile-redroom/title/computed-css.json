@@ -1,0 +1,23 @@
+{
+  "exists": true,
+  "computed": {
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "font-size": "16px",
+    "font-weight": "700",
+    "height": "20px",
+    "letter-spacing": "-0.08px",
+    "margin": "0px",
+    "width": "270px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 351.5,
+    "width": 270,
+    "height": 20
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

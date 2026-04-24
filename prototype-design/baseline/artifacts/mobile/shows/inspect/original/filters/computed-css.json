@@ -1,0 +1,21 @@
+{
+  "exists": true,
+  "computed": {
+    "background-color": "rgba(0, 0, 0, 0)",
+    "display": "flex",
+    "gap": "8px",
+    "height": "29px",
+    "padding": "4px 20px 14px",
+    "width": "350px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 200.125,
+    "width": 390,
+    "height": 47
+  },
+  "attributes": {
+    "class": "px-scroll",
+    "id": ""
+  }
+}

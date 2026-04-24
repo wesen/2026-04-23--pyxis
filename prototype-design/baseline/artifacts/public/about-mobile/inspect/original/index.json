@@ -1,0 +1,432 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "full-shell",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.267710437Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1959.38px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1959.375
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/full-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/full-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/full-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.351562732Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1959.38px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1959.375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e header",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.437364451Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "",
+          "border-radius": "0px",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "52px",
+          "line-height": "normal",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 53
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "about-header",
+        "selector": "#root \u003e div \u003e main \u003e :first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.482750267Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "52.5px",
+          "line-height": "normal",
+          "margin": "0px 0px 22px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 79,
+          "width": 354,
+          "height": 52.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-header/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-header/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-header/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "about-intro",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.517288573Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-style": "normal",
+          "height": "422.5px",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 174.5,
+          "width": 354,
+          "height": 422.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-intro/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-intro/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-intro/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "about-ethos",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(4)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.571203038Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "border-top": "1px solid rgb(234, 231, 224)",
+          "display": "block",
+          "grid-template-columns": "none",
+          "height": "533.938px",
+          "margin": "40px 0px 0px",
+          "padding": "28px 0px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 637,
+          "width": 354,
+          "height": 562.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-ethos/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-ethos/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-ethos/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "about-collective",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(5)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.636422675Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "border-top": "1px solid rgb(234, 231, 224)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "480.5px",
+          "margin": "40px 0px 0px",
+          "padding": "28px 0px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 1239.9375,
+          "width": 354,
+          "height": 509.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-collective/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-collective/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/about-collective/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "main",
+        "selector": "#root \u003e div \u003e main",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.687169774Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "1670.44px",
+          "margin": "0px",
+          "padding": "26px 18px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 53,
+          "width": 390,
+          "height": 1696.4375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/main/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/main/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/main/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-about-mobile",
+        "url": "http://localhost:7070/standalone/public/about-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1780
+        },
+        "name": "footer",
+        "selector": "#root \u003e div \u003e footer",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:00.757926902Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "100.938px",
+          "margin": "60px 0px 0px",
+          "padding": "24px 18px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 1809.4375,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/footer/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/footer/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/about-mobile/inspect/original/footer/inspect.json"
+    }
+  ]
+}

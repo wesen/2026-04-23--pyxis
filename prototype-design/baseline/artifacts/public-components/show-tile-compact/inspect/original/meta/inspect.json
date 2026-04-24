@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "style": "font-size: 12.5px; color: rgb(142, 136, 126); margin-top: 4px;"
+  },
+  "bounds": {
+    "height": 15,
+    "width": 354,
+    "x": 0,
+    "y": 479.5
+  },
+  "children": [],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(142, 136, 126)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(142, 136, 126)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "12.5px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "15px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "4px 0px 0px",
+    "padding": "0px",
+    "position": "static",
+    "width": "354px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": "Every Monday · 7:00 PM · All Ages"
+}

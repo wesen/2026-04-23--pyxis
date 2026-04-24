@@ -1,0 +1,22 @@
+{
+  "exists": true,
+  "computed": {
+    "aspect-ratio": "4 / 5",
+    "background-color": "rgb(17, 17, 17)",
+    "border-radius": "4px",
+    "display": "block",
+    "height": "337.5px",
+    "overflow": "hidden",
+    "width": "270px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 270,
+    "height": 337.5
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

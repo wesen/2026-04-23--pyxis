@@ -1,0 +1,21 @@
+{
+  "exists": true,
+  "computed": {
+    "color": "rgb(142, 136, 126)",
+    "display": "block",
+    "font-size": "13px",
+    "height": "16px",
+    "text-decoration": "none",
+    "width": "61.2188px"
+  },
+  "bounds": {
+    "x": 18,
+    "y": 169.9375,
+    "width": 61.21875,
+    "height": 16
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

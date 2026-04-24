@@ -1,0 +1,27 @@
+{
+  "exists": true,
+  "computed": {
+    "background-color": "rgb(255, 255, 255)",
+    "border": "",
+    "border-radius": "0px",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "font-family": "Inter, sans-serif",
+    "font-size": "16px",
+    "font-weight": "400",
+    "height": "52px",
+    "line-height": "normal",
+    "padding": "0px",
+    "width": "390px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 53
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

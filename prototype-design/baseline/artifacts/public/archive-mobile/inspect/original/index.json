@@ -1,0 +1,427 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "full-shell",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.535102034Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1544.44px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1544.4375
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/full-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/full-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/full-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.635729252Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(31, 30, 28)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1544.44px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1544.4375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e header",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.692258167Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "border": "",
+          "border-radius": "0px",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "52px",
+          "line-height": "normal",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 53
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "archive-header",
+        "selector": "#root \u003e div \u003e main \u003e :first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.731557318Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "height": "52.5px",
+          "line-height": "normal",
+          "margin": "0px 0px 22px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 79,
+          "width": 354,
+          "height": 52.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-header/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-header/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-header/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "archive-stats",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.786704333Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "border": "",
+          "display": "grid",
+          "grid-template-columns": "107.328px 107.328px 107.344px",
+          "height": "112px",
+          "margin": "0px 0px 28px",
+          "padding": "14px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 174.5,
+          "width": 354,
+          "height": 142
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-stats/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-stats/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-stats/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "archive-search",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(4)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.835079145Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "center",
+          "display": "flex",
+          "gap": "10px",
+          "height": "79px",
+          "margin": "0px 0px 28px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 344.5,
+          "width": 354,
+          "height": 79
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-search/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-search/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-search/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "archive-year-group",
+        "selector": "#root \u003e div \u003e main \u003e :nth-child(5)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.886581223Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "border-bottom": "0px none rgb(31, 30, 28)",
+          "border-top": "0px none rgb(31, 30, 28)",
+          "display": "block",
+          "height": "446px",
+          "margin": "0px 0px 40px",
+          "padding": "0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 18,
+          "y": 451.5,
+          "width": 354,
+          "height": 446
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-year-group/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-year-group/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/archive-year-group/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "main",
+        "selector": "#root \u003e div \u003e main",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:05.95184693Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "1255.5px",
+          "margin": "0px",
+          "padding": "26px 18px 0px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 53,
+          "width": 390,
+          "height": 1281.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/main/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/main/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/main/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-public-archive-mobile",
+        "url": "http://localhost:7070/standalone/public/archive-mobile.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1880
+        },
+        "name": "footer",
+        "selector": "#root \u003e div \u003e footer",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:56:06.013214123Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border": "",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "height": "100.938px",
+          "margin": "60px 0px 0px",
+          "padding": "24px 18px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 1394.5,
+          "width": 390,
+          "height": 149.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/footer/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/footer/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public/archive-mobile/inspect/original/footer/inspect.json"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "public-components/nav-desktop",
+  "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+  "viewport": {
+    "Width": 1120,
+    "Height": 340
+  },
+  "name": "wordmark",
+  "selector": "#capture-root [data-catalog='nav'] header button:first-child",
+  "selector_source": "style",
+  "root_selector": "#capture-root",
+  "prepare_type": "direct-react-global",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:54:18.569375022Z"
+}

@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "style": "background: rgb(243, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: inherit; padding: 6px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; color: rgb(31, 30, 28);"
+  },
+  "bounds": {
+    "height": 28,
+    "width": 70.1875,
+    "x": 595.15625,
+    "y": 16
+  },
+  "children": [],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgb(243, 241, 236)",
+    "border": "0px none rgb(31, 30, 28)",
+    "borderRadius": "6px",
+    "boxSizing": "border-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "13px",
+    "fontWeight": "600",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "28px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "6px 14px",
+    "position": "static",
+    "width": "70.1875px"
+  },
+  "id": "",
+  "tag": "button",
+  "text": "Shows"
+}

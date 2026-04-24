@@ -1,0 +1,225 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-tile-redroom",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 470,
+          "Height": 650
+        },
+        "name": "frame",
+        "selector": "#capture-root [data-catalog='frame']",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:31.372606193Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 255, 255)",
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "height": "441.5px",
+          "padding": "0px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 441.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/frame/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/frame/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/frame/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-tile-redroom",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 470,
+          "Height": 650
+        },
+        "name": "poster",
+        "selector": "#capture-root [data-catalog='show-tile'] \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:31.461448904Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(17, 17, 17)",
+          "border-radius": "4px",
+          "display": "block",
+          "height": "337.5px",
+          "overflow": "hidden",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 270,
+          "height": 337.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/poster/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/poster/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/poster/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-tile-redroom",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 470,
+          "Height": 650
+        },
+        "name": "title",
+        "selector": "#capture-root [data-catalog='show-tile'] \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:31.510964202Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(31, 30, 28)",
+          "display": "block",
+          "font-family": "Inter, sans-serif",
+          "font-size": "16px",
+          "font-weight": "700",
+          "height": "20px",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 351.5,
+          "width": 270,
+          "height": 20
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/title/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/title/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/title/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-tile-redroom",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 470,
+          "Height": 650
+        },
+        "name": "meta",
+        "selector": "#capture-root [data-catalog='show-tile'] \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:31.543848064Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(142, 136, 126)",
+          "display": "block",
+          "font-size": "12.5px",
+          "height": "15px",
+          "margin": "4px 0px 0px",
+          "padding": "0px",
+          "width": "270px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 375.5,
+          "width": 270,
+          "height": 15
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/meta/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/meta/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/meta/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "public-components/show-tile-redroom",
+        "url": "http://localhost:7070/Pyxis%20Public%20Site.html",
+        "viewport": {
+          "Width": 470,
+          "Height": 650
+        },
+        "name": "ticket-pill",
+        "selector": "#capture-root [data-catalog='show-tile'] \u003e div \u003e div:nth-child(2) \u003e button",
+        "selector_source": "style",
+        "root_selector": "#capture-root",
+        "prepare_type": "direct-react-global",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:57:31.598877216Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(255, 242, 239)",
+          "border": "0px none rgb(200, 39, 13)",
+          "border-radius": "999px",
+          "color": "rgb(200, 39, 13)",
+          "display": "inline-block",
+          "font-size": "11.5px",
+          "font-weight": "600",
+          "height": "24px",
+          "margin": "10px 0px 0px",
+          "padding": "5px 12px",
+          "width": "79.0781px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 417.5,
+          "width": 79.078125,
+          "height": 24
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/ticket-pill/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/ticket-pill/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/artifacts/public-components/show-tile-redroom/inspect/original/ticket-pill/inspect.json"
+    }
+  ]
+}

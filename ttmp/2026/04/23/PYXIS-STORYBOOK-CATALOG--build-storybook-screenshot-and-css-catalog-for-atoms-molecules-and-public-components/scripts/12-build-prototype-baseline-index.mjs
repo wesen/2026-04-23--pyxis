@@ -7,7 +7,7 @@ const ticketRoot = process.env.PYXIS_STORYBOOK_CATALOG_TICKET || path.join(
   repoRoot,
   'ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components'
 );
-const baselineRoot = path.join(ticketRoot, 'various/prototype-baseline');
+const baselineRoot = path.join(repoRoot, 'prototype-design/baseline');
 const manifestPath = path.join(baselineRoot, 'manifest.json');
 const outHtml = path.join(baselineRoot, 'index.html');
 const outMd = path.join(baselineRoot, 'index.md');
@@ -91,8 +91,8 @@ for (const [group, entries] of groups.entries()) {
   html += `<section><h2>${esc(group)}</h2><div class="grid">\n`;
   md += `## ${group}\n\n`;
   for (const entry of entries) {
-    const configPath = path.join(ticketRoot, entry.config);
-    const outputPath = path.join(ticketRoot, entry.output);
+    const configPath = path.join(repoRoot, entry.config);
+    const outputPath = path.join(repoRoot, entry.output);
     const screenshotCount = countScreenshots(outputPath);
     const configHref = rel(outHtml, configPath);
     const outputHref = rel(outHtml, outputPath);

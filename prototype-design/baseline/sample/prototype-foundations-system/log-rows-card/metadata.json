@@ -1,0 +1,16 @@
+{
+  "side": "original",
+  "target_name": "prototype-foundations-system",
+  "url": "http://localhost:7070/Pyxis%20Full%20App.html",
+  "viewport": {
+    "Width": 1440,
+    "Height": 2870
+  },
+  "name": "log-rows-card",
+  "selector": "#capture-root \u003e div \u003e div:nth-of-type(2) \u003e div:nth-child(10)",
+  "selector_source": "style",
+  "root_selector": "#capture-root",
+  "prepare_type": "direct-react-global",
+  "format": "bundle",
+  "created_at": "2026-04-24T05:53:56.909415819Z"
+}

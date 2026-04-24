@@ -1,0 +1,20 @@
+{
+  "exists": true,
+  "computed": {
+    "display": "flex",
+    "gap": "10px",
+    "height": "41px",
+    "padding": "4px 14px 22px",
+    "width": "362px"
+  },
+  "bounds": {
+    "x": 0,
+    "y": 775.765625,
+    "width": 390,
+    "height": 67
+  },
+  "attributes": {
+    "class": "",
+    "id": ""
+  }
+}

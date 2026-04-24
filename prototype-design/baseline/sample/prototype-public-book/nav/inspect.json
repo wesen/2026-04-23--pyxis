@@ -1,0 +1,307 @@
+{
+  "attributes": {
+    "style": "background: rgb(255, 255, 255); border-bottom: 1px solid rgb(234, 231, 224); position: sticky; top: 0px; z-index: 50;"
+  },
+  "bounds": {
+    "height": 61,
+    "width": 920,
+    "x": 0,
+    "y": 0
+  },
+  "children": [
+    {
+      "attributes": {
+        "style": "max-width: 920px; margin: 0px auto; padding: 0px 32px; display: flex; align-items: center; justify-content: space-between; height: 60px;"
+      },
+      "bounds": {
+        "height": 60,
+        "width": 920,
+        "x": 0,
+        "y": 0
+      },
+      "children": [
+        {
+          "attributes": {
+            "style": "background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; padding: 0px; font-family: Fraunces, serif; font-size: 24px; font-weight: 700; letter-spacing: -0.025em; color: rgb(31, 30, 28);"
+          },
+          "bounds": {
+            "height": 29,
+            "width": 61.296875,
+            "x": 32,
+            "y": 15.5
+          },
+          "children": [],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(31, 30, 28)",
+            "borderRadius": "0px",
+            "boxSizing": "border-box",
+            "color": "rgb(31, 30, 28)",
+            "display": "block",
+            "flexDirection": "row",
+            "fontFamily": "Fraunces, serif",
+            "fontSize": "24px",
+            "fontWeight": "700",
+            "gap": "normal",
+            "gridTemplateColumns": "none",
+            "height": "29px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "61.2969px"
+          },
+          "id": "",
+          "tag": "button",
+          "text": "ppxis"
+        },
+        {
+          "attributes": {
+            "style": "display: flex; gap: 2px;"
+          },
+          "bounds": {
+            "height": 28,
+            "width": 292.5,
+            "x": 595.5,
+            "y": 16
+          },
+          "children": [
+            {
+              "attributes": {
+                "style": "background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: inherit; padding: 6px 14px; font-size: 13px; font-weight: 400; border-radius: 6px; color: rgb(142, 136, 126);"
+              },
+              "bounds": {
+                "height": 28,
+                "width": 69.09375,
+                "x": 595.5,
+                "y": 16
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(142, 136, 126)",
+                "borderRadius": "6px",
+                "boxSizing": "border-box",
+                "color": "rgb(142, 136, 126)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "28px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "6px 14px",
+                "position": "static",
+                "width": "69.0938px"
+              },
+              "id": "",
+              "tag": "button",
+              "text": "Shows"
+            },
+            {
+              "attributes": {
+                "style": "background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: inherit; padding: 6px 14px; font-size: 13px; font-weight: 400; border-radius: 6px; color: rgb(142, 136, 126);"
+              },
+              "bounds": {
+                "height": 28,
+                "width": 74.546875,
+                "x": 666.59375,
+                "y": 16
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(142, 136, 126)",
+                "borderRadius": "6px",
+                "boxSizing": "border-box",
+                "color": "rgb(142, 136, 126)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "28px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "6px 14px",
+                "position": "static",
+                "width": "74.5469px"
+              },
+              "id": "",
+              "tag": "button",
+              "text": "Archive"
+            },
+            {
+              "attributes": {
+                "style": "background: rgb(243, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: inherit; padding: 6px 14px; font-size: 13px; font-weight: 600; border-radius: 6px; color: rgb(31, 30, 28);"
+              },
+              "bounds": {
+                "height": 28,
+                "width": 78.1875,
+                "x": 743.140625,
+                "y": 16
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgb(243, 241, 236)",
+                "border": "0px none rgb(31, 30, 28)",
+                "borderRadius": "6px",
+                "boxSizing": "border-box",
+                "color": "rgb(31, 30, 28)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "600",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "28px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "6px 14px",
+                "position": "static",
+                "width": "78.1875px"
+              },
+              "id": "",
+              "tag": "button",
+              "text": "Book us"
+            },
+            {
+              "attributes": {
+                "style": "background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; font-family: inherit; padding: 6px 14px; font-size: 13px; font-weight: 400; border-radius: 6px; color: rgb(142, 136, 126);"
+              },
+              "bounds": {
+                "height": 28,
+                "width": 64.671875,
+                "x": 823.328125,
+                "y": 16
+              },
+              "children": [],
+              "class_name": "",
+              "computed": {
+                "alignItems": "normal",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "border": "0px none rgb(142, 136, 126)",
+                "borderRadius": "6px",
+                "boxSizing": "border-box",
+                "color": "rgb(142, 136, 126)",
+                "display": "block",
+                "flexDirection": "row",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridTemplateColumns": "none",
+                "height": "28px",
+                "justifyContent": "normal",
+                "lineHeight": "normal",
+                "margin": "0px",
+                "padding": "6px 14px",
+                "position": "static",
+                "width": "64.6719px"
+              },
+              "id": "",
+              "tag": "button",
+              "text": "About"
+            }
+          ],
+          "class_name": "",
+          "computed": {
+            "alignItems": "normal",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "border": "0px none rgb(31, 30, 28)",
+            "borderRadius": "0px",
+            "boxSizing": "content-box",
+            "color": "rgb(31, 30, 28)",
+            "display": "flex",
+            "flexDirection": "row",
+            "fontFamily": "Inter, sans-serif",
+            "fontSize": "16px",
+            "fontWeight": "400",
+            "gap": "2px",
+            "gridTemplateColumns": "none",
+            "height": "28px",
+            "justifyContent": "normal",
+            "lineHeight": "normal",
+            "margin": "0px",
+            "padding": "0px",
+            "position": "static",
+            "width": "292.5px"
+          },
+          "id": "",
+          "tag": "nav",
+          "text": ""
+        }
+      ],
+      "class_name": "",
+      "computed": {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(31, 30, 28)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(31, 30, 28)",
+        "display": "flex",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "60px",
+        "justifyContent": "space-between",
+        "lineHeight": "normal",
+        "margin": "0px",
+        "padding": "0px 32px",
+        "position": "static",
+        "width": "856px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": ""
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgb(255, 255, 255)",
+    "border": "",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "60px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px",
+    "padding": "0px",
+    "position": "sticky",
+    "width": "920px"
+  },
+  "id": "",
+  "tag": "header",
+  "text": ""
+}

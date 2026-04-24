@@ -1,0 +1,115 @@
+{
+  "attributes": {
+    "style": "margin-bottom: 22px;"
+  },
+  "bounds": {
+    "height": 52.5,
+    "width": 354,
+    "x": 18,
+    "y": 79
+  },
+  "children": [
+    {
+      "attributes": {
+        "style": "font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; color: rgb(142, 136, 126); text-transform: uppercase; margin-bottom: 8px;"
+      },
+      "bounds": {
+        "height": 13,
+        "width": 354,
+        "x": 18,
+        "y": 79
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(142, 136, 126)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(142, 136, 126)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": "10.5px",
+        "fontWeight": "600",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "13px",
+        "justifyContent": "normal",
+        "lineHeight": "normal",
+        "margin": "0px 0px 8px",
+        "padding": "0px",
+        "position": "static",
+        "width": "354px"
+      },
+      "id": "",
+      "tag": "div",
+      "text": "Est. 2023"
+    },
+    {
+      "attributes": {
+        "style": "font-family: Fraunces, serif; font-size: 30px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; margin: 0px; color: rgb(31, 30, 28);"
+      },
+      "bounds": {
+        "height": 31.5,
+        "width": 354,
+        "x": 18,
+        "y": 100
+      },
+      "children": [],
+      "class_name": "",
+      "computed": {
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(31, 30, 28)",
+        "borderRadius": "0px",
+        "boxSizing": "content-box",
+        "color": "rgb(31, 30, 28)",
+        "display": "block",
+        "flexDirection": "row",
+        "fontFamily": "Fraunces, serif",
+        "fontSize": "30px",
+        "fontWeight": "700",
+        "gap": "normal",
+        "gridTemplateColumns": "none",
+        "height": "31.5px",
+        "justifyContent": "normal",
+        "lineHeight": "31.5px",
+        "margin": "0px",
+        "padding": "0px",
+        "position": "static",
+        "width": "354px"
+      },
+      "id": "",
+      "tag": "h1",
+      "text": "About ppxis"
+    }
+  ],
+  "class_name": "",
+  "computed": {
+    "alignItems": "normal",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "0px none rgb(31, 30, 28)",
+    "borderRadius": "0px",
+    "boxSizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "flexDirection": "row",
+    "fontFamily": "Inter, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "gap": "normal",
+    "gridTemplateColumns": "none",
+    "height": "52.5px",
+    "justifyContent": "normal",
+    "lineHeight": "normal",
+    "margin": "0px 0px 22px",
+    "padding": "0px",
+    "position": "static",
+    "width": "354px"
+  },
+  "id": "",
+  "tag": "div",
+  "text": ""
+}

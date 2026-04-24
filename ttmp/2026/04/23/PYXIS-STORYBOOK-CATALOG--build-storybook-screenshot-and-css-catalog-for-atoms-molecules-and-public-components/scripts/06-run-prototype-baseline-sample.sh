@@ -2,8 +2,9 @@
 set -euo pipefail
 
 REPO_ROOT="${PYXIS_REPO_ROOT:-/home/manuel/code/wesen/2026-04-23--pyxis}"
-TICKET_ROOT="${PYXIS_STORYBOOK_CATALOG_TICKET:-$REPO_ROOT/ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components}"
+CONFIG_DIR="$REPO_ROOT/prototype-design/visual-diff"
 PROTOTYPE_DIR="$REPO_ROOT/prototype-design"
+BASELINE_DIR="$REPO_ROOT/prototype-design/baseline"
 PORT="${PYXIS_PROTOTYPE_PORT:-7070}"
 
 if ! command -v css-visual-diff >/dev/null 2>&1; then
@@ -19,27 +20,27 @@ if ! curl -fsS "http://localhost:$PORT/Pyxis%20Public%20Site.html" >/dev/null 2>
   sleep 1
 fi
 
-BASE_OUT="$TICKET_ROOT/various/prototype-baseline/sample"
+BASE_OUT="$BASELINE_DIR/sample"
 rm -rf "$BASE_OUT"
 mkdir -p "$BASE_OUT"
 
 SAMPLE_CFGS=(
-  "$TICKET_ROOT/sources/prototype-configs/prototype-foundations-system.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-shows.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-shows-mobile.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-detail.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-archive.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-book.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/prototype-public-about.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/nav-desktop.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/nav-mobile.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/footer-desktop.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/footer-mobile.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/page-header-shows.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/show-grid-desktop.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/show-grid-mobile.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/poster-redroom.css-visual-diff.yml"
-  "$TICKET_ROOT/sources/prototype-configs/public-components/show-tile-redroom.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-foundations-system.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-shows.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-shows-mobile.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-detail.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-archive.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-book.css-visual-diff.yml"
+  "$CONFIG_DIR/prototype-public-about.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/nav-desktop.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/nav-mobile.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/footer-desktop.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/footer-mobile.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/page-header-shows.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/show-grid-desktop.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/show-grid-mobile.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/poster-redroom.css-visual-diff.yml"
+  "$CONFIG_DIR/public-components/show-tile-redroom.css-visual-diff.yml"
 )
 
 for cfg in "${SAMPLE_CFGS[@]}"; do

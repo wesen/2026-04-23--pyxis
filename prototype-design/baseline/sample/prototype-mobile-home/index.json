@@ -1,0 +1,429 @@
+{
+  "output_dir": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home",
+  "results": [
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "full-screen",
+        "selector": "#root",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.007011023Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background-color": "rgb(232, 228, 218)",
+          "border": "0px none rgb(0, 0, 0)",
+          "border-radius": "0px",
+          "box-shadow": "none",
+          "color": "rgb(0, 0, 0)",
+          "display": "block",
+          "font-family": "Inter, -apple-system, sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1118.94px",
+          "justify-content": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1118.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": "root"
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/full-screen/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/full-screen/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/full-screen/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-shell",
+        "selector": "#root \u003e div",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.097909882Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "align-items": "normal",
+          "background": "rgb(243, 241, 235) none repeat scroll 0% 0% / auto padding-box border-box",
+          "background-color": "rgb(243, 241, 235)",
+          "border": "0px none rgb(26, 26, 24)",
+          "border-color": "rgb(26, 26, 24)",
+          "border-radius": "0px",
+          "border-style": "none",
+          "border-width": "0px",
+          "box-shadow": "none",
+          "box-sizing": "content-box",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "flex-direction": "column",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "400",
+          "gap": "normal",
+          "grid-template-columns": "none",
+          "height": "1118.94px",
+          "justify-content": "normal",
+          "letter-spacing": "normal",
+          "line-height": "normal",
+          "margin": "0px",
+          "max-height": "none",
+          "max-width": "none",
+          "min-height": "0px",
+          "min-width": "0px",
+          "opacity": "1",
+          "overflow": "hidden",
+          "padding": "0px",
+          "position": "relative",
+          "text-align": "start",
+          "text-transform": "none",
+          "white-space": "normal",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1118.9375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-shell/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-shell/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-shell/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "status-bar",
+        "selector": "#root \u003e div \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.165846777Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "63.5px",
+          "padding": "21px 24px 19px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 63.5
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/status-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/status-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/status-bar/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "screen-body",
+        "selector": "#root \u003e div \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.223870971Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(0, 0, 0, 0)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "gap": "normal",
+          "height": "1055.44px",
+          "padding": "0px",
+          "width": "390px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 1055.4375
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-body/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-body/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/screen-body/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "nav",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.286494217Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "44px",
+          "padding": "8px 18px 10px",
+          "width": "354px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 63.5,
+          "width": 390,
+          "height": 62
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/nav/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/nav/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/nav/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "hero",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2) \u003e div:first-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.3355599Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "font-size": "16px",
+          "height": "73.625px",
+          "line-height": "normal",
+          "padding": "6px 20px 14px",
+          "width": "350px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 125.5,
+          "width": 390,
+          "height": 93.625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/hero/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/hero/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/hero/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "next-show-card",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2) \u003e div:nth-child(2)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.368243045Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgb(26, 26, 24)",
+          "border-radius": "12px",
+          "color": "rgb(255, 255, 255)",
+          "display": "block",
+          "height": "112.188px",
+          "padding": "18px",
+          "width": "326px"
+        },
+        "bounds": {
+          "x": 14,
+          "y": 225.125,
+          "width": 362,
+          "height": 148.1875
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/next-show-card/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/next-show-card/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/next-show-card/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "stats-grid",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:nth-child(2) \u003e div:nth-child(3)",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.419958986Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "display": "grid",
+          "gap": "10px",
+          "grid-template-columns": "176px 176px",
+          "height": "190px",
+          "width": "362px"
+        },
+        "bounds": {
+          "x": 14,
+          "y": 393.3125,
+          "width": 362,
+          "height": 190
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/stats-grid/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/stats-grid/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/stats-grid/inspect.json"
+    },
+    {
+      "metadata": {
+        "side": "original",
+        "target_name": "prototype-mobile-home",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "viewport": {
+          "Width": 390,
+          "Height": 1024
+        },
+        "name": "tab-bar",
+        "selector": "#root \u003e div \u003e div:nth-child(2) \u003e div:last-child",
+        "selector_source": "style",
+        "root_selector": "#root",
+        "prepare_type": "script",
+        "format": "bundle",
+        "created_at": "2026-04-24T05:54:53.471585949Z"
+      },
+      "style": {
+        "exists": true,
+        "computed": {
+          "background-color": "rgba(255, 255, 255, 0.92)",
+          "border-top": "1px solid rgb(234, 230, 221)",
+          "color": "rgb(26, 26, 24)",
+          "display": "flex",
+          "height": "36.625px",
+          "padding": "8px 8px 26px",
+          "width": "374px"
+        },
+        "bounds": {
+          "x": 0,
+          "y": 1047.3125,
+          "width": 390,
+          "height": 71.625
+        },
+        "attributes": {
+          "class": "",
+          "id": ""
+        }
+      },
+      "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/tab-bar/screenshot.png",
+      "html": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/tab-bar/prepared.html",
+      "inspect_json": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/sample/prototype-mobile-home/tab-bar/inspect.json"
+    }
+  ]
+}

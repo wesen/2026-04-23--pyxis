@@ -8,9 +8,9 @@ const ticketRoot = process.env.PYXIS_STORYBOOK_CATALOG_TICKET || path.join(
   'ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components'
 );
 const prototypeDir = path.join(repoRoot, 'prototype-design');
-const configRoot = path.join(ticketRoot, 'sources/prototype-configs');
+const configRoot = path.join(repoRoot, 'prototype-design/visual-diff');
 const componentRoot = path.join(configRoot, 'public-components');
-const baselineRoot = path.join(ticketRoot, 'various/prototype-baseline');
+const baselineRoot = path.join(repoRoot, 'prototype-design/baseline');
 const manifestPath = path.join(baselineRoot, 'manifest.json');
 const prototypeBaseUrl = process.env.PYXIS_PROTOTYPE_URL || 'http://localhost:7070';
 
@@ -750,8 +750,8 @@ for (const cfg of configs) {
     slug: cfg.slug,
     title: cfg.title,
     kind: cfg.kind,
-    config: path.relative(ticketRoot, outPath).split(path.sep).join('/'),
-    output: path.relative(ticketRoot, path.join(baselineRoot, 'artifacts', cfg.outputSubdir)).split(path.sep).join('/'),
+    config: path.relative(repoRoot, outPath).split(path.sep).join('/'),
+    output: path.relative(repoRoot, path.join(baselineRoot, 'artifacts', cfg.outputSubdir)).split(path.sep).join('/'),
     sourceHtml: cfg.sourceHtml || (cfg.page === 'foundations-system' ? 'prototype-design/Pyxis Full App.html' : 'prototype-design/Pyxis Public Site.html'),
     sourceComponent: cfg.sourceComponent || '',
     page: cfg.page || '',
@@ -761,9 +761,9 @@ for (const cfg of configs) {
 
 fs.writeFileSync(manifestPath, JSON.stringify({
   generatedAt: new Date().toISOString(),
-  prototypeDir,
-  configRoot: path.relative(ticketRoot, configRoot).split(path.sep).join('/'),
-  outputRoot: path.relative(ticketRoot, path.join(baselineRoot, 'artifacts')).split(path.sep).join('/'),
+  prototypeDir: path.relative(repoRoot, prototypeDir).split(path.sep).join('/'),
+  configRoot: path.relative(repoRoot, configRoot).split(path.sep).join('/'),
+  outputRoot: path.relative(repoRoot, path.join(baselineRoot, 'artifacts')).split(path.sep).join('/'),
   count: manifest.length,
   entries: manifest,
 }, null, 2));
