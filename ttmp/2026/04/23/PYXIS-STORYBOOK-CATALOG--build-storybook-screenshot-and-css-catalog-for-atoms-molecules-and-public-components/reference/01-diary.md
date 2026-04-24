@@ -1009,6 +1009,8 @@ Work on tasks task by task, commit at appropriate intervals"
 
 **Inferred user intent:** Finish the prototype baseline source of truth so every major prototype surface is exported as screenshots/CSS/HTML/inspect data, while preserving the existing foundations baseline and avoiding expensive unnecessary recomputation.
 
+**Commit (code):** c9d0bf0 — "feat(prototype): add full app baseline export"
+
 ### What I did
 
 - Read the Full App handover document:

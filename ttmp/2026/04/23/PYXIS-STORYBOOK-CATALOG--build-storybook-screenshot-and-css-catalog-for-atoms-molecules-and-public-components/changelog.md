@@ -240,3 +240,14 @@
 ### Fixed while authoring
 - Corrected app-shell selectors after discovering most Full App `main` regions have a header plus one content wrapper, rather than many direct card children.
 - Corrected Bookings and Audit Log selectors after the Full App-only full runner exposed extra content-wrapper hops.
+
+## 2026-04-24
+
+Step 11: added the non-foundations Full App baseline export workflow and generated the Full App-only baseline artifacts under prototype-design/baseline (commit c9d0bf0).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/baseline/manifest.json — Updated manifest with full-app-screen entries
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs — Standalone Full App generator
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh — Full App-only extraction runner
+
