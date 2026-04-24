@@ -390,6 +390,108 @@ function mobileScreenStyles(screen) {
   return common;
 }
 
+
+function fullAppScreenStyles(screen) {
+  const root = '#root';
+  const screenRoot = `${root} > div`;
+  const appRoot = screen === 'modal' ? `${screenRoot} > div:first-child` : screenRoot;
+  const sidebar = `${appRoot} > aside`;
+  const main = `${appRoot} > main`;
+  const base = [
+    { name: 'full-screen', selector: root, props: pageProps },
+    { name: 'screen-root', selector: screenRoot, props: baseProps },
+  ];
+
+  if (screen === 'login') {
+    return base.concat([
+      { name: 'brand-panel', selector: `${screenRoot} > div:first-child`, props: ['display', 'width', 'height', 'padding', 'font-family', 'font-size', 'line-height', 'color', 'background-color', 'border', 'border-radius'] },
+      { name: 'auth-panel', selector: `${screenRoot} > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'font-family', 'font-size', 'line-height', 'color', 'background-color', 'border'] },
+      { name: 'welcome-heading', selector: `${screenRoot} > div:nth-child(2) h1`, props: ['display', 'width', 'height', 'margin', 'font-family', 'font-size', 'font-weight', 'line-height', 'color'] },
+      { name: 'discord-button', selector: `${screenRoot} > div:nth-child(2) button`, props: ['display', 'width', 'height', 'padding', 'font-family', 'font-size', 'font-weight', 'color', 'background-color', 'border', 'border-radius'] },
+    ]);
+  }
+
+  if (screen === 'setup') {
+    return base.concat([
+      { name: 'brand', selector: `${screenRoot} > div:first-child`, props: ['display', 'width', 'height', 'font-family', 'font-size', 'font-weight', 'color'] },
+      { name: 'setup-heading', selector: `${screenRoot} > h1`, props: ['display', 'width', 'height', 'font-family', 'font-size', 'font-weight', 'line-height', 'color'] },
+      { name: 'progress-strip', selector: `${screenRoot} > div:nth-child(5)`, props: ['display', 'width', 'height', 'padding', 'gap', 'background-color', 'border', 'border-radius'] },
+      { name: 'channel-card', selector: `${screenRoot} > div:nth-child(6)`, props: ['display', 'width', 'height', 'padding', 'gap', 'background-color', 'border', 'border-radius', 'box-shadow'] },
+      { name: 'helper-note', selector: `${screenRoot} > div:nth-child(7)`, props: ['display', 'width', 'height', 'font-family', 'font-size', 'color'] },
+    ]);
+  }
+
+  const common = base.concat([
+    { name: 'sidebar', selector: sidebar, props: ['display', 'width', 'height', 'padding', 'font-family', 'font-size', 'color', 'background-color', 'border'] },
+    { name: 'main', selector: main, props: ['display', 'width', 'height', 'padding', 'gap', 'font-family', 'font-size', 'line-height', 'color', 'background-color', 'overflow'] },
+    { name: 'main-header', selector: `${main} > div:first-child`, props: ['display', 'width', 'height', 'padding', 'gap', 'font-family', 'font-size', 'font-weight', 'line-height', 'color'] },
+  ]);
+
+  if (screen === 'dashboard') {
+    common.push(
+      { name: 'hero-card', selector: `${main} > div:nth-child(2) > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius', 'box-shadow', 'color'] },
+      { name: 'stats-grid', selector: `${main} > div:nth-child(2) > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'content-grid', selector: `${main} > div:nth-child(2) > div:nth-child(3)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+    );
+  } else if (screen === 'shows') {
+    common.push(
+      { name: 'filter-tabs', selector: `${main} > div:nth-child(2) > div:first-child`, props: ['display', 'width', 'height', 'padding', 'gap', 'background-color', 'border', 'border-radius'] },
+      { name: 'confirmed-card', selector: `${main} > div:nth-child(2) > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius', 'box-shadow'] },
+      { name: 'archived-card', selector: `${main} > div:nth-child(2) > div:nth-child(3)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'calendar') {
+    common.push(
+      { name: 'month-card', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'gap', 'background-color', 'border', 'border-radius'] },
+      { name: 'calendar-layout', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'calendar-card', selector: `${main} > div:nth-child(2) > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'bookings') {
+    common.push(
+      { name: 'queue-layout', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'pending-card', selector: `${main} > div:nth-child(2) > div:first-child > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+      { name: 'sidebar-cards', selector: `${main} > div:nth-child(2) > div:first-child > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap'] },
+    );
+  } else if (screen === 'modal') {
+    common.push(
+      { name: 'modal-backdrop', selector: `${screenRoot} > div:nth-child(2)`, props: ['display', 'position', 'width', 'height', 'background-color', 'opacity'] },
+      { name: 'modal-panel', selector: `${screenRoot} > div:nth-child(2) > div`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius', 'box-shadow'] },
+      { name: 'modal-footer', selector: `${screenRoot} > div:nth-child(2) > div > div:last-child`, props: ['display', 'width', 'height', 'padding', 'gap', 'border'] },
+    );
+  } else if (screen === 'artists') {
+    common.push(
+      { name: 'featured-grid', selector: `${main} > div:nth-child(2) > div:first-child`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'first-artist-card', selector: `${main} > div:nth-child(2) > div:first-child > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+      { name: 'roster-table-card', selector: `${main} > div:nth-child(2) > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'attendance') {
+    common.push(
+      { name: 'stats-grid', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'log-layout', selector: `${main} > div:nth-child(2) > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'editor-card', selector: `${main} > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'log') {
+    common.push(
+      { name: 'audit-layout', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'filters-card', selector: `${main} > div:nth-child(2) > div:first-child > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+      { name: 'activity-card', selector: `${main} > div:nth-child(2) > div:first-child > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'discord') {
+    common.push(
+      { name: 'discord-layout', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'connection-card', selector: `${main} > div:nth-child(2) > div:first-child > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+      { name: 'channel-mapping-card', selector: `${main} > div:nth-child(2) > div:first-child > div:nth-child(2)`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  } else if (screen === 'settings') {
+    common.push(
+      { name: 'settings-layout', selector: `${main} > div:nth-child(2)`, props: ['display', 'width', 'height', 'gap', 'grid-template-columns'] },
+      { name: 'tab-rail', selector: `${main} > div:nth-child(2) > div:first-child > div:first-child`, props: ['display', 'width', 'height', 'padding', 'gap', 'background-color', 'border', 'border-radius'] },
+      { name: 'space-info-card', selector: `${main} > div:nth-child(2) > div:first-child > div:nth-child(2) > div:first-child`, props: ['display', 'width', 'height', 'padding', 'background-color', 'border', 'border-radius'] },
+    );
+  }
+
+  return common;
+}
+
 function componentStyles(kind, compact = false) {
   const root = "#capture-root";
   const frame = `${root} [data-catalog='frame']`;
@@ -829,6 +931,63 @@ const configs = [
     outputSubdir: 'public-components/show-grid-mobile',
     styles: componentStyles('show-grid', true),
   },
+
+  {
+    kind: 'full-app-screen',
+    slug: 'prototype-full-app-login',
+    title: 'Prototype Full App / Login',
+    page: 'login',
+    sourceHtml: 'prototype-design/Pyxis Full App.html',
+    mobile: false,
+    urlPath: 'standalone/full-app/login.html',
+    description: 'Standalone Full App login screen; foundations excluded.',
+    minHeight: 760,
+    outputSubdir: 'full-app/login',
+    styles: fullAppScreenStyles('login'),
+  },
+  {
+    kind: 'full-app-screen',
+    slug: 'prototype-full-app-setup',
+    title: 'Prototype Full App / Setup wizard',
+    page: 'setup',
+    sourceHtml: 'prototype-design/Pyxis Full App.html',
+    mobile: false,
+    urlPath: 'standalone/full-app/setup.html',
+    description: 'Standalone Full App setup wizard screen; foundations excluded.',
+    minHeight: 860,
+    outputSubdir: 'full-app/setup',
+    styles: fullAppScreenStyles('setup'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-dashboard', title: 'Prototype Full App / Dashboard', page: 'dashboard', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/dashboard.html', description: 'Standalone Full App dashboard screen.', minHeight: 760, outputSubdir: 'full-app/dashboard', styles: fullAppScreenStyles('dashboard'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-shows', title: 'Prototype Full App / Shows', page: 'shows', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/shows.html', description: 'Standalone Full App shows index screen.', minHeight: 760, outputSubdir: 'full-app/shows', styles: fullAppScreenStyles('shows'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-calendar', title: 'Prototype Full App / Calendar', page: 'calendar', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/calendar.html', description: 'Standalone Full App calendar screen.', minHeight: 760, outputSubdir: 'full-app/calendar', styles: fullAppScreenStyles('calendar'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-bookings', title: 'Prototype Full App / Bookings', page: 'bookings', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/bookings.html', description: 'Standalone Full App bookings queue screen.', minHeight: 760, outputSubdir: 'full-app/bookings', styles: fullAppScreenStyles('bookings'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-modal', title: 'Prototype Full App / New show modal', page: 'modal', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/modal.html', description: 'Standalone Full App new show modal state.', minHeight: 760, outputSubdir: 'full-app/modal', styles: fullAppScreenStyles('modal'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-artists', title: 'Prototype Full App / Artists', page: 'artists', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/artists.html', description: 'Standalone Full App artists roster screen.', minHeight: 760, outputSubdir: 'full-app/artists', styles: fullAppScreenStyles('artists'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-attendance', title: 'Prototype Full App / Post-show log', page: 'attendance', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/attendance.html', description: 'Standalone Full App attendance/post-show log screen.', minHeight: 760, outputSubdir: 'full-app/attendance', styles: fullAppScreenStyles('attendance'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-log', title: 'Prototype Full App / Audit log', page: 'log', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/log.html', description: 'Standalone Full App audit log screen.', minHeight: 760, outputSubdir: 'full-app/log', styles: fullAppScreenStyles('log'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-discord', title: 'Prototype Full App / Discord', page: 'discord', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/discord.html', description: 'Standalone Full App Discord channel mapping screen.', minHeight: 760, outputSubdir: 'full-app/discord', styles: fullAppScreenStyles('discord'),
+  },
+  {
+    kind: 'full-app-screen', slug: 'prototype-full-app-settings', title: 'Prototype Full App / Settings', page: 'settings', sourceHtml: 'prototype-design/Pyxis Full App.html', mobile: false, urlPath: 'standalone/full-app/settings.html', description: 'Standalone Full App settings screen.', minHeight: 760, outputSubdir: 'full-app/settings', styles: fullAppScreenStyles('settings'),
+  },
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-login',
@@ -842,6 +1001,7 @@ const configs = [
     outputSubdir: 'mobile/login',
     styles: mobileScreenStyles('login'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-home',
@@ -855,6 +1015,7 @@ const configs = [
     outputSubdir: 'mobile/home',
     styles: mobileScreenStyles('home'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-shows',
@@ -868,6 +1029,7 @@ const configs = [
     outputSubdir: 'mobile/shows',
     styles: mobileScreenStyles('shows'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-show-detail',
@@ -881,6 +1043,7 @@ const configs = [
     outputSubdir: 'mobile/show-detail',
     styles: mobileScreenStyles('show-detail'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-calendar',
@@ -894,6 +1057,7 @@ const configs = [
     outputSubdir: 'mobile/calendar',
     styles: mobileScreenStyles('calendar'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-bookings',
@@ -907,6 +1071,7 @@ const configs = [
     outputSubdir: 'mobile/bookings',
     styles: mobileScreenStyles('bookings'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-booking-review',
@@ -920,6 +1085,7 @@ const configs = [
     outputSubdir: 'mobile/booking-review',
     styles: mobileScreenStyles('booking-review'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-artists',
@@ -933,6 +1099,7 @@ const configs = [
     outputSubdir: 'mobile/artists',
     styles: mobileScreenStyles('artists'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-artist-detail',
@@ -946,6 +1113,7 @@ const configs = [
     outputSubdir: 'mobile/artist-detail',
     styles: mobileScreenStyles('artist-detail'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-post-show',
@@ -959,6 +1127,7 @@ const configs = [
     outputSubdir: 'mobile/post-show',
     styles: mobileScreenStyles('post-show'),
   },
+
   {
     kind: 'mobile-screen',
     slug: 'prototype-mobile-settings',
@@ -986,7 +1155,7 @@ for (const cfg of configs) {
     ? path.join('public-components', `${path.basename(cfg.slug)}.css-visual-diff.yml`)
     : `${cfg.slug}.css-visual-diff.yml`;
   const outPath = path.join(configRoot, relPath);
-  const content = (cfg.kind === 'page' || cfg.kind === 'mobile-screen') ? pageConfig(cfg) : componentConfig(cfg);
+  const content = (cfg.kind === 'page' || cfg.kind === 'mobile-screen' || cfg.kind === 'full-app-screen') ? pageConfig(cfg) : componentConfig(cfg);
   ensureDir(path.dirname(outPath));
   fs.writeFileSync(outPath, content);
   manifest.push({

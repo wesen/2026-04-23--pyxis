@@ -1,1 +1,9 @@
-# prototype-design/baseline/
+# Generated prototype baseline artifacts. Keep manifest/index tracked; keep heavy PNG/CSS/HTML bundles local.
+prototype-design/baseline/artifacts/
+prototype-design/baseline/sample/
+prototype-design/baseline/sample-public-components/
+prototype-design/baseline/sample-full-app/
+
+# Local IDE / Playwright MCP state.
+.idea/
+.playwright-mcp/

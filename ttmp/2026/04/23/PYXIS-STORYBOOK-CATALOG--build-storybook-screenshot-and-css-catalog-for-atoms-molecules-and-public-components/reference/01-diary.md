@@ -10,13 +10,26 @@ Topics:
 DocType: reference
 Intent: long-term
 Owners: []
-RelatedFiles: []
+RelatedFiles:
+    - Path: docs/playbooks/03-pyxis-full-app-baseline-handover.md
+      Note: Implementation handover followed for the Full App baseline extraction
+    - Path: prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+      Note: Generates the new full-app-screen css-visual-diff configs
+    - Path: prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
+      Note: Adds the Full App screens group to the index
+    - Path: prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs
+      Note: Generates clean standalone Full App screens from Pyxis Full App modules
+    - Path: prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh
+      Note: Runs targeted Full App sample extraction without recomputing existing baselines
+    - Path: prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
+      Note: Runs Full App-only baseline export into prototype-design/baseline
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-04-23T22:48:55.940608831-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 # Diary
 
@@ -975,3 +988,176 @@ prototype-design/baseline/artifacts/mobile/calendar/inspect/original/full-screen
 ```
 
 The captures looked correct: clean standalone mobile screens, no DesignCanvas chrome, and meaningful screen/section crops.
+
+## Step 11: Add Full App standalone screens and targeted baseline extraction
+
+I continued the prototype baseline catalog by applying the new Full App handover playbook. The important constraint was to avoid recomputing the existing public/mobile/foundations baseline corpus while authoring the new Full App screens, because `Pyxis Full App.html` is large and the existing 40-config baseline was already validated.
+
+I added a standalone Full App page generator, extended the canonical baseline config generator with the non-foundations Full App screens, and created Full App-only sample/full runners. This produced clean standalone screen captures from `prototype-design/Pyxis Full App.html` without DesignCanvas chrome and without rerunning the already-existing baseline set.
+
+### Prompt Context
+
+**User prompt (verbatim):** "docs/playbooks/03-pyxis-full-app-baseline-handover.md
+
+Read it and then work on the task in the current docmgr ticket. Keep a detailed diary as you work. 
+
+We want to have a full export of @\"prototype-design/Pyxis Full App.html\"  (except the foundations which we shoud already have) as prototype-design/baseline.
+
+Work on tasks task by task, commit at appropriate intervals"
+
+**Assistant interpretation:** Use the new Full App handover doc as the implementation plan, continue the current PYXIS-STORYBOOK-CATALOG ticket, add the missing non-foundations Full App prototype baselines under `prototype-design/baseline`, and keep ticket bookkeeping current.
+
+**Inferred user intent:** Finish the prototype baseline source of truth so every major prototype surface is exported as screenshots/CSS/HTML/inspect data, while preserving the existing foundations baseline and avoiding expensive unnecessary recomputation.
+
+### What I did
+
+- Read the Full App handover document:
+  - `docs/playbooks/03-pyxis-full-app-baseline-handover.md`
+- Added ticket tasks for the Full App continuation work.
+- Added standalone Full App generator:
+  - `prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs`
+- Generated clean standalone Full App pages under:
+  - `prototype-design/standalone/full-app/`
+- Updated the standalone index to link to the new Full App screen index:
+  - `prototype-design/standalone/index.html`
+- Extended the canonical baseline config generator:
+  - `prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs`
+- Added 12 non-foundations Full App configs:
+  - login
+  - setup
+  - dashboard
+  - shows
+  - calendar
+  - bookings
+  - modal
+  - artists
+  - attendance
+  - log
+  - discord
+  - settings
+- Updated the baseline index builder to group these entries under `Full App screens`:
+  - `prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs`
+- Added focused Full App runners:
+  - `prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh`
+  - `prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh`
+- Ran the targeted Full App sample successfully after fixing selectors.
+- Ran the Full App-only full export successfully after fixing bookings/log selectors.
+- Rebuilt the canonical baseline index.
+- Visually inspected representative PNGs with the `read` image tool.
+
+### Why
+
+The baseline catalog already covered public pages, public components, mobile app screens, and Full App Foundations/SystemPage. The remaining gap was the large Full App admin/staff prototype. Standalone pages avoid DesignCanvas capture problems, and Full App-only runners honor the handover warning not to rerun the full existing baseline corpus during authoring.
+
+### What worked
+
+- Standalone pages loaded correctly via the existing prototype static server at `http://localhost:7070`.
+- The Full App sample runner validated login, dashboard, shows, modal, discord, and settings without recomputing the public/mobile/foundations configs.
+- The Full App full runner exported all 12 non-foundations Full App configs into:
+  - `prototype-design/baseline/artifacts/full-app/`
+- Current manifest totals after adding Full App screens:
+  - configs: `52`
+  - foundations: `1`
+  - public pages: `10`
+  - public components: `18`
+  - full-app-screen: `12`
+  - mobile-screen: `11`
+- Current artifact totals under `prototype-design/baseline/artifacts/`:
+  - screenshots: `354`
+  - computed CSS Markdown: `354`
+  - prepared HTML: `354`
+  - inspect JSON: `354`
+- Full App-specific screenshot count:
+  - `93`
+
+### What didn't work
+
+The first Full App sample run failed on a dashboard selector:
+
+```text
+style "stats-grid" selector did not match: #root > div > main > div:nth-child(3)
+```
+
+The assumption was wrong because most shell-based Full App screens render `main` with two direct children: a header and one scroll/content container. The useful cards live under `main > div:nth-child(2) > ...`, not as direct children of `main`.
+
+The first Full App-only full run then exposed two non-sample failures:
+
+```text
+style "sidebar-cards" selector did not match: #root > div > main > div:nth-child(2) > div:nth-child(2)
+style "activity-card" selector did not match: #root > div > main > div:nth-child(2) > div:nth-child(2)
+```
+
+Bookings and Audit Log each have an extra content wrapper before the left/right layout columns. I inspected their DOM with Playwright and updated those selectors to include the extra `> div:first-child` hop.
+
+### What I learned
+
+The non-foundations Full App screens fall into three structural families:
+
+1. `LoginScreen` and `SetupScreen` are standalone non-shell layouts.
+2. Most app screens use the `px-root` app shell with `aside` and `main`.
+3. `ModalShowcase` wraps the app shell plus a modal overlay, so selectors need to target `#root > div > div:first-child` for the background app and `#root > div > div:nth-child(2)` for the modal layer.
+
+The app-shell `main` element usually has only two direct children. Most meaningful probes should therefore start under `main > div:nth-child(2)`.
+
+### What was tricky to build
+
+The tricky part was keeping the work targeted. The existing full baseline runner intentionally scans every config under `prototype-design/visual-diff/`, which would recompute everything. I avoided that during authoring by creating Full App-only runners that only match `prototype-full-app-*.css-visual-diff.yml`.
+
+Selector brittleness was the second tricky part. The first generated selectors assumed common card positions across screens. Playwright DOM inspection showed that each screen has slight wrapper differences, especially Bookings, Audit Log, Settings, and Modal. I kept the probes broad enough to be stable but specific enough to produce useful crops.
+
+### What warrants a second pair of eyes
+
+- Review whether the broad Full App probes are the right first catalog granularity, especially for Calendar and Attendance where a few current selectors capture large content containers.
+- Review whether Setup should have a taller standalone artboard or whether matching the original 1240 × 760 artboard is more important than showing content that extends below the artboard.
+- Confirm whether the generated standalone Full App pages should stay checked in as source artifacts, consistent with public/mobile standalone pages.
+
+### What should be done in the future
+
+- Add thumbnails to the baseline index if manual browsing becomes too slow.
+- Add more card-level probes for individual Full App cards after this first baseline is reviewed.
+- Consider extracting common app-shell selectors into stable prototype-side `data-catalog` attributes if future work needs less structural selector drift.
+
+### Code review instructions
+
+Start with these files:
+
+```text
+prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs
+prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh
+prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
+prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
+prototype-design/standalone/full-app/index.html
+prototype-design/standalone/index.html
+```
+
+Validate with:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+node prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs
+node prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh
+prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh
+node prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
+```
+
+Inspect the output at:
+
+```text
+prototype-design/baseline/index.html
+prototype-design/baseline/artifacts/full-app/
+```
+
+Representative visual files inspected:
+
+```text
+prototype-design/baseline/sample-full-app/prototype-full-app-login/full-screen/screenshot.png
+prototype-design/baseline/sample-full-app/prototype-full-app-dashboard/full-screen/screenshot.png
+prototype-design/baseline/sample-full-app/prototype-full-app-modal/modal-panel/screenshot.png
+prototype-design/baseline/sample-full-app/prototype-full-app-settings/full-screen/screenshot.png
+prototype-design/baseline/artifacts/full-app/bookings/inspect/original/full-screen/screenshot.png
+prototype-design/baseline/artifacts/full-app/log/inspect/original/activity-card/screenshot.png
+prototype-design/baseline/artifacts/full-app/artists/inspect/original/full-screen/screenshot.png
+prototype-design/baseline/artifacts/full-app/setup/inspect/original/full-screen/screenshot.png
+```

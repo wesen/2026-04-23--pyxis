@@ -507,7 +507,7 @@ Use small scripts first:
 
 ```bash
 scripts/06-run-prototype-baseline-sample.sh
-scripts/08-run-prototype-public-component-sample.sh
+prototype-design/visual-diff/scripts/08-run-prototype-public-component-sample.sh
 ```
 
 The public component sample currently extracts:
@@ -527,7 +527,7 @@ The user preference for this ticket is:
 Use `read` on sample PNGs, for example:
 
 ```text
-various/prototype-baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
+prototype-design/baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
 ```
 
 Check:

@@ -197,3 +197,46 @@
   - prepared HTML: `261`
   - inspect JSON: `261`
 - Visually inspected representative mobile artifacts for Home, Login, Settings, Calendar, and Shows.
+
+## 2026-04-24 — Add Full App non-foundations prototype baseline workflow
+
+### Added
+- Added standalone Full App screen generator at `prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs`.
+- Generated standalone Full App entrypoints under `prototype-design/standalone/full-app/` for all non-foundations screens:
+  - login
+  - setup
+  - dashboard
+  - shows
+  - calendar
+  - bookings
+  - modal
+  - artists
+  - attendance
+  - log
+  - discord
+  - settings
+- Extended `prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs` with 12 `full-app-screen` configs sourced from `prototype-design/Pyxis Full App.html`.
+- Added a `Full App screens` group to the baseline index builder.
+- Added Full App-only runners:
+  - `prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh`
+  - `prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh`
+
+### Changed
+- Updated `prototype-design/standalone/index.html` to link to the new standalone Full App screen index.
+- Regenerated `prototype-design/baseline/manifest.json` and rebuilt `prototype-design/baseline/index.html`.
+
+### Validated
+- Ran the Full App sample runner successfully after fixing selector assumptions.
+- Ran the Full App-only full export successfully into `prototype-design/baseline/artifacts/full-app/` without recomputing the existing public/mobile/foundations baseline set.
+- Current totals after adding Full App screens:
+  - configs: `52`
+  - screenshots: `354`
+  - computed CSS Markdown: `354`
+  - prepared HTML: `354`
+  - inspect JSON: `354`
+  - Full App screenshots: `93`
+- Visually inspected representative Full App PNGs for login, dashboard, modal, settings, bookings, audit log, artists, and setup.
+
+### Fixed while authoring
+- Corrected app-shell selectors after discovering most Full App `main` regions have a header plus one content wrapper, rather than many direct card children.
+- Corrected Bookings and Audit Log selectors after the Full App-only full runner exposed extra content-wrapper hops.

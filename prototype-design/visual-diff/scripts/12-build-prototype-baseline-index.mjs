@@ -51,7 +51,9 @@ for (const entry of manifest.entries || []) {
     ? 'Public components'
     : entry.kind === 'mobile-screen'
       ? 'Mobile app screens'
-      : 'Public pages and foundations';
+      : entry.kind === 'full-app-screen'
+        ? 'Full App screens'
+        : 'Public pages and foundations';
   if (!groups.has(group)) groups.set(group, []);
   groups.get(group).push(entry);
 }

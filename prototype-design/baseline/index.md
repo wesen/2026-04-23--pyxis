@@ -1,8 +1,8 @@
 # Pyxis Prototype Baseline Catalog
 
-Generated: 2026-04-24T05:53:40.431Z
+Generated: 2026-04-24T06:26:17.743Z
 
-Configs: 40
+Configs: 52
 
 ## Public pages and foundations
 
@@ -38,6 +38,21 @@ Configs: 40
 - **Prototype public page header / shows** (component) — [config](prototype-design/visual-diff/public-components/page-header-shows.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/public-components/page-header-shows), screenshots: 5
 - **Prototype public show grid / desktop** (component) — [config](prototype-design/visual-diff/public-components/show-grid-desktop.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/public-components/show-grid-desktop), screenshots: 3
 - **Prototype public show grid / mobile** (component) — [config](prototype-design/visual-diff/public-components/show-grid-mobile.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/public-components/show-grid-mobile), screenshots: 4
+
+## Full App screens
+
+- **Prototype Full App / Login** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-login.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/login), screenshots: 6
+- **Prototype Full App / Setup wizard** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-setup.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/setup), screenshots: 7
+- **Prototype Full App / Dashboard** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-dashboard.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/dashboard), screenshots: 8
+- **Prototype Full App / Shows** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-shows.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/shows), screenshots: 8
+- **Prototype Full App / Calendar** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-calendar.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/calendar), screenshots: 8
+- **Prototype Full App / Bookings** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-bookings.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/bookings), screenshots: 8
+- **Prototype Full App / New show modal** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-modal.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/modal), screenshots: 8
+- **Prototype Full App / Artists** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-artists.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/artists), screenshots: 8
+- **Prototype Full App / Post-show log** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-attendance.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/attendance), screenshots: 8
+- **Prototype Full App / Audit log** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-log.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/log), screenshots: 8
+- **Prototype Full App / Discord** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-discord.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/discord), screenshots: 8
+- **Prototype Full App / Settings** (full-app-screen) — [config](prototype-design/visual-diff/prototype-full-app-settings.css-visual-diff.yml), [output](prototype-design/baseline/artifacts/full-app/settings), screenshots: 8
 
 ## Mobile app screens
 

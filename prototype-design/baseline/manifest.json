@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-04-24T05:53:40.431Z",
+  "generatedAt": "2026-04-24T06:26:17.743Z",
   "prototypeDir": "prototype-design",
   "configRoot": "prototype-design/visual-diff",
   "outputRoot": "prototype-design/baseline/artifacts",
-  "count": 40,
+  "count": 52,
   "entries": [
     {
       "slug": "prototype-foundations-system",
@@ -322,6 +322,138 @@
       "sourceHtml": "prototype-design/Pyxis Public Site.html",
       "sourceComponent": "PPXCatalogShowGrid",
       "page": "",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-login",
+      "title": "Prototype Full App / Login",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-login.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/login",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "login",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-setup",
+      "title": "Prototype Full App / Setup wizard",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-setup.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/setup",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "setup",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-dashboard",
+      "title": "Prototype Full App / Dashboard",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-dashboard.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/dashboard",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "dashboard",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-shows",
+      "title": "Prototype Full App / Shows",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-shows.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/shows",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "shows",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-calendar",
+      "title": "Prototype Full App / Calendar",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-calendar.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/calendar",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "calendar",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-bookings",
+      "title": "Prototype Full App / Bookings",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-bookings.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/bookings",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "bookings",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-modal",
+      "title": "Prototype Full App / New show modal",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-modal.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/modal",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "modal",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-artists",
+      "title": "Prototype Full App / Artists",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-artists.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/artists",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "artists",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-attendance",
+      "title": "Prototype Full App / Post-show log",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-attendance.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/attendance",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "attendance",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-log",
+      "title": "Prototype Full App / Audit log",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-log.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/log",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "log",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-discord",
+      "title": "Prototype Full App / Discord",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-discord.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/discord",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "discord",
+      "mobile": false
+    },
+    {
+      "slug": "prototype-full-app-settings",
+      "title": "Prototype Full App / Settings",
+      "kind": "full-app-screen",
+      "config": "prototype-design/visual-diff/prototype-full-app-settings.css-visual-diff.yml",
+      "output": "prototype-design/baseline/artifacts/full-app/settings",
+      "sourceHtml": "prototype-design/Pyxis Full App.html",
+      "sourceComponent": "",
+      "page": "settings",
       "mobile": false
     },
     {
