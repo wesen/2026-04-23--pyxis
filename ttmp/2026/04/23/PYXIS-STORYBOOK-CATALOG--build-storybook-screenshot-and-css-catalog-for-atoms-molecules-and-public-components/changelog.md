@@ -251,3 +251,19 @@ Step 11: added the non-foundations Full App baseline export workflow and generat
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs — Standalone Full App generator
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/scripts/17-run-full-app-baseline-full.sh — Full App-only extraction runner
 
+
+## 2026-04-24 — Add phased Storybook catalog expansion tasks
+
+### Added
+- Added detailed multi-phase tasks for pivoting from prototype baseline extraction to Storybook-side catalog capture.
+- The new plan captures the design-system component layer first: atoms, molecules, organisms, fixtures, and missing component states.
+- The plan then expands public-site component stories and maps them back to `prototype-design/Pyxis Public Site.html` baseline entries.
+
+### Sequencing
+- Phase 1: audit current Storybook inventory and establish `prototype-design/storybook-catalog/` output layout.
+- Phase 2: run a component-system Storybook sample and then full atoms/molecules/organisms extraction.
+- Phase 3: add missing stories/states for atoms, molecules, and organisms.
+- Phase 4: map component-system Storybook captures back to Full App foundations/card-level prototype baselines.
+- Phase 5: expand public-site component stories.
+- Phase 6: refocus on `prototype-design/Pyxis Public Site.html` for component-level and page-level comparisons.
+- Phase 7: keep diary/changelog updated after each capture/story-expansion phase.
