@@ -1,9 +1,9 @@
+import { pyxisPart } from '../../utils/parts';
 import type { LineupEntry } from '../../mocks/types';
 
 export type LineupRowProps = {
   entry: LineupEntry;
   className?: string;
-  'data-part'?: string;
 };
 
 const roleColors: Record<LineupEntry['role'], string> = {
@@ -18,8 +18,8 @@ const roleLabels: Record<LineupEntry['role'], string> = {
   dj:       'DJ',
 };
 
-export const LineupRow = ({ entry, className, 'data-part': dataPart }: LineupRowProps) => (
-  <div className={className} data-part={dataPart ?? 'lineup-row'}>
+export const LineupRow = ({ entry, className }: LineupRowProps) => (
+  <div className={className} {...pyxisPart('lineup-row')}>
     <span className="pyxis-lineup-row__time">{entry.start_time}</span>
     <span className="pyxis-lineup-row__artist">{entry.artist}</span>
     <span

@@ -1,4 +1,5 @@
 import React from 'react';
+import { pyxisPart } from '../../utils/parts';
 export type EmptyProps = {
   icon?: string; // SVG path for the icon
   title: string;
@@ -7,6 +8,7 @@ export type EmptyProps = {
 };
 export const Empty = ({ title, description, action }: EmptyProps) => (
   <div
+    {...pyxisPart('empty')}
     style={{
       display: 'flex',
       flexDirection: 'column',
@@ -16,12 +18,12 @@ export const Empty = ({ title, description, action }: EmptyProps) => (
       gap: 12,
     }}
   >
-    <svg width="32" height="32" viewBox="0 0 20 20" fill="var(--color-text-disabled)" aria-hidden>
+    <svg {...pyxisPart('empty', 'icon')} width="32" height="32" viewBox="0 0 20 20" fill="var(--color-text-disabled)" aria-hidden>
       <circle cx="10" cy="10" r="3" />
     </svg>
-    <div style={{ fontWeight: 600, color: 'var(--color-text-secondary)' }}>{title}</div>
+    <div {...pyxisPart('empty', 'title')} style={{ fontWeight: 600, color: 'var(--color-text-secondary)' }}>{title}</div>
     {description && (
-      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-tertiary)', maxWidth: '320px' }}>
+      <div {...pyxisPart('empty', 'description')} style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-tertiary)', maxWidth: '320px' }}>
         {description}
       </div>
     )}

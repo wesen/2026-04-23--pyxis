@@ -17,6 +17,8 @@ RelatedFiles:
       Note: Implementation handover followed for the Full App baseline extraction
     - Path: docs/playbooks/04-storybook-component-capture-playbook.md
       Note: Reusable Storybook capture authoring and extraction playbook
+    - Path: prototype-design/storybook-catalog/index.html
+      Note: Generated catalog index for extracted Storybook screenshots
     - Path: prototype-design/storybook-catalog/inventory.json
       Note: Machine-readable Storybook inventory for future config generation
     - Path: prototype-design/storybook-catalog/inventory.md
@@ -39,12 +41,18 @@ RelatedFiles:
         Generates capture-target selectors from data-pyxis-component roots
     - Path: prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
       Note: Runs the first atom Storybook capture sample
+    - Path: prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+      Note: Full Storybook catalog extraction runner
+    - Path: prototype-design/visual-diff/scripts/21-build-storybook-catalog-index.mjs
+      Note: Builds browsable Storybook catalog index
     - Path: ttmp/2026/04/23/PYXIS-STORYBOOK-CATALOG--build-storybook-screenshot-and-css-catalog-for-atoms-molecules-and-public-components/design/02-storybook-capture-contract-and-cleanup-plan.md
       Note: Detailed design for the Storybook capture selector contract
     - Path: web/packages/pyxis-components/src/atoms/Badge/Badge.tsx
       Note: Representative atom proving focused Badge capture
     - Path: web/packages/pyxis-components/src/molecules/Card/Card.tsx
       Note: Current molecule story updated to the canonical capture selector contract
+    - Path: web/packages/pyxis-components/src/storybook/StoryFrame.tsx
+      Note: Storybook fixture root for variant-grid captures
     - Path: web/packages/pyxis-components/src/utils/parts.ts
       Note: Canonical pyxisPart helper for component roots and internal parts
     - Path: web/packages/pyxis-components/storybook-static/index.json
@@ -55,6 +63,7 @@ LastUpdated: 2026-04-23T22:48:55.940608831-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -1545,3 +1554,92 @@ cd ..
 node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
 prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
 ```
+
+## Step 15: Expand Storybook catalog to molecules, organisms, and public components
+
+After the atom selector contract was stable, I extended it across the rest of the current component library. The goal was to make the Storybook catalog broad enough to serve as an implementation-side counterpart to the prototype baseline, especially `prototype-design/Pyxis Public Site.html`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Apply the selector contract to remaining molecules/organisms as stories are added; add `StoryFrame` for variant-grid stories; build full Storybook catalog runner/index; then expand public-site components for comparison against `prototype-design/Pyxis Public Site.html`"
+
+**Assistant interpretation:** Continue from the atom work: add canonical capture selectors to molecules/organisms/public components, add missing stories, introduce a Storybook fixture root for variant grids, generate and run a full catalog, and make public components capturable.
+
+**Inferred user intent:** Move from proof-of-concept atom screenshots to a reusable visual implementation catalog that can later be matched against prototype component baselines.
+
+### What I did
+
+- Added `web/packages/pyxis-components/src/storybook/StoryFrame.tsx`.
+- Added Storybook stories for previously missing components:
+  - `CardHead`
+  - `Field`
+  - `Stat`
+  - `Table`
+  - `Empty`
+  - `LogRow`
+  - `Modal`
+  - `TopBar`
+- Applied `pyxisPart()` to remaining current molecules and organisms.
+- Applied `pyxisPart()` to public-site components and removed old unnamespaced `data-part` props.
+- Updated `PubNav.css` to use the canonical selector contract.
+- Updated the config generator to include `Public/*` stories and to use kebab-case component slugs.
+- Added full Storybook catalog scripts:
+  - `20-run-storybook-catalog-full.sh`
+  - `21-build-storybook-catalog-index.mjs`
+  - `22-serve-storybook-catalog-index.sh`
+- Updated `docs/playbooks/04-storybook-component-capture-playbook.md` with full catalog and public component instructions.
+
+### Commands run
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd web && pnpm --filter pyxis-components build-storybook
+node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+node prototype-design/visual-diff/scripts/21-build-storybook-catalog-index.mjs
+```
+
+### Results
+
+The generator now produces 89 configs:
+
+```text
+atoms: 47
+molecules: 18
+organisms: 4
+public: 20
+```
+
+The full catalog extraction completed successfully and produced 89 `capture-target` screenshots under:
+
+```text
+prototype-design/storybook-catalog/artifacts/*/*/*/inspect/original/capture-target/screenshot.png
+```
+
+The browsable index is:
+
+```text
+prototype-design/storybook-catalog/index.html
+```
+
+### Representative screenshots inspected
+
+- `prototype-design/storybook-catalog/artifacts/molecules/stat/default/inspect/original/capture-target/screenshot.png`
+- `prototype-design/storybook-catalog/artifacts/molecules/table/default/inspect/original/capture-target/screenshot.png`
+- `prototype-design/storybook-catalog/artifacts/organisms/top-bar/default/inspect/original/capture-target/screenshot.png`
+- `prototype-design/storybook-catalog/artifacts/public/pub-nav/default/inspect/original/capture-target/screenshot.png`
+- `prototype-design/storybook-catalog/artifacts/public/venue-card/default/inspect/original/capture-target/screenshot.png`
+
+### Problems encountered
+
+The first full catalog run failed on `Button/IconOnly` because the story rendered an uninstrumented native button while the generated selector expected the canonical `button` root. I changed that story to render `IconButton` inside a `StoryFrame`.
+
+The second full catalog run failed on `Icon/PyxisLogo` because `Atoms/Icon` normally maps to `data-pyxis-component="icon"`, while logo stories emit `pyxis-logo` and `pyxis-mark`. I added generator exceptions for those two stories.
+
+The catalog index initially looked for screenshots directly under each story output directory, but `css-visual-diff inspect --side original` writes under `inspect/original`. I updated the index builder to link the actual artifact paths.
+
+### What should be done next
+
+- Create explicit prototype-vs-Storybook comparison configs for public components, starting with `PubNav`, `PubFooter`, `VenueCard`/`SpaceInfo`, `BookingForm`, and public show rows.
+- Add any missing public component states that prototype baselines require, especially desktop/mobile nav and show-grid/show-tile equivalents.
+- Consider adding richer Modal danger/confirmation variants and any missing app-specific organisms such as Sidebar/NavItem if those are introduced.

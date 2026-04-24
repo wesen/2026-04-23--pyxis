@@ -1,14 +1,14 @@
+import { pyxisPart } from '../../utils/parts';
 import { clsx } from 'clsx';
 
 export type PubFooterProps = {
   className?: string;
-  'data-part'?: string;
 };
 
-export const PubFooter = ({ className, 'data-part': dataPart }: PubFooterProps) => (
+export const PubFooter = ({ className }: PubFooterProps) => (
   <footer
     className={clsx('pyxis-footer', className)}
-    data-part={dataPart ?? 'pub-footer'}
+    {...pyxisPart('pub-footer')}
     style={{ borderTop: '1px solid #EAE7E0', marginTop: 60, padding: '28px 32px' }}
   >
     <div

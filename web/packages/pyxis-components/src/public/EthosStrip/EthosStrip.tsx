@@ -1,9 +1,9 @@
+import { pyxisPart } from '../../utils/parts';
 export type EthosStripProps = {
   className?: string;
-  'data-part'?: string;
 };
-export const EthosStrip = ({ className, 'data-part': dataPart }: EthosStripProps) => (
-  <div data-part={dataPart ?? 'ethos-strip'} className={className} style={{ background: 'var(--color-ink)', color: 'var(--color-text-inverse)', padding: '48px 32px' }}>
+export const EthosStrip = ({ className }: EthosStripProps) => (
+  <div {...pyxisPart('ethos-strip')} className={className} style={{ background: 'var(--color-ink)', color: 'var(--color-text-inverse)', padding: '48px 32px' }}>
     <div style={{ maxWidth: 980, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
       {[
         { num: '01', title: 'Artists first', desc: 'We take care of our artists. Sound, hospitality, audience — we work to make every show worth the trip.' },

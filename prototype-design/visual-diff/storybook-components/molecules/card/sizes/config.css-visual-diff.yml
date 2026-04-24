@@ -51,7 +51,7 @@ styles:
     include_bounds: true
     props: [display, position, box-sizing, width, height, min-width, min-height, max-width, max-height, margin, padding, gap, font-family, font-size, font-weight, line-height, letter-spacing, text-transform, text-align, color, background, background-color, border, border-color, border-width, border-style, border-radius, box-shadow, opacity, align-items, justify-content, grid-template-columns, flex-direction, white-space, overflow]
   - name: "capture-target"
-    selector: "#storybook-root > *:first-child"
+    selector: "#storybook-root [data-pyxis-story-root], #storybook-root > *:first-child:not(:has([data-pyxis-story-root]))"
     include_bounds: true
     props: [display, position, box-sizing, width, height, min-width, min-height, max-width, max-height, margin, padding, gap, font-family, font-size, font-weight, line-height, letter-spacing, text-transform, text-align, color, background, background-color, border, border-color, border-width, border-style, border-radius, box-shadow, opacity, align-items, justify-content, grid-template-columns, flex-direction, white-space, overflow]
 

@@ -1,3 +1,4 @@
+import { pyxisPart } from '../../utils/parts';
 import React, { useState } from 'react';
 import { Input } from '../../atoms/Input';
 import { Button } from '../../atoms/Button';
@@ -6,10 +7,9 @@ export type MailingListCTAProps = {
   onSubscribe?: (email: string) => Promise<void>;
   isSubmitting?: boolean;
   className?: string;
-  'data-part'?: string;
 };
 
-export const MailingListCTA = ({ onSubscribe, isSubmitting, className, 'data-part': dataPart }: MailingListCTAProps) => {
+export const MailingListCTA = ({ onSubscribe, isSubmitting, className }: MailingListCTAProps) => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ export const MailingListCTA = ({ onSubscribe, isSubmitting, className, 'data-par
 
   return (
     <div
-      data-part={dataPart ?? 'mailing-list-cta'}
+      {...pyxisPart('mailing-list-cta')}
       className={className}
       style={{
         padding: '32px',

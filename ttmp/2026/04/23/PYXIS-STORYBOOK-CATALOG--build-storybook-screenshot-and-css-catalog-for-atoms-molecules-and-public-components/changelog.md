@@ -345,3 +345,30 @@ Step 11: added the non-foundations Full App baseline export workflow and generat
 ### Result
 - Badge capture is now tightly scoped to the badge itself instead of the Storybook wrapper.
 - Storybook configs now use the namespaced selector contract for single-widget atom stories.
+
+## 2026-04-24 — Expand Storybook capture contract to molecules, organisms, and public components
+
+### Added
+- Added `StoryFrame` for intentional multi-widget / variant-grid Storybook captures.
+- Added missing molecule stories for CardHead, Field, Stat, Table, Empty, and LogRow.
+- Added organism stories for Modal and TopBar.
+- Added full Storybook catalog runner and catalog index scripts:
+  - `prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh`
+  - `prototype-design/visual-diff/scripts/21-build-storybook-catalog-index.mjs`
+  - `prototype-design/visual-diff/scripts/22-serve-storybook-catalog-index.sh`
+
+### Changed
+- Extended canonical `data-pyxis-component` / `data-pyxis-part` capture attributes to remaining current molecules and organisms.
+- Extended the same selector contract to public-site components so `Public/*` Storybook stories can be captured for future comparison against `prototype-design/Pyxis Public Site.html`.
+- Updated the Storybook config generator to include atoms, molecules, organisms, and public components.
+- Updated config generation to kebab-case component names such as `card-head`, `top-bar`, and `pub-nav`.
+- Updated the Storybook capture playbook with full catalog, public component, and serving instructions.
+
+### Validated
+- Ran `pnpm --filter pyxis-components typecheck`.
+- Ran `pnpm --filter pyxis-components build-storybook`.
+- Regenerated 89 Storybook capture configs.
+- Ran the full Storybook catalog extraction successfully.
+- Built `prototype-design/storybook-catalog/index.html`.
+- Verified `89` capture-target screenshots exist across atoms, molecules, organisms, and public components.
+- Visually inspected representative captures for Stat, Table, TopBar, PubNav, and VenueCard with `read`.

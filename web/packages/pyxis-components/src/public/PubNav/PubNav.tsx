@@ -1,10 +1,10 @@
+import { pyxisPart } from '../../utils/parts';
 import { clsx } from 'clsx';
 
 export type PubNavProps = {
   currentPage: 'shows' | 'archive' | 'book' | 'about';
   onNavigate?: (page: string) => void;
   className?: string;
-  'data-part'?: string;
 };
 
 const navLinks = [
@@ -14,11 +14,11 @@ const navLinks = [
   { id: 'about',   label: 'About' },
 ] as const;
 
-export const PubNav = ({ currentPage, onNavigate, className, 'data-part': dataPart }: PubNavProps) => {
+export const PubNav = ({ currentPage, onNavigate, className }: PubNavProps) => {
   return (
     <header
       className={clsx('pyxis-pub-nav', className)}
-      data-part={dataPart ?? 'pub-nav'}
+      {...pyxisPart('pub-nav')}
     >
       <div className="pyxis-pub-nav__inner">
         <button

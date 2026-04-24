@@ -258,7 +258,43 @@ Only after this is true should you compare against prototype baselines.
 
 ---
 
-## 8. Mapping to prototype baselines
+## 8. Run the full Storybook catalog
+
+After a focused sample passes, build the full implementation catalog:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+pnpm --dir web --filter pyxis-components build-storybook
+node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+```
+
+The full runner reads `prototype-design/storybook-catalog/manifest.json`, runs every generated config, and then rebuilds:
+
+```text
+prototype-design/storybook-catalog/index.html
+```
+
+Serve the catalog with:
+
+```bash
+prototype-design/visual-diff/scripts/22-serve-storybook-catalog-index.sh
+```
+
+Then open:
+
+```text
+http://localhost:8796/prototype-design/storybook-catalog/index.html
+```
+
+You can limit the full runner to one group while developing:
+
+```bash
+PYXIS_STORYBOOK_CATALOG_GROUP=molecules prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+PYXIS_STORYBOOK_CATALOG_GROUP=public prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+```
+
+## 9. Mapping to prototype baselines
 
 Once the Storybook capture is trustworthy, map it to the prototype baseline.
 
@@ -279,7 +315,37 @@ Direct visual comparison works only if both sides are scoped to equivalent objec
 
 ---
 
-## 9. Common mistakes
+## 10. Public-site component capture
+
+Public-site components use the same selector contract as design-system components:
+
+```tsx
+<section {...pyxisPart('pub-hero')}>…</section>
+<nav {...pyxisPart('pub-nav')}>…</nav>
+<div {...pyxisPart('venue-card')}>…</div>
+```
+
+The catalog generator includes `Public/*` stories and writes configs under:
+
+```text
+prototype-design/visual-diff/storybook-components/public/
+```
+
+These captures are the bridge between the implementation catalog and the prototype source of truth:
+
+```text
+prototype-design/Pyxis Public Site.html
+prototype-design/baseline/artifacts/public/...
+```
+
+Do public-site comparison in this order:
+
+1. Verify each public component has a focused Storybook `capture-target`.
+2. Find the closest prototype component baseline in `prototype-design/baseline/`.
+3. Compare equivalent scopes first, such as PubNav ↔ prototype nav, VenueCard/SpaceInfo ↔ prototype space info, BookingForm ↔ prototype booking form.
+4. Only then compare full public pages.
+
+## 11. Common mistakes
 
 Do not use `#storybook-root > *:first-child` as the primary comparison target for single-widget stories. It is a fallback, not a contract.
 
@@ -296,7 +362,7 @@ Do not trust screenshot dimensions alone. Use `read` to visually inspect represe
 
 ---
 
-## 10. Checklist for a new component
+## 12. Checklist for a new component
 
 When adding a component that should be captured:
 

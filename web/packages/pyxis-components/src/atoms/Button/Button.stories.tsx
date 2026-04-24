@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { IconButton } from '../Icon';
 import { Button } from './Button';
 import type { ButtonVariant, ButtonSize } from './Button';
 import { buttonVariants } from '../../tokens';
+import { StoryFrame } from '../../storybook';
 
 const meta: Meta<typeof Button> = {
   title: 'Atoms/Button',
@@ -65,7 +67,7 @@ export const Default: Story = {
 /** All variants — use to see the full range of visual styles */
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+    <StoryFrame id="atoms-button-all-variants" component="button" level="atom">
       <Button variant="primary">Primary</Button>
       <Button variant="dark">Dark</Button>
       <Button variant="outline">Outline</Button>
@@ -73,7 +75,7 @@ export const AllVariants: Story = {
       <Button variant="danger">Danger</Button>
       <Button variant="success">Success</Button>
       <Button variant="discord">Discord</Button>
-    </div>
+    </StoryFrame>
   ),
   parameters: { controls: { disable: true } },
 };
@@ -81,11 +83,11 @@ export const AllVariants: Story = {
 /** All sizes */
 export const AllSizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+    <StoryFrame id="atoms-button-all-sizes" component="button" level="atom">
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
-    </div>
+    </StoryFrame>
   ),
   parameters: { controls: { disable: true } },
 };
@@ -151,21 +153,11 @@ export const DiscordVariant: Story = {
 /** Icon-only button (square) — use with IconButton for toolbar actions */
 export const IconOnly: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '8px' }}>
-      <button
-        aria-label="Delete"
-        style={{
-          width: 40, height: 40, borderRadius: 'var(--radius-md)',
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          background: 'transparent', border: '1px solid var(--color-border)',
-          cursor: 'pointer', color: 'var(--color-text-secondary)',
-        }}
-      >
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 6h12M8 6V4.5A1 1 0 0 1 9 3.5h2a1 1 0 0 1 1 1V6M6 6l.8 10a1 1 0 0 0 1 1h4.4a1 1 0 0 0 1-1L14 6" />
-        </svg>
-      </button>
-    </div>
+    <StoryFrame id="atoms-button-icon-only" component="button" level="atom">
+      <IconButton icon="trash" label="Delete" />
+      <IconButton icon="edit" label="Edit" />
+      <IconButton icon="calendar" label="Calendar" />
+    </StoryFrame>
   ),
   parameters: { controls: { disable: true } },
 };

@@ -1,20 +1,20 @@
+import { pyxisPart } from '../../utils/parts';
 import type { Show } from '../../mocks/types';
 
 export type PubShowRowProps = {
   show: Show;
   onClick?: (show: Show) => void;
   className?: string;
-  'data-part'?: string;
 };
 
-export const PubShowRow = ({ show, onClick, className, 'data-part': dataPart }: PubShowRowProps) => {
+export const PubShowRow = ({ show, onClick, className }: PubShowRowProps) => {
   const month = new Date(show.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short' });
   const day = new Date(show.date + 'T00:00:00').getDate();
 
   return (
     <article
       className={className}
-      data-part={dataPart ?? 'pub-show-row'}
+      {...pyxisPart('pub-show-row')}
       onClick={onClick ? () => onClick(show) : undefined}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}

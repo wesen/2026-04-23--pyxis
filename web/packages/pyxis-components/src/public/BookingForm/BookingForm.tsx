@@ -1,3 +1,4 @@
+import { pyxisPart } from '../../utils/parts';
 import React, { useState } from 'react';
 import { Input } from '../../atoms/Input';
 import { Select } from '../../atoms/Select';
@@ -9,7 +10,6 @@ export type BookingFormProps = {
   onSubmit?: (data: BookingFormData) => Promise<void>;
   isSubmitting?: boolean;
   className?: string;
-  'data-part'?: string;
 };
 
 const genreOptions = [
@@ -23,7 +23,7 @@ const genreOptions = [
 ];
 
 type FormState = Partial<BookingFormData>;
-export const BookingForm = ({ onSubmit, isSubmitting, className, 'data-part': dataPart }: BookingFormProps) => {
+export const BookingForm = ({ onSubmit, isSubmitting, className }: BookingFormProps) => {
   const [form, setForm] = useState<FormState>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +38,7 @@ export const BookingForm = ({ onSubmit, isSubmitting, className, 'data-part': da
 
   return (
     <form
-      data-part={dataPart ?? 'booking-form'}
+      {...pyxisPart('booking-form')}
       className={className}
       onSubmit={handleSubmit}
       noValidate

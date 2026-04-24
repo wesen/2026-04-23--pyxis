@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
+import { StoryFrame } from '../../storybook';
 
 const meta: Meta<typeof Card> = {
   title: 'Molecules/Card',
@@ -58,11 +59,11 @@ export const Interactive: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <StoryFrame id="molecules-card-sizes" component="card" level="molecule" layout="column" gap={16}>
       <Card padding="sm"><strong>Small</strong> padding — 16px</Card>
       <Card padding="md"><strong>Medium</strong> padding — 22px</Card>
       <Card padding="lg"><strong>Large</strong> padding — 32px</Card>
-    </div>
+    </StoryFrame>
   ),
   parameters: { controls: { disable: true } },
 };

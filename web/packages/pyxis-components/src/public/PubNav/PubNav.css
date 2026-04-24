@@ -1,6 +1,6 @@
 /* PubNav — public site navigation bar, aligned to PPX prototype */
 
-[data-part='pub-nav'] {
+[data-pyxis-component='pub-nav'][data-pyxis-part='root'] {
   background: #fff;
   border-bottom: 1px solid #EAE7E0;
   position: sticky;

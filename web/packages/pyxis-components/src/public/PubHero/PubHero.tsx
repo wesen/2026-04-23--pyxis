@@ -1,3 +1,4 @@
+import { pyxisPart } from '../../utils/parts';
 import { Button } from '../../atoms/Button';
 import type { Show } from '../../mocks/types';
 
@@ -6,14 +7,13 @@ export type PubHeroProps = {
   onShowClick?: (show: Show) => void;
   onTicketClick?: (show: Show) => void;
   className?: string;
-  'data-part'?: string;
 };
 
 const fmtFull = (d: string) =>
   new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 
-export const PubHero = ({ show, onShowClick, onTicketClick, className, 'data-part': dataPart }: PubHeroProps) => (
-  <section className={className} data-part={dataPart ?? 'pub-hero'} onClick={onShowClick ? () => onShowClick(show) : undefined} role={onShowClick ? 'button' : undefined} tabIndex={onShowClick ? 0 : undefined} style={{ cursor: onShowClick ? 'pointer' : 'default' }}>
+export const PubHero = ({ show, onShowClick, onTicketClick, className }: PubHeroProps) => (
+  <section className={className} {...pyxisPart('pub-hero')} onClick={onShowClick ? () => onShowClick(show) : undefined} role={onShowClick ? 'button' : undefined} tabIndex={onShowClick ? 0 : undefined} style={{ cursor: onShowClick ? 'pointer' : 'default' }}>
     <div className="pyxis-hero__inner">
       {/* Date block */}
       <div className="pyxis-hero__date" aria-label={`Date: ${fmtFull(show.date)}`}>

@@ -22,6 +22,11 @@ const props = [
 function ensureDir(dir) { fs.mkdirSync(dir, { recursive: true }); }
 function q(v) { return JSON.stringify(v); }
 function slugPart(v) { return String(v).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function kebabComponentName(v) {
+  return slugPart(String(v || '')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2'));
+}
 function scalar(value) {
   if (typeof value === 'string') return q(value);
   if (typeof value === 'number' || typeof value === 'boolean') return String(value);
@@ -34,6 +39,7 @@ function groupOf(title) {
   if (top === 'Atoms') return 'atoms';
   if (top === 'Molecules') return 'molecules';
   if (top === 'Organisms') return 'organisms';
+  if (top === 'Public') return 'public';
   return 'other';
 }
 function style(name, selector) {
@@ -47,7 +53,7 @@ function style(name, selector) {
 
 function componentSlugFromTitle(title) {
   const raw = String(title || '').split('/').slice(1).join('-');
-  const slug = slugPart(raw);
+  const slug = kebabComponentName(raw);
   if (slug === 'atom-diff-fixture') return '';
   if (slug === 'icon') return 'icon';
   return slug;
@@ -56,8 +62,10 @@ function componentSlugFromTitle(title) {
 function captureTargetSelector(entry) {
   const title = String(entry.title || '');
   const storyName = String(entry.name || '').toLowerCase();
-  if (title === 'Atoms/Atom Diff Fixture') return '#storybook-root > *:first-child';
-  if (/all|sizes|variants|statuses|colors|icons/.test(storyName)) return '#storybook-root > *:first-child';
+  if (title === 'Atoms/Atom Diff Fixture') return '#storybook-root [data-pyxis-story-root], #storybook-root > *:first-child:not(:has([data-pyxis-story-root]))';
+  if (/all|sizes|variants|statuses|colors|icons|icon-only|set|states|lineup/.test(storyName)) return '#storybook-root [data-pyxis-story-root], #storybook-root > *:first-child:not(:has([data-pyxis-story-root]))';
+  if (title === 'Atoms/Icon' && storyName.replace(/\s+/g, '') === 'pyxislogo') return '#storybook-root [data-pyxis-component="pyxis-logo"][data-pyxis-part="root"]';
+  if (title === 'Atoms/Icon' && storyName.replace(/\s+/g, '') === 'pyxismark') return '#storybook-root [data-pyxis-component="pyxis-mark"][data-pyxis-part="root"]';
   const component = componentSlugFromTitle(title);
   if (component) return `#storybook-root [data-pyxis-component="${component}"][data-pyxis-part="root"]`;
   return '#storybook-root > *:first-child';
@@ -137,13 +145,13 @@ ensureDir(catalogRoot);
 const index = JSON.parse(fs.readFileSync(storybookIndexPath, 'utf8'));
 const entries = Object.values(index.entries || index)
   .filter((entry) => entry.type === 'story')
-  .filter((entry) => ['atoms', 'molecules', 'organisms'].includes(groupOf(entry.title)))
+  .filter((entry) => ['atoms', 'molecules', 'organisms', 'public'].includes(groupOf(entry.title)))
   .sort((a, b) => a.id.localeCompare(b.id));
 
 const manifest = [];
 for (const entry of entries) {
   const group = groupOf(entry.title);
-  const component = slugPart(entry.title.split('/').slice(1).join('-') || entry.title);
+  const component = kebabComponentName(entry.title.split('/').slice(1).join('-') || entry.title);
   const story = slugPart(entry.name);
   const relDir = path.join(group, component, story);
   const configPath = path.join(configRoot, relDir, 'config.css-visual-diff.yml');
