@@ -13,6 +13,9 @@
 - [x] Verify upload exists on reMarkable.
 - [x] Upload whole current ticket bundle to reMarkable before implementation.
 - [x] Verify current ticket bundle exists on reMarkable.
+- [x] Upload implementation progress docs bundle to reMarkable.
+- [x] Upload implementation source bundle to reMarkable.
+- [x] Verify progress/source uploads exist on reMarkable.
 
 ## Phase 1 — Library skeleton and registry
 

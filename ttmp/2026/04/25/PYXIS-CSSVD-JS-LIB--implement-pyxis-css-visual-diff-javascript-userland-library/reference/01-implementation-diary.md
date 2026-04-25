@@ -887,3 +887,91 @@ css-visual-diff verbs script compare region
 ```
 
 and returns both an `args` array and a quoted `shellCommand`. It intentionally does not execute the command inside Goja.
+
+
+## Step 7: Upload updated progress and source bundles to reMarkable
+
+After implementing Phases 1 through 3 and the Phase 4 command-planner/blocker investigation, I uploaded updated bundles to reMarkable. The earlier upload captured the planning ticket before implementation; this upload captures the current implementation state and the source files.
+
+This gives the reMarkable copy both the narrative docs and a syntax-highlighted source bundle for offline review.
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 3)
+
+**Assistant interpretation:** Keep the ticket and implementation artifacts available on reMarkable as work progresses.
+
+**Inferred user intent:** Preserve the current ticket state and source code in a reviewable form outside the repository.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Uploaded docs/progress bundle:
+
+```text
+PYXIS css-visual-diff JS Userland Library Progress
+```
+
+- Uploaded source bundle:
+
+```text
+PYXIS css-visual-diff JS Userland Library Source
+```
+
+- Verified remote directory:
+
+```bash
+remarquee cloud ls /ai/2026/04/25/PYXIS-CSSVD-JS-LIB --long --non-interactive
+```
+
+### Why
+
+The ticket changed substantially after the initial planning upload: it now includes actual JS modules, verbs, smoke tests, generated summaries, and runtime limitation evidence. The reMarkable upload should reflect that progress.
+
+### What worked
+
+Verification listed:
+
+```text
+[f]	PYXIS css-visual-diff JS Userland Library Current Ticket
+[f]	PYXIS css-visual-diff JS Userland Library Plan
+[f]	PYXIS css-visual-diff JS Userland Library Progress
+[f]	PYXIS css-visual-diff JS Userland Library Source
+```
+
+### What didn't work
+
+No upload failures occurred.
+
+### What I learned
+
+For a ticket that includes both long-form docs and source scripts, the best reMarkable delivery is two bundles: a Markdown docs bundle and a source-code bundle.
+
+### What was tricky to build
+
+N/A. The only consideration was explicitly passing both directories and individual shell scripts to `remarquee upload src --bundle`.
+
+### What warrants a second pair of eyes
+
+N/A for upload mechanics.
+
+### What should be done in the future
+
+Upload another progress bundle after Phase 4/5 actual compare orchestration changes, especially if a new `cvd.comparePixels` primitive becomes available.
+
+### Code review instructions
+
+Verify remote state with:
+
+```bash
+remarquee cloud ls /ai/2026/04/25/PYXIS-CSSVD-JS-LIB --long --non-interactive
+```
+
+### Technical details
+
+Remote path:
+
+```text
+/ai/2026/04/25/PYXIS-CSSVD-JS-LIB
+```
