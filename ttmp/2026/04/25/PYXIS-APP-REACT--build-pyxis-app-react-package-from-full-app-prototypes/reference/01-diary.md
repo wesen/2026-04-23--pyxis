@@ -470,3 +470,83 @@ css-visual-diff verbs \
   --output json \
   > ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card.json
 ```
+
+## Step 6: Add hard-gate phases for proving the CSS visual improvement loop
+
+After the user asked whether `css-visual-diff` had already validated the style, I clarified that the existing MetricCard run was only a wiring smoke because it compared a full prototype root against one isolated React component. I then updated the task plan so the team must prove a real like-for-like CSS visual improvement loop before moving further into page work.
+
+The new phases make selector verification and crop inspection explicit gates. They require a component-level proof (`MetricCard`), a section-level proof (`dashboard-metrics`), and a short runbook before continuing to the full Dashboard page.
+
+### Prompt Context
+
+**User prompt (verbatim):** "add phases for making sure our css-visual improvement loop works before moving further."
+
+**Assistant interpretation:** Insert explicit implementation phases before Dashboard/page work to verify that css-visual-diff compares equivalent prototype/React regions and can drive actual CSS improvements.
+
+**Inferred user intent:** Avoid scaling page implementation on top of an unproven or misleading visual-diff loop.
+
+**Commit (docs):** this commit — "Add css visual loop proof phases"
+
+### What I did
+
+- Updated `tasks.md` between Phase 6 and Phase 7.
+- Added `Phase 6A — Prove the CSS visual improvement loop on one component`.
+- Added `Phase 6B — Prove the CSS visual improvement loop on one page section`.
+- Added `Phase 6C — Write the visual improvement loop runbook`.
+- Marked Phases 6A and 6B as hard gates before Phase 7.
+- Specified selector instrumentation, visual spec correction, ticket-local scripts, artifact folders, inspect-first validation, two-iteration improvement loops, acceptance criteria, and milestone commits.
+- Added the user’s follow-up instruction that visual validation must inspect individual `left_region.png` / `right_region.png` files with the `read` tool, not `understand_image`, and not rely on the conjoined `diff_comparison.png` image.
+
+### Why
+
+- The first visual comparison proved the tooling can run, but not that style parity is meaningful.
+- Without like-for-like selectors, pixel numbers can be actively misleading.
+- A proven component-and-section loop should reduce wasted tuning time when the team moves to the full Dashboard page.
+
+### What worked
+
+- The new phases fit naturally between component expansion and Dashboard page tuning.
+- The plan now explicitly blocks further page work until crop selectors and visual artifacts are trustworthy.
+
+### What didn't work
+
+- N/A; this was a planning/task update only.
+
+### What I learned
+
+- The current task list needed a stronger distinction between “visual-diff command runs” and “visual-diff validates style.”
+- The next implementation should prioritize selector/crop correctness over CSS changes.
+
+### What was tricky to build
+
+- The tricky part was making the phases concrete enough to be executable rather than adding a vague “validate visual diff” checkbox. The new tasks require exact scripts, artifact paths, crop inspection, two reruns, and acceptance criteria.
+- The image-review rule is deliberately explicit because the combined diff image can hide crop mismatch problems; individual crops are the source of truth for deciding whether selectors are valid.
+
+### What warrants a second pair of eyes
+
+- Review whether `MetricCard` and `dashboard-metrics` are the best proof targets, or whether a simpler prototype fixture should be created first.
+- Review whether Phases 6A–6C should be renumbered into full Phases 7–9 if the team wants strict sequential phase numbers.
+
+### What should be done in the future
+
+- Execute Phase 6A before any further page implementation.
+- Keep all proof scripts under the ticket `scripts/` directory with numerical prefixes.
+- Do not tune style based on numeric diffs until crop screenshots are confirmed comparable.
+
+### Code review instructions
+
+- Review `tasks.md` around Phase 6A–6C.
+- Check that the phases block Phase 7 until a like-for-like component and section comparison has been proven.
+- Confirm that the proposed artifact folders and script names match the ticket conventions.
+
+### Technical details
+
+New planned artifact/script locations:
+
+```text
+scripts/03-smoke-compare-metric-card.sh
+scripts/04-smoke-compare-dashboard-metrics.sh
+various/05-css-loop-metric-card/
+various/06-css-loop-dashboard-metrics/
+playbooks/02-pyxis-app-css-visual-improvement-loop.md
+```
