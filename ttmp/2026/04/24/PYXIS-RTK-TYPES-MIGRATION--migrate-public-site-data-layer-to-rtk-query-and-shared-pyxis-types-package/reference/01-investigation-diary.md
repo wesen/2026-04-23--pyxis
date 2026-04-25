@@ -1125,3 +1125,30 @@ Fix: remove the temporary `pyxis-types` path mappings and let TypeScript resolve
 ### Result
 
 `cd web && pnpm -r typecheck` passes after the migration.
+
+
+## Step 35: Track A3 — add RTK Query infrastructure
+
+### What I did
+
+- Added `@reduxjs/toolkit` and `react-redux` to `pyxis-user-site`.
+- Created `web/packages/pyxis-user-site/src/api/publicApi.ts` with RTK Query endpoints for:
+  - upcoming shows,
+  - show detail,
+  - archive,
+  - archive stats,
+  - booking submission.
+- Created `web/packages/pyxis-user-site/src/store.ts` with `makeStore()`, singleton `store`, RTK Query reducer/middleware, listeners, and typed Redux hooks.
+- Created `web/packages/pyxis-user-site/src/api/errors.ts` to normalize RTK Query and serialized errors for page UI.
+- Kept TanStack React Query dependencies temporarily because `App.tsx` and existing hooks still use them until A4/A5.
+
+### Commands
+
+```bash
+cd web && pnpm --filter pyxis-user-site add @reduxjs/toolkit react-redux
+cd web && pnpm --filter pyxis-user-site typecheck
+```
+
+### Result
+
+`pyxis-user-site` typecheck passes with the new RTK Query infrastructure present but not yet wired into pages/providers.

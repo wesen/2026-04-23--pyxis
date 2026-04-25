@@ -1,0 +1,71 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type {
+  ArchiveStats,
+  ArchivedShow,
+  BookingConfirmation,
+  BookingFormData,
+  Show,
+} from 'pyxis-types';
+import { endpoints } from './endpoints';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
+
+export const publicApi = createApi({
+  reducerPath: 'publicApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_BASE_URL,
+    prepareHeaders: (headers) => {
+      headers.set('Content-Type', 'application/json');
+      return headers;
+    },
+  }),
+  tagTypes: ['Archive', 'Show', 'Submission'],
+  endpoints: (builder) => ({
+    getUpcomingShows: builder.query<Show[], void>({
+      query: () => endpoints.shows,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((show) => ({ type: 'Show' as const, id: show.id })),
+              { type: 'Show' as const, id: 'LIST' },
+            ]
+          : [{ type: 'Show' as const, id: 'LIST' }],
+    }),
+
+    getShow: builder.query<Show, number>({
+      query: (id) => endpoints.show(id),
+      providesTags: (_result, _error, id) => [{ type: 'Show', id }],
+    }),
+
+    getArchive: builder.query<ArchivedShow[], string | void>({
+      query: (search) => ({
+        url: endpoints.archive,
+        params: search ? { search } : undefined,
+      }),
+      providesTags: [{ type: 'Archive', id: 'LIST' }],
+    }),
+
+    getArchiveStats: builder.query<ArchiveStats, void>({
+      query: () => endpoints.archiveStats,
+      keepUnusedDataFor: 60 * 60,
+      providesTags: [{ type: 'Archive', id: 'STATS' }],
+    }),
+
+    submitBooking: builder.mutation<BookingConfirmation, BookingFormData>({
+      query: (body) => ({
+        url: endpoints.submissions,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'Submission', id: 'LIST' }],
+    }),
+  }),
+});
+
+export const {
+  useGetArchiveQuery,
+  useGetArchiveStatsQuery,
+  useGetShowQuery,
+  useGetUpcomingShowsQuery,
+  useSubmitBookingMutation,
+} = publicApi;

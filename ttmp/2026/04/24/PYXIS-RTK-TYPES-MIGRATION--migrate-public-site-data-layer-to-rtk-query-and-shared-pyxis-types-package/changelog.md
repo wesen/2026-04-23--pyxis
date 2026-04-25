@@ -111,4 +111,5 @@
 - Ran baseline `cd web && pnpm -r typecheck`, `pnpm --filter pyxis-types typecheck`, and `pnpm --filter pyxis-types build`. Fixed the initial build failure by overriding inherited `allowImportingTsExtensions` for the emitting package build.
 - Completed Track A2 type migration. Replaced duplicated user-site API type definitions and component mock type definitions with compatibility re-exports from `pyxis-types`; updated public components and MSW handlers to import canonical types from `pyxis-types`; kept compatibility files temporarily for exported import paths.
 - Removed initial `pyxis-types` TypeScript path mappings so consumers resolve the package through its workspace package metadata. Forced the generated `pyxis-types/dist` files into git so clean workspace typechecks can resolve the package before an explicit build step.
+- Completed Track A3 RTK Query infrastructure. Added `@reduxjs/toolkit` and `react-redux`, created the public RTK Query API slice, Redux store/makeStore setup, typed Redux hooks, and RTK Query error-message helper. Kept TanStack Query temporarily for the upcoming hook/provider migration.
 

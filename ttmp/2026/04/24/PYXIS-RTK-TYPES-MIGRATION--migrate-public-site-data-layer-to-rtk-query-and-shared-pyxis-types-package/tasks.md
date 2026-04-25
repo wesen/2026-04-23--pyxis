@@ -49,16 +49,16 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## A3 — Add Redux Toolkit and RTK Query infrastructure
 
-- [ ] Add dependencies to `pyxis-user-site`: `@reduxjs/toolkit` and `react-redux`.
-- [ ] Keep `@tanstack/react-query` and devtools temporarily until migration is complete.
-- [ ] Create `web/packages/pyxis-user-site/src/store.ts`.
-- [ ] Consider exporting `makeStore()` for Storybook/test store isolation.
-- [ ] Create `web/packages/pyxis-user-site/src/api/publicApi.ts` using `createApi` and `fetchBaseQuery`.
-- [ ] Configure `VITE_API_URL` handling in the RTK base query.
-- [ ] Configure API reducer and middleware in the store.
-- [ ] Add typed app hooks if needed: `useAppDispatch`, `useAppSelector`.
-- [ ] Add an API error-message helper for RTK Query errors.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Add dependencies to `pyxis-user-site`: `@reduxjs/toolkit` and `react-redux`.
+- [x] Keep `@tanstack/react-query` and devtools temporarily until migration is complete.
+- [x] Create `web/packages/pyxis-user-site/src/store.ts`.
+- [x] Consider exporting `makeStore()` for Storybook/test store isolation.
+- [x] Create `web/packages/pyxis-user-site/src/api/publicApi.ts` using `createApi` and `fetchBaseQuery`.
+- [x] Configure `VITE_API_URL` handling in the RTK base query.
+- [x] Configure API reducer and middleware in the store.
+- [x] Add typed app hooks if needed: `useAppDispatch`, `useAppSelector`.
+- [x] Add an API error-message helper for RTK Query errors.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 
 ## A4 — Replace React Query hooks with RTK Query hooks
 
@@ -78,7 +78,7 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 - [ ] Prefer per-story `makeStore()` if RTK Query cache leaks between stories.
 - [ ] Confirm MSW handlers still intercept `/api/public/*` requests.
 - [ ] Run user-site Storybook stories and verify page data loads from MSW.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 
 ## A6 — RTK Query tests, validation, and cleanup
 
