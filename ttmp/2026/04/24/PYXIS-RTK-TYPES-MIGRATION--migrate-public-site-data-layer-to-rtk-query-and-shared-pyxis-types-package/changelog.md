@@ -95,4 +95,7 @@
 - Continued B5 by extracting `AboutHero`, `EthosGrid`, and `EthosStrip` styles into component CSS files.
 - Added stable part selectors for hero eyebrow/title/tagline and ethos heading/grid/item/number/title/description subparts.
 - Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `AboutHero` component `0.0000%` (root `10.5730%` selector/context residual), `EthosGrid` `5.9015%`, `EthosStrip` component `9.6481%` / root `7.4975%`.
+- Completed B5 shell/home/footer extraction by extracting `MailingListCTA`, `PubHero`, and `PubFooter` styles into component CSS files and cleaning `PubNav.css` to use tokens.
+- Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `MailingListCTA` component `3.3797%`, `PubHero` `0.0218%`, `PubFooter` component `0.2511%`, `PubNav` `1.7409%`.
+- B5 extraction tasks are complete, with `SpaceInfo`/`VenueCard` and `FindUsBlock`/`SpaceInfo` taxonomy overlaps still requiring ADR-level decisions later.
 

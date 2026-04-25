@@ -1,0 +1,9 @@
+/* PubHero — featured public show row. */
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='root']) { --pyxis-pub-hero-accent: var(--color-accent); --pyxis-pub-hero-border: #EAE7E0; --pyxis-pub-hero-muted: #8E887E; border-top: 1px solid var(--pyxis-pub-hero-border); cursor: default; display: grid; gap: 24px; grid-template-columns: 80px 1fr; padding: 24px 0; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='root'][role='button']) { cursor: pointer; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='date']) { color: var(--pyxis-pub-hero-muted); font-variant-numeric: tabular-nums; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='month']) { font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='day']) { color: var(--pyxis-pub-hero-accent); font-family: var(--font-display); font-size: 42px; line-height: 1; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='artist']) { color: var(--pyxis-pub-hero-accent); font-family: var(--font-display); font-size: 34px; font-weight: var(--weight-bold); letter-spacing: -0.025em; margin: 0 0 6px; }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='genre']) { color: var(--pyxis-pub-hero-muted); font-size: var(--text-sm); margin: 0 0 var(--space-3); }
+:where([data-pyxis-component='pub-hero'][data-pyxis-part='meta']) { color: var(--pyxis-pub-hero-muted); font-size: 12.5px; }

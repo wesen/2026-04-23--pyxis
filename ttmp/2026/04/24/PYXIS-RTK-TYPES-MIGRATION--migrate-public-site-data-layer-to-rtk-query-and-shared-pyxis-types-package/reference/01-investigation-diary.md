@@ -921,3 +921,37 @@ EthosStrip component 9.6481% | root 7.4975%
 ```
 
 `AboutHero` component parity is exact; its root residual appears to be selector/context related. Ethos components still need later visual tuning/taxonomy decision.
+
+
+## Step 28: Complete B5 shell/home/footer extraction
+
+### What I did
+
+- Created CSS files and extracted static inline styles for:
+  - `MailingListCTA`
+  - `PubHero`
+  - `PubFooter`
+- Cleaned `PubNav.css` to replace hardcoded colors/radii/weights with tokens.
+- Added stable part selectors for CTA, hero, and footer subparts.
+- Ran final B5 typecheck and matching visual-diff configs.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config .../mailing-list-cta-default.css-visual-diff.yml
+css-visual-diff run --config .../pub-hero-default.css-visual-diff.yml
+css-visual-diff run --config .../pub-footer-default.css-visual-diff.yml
+css-visual-diff run --config .../pub-nav-default.css-visual-diff.yml
+```
+
+Typecheck passed. Current pixel diffs:
+
+```text
+MailingListCTA component 3.3797% | root 13.1343%
+PubHero        component 0.0218% | root 0.0218%
+PubFooter      component 0.2511% | root 0.3725%
+PubNav         component 1.7409% | root 1.7409%
+```
+
+B5 extraction tasks are now complete. Remaining concerns are taxonomy/ADR-level decisions and visual tuning, not the initial CSS extraction pass.

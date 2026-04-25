@@ -1,5 +1,7 @@
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
 import type { Show } from '../../mocks/types';
+import './PubHero.css';
 
 export type PubHeroProps = {
   show: Show;
@@ -10,21 +12,20 @@ export type PubHeroProps = {
 
 export const PubHero = ({ show, onShowClick, className }: PubHeroProps) => (
   <section
-    className={className}
+    className={clsx('pyxis-pub-hero', className)}
     {...pyxisPart('pub-hero')}
     onClick={onShowClick ? () => onShowClick(show) : undefined}
     role={onShowClick ? 'button' : undefined}
     tabIndex={onShowClick ? 0 : undefined}
-    style={{ borderTop: '1px solid #EAE7E0', padding: '24px 0', display: 'grid', gridTemplateColumns: '80px 1fr', gap: 24, cursor: onShowClick ? 'pointer' : 'default' }}
   >
-    <div style={{ color: '#8E887E', fontVariantNumeric: 'tabular-nums' }}>
-      <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '.12em' }}>Feb</div>
-      <div style={{ fontFamily: 'var(--font-display)', fontSize: 42, color: '#C8270D', lineHeight: 1 }}>14</div>
+    <div className="pyxis-pub-hero__date" {...pyxisPart('pub-hero', 'date')}>
+      <div {...pyxisPart('pub-hero', 'month')}>Feb</div>
+      <div {...pyxisPart('pub-hero', 'day')}>14</div>
     </div>
-    <div>
-      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 34, fontWeight: 700, letterSpacing: '-.025em', margin: '0 0 6px', color: '#C8270D' }}>{show.artist}</h2>
-      <p style={{ fontSize: 13, color: '#8E887E', margin: '0 0 12px' }}>{show.genre}</p>
-      <div style={{ fontSize: 12.5, color: '#8E887E' }}>Doors {show.doors_time} · {show.age} · {show.price}</div>
+    <div className="pyxis-pub-hero__content" {...pyxisPart('pub-hero', 'content')}>
+      <h2 {...pyxisPart('pub-hero', 'artist')}>{show.artist}</h2>
+      <p {...pyxisPart('pub-hero', 'genre')}>{show.genre}</p>
+      <div {...pyxisPart('pub-hero', 'meta')}>Doors {show.doors_time} · {show.age} · {show.price}</div>
     </div>
   </section>
 );

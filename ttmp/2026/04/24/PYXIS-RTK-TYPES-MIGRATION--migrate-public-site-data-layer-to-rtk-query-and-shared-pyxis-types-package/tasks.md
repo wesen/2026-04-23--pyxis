@@ -180,12 +180,12 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `FindUsBlock` styles into `FindUsBlock.css` if canonical.
 - [x] Extract `SpaceInfo` styles into `SpaceInfo.css` if retained.
 - [x] Extract `VenueCard` styles into `VenueCard.css` if retained.
-- [ ] Extract `MailingListCTA` styles into `MailingListCTA.css`.
-- [ ] Extract `PubHero` styles into `PubHero.css`.
-- [ ] Extract `PubFooter` styles into `PubFooter.css`.
-- [ ] Clean up `PubNav.css` to use tokens and richer `data-pyxis-part` selectors.
-- [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
-- [ ] Run matching visual-diff configs for touched about/home/footer components.
+- [x] Extract `MailingListCTA` styles into `MailingListCTA.css`.
+- [x] Extract `PubHero` styles into `PubHero.css`.
+- [x] Extract `PubFooter` styles into `PubFooter.css`.
+- [x] Clean up `PubNav.css` to use tokens and richer `data-pyxis-part` selectors.
+- [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
+- [x] Run matching visual-diff configs for touched about/home/footer components.
 - [x] Commit this batch separately.
 
 ## B6 — Storybook theme and variant coverage
