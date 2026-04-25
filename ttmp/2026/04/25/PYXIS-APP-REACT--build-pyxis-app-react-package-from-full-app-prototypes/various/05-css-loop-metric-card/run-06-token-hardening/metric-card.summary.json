@@ -1,0 +1,104 @@
+[
+{
+  "classificationCounts": {
+    "review": 1
+  },
+  "jsonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/compare-all-output.json",
+  "markdownPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/01-suite-summary.md",
+  "maxChangedPercent": 3.724216959511077,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "review"
+  },
+  "rows": [
+    {
+      "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/compare.json",
+      "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-metric-card"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 0.5,
+          "width": 0,
+          "x": -247,
+          "y": -299.390625
+        },
+        "left": {
+          "height": 135.5,
+          "width": 231,
+          "x": 247,
+          "y": 299.390625
+        },
+        "normalizedHeight": 136,
+        "normalizedWidth": 231,
+        "right": {
+          "height": 136,
+          "width": 231,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 3.724216959511077,
+      "changedPixels": 1170,
+      "classification": "review",
+      "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/diff_comparison.png",
+      "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/diff_only.png",
+      "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/left_region.png",
+      "leftSelector": "[data-pyxis-component=\"metric-card\"][data-metric-card=\"upcoming\"]",
+      "page": "metric-card",
+      "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-06-token-hardening/metric-card/artifacts/component/right_region.png",
+      "rightSelector": "[data-pyxis-component=\"metric-card\"]",
+      "section": "component",
+      "styleChangeCount": 6,
+      "styleDiffs": [
+        {
+          "left": "12px",
+          "property": "border-radius",
+          "right": "10px"
+        },
+        {
+          "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "property": "box-shadow",
+          "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+        },
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-left",
+          "right": "26px"
+        }
+      ],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 31416,
+      "variant": "component"
+    }
+  ],
+  "sectionCount": 1
+}
+]

@@ -1,5 +1,5 @@
-.app-metric-card { position: relative; overflow: hidden; background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: 10px; padding: 18px 18px 18px 26px; min-height: 136px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; box-shadow: 0 1px 2px rgba(31, 30, 28, 0.04); }
-.app-metric-card::before { content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 2px; border-radius: 999px; background: var(--app-accent); }
+.app-metric-card { position: relative; overflow: hidden; background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 18px 18px 18px 26px; min-height: 136px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; box-shadow: var(--app-shadow-card); }
+.app-metric-card::before { content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 2px; border-radius: var(--app-radius-pill); background: var(--app-accent); }
 .app-metric-card span { color: var(--app-muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .app-metric-card strong { color: var(--app-ink); font-family: var(--font-display, Georgia, serif); font-size: 32px; font-weight: 500; line-height: 1; margin-top: 6px; letter-spacing: -0.02em; }
 .app-metric-card small { color: var(--app-muted); font-size: 11.5px; margin-top: 6px; }

@@ -964,3 +964,81 @@ The runbook now explicitly says:
 ```text
 Do not tune each component into a one-off clone of its current prototype crop. Use the visual loop to discover shared theme decisions, then encode those decisions in reusable tokens and variables.
 ```
+
+## Step 10: Token-hardening pass before Phase 7
+
+Before starting the full Dashboard page work, I did the short theme-cohesion pass requested by the user. The goal was not to retune pixels, but to make the existing app styling less component-local and easier to reuse during Phase 7.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue from the Phase 6C handoff by doing the recommended pre-Phase-7 token-hardening pass.
+
+**Inferred user intent:** Prepare the app for full Dashboard work with cohesive shared variables, not one-off component tweaks.
+
+### What I changed
+
+- Expanded `web/packages/pyxis-app/src/styles/app-tokens.css` with shared tokens for:
+  - login gradient colors,
+  - surface variants,
+  - dark-surface foregrounds,
+  - RGB channel values for reusable alpha colors,
+  - warm brand color,
+  - radius scale including pill/modal radii,
+  - card/nav/modal shadows,
+  - modal backdrop,
+  - status-dot ring alpha.
+- Replaced hard-coded component values in:
+  - `MetricCard.css`,
+  - `AppShell.css`,
+  - `Panels.css`,
+  - `StatusDot.css`,
+  - `Rows.css`,
+  - `pages.css`.
+
+### Validation
+
+- Typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- MetricCard visual smoke after token hardening:
+
+```bash
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh run-06-token-hardening
+```
+
+Result stayed unchanged in the review band:
+
+```text
+3.724216959511077%, 1170/31416, review
+```
+
+- Dashboard metrics visual smoke after token hardening:
+
+```bash
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/04-smoke-compare-dashboard-metrics.sh run-09-token-hardening
+```
+
+Result stayed unchanged in the review band:
+
+```text
+7.44485294117647%, 9801/131648, review
+```
+
+I inspected the new dashboard metrics crops with `read`:
+
+```text
+various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts/metrics/left_region.png
+various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts/metrics/right_region.png
+various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts/metrics/diff_only.png
+```
+
+The crops remain aligned; the diff remains mostly typography/edge pixels, so this is acceptable and should not be chased further.
+
+### Why this matters for Phase 7
+
+The Dashboard page can now compose shell, panels, rows, metric cards, and mobile nav from a more coherent app theme. Any future page-level tuning should first ask whether a value belongs in `app-tokens.css` before adding local CSS.

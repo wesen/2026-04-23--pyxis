@@ -1,20 +1,51 @@
 :root {
   --app-canvas: #f3f1eb;
   --app-mobile-canvas: #e8e4da;
+  --app-login-glow: #fff7e8;
+  --app-login-edge: #e7e0d3;
+
   --app-surface: #fffaf2;
   --app-surface-strong: #ffffff;
+  --app-surface-muted: #eee8dc;
+  --app-surface-success: #e8f2e9;
+
   --app-ink: #1f1e1c;
+  --app-ink-rgb: 31, 30, 28;
   --app-muted: #6f685e;
   --app-faint: #9b9488;
+  --app-faint-rgb: 155, 148, 136;
   --app-rule: #e1ddd2;
+  --app-on-dark: #ffffff;
+  --app-on-dark-muted: rgba(255, 255, 255, 0.72);
+  --app-on-dark-faint: rgba(255, 255, 255, 0.55);
+  --app-on-dark-hover: rgba(255, 255, 255, 0.1);
+  --app-on-dark-active: rgba(255, 255, 255, 0.12);
+  --app-brand-warm: #f7ead0;
+
   --app-accent: #c8270d;
   --app-accent-soft: #fcefeb;
   --app-success: #3c7a4f;
+  --app-success-rgb: 60, 122, 79;
   --app-warning: #c97a0f;
+  --app-warning-rgb: 201, 122, 15;
   --app-danger: #b33a2e;
+  --app-danger-rgb: 179, 58, 46;
   --app-info: #2e5d9e;
-  --app-radius-sm: 8px;
+  --app-info-rgb: 46, 93, 158;
+
+  --app-radius-xs: 8px;
+  --app-radius-sm: 10px;
   --app-radius-md: 12px;
   --app-radius-lg: 18px;
-  --app-shadow: 0 18px 50px rgba(31, 30, 28, 0.08);
+  --app-radius-xl: 22px;
+  --app-radius-2xl: 24px;
+  --app-radius-modal: 28px;
+  --app-radius-pill: 999px;
+
+  --app-shadow: 0 18px 50px rgba(var(--app-ink-rgb), 0.08);
+  --app-shadow-card: 0 1px 2px rgba(var(--app-ink-rgb), 0.04);
+  --app-shadow-nav: 0 18px 40px rgba(0, 0, 0, 0.22);
+  --app-shadow-modal: 0 24px 70px rgba(0, 0, 0, 0.25);
+  --app-backdrop: rgba(var(--app-ink-rgb), 0.42);
+  --app-status-ring-alpha: 0.14;
 }
