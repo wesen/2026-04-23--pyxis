@@ -86,6 +86,16 @@ Preferred page workflow:
 
 Concrete example: for the dashboard, tune `DashboardUpcomingPanel` as an organism with its own Storybook story and focused visual spec before trying to improve the full dashboard page number. If its crop is close but the full page is still noisy, move to the next organism rather than overfitting the page.
 
+For multi-page work, split the backlog into one phase per route/page. Each page phase should begin by listing the organisms it needs and the atoms/molecules it should reuse. Do not start with a generic “remaining pages” pass. The per-page phase should prove consistency bottom-up:
+
+1. atoms/molecules already exist or are extracted,
+2. page-specific organisms are extracted and covered in Storybook,
+3. shared values are promoted into tokens as repeated patterns appear,
+4. section comparisons pass or reach an accepted review-band stop point,
+5. only then does the page get a full-page checkpoint.
+
+This keeps feedback loops small, prevents one page from inventing private visual rules, and makes the app feel like one cohesive system as each route is added.
+
 ## Required loop order
 
 1. Verify prototype and React selectors exist.

@@ -1456,3 +1456,97 @@ The user clarified that the visual loop should explicitly say to extract organis
 ### Why
 
 This keeps the feedback loop small and prevents token drift: section stories provide faster visual evidence, while token consolidation keeps the app cohesive as Dashboard and later pages grow.
+
+## Step 14: Split Phase 8 into one page phase per route
+
+The user asked to make the Phase 8 backlog more explicit: instead of one broad “remaining pages” bucket, every remaining route should have its own phase and should follow the bottom-up component workflow. I updated the ticket tasks and reinforced the runbook so future work starts from reusable atoms/molecules/organisms, not full-page tuning.
+
+This did not change application code. It changed the implementation plan so the next developer can pick one page, inventory its prototype, extract the right organisms, add Storybook coverage, consolidate tokens as patterns repeat, and only then use the full-page crop as a checkpoint.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Split tasks phase 8 into one phase per page and to make sure to identify the proper organisms / reuse molecules / atoms, and to make sure they are consistent. working bottom up. I hope that's clear in the runbook."
+
+**Assistant interpretation:** Replace the generic Phase 8 page checklist with explicit per-page phases and ensure the runbook makes the bottom-up organism/story/token workflow clear.
+
+**Inferred user intent:** Prevent future work from becoming a page-by-page styling scramble; make each route follow the same reusable component extraction and cohesive-token process.
+
+**Commit (docs):** pending at diary write time — intended milestone: `Split remaining pyxis app page phases`
+
+### What I did
+
+- Replaced the old generic Phase 8 checklist in `tasks.md` with per-page phases:
+  - Phase 8.1 Login and mobile login,
+  - Phase 8.2 Setup,
+  - Phase 8.3 Shows and mobile shows,
+  - Phase 8.4 Show detail and mobile show detail,
+  - Phase 8.5 Calendar and mobile calendar,
+  - Phase 8.6 Bookings and mobile bookings,
+  - Phase 8.7 Booking review mobile route/section,
+  - Phase 8.8 Artists and mobile artists,
+  - Phase 8.9 Artist detail mobile route/section,
+  - Phase 8.10 Attendance / post-show mobile route/section,
+  - Phase 8.11 Audit log,
+  - Phase 8.12 Discord,
+  - Phase 8.13 Settings and mobile settings,
+  - Phase 8.14 New show modal.
+- Added a shared checklist for every page phase:
+  - read prototype first,
+  - identify atoms/molecules/organisms before CSS edits,
+  - reuse existing app atoms/molecules,
+  - extract page organisms,
+  - add `data-section` selectors,
+  - add rich Storybook stories,
+  - consolidate tokens,
+  - run focused section comparisons before full-page checkpoints.
+- Updated `playbooks/02-pyxis-app-css-visual-improvement-loop.md` to make the multi-page process explicit.
+
+### Why
+
+- A generic “remaining pages” phase is too easy to execute top-down.
+- Splitting by page gives each route a clear definition of done and a natural coherent commit boundary.
+- The shared checklist keeps each page consistent with the Dashboard lessons: extract reusable sections, tell Storybook what states matter, and use tokens instead of one-off styling.
+
+### What worked
+
+- The tasks document now gives the intern/next session an actionable route-by-route sequence.
+- The runbook now explicitly says not to start with a generic “remaining pages” pass.
+- The page phases name candidate organisms up front, which should make future review easier.
+
+### What didn't work
+
+- N/A; this was a planning/documentation update only.
+
+### What I learned
+
+- The Dashboard checkpoint exposed the planning pattern needed for the rest of the app: every page needs organism extraction and Storybook coverage before visual tuning.
+- Naming candidate organisms in the task list reduces ambiguity before implementation starts.
+
+### What was tricky to build
+
+The tricky part was making the phase split detailed enough to guide work without pretending the exact component taxonomy is final. I listed likely organism names per route, but kept the checklist phrased as “extract as needed” so future implementation can adjust based on the prototype evidence.
+
+### What warrants a second pair of eyes
+
+- Review the proposed Phase 8.x organism names before implementation; some may collapse into shared organisms or split further after prototype inspection.
+- Confirm the route order is the right priority for the intern/next implementer.
+
+### What should be done in the future
+
+- Start Phase 8.1 with prototype inventory and Storybook stories before changing page CSS.
+- As pages are implemented, update each Phase 8.x checklist item rather than reintroducing a generic “remaining pages” bucket.
+
+### Code review instructions
+
+- Review:
+  - `ttmp/.../tasks.md` Phase 8,
+  - `ttmp/.../playbooks/02-pyxis-app-css-visual-improvement-loop.md` section “Extract page sections before tuning the whole page”.
+- Validate by checking that every remaining page has its own phase, candidate organisms, Storybook expectations, section visual expectations, and coherent commit target.
+
+### Technical details
+
+The runbook now states the multi-page workflow as:
+
+```text
+atoms/molecules already exist or are extracted → page-specific organisms are extracted and covered in Storybook → shared values are promoted into tokens → section comparisons pass or reach review-band → full-page checkpoint
+```
