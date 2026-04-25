@@ -39,3 +39,13 @@ Evaluated new flexible css-visual-diff JS API, updated compare-section to use cv
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/lib/compare-region.js — cvd.compare.region implementation
 
 - Uploaded `PYXIS css-visual-diff Flexible JS API Evaluation` and `PYXIS css-visual-diff Flexible JS API Experiment Source` to reMarkable under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB` and verified both documents.
+- Added clean maintainer follow-up request document `design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md`, containing only remaining desired features after `cvd.compare.region(...)` satisfied the original core request.
+
+## 2026-04-25
+
+Created clean maintainer follow-up request document containing only current desired css-visual-diff features after the flexible JS API landed.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md — Clean current maintainer request document
+

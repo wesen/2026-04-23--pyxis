@@ -113,6 +113,7 @@
 - [ ] Include accepted differences in Markdown reports.
 - [x] Revisit maintainer feature-request document after flexible JS API implementation experience.
 - [x] Mark core pixel compare request as satisfied by `cvd.compare.region(...)`.
+- [x] Create clean maintainer follow-up request document with only newly desired features.
 - [ ] Prepare upstream issue text or discussion notes.
 
 ## Phase 8 — Promotion decision

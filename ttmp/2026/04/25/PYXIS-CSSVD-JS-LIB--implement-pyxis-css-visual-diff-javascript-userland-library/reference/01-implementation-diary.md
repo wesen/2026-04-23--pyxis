@@ -1225,3 +1225,87 @@ Remote path:
 ```text
 /ai/2026/04/25/PYXIS-CSSVD-JS-LIB
 ```
+
+
+## Step 10: Create clean maintainer follow-up request document
+
+The earlier maintainer request document still contained historical context about the missing JS-callable pixel comparison primitive. After the flexible API evaluation, that request is satisfied by `cvd.compare.region(...)`, `cvd.compare.selections(...)`, and `cvd.image.diff(...)`. The user asked for a clean separate document containing only the newly desired features.
+
+I created a new maintainer-facing document that removes the obsolete core request and focuses only on follow-up ergonomics discovered during Pyxis integration.
+
+### Prompt Context
+
+**User prompt (verbatim):** "make a cleaned request doucment that only contains the newly desired features (separate doc)"
+
+**Assistant interpretation:** Create a separate cleaned-up upstream request document without obsolete requests that were satisfied by the new flexible JS API.
+
+**Inferred user intent:** Have a concise document suitable for sharing with css-visual-diff maintainers, focused on the next useful improvements rather than historical asks.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+Created:
+
+```text
+design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md
+```
+
+The new document keeps only current requests:
+
+```text
+P0 selector wait helper
+P0 artifact write/report schema clarity
+P1 multi-section comparison/catalog example
+P1 collection profile/default documentation
+P2 structural/bounds tolerances
+P2 CSS/style normalization hooks
+P3 style property presets
+P3 explicit no-op prepare/wait documentation
+```
+
+It explicitly states that the old request for a JS-callable pixel comparison primitive is no longer requested because it is satisfied by the new flexible JS API.
+
+### Why
+
+The old maintainer request document is useful historical context, but it is no longer the clean document to share externally. A maintainer should not have to read through superseded P0 requests to find the actual current asks.
+
+### What worked
+
+The cleaned document is standalone and concise enough to share directly. It includes concrete usage examples and priority labels.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The new API changes the maintainer conversation from “please expose the core primitive” to “please make the new primitive easier to use correctly in larger workflows.”
+
+### What was tricky to build
+
+The main editorial challenge was separating historical context from current asks. The document includes only enough context to explain why the old request is obsolete.
+
+### What warrants a second pair of eyes
+
+Review priority ordering before sharing upstream. In particular, confirm whether artifact schema clarity should be P0 or P1.
+
+### What should be done in the future
+
+If this is shared with maintainers, consider splitting it into separate upstream issues:
+
+1. selector wait helper,
+2. artifact write result schema,
+3. multi-section catalog example,
+4. collection profile docs,
+5. tolerances/normalization.
+
+### Code review instructions
+
+Review:
+
+```text
+design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md
+```
+
+Validate that it does not re-request `cvd.compare.region(...)`, except to state that this request is satisfied.
