@@ -154,3 +154,117 @@ PYXIS App React Workflow Guide
 ### Notes
 
 `remarquee` printed a non-fatal remote tree refresh warning, then reported a successful upload. `remarquee cloud ls` showed the uploaded document.
+
+
+## Step 4: Correct mobile architecture and write intern handoff tasks/playbook
+
+The user clarified that the mobile app should be the responsive version of the main app, not a separate application architecture. I updated the main guide accordingly, rewrote the task list as a detailed intern handoff, wrote a practical intern playbook, related the playbook to key source files, and uploaded a new reMarkable bundle.
+
+### Prompt Context
+
+**User prompt 1 (verbatim):** "i think the mobile app should be the responsive version of the main app, update."
+
+**User prompt 2 (verbatim):** "create a detailed set of tasks in the ticket, so that we can hand this off to our new intern and they don't get lost. Add a precise and detailed playbook explaining all the moving parts and where to look for help and giving clear guidance. Add to ticket and upload to remarkable."
+
+**Assistant interpretation:** Make the responsive architecture explicit, then turn the previous design guide into a concrete intern-ready execution package.
+
+**Inferred user intent:** Prevent the next developer from accidentally creating a parallel mobile app, and give them enough procedural detail to start implementation safely.
+
+### What changed
+
+Updated:
+
+```text
+design/01-pyxis-app-react-end-to-end-workflow-guide.md
+tasks.md
+```
+
+Created:
+
+```text
+playbooks/01-pyxis-app-react-intern-playbook.md
+```
+
+### Key architecture correction
+
+The guide now says:
+
+```text
+One app.
+One route tree.
+One data layer.
+One component system.
+Many responsive viewport variants.
+```
+
+Mobile prototype pages are now described as viewport baselines for the same routes, for example:
+
+```text
+DashboardPage desktop viewport -> standalone/full-app/dashboard.html
+DashboardPage mobile viewport  -> standalone/mobile/home.html
+```
+
+### Task list scope
+
+The task list now includes detailed phases for:
+
+- orientation and environment,
+- route/section inventory,
+- `pyxis-app` package scaffold,
+- app data contracts and RTK Query,
+- selector contract,
+- first component slice,
+- component library expansion,
+- responsive Dashboard page,
+- remaining responsive pages,
+- visual suite hardening,
+- final playbook/handoff.
+
+### Playbook scope
+
+The intern playbook explains:
+
+- repository map,
+- where to look for help,
+- development environment,
+- implementation loop,
+- component taxonomy,
+- selector contract,
+- CSS/theming rules,
+- RTK Query rules,
+- Storybook rules,
+- visual-diff rules,
+- diary requirements,
+- first recommended implementation path,
+- common mistakes,
+- definition of done,
+- recovery checklist if lost.
+
+### reMarkable upload
+
+Uploaded bundle:
+
+```text
+PYXIS App React Intern Handoff
+```
+
+Remote:
+
+```text
+/ai/2026/04/25/PYXIS-APP-REACT
+```
+
+Included:
+
+```text
+design/01-pyxis-app-react-end-to-end-workflow-guide.md
+tasks.md
+playbooks/01-pyxis-app-react-intern-playbook.md
+various/01-source-inventory.md
+```
+
+Dry-run succeeded first. `remarquee cloud ls` shows both `PYXIS App React Intern Handoff` and the earlier `PYXIS App React Workflow Guide`.
+
+### Validation
+
+`docmgr doctor --ticket PYXIS-APP-REACT --stale-after 30` reports only the known topic-vocabulary warning.

@@ -17,7 +17,7 @@ RelatedFiles:
     - Path: prototype-design/screens/auth-dash.jsx
       Note: Prototype source for login/setup/dashboard screens
     - Path: prototype-design/screens/mobile.jsx
-      Note: Prototype source for mobile app screens
+      Note: Prototype source for mobile viewport baselines of the same app routes
     - Path: prototype-design/screens/roster.jsx
       Note: Prototype source for artists/calendar/attendance screens
     - Path: prototype-design/screens/settings-discord.jsx
@@ -27,7 +27,7 @@ RelatedFiles:
     - Path: prototype-design/standalone/full-app/index.html
       Note: Full-app standalone prototype index that pyxis-app pages should target
     - Path: prototype-design/standalone/mobile/index.html
-      Note: Mobile standalone prototype index that pyxis-app mobile screens should target
+      Note: Mobile standalone prototype index that pyxis-app mobile viewport variants should target
     - Path: prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
       Note: Current visual suite schema and compare-spec precedent
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
@@ -37,7 +37,7 @@ RelatedFiles:
     - Path: web/packages/pyxis-user-site/src/api/publicApi.ts
       Note: RTK Query package pattern to mirror for pyxis-app
 ExternalSources: []
-Summary: Detailed intern-facing analysis, design, and implementation guide for creating the pyxis-app React package from full-app and mobile prototypes using modular themable components, Storybook, RTK Query, and JS-canonical css-visual-diff suites.
+Summary: Detailed intern-facing analysis, design, and implementation guide for creating the responsive pyxis-app React package from desktop full-app and mobile prototype baselines using modular themable components, Storybook, RTK Query, and JS-canonical css-visual-diff suites.
 LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
@@ -48,7 +48,7 @@ WhenToUse: ""
 
 ## Executive summary
 
-This guide describes how to transform the Pyxis staff/full-app and mobile prototypes into a production-quality React package named `pyxis-app`.
+This guide describes how to transform the Pyxis staff/full-app desktop prototype and the mobile prototype baseline into one production-quality, responsive React package named `pyxis-app`.
 
 The target workflow is:
 
@@ -78,7 +78,20 @@ The existing public-site work proved the pattern:
 - visual suite specs under `prototype-design/visual-diff/userland/specs/`,
 - `css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec ...`.
 
-For `pyxis-app`, we should reuse that shape and extend it to staff/full-app and mobile app screens.
+### Responsive-app decision
+
+The mobile prototype is a **responsive baseline for the main app**, not a separate application architecture. That means:
+
+- create one `pyxis-app` package,
+- create one route/page hierarchy,
+- create one data and RTK Query layer,
+- make components and pages responsive through CSS, layout variants, and shell variants,
+- compare desktop pages against `prototype-design/standalone/full-app/*.html`,
+- compare mobile viewport variants of those same React pages against `prototype-design/standalone/mobile/*.html`.
+
+Mobile-specific components are allowed only as implementation details of the same app shell or page when the interaction truly differs, for example a bottom navigation replacing the desktop sidebar. They should not create a parallel `MobileDashboardPage`, `MobileShowsPage`, etc. unless sharing the page would make the implementation worse.
+
+For `pyxis-app`, we should reuse that shape and extend it to the staff app across desktop and mobile viewport variants. The mobile prototype is not a second product; it is the responsive/mobile form of the same app routes and component system.
 
 ---
 
@@ -179,11 +192,13 @@ prototype-design/screens/settings-discord.jsx
   ModalShowcase
 ```
 
-The mobile prototype screens come from:
+The mobile prototype baseline comes from:
 
 ```text
 prototype-design/screens/mobile.jsx
 ```
+
+Treat those mobile pages as viewport-specific design evidence for the same app routes. They are not a separate `pyxis-mobile` product and should not drive a second React page hierarchy unless a concrete interaction truly cannot share the main page/component implementation.
 
 Shared prototype support lives in:
 
@@ -322,7 +337,7 @@ web/packages/pyxis-app/
 Responsibility:
 
 - Staff/full-app React UI.
-- Mobile app React UI.
+- Responsive/mobile views of the same staff/full-app React UI.
 - App-specific domain components.
 - App-specific RTK Query API slices.
 - App routes and page composition.
@@ -345,7 +360,7 @@ It should not become a dumping ground for all components. Use this rule:
 
 ```text
 If the component is generic and reusable across public site + app, put it in pyxis-components.
-If the component encodes staff-app/mobile-app concepts, put it in pyxis-app.
+If the component encodes Pyxis staff-app concepts, put it in pyxis-app; implement mobile behavior as responsive variants unless there is a concrete mobile-only interaction pattern.
 If a pyxis-app component later proves reusable, promote it to pyxis-components deliberately.
 ```
 
@@ -387,26 +402,19 @@ web/packages/pyxis-app/
       Setup.tsx
       Dashboard.tsx
       Shows.tsx
+      ShowDetail.tsx
       Calendar.tsx
       Bookings.tsx
+      BookingReview.tsx
       Artists.tsx
+      ArtistDetail.tsx
       Attendance.tsx
+      PostShow.tsx
       AuditLog.tsx
       Discord.tsx
       Settings.tsx
-      MobileHome.tsx
-      MobileShows.tsx
-      MobileShowDetail.tsx
-      MobileCalendar.tsx
-      MobileBookings.tsx
-      MobileBookingReview.tsx
-      MobileArtists.tsx
-      MobileArtistDetail.tsx
-      MobilePostShow.tsx
-      MobileSettings.tsx
     stories/
-      AppPages.stories.tsx
-      MobileScreens.stories.tsx
+      AppPages.stories.tsx       # desktop + mobile viewport variants of the same page components
 ```
 
 Alternative: put stories beside components with `*.stories.tsx`, and keep only route/page stories in `stories/`. That is the current `pyxis-components` + `pyxis-user-site` pattern and is probably best:
@@ -415,7 +423,6 @@ Alternative: put stories beside components with `*.stories.tsx`, and keep only r
 src/components/molecules/KpiCard/KpiCard.stories.tsx
 src/components/organisms/BookingQueue/BookingQueue.stories.tsx
 stories/AppPages.stories.tsx
-stories/MobileScreens.stories.tsx
 ```
 
 ### 2.3 Package manifest sketch
@@ -509,7 +516,7 @@ Domain:
   generic design system
   public site
   staff/full app
-  mobile app
+  viewport variant: desktop/mobile
 ```
 
 This prevents arguments like “is `BookingQueue` an organism or a page?” The useful answer is:
@@ -517,7 +524,7 @@ This prevents arguments like “is `BookingQueue` an organism or a page?” The 
 ```text
 BookingQueue = staff-app organism
 BookingsPage = staff-app page
-MBookingReview = mobile-app screen/page
+BookingReview = staff-app page/section with a mobile viewport variant
 ```
 
 ### 3.2 What belongs in `pyxis-components`
@@ -611,45 +618,22 @@ Pages:
   SettingsPage
 ```
 
-Mobile component candidates:
+Responsive/mobile implementation candidates:
 
 ```text
-Atoms / primitives:
-  MobileIconButton
-  MobileTabIcon
-  MobileStatusPill
-
-Molecules:
-  MobileHeader
-  MobileBottomNavItem
-  MobileMetricCard
-  MobileShowCard
-  MobileBookingCard
-  MobileArtistRow
-  MobileSettingRow
-
-Organisms:
-  MobileShell
-  MobileBottomNav
-  MobileShowList
-  MobileBookingQueue
-  MobileCalendarAgenda
-  MobileArtistList
-  MobilePostShowForm
-
-Screens:
-  MobileLoginScreen
-  MobileHomeScreen
-  MobileShowsScreen
-  MobileShowDetailScreen
-  MobileCalendarScreen
-  MobileBookingsScreen
-  MobileBookingReviewScreen
-  MobileArtistsScreen
-  MobileArtistDetailScreen
-  MobilePostShowScreen
-  MobileSettingsScreen
+Responsive variants, not separate products:
+  AppShell collapses sidebar/topbar into mobile navigation.
+  AppSidebar becomes a drawer or bottom navigation.
+  AppTopBar becomes a compact mobile header.
+  DashboardOverview reflows metric cards into a vertical stack.
+  ShowsTable can become ShowCardList at narrow widths.
+  BookingQueue can become BookingCardList at narrow widths.
+  CalendarMonth can expose a compact agenda/list view at narrow widths.
+  ArtistRoster can become ArtistList at narrow widths.
+  SettingsPanel keeps the same data contract but uses mobile row spacing.
 ```
+
+Create `Mobile*` components only when a mobile interaction is genuinely different and cannot be expressed as a responsive variant of the same component. Even then, treat the component as an implementation detail of the same route/page, not as a separate mobile app.
 
 ### 3.4 Decomposition rule of thumb
 
@@ -665,8 +649,8 @@ Is it a generic composition of primitives?
 Is it a generic interaction/shell pattern?
   → pyxis-components organism
 
-Does it represent staff app or mobile app domain data/workflow?
-  → pyxis-app component
+Does it represent Pyxis staff-app domain data/workflow?
+  → pyxis-app component, responsive across desktop/mobile as needed
 
 Does it map to a route or full screen?
   → pyxis-app page/screen
@@ -744,11 +728,14 @@ data-page="dashboard"
 data-section="dashboard-overview"
 ```
 
-For mobile screens use either the same `data-page` or an explicit mobile slug:
+For mobile viewport comparisons, prefer the same `data-page` and `data-section` names as desktop. Only introduce a mobile-specific section slug when the interaction genuinely has no desktop counterpart:
 
 ```html
-data-page="mobile-home"
-data-section="mobile-home-summary"
+data-page="dashboard"
+data-section="dashboard-summary"
+
+<!-- only if genuinely mobile-only -->
+data-section="dashboard-bottom-nav"
 ```
 
 Recommended page selector pattern:
@@ -990,7 +977,7 @@ Write stories in this order:
 2. pyxis-app atoms/molecules
 3. pyxis-app organisms
 4. pyxis-app page stories
-5. mobile screen stories
+5. mobile viewport variants of the same page stories
 ```
 
 Example molecule story:
@@ -1049,12 +1036,12 @@ For page capture:
 [data-section='dashboard-metrics']
 ```
 
-For mobile capture:
+For mobile capture, use the same app shell and page selectors at a mobile viewport:
 
 ```css
-[data-story-frame='pyxis-mobile-shell']
-[data-page='mobile-home']
-[data-section='mobile-home-summary']
+[data-story-frame='pyxis-app-shell']
+[data-page='dashboard']
+[data-section='dashboard-summary']
 ```
 
 ---
@@ -1071,8 +1058,8 @@ The existing `compare-spec` verb can already run arbitrary specs:
 css-visual-diff verbs \
   --repository prototype-design/visual-diff/userland \
   pyxis pages compare-spec \
-  prototype-design/visual-diff/userland/specs/app-full.desktop.visual.yml \
-  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/app-full-desktop \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/app-desktop \
   --output json
 ```
 
@@ -1083,23 +1070,23 @@ The command still says `pyxis pages`, but the underlying spec can represent staf
 Create these specs as the implementation progresses:
 
 ```text
-prototype-design/visual-diff/userland/specs/app-full.components.visual.yml
-prototype-design/visual-diff/userland/specs/app-full.pages.desktop.visual.yml
-prototype-design/visual-diff/userland/specs/app-mobile.screens.visual.yml
+prototype-design/visual-diff/userland/specs/app.components.visual.yml
+prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml
+prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml
 ```
 
 Potentially later:
 
 ```text
-prototype-design/visual-diff/userland/specs/app-mobile.components.visual.yml
-prototype-design/visual-diff/userland/specs/app-full.pages.tablet.visual.yml
+prototype-design/visual-diff/userland/specs/app.pages.tablet.visual.yml
+prototype-design/visual-diff/userland/specs/app.components.mobile-overrides.visual.yml  # only if component-level mobile deltas need separate coverage
 ```
 
 ### 7.3 Full-app page spec sketch
 
 ```yaml
 schemaVersion: pyxis.visual-suite.v1
-name: app-full-pages
+name: app-pages-desktop
 defaults:
   prototypeBase: http://localhost:7070
   storybookBase: http://localhost:6008
@@ -1143,11 +1130,14 @@ targets:
         react: '[data-section="dashboard-activity"]'
 ```
 
-### 7.4 Mobile screen spec sketch
+### 7.4 Mobile viewport spec sketch
+
+The mobile spec should compare the same React app pages at a 390px viewport against the standalone mobile prototype pages. Some prototype paths use mobile-specific names (`home.html`, `booking-review.html`, `post-show.html`), but the React side should still be the same route/page family where possible.
+
 
 ```yaml
 schemaVersion: pyxis.visual-suite.v1
-name: app-mobile-screens
+name: app-pages-mobile
 defaults:
   prototypeBase: http://localhost:7070
   storybookBase: http://localhost:6008
@@ -1169,18 +1159,18 @@ policy:
     - name: major-mismatch
       maxChangedPercent: 100
 targets:
-  - page: mobile-home
+  - page: dashboard
     variant: mobile
     priority: first-pass
     prototypePath: /standalone/mobile/home.html
-    storyId: pyxis-app-mobile-screens--home
+    storyId: pyxis-app-pages--dashboard-mobile
     sections:
       - name: page
         original: '#root'
-        react: '[data-story-frame="pyxis-mobile-shell"]'
+        react: '[data-story-frame="pyxis-app-shell"]'
       - name: content
-        original: '[data-page="mobile-home"]'
-        react: '[data-page="mobile-home"]'
+        original: '[data-page="dashboard"]'
+        react: '[data-page="dashboard"]'
 ```
 
 ### 7.5 Component visual suite sketch
@@ -1189,7 +1179,7 @@ The same spec schema can represent component fixtures by treating each component
 
 ```yaml
 schemaVersion: pyxis.visual-suite.v1
-name: app-full-components
+name: app-components
 defaults:
   prototypeBase: http://localhost:7070
   storybookBase: http://localhost:6008
@@ -1329,7 +1319,7 @@ for component in planned_components:
   locate prototype crop
   create React component with data-pyxis selectors
   write Default story
-  add target to app-full.components.visual.yml
+  add target to app.components.visual.yml
   run compare-spec --page component-slug
   inspect left_region/right_region
   tune CSS
@@ -1343,22 +1333,22 @@ After atoms/molecules are credible, compose larger sections:
 ```text
 AppShell
 AppSidebar
+AppTopBar
+AppBottomNav or AppMobileNav as responsive shell parts
 DashboardOverview
-ShowsTable
-BookingQueue
-CalendarMonth
-ArtistRoster
+ShowsTable / ShowCardList responsive presentation
+BookingQueue / BookingCardList responsive presentation
+CalendarMonth / CalendarAgenda responsive presentation
+ArtistRoster / ArtistList responsive presentation
 DiscordMappingPanel
 SettingsPanel
-MobileShell
-MobileBottomNav
 ```
 
 Do not build pages directly from raw divs if a component should exist. This is the point where app-specific organisms become a real library.
 
 ### Phase 5 — Page composition
 
-Create desktop staff-app pages:
+Create staff-app pages once, then make them responsive:
 
 ```text
 Login
@@ -1374,27 +1364,27 @@ Discord
 Settings
 ```
 
-Create mobile screens:
+Create mobile viewport variants of the same pages:
 
 ```text
-MobileLogin
-MobileHome
-MobileShows
-MobileShowDetail
-MobileCalendar
-MobileBookings
-MobileBookingReview
-MobileArtists
-MobileArtistDetail
-MobilePostShow
-MobileSettings
+Login mobile viewport
+Dashboard/Home mobile viewport
+Shows mobile viewport
+Show detail mobile viewport
+Calendar mobile viewport
+Bookings mobile viewport
+Booking review mobile viewport
+Artists mobile viewport
+Artist detail mobile viewport
+Post-show mobile viewport
+Settings mobile viewport
 ```
 
-Add page stories and specs:
+Add page stories and specs. These specs should target the same React page components at different viewports:
 
 ```text
-app-full.pages.desktop.visual.yml
-app-mobile.screens.visual.yml
+app.pages.desktop.visual.yml
+app.pages.mobile.visual.yml
 ```
 
 ### Phase 6 — Visual tuning
@@ -1406,7 +1396,7 @@ Use this loop:
 css-visual-diff verbs \
   --repository prototype-design/visual-diff/userland \
   pyxis pages compare-spec \
-  prototype-design/visual-diff/userland/specs/app-full.pages.desktop.visual.yml \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
   --page dashboard \
   --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/app-dashboard \
   --output json
@@ -1478,7 +1468,7 @@ across public site and pyxis-app. It should be updated to mention:
 - Storybook port 6008,
 - app specs,
 - component-level JS suite specs,
-- mobile screen specs,
+- mobile viewport specs for the same app pages,
 - artifact history convention.
 
 ### 9.5 Potential new playbook
@@ -1570,7 +1560,7 @@ Deliver:
 
 ```text
 Dashboard page story
-app-full.pages.desktop.visual.yml target
+app.pages.desktop.visual.yml target
 first page compare artifacts
 notes on selector/data gaps
 ```
@@ -1628,7 +1618,7 @@ sequenceDiagram
   participant CVD as css-visual-diff JS userland
   participant Hist as Ticket history various/NN
 
-  Dev->>CVD: compare-spec app-full.pages.desktop.visual.yml --page dashboard
+  Dev->>CVD: compare-spec app.pages.desktop.visual.yml --page dashboard
   CVD->>Proto: load /standalone/full-app/dashboard.html
   CVD->>SB: load iframe story dashboard-desktop
   CVD->>CVD: compare selectors/regions
