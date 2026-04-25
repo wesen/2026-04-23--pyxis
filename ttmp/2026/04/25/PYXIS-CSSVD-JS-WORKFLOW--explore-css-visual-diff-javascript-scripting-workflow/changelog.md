@@ -20,3 +20,5 @@ Initial css-visual-diff JavaScript workflow exploration: captured docs, proved t
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-WORKFLOW--explore-css-visual-diff-javascript-scripting-workflow/reference/01-exploration-diary.md — Detailed chronological experiment log
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-WORKFLOW--explore-css-visual-diff-javascript-scripting-workflow/reference/02-copious-research-notes-for-technical-deep-dive.md — Blog-post research notes
 
+
+- Added JS API wishlist research notes after initial Pyxis experiments, covering first-class pixel compare APIs, multi-section runners, YAML interop helpers, result summarizers, tolerances, CSS normalization, policy helpers, and blog-post-oriented reporting.

@@ -696,3 +696,200 @@ scripts/06-inspect-public-page-section.js
 Reason:
 
 - It will support Shows tuning, which is the biggest remaining visual mismatch.
+
+
+## JS API wishlist after initial Pyxis experiments
+
+The first experiments showed that the JavaScript API is already useful: ticket-local verbs work, and `verbs script compare region` reproduced the Archive YAML content diff. The missing pieces are mostly about moving from one-off comparisons to a full project workflow with registries, multi-section pages, concise reports, and CI policy.
+
+### 1. First-class pixel compare API callable from custom JS
+
+The built-in `verbs script compare region` command can compare two URL/selector regions and return pixel stats/artifacts, but the public JavaScript API documentation focuses more on locators, probes, snapshots, inspect artifacts, catalogs, and structural diffs. For Pyxis, a custom verb should be able to call a first-class API like:
+
+```js
+const result = await cvd.comparePixels({
+  left: { page, selector: '#root > *' },
+  right: { page, selector: "[data-page='archive']" },
+  threshold: 30,
+  outDir,
+  writePngs: true,
+  writeMarkdown: true,
+  writeJson: true,
+})
+```
+
+Why it matters: this would let us build `pyxis pages compare archive content` without shelling out to the built-in verb or duplicating the comparison implementation.
+
+### 2. Multi-section compare runner
+
+YAML `run --config` can compare several sections in one config. A JS equivalent should accept an array of section pairs and produce one summary table plus per-section artifacts:
+
+```js
+await cvd.compareSections({
+  leftPage,
+  rightPage,
+  sections: [
+    { name: 'page', left: '#root', right: "[data-story-frame='pyxis-page-shell']" },
+    { name: 'content', left: '#root > *', right: "[data-page='archive']" },
+  ],
+  outDir,
+})
+```
+
+Why it matters: Pyxis pages need page/content/section comparisons. Running one command per section is okay for smoke tests but clumsy for official reports.
+
+### 3. Config-to-JS bridge helpers beyond `loadConfig`
+
+`cvd.loadConfig(path)` is a good foundation, but the migration would be smoother with helpers that turn config sides/sections/styles into executable targets/probes/compare jobs:
+
+```js
+const cfg = await cvd.loadConfig(path)
+const job = cvd.jobFromConfig(cfg)
+await job.preflight({ side: 'react' })
+await job.compareAll({ outDir })
+```
+
+Why it matters: the safest migration path is wrapping existing YAML first, not rewriting everything immediately.
+
+### 4. Built-in Markdown/table summarizers for compare result directories
+
+We repeatedly need to summarize `pixeldiff.md`, `compare.json`, and artifact paths across many pages. A JS helper could read output dirs and return normalized rows:
+
+```js
+const rows = await cvd.readPixelDiffResults('prototype-design/visual-comparisons/public-pages')
+await cvd.report.pixelSummary(rows).writeMarkdown('page-summary.md')
+```
+
+Why it matters: Phase 7 required manual copy/paste. This would immediately improve documentation, CI summaries, and blog-post evidence gathering.
+
+### 5. Numeric tolerances for structural snapshot diffs
+
+`cvd.diff` currently provides deterministic structural JSON diff with `ignorePaths`. For layout tuning, full ignore paths are too coarse; we often want tolerances:
+
+```js
+cvd.diff(before, after, {
+  tolerances: {
+    'results[*].snapshot.bounds.x': 1,
+    'results[*].snapshot.bounds.y': 4,
+    'results[*].snapshot.bounds.width': 2,
+  },
+})
+```
+
+Why it matters: responsive/browser layout can move by a few pixels without violating visual intent.
+
+### 6. CSS value normalization and token-aware comparisons
+
+Computed CSS often differs in equivalent or acceptable ways: `#fff` vs `rgb(255, 255, 255)`, font-family fallback expansion, `normal` line-height vs numeric computed line-height, token variables vs resolved values. A normalizer hook would help:
+
+```js
+cvd.diffStyles(left, right, {
+  normalize: ['colors', 'fontFamilies', 'zeroUnits'],
+  tokenMap: './web/packages/pyxis-components/src/tokens/tokens.css',
+})
+```
+
+Why it matters: Pyxis cares about token contracts and visual output more than raw CSS textual equality.
+
+### 7. Concise computed-style property presets
+
+The built-in compare-region output is evidence-rich but very verbose. It would help to have reusable property presets:
+
+```js
+cvd.styles.presets.layout
+cvd.styles.presets.typography
+cvd.styles.presets.surface
+cvd.styles.presets.spacing
+cvd.styles.presets.interaction
+```
+
+Why it matters: project scripts should avoid dumping every computed property unless explicitly in forensic mode.
+
+### 8. Page/target registry primitives
+
+Many projects need to define base URLs, story IDs, viewports, and selectors once. A small registry helper would reduce boilerplate:
+
+```js
+const registry = cvd.registry({
+  prototypeBase: 'http://localhost:7070',
+  storybookBase: 'http://localhost:6007/iframe.html',
+})
+
+registry.page('archive')
+  .prototype('/standalone/public/archive.html')
+  .story('public-site-pages--archive-desktop')
+  .section('content', '#root > *', "[data-page='archive']")
+```
+
+Why it matters: the hardest maintenance problem is duplicate target metadata across YAML, scripts, and docs.
+
+### 9. Authoring vs CI policy helpers
+
+The docs recommend authoring mode vs CI mode, but every script has to encode the policy itself. Helpers could standardize this:
+
+```js
+cvd.policy.authoring().handlePreflight(statuses)
+cvd.policy.ci({ failOnMissing: true, maxChangedPercent: 1 }).assert(result)
+```
+
+Why it matters: during tuning we want evidence even when selectors are missing; in CI we want fast failure.
+
+### 10. Stable artifact directory and slug helpers for compare outputs
+
+The catalog API has `artifactDir(slug)`, which is useful. Compare workflows need the same pattern for page/section/output naming:
+
+```js
+const out = cvd.paths.artifactDir(baseOut, ['public-pages', page, section])
+```
+
+Why it matters: path consistency is what makes reports linkable and reviewable.
+
+### 11. Screenshot/image metadata in JSON outputs
+
+Pixel reports should include image dimensions, crop bounds, threshold, changed pixels, changed percent, and artifact paths in a stable schema. The built-in compare result already contains much of this, but a documented type/schema would make downstream tooling safer.
+
+Why it matters: the page-level report and future blog post both need reliable artifact references.
+
+### 12. Optional human-review annotations / accepted-difference records
+
+A JS workflow should be able to attach accepted differences next to a result:
+
+```js
+result.accept({
+  path: 'font-family',
+  reason: 'Prototype uses inline Inter; React uses tokenized Inter fallback stack.',
+})
+```
+
+Why it matters: Pyxis already has accepted CSS-only differences at component level. We need a first-class way to carry those decisions into reports.
+
+### 13. Direct Storybook story target helper
+
+Since many comparisons target Storybook iframes, a helper would avoid URL mistakes:
+
+```js
+cvd.storybook('http://localhost:6007').story('public-site-pages--archive-desktop')
+```
+
+Why it matters: Storybook iframe URL construction is repeated and easy to mistype.
+
+### 14. Better stdout/output-file ergonomics for generated reports
+
+One experiment failed because stdout was redirected into a directory before the script created it. This is shell behavior, not a css-visual-diff bug, but JS verbs could encourage safer patterns by making `--output-file` and `--outDir` conventions easy and consistent.
+
+Why it matters: visual workflows generate many artifacts; safe output conventions prevent silly failures.
+
+### 15. Blog-post-friendly report builders
+
+For the eventual article, it would be useful to generate compact, embeddable snippets:
+
+```js
+cvd.report(result).blogMarkdown({
+  includeCommand: true,
+  includeSummaryTable: true,
+  includeArtifactLinks: true,
+  includeLessons: true,
+})
+```
+
+Why it matters: high-quality technical writeups need both evidence and explanation. A report builder could reduce manual transcription errors.
