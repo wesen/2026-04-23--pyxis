@@ -1,19 +1,25 @@
-// API client barrel
-export { apiFetch, ApiException } from './client';
-export type { ApiError } from './client';
+// Public API barrel for pyxis-user-site.
 export { endpoints } from './endpoints';
 export type { Endpoint } from './endpoints';
+export { getApiErrorMessage } from './errors';
 export type {
-  Show,
-  ArchivedShow,
+  ApiError,
   ArchiveStats,
-  BookingFormData,
+  ArchivedShow,
   BookingConfirmation,
+  BookingFormData,
+  Show,
 } from './types';
 export {
-  useUpcomingShows,
-  useShow,
   useArchive,
   useArchiveStats,
+  useGetArchiveQuery,
+  useGetArchiveStatsQuery,
+  useGetShowQuery,
+  useGetUpcomingShowsQuery,
+  useShow,
   useSubmitBooking,
+  useSubmitBookingMutation,
+  useUpcomingShows,
 } from './hooks';
+export { publicApi } from './publicApi';

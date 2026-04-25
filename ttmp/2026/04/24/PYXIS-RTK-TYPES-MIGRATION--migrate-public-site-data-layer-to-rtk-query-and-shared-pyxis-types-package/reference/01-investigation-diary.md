@@ -1152,3 +1152,43 @@ cd web && pnpm --filter pyxis-user-site typecheck
 ### Result
 
 `pyxis-user-site` typecheck passes with the new RTK Query infrastructure present but not yet wired into pages/providers.
+
+
+## Step 36: Track A4-A6 — migrate user-site to RTK Query
+
+### What I did
+
+- Rewrote `web/packages/pyxis-user-site/src/api/hooks.ts` as compatibility wrappers over generated RTK Query hooks.
+- Replaced `QueryClientProvider` in `App.tsx` with Redux `<Provider store={store}>`.
+- Updated `Shows.tsx` to use `getApiErrorMessage(error)` because RTK Query errors are not necessarily `Error` instances.
+- Updated user-site page stories and Storybook preview to use Redux `Provider` with `makeStore()` instead of React Query.
+- Removed the old `apiFetch` client file after no imports remained.
+- Removed `@tanstack/react-query` and `@tanstack/react-query-devtools` dependencies.
+
+### Commands
+
+```bash
+cd web && pnpm --filter pyxis-user-site typecheck
+rg "@tanstack|useQuery|useMutation|QueryClient|QueryClientProvider|apiFetch|ApiException" web/packages/pyxis-user-site -g'*.ts' -g'*.tsx' -g'package.json'
+cd web && pnpm --filter pyxis-user-site remove @tanstack/react-query @tanstack/react-query-devtools
+cd web && pnpm -r typecheck
+cd web && pnpm --filter pyxis-user-site build
+cd web && pnpm --filter pyxis-user-site build-storybook
+cd web && pnpm -r test
+```
+
+### Results
+
+- `pyxis-user-site` typecheck passed.
+- Recursive workspace typecheck passed.
+- `pyxis-user-site` production build passed.
+- `pyxis-user-site` Storybook static build passed after replacing the old React Query preview decorator.
+- The TanStack/API-client search returns no matches under `pyxis-user-site`.
+
+### Issue encountered
+
+The first user-site Storybook build failed because `.storybook/preview.tsx` still imported `QueryClient` / `QueryClientProvider` from `@tanstack/react-query`, which had just been removed.
+
+Fix: replace the preview decorator with Redux `Provider` and `makeStore()`.
+
+`pnpm -r test` still fails because `pyxis-components` has no Vitest test files and Vitest exits with code 1. This is an existing test-script stability issue rather than an RTK Query migration failure.

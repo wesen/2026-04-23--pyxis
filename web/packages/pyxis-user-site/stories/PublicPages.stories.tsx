@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { handlers } from 'pyxis-components/mocks/handlers';
 import { Layout } from '../src/components/layout/Layout';
@@ -7,6 +8,7 @@ import { ShowDetail } from '../src/pages/ShowDetail';
 import { Archive } from '../src/pages/Archive';
 import { Book } from '../src/pages/Book';
 import { About } from '../src/pages/About';
+import { makeStore } from '../src/store';
 
 const meta: Meta<typeof PublicPageRoute> = {
   title: 'Public Site/Pages',
@@ -28,6 +30,8 @@ type PublicPageRouteProps = {
 };
 
 function PublicPageRoute({ route, storyName, width, minHeight }: PublicPageRouteProps) {
+  const store = makeStore();
+
   return (
     <div
       data-story="pyxis-public-page"
@@ -42,18 +46,20 @@ function PublicPageRoute({ route, storyName, width, minHeight }: PublicPageRoute
       }}
     >
       <div data-story-frame="pyxis-page-shell" style={{ width, background: '#fff', minHeight }}>
-        <MemoryRouter initialEntries={[route]}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Shows />} />
-              <Route path="shows" element={<Shows />} />
-              <Route path="shows/:id" element={<ShowDetail />} />
-              <Route path="archive" element={<Archive />} />
-              <Route path="book" element={<Book />} />
-              <Route path="about" element={<About />} />
-            </Route>
-          </Routes>
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={[route]}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Shows />} />
+                <Route path="shows" element={<Shows />} />
+                <Route path="shows/:id" element={<ShowDetail />} />
+                <Route path="archive" element={<Archive />} />
+                <Route path="book" element={<Book />} />
+                <Route path="about" element={<About />} />
+              </Route>
+            </Routes>
+          </MemoryRouter>
+        </Provider>
       </div>
     </div>
   );

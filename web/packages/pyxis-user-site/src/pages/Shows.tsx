@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useUpcomingShows } from '../api/hooks';
+import { getApiErrorMessage } from '../api/errors';
 import { PubHero, PubShowRow, MailingListCTA, Empty } from 'pyxis-components';
 
 export function Shows() {
@@ -70,7 +71,7 @@ function ShowsError({ error }: { error?: unknown }) {
     <div style={{ maxWidth: 980, margin: '0 auto', padding: '64px 32px', textAlign: 'center' }}>
       <p style={{ color: 'var(--color-accent)' }}>Failed to load shows.</p>
       <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-tertiary)' }}>
-        {error instanceof Error ? error.message : 'Unknown error'}
+        {getApiErrorMessage(error)}
       </p>
     </div>
   );

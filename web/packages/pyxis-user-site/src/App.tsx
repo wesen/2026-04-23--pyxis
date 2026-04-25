@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Layout } from './components/layout/Layout';
 import { NotFound } from './pages/NotFound';
+import { store } from './store';
 
 // Lazy-loaded pages — each route is a separate JS chunk
 const Shows       = lazy(() => import('./pages/Shows').then(m => ({ default: m.Shows })));
@@ -13,20 +14,9 @@ const Book        = lazy(() => import('./pages/Book').then(m => ({ default: m.Bo
 const BookSuccess = lazy(() => import('./pages/BookSuccess').then(m => ({ default: m.BookSuccess })));
 const About       = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5,       // 5 min
-      gcTime:    1000 * 60 * 30,      // 30 min
-      retry: 2,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
       <ErrorBoundary>
         <BrowserRouter>
           <Routes>
@@ -83,7 +73,7 @@ export function App() {
           </Routes>
         </BrowserRouter>
       </ErrorBoundary>
-    </QueryClientProvider>
+    </Provider>
   );
 }
 

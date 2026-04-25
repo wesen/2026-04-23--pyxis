@@ -62,37 +62,37 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## A4 — Replace React Query hooks with RTK Query hooks
 
-- [ ] Replace `useUpcomingShows` with `useGetUpcomingShowsQuery` or a compatibility wrapper.
-- [ ] Replace `useShow` with `useGetShowQuery`.
-- [ ] Replace `useArchive` with `useGetArchiveQuery`.
-- [ ] Replace `useArchiveStats` with `useGetArchiveStatsQuery`.
-- [ ] Replace `useSubmitBooking` with `useSubmitBookingMutation` or a compatibility wrapper.
-- [ ] Update `Shows.tsx`, `ShowDetail.tsx`, `Archive.tsx`, `Book.tsx`, and `BookSuccess.tsx` imports/usages if direct generated hooks are used.
-- [ ] Remove `apiFetch`, `client.ts`, and endpoint constants only after no imports remain, or keep endpoint constants if still useful.
-- [ ] Run `rg "@tanstack|useQuery|useMutation|QueryClient|apiFetch" web/packages/pyxis-user-site/src` and resolve remaining usage.
+- [x] Replace `useUpcomingShows` with `useGetUpcomingShowsQuery` or a compatibility wrapper.
+- [x] Replace `useShow` with `useGetShowQuery`.
+- [x] Replace `useArchive` with `useGetArchiveQuery`.
+- [x] Replace `useArchiveStats` with `useGetArchiveStatsQuery`.
+- [x] Replace `useSubmitBooking` with `useSubmitBookingMutation` or a compatibility wrapper.
+- [x] Update `Shows.tsx`, `ShowDetail.tsx`, `Archive.tsx`, `Book.tsx`, and `BookSuccess.tsx` imports/usages if direct generated hooks are used.
+- [x] Remove `apiFetch`, `client.ts`, and endpoint constants only after no imports remain, or keep endpoint constants if still useful.
+- [x] Run `rg "@tanstack|useQuery|useMutation|QueryClient|apiFetch" web/packages/pyxis-user-site/src` and resolve remaining usage.
 
 ## A5 — Wire providers and Storybook
 
-- [ ] Replace `QueryClientProvider` in `App.tsx` with Redux `<Provider store={store}>`.
-- [ ] Add a Storybook decorator/provider for user-site stories that uses the same store setup.
-- [ ] Prefer per-story `makeStore()` if RTK Query cache leaks between stories.
-- [ ] Confirm MSW handlers still intercept `/api/public/*` requests.
-- [ ] Run user-site Storybook stories and verify page data loads from MSW.
+- [x] Replace `QueryClientProvider` in `App.tsx` with Redux `<Provider store={store}>`.
+- [x] Add a Storybook decorator/provider for user-site stories that uses the same store setup.
+- [x] Prefer per-story `makeStore()` if RTK Query cache leaks between stories.
+- [x] Confirm MSW handlers still intercept `/api/public/*` requests.
+- [x] Run user-site Storybook stories and verify page data loads from MSW.
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 
 ## A6 — RTK Query tests, validation, and cleanup
 
 - [x] Run `cd web && pnpm -r typecheck`.
 - [ ] Run `cd web && pnpm -r test` if tests are configured and stable.
-- [ ] Run relevant user-site Storybook smoke checks.
-- [ ] Remove `@tanstack/react-query` dependencies after migration if no longer used.
-- [ ] Remove React Query devtools if no longer used.
+- [x] Run relevant user-site Storybook smoke checks.
+- [x] Remove `@tanstack/react-query` dependencies after migration if no longer used.
+- [x] Remove React Query devtools if no longer used.
 - [ ] Update documentation and package READMEs.
-- [ ] Commit RTK/types migration in small logical commits.
+- [x] Commit RTK/types migration in small logical commits.
 
 ## A7 — RTK Query optional compatibility and follow-up
 
-- [ ] Add compatibility wrapper hooks preserving current names (`useUpcomingShows`, etc.) if page migration should be incremental.
+- [x] Add compatibility wrapper hooks preserving current names (`useUpcomingShows`, etc.) if page migration should be incremental.
 - [ ] Add generated schema or validation layer if backend contracts are unstable.
 - [ ] Add API error normalizer tests.
 - [ ] Consider code generation from OpenAPI/protobuf later.
