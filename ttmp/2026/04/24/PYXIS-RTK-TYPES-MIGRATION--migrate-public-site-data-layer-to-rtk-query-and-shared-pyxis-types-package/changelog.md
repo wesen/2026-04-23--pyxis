@@ -17,4 +17,7 @@
 - Extracted `SafetyNote` static inline styles into `web/packages/pyxis-components/src/public/SafetyNote/SafetyNote.css`.
 - Added a `SafetyNote` Storybook theme override story using component-local CSS variables.
 - Validated `SafetyNote` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../safety-note-default.css-visual-diff.yml`; current pixel diff remains `9.2839% | 2855/30752` with CSS differences limited to box-sizing/font-family.
+- Extracted `ArchiveStats` static inline styles into `web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.css`.
+- Added `ArchiveStats` part selectors for `item`, `value`, and `label`, plus theme/narrow Storybook stories.
+- Validated `ArchiveStats` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-stats-default.css-visual-diff.yml`; current pixel diff is `7.0987% | 4634/65280`, with root CSS diff reduced to a 1px height difference.
 

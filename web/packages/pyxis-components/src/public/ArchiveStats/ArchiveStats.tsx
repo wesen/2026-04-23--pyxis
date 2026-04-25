@@ -1,5 +1,7 @@
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
 import type { ArchiveStats as ArchiveStatsData } from '../../mocks/types';
+import './ArchiveStats.css';
 
 export type ArchiveStatsProps = {
   stats: ArchiveStatsData;
@@ -15,42 +17,22 @@ export const ArchiveStats = ({ stats, className }: ArchiveStatsProps) => {
   ];
 
   return (
-    <div
-      {...pyxisPart('archive-stats')}
-      className={className}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: 32,
-        padding: '18px 0',
-        borderTop: '1px solid #EAE7E0',
-        borderBottom: '1px solid #EAE7E0',
-        color: '#1F1E1C',
-        boxSizing: 'content-box',
-      }}
-    >
+    <div {...pyxisPart('archive-stats')} className={clsx('pyxis-archive-stats', className)}>
       {items.map((item) => (
-        <div key={item.label}>
+        <div
+          key={item.label}
+          className="pyxis-archive-stats__item"
+          {...pyxisPart('archive-stats', 'item')}
+        >
           <div
-            style={{
-              fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-              fontSize: 34,
-              fontWeight: 600,
-              color: '#C8270D',
-              letterSpacing: '-0.02em',
-              fontVariantNumeric: 'tabular-nums',
-            }}
+            className="pyxis-archive-stats__value"
+            {...pyxisPart('archive-stats', 'value')}
           >
             {item.value}
           </div>
           <div
-            style={{
-              fontSize: 11,
-              color: '#8E887E',
-              letterSpacing: '.12em',
-              textTransform: 'uppercase',
-              marginTop: 2,
-            }}
+            className="pyxis-archive-stats__label"
+            {...pyxisPart('archive-stats', 'label')}
           >
             {item.label}
           </div>

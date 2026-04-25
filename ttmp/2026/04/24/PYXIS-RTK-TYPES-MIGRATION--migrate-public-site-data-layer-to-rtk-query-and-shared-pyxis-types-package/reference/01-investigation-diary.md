@@ -247,3 +247,36 @@ font-family: Inter, system-ui, ... vs Inter, ...
 ```
 
 This suggests the extraction did not introduce obvious CSS property drift in the compared properties, but the existing pixel diff still warrants later tuning if `SafetyNote` needs accepted/near-exact parity.
+
+
+## Step 5: Extract `ArchiveStats` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.css`.
+- Moved the root grid, border, spacing, stat value, and label styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `item`, `value`, and `label`.
+- Updated `ArchiveStats.tsx` to self-import CSS and use `clsx('pyxis-archive-stats', className)`.
+- Added `ThemeOverride` and `Narrow` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-stats-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 7.0987% | 4634/65280
+root      7.0987% | 4634/65280
+```
+
+CSS diff is down to:
+
+```text
+height: 58px vs 57px
+```
+
+This is a small residual layout difference after CSS extraction. I left it as a documented follow-up rather than forcing a magic 1px adjustment into the first architecture cleanup pass.
