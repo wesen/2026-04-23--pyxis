@@ -50,3 +50,13 @@ Step 9: Finished Phase 6C visual improvement runbook with compact-output, stop-w
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Central doc pointer
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md — Runbook for future pyxis-app visual tuning
 
+
+## 2026-04-25
+
+Step 10: Hardened pyxis-app theme tokens before Phase 7 and validated unchanged MetricCard/dashboard-metrics review-band diffs (commit fba5369)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-09-token-hardening — Dashboard metrics validation artifacts
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/styles/app-tokens.css — Shared variables for surfaces
+

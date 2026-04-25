@@ -42,10 +42,18 @@ RelatedFiles:
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
       Note: RTK Query app API slice and hooks
+    - Path: web/packages/pyxis-app/src/components/atoms/StatusDot.css
+      Note: Centralized status colors/rings through CSS variables
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
+    - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
+      Note: Replaced local surface/status values with app tokens
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
       Note: Initial Phase 5-6 staff app organisms and page composition components
+    - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
+      Note: Replaced local dark-surface colors/shadows/radii with app tokens
+    - Path: web/packages/pyxis-app/src/styles/app-tokens.css
+      Note: Expanded cohesive app theme variables before Phase 7 (commit fba5369)
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -54,6 +62,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
