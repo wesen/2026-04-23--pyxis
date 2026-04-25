@@ -630,3 +630,30 @@ root      0.0000% | 0/83032
 ```
 
 This was an exact pixel-parity extraction.
+
+
+## Step 18: Extract `ShowDetailHeader` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ShowDetailHeader/ShowDetailHeader.css`.
+- Moved meta, title, and description styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `meta`, `title`, and `description`.
+- Updated `ShowDetailHeader.tsx` to self-import CSS and use `clsx('pyxis-show-detail-header', className)`.
+- Added `LongTitle` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/show-detail-header-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/70200
+root      0.0000% | 0/70200
+```
+
+This was an exact pixel-parity extraction.

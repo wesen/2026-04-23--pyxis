@@ -155,7 +155,7 @@ Start here to establish the pattern before touching large organisms.
 ## B4 — Extract CSS for show-detail and booking components
 
 - [x] Extract `PublicPageHeader` styles into `PublicPageHeader.css`.
-- [ ] Extract `ShowDetailHeader` styles into `ShowDetailHeader.css`.
+- [x] Extract `ShowDetailHeader` styles into `ShowDetailHeader.css`.
 - [ ] Extract `ShowMetaStrip` styles into `ShowMetaStrip.css`.
 - [ ] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
 - [ ] Extract `BookingForm` styles into `BookingForm.css`.

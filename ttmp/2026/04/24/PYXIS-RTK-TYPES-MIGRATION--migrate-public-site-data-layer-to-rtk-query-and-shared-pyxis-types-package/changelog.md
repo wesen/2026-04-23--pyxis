@@ -61,4 +61,7 @@
 - Started B4 detail/booking extraction by extracting `PublicPageHeader` styles into `web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css`.
 - Added part selectors for `kicker`, `title`, and `divider`, plus long-title and theme override Storybook stories.
 - Validated `PublicPageHeader` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../public-page-header-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/110424`.
+- Extracted `ShowDetailHeader` styles into `web/packages/pyxis-components/src/public/ShowDetailHeader/ShowDetailHeader.css`.
+- Added part selectors for `meta`, `title`, and `description`, plus long-title and theme override Storybook stories.
+- Validated `ShowDetailHeader` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-detail-header-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/70200`.
 
