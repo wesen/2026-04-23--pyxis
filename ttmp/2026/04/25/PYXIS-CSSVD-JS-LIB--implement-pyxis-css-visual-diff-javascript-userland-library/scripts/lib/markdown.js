@@ -83,6 +83,13 @@ function renderCompareAllSummary(suite) {
   lines.push('- Page count: ' + (suite.pageCount || 0))
   lines.push('- Section count: ' + (suite.sectionCount || rows.length))
   lines.push('- Max changed percent: ' + fixedPercent(suite.maxChangedPercent))
+  if (suite.mode) lines.push('- Mode: `' + suite.mode + '`')
+  if (suite.policy) {
+    lines.push('- Policy status: `' + (suite.policy.ok ? 'pass' : 'fail') + '`')
+    if (suite.policy.maxChangedPercent != null) lines.push('- Max changed percent threshold: `' + suite.policy.maxChangedPercent + '`')
+    if (suite.policy.maxPolicyBand) lines.push('- Max policy band: `' + suite.policy.maxPolicyBand + '`')
+    lines.push('- Worst classification: `' + (suite.policy.worstClassification || '') + '`')
+  }
   lines.push('')
   lines.push('## Classification counts')
   lines.push('')
@@ -92,6 +99,16 @@ function renderCompareAllSummary(suite) {
     lines.push('| ' + esc(key) + ' | ' + suite.classificationCounts[key] + ' |')
   })
   lines.push('')
+  if (suite.policy && suite.policy.failures && suite.policy.failures.length) {
+    lines.push('## Policy failures')
+    lines.push('')
+    lines.push('| Page | Section | Type | Actual | Expected |')
+    lines.push('| --- | --- | --- | --- | --- |')
+    suite.policy.failures.forEach(function (failure) {
+      lines.push('| ' + [failure.page, failure.section, failure.type, failure.actual, failure.expected].map(esc).join(' | ') + ' |')
+    })
+    lines.push('')
+  }
   lines.push('## Section results')
   lines.push('')
   lines.push(renderPixelDiffTable(rows))

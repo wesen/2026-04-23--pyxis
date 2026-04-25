@@ -19,6 +19,9 @@ Summary: Generated suite summary from `pyxis pages compare-all`.
 - Page count: 5
 - Section count: 13
 - Max changed percent: 66.8566%
+- Mode: `authoring`
+- Policy status: `pass`
+- Worst classification: `major-mismatch`
 
 ## Classification counts
 

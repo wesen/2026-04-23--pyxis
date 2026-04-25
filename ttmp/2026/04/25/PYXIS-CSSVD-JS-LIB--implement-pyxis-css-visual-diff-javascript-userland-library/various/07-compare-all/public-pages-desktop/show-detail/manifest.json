@@ -3,8 +3,8 @@
   "title": "Pyxis public page comparison: show-detail desktop",
   "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail",
   "artifact_root": "artifacts",
-  "created_at": "2026-04-25T20:03:22.728263771Z",
-  "updated_at": "2026-04-25T20:03:29.863122109Z",
+  "created_at": "2026-04-25T20:43:31.729493766Z",
+  "updated_at": "2026-04-25T20:43:39.694740423Z",
   "targets": [
     {
       "slug": "page",
@@ -144,7 +144,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:28.122892672Z"
+      "recorded_at": "2026-04-25T20:43:38.267057093Z"
     },
     {
       "target": {
@@ -279,7 +279,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:29.863120877Z"
+      "recorded_at": "2026-04-25T20:43:39.694739462Z"
     }
   ],
   "summary": {

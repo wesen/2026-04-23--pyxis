@@ -1,0 +1,103 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "root",
+      "name": "id"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 131,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "left": {
+      "height": 1558.03125,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 1689.03125,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 1558.03125,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "archive-page",
+    "selector": "#root",
+    "url": "http://localhost:7070/standalone/public/archive.html",
+    "visible": true
+  },
+  "name": "archive-page",
+  "pixel": {
+    "changedPercent": 6.651092748474785,
+    "changedPixels": 103350,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_only.png",
+    "normalizedHeight": 1689,
+    "normalizedWidth": 920,
+    "threshold": 30,
+    "totalPixels": 1553880
+  },
+  "right": {
+    "bounds": {
+      "height": 1689.03125,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "archive-page",
+    "selector": "[data-story-frame='pyxis-page-shell']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(0, 0, 0)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    }
+  ],
+  "text": {
+    "changed": false
+  }
+}

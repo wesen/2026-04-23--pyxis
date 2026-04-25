@@ -89,12 +89,13 @@
 
 - [x] Implement `pyxis pages compare-page <page>`.
 - [x] Implement `pyxis pages compare-all`.
-- [ ] Support `--mode authoring|ci`.
-- [ ] Support `--maxChangedPercent` or policy band failure thresholds.
+- [x] Support `--mode authoring|ci` for `compare-all`.
+- [x] Support `--maxChangedPercent` and `--maxPolicyBand` policy thresholds for `compare-all`.
 - [x] Generate aggregate JSON report for one page (`compare-page-output.json`).
 - [x] Generate catalog Markdown report for one page (`01-catalog-index.md`).
 - [x] Add smoke script `scripts/09-smoke-compare-page-archive.sh`.
 - [x] Add smoke scripts `scripts/10-smoke-compare-all-archive-filter.sh` and `scripts/11-run-compare-all-public-pages.sh`.
+- [x] Add smoke script `scripts/12-smoke-compare-all-ci-policy-fail.sh`.
 - [x] Validate all current desktop page sections run from registry. (5 pages / 13 sections.)
 - [x] Record results in diary.
 

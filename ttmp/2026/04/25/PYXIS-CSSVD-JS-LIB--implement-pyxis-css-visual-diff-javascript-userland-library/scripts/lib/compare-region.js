@@ -154,10 +154,37 @@ function comparisonRow(target, section, outDir, threshold, summary, json, writte
   })
 }
 
-function ensureDocmgrMarkdown(path, title) {
+function dirname(path) {
+  return String(path || '').replace(/\/[^/]*$/g, '')
+}
+
+async function ensureDir(path) {
+  if (!path) return path
+  if (fs.mkdir) {
+    await fs.mkdir(path, { recursive: true })
+  }
+  return path
+}
+
+async function readText(path) {
+  if (fs.readFile) return String(await fs.readFile(path, 'utf8'))
+  return String(fs.readFileSync(path))
+}
+
+async function writeText(path, content) {
+  await ensureDir(dirname(path))
+  if (fs.writeFile) {
+    await fs.writeFile(path, content)
+  } else {
+    fs.writeFileSync(path, content)
+  }
+  return path
+}
+
+async function ensureDocmgrMarkdown(path, title) {
   if (!path) return path
   try {
-    var content = String(fs.readFileSync(path))
+    var content = await readText(path)
     if (content.indexOf('---\n') === 0) return path
     var frontmatter = [
       '---',
@@ -176,7 +203,7 @@ function ensureDocmgrMarkdown(path, title) {
       '---',
       '',
     ].join('\n')
-    fs.writeFileSync(path, frontmatter + content)
+    await writeText(path, frontmatter + content)
   } catch (err) {
     // Best-effort wrapper; comparison data is still returned if this fails.
   }
@@ -217,7 +244,7 @@ async function compareSection(pageName, sectionName, options) {
       attributes: options.attributes || DEFAULT_ATTRIBUTES,
     })
     var written = await comparison.artifacts.write(outDir, ['json', 'markdown'])
-    ensureDocmgrMarkdown(written.markdown || (outDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
+    await ensureDocmgrMarkdown(written.markdown || (outDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
     var summary = comparison.summary()
     var json = comparison.toJSON ? comparison.toJSON() : summary
     var bounds = summary.bounds || (comparison.bounds && comparison.bounds.diff ? comparison.bounds.diff() : null)
@@ -293,7 +320,7 @@ async function comparePage(pageName, options) {
         attributes: options.attributes || DEFAULT_ATTRIBUTES,
       })
       var written = await comparison.artifacts.write(artifactDir, ['json', 'markdown'])
-      ensureDocmgrMarkdown(written.markdown || (artifactDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
+      await ensureDocmgrMarkdown(written.markdown || (artifactDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
       catalog.record(comparison, {
         slug: section.name,
         name: target.page + ' ' + section.name,
@@ -307,7 +334,7 @@ async function comparePage(pageName, options) {
     }
     var manifestPath = await catalog.writeManifest()
     var indexPath = await catalog.writeIndex()
-    ensureDocmgrMarkdown(indexPath, 'Generated comparison catalog for ' + target.page)
+    await ensureDocmgrMarkdown(indexPath, 'Generated comparison catalog for ' + target.page)
     return [{
       page: target.page,
       variant: target.variant,
@@ -357,23 +384,35 @@ async function compareAll(options) {
     rows = rows.concat(run.sections || [])
   }
   rows = policies.sortByChangedPercentDesc(rows)
+  var policy = policies.passesPolicy(rows, {
+    maxChangedPercent: options.maxChangedPercent,
+    maxPolicyBand: options.maxPolicyBand || '',
+  })
+  policy.maxChangedPercent = policies.normalizeMaxChangedPercent(options.maxChangedPercent)
+  policy.maxPolicyBand = options.maxPolicyBand || ''
   var suite = {
     variant: variant,
+    mode: options.mode || 'authoring',
     outDir: outDir,
     pageCount: pageRuns.length,
     sectionCount: rows.length,
     maxChangedPercent: maxChangedPercent(rows),
     classificationCounts: countByClassification(rows),
     acceptedDifferenceCount: rows.reduce(function (count, row) { return count + (row.acceptedDifferenceCount || 0) }, 0),
+    policy: policy,
     pages: pageRuns,
     rows: rows,
   }
   var jsonPath = outDir.replace(/\/+$/g, '') + '/compare-all-output.json'
   var markdownPath = outDir.replace(/\/+$/g, '') + '/01-suite-summary.md'
-  fs.writeFileSync(jsonPath, JSON.stringify([suite], null, 2))
-  fs.writeFileSync(markdownPath, markdown.renderCompareAllSummary(suite))
+  await ensureDir(outDir)
+  await writeText(jsonPath, JSON.stringify([suite], null, 2))
+  await writeText(markdownPath, markdown.renderCompareAllSummary(suite))
   suite.jsonPath = jsonPath
   suite.markdownPath = markdownPath
+  if ((options.mode || 'authoring') === 'ci' && !policy.ok) {
+    throw new Error('compare-all policy failed: ' + policy.failures.length + ' failure(s); wrote ' + jsonPath + ' and ' + markdownPath)
+  }
   return [suite]
 }
 

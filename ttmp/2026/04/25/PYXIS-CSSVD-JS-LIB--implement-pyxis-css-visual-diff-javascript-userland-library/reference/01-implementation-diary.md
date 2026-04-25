@@ -1752,3 +1752,170 @@ Validate full suite:
 ```bash
 ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/11-run-compare-all-public-pages.sh
 ```
+
+
+## Step 14: Restore fs-backed report writing and add CI policy thresholds
+
+The user paused the previous direction and reported that css-visual-diff now explicitly enables `require("fs")` for repository-scanned JS verbs after the go-go-goja host-module change. That changes the local design again: instead of avoiding `fs.mkdir(...)` inside verbs, Pyxis should use the now-supported runtime `fs` API directly.
+
+### Prompt Context
+
+**User prompt (verbatim):** "hold on, we are actually going to add fs support. 
+
+---
+
+ For Pyxis developers — two small follow-up changes landed:                                                
+                                                                                                           
+ 1. JS verbs now explicitly enable require("fs")                                                           
+     - After the go-go-goja update, host-access modules like fs are opt-in.                                
+     - css-visual-diff now explicitly registers fs for repository-scanned JS verbs.                        
+     - This means visual scripts can continue to do:                                                       
+       ```js                                                                                               
+         const fs = require("fs")                                                                          
+         await fs.writeFile("artifacts/report.json", JSON.stringify(data, null, 2))                        
+       ```                                                                                                 
+     - Added an integration test that verifies require("fs"), fs.mkdir, fs.writeFile, and fs.readFile work 
+ inside the actual verb runtime.                                                                           
+ 2. JS verb docs now show objectFromFile for JSON/YAML specs                                                
+     - Repository-scanned verbs can define fields like:                                                    
+       ```js                                                                                               
+         spec: {                                                                                           
+           type: "objectFromFile",                                                                         
+           required: true,                                                                                 
+           help: "JSON/YAML visual spec",                                                                  
+         }                                                                                                 
+       ```                                                                                                 
+     - Then run:                                                                                           
+       ```bash                                                                                             
+         css-visual-diff verbs --repository ./visual-verbs site validate-homepage \                        
+           http://localhost:4100 \                                                                         
+           http://localhost:4200 \                                                                         
+           ./artifacts/visual/homepage/latest \                                                            
+           --spec ./visual.yml \                                                                           
+           --output json                                                                                   
+       ```                                                                                                 
+     - The JS function receives spec as a parsed object, not a filename string:                            
+       ```js                                                                                               
+         async function validateHomepage(leftUrl, rightUrl, outDir, spec) {                                
+           for (const section of spec.sections || []) {                                                    
+             // section.name, section.selector, section.threshold, ...                                     
+           }                                                                                               
+         }                                                                                                 
+       ```                                                                                                 
+     - This is useful for keeping selector inventories, viewport matrices, thresholds, and route lists in  
+ JSON/YAML instead of hard-coding them in JS."
+
+**Assistant interpretation:** Stop treating missing `fs.mkdirSync` as a current runtime limitation and update Pyxis scripts to use the newly supported async `fs` methods.
+
+**Inferred user intent:** Keep local implementation aligned with upstream css-visual-diff runtime behavior and continue the suite-policy work.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Replaced sync-only report helpers in `scripts/lib/compare-region.js` with async helpers around the newly supported verb runtime `fs` methods:
+
+```js
+await fs.mkdir(path, { recursive: true })
+await fs.readFile(path, 'utf8')
+await fs.writeFile(path, content)
+```
+
+- Updated `ensureDocmgrMarkdown(...)` to be async and await `readFile`/`writeFile`.
+- Restored explicit suite output directory creation inside `compareAll(...)`.
+- Added `--mode authoring|ci` to `pyxis pages compare-all`.
+- Added policy thresholds:
+
+```text
+--maxChangedPercent <number>
+--maxPolicyBand <accepted|review|tune-required|major-mismatch>
+```
+
+- Added policy summary/failure rendering to `01-suite-summary.md`.
+- Added smoke script:
+
+```text
+scripts/12-smoke-compare-all-ci-policy-fail.sh
+```
+
+### Why
+
+The previous Step 13 note said the suite should avoid assuming full Node-style `fs` support inside verbs because `fs.mkdirSync` was unavailable. That was correct for the runtime at that moment, but the new css-visual-diff update explicitly registers `fs` and tests async `fs.mkdir`, `fs.writeFile`, and `fs.readFile`. Pyxis should use that supported API instead of retaining a shell-only workaround.
+
+### What worked
+
+Archive authoring smoke passed with fs-backed report writes:
+
+```text
+pageCount: 1
+sectionCount: 2
+mode: authoring
+policy.ok: true
+policy.worstClassification: review
+```
+
+CI policy failure smoke passed: the command wrote reports and then exited non-zero as intended when `--maxChangedPercent 1` was exceeded.
+
+```text
+mode: ci
+policy.ok: false
+policy.failures: 2
+policy.maxChangedPercent: 1
+```
+
+Full public-pages authoring suite still passed:
+
+```text
+pageCount: 5
+sectionCount: 13
+classificationCounts:
+  major-mismatch: 5
+  tune-required: 6
+  review: 2
+policy.ok: true
+worstClassification: major-mismatch
+```
+
+### What didn't work
+
+The first metadata attempt used `default: -1` for `maxChangedPercent`. The repository verb scanner rejected that as an unsupported `unary_expression` metadata literal. I changed the field default to `0` and made `0` mean "disabled".
+
+### What I learned
+
+- Use async `fs` methods in css-visual-diff repository verbs, not `fs.mkdirSync`, if we want to align with the new supported API.
+- Verb metadata defaults need simple literals. Negative numeric literals are parsed as unary expressions and rejected.
+- `authoring` mode should always return reports; `ci` mode can write reports and then fail.
+
+### What was tricky to build
+
+The tricky part was distinguishing pixel threshold (`threshold`, used by image diffing) from policy threshold (`maxChangedPercent`, used by project-level pass/fail). The CLI now exposes both with distinct names.
+
+### What warrants a second pair of eyes
+
+- Whether `--maxPolicyBand` should be a free string as implemented, or whether the verb scanner now supports a better non-empty enum pattern.
+- Whether `compare-page` should also get CI policy options, or whether policy should remain suite-level only.
+- Whether the next step should move page/section inventories to an `objectFromFile` spec rather than inline `registry.js`.
+
+### What should be done in the future
+
+Use the new `objectFromFile` support to prototype spec-driven page suites. That would let Pyxis move selectors, viewports, thresholds, and accepted differences into YAML/JSON while keeping JS focused on execution.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/compare-region.js
+scripts/lib/policies.js
+scripts/lib/markdown.js
+scripts/verbs/pyxis-pages.js
+scripts/12-smoke-compare-all-ci-policy-fail.sh
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/10-smoke-compare-all-archive-filter.sh
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/12-smoke-compare-all-ci-policy-fail.sh
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/11-run-compare-all-public-pages.sh
+```

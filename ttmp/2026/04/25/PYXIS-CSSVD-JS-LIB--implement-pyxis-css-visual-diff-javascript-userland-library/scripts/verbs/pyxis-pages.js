@@ -178,6 +178,9 @@ async function compareAll(values) {
     outDir: values.outDir || '',
     threshold: values.threshold || 30,
     inspect: values.inspect || 'rich',
+    mode: values.mode || 'authoring',
+    maxChangedPercent: values.maxChangedPercent,
+    maxPolicyBand: values.maxPolicyBand || '',
   })
 }
 
@@ -193,5 +196,8 @@ __verb__('compareAll', {
     outDir: { type: 'string', default: '', help: 'Output directory for suite artifacts' },
     threshold: { type: 'int', default: 30, help: 'Pixel threshold 0-255' },
     inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
+    mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail the command after writing reports when policy thresholds are exceeded' },
+    maxChangedPercent: { type: 'float', default: 0, help: 'Optional policy threshold for changed percent; 0 disables it' },
+    maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band: accepted, review, tune-required, or major-mismatch' },
   },
 })

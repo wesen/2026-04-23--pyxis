@@ -3,8 +3,8 @@
   "title": "Pyxis public page comparison: shows desktop",
   "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/shows",
   "artifact_root": "artifacts",
-  "created_at": "2026-04-25T20:03:08.208552799Z",
-  "updated_at": "2026-04-25T20:03:22.688043265Z",
+  "created_at": "2026-04-25T20:43:18.11897972Z",
+  "updated_at": "2026-04-25T20:43:31.683799381Z",
   "targets": [
     {
       "slug": "page",
@@ -174,7 +174,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:14.849001008Z"
+      "recorded_at": "2026-04-25T20:43:24.986046763Z"
     },
     {
       "target": {
@@ -309,7 +309,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:17.504289123Z"
+      "recorded_at": "2026-04-25T20:43:26.777633597Z"
     },
     {
       "target": {
@@ -456,7 +456,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:18.981326877Z"
+      "recorded_at": "2026-04-25T20:43:28.273080751Z"
     },
     {
       "target": {
@@ -591,7 +591,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:20.913203259Z"
+      "recorded_at": "2026-04-25T20:43:30.021786125Z"
     },
     {
       "target": {
@@ -726,7 +726,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:22.688038973Z"
+      "recorded_at": "2026-04-25T20:43:31.683795009Z"
     }
   ],
   "summary": {

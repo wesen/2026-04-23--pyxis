@@ -1,10 +1,10 @@
 {
   "schema_version": "css-visual-diff.catalog.v1",
   "title": "Pyxis public page comparison: archive desktop",
-  "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive",
+  "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive",
   "artifact_root": "artifacts",
-  "created_at": "2026-04-25T20:42:42.563468284Z",
-  "updated_at": "2026-04-25T20:42:49.637689422Z",
+  "created_at": "2026-04-25T20:43:09.911063341Z",
+  "updated_at": "2026-04-25T20:43:17.849462142Z",
   "targets": [
     {
       "slug": "page",
@@ -75,8 +75,8 @@
           "changedPercent": 6.651092748474785,
           "normalizedWidth": 920,
           "normalizedHeight": 1689,
-          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/page/diff_comparison.png",
-          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/page/diff_only.png"
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_only.png"
         },
         "bounds": {
           "changed": true,
@@ -100,9 +100,7 @@
           }
         },
         "text": {
-          "changed": true,
-          "left": "ppxisShowsArchiveBook usAboutSince 2023The archive194shows312artists31residencies0cops calledAll20252024202320258 showsDec 12Winter Solstice RaveElectronicrecap →Nov 29Jake Meginsky · liveNoiserecap →Nov 15Bottom FeedersHardcorerecap →Oct 31The Halloween DroneDronerecap →Oct 18Cecile BelievePoprecap →Sep 27Moor MotherNoise poetryrecap →Sep 06808 Collective vol. 4Houserecap →Aug 23Petals of LoveCommunityrecap →20247 showsDec 20Year-end all-nighterMixedrecap →Nov 08Basement FrequenciesTechnorecap →Oct 26LolinaExperimentalrecap →Sep 14Working Men's ClubPost-punkrecap →Aug 02Wet TennisIndierecap →Jul 13Fire ToolzVaporwaverecap →Jun 22Redroom Inferno IElectronicrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
-          "right": "ppxisShowsArchiveBook usAboutEvery show since day oneArchive12 of 247 showsAll202520242023247shows18,400artists4residencies132cops called20253 showsMar 14Planning for BurialAmbientrecap →Feb 28ActressElectronicrecap →Jan 18ContainerNoiserecap →20247 showsNov 15Burial HexDarkwaverecap →Sep 6Moor MotherExperimentalrecap →Aug 2PharmakonIndustrialrecap →Jul 19CygnusTechnorecap →May 10ActressElectronicrecap →Apr 12Planning for BurialAmbientrecap →Feb 23ContainerNoiserecap →20232 showsDec 8Zola JesusArt Poprecap →Oct 27OrphxEBMrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+          "changed": false
         },
         "styles": [
           {
@@ -134,17 +132,17 @@
         "artifacts": [
           {
             "name": "diffOnly",
-            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/page/diff_only.png",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_only.png",
             "kind": "png"
           },
           {
             "name": "diffComparison",
-            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/page/diff_comparison.png",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/page/diff_comparison.png",
             "kind": "png"
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:42:48.192878021Z"
+      "recorded_at": "2026-04-25T20:43:16.360921063Z"
     },
     {
       "target": {
@@ -193,8 +191,8 @@
           "changedPercent": 7.128146453089244,
           "normalizedWidth": 920,
           "normalizedHeight": 1558,
-          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/content/diff_comparison.png",
-          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/content/diff_only.png"
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/content/diff_only.png"
         },
         "bounds": {
           "changed": true,
@@ -218,9 +216,7 @@
           }
         },
         "text": {
-          "changed": true,
-          "left": "ppxisShowsArchiveBook usAboutSince 2023The archive194shows312artists31residencies0cops calledAll20252024202320258 showsDec 12Winter Solstice RaveElectronicrecap →Nov 29Jake Meginsky · liveNoiserecap →Nov 15Bottom FeedersHardcorerecap →Oct 31The Halloween DroneDronerecap →Oct 18Cecile BelievePoprecap →Sep 27Moor MotherNoise poetryrecap →Sep 06808 Collective vol. 4Houserecap →Aug 23Petals of LoveCommunityrecap →20247 showsDec 20Year-end all-nighterMixedrecap →Nov 08Basement FrequenciesTechnorecap →Oct 26LolinaExperimentalrecap →Sep 14Working Men's ClubPost-punkrecap →Aug 02Wet TennisIndierecap →Jul 13Fire ToolzVaporwaverecap →Jun 22Redroom Inferno IElectronicrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
-          "right": "Every show since day oneArchive12 of 247 showsAll202520242023247shows18,400artists4residencies132cops called20253 showsMar 14Planning for BurialAmbientrecap →Feb 28ActressElectronicrecap →Jan 18ContainerNoiserecap →20247 showsNov 15Burial HexDarkwaverecap →Sep 6Moor MotherExperimentalrecap →Aug 2PharmakonIndustrialrecap →Jul 19CygnusTechnorecap →May 10ActressElectronicrecap →Apr 12Planning for BurialAmbientrecap →Feb 23ContainerNoiserecap →20232 showsDec 8Zola JesusArt Poprecap →Oct 27OrphxEBMrecap →"
+          "changed": false
         },
         "styles": [
           {
@@ -269,17 +265,17 @@
         "artifacts": [
           {
             "name": "diffOnly",
-            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/content/diff_only.png",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/content/diff_only.png",
             "kind": "png"
           },
           {
             "name": "diffComparison",
-            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter/archive/artifacts/content/diff_comparison.png",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail/archive/artifacts/content/diff_comparison.png",
             "kind": "png"
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:42:49.637688566Z"
+      "recorded_at": "2026-04-25T20:43:17.849461452Z"
     }
   ],
   "summary": {

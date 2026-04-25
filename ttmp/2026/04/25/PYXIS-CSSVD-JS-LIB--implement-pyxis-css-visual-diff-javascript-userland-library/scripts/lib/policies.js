@@ -1,3 +1,5 @@
+var POLICY_ORDER = ['accepted', 'review', 'tune-required', 'major-mismatch', 'unknown']
+
 function classifyChangedPercent(percent) {
   var n = Number(percent)
   if (isNaN(n)) return 'unknown'
@@ -25,6 +27,65 @@ function withClassification(row) {
   return copy
 }
 
+function policyRank(name) {
+  var idx = POLICY_ORDER.indexOf(String(name || 'unknown'))
+  return idx === -1 ? POLICY_ORDER.indexOf('unknown') : idx
+}
+
+function worstClassification(rows) {
+  var worst = 'accepted'
+  rows.forEach(function (row) {
+    var classification = row.classification || classifyChangedPercent(row.changedPercent)
+    if (policyRank(classification) > policyRank(worst)) worst = classification
+  })
+  return rows.length ? worst : 'unknown'
+}
+
+function normalizeMaxChangedPercent(value) {
+  if (value === undefined || value === null || value === '') return null
+  var n = Number(value)
+  if (isNaN(n) || n <= 0) return null
+  return n
+}
+
+function passesPolicy(rows, options) {
+  options = options || {}
+  var maxChangedPercent = normalizeMaxChangedPercent(options.maxChangedPercent)
+  var maxPolicyBand = options.maxPolicyBand || ''
+  var failures = []
+  rows.forEach(function (row) {
+    var changed = Number(row.changedPercent || 0)
+    var classification = row.classification || classifyChangedPercent(changed)
+    if (maxChangedPercent !== null && changed > maxChangedPercent) {
+      failures.push({
+        page: row.page,
+        section: row.section,
+        type: 'maxChangedPercent',
+        actual: changed,
+        expected: maxChangedPercent,
+      })
+    }
+    if (maxPolicyBand && policyRank(classification) > policyRank(maxPolicyBand)) {
+      failures.push({
+        page: row.page,
+        section: row.section,
+        type: 'maxPolicyBand',
+        actual: classification,
+        expected: maxPolicyBand,
+      })
+    }
+  })
+  return {
+    ok: failures.length === 0,
+    failures: failures,
+    maxChangedPercent: rows.reduce(function (max, row) {
+      var value = Number(row.changedPercent || 0)
+      return value > max ? value : max
+    }, 0),
+    worstClassification: worstClassification(rows),
+  }
+}
+
 function sortByChangedPercentDesc(rows) {
   return rows.slice().sort(function (a, b) {
     return Number(b.changedPercent || 0) - Number(a.changedPercent || 0)
@@ -32,7 +93,12 @@ function sortByChangedPercentDesc(rows) {
 }
 
 module.exports = {
+  POLICY_ORDER: POLICY_ORDER,
   classifyChangedPercent: classifyChangedPercent,
+  policyRank: policyRank,
+  worstClassification: worstClassification,
+  normalizeMaxChangedPercent: normalizeMaxChangedPercent,
+  passesPolicy: passesPolicy,
   acceptedDifferenceSummary: acceptedDifferenceSummary,
   withClassification: withClassification,
   sortByChangedPercentDesc: sortByChangedPercentDesc,

@@ -3,8 +3,8 @@
   "title": "Pyxis public page comparison: about desktop",
   "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about",
   "artifact_root": "artifacts",
-  "created_at": "2026-04-25T20:03:44.774461383Z",
-  "updated_at": "2026-04-25T20:03:54.052367903Z",
+  "created_at": "2026-04-25T20:43:54.410705766Z",
+  "updated_at": "2026-04-25T20:44:02.16817793Z",
   "targets": [
     {
       "slug": "page",
@@ -144,7 +144,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:52.577680712Z"
+      "recorded_at": "2026-04-25T20:44:00.685359342Z"
     },
     {
       "target": {
@@ -279,7 +279,7 @@
           }
         ]
       },
-      "recorded_at": "2026-04-25T20:03:54.052366511Z"
+      "recorded_at": "2026-04-25T20:44:02.168176852Z"
     }
   ],
   "summary": {
