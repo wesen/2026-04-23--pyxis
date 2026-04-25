@@ -30,7 +30,11 @@ The reviewed public-page suite spec is:
 prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
 ```
 
-`specs/public-pages.desktop.visual.js` is a CommonJS mirror used by registry-backed ergonomic verbs in the Goja runtime. Keep the YAML spec as the reviewed source of truth and regenerate the JS mirror after spec edits.
+`specs/public-pages.desktop.visual.js` is a CommonJS mirror used by registry-backed ergonomic verbs in the Goja runtime. Keep the YAML spec as the reviewed source of truth and regenerate the JS mirror after spec edits:
+
+```bash
+prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py
+```
 
 ## Repository-scanned verbs
 

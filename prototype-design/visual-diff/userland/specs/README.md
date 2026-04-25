@@ -18,7 +18,11 @@ public-pages.desktop.visual.js
 
 This CommonJS file mirrors the YAML spec for registry-backed ergonomic verbs that need synchronous access to the default suite in the Goja runtime.
 
-Do not edit the JS mirror by hand unless you are also updating the YAML source. Prefer regenerating it from the YAML after spec edits.
+Do not edit the JS mirror by hand. Regenerate it from the YAML after spec edits:
+
+```bash
+prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py
+```
 
 ## Schema
 

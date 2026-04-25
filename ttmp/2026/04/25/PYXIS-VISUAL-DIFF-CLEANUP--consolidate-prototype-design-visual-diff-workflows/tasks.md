@@ -50,6 +50,8 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 - [x] Add stable `data-page` / `data-section` selectors to public prototypes where missing.
 - [x] Update visual suite spec selectors to use stable selectors.
 - [x] Validate Shows semantic diagnostics before and after selector changes.
+- [x] Refresh public-page `baselineDiffs` after selector stabilization.
+- [x] Add a spec-mirror refresh script to prevent YAML/CommonJS drift.
 - [ ] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
 
 ## Phase 5 — Script and docs cleanup

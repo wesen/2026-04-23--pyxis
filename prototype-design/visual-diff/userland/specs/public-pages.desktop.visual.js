@@ -1,5 +1,5 @@
 // Generated mirror of public-pages.desktop.visual.yml for registry-backed ergonomic verbs.
-// Keep the YAML spec as the reviewed source of truth; regenerate this module after spec edits.
+// Keep the YAML spec as the reviewed source of truth; run scripts/refresh-spec-mirrors.py after spec edits.
 
 module.exports = {
   "schemaVersion": "pyxis.visual-suite.v1",
@@ -45,11 +45,11 @@ module.exports = {
       "prototypePath": "/standalone/public/shows.html",
       "storyId": "public-site-pages--shows-desktop",
       "baselineDiffs": {
-        "page": 50.5245,
-        "content": 49.094,
-        "header": 51.0775,
-        "shows-list": 66.8566,
-        "mailing-list": 51.2191
+        "shows-list": 66.0368,
+        "content": 52.4196,
+        "page": 46.3495,
+        "mailing-list": 9.9766,
+        "header": 7.2648
       },
       "sections": [
         {
@@ -86,8 +86,8 @@ module.exports = {
       "prototypePath": "/standalone/public/detail.html",
       "storyId": "public-site-pages--show-detail-desktop",
       "baselineDiffs": {
-        "page": 18.5282,
-        "content": 24.4647
+        "content": 30.0792,
+        "page": 18.5282
       },
       "sections": [
         {
@@ -109,8 +109,8 @@ module.exports = {
       "prototypePath": "/standalone/public/archive.html",
       "storyId": "public-site-pages--archive-desktop",
       "baselineDiffs": {
-        "page": 6.6511,
-        "content": 7.1281
+        "content": 7.2126,
+        "page": 6.6511
       },
       "sections": [
         {
@@ -132,8 +132,8 @@ module.exports = {
       "prototypePath": "/standalone/public/book.html",
       "storyId": "public-site-pages--book-desktop",
       "baselineDiffs": {
-        "page": 12.1006,
-        "content": 14.5896
+        "content": 16.9306,
+        "page": 12.1006
       },
       "sections": [
         {
@@ -155,8 +155,8 @@ module.exports = {
       "prototypePath": "/standalone/public/about.html",
       "storyId": "public-site-pages--about-desktop",
       "baselineDiffs": {
-        "page": 18.2795,
-        "content": 20.4334
+        "content": 20.5467,
+        "page": 18.2795
       },
       "sections": [
         {

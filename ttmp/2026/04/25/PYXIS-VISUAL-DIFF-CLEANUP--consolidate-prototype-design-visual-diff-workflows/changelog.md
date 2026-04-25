@@ -30,3 +30,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Committed public-page native config deletion.
 - Stabilized public prototype selectors by adding `data-page` to the shell, Shows section selectors, a prototype mailing-list CTA counterpart, and matching visual-suite selectors; validated Shows diagnostics and Archive spec smoke.
 - Committed public-page selector stabilization.
+- Refreshed public-page visual suite baselines after selector stabilization and added `scripts/refresh-spec-mirrors.py` to regenerate CommonJS mirrors from YAML specs.
