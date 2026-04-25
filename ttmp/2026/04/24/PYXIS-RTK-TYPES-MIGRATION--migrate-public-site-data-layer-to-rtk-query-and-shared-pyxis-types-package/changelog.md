@@ -109,4 +109,6 @@
 - Updated `docs/playbooks/05-bottom-up-component-visual-parity.md` with CSS extraction/theming workflow, Storybook theme story guidance, parity-map styleArchitecture guidance, and css-visual-diff improvement wishlist.
 - Started Track A. Added the `pyxis-types` workspace package with public API/domain contracts, package exports, typecheck/build scripts, workspace path mappings, and workspace dependencies from `pyxis-components` and `pyxis-user-site`.
 - Ran baseline `cd web && pnpm -r typecheck`, `pnpm --filter pyxis-types typecheck`, and `pnpm --filter pyxis-types build`. Fixed the initial build failure by overriding inherited `allowImportingTsExtensions` for the emitting package build.
+- Completed Track A2 type migration. Replaced duplicated user-site API type definitions and component mock type definitions with compatibility re-exports from `pyxis-types`; updated public components and MSW handlers to import canonical types from `pyxis-types`; kept compatibility files temporarily for exported import paths.
+- Removed initial `pyxis-types` TypeScript path mappings so consumers resolve the package through its workspace package metadata. Forced the generated `pyxis-types/dist` files into git so clean workspace typechecks can resolve the package before an explicit build step.
 

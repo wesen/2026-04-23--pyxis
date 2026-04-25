@@ -1096,3 +1096,32 @@ Fix: set `allowImportingTsExtensions: false` in `web/packages/pyxis-types/tsconf
 ### Result
 
 `pyxis-types` typecheck and build now pass.
+
+
+## Step 34: Track A2 — migrate duplicated types to `pyxis-types`
+
+### What I did
+
+- Replaced `web/packages/pyxis-user-site/src/api/types.ts` with compatibility re-exports from `pyxis-types`.
+- Replaced `web/packages/pyxis-components/src/mocks/types.ts` with compatibility re-exports from `pyxis-types`.
+- Updated `web/packages/pyxis-components/src/mocks/handlers.ts` to import public API types directly from `pyxis-types`.
+- Updated public components that imported from `../../mocks/types` to import from `pyxis-types`.
+- Updated `Archive.tsx` to import `ArchivedShow` directly from `pyxis-types`.
+- Ran the import scan for `mocks/types` / `api/types`; only the compatibility-file comment remains.
+
+### Commands
+
+```bash
+rg "mocks/types|api/types" web/packages -g'*.ts' -g'*.tsx'
+cd web && pnpm -r typecheck
+```
+
+### Issue encountered
+
+Direct TypeScript path mappings from `pyxis-types` to `packages/pyxis-types/src` made `pyxis-components` typecheck fail with `TS6059` because the imported source files were outside `pyxis-components` `rootDir`.
+
+Fix: remove the temporary `pyxis-types` path mappings and let TypeScript resolve the workspace package through its package metadata. Because that package metadata points to `dist`, the generated `pyxis-types/dist` files are committed intentionally so a clean checkout can typecheck before a separate package build.
+
+### Result
+
+`cd web && pnpm -r typecheck` passes after the migration.

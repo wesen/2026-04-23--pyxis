@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { Show } from '../../mocks/types';
+import type { Show } from 'pyxis-types';
 import './PubHero.css';
 
 export type PubHeroProps = {

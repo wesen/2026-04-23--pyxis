@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useArchive, useArchiveStats } from '../api/hooks';
 import { Input, ArchiveStats } from 'pyxis-components';
-import type { ArchivedShow } from '../api/types';
+import type { ArchivedShow } from 'pyxis-types';
 
 export function Archive() {
   const [search, setSearch] = useState('');

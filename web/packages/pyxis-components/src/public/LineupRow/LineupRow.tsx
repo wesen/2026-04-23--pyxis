@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { LineupEntry } from '../../mocks/types';
+import type { LineupEntry } from 'pyxis-types';
 import './LineupRow.css';
 
 export type LineupRowProps = {

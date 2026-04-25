@@ -3,12 +3,12 @@
 
 import { http, HttpResponse } from 'msw';
 import type {
-  Show,
-  ArchivedShow,
   ArchiveStats,
-  BookingFormData,
+  ArchivedShow,
   BookingConfirmation,
-} from './types';
+  BookingFormData,
+  Show,
+} from 'pyxis-types';
 
 /* ─── Seed data ─────────────────────────────────────── */
 

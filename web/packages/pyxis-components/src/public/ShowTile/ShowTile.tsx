@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { Show } from '../../mocks/types';
+import type { Show } from 'pyxis-types';
 import { Poster, type PosterKind } from '../Poster';
 import './ShowTile.css';
 

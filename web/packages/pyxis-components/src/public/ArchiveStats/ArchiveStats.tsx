@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { ArchiveStats as ArchiveStatsData } from '../../mocks/types';
+import type { ArchiveStats as ArchiveStatsData } from 'pyxis-types';
 import './ArchiveStats.css';
 
 export type ArchiveStatsProps = {

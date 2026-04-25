@@ -20,8 +20,6 @@
     "paths": {
       "@pyxis-components": ["./packages/pyxis-components/src"],
       "@pyxis-components/*": ["./packages/pyxis-components/src/*"],
-      "pyxis-types": ["./packages/pyxis-types/src"],
-      "pyxis-types/*": ["./packages/pyxis-types/src/*"],
       "@/*": ["./packages/pyxis-user-site/src/*"]
     }
   },

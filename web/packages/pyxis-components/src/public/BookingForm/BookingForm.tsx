@@ -1,7 +1,7 @@
 import type { FormEvent } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { BookingFormData } from '../../mocks/types';
+import type { BookingFormData } from 'pyxis-types';
 import './BookingForm.css';
 
 export type BookingFormProps = {

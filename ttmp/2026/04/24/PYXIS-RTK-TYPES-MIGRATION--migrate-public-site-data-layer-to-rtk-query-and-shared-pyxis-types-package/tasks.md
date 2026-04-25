@@ -38,14 +38,14 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## A2 — Move duplicated API/domain types to `pyxis-types`
 
-- [ ] Replace `web/packages/pyxis-user-site/src/api/types.ts` definitions with `pyxis-types` imports/re-exports.
-- [ ] Replace `web/packages/pyxis-components/src/mocks/types.ts` definitions with `pyxis-types` imports/re-exports where appropriate.
-- [ ] Keep component-only mock/admin types local only if they are not public API contracts.
-- [ ] Update `web/packages/pyxis-components/src/mocks/handlers.ts` to import public API types from `pyxis-types`.
-- [ ] Update public component props that currently import from `../../mocks/types` to import from `pyxis-types`.
-- [ ] Decide whether to keep compatibility re-export files (`mocks/types.ts`, `api/types.ts`) temporarily.
-- [ ] Run `cd web && pnpm -r typecheck`.
-- [ ] Run `rg "src/api/types|mocks/types" web/packages -g'*.ts' -g'*.tsx'` and decide which imports should remain.
+- [x] Replace `web/packages/pyxis-user-site/src/api/types.ts` definitions with `pyxis-types` imports/re-exports.
+- [x] Replace `web/packages/pyxis-components/src/mocks/types.ts` definitions with `pyxis-types` imports/re-exports where appropriate.
+- [x] Keep component-only mock/admin types local only if they are not public API contracts.
+- [x] Update `web/packages/pyxis-components/src/mocks/handlers.ts` to import public API types from `pyxis-types`.
+- [x] Update public component props that currently import from `../../mocks/types` to import from `pyxis-types`.
+- [x] Decide whether to keep compatibility re-export files (`mocks/types.ts`, `api/types.ts`) temporarily.
+- [x] Run `cd web && pnpm -r typecheck`.
+- [x] Run `rg "src/api/types|mocks/types" web/packages -g'*.ts' -g'*.tsx'` and decide which imports should remain.
 
 ## A3 — Add Redux Toolkit and RTK Query infrastructure
 
@@ -82,7 +82,7 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## A6 — RTK Query tests, validation, and cleanup
 
-- [ ] Run `cd web && pnpm -r typecheck`.
+- [x] Run `cd web && pnpm -r typecheck`.
 - [ ] Run `cd web && pnpm -r test` if tests are configured and stable.
 - [ ] Run relevant user-site Storybook smoke checks.
 - [ ] Remove `@tanstack/react-query` dependencies after migration if no longer used.

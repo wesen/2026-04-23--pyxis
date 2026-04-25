@@ -1,5 +1,5 @@
 import { pyxisPart } from '../../utils/parts';
-import type { Show } from '../../mocks/types';
+import type { Show } from 'pyxis-types';
 
 export type PubShowRowProps = {
   show: Show;

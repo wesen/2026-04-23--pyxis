@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { Show } from '../../mocks/types';
+import type { Show } from 'pyxis-types';
 import './TicketStub.css';
 
 export type TicketStubProps = {
