@@ -1,7 +1,7 @@
 [
 {
-  "artifactJson": "",
-  "artifactMarkdown": "",
+  "artifactJson": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/compare.json",
+  "artifactMarkdown": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/compare.md",
   "bounds": {
     "changed": true,
     "delta": {
@@ -27,12 +27,14 @@
   "changedPixels": 102172,
   "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/diff_comparison.png",
   "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/diff_only.png",
+  "leftRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/left_region.png",
   "leftSelector": "#root \u003e *",
   "leftUrl": "http://localhost:7070/standalone/public/archive.html",
   "normalizedHeight": 1558,
   "normalizedWidth": 920,
   "outDir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content",
   "page": "archive",
+  "rightRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/right_region.png",
   "rightSelector": "[data-page='archive']",
   "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
   "section": "content",
@@ -84,6 +86,10 @@
   "textChanged": null,
   "threshold": 30,
   "totalPixels": 1433360,
-  "variant": "desktop"
+  "variant": "desktop",
+  "writtenArtifacts": [
+    "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/compare.json",
+    "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/05-new-api-compare-section/archive-content/compare.md"
+  ]
 }
 ]

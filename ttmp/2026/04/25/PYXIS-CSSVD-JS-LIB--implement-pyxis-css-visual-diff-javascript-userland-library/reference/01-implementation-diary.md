@@ -1309,3 +1309,160 @@ design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-
 ```
 
 Validate that it does not re-request `cvd.compare.region(...)`, except to state that this request is satisfied.
+
+
+## Step 11: Incorporate completed beta ergonomics follow-up
+
+The user reported that css-visual-diff completed the scoped beta ergonomics follow-up: selector readiness helpers, stable artifact path results, a multi-section catalog example, and collection profile documentation. I updated the Pyxis userland implementation and the clean maintainer request document accordingly.
+
+This means the remaining upstream request list is now much smaller and mostly policy-oriented. The high-priority workflow friction we observed in Pyxis is largely addressed.
+
+### Prompt Context
+
+**User prompt (verbatim):** "We completed the scoped css-visual-diff beta ergonomics follow-up for JavaScript visual workflows.        
+                                                                                                           
+ What landed:                                                                                              
+                                                                                                           
+ 1. Selector readiness helpers                                                                             
+     - Added locator.waitFor(options) as the preferred readiness API.                                      
+     - Added page.waitForSelector(selector, options) as a small convenience wrapper.                       
+     - Supports timeoutMs, pollIntervalMs, visible, and afterWaitMs.                                       
+     - This replaces the awkward previous workaround of using page.prepare(... waitFor ...) just to wait   
+ for Storybook/app selectors.                                                                              
+ 2. Stable artifact path results                                                                           
+     - comparison.artifacts.write(outDir, ["json", "markdown"]) now returns stable keyed paths:            
+           - json                                                                                          
+           - markdown                                                                                      
+           - leftRegion                                                                                    
+           - rightRegion                                                                                   
+           - diffOnly                                                                                      
+           - diffComparison                                                                                
+           - written                                                                                       
+     - This makes project-local CLI wrappers much easier because they can return compact JSON summaries    
+ with direct artifact links.                                                                               
+ 3. Multi-section catalog example                                                                          
+     - Added examples/verbs/compare-page-catalog.js.                                                       
+     - It loads left/right pages once, waits for selectors, compares multiple sections, writes per-section 
+ artifacts, records comparisons into one catalog, and returns JSON suitable for CI or agent use.           
+     - Added a smoke script that validates manifest/index output, per-section PNG/JSON/Markdown artifacts, 
+ and stdout artifact paths.                                                                                
+ 4. Collection profile documentation                                                                       
+     - Documented minimal, rich, and debug profiles based on the actual implementation.                    
+     - Clarified that styleProps and attributes are collection-time filters, not just report filters.      
+     - rich remains the default for diagnostics.                                                           
+     - minimal is recommended for lean/high-volume CI checks.                                              
+     - debug is recommended for one-off investigation because it collects inner HTML, all computed styles, 
+ and all attributes.                                                                                       
+                                                                                                           
+ Explicitly deferred for now:                                                                              
+                                                                                                           
+ - Bounds tolerance API.                                                                                   
+ - CSS/style normalization hooks.                                                                          
+ - Built-in style property presets.                                                                        
+                                                                                                           
+ Those are still plausible future features, but they encode project policy. We intentionally left them out 
+ until beta usage shows repeated patterns that justify shared abstractions."
+
+**Assistant interpretation:** Update our implementation and docs now that the previously requested beta ergonomics landed.
+
+**Inferred user intent:** Keep the Pyxis ticket accurate and stop requesting features that css-visual-diff already implemented.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Updated `scripts/lib/compare-region.js` to use:
+
+```js
+await page.locator(selector).waitFor({
+  timeoutMs: 30000,
+  pollIntervalMs: 100,
+  visible: true,
+  afterWaitMs: 500,
+})
+```
+
+instead of `page.prepare({ waitFor, script: 'void 0' })`.
+
+- Updated `compareSection(...)` to consume the stable return value from:
+
+```js
+const written = await comparison.artifacts.write(outDir, ['json', 'markdown'])
+```
+
+and return direct paths for `json`, `markdown`, `leftRegion`, `rightRegion`, `diffOnly`, `diffComparison`, and `written`.
+
+- Rewrote:
+
+```text
+design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md
+```
+
+so it no longer requests landed features.
+
+- Appended a beta ergonomics update section to:
+
+```text
+reference/02-flexible-javascript-api-evaluation-report.md
+```
+
+### Why
+
+The previous clean request document was already narrower than the original wishlist, but it still requested selector wait helpers, artifact path clarity, multi-section examples, and collection profile docs. Those have now landed, so the document needed another cleanup pass.
+
+### What worked
+
+The Archive content smoke still passes with the exact same pixel result:
+
+```text
+changedPercent: 7.128146453089244
+changedPixels: 102172
+```
+
+The compact JSON row now includes direct artifact fields from the new `artifacts.write(...)` result:
+
+```text
+artifactJson
+artifactMarkdown
+leftRegionPath
+rightRegionPath
+diffOnlyPath
+diffComparisonPath
+writtenArtifacts
+```
+
+### What didn't work
+
+No new runtime failure occurred.
+
+### What I learned
+
+The beta ergonomics update turned several Pyxis userland workarounds into straightforward API calls. The remaining feature requests are no longer blockers; they are potential shared abstractions if beta users repeatedly implement them.
+
+### What was tricky to build
+
+The tricky part was editorial rather than technical: making sure the request document does not keep asking for landed features.
+
+### What warrants a second pair of eyes
+
+Review whether the remaining requests should be shared upstream at all right now, or whether we should wait for more Pyxis compare-page/compare-all usage.
+
+### What should be done in the future
+
+Implement `compare-page` using the now-documented multi-section catalog pattern.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/compare-region.js
+design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md
+reference/02-flexible-javascript-api-evaluation-report.md
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/08-smoke-new-api-compare-section.sh
+```

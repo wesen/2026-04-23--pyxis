@@ -545,3 +545,34 @@ Next implementation steps:
 ## Bottom line
 
 The new API is exactly the right direction. It turns `css-visual-diff` from a CLI with JavaScript wrappers into a scriptable visual comparison toolkit. For Pyxis, it eliminates the biggest architectural blocker and lets the userland library become what it should be: project-specific registry, policy, and reporting glue around solid core browser/image comparison primitives.
+
+
+## Beta ergonomics follow-up update
+
+After this report was first written, css-visual-diff landed the scoped beta ergonomics follow-up for JavaScript visual workflows. The changes directly address the remaining high-priority friction points from the Pyxis experiment:
+
+- `locator.waitFor(options)` and `page.waitForSelector(selector, options)` replace the awkward `page.prepare({ waitFor, script: 'void 0' })` workaround.
+- `comparison.artifacts.write(outDir, ['json', 'markdown'])` now returns stable keyed artifact paths: `json`, `markdown`, `leftRegion`, `rightRegion`, `diffOnly`, `diffComparison`, and `written`.
+- The multi-section catalog example landed as `examples/verbs/compare-page-catalog.js`.
+- The collection profile docs now explain `minimal`, `rich`, and `debug`, and clarify that `styleProps` and `attributes` are collection-time filters.
+
+I updated the Pyxis userland `compare-section` implementation to use `locator.waitFor(...)` and the stable artifact write result. The Archive content smoke still reproduces the same pixel result:
+
+```text
+changedPercent: 7.128146453089244
+changedPixels: 102172
+```
+
+The compact stdout row now includes direct artifact links from the write result:
+
+```text
+artifactJson
+artifactMarkdown
+leftRegionPath
+rightRegionPath
+diffOnlyPath
+diffComparisonPath
+writtenArtifacts
+```
+
+This changes the remaining maintainer requests again: selector readiness, artifact path metadata, collection profile docs, and multi-section catalog examples are now landed. The only remaining plausible future features are policy-ish abstractions: bounds tolerances, CSS/style normalization, style presets, and small docs examples for frontmatter/policy integration.

@@ -18,6 +18,9 @@
 - [x] Verify progress/source uploads exist on reMarkable.
 - [x] Capture newer flexible JavaScript API docs with `scripts/07-capture-new-flexible-js-api-docs.sh`.
 - [x] Store new API experiment scripts in the ticket `scripts/` folder.
+- [x] Update compare-section to use `locator.waitFor(...)`.
+- [x] Update compare-section to use stable `comparison.artifacts.write(...)` returned paths.
+- [x] Rewrite clean maintainer request document after beta ergonomics follow-up landed.
 - [x] Upload flexible JS API evaluation report to reMarkable.
 - [x] Upload flexible JS API experiment source bundle to reMarkable.
 - [x] Verify flexible JS API uploads exist on reMarkable.

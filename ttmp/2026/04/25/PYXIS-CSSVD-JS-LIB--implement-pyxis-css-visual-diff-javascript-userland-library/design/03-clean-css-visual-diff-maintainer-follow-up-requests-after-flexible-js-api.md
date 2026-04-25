@@ -1,42 +1,31 @@
 ---
-Title: Clean css-visual-diff maintainer follow-up requests after flexible JS API
+Title: Clean css-visual-diff maintainer follow-up requests after beta ergonomics update
 Ticket: PYXIS-CSSVD-JS-LIB
 Status: active
 Topics:
-    - frontend
-    - visual-diff
-    - storybook
-    - automation
-    - pyxis
+  - frontend
+  - visual-diff
+  - storybook
+  - automation
+  - pyxis
 DocType: design
 Intent: long-term
 Owners: []
-RelatedFiles:
-    - Path: ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/reference/02-flexible-javascript-api-evaluation-report.md
-      Note: Source evaluation showing cvd.compare.region satisfies the original core primitive request
-    - Path: ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/lib/compare-region.js
-      Note: Integration code that revealed remaining selector wait and artifact schema ergonomics
+RelatedFiles: []
 ExternalSources:
-    - css-visual-diff help javascript-api
-    - css-visual-diff help javascript-verbs
-Summary: Clean maintainer-facing request document containing only the remaining desired css-visual-diff features after cvd.compare.region and the flexible JavaScript API satisfied the original core pixel-compare request.
-LastUpdated: 2026-04-25T09:10:00-04:00
-WhatFor: Use this as the current concise upstream request list for css-visual-diff maintainers.
-WhenToUse: Share this instead of the older request document when discussing follow-up improvements after the flexible JS API landed.
+  - css-visual-diff help javascript-api
+  - css-visual-diff help javascript-verbs
+Summary: "Current maintainer-facing follow-up request list after selector wait helpers, stable artifact write paths, multi-section catalog examples, and collection profile docs landed in css-visual-diff beta."
+LastUpdated: 2026-04-25T09:25:00-04:00
+WhatFor: "Use this as the current concise upstream request list for css-visual-diff maintainers after the beta ergonomics follow-up."
+WhenToUse: "Share this instead of older request documents when discussing remaining css-visual-diff JavaScript workflow improvements."
 ---
 
-
-# Clean css-visual-diff Maintainer Follow-up Requests
+# Clean css-visual-diff Maintainer Follow-up Requests After Beta Ergonomics Update
 
 ## Context
 
-Pyxis uses `css-visual-diff` to compare standalone prototype pages/components against React/Storybook implementations. We originally asked for a JS-callable pixel comparison primitive because our project-local JS verbs could only plan calls to the built-in CLI command:
-
-```bash
-css-visual-diff verbs script compare region ...
-```
-
-The newer flexible JavaScript API now satisfies that core request with:
+Pyxis uses `css-visual-diff` to compare standalone prototype pages/components against React/Storybook implementations. The flexible JavaScript API already satisfied our original core request for JS-callable region comparison through:
 
 ```js
 cvd.compare.region(...)
@@ -44,253 +33,107 @@ cvd.compare.selections(...)
 cvd.image.diff(...)
 ```
 
-We validated `cvd.compare.region(...)` in the Pyxis userland library against Archive content and reproduced the existing baselines exactly:
+A subsequent beta ergonomics follow-up also landed several of our high-priority requests:
+
+1. `locator.waitFor(options)` and `page.waitForSelector(selector, options)`.
+2. Stable keyed paths returned from `comparison.artifacts.write(...)`.
+3. `examples/verbs/compare-page-catalog.js` multi-section catalog example.
+4. Documentation for `minimal`, `rich`, and `debug` collection profiles, including clarification that `styleProps` and `attributes` are collection-time filters.
+
+We validated the first two directly in the Pyxis userland library by updating `pyxis pages compare-section archive content` to use `locator.waitFor(...)` and the stable artifact write result.
+
+Validated output:
 
 ```text
-YAML Archive content:                 7.1281%
-Built-in script compare region smoke: 7.128146453089244%
-New cvd.compare.region userland verb: 7.128146453089244%
-Changed pixels:                       102172
+changedPercent: 7.128146453089244
+changedPixels: 102172
+artifactJson: .../compare.json
+artifactMarkdown: .../compare.md
+leftRegionPath: .../left_region.png
+rightRegionPath: .../right_region.png
+diffOnlyPath: .../diff_only.png
+diffComparisonPath: .../diff_comparison.png
 ```
 
-This document intentionally **does not repeat** the old request for a JS-callable pixel compare primitive. That request is satisfied. The remaining requests are smaller follow-up improvements discovered while using the new API in a real project workflow.
+Therefore this document only contains **remaining** follow-up requests. It intentionally does not request the already-landed features above.
 
 ## Priority summary
 
-| Priority | Request | Why it matters |
-| --- | --- | --- |
-| P0 | Selector wait helper for JS scripts | Prevent Storybook/app readiness races before `cvd.compare.region`. |
-| P0 | Clarify artifact write/report schema | Make generated JSON/Markdown artifacts easier to consume reliably. |
-| P1 | Multi-section comparison/catalog example | Help projects implement page-level workflows with catalogs correctly. |
-| P1 | Comparison artifact metadata for JSON/Markdown writes | Let scripts return paths to all written artifacts without guessing. |
-| P2 | Tolerances for structural/bounds diffs | Reduce noise from tiny expected layout deltas. |
-| P2 | CSS/style normalization hooks | Reduce noise from equivalent CSS representations. |
-| P3 | Built-in style property presets | Improve script readability and reduce verbose computed-style dumps. |
+| Priority | Request | Status | Why it matters |
+| --- | --- | --- | --- |
+| P1 | Bounds tolerance API | Deferred upstream; still useful after beta usage patterns emerge | Helps classify tiny layout jitter vs meaningful drift. |
+| P1 | CSS/style normalization hooks | Deferred upstream; still useful after repeated patterns emerge | Reduces noise from equivalent CSS representations. |
+| P2 | Built-in style property presets | Deferred upstream; policy-ish but may become common | Improves script readability and shared vocabulary. |
+| P2 | Document recommended artifact/frontmatter integration pattern | New smaller docs request | Helps doc-managed workflows avoid generated Markdown validation issues. |
+| P3 | Optional compare-page policy example | New smaller example request | Shows how to layer project policy over the new catalog example. |
 
-## P0: Selector wait helper for JS scripts
+## Landed; no longer requested
 
-### Problem
+These should not be filed as new requests:
 
-When we first switched `pyxis pages compare-section` to `cvd.compare.region(...)`, the comparison sometimes saw the Storybook-side selector as missing:
+### JS-callable pixel comparison primitive
 
-```json
-"right": {
-  "exists": false,
-  "visible": false,
-  "selector": "[data-page='archive']"
-}
-```
-
-The page had loaded, but the meaningful React/MSW/RTK-rendered selector was not ready yet.
-
-We fixed this with `page.prepare(...)`:
+Satisfied by:
 
 ```js
-await page.prepare({
-  type: 'script',
-  waitFor: 'document.querySelector("[data-page=\\"archive\\"]")',
-  waitForTimeoutMs: 30000,
-  script: 'void 0',
-  afterWaitMs: 500,
-})
+cvd.compare.region(...)
+cvd.compare.selections(...)
+cvd.image.diff(...)
 ```
 
-This works, but it is awkward for the common case “wait until this selector exists”. It also required discovering that an empty `script` is invalid and that `script: 'void 0'` is a valid no-op.
+### Selector readiness helper
 
-### Request
-
-Add a dedicated selector wait helper, for example:
+Satisfied by:
 
 ```js
-await page.waitForSelector('[data-page="archive"]', {
+await locator.waitFor({
   timeoutMs: 30000,
-  visible: false,
-  afterWaitMs: 500,
-})
-```
-
-or locator-based:
-
-```js
-await page.locator('[data-page="archive"]').waitFor({
-  timeoutMs: 30000,
+  pollIntervalMs: 100,
   visible: true,
   afterWaitMs: 500,
 })
 ```
 
-### Why it matters
+and:
 
-Most real app comparisons need a page-readiness check before visual comparison. This is especially true for:
-
-- Storybook iframe stories,
-- MSW-backed stories,
-- RTK Query / async data loading,
-- routes that lazy-load components,
-- pages where the root loads before the target section exists.
-
-A selector wait helper would make project scripts shorter and less error-prone.
-
-## P0: Clarify artifact write/report schema
-
-### Problem
-
-`comparison.artifacts.write(outDir, ['json', 'markdown'])` successfully writes:
-
-```text
-compare.json
-compare.md
+```js
+await page.waitForSelector('[data-page="archive"]', {
+  timeoutMs: 30000,
+  visible: true,
+})
 ```
 
-But in our compact wrapper, `comparison.toJSON().artifacts` clearly contained PNG artifact entries such as:
+### Stable artifact write paths
+
+Satisfied by:
+
+```js
+const written = await comparison.artifacts.write(outDir, ['json', 'markdown'])
+```
+
+which now returns keys such as:
 
 ```text
+json
+markdown
+leftRegion
+rightRegion
 diffOnly
 diffComparison
+written
 ```
 
-while the JSON/Markdown artifact paths were not exposed in the same way. Our wrapper therefore had reliable paths for diff PNGs from `pixel`, but blank fields for:
+### Multi-section catalog example
+
+Satisfied by:
 
 ```text
-artifactJson
-artifactMarkdown
+examples/verbs/compare-page-catalog.js
 ```
 
-This is manageable in userland because the filenames are predictable, but it would be cleaner if written artifacts were represented consistently.
+### Collection profile documentation
 
-### Request
-
-Document and/or expose a stable artifact write result. For example:
-
-```js
-const written = await comparison.artifacts.write(outDir, ['json', 'markdown', 'diffComparison'])
-
-// suggested shape
-{
-  json: '.../compare.json',
-  markdown: '.../compare.md',
-  diffComparison: '.../diff_comparison.png',
-  diffOnly: '.../diff_only.png',
-  leftRegion: '.../left_region.png',
-  rightRegion: '.../right_region.png'
-}
-```
-
-Alternatively, ensure `comparison.toJSON().artifacts` includes all generated artifacts after `artifacts.write(...)`.
-
-### Why it matters
-
-Project-local verbs often need to return compact JSON rows containing artifact paths:
-
-```json
-{
-  "changedPercent": 7.1281,
-  "compareJson": ".../compare.json",
-  "compareMarkdown": ".../compare.md",
-  "diffComparison": ".../diff_comparison.png"
-}
-```
-
-Stable artifact metadata avoids filename guessing and makes CI/report integration safer.
-
-## P1: Multi-section comparison and catalog example
-
-### Problem
-
-The new docs include a helpful homepage validation sketch using a loop and `catalog.record(comparison, ...)`. That is the right direction. Projects doing page-level parity need a complete recommended pattern for:
-
-- loading two pages once,
-- comparing multiple sections,
-- writing per-section artifacts,
-- recording comparisons into a catalog,
-- writing `manifest.json` and `index.md`,
-- returning compact stdout JSON for CI/agents.
-
-### Request
-
-Add a complete example/tutorial section that looks like:
-
-```js
-async function comparePage(leftUrl, rightUrl, outDir) {
-  const cvd = require('css-visual-diff')
-  const browser = await cvd.browser()
-  const catalog = cvd.catalog.create({
-    title: 'Public page comparison',
-    outDir,
-    artifactRoot: 'artifacts',
-  })
-
-  const sections = [
-    {
-      name: 'page',
-      leftSelector: '#root',
-      rightSelector: "[data-story-frame='pyxis-page-shell']",
-    },
-    {
-      name: 'content',
-      leftSelector: '#root > *',
-      rightSelector: "[data-page='archive']",
-    },
-  ]
-
-  let leftPage, rightPage
-  try {
-    leftPage = await browser.page(leftUrl, { viewport: { width: 920, height: 1460 }, waitMs: 1000 })
-    rightPage = await browser.page(rightUrl, { viewport: { width: 920, height: 1460 }, waitMs: 1000 })
-
-    const summaries = []
-    for (const section of sections) {
-      await leftPage.locator(section.leftSelector).waitFor({ timeoutMs: 30000 })
-      await rightPage.locator(section.rightSelector).waitFor({ timeoutMs: 30000 })
-
-      const artifactDir = catalog.artifactDir(section.name)
-      const comparison = await cvd.compare.region({
-        name: section.name,
-        left: leftPage.locator(section.leftSelector),
-        right: rightPage.locator(section.rightSelector),
-        outDir: artifactDir,
-        threshold: 30,
-        inspect: 'rich',
-      })
-
-      const written = await comparison.artifacts.write(artifactDir, ['json', 'markdown'])
-      catalog.record(comparison, {
-        slug: section.name,
-        name: section.name,
-        url: leftUrl,
-        selector: section.leftSelector,
-      })
-
-      summaries.push({
-        section: section.name,
-        pixel: comparison.pixel.summary(),
-        artifacts: written,
-      })
-    }
-
-    return {
-      summaries,
-      manifestPath: await catalog.writeManifest(),
-      indexPath: await catalog.writeIndex(),
-      catalog: catalog.summary(),
-    }
-  } finally {
-    if (leftPage) await leftPage.close()
-    if (rightPage) await rightPage.close()
-    await browser.close()
-  }
-}
-```
-
-### Why it matters
-
-This is the workflow most design-system and page-level users will need after the single-section example works.
-
-## P1: Document collection profiles and recommended defaults
-
-### Problem
-
-The new docs list collection profiles:
+Satisfied for:
 
 ```text
 minimal
@@ -298,29 +141,13 @@ rich
 debug
 ```
 
-For real workflows, users need guidance on when each is appropriate and what artifact/performance tradeoffs to expect.
+including the important clarification that `styleProps` and `attributes` are collection-time filters, not just report filters.
 
-### Request
-
-Add a small decision table:
-
-| Profile | Use when | Avoid when |
-| --- | --- | --- |
-| `minimal` | CI only needs existence/bounds/pixels | You need text/style diagnosis |
-| `rich` | default authoring/review mode | very large suites where style extraction is too expensive |
-| `debug` | deep one-off diagnosis | routine CI/page-suite runs |
-
-Also document what style/attribute sets `rich` collects by default, and whether passing `styleProps` / `attributes` narrows collection, comparison, or both.
-
-### Why it matters
-
-Project-local wrappers need to choose defaults. Pyxis currently uses `inspect: 'rich'` for `compare-section`, but may prefer `minimal` for large `compare-all` runs unless a section fails.
-
-## P2: Tolerances for structural/bounds diffs
+## P1: Bounds tolerance API
 
 ### Problem
 
-`SelectionComparison` exposes bounds deltas directly, for example:
+`SelectionComparison` exposes bounds deltas directly, which is excellent:
 
 ```json
 {
@@ -333,18 +160,16 @@ Project-local wrappers need to choose defaults. Pyxis currently uses `inspect: '
 }
 ```
 
-This is excellent. The next useful layer is tolerance-aware evaluation:
+Project workflows often need to distinguish acceptable tiny layout jitter from meaningful structural drift:
 
 ```text
 x/y changed by <= 2px: acceptable
 height changed by > 20px: needs review
 ```
 
-Userland can implement this, but an official option would make reports and policy checks more consistent.
+Pyxis can implement this in userland, so this is not a blocker. But if multiple beta users repeat this pattern, an official tolerance option would be useful.
 
-### Request
-
-Add tolerance support to structural comparison methods, for example:
+### Possible API
 
 ```js
 const bounds = comparison.bounds.diff({
@@ -357,7 +182,7 @@ const bounds = comparison.bounds.diff({
 })
 ```
 
-or at compare time:
+or at comparison time:
 
 ```js
 const comparison = await cvd.compare.region({
@@ -369,9 +194,13 @@ const comparison = await cvd.compare.region({
 
 ### Why it matters
 
-Pixel diffs are sensitive; bounds tolerances help classify harmless layout jitter separately from real structural drift.
+It allows reports to distinguish:
 
-## P2: CSS/style normalization hooks
+- harmless layout jitter,
+- expected responsive offsets,
+- major composition drift.
+
+## P1: CSS/style normalization hooks
 
 ### Problem
 
@@ -385,11 +214,9 @@ normal line-height vs resolved line-height
 prototype inline styles vs tokenized React CSS
 ```
 
-Userland can normalize these, but official hooks would make comparison reports cleaner and reusable.
+This is especially common when comparing prototypes against productionized component CSS.
 
-### Request
-
-Expose normalization options such as:
+### Possible API
 
 ```js
 const comparison = await cvd.compare.region({
@@ -415,13 +242,17 @@ const normalized = cvd.normalize.styles(styleMap, {
 
 ### Why it matters
 
-This keeps reports focused on meaningful visual differences rather than equivalent CSS formatting.
+It keeps reports focused on meaningful visual differences rather than equivalent CSS formatting.
 
-## P3: Built-in style property presets
+### Why it can remain deferred
+
+Normalization encodes policy. Different projects will disagree about whether font fallback differences, token equivalence, or line-height resolution should be accepted. Pyxis can gather userland evidence first.
+
+## P2: Built-in style property presets
 
 ### Problem
 
-Every project redefines common style groups:
+Every project tends to redefine common style groups:
 
 ```js
 const typography = ['font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing', 'color']
@@ -429,9 +260,7 @@ const surface = ['background-color', 'border-color', 'border-radius', 'box-shado
 const spacing = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left']
 ```
 
-### Request
-
-Expose documented presets:
+### Possible API
 
 ```js
 cvd.styles.presets.typography
@@ -453,62 +282,75 @@ await cvd.compare.region({
 
 ### Why it matters
 
-This is not a core primitive, but it improves readability and creates shared vocabulary across scripts and docs.
+This improves readability and creates shared vocabulary across scripts and docs.
 
-## P3: Explicit no-op prepare / wait documentation
+### Why it can remain deferred
+
+Like normalization, presets can encode policy. It is reasonable to wait until beta users repeat the same lists.
+
+## P2: Document artifact/frontmatter integration pattern
 
 ### Problem
 
-We used this pattern successfully:
+`comparison.artifacts.write(...)` writes Markdown reports. In doc-managed repos like Pyxis, Markdown files under ticket workspaces may be validated by tools that expect frontmatter. We currently wrap generated `compare.md` with docmgr frontmatter in userland.
 
-```js
-await page.prepare({
-  type: 'script',
-  waitFor: 'document.querySelector("[data-page=\\"archive\\"]")',
-  waitForTimeoutMs: 30000,
-  script: 'void 0',
-  afterWaitMs: 500,
-})
-```
-
-But this was discovered by trial and error after an empty `script` failed.
+This is not a css-visual-diff bug. It is an integration pattern.
 
 ### Request
 
-If `page.prepare` remains the recommended wait helper, document the no-op pattern explicitly:
+Add a small note/example showing that projects can post-process generated Markdown reports when their documentation system requires frontmatter:
 
 ```js
-script: 'void 0'
+const written = await comparison.artifacts.write(outDir, ['json', 'markdown'])
+await addFrontmatterIfNeeded(written.markdown, {
+  title: 'Archive content visual comparison',
+  ticket: 'PYXIS-CSSVD-JS-LIB',
+})
 ```
 
-Better yet, provide the selector wait helper requested above.
+### Why it matters
 
-## What is no longer requested
+It prevents users from treating documentation validation failures as css-visual-diff failures. It also shows the right boundary: css-visual-diff writes report Markdown; project documentation systems can wrap it.
 
-The following old request is obsolete and should not be filed as a new upstream issue:
+## P3: Optional compare-page policy example
+
+### Problem
+
+The new multi-section catalog example demonstrates comparison and artifact generation. Many users will also want to layer policy on top:
 
 ```text
-Expose a JS-callable pixel comparison primitive.
+changedPercent <= 1%: accepted
+changedPercent <= 10%: review
+changedPercent <= 25%: tune-required
+changedPercent > 25%: major-mismatch
 ```
 
-That is now satisfied by:
+### Request
+
+Optionally add a small example section showing policy classification as userland code, not as core css-visual-diff policy:
 
 ```js
-cvd.compare.region(...)
-cvd.compare.selections(...)
-cvd.image.diff(...)
+function classify(comparison) {
+  const changed = comparison.pixel.summary().changedPercent
+  if (changed <= 1) return 'accepted'
+  if (changed <= 10) return 'review'
+  if (changed <= 25) return 'tune-required'
+  return 'major-mismatch'
+}
 ```
 
-## Minimal actionable maintainer list
+### Why it matters
 
-If maintainers only want a short issue list, file these:
+It teaches the right layering: css-visual-diff provides measurements and artifacts; projects decide policy.
 
-1. Add `locator.waitFor(...)` / `page.waitForSelector(...)` helper.
-2. Return/document artifact paths from `comparison.artifacts.write(...)`.
-3. Add a complete multi-section comparison + catalog example.
-4. Clarify collection profile defaults and `styleProps` / `attributes` semantics.
-5. Consider tolerance and normalization hooks after the core workflow settles.
+## Minimal current ask
+
+The current short list for maintainers is:
+
+1. Keep bounds tolerances, CSS normalization, and style presets deferred until beta usage confirms repeated patterns.
+2. Consider a small docs note for documentation/frontmatter integration around generated Markdown artifacts.
+3. Consider a small docs example for project-local policy classification layered on top of `comparison.summary()`.
 
 ## Closing note
 
-The flexible JS API is a large improvement. It solved the most important Pyxis blocker. These requests are now about making the API easier to use correctly in larger project-local visual workflows, not about missing fundamental comparison capability.
+The beta ergonomics update landed the highest-value workflow pieces for Pyxis. The remaining items are no longer blockers. They are potential shared abstractions if enough projects independently implement the same userland patterns.

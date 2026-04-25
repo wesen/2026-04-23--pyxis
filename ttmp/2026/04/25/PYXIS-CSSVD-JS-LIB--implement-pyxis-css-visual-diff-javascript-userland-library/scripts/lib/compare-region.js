@@ -108,17 +108,13 @@ function artifactPath(artifactsList, name) {
   return ''
 }
 
-function jsString(value) {
-  return JSON.stringify(String(value == null ? '' : value))
-}
-
-async function waitForSelector(page, selector) {
-  await page.prepare({
-    type: 'script',
-    waitFor: 'document.querySelector(' + jsString(selector) + ')',
-    waitForTimeoutMs: 30000,
-    script: 'void 0',
-    afterWaitMs: 500,
+async function waitForLocator(page, selector, options) {
+  options = options || {}
+  await page.locator(selector).waitFor({
+    timeoutMs: options.timeoutMs || 30000,
+    pollIntervalMs: options.pollIntervalMs || 100,
+    visible: options.visible !== false,
+    afterWaitMs: options.afterWaitMs == null ? 500 : options.afterWaitMs,
   })
 }
 
@@ -167,13 +163,13 @@ async function compareSection(pageName, sectionName, options) {
       waitMs: target.waitMs,
       name: target.page + '-prototype',
     })
-    await waitForSelector(leftPage, section.original)
+    await waitForLocator(leftPage, section.original, { visible: true })
     rightPage = await browser.page(target.storybookUrl, {
       viewport: target.viewport,
       waitMs: target.waitMs,
       name: target.page + '-storybook',
     })
-    await waitForSelector(rightPage, section.react)
+    await waitForLocator(rightPage, section.react, { visible: true })
     var comparison = await cvd.compare.region({
       name: target.page + '-' + section.name,
       left: leftPage.locator(section.original),
@@ -184,8 +180,8 @@ async function compareSection(pageName, sectionName, options) {
       styleProps: options.styleProps || DEFAULT_STYLE_PROPS,
       attributes: options.attributes || DEFAULT_ATTRIBUTES,
     })
-    await comparison.artifacts.write(outDir, ['json', 'markdown'])
-    ensureDocmgrMarkdown(outDir + '/compare.md', 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
+    var written = await comparison.artifacts.write(outDir, ['json', 'markdown'])
+    ensureDocmgrMarkdown(written.markdown || (outDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
     var summary = comparison.summary()
     var json = comparison.toJSON ? comparison.toJSON() : summary
     var pixel = summary.pixel || (json && json.pixel) || {}
@@ -207,10 +203,13 @@ async function compareSection(pageName, sectionName, options) {
       normalizedHeight: pixel.normalizedHeight,
       bounds: bounds,
       textChanged: summary.text ? summary.text.changed : undefined,
-      artifactJson: artifactPath(json.artifacts, 'json'),
-      artifactMarkdown: artifactPath(json.artifacts, 'markdown'),
-      diffComparisonPath: artifactPath(json.artifacts, 'diffComparison'),
-      diffOnlyPath: artifactPath(json.artifacts, 'diffOnly'),
+      artifactJson: written.json || artifactPath(json.artifacts, 'json'),
+      artifactMarkdown: written.markdown || artifactPath(json.artifacts, 'markdown'),
+      leftRegionPath: written.leftRegion || artifactPath(json.artifacts, 'leftRegion'),
+      rightRegionPath: written.rightRegion || artifactPath(json.artifacts, 'rightRegion'),
+      diffComparisonPath: written.diffComparison || artifactPath(json.artifacts, 'diffComparison'),
+      diffOnlyPath: written.diffOnly || artifactPath(json.artifacts, 'diffOnly'),
+      writtenArtifacts: written.written || [],
       summary: summary,
     }
   } finally {
