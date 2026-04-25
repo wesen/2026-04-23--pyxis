@@ -56,3 +56,4 @@ Created clean maintainer follow-up request document containing only current desi
 - Promoted the validated css-visual-diff JavaScript userland library from the ticket workspace to `prototype-design/visual-diff/userland`, updated default output paths to `prototype-design/visual-comparisons/cssvd-js`, added a stable README, and validated the promoted smoke/run scripts.
 - Restored local `.envrc` convenience for `CSS_VISUAL_DIFF_VERB_REPOSITORIES` and ignored it as direnv/local machine state.
 - Added `.envrc.example` documenting the optional `CSS_VISUAL_DIFF_VERB_REPOSITORIES` direnv helper while keeping local `.envrc` ignored.
+- Added `pyxis pages compare-spec` using css-visual-diff `objectFromFile`, plus `specs/public-pages.desktop.visual.yml` and an Archive spec smoke.

@@ -1,0 +1,98 @@
+name: public-pages
+variant: desktop
+prototypeBase: http://localhost:7070
+storybookBase: http://localhost:6007
+viewport:
+  width: 920
+  height: 1460
+waitMs: 1000
+threshold: 30
+inspect: rich
+pages:
+  - page: shows
+    variant: desktop
+    priority: tune-first
+    prototypePath: /standalone/public/shows.html
+    storyId: public-site-pages--shows-desktop
+    baselineDiffs:
+      page: 50.5245
+      content: 49.0940
+      header: 51.0775
+      shows-list: 66.8566
+      mailing-list: 51.2191
+    sections:
+      - name: page
+        original: "#root"
+        react: "[data-story-frame='pyxis-page-shell']"
+      - name: content
+        original: "#root > *"
+        react: "[data-page='shows']"
+      - name: header
+        original: "#root > *"
+        react: "[data-section='shows-header']"
+      - name: shows-list
+        original: "#root > *"
+        react: "[data-section='shows-list']"
+      - name: mailing-list
+        original: "#root > *"
+        react: "[data-section='mailing-list']"
+  - page: show-detail
+    variant: desktop
+    priority: second-pass
+    prototypePath: /standalone/public/detail.html
+    storyId: public-site-pages--show-detail-desktop
+    baselineDiffs:
+      page: 18.5282
+      content: 24.4647
+    sections:
+      - name: page
+        original: "#root"
+        react: "[data-story-frame='pyxis-page-shell']"
+      - name: content
+        original: "#root > *"
+        react: "[data-page='show-detail']"
+  - page: archive
+    variant: desktop
+    priority: closest-to-acceptance
+    prototypePath: /standalone/public/archive.html
+    storyId: public-site-pages--archive-desktop
+    baselineDiffs:
+      page: 6.6511
+      content: 7.1281
+    sections:
+      - name: page
+        original: "#root"
+        react: "[data-story-frame='pyxis-page-shell']"
+      - name: content
+        original: "#root > *"
+        react: "[data-page='archive']"
+  - page: book
+    variant: desktop
+    priority: second-pass
+    prototypePath: /standalone/public/book.html
+    storyId: public-site-pages--book-desktop
+    baselineDiffs:
+      page: 12.1006
+      content: 14.5896
+    sections:
+      - name: page
+        original: "#root"
+        react: "[data-story-frame='pyxis-page-shell']"
+      - name: content
+        original: "#root > *"
+        react: "[data-page='book']"
+  - page: about
+    variant: desktop
+    priority: second-pass
+    prototypePath: /standalone/public/about.html
+    storyId: public-site-pages--about-desktop
+    baselineDiffs:
+      page: 18.2795
+      content: 20.4334
+    sections:
+      - name: page
+        original: "#root"
+        react: "[data-story-frame='pyxis-page-shell']"
+      - name: content
+        original: "#root > *"
+        react: "[data-page='about']"

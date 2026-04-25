@@ -128,3 +128,10 @@
 - [x] Add/promote final validation commands under `prototype-design/visual-diff/userland/*.sh`.
 - [ ] Create final postmortem/reference report.
 - [ ] Optionally upload final implementation bundle to reMarkable.
+
+## Phase 9 — Spec-driven suites
+
+- [x] Add first YAML visual spec under `prototype-design/visual-diff/userland/specs`.
+- [x] Add `pyxis pages compare-spec` using `objectFromFile`.
+- [x] Validate Archive subset from YAML spec.
+- [ ] Decide whether YAML spec replaces `lib/registry.js` as source of truth.

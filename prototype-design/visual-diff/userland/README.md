@@ -43,6 +43,7 @@ pyxis pages compare-section-command
 pyxis pages compare-section
 pyxis pages compare-page
 pyxis pages compare-all
+pyxis pages compare-spec
 ```
 
 ## Common commands
@@ -67,10 +68,16 @@ css-visual-diff verbs \
   --output json
 ```
 
-Run the desktop public-page suite:
+Run the desktop public-page suite from the built-in JS registry:
 
 ```bash
 prototype-design/visual-diff/userland/11-run-compare-all-public-pages.sh
+```
+
+Run the Archive subset from the YAML visual spec via `objectFromFile`:
+
+```bash
+prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
 ```
 
 Run the CI policy failure smoke:
@@ -108,6 +115,28 @@ css-visual-diff verbs \
   --output json
 ```
 
+## Spec-driven suites
+
+`compare-spec` uses css-visual-diff's `objectFromFile` field support. The verb receives the parsed JSON/YAML object, not a filename string.
+
+The first promoted spec lives at:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+Example:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml \
+  --page archive \
+  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/archive-filter \
+  --output json
+```
+
 ## Next cleanup
 
-The current target registry lives in `lib/registry.js`. A likely next step is to use css-visual-diff's `objectFromFile` field support to move route/selector/viewport/threshold/accepted-difference metadata into JSON or YAML specs.
+The built-in target registry still lives in `lib/registry.js` for compatibility with existing commands. Future cleanup can make the YAML spec the primary source of truth and keep `registry.js` as a loader/compatibility adapter.

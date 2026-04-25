@@ -7,8 +7,12 @@ var DEFAULTS = {
   waitMs: 1000,
 }
 
+function joinUrl(base, path) {
+  return String(base || '').replace(/\/+$/, '') + '/' + String(path || '').replace(/^\/+/, '')
+}
+
 function prototypeUrl(path) {
-  return DEFAULTS.prototypeBase.replace(/\/+$/, '') + '/' + String(path || '').replace(/^\/+/, '')
+  return joinUrl(DEFAULTS.prototypeBase, path)
 }
 
 function normalizeAcceptedDifferences(config) {
@@ -16,8 +20,9 @@ function normalizeAcceptedDifferences(config) {
   return accepted
 }
 
-function pageRecord(config) {
-  var storyUrl = storybook.storybookIframeUrl(DEFAULTS.storybookBase, config.storyId)
+function pageRecord(config, defaults) {
+  defaults = defaults || DEFAULTS
+  var storyUrl = storybook.storybookIframeUrl(defaults.storybookBase, config.storyId)
   var accepted = normalizeAcceptedDifferences(config)
   var sections = (config.sections || []).map(function (section) {
     var copy = {}
@@ -29,11 +34,11 @@ function pageRecord(config) {
     page: config.page,
     variant: config.variant || 'desktop',
     priority: config.priority || 'unknown',
-    prototypeUrl: prototypeUrl(config.prototypePath),
+    prototypeUrl: joinUrl(defaults.prototypeBase, config.prototypePath),
     storyId: config.storyId,
     storybookUrl: storyUrl,
-    viewport: config.viewport || DEFAULTS.viewport,
-    waitMs: config.waitMs || DEFAULTS.waitMs,
+    viewport: config.viewport || defaults.viewport,
+    waitMs: config.waitMs || defaults.waitMs,
     sections: sections,
     baselineDiffs: config.baselineDiffs || {},
     acceptedDifferences: accepted,
@@ -125,6 +130,19 @@ function findSection(page, section, variant) {
   return null
 }
 
+function targetsFromSpec(spec) {
+  spec = spec || {}
+  var defaults = {
+    prototypeBase: spec.prototypeBase || DEFAULTS.prototypeBase,
+    storybookBase: spec.storybookBase || DEFAULTS.storybookBase,
+    viewport: spec.viewport || DEFAULTS.viewport,
+    waitMs: spec.waitMs || DEFAULTS.waitMs,
+  }
+  return (spec.pages || []).map(function (page) {
+    return pageRecord(page, defaults)
+  })
+}
+
 function flattenTargets(filters) {
   var rows = []
   listTargets(filters).forEach(function (target) {
@@ -149,6 +167,9 @@ function flattenTargets(filters) {
 module.exports = {
   DEFAULTS: DEFAULTS,
   PUBLIC_PAGES: PUBLIC_PAGES,
+  joinUrl: joinUrl,
+  pageRecord: pageRecord,
+  targetsFromSpec: targetsFromSpec,
   listTargets: listTargets,
   findPage: findPage,
   findSection: findSection,

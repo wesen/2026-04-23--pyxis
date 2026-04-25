@@ -272,15 +272,12 @@ function maxChangedPercent(rows) {
   }, 0)
 }
 
-async function comparePage(pageName, options) {
+async function compareTarget(target, options) {
   options = options || {}
-  var variant = options.variant || 'desktop'
-  var target = registry.findPage(pageName, variant)
-  if (!target) throw new Error('unknown page: ' + pageName)
   var outDir = options.outDir || artifacts.artifactDir(
     'prototype-design/visual-comparisons/cssvd-js/compare-page',
-    pageName,
-    variant
+    target.page,
+    target.variant
   )
   var threshold = Number(options.threshold || 30)
   var catalog = cvd.catalog.create({
@@ -355,14 +352,17 @@ async function comparePage(pageName, options) {
   }
 }
 
-async function compareAll(options) {
+async function comparePage(pageName, options) {
   options = options || {}
   var variant = options.variant || 'desktop'
-  var targets = registry.listTargets({
-    page: options.page || '',
-    variant: variant,
-    priority: options.priority || '',
-  })
+  var target = registry.findPage(pageName, variant)
+  if (!target) throw new Error('unknown page: ' + pageName)
+  return await compareTarget(target, options)
+}
+
+async function compareAllTargets(targets, options) {
+  options = options || {}
+  var variant = options.variant || 'desktop'
   var outDir = options.outDir || artifacts.artifactDir(
     'prototype-design/visual-comparisons/cssvd-js/compare-all',
     'public-pages',
@@ -373,7 +373,7 @@ async function compareAll(options) {
   for (var i = 0; i < targets.length; i++) {
     var target = targets[i]
     var pageOutDir = artifacts.artifactDir(outDir, target.page)
-    var pageResult = await comparePage(target.page, {
+    var pageResult = await compareTarget(target, {
       variant: target.variant,
       outDir: pageOutDir,
       threshold: options.threshold || 30,
@@ -416,11 +416,43 @@ async function compareAll(options) {
   return [suite]
 }
 
+async function compareAll(options) {
+  options = options || {}
+  var variant = options.variant || 'desktop'
+  var targets = registry.listTargets({
+    page: options.page || '',
+    variant: variant,
+    priority: options.priority || '',
+  })
+  options.variant = variant
+  return await compareAllTargets(targets, options)
+}
+
+async function compareSpec(spec, options) {
+  options = options || {}
+  var targets = registry.targetsFromSpec(spec || {})
+  if (options.page) {
+    targets = targets.filter(function (target) { return target.page === options.page })
+  }
+  if (options.priority) {
+    targets = targets.filter(function (target) { return target.priority === options.priority })
+  }
+  options.variant = options.variant || (spec && spec.variant) || 'desktop'
+  options.outDir = options.outDir || artifacts.artifactDir(
+    'prototype-design/visual-comparisons/cssvd-js/compare-spec',
+    spec && spec.name ? spec.name : 'suite',
+    options.variant
+  )
+  return await compareAllTargets(targets, options)
+}
+
 module.exports = {
   buildCompareRegionArgs: buildCompareRegionArgs,
   argsToShellCommand: argsToShellCommand,
   planCompareSection: planCompareSection,
   compareSection: compareSection,
+  compareTarget: compareTarget,
   comparePage: comparePage,
   compareAll: compareAll,
+  compareSpec: compareSpec,
 }

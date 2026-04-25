@@ -201,3 +201,36 @@ __verb__('compareAll', {
     maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band: accepted, review, tune-required, or major-mismatch' },
   },
 })
+
+async function compareSpec(spec, values) {
+  return await lib.compareRegion.compareSpec(spec, {
+    page: values.page || '',
+    variant: values.variant || (spec && spec.variant) || 'desktop',
+    priority: values.priority || '',
+    outDir: values.outDir || '',
+    threshold: values.threshold || (spec && spec.threshold) || 30,
+    inspect: values.inspect || (spec && spec.inspect) || 'rich',
+    mode: values.mode || 'authoring',
+    maxChangedPercent: values.maxChangedPercent || (spec && spec.maxChangedPercent),
+    maxPolicyBand: values.maxPolicyBand || (spec && spec.maxPolicyBand) || '',
+  })
+}
+
+__verb__('compareSpec', {
+  parents: ['pyxis', 'pages'],
+  short: 'Compare pages from a JSON/YAML visual spec loaded with objectFromFile',
+  output: 'structured',
+  fields: {
+    spec: { argument: true, type: 'objectFromFile', required: true, help: 'JSON/YAML visual spec with pages and sections' },
+    values: { bind: 'all' },
+    page: { type: 'string', default: '', help: 'Optional page filter for smoke/debug runs' },
+    variant: { type: 'string', default: '', help: 'Optional variant override; defaults to spec.variant or desktop' },
+    priority: { type: 'string', default: '', help: 'Optional priority filter' },
+    outDir: { type: 'string', default: '', help: 'Output directory for suite artifacts' },
+    threshold: { type: 'int', default: 0, help: 'Pixel threshold 0-255; 0 uses spec/default 30' },
+    inspect: { type: 'string', default: '', help: 'Collection profile; defaults to spec.inspect or rich' },
+    mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail the command after writing reports when policy thresholds are exceeded' },
+    maxChangedPercent: { type: 'float', default: 0, help: 'Optional policy threshold for changed percent; 0 uses spec value or disables it' },
+    maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band' },
+  },
+})

@@ -2137,3 +2137,107 @@ The example explains that developers can copy it to `.envrc` and run `direnv all
 ### Validation
 
 `git status --short --ignored .envrc .envrc.example .gitignore` shows `.envrc.example` as tracked candidate and `.envrc` ignored.
+
+
+## Step 18: Add objectFromFile spec-driven suite smoke
+
+I continued after promotion by prototyping the next cleanup: moving page/section inventory out of hard-coded JS and into a YAML visual spec loaded through css-visual-diff's `objectFromFile` field type.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue from the promoted userland library into the next planned refactor: spec-driven suites.
+
+**Inferred user intent:** Reduce hard-coded registry pressure and use the newly landed css-visual-diff objectFromFile feature.
+
+### What I did
+
+Added:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
+```
+
+Updated:
+
+```text
+prototype-design/visual-diff/userland/lib/registry.js
+prototype-design/visual-diff/userland/lib/compare-region.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/README.md
+```
+
+New verb:
+
+```text
+pyxis pages compare-spec <spec.yml>
+```
+
+The verb field uses:
+
+```js
+spec: { argument: true, type: 'objectFromFile', required: true }
+```
+
+so the implementation receives the parsed spec object directly.
+
+### Why
+
+Selectors, route lists, viewport settings, policy thresholds, and accepted differences are data. The validated JS registry is useful, but a YAML/JSON spec is easier to review and evolve as the page suite grows.
+
+### What worked
+
+The Archive subset smoke passed from the YAML spec:
+
+```text
+pageCount: 1
+sectionCount: 2
+classificationCounts: { review: 2 }
+maxChangedPercent: 7.128146453089244
+```
+
+The existing registry list smoke still returns 13 rows after the refactor.
+
+### What didn't work
+
+No runtime failure occurred.
+
+### What I learned
+
+The current code can support both workflows: the built-in registry remains available for existing commands, while `compare-spec` can run from parsed YAML. That lets us migrate gradually instead of forcing a source-of-truth switch immediately.
+
+### What was tricky to build
+
+The main refactor was extracting `compareTarget(target, options)` and `compareAllTargets(targets, options)` so both registry-backed and spec-backed workflows can share the same comparison/catalog/report implementation.
+
+### What warrants a second pair of eyes
+
+- Whether `specs/public-pages.desktop.visual.yml` should become the source of truth immediately.
+- Whether accepted differences should now be authored only in YAML and removed from inline registry metadata.
+- Whether `compare-spec` should accept multiple specs with `objectListFromFile` later for viewport matrices.
+
+### What should be done in the future
+
+Run a full `compare-spec` suite and compare its summary against `compare-all`. If the outputs match, migrate `compare-all` to load the YAML spec by default.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+prototype-design/visual-diff/userland/lib/registry.js
+prototype-design/visual-diff/userland/lib/compare-region.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
+prototype-design/visual-diff/userland/README.md
+```
+
+Validate:
+
+```bash
+prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
+prototype-design/visual-diff/userland/01-smoke-list-targets.sh
+```
