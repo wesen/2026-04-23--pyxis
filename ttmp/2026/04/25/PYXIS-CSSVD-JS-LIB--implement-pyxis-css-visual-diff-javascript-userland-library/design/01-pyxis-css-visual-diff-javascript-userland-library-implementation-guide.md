@@ -118,7 +118,7 @@ Run with:
 
 ```bash
 css-visual-diff verbs \
-  --repository ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/verbs \
+  --repository ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts \
   pyxis pages list-targets \
   --output json
 ```
@@ -440,7 +440,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages list-targets --output table
+css-visual-diff verbs --repository scripts pyxis pages list-targets --output table
 ```
 
 ### `pyxis pages summarize-results`
@@ -454,7 +454,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages summarize-results \
+css-visual-diff verbs --repository scripts pyxis pages summarize-results \
   --resultsDir prototype-design/visual-comparisons/public-pages \
   --markdown ttmp/.../various/page-summary.md \
   --output table
@@ -470,7 +470,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages inspect-section shows header --output yaml
+css-visual-diff verbs --repository scripts pyxis pages inspect-section shows header --output yaml
 ```
 
 ### `pyxis pages compare-section`
@@ -484,7 +484,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages compare-section archive content \
+css-visual-diff verbs --repository scripts pyxis pages compare-section archive content \
   --outDir ttmp/.../various/archive-content \
   --output json
 ```
@@ -500,7 +500,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages compare-page archive \
+css-visual-diff verbs --repository scripts pyxis pages compare-page archive \
   --outDir ttmp/.../various/archive-page \
   --output table
 ```
@@ -516,7 +516,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages compare-all \
+css-visual-diff verbs --repository scripts pyxis pages compare-all \
   --outDir ttmp/.../various/public-pages-run \
   --mode authoring \
   --output table
@@ -533,7 +533,7 @@ Purpose:
 Example:
 
 ```bash
-css-visual-diff verbs --repository scripts/verbs pyxis pages snapshot-section shows header --output json
+css-visual-diff verbs --repository scripts pyxis pages snapshot-section shows header --output json
 ```
 
 ## Implementation phases
@@ -552,7 +552,7 @@ Deliverables:
 Validation:
 
 ```bash
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages list-targets --output json
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages list-targets --output json
 ```
 
 ### Phase 2 — existing result summarizer
@@ -567,7 +567,7 @@ Deliverables:
 Validation:
 
 ```bash
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages summarize-results \
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages summarize-results \
   --resultsDir prototype-design/visual-comparisons/public-pages \
   --output table
 ```
@@ -589,7 +589,7 @@ Deliverables:
 Validation:
 
 ```bash
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages inspect-section shows content --output yaml
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages inspect-section shows content --output yaml
 ```
 
 Success criteria:
@@ -608,7 +608,7 @@ Deliverables:
 Validation:
 
 ```bash
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages compare-section archive content \
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages compare-section archive content \
   --outDir ttmp/.../various/phase-4/archive-content \
   --output json
 ```
@@ -660,11 +660,11 @@ Deliverables:
 Run before considering this ticket complete:
 
 ```bash
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages list-targets --output json
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages summarize-results --output table
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages inspect-section archive content --output yaml
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages compare-section archive content --outDir ttmp/.../various/smoke/archive-content --output json
-css-visual-diff verbs --repository ttmp/.../scripts/verbs pyxis pages compare-page archive --outDir ttmp/.../various/smoke/archive-page --output table
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages list-targets --output json
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages summarize-results --output table
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages inspect-section archive content --output yaml
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages compare-section archive content --outDir ttmp/.../various/smoke/archive-content --output json
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages compare-page archive --outDir ttmp/.../various/smoke/archive-page --output table
 ```
 
 If promoted to the repo, also run:

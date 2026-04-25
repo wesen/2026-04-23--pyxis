@@ -19,3 +19,6 @@ Created implementation planning ticket with userland library guide, maintainer f
 
 
 - Uploaded ticket bundle to reMarkable as `PYXIS css-visual-diff JS Userland Library Plan` under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB` after a successful dry run, and verified the upload with `remarquee cloud ls`.
+
+- Uploaded the whole current ticket bundle to reMarkable as `PYXIS css-visual-diff JS Userland Library Current Ticket` under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB` before starting implementation.
+- Completed Phase 1 library skeleton and registry: added slug/storybook/artifact/registry modules, `pyxis pages list-targets`, `pyxis pages import-smoke`, and smoke scripts validating relative imports and target registry output.

@@ -278,3 +278,167 @@ Document name:
 ```text
 PYXIS css-visual-diff JS Userland Library Plan
 ```
+
+
+## Step 3: Start Phase 1 with library skeleton, registry, and import smoke tests
+
+I started implementation with the smallest useful slice: pure userland modules and a repository-scanned verb file that imports them. This validates the core architecture before any browser work or pixel comparison bridge is attempted.
+
+The key discovery was that relative imports only worked when the css-visual-diff verb repository was the ticket `scripts/` directory, not the nested `scripts/verbs/` directory. That means the script repository root must include both `verbs/` and `lib/` if verb files import sibling userland modules.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Upload the whole current ticket as bundle to remarkable, then add tasks to the new lib ticket, and work on those step by step, making sure to write test scripts to validate the proper working of the library (and the import mechanism to make sure we can include files properly), checking things off as you go, committing at appropriate intervals, and continuing to keep a detailed diary in this new ticket."
+
+**Assistant interpretation:** Upload the current ticket bundle, then begin implementing the planned JS userland library step by step with smoke tests, task checkoffs, commits, and detailed diary updates.
+
+**Inferred user intent:** Move from planning into careful incremental implementation, with enough validation and documentation that the work can be resumed or reviewed safely.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added library modules:
+
+```text
+scripts/lib/slug.js
+scripts/lib/storybook.js
+scripts/lib/artifacts.js
+scripts/lib/registry.js
+scripts/lib/index.js
+```
+
+- Added verb file:
+
+```text
+scripts/verbs/pyxis-pages.js
+```
+
+- Implemented verbs:
+
+```text
+pyxis pages list-targets
+pyxis pages import-smoke
+```
+
+- Added smoke scripts:
+
+```text
+scripts/01-smoke-list-targets.sh
+scripts/02-smoke-import-mechanism.sh
+```
+
+- Ran the import smoke and list-targets smoke, saving outputs under:
+
+```text
+various/01-import-smoke/import-smoke.json
+various/01-import-smoke/list-targets.json
+```
+
+- Validated output with Python assertions:
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+base=Path('ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/01-import-smoke')
+smoke=json.loads((base/'import-smoke.json').read_text())
+rows=json.loads((base/'list-targets.json').read_text())
+assert smoke[0]['ok'] is True, smoke
+assert len(rows) == 13, len(rows)
+assert any(r['page']=='archive' and r['section']=='content' for r in rows)
+print('validated import smoke rows=', len(smoke), 'target rows=', len(rows))
+PY
+```
+
+### Why
+
+The implementation guide depends on the assumption that userland modules can be split across files and imported by verb files. Before building result parsers or browser commands, we needed to prove the import mechanism and repository root shape.
+
+### What worked
+
+Running with the ticket `scripts/` directory as the verb repository works:
+
+```bash
+css-visual-diff verbs \
+  --repository ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts \
+  pyxis pages import-smoke \
+  --output json
+```
+
+The import smoke returned `ok: true`, generated an Archive content Storybook URL, created a slug, generated an artifact path, and looked up the Archive content selectors from the registry.
+
+The `list-targets` smoke returned 13 rows: 5 Shows sections plus 2 each for ShowDetail, Archive, Book, and About.
+
+### What didn't work
+
+The first attempt used the nested verbs directory as the repository root:
+
+```bash
+css-visual-diff verbs \
+  --repository ttmp/.../scripts/verbs \
+  pyxis pages import-smoke \
+  --output json
+```
+
+It failed with:
+
+```text
+Error: GoError: Invalid module at github.com/dop251/goja_nodejs/require.(*RequireModule).require-fm (native)
+```
+
+Cause: `pyxis-pages.js` requires `../lib/index.js`, but when the repository root is `scripts/verbs`, `../lib` sits outside the scanned/allowed module root.
+
+Fix: use `--repository <ticket>/scripts`, so both `verbs/` and `lib/` live under the repository root.
+
+### What I learned
+
+For userland multi-file JS verbs, the repository root should be the common parent containing both verb files and support modules. Our smoke scripts now use:
+
+```text
+--repository <ticket>/scripts
+```
+
+not:
+
+```text
+--repository <ticket>/scripts/verbs
+```
+
+### What was tricky to build
+
+The import failure looked like a generic module problem, but it was actually a repository-root problem. Because Goja's require layer reports `Invalid module`, the safest diagnostic is to try the repository root one level higher and keep all imported files under that root.
+
+### What warrants a second pair of eyes
+
+- Whether scanning `scripts/` instead of `scripts/verbs/` is acceptable long term if support modules have no sentinels. It worked in this smoke, but stable docs should mention the pattern explicitly.
+- Whether the registry should include Shows sub-section selectors against broad prototype selectors or wait for more precise prototype section selectors.
+
+### What should be done in the future
+
+- Implement Phase 2 `summarize-results` next.
+- Add a README note warning future developers to pass `--repository <ticket>/scripts`.
+- Consider adding a tiny `pyxis pages debug-module-root` verb if import issues recur.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/*.js
+scripts/verbs/pyxis-pages.js
+scripts/01-smoke-list-targets.sh
+scripts/02-smoke-import-mechanism.sh
+various/01-import-smoke/*.json
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/02-smoke-import-mechanism.sh
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/01-smoke-list-targets.sh
+```
+
+### Technical details
+
+The registry currently hard-codes the desktop public pages and first-pass baseline diff percentages from the previous page-level visual-diff report. This is intentional for Phase 1; Phase 2 will parse official generated results instead of relying only on baselines embedded in the registry.

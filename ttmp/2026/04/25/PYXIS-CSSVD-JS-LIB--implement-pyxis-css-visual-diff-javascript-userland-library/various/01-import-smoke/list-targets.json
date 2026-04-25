@@ -1,0 +1,158 @@
+[
+{
+  "baselineChangedPercent": 50.5245,
+  "originalSelector": "#root",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "reactSelector": "[data-story-frame='pyxis-page-shell']",
+  "section": "page",
+  "storyId": "public-site-pages--shows-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 49.094,
+  "originalSelector": "#root \u003e *",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "reactSelector": "[data-page='shows']",
+  "section": "content",
+  "storyId": "public-site-pages--shows-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 51.0775,
+  "originalSelector": "#root \u003e *",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "reactSelector": "[data-section='shows-header']",
+  "section": "header",
+  "storyId": "public-site-pages--shows-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 66.8566,
+  "originalSelector": "#root \u003e *",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "reactSelector": "[data-section='shows-list']",
+  "section": "shows-list",
+  "storyId": "public-site-pages--shows-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 51.2191,
+  "originalSelector": "#root \u003e *",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "reactSelector": "[data-section='mailing-list']",
+  "section": "mailing-list",
+  "storyId": "public-site-pages--shows-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 18.5282,
+  "originalSelector": "#root",
+  "page": "show-detail",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/detail.html",
+  "reactSelector": "[data-story-frame='pyxis-page-shell']",
+  "section": "page",
+  "storyId": "public-site-pages--show-detail-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 24.4647,
+  "originalSelector": "#root \u003e *",
+  "page": "show-detail",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/detail.html",
+  "reactSelector": "[data-page='show-detail']",
+  "section": "content",
+  "storyId": "public-site-pages--show-detail-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 6.6511,
+  "originalSelector": "#root",
+  "page": "archive",
+  "priority": "closest-to-acceptance",
+  "prototypeUrl": "http://localhost:7070/standalone/public/archive.html",
+  "reactSelector": "[data-story-frame='pyxis-page-shell']",
+  "section": "page",
+  "storyId": "public-site-pages--archive-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 7.1281,
+  "originalSelector": "#root \u003e *",
+  "page": "archive",
+  "priority": "closest-to-acceptance",
+  "prototypeUrl": "http://localhost:7070/standalone/public/archive.html",
+  "reactSelector": "[data-page='archive']",
+  "section": "content",
+  "storyId": "public-site-pages--archive-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 12.1006,
+  "originalSelector": "#root",
+  "page": "book",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/book.html",
+  "reactSelector": "[data-story-frame='pyxis-page-shell']",
+  "section": "page",
+  "storyId": "public-site-pages--book-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 14.5896,
+  "originalSelector": "#root \u003e *",
+  "page": "book",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/book.html",
+  "reactSelector": "[data-page='book']",
+  "section": "content",
+  "storyId": "public-site-pages--book-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 18.2795,
+  "originalSelector": "#root",
+  "page": "about",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/about.html",
+  "reactSelector": "[data-story-frame='pyxis-page-shell']",
+  "section": "page",
+  "storyId": "public-site-pages--about-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+, {
+  "baselineChangedPercent": 20.4334,
+  "originalSelector": "#root \u003e *",
+  "page": "about",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/about.html",
+  "reactSelector": "[data-page='about']",
+  "section": "content",
+  "storyId": "public-site-pages--about-desktop",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+  "variant": "desktop"
+}
+]

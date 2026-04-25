@@ -1,0 +1,12 @@
+[
+{
+  "artifactDir": "/tmp/pyxis-cssvd/public-pages/desktop/archive/content",
+  "ok": true,
+  "originalSelector": "#root \u003e *",
+  "reactSelector": "[data-page='archive']",
+  "sectionName": "content",
+  "slug": "archive-content",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+  "targetPage": "archive"
+}
+]

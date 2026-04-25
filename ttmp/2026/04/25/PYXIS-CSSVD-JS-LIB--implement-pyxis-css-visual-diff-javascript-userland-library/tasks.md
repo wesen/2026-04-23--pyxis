@@ -11,18 +11,23 @@
 - [x] Dry-run reMarkable bundle upload.
 - [x] Upload ticket bundle to reMarkable.
 - [x] Verify upload exists on reMarkable.
+- [x] Upload whole current ticket bundle to reMarkable before implementation.
+- [x] Verify current ticket bundle exists on reMarkable.
 
 ## Phase 1 — Library skeleton and registry
 
-- [ ] Create `scripts/lib/slug.js`.
-- [ ] Create `scripts/lib/storybook.js`.
-- [ ] Create `scripts/lib/artifacts.js`.
-- [ ] Create `scripts/lib/registry.js`.
-- [ ] Create `scripts/verbs/pyxis-pages.js`.
-- [ ] Implement `pyxis pages list-targets`.
-- [ ] Add smoke script `scripts/01-smoke-list-targets.sh`.
-- [ ] Validate list-targets with `css-visual-diff verbs --repository ... pyxis pages list-targets --output json`.
-- [ ] Record results in diary.
+- [x] Create `scripts/lib/slug.js`.
+- [x] Create `scripts/lib/storybook.js`.
+- [x] Create `scripts/lib/artifacts.js`.
+- [x] Create `scripts/lib/registry.js`.
+- [x] Create `scripts/verbs/pyxis-pages.js`.
+- [x] Implement `pyxis pages list-targets`.
+- [x] Add smoke script `scripts/01-smoke-list-targets.sh`.
+- [x] Validate list-targets with `css-visual-diff verbs --repository ... pyxis pages list-targets --output json`.
+- [x] Add import-mechanism smoke verb `pyxis pages import-smoke`.
+- [x] Add smoke script `scripts/02-smoke-import-mechanism.sh`.
+- [x] Validate relative imports use `--repository <ticket>/scripts` rather than `scripts/verbs`.
+- [x] Record results in diary.
 
 ## Phase 2 — Existing result summarizer
 
@@ -37,7 +42,7 @@
 - [ ] Add smoke script `scripts/02-smoke-summarize-existing-page-results.sh`.
 - [ ] Generate JSON and Markdown summary under `various/`.
 - [ ] Confirm generated summary reproduces the previous Phase 7 page-diff report.
-- [ ] Record results in diary.
+- [x] Record results in diary.
 
 ## Phase 3 — Locator-first inspect command
 
@@ -50,7 +55,7 @@
 - [ ] Support `--failOnMissing`.
 - [ ] Add smoke script `scripts/03-smoke-inspect-section.sh`.
 - [ ] Validate with Archive content and Shows header.
-- [ ] Record results in diary.
+- [x] Record results in diary.
 
 ## Phase 4 — Pixel compare-section bridge
 
@@ -62,7 +67,7 @@
 - [ ] Implement `pyxis pages compare-section <page> <section>`.
 - [ ] Add smoke script `scripts/04-smoke-compare-section.sh`.
 - [ ] Validate Archive content result is approximately `7.1281%`.
-- [ ] Record results in diary.
+- [x] Record results in diary.
 
 ## Phase 5 — Page and suite orchestration
 
@@ -75,7 +80,7 @@
 - [ ] Add smoke script `scripts/05-smoke-compare-page.sh`.
 - [ ] Add smoke script `scripts/06-smoke-compare-all.sh`.
 - [ ] Validate all current desktop page sections run from registry.
-- [ ] Record results in diary.
+- [x] Record results in diary.
 
 ## Phase 6 — Snapshot and semantic diff tooling
 
@@ -87,7 +92,7 @@
 - [ ] Implement optional `pyxis pages diff-snapshots`.
 - [ ] Write JSON and Markdown semantic reports.
 - [ ] Validate with Shows header or Archive content.
-- [ ] Record results in diary.
+- [x] Record results in diary.
 
 ## Phase 7 — Accepted differences and maintainer feedback loop
 
