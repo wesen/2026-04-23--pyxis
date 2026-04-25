@@ -158,16 +158,16 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ShowDetailHeader` styles into `ShowDetailHeader.css`.
 - [x] Extract `ShowMetaStrip` styles into `ShowMetaStrip.css`.
 - [x] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
-- [ ] Extract `BookingForm` styles into `BookingForm.css`.
+- [x] Extract `BookingForm` styles into `BookingForm.css`.
 - [x] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
 - [x] Extract `BookingRules` styles into `BookingRules.css`.
 - [x] Extract `BookingSuccess` styles into `BookingSuccess.css`.
 - [x] Extract `SaferSpaceAgreement` styles into `SaferSpaceAgreement.css`.
-- [ ] Preserve form label/control relationships in `BookingForm`.
-- [ ] Add tokenized `:focus-visible`, `:disabled`, error, and success styles where relevant.
-- [ ] Keep only truly dynamic form styles inline, preferably as CSS custom properties.
-- [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
-- [ ] Run matching visual-diff configs for touched detail/booking components.
+- [x] Preserve form label/control relationships in `BookingForm`.
+- [x] Add tokenized `:focus-visible`, `:disabled`, error, and success styles where relevant.
+- [x] Keep only truly dynamic form styles inline, preferably as CSS custom properties.
+- [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
+- [x] Run matching visual-diff configs for touched detail/booking components.
 - [x] Commit this batch separately.
 
 ## B5 — Extract CSS for about/home/footer/public shell components

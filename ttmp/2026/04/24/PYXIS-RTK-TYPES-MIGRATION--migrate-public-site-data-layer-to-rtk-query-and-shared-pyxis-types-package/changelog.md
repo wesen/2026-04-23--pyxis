@@ -84,4 +84,9 @@
 - Extracted `BookingSuccess` styles into `web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.css`.
 - Added part selectors for `icon`, `title`, `message`, and `actions`, plus artist and narrow Storybook stories.
 - Validated `BookingSuccess` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-success-default.css-visual-diff.yml`; current pixel diff is `component 7.3591% | 10401/141336`, `root 9.3157% | 11816/126840`.
+- Extracted `BookingForm` styles into `web/packages/pyxis-components/src/public/BookingForm/BookingForm.css`.
+- Added part selectors for intro, fields, labels, controls, field grid, actions, and submit button; preserved label/control relationships with explicit `htmlFor`/`id` pairs.
+- Added tokenized focus-visible and disabled styles, plus submitting/narrow/theme override Storybook stories.
+- Validated `BookingForm` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-form-default.css-visual-diff.yml`; current pixel diff is `1.7528% | 5536/315840`.
+- Completed B4 detail/booking CSS extraction pass.
 

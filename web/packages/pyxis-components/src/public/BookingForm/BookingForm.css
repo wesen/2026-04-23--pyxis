@@ -1,0 +1,100 @@
+/* BookingForm — public booking inquiry form. */
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='root']) {
+  --pyxis-booking-form-accent-color: var(--color-accent);
+  --pyxis-booking-form-border-color: #EAE7E0;
+  --pyxis-booking-form-muted-color: #8E887E;
+  --pyxis-booking-form-surface: var(--color-surface);
+
+  display: grid;
+  gap: 18px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='intro']) {
+  color: var(--pyxis-booking-form-muted-color);
+  font-size: 13.5px;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='field']) {
+  display: block;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='field-grid']) {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr 1fr;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='label']) {
+  color: var(--pyxis-booking-form-muted-color);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='input']),
+:where([data-pyxis-component='booking-form'][data-pyxis-part='select']) {
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--pyxis-booking-form-border-color);
+  box-sizing: border-box;
+  color: var(--pyxis-booking-form-accent-color);
+  font-family: inherit;
+  font-size: 14.5px;
+  outline: none;
+  padding: 8px 0;
+  width: 100%;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='select']) {
+  appearance: none;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='textarea']) {
+  background: var(--pyxis-booking-form-surface);
+  border: 1px solid var(--pyxis-booking-form-border-color);
+  border-radius: var(--radius-xs);
+  box-sizing: border-box;
+  color: var(--pyxis-booking-form-accent-color);
+  font-family: inherit;
+  font-size: var(--text-base);
+  outline: none;
+  padding: var(--space-3);
+  resize: vertical;
+  width: 100%;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='input']:focus-visible),
+:where([data-pyxis-component='booking-form'][data-pyxis-part='select']:focus-visible),
+:where([data-pyxis-component='booking-form'][data-pyxis-part='textarea']:focus-visible) {
+  border-color: var(--pyxis-booking-form-accent-color);
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='submit']) {
+  background: var(--pyxis-booking-form-accent-color);
+  border: none;
+  border-radius: var(--radius-xs);
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  padding: 12px 22px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='submit']:disabled) {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='submit']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}

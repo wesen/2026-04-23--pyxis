@@ -822,3 +822,34 @@ root      9.3157% | 11816/126840
 ```
 
 The current config's original root selector targets the first child under the fixture, while the React selector targets the full success component root, so root CSS and pixel comparisons are not apples-to-apples. This component should receive selector/config tuning later if success-state parity is important.
+
+
+## Step 25: Extract `BookingForm` CSS and complete B4
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/BookingForm/BookingForm.css`.
+- Moved intro, field, label, input, select, textarea, layout grid, action, and submit styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `intro`, `field`, `field-grid`, `label`, `input`, `select`, `textarea`, `actions`, and `submit`.
+- Preserved and improved label/control relationships by adding explicit `id` and `htmlFor` pairs.
+- Added tokenized focus-visible styles for controls and submit button.
+- Added disabled styling for the submit button.
+- Updated `BookingForm.tsx` to self-import CSS and use `clsx('pyxis-booking-form', className)`.
+- Added `Submitting`, `Narrow`, and `ThemeOverride` Storybook stories.
+- Marked the B4 validation tasks complete after typecheck and visual diff.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-form-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 1.7528% | 5536/315840
+root      1.7528% | 5536/315840
+```
+
+B4 detail/booking CSS extraction is now complete.
