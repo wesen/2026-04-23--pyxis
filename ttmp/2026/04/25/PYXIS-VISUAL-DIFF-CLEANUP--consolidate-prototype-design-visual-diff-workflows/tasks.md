@@ -61,8 +61,10 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 
 ## Phase 6 — Native run-config removal
 
-- [ ] Mine `prototype-design/visual-diff/comparisons/**` for useful data missing from suite specs.
-- [ ] Delete native run configs from active workflow paths after migration.
+- [x] Mine public-page configs under `prototype-design/visual-diff/comparisons/public-pages/**`; useful data is represented in `userland/specs/public-pages.desktop.visual.yml`.
+- [ ] Mine remaining component-system configs under `prototype-design/visual-diff/comparisons/component-system/**` for useful data missing from suite specs.
+- [x] Delete public-page native run configs from active workflow paths after migration.
+- [ ] Delete remaining native run configs from active workflow paths after migration.
 - [ ] Record removed paths and rationale in the cleanup diary/postmortem.
 
 ## Phase 7 — Final validation and handoff

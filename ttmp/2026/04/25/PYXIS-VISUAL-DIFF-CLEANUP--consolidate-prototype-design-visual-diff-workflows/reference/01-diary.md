@@ -496,3 +496,113 @@ python3 -c 'import json; rows=json.load(open("/tmp/pyxis-final-list.json")); pri
 ### Technical details
 
 `docmgr doctor` still reports only the known unknown-topic vocabulary warning for `automation`, `frontend`, `pyxis`, `storybook`, and `visual-diff`.
+
+
+## Step 9: Delete retired public-page native configs
+
+I started Phase 6 with the safest deletion set: the five page-level native `css-visual-diff run` configs. These had a direct replacement in the canonical JS visual suite spec and were no longer needed as active workflow inputs.
+
+I intentionally did not delete `prototype-design/visual-diff/public-components/**` yet. Those files are retired-native under the new policy, but active baseline scripts and baseline manifests still reference them. They should be handled with the baseline/prototype-catalog cleanup rather than mixed into the page-suite deletion.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, delete what you think is best, then commit, diary, and continue"
+
+**Assistant interpretation:** Remove the low-risk obsolete files now, validate, record the decision in the diary, commit, then proceed to the next cleanup work.
+
+**Inferred user intent:** Make concrete cleanup progress instead of only planning, while avoiding risky broad deletions.
+
+**Commit (code):** `e24ca46` — "Remove retired public page visual configs"
+
+### What I did
+
+Deleted:
+
+```text
+prototype-design/visual-diff/comparisons/public-pages/about-desktop.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/public-pages/archive-desktop.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/public-pages/book-desktop.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/public-pages/show-detail-desktop.css-visual-diff.yml
+prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml
+```
+
+Updated:
+
+```text
+reference/02-prototype-design-visual-inventory.md
+tasks.md
+```
+
+The inventory now counts `retired-native: 72` instead of `77` and notes that page-level native configs have been removed after migration to the JS visual suite spec.
+
+### Why
+
+These configs were the clearest safe deletion because every page and section they covered is represented in:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+Keeping them would preserve a second active public-page workflow, exactly what the cleanup plan says to avoid.
+
+### What worked
+
+The spec-backed public-page suite still runs after deletion:
+
+```bash
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh >/tmp/pyxis-after-delete-public-page-configs.json
+python3 - <<'PY'
+import json
+run=json.load(open('/tmp/pyxis-after-delete-public-page-configs.json'))[0]
+print({'pageCount':run['pageCount'],'sectionCount':run['sectionCount'],'maxChangedPercent':run['maxChangedPercent'],'classificationCounts':run['classificationCounts']})
+PY
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+Result:
+
+```text
+{'pageCount': 5, 'sectionCount': 13, 'maxChangedPercent': 66.85658212560386, 'classificationCounts': {'major-mismatch': 5, 'review': 2, 'tune-required': 6}}
+```
+
+### What didn't work
+
+N/A. The deletion and validation were straightforward.
+
+### What I learned
+
+The page-level native configs are now genuinely unnecessary for current Pyxis workflow. Search still finds historical references in older ticket docs, but those are evidence of past work, not active source.
+
+### What was tricky to build
+
+The main judgment call was not deleting the older `visual-diff/public-components` configs in the same pass. Although they are also retired-native by policy, they still have live references from baseline scripts and baseline manifests. Deleting them now would force a broader baseline-catalog cleanup and risk mixing concerns.
+
+### What warrants a second pair of eyes
+
+- Confirm that historical ticket docs can keep references to removed native configs as historical evidence.
+- Confirm whether the next deletion pass should target `visual-diff/public-components/**` together with `prototype-design/baseline/**` and related scripts.
+
+### What should be done in the future
+
+- Continue with Phase 4 selector stabilization.
+- Later, delete or archive `visual-diff/public-components/**` as part of a baseline/prototype-catalog cleanup.
+- Later, migrate or remove remaining component-system native configs under `visual-diff/comparisons/component-system/**`.
+
+### Code review instructions
+
+Review deleted paths and compare with the visual suite spec:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+Validate with:
+
+```bash
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+### Technical details
+
+The removed files are still referenced by older ticket documentation and previous exploratory scripts. Those references document historical workflows and were not updated in this deletion pass.

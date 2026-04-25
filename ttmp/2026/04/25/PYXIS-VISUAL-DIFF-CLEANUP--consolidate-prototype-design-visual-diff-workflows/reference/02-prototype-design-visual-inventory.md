@@ -12,8 +12,7 @@ DocType: reference
 Intent: short-term
 Owners: []
 RelatedFiles:
-    - Path: prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml
-      Note: Representative retired native config classified for later removal
+    - Path:       Note: Representative retired native config classified for later removal
     - Path: prototype-design/visual-diff/userland/lib/registry.js
       Note: Default target loader/normalizer rewired away from hard-coded PUBLIC_PAGES
     - Path: prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
@@ -49,7 +48,7 @@ Generated during Phase 1 cleanup and refreshed after the Phase 3 JS-userland sim
 | Class | Count |
 | --- | ---: |
 | canonical-source | 84 |
-| retired-native | 77 |
+| retired-native | 72 |
 | generated | 2914 |
 | generated-historical | 3465 |
 | needs-review | 190 |
@@ -57,7 +56,7 @@ Generated during Phase 1 cleanup and refreshed after the Phase 3 JS-userland sim
 ## Key decisions from inventory
 
 - `prototype-design/visual-diff/userland/**` is the promoted JS-canonical workflow, after Phase 3 simplification.
-- `prototype-design/visual-diff/comparisons/**/*.css-visual-diff.yml` and `prototype-design/visual-diff/public-components/*.css-visual-diff.yml` are retired native-run inputs.
+- `prototype-design/visual-diff/comparisons/**/*.css-visual-diff.yml` and `prototype-design/visual-diff/public-components/*.css-visual-diff.yml` are retired native-run inputs; public-page configs were removed after migration to the visual suite spec.
 - `prototype-design/visual-comparisons/**` and `prototype-design/storybook-catalog/**` are generated output, not source.
 - `prototype-design/baseline/**` is large generated/historical evidence and should be handled in a later targeted pass.
 - Deleted transition scripts and old-output readers are intentionally absent from canonical source.
@@ -210,11 +209,6 @@ prototype-design/visual-diff/comparisons/component-system/public/organisms/pub-n
 prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml
 prototype-design/visual-diff/comparisons/component-system/public/organisms/space-info-default.css-visual-diff.yml
 prototype-design/visual-diff/comparisons/component-system/public/organisms/venue-card-default.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/public-pages/about-desktop.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/public-pages/archive-desktop.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/public-pages/book-desktop.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/public-pages/show-detail-desktop.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml
 prototype-design/visual-diff/public-components/footer-desktop.css-visual-diff.yml
 prototype-design/visual-diff/public-components/footer-mobile.css-visual-diff.yml
 prototype-design/visual-diff/public-components/nav-desktop.css-visual-diff.yml

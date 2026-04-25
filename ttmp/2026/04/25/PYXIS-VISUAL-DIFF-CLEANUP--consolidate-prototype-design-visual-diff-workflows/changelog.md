@@ -26,3 +26,5 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Implemented cleanup Phases 1–3: added prototype-design inventory, formalized visual suite schema, rewired registry to spec mirror, removed JS transition scaffolding, moved stable scripts under `userland/scripts/`, and validated list/Archive/full-suite smokes.
 - Committed Phases 1–3 cleanup as `5373ea0` (`Consolidate visual diff JS userland`).
 - Recorded final hygiene validation note after Phase 1–3 cleanup; list-targets returned 13 rows and docmgr only reported the known topic-vocabulary warning.
+- Deleted five retired public-page native `css-visual-diff run` configs after validating the spec-backed public-page suite still produces 5 pages / 13 sections.
+- Committed public-page native config deletion.
