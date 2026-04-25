@@ -38,3 +38,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Committed deprecated prototype-design quarantine.
 - Marked old baseline/storybook/component-native playbooks as deprecated and rewrote their moved artifact paths to `prototype-design/-deprecated/...`.
 - Committed deprecated playbook/path-reference updates.
+- Added final cleanup postmortem/handoff and related it to key active/quarantine files.

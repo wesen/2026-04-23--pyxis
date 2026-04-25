@@ -1263,3 +1263,84 @@ sectionCount: 13
 maxChangedPercent: 66.03678642230044
 classificationCounts: { major-mismatch: 4, review: 4, tune-required: 5 }
 ```
+
+
+## Step 15: Write final postmortem and handoff
+
+I wrote the final cleanup handoff document and checked off the remaining Phase 7 tasks. The report summarizes the JS-canonical workflow, the deprecated quarantine, validation results, key decisions, review checklist, and follow-up items.
+
+This gives the next developer a compact entrypoint instead of requiring them to reconstruct the cleanup from the full diary.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 14)
+
+**Assistant interpretation:** Continue through the last cleanup tasks by producing a final handoff/postmortem.
+
+**Inferred user intent:** Leave the ticket reviewable and resumable after a large cleanup.
+
+**Commit (docs):** pending at diary-write time — intended message: "Add visual diff cleanup final handoff"
+
+### What I did
+
+Created:
+
+```text
+reference/03-final-postmortem-and-handoff.md
+```
+
+Updated:
+
+```text
+tasks.md
+```
+
+Related the final handoff to key source files with `docmgr doc relate`.
+
+### Why
+
+The cleanup changed many paths and conventions. A final report captures the current active workflow and prevents future readers from mistaking the deprecated archive for active infrastructure.
+
+### What worked
+
+The handoff now includes:
+
+- active layout,
+- deprecated quarantine layout,
+- canonical command list,
+- validation results,
+- baseline values,
+- Shows diagnostics,
+- decisions,
+- commits of interest,
+- review checklist,
+- follow-ups.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+A short final handoff is necessary after a cleanup with large renames; otherwise reviewers are forced to read every diary step.
+
+### What was tricky to build
+
+The main challenge was making the final report concise while still including enough exact commands and path mappings to be useful.
+
+### What warrants a second pair of eyes
+
+- Confirm whether all remaining follow-ups are correctly scoped outside this cleanup ticket.
+- Confirm whether the deprecated folder should stay in the repo long-term or be removed after review.
+
+### What should be done in the future
+
+See `reference/03-final-postmortem-and-handoff.md`, especially the follow-up section.
+
+### Code review instructions
+
+Start with the final handoff, then inspect the commits listed there.
+
+### Technical details
+
+`docmgr doctor` is expected to keep warning about unknown topics until project vocabulary is expanded.

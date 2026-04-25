@@ -74,5 +74,5 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 - [x] Run promoted smoke suite subset after deprecated move (`smoke-list-targets`, `smoke-compare-spec-archive`).
 - [x] Run full spec suite after deprecated quarantine.
 - [x] Ensure generated artifacts are not committed.
-- [ ] Write final postmortem/reference report.
-- [ ] Commit cleanup in safe chunks.
+- [x] Write final postmortem/reference report.
+- [x] Commit cleanup in safe chunks.
