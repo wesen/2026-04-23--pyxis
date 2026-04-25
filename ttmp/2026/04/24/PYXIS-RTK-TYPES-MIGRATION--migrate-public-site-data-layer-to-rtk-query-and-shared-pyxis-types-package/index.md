@@ -41,6 +41,10 @@ The work is intentionally planned before page-level application composition so t
 
 - [RTK Query and pyxis-types migration guide](./design-doc/01-rtk-query-and-pyxis-types-migration-guide.md)
 - [Public component CSS extraction and theming guide](./design-doc/02-public-component-css-extraction-and-theming-guide.md)
+- [ADR — Public component theming and CSS extraction contract](./design-doc/03-public-component-theming-adr.md)
+- [ADR — Public component taxonomy after CSS extraction](./design-doc/04-public-component-taxonomy-adr.md)
+- [CSS extraction validation and cleanup report](./reference/02-css-extraction-validation-cleanup.md)
+- [CSS extraction postmortem](./reference/03-css-extraction-postmortem.md)
 - [Investigation diary](./reference/01-investigation-diary.md)
 - [Tasks](./tasks.md)
 - [Changelog](./changelog.md)

@@ -1026,3 +1026,30 @@ All commands completed successfully.
 - `ShowMetaStrip`, `ShowTile`, and `Poster` retain dynamic inline styles for CSS variables.
 - CSS files still contain hardcoded fallback values in component-local variables; future token-hardening should replace these where parity allows.
 - `PubShowRow` remains deferred pending taxonomy.
+
+
+## Step 32: B8 ADRs, postmortem, and playbook updates
+
+### What I did
+
+- Added `design-doc/03-public-component-theming-adr.md`.
+- Added `design-doc/04-public-component-taxonomy-adr.md`.
+- Added `reference/03-css-extraction-postmortem.md`.
+- Updated `docs/playbooks/05-bottom-up-component-visual-parity.md` with CSS extraction workflow lessons.
+- Updated ticket index, tasks, and changelog.
+
+### Key decisions captured
+
+- `data-pyxis-component` / `data-pyxis-part` are the repo-specific theming selector contract.
+- `unstyled` mode remains deferred until a concrete consumer needs it.
+- Slots/renderers should be added selectively, not everywhere.
+- `PubShowRow` remains deferred pending taxonomy.
+- `ShowTile`/`ShowGrid`, `ArchiveShowRow`, `BookingSpaceAside`, `FindUsBlock`, and `EthosGrid` are the recommended canonical choices for their respective page contexts pending review.
+
+### Workflow lessons captured
+
+- Separate CSS architecture extraction from token-hardening/visual tuning.
+- Preserve exact prototype values during extraction to avoid accidental drift.
+- `css-visual-diff run --config-dir` needs a consolidated summary mode.
+- Configs should warn when original/react selector scopes differ substantially.
+- React-before/after baseline mode would help refactor-safety workflows.

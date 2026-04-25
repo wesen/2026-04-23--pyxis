@@ -203,3 +203,166 @@ Organism targets currently needing a follow-up pass:
 ```text
 modal-default — header/body 0.0000%; panel 1.2820%; footer 1.9902%
 ```
+
+## CSS extraction and theming workflow
+
+When a prototype-matched React component still has static JSX `style={{ ... }}` blocks, treat cleanup as two separate passes.
+
+```text
+Pass 1 — architecture extraction
+  Move static styles from JSX to Component.css.
+  Add or preserve data-pyxis part selectors.
+  Preserve exact visual values unless a task explicitly asks for tuning.
+  Add Storybook default/narrow/theme stories.
+  Re-run the matching visual-diff config.
+
+Pass 2 — token hardening and visual tuning
+  Replace component CSS hex fallbacks with global tokens where parity allows.
+  Tune residual pixel diffs.
+  Update accepted statuses and accepted differences.
+```
+
+Do not combine these passes unless the component is tiny. Token substitution can create visual drift, so first preserve behavior and pixels, then improve token purity.
+
+### Component CSS pattern
+
+Prefer one CSS file per canonical public component:
+
+```text
+web/packages/pyxis-components/src/public/Component/Component.tsx
+web/packages/pyxis-components/src/public/Component/Component.css
+web/packages/pyxis-components/src/public/Component/Component.stories.tsx
+```
+
+Import CSS from the component implementation:
+
+```ts
+import './Component.css';
+```
+
+Use the existing Pyxis part contract:
+
+```tsx
+<div className={clsx('pyxis-show-tile', className)} {...pyxisPart('show-tile')}>
+  <h3 {...pyxisPart('show-tile', 'title')}>...</h3>
+</div>
+```
+
+This emits:
+
+```html
+data-pyxis-component="show-tile" data-pyxis-part="root"
+data-pyxis-component="show-tile" data-pyxis-part="title"
+```
+
+Do not introduce a parallel generic `data-part` system.
+
+### CSS selector guidance
+
+Prefer low-specificity part selectors:
+
+```css
+:where([data-pyxis-component='show-tile'][data-pyxis-part='root']) {
+  --pyxis-show-tile-title-color: var(--color-accent);
+}
+
+:where([data-pyxis-component='show-tile'][data-pyxis-part='title']) {
+  color: var(--pyxis-show-tile-title-color);
+}
+```
+
+Avoid deep selectors and `!important`. If an override needs `!important`, add a better part selector or component-local CSS variable.
+
+### Remaining inline styles that are acceptable
+
+After extraction, static layout/typography/color styles should not remain in component JSX. These inline styles are acceptable:
+
+- Storybook wrapper width/layout styles.
+- Visual-diff fixture wrapper styles.
+- Dynamic CSS variables, for example:
+  - `ShowMetaStrip` dynamic `gridTemplateColumns` from `items.length`,
+  - `ShowTile` ticket-pill variables from `show.kind`,
+  - `Poster` artwork variables from poster kind/ratio.
+
+Classify remaining inline styles with:
+
+```bash
+rg "style=\{\{" web/packages/pyxis-components/src/public -g'*.tsx'
+```
+
+### Storybook theming stories
+
+For canonical public components, add at least a default story and one representative theme override story. Use component variables directly so the story documents the theming API:
+
+```tsx
+export const ThemeOverride: Story = {
+  render: (args) => (
+    <div
+      style={{
+        '--pyxis-ticket-stub-bg': 'var(--color-ink)',
+        '--pyxis-ticket-stub-title-color': 'var(--color-text-inverse)',
+      } as React.CSSProperties}
+    >
+      <TicketStub {...args} />
+    </div>
+  ),
+};
+```
+
+Add narrow/long-content/submitting stories where relevant.
+
+Do not add `unstyled` stories unless the component actually implements an `unstyled` prop.
+Do not add slot/renderer stories unless the component actually exposes slots/renderers.
+
+### Directory-level validation after a batch
+
+For a batch of public components, run:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd web && pnpm -r typecheck
+
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/molecules
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/organisms
+```
+
+`run --config-dir` is good for pass/fail coverage, but it does not yet provide a concise diff summary. Use individual `pixeldiff.md` files or a custom summary script when you need ranked results.
+
+### Updating the parity map after CSS extraction
+
+For extracted public components, add or update a `styleArchitecture` object in:
+
+```text
+prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+```
+
+Example:
+
+```json
+"styleArchitecture": {
+  "cssExtraction": "complete",
+  "cssFile": "web/packages/pyxis-components/src/public/ShowTile/ShowTile.css",
+  "selectorContract": "data-pyxis-component + data-pyxis-part",
+  "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+  "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+}
+```
+
+If a component is intentionally deferred because of taxonomy overlap, record that too:
+
+```json
+"styleArchitecture": {
+  "cssExtraction": "deferred",
+  "reason": "pending public component taxonomy decision versus ShowTile/ShowGrid and ArchiveShowRow"
+}
+```
+
+### Tooling improvement wishlist
+
+The CSS extraction pass showed several useful future improvements for `css-visual-diff`:
+
+- `run --config-dir --summary-md --summary-json` for a consolidated diff summary.
+- selector-scope warnings when original and React selectors have very different dimensions.
+- React-before vs React-after baseline mode for refactor-safety checks.
+- first-class part-selector validation.
+- artifact-based LLM review that summarizes existing `run` outputs instead of recapturing evidence.

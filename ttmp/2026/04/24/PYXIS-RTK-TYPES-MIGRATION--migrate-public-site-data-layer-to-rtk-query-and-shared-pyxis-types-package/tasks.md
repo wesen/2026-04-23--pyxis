@@ -217,10 +217,10 @@ Start here to establish the pattern before touching large organisms.
 
 ## B8 — Optional follow-up after CSS extraction
 
-- [ ] Add a public component theming ADR.
-- [ ] Review canonical components for slot/renderer APIs (`ShowTile`, `ShowGrid`, `ArchiveShowList`, `PublicPageHeader`, `BookingForm`) and add only where a concrete page/story needs them.
-- [ ] Add module/export checks for every canonical public component: folder-local CSS, exported component, exported useful prop types, no private internal imports by consumers.
-- [ ] Add a public component taxonomy ADR.
+- [x] Add a public component theming ADR.
+- [x] Review canonical components for slot/renderer APIs (`ShowTile`, `ShowGrid`, `ArchiveShowList`, `PublicPageHeader`, `BookingForm`) and add only where a concrete page/story needs them.
+- [x] Add module/export checks for every canonical public component: folder-local CSS, exported component, exported useful prop types, no private internal imports by consumers.
+- [x] Add a public component taxonomy ADR.
 - [ ] Remove deprecated/duplicate public components after app pages use canonical components.
 - [ ] Add stronger lint/check tooling for static inline styles in public components.
 - [ ] Add a Storybook theme switcher/global decorator if useful.

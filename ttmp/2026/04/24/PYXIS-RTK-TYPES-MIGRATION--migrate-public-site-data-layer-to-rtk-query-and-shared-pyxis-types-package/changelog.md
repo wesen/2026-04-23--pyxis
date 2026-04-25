@@ -105,4 +105,6 @@
 - Completed B7 validation and cleanup. Ran component and recursive workspace typechecks, public molecule and organism `css-visual-diff` config-dir reruns, inline-style scans, TSX/CSS hardcoded color scans, and parity-map updates.
 - Added `reference/02-css-extraction-validation-cleanup.md` with remaining inline style/color classifications and follow-up recommendations.
 - Updated `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with `styleArchitecture` metadata for extracted public components and a deferred taxonomy note for `PubShowRow`.
+- Completed B8 ADR/documentation work: added theming ADR, taxonomy ADR, and a detailed CSS extraction postmortem.
+- Updated `docs/playbooks/05-bottom-up-component-visual-parity.md` with CSS extraction/theming workflow, Storybook theme story guidance, parity-map styleArchitecture guidance, and css-visual-diff improvement wishlist.
 
