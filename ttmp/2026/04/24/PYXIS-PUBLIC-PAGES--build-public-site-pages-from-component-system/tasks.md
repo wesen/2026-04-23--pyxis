@@ -9,38 +9,38 @@ Keep commits small. Update the diary after each phase or important failure.
 ## Phase 0 — Orientation, setup, and baseline capture
 
 - [x] Read `design/01-public-site-page-build-analysis-design-implementation-guide.md` fully before editing pages.
-- [ ] Read prior theming ADR: `../PYXIS-RTK-TYPES-MIGRATION--migrate-public-site-data-layer-to-rtk-query-and-shared-pyxis-types-package/design-doc/03-public-component-theming-adr.md`.
-- [ ] Read prior taxonomy ADR: `../PYXIS-RTK-TYPES-MIGRATION--migrate-public-site-data-layer-to-rtk-query-and-shared-pyxis-types-package/design-doc/04-public-component-taxonomy-adr.md`.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Run `cd web && pnpm -r typecheck`.
-- [ ] Start or confirm user-site Storybook on port `6007`.
-- [ ] Smoke check `public-site-pages--shows-desktop` iframe on `http://localhost:6007`.
-- [ ] Smoke check `public-site-pages--show-detail-desktop` iframe on `http://localhost:6007`.
-- [ ] Smoke check `public-site-pages--archive-desktop` iframe on `http://localhost:6007`.
-- [ ] Smoke check `public-site-pages--book-desktop` iframe on `http://localhost:6007`.
-- [ ] Smoke check `public-site-pages--about-desktop` iframe on `http://localhost:6007`.
-- [ ] Confirm standalone prototype pages are reachable through the prototype server.
-- [ ] Create page-level visual-diff config directory under `prototype-design/visual-diff/comparisons/public-pages`.
-- [ ] Add first draft `shows-desktop.css-visual-diff.yml`.
-- [ ] Capture current Shows page baseline before changing code.
-- [ ] Record baseline commands and results in `reference/01-diary.md`.
-- [ ] Commit page visual-diff scaffolding separately.
+- [x] Read prior theming ADR: `../PYXIS-RTK-TYPES-MIGRATION--migrate-public-site-data-layer-to-rtk-query-and-shared-pyxis-types-package/design-doc/03-public-component-theming-adr.md`.
+- [x] Read prior taxonomy ADR: `../PYXIS-RTK-TYPES-MIGRATION--migrate-public-site-data-layer-to-rtk-query-and-shared-pyxis-types-package/design-doc/04-public-component-taxonomy-adr.md`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm -r typecheck`.
+- [x] Start or confirm user-site Storybook on port `6007`.
+- [x] Smoke check `public-site-pages--shows-desktop` iframe on `http://localhost:6007`.
+- [x] Smoke check `public-site-pages--show-detail-desktop` iframe on `http://localhost:6007`.
+- [x] Smoke check `public-site-pages--archive-desktop` iframe on `http://localhost:6007`.
+- [x] Smoke check `public-site-pages--book-desktop` iframe on `http://localhost:6007`.
+- [x] Smoke check `public-site-pages--about-desktop` iframe on `http://localhost:6007`.
+- [x] Confirm standalone prototype pages are reachable through the prototype server.
+- [x] Create page-level visual-diff config directory under `prototype-design/visual-diff/comparisons/public-pages`.
+- [x] Add first draft `shows-desktop.css-visual-diff.yml`.
+- [x] Capture current Shows page baseline before changing code.
+- [x] Record baseline commands and results in `reference/01-diary.md`.
+- [x] Commit page visual-diff scaffolding separately.
 
 ---
 
 ## Phase 1 — Shared public shell and page layout
 
-- [ ] Inspect `web/packages/pyxis-user-site/src/components/layout/Layout.tsx`.
-- [ ] Inspect `PubNav` and `PubFooter` usage in the app shell.
-- [ ] Decide whether public page max-width/background belongs in `Layout`, individual page CSS, or Storybook shell.
-- [ ] Add shared page CSS helper if useful, for example `src/pages/PublicPage.css`.
-- [ ] Ensure every page has a semantic `<main>` element where appropriate.
-- [ ] Ensure every page has stable `data-page` selector.
-- [ ] Ensure major sections use stable `data-section` selectors.
-- [ ] Reduce obvious page wrapper inline styles where safe.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Smoke check all desktop page stories.
-- [ ] Commit shared public shell/page wrapper changes separately.
+- [x] Inspect `web/packages/pyxis-user-site/src/components/layout/Layout.tsx`.
+- [x] Inspect `PubNav` and `PubFooter` usage in the app shell.
+- [x] Decide whether public page max-width/background belongs in `Layout`, individual page CSS, or Storybook shell.
+- [x] Add shared page CSS helper if useful, for example `src/pages/PublicPage.css`.
+- [x] Ensure every page has a semantic `<main>` element where appropriate.
+- [x] Ensure every page has stable `data-page` selector.
+- [x] Ensure major sections use stable `data-section` selectors.
+- [x] Reduce obvious page wrapper inline styles where safe.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Smoke check all desktop page stories.
+- [x] Commit shared public shell/page wrapper changes separately.
 
 ---
 
@@ -53,23 +53,23 @@ web/packages/pyxis-user-site/src/pages/Shows.tsx
 prototype-design/standalone/public/shows.html
 ```
 
-- [ ] Inspect `shows.html` and identify top-level sections.
-- [ ] Compare current `Shows.tsx` section map against prototype sections.
-- [ ] Decide whether `PubHero` remains in the Shows page.
-- [ ] Replace `PubShowRow` list with canonical `ShowGrid` / `ShowTile` if prototype is poster-grid based.
-- [ ] Keep `MailingListCTA` if present in baseline.
-- [ ] Preserve RTK Query behavior through `useUpcomingShows()` or generated RTK Query hooks.
-- [ ] Preserve loading state.
-- [ ] Preserve empty state with `Empty` or an agreed public empty state.
-- [ ] Preserve error state with `getApiErrorMessage`.
-- [ ] Add or update Shows page CSS file if page layout needs CSS.
+- [x] Inspect `shows.html` and identify top-level sections.
+- [x] Compare current `Shows.tsx` section map against prototype sections.
+- [x] Decide whether `PubHero` remains in the Shows page.
+- [x] Replace `PubShowRow` list with canonical `ShowGrid` / `ShowTile` if prototype is poster-grid based.
+- [x] Keep `MailingListCTA` if present in baseline.
+- [x] Preserve RTK Query behavior through `useUpcomingShows()` or generated RTK Query hooks.
+- [x] Preserve loading state.
+- [x] Preserve empty state with `Empty` or an agreed public empty state.
+- [x] Preserve error state with `getApiErrorMessage`.
+- [x] Add or update Shows page CSS file if page layout needs CSS.
 - [ ] Add long-content or empty Shows Storybook variants if useful.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Run `shows-desktop` visual-diff config.
-- [ ] Tune page and component usage until desktop result is acceptable or documented.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `shows-desktop` visual-diff config.
+- [x] Tune page and component usage until desktop result is acceptable or documented.
 - [ ] Add `shows-mobile` config after desktop selector scopes are stable.
-- [ ] Update diary with exact diffs and accepted differences.
-- [ ] Commit Shows page changes separately.
+- [x] Update diary with exact diffs and accepted differences.
+- [x] Commit Shows page changes separately.
 
 ---
 
@@ -91,13 +91,13 @@ prototype-design/standalone/public/detail.html
 - [ ] Decide `VenueCard` vs `BookingSpaceAside` for detail-page aside.
 - [ ] Document the venue-card decision in the diary.
 - [ ] Preserve route-param parsing and invalid/not-found behavior.
-- [ ] Preserve loading state.
+- [x] Preserve loading state.
 - [ ] Add or update ShowDetail page CSS file.
 - [ ] Add cancelled/not-found/long-lineup story variants if useful.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 - [ ] Add and run `show-detail-desktop` visual-diff config.
 - [ ] Add `show-detail-mobile` config after desktop stabilizes.
-- [ ] Update diary with exact diffs and accepted differences.
+- [x] Update diary with exact diffs and accepted differences.
 - [ ] Commit ShowDetail changes separately.
 
 ---
@@ -123,10 +123,10 @@ prototype-design/standalone/public/archive.html
 - [ ] Preserve loading count behavior or replace with a canonical loading state.
 - [ ] Add empty filtered-state story if useful.
 - [ ] Add or update Archive page CSS file.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 - [ ] Add and run `archive-desktop` visual-diff config.
 - [ ] Add `archive-mobile` config after desktop stabilizes.
-- [ ] Update diary with exact diffs and accepted differences.
+- [x] Update diary with exact diffs and accepted differences.
 - [ ] Commit Archive changes separately.
 
 ---
@@ -152,10 +152,10 @@ prototype-design/standalone/public/book.html
 - [ ] Use `BookingSuccess` in `BookSuccess.tsx` or add a page story using it.
 - [ ] Add submitting and validation-error stories if useful.
 - [ ] Add or update Book page CSS file.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 - [ ] Add and run `book-desktop` visual-diff config.
 - [ ] Add `book-mobile` config after desktop stabilizes.
-- [ ] Update diary with exact diffs and accepted differences.
+- [x] Update diary with exact diffs and accepted differences.
 - [ ] Commit Book/BookSuccess changes separately.
 
 ---
@@ -178,10 +178,10 @@ prototype-design/standalone/public/about.html
 - [ ] Decide how to handle the hero image placeholder.
 - [ ] Add or update About page CSS file.
 - [ ] Add long-copy or mobile story variant if useful.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 - [ ] Add and run `about-desktop` visual-diff config.
 - [ ] Add `about-mobile` config after desktop stabilizes.
-- [ ] Update diary with exact diffs and accepted differences.
+- [x] Update diary with exact diffs and accepted differences.
 - [ ] Commit About changes separately.
 
 ---
@@ -202,8 +202,8 @@ prototype-design/standalone/public/about.html
 
 ## Phase 8 — Final validation and publication
 
-- [ ] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Run `cd web && pnpm -r typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
+- [x] Run `cd web && pnpm -r typecheck`.
 - [ ] Run `cd web && pnpm --filter pyxis-user-site build`.
 - [ ] Run `cd web && pnpm --filter pyxis-user-site build-storybook`.
 - [ ] Attempt `cd web && pnpm -r test`; if it still fails because packages have no test files, document the known issue.
