@@ -978,7 +978,7 @@ This follows the user's request to keep old material available but clearly separ
 
 **Inferred user intent:** Preserve historical evidence while making active workflow paths smaller, clearer, and harder to misuse.
 
-**Commit (code/docs):** pending at diary-write time — intended message: "Quarantine deprecated prototype design artifacts"
+**Commit (code/docs):** `f16de10` — "Quarantine deprecated prototype design artifacts"
 
 ### What I did
 
