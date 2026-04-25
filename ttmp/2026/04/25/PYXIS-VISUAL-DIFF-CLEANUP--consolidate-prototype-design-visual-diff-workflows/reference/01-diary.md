@@ -1344,3 +1344,88 @@ Start with the final handoff, then inspect the commits listed there.
 ### Technical details
 
 `docmgr doctor` is expected to keep warning about unknown topics until project vocabulary is expanded.
+
+
+## Step 16: Write detailed cleanup postmortem
+
+The user asked for a deeper postmortem to close the cleanup chapter and make it possible to focus on proper visual diffing going forward. I wrote a detailed retrospective that explains why the cleanup mattered, what changed, what the numbers now mean, lessons learned, mistakes, sharp edges, and the recommended next visual-diff loop.
+
+This is intentionally more reflective than the final handoff. The handoff is a compact reviewer entrypoint; this postmortem records the why and the learning.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Write a detailed postmortem on the cleanup you did, what you learned, what is worth noting. that way we can close the chapter, and now focus on proper visual diffing moving forward."
+
+**Assistant interpretation:** Create a detailed retrospective document that explains the cleanup, records lessons learned, and marks the transition from infrastructure cleanup to real visual-diff tuning.
+
+**Inferred user intent:** Preserve cleanup context for future review and avoid re-litigating old workflow decisions when starting the next phase.
+
+**Commit (docs):** pending at diary-write time — intended message: "Add detailed visual diff cleanup postmortem"
+
+### What I did
+
+Created:
+
+```text
+reference/04-detailed-cleanup-postmortem.md
+```
+
+Related it to key files with `docmgr doc relate`.
+
+### Why
+
+The cleanup involved a major workflow decision: stop preserving native config compatibility and make JS/spec-driven visual diffing canonical. The detailed postmortem captures that reasoning and makes the next chapter explicit: use the workflow, do not keep cleaning it.
+
+### What worked
+
+The postmortem covers:
+
+- why the cleanup mattered,
+- what changed,
+- how the public-page numbers changed,
+- what was learned,
+- future visual-diffing guidance,
+- mistakes and sharp edges,
+- current project state,
+- recommended Shows tuning loop.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The cleanup itself produced one major process lesson: compatibility is not neutral. Keeping old workflows visible can actively prevent a team from using the right workflow confidently.
+
+### What was tricky to build
+
+The tricky part was writing a postmortem that is detailed enough to be useful but not so procedural that it duplicates the full diary. I focused on decisions and lessons rather than listing every file move.
+
+### What warrants a second pair of eyes
+
+- Confirm that the recommended next chapter should indeed be Shows tuning.
+- Confirm whether any lessons should be elevated into repo-level contributing docs.
+
+### What should be done in the future
+
+Start proper visual diffing/tuning using the JS-canonical suite.
+
+### Code review instructions
+
+Read:
+
+```text
+reference/04-detailed-cleanup-postmortem.md
+```
+
+Then compare with:
+
+```text
+reference/03-final-postmortem-and-handoff.md
+```
+
+The former explains lessons; the latter is the quick operational handoff.
+
+### Technical details
+
+No code changed in this step.
