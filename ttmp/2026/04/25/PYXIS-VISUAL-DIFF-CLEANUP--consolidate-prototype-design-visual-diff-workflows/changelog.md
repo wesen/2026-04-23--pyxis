@@ -29,3 +29,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Deleted five retired public-page native `css-visual-diff run` configs after validating the spec-backed public-page suite still produces 5 pages / 13 sections.
 - Committed public-page native config deletion.
 - Stabilized public prototype selectors by adding `data-page` to the shell, Shows section selectors, a prototype mailing-list CTA counterpart, and matching visual-suite selectors; validated Shows diagnostics and Archive spec smoke.
+- Committed public-page selector stabilization.

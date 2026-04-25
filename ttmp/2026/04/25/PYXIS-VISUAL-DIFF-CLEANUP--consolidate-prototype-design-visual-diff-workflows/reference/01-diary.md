@@ -622,7 +622,7 @@ This is intentionally selector/composition cleanup, not final CSS tuning. The re
 
 **Inferred user intent:** Keep progressing through the cleanup ticket toward a better foundation for later visual tuning.
 
-**Commit (code):** pending at diary-write time — intended message: "Stabilize public page visual selectors"
+**Commit (code):** `8a985a9` — "Stabilize public page visual selectors"
 
 ### What I did
 
