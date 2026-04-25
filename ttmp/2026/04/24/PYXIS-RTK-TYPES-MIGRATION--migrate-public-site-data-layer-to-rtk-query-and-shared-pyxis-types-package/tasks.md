@@ -122,7 +122,7 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 Start here to establish the pattern before touching large organisms.
 
-- [ ] Extract `SafetyNote` styles into `SafetyNote.css`.
+- [x] Extract `SafetyNote` styles into `SafetyNote.css`.
 - [ ] Extract `ArchiveStats` styles into `ArchiveStats.css`.
 - [ ] Extract `TicketStub` styles into `TicketStub.css`.
 - [ ] Extract `LineupRow` styles into `LineupRow.css`.
@@ -132,7 +132,7 @@ Start here to establish the pattern before touching large organisms.
 - [ ] Add/verify root `className` and `data-pyxis-component` selectors for each component.
 - [ ] Add/verify important `data-pyxis-part` selectors for titles, metadata, badges, chips, and actions.
 - [ ] Replace hardcoded colors with tokens or component-local CSS variables.
-- [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
 - [ ] Run matching molecule visual-diff configs for touched components.
 - [ ] Commit this batch separately.
 

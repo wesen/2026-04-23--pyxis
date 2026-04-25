@@ -1,0 +1,16 @@
+/* SafetyNote — quiet safer-space/public-event note. */
+
+:where([data-pyxis-component='safety-note'][data-pyxis-part='root']) {
+  --pyxis-safety-note-color: #8E887E;
+  --pyxis-safety-note-border-color: #EAE7E0;
+  --pyxis-safety-note-font-size: 12.5px;
+  --pyxis-safety-note-line-height: 1.65;
+  --pyxis-safety-note-padding-left: 14px;
+
+  border-left: 2px solid var(--pyxis-safety-note-border-color);
+  color: var(--pyxis-safety-note-color);
+  font-size: var(--pyxis-safety-note-font-size);
+  font-style: italic;
+  line-height: var(--pyxis-safety-note-line-height);
+  padding-left: var(--pyxis-safety-note-padding-left);
+}

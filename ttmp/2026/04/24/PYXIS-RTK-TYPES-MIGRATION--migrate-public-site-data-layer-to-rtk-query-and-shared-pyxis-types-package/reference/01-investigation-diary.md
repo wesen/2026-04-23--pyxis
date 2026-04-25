@@ -213,3 +213,37 @@ data-pyxis-part
 ### Next steps
 
 Start the implementation tasks one by one, beginning with small public molecule CSS extraction so the pattern is validated before larger organisms such as `BookingForm`.
+
+
+## Step 4: Extract `SafetyNote` CSS as the first small molecule
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/SafetyNote/SafetyNote.css`.
+- Moved static inline `SafetyNote` styles from JSX into CSS.
+- Added component-local CSS variables for color, border color, font size, line height, and padding.
+- Updated `SafetyNote.tsx` to self-import CSS and use `clsx('pyxis-safety-note', className)`.
+- Expanded `SafetyNote.stories.tsx` with a `ThemeOverride` story that demonstrates overriding the component-local CSS variables.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/safety-note-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current pixel-diff output for `SafetyNote` is:
+
+```text
+component 9.2839% | 2855/30752
+root      9.2839% | 2855/30752
+```
+
+CSS diff reports only:
+
+```text
+box-sizing: content-box vs border-box
+font-family: Inter, system-ui, ... vs Inter, ...
+```
+
+This suggests the extraction did not introduce obvious CSS property drift in the compared properties, but the existing pixel diff still warrants later tuning if `SafetyNote` needs accepted/near-exact parity.
