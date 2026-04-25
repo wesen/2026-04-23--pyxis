@@ -34,3 +34,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Committed refreshed selector-stabilized baselines and spec mirror generator.
 - Updated bottom-up visual parity playbook to point public-page validation at JS visual suite scripts and mark native component config directories as retired inputs.
 - Committed visual parity playbook JS-suite update.
+- Created `prototype-design/-deprecated/` quarantine, moved old native configs/scripts/generated outputs/screenshots/imports out of active paths, updated inventory/tasks, and validated JS visual suite.

@@ -962,3 +962,200 @@ rg "config-dir|visual-diff/userland/[0-9]" docs/playbooks/05-bottom-up-component
 ### Technical details
 
 No generated artifacts were produced.
+
+
+## Step 13: Quarantine deprecated prototype-design artifacts
+
+I created a `prototype-design/-deprecated/` quarantine and moved the old prototype baseline, Storybook catalog, native visual-diff config, generated output, scratch screenshot, imported HTML, old `.mjs`, and old `.sh` material out of active paths. The active `prototype-design/visual-diff` tree now contains only fixture preparation and the promoted JS userland.
+
+This follows the user's request to keep old material available but clearly separate from files that still serve the current workflow. The move is intentionally archival: active Pyxis work should not run scripts or configs from `-deprecated`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue. Make a -deprecated folder also so that we can move everything that doesn't serve a purpose (old yamls, html, pngs, mjs, sh, etc...)."
+
+**Assistant interpretation:** Continue cleanup by creating a deprecated quarantine folder and moving obsolete/historical prototype-design artifacts into it instead of leaving them in active source paths.
+
+**Inferred user intent:** Preserve historical evidence while making active workflow paths smaller, clearer, and harder to misuse.
+
+**Commit (code/docs):** pending at diary-write time — intended message: "Quarantine deprecated prototype design artifacts"
+
+### What I did
+
+Created:
+
+```text
+prototype-design/-deprecated/README.md
+```
+
+Moved old native configs into:
+
+```text
+prototype-design/-deprecated/visual-diff-native-configs/
+```
+
+including:
+
+```text
+prototype-design/visual-diff/prototype-*.css-visual-diff.yml
+prototype-design/visual-diff/public-components/**
+prototype-design/visual-diff/comparisons/**
+prototype-design/visual-diff/storybook-components/**
+```
+
+Moved old baseline/catalog scripts into:
+
+```text
+prototype-design/-deprecated/visual-diff-scripts/
+```
+
+including the old `06`–`22` baseline/catalog `.sh` and `.mjs` scripts.
+
+Moved generated/historical output into:
+
+```text
+prototype-design/-deprecated/generated-output/
+```
+
+including:
+
+```text
+prototype-design/baseline/**
+prototype-design/storybook-catalog/**
+prototype-design/visual-comparisons/**
+```
+
+Moved old scratch/import material into:
+
+```text
+prototype-design/-deprecated/screenshots-and-imports/
+```
+
+including root PNGs, `comp/`, `direct/`, `uploads/`, and the imported `Pyxis *.html` files.
+
+Updated `.gitignore` for ignored generated-output subtrees under `-deprecated` so previously ignored generated artifacts remain local/ignored after the directory move.
+
+Rewrote the inventory doc:
+
+```text
+reference/02-prototype-design-visual-inventory.md
+```
+
+to reflect the new active/deprecated split.
+
+Updated `tasks.md` to mark native config archival/removal and generated-output quarantine complete.
+
+### Why
+
+The active prototype-design tree had several generations of artifacts mixed together: current source, native-run configs, generated comparison reports, baseline catalogs, old scripts, and scratch screenshots. Keeping all of that in active paths made it hard to know what a developer should use.
+
+The quarantine keeps evidence available without presenting it as current workflow.
+
+### What worked
+
+After the move, active old-extension files outside `-deprecated` are only the current userland scripts; no active native `*.css-visual-diff.yml` configs remain.
+
+Validation succeeded:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-list-targets.sh >/tmp/list-after-deprecated-move.json
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh >/tmp/archive-after-deprecated-move.json
+```
+
+Result:
+
+```text
+{'targets': 13, 'archiveSections': 2, 'archiveMax': 7.2125872435568175}
+```
+
+Full public-page spec suite also succeeded:
+
+```bash
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh >/tmp/public-suite-after-deprecated-quarantine.json
+```
+
+Result:
+
+```text
+{'pageCount': 5, 'sectionCount': 13, 'maxChangedPercent': 66.03678642230044, 'classificationCounts': {'major-mismatch': 4, 'review': 4, 'tune-required': 5}}
+```
+
+Generated runtime artifacts were removed afterward:
+
+```bash
+rm -rf prototype-design/visual-comparisons/cssvd-js prototype-design/visual-comparisons
+```
+
+### What didn't work
+
+One `git mv` command failed when moving `prototype-design/visual-comparisons` because the directory only contained ignored/untracked generated outputs from Git's perspective:
+
+```text
+fatal: source directory is empty, source=prototype-design/visual-comparisons, destination=prototype-design/-deprecated/generated-output/visual-comparisons
+```
+
+I fixed this by moving the directory with plain `mv` and adding ignore rules for the deprecated generated-output location. That keeps local generated output quarantined without force-adding ignored artifacts to Git.
+
+### What I learned
+
+Some generated output directories had a mix of tracked and ignored/untracked files. `git mv` handled tracked files; ignored generated files needed filesystem moves plus `.gitignore` updates. This is exactly why the deprecated folder needs an explicit policy: not all historical evidence should become tracked source.
+
+### What was tricky to build
+
+The tricky part was preserving history without accidentally committing large ignored generated output. The baseline and storybook catalog trees contain many generated files, some tracked and some ignored. The solution was:
+
+1. use `git mv` for tracked historical files,
+2. use `mv` for ignored generated directories,
+3. add `.gitignore` rules for `prototype-design/-deprecated/generated-output/**` subtrees that should remain local/ignored,
+4. validate that active workflow scripts still run.
+
+### What warrants a second pair of eyes
+
+- Confirm that the quarantine structure is acceptable, especially the names `generated-output`, `visual-diff-native-configs`, `visual-diff-scripts`, and `screenshots-and-imports`.
+- Confirm whether any of the quarantined docs/playbooks should be marked historical or moved later.
+- Confirm whether `prototype-design/-deprecated` should eventually be removed from the repo entirely after enough time.
+
+### What should be done in the future
+
+- Update older playbooks (`02`, `03`, `04`) to say their workflows are deprecated or point to the new locations.
+- Optionally add a check that no active `prototype-design` path contains `*.css-visual-diff.yml` outside `-deprecated`.
+- Continue Shows tuning or build component-level JS visual suites if component parity remains active.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/-deprecated/README.md
+.gitignore
+ttmp/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP--consolidate-prototype-design-visual-diff-workflows/reference/02-prototype-design-visual-inventory.md
+```
+
+Validate active tree shape:
+
+```bash
+find prototype-design -path 'prototype-design/-deprecated' -prune -o -type f \
+  \( -name '*.css-visual-diff.yml' -o -name '*.mjs' -o -name '*.png' \) -print
+find prototype-design/visual-diff -maxdepth 4 -type f | sort
+```
+
+Validate JS workflow:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-list-targets.sh
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js prototype-design/visual-comparisons
+```
+
+### Technical details
+
+Current active inventory after quarantine:
+
+```text
+canonical-source: 88
+deprecated: 6639
+active retired-native: 0
+active generated-output: 0
+needs-review: 0
+```

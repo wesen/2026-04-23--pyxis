@@ -13,3 +13,12 @@ prototype-design/storybook-catalog/sample-atoms/
 
 # Generated prototype-vs-Storybook comparison outputs
 prototype-design/visual-comparisons/
+
+# Deprecated generated prototype-design outputs kept locally for historical inspection.
+prototype-design/-deprecated/generated-output/baseline/artifacts/
+prototype-design/-deprecated/generated-output/baseline/sample/
+prototype-design/-deprecated/generated-output/baseline/sample-public-components/
+prototype-design/-deprecated/generated-output/baseline/sample-full-app/
+prototype-design/-deprecated/generated-output/storybook-catalog/artifacts/
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/
+prototype-design/-deprecated/generated-output/visual-comparisons/

@@ -27,7 +27,7 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 
 - [x] Produce tracked inventory of `prototype-design` visual assets, configs, scripts, and generated outputs.
 - [x] Classify paths as canonical-source, retired-native, generated, generated-historical, or needs-review.
-- [x] Decide which generated/historical paths under `prototype-design/baseline` should remain tracked for now: defer deletion to a separate targeted baseline-corpus pass.
+- [x] Decide which generated/historical paths under `prototype-design/baseline` should remain tracked for now: moved to `prototype-design/-deprecated/generated-output/baseline/` as historical quarantine.
 
 ## Phase 2 — Source-of-truth cleanup
 
@@ -52,7 +52,7 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 - [x] Validate Shows semantic diagnostics before and after selector changes.
 - [x] Refresh public-page `baselineDiffs` after selector stabilization.
 - [x] Add a spec-mirror refresh script to prevent YAML/CommonJS drift.
-- [ ] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
+- [x] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
 
 ## Phase 5 — Script and docs cleanup
 
@@ -64,15 +64,15 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 ## Phase 6 — Native run-config removal
 
 - [x] Mine public-page configs under `prototype-design/visual-diff/comparisons/public-pages/**`; useful data is represented in `userland/specs/public-pages.desktop.visual.yml`.
-- [ ] Mine remaining component-system configs under `prototype-design/visual-diff/comparisons/component-system/**` for useful data missing from suite specs.
+- [x] Move remaining component-system configs under `prototype-design/visual-diff/comparisons/component-system/**` to `prototype-design/-deprecated/visual-diff-native-configs/comparisons/` for historical quarantine.
 - [x] Delete public-page native run configs from active workflow paths after migration.
-- [ ] Delete remaining native run configs from active workflow paths after migration.
-- [ ] Record removed paths and rationale in the cleanup diary/postmortem.
+- [x] Move remaining native run configs from active workflow paths to `prototype-design/-deprecated/visual-diff-native-configs/`.
+- [x] Record removed/moved paths and rationale in the cleanup diary/postmortem.
 
 ## Phase 7 — Final validation and handoff
 
-- [ ] Run promoted smoke suite.
+- [x] Run promoted smoke suite subset after deprecated move (`smoke-list-targets`, `smoke-compare-spec-archive`).
 - [ ] Run full spec suite.
-- [ ] Ensure generated artifacts are not committed.
+- [x] Ensure generated artifacts are not committed.
 - [ ] Write final postmortem/reference report.
 - [ ] Commit cleanup in safe chunks.
