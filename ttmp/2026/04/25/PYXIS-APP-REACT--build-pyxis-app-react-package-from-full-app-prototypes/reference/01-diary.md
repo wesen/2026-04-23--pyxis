@@ -985,7 +985,9 @@ Do not tune each component into a one-off clone of its current prototype crop. U
 
 ## Step 10: Token-hardening pass before Phase 7
 
-Before starting the full Dashboard page work, I did the short theme-cohesion pass requested by the user. The goal was not to retune pixels, but to make the existing app styling less component-local and easier to reuse during Phase 7.
+Before starting the full Dashboard page work, I did a short theme-cohesion pass. The intent was to make the app easier to tune as a system: shared surfaces, borders, shadows, radii, dark-surface text, and status colors should live in reusable variables rather than scattered component literals.
+
+This pass intentionally did not chase a lower visual diff. It kept the already-proven MetricCard and dashboard-metrics crops stable while moving local CSS values into a more coherent app token vocabulary.
 
 ### Prompt Context
 
@@ -995,7 +997,9 @@ Before starting the full Dashboard page work, I did the short theme-cohesion pas
 
 **Inferred user intent:** Prepare the app for full Dashboard work with cohesive shared variables, not one-off component tweaks.
 
-### What I changed
+**Commit (code):** fba5369 — "Harden pyxis app visual theme tokens"
+
+### What I did
 
 - Expanded `web/packages/pyxis-app/src/styles/app-tokens.css` with shared tokens for:
   - login gradient colors,
@@ -1008,46 +1012,51 @@ Before starting the full Dashboard page work, I did the short theme-cohesion pas
   - modal backdrop,
   - status-dot ring alpha.
 - Replaced hard-coded component values in:
-  - `MetricCard.css`,
-  - `AppShell.css`,
-  - `Panels.css`,
-  - `StatusDot.css`,
-  - `Rows.css`,
-  - `pages.css`.
+  - `web/packages/pyxis-app/src/components/molecules/MetricCard.css`,
+  - `web/packages/pyxis-app/src/components/shell/AppShell.css`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`,
+  - `web/packages/pyxis-app/src/components/atoms/StatusDot.css`,
+  - `web/packages/pyxis-app/src/components/molecules/Rows.css`,
+  - `web/packages/pyxis-app/src/pages/pages.css`.
+- Ran typecheck and the already-proven component/metrics visual smoke scripts.
+- Inspected the post-token-hardening dashboard metrics crops with `read`.
+- Recorded the work in docmgr/changelog in commit `2492fed` — "Diary: record app token hardening".
 
-### Validation
+### Why
 
-- Typecheck:
+- Dashboard page work would otherwise invite per-component tweaks to match each crop.
+- Shared token names make it easier to decide whether a diff is component-specific or theme-wide.
+- Keeping MetricCard and dashboard metrics unchanged proved the token extraction was behavior-preserving enough for Phase 7.
+
+### What worked
+
+- TypeScript validation passed:
 
 ```bash
 cd web && pnpm --filter pyxis-app typecheck
 ```
 
-- MetricCard visual smoke after token hardening:
+- MetricCard visual smoke stayed unchanged in the review band:
 
 ```bash
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh run-06-token-hardening
 ```
 
-Result stayed unchanged in the review band:
-
 ```text
 3.724216959511077%, 1170/31416, review
 ```
 
-- Dashboard metrics visual smoke after token hardening:
+- Dashboard metrics visual smoke also stayed unchanged in the review band:
 
 ```bash
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/04-smoke-compare-dashboard-metrics.sh run-09-token-hardening
 ```
 
-Result stayed unchanged in the review band:
-
 ```text
 7.44485294117647%, 9801/131648, review
 ```
 
-I inspected the new dashboard metrics crops with `read`:
+- The final metrics crops remained aligned:
 
 ```text
 various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts/metrics/left_region.png
@@ -1055,17 +1064,77 @@ various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts
 various/06-css-loop-dashboard-metrics/run-09-token-hardening/dashboard/artifacts/metrics/diff_only.png
 ```
 
-The crops remain aligned; the diff remains mostly typography/edge pixels, so this is acceptable and should not be chased further.
+### What didn't work
 
-### Why this matters for Phase 7
+- No hard failure in this step.
+- The visual diff numbers did not improve; this was expected because the pass deliberately preserved the rendered values while moving them into tokens.
 
-The Dashboard page can now compose shell, panels, rows, metric cards, and mobile nav from a more coherent app theme. Any future page-level tuning should first ask whether a value belongs in `app-tokens.css` before adding local CSS.
+### What I learned
+
+- Token-hardening is safest when it is validated against both a component-level crop and a section-level crop.
+- The dashboard metrics result is a useful guardrail: if token changes drift that known section, future page tuning becomes harder to trust.
+
+### What was tricky to build
+
+The tricky part was avoiding accidental visual drift while renaming values. Shadows and alpha colors were the highest-risk values because moving `rgba(...)` literals into RGB-channel tokens can subtly change rendered output if the channel or alpha is mistyped.
+
+The approach was to promote the exact existing values first, then validate MetricCard and dashboard metrics before making any new visual decisions.
+
+### What warrants a second pair of eyes
+
+- Review `app-tokens.css` naming to make sure the token vocabulary is understandable before more pages depend on it.
+- Check whether `--app-radius-sm` / `--app-radius-xs` naming is intuitive now that old literals like `8px`, `10px`, `12px` were normalized.
+
+### What should be done in the future
+
+- Continue promoting repeated dashboard section values into shared tokens as organisms are extracted.
+- Avoid introducing new hard-coded colors/shadows/radii in section-specific CSS unless they are explicitly temporary evidence.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-app/src/styles/app-tokens.css`.
+- Then review the CSS consumers listed under "What I did" and confirm they reference tokens rather than duplicated literals.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual checks:
+
+```bash
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh run-review
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/04-smoke-compare-dashboard-metrics.sh run-review
+```
+
+### Technical details
+
+The post-token-hardening visual artifacts are under:
+
+```text
+various/05-css-loop-metric-card/run-06-token-hardening/
+various/06-css-loop-dashboard-metrics/run-09-token-hardening/
+```
+
+The key rule established by this step is: future Dashboard tuning should first ask whether a repeated value belongs in `app-tokens.css` before adding local section CSS.
 
 ## Step 11: Start Phase 7 Dashboard composition
 
-I continued into Phase 7 after the token-hardening pass. The goal was to improve the full responsive Dashboard page structurally using the proven loop, not to chase exact pixels.
+After token-hardening, I composed the first responsive Dashboard checkpoint. The goal was structural parity, not final pixel parity: get the shell, hero, metrics, upcoming shows, quick actions, attention/activity areas, and mobile bottom navigation into the React app so focused section tuning could begin.
 
-### What changed
+The full-page visual diff improved substantially on desktop after matching the shell/sidebar direction, but it stayed above review-band. That is expected for a full-page checkpoint because the prototype contains richer sidebar/topbar details, extra desktop panels, and different text contracts.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 10)
+
+**Assistant interpretation:** Continue from the token-hardening checkpoint into Phase 7 responsive Dashboard composition.
+
+**Inferred user intent:** Build a working responsive Dashboard baseline that can be tuned with the proven css-visual-diff loop.
+
+**Commit (code):** dadc31b — "Compose responsive dashboard page checkpoint"
+
+### What I did
 
 - Added dashboard-specific composition inside `DashboardOverview`:
   - desktop/mobile hero section for the next show,
@@ -1075,7 +1144,7 @@ I continued into Phase 7 after the token-hardening pass. The goal was to improve
   - desktop upcoming-shows table with the existing table/row components,
   - responsive mobile ordering that hides upcoming shows to match the mobile prototype more closely.
 - Adjusted `AppShell`:
-  - desktop sidebar now uses the light surface theme to match the full-app prototype and the cohesive theme tokens,
+  - desktop sidebar now uses the light surface theme to match the full-app prototype and cohesive theme tokens,
   - mobile dashboard hides the generic topbar in favor of the mobile dashboard header,
   - mobile bottom nav is static at page bottom and labels the fifth item as `More`.
 - Added ticket script:
@@ -1085,64 +1154,158 @@ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-pro
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh mobile run-name
 ```
 
-### Validation
+- Ran desktop/mobile full-page visual checkpoints.
+- Inspected representative final right-side crops with `read`.
+- Recorded the work in docmgr/changelog in commit `50e6fb8` — "Diary: record dashboard page checkpoint".
 
-- Typecheck:
+### Why
+
+- Phase 7 needed a page-level baseline before individual Dashboard sections could be refined.
+- The React app needed the same page to respond to desktop and 390px mobile viewports, rather than creating a separate mobile page.
+- A full-page checkpoint establishes what is structurally present and what still requires focused section work.
+
+### What worked
+
+- TypeScript validation passed:
 
 ```bash
 cd web && pnpm --filter pyxis-app typecheck
 ```
 
-- Desktop page runs:
+- Desktop full-page diff improved across the loop:
   - `run-01-baseline`: `42.4321%`, major mismatch.
   - `run-02-hero-attention`: `28.4535%`, major/tune band depending on classification label.
   - `run-03-table-mobile-trim`: `28.7209%`, major/tune band.
   - `run-04-light-sidebar`: `16.4150%`, `245069` changed pixels, `tune-required`.
-
-- Mobile page runs:
+- Mobile full-page checkpoints were captured:
   - `run-01-baseline`: `33.4386%`, major mismatch.
   - `run-02-hero-attention`: `27.9984%`, major/tune band.
   - `run-03-table-mobile-trim`: `29.1554%`, major/tune band.
   - `run-04-bottom-nav-static`: `25.9643%`, major/tune band.
-
-I inspected representative final crops with `read`:
+- Representative crops inspected with `read`:
 
 ```text
 various/07-dashboard-page/desktop/run-04-light-sidebar/dashboard/artifacts/page/right_region.png
 various/07-dashboard-page/mobile/run-04-bottom-nav-static/dashboard/artifacts/page/right_region.png
 ```
 
-### Current assessment
+### What didn't work
 
-The full page is now structurally much closer: hero, metrics, upcoming, quick actions, activity, mobile attention cards, and mobile bottom nav are all present. The full-page diff remains above review-band because the full prototype has richer sidebar/topbar details, different table density, extra bot/status/attention desktop panels, and different hidden/visible text contracts. This should be treated as a Phase 7 checkpoint, not a final visual acceptance.
+- Full-page parity remained too noisy to use as the main tuning loop.
+- The desktop prototype contains sidebar grouping/user-footer/status panels that the React checkpoint did not yet implement.
+- The mobile comparison still differed in content ordering and text contracts, especially around upcoming shows/activity visibility.
 
-### Next tuning ideas
+### What I learned
 
-- Add desktop sidebar grouping/user footer only if needed for the page diff.
-- Add desktop bot-status and settings mini panels if full-page parity matters.
-- Decide whether mobile metric labels should use mobile-specific copy (`Pending`, `Capacity`) or remain shared semantic labels.
-- Consider adding focused section specs for `dashboard-hero`, `dashboard-upcoming`, `dashboard-activity`, and `dashboard-attention` rather than tuning only the full-page crop.
+- Full-page comparisons are good checkpoints, but they are poor edit-loop drivers once a page has many independently moving sections.
+- Matching the shell/sidebar color direction produced a large desktop improvement, which confirmed that theme-level decisions can dominate page-level diffs.
+
+### What was tricky to build
+
+The hard part was balancing desktop and mobile in one component tree. A change that helped desktop page parity, such as adding richer upcoming-show content, could hurt mobile height/order parity.
+
+The solution was to treat this as a checkpoint and defer fine-grained work to extracted section comparisons rather than keep tuning the whole page crop.
+
+### What warrants a second pair of eyes
+
+- Review `DashboardOverview` in `Panels.tsx`; it grew too large during the checkpoint and should continue being split into named organisms.
+- Review whether desktop-only bot/status/attention panels should be implemented for parity or intentionally deferred.
+- Review mobile copy differences (`Pending bookings` vs `Pending`, `Capacity use` vs `Capacity`) before tuning metrics further.
+
+### What should be done in the future
+
+- Add focused section specs for `dashboard-hero`, `dashboard-upcoming`, `dashboard-activity`, and `dashboard-attention`.
+- Extract page sections into named components/organisms and tune those before returning to the full-page crop.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`
+  - `web/packages/pyxis-app/src/components/shell/AppShell.tsx`
+  - `web/packages/pyxis-app/src/components/shell/AppShell.css`
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh desktop run-review
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh mobile run-review
+```
+
+### Technical details
+
+The full-page visual artifacts for this checkpoint are under:
+
+```text
+various/07-dashboard-page/desktop/run-04-light-sidebar/
+various/07-dashboard-page/mobile/run-04-bottom-nav-static/
+```
+
+The checkpoint should not be considered final visual acceptance; it is the baseline from which section-level Dashboard work should proceed.
 
 ## Step 12: Dashboard section extraction, Storybook enrichment, and CSS import fix
 
-The user reminded me to keep extracting atoms/molecules/organisms as the dashboard grows instead of letting the page component become a blob, and to build a richer Storybook around those extracted parts.
+The user reminded me to extract atoms, molecules, and organisms as needed rather than tuning the full Dashboard as a monolith. I responded by adding prototype/React section selectors, extracting dashboard-specific organism pieces, and creating a richer Storybook surface for the dashboard sections.
 
-### What I changed
+During this same step I also diagnosed and fixed a Storybook/Vite CSS loading failure. The dashboard briefly looked completely broken because the `Panels.css` module was being served with an empty injected CSS string; adding a query suffix to the import forced a distinct Vite CSS module and restored the styles.
+
+### Prompt Context
+
+**User prompt (verbatim):** "remember to extract components / atoms / molecules / organisms as needed to make the job easier and a rich storybook"
+
+**Assistant interpretation:** Do not let Phase 7 continue as one large page component; extract dashboard sections into reusable organism-level pieces and add Storybook stories for them.
+
+**Inferred user intent:** Keep the visual feedback loop small, reviewable, and reusable by tuning section stories/specs instead of only full-page crops.
+
+**Commit (code):** 6b4a714 — "Extract dashboard sections and enrich stories"
+
+### What I did
 
 - Added prototype section selectors for focused dashboard comparisons:
   - desktop `dashboard-hero`, `dashboard-upcoming`, `dashboard-quick-actions`, `dashboard-activity`, `dashboard-attention`,
   - mobile `dashboard-hero`, `dashboard-metrics`, `dashboard-attention`, `dashboard-activity`.
-- Refreshed the JS mirror specs with `refresh-spec-mirrors.py`.
+- Updated visual specs:
+  - `prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml`.
+- Refreshed JS mirror specs:
+
+```bash
+python3 prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py
+```
+
 - Extracted dashboard-specific organism sections into:
-  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`
+
+```text
+web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
+```
+
 - Added rich Storybook coverage in:
-  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`
-- Exported the new sections from `web/packages/pyxis-app/src/index.ts`.
-- Fixed a Storybook/Vite CSS loading issue by changing the Panels CSS import to `./Panels.css?dashboard`. Before the fix, Vite served an empty `__vite__css` for `Panels.css` in the iframe after HMR, which made dashboard sections render unstyled. The user confirmed the UI was fixed after this change.
 
-### Validation
+```text
+web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx
+```
 
-- Typecheck:
+- Exported the new sections from:
+
+```text
+web/packages/pyxis-app/src/index.ts
+```
+
+- Fixed the Storybook/Vite CSS loading issue by changing the Panels CSS import in `Panels.tsx` to:
+
+```ts
+import './Panels.css?dashboard';
+```
+
+### Why
+
+- Focused organism stories and `--section` visual specs make the feedback loop shorter than full-page tuning.
+- Extracted dashboard sections are easier to review, reuse, and theme.
+- Rich Storybook stories make it possible to inspect desktop/mobile section variants without running the whole page.
+
+### What worked
+
+- TypeScript validation passed:
 
 ```bash
 cd web && pnpm --filter pyxis-app typecheck
@@ -1151,23 +1314,127 @@ cd web && pnpm --filter pyxis-app typecheck
 - Full page after CSS import fix:
   - desktop `run-05-css-import-fix`: `16.414974279284106%`, `245069` changed pixels, `tune-required`.
   - mobile `run-07-css-import-fix`: `27.23846973048251%`, `133000` changed pixels, `major-mismatch`.
-
 - Focused section baseline runs were created under:
-  - `various/08-dashboard-section-focus/desktop/run-01-sections/`
-  - `various/08-dashboard-section-focus/mobile/run-01-sections/`
-  - `various/08-dashboard-section-focus/mobile/run-02-mobile-compact/`
 
-### Important caution
+```text
+various/08-dashboard-section-focus/desktop/run-01-sections/
+various/08-dashboard-section-focus/mobile/run-01-sections/
+various/08-dashboard-section-focus/mobile/run-02-mobile-compact/
+```
 
-The mobile compact tuning briefly exposed a CSS/HMR failure where `Panels.css` was fetched but injected as an empty style module. This made the dashboard look completely broken in Storybook. The fix was the query-suffixed import. If this happens again, inspect the served CSS module and check whether `const __vite__css = ""` appears.
+- I verified in Storybook via Playwright that the CSS import fix restored styles:
 
-### Next recommended work
+```js
+() => ({
+  panelStyles: [...document.querySelectorAll('style')].some(s => s.textContent.includes('app-panel')),
+  heroBg: getComputedStyle(document.querySelector('.app-dashboard-hero')).backgroundColor,
+  metricGrid: getComputedStyle(document.querySelector('.app-metrics-grid')).gridTemplateColumns,
+})
+```
 
-Continue tuning via extracted section stories/specs, not the full page only. The next best extraction targets are:
+Result after fix:
 
-- `DashboardMetricsGrid` as an organism around `MetricCard`, with desktop/mobile label variants if needed.
-- `DashboardActivityPanel` around `ActivityFeedItem`, with desktop/mobile item-count behavior.
-- A dedicated mobile bottom nav atom/molecule if route pages need richer mobile parity.
+```json
+{
+  "panelStyles": true,
+  "heroBg": "rgb(31, 30, 28)",
+  "metricGrid": "275.5px 275.5px 275.5px 275.5px"
+}
+```
+
+### What didn't work
+
+- A mobile compact CSS attempt made the dashboard look broken because Storybook/Vite served `Panels.css` as an empty injected style module.
+- The failing symptom was visible in the browser and confirmed by inspecting the served CSS module:
+
+```text
+const __vite__css = ""
+```
+
+- The first attempt to validate with the full-page mobile comparison after that failure produced a much worse page result:
+
+```text
+run-05-mobile-compact: 61.91450044208665%, major-mismatch
+```
+
+- The issue was fixed by importing the CSS as `./Panels.css?dashboard`, and the user confirmed: "it's fixed."
+
+### What I learned
+
+- Vite/Storybook CSS HMR can fail in a way that still returns HTTP 200 for the CSS module while injecting an empty style string.
+- When the UI suddenly looks unstyled, it is worth inspecting the served CSS module rather than only the source CSS file.
+- Section extraction should happen before repeated full-page tuning; otherwise page-level diffs hide the source of regressions.
+
+### What was tricky to build
+
+The CSS failure was tricky because the source file was syntactically balanced and typecheck still passed. The browser requested `Panels.css` successfully, but the injected Vite module contained an empty `__vite__css` string, so the actual runtime page had no panel/dashboard styles.
+
+I diagnosed it by checking computed styles in the iframe, then fetching the served CSS module and looking for whether `.app-panel` was present. The fix was to force a distinct CSS module URL with a query-suffixed import.
+
+### What warrants a second pair of eyes
+
+- Review whether the `?dashboard` CSS import should remain as the long-term fix or whether Storybook/Vite cache/HMR should be cleaned another way.
+- Review the split between `Panels.tsx` and `DashboardSections.tsx`; more extraction is likely needed (`DashboardMetricsGrid`, `DashboardActivityPanel`, `DashboardUpcomingPanel`).
+- Review the new Storybook stories to ensure they cover the states reviewers actually need.
+
+### What should be done in the future
+
+- Extract `DashboardMetricsGrid` as an organism around `MetricCard`, with desktop/mobile label variants if needed.
+- Extract `DashboardActivityPanel` around `ActivityFeedItem`, with desktop/mobile item-count behavior.
+- Extract `DashboardUpcomingPanel` so its table/mobile-card variants can be tuned independently.
+- Consider a dedicated mobile bottom nav atom/molecule if route pages need richer mobile parity.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx`,
+  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`,
+  - `prototype-design/screens/auth-dash.jsx`,
+  - `prototype-design/screens/mobile.jsx`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh desktop run-review
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh mobile run-review
+```
+
+- In Storybook, inspect:
+
+```text
+Pyxis App/Dashboard Sections/HeroDesktop
+Pyxis App/Dashboard Sections/MobileHeaderAndCopy
+Pyxis App/Dashboard Sections/MetricsGridDesktop
+Pyxis App/Dashboard Sections/UpcomingPanelDesktop
+Pyxis App/Dashboard Sections/QuickActionsPanel
+Pyxis App/Dashboard Sections/AttentionPanelMobile
+Pyxis App/Dashboard Sections/ActivityPanel
+Pyxis App/Dashboard Sections/MobileDashboardStack
+```
+
+### Technical details
+
+The CSS failure can be checked in the browser with:
+
+```js
+[...document.querySelectorAll('style')].some(s => s.textContent.includes('app-panel'))
+```
+
+The section-level visual artifacts are under:
+
+```text
+various/08-dashboard-section-focus/
+```
+
+The full-page post-fix visual artifacts are under:
+
+```text
+various/07-dashboard-page/desktop/run-05-css-import-fix/
+various/07-dashboard-page/mobile/run-07-css-import-fix/
+```
 
 ## Step 13: Add runbook guidance for organism extraction before full-page tuning
 
