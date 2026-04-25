@@ -206,3 +206,34 @@ page    18.5282%
 ```
 
 This is a substantial improvement over the Shows first-pass diff, but still needs tuning before parity acceptance.
+
+
+## Step 7: Phase 4 Archive first composition pass
+
+### What I did
+
+- Replaced local archive header with `PublicPageHeader`.
+- Extended `ArchiveSearchFilters` with optional controlled search props and result label so the page can preserve `useArchive(search)` behavior while using the canonical component.
+- Kept `ArchiveStats`.
+- Replaced local `YearGroups` and `ArchiveRow` implementations with `YearGroup`, `ArchiveShowList`, and `ArchiveShowRow`.
+- Added `web/packages/pyxis-user-site/src/pages/Archive.css`.
+- Added `prototype-design/visual-diff/comparisons/public-pages/archive-desktop.css-visual-diff.yml`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd web && pnpm --filter pyxis-user-site typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/public-pages/archive-desktop.css-visual-diff.yml
+```
+
+### Result
+
+The archive config runs with full two-section coverage. First-pass residual diffs:
+
+```text
+content 7.1281%
+page    6.6511%
+```
+
+This is close enough for a strong first composition pass, but still needs review/tuning before final acceptance.

@@ -32,6 +32,12 @@
   outline-offset: 2px;
 }
 
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='result-label']) {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  margin-inline: auto 6px;
+}
+
 :where([data-pyxis-component='archive-search-filters'][data-pyxis-part='years']) {
   display: flex;
   gap: 6px;

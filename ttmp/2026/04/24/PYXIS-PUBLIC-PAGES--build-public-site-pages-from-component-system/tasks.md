@@ -111,23 +111,23 @@ web/packages/pyxis-user-site/src/pages/Archive.tsx
 prototype-design/standalone/public/archive.html
 ```
 
-- [ ] Inspect `archive.html` and identify sections.
-- [ ] Replace local page header with `PublicPageHeader` if matching baseline.
-- [ ] Replace local search row with `ArchiveSearchFilters` if props fit.
-- [ ] Extend `ArchiveSearchFilters` carefully if the page needs missing props.
-- [ ] Keep `ArchiveStats` for totals.
-- [ ] Replace local `YearGroups` with `YearGroup`.
-- [ ] Replace local `ArchiveRow` with `ArchiveShowRow`.
-- [ ] Use `ArchiveShowList` for grouped row layout.
-- [ ] Preserve search state and `useArchive(search)` behavior.
-- [ ] Preserve loading count behavior or replace with a canonical loading state.
+- [x] Inspect `archive.html` and identify sections.
+- [x] Replace local page header with `PublicPageHeader` if matching baseline.
+- [x] Replace local search row with `ArchiveSearchFilters` if props fit.
+- [x] Extend `ArchiveSearchFilters` carefully if the page needs missing props.
+- [x] Keep `ArchiveStats` for totals.
+- [x] Replace local `YearGroups` with `YearGroup`.
+- [x] Replace local `ArchiveRow` with `ArchiveShowRow`.
+- [x] Use `ArchiveShowList` for grouped row layout.
+- [x] Preserve search state and `useArchive(search)` behavior.
+- [x] Preserve loading count behavior or replace with a canonical loading state.
 - [ ] Add empty filtered-state story if useful.
-- [ ] Add or update Archive page CSS file.
+- [x] Add or update Archive page CSS file.
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Add and run `archive-desktop` visual-diff config.
+- [x] Add and run `archive-desktop` visual-diff config.
 - [ ] Add `archive-mobile` config after desktop stabilizes.
 - [x] Update diary with exact diffs and accepted differences.
-- [ ] Commit Archive changes separately.
+- [x] Commit Archive changes separately.
 
 ---
 
