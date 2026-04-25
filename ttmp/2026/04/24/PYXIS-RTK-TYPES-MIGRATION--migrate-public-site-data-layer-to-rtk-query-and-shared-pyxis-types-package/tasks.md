@@ -160,7 +160,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
 - [ ] Extract `BookingForm` styles into `BookingForm.css`.
 - [x] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
-- [ ] Extract `BookingRules` styles into `BookingRules.css`.
+- [x] Extract `BookingRules` styles into `BookingRules.css`.
 - [ ] Extract `BookingSuccess` styles into `BookingSuccess.css`.
 - [x] Extract `SaferSpaceAgreement` styles into `SaferSpaceAgreement.css`.
 - [ ] Preserve form label/control relationships in `BookingForm`.

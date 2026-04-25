@@ -1,0 +1,28 @@
+/* BookingRules — compact dark rules/info panel for booking page. */
+
+:where([data-pyxis-component='booking-rules'][data-pyxis-part='root']) {
+  --pyxis-booking-rules-bg: #1F1E1C;
+  --pyxis-booking-rules-color: #E8E3D8;
+  --pyxis-booking-rules-body-color: #BCB7AD;
+
+  background: var(--pyxis-booking-rules-bg);
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  color: var(--pyxis-booking-rules-color);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  padding: 26px;
+}
+
+:where([data-pyxis-component='booking-rules'][data-pyxis-part='title']) {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+:where([data-pyxis-component='booking-rules'][data-pyxis-part='body']) {
+  color: var(--pyxis-booking-rules-body-color);
+}

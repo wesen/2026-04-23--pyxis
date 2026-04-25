@@ -78,4 +78,7 @@
 - Added part selectors for title, spec list/items/labels/values, footer, and email; moved specs into a named constant.
 - Added narrow and theme override Storybook stories.
 - Validated `BookingSpaceAside` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-space-aside-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/149700`.
+- Extracted `BookingRules` styles into `web/packages/pyxis-components/src/public/BookingRules/BookingRules.css`.
+- Added part selectors for `title` and `body`, plus narrow and theme override Storybook stories.
+- Validated `BookingRules` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-rules-default.css-visual-diff.yml`; current pixel diff is `2.4789% | 1174/47360`.
 

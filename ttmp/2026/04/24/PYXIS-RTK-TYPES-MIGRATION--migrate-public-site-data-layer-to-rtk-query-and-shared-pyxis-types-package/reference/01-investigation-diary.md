@@ -768,3 +768,30 @@ root      0.0000% | 0/149700
 ```
 
 This was an exact pixel-parity extraction.
+
+
+## Step 23: Extract `BookingRules` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/BookingRules/BookingRules.css`.
+- Moved panel, title, and body styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `title` and `body`.
+- Updated `BookingRules.tsx` to self-import CSS and use `clsx('pyxis-booking-rules', className)`.
+- Added `Narrow` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-rules-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 2.4789% | 1174/47360
+root      2.4789% | 1174/47360
+```
+
+The config reports width/height differences because the prototype selector is `> *` while the React selector is the component root in its fixture context.
