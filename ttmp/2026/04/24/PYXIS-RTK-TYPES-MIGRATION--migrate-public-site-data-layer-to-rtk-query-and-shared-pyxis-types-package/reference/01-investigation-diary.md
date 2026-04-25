@@ -334,3 +334,31 @@ root      6.5709% | 1372/20880
 ```
 
 The config compares the prototype's table-row implementation with React's grid implementation, so CSS differences such as `display: table-row` vs `grid` are expected until this component receives a deeper semantic/tuning pass.
+
+
+## Step 8: Extract `YearGroup` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/YearGroup/YearGroup.css`.
+- Moved the year heading/count layout and typography styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `header`, `year`, and `count`.
+- Updated `YearGroup.tsx` to self-import CSS and use `clsx('pyxis-year-group', className)`.
+- Replaced the `React` namespace import with a type-only `ReactNode` import.
+- Added `Singular` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/year-group-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/35280
+root      0.0000% | 0/28560
+```
+
+This was a clean CSS extraction with exact pixel parity.

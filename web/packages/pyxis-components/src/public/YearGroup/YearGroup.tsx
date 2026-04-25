@@ -1,16 +1,24 @@
+import type { ReactNode } from 'react';
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import React from 'react';
+import './YearGroup.css';
+
 export type YearGroupProps = {
   year: number;
   showCount: number;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 };
+
 export const YearGroup = ({ year, showCount, children, className }: YearGroupProps) => (
-  <div {...pyxisPart('year-group')} className={className}>
-    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 12, borderBottom: '1px solid #EAE7E0', paddingBottom: 8 }}>
-      <div style={{ fontFamily: 'var(--font-display)', fontSize: 34, fontWeight: 500, color: '#C8270D', letterSpacing: '-.02em' }}>{year}</div>
-      <div style={{ fontSize: 11, color: '#8E887E', letterSpacing: '.12em', textTransform: 'uppercase' }}>{showCount} show{showCount !== 1 ? 's' : ''}</div>
+  <div {...pyxisPart('year-group')} className={clsx('pyxis-year-group', className)}>
+    <div className="pyxis-year-group__header" {...pyxisPart('year-group', 'header')}>
+      <div className="pyxis-year-group__year" {...pyxisPart('year-group', 'year')}>
+        {year}
+      </div>
+      <div className="pyxis-year-group__count" {...pyxisPart('year-group', 'count')}>
+        {showCount} show{showCount !== 1 ? 's' : ''}
+      </div>
     </div>
     {children}
   </div>

@@ -1,0 +1,31 @@
+/* YearGroup — archive year heading and count. */
+
+:where([data-pyxis-component='year-group'][data-pyxis-part='root']) {
+  --pyxis-year-group-accent-color: var(--color-accent);
+  --pyxis-year-group-border-color: #EAE7E0;
+  --pyxis-year-group-muted-color: #8E887E;
+}
+
+:where([data-pyxis-component='year-group'][data-pyxis-part='header']) {
+  align-items: baseline;
+  border-bottom: 1px solid var(--pyxis-year-group-border-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+}
+
+:where([data-pyxis-component='year-group'][data-pyxis-part='year']) {
+  color: var(--pyxis-year-group-accent-color);
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.02em;
+}
+
+:where([data-pyxis-component='year-group'][data-pyxis-part='count']) {
+  color: var(--pyxis-year-group-muted-color);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

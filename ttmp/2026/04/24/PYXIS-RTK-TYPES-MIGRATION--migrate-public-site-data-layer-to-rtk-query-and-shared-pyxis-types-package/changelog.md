@@ -26,4 +26,7 @@
 - Extracted `LineupRow` static inline styles into `web/packages/pyxis-components/src/public/LineupRow/LineupRow.css`.
 - Added `LineupRow` part selectors for `time`, `artist-block`, `artist`, and `role`, plus support-role and theme override Storybook stories.
 - Validated `LineupRow` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../lineup-row-default.css-visual-diff.yml`; current pixel diff is `component 5.3400% | 1115/20880`, `root 6.5709% | 1372/20880`.
+- Extracted `YearGroup` static inline styles into `web/packages/pyxis-components/src/public/YearGroup/YearGroup.css`.
+- Added `YearGroup` part selectors for `header`, `year`, and `count`, plus singular-count and theme override Storybook stories.
+- Validated `YearGroup` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../year-group-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/35280`.
 
