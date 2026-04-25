@@ -66,6 +66,7 @@
 - [x] Support `--failOnMissing`.
 - [x] Add smoke script `scripts/04-smoke-inspect-section.sh`.
 - [x] Validate with Archive content.
+- [x] Add Shows diagnostic snapshot runner.
 - [ ] Validate with Shows header before using it for Shows tuning.
 - [x] Record results in diary.
 
@@ -106,9 +107,10 @@
 - [x] Implement userland color/zero/font-family normalization.
 - [x] Implement userland numeric tolerance filtering for bounds.
 - [x] Implement `pyxis pages snapshot-section <page> <section>`.
-- [ ] Implement optional `pyxis pages diff-snapshots`.
+- [x] Implement optional `pyxis pages diff-snapshots`.
 - [x] Write JSON and Markdown semantic reports.
 - [x] Validate with Archive content.
+- [x] Add Shows diagnostic snapshot runner.
 - [x] Record Phase 6 first slice results in diary.
 
 ## Phase 7 — Accepted differences and maintainer feedback loop

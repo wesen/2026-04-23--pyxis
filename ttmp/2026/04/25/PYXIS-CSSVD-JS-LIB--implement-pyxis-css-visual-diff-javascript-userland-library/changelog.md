@@ -59,3 +59,4 @@ Created clean maintainer follow-up request document containing only current desi
 - Added `pyxis pages compare-spec` using css-visual-diff `objectFromFile`, plus `specs/public-pages.desktop.visual.yml` and an Archive spec smoke.
 - Added `14-run-compare-spec-public-pages.sh` and validated full YAML spec output matches registry-backed `compare-all` across 5 pages / 13 sections.
 - Started Phase 6 semantic tooling: added normalizers/tolerances, `pyxis pages snapshot-section`, and validated Archive content semantic snapshot output.
+- Completed Phase 6 snapshot comparison slice: added `pyxis pages diff-snapshots`, a diff-snapshots smoke, and Shows diagnostic snapshot runner.

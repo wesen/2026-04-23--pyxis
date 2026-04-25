@@ -45,6 +45,7 @@ pyxis pages compare-page
 pyxis pages compare-all
 pyxis pages compare-spec
 pyxis pages snapshot-section
+pyxis pages diff-snapshots
 ```
 
 ## Common commands
@@ -91,6 +92,18 @@ Write a semantic snapshot/diff for one section:
 
 ```bash
 prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
+```
+
+Diff two semantic snapshots:
+
+```bash
+prototype-design/visual-diff/userland/16-smoke-diff-snapshots-archive-content.sh
+```
+
+Capture Shows diagnostic snapshots for the largest residual page diffs:
+
+```bash
+prototype-design/visual-diff/userland/17-snapshot-shows-sections.sh
 ```
 
 ## Policy modes

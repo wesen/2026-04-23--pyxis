@@ -2411,3 +2411,109 @@ Validate:
 ```bash
 prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
 ```
+
+
+## Step 21: Add diff-snapshots and Shows semantic diagnostics
+
+I continued Phase 6 without changing the Markdown frontmatter behavior. The next slice was snapshot-to-snapshot comparison plus a Shows diagnostic runner for the largest remaining page diffs.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue" and then "no need to make it optional. ust continue with th enormal work"
+
+**Assistant interpretation:** Do not spend time changing the docmgr preamble behavior now; continue with the planned Phase 6 semantic tooling work.
+
+**Inferred user intent:** Finish the snapshot/diff functionality and start producing diagnostics useful for Shows tuning.
+
+### What I did
+
+Added new verb support in:
+
+```text
+prototype-design/visual-diff/userland/lib/snapshot.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+```
+
+New verb:
+
+```text
+pyxis pages diff-snapshots <before-snapshot.json> <after-snapshot.json>
+```
+
+Added scripts:
+
+```text
+prototype-design/visual-diff/userland/16-smoke-diff-snapshots-archive-content.sh
+prototype-design/visual-diff/userland/17-snapshot-shows-sections.sh
+```
+
+Updated:
+
+```text
+prototype-design/visual-diff/userland/README.md
+```
+
+### Why
+
+`snapshot-section` captures one semantic state. `diff-snapshots` compares two states across runs, which will be useful after tuning changes. The Shows diagnostic runner starts applying the semantic snapshot tooling to the page with the largest pixel diffs.
+
+### What worked
+
+`16-smoke-diff-snapshots-archive-content.sh` writes two identical Archive content snapshots and diffs them. It passed with:
+
+```text
+changed: false
+all metric deltas: 0
+```
+
+`17-snapshot-shows-sections.sh` generated diagnostics for the current large Shows sections:
+
+```text
+header       styleDiffs=9 yDelta=61 heightDelta=-1596.453125
+shows-list   styleDiffs=9 yDelta=274.59375 heightDelta=-890.390625
+mailing-list styleDiffs=9 yDelta=1256.25 heightDelta=-1655.546875
+content      styleDiffs=7 yDelta=61 heightDelta=-388.296875
+```
+
+### What didn't work
+
+No new runtime failure occurred in this step. The Shows diagnostics are noisy because the prototype selectors are still broad (`#root > *`) while React selectors target narrower page sections. This confirms that selector precision and page taxonomy are part of the Shows tuning problem.
+
+### What I learned
+
+The semantic snapshot tooling can now distinguish two different use cases:
+
+1. stable before/after comparison across tuning changes (`diff-snapshots`), and
+2. immediate triage of current large drift (`snapshot-section` diagnostics).
+
+### What was tricky to build
+
+The snapshot diff intentionally compares summary metrics first rather than deeply diffing every style value. That keeps the report stable and useful for tracking whether a tuning pass improved or worsened semantic drift.
+
+### What warrants a second pair of eyes
+
+- Whether the Shows prototype selectors should be made more precise before tuning CSS.
+- Whether `diff-snapshots` should also include added/removed style property names in future output.
+- Whether broad text comparison should be disabled for section snapshots by default.
+
+### What should be done in the future
+
+Use the Shows snapshot diagnostics before changing page CSS. The largest deltas suggest that selector scope and vertical composition are bigger issues than isolated style tokens.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/userland/lib/snapshot.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/16-smoke-diff-snapshots-archive-content.sh
+prototype-design/visual-diff/userland/17-snapshot-shows-sections.sh
+```
+
+Validate:
+
+```bash
+prototype-design/visual-diff/userland/16-smoke-diff-snapshots-archive-content.sh
+prototype-design/visual-diff/userland/17-snapshot-shows-sections.sh
+```

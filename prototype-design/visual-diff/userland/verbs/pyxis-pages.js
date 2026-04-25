@@ -268,3 +268,21 @@ __verb__('snapshotSection', {
     failOnMissing: { type: 'bool', default: true, help: 'Fail when the selector is missing or hidden' },
   },
 })
+
+async function diffSnapshots(before, after, values) {
+  return await lib.snapshot.diffSnapshots(before, after, {
+    outDir: values.outDir || '',
+  })
+}
+
+__verb__('diffSnapshots', {
+  parents: ['pyxis', 'pages'],
+  short: 'Diff two semantic snapshot JSON files',
+  output: 'structured',
+  fields: {
+    before: { argument: true, required: true, help: 'Before snapshot.json path' },
+    after: { argument: true, required: true, help: 'After snapshot.json path' },
+    values: { bind: 'all' },
+    outDir: { type: 'string', default: '', help: 'Output directory for snapshot diff artifacts' },
+  },
+})
