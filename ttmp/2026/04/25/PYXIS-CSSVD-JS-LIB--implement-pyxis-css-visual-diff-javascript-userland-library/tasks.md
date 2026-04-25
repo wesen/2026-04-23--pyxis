@@ -87,16 +87,16 @@
 
 ## Phase 5 — Page and suite orchestration
 
-- [ ] Implement `pyxis pages compare-page <page>`.
+- [x] Implement `pyxis pages compare-page <page>`.
 - [ ] Implement `pyxis pages compare-all`.
 - [ ] Support `--mode authoring|ci`.
 - [ ] Support `--maxChangedPercent` or policy band failure thresholds.
-- [ ] Generate aggregate JSON report.
-- [ ] Generate aggregate Markdown report.
-- [ ] Add smoke script `scripts/05-smoke-compare-page.sh`.
+- [x] Generate aggregate JSON report for one page (`compare-page-output.json`).
+- [x] Generate catalog Markdown report for one page (`01-catalog-index.md`).
+- [x] Add smoke script `scripts/09-smoke-compare-page-archive.sh`.
 - [ ] Add smoke script `scripts/06-smoke-compare-all.sh`.
-- [ ] Validate all current desktop page sections run from registry.
-- [ ] Record results in diary.
+- [ ] Validate all current desktop page sections run from registry. (Archive validated; all-pages pending.)
+- [x] Record results in diary.
 
 ## Phase 6 — Snapshot and semantic diff tooling
 

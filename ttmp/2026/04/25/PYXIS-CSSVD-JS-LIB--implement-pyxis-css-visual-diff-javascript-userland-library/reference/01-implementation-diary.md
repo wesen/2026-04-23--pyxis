@@ -1466,3 +1466,138 @@ Validate:
 ```bash
 ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/08-smoke-new-api-compare-section.sh
 ```
+
+
+## Step 12: Implement compare-page catalog orchestration for Archive
+
+I continued from the flexible JS API evaluation by implementing the first page-level orchestration command: `pyxis pages compare-page <page>`. This command opens the prototype and Storybook pages once, waits for each registered section, compares each section with `cvd.compare.region(...)`, writes per-section artifacts, records each comparison into a css-visual-diff catalog, and returns a compact page summary.
+
+This is the first implementation of the workflow we wanted after the beta ergonomics follow-up: project registry and policy in userland, browser/image comparison and catalog primitives in css-visual-diff.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue implementing the next planned userland library step after `compare-section`, using the new flexible JS API.
+
+**Inferred user intent:** Move from single-section comparison toward page-level orchestration and catalog output.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Updated:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Added smoke script:
+
+```text
+scripts/09-smoke-compare-page-archive.sh
+```
+
+- Implemented verb:
+
+```text
+pyxis pages compare-page <page>
+```
+
+- Ran Archive page smoke and generated:
+
+```text
+various/06-compare-page/archive/compare-page-output.json
+various/06-compare-page/archive/manifest.json
+various/06-compare-page/archive/01-catalog-index.md
+various/06-compare-page/archive/artifacts/page/*
+various/06-compare-page/archive/artifacts/content/*
+```
+
+### Why
+
+A one-section compare command is useful, but page-level visual parity needs a higher-level loop that compares all registered sections for a page and leaves behind a navigable artifact bundle. The new `cvd.catalog.create(...).record(comparison)` API is designed for this.
+
+### What worked
+
+Archive page comparison produced two section rows:
+
+```text
+page    6.651092748474785% / 103350 changed pixels
+content 7.128146453089244% / 102172 changed pixels
+```
+
+The command wrote:
+
+```text
+manifest.json
+01-catalog-index.md
+artifacts/page/compare.json
+artifacts/page/compare.md
+artifacts/page/diff_comparison.png
+artifacts/content/compare.json
+artifacts/content/compare.md
+artifacts/content/diff_comparison.png
+```
+
+The returned JSON includes:
+
+```text
+sectionCount: 2
+maxChangedPercent: 7.128146453089244
+manifestPath: .../manifest.json
+indexPath: .../01-catalog-index.md
+catalog.comparisonCount: 2
+```
+
+### What didn't work
+
+My first validation expected the Archive page changed percent from the earlier rounded Markdown report (`6.6511%`) with a slightly different long-form value. The new direct `cvd.compare.region(...)` returned:
+
+```text
+6.651092748474785%
+```
+
+The changed pixel count is the same expected value (`103350`), so I updated the assertion to validate the exact current JS API output and changed pixel count.
+
+### What I learned
+
+The catalog API works well for page orchestration. One important detail: use a docmgr-friendly catalog index filename directly (`01-catalog-index.md`) rather than writing `index.md` and renaming it in a shell script. This keeps stdout `indexPath` accurate.
+
+### What was tricky to build
+
+The main design choice was where to open pages. `compare-section` opens and closes pages for one section. `compare-page` should not do that per section; it opens the prototype and Storybook pages once and reuses them across the registered sections. That makes page-level comparison faster and closer to the documented multi-section pattern.
+
+### What warrants a second pair of eyes
+
+- Whether broad prototype selectors for Shows sections are precise enough before implementing `compare-all`.
+- Whether catalog target metadata should include both left and right URLs/selectors rather than only the left-side URL/selector in `catalog.record(...)`.
+
+### What should be done in the future
+
+- Implement `compare-all` by looping over registered pages and reusing `compare-page`.
+- Add policy classification to page summaries.
+- Consider using `inspect: minimal` for high-volume runs, with `rich` as authoring/default.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+scripts/09-smoke-compare-page-archive.sh
+various/06-compare-page/archive/compare-page-output.json
+various/06-compare-page/archive/01-catalog-index.md
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/09-smoke-compare-page-archive.sh
+```
+
+### Technical details
+
+The page smoke currently validates Archive because it has two stable sections and the closest first-pass parity. `compare-all` should come next, after deciding whether to include all Shows sub-sections with their current broad prototype selectors.

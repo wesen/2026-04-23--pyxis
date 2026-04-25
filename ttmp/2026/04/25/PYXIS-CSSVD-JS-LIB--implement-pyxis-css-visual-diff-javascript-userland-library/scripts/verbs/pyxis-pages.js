@@ -146,3 +146,26 @@ __verb__('compareSection', {
     inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
   },
 })
+
+async function comparePage(page, values) {
+  return await lib.compareRegion.comparePage(page, {
+    variant: values.variant || 'desktop',
+    outDir: values.outDir || '',
+    threshold: values.threshold || 30,
+    inspect: values.inspect || 'rich',
+  })
+}
+
+__verb__('comparePage', {
+  parents: ['pyxis', 'pages'],
+  short: 'Compare all registered sections for one Pyxis page and write a catalog',
+  output: 'structured',
+  fields: {
+    page: { argument: true, required: true, help: 'Registered page slug' },
+    values: { bind: 'all' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    outDir: { type: 'string', default: '', help: 'Output directory for page catalog artifacts' },
+    threshold: { type: 'int', default: 30, help: 'Pixel threshold 0-255' },
+    inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
+  },
+})

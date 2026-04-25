@@ -1,0 +1,207 @@
+[
+{
+  "catalog": {
+    "artifactCount": 4,
+    "comparisonCount": 2,
+    "failureCount": 0,
+    "preflightCount": 0,
+    "resultCount": 0,
+    "targetCount": 2
+  },
+  "indexPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/01-catalog-index.md",
+  "manifestPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/manifest.json",
+  "maxChangedPercent": 7.128146453089244,
+  "outDir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive",
+  "page": "archive",
+  "sectionCount": 2,
+  "sections": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.md",
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 131,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1558.03125,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1689.03125,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 6.651092748474785,
+      "changedPixels": 103350,
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+      "normalizedHeight": 1689,
+      "normalizedWidth": 920,
+      "outDir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page",
+      "page": "archive",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+      "section": "page",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1558.03125,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "archive-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "visible": true
+        },
+        "name": "archive-page",
+        "pixel": {
+          "changedPercent": 6.651092748474785,
+          "changedPixels": 103350,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_only.png",
+          "normalizedHeight": 1689,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1553880
+        },
+        "right": {
+          "bounds": {
+            "height": 1689.03125,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "archive-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1553880,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.json",
+        "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.md"
+      ]
+    },
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.md",
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": -118.9375,
+          "width": 0,
+          "x": 0,
+          "y": 61
+        },
+        "left": {
+          "height": 1558.03125,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1439.09375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 7.128146453089244,
+      "changedPixels": 102172,
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/left_region.png",
+      "leftSelector": "#root \u003e *",
+      "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+      "normalizedHeight": 1558,
+      "normalizedWidth": 920,
+      "outDir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content",
+      "page": "archive",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='archive']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+      "section": "content",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 2,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1558.03125,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "archive-content",
+          "selector": "#root \u003e *",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "visible": true
+        },
+        "name": "archive-content",
+        "pixel": {
+          "changedPercent": 7.128146453089244,
+          "changedPixels": 102172,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_only.png",
+          "normalizedHeight": 1558,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1433360
+        },
+        "right": {
+          "bounds": {
+            "height": 1439.09375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "archive-content",
+          "selector": "[data-page='archive']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 5,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1433360,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.json",
+        "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.md"
+      ]
+    }
+  ],
+  "variant": "desktop"
+}
+]

@@ -1,0 +1,293 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: archive desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T19:58:47.958628555Z",
+  "updated_at": "2026-04-25T19:58:55.309739146Z",
+  "targets": [
+    {
+      "slug": "page",
+      "name": "archive page",
+      "url": "http://localhost:7070/standalone/public/archive.html",
+      "selector": "#root",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "content",
+      "name": "archive content",
+      "url": "http://localhost:7070/standalone/public/archive.html",
+      "selector": "#root \u003e *",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "page",
+        "name": "archive page",
+        "url": "http://localhost:7070/standalone/public/archive.html",
+        "selector": "#root",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "archive-page",
+        "left": {
+          "name": "archive-page",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "selector": "#root",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1558.03125
+          }
+        },
+        "right": {
+          "name": "archive-page",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1689.03125
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1553880,
+          "changedPixels": 103350,
+          "changedPercent": 6.651092748474785,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1689,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1558.03125
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1689.03125
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 131
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAboutSince 2023The archive194shows312artists31residencies0cops calledAll20252024202320258 showsDec 12Winter Solstice RaveElectronicrecap →Nov 29Jake Meginsky · liveNoiserecap →Nov 15Bottom FeedersHardcorerecap →Oct 31The Halloween DroneDronerecap →Oct 18Cecile BelievePoprecap →Sep 27Moor MotherNoise poetryrecap →Sep 06808 Collective vol. 4Houserecap →Aug 23Petals of LoveCommunityrecap →20247 showsDec 20Year-end all-nighterMixedrecap →Nov 08Basement FrequenciesTechnorecap →Oct 26LolinaExperimentalrecap →Sep 14Working Men's ClubPost-punkrecap →Aug 02Wet TennisIndierecap →Jul 13Fire ToolzVaporwaverecap →Jun 22Redroom Inferno IElectronicrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "ppxisShowsArchiveBook usAboutEvery show since day oneArchive12 of 247 showsAll202520242023247shows18,400artists4residencies132cops called20253 showsMar 14Planning for BurialAmbientrecap →Feb 28ActressElectronicrecap →Jan 18ContainerNoiserecap →20247 showsNov 15Burial HexDarkwaverecap →Sep 6Moor MotherExperimentalrecap →Aug 2PharmakonIndustrialrecap →Jul 19CygnusTechnorecap →May 10ActressElectronicrecap →Apr 12Planning for BurialAmbientrecap →Feb 23ContainerNoiserecap →20232 showsDec 8Zola JesusArt Poprecap →Oct 27OrphxEBMrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(0, 0, 0)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "id",
+            "left": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T19:58:53.792939802Z"
+    },
+    {
+      "target": {
+        "slug": "content",
+        "name": "archive content",
+        "url": "http://localhost:7070/standalone/public/archive.html",
+        "selector": "#root \u003e *",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "archive-content",
+        "left": {
+          "name": "archive-content",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "selector": "#root \u003e *",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1558.03125
+          }
+        },
+        "right": {
+          "name": "archive-content",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "selector": "[data-page='archive']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1439.09375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1433360,
+          "changedPixels": 102172,
+          "changedPercent": 7.128146453089244,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1558,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1558.03125
+          },
+          "right": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1439.09375
+          },
+          "delta": {
+            "x": 0,
+            "y": 61,
+            "width": 0,
+            "height": -118.9375
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAboutSince 2023The archive194shows312artists31residencies0cops calledAll20252024202320258 showsDec 12Winter Solstice RaveElectronicrecap →Nov 29Jake Meginsky · liveNoiserecap →Nov 15Bottom FeedersHardcorerecap →Oct 31The Halloween DroneDronerecap →Oct 18Cecile BelievePoprecap →Sep 27Moor MotherNoise poetryrecap →Sep 06808 Collective vol. 4Houserecap →Aug 23Petals of LoveCommunityrecap →20247 showsDec 20Year-end all-nighterMixedrecap →Nov 08Basement FrequenciesTechnorecap →Oct 26LolinaExperimentalrecap →Sep 14Working Men's ClubPost-punkrecap →Aug 02Wet TennisIndierecap →Jul 13Fire ToolzVaporwaverecap →Jun 22Redroom Inferno IElectronicrecap →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "Every show since day oneArchive12 of 247 showsAll202520242023247shows18,400artists4residencies132cops called20253 showsMar 14Planning for BurialAmbientrecap →Feb 28ActressElectronicrecap →Jan 18ContainerNoiserecap →20247 showsNov 15Burial HexDarkwaverecap →Sep 6Moor MotherExperimentalrecap →Aug 2PharmakonIndustrialrecap →Jul 19CygnusTechnorecap →May 10ActressElectronicrecap →Apr 12Planning for BurialAmbientrecap →Feb 23ContainerNoiserecap →20232 showsDec 8Zola JesusArt Poprecap →Oct 27OrphxEBMrecap →"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "0px",
+            "right": "72px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-public-page pyxis-archive-page",
+            "changed": true
+          },
+          {
+            "name": "data-page",
+            "right": "archive",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T19:58:55.309738096Z"
+    }
+  ],
+  "summary": {
+    "target_count": 2,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 2,
+    "failure_count": 0,
+    "artifact_count": 4
+  }
+}

@@ -118,6 +118,36 @@ async function waitForLocator(page, selector, options) {
   })
 }
 
+function comparisonRow(target, section, outDir, threshold, summary, json, written, bounds) {
+  var pixel = summary.pixel || (json && json.pixel) || {}
+  return {
+    page: target.page,
+    variant: target.variant,
+    section: section.name,
+    outDir: outDir,
+    leftUrl: target.prototypeUrl,
+    rightUrl: target.storybookUrl,
+    leftSelector: section.original,
+    rightSelector: section.react,
+    threshold: threshold,
+    changedPercent: pixel.changedPercent,
+    changedPixels: pixel.changedPixels,
+    totalPixels: pixel.totalPixels,
+    normalizedWidth: pixel.normalizedWidth,
+    normalizedHeight: pixel.normalizedHeight,
+    bounds: bounds,
+    textChanged: summary.text ? summary.text.changed : undefined,
+    artifactJson: written.json || artifactPath(json.artifacts, 'json'),
+    artifactMarkdown: written.markdown || artifactPath(json.artifacts, 'markdown'),
+    leftRegionPath: written.leftRegion || artifactPath(json.artifacts, 'leftRegion'),
+    rightRegionPath: written.rightRegion || artifactPath(json.artifacts, 'rightRegion'),
+    diffComparisonPath: written.diffComparison || artifactPath(json.artifacts, 'diffComparison'),
+    diffOnlyPath: written.diffOnly || artifactPath(json.artifacts, 'diffOnly'),
+    writtenArtifacts: written.written || [],
+    summary: summary,
+  }
+}
+
 function ensureDocmgrMarkdown(path, title) {
   if (!path) return path
   try {
@@ -184,34 +214,92 @@ async function compareSection(pageName, sectionName, options) {
     ensureDocmgrMarkdown(written.markdown || (outDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
     var summary = comparison.summary()
     var json = comparison.toJSON ? comparison.toJSON() : summary
-    var pixel = summary.pixel || (json && json.pixel) || {}
     var bounds = summary.bounds || (comparison.bounds && comparison.bounds.diff ? comparison.bounds.diff() : null)
-    return {
+    return comparisonRow(target, section, outDir, threshold, summary, json, written, bounds)
+  } finally {
+    if (leftPage) await leftPage.close()
+    if (rightPage) await rightPage.close()
+    await browser.close()
+  }
+}
+
+async function comparePage(pageName, options) {
+  options = options || {}
+  var variant = options.variant || 'desktop'
+  var target = registry.findPage(pageName, variant)
+  if (!target) throw new Error('unknown page: ' + pageName)
+  var outDir = options.outDir || artifacts.artifactDir(
+    'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page',
+    pageName,
+    variant
+  )
+  var threshold = Number(options.threshold || 30)
+  var catalog = cvd.catalog.create({
+    title: 'Pyxis public page comparison: ' + target.page + ' ' + target.variant,
+    outDir: outDir,
+    artifactRoot: 'artifacts',
+    indexName: '01-catalog-index.md',
+  })
+  var browser = await cvd.browser()
+  var leftPage = null
+  var rightPage = null
+  var rows = []
+  try {
+    leftPage = await browser.page(target.prototypeUrl, {
+      viewport: target.viewport,
+      waitMs: target.waitMs,
+      name: target.page + '-prototype',
+    })
+    rightPage = await browser.page(target.storybookUrl, {
+      viewport: target.viewport,
+      waitMs: target.waitMs,
+      name: target.page + '-storybook',
+    })
+    for (var i = 0; i < target.sections.length; i++) {
+      var section = target.sections[i]
+      await waitForLocator(leftPage, section.original, { visible: true })
+      await waitForLocator(rightPage, section.react, { visible: true })
+      var artifactDir = catalog.artifactDir(section.name)
+      var comparison = await cvd.compare.region({
+        name: target.page + '-' + section.name,
+        left: leftPage.locator(section.original),
+        right: rightPage.locator(section.react),
+        threshold: threshold,
+        inspect: options.inspect || 'rich',
+        outDir: artifactDir,
+        styleProps: options.styleProps || DEFAULT_STYLE_PROPS,
+        attributes: options.attributes || DEFAULT_ATTRIBUTES,
+      })
+      var written = await comparison.artifacts.write(artifactDir, ['json', 'markdown'])
+      ensureDocmgrMarkdown(written.markdown || (artifactDir + '/compare.md'), 'Generated compare.region artifact for ' + target.page + ' ' + section.name)
+      catalog.record(comparison, {
+        slug: section.name,
+        name: target.page + ' ' + section.name,
+        url: target.prototypeUrl,
+        selector: section.original,
+      })
+      var summary = comparison.summary()
+      var json = comparison.toJSON ? comparison.toJSON() : summary
+      var bounds = summary.bounds || (comparison.bounds && comparison.bounds.diff ? comparison.bounds.diff() : null)
+      rows.push(comparisonRow(target, section, artifactDir, threshold, summary, json, written, bounds))
+    }
+    var manifestPath = await catalog.writeManifest()
+    var indexPath = await catalog.writeIndex()
+    ensureDocmgrMarkdown(indexPath, 'Generated comparison catalog for ' + target.page)
+    return [{
       page: target.page,
       variant: target.variant,
-      section: section.name,
       outDir: outDir,
-      leftUrl: target.prototypeUrl,
-      rightUrl: target.storybookUrl,
-      leftSelector: section.original,
-      rightSelector: section.react,
-      threshold: threshold,
-      changedPercent: pixel.changedPercent,
-      changedPixels: pixel.changedPixels,
-      totalPixels: pixel.totalPixels,
-      normalizedWidth: pixel.normalizedWidth,
-      normalizedHeight: pixel.normalizedHeight,
-      bounds: bounds,
-      textChanged: summary.text ? summary.text.changed : undefined,
-      artifactJson: written.json || artifactPath(json.artifacts, 'json'),
-      artifactMarkdown: written.markdown || artifactPath(json.artifacts, 'markdown'),
-      leftRegionPath: written.leftRegion || artifactPath(json.artifacts, 'leftRegion'),
-      rightRegionPath: written.rightRegion || artifactPath(json.artifacts, 'rightRegion'),
-      diffComparisonPath: written.diffComparison || artifactPath(json.artifacts, 'diffComparison'),
-      diffOnlyPath: written.diffOnly || artifactPath(json.artifacts, 'diffOnly'),
-      writtenArtifacts: written.written || [],
-      summary: summary,
-    }
+      sectionCount: rows.length,
+      maxChangedPercent: rows.reduce(function (max, row) {
+        var value = Number(row.changedPercent || 0)
+        return value > max ? value : max
+      }, 0),
+      manifestPath: manifestPath,
+      indexPath: indexPath,
+      catalog: catalog.summary(),
+      sections: rows,
+    }]
   } finally {
     if (leftPage) await leftPage.close()
     if (rightPage) await rightPage.close()
@@ -224,4 +312,5 @@ module.exports = {
   argsToShellCommand: argsToShellCommand,
   planCompareSection: planCompareSection,
   compareSection: compareSection,
+  comparePage: comparePage,
 }

@@ -50,3 +50,4 @@ Created clean maintainer follow-up request document containing only current desi
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/design/03-clean-css-visual-diff-maintainer-follow-up-requests-after-flexible-js-api.md — Clean current maintainer request document
 
 - Updated Pyxis compare-section to use newly landed `locator.waitFor(...)` and stable `comparison.artifacts.write(...)` paths; rewrote the clean maintainer request document to remove landed beta ergonomics requests and keep only remaining deferred/policy-oriented asks.
+- Implemented `pyxis pages compare-page <page>` using `cvd.compare.region(...)` across registered sections and `cvd.catalog.create(...).record(...)`; added Archive page smoke producing two section comparisons plus catalog manifest/index.
