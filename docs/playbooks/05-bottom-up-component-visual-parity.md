@@ -316,17 +316,29 @@ Do not add slot/renderer stories unless the component actually exposes slots/ren
 
 ### Directory-level validation after a batch
 
-For a batch of public components, run:
+For a batch of public components, run the React checks first:
 
 ```bash
 cd web && pnpm --filter pyxis-components typecheck
 cd web && pnpm -r typecheck
-
-css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/molecules
-css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/organisms
 ```
 
-`run --config-dir` is good for pass/fail coverage, but it does not yet provide a concise diff summary. Use individual `pixeldiff.md` files or a custom summary script when you need ranked results.
+The old native component config directories under `prototype-design/visual-diff/comparisons/component-system/**` are retired inputs. Use them only when intentionally mining historical component evidence during cleanup. Do not create new native `*.css-visual-diff.yml` configs for Pyxis work.
+
+For page-level public-site validation, use the JS-canonical visual suite instead:
+
+```bash
+prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+Use semantic diagnostics before tuning a large page diff:
+
+```bash
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
 
 ### Updating the parity map after CSS extraction
 
@@ -344,7 +356,7 @@ Example:
   "cssFile": "web/packages/pyxis-components/src/public/ShowTile/ShowTile.css",
   "selectorContract": "data-pyxis-component + data-pyxis-part",
   "storybookThemeCoverage": "representative theme/narrow variants added or verified",
-  "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+  "validated": "2026-04-25 pyxis JS visual suite or component-specific migrated visual spec rerun"
 }
 ```
 
@@ -361,7 +373,7 @@ If a component is intentionally deferred because of taxonomy overlap, record tha
 
 The CSS extraction pass showed several useful future improvements for `css-visual-diff`:
 
-- `run --config-dir --summary-md --summary-json` for a consolidated diff summary.
+- richer `compare-spec` summary modes for component-level migrated visual suites.
 - selector-scope warnings when original and React selectors have very different dimensions.
 - React-before vs React-after baseline mode for refactor-safety checks.
 - first-class part-selector validation.

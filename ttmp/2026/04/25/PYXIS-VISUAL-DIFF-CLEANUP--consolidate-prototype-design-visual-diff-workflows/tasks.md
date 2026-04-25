@@ -56,10 +56,10 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 
 ## Phase 5 — Script and docs cleanup
 
-- [ ] Rename/reorganize promoted userland scripts into stable non-ticket-era names.
-- [ ] Update `prototype-design/visual-diff/userland/README.md`.
-- [ ] Add `prototype-design/visual-diff/userland/specs/README.md`.
-- [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` to remove native `css-visual-diff run` as the Pyxis workflow.
+- [x] Rename/reorganize promoted userland scripts into stable non-ticket-era names.
+- [x] Update `prototype-design/visual-diff/userland/README.md`.
+- [x] Add `prototype-design/visual-diff/userland/specs/README.md`.
+- [x] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` to remove native `css-visual-diff run` as the Pyxis page workflow.
 
 ## Phase 6 — Native run-config removal
 

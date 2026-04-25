@@ -865,3 +865,100 @@ rm -rf prototype-design/visual-comparisons/cssvd-js
 ### Technical details
 
 The full-suite run was written to `/tmp/pyxis-public-suite-after-selector.json`; generated cssvd artifacts were removed afterward.
+
+
+## Step 12: Update parity playbook for JS-canonical page workflow
+
+I updated the bottom-up visual parity playbook so it no longer instructs developers to use native `css-visual-diff run --config-dir` as the public-page workflow. Component native configs are now described as retired historical inputs to mine during cleanup, while page-level public-site validation points to the promoted JS visual suite scripts.
+
+This aligns the general playbook with the cleanup ticket's implementation state: public pages are spec-driven and JS-canonical, and new Pyxis work should not add native `*.css-visual-diff.yml` configs.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 11)
+
+**Assistant interpretation:** Continue cleanup by updating docs that still described the old/native validation flow.
+
+**Inferred user intent:** Keep consolidating the workflow so future developers follow the JS suite path rather than resurrecting native config-dir runs.
+
+**Commit (code/docs):** pending at diary-write time — intended message: "Update visual parity playbook for JS suite"
+
+### What I did
+
+Updated:
+
+```text
+docs/playbooks/05-bottom-up-component-visual-parity.md
+tasks.md
+```
+
+The playbook now says:
+
+- Run React typechecks first for component batches.
+- Treat `prototype-design/visual-diff/comparisons/component-system/**` as retired inputs, useful only when intentionally mining historical evidence.
+- Do not create new native `*.css-visual-diff.yml` configs for Pyxis work.
+- Use the JS-canonical page suite for public-site validation:
+
+```bash
+prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+- Use Shows semantic diagnostics before tuning large page diffs:
+
+```bash
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+I also checked off the Phase 5 docs/script-cleanup tasks because the script reorganization, userland README, specs README, and playbook updates are now done.
+
+### Why
+
+Without this playbook update, a future developer could follow stale docs and reintroduce native config-dir workflows after the cleanup intentionally removed them from public-page work.
+
+### What worked
+
+A search confirmed the playbook no longer contains old numbered userland script paths or `run --config-dir` instructions as validation guidance. Remaining mentions are historical/wishlist context only.
+
+### What didn't work
+
+N/A. This was a docs-only update.
+
+### What I learned
+
+The playbook still contains older component-level `css-visual-diff screenshot`, `css-md`, and single-config examples. I left those alone because component-system migration is not finished; this update specifically prevents native config-dir from being presented as the public-page workflow.
+
+### What was tricky to build
+
+The nuance was not over-editing component-level historical guidance. Public pages are already JS-canonical. Component-system configs remain retired-native but not yet fully migrated into component visual suite specs, so the playbook should warn against adding new native configs without pretending all component examples have already been replaced.
+
+### What warrants a second pair of eyes
+
+- Decide whether component-system examples should be rewritten to use new component visual suite specs once those specs exist.
+- Decide whether the tooling wishlist should be moved to a separate historical note now that JS `compare-spec` summary reporting exists.
+
+### What should be done in the future
+
+- Migrate component-system parity examples to spec-driven JS suites if component parity remains an active workflow.
+- Continue native config cleanup for remaining retired component configs.
+
+### Code review instructions
+
+Review:
+
+```text
+docs/playbooks/05-bottom-up-component-visual-parity.md
+ttmp/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP--consolidate-prototype-design-visual-diff-workflows/tasks.md
+```
+
+Validate docs intent with:
+
+```bash
+rg "config-dir|visual-diff/userland/[0-9]" docs/playbooks/05-bottom-up-component-visual-parity.md
+```
+
+### Technical details
+
+No generated artifacts were produced.
