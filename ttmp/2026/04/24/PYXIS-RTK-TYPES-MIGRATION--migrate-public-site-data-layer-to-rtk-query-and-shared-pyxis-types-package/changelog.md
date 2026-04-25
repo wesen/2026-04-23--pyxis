@@ -115,3 +115,8 @@
 - Completed Track A4/A5/A6 migration from TanStack React Query to RTK Query. Replaced the app provider with Redux Provider, rewrote compatibility hooks over RTK Query generated hooks, removed the old `apiFetch` client, wired user-site Storybook to Redux stores, removed TanStack dependencies, and verified typecheck, app build, and user-site Storybook build.
 - `pnpm -r test` was attempted but remains non-actionable because `pyxis-components` has no Vitest test files and exits with code 1.
 
+
+## 2026-04-24
+
+Closed after completing RTK Query migration, shared pyxis-types package, public component CSS extraction/theming stabilization, B8 ADRs, validation reports, and postmortem. Follow-up page-level work moved to PYXIS-PUBLIC-PAGES.
+

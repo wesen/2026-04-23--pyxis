@@ -1,7 +1,7 @@
 ---
 Title: Migrate public site data layer to RTK Query and shared pyxis-types package
 Ticket: PYXIS-RTK-TYPES-MIGRATION
-Status: active
+Status: complete
 Topics:
     - frontend
     - react
@@ -13,17 +13,18 @@ DocType: index
 Intent: long-term
 Owners: []
 RelatedFiles:
-    - web/packages/pyxis-user-site/src/App.tsx
-    - web/packages/pyxis-user-site/src/api/hooks.ts
-    - web/packages/pyxis-user-site/src/api/types.ts
-    - web/packages/pyxis-components/src/mocks/types.ts
-    - web/packages/pyxis-components/src/mocks/handlers.ts
+    - Path: web/packages/pyxis-user-site/src/App.tsx
+    - Path: web/packages/pyxis-user-site/src/api/hooks.ts
+    - Path: web/packages/pyxis-user-site/src/api/types.ts
+    - Path: web/packages/pyxis-components/src/mocks/types.ts
+    - Path: web/packages/pyxis-components/src/mocks/handlers.ts
 ExternalSources: []
-Summary: "Ticket for migrating Pyxis public-site data fetching from TanStack React Query to RTK Query, centralizing duplicated API/domain types in a new pyxis-types workspace package, and extracting public component inline styles into tokenized themeable CSS."
-LastUpdated: 2026-04-24T00:00:00Z
-WhatFor: "Planning and handing off the RTK Query + pyxis-types migration and public component CSS extraction/theming work to an intern."
-WhenToUse: "Use before implementing app-level data architecture changes, component styling stabilization, or page rewiring that depends on shared API types and stable themed public components."
+Summary: Ticket for migrating Pyxis public-site data fetching from TanStack React Query to RTK Query, centralizing duplicated API/domain types in a new pyxis-types workspace package, and extracting public component inline styles into tokenized themeable CSS.
+LastUpdated: 2026-04-24T21:48:55.754887657-04:00
+WhatFor: Planning and handing off the RTK Query + pyxis-types migration and public component CSS extraction/theming work to an intern.
+WhenToUse: Use before implementing app-level data architecture changes, component styling stabilization, or page rewiring that depends on shared API types and stable themed public components.
 ---
+
 
 # Migrate public site data layer to RTK Query and shared pyxis-types package
 
