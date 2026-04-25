@@ -1,0 +1,18 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { DashboardPage, ShowsPage, CalendarPage, BookingsPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from '../src/pages/Pages';
+const meta: Meta = { title: 'Pyxis App/Pages', parameters: { layout: 'fullscreen' } };
+export default meta;
+type Story = StoryObj;
+export const DashboardDesktop: Story = { render: () => <DashboardPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };
+export const DashboardMobile: Story = { render: () => <DashboardPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+export const LoginDesktop: Story = { render: () => <LoginPage/> };
+export const SetupDesktop: Story = { render: () => <SetupPage/> };
+export const ShowsDesktop: Story = { render: () => <ShowsPage/> };
+export const CalendarDesktop: Story = { render: () => <CalendarPage/> };
+export const BookingsDesktop: Story = { render: () => <BookingsPage/> };
+export const ArtistsDesktop: Story = { render: () => <ArtistsPage/> };
+export const AttendanceDesktop: Story = { render: () => <AttendancePage/> };
+export const AuditLogDesktop: Story = { render: () => <AuditLogPage/> };
+export const DiscordDesktop: Story = { render: () => <DiscordPage/> };
+export const SettingsDesktop: Story = { render: () => <SettingsPage/> };
+export const ModalDesktop: Story = { render: () => <ModalShowcasePage/> };

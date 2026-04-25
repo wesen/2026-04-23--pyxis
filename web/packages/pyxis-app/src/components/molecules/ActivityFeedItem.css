@@ -1,0 +1,5 @@
+.app-activity-feed-item { list-style: none; display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--app-rule); }
+.app-activity-feed-item:last-child { border-bottom: 0; }
+.app-activity-feed-item p { margin: 0 0 3px; color: var(--app-ink); font-weight: 650; }
+.app-activity-feed-item span { color: var(--app-muted); font-size: 12px; }
+.app-activity-feed-item .app-status-dot { margin-top: 6px; flex: 0 0 auto; }

@@ -1,0 +1,61 @@
+// Generated mirror of app.pages.desktop.visual.yml for registry-backed ergonomic verbs.
+// Keep the YAML spec as the reviewed source of truth; run scripts/refresh-spec-mirrors.py after spec edits.
+
+module.exports = {
+  "schemaVersion": "pyxis.visual-suite.v1",
+  "name": "app-pages-desktop",
+  "defaults": {
+    "prototypeBase": "http://localhost:7070",
+    "storybookBase": "http://localhost:6008",
+    "viewport": {
+      "width": 1240,
+      "height": 900
+    },
+    "waitMs": 1000,
+    "threshold": 30,
+    "inspect": "rich",
+    "variant": "desktop"
+  },
+  "policy": {
+    "bands": [
+      {
+        "name": "accepted",
+        "maxChangedPercent": 0.5
+      },
+      {
+        "name": "review",
+        "maxChangedPercent": 10
+      },
+      {
+        "name": "tune-required",
+        "maxChangedPercent": 30
+      },
+      {
+        "name": "major-mismatch",
+        "maxChangedPercent": 100
+      }
+    ]
+  },
+  "acceptedDifferences": {},
+  "targets": [
+    {
+      "page": "dashboard",
+      "variant": "desktop",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-pages--dashboard-desktop",
+      "sections": [
+        {
+          "name": "page",
+          "original": "[data-page=\"dashboard\"]",
+          "react": "[data-page=\"dashboard\"]"
+        },
+        {
+          "name": "summary",
+          "original": "[data-page=\"dashboard\"]",
+          "react": "[data-section=\"dashboard-summary\"]"
+        }
+      ]
+    }
+  ]
+}

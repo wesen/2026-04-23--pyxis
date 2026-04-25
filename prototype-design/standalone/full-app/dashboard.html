@@ -27,7 +27,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneFullAppScreen() {
-    return <DashboardScreen />;
+    return <div data-page="dashboard"><DashboardScreen /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneFullAppScreen />);

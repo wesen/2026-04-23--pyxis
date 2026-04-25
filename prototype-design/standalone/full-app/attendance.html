@@ -27,7 +27,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneFullAppScreen() {
-    return <AttendanceScreen />;
+    return <div data-page="attendance"><AttendanceScreen /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneFullAppScreen />);

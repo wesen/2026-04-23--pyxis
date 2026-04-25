@@ -1,0 +1,36 @@
+schemaVersion: pyxis.visual-suite.v1
+name: app-pages-mobile
+defaults:
+  prototypeBase: http://localhost:7070
+  storybookBase: http://localhost:6008
+  viewport:
+    width: 390
+    height: 844
+  waitMs: 1000
+  threshold: 30
+  inspect: rich
+  variant: mobile
+policy:
+  bands:
+    - name: accepted
+      maxChangedPercent: 0.5
+    - name: review
+      maxChangedPercent: 10
+    - name: tune-required
+      maxChangedPercent: 30
+    - name: major-mismatch
+      maxChangedPercent: 100
+acceptedDifferences: {}
+targets:
+  - page: dashboard
+    variant: mobile
+    priority: tune-first
+    prototypePath: /standalone/mobile/home.html
+    storyId: pyxis-app-pages--dashboard-mobile
+    sections:
+      - name: page
+        original: '[data-page="dashboard"]'
+        react: '[data-page="dashboard"]'
+      - name: summary
+        original: '[data-page="dashboard"]'
+        react: '[data-section="dashboard-summary"]'

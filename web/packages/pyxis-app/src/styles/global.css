@@ -1,0 +1,11 @@
+@import './app-tokens.css';
+@import '../../../pyxis-components/src/tokens/tokens.css';
+@import '../../../pyxis-components/src/atoms/Button/Button.css';
+@import '../../../pyxis-components/src/atoms/Icon/Icon.css';
+@import '../../../pyxis-components/src/atoms/Input/Input.css';
+@import '../../../pyxis-components/src/atoms/Select/Select.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-body, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif); color: var(--app-ink); background: var(--app-canvas); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; } button, input, select, textarea { font: inherit; }
+.pyxis-app { min-height: 100vh; background: var(--app-canvas); }

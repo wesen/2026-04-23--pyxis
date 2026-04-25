@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "noEmit": false, "declaration": true, "emitDeclarationOnly": false },
+  "exclude": ["node_modules", "dist", "storybook-static", "**/*.test.ts", "**/*.test.tsx", "stories", ".storybook"]
+}

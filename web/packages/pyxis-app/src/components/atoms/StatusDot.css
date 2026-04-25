@@ -1,0 +1,5 @@
+.app-status-dot { width: 9px; height: 9px; border-radius: 999px; display: inline-block; background: var(--app-faint); box-shadow: 0 0 0 3px rgba(155,148,136,.14); }
+.app-status-dot[data-tone='confirmed'], .app-status-dot[data-tone='approved'] { background: var(--app-success); box-shadow: 0 0 0 3px rgba(60,122,79,.14); }
+.app-status-dot[data-tone='pending'], .app-status-dot[data-tone='hold'] { background: var(--app-warning); box-shadow: 0 0 0 3px rgba(201,122,15,.14); }
+.app-status-dot[data-tone='declined'], .app-status-dot[data-tone='blocked'] { background: var(--app-danger); box-shadow: 0 0 0 3px rgba(179,58,46,.14); }
+.app-status-dot[data-tone='bot'] { background: var(--app-info); box-shadow: 0 0 0 3px rgba(46,93,158,.14); }

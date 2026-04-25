@@ -27,7 +27,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneFullAppScreen() {
-    return <AuditLogScreen />;
+    return <div data-page="audit-log"><AuditLogScreen /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneFullAppScreen />);

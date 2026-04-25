@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "pyxis-components": ["../pyxis-components/src"],
+      "pyxis-components/*": ["../pyxis-components/src/*"],
+      "pyxis-types": ["../pyxis-types/src"],
+      "pyxis-types/*": ["../pyxis-types/src/*"]
+    }
+  },
+  "include": ["src", "stories", ".storybook", "src/vite-env.d.ts"],
+  "exclude": ["node_modules", "dist", "storybook-static"]
+}

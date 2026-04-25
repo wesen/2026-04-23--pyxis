@@ -13,9 +13,15 @@
     "./public": {
       "import": "./dist/public.js",
       "types": "./dist/public.d.ts"
+    },
+    "./app": {
+      "import": "./dist/app.js",
+      "types": "./dist/app.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",

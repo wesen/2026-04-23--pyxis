@@ -1,0 +1,5 @@
+.app-metric-card { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); padding: 18px; min-height: 116px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--app-shadow); }
+.app-metric-card span { color: var(--app-muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.app-metric-card strong { color: var(--app-ink); font-family: var(--font-display, Georgia, serif); font-size: clamp(30px, 5vw, 44px); font-weight: 500; line-height: 1; }
+.app-metric-card small { color: var(--app-muted); font-size: 13px; }
+.app-metric-card[data-tone='accent'] { border-color: rgba(200,39,13,.3); background: var(--app-accent-soft); }

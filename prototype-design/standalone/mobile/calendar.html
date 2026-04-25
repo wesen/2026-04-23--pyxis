@@ -24,7 +24,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneMobileScreen() {
-    return <MCalendar />;
+    return <div data-page="calendar"><MCalendar /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneMobileScreen />);

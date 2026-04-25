@@ -1,0 +1,4 @@
+.app-today-show-card { display: flex; gap: 14px; align-items: center; padding: 16px; border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); background: var(--app-surface-strong); }
+.app-today-show-card h3 { margin: 0; font-size: 18px; }
+.app-today-show-card p { margin: 4px 0; color: var(--app-muted); }
+.app-today-show-card span { display: inline-flex; align-items: center; gap: 8px; color: var(--app-muted); font-size: 13px; }

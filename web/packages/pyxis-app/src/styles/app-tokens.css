@@ -1,0 +1,20 @@
+:root {
+  --app-canvas: #f3f1eb;
+  --app-mobile-canvas: #e8e4da;
+  --app-surface: #fffaf2;
+  --app-surface-strong: #ffffff;
+  --app-ink: #1f1e1c;
+  --app-muted: #6f685e;
+  --app-faint: #9b9488;
+  --app-rule: #e1ddd2;
+  --app-accent: #c8270d;
+  --app-accent-soft: #fcefeb;
+  --app-success: #3c7a4f;
+  --app-warning: #c97a0f;
+  --app-danger: #b33a2e;
+  --app-info: #2e5d9e;
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 18px;
+  --app-shadow: 0 18px 50px rgba(31, 30, 28, 0.08);
+}

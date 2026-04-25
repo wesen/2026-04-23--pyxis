@@ -1,0 +1,5 @@
+.app-login { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at top left, #fff7e8, var(--app-canvas) 42%, #e7e0d3); }
+.app-login section { width: min(440px, 100%); border: 1px solid var(--app-rule); border-radius: 28px; background: var(--app-surface); padding: 34px; box-shadow: var(--app-shadow); }
+.app-login b { font-family: var(--font-display, Georgia, serif); font-size: 34px; color: var(--app-accent); font-weight: 500; }
+.app-login h1 { margin: 28px 0 8px; font-family: var(--font-display, Georgia, serif); font-size: 42px; line-height: 1; font-weight: 500; }
+.app-login p { color: var(--app-muted); margin: 0 0 22px; }

@@ -27,7 +27,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneFullAppScreen() {
-    return <ArtistsScreen />;
+    return <div data-page="artists"><ArtistsScreen /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneFullAppScreen />);

@@ -12,3 +12,22 @@ export type {
   Submission,
   SubmissionStatus,
 } from './public';
+
+export type {
+  ActivityType,
+  AppDashboardSummary,
+  AppShow,
+  AppShowStatus,
+  ArtistProfile,
+  AttendanceEntry,
+  AuditLogEntry,
+  AuthSession,
+  BookingRequest,
+  BookingStatus,
+  CalendarEvent,
+  DiscordChannelKind,
+  DiscordChannelMapping,
+  SpaceSettings,
+  StaffMember,
+  UserRole,
+} from './app';

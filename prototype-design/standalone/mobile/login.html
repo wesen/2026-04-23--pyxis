@@ -24,7 +24,7 @@
 
 <script type="text/babel" data-presets="react">
   function StandaloneMobileScreen() {
-    return <MLogin />;
+    return <div data-page="login"><MLogin /></div>;
   }
 
   ReactDOM.createRoot(document.getElementById("root")).render(<StandaloneMobileScreen />);

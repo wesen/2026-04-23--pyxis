@@ -1,0 +1,51 @@
+schemaVersion: pyxis.visual-suite.v1
+name: app-components
+defaults:
+  prototypeBase: http://localhost:7070
+  storybookBase: http://localhost:6008
+  viewport:
+    width: 520
+    height: 420
+  waitMs: 1000
+  threshold: 30
+  inspect: rich
+  variant: component
+policy:
+  bands:
+    - name: accepted
+      maxChangedPercent: 0.5
+    - name: review
+      maxChangedPercent: 10
+    - name: tune-required
+      maxChangedPercent: 30
+    - name: major-mismatch
+      maxChangedPercent: 100
+acceptedDifferences: {}
+targets:
+  - page: metric-card
+    variant: component
+    priority: tune-first
+    prototypePath: /standalone/full-app/dashboard.html
+    storyId: pyxis-app-components--metric-card-default
+    sections:
+      - name: component
+        original: '#root'
+        react: '[data-pyxis-component="metric-card"]'
+  - page: activity-feed-item
+    variant: component
+    priority: tune-first
+    prototypePath: /standalone/full-app/dashboard.html
+    storyId: pyxis-app-components--activity-item-default
+    sections:
+      - name: component
+        original: '#root'
+        react: '[data-pyxis-component="activity-feed-item"]'
+  - page: today-show-card
+    variant: component
+    priority: normal
+    prototypePath: /standalone/full-app/dashboard.html
+    storyId: pyxis-app-components--today-show-default
+    sections:
+      - name: component
+        original: '#root'
+        react: '[data-pyxis-component="today-show-card"]'
