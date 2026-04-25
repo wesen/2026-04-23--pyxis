@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "mobile",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 99.3476223362273,
+    "classificationCounts": {
+      "major-mismatch": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "major-mismatch",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "dashboard",
+        "variant": "mobile",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard",
+        "sectionCount": 1,
+        "maxChangedPercent": 99.3476223362273,
+        "classificationCounts": {
+          "major-mismatch": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "dashboard",
+            "variant": "mobile",
+            "section": "hero",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero",
+            "leftUrl": "http://localhost:7070/standalone/mobile/home.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile&viewMode=story",
+            "leftSelector": "[data-section=\"dashboard-hero\"]",
+            "rightSelector": "[data-section=\"dashboard-hero\"]",
+            "threshold": 30,
+            "changedPercent": 99.3476223362273,
+            "changedPixels": 80559,
+            "totalPixels": 81088,
+            "normalizedWidth": 362,
+            "normalizedHeight": 224,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 14,
+                "y": 225.125,
+                "width": 362,
+                "height": 148.1875
+              },
+              "right": {
+                "x": 14,
+                "y": 178.46875,
+                "width": 362,
+                "height": 223.15625
+              },
+              "delta": {
+                "x": 0,
+                "y": -46.65625,
+                "width": 0,
+                "height": 74.96875
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "pixel": {
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 81088,
+                  "changedPixels": 80559,
+                  "changedPercent": 99.3476223362273,
+                  "normalizedWidth": 362,
+                  "normalizedHeight": 224
+                },
+                "right": {
+                  "name": "dashboard-hero",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile&viewMode=story",
+                  "selector": "[data-section=\"dashboard-hero\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "height": 223.15625,
+                    "x": 14,
+                    "y": 178.46875,
+                    "width": 362
+                  }
+                },
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "left": {
+                  "name": "dashboard-hero",
+                  "url": "http://localhost:7070/standalone/mobile/home.html",
+                  "selector": "[data-section=\"dashboard-hero\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 14,
+                    "y": 225.125,
+                    "width": 362,
+                    "height": 148.1875
+                  }
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 9,
+                "textChanged": true,
+                "attributeChanges": 1,
+                "name": "dashboard-hero"
+              },
+            "classification": "major-mismatch",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "dashboard",
+        "variant": "mobile",
+        "section": "hero",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero",
+        "leftUrl": "http://localhost:7070/standalone/mobile/home.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile&viewMode=story",
+        "leftSelector": "[data-section=\"dashboard-hero\"]",
+        "rightSelector": "[data-section=\"dashboard-hero\"]",
+        "threshold": 30,
+        "changedPercent": 99.3476223362273,
+        "changedPixels": 80559,
+        "totalPixels": 81088,
+        "normalizedWidth": 362,
+        "normalizedHeight": 224,
+        "bounds": {
+          "left": {
+            "x": 14,
+            "y": 225.125,
+            "width": 362,
+            "height": 148.1875
+          },
+          "right": {
+            "x": 14,
+            "y": 178.46875,
+            "width": 362,
+            "height": 223.15625
+          },
+          "delta": {
+            "x": 0,
+            "y": -46.65625,
+            "width": 0,
+            "height": 74.96875
+          },
+          "changed": true
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "right": {
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile&viewMode=story",
+              "selector": "[data-section=\"dashboard-hero\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 14,
+                "y": 178.46875,
+                "width": 362,
+                "height": 223.15625
+              },
+              "name": "dashboard-hero"
+            },
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "left": {
+              "name": "dashboard-hero",
+              "url": "http://localhost:7070/standalone/mobile/home.html",
+              "selector": "[data-section=\"dashboard-hero\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "height": 148.1875,
+                "x": 14,
+                "y": 225.125,
+                "width": 362
+              }
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true,
+            "attributeChanges": 1,
+            "name": "dashboard-hero",
+            "pixel": {
+              "totalPixels": 81088,
+              "changedPixels": 80559,
+              "changedPercent": 99.3476223362273,
+              "normalizedWidth": 362,
+              "normalizedHeight": 224,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_only.png",
+              "threshold": 30
+            }
+          },
+        "classification": "major-mismatch",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

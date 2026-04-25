@@ -80,9 +80,9 @@ function MTabBar({ active }) {
 }
 
 // Card list group (iOS-style grouped rows)
-function MGroup({ title, action, children, style }) {
+function MGroup({ title, action, children, style, section }) {
   return (
-    <div style={{ marginBottom: 20, ...style }}>
+    <div data-section={section} style={{ marginBottom: 20, ...style }}>
       {title && <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "0 22px 8px" }}>
         <div style={{ fontSize: 11, fontWeight: 600, color: MC.ink3, textTransform: "uppercase", letterSpacing: ".09em" }}>{title}</div>
         {action}
@@ -181,7 +181,7 @@ function MHome() {
         <MHero eyebrow="Welcome back" title="Good morning, Ada." sub="6 shows booked · 3 need your eye." />
 
         {/* Next show hero */}
-        <div style={{ margin: "6px 14px 20px", background: MC.ink, color: "#fff", borderRadius: MR.lg, padding: 18, position: "relative", overflow: "hidden" }}>
+        <div data-section="dashboard-hero" style={{ margin: "6px 14px 20px", background: MC.ink, color: "#fff", borderRadius: MR.lg, padding: 18, position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", right: -40, top: -40, opacity: .12 }}><PyxisMark size={200} color="#fff" /></div>
           <div style={{ fontSize: 10.5, textTransform: "uppercase", letterSpacing: ".1em", color: "rgba(255,255,255,.6)", fontWeight: 600, marginBottom: 8 }}>Next on stage · in 9 days</div>
           <div className="px-serif" style={{ fontSize: 24, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.05, marginBottom: 4 }}>{next.artist}</div>
@@ -193,7 +193,7 @@ function MHome() {
         </div>
 
         {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "0 14px 20px" }}>
+        <div data-section="dashboard-metrics" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "0 14px 20px" }}>
           {[
             ["Upcoming", "6", "next 60 days", MC.accent],
             ["Pending", "3", "review needed", MC.amber],
@@ -211,7 +211,7 @@ function MHome() {
           ))}
         </div>
 
-        <MGroup title="Needs your attention" action={<span style={{ fontSize: 11, color: MC.accent, fontWeight: 600 }}>3</span>}>
+        <MGroup title="Needs your attention" section="dashboard-attention" action={<span style={{ fontSize: 11, color: MC.accent, fontWeight: 600 }}>3</span>}>
           <MRow icon="warn" iconColor={MC.amber} iconBg={MC.amberLt}
             title="2 past shows need logging" sub="Planning for Burial · Actress"
             trail={<Icon name="chev" size={14} color={MC.ink3} />} />
@@ -223,7 +223,7 @@ function MHome() {
             trail={<Icon name="chev" size={14} color={MC.ink3} />} last />
         </MGroup>
 
-        <MGroup title="Recent activity" action={<span style={{ fontSize: 11, color: MC.ink3 }}>Today</span>}>
+        <MGroup title="Recent activity" section="dashboard-activity" action={<span style={{ fontSize: 11, color: MC.ink3 }}>Today</span>}>
           {D.log.slice(0, 3).map((l, i) => (
             <MRow key={l.id} icon={l.type === "bot" ? "compass" : l.type === "approve" ? "check" : "edit"}
               iconColor={l.type === "approve" ? MC.green : l.type === "decline" ? MC.accent : MC.blue}

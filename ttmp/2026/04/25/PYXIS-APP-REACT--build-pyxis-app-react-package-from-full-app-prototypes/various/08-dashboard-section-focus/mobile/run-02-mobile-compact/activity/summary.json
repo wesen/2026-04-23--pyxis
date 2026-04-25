@@ -1,0 +1,101 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/01-suite-summary.md",
+  "maxChangedPercent": 86.64993252361674,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-panel"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "panel"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 277.71875,
+          "width": -28,
+          "x": 14,
+          "y": 1504.046875
+        },
+        "left": {
+          "height": 197,
+          "width": 390,
+          "x": 0,
+          "y": 820.3125
+        },
+        "normalizedHeight": 475,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 474.71875,
+          "width": 362,
+          "x": 14,
+          "y": 2324.359375
+        }
+      },
+      "changedPercent": 86.64993252361674,
+      "changedPixels": 160519,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-activity\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/activity/dashboard/artifacts/activity/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-activity\"]",
+      "section": "activity",
+      "styleChangeCount": 3,
+      "styleDiffs": [
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Recent activityTodayjamie approved show #47 · Orphx · Jul 4Today · 11:42bot posted + pinned #47 in #upcoming-showsToday · 11:39sam declined submission · Arca · Jul 12Today · 09:14",
+        "right": "Recent activityliveapproved show #47 · Orphx · Jul 4Today · 11:42 · jamieposted + pinned #47 in #upcoming-showsToday · 11:39 · botdeclined submission · Arca · Jul 12Today · 09:14 · samauto-archived 2 past shows (Planning for Burial, Actress)Apr 22 · 23:00 · botedited show #42 · updated doors to 8:00 PMApr 21 · 16:30 · jamie"
+      },
+      "threshold": 30,
+      "totalPixels": 185250,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

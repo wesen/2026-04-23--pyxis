@@ -134,7 +134,7 @@ function DashboardScreen() {
       </>}
     >
       {/* Hero strip — next show */}
-      <div style={{ background: C.ink, color: "#fff", borderRadius: R.lg, padding: 26, display: "flex", alignItems: "center", gap: 32, marginBottom: 20, position: "relative", overflow: "hidden" }}>
+      <div data-section="dashboard-hero" style={{ background: C.ink, color: "#fff", borderRadius: R.lg, padding: 26, display: "flex", alignItems: "center", gap: 32, marginBottom: 20, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", right: -60, top: -60, opacity: .1 }}><PyxisMark size={300} color="#fff" /></div>
         <div style={{ flex: 1, position: "relative" }}>
           <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: ".1em", color: "rgba(255,255,255,.6)", marginBottom: 6, fontWeight: 600 }}>Next on stage · in {daysAway} days</div>
@@ -162,7 +162,7 @@ function DashboardScreen() {
 
       {/* Two-col */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 16 }}>
-        <Card>
+        <Card data-section="dashboard-upcoming">
           <CardHead title="Upcoming shows" subtitle="Pinned to #upcoming-shows" action={<Btn variant="outline" size="sm" iconRight="chev">View all</Btn>} />
           <Table
             cols={[
@@ -177,14 +177,14 @@ function DashboardScreen() {
         </Card>
 
         <div>
-          <Card style={{ marginBottom: 16, padding: 18 }}>
+          <Card data-section="dashboard-quick-actions" style={{ marginBottom: 16, padding: 18 }}>
             <CardHead title="Quick actions" style={{ marginBottom: 12 }} />
             <Btn icon="plus" full style={{ marginBottom: 8 }}>Add a show</Btn>
             <Btn variant="outline" icon="mail" full style={{ marginBottom: 8 }}>Review bookings · {pending.length}</Btn>
             <Btn variant="ghost" icon="log" full>Open audit log</Btn>
           </Card>
 
-          <Card style={{ padding: 18 }}>
+          <Card data-section="dashboard-activity" style={{ padding: 18 }}>
             <CardHead title="Recent activity" action={<span style={{ fontSize: 11, color: C.ink3 }}>live</span>} style={{ marginBottom: 6 }} />
             {D.log.slice(0, 5).map(l => <LogRow key={l.id} {...l} />)}
           </Card>
@@ -218,7 +218,7 @@ function DashboardScreen() {
           </div>
         </Card>
 
-        <Card style={{ padding: 18 }}>
+        <Card data-section="dashboard-attention" style={{ padding: 18 }}>
           <CardHead title="Needs your attention" style={{ marginBottom: 12 }} />
           {[
             ["2 past shows need logging", "Planning for Burial · Mar 14 and Actress · Feb 28", "warn", C.amber],

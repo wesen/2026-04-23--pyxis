@@ -1,0 +1,101 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/01-suite-summary.md",
+  "maxChangedPercent": 20.37411947418049,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-dashboard-hero"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 6.59375,
+          "width": 2,
+          "x": -1,
+          "y": -23.09375
+        },
+        "left": {
+          "height": 142,
+          "width": 966,
+          "x": 247,
+          "y": 137.390625
+        },
+        "normalizedHeight": 149,
+        "normalizedWidth": 968,
+        "right": {
+          "height": 148.59375,
+          "width": 968,
+          "x": 246,
+          "y": 114.296875
+        }
+      },
+      "changedPercent": 20.37411947418049,
+      "changedPixels": 29386,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-hero\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/hero/dashboard/artifacts/hero/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-hero\"]",
+      "section": "hero",
+      "styleChangeCount": 5,
+      "styleDiffs": [
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "background-color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "26px",
+          "property": "padding-bottom",
+          "right": "28px"
+        },
+        {
+          "left": "26px",
+          "property": "padding-top",
+          "right": "28px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorView on DiscordEdit show",
+        "right": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 Doors 8:00 PM 21+ $12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord✦"
+      },
+      "threshold": 30,
+      "totalPixels": 144232,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

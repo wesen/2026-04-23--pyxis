@@ -1,0 +1,121 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/01-suite-summary.md",
+  "maxChangedPercent": 99.3476223362273,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-dashboard-hero"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 74.96875,
+          "width": 0,
+          "x": 0,
+          "y": -46.65625
+        },
+        "left": {
+          "height": 148.1875,
+          "width": 362,
+          "x": 14,
+          "y": 225.125
+        },
+        "normalizedHeight": 224,
+        "normalizedWidth": 362,
+        "right": {
+          "height": 223.15625,
+          "width": 362,
+          "x": 14,
+          "y": 178.46875
+        }
+      },
+      "changedPercent": 99.3476223362273,
+      "changedPixels": 80559,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-hero\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/hero/dashboard/artifacts/hero/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-hero\"]",
+      "section": "hero",
+      "styleChangeCount": 9,
+      "styleDiffs": [
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "background-color",
+          "right": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "left": "12px",
+          "property": "border-radius",
+          "right": "0px"
+        },
+        {
+          "left": "rgb(255, 255, 255)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-bottom",
+          "right": "0px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-left",
+          "right": "0px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-right",
+          "right": "0px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-top",
+          "right": "0px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord",
+        "right": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 Doors 8:00 PM 21+ $12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord✦"
+      },
+      "threshold": 30,
+      "totalPixels": 81088,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

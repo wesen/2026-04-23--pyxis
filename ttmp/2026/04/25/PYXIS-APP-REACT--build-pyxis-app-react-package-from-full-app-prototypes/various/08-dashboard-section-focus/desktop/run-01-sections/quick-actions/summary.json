@@ -1,0 +1,134 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/01-suite-summary.md",
+  "maxChangedPercent": 25.591645108747723,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-panel"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "panel"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 24.296875,
+          "width": 23.171875,
+          "x": -22.171875,
+          "y": -18
+        },
+        "left": {
+          "height": 189.28125,
+          "width": 320,
+          "x": 893,
+          "y": 454.890625
+        },
+        "normalizedHeight": 213,
+        "normalizedWidth": 343,
+        "right": {
+          "height": 213.578125,
+          "width": 343.171875,
+          "x": 870.828125,
+          "y": 436.890625
+        }
+      },
+      "changedPercent": 25.591645108747723,
+      "changedPixels": 18697,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-quick-actions\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/quick-actions/dashboard/artifacts/quick-actions/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-quick-actions\"]",
+      "section": "quick-actions",
+      "styleChangeCount": 10,
+      "styleDiffs": [
+        {
+          "left": "rgb(255, 255, 255)",
+          "property": "background-color",
+          "right": "rgb(255, 250, 242)"
+        },
+        {
+          "left": "12px",
+          "property": "border-radius",
+          "right": "22px"
+        },
+        {
+          "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "property": "box-shadow",
+          "right": "rgba(31, 30, 28, 0.08) 0px 18px 50px 0px"
+        },
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-bottom",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-left",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-right",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-top",
+          "right": "22px"
+        }
+      ],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 73059,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

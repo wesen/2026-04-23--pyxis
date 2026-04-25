@@ -1,0 +1,160 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard mobile",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/hero/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T23:44:58.581145719Z",
+  "updated_at": "2026-04-25T23:45:03.830356278Z",
+  "targets": [
+    {
+      "slug": "hero",
+      "name": "dashboard hero",
+      "url": "http://localhost:7070/standalone/mobile/home.html",
+      "selector": "[data-section=\"dashboard-hero\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "hero",
+        "name": "dashboard hero",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "selector": "[data-section=\"dashboard-hero\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "dashboard-hero",
+        "left": {
+          "name": "dashboard-hero",
+          "url": "http://localhost:7070/standalone/mobile/home.html",
+          "selector": "[data-section=\"dashboard-hero\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 14,
+            "y": 225.125,
+            "width": 362,
+            "height": 148.1875
+          }
+        },
+        "right": {
+          "name": "dashboard-hero",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile\u0026viewMode=story",
+          "selector": "[data-section=\"dashboard-hero\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 14,
+            "y": 194.78125,
+            "width": 362,
+            "height": 177.28125
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 64074,
+          "changedPixels": 28072,
+          "changedPercent": 43.81184255704342,
+          "normalizedWidth": 362,
+          "normalizedHeight": 177,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/hero/dashboard/artifacts/hero/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/hero/dashboard/artifacts/hero/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 14,
+            "y": 225.125,
+            "width": 362,
+            "height": 148.1875
+          },
+          "right": {
+            "x": 14,
+            "y": 194.78125,
+            "width": 362,
+            "height": 177.28125
+          },
+          "delta": {
+            "x": 0,
+            "y": -30.34375,
+            "width": 0,
+            "height": 29.09375
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord",
+          "right": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 Doors 8:00 PM 21+ $12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord✦"
+        },
+        "styles": [
+          {
+            "name": "background-color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "20.3px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "18px",
+            "right": "76px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "18px",
+            "right": "22px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-dashboard-hero",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/hero/dashboard/artifacts/hero/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/hero/dashboard/artifacts/hero/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T23:45:03.830355765Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

@@ -1,0 +1,136 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/01-suite-summary.md",
+  "maxChangedPercent": 10.94666438003773,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-panel"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "panel"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 45.15625,
+          "width": 23.171875,
+          "x": -22.171875,
+          "y": 8.296875
+        },
+        "left": {
+          "height": 464.5,
+          "width": 320,
+          "x": 893,
+          "y": 660.171875
+        },
+        "normalizedHeight": 510,
+        "normalizedWidth": 343,
+        "right": {
+          "height": 509.65625,
+          "width": 343.171875,
+          "x": 870.828125,
+          "y": 668.46875
+        }
+      },
+      "changedPercent": 10.94666438003773,
+      "changedPixels": 19149,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-activity\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-activity\"]",
+      "section": "activity",
+      "styleChangeCount": 10,
+      "styleDiffs": [
+        {
+          "left": "rgb(255, 255, 255)",
+          "property": "background-color",
+          "right": "rgb(255, 250, 242)"
+        },
+        {
+          "left": "12px",
+          "property": "border-radius",
+          "right": "22px"
+        },
+        {
+          "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "property": "box-shadow",
+          "right": "rgba(31, 30, 28, 0.08) 0px 18px 50px 0px"
+        },
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-bottom",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-left",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-right",
+          "right": "22px"
+        },
+        {
+          "left": "18px",
+          "property": "padding-top",
+          "right": "22px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Recent activityliveToday · 11:42jamie approved show #47 · Orphx · Jul 4Today · 11:39bot posted + pinned #47 in #upcoming-showsToday · 09:14sam declined submission · Arca · Jul 12Apr 22 · 23:00bot auto-archived 2 past shows (Planning for Burial, Actress)Apr 21 · 16:30jamie edited show #42 · updated doors to 8:00 PM",
+        "right": "Recent activityliveapproved show #47 · Orphx · Jul 4Today · 11:42 · jamieposted + pinned #47 in #upcoming-showsToday · 11:39 · botdeclined submission · Arca · Jul 12Today · 09:14 · samauto-archived 2 past shows (Planning for Burial, Actress)Apr 22 · 23:00 · botedited show #42 · updated doors to 8:00 PMApr 21 · 16:30 · jamie"
+      },
+      "threshold": 30,
+      "totalPixels": 174930,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

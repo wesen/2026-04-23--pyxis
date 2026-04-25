@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 43.578125,
+      "width": -28,
+      "x": 14,
+      "y": 110.140625
+    },
+    "left": {
+      "height": 197,
+      "width": 390,
+      "x": 0,
+      "y": 603.3125
+    },
+    "right": {
+      "height": 240.578125,
+      "width": 362,
+      "x": 14,
+      "y": 713.453125
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 197,
+      "width": 390,
+      "x": 0,
+      "y": 603.3125
+    },
+    "exists": true,
+    "name": "dashboard-attention",
+    "selector": "[data-section=\"dashboard-attention\"]",
+    "url": "http://localhost:7070/standalone/mobile/home.html",
+    "visible": true
+  },
+  "name": "dashboard-attention",
+  "pixel": {
+    "changedPercent": 28.21895946377274,
+    "changedPixels": 26523,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_only.png",
+    "normalizedHeight": 241,
+    "normalizedWidth": 390,
+    "threshold": 30,
+    "totalPixels": 93990
+  },
+  "right": {
+    "bounds": {
+      "height": 240.578125,
+      "width": 362,
+      "x": 14,
+      "y": 713.453125
+    },
+    "exists": true,
+    "name": "dashboard-attention",
+    "selector": "[data-section=\"dashboard-attention\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "border-radius",
+      "right": "18px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Needs your attention32 past shows need loggingPlanning for Burial · ActressZola Jesus · Jun 6Check price for a 160-draw headlinerDiscord token expires in 14dReconnect to keep pinning working",
+    "right": "Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›"
+  }
+}

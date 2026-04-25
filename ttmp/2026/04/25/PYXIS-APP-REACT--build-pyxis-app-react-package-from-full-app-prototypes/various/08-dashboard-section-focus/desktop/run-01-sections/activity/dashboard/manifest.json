@@ -1,0 +1,200 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T23:44:17.377380664Z",
+  "updated_at": "2026-04-25T23:44:23.01835693Z",
+  "targets": [
+    {
+      "slug": "activity",
+      "name": "dashboard activity",
+      "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+      "selector": "[data-section=\"dashboard-activity\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "activity",
+        "name": "dashboard activity",
+        "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "selector": "[data-section=\"dashboard-activity\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "dashboard-activity",
+        "left": {
+          "name": "dashboard-activity",
+          "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+          "selector": "[data-section=\"dashboard-activity\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 893,
+            "y": 660.171875,
+            "width": 320,
+            "height": 464.5
+          }
+        },
+        "right": {
+          "name": "dashboard-activity",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+          "selector": "[data-section=\"dashboard-activity\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 870.828125,
+            "y": 668.46875,
+            "width": 343.171875,
+            "height": 509.65625
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 174930,
+          "changedPixels": 19149,
+          "changedPercent": 10.94666438003773,
+          "normalizedWidth": 343,
+          "normalizedHeight": 510,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 893,
+            "y": 660.171875,
+            "width": 320,
+            "height": 464.5
+          },
+          "right": {
+            "x": 870.828125,
+            "y": 668.46875,
+            "width": 343.171875,
+            "height": 509.65625
+          },
+          "delta": {
+            "x": -22.171875,
+            "y": 8.296875,
+            "width": 23.171875,
+            "height": 45.15625
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Recent activityliveToday · 11:42jamie approved show #47 · Orphx · Jul 4Today · 11:39bot posted + pinned #47 in #upcoming-showsToday · 09:14sam declined submission · Arca · Jul 12Apr 22 · 23:00bot auto-archived 2 past shows (Planning for Burial, Actress)Apr 21 · 16:30jamie edited show #42 · updated doors to 8:00 PM",
+          "right": "Recent activityliveapproved show #47 · Orphx · Jul 4Today · 11:42 · jamieposted + pinned #47 in #upcoming-showsToday · 11:39 · botdeclined submission · Arca · Jul 12Today · 09:14 · samauto-archived 2 past shows (Planning for Burial, Actress)Apr 22 · 23:00 · botedited show #42 · updated doors to 8:00 PMApr 21 · 16:30 · jamie"
+        },
+        "styles": [
+          {
+            "name": "background-color",
+            "left": "rgb(255, 255, 255)",
+            "right": "rgb(255, 250, 242)",
+            "changed": true
+          },
+          {
+            "name": "border-radius",
+            "left": "12px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "box-shadow",
+            "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+            "right": "rgba(31, 30, 28, 0.08) 0px 18px 50px 0px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "18px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-left",
+            "left": "18px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-right",
+            "left": "18px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "18px",
+            "right": "22px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/desktop/run-01-sections/activity/dashboard/artifacts/activity/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T23:44:23.018356615Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

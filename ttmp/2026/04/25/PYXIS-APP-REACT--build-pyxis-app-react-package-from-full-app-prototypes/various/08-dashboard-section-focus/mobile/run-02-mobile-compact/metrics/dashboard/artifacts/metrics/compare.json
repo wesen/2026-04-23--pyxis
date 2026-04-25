@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-metrics-grid"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 354,
+      "width": 0,
+      "x": 0,
+      "y": 8.3125
+    },
+    "left": {
+      "height": 190,
+      "width": 362,
+      "x": 14,
+      "y": 393.3125
+    },
+    "right": {
+      "height": 544,
+      "width": 362,
+      "x": 14,
+      "y": 401.625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 190,
+      "width": 362,
+      "x": 14,
+      "y": 393.3125
+    },
+    "exists": true,
+    "name": "dashboard-metrics",
+    "selector": "[data-section=\"dashboard-metrics\"]",
+    "url": "http://localhost:7070/standalone/mobile/home.html",
+    "visible": true
+  },
+  "name": "dashboard-metrics",
+  "pixel": {
+    "changedPercent": 7.728205232369191,
+    "changedPixels": 15219,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_only.png",
+    "normalizedHeight": 544,
+    "normalizedWidth": 362,
+    "threshold": 30,
+    "totalPixels": 196928
+  },
+  "right": {
+    "bounds": {
+      "height": 544,
+      "width": 362,
+      "x": 14,
+      "y": 401.625
+    },
+    "exists": true,
+    "name": "dashboard-metrics",
+    "selector": "[data-section=\"dashboard-metrics\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Upcoming6next 60 daysPending3review neededAvg draw84last 6 showsCapacity56%May 2025",
+    "right": "Upcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025"
+  }
+}

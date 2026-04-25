@@ -54,6 +54,26 @@ module.exports = {
           "name": "summary",
           "original": "[data-page=\"dashboard\"]",
           "react": "[data-section=\"dashboard-summary\"]"
+        },
+        {
+          "name": "hero",
+          "original": "[data-section=\"dashboard-hero\"]",
+          "react": "[data-section=\"dashboard-hero\"]"
+        },
+        {
+          "name": "metrics",
+          "original": "[data-section=\"dashboard-metrics\"]",
+          "react": "[data-section=\"dashboard-metrics\"]"
+        },
+        {
+          "name": "attention",
+          "original": "[data-section=\"dashboard-attention\"]",
+          "react": "[data-section=\"dashboard-attention\"]"
+        },
+        {
+          "name": "activity",
+          "original": "[data-section=\"dashboard-activity\"]",
+          "react": "[data-section=\"dashboard-activity\"]"
         }
       ]
     }

@@ -15,4 +15,5 @@ export * from './components/molecules/AttendanceStat';
 export * from './components/molecules/DiscordChannelRow';
 export * from './components/molecules/SettingsToggleRow';
 export * from './components/organisms/Panels';
+export * from './components/organisms/DashboardSections';
 export * from './components/shell/AppShell';

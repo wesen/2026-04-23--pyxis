@@ -1,0 +1,91 @@
+[
+{
+  "classificationCounts": {
+    "review": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/01-suite-summary.md",
+  "maxChangedPercent": 7.728205232369191,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "review"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-metrics-grid"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 354,
+          "width": 0,
+          "x": 0,
+          "y": 8.3125
+        },
+        "left": {
+          "height": 190,
+          "width": 362,
+          "x": 14,
+          "y": 393.3125
+        },
+        "normalizedHeight": 544,
+        "normalizedWidth": 362,
+        "right": {
+          "height": 544,
+          "width": 362,
+          "x": 14,
+          "y": 401.625
+        }
+      },
+      "changedPercent": 7.728205232369191,
+      "changedPixels": 15219,
+      "classification": "review",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-metrics\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/metrics/dashboard/artifacts/metrics/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-metrics\"]",
+      "section": "metrics",
+      "styleChangeCount": 3,
+      "styleDiffs": [
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Upcoming6next 60 daysPending3review neededAvg draw84last 6 showsCapacity56%May 2025",
+        "right": "Upcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025"
+      },
+      "threshold": 30,
+      "totalPixels": 196928,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

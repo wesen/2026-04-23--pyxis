@@ -1,0 +1,101 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/01-suite-summary.md",
+  "maxChangedPercent": 84.38773833004602,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-panel"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "panel"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 114.71875,
+          "width": -28,
+          "x": 14,
+          "y": 359.734375
+        },
+        "left": {
+          "height": 197,
+          "width": 390,
+          "x": 0,
+          "y": 603.3125
+        },
+        "normalizedHeight": 312,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 311.71875,
+          "width": 362,
+          "x": 14,
+          "y": 963.046875
+        }
+      },
+      "changedPercent": 84.38773833004602,
+      "changedPixels": 102683,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-attention\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-02-mobile-compact/attention/dashboard/artifacts/attention/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-attention\"]",
+      "section": "attention",
+      "styleChangeCount": 3,
+      "styleDiffs": [
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Needs your attention32 past shows need loggingPlanning for Burial · ActressZola Jesus · Jun 6Check price for a 160-draw headlinerDiscord token expires in 14dReconnect to keep pinning working",
+        "right": "Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›"
+      },
+      "threshold": 30,
+      "totalPixels": 121680,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

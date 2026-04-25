@@ -1,0 +1,164 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard mobile",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T23:45:09.503126355Z",
+  "updated_at": "2026-04-25T23:45:15.031898613Z",
+  "targets": [
+    {
+      "slug": "attention",
+      "name": "dashboard attention",
+      "url": "http://localhost:7070/standalone/mobile/home.html",
+      "selector": "[data-section=\"dashboard-attention\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "attention",
+        "name": "dashboard attention",
+        "url": "http://localhost:7070/standalone/mobile/home.html",
+        "selector": "[data-section=\"dashboard-attention\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "dashboard-attention",
+        "left": {
+          "name": "dashboard-attention",
+          "url": "http://localhost:7070/standalone/mobile/home.html",
+          "selector": "[data-section=\"dashboard-attention\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 603.3125,
+            "width": 390,
+            "height": 197
+          }
+        },
+        "right": {
+          "name": "dashboard-attention",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-mobile\u0026viewMode=story",
+          "selector": "[data-section=\"dashboard-attention\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 14,
+            "y": 713.453125,
+            "width": 362,
+            "height": 240.578125
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 93990,
+          "changedPixels": 26523,
+          "changedPercent": 28.21895946377274,
+          "normalizedWidth": 390,
+          "normalizedHeight": 241,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 603.3125,
+            "width": 390,
+            "height": 197
+          },
+          "right": {
+            "x": 14,
+            "y": 713.453125,
+            "width": 362,
+            "height": 240.578125
+          },
+          "delta": {
+            "x": 14,
+            "y": 110.140625,
+            "width": -28,
+            "height": 43.578125
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Needs your attention32 past shows need loggingPlanning for Burial · ActressZola Jesus · Jun 6Check price for a 160-draw headlinerDiscord token expires in 14dReconnect to keep pinning working",
+          "right": "Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›"
+        },
+        "styles": [
+          {
+            "name": "border-radius",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "20.3px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/08-dashboard-section-focus/mobile/run-01-sections/attention/dashboard/artifacts/attention/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T23:45:15.03189821Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

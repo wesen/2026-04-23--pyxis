@@ -1122,3 +1122,49 @@ The full page is now structurally much closer: hero, metrics, upcoming, quick ac
 - Add desktop bot-status and settings mini panels if full-page parity matters.
 - Decide whether mobile metric labels should use mobile-specific copy (`Pending`, `Capacity`) or remain shared semantic labels.
 - Consider adding focused section specs for `dashboard-hero`, `dashboard-upcoming`, `dashboard-activity`, and `dashboard-attention` rather than tuning only the full-page crop.
+
+## Step 12: Dashboard section extraction, Storybook enrichment, and CSS import fix
+
+The user reminded me to keep extracting atoms/molecules/organisms as the dashboard grows instead of letting the page component become a blob, and to build a richer Storybook around those extracted parts.
+
+### What I changed
+
+- Added prototype section selectors for focused dashboard comparisons:
+  - desktop `dashboard-hero`, `dashboard-upcoming`, `dashboard-quick-actions`, `dashboard-activity`, `dashboard-attention`,
+  - mobile `dashboard-hero`, `dashboard-metrics`, `dashboard-attention`, `dashboard-activity`.
+- Refreshed the JS mirror specs with `refresh-spec-mirrors.py`.
+- Extracted dashboard-specific organism sections into:
+  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`
+- Added rich Storybook coverage in:
+  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`
+- Exported the new sections from `web/packages/pyxis-app/src/index.ts`.
+- Fixed a Storybook/Vite CSS loading issue by changing the Panels CSS import to `./Panels.css?dashboard`. Before the fix, Vite served an empty `__vite__css` for `Panels.css` in the iframe after HMR, which made dashboard sections render unstyled. The user confirmed the UI was fixed after this change.
+
+### Validation
+
+- Typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Full page after CSS import fix:
+  - desktop `run-05-css-import-fix`: `16.414974279284106%`, `245069` changed pixels, `tune-required`.
+  - mobile `run-07-css-import-fix`: `27.23846973048251%`, `133000` changed pixels, `major-mismatch`.
+
+- Focused section baseline runs were created under:
+  - `various/08-dashboard-section-focus/desktop/run-01-sections/`
+  - `various/08-dashboard-section-focus/mobile/run-01-sections/`
+  - `various/08-dashboard-section-focus/mobile/run-02-mobile-compact/`
+
+### Important caution
+
+The mobile compact tuning briefly exposed a CSS/HMR failure where `Panels.css` was fetched but injected as an empty style module. This made the dashboard look completely broken in Storybook. The fix was the query-suffixed import. If this happens again, inspect the served CSS module and check whether `const __vite__css = ""` appears.
+
+### Next recommended work
+
+Continue tuning via extracted section stories/specs, not the full page only. The next best extraction targets are:
+
+- `DashboardMetricsGrid` as an organism around `MetricCard`, with desktop/mobile label variants if needed.
+- `DashboardActivityPanel` around `ActivityFeedItem`, with desktop/mobile item-count behavior.
+- A dedicated mobile bottom nav atom/molecule if route pages need richer mobile parity.
