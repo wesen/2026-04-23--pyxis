@@ -157,7 +157,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `PublicPageHeader` styles into `PublicPageHeader.css`.
 - [x] Extract `ShowDetailHeader` styles into `ShowDetailHeader.css`.
 - [x] Extract `ShowMetaStrip` styles into `ShowMetaStrip.css`.
-- [ ] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
+- [x] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
 - [ ] Extract `BookingForm` styles into `BookingForm.css`.
 - [ ] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
 - [ ] Extract `BookingRules` styles into `BookingRules.css`.

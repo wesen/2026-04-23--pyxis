@@ -685,3 +685,30 @@ root      0.0000% | 0/31680
 ```
 
 This was an exact pixel-parity extraction.
+
+
+## Step 20: Extract `ReserveTicketCard` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ReserveTicketCard/ReserveTicketCard.css`.
+- Moved root card, header, price, note, and CTA button styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `header`, `eyebrow`, `code`, `price`, `note`, and `cta`.
+- Added tokenized focus-visible styling for the CTA.
+- Updated `ReserveTicketCard.tsx` to self-import CSS and use `clsx('pyxis-reserve-ticket-card', className)`.
+- Added `Compact` and `ThemeOverride` Storybook stories.
+- Initially used a too-large typography token for price, which produced an 11% pixel diff. Reverted that to the exact 20px prototype size and reduced the diff.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/reserve-ticket-card-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 1.1681% | 560/47940
+root      1.1681% | 560/47940
+```

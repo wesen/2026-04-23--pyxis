@@ -1,0 +1,65 @@
+/* ReserveTicketCard — compact ticket reservation callout. */
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='root']) {
+  --pyxis-reserve-ticket-bg: #F8F6F1;
+  --pyxis-reserve-ticket-accent-color: var(--color-accent);
+  --pyxis-reserve-ticket-muted-color: #8E887E;
+  --pyxis-reserve-ticket-button-bg: var(--color-accent);
+  --pyxis-reserve-ticket-button-color: var(--color-text-inverse);
+
+  background: var(--pyxis-reserve-ticket-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='header']) {
+  color: var(--pyxis-reserve-ticket-muted-color);
+  display: flex;
+  font-size: 11.5px;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='eyebrow']) {
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='code']) {
+  font-variant-numeric: tabular-nums;
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='price']) {
+  color: var(--pyxis-reserve-ticket-accent-color);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.015em;
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='note']) {
+  color: var(--pyxis-reserve-ticket-muted-color);
+  font-size: 11.5px;
+  margin-top: var(--space-1);
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='cta']) {
+  background: var(--pyxis-reserve-ticket-button-bg);
+  border: none;
+  border-radius: var(--radius-xs);
+  color: var(--pyxis-reserve-ticket-button-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  margin-top: var(--space-3);
+  padding: 10px;
+  width: 100%;
+}
+
+:where([data-pyxis-component='reserve-ticket-card'][data-pyxis-part='cta']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}
