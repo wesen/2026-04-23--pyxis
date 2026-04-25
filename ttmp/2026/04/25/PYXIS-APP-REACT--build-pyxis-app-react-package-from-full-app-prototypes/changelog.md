@@ -40,3 +40,13 @@ Step 8: Proved dashboard metrics section visual loop and added compare-spec --se
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/verbs/pyxis-pages.js — Compact summary output for visual iteration
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md — Runbook note for tuning tool output and not chasing pixel perfection
 
+
+## 2026-04-25
+
+Step 9: Finished Phase 6C visual improvement runbook with compact-output, stop-when-close, and cohesive-theme/token guidance (commit d7f3692199b72a4933a5389c090c87230f753f89)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/05-bottom-up-component-visual-parity.md — Central doc pointer
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md — Runbook for future pyxis-app visual tuning
+

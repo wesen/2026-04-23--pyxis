@@ -12,6 +12,8 @@ DocType: reference
 Intent: diary
 Owners: []
 RelatedFiles:
+    - Path: docs/playbooks/05-bottom-up-component-visual-parity.md
+      Note: Central playbook pointer to pyxis-app visual loop (commit d7f3692199b72a4933a5389c090c87230f753f89)
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/visual-diff/userland/lib/compare-region.js
@@ -21,7 +23,9 @@ RelatedFiles:
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
       Note: Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
-      Note: Runbook for compact-output visual loop and stop-when-close rule
+      Note: |-
+        Runbook for compact-output visual loop and stop-when-close rule
+        Completed Phase 6C runbook with cohesive-theme guidance
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/02-inventory-prototype-routes.mjs
       Note: Ticket-local route inventory script
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
@@ -50,6 +54,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
