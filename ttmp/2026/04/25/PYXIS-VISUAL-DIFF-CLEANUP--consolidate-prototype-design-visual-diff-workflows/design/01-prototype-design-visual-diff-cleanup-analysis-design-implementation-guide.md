@@ -658,7 +658,193 @@ Recommended medium-term path:
 - Add `specs/public-pages.desktop.visual.json` generated from YAML or manually kept equivalent.
 - Make `registry.js` load JSON for default ergonomic commands.
 
-### Phase C: Stabilize prototype selectors
+### Phase C: Simplify the JavaScript userland itself
+
+Goal: remove transition scaffolding from the promoted JS userland so the remaining code is clearly project-specific and spec-driven.
+
+The JS userland was developed in stages. Some files and verbs are core workflow code. Others only exist because we were proving imports, testing older APIs, reading old native-run outputs, or bridging to built-in command-line verbs before the direct JS API was ready. The cleanup should make this distinction explicit and remove the scaffolding.
+
+#### Keep as core workflow
+
+These files implement the future Pyxis workflow and should remain, though they may be simplified as the spec becomes canonical:
+
+```text
+prototype-design/visual-diff/userland/lib/compare-region.js
+prototype-design/visual-diff/userland/lib/snapshot.js
+prototype-design/visual-diff/userland/lib/policies.js
+prototype-design/visual-diff/userland/lib/markdown.js
+prototype-design/visual-diff/userland/lib/artifacts.js
+prototype-design/visual-diff/userland/lib/storybook.js
+prototype-design/visual-diff/userland/lib/styles.js
+prototype-design/visual-diff/userland/lib/normalizers.js
+prototype-design/visual-diff/userland/lib/tolerances.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+Core verbs:
+
+```text
+pyxis pages compare-spec
+pyxis pages snapshot-section
+pyxis pages diff-snapshots
+```
+
+These are aligned with the JS-canonical future. They use project-specific suite data, policy, reports, and semantic diagnostics.
+
+#### Rewire or simplify
+
+`registry.js` is the main transitional file:
+
+```text
+prototype-design/visual-diff/userland/lib/registry.js
+```
+
+Current problem:
+
+```text
+PUBLIC_PAGES duplicates data from specs/public-pages.desktop.visual.yml.
+```
+
+Target:
+
+```text
+registry.js should normalize/load spec data, not own selector truth.
+```
+
+Ergonomic verbs can remain if they load the default suite spec:
+
+```text
+pyxis pages list-targets
+pyxis pages inspect-section
+pyxis pages compare-section
+pyxis pages compare-page
+pyxis pages compare-all
+```
+
+The important distinction is this: keeping a convenient verb is fine; keeping a duplicated hard-coded registry behind that verb is not.
+
+Recommended pseudocode:
+
+```js
+async function defaultTargets() {
+  const spec = await loadDefaultVisualSpec()
+  return targetsFromSpec(spec)
+}
+
+async function compareSection(page, section, options) {
+  const target = findTarget(await defaultTargets(), page)
+  const sectionConfig = findSection(target, section)
+  return compareTargetSection(target, sectionConfig, options)
+}
+```
+
+If direct YAML loading is awkward inside library code, use one of these approaches:
+
+- make `compare-spec` the only canonical command and remove registry-backed shortcuts;
+- keep a generated JSON sidecar for default ergonomic verbs;
+- keep a small `defaultSpec.js` module generated from YAML.
+
+Do not solve this by continuing to edit two independent inventories.
+
+#### Remove
+
+The following are transition/compatibility scaffolding and should be removed from the promoted userland unless a concrete current workflow needs them:
+
+```text
+prototype-design/visual-diff/userland/lib/results.js
+pyxis pages summarize-results
+pyxis pages import-smoke
+pyxis pages compare-section-command
+buildCompareRegionArgs(...)
+argsToShellCommand(...)
+planCompareSection(...)
+```
+
+Why remove them:
+
+- `results.js` parses old generated `pixeldiff.md` outputs from native/config-run workflows. JS suite runs now write structured JSON directly.
+- `import-smoke` proved repository-scanned imports during development. It is not a product workflow.
+- `compare-section-command` and its command-planning helpers were an interim bridge to the built-in command-line `compare region` verb. Direct `cvd.compare.region(...)` is now validated and canonical.
+
+Scripts that should be removed or moved into ticket history:
+
+```text
+02-smoke-import-mechanism.sh
+03-smoke-summarize-existing-page-results.sh
+05-smoke-compare-section-command.sh
+06-smoke-child-process-unavailable.sh
+07-capture-new-flexible-js-api-docs.sh
+```
+
+Some of these were important evidence while developing the JS API. That does not make them stable project infrastructure. If the evidence matters, keep it in the ticket diary/reference docs, not in the promoted userland folder.
+
+#### Keep and rename operational scripts
+
+The operational scripts should be kept, but renamed into stable names under a `scripts/` subdirectory:
+
+```text
+13-smoke-compare-spec-archive-filter.sh        -> scripts/smoke-compare-spec-archive.sh
+14-run-compare-spec-public-pages.sh            -> scripts/run-compare-spec-public-pages.sh
+12-smoke-compare-all-ci-policy-fail.sh         -> scripts/smoke-ci-policy-failure.sh
+15-smoke-snapshot-section-archive-content.sh   -> scripts/smoke-snapshot-section-archive.sh
+16-smoke-diff-snapshots-archive-content.sh     -> scripts/smoke-diff-snapshots-archive.sh
+17-snapshot-shows-sections.sh                  -> scripts/diagnose-shows-sections.sh
+```
+
+Registry-backed operational scripts should either be rewritten to use `compare-spec` or removed after equivalent spec-backed scripts exist.
+
+#### Desired final userland shape
+
+A clean promoted JS userland should look like this:
+
+```text
+prototype-design/visual-diff/userland/
+  README.md
+  specs/
+    README.md
+    public-pages.desktop.visual.yml
+  lib/
+    artifacts.js
+    compare-region.js
+    index.js
+    markdown.js
+    normalizers.js
+    policies.js
+    registry.js          # loader/normalizer only, no hard-coded page inventory
+    snapshot.js
+    storybook.js
+    styles.js
+    tolerances.js
+  verbs/
+    pyxis-pages.js
+  scripts/
+    smoke-compare-spec-archive.sh
+    run-compare-spec-public-pages.sh
+    smoke-ci-policy-failure.sh
+    smoke-snapshot-section-archive.sh
+    smoke-diff-snapshots-archive.sh
+    diagnose-shows-sections.sh
+```
+
+This is much smaller than the promoted ticket-era folder and easier for a new developer to understand.
+
+#### Validation after JS userland cleanup
+
+Run:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+prototype-design/visual-diff/userland/scripts/smoke-ci-policy-failure.sh
+prototype-design/visual-diff/userland/scripts/smoke-snapshot-section-archive.sh
+prototype-design/visual-diff/userland/scripts/smoke-diff-snapshots-archive.sh
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+```
+
+The exact script names may differ during migration, but the capabilities must remain covered.
+
+### Phase D: Stabilize prototype selectors
 
 Goal: every canonical comparison section should have stable selectors on both prototype and React sides.
 
@@ -713,7 +899,7 @@ sections:
 
 Do not keep comparing `#root` against section-level React selectors. That inflates diffs and makes CSS tuning misleading.
 
-### Phase D: Rename and organize scripts
+### Phase E: Rename and organize scripts
 
 The promoted scripts currently have ticket-era numeric names:
 
@@ -744,7 +930,7 @@ prototype-design/visual-diff/userland/scripts/
 
 Update `README.md` accordingly.
 
-### Phase E: Remove native run-config workflow
+### Phase F: Remove native run-config workflow
 
 Do not maintain native `*.css-visual-diff.yml` configs as a second workflow. The cleanup should do a deliberate removal pass:
 
@@ -764,7 +950,7 @@ Do not keep native run configs for backwards compatibility.
 
 If a future upstream css-visual-diff bug report needs a minimal native repro, create that repro at that time in the relevant ticket. Do not keep a permanent native-config compatibility layer in the product repo.
 
-### Phase F: Documentation cleanup
+### Phase G: Documentation cleanup
 
 Update:
 

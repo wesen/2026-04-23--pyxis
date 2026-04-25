@@ -178,3 +178,54 @@ PYXIS Visual Diff Cleanup Guide - JS Canonical
 ```
 
 Remote listing now shows both the original planning guide and the revised JS-canonical guide. The revised one should be treated as current.
+
+
+## Step 5: Add explicit JS userland cleanup section
+
+The user asked whether the ticket already addressed cleanup of the JavaScript userland itself. It only did so indirectly, so I added a dedicated guide section and task phase.
+
+### Prompt Context
+
+**User prompt (verbatim):** "update"
+
+**Assistant interpretation:** Update the cleanup guide to explicitly describe which promoted JS userland files, verbs, and scripts are core, transitional, or removable.
+
+### What changed
+
+Added a new section to the guide:
+
+```text
+Phase C: Simplify the JavaScript userland itself
+```
+
+It now lists:
+
+- core files to keep,
+- `registry.js` as a loader/normalizer refactor target,
+- ergonomic verbs that may stay if spec-backed,
+- transitional code to remove (`results.js`, `summarize-results`, `compare-section-command`, command builders),
+- development-only scripts to remove or move to ticket history,
+- operational scripts to keep/rename,
+- desired final `userland/` shape,
+- validation commands for the reduced JS userland.
+
+Updated `tasks.md` with a new Phase 3 for JS userland simplification and renumbered later phases.
+
+
+## Step 6: Upload JS userland cleanup revision
+
+Uploaded the revised guide bundle with the explicit JS userland cleanup section.
+
+Remote directory:
+
+```text
+/ai/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP
+```
+
+Uploaded document:
+
+```text
+PYXIS Visual Diff Cleanup Guide - JS Userland Cleanup
+```
+
+This is now the most current uploaded guide.

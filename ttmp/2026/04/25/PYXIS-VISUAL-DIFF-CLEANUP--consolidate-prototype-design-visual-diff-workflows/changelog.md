@@ -21,3 +21,5 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Uploaded guide bundle to reMarkable at `/ai/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP` as `PYXIS Visual Diff Cleanup Guide`.
 - Revised cleanup guide and task list to make project-specific JS userland the canonical workflow and remove backwards-compatibility requirements for native `css-visual-diff run` configs.
 - Uploaded revised JS-canonical cleanup guide bundle to reMarkable as `PYXIS Visual Diff Cleanup Guide - JS Canonical`.
+- Added explicit JS userland cleanup section to guide and tasks, covering keep/rewire/remove decisions for transitional modules, verbs, and scripts.
+- Uploaded updated JS-userland-cleanup guide bundle to reMarkable as `PYXIS Visual Diff Cleanup Guide - JS Userland Cleanup`.

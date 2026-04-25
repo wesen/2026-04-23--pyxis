@@ -36,27 +36,36 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 - [ ] Stop maintaining hard-coded selector truth in `lib/registry.js`; convert it into a loader/normalizer or remove registry-backed shortcuts.
 - [ ] Do not add or maintain new native `*.css-visual-diff.yml` configs.
 
-## Phase 3 — Selector stabilization
+## Phase 3 — JS userland simplification
+
+- [ ] Remove old native-output summary code (`lib/results.js`, `summarize-results`).
+- [ ] Remove command-planner compatibility code (`compare-section-command`, `planCompareSection`, shell command builders).
+- [ ] Remove import/runtime proving scripts from promoted userland.
+- [ ] Rewire ergonomic verbs to the default visual suite spec or remove them in favor of `compare-spec`.
+- [ ] Move stable operational scripts under `userland/scripts/` with descriptive names.
+- [ ] Validate the reduced JS userland smoke suite.
+
+## Phase 4 — Selector stabilization
 
 - [ ] Add stable `data-page` / `data-section` selectors to public prototypes where missing.
 - [ ] Update visual suite spec selectors to use stable selectors.
 - [ ] Validate Shows semantic diagnostics before and after selector changes.
 - [ ] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
 
-## Phase 4 — Script and docs cleanup
+## Phase 5 — Script and docs cleanup
 
 - [ ] Rename/reorganize promoted userland scripts into stable non-ticket-era names.
 - [ ] Update `prototype-design/visual-diff/userland/README.md`.
 - [ ] Add `prototype-design/visual-diff/userland/specs/README.md`.
 - [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` to remove native `css-visual-diff run` as the Pyxis workflow.
 
-## Phase 5 — Native run-config removal
+## Phase 6 — Native run-config removal
 
 - [ ] Mine `prototype-design/visual-diff/comparisons/**` for useful data missing from suite specs.
 - [ ] Delete native run configs from active workflow paths after migration.
 - [ ] Record removed paths and rationale in the cleanup diary/postmortem.
 
-## Phase 6 — Final validation and handoff
+## Phase 7 — Final validation and handoff
 
 - [ ] Run promoted smoke suite.
 - [ ] Run full spec suite.
