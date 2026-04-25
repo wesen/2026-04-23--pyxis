@@ -139,6 +139,7 @@ Start here to establish the pattern before touching large organisms.
 ## B3 — Extract CSS for show-list and archive components
 
 - [ ] Extract `PubShowRow` styles into `PubShowRow.css` if the component remains canonical.
+  - Note: `PubShowRow` remains deferred pending taxonomy decision against `ShowTile`/`ShowGrid` and `ArchiveShowRow`.
 - [x] Extract `ArchiveShowRow` styles into `ArchiveShowRow.css`.
 - [x] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
 - [x] Extract `ArchiveSearchFilters` styles into `ArchiveSearchFilters.css`.
@@ -146,9 +147,9 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ShowGrid` styles into `ShowGrid.css`.
 - [x] Ensure `ShowGrid` owns only layout and does not duplicate `ShowTile` internals.
 - [x] Ensure `ArchiveShowList` owns only list layout and does not duplicate `ArchiveShowRow` internals.
-- [ ] Add long-title/long-genre Storybook cases where wrapping matters.
-- [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
-- [ ] Run matching visual-diff configs for touched show/archive components.
+- [x] Add long-title/long-genre Storybook cases where wrapping matters.
+- [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
+- [x] Run matching visual-diff configs for touched show/archive components.
 - [x] Commit this batch separately.
 
 ## B4 — Extract CSS for show-detail and booking components

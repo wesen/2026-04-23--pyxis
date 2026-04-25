@@ -574,3 +574,31 @@ root      4.3076% | 16224/376640
 ```
 
 The residual diff mostly follows child `ShowTile`/`Poster` differences rather than new grid layout drift.
+
+
+## Step 16: Close current B3 pass and defer `PubShowRow` pending taxonomy
+
+### What I did
+
+- Ran a final component-package typecheck after the B3 show/archive extraction pass.
+- Updated B3 tasks to mark completed validation for touched components.
+- Left `PubShowRow` unchecked and explicitly deferred because it overlaps semantically with both upcoming show tile/grid components and archive row components.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+Typecheck passed.
+
+### Why `PubShowRow` is deferred
+
+`PubShowRow` is still exported and has visual-diff coverage, but it appears to overlap with:
+
+```text
+ShowTile / ShowGrid — canonical poster-based upcoming shows layout
+ArchiveShowRow      — canonical archive/recap row layout
+```
+
+The task list already says to extract `PubShowRow` only "if the component remains canonical." Rather than polishing a possibly deprecated overlap component, I documented it as pending taxonomy decision.

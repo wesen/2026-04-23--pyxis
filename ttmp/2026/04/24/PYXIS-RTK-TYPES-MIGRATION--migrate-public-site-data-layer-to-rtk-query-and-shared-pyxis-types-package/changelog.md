@@ -55,4 +55,7 @@
 - Kept `ShowGrid` responsible only for grid layout and compact state, delegating tile internals to `ShowTile`.
 - Added a theme override Storybook story that demonstrates inherited `ShowTile` CSS variables through the grid.
 - Validated `ShowGrid` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-grid-desktop.css-visual-diff.yml`; current pixel diff is `4.3076% | 16224/376640`.
+- Completed the implemented portion of B3 show/archive CSS extraction for `ArchiveShowRow`, `ArchiveShowList`, `ArchiveSearchFilters`, `ShowTile`, and `ShowGrid`.
+- Left `PubShowRow` deferred pending taxonomy decision against `ShowTile`/`ShowGrid` and `ArchiveShowRow`; it remains exported and covered, but should not be polished until canonical usage is decided.
+- Ran final B3 `pnpm --filter pyxis-components typecheck`, which passed.
 
