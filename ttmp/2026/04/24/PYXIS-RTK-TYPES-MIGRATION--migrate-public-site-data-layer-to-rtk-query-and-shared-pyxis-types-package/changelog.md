@@ -20,4 +20,7 @@
 - Extracted `ArchiveStats` static inline styles into `web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.css`.
 - Added `ArchiveStats` part selectors for `item`, `value`, and `label`, plus theme/narrow Storybook stories.
 - Validated `ArchiveStats` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-stats-default.css-visual-diff.yml`; current pixel diff is `7.0987% | 4634/65280`, with root CSS diff reduced to a 1px height difference.
+- Extracted `TicketStub` static inline styles into `web/packages/pyxis-components/src/public/TicketStub/TicketStub.css`.
+- Added `TicketStub` part selectors for `eyebrow`, `title`, `divider`, `meta`, `price`, and `age`, plus long-content and theme override Storybook stories.
+- Validated `TicketStub` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../ticket-stub-default.css-visual-diff.yml`; current pixel diff is `0.3144% | 94/29900`.
 

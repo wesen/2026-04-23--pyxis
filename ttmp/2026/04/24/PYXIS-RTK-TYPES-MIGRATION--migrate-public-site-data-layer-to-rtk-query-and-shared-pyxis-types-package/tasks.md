@@ -124,7 +124,7 @@ Start here to establish the pattern before touching large organisms.
 
 - [x] Extract `SafetyNote` styles into `SafetyNote.css`.
 - [x] Extract `ArchiveStats` styles into `ArchiveStats.css`.
-- [ ] Extract `TicketStub` styles into `TicketStub.css`.
+- [x] Extract `TicketStub` styles into `TicketStub.css`.
 - [ ] Extract `LineupRow` styles into `LineupRow.css`.
 - [ ] Extract `YearGroup` styles into `YearGroup.css`.
 - [ ] Extract `Poster` styles into `Poster.css`.

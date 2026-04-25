@@ -1,0 +1,47 @@
+/* TicketStub — compact admit-one show card. */
+
+:where([data-pyxis-component='ticket-stub'][data-pyxis-part='root']) {
+  --pyxis-ticket-stub-bg: var(--color-surface);
+  --pyxis-ticket-stub-border-color: #EAE7E0;
+  --pyxis-ticket-stub-color: #1F1E1C;
+  --pyxis-ticket-stub-muted-color: #8E887E;
+  --pyxis-ticket-stub-title-color: var(--color-accent);
+
+  background: var(--pyxis-ticket-stub-bg);
+  border: 1px solid var(--pyxis-ticket-stub-border-color);
+  border-radius: var(--radius-xs);
+  box-sizing: border-box;
+  color: var(--pyxis-ticket-stub-color);
+  display: grid;
+  gap: var(--space-2);
+  padding: 14px;
+}
+
+:where([data-pyxis-component='ticket-stub'][data-pyxis-part='eyebrow']) {
+  color: var(--pyxis-ticket-stub-muted-color);
+  font-size: 10.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='ticket-stub'][data-pyxis-part='title']) {
+  color: var(--pyxis-ticket-stub-title-color);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+:where([data-pyxis-component='ticket-stub'][data-pyxis-part='divider']) {
+  background: var(--pyxis-ticket-stub-border-color);
+  height: 1px;
+  margin: 2px 0;
+}
+
+:where([data-pyxis-component='ticket-stub'][data-pyxis-part='meta']) {
+  color: var(--pyxis-ticket-stub-muted-color);
+  display: flex;
+  font-size: 12.5px;
+  justify-content: space-between;
+}

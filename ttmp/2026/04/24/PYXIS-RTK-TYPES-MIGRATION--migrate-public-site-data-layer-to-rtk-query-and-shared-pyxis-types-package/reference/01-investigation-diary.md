@@ -280,3 +280,30 @@ height: 58px vs 57px
 ```
 
 This is a small residual layout difference after CSS extraction. I left it as a documented follow-up rather than forcing a magic 1px adjustment into the first architecture cleanup pass.
+
+
+## Step 6: Extract `TicketStub` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/TicketStub/TicketStub.css`.
+- Moved all static root, text, divider, and metadata styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `eyebrow`, `title`, `divider`, `meta`, `price`, and `age`.
+- Updated `TicketStub.tsx` to self-import CSS and use `clsx('pyxis-ticket-stub', className)`.
+- Added `LongArtist` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/ticket-stub-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.3144% | 94/29900
+root      0.3144% | 94/29900
+```
+
+The residual CSS diff includes box-sizing/font-family and selector-bound width/height differences, but the pixel diff is very low. This is a good example of architecture cleanup preserving visual output closely.
