@@ -401,3 +401,98 @@ generated: 2914
 generated-historical: 3465
 needs-review: 190
 ```
+
+
+## Step 8: Final hygiene check after commit
+
+After committing the Phase 1–3 implementation and diary update, I ran final hygiene checks. The repo remained clean, and the lightweight `list-targets` validation still returned the expected 13 section rows from the spec-backed registry.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 7)
+
+**Assistant interpretation:** Confirm the committed cleanup is still valid and record any final validation issue.
+
+**Inferred user intent:** Leave the ticket in a clean, resumable state with exact validation notes.
+
+**Commit (code):** `5373ea0` — "Consolidate visual diff JS userland"
+
+**Commit (diary):** `9ef94d8` — "Diary: record visual diff cleanup phases"
+
+### What I did
+
+- Ran `docmgr doctor --ticket PYXIS-VISUAL-DIFF-CLEANUP --stale-after 30`.
+- Re-ran `pyxis pages list-targets` and parsed the JSON via a temporary file.
+- Checked `git status --short`.
+
+### Why
+
+This confirmed that the committed code still loaded in the css-visual-diff Goja runtime and that no generated artifacts or accidental edits were left behind.
+
+### What worked
+
+The corrected list-targets validation worked:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages list-targets --output json >/tmp/pyxis-final-list.json
+python3 - <<'PY'
+import json
+rows=json.load(open('/tmp/pyxis-final-list.json'))
+print({'rows': len(rows), 'first': rows[0]['page']+'/'+rows[0]['section'], 'last': rows[-1]['page']+'/'+rows[-1]['section']})
+PY
+```
+
+Result:
+
+```text
+{'rows': 13, 'first': 'shows/page', 'last': 'about/content'}
+```
+
+### What didn't work
+
+I first attempted to pipe JSON into a Python here-doc:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages list-targets --output json | python3 - <<'PY'
+import sys,json
+rows=json.load(sys.stdin)
+print({'rows': len(rows), 'first': rows[0]['page']+'/'+rows[0]['section'], 'last': rows[-1]['page']+'/'+rows[-1]['section']})
+PY
+```
+
+That failed because the here-doc supplies Python's stdin, so the piped JSON is not available to `json.load(sys.stdin)`. Exact error:
+
+```text
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+```
+
+The fix was to write the command output to `/tmp/pyxis-final-list.json` and read that file.
+
+### What I learned
+
+Do not combine a shell pipe with `python3 - <<'PY'` when the Python program also needs stdin data. Use a temporary file or `python3 -c`.
+
+### What was tricky to build
+
+N/A; this was a validation-shell issue, not an implementation issue.
+
+### What warrants a second pair of eyes
+
+N/A beyond the review items already listed in Step 7.
+
+### What should be done in the future
+
+Use file-based JSON parsing in diary/validation snippets when the Python code is embedded as a here-doc.
+
+### Code review instructions
+
+Use the validation commands from Step 7. The final lightweight check is:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages list-targets --output json >/tmp/pyxis-final-list.json
+python3 -c 'import json; rows=json.load(open("/tmp/pyxis-final-list.json")); print(len(rows))'
+```
+
+### Technical details
+
+`docmgr doctor` still reports only the known unknown-topic vocabulary warning for `automation`, `frontend`, `pyxis`, `storybook`, and `visual-diff`.
