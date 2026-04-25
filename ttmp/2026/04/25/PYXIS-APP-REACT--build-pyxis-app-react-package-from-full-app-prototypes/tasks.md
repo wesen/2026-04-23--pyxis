@@ -21,15 +21,15 @@ The mobile prototype is **not** a separate app architecture. It is the responsiv
 
 ## Ground rules
 
-- [ ] Keep a detailed diary in `reference/01-diary.md` for every meaningful step.
-- [ ] Commit at coherent milestones, not after every tiny edit.
-- [ ] Use live Storybook in tmux, not static Storybook builds, for the normal edit/compare loop.
-- [ ] Keep generated runtime artifacts out of active source paths.
-- [ ] Preserve useful intermediate visual artifacts under numbered ticket folders such as `various/02-first-dashboard-run/`.
-- [ ] Put one-off scripts in this ticket's `scripts/` or `experiments/` folders; promote only stable reusable scripts.
-- [ ] Do not create new active native `*.css-visual-diff.yml` configs.
-- [ ] Use JS/YAML visual suite specs and `css-visual-diff` JS userland.
-- [ ] Prefer one page/component implementation that responds to viewport size over parallel `Mobile*Page` implementations.
+- [x] Keep a detailed diary in `reference/01-diary.md` for every meaningful step.
+- [x] Commit at coherent milestones, not after every tiny edit.
+- [x] Use live Storybook in tmux, not static Storybook builds, for the normal edit/compare loop.
+- [x] Keep generated runtime artifacts out of active source paths.
+- [x] Preserve useful intermediate visual artifacts under numbered ticket folders such as `various/02-first-dashboard-run/`.
+- [x] Put one-off scripts in this ticket's `scripts/` or `experiments/` folders; promote only stable reusable scripts.
+- [x] Do not create new active native `*.css-visual-diff.yml` configs.
+- [x] Use JS/YAML visual suite specs and `css-visual-diff` JS userland.
+- [x] Prefer one page/component implementation that responds to viewport size over parallel `Mobile*Page` implementations.
 
 ---
 
@@ -39,36 +39,36 @@ Goal: understand the existing system before writing new code.
 
 ### Read first
 
-- [ ] Read `design/01-pyxis-app-react-end-to-end-workflow-guide.md`.
-- [ ] Read `playbooks/01-pyxis-app-react-intern-playbook.md`.
-- [ ] Read `various/01-source-inventory.md`.
-- [ ] Read `docs/component-system-and-public-site-components.md`.
-- [ ] Read `docs/playbooks/05-bottom-up-component-visual-parity.md`.
-- [ ] Read `prototype-design/visual-diff/userland/README.md`.
+- [x] Read `design/01-pyxis-app-react-end-to-end-workflow-guide.md`.
+- [x] Read `playbooks/01-pyxis-app-react-intern-playbook.md`.
+- [x] Read `various/01-source-inventory.md`.
+- [x] Read `docs/component-system-and-public-site-components.md`.
+- [x] Read `docs/playbooks/05-bottom-up-component-visual-parity.md`.
+- [x] Read `prototype-design/visual-diff/userland/README.md`.
 
 ### Confirm tools and servers
 
-- [ ] Confirm repo root:
+- [x] Confirm repo root:
 
   ```bash
   pwd
   # /home/manuel/code/wesen/2026-04-23--pyxis
   ```
 
-- [ ] Confirm package manager from `web/`:
+- [x] Confirm package manager from `web/`:
 
   ```bash
   cd web
   pnpm --version
   ```
 
-- [ ] Confirm `css-visual-diff` works:
+- [x] Confirm `css-visual-diff` works:
 
   ```bash
   css-visual-diff --help >/tmp/cssvd-help.txt
   ```
 
-- [ ] Confirm `remarquee` works if you need to upload docs:
+- [x] Confirm `remarquee` works if you need to upload docs:
 
   ```bash
   remarquee status
@@ -76,13 +76,13 @@ Goal: understand the existing system before writing new code.
 
 ### Start or confirm prototype server
 
-- [ ] Start prototype server if it is not already running:
+- [x] Start prototype server if it is not already running:
 
   ```bash
   python3 -m http.server 7070 --directory prototype-design
   ```
 
-- [ ] Open/check:
+- [x] Open/check:
 
   ```text
   http://localhost:7070/standalone/full-app/index.html
@@ -91,7 +91,7 @@ Goal: understand the existing system before writing new code.
 
 ### Deliverable
 
-- [ ] Diary entry: what you read, what servers/tools are available, and any setup problems.
+- [x] Diary entry: what you read, what servers/tools are available, and any setup problems.
 
 ---
 
@@ -103,50 +103,50 @@ Goal: map the desktop and mobile prototype baselines to one responsive route mod
 
 Inventory these pages:
 
-- [ ] `prototype-design/standalone/full-app/login.html`
-- [ ] `prototype-design/standalone/full-app/setup.html`
-- [ ] `prototype-design/standalone/full-app/dashboard.html`
-- [ ] `prototype-design/standalone/full-app/shows.html`
-- [ ] `prototype-design/standalone/full-app/calendar.html`
-- [ ] `prototype-design/standalone/full-app/bookings.html`
-- [ ] `prototype-design/standalone/full-app/modal.html`
-- [ ] `prototype-design/standalone/full-app/artists.html`
-- [ ] `prototype-design/standalone/full-app/attendance.html`
-- [ ] `prototype-design/standalone/full-app/log.html`
-- [ ] `prototype-design/standalone/full-app/discord.html`
-- [ ] `prototype-design/standalone/full-app/settings.html`
+- [x] `prototype-design/standalone/full-app/login.html`
+- [x] `prototype-design/standalone/full-app/setup.html`
+- [x] `prototype-design/standalone/full-app/dashboard.html`
+- [x] `prototype-design/standalone/full-app/shows.html`
+- [x] `prototype-design/standalone/full-app/calendar.html`
+- [x] `prototype-design/standalone/full-app/bookings.html`
+- [x] `prototype-design/standalone/full-app/modal.html`
+- [x] `prototype-design/standalone/full-app/artists.html`
+- [x] `prototype-design/standalone/full-app/attendance.html`
+- [x] `prototype-design/standalone/full-app/log.html`
+- [x] `prototype-design/standalone/full-app/discord.html`
+- [x] `prototype-design/standalone/full-app/settings.html`
 
 ### Mobile prototype baselines
 
 Map these to the same app routes/pages where possible:
 
-- [ ] `prototype-design/standalone/mobile/login.html` → `LoginPage`
-- [ ] `prototype-design/standalone/mobile/home.html` → `DashboardPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/shows.html` → `ShowsPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/show-detail.html` → `ShowDetailPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/calendar.html` → `CalendarPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/bookings.html` → `BookingsPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/booking-review.html` → `BookingReviewPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/artists.html` → `ArtistsPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/artist-detail.html` → `ArtistDetailPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/post-show.html` → `PostShowPage` mobile viewport
-- [ ] `prototype-design/standalone/mobile/settings.html` → `SettingsPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/login.html` → `LoginPage`
+- [x] `prototype-design/standalone/mobile/home.html` → `DashboardPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/shows.html` → `ShowsPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/show-detail.html` → `ShowDetailPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/calendar.html` → `CalendarPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/bookings.html` → `BookingsPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/booking-review.html` → `BookingReviewPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/artists.html` → `ArtistsPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/artist-detail.html` → `ArtistDetailPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/post-show.html` → `PostShowPage` mobile viewport
+- [x] `prototype-design/standalone/mobile/settings.html` → `SettingsPage` mobile viewport
 
 ### Section inventory
 
 For each route/page:
 
-- [ ] Identify root page selector candidate, e.g. `data-page="dashboard"`.
-- [ ] Identify important sections, e.g. `dashboard-summary`, `dashboard-activity`, `dashboard-upcoming`.
-- [ ] Identify repeated UI shapes that should become components.
-- [ ] Note desktop/mobile layout differences.
-- [ ] Decide whether a mobile difference is CSS/responsive layout or a true mobile-only interaction.
+- [x] Identify root page selector candidate, e.g. `data-page="dashboard"`.
+- [x] Identify important sections, e.g. `dashboard-summary`, `dashboard-activity`, `dashboard-upcoming`.
+- [x] Identify repeated UI shapes that should become components.
+- [x] Note desktop/mobile layout differences.
+- [x] Decide whether a mobile difference is CSS/responsive layout or a true mobile-only interaction.
 
 ### Deliverables
 
-- [ ] Create `various/02-route-section-inventory.md`.
-- [ ] Update diary with key route mapping decisions.
-- [ ] If prototype selectors are missing, create a small implementation task list for adding them.
+- [x] Create `various/02-route-section-inventory.md`.
+- [x] Update diary with key route mapping decisions.
+- [x] If prototype selectors are missing, create a small implementation task list for adding them.
 
 ---
 
@@ -156,54 +156,54 @@ Goal: create a buildable package with Vite, Storybook, RTK Query, and routing.
 
 ### Package files
 
-- [ ] Create `web/packages/pyxis-app/package.json`.
-- [ ] Create `web/packages/pyxis-app/tsconfig.json`.
-- [ ] Create `web/packages/pyxis-app/tsconfig.build.json` if needed.
-- [ ] Create `web/packages/pyxis-app/vite.config.ts`.
-- [ ] Create `web/packages/pyxis-app/index.html`.
-- [ ] Create `web/packages/pyxis-app/public/mockServiceWorker.js` or initialize MSW as needed.
+- [x] Create `web/packages/pyxis-app/package.json`.
+- [x] Create `web/packages/pyxis-app/tsconfig.json`.
+- [x] Create `web/packages/pyxis-app/tsconfig.build.json` if needed.
+- [x] Create `web/packages/pyxis-app/vite.config.ts`.
+- [x] Create `web/packages/pyxis-app/index.html`.
+- [x] Create `web/packages/pyxis-app/public/mockServiceWorker.js` or initialize MSW as needed.
 
 ### Source skeleton
 
-- [ ] Create `src/main.tsx`.
-- [ ] Create `src/App.tsx`.
-- [ ] Create `src/store.ts`.
-- [ ] Create `src/styles/global.css`.
-- [ ] Create `src/styles/app-tokens.css` if app-specific aliases are needed.
-- [ ] Create `src/api/endpoints.ts`.
-- [ ] Create `src/api/appApi.ts`.
-- [ ] Create `src/api/hooks.ts`.
-- [ ] Create `src/api/mockHandlers.ts`.
-- [ ] Create `src/api/errors.ts`.
+- [x] Create `src/main.tsx`.
+- [x] Create `src/App.tsx`.
+- [x] Create `src/store.ts`.
+- [x] Create `src/styles/global.css`.
+- [x] Create `src/styles/app-tokens.css` if app-specific aliases are needed.
+- [x] Create `src/api/endpoints.ts`.
+- [x] Create `src/api/appApi.ts`.
+- [x] Create `src/api/hooks.ts`.
+- [x] Create `src/api/mockHandlers.ts`.
+- [x] Create `src/api/errors.ts`.
 
 ### Storybook skeleton
 
-- [ ] Create `.storybook/main.ts`.
-- [ ] Create `.storybook/preview.tsx`.
-- [ ] Alias `pyxis-components` to source in Storybook Vite config.
-- [ ] Add MSW loader/decorator.
-- [ ] Add Redux Provider decorator with `makeStore()`.
-- [ ] Add viewports:
+- [x] Create `.storybook/main.ts`.
+- [x] Create `.storybook/preview.tsx`.
+- [x] Alias `pyxis-components` to source in Storybook Vite config.
+- [x] Add MSW loader/decorator.
+- [x] Add Redux Provider decorator with `makeStore()`.
+- [x] Add viewports:
   - desktop: `1240px × 900px` or prototype-specific height,
   - mobile: `390px × 844px`.
 
 ### Validation
 
-- [ ] Run:
+- [x] Run:
 
   ```bash
   cd web
   pnpm --filter pyxis-app typecheck
   ```
 
-- [ ] Start Storybook:
+- [x] Start Storybook:
 
   ```bash
   tmux new-session -d -s pyxis-app-storybook \
     'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-app storybook'
   ```
 
-- [ ] Confirm Storybook at:
+- [x] Confirm Storybook at:
 
   ```text
   http://localhost:6008
@@ -211,7 +211,7 @@ Goal: create a buildable package with Vite, Storybook, RTK Query, and routing.
 
 ### Deliverable
 
-- [ ] Commit: `Scaffold pyxis app package`.
+- [x] Commit: `Scaffold pyxis app package`.
 
 ---
 
@@ -221,44 +221,44 @@ Goal: typed data first, then components.
 
 ### `pyxis-types`
 
-- [ ] Add `web/packages/pyxis-types/src/app.ts`.
-- [ ] Export app types from `web/packages/pyxis-types/src/index.ts`.
-- [ ] Define at least:
-  - [ ] `AppShow`
-  - [ ] `BookingRequest`
-  - [ ] `ArtistProfile`
-  - [ ] `CalendarEvent`
-  - [ ] `AttendanceEntry`
-  - [ ] `AuditLogEntry`
-  - [ ] `DiscordChannelMapping`
-  - [ ] `SpaceSettings`
-  - [ ] `AuthSession`
+- [x] Add `web/packages/pyxis-types/src/app.ts`.
+- [x] Export app types from `web/packages/pyxis-types/src/index.ts`.
+- [x] Define at least:
+  - [x] `AppShow`
+  - [x] `BookingRequest`
+  - [x] `ArtistProfile`
+  - [x] `CalendarEvent`
+  - [x] `AttendanceEntry`
+  - [x] `AuditLogEntry`
+  - [x] `DiscordChannelMapping`
+  - [x] `SpaceSettings`
+  - [x] `AuthSession`
 
 ### App API slice
 
-- [ ] Add RTK Query endpoints for:
-  - [ ] session
-  - [ ] shows
-  - [ ] show detail
-  - [ ] bookings
-  - [ ] booking detail/review
-  - [ ] artists
-  - [ ] artist detail
-  - [ ] calendar
-  - [ ] attendance/post-show
-  - [ ] audit log
-  - [ ] discord mappings
-  - [ ] settings
+- [x] Add RTK Query endpoints for:
+  - [x] session
+  - [x] shows
+  - [x] show detail
+  - [x] bookings
+  - [x] booking detail/review
+  - [x] artists
+  - [x] artist detail
+  - [x] calendar
+  - [x] attendance/post-show
+  - [x] audit log
+  - [x] discord mappings
+  - [x] settings
 
 ### Mock data
 
-- [ ] Derive seed data from `prototype-design/lib/data.js`.
-- [ ] Keep mock data count close to prototype pages so visual diffs are meaningful.
-- [ ] Add MSW handlers with wildcard URL patterns, e.g. `*/api/app/shows`.
+- [x] Derive seed data from `prototype-design/lib/data.js`.
+- [x] Keep mock data count close to prototype pages so visual diffs are meaningful.
+- [x] Add MSW handlers with wildcard URL patterns, e.g. `*/api/app/shows`.
 
 ### Validation
 
-- [ ] Run:
+- [x] Run:
 
   ```bash
   cd web
@@ -268,7 +268,7 @@ Goal: typed data first, then components.
 
 ### Deliverable
 
-- [ ] Commit: `Add pyxis app data contracts and API slice`.
+- [x] Commit: `Add pyxis app data contracts and API slice`.
 
 ---
 
@@ -280,23 +280,23 @@ Goal: make visual comparisons semantically meaningful before tuning CSS.
 
 For each standalone prototype page:
 
-- [ ] Add or verify `data-page` on the main page root.
-- [ ] Add or verify `data-section` on important sections.
-- [ ] Add `data-pyxis-component` / `data-pyxis-part` to prototype component fixtures when useful.
+- [x] Add or verify `data-page` on the main page root.
+- [ ] Add or verify `data-section` on important sections. (deferred to selector-only prototype source pass)
+- [ ] Add `data-pyxis-component` / `data-pyxis-part` to prototype component fixtures when useful. (deferred to selector-only prototype source pass)
 
 ### React selectors
 
 For each React component/page:
 
-- [ ] Add `data-pyxis-component` / `data-pyxis-part` to reusable components.
-- [ ] Add `data-page` to page roots.
-- [ ] Add `data-section` to important page sections.
-- [ ] Keep desktop and mobile variants using the same page/section names where possible.
+- [x] Add `data-pyxis-component` / `data-pyxis-part` to reusable components.
+- [x] Add `data-page` to page roots.
+- [x] Add `data-section` to important page sections.
+- [x] Keep desktop and mobile variants using the same page/section names where possible.
 
 ### Deliverable
 
-- [ ] Create `various/03-selector-contract-map.md` mapping prototype selectors to React selectors.
-- [ ] Commit selector-only changes separately if they touch prototype source.
+- [x] Create `various/03-selector-contract-map.md` mapping prototype selectors to React selectors.
+- [x] Commit selector-only changes separately if they touch prototype source.
 
 ---
 
@@ -306,31 +306,31 @@ Goal: prove the component workflow with one small repeated component.
 
 Recommended first components:
 
-- [ ] `MetricCard`
-- [ ] `ActivityFeedItem`
-- [ ] `StatusDot`
-- [ ] `DateChip`
+- [x] `MetricCard`
+- [x] `ActivityFeedItem`
+- [x] `StatusDot`
+- [x] `DateChip`
 
 For the chosen component:
 
-- [ ] Locate prototype source and visual examples.
-- [ ] Decide whether it belongs in `pyxis-components` or `pyxis-app`.
-- [ ] Create `Component.tsx`.
-- [ ] Create `Component.css`.
-- [ ] Add part selectors.
-- [ ] Add Storybook stories:
-  - [ ] default,
-  - [ ] compact/mobile viewport if relevant,
-  - [ ] themed/dark if relevant.
-- [ ] Add visual spec target to `app.components.visual.yml`.
-- [ ] Run focused `compare-spec` for that component.
-- [ ] Inspect `left_region.png` and `right_region.png` first.
-- [ ] Tune until close enough.
-- [ ] Preserve useful artifacts under `various/04-first-component-run/`.
+- [x] Locate prototype source and visual examples.
+- [x] Decide whether it belongs in `pyxis-components` or `pyxis-app`.
+- [x] Create `Component.tsx`.
+- [x] Create `Component.css`.
+- [x] Add part selectors.
+- [x] Add Storybook stories:
+  - [x] default,
+  - [x] compact/mobile viewport if relevant,
+  - [x] themed/dark if relevant.
+- [x] Add visual spec target to `app.components.visual.yml`.
+- [x] Run focused `compare-spec` for that component.
+- [x] Inspect `left_region.png` and `right_region.png` first.
+- [ ] Tune until close enough. (blocked by prototype component selectors; recorded in diary)
+- [x] Preserve useful artifacts under `various/04-first-component-run/`.
 
 ### Deliverable
 
-- [ ] Commit: `Add first pyxis app component slice`.
+- [x] Commit: `Add first pyxis app component slice`.
 
 ---
 
@@ -340,46 +340,46 @@ Goal: build enough components to compose the first page without raw div soup.
 
 ### Staff-app molecules
 
-- [ ] `MetricCard`
-- [ ] `TodayShowCard`
-- [ ] `ActivityFeedItem`
-- [ ] `ShowTableRow`
-- [ ] `BookingQueueRow` / `BookingCard`
-- [ ] `ArtistRosterRow` / `ArtistCard`
-- [ ] `CalendarEventChip`
-- [ ] `AttendanceStat`
-- [ ] `DiscordChannelRow`
-- [ ] `SettingsToggleRow`
+- [x] `MetricCard`
+- [x] `TodayShowCard`
+- [x] `ActivityFeedItem`
+- [x] `ShowTableRow`
+- [x] `BookingQueueRow` / `BookingCard`
+- [x] `ArtistRosterRow` / `ArtistCard`
+- [x] `CalendarEventChip`
+- [x] `AttendanceStat`
+- [x] `DiscordChannelRow`
+- [x] `SettingsToggleRow`
 
 ### Staff-app organisms
 
-- [ ] `AppShell`
-- [ ] `AppSidebar`
-- [ ] `AppTopBar`
-- [ ] `AppBottomNav` or responsive mobile shell navigation
-- [ ] `DashboardOverview`
-- [ ] `ShowsTable` / responsive show list
-- [ ] `BookingQueue` / responsive booking cards
-- [ ] `CalendarMonth` / responsive agenda
-- [ ] `ArtistRoster` / responsive artist list
-- [ ] `AttendancePanel`
-- [ ] `AuditLogPanel`
-- [ ] `DiscordMappingPanel`
-- [ ] `SettingsPanel`
-- [ ] `NewShowModal`
+- [x] `AppShell`
+- [x] `AppSidebar`
+- [x] `AppTopBar`
+- [x] `AppBottomNav` or responsive mobile shell navigation
+- [x] `DashboardOverview`
+- [x] `ShowsTable` / responsive show list
+- [x] `BookingQueue` / responsive booking cards
+- [x] `CalendarMonth` / responsive agenda
+- [x] `ArtistRoster` / responsive artist list
+- [x] `AttendancePanel`
+- [x] `AuditLogPanel`
+- [x] `DiscordMappingPanel`
+- [x] `SettingsPanel`
+- [x] `NewShowModal`
 
 For each component:
 
-- [ ] Story exists.
-- [ ] Selectors exist.
-- [ ] CSS is in CSS files, not static inline styles.
-- [ ] Tokens/variables are used where reasonable.
-- [ ] Visual spec target exists if component is important enough for comparison.
-- [ ] Diary notes any accepted differences.
+- [x] Story exists.
+- [x] Selectors exist.
+- [x] CSS is in CSS files, not static inline styles.
+- [x] Tokens/variables are used where reasonable.
+- [x] Visual spec target exists if component is important enough for comparison.
+- [x] Diary notes any accepted differences.
 
 ### Deliverable
 
-- [ ] Commit in batches by component family, e.g. dashboard, bookings, shell.
+- [x] Commit in batches by component family, e.g. dashboard, bookings, shell.
 
 ---
 

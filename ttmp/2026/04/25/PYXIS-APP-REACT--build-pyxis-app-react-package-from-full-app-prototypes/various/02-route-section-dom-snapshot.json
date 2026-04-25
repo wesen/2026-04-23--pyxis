@@ -1,0 +1,1062 @@
+[
+  {
+    "variant": "desktop",
+    "route": "LoginPage",
+    "prototypePath": "/standalone/full-app/login.html",
+    "status": 200,
+    "title": "Pyxis Full App · Login · Sign-in",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"login\"]",
+        "page": "login",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisThe operations desk for a small-venue community.Confirm shows, review booking requests, and let a friendly bot handle the Discord posts"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Welcome back",
+        "path": "div[data-page=\"login\"] > div > div > h1"
+      }
+    ],
+    "landmarkish": [],
+    "buttons": [
+      "Continue with Discord",
+      "Email me a link"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "SetupPage",
+    "prototypePath": "/standalone/full-app/setup.html",
+    "status": 200,
+    "title": "Pyxis Full App · Setup · Wizard step 3",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"setup\"]",
+        "page": "setup",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisSetup · 3 of 4Map your Discord channelsTell the bot where to post. Right-click any channel in Discord and choose Copy Channel ID (requi"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Map your Discord channels",
+        "path": "div#root > div[data-page=\"setup\"] > div > h1"
+      }
+    ],
+    "landmarkish": [],
+    "buttons": [
+      "Back",
+      "Skip for now",
+      "Continue"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "DashboardPage",
+    "prototypePath": "/standalone/full-app/dashboard.html",
+    "status": 200,
+    "title": "Pyxis Full App · Dashboard · Home",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"dashboard\"]",
+        "page": "dashboard",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Welcome back, Ada",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Upcoming shows",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Quick actions",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Recent activity",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Needs your attention",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"dashboard\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"dashboard\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"dashboard\"] > div > main",
+        "text": "Home / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew showNext on stage · in 9 daysBurial "
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "DateArtistDoorsAgeStatusMay 2FridayBurial HexDarkwave8:00 PM21+ConfirmedMay 9FridayMoor MotherExperimental7:00 PMAll Age"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "New show",
+      "View on Discord",
+      "Edit show",
+      "View all",
+      "Add a show",
+      "Review bookings · 3",
+      "Open audit log",
+      "Settings"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "ShowsPage",
+    "prototypePath": "/standalone/full-app/shows.html",
+    "status": 200,
+    "title": "Pyxis Full App · Shows · Index",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"shows\"]",
+        "page": "shows",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Shows",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Confirmed · 6",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Archived · 2",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"shows\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"shows\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"shows\"] > div > main",
+        "text": "Home / ShowsShowsAll confirmed and archived eventsNew showAll Confirmed 6Hold Cancelled Archived Sort: Date ascendingCon"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "#DateArtistDoorsAgePriceDrawStatus#42May 2FridayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#43May 9Fri"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "DateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectroni"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "New show",
+      "See all past shows"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "CalendarPage",
+    "prototypePath": "/standalone/full-app/calendar.html",
+    "status": 200,
+    "title": "Pyxis Full App · Calendar · May 2025",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"calendar\"]",
+        "page": "calendar",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Calendar",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "May at a glance",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Today · May 2",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"calendar\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"calendar\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"calendar\"] > div > main",
+        "text": "Home / CalendarCalendarPlan the room · holds, confirms, and off-nightsMonthWeekListAddMay 2025TodaySunMonTueWedThuFriSat"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Add",
+      "Today",
+      "Open show",
+      "Add to today"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "BookingsPage",
+    "prototypePath": "/standalone/full-app/bookings.html",
+    "status": 200,
+    "title": "Pyxis Full App · Bookings · Queue",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"bookings\"]",
+        "page": "bookings",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Bookings",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Awaiting review · 3",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Recently processed",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Inbox rhythm",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Decline templates",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"bookings\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"bookings\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"bookings\"] > div > main",
+        "text": "Home / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-reviewAwaiting review · 3Review each request, the"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "ArtistRequestedGenreSubmittedStatusOrphxJul 4EBMApr 18ApprovedArcaJul 12ExperimentalApr 15Declined"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Open form",
+      "Auto-review",
+      "pharmakon.bandcamp.com",
+      "Hold",
+      "Decline",
+      "Approve",
+      "instagram.com/lustyouth",
+      "Hold",
+      "Decline",
+      "Approve",
+      "container.bandcamp.com",
+      "Hold",
+      "Decline",
+      "Approve",
+      "View archive"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "NewShowModal",
+    "prototypePath": "/standalone/full-app/modal.html",
+    "status": 200,
+    "title": "Pyxis Full App · Shows · New show modal",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"shows\"]",
+        "page": "shows",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Shows",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Confirmed · 6",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Add new show",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div[data-page=\"shows\"] > div > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div[data-page=\"shows\"] > div > div > main",
+        "text": "Home / ShowsShowsAll confirmed and archived eventsNew showConfirmed · 6DateArtistStatusMay 2Burial HexConfirmedMay 9Moor"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "DateArtistStatusMay 2Burial HexConfirmedMay 9Moor MotherConfirmedMay 17Cygnus + GuestsConfirmedMay 23Open Mic NightConfi"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "New show",
+      "Cancel",
+      "Save as hold",
+      "Confirm & post"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "ArtistsPage",
+    "prototypePath": "/standalone/full-app/artists.html",
+    "status": 200,
+    "title": "Pyxis Full App · Artists · Roster",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"artists\"]",
+        "page": "artists",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Artists",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "All artists",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"artists\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"artists\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"artists\"] > div > main",
+        "text": "Home / ArtistsArtists8 in roster · 6 played this yearAdd artistFrequent · 3 showsBurial HexDarkwave · avg draw 58Open pr"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "ArtistGenreShowsAvg drawLast showNotesBHBurial Hexburialvault.comDarkwave358May 2Great draw, always professional. Prefer"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Add artist",
+      "Open profile",
+      "Book",
+      "Open profile",
+      "Book",
+      "Open profile",
+      "Book"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "AttendancePage",
+    "prototypePath": "/standalone/full-app/attendance.html",
+    "status": 200,
+    "title": "Pyxis Full App · Post-show log",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"attendance\"]",
+        "page": "attendance",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Post-show log",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Past shows",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"attendance\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"attendance\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"attendance\"] > div > main",
+        "text": "Home / Post-show logPost-show logRecord headcount and notes after the night.Waiting to log2Oldest: Feb 28Logged this yea"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "ShowDateDrawNotesStatusPlanning for Burial#40Fri, Mar 14, 2025——Needs logLogActress#41Fri, Feb 28, 202561Good energy, no"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Log",
+      "Edit",
+      "Edit",
+      "Edit",
+      "Save draft",
+      "Log show"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "AuditLogPage",
+    "prototypePath": "/standalone/full-app/log.html",
+    "status": 200,
+    "title": "Pyxis Full App · Audit log",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"audit-log\"]",
+        "page": "audit-log",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Audit log",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Activity",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"audit-log\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"audit-log\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"audit-log\"] > div > main",
+        "text": "Home / Audit logAudit logEverything that happens, in orderExport CSVWhoAll users42jamie12sam8ada6bot16Whatapprovedecline"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Export CSV"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "DiscordPage",
+    "prototypePath": "/standalone/full-app/discord.html",
+    "status": 200,
+    "title": "Pyxis Full App · Discord · Channel mapping",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"discord\"]",
+        "page": "discord",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Discord",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Server connection",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Channel mapping",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "What the bot does",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"discord\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"discord\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"discord\"] > div > main",
+        "text": "Home / DiscordDiscordThe bot that does the boring bitsReconnect botServer connectionThe Discord server your bot operates"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Reconnect bot",
+      "Test connection",
+      "Discard",
+      "Save changes"
+    ]
+  },
+  {
+    "variant": "desktop",
+    "route": "SettingsPage",
+    "prototypePath": "/standalone/full-app/settings.html",
+    "status": 200,
+    "title": "Pyxis Full App · Settings · Space",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"settings\"]",
+        "page": "settings",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome"
+      }
+    ],
+    "headings": [
+      {
+        "level": "h1",
+        "text": "Settings",
+        "path": "main > div > div > h1"
+      },
+      {
+        "level": "h2",
+        "text": "Space info",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Staff & roles",
+        "path": "div > div > div > h2"
+      },
+      {
+        "level": "h2",
+        "text": "Danger zone",
+        "path": "div > div > div > h2"
+      }
+    ],
+    "landmarkish": [
+      {
+        "tag": "aside",
+        "path": "div#root > div[data-page=\"settings\"] > div > aside",
+        "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Do"
+      },
+      {
+        "tag": "nav",
+        "path": "div[data-page=\"settings\"] > div > aside > nav",
+        "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+      },
+      {
+        "tag": "main",
+        "path": "div#root > div[data-page=\"settings\"] > div > main",
+        "text": "Home / SettingsSettingsSpace info, staff access, and data Space Staff & roles Public site Notifications Billing Import /"
+      },
+      {
+        "tag": "table",
+        "path": "div > div > div > table",
+        "text": "MemberRoleLast seenStatusADAda Doveada@pyxis.xyzAdminnowLiveJQJamie Quinnjamie@pyxis.xyzBooker2h agoLiveSRSam Reyessam@p"
+      }
+    ],
+    "buttons": [
+      "Dashboard",
+      "Shows",
+      "Calendar",
+      "Bookings3",
+      "Artists",
+      "Post-show log",
+      "Audit log",
+      "Discord",
+      "Settings",
+      "Invite",
+      "Export",
+      "Disconnect",
+      "Delete"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "LoginPage",
+    "prototypePath": "/standalone/mobile/login.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Login",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"login\"]",
+        "page": "login",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41pyxisRun the roomfrom your pocket.Confirm shows, review bookings, and keep the Discord humming — wherever you are.Continue with DiscordI"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Continue with Discord"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "DashboardPage",
+    "prototypePath": "/standalone/mobile/home.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Home / Dashboard",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"dashboard\"]",
+        "page": "dashboard",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41pyxisWed, Apr 23ADWelcome backGood morning, Ada.6 shows booked · 3 need your eye.Next on stage · in 9 daysBurial HexFri, May 2, 2025 · D"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Open show",
+      "Discord"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "ShowsPage",
+    "prototypePath": "/standalone/mobile/shows.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Shows / Index",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"shows\"]",
+        "page": "shows",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41ShowsConfirmed6 upcoming · May 2025AllConfirmedHoldArchivedMay2FriBurial HexDarkwave · Doors 8:00 PM · 21+Confirmed~70/150May9FriMoor Mo"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": []
+  },
+  {
+    "variant": "mobile",
+    "route": "ShowDetailPage",
+    "prototypePath": "/standalone/mobile/show-detail.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Show / Detail",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"show-detail\"]",
+        "page": "show-detail",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41 ShowsConfirmedDarkwave pinnedBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+poster · 1080×1080DetailsDoors8:00 PMPrice$12 adv / $15 do"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Duplicate",
+      "Cancel show"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "CalendarPage",
+    "prototypePath": "/standalone/mobile/calendar.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Calendar / May 2025",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"calendar\"]",
+        "page": "calendar",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41CalendarMay 20255 confirmed · 1 hold · 24 openSMTWTFS12345678910111213141516171819202122232425262728293031This weekBurial HexFriday, May"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": []
+  },
+  {
+    "variant": "mobile",
+    "route": "BookingsPage",
+    "prototypePath": "/standalone/mobile/bookings.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Bookings / Queue",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"bookings\"]",
+        "page": "bookings",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41BookingsInbox3 awaiting review · 2 new todayPending 3Approved 1Declined 1PharmakonPending Jun 14 Industrial ~80pharmakon.bandcamp.comDec"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Decline",
+      "Hold",
+      "Approve",
+      "Decline",
+      "Hold",
+      "Approve",
+      "Decline",
+      "Hold",
+      "Approve"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "BookingReviewPage",
+    "prototypePath": "/standalone/mobile/booking-review.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Booking / Review",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"booking-review\"]",
+        "page": "booking-review",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41 BookingsPendingPharmakonSubmitted Apr 19 · IndustrialRequestPreferred dateSat, Jun 14Expected draw~80Linkspharmakon.bandcamp.com✓ Date "
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Decline",
+      "Approve"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "ArtistsPage",
+    "prototypePath": "/standalone/mobile/artists.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Artists / Roster",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"artists\"]",
+        "page": "artists",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41ArtistsSearch by name or genre…Roster · 8BHBurial HexDarkwave · 3 shows · avg 58MMMoor MotherExperimental · 2 shows · avg 106PFPlanning "
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": []
+  },
+  {
+    "variant": "mobile",
+    "route": "ArtistDetailPage",
+    "prototypePath": "/standalone/mobile/artist-detail.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Artist / Detail",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"artist-detail\"]",
+        "page": "artist-detail",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41 ArtistsBHBurial HexDarkwave · burialvault.com3Shows58Avg drawMay 2Last showShow historyMay 2, 202572 attendedNov 15, 202455 attendedJul"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "Book a show"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "PostShowPage",
+    "prototypePath": "/standalone/mobile/post-show.html",
+    "status": 200,
+    "title": "Pyxis Mobile · Post-show / Log",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"post-show\"]",
+        "page": "post-show",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41 ShowsLog showSavePlanning for BurialFri, Mar 14, 2025 · #40Attendance34of 150 capacity · 23%−5−1+1+5How did it go?QuietSteadyGreatPacke"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": [
+      "−5",
+      "−1",
+      "+1",
+      "+5"
+    ]
+  },
+  {
+    "variant": "mobile",
+    "route": "SettingsPage",
+    "prototypePath": "/standalone/mobile/settings.html",
+    "status": 200,
+    "title": "Pyxis Mobile · More / Settings",
+    "dataSelectors": [
+      {
+        "tag": "div",
+        "path": "html > body > div#root > div[data-page=\"settings\"]",
+        "page": "settings",
+        "section": null,
+        "component": null,
+        "part": null,
+        "text": "9:41MoreAda Doveadmin · ada@pyxis.xyzADVenueSpace infoName, address, capacityStaff & roles4 members · 1 pendingPublic sitepyxis.xyzIntegrati"
+      }
+    ],
+    "headings": [],
+    "landmarkish": [],
+    "buttons": []
+  }
+]

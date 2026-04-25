@@ -1,0 +1,211 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: metric-card component",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card/metric-card",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T23:04:42.673397977Z",
+  "updated_at": "2026-04-25T23:04:48.267400034Z",
+  "targets": [
+    {
+      "slug": "component",
+      "name": "metric-card component",
+      "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+      "selector": "#root",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "component",
+        "name": "metric-card component",
+        "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "selector": "#root",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "metric-card-component",
+        "left": {
+          "name": "metric-card-component",
+          "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+          "selector": "#root",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 1240,
+            "height": 760
+          }
+        },
+        "right": {
+          "name": "metric-card-component",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-components--metric-card-default\u0026viewMode=story",
+          "selector": "[data-pyxis-component=\"metric-card\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 24,
+            "y": 24,
+            "width": 192,
+            "height": 116
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 942400,
+          "changedPixels": 202047,
+          "changedPercent": 21.439622241086585,
+          "normalizedWidth": 1240,
+          "normalizedHeight": 760,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card/metric-card/artifacts/component/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card/metric-card/artifacts/component/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 1240,
+            "height": 760
+          },
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 192,
+            "height": 116
+          },
+          "delta": {
+            "x": 24,
+            "y": 24,
+            "width": -1048,
+            "height": -644
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew showNext on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorView on DiscordEdit showUpcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025Upcoming showsPinned to #upcoming-showsView allDateArtistDoorsAgeStatusMay 2FridayBurial HexDarkwave8:00 PM21+ConfirmedMay 9FridayMoor MotherExperimental7:00 PMAll AgesConfirmedMay 17SaturdayCygnus + GuestsTechno9:00 PM18+ConfirmedMay 23FridayOpen Mic NightVarious7:00 PMAll AgesConfirmedMay 30FridayBasement FrequenciesTechno10:00 PM21+ConfirmedQuick actionsAdd a showReview bookings · 3Open audit logRecent activityliveToday · 11:42jamie approved show #47 · Orphx · Jul 4Today · 11:39bot posted + pinned #47 in #upcoming-showsToday · 09:14sam declined submission · Arca · Jul 12Apr 22 · 23:00bot auto-archived 2 past shows (Planning for Burial, Actress)Apr 21 · 16:30jamie edited show #42 · updated doors to 8:00 PMBot statuspyxis-bot OnlineHollow Earth · 247 members · v1.2.0SettingsPinned3upcomingLast sync12magoUptime99.4%30 dayNeeds your attention2 past shows need loggingPlanning for Burial · Mar 14 and Actress · Feb 28Zola Jesus · Jun 6Price still says $20 — is that right for a 160-draw headliner?Discord token expires in 14 daysReconnect to keep pinning and archival running",
+          "right": "Upcoming shows6confirmed"
+        },
+        "styles": [
+          {
+            "name": "background-color",
+            "left": "rgb(243, 241, 235)",
+            "right": "rgb(252, 239, 235)",
+            "changed": true
+          },
+          {
+            "name": "border-radius",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "box-shadow",
+            "left": "none",
+            "right": "rgba(31, 30, 28, 0.08) 0px 18px 50px 0px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(0, 0, 0)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, -apple-system, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "20.3px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-left",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-right",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "0px",
+            "right": "18px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-metric-card",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "metric-card",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          },
+          {
+            "name": "id",
+            "left": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card/metric-card/artifacts/component/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/04-first-component-run/metric-card/metric-card/artifacts/component/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T23:04:48.267398873Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}
