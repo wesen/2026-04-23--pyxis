@@ -229,3 +229,175 @@ PYXIS Visual Diff Cleanup Guide - JS Userland Cleanup
 ```
 
 This is now the most current uploaded guide.
+
+
+## Step 7: Implement cleanup Phases 1–3
+
+This step moved the cleanup ticket from planning into implementation. I created a tracked inventory for `prototype-design`, formalized the visual suite spec shape, and simplified the promoted JavaScript userland so it no longer carries native-output readers, command-planner compatibility, or development-only smoke scripts.
+
+The most important outcome is that the JS userland now reflects the cleanup decision: Pyxis uses project-specific visual suite specs and JavaScript verbs as the canonical workflow. Registry-backed ergonomic commands still exist, but their selector truth now comes from a CommonJS mirror of the visual suite spec rather than a hand-maintained `PUBLIC_PAGES` array.
+
+### Prompt Context
+
+**User prompt (verbatim):** "WOrk on docmgr ticket PYXIS-VISUAL-DIFF-CLEANUP Phase 1 - 3"
+
+**Assistant interpretation:** Implement the first three cleanup phases in the docmgr ticket: inventory/classification, source-of-truth cleanup, and JS userland simplification.
+
+**Inferred user intent:** Turn the revised plan into committed repo changes while keeping detailed diary records and committing at a coherent milestone.
+
+**Commit (code):** pending at diary-write time — intended message: "Consolidate visual diff JS userland"
+
+### What I did
+
+- Created a tracked Phase 1 inventory document:
+  - `reference/02-prototype-design-visual-inventory.md`
+- Classified current `prototype-design` filesystem paths as:
+  - `canonical-source`
+  - `retired-native`
+  - `generated`
+  - `generated-historical`
+  - `needs-review`
+- Marked native configs under `prototype-design/visual-diff/comparisons/**` and `prototype-design/visual-diff/public-components/**` as retired-native inputs.
+- Marked `prototype-design/visual-comparisons/**` and `prototype-design/storybook-catalog/**` as generated output.
+- Left `prototype-design/baseline/**` as generated-historical and deferred deletion to a separate targeted pass.
+- Formalized the public-page visual suite schema in:
+  - `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml`
+- Added v1 schema fields:
+  - `schemaVersion: pyxis.visual-suite.v1`
+  - `defaults`
+  - `policy`
+  - `acceptedDifferences`
+  - `targets`
+- Added a CommonJS spec mirror for Goja runtime ergonomic verbs:
+  - `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js`
+- Added spec documentation:
+  - `prototype-design/visual-diff/userland/specs/README.md`
+- Rewrote `lib/registry.js` so it no longer owns hard-coded `PUBLIC_PAGES`; it now normalizes target data from the default visual suite mirror.
+- Removed old native-output summary code:
+  - deleted `prototype-design/visual-diff/userland/lib/results.js`
+  - removed `results` from `lib/index.js`
+  - removed the `pyxis pages summarize-results` verb
+- Removed command-planner compatibility code:
+  - removed `buildCompareRegionArgs(...)`
+  - removed `argsToShellCommand(...)`
+  - removed `planCompareSection(...)`
+  - removed the `pyxis pages compare-section-command` verb
+- Removed import/runtime proving code:
+  - removed the `pyxis pages import-smoke` verb
+  - removed old numbered transition scripts `02`, `03`, `05`, `06`, and `07`
+- Moved stable operational scripts under:
+  - `prototype-design/visual-diff/userland/scripts/`
+- Rewrote `prototype-design/visual-diff/userland/README.md` around the JS-canonical workflow.
+- Checked off Phases 1–3 in `tasks.md`.
+
+### Why
+
+The previous userland still contained code from multiple development stages. Some of that code proved imports, summarized native-run `pixeldiff.md` artifacts, or built shell commands for the built-in compare-region verb. Those paths no longer belong in promoted project infrastructure because direct `cvd.compare.region(...)` and spec-driven JS orchestration are now validated.
+
+The registry rewrite matters because the old `PUBLIC_PAGES` array was a second source of truth beside `public-pages.desktop.visual.yml`. Keeping both would make future selector cleanup and page tuning error-prone.
+
+### What worked
+
+Validation commands succeeded:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-list-targets.sh >/tmp/pyxis-list-targets.json
+# Result: 13 rows; first page shows; last section content
+
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh >/tmp/pyxis-compare-spec-archive.json
+# Result: pageCount=1, sectionCount=2, maxChangedPercent=7.128146453089244
+
+prototype-design/visual-diff/userland/scripts/smoke-ci-policy-failure.sh
+# Result: ci policy failure smoke passed
+
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh >/tmp/pyxis-compare-spec-public-pages.json
+# Result: pageCount=5, sectionCount=13, maxChangedPercent=66.85658212560386, classificationCounts={major-mismatch: 5, review: 2, tune-required: 6}
+```
+
+After validation I removed generated runtime artifacts again:
+
+```bash
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+### What didn't work
+
+One minor shell issue occurred while printing section labels:
+
+```text
+/bin/bash: line 1: printf: --: invalid option
+printf: usage: printf [-v var] format [arguments]
+```
+
+Cause: `printf '--- status ---\n'` can be interpreted as options by Bash's printf in this environment. This was harmless and did not affect repo changes. Future shell snippets should use `printf '%s\n' '--- status ---'` or `echo`.
+
+No css-visual-diff validation failures occurred.
+
+### What I learned
+
+The Goja verb runtime can consume the `objectFromFile` YAML object for explicit `compare-spec`, but library-level synchronous default loading is easier through a CommonJS module. The compromise is a generated JS mirror of the YAML spec for ergonomic registry-backed verbs. The YAML remains the reviewed source of truth.
+
+The full public-page spec suite still reproduces the same expected first-pass numbers, which means the schema migration did not alter comparison semantics.
+
+### What was tricky to build
+
+The tricky part was removing duplicated selector truth without making every ergonomic command require an explicit spec argument. `compare-spec` already receives parsed YAML through `objectFromFile`, but `list-targets`, `compare-section`, `compare-page`, `compare-all`, `inspect-section`, and `snapshot-section` still need a default inventory. The short-term solution is `public-pages.desktop.visual.js`, a CommonJS mirror of the YAML spec.
+
+This is acceptable for the current cleanup because it removes the hand-coded `PUBLIC_PAGES` registry from library code. The remaining risk is remembering to regenerate the JS mirror after YAML edits. That risk is documented in the README and specs README, and can be eliminated later with a small generator or by making all ergonomic verbs accept explicit specs.
+
+### What warrants a second pair of eyes
+
+- Confirm that tracking `public-pages.desktop.visual.js` as a mirror is acceptable, or decide to add a generator script in a follow-up.
+- Review the v1 schema shape (`defaults`, `policy`, `acceptedDifferences`, `targets`) before more specs are added.
+- Review whether registry-backed verbs should remain long-term or whether `compare-spec` should become the only canonical runner.
+- Review the `needs-review` inventory paths before any deletion pass outside the userland cleanup.
+
+### What should be done in the future
+
+- Add a tiny generator/check script so `public-pages.desktop.visual.js` cannot drift from the YAML spec.
+- Continue Phase 4 selector stabilization, especially replacing broad Shows prototype selectors.
+- Start Phase 6 by mining retired native configs and deleting them from active paths after useful data is migrated.
+- Update the broader bottom-up playbook now that userland scripts moved under `scripts/`.
+
+### Code review instructions
+
+Start with:
+
+1. `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml`
+2. `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js`
+3. `prototype-design/visual-diff/userland/lib/registry.js`
+4. `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`
+5. `prototype-design/visual-diff/userland/lib/compare-region.js`
+6. `prototype-design/visual-diff/userland/scripts/`
+7. `reference/02-prototype-design-visual-inventory.md`
+
+Validate with:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-list-targets.sh
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh
+prototype-design/visual-diff/userland/scripts/smoke-ci-policy-failure.sh
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+### Technical details
+
+Current suite count after migration:
+
+```text
+pageCount: 5
+sectionCount: 13
+maxChangedPercent: 66.85658212560386
+classificationCounts: { major-mismatch: 5, review: 2, tune-required: 6 }
+```
+
+Inventory count after refresh:
+
+```text
+canonical-source: 84
+retired-native: 77
+generated: 2914
+generated-historical: 3465
+needs-review: 190
+```

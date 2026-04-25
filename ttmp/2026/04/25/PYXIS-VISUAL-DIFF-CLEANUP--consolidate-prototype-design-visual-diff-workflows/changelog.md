@@ -23,3 +23,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Uploaded revised JS-canonical cleanup guide bundle to reMarkable as `PYXIS Visual Diff Cleanup Guide - JS Canonical`.
 - Added explicit JS userland cleanup section to guide and tasks, covering keep/rewire/remove decisions for transitional modules, verbs, and scripts.
 - Uploaded updated JS-userland-cleanup guide bundle to reMarkable as `PYXIS Visual Diff Cleanup Guide - JS Userland Cleanup`.
+- Implemented cleanup Phases 1–3: added prototype-design inventory, formalized visual suite schema, rewired registry to spec mirror, removed JS transition scaffolding, moved stable scripts under `userland/scripts/`, and validated list/Archive/full-suite smokes.

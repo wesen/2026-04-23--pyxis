@@ -22,35 +22,6 @@ var DEFAULT_STYLE_PROPS = [
 
 var DEFAULT_ATTRIBUTES = ['id', 'class', 'data-page', 'data-section', 'data-pyxis-component', 'data-pyxis-part']
 
-function shellQuote(value) {
-  value = String(value == null ? '' : value)
-  return "'" + value.replace(/'/g, "'\\''") + "'"
-}
-
-function buildCompareRegionArgs(options) {
-  options = options || {}
-  return [
-    'verbs', 'script', 'compare', 'region',
-    '--leftUrl', options.leftUrl,
-    '--rightUrl', options.rightUrl,
-    '--leftSelector', options.leftSelector,
-    '--rightSelector', options.rightSelector,
-    '--width', String(options.width || 920),
-    '--height', String(options.height || 1460),
-    '--leftWaitMs', String(options.leftWaitMs || 1000),
-    '--rightWaitMs', String(options.rightWaitMs || 1000),
-    '--outDir', options.outDir,
-    '--writeJson',
-    '--writeMarkdown',
-    '--writePngs',
-    '--output', 'json',
-  ]
-}
-
-function argsToShellCommand(args) {
-  return ['css-visual-diff'].concat(args).map(shellQuote).join(' ')
-}
-
 function findTargetAndSection(pageName, sectionName, options) {
   options = options || {}
   var variant = options.variant || 'desktop'
@@ -68,38 +39,6 @@ function defaultOutDir(pageName, sectionName, variant) {
     sectionName,
     variant || 'desktop'
   )
-}
-
-function planCompareSection(pageName, sectionName, options) {
-  options = options || {}
-  var found = findTargetAndSection(pageName, sectionName, options)
-  var target = found.target
-  var section = found.section
-  var outDir = options.outDir || defaultOutDir(pageName, sectionName, target.variant)
-  var args = buildCompareRegionArgs({
-    leftUrl: target.prototypeUrl,
-    rightUrl: target.storybookUrl,
-    leftSelector: section.original,
-    rightSelector: section.react,
-    width: target.viewport.width,
-    height: target.viewport.height,
-    leftWaitMs: target.waitMs,
-    rightWaitMs: target.waitMs,
-    outDir: outDir,
-  })
-  return {
-    page: target.page,
-    variant: target.variant,
-    section: section.name,
-    outDir: outDir,
-    leftUrl: target.prototypeUrl,
-    rightUrl: target.storybookUrl,
-    leftSelector: section.original,
-    rightSelector: section.react,
-    args: args,
-    shellCommand: argsToShellCommand(args),
-    note: 'Command-plan compatibility view for the built-in compare-region verb. Prefer pyxis pages compare-section on css-visual-diff versions exposing cvd.compare.region.',
-  }
 }
 
 function artifactPath(artifactsList, name) {
@@ -430,26 +369,27 @@ async function compareAll(options) {
 
 async function compareSpec(spec, options) {
   options = options || {}
-  var targets = registry.targetsFromSpec(spec || {})
+  spec = spec || {}
+  var defaults = spec.defaults || spec
+  var targets = registry.targetsFromSpec(spec)
   if (options.page) {
     targets = targets.filter(function (target) { return target.page === options.page })
   }
   if (options.priority) {
     targets = targets.filter(function (target) { return target.priority === options.priority })
   }
-  options.variant = options.variant || (spec && spec.variant) || 'desktop'
+  options.variant = options.variant || defaults.variant || 'desktop'
+  options.threshold = options.threshold || defaults.threshold || 30
+  options.inspect = options.inspect || defaults.inspect || 'rich'
   options.outDir = options.outDir || artifacts.artifactDir(
     'prototype-design/visual-comparisons/cssvd-js/compare-spec',
-    spec && spec.name ? spec.name : 'suite',
+    spec.name || 'suite',
     options.variant
   )
   return await compareAllTargets(targets, options)
 }
 
 module.exports = {
-  buildCompareRegionArgs: buildCompareRegionArgs,
-  argsToShellCommand: argsToShellCommand,
-  planCompareSection: planCompareSection,
   compareSection: compareSection,
   compareTarget: compareTarget,
   comparePage: comparePage,

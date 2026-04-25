@@ -25,25 +25,25 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 
 ## Phase 1 — Inventory and classification
 
-- [ ] Produce tracked inventory of `prototype-design` visual assets, configs, scripts, and generated outputs.
-- [ ] Classify paths as canonical-source, retired-native, generated, historical, or obsolete.
-- [ ] Decide which generated/historical paths under `prototype-design/baseline` should remain tracked.
+- [x] Produce tracked inventory of `prototype-design` visual assets, configs, scripts, and generated outputs.
+- [x] Classify paths as canonical-source, retired-native, generated, generated-historical, or needs-review.
+- [x] Decide which generated/historical paths under `prototype-design/baseline` should remain tracked for now: defer deletion to a separate targeted baseline-corpus pass.
 
 ## Phase 2 — Source-of-truth cleanup
 
-- [ ] Formalize `*.visual.yml` schema with `schemaVersion`, `defaults`, `targets`, `policy`, and `acceptedDifferences`.
-- [ ] Keep `compare-spec` and project-specific JS userland as the canonical suite runner.
-- [ ] Stop maintaining hard-coded selector truth in `lib/registry.js`; convert it into a loader/normalizer or remove registry-backed shortcuts.
-- [ ] Do not add or maintain new native `*.css-visual-diff.yml` configs.
+- [x] Formalize `*.visual.yml` schema with `schemaVersion`, `defaults`, `targets`, `policy`, and `acceptedDifferences`.
+- [x] Keep `compare-spec` and project-specific JS userland as the canonical suite runner.
+- [x] Stop maintaining hard-coded selector truth in `lib/registry.js`; convert it into a loader/normalizer backed by the visual suite mirror.
+- [x] Do not add or maintain new native `*.css-visual-diff.yml` configs.
 
 ## Phase 3 — JS userland simplification
 
-- [ ] Remove old native-output summary code (`lib/results.js`, `summarize-results`).
-- [ ] Remove command-planner compatibility code (`compare-section-command`, `planCompareSection`, shell command builders).
-- [ ] Remove import/runtime proving scripts from promoted userland.
-- [ ] Rewire ergonomic verbs to the default visual suite spec or remove them in favor of `compare-spec`.
-- [ ] Move stable operational scripts under `userland/scripts/` with descriptive names.
-- [ ] Validate the reduced JS userland smoke suite.
+- [x] Remove old native-output summary code (`lib/results.js`, `summarize-results`).
+- [x] Remove command-planner compatibility code (`compare-section-command`, `planCompareSection`, shell command builders).
+- [x] Remove import/runtime proving scripts from promoted userland.
+- [x] Rewire ergonomic verbs to the default visual suite spec or remove them in favor of `compare-spec`.
+- [x] Move stable operational scripts under `userland/scripts/` with descriptive names.
+- [x] Validate the reduced JS userland smoke suite.
 
 ## Phase 4 — Selector stabilization
 

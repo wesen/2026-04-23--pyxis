@@ -1,4 +1,5 @@
 var storybook = require('./storybook.js')
+var defaultSpec = require('../specs/public-pages.desktop.visual.js')
 
 var DEFAULTS = {
   prototypeBase: 'http://localhost:7070',
@@ -9,10 +10,6 @@ var DEFAULTS = {
 
 function joinUrl(base, path) {
   return String(base || '').replace(/\/+$/, '') + '/' + String(path || '').replace(/^\/+/, '')
-}
-
-function prototypeUrl(path) {
-  return joinUrl(DEFAULTS.prototypeBase, path)
 }
 
 function normalizeAcceptedDifferences(config) {
@@ -32,7 +29,7 @@ function pageRecord(config, defaults) {
   })
   return {
     page: config.page,
-    variant: config.variant || 'desktop',
+    variant: config.variant || defaults.variant || 'desktop',
     priority: config.priority || 'unknown',
     prototypeUrl: joinUrl(defaults.prototypeBase, config.prototypePath),
     storyId: config.storyId,
@@ -45,70 +42,35 @@ function pageRecord(config, defaults) {
   }
 }
 
-var PUBLIC_PAGES = [
-  pageRecord({
-    page: 'shows',
-    priority: 'tune-first',
-    prototypePath: '/standalone/public/shows.html',
-    storyId: 'public-site-pages--shows-desktop',
-    sections: [
-      { name: 'page', original: '#root', react: "[data-story-frame='pyxis-page-shell']" },
-      { name: 'content', original: '#root > *', react: "[data-page='shows']" },
-      { name: 'header', original: '#root > *', react: "[data-section='shows-header']" },
-      { name: 'shows-list', original: '#root > *', react: "[data-section='shows-list']" },
-      { name: 'mailing-list', original: '#root > *', react: "[data-section='mailing-list']" },
-    ],
-    baselineDiffs: { page: 50.5245, content: 49.0940, header: 51.0775, 'shows-list': 66.8566, 'mailing-list': 51.2191 },
-  }),
-  pageRecord({
-    page: 'show-detail',
-    priority: 'second-pass',
-    prototypePath: '/standalone/public/detail.html',
-    storyId: 'public-site-pages--show-detail-desktop',
-    sections: [
-      { name: 'page', original: '#root', react: "[data-story-frame='pyxis-page-shell']" },
-      { name: 'content', original: '#root > *', react: "[data-page='show-detail']" },
-    ],
-    baselineDiffs: { page: 18.5282, content: 24.4647 },
-  }),
-  pageRecord({
-    page: 'archive',
-    priority: 'closest-to-acceptance',
-    prototypePath: '/standalone/public/archive.html',
-    storyId: 'public-site-pages--archive-desktop',
-    sections: [
-      { name: 'page', original: '#root', react: "[data-story-frame='pyxis-page-shell']" },
-      { name: 'content', original: '#root > *', react: "[data-page='archive']" },
-    ],
-    baselineDiffs: { page: 6.6511, content: 7.1281 },
-  }),
-  pageRecord({
-    page: 'book',
-    priority: 'second-pass',
-    prototypePath: '/standalone/public/book.html',
-    storyId: 'public-site-pages--book-desktop',
-    sections: [
-      { name: 'page', original: '#root', react: "[data-story-frame='pyxis-page-shell']" },
-      { name: 'content', original: '#root > *', react: "[data-page='book']" },
-    ],
-    baselineDiffs: { page: 12.1006, content: 14.5896 },
-  }),
-  pageRecord({
-    page: 'about',
-    priority: 'second-pass',
-    prototypePath: '/standalone/public/about.html',
-    storyId: 'public-site-pages--about-desktop',
-    sections: [
-      { name: 'page', original: '#root', react: "[data-story-frame='pyxis-page-shell']" },
-      { name: 'content', original: '#root > *', react: "[data-page='about']" },
-    ],
-    baselineDiffs: { page: 18.2795, content: 20.4334 },
-  }),
-]
+function defaultsFromSpec(spec) {
+  spec = spec || {}
+  var raw = spec.defaults || spec
+  return {
+    prototypeBase: raw.prototypeBase || DEFAULTS.prototypeBase,
+    storybookBase: raw.storybookBase || DEFAULTS.storybookBase,
+    viewport: raw.viewport || DEFAULTS.viewport,
+    waitMs: raw.waitMs || DEFAULTS.waitMs,
+    variant: raw.variant || spec.variant || 'desktop',
+    threshold: raw.threshold || spec.threshold || 30,
+    inspect: raw.inspect || spec.inspect || 'rich',
+  }
+}
 
-function listTargets(filters) {
+function targetsFromSpec(spec) {
+  spec = spec || {}
+  var defaults = defaultsFromSpec(spec)
+  return (spec.pages || spec.targets || []).map(function (page) {
+    return pageRecord(page, defaults)
+  })
+}
+
+function defaultTargets() {
+  return targetsFromSpec(defaultSpec)
+}
+
+function filterTargets(targets, filters) {
   filters = filters || {}
-  return PUBLIC_PAGES.filter(function (target) {
+  return (targets || []).filter(function (target) {
     if (filters.page && target.page !== filters.page) return false
     if (filters.variant && target.variant !== filters.variant) return false
     if (filters.priority && target.priority !== filters.priority) return false
@@ -116,8 +78,13 @@ function listTargets(filters) {
   })
 }
 
+function listTargets(filters) {
+  return filterTargets(defaultTargets(), filters)
+}
+
 function findPage(page, variant) {
-  var matches = listTargets({ page: page, variant: variant || 'desktop' })
+  var defaults = defaultsFromSpec(defaultSpec)
+  var matches = listTargets({ page: page, variant: variant || defaults.variant || 'desktop' })
   return matches.length ? matches[0] : null
 }
 
@@ -128,19 +95,6 @@ function findSection(page, section, variant) {
     if (target.sections[i].name === section) return target.sections[i]
   }
   return null
-}
-
-function targetsFromSpec(spec) {
-  spec = spec || {}
-  var defaults = {
-    prototypeBase: spec.prototypeBase || DEFAULTS.prototypeBase,
-    storybookBase: spec.storybookBase || DEFAULTS.storybookBase,
-    viewport: spec.viewport || DEFAULTS.viewport,
-    waitMs: spec.waitMs || DEFAULTS.waitMs,
-  }
-  return (spec.pages || []).map(function (page) {
-    return pageRecord(page, defaults)
-  })
 }
 
 function flattenTargets(filters) {
@@ -166,10 +120,12 @@ function flattenTargets(filters) {
 
 module.exports = {
   DEFAULTS: DEFAULTS,
-  PUBLIC_PAGES: PUBLIC_PAGES,
+  defaultSpec: defaultSpec,
   joinUrl: joinUrl,
   pageRecord: pageRecord,
   targetsFromSpec: targetsFromSpec,
+  defaultTargets: defaultTargets,
+  filterTargets: filterTargets,
   listTargets: listTargets,
   findPage: findPage,
   findSection: findSection,

@@ -5,7 +5,6 @@ module.exports = {
   registry: require('./registry.js'),
   policies: require('./policies.js'),
   markdown: require('./markdown.js'),
-  results: require('./results.js'),
   styles: require('./styles.js'),
   inspect: require('./inspect.js'),
   compareRegion: require('./compare-region.js'),

@@ -1,16 +1,17 @@
 # Pyxis css-visual-diff JavaScript userland
 
-This directory contains the promoted Pyxis JavaScript workflow layer for `css-visual-diff`.
+This directory contains the promoted Pyxis project-specific workflow layer for `css-visual-diff`.
 
-It started as the `PYXIS-CSSVD-JS-LIB` ticket prototype and now holds reusable project infrastructure for comparing standalone prototype pages against Storybook-rendered React pages.
+It compares standalone prototype pages against Storybook-rendered React pages through the JavaScript API (`cvd.compare.region`, catalogs, policies, and semantic snapshots). The JS userland and `specs/*.visual.yml` files are the canonical Pyxis workflow; native `css-visual-diff run` configs are retired and should not be maintained as a parallel path.
 
 ## Layout
 
 ```text
 prototype-design/visual-diff/userland/
-  lib/                  # reusable JS modules
+  lib/                  # reusable JS modules for comparison, policy, snapshots, and spec normalization
+  specs/                # project-specific visual suite specs
   verbs/                # repository-scanned css-visual-diff verbs
-  *.sh                  # smoke/run scripts
+  scripts/              # stable smoke/run scripts
 ```
 
 Generated artifacts should be written under:
@@ -20,6 +21,16 @@ prototype-design/visual-comparisons/cssvd-js/
 ```
 
 Do not treat generated comparison artifacts as source unless a review explicitly asks for them to be committed.
+
+## Source of truth
+
+The reviewed public-page suite spec is:
+
+```text
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+`specs/public-pages.desktop.visual.js` is a CommonJS mirror used by registry-backed ergonomic verbs in the Goja runtime. Keep the YAML spec as the reviewed source of truth and regenerate the JS mirror after spec edits.
 
 ## Repository-scanned verbs
 
@@ -32,14 +43,11 @@ css-visual-diff verbs \
   --output json
 ```
 
-Available verbs include:
+Available verbs:
 
 ```text
 pyxis pages list-targets
-pyxis pages import-smoke
-pyxis pages summarize-results
 pyxis pages inspect-section
-pyxis pages compare-section-command
 pyxis pages compare-section
 pyxis pages compare-page
 pyxis pages compare-all
@@ -48,7 +56,61 @@ pyxis pages snapshot-section
 pyxis pages diff-snapshots
 ```
 
+Removed transition verbs:
+
+```text
+pyxis pages import-smoke
+pyxis pages summarize-results
+pyxis pages compare-section-command
+```
+
+Those verbs were only needed while proving repository imports, reading old native-run artifacts, or building shell-command plans before direct `cvd.compare.region(...)` was available.
+
 ## Common commands
+
+Run the canonical Archive spec smoke:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh
+```
+
+Run the canonical desktop public-page suite from the YAML visual spec:
+
+```bash
+prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
+```
+
+Run the registry-backed full public-page suite smoke. This uses the JS mirror of the YAML spec:
+
+```bash
+prototype-design/visual-diff/userland/scripts/run-compare-all-public-pages.sh
+```
+
+Run the CI policy failure smoke:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-ci-policy-failure.sh
+```
+
+Write a semantic snapshot/diff for one section:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-snapshot-section-archive.sh
+```
+
+Diff two semantic snapshots:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-diff-snapshots-archive.sh
+```
+
+Capture Shows diagnostic snapshots for the largest residual page diffs:
+
+```bash
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+```
+
+## Direct examples
 
 Compare one section:
 
@@ -70,45 +132,21 @@ css-visual-diff verbs \
   --output json
 ```
 
-Run the desktop public-page suite from the built-in JS registry:
+Run a spec subset via `objectFromFile`:
 
 ```bash
-prototype-design/visual-diff/userland/11-run-compare-all-public-pages.sh
-```
-
-Run the Archive subset from the YAML visual spec via `objectFromFile`:
-
-```bash
-prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
-```
-
-Run the CI policy failure smoke:
-
-```bash
-prototype-design/visual-diff/userland/12-smoke-compare-all-ci-policy-fail.sh
-```
-
-Write a semantic snapshot/diff for one section:
-
-```bash
-prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
-```
-
-Diff two semantic snapshots:
-
-```bash
-prototype-design/visual-diff/userland/16-smoke-diff-snapshots-archive-content.sh
-```
-
-Capture Shows diagnostic snapshots for the largest residual page diffs:
-
-```bash
-prototype-design/visual-diff/userland/17-snapshot-shows-sections.sh
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml \
+  --page archive \
+  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/archive-filter \
+  --output json
 ```
 
 ## Policy modes
 
-`compare-all` supports two modes:
+`compare-all` and `compare-spec` support two modes:
 
 ```text
 authoring  write reports and return normally
@@ -127,36 +165,17 @@ Example:
 ```bash
 css-visual-diff verbs \
   --repository prototype-design/visual-diff/userland \
-  pyxis pages compare-all \
-  --page archive \
-  --mode ci \
-  --maxChangedPercent 10 \
-  --outDir prototype-design/visual-comparisons/cssvd-js/compare-all/archive-ci \
-  --output json
-```
-
-## Spec-driven suites
-
-`compare-spec` uses css-visual-diff's `objectFromFile` field support. The verb receives the parsed JSON/YAML object, not a filename string.
-
-The first promoted spec lives at:
-
-```text
-prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
-```
-
-Example:
-
-```bash
-css-visual-diff verbs \
-  --repository prototype-design/visual-diff/userland \
   pyxis pages compare-spec \
   prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml \
   --page archive \
-  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/archive-filter \
+  --mode ci \
+  --maxChangedPercent 10 \
+  --outDir prototype-design/visual-comparisons/cssvd-js/compare-spec/archive-ci \
   --output json
 ```
 
-## Next cleanup
+## Cleanup policy
 
-The built-in target registry still lives in `lib/registry.js` for compatibility with existing commands. Future cleanup can make the YAML spec the primary source of truth and keep `registry.js` as a loader/compatibility adapter.
+Do not add new native `*.css-visual-diff.yml` configs for Pyxis. If Pyxis needs a comparison, add it to a project-specific visual suite spec and run it through this JS userland.
+
+Transition scripts and old-output readers should live in ticket history, not in this promoted directory.
