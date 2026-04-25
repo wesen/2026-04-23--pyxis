@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+      'pyxis-components': resolve(__dirname, '../pyxis-components/src'),
+      'pyxis-components/*': resolve(__dirname, '../pyxis-components/src/*'),
     },
   },
   build: {

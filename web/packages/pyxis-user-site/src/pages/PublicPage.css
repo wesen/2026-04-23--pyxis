@@ -1,0 +1,50 @@
+.pyxis-public-page {
+  width: min(100%, 920px);
+  margin-inline: auto;
+  background: #fff;
+}
+
+.pyxis-public-page__inner {
+  padding-inline: 48px;
+}
+
+.pyxis-public-page__section {
+  margin-top: var(--space-8);
+}
+
+.pyxis-public-page__status {
+  width: min(100%, 920px);
+  margin-inline: auto;
+  padding: 64px 48px;
+  text-align: center;
+}
+
+.pyxis-public-page__status-message {
+  color: var(--color-accent);
+}
+
+.pyxis-public-page__status-detail {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+}
+
+.pyxis-public-page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.pyxis-public-page-shell__main {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .pyxis-public-page__inner {
+    padding-inline: 24px;
+  }
+
+  .pyxis-public-page__status {
+    padding-inline: 24px;
+  }
+}

@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { resolve } from 'path';
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -23,6 +24,14 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   staticDirs: ['../public'],
+  viteFinal: async (config) => {
+    config.resolve = config.resolve ?? {};
+    config.resolve.alias = {
+      ...(Array.isArray(config.resolve.alias) ? {} : config.resolve.alias),
+      'pyxis-components': resolve(__dirname, '../../pyxis-components/src'),
+    };
+    return config;
+  },
 };
 
 export default config;

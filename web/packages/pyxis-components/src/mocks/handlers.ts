@@ -156,12 +156,12 @@ export const seedStats: ArchiveStats = {
 
 export const handlers = [
   // GET /public/shows
-  http.get('/api/public/shows', () => {
+  http.get('*/api/public/shows', () => {
     return HttpResponse.json(seedShows);
   }),
 
   // GET /public/shows/:id
-  http.get('/api/public/shows/:id', ({ params }) => {
+  http.get('*/api/public/shows/:id', ({ params }) => {
     const id = Number(params.id);
     const show = seedShows.find((s) => s.id === id);
     if (!show) {
@@ -174,7 +174,7 @@ export const handlers = [
   }),
 
   // GET /public/shows/:id/flyer
-  http.get('/api/public/shows/:id/flyer', ({ params }) => {
+  http.get('*/api/public/shows/:id/flyer', ({ params }) => {
     const id = Number(params.id);
     const show = seedShows.find((s) => s.id === id);
     if (!show) {
@@ -189,7 +189,7 @@ export const handlers = [
   }),
 
   // GET /public/archive
-  http.get('/api/public/archive', ({ request }) => {
+  http.get('*/api/public/archive', ({ request }) => {
     const url = new URL(request.url);
     const search = url.searchParams.get('search');
     if (search) {
@@ -206,12 +206,12 @@ export const handlers = [
   }),
 
   // GET /public/archive/stats
-  http.get('/api/public/archive/stats', () => {
+  http.get('*/api/public/archive/stats', () => {
     return HttpResponse.json(seedStats);
   }),
 
   // POST /public/submissions
-  http.post('/api/public/submissions', async ({ request }) => {
+  http.post('*/api/public/submissions', async ({ request }) => {
     const body = (await request.json()) as BookingFormData;
     if (!body.artist_name || !body.links) {
       return HttpResponse.json(

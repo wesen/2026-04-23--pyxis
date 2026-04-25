@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { PubNav, PubFooter } from 'pyxis-components';
+import '../../pages/PublicPage.css';
 
 export function Layout() {
   const location = useLocation();
@@ -15,11 +16,11 @@ export function Layout() {
   const currentPage = pageMap[location.pathname] ?? 'shows';
 
   return (
-    <div data-page-shell="public" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="pyxis-public-page-shell" data-page-shell="public">
       <div data-region="nav"><PubNav currentPage={currentPage} /></div>
-      <main data-region="main" style={{ flex: 1 }}>
+      <div className="pyxis-public-page-shell__main" data-region="main">
         <Outlet />
-      </main>
+      </div>
       <div data-region="footer"><PubFooter /></div>
     </div>
   );
