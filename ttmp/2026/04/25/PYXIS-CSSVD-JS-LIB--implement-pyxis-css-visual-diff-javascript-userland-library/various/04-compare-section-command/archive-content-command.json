@@ -1,0 +1,43 @@
+[
+{
+  "args": [
+    "verbs",
+    "script",
+    "compare",
+    "region",
+    "--leftUrl",
+    "http://localhost:7070/standalone/public/archive.html",
+    "--rightUrl",
+    "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+    "--leftSelector",
+    "#root \u003e *",
+    "--rightSelector",
+    "[data-page='archive']",
+    "--width",
+    "920",
+    "--height",
+    "1460",
+    "--leftWaitMs",
+    "1000",
+    "--rightWaitMs",
+    "1000",
+    "--outDir",
+    "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/04-compare-section-command/archive-content",
+    "--writeJson",
+    "--writeMarkdown",
+    "--writePngs",
+    "--output",
+    "json"
+  ],
+  "leftSelector": "#root \u003e *",
+  "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+  "note": "This is a command plan. Current css-visual-diff Goja runtime does not expose child_process, so execution is done by a shell smoke script or future cvd.comparePixels API.",
+  "outDir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/04-compare-section-command/archive-content",
+  "page": "archive",
+  "rightSelector": "[data-page='archive']",
+  "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+  "section": "content",
+  "shellCommand": "'css-visual-diff' 'verbs' 'script' 'compare' 'region' '--leftUrl' 'http://localhost:7070/standalone/public/archive.html' '--rightUrl' 'http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story' '--leftSelector' '#root \u003e *' '--rightSelector' '[data-page='\\''archive'\\'']' '--width' '920' '--height' '1460' '--leftWaitMs' '1000' '--rightWaitMs' '1000' '--outDir' 'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/04-compare-section-command/archive-content' '--writeJson' '--writeMarkdown' '--writePngs' '--output' 'json'",
+  "variant": "desktop"
+}
+]

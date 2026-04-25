@@ -8,6 +8,7 @@ module.exports = {
   results: require('./results.js'),
   styles: require('./styles.js'),
   inspect: require('./inspect.js'),
+  compareRegion: require('./compare-region.js'),
 }
 
 

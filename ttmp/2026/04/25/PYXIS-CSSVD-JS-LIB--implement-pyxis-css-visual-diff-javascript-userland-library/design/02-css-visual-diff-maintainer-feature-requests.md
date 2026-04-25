@@ -180,7 +180,7 @@ Nearly every project-level comparison workflow can be built in userland if this 
 - build a catalog,
 - write CI summaries.
 
-Without it, project scripts need to invoke the CLI as a subprocess.
+Without it, project scripts need to invoke the CLI as a subprocess. In the current css-visual-diff Goja runtime, `require('child_process')` fails with `Invalid module`, so even subprocess invocation is not available inside repository-scanned JS verbs. That makes a JS-callable pixel comparison primitive the cleaner path.
 
 ## P1: YAML config/job bridge for JS
 

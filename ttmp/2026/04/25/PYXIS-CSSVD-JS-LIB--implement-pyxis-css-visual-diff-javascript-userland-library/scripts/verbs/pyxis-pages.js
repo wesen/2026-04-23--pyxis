@@ -102,3 +102,23 @@ __verb__('inspectSection', {
     failOnMissing: { type: 'bool', default: false, help: 'Fail when the selector is missing or hidden' },
   },
 })
+
+function compareSectionCommand(page, section, values) {
+  return [lib.compareRegion.planCompareSection(page, section, {
+    variant: values.variant || 'desktop',
+    outDir: values.outDir || '',
+  })]
+}
+
+__verb__('compareSectionCommand', {
+  parents: ['pyxis', 'pages'],
+  short: 'Build the built-in compare-region command for a registered Pyxis page section',
+  output: 'structured',
+  fields: {
+    page: { argument: true, required: true, help: 'Registered page slug' },
+    section: { argument: true, required: true, help: 'Registered section name' },
+    values: { bind: 'all' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    outDir: { type: 'string', default: '', help: 'Output directory for artifacts' },
+  },
+})

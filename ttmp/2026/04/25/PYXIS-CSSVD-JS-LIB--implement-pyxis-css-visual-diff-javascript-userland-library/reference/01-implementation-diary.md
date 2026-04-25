@@ -746,3 +746,144 @@ The command supports:
 ```
 
 It uses `cvd.browser()`, `browser.page()`, `page.locator()`, `locator.status()`, `locator.text()`, `locator.bounds()`, `locator.computedStyle()`, and `locator.attributes()`.
+
+
+## Step 6: Investigate Phase 4 compare-section bridge and confirm the core boundary
+
+I started the Phase 4 pixel compare bridge by building the part we can do safely in userland: generate the exact built-in `css-visual-diff verbs script compare region` command for any registered page section. I also tested whether the Goja JavaScript runtime exposes `child_process`, because the original implementation plan assumed a JS wrapper could spawn the built-in command.
+
+This step confirmed the boundary we suspected from the API wishlist: command planning is userland, but executing pixel comparison from a custom JS verb still needs either shell orchestration outside Goja or a future JS-callable pixel comparison primitive.
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 3)
+
+**Assistant interpretation:** Continue stepwise implementation, but record blockers and update tasks honestly when a planned userland approach hits a runtime limitation.
+
+**Inferred user intent:** Build as much as practical now while identifying precise css-visual-diff API gaps for maintainers.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added:
+
+```text
+scripts/lib/compare-region.js
+```
+
+- Updated:
+
+```text
+scripts/lib/index.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Implemented verb:
+
+```text
+pyxis pages compare-section-command <page> <section>
+```
+
+- Added smoke scripts:
+
+```text
+scripts/05-smoke-compare-section-command.sh
+scripts/06-smoke-child-process-unavailable.sh
+```
+
+- Generated:
+
+```text
+various/04-compare-section-command/archive-content-command.json
+various/04-compare-section-command/child-process-output.txt
+various/04-compare-section-command/child-process-exit-code.txt
+```
+
+### Why
+
+The implementation plan called for a shell-backed bridge around the built-in compare-region verb. Before building more orchestration on that assumption, I needed to validate whether custom css-visual-diff JS verbs can spawn subprocesses.
+
+### What worked
+
+The command planner works. For Archive content it returns:
+
+```text
+page: archive
+section: content
+leftSelector: #root > *
+rightSelector: [data-page='archive']
+```
+
+It also returns a full shell command using the built-in compare-region verb. That is useful for shell smoke scripts and documentation.
+
+### What didn't work
+
+The current Goja runtime does not expose `child_process` as a valid module. The diagnostic script failed with:
+
+```text
+Error: GoError: Invalid module at github.com/dop251/goja_nodejs/require.(*RequireModule).require-fm (native)
+```
+
+Exit code:
+
+```text
+1
+```
+
+This means the planned `child_process.spawn` bridge cannot run inside a css-visual-diff JS verb today.
+
+### What I learned
+
+This strongly reinforces the maintainer request for a JS-callable pixel comparison primitive such as `cvd.comparePixels(...)`. Without it, a project-specific JS verb can plan and summarize pixel comparisons, but actual pixel comparison execution has to happen through shell scripts or the built-in CLI.
+
+### What was tricky to build
+
+The tricky design point is avoiding a half-fake `compare-section` verb. Returning a command plan is honest and useful. Pretending to execute the comparison from JS would either fail or require unsupported runtime features. The task list now marks actual `compare-section` execution as blocked pending a core API/process-execution capability.
+
+### What warrants a second pair of eyes
+
+- Whether css-visual-diff should expose `child_process`-like behavior at all, or whether the cleaner design is only to expose `cvd.comparePixels(...)`.
+- Whether the command planner should be renamed from `compare-section-command` to `plan-compare-section` for clarity.
+
+### What should be done in the future
+
+- Keep using shell smoke scripts for actual built-in compare-region execution.
+- Update the maintainer feature request with this concrete runtime limitation if needed.
+- Do not block Phase 5 reporting/orchestration work that can consume command plans and existing results.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+scripts/05-smoke-compare-section-command.sh
+scripts/06-smoke-child-process-unavailable.sh
+various/04-compare-section-command/archive-content-command.json
+```
+
+Validate command planning:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/05-smoke-compare-section-command.sh
+```
+
+Validate the runtime limitation:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/06-smoke-child-process-unavailable.sh
+```
+
+The second command is expected to fail with `Invalid module`.
+
+### Technical details
+
+The command planner builds args for:
+
+```text
+css-visual-diff verbs script compare region
+```
+
+and returns both an `args` array and a quoted `shellCommand`. It intentionally does not execute the command inside Goja.

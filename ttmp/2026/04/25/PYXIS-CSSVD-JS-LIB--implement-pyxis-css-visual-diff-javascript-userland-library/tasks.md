@@ -60,12 +60,16 @@
 
 ## Phase 4 — Pixel compare-section bridge
 
-- [ ] Create `scripts/lib/compare-region.js`.
-- [ ] Use `child_process.spawn` to invoke `css-visual-diff verbs script compare region`.
+- [x] Create `scripts/lib/compare-region.js` for command planning.
+- [x] Confirm `child_process` is unavailable in css-visual-diff Goja verbs.
+- [x] Implement `pyxis pages compare-section-command <page> <section>` as a command-plan bridge.
+- [x] Add smoke script `scripts/05-smoke-compare-section-command.sh`.
+- [x] Add diagnostic script `scripts/06-smoke-child-process-unavailable.sh`.
+- [ ] Use `child_process.spawn` to invoke `css-visual-diff verbs script compare region`. (Blocked: `child_process` is not exposed in current Goja runtime.)
 - [ ] Create output directories before spawning commands.
 - [ ] Read generated `compare.json`.
 - [ ] Wrap generated Markdown with docmgr-compatible frontmatter when output lives under `ttmp`.
-- [ ] Implement `pyxis pages compare-section <page> <section>`.
+- [ ] Implement `pyxis pages compare-section <page> <section>`. (Blocked pending JS-callable pixel compare or process execution API.)
 - [ ] Add smoke script `scripts/04-smoke-compare-section.sh`.
 - [ ] Validate Archive content result is approximately `7.1281%`.
 - [x] Record results in diary.
