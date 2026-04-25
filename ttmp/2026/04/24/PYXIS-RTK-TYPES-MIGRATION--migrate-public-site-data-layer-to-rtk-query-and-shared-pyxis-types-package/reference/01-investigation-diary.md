@@ -657,3 +657,31 @@ root      0.0000% | 0/70200
 ```
 
 This was an exact pixel-parity extraction.
+
+
+## Step 19: Extract `ShowMetaStrip` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ShowMetaStrip/ShowMetaStrip.css`.
+- Moved root border/grid styles and item label/value styles out of JSX.
+- Kept the dynamic column count as a root `gridTemplateColumns` style because it depends on `items.length`.
+- Added stable `data-pyxis-part` hooks for `item`, `label`, and `value`.
+- Updated `ShowMetaStrip.tsx` to self-import CSS and use `clsx('pyxis-show-meta-strip', className)`.
+- Added `FourItems` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/show-meta-strip-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/31680
+root      0.0000% | 0/31680
+```
+
+This was an exact pixel-parity extraction.

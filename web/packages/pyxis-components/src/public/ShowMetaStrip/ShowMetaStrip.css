@@ -1,0 +1,31 @@
+/* ShowMetaStrip — compact metadata columns for show detail pages. */
+
+:where([data-pyxis-component='show-meta-strip'][data-pyxis-part='root']) {
+  --pyxis-show-meta-strip-accent-color: var(--color-accent);
+  --pyxis-show-meta-strip-border-color: #EAE7E0;
+  --pyxis-show-meta-strip-muted-color: #8E887E;
+
+  border-bottom: 1px solid var(--pyxis-show-meta-strip-border-color);
+  border-top: 1px solid var(--pyxis-show-meta-strip-border-color);
+  display: grid;
+  gap: 0;
+}
+
+:where([data-pyxis-component='show-meta-strip'][data-pyxis-part='item']) {
+  padding: 14px 0;
+}
+
+:where([data-pyxis-component='show-meta-strip'][data-pyxis-part='label']) {
+  color: var(--pyxis-show-meta-strip-muted-color);
+  font-size: 10.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='show-meta-strip'][data-pyxis-part='value']) {
+  color: var(--pyxis-show-meta-strip-accent-color);
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+  margin-top: var(--space-1);
+}

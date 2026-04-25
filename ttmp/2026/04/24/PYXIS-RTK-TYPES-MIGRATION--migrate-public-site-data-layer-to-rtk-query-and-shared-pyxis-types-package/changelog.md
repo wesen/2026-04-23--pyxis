@@ -64,4 +64,8 @@
 - Extracted `ShowDetailHeader` styles into `web/packages/pyxis-components/src/public/ShowDetailHeader/ShowDetailHeader.css`.
 - Added part selectors for `meta`, `title`, and `description`, plus long-title and theme override Storybook stories.
 - Validated `ShowDetailHeader` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-detail-header-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/70200`.
+- Extracted `ShowMetaStrip` styles into `web/packages/pyxis-components/src/public/ShowMetaStrip/ShowMetaStrip.css`.
+- Added part selectors for `item`, `label`, and `value`, keeping dynamic column count as a CSS custom style on the root.
+- Added four-item and theme override Storybook stories.
+- Validated `ShowMetaStrip` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-meta-strip-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/31680`.
 
