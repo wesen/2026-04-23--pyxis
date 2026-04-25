@@ -1,0 +1,21 @@
+---
+Title: Changelog
+Ticket: PYXIS-VISUAL-DIFF-CLEANUP
+Status: active
+Topics:
+  - frontend
+  - visual-diff
+  - storybook
+  - automation
+  - pyxis
+DocType: changelog
+Intent: short-term
+Summary: Changelog for the prototype-design visual-diff cleanup ticket.
+---
+
+# Changelog
+
+- Created cleanup/consolidation ticket for `prototype-design`, visual-diff scripts, specs, native configs, and generated-artifact policy.
+- Added intern-facing analysis/design/implementation guide at `design/01-prototype-design-visual-diff-cleanup-analysis-design-implementation-guide.md`.
+- Added concrete phased task checklist and planning diary.
+- Uploaded guide bundle to reMarkable at `/ai/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP` as `PYXIS Visual Diff Cleanup Guide`.
