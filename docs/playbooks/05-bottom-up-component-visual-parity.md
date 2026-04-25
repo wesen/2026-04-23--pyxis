@@ -1,5 +1,8 @@
 # Bottom-Up Component Visual Parity
 
+> [!warning] Historical component-native sections
+> Earlier component parity examples in this playbook refer to retired native `css-visual-diff` configs now quarantined under `prototype-design/-deprecated/visual-diff-native-configs/`. Active public-page validation uses the JS userland suite in `prototype-design/visual-diff/userland/`. Do not create new native `*.css-visual-diff.yml` configs.
+
 This playbook is the daily entrypoint for comparing Pyxis prototype components against the React/Storybook implementation with `css-visual-diff`.
 
 ## Principle
@@ -15,9 +18,9 @@ Page diffs are only useful after the components inside those pages are trustwort
 ## Key files
 
 ```text
-prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
-prototype-design/visual-diff/comparisons/component-system/atoms/*.css-visual-diff.yml
-prototype-design/visual-diff/comparisons/component-system/molecules/*.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/component-parity-map.json
+prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/atoms/*.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/*.css-visual-diff.yml
 prototype-design/visual-diff/scripts/fixtures/atom-fixture-prepare.js
 prototype-design/visual-diff/scripts/fixtures/molecule-fixture-prepare.js
 web/packages/pyxis-components/src/atoms/AtomDiffFixture.stories.tsx
@@ -31,7 +34,7 @@ Generated output goes under `prototype-design/visual-comparisons/` and should no
 The parity map is the source-of-truth queue/inventory for component parity pairs:
 
 ```text
-prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/component-parity-map.json
 ```
 
 Each entry records:
@@ -88,7 +91,7 @@ Do not run the full comparison until these are valid.
 
 ```bash
 css-visual-diff html \
-  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
   --side original \
   --root \
   --output-file /tmp/card-original-root.html
@@ -98,13 +101,13 @@ css-visual-diff html \
 
 ```bash
 css-visual-diff screenshot \
-  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
   --side original \
   --section component \
   --output-file /tmp/card-original.png
 
 css-visual-diff screenshot \
-  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
   --side react \
   --section component \
   --output-file /tmp/card-react.png
@@ -116,7 +119,7 @@ Use the `read` tool to look at screenshots directly.
 
 ```bash
 css-visual-diff css-md \
-  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
   --side original \
   --style root \
   --output-file /tmp/card-original-css.md
@@ -128,7 +131,7 @@ A CSS diff is evidence, not a verdict. If the React implementation splits paddin
 
 ```bash
 css-visual-diff run \
-  --config prototype-design/visual-diff/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/molecules/card-default.css-visual-diff.yml \
   --modes capture,cssdiff,matched-styles,pixeldiff,html-report
 ```
 
@@ -323,7 +326,7 @@ cd web && pnpm --filter pyxis-components typecheck
 cd web && pnpm -r typecheck
 ```
 
-The old native component config directories under `prototype-design/visual-diff/comparisons/component-system/**` are retired inputs. Use them only when intentionally mining historical component evidence during cleanup. Do not create new native `*.css-visual-diff.yml` configs for Pyxis work.
+The old native component config directories under `prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/**` are retired inputs. Use them only when intentionally mining historical component evidence during cleanup. Do not create new native `*.css-visual-diff.yml` configs for Pyxis work.
 
 For page-level public-site validation, use the JS-canonical visual suite instead:
 
@@ -345,7 +348,7 @@ rm -rf prototype-design/visual-comparisons/cssvd-js
 For extracted public components, add or update a `styleArchitecture` object in:
 
 ```text
-prototype-design/visual-diff/comparisons/component-system/component-parity-map.json
+prototype-design/-deprecated/visual-diff-native-configs/comparisons/component-system/component-parity-map.json
 ```
 
 Example:

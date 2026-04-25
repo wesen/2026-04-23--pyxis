@@ -72,7 +72,7 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 ## Phase 7 — Final validation and handoff
 
 - [x] Run promoted smoke suite subset after deprecated move (`smoke-list-targets`, `smoke-compare-spec-archive`).
-- [ ] Run full spec suite.
+- [x] Run full spec suite after deprecated quarantine.
 - [x] Ensure generated artifacts are not committed.
 - [ ] Write final postmortem/reference report.
 - [ ] Commit cleanup in safe chunks.

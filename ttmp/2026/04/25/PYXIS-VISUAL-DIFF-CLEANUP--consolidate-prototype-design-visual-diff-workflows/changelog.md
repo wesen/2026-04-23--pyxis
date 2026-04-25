@@ -36,3 +36,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Committed visual parity playbook JS-suite update.
 - Created `prototype-design/-deprecated/` quarantine, moved old native configs/scripts/generated outputs/screenshots/imports out of active paths, updated inventory/tasks, and validated JS visual suite.
 - Committed deprecated prototype-design quarantine.
+- Marked old baseline/storybook/component-native playbooks as deprecated and rewrote their moved artifact paths to `prototype-design/-deprecated/...`.

@@ -12,11 +12,11 @@ DocType: playbook
 Intent: implementation-guide
 Owners: []
 RelatedFiles:
-    - Path: prototype-design/Pyxis Full App.html
+    - Path: prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
       Note: Full App prototype entrypoint; Foundations/SystemPage only for this catalog
-    - Path: prototype-design/Pyxis Public Site.html
+    - Path: prototype-design/-deprecated/screenshots-and-imports/Pyxis Public Site.html
       Note: Primary public prototype HTML baseline entrypoint
-    - Path: prototype-design/Pyxis Mobile.html
+    - Path: prototype-design/-deprecated/screenshots-and-imports/Pyxis Mobile.html
       Note: Primary mobile prototype HTML baseline entrypoint
     - Path: prototype-design/screens/ppxis.jsx
       Note: Public prototype globals and catalog fixture wrappers used by direct-react-global
@@ -28,17 +28,17 @@ RelatedFiles:
       Note: Standalone public Shows page entrypoint for direct baseline extraction
     - Path: prototype-design/standalone/mobile/home.html
       Note: Standalone mobile dashboard entrypoint for direct baseline extraction
-    - Path: prototype-design/visual-diff/scripts/06-run-prototype-baseline-sample.sh
+    - Path: prototype-design/-deprecated/visual-diff-scripts/06-run-prototype-baseline-sample.sh
       Note: Sample-first validation runner referenced by the playbook
-    - Path: prototype-design/visual-diff/scripts/08-run-prototype-public-component-sample.sh
+    - Path: prototype-design/-deprecated/visual-diff-scripts/08-run-prototype-public-component-sample.sh
       Note: Public component sample runner referenced by the playbook
-    - Path: prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+    - Path: prototype-design/-deprecated/visual-diff-scripts/11-generate-prototype-baseline-configs.mjs
       Note: Generates the canonical prototype baseline configs
-    - Path: prototype-design/visual-diff/scripts/14-generate-standalone-mobile-html.mjs
+    - Path: prototype-design/-deprecated/visual-diff-scripts/14-generate-standalone-mobile-html.mjs
       Note: Regenerates standalone mobile screen HTML files
-    - Path: prototype-design/visual-diff/prototype-public-shows.css-visual-diff.yml
+    - Path: prototype-design/-deprecated/visual-diff-native-configs/prototype-public-shows.css-visual-diff.yml
       Note: Page-level public Shows baseline config
-    - Path: prototype-design/visual-diff/public-components/show-tile-redroom.css-visual-diff.yml
+    - Path: prototype-design/-deprecated/visual-diff-native-configs/public-components/show-tile-redroom.css-visual-diff.yml
       Note: Detailed component fixture baseline config example
 ExternalSources: []
 Summary: How to extract trusted PNG, CSS, prepared HTML, and inspect JSON baselines from prototype HTML files with css-visual-diff.
@@ -51,6 +51,9 @@ WhenToUse: When adding or updating prototype baseline configs from Pyxis HTML pr
 
 # HTML Prototype Baseline Extraction Playbook
 
+> [!warning] Deprecated workflow
+> This playbook documents the historical prototype baseline extraction workflow. Its configs, generated outputs, old scripts, and imported HTML now live under `prototype-design/-deprecated/`. For active Pyxis public-page visual validation, use `prototype-design/visual-diff/userland/` and `*.visual.yml` specs.
+
 This playbook explains how to extract a reliable visual/CSS baseline from a prototype `.html` file using `css-visual-diff`. It is written for the Pyxis catalog workflow, but the method applies to any React prototype HTML that exposes components through browser globals.
 
 The central idea is simple:
@@ -60,8 +63,8 @@ The central idea is simple:
 For Pyxis, the two important prototype files are:
 
 ```text
-prototype-design/Pyxis Public Site.html
-prototype-design/Pyxis Full App.html
+prototype-design/-deprecated/screenshots-and-imports/Pyxis Public Site.html
+prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
 ```
 
 Their roles are different:
@@ -80,7 +83,7 @@ The current canonical repo-root layout is:
 ```text
 prototype-design/visual-diff/
 prototype-design/visual-diff/scripts/
-prototype-design/baseline/
+prototype-design/-deprecated/generated-output/baseline/
 prototype-design/standalone/
 ```
 
@@ -153,13 +156,13 @@ curl -I 'http://localhost:7070/Pyxis%20Full%20App.html'
 The canonical repo-root scripts start this server automatically if needed:
 
 ```bash
-prototype-design/visual-diff/scripts/06-run-prototype-baseline-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/06-run-prototype-baseline-sample.sh
 ```
 
 and:
 
 ```bash
-prototype-design/visual-diff/scripts/08-run-prototype-public-component-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/08-run-prototype-public-component-sample.sh
 ```
 
 ## 3. Standalone HTML entrypoints
@@ -197,7 +200,7 @@ prototype-design/standalone/mobile/settings.html
 Generate or refresh them with:
 
 ```bash
-node prototype-design/visual-diff/scripts/14-generate-standalone-mobile-html.mjs
+node prototype-design/-deprecated/visual-diff-scripts/14-generate-standalone-mobile-html.mjs
 ```
 
 The public/foundations standalone generators still exist in the ticket workspace today, but the baseline/config workflow is now canonical under `prototype-design/`.
@@ -298,7 +301,7 @@ Use page-level baselines to capture full public pages or major page regions.
 Example source config:
 
 ```text
-prototype-design/visual-diff/prototype-public-shows.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-public-shows.css-visual-diff.yml
 ```
 
 It renders:
@@ -326,7 +329,7 @@ Run all probes from the config:
 
 ```bash
 css-visual-diff inspect \
-  --config prototype-design/visual-diff/prototype-public-shows.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/prototype-public-shows.css-visual-diff.yml \
   --side original \
   --all-styles \
   --out /tmp/pyxis-public-shows-baseline
@@ -347,7 +350,7 @@ Use the `read` image tool to inspect the PNG. Do not rely only on dimensions.
 Example config:
 
 ```text
-prototype-design/visual-diff/prototype-foundations-system.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-foundations-system.css-visual-diff.yml
 ```
 
 It renders:
@@ -377,7 +380,7 @@ Sample command:
 
 ```bash
 css-visual-diff inspect \
-  --config prototype-design/visual-diff/prototype-foundations-system.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/prototype-foundations-system.css-visual-diff.yml \
   --side original \
   --all-styles \
   --out /tmp/pyxis-foundations-baseline
@@ -397,7 +400,7 @@ Prefer direct component fixture baselines for reusable public-site parts.
 Example config:
 
 ```text
-prototype-design/visual-diff/public-components/show-tile-redroom.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/public-components/show-tile-redroom.css-visual-diff.yml
 ```
 
 It renders:
@@ -419,7 +422,7 @@ Run it:
 
 ```bash
 css-visual-diff inspect \
-  --config prototype-design/visual-diff/public-components/show-tile-redroom.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/public-components/show-tile-redroom.css-visual-diff.yml \
   --side original \
   --all-styles \
   --out /tmp/show-tile-redroom-baseline
@@ -507,7 +510,7 @@ Use small scripts first:
 
 ```bash
 scripts/06-run-prototype-baseline-sample.sh
-prototype-design/visual-diff/scripts/08-run-prototype-public-component-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/08-run-prototype-public-component-sample.sh
 ```
 
 The public component sample currently extracts:
@@ -527,7 +530,7 @@ The user preference for this ticket is:
 Use `read` on sample PNGs, for example:
 
 ```text
-prototype-design/baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
+prototype-design/-deprecated/generated-output/baseline/sample-public-components/show-tile-redroom/show-tile/screenshot.png
 ```
 
 Check:
@@ -609,18 +612,18 @@ Prototype baseline configs now live here:
 
 ```text
 prototype-design/visual-diff/
-prototype-design/visual-diff/public-components/
+prototype-design/-deprecated/visual-diff-native-configs/public-components/
 prototype-design/visual-diff/scripts/
 ```
 
 Generated artifacts now live here:
 
 ```text
-prototype-design/baseline/artifacts/
-prototype-design/baseline/sample/
-prototype-design/baseline/sample-public-components/
-prototype-design/baseline/index.html
-prototype-design/baseline/manifest.json
+prototype-design/-deprecated/generated-output/baseline/artifacts/
+prototype-design/-deprecated/generated-output/baseline/sample/
+prototype-design/-deprecated/generated-output/baseline/sample-public-components/
+prototype-design/-deprecated/generated-output/baseline/index.html
+prototype-design/-deprecated/generated-output/baseline/manifest.json
 ```
 
 Generated artifacts are ignored at the repo root via:
@@ -632,7 +635,7 @@ Generated artifacts are ignored at the repo root via:
 with:
 
 ```text
-prototype-design/baseline/
+prototype-design/-deprecated/generated-output/baseline/
 ```
 
 Do commit:
@@ -668,7 +671,7 @@ is exported to `window`.
 Create:
 
 ```text
-prototype-design/visual-diff/public-components/footer-desktop.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/public-components/footer-desktop.css-visual-diff.yml
 ```
 
 Use:
@@ -694,7 +697,7 @@ Use selectors:
 
 ```bash
 css-visual-diff inspect \
-  --config prototype-design/visual-diff/public-components/footer-desktop.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/public-components/footer-desktop.css-visual-diff.yml \
   --side original \
   --all-styles \
   --out /tmp/footer-desktop-baseline
@@ -713,7 +716,7 @@ Read:
 Once correct, add it to:
 
 ```text
-prototype-design/visual-diff/scripts/08-run-prototype-public-component-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/08-run-prototype-public-component-sample.sh
 ```
 
 or create a full public component runner.

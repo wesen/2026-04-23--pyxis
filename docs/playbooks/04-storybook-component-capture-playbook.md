@@ -15,6 +15,9 @@ LastUpdated: 2026-04-24T00:00:00Z
 
 # Storybook Component Capture Playbook
 
+> [!warning] Deprecated capture workflow
+> This playbook documents the historical Storybook catalog/native-config capture workflow. The generated config tree and catalog outputs now live under `prototype-design/-deprecated/`. Active public-page validation uses `prototype-design/visual-diff/userland/`. Component-level JS visual suites can be rebuilt later if needed.
+
 This playbook explains how to create Storybook-ready Pyxis components and extract focused screenshots with `css-visual-diff`. The goal is not to screenshot the Storybook canvas. The goal is to screenshot the meaningful widget: the button, badge, card, venue card, booking form, or page shell that will later be compared with a prototype baseline.
 
 The rule is simple:
@@ -185,7 +188,7 @@ Run:
 
 ```bash
 cd /home/manuel/code/wesen/2026-04-23--pyxis
-node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
+node prototype-design/-deprecated/visual-diff-scripts/18-generate-storybook-design-system-configs.mjs
 ```
 
 The generator reads:
@@ -197,7 +200,7 @@ web/packages/pyxis-components/storybook-static/index.json
 and writes configs under:
 
 ```text
-prototype-design/visual-diff/storybook-components/
+prototype-design/-deprecated/visual-diff-native-configs/storybook-components/
 ```
 
 Each config has two initial probes:
@@ -220,23 +223,23 @@ styles:
 Do not run the full catalog while changing the selector contract. Use the atom sample:
 
 ```bash
-prototype-design/visual-diff/scripts/19-run-storybook-atoms-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/19-run-storybook-atoms-sample.sh
 ```
 
 The sample writes generated artifacts under:
 
 ```text
-prototype-design/storybook-catalog/sample-atoms/
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/
 ```
 
 Inspect screenshots with the image-capable `read` tool. Good files to check:
 
 ```text
-prototype-design/storybook-catalog/sample-atoms/atoms/badge/default/capture-target/screenshot.png
-prototype-design/storybook-catalog/sample-atoms/atoms/button/default/capture-target/screenshot.png
-prototype-design/storybook-catalog/sample-atoms/atoms/input/default/capture-target/screenshot.png
-prototype-design/storybook-catalog/sample-atoms/atoms/avatar/default/capture-target/screenshot.png
-prototype-design/storybook-catalog/sample-atoms/atoms/icon/default/capture-target/screenshot.png
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/atoms/badge/default/capture-target/screenshot.png
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/atoms/button/default/capture-target/screenshot.png
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/atoms/input/default/capture-target/screenshot.png
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/atoms/avatar/default/capture-target/screenshot.png
+prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/atoms/icon/default/capture-target/screenshot.png
 ```
 
 A good Badge capture is badge-sized. A bad Badge capture is viewport-sized.
@@ -265,33 +268,33 @@ After a focused sample passes, build the full implementation catalog:
 ```bash
 cd /home/manuel/code/wesen/2026-04-23--pyxis
 pnpm --dir web --filter pyxis-components build-storybook
-node prototype-design/visual-diff/scripts/18-generate-storybook-design-system-configs.mjs
-prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+node prototype-design/-deprecated/visual-diff-scripts/18-generate-storybook-design-system-configs.mjs
+prototype-design/-deprecated/visual-diff-scripts/20-run-storybook-catalog-full.sh
 ```
 
-The full runner reads `prototype-design/storybook-catalog/manifest.json`, runs every generated config, and then rebuilds:
+The full runner reads `prototype-design/-deprecated/generated-output/storybook-catalog/manifest.json`, runs every generated config, and then rebuilds:
 
 ```text
-prototype-design/storybook-catalog/index.html
+prototype-design/-deprecated/generated-output/storybook-catalog/index.html
 ```
 
 Serve the catalog with:
 
 ```bash
-prototype-design/visual-diff/scripts/22-serve-storybook-catalog-index.sh
+prototype-design/-deprecated/visual-diff-scripts/22-serve-storybook-catalog-index.sh
 ```
 
 Then open:
 
 ```text
-http://localhost:8796/prototype-design/storybook-catalog/index.html
+http://localhost:8796/prototype-design/-deprecated/generated-output/storybook-catalog/index.html
 ```
 
 You can limit the full runner to one group while developing:
 
 ```bash
-PYXIS_STORYBOOK_CATALOG_GROUP=molecules prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
-PYXIS_STORYBOOK_CATALOG_GROUP=public prototype-design/visual-diff/scripts/20-run-storybook-catalog-full.sh
+PYXIS_STORYBOOK_CATALOG_GROUP=molecules prototype-design/-deprecated/visual-diff-scripts/20-run-storybook-catalog-full.sh
+PYXIS_STORYBOOK_CATALOG_GROUP=public prototype-design/-deprecated/visual-diff-scripts/20-run-storybook-catalog-full.sh
 ```
 
 ## 9. Mapping to prototype baselines
@@ -354,20 +357,20 @@ Public-site components use the same selector contract as design-system component
 The catalog generator includes `Public/*` stories and writes configs under:
 
 ```text
-prototype-design/visual-diff/storybook-components/public/
+prototype-design/-deprecated/visual-diff-native-configs/storybook-components/public/
 ```
 
 These captures are the bridge between the implementation catalog and the prototype source of truth:
 
 ```text
-prototype-design/Pyxis Public Site.html
-prototype-design/baseline/artifacts/public/...
+prototype-design/-deprecated/screenshots-and-imports/Pyxis Public Site.html
+prototype-design/-deprecated/generated-output/baseline/artifacts/public/...
 ```
 
 Do public-site comparison in this order:
 
 1. Verify each public component has a focused Storybook `capture-target`.
-2. Find the closest prototype component baseline in `prototype-design/baseline/`.
+2. Find the closest prototype component baseline in `prototype-design/-deprecated/generated-output/baseline/`.
 3. Compare equivalent scopes first, such as PubNav ↔ prototype nav, VenueCard/SpaceInfo ↔ prototype space info, BookingForm ↔ prototype booking form.
 4. Only then compare full public pages.
 

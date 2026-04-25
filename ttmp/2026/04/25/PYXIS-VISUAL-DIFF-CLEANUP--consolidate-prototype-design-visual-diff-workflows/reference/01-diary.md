@@ -1159,3 +1159,107 @@ active retired-native: 0
 active generated-output: 0
 needs-review: 0
 ```
+
+
+## Step 14: Mark deprecated playbooks and path references
+
+After creating the `-deprecated` quarantine, I updated the older playbooks and component overview docs so they no longer point readers at active paths that no longer exist. The older workflows remain documented, but they are now explicitly marked as deprecated/historical and their file references point into `prototype-design/-deprecated/`.
+
+This preserves documentation value while making the active workflow boundary clearer: public-page validation is JS/spec-driven, and old baseline/catalog/native-config workflows are archaeology unless intentionally revived.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 13)
+
+**Assistant interpretation:** Continue the deprecated-folder cleanup by updating docs that still referenced the pre-quarantine paths.
+
+**Inferred user intent:** Avoid stale docs that send future developers to moved/deprecated YAML, HTML, PNG, MJS, and shell artifacts.
+
+**Commit (docs):** pending at diary-write time — intended message: "Mark old visual diff playbooks deprecated"
+
+### What I did
+
+Updated these docs:
+
+```text
+docs/playbooks/02-html-prototype-baseline-extraction-playbook.md
+docs/playbooks/03-pyxis-full-app-baseline-handover.md
+docs/playbooks/04-storybook-component-capture-playbook.md
+docs/playbooks/05-bottom-up-component-visual-parity.md
+docs/component-system-and-public-site-components.md
+```
+
+Changes:
+
+- Added warning/note callouts explaining that the old baseline, Storybook catalog, and component-native config workflows are deprecated/historical.
+- Replaced old paths such as `prototype-design/baseline/`, `prototype-design/storybook-catalog/`, `prototype-design/visual-diff/prototype-*.css-visual-diff.yml`, `prototype-design/visual-diff/public-components/`, `prototype-design/visual-diff/comparisons/`, and old numbered scripts with their `prototype-design/-deprecated/...` locations.
+- Left active fixture paths such as `prototype-design/visual-diff/scripts/fixtures/**` untouched.
+- Checked the Phase 7 full-suite task because the full public-page suite was run successfully after the quarantine move.
+
+### Why
+
+The quarantine move made many old path references stale. Updating docs prevents future developers from assuming the old native config/capture workflow is still active.
+
+### What worked
+
+Search no longer finds active old paths in the updated docs:
+
+```bash
+rg -n "prototype-design/(baseline|storybook-catalog|visual-diff/(prototype-|public-components|comparisons|storybook-components|scripts/(0[6-9]|1[1-9]|2[0-2])))" \
+  docs/playbooks docs/component-system-and-public-site-components.md
+```
+
+Result: no matches.
+
+### What didn't work
+
+N/A. This was a docs/path update.
+
+### What I learned
+
+There are three levels of documentation now:
+
+1. active JS userland docs for current page validation,
+2. historical playbooks that are still useful for archaeology,
+3. ticket diaries that preserve exact old commands and outcomes.
+
+The historical playbooks should not be deleted immediately because they explain why the deprecated artifacts exist, but they must be clearly labeled.
+
+### What was tricky to build
+
+The tricky part was avoiding blind replacement of active fixture paths. The old numbered scripts moved to `-deprecated`, but fixture preparation scripts under `prototype-design/visual-diff/scripts/fixtures/` are still active and should not be rewritten.
+
+### What warrants a second pair of eyes
+
+- Confirm that keeping historical playbooks in `docs/playbooks/` with warnings is preferable to moving them under `prototype-design/-deprecated/` or a docs archive.
+- Confirm whether `docs/playbooks/05-bottom-up-component-visual-parity.md` should be split into active page-suite guidance plus historical component-native guidance.
+
+### What should be done in the future
+
+- Consider adding a small repository check that fails if new active `prototype-design/**/*.css-visual-diff.yml` files appear outside `-deprecated`.
+- Write a final handoff/postmortem for this cleanup ticket.
+
+### Code review instructions
+
+Review the warnings and path replacements in:
+
+```text
+docs/playbooks/02-html-prototype-baseline-extraction-playbook.md
+docs/playbooks/03-pyxis-full-app-baseline-handover.md
+docs/playbooks/04-storybook-component-capture-playbook.md
+docs/playbooks/05-bottom-up-component-visual-parity.md
+docs/component-system-and-public-site-components.md
+```
+
+Validate with the `rg` command above.
+
+### Technical details
+
+The full public-page suite run after the quarantine move produced:
+
+```text
+pageCount: 5
+sectionCount: 13
+maxChangedPercent: 66.03678642230044
+classificationCounts: { major-mismatch: 4, review: 4, tune-required: 5 }
+```

@@ -15,6 +15,9 @@ LastUpdated: 2026-04-24T00:00:00Z
 
 # Pyxis Component System and Public Site Components
 
+> [!note] Historical artifact paths
+> Prototype baseline and Storybook catalog artifact paths in this document refer to historical outputs now quarantined under `prototype-design/-deprecated/generated-output/`. Active public-page visual validation uses the JS userland suite.
+
 A component system is a vocabulary for building interfaces. The point is not to argue whether a component is “really” an atom or “really” an organism. The point is to give developers and designers a shared map. When two people say “Button,” they should mean the same primitive. When they say “VenueCard,” they should understand that it is a composed public-site object, not a global primitive. That shared map is what lets us test the system one layer at a time instead of debugging a whole page every time a border radius changes.
 
 Pyxis uses two ideas together. The first idea is **composition level**: small parts combine into larger parts. The second idea is **domain**: some parts are generic and reusable anywhere, while others are specific to the public site, the staff/admin app, or the mobile app. A component can be an organism in one domain without being part of the generic organism layer. This distinction matters because our visual testing workflow depends on it.
@@ -249,10 +252,10 @@ The visual catalog workflow follows the component hierarchy because it reduces n
 The prototype baseline and Storybook catalog sit side by side:
 
 ```text
-prototype-design/baseline/
+prototype-design/-deprecated/generated-output/baseline/
   source-of-truth captures from prototype HTML
 
-prototype-design/storybook-catalog/
+prototype-design/-deprecated/generated-output/storybook-catalog/
   implementation captures from Storybook
 ```
 

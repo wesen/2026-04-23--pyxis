@@ -11,7 +11,7 @@ DocType: playbook
 Intent: handoff
 Owners: []
 RelatedFiles:
-  - Path: prototype-design/Pyxis Full App.html
+  - Path: prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
     Note: Full App prototype entrypoint to cover next; exclude foundations because they already exist.
   - Path: prototype-design/screens/auth-dash.jsx
     Note: Exports LoginScreen, SetupScreen, DashboardScreen.
@@ -21,18 +21,18 @@ RelatedFiles:
     Note: Exports ArtistsScreen, CalendarScreen, AttendanceScreen.
   - Path: prototype-design/screens/settings-discord.jsx
     Note: Exports DiscordScreen, SettingsScreen, ModalShowcase.
-  - Path: prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+  - Path: prototype-design/-deprecated/visual-diff-scripts/11-generate-prototype-baseline-configs.mjs
     Note: Canonical config generator to extend.
-  - Path: prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
+  - Path: prototype-design/-deprecated/visual-diff-scripts/12-build-prototype-baseline-index.mjs
     Note: Rebuilds the browsable baseline index after new configs are added.
-  - Path: prototype-design/visual-diff/scripts/13-serve-prototype-baseline-index.sh
+  - Path: prototype-design/-deprecated/visual-diff-scripts/13-serve-prototype-baseline-index.sh
     Note: Serves the baseline index locally.
-  - Path: prototype-design/baseline/index.html
+  - Path: prototype-design/-deprecated/generated-output/baseline/index.html
     Note: Current browsable baseline index.
   - Path: docs/playbooks/02-html-prototype-baseline-extraction-playbook.md
     Note: Canonical baseline extraction playbook to follow for the detailed extraction loop.
 ExternalSources: []
-Summary: Handover for extracting the remaining Full App baseline from prototype-design/Pyxis Full App.html without recomputing the whole existing baseline set.
+Summary: Handover for extracting the remaining Full App baseline from prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html without recomputing the whole existing baseline set.
 LastUpdated: 2026-04-24T00:00:00Z
 WhatFor: Use this when continuing baseline extraction for the non-foundations Full App prototype screens.
 WhenToUse: When a colleague is tasked with finishing baseline extraction for Pyxis Full App screens after the public site, mobile screens, and foundations baseline already exist.
@@ -40,10 +40,13 @@ WhenToUse: When a colleague is tasked with finishing baseline extraction for Pyx
 
 # Pyxis Full App Baseline Extraction Handover
 
+> [!warning] Deprecated workflow
+> This handover documents the historical Full App baseline extraction workflow. The referenced baseline configs, generated outputs, and old scripts have been quarantined under `prototype-design/-deprecated/`. Do not extend this workflow unless intentionally doing archaeology.
+
 This handover is for the colleague who will extract the remaining baseline from:
 
 ```text
-prototype-design/Pyxis Full App.html
+prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
 ```
 
 ## Scope
@@ -62,7 +65,7 @@ The current canonical prototype baseline workflow is already set up under:
 ```text
 prototype-design/visual-diff/
 prototype-design/visual-diff/scripts/
-prototype-design/baseline/
+prototype-design/-deprecated/generated-output/baseline/
 prototype-design/standalone/
 ```
 
@@ -82,7 +85,7 @@ Why:
 
 - the existing baseline already covers public pages, public components, mobile screens, and foundations,
 - the new Full App work adds another large set of screens,
-- `prototype-design/Pyxis Full App.html` is huge and DesignCanvas-based,
+- `prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html` is huge and DesignCanvas-based,
 - a full rerun of everything is slow, noisy, and unnecessary while you are still fixing selectors.
 
 ## Practical rule
@@ -97,7 +100,7 @@ While authoring the new Full App baselines:
 Do **not** use the current all-config full runner as your main iteration loop:
 
 ```bash
-prototype-design/visual-diff/scripts/07-run-prototype-baseline-full.sh
+prototype-design/-deprecated/visual-diff-scripts/07-run-prototype-baseline-full.sh
 ```
 
 That script scans the whole config directory and reruns everything.
@@ -125,26 +128,26 @@ The baseline system already exists and is working.
 
 ```text
 prototype-design/visual-diff/
-prototype-design/visual-diff/public-components/
+prototype-design/-deprecated/visual-diff-native-configs/public-components/
 prototype-design/visual-diff/scripts/
 ```
 
 ### Generated baseline
 
 ```text
-prototype-design/baseline/
+prototype-design/-deprecated/generated-output/baseline/
 ```
 
 ### Browsable index
 
 ```text
-prototype-design/baseline/index.html
+prototype-design/-deprecated/generated-output/baseline/index.html
 ```
 
 Served locally with:
 
 ```bash
-prototype-design/visual-diff/scripts/13-serve-prototype-baseline-index.sh
+prototype-design/-deprecated/visual-diff-scripts/13-serve-prototype-baseline-index.sh
 ```
 
 URL:
@@ -175,13 +178,13 @@ Total:
 The foundations part of `Pyxis Full App.html` is already represented by:
 
 ```text
-prototype-design/visual-diff/prototype-foundations-system.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-foundations-system.css-visual-diff.yml
 ```
 
 and writes to:
 
 ```text
-prototype-design/baseline/artifacts/foundations/system/
+prototype-design/-deprecated/generated-output/baseline/artifacts/foundations/system/
 ```
 
 Do not replace or re-author that unless you discover a real defect.
@@ -190,7 +193,7 @@ Do not replace or re-author that unless you discover a real defect.
 
 # 3. What remains to extract from Pyxis Full App
 
-From `prototype-design/Pyxis Full App.html`, the remaining artboards are:
+From `prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html`, the remaining artboards are:
 
 ## Entry & onboarding
 
@@ -259,14 +262,14 @@ prepared HTML first
 ## Source files to inspect
 
 ```text
-prototype-design/Pyxis Full App.html
+prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
 prototype-design/screens/auth-dash.jsx
 prototype-design/screens/shows-bookings.jsx
 prototype-design/screens/roster.jsx
 prototype-design/screens/settings-discord.jsx
 prototype-design/lib/components.jsx
 prototype-design/design-canvas.jsx
-prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+prototype-design/-deprecated/visual-diff-scripts/11-generate-prototype-baseline-configs.mjs
 ```
 
 ---
@@ -291,7 +294,7 @@ Create clean standalone HTML pages for the non-foundations Full App screens, jus
 Create a new repo-root script, for example:
 
 ```text
-prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs
+prototype-design/-deprecated/visual-diff-scripts/15-generate-standalone-full-app-html.mjs
 ```
 
 Its job should be:
@@ -346,7 +349,7 @@ This keeps the Full App workflow consistent with what already works:
 Extend:
 
 ```text
-prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
+prototype-design/-deprecated/visual-diff-scripts/11-generate-prototype-baseline-configs.mjs
 ```
 
 with a new group of entries for the Full App screens.
@@ -356,18 +359,18 @@ with a new group of entries for the Full App screens.
 Use per-screen configs like:
 
 ```text
-prototype-design/visual-diff/prototype-full-app-login.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-setup.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-dashboard.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-shows.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-calendar.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-bookings.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-modal.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-artists.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-attendance.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-log.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-discord.css-visual-diff.yml
-prototype-design/visual-diff/prototype-full-app-settings.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-login.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-setup.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-dashboard.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-shows.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-calendar.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-bookings.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-modal.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-artists.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-attendance.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-log.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-discord.css-visual-diff.yml
+prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-settings.css-visual-diff.yml
 ```
 
 ## Suggested output directories
@@ -375,15 +378,15 @@ prototype-design/visual-diff/prototype-full-app-settings.css-visual-diff.yml
 Write them under:
 
 ```text
-prototype-design/baseline/artifacts/full-app/
+prototype-design/-deprecated/generated-output/baseline/artifacts/full-app/
 ```
 
 For example:
 
 ```text
-prototype-design/baseline/artifacts/full-app/login/
-prototype-design/baseline/artifacts/full-app/setup/
-prototype-design/baseline/artifacts/full-app/dashboard/
+prototype-design/-deprecated/generated-output/baseline/artifacts/full-app/login/
+prototype-design/-deprecated/generated-output/baseline/artifacts/full-app/setup/
+prototype-design/-deprecated/generated-output/baseline/artifacts/full-app/dashboard/
 ...
 ```
 
@@ -392,7 +395,7 @@ prototype-design/baseline/artifacts/full-app/dashboard/
 Use:
 
 ```yaml
-source_html: prototype-design/Pyxis Full App.html
+source_html: prototype-design/-deprecated/screenshots-and-imports/Pyxis Full App.html
 ```
 
 and a screen-specific `urlPath` like:
@@ -554,7 +557,7 @@ Use either the built-in help flow or the direct command:
 
 ```bash
 css-visual-diff html \
-  --config prototype-design/visual-diff/prototype-full-app-dashboard.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-dashboard.css-visual-diff.yml \
   --side original \
   --root \
   --output-file /tmp/prototype-full-app-dashboard-root.html
@@ -568,7 +571,7 @@ Use:
 
 ```bash
 css-visual-diff inspect \
-  --config prototype-design/visual-diff/prototype-full-app-dashboard.css-visual-diff.yml \
+  --config prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-dashboard.css-visual-diff.yml \
   --side original \
   --all-styles
 ```
@@ -604,7 +607,7 @@ Do not overload the current generic sample runner immediately.
 Instead, create a new script, for example:
 
 ```text
-prototype-design/visual-diff/scripts/16-run-full-app-screen-sample.sh
+prototype-design/-deprecated/visual-diff-scripts/16-run-full-app-screen-sample.sh
 ```
 
 Use it for a focused subset such as:
@@ -625,7 +628,7 @@ Why:
 This script should write to something like:
 
 ```text
-prototype-design/baseline/sample-full-app/
+prototype-design/-deprecated/generated-output/baseline/sample-full-app/
 ```
 
 This is much safer and faster than repeatedly invoking the global all-config full runner.
@@ -643,9 +646,9 @@ After you have:
 then rebuild the manifest and index:
 
 ```bash
-node prototype-design/visual-diff/scripts/11-generate-prototype-baseline-configs.mjs
-node prototype-design/visual-diff/scripts/12-build-prototype-baseline-index.mjs
-prototype-design/visual-diff/scripts/13-serve-prototype-baseline-index.sh
+node prototype-design/-deprecated/visual-diff-scripts/11-generate-prototype-baseline-configs.mjs
+node prototype-design/-deprecated/visual-diff-scripts/12-build-prototype-baseline-index.mjs
+prototype-design/-deprecated/visual-diff-scripts/13-serve-prototype-baseline-index.sh
 ```
 
 Review at:
@@ -692,7 +695,7 @@ If you were starting this tomorrow, do exactly this:
    ```
 3. Create:
    ```text
-   prototype-design/visual-diff/scripts/15-generate-standalone-full-app-html.mjs
+   prototype-design/-deprecated/visual-diff-scripts/15-generate-standalone-full-app-html.mjs
    ```
 4. Generate:
    ```text
@@ -700,7 +703,7 @@ If you were starting this tomorrow, do exactly this:
    ```
 5. Add one config only:
    ```text
-   prototype-design/visual-diff/prototype-full-app-login.css-visual-diff.yml
+   prototype-design/-deprecated/visual-diff-native-configs/prototype-full-app-login.css-visual-diff.yml
    ```
 6. Run only that config.
 7. Inspect PNG + prepared HTML.
@@ -718,8 +721,8 @@ This handoff is complete when the colleague can:
 
 - point at a clean standalone HTML page for each non-foundations Full App screen,
 - point at a canonical `prototype-design/visual-diff/*.css-visual-diff.yml` config for each screen,
-- open screen artifacts under `prototype-design/baseline/artifacts/full-app/...`,
-- inspect them in `prototype-design/baseline/index.html`,
+- open screen artifacts under `prototype-design/-deprecated/generated-output/baseline/artifacts/full-app/...`,
+- inspect them in `prototype-design/-deprecated/generated-output/baseline/index.html`,
 - and do all that **without** rerunning the already-existing public/mobile/foundations baseline set during the normal authoring loop.
 
 That last condition matters.
