@@ -153,11 +153,11 @@ function DashboardScreen() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
-        <Stat label="Upcoming" value={upcoming.length} sub="Next 60 days" accent={C.accent} />
-        <Stat label="Pending bookings" value={pending.length} sub="Awaiting review" trend="2 new today" accent={C.amber} />
-        <Stat label="Avg draw" value="84" sub="Last 6 shows" trend="↑ 12 vs. prior 6" accent={C.green} />
-        <Stat label="Capacity use" value="56%" sub="May 2025" accent={C.blue} />
+      <div data-section="dashboard-metrics" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 20 }}>
+        <Stat metricId="upcoming" label="Upcoming" value={upcoming.length} sub="Next 60 days" accent={C.accent} />
+        <Stat metricId="pending-bookings" label="Pending bookings" value={pending.length} sub="Awaiting review" trend="2 new today" accent={C.amber} />
+        <Stat metricId="avg-draw" label="Avg draw" value="84" sub="Last 6 shows" trend="↑ 12 vs. prior 6" accent={C.green} />
+        <Stat metricId="capacity-use" label="Capacity use" value="56%" sub="May 2025" accent={C.blue} />
       </div>
 
       {/* Two-col */}

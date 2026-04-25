@@ -157,8 +157,8 @@ const IconBtn = ({ icon, onClick, size = 30, tooltip, style }) => (
 
 /* ─────────── CARD ─────────── */
 
-const Card = ({ children, padding = 22, style, interactive }) => (
-  <div style={{
+const Card = ({ children, padding = 22, style, interactive, ...rest }) => (
+  <div {...rest} style={{
     background: C.surface, borderRadius: R.lg, border: `1px solid ${C.line}`,
     padding, boxShadow: S.sm, cursor: interactive ? "pointer" : "default",
     transition: "box-shadow .2s, transform .15s",
@@ -178,14 +178,20 @@ const CardHead = ({ title, action, subtitle, style }) => (
 
 /* ─────────── STAT TILE ─────────── */
 
-const Stat = ({ label, value, sub, trend, accent = C.accent }) => (
-  <Card padding={18} style={{ position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "absolute", left: 0, top: 14, bottom: 14, width: 2, background: accent, borderRadius: R.pill }} />
+const Stat = ({ label, value, sub, trend, accent = C.accent, metricId }) => (
+  <Card
+    padding={18}
+    data-pyxis-component="metric-card"
+    data-pyxis-part="root"
+    data-metric-card={metricId}
+    style={{ position: "relative", overflow: "hidden" }}
+  >
+    <div data-pyxis-component="metric-card" data-pyxis-part="accent" style={{ position: "absolute", left: 0, top: 14, bottom: 14, width: 2, background: accent, borderRadius: R.pill }} />
     <div style={{ paddingLeft: 8 }}>
-      <Eyebrow>{label}</Eyebrow>
-      <div className="px-serif" style={{ fontSize: 32, fontWeight: 500, lineHeight: 1, marginTop: 6, letterSpacing: "-0.02em" }}>{value}</div>
-      {sub && <div style={{ fontSize: 11.5, color: C.ink2, marginTop: 6 }}>{sub}</div>}
-      {trend && <div style={{ fontSize: 11, color: accent, marginTop: 4, fontWeight: 500 }}>{trend}</div>}
+      <Eyebrow data-pyxis-component="metric-card" data-pyxis-part="label">{label}</Eyebrow>
+      <div data-pyxis-component="metric-card" data-pyxis-part="value" className="px-serif" style={{ fontSize: 32, fontWeight: 500, lineHeight: 1, marginTop: 6, letterSpacing: "-0.02em" }}>{value}</div>
+      {sub && <div data-pyxis-component="metric-card" data-pyxis-part="caption" style={{ fontSize: 11.5, color: C.ink2, marginTop: 6 }}>{sub}</div>}
+      {trend && <div data-pyxis-component="metric-card" data-pyxis-part="trend" style={{ fontSize: 11, color: accent, marginTop: 4, fontWeight: 500 }}>{trend}</div>}
     </div>
   </Card>
 );
