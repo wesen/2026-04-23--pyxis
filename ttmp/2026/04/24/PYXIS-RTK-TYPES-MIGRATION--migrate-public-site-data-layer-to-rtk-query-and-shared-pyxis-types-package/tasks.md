@@ -139,7 +139,7 @@ Start here to establish the pattern before touching large organisms.
 ## B3 — Extract CSS for show-list and archive components
 
 - [ ] Extract `PubShowRow` styles into `PubShowRow.css` if the component remains canonical.
-- [ ] Extract `ArchiveShowRow` styles into `ArchiveShowRow.css`.
+- [x] Extract `ArchiveShowRow` styles into `ArchiveShowRow.css`.
 - [ ] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
 - [ ] Extract `ArchiveSearchFilters` styles into `ArchiveSearchFilters.css`.
 - [ ] Extract `ShowTile` styles into `ShowTile.css`.

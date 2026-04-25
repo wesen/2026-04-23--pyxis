@@ -36,4 +36,7 @@
 - Added `ShowTypeChips` part selectors for `chip`, active state via `data-state`, focus-visible styling, wrapped layout and theme override Storybook stories.
 - Validated `ShowTypeChips` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-type-chips-default.css-visual-diff.yml`; current pixel diff is `0.0102% | 4/39200`.
 - Completed the initial B2 small public molecule CSS extraction batch: `SafetyNote`, `ArchiveStats`, `TicketStub`, `LineupRow`, `YearGroup`, `Poster`, and `ShowTypeChips`.
+- Started B3 show/archive CSS extraction by extracting `ArchiveShowRow` styles into `web/packages/pyxis-components/src/public/ArchiveShowRow/ArchiveShowRow.css`.
+- Added `ArchiveShowRow` part selectors for `date`, `name`, `tag`, and `cta`, plus long-name and theme override Storybook stories.
+- Validated `ArchiveShowRow` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-show-row-default.css-visual-diff.yml`; current pixel diff is `0.2671% | 100/37440`.
 

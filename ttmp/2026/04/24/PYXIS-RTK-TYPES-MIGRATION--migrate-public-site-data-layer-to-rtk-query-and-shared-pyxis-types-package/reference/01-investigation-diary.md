@@ -433,3 +433,31 @@ ShowTypeChips
 ```
 
 Some components still have residual visual diff from pre-existing semantic/layout differences, but static inline styles have been extracted and all touched components passed typecheck plus their matching visual-diff configs.
+
+
+## Step 11: Extract `ArchiveShowRow` CSS
+
+### What I did
+
+- Started B3 show/archive CSS extraction.
+- Created `web/packages/pyxis-components/src/public/ArchiveShowRow/ArchiveShowRow.css`.
+- Moved root grid, border, typography, and recap-link styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `date`, `name`, `tag`, and `cta`.
+- Updated `ArchiveShowRow.tsx` to self-import CSS and use `clsx('pyxis-archive-show-row', className)`.
+- Added `LongName` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-show-row-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.2671% | 100/37440
+root      0.2671% | 100/37440
+```
+
+The config's root CSS diff compares the prototype wrapper selector to the React row anchor, so CSS properties such as block-vs-grid and padding differ even though the pixel diff is low.
