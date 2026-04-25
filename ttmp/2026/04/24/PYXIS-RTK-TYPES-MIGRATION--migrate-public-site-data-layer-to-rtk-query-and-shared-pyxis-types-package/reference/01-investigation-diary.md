@@ -1053,3 +1053,46 @@ All commands completed successfully.
 - `css-visual-diff run --config-dir` needs a consolidated summary mode.
 - Configs should warn when original/react selector scopes differ substantially.
 - React-before/after baseline mode would help refactor-safety workflows.
+
+
+## Step 33: Track A1 — add `pyxis-types` workspace package
+
+### What I did
+
+- Re-read the RTK Query / `pyxis-types` migration guide fully before starting data-layer work.
+- Ran baseline workspace typecheck.
+- Created `web/packages/pyxis-types` with:
+  - `package.json`,
+  - `tsconfig.json`,
+  - `tsconfig.build.json`,
+  - `src/public.ts`,
+  - `src/index.ts`.
+- Added public API/domain contracts to `pyxis-types`, including `Show`, `ArchivedShow`, `LineupEntry`, `ArchiveStats`, booking types, API error type, and the mock/admin-only `Artist`/`Submission` types that currently live in component mocks.
+- Added `pyxis-types` workspace dependencies to `pyxis-components` and `pyxis-user-site`.
+- Added TypeScript path mappings for `pyxis-types`.
+- Ran `pnpm install` from `web` so the lockfile reflects the new workspace package.
+
+### Commands
+
+```bash
+cd web && pnpm -r typecheck
+cd web && pnpm install
+cd web && pnpm --filter pyxis-types typecheck
+cd web && pnpm --filter pyxis-types build
+```
+
+### Issue encountered
+
+The first `pyxis-types` build failed with:
+
+```text
+tsconfig.build.json(3,3): error TS5096: Option 'allowImportingTsExtensions' can only be used when either 'noEmit' or 'emitDeclarationOnly' is set.
+```
+
+Cause: the package inherits `allowImportingTsExtensions` from the workspace root, but `pyxis-types` build emits JS and declarations.
+
+Fix: set `allowImportingTsExtensions: false` in `web/packages/pyxis-types/tsconfig.json`. The package does not use `.ts` import specifiers, so this is safe.
+
+### Result
+
+`pyxis-types` typecheck and build now pass.

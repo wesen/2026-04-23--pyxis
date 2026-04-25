@@ -12,6 +12,12 @@
       ],
       "pyxis-components/*": [
         "../pyxis-components/src/*"
+      ],
+      "pyxis-types": [
+        "../pyxis-types/src"
+      ],
+      "pyxis-types/*": [
+        "../pyxis-types/src/*"
       ]
     }
   },

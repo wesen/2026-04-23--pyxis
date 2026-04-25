@@ -107,4 +107,6 @@
 - Updated `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with `styleArchitecture` metadata for extracted public components and a deferred taxonomy note for `PubShowRow`.
 - Completed B8 ADR/documentation work: added theming ADR, taxonomy ADR, and a detailed CSS extraction postmortem.
 - Updated `docs/playbooks/05-bottom-up-component-visual-parity.md` with CSS extraction/theming workflow, Storybook theme story guidance, parity-map styleArchitecture guidance, and css-visual-diff improvement wishlist.
+- Started Track A. Added the `pyxis-types` workspace package with public API/domain contracts, package exports, typecheck/build scripts, workspace path mappings, and workspace dependencies from `pyxis-components` and `pyxis-user-site`.
+- Ran baseline `cd web && pnpm -r typecheck`, `pnpm --filter pyxis-types typecheck`, and `pnpm --filter pyxis-types build`. Fixed the initial build failure by overriding inherited `allowImportingTsExtensions` for the emitting package build.
 

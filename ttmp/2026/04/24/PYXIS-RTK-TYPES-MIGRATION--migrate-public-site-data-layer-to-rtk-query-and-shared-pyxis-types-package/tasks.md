@@ -11,9 +11,9 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## Shared Phase 0 — Orientation and safety checks
 
-- [ ] Read `design-doc/01-rtk-query-and-pyxis-types-migration-guide.md` fully before data-layer work.
+- [x] Read `design-doc/01-rtk-query-and-pyxis-types-migration-guide.md` fully before data-layer work.
 - [ ] Read `design-doc/02-public-component-css-extraction-and-theming-guide.md` fully before component styling work.
-- [ ] Run baseline checks from repo root: `cd web && pnpm -r typecheck`.
+- [x] Run baseline checks from repo root: `cd web && pnpm -r typecheck`.
 - [ ] Confirm current user-site Storybook still runs on port `6007` if page stories are needed.
 - [ ] Confirm component Storybook still runs on port `6006` for component visual work.
 - [ ] Confirm component Storybook should run from tmux: `cd web && pnpm --filter pyxis-components storybook`.
@@ -26,15 +26,15 @@ Keep the tracks in separate commits where possible. Do not mix RTK Query provide
 
 ## A1 — Add the shared `pyxis-types` workspace package
 
-- [ ] Create `web/packages/pyxis-types/package.json`.
-- [ ] Create `web/packages/pyxis-types/tsconfig.json` and `tsconfig.build.json` following workspace conventions.
-- [ ] Create `web/packages/pyxis-types/src/public.ts` with public API domain types.
-- [ ] Create `web/packages/pyxis-types/src/index.ts` that re-exports the public types.
-- [ ] Add package exports for `.` and optionally `./public`.
-- [ ] Add `pyxis-types` workspace dependency to `pyxis-components` if components/mocks import shared types.
-- [ ] Add `pyxis-types` workspace dependency to `pyxis-user-site`.
-- [ ] Run `cd web && pnpm --filter pyxis-types typecheck`.
-- [ ] Run `cd web && pnpm --filter pyxis-types build` if build scripts are added.
+- [x] Create `web/packages/pyxis-types/package.json`.
+- [x] Create `web/packages/pyxis-types/tsconfig.json` and `tsconfig.build.json` following workspace conventions.
+- [x] Create `web/packages/pyxis-types/src/public.ts` with public API domain types.
+- [x] Create `web/packages/pyxis-types/src/index.ts` that re-exports the public types.
+- [x] Add package exports for `.` and optionally `./public`.
+- [x] Add `pyxis-types` workspace dependency to `pyxis-components` if components/mocks import shared types.
+- [x] Add `pyxis-types` workspace dependency to `pyxis-user-site`.
+- [x] Run `cd web && pnpm --filter pyxis-types typecheck`.
+- [x] Run `cd web && pnpm --filter pyxis-types build` if build scripts are added.
 
 ## A2 — Move duplicated API/domain types to `pyxis-types`
 
