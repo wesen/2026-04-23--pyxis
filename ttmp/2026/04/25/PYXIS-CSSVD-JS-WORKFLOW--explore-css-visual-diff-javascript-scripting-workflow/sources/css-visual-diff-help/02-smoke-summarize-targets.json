@@ -1,0 +1,37 @@
+[
+{
+  "config": "prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml",
+  "page": "shows",
+  "priority": "tune-first",
+  "prototypeUrl": "http://localhost:7070/standalone/public/shows.html",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story"
+}
+, {
+  "config": "prototype-design/visual-diff/comparisons/public-pages/show-detail-desktop.css-visual-diff.yml",
+  "page": "show-detail",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/detail.html",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story"
+}
+, {
+  "config": "prototype-design/visual-diff/comparisons/public-pages/archive-desktop.css-visual-diff.yml",
+  "page": "archive",
+  "priority": "closest-to-acceptance",
+  "prototypeUrl": "http://localhost:7070/standalone/public/archive.html",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story"
+}
+, {
+  "config": "prototype-design/visual-diff/comparisons/public-pages/book-desktop.css-visual-diff.yml",
+  "page": "book",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/book.html",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story"
+}
+, {
+  "config": "prototype-design/visual-diff/comparisons/public-pages/about-desktop.css-visual-diff.yml",
+  "page": "about",
+  "priority": "second-pass",
+  "prototypeUrl": "http://localhost:7070/standalone/public/about.html",
+  "storybookUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story"
+}
+]
