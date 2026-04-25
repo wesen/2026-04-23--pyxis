@@ -134,4 +134,5 @@
 - [x] Add first YAML visual spec under `prototype-design/visual-diff/userland/specs`.
 - [x] Add `pyxis pages compare-spec` using `objectFromFile`.
 - [x] Validate Archive subset from YAML spec.
+- [x] Add full `compare-spec` suite runner and validate equivalence with registry-backed `compare-all`.
 - [ ] Decide whether YAML spec replaces `lib/registry.js` as source of truth.

@@ -2241,3 +2241,53 @@ Validate:
 prototype-design/visual-diff/userland/13-smoke-compare-spec-archive-filter.sh
 prototype-design/visual-diff/userland/01-smoke-list-targets.sh
 ```
+
+
+## Step 19: Validate full YAML spec suite equivalence
+
+I added a full-suite runner for the promoted YAML visual spec and compared its output against the registry-backed `compare-all` output.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue. Are we also going to tackle phase 6 at some point?" followed by "continue"
+
+**Assistant interpretation:** Continue the spec-driven workflow work, then proceed into Phase 6.
+
+**Inferred user intent:** Establish that the YAML spec is not just a smoke path before using it as the future source of truth. Also answer that Phase 6 is on the roadmap and should be started soon.
+
+### What I did
+
+Added:
+
+```text
+prototype-design/visual-diff/userland/14-run-compare-spec-public-pages.sh
+```
+
+Ran both full suites:
+
+```bash
+prototype-design/visual-diff/userland/11-run-compare-all-public-pages.sh
+prototype-design/visual-diff/userland/14-run-compare-spec-public-pages.sh
+```
+
+and compared the JSON summaries by page/section.
+
+### Result
+
+The registry-backed and YAML-backed full suites matched:
+
+```text
+pageCount: 5
+sectionCount: 13
+classificationCounts:
+  major-mismatch: 5
+  tune-required: 6
+  review: 2
+maxChangedPercent: 66.85658212560386
+```
+
+All section `changedPixels` and `changedPercent` values matched exactly.
+
+### What should be done next
+
+Yes, Phase 6 should be tackled next. The most useful first slice is semantic/snapshot diff tooling for a single section, because that will explain why large pixel diffs exist before we tune Shows.
