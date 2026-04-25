@@ -1175,7 +1175,7 @@ This preserves documentation value while making the active workflow boundary cle
 
 **Inferred user intent:** Avoid stale docs that send future developers to moved/deprecated YAML, HTML, PNG, MJS, and shell artifacts.
 
-**Commit (docs):** pending at diary-write time — intended message: "Mark old visual diff playbooks deprecated"
+**Commit (docs):** `d6225eb` — "Mark old visual diff playbooks deprecated"
 
 ### What I did
 
