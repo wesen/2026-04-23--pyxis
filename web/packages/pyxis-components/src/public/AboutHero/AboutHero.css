@@ -1,0 +1,5 @@
+/* AboutHero — about page hero heading. */
+:where([data-pyxis-component='about-hero'][data-pyxis-part='root']) { --pyxis-about-hero-accent: var(--color-accent); --pyxis-about-hero-muted: #8E887E; padding: 48px 0 32px; }
+:where([data-pyxis-component='about-hero'][data-pyxis-part='eyebrow']) { color: var(--pyxis-about-hero-muted); font-size: 11px; font-weight: var(--weight-semibold); letter-spacing: 0.14em; margin: 0 0 10px; text-transform: uppercase; }
+:where([data-pyxis-component='about-hero'][data-pyxis-part='title']) { color: var(--pyxis-about-hero-accent); font-family: var(--font-display); font-size: 42px; font-weight: var(--weight-bold); letter-spacing: -0.025em; line-height: 1.05; margin: 0; }
+:where([data-pyxis-component='about-hero'][data-pyxis-part='tagline']) { color: var(--pyxis-about-hero-accent); font-family: var(--font-display); font-size: 30px; font-style: italic; font-weight: var(--weight-regular); letter-spacing: -0.015em; line-height: 1.3; margin: 28px 0 0; }

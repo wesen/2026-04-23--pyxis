@@ -890,3 +890,34 @@ VenueCard       component 2.7831% | root 2.7831%
 ```
 
 These were architecture extraction passes, not final visual tuning passes.
+
+
+## Step 27: Extract `AboutHero`, `EthosGrid`, and `EthosStrip` CSS
+
+### What I did
+
+- Created CSS files and extracted static inline styles for:
+  - `AboutHero`
+  - `EthosGrid`
+  - `EthosStrip`
+- Added stable `data-pyxis-part` selectors for hero and ethos subparts.
+- Updated the components to self-import CSS and use `clsx`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config .../about-hero-default.css-visual-diff.yml
+css-visual-diff run --config .../ethos-grid-default.css-visual-diff.yml
+css-visual-diff run --config .../ethos-strip-default.css-visual-diff.yml
+```
+
+Typecheck passed. Current pixel diffs:
+
+```text
+AboutHero  component 0.0000% | root 10.5730%
+EthosGrid  component 5.9015% | root 5.9015%
+EthosStrip component 9.6481% | root 7.4975%
+```
+
+`AboutHero` component parity is exact; its root residual appears to be selector/context related. Ethos components still need later visual tuning/taxonomy decision.

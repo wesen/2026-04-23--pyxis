@@ -1,0 +1,7 @@
+/* EthosGrid — about-page ethos cards. */
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='root']) { --pyxis-ethos-accent: var(--color-accent); --pyxis-ethos-border: #EAE7E0; --pyxis-ethos-body: #4A463E; --pyxis-ethos-muted: #8E887E; border-top: 1px solid var(--pyxis-ethos-border); padding-top: 36px; }
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='heading']) { color: var(--pyxis-ethos-muted); font-size: 11px; font-weight: var(--weight-semibold); letter-spacing: 0.14em; margin-bottom: 28px; text-transform: uppercase; }
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='grid']) { display: grid; gap: 28px; grid-template-columns: repeat(3, 1fr); }
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='number']) { color: var(--pyxis-ethos-accent); font-family: var(--font-display); font-size: 44px; font-style: italic; font-weight: var(--weight-medium); letter-spacing: -0.02em; line-height: 1; }
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='title']) { color: var(--pyxis-ethos-accent); font-family: var(--font-display); font-size: 20px; font-weight: var(--weight-medium); letter-spacing: -0.015em; margin-top: 10px; }
+:where([data-pyxis-component='ethos-grid'][data-pyxis-part='description']) { color: var(--pyxis-ethos-body); font-size: var(--text-sm); line-height: 1.65; margin-top: var(--space-2); }

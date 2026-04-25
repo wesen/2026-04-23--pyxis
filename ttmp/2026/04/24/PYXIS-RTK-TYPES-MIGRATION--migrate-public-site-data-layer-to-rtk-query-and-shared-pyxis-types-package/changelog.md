@@ -92,4 +92,7 @@
 - Started B5 about/home/footer extraction with `AboutIntro`, `CollectiveList`, `FindUsBlock`, `SpaceInfo`, and `VenueCard`.
 - Extracted their static inline styles into component CSS files and added stable part selectors for headings/body/contact/list/card subparts.
 - Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `AboutIntro` component `4.3161%`, `CollectiveList` `5.1793%`, `FindUsBlock` `5.8667%`, `SpaceInfo` `2.4884%`, `VenueCard` `2.7831%`.
+- Continued B5 by extracting `AboutHero`, `EthosGrid`, and `EthosStrip` styles into component CSS files.
+- Added stable part selectors for hero eyebrow/title/tagline and ethos heading/grid/item/number/title/description subparts.
+- Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `AboutHero` component `0.0000%` (root `10.5730%` selector/context residual), `EthosGrid` `5.9015%`, `EthosStrip` component `9.6481%` / root `7.4975%`.
 
