@@ -461,3 +461,30 @@ root      0.2671% | 100/37440
 ```
 
 The config's root CSS diff compares the prototype wrapper selector to the React row anchor, so CSS properties such as block-vs-grid and padding differ even though the pixel diff is low.
+
+
+## Step 12: Extract `ArchiveShowList` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ArchiveShowList/ArchiveShowList.css`.
+- Updated `ArchiveShowList.tsx` to self-import CSS and use `clsx('pyxis-archive-show-list', className)`.
+- Pulled default show data into a named `defaultShows` constant for readability.
+- Kept `ArchiveShowList` intentionally thin: it owns list/container layout only and delegates row visuals to `ArchiveShowRow`.
+- Added `LongContent` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/archive-show-list-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.4888% | 549/112320
+root      0.4888% | 549/112320
+```
+
+The remaining root CSS diff is mostly wrapper/default inherited style differences; the pixel diff remains low.

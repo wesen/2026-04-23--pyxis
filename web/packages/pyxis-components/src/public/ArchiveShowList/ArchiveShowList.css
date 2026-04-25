@@ -1,0 +1,5 @@
+/* ArchiveShowList — list container for archived public show rows. */
+
+:where([data-pyxis-component='archive-show-list'][data-pyxis-part='root']) {
+  display: block;
+}

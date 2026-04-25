@@ -140,12 +140,12 @@ Start here to establish the pattern before touching large organisms.
 
 - [ ] Extract `PubShowRow` styles into `PubShowRow.css` if the component remains canonical.
 - [x] Extract `ArchiveShowRow` styles into `ArchiveShowRow.css`.
-- [ ] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
+- [x] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
 - [ ] Extract `ArchiveSearchFilters` styles into `ArchiveSearchFilters.css`.
 - [ ] Extract `ShowTile` styles into `ShowTile.css`.
 - [ ] Extract `ShowGrid` styles into `ShowGrid.css`.
 - [ ] Ensure `ShowGrid` owns only layout and does not duplicate `ShowTile` internals.
-- [ ] Ensure `ArchiveShowList` owns only list layout and does not duplicate `ArchiveShowRow` internals.
+- [x] Ensure `ArchiveShowList` owns only list layout and does not duplicate `ArchiveShowRow` internals.
 - [ ] Add long-title/long-genre Storybook cases where wrapping matters.
 - [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
 - [ ] Run matching visual-diff configs for touched show/archive components.

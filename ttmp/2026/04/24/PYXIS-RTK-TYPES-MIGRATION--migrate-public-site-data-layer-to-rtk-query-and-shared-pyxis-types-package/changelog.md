@@ -39,4 +39,8 @@
 - Started B3 show/archive CSS extraction by extracting `ArchiveShowRow` styles into `web/packages/pyxis-components/src/public/ArchiveShowRow/ArchiveShowRow.css`.
 - Added `ArchiveShowRow` part selectors for `date`, `name`, `tag`, and `cta`, plus long-name and theme override Storybook stories.
 - Validated `ArchiveShowRow` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-show-row-default.css-visual-diff.yml`; current pixel diff is `0.2671% | 100/37440`.
+- Extracted `ArchiveShowList` container styling into `web/packages/pyxis-components/src/public/ArchiveShowList/ArchiveShowList.css`.
+- Refactored `ArchiveShowList` defaults into a named constant and kept the list container responsible only for layout, delegating row visuals to `ArchiveShowRow`.
+- Added long-content and theme override Storybook stories for `ArchiveShowList`.
+- Validated `ArchiveShowList` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-show-list-default.css-visual-diff.yml`; current pixel diff is `0.4888% | 549/112320`.
 
