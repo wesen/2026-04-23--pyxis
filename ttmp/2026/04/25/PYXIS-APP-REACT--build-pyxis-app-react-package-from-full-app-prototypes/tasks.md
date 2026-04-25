@@ -468,56 +468,57 @@ This phase is also a **hard gate** before Phase 7. Prefer a Dashboard section th
 
 Recommended section: `dashboard-metrics`.
 
-- [ ] Confirm desktop prototype has a stable selector for the metrics section.
-- [ ] Confirm React has `data-section="dashboard-metrics"`.
-- [ ] Confirm the section contains comparable data/counts on both sides.
-- [ ] If data differs, adjust mock data/story args before tuning CSS.
+- [x] Confirm desktop prototype has a stable selector for the metrics section.
+- [x] Confirm React has `data-section="dashboard-metrics"`.
+- [x] Confirm the section contains comparable data/counts on both sides.
+- [x] If data differs, adjust mock data/story args before tuning CSS.
 
 ### Prototype section selectors
 
-- [ ] Add `data-section="dashboard-metrics"` to the prototype dashboard metric-card group.
-- [ ] Add or verify `data-section="dashboard-summary"` on the enclosing dashboard summary area.
-- [ ] Add `data-section="dashboard-upcoming"` and `data-section="dashboard-activity"` only if they can be done behavior-neutrally in the same selector pass.
-- [ ] Verify the standalone desktop dashboard still renders.
+- [x] Add `data-section="dashboard-metrics"` to the prototype dashboard metric-card group.
+- [ ] Add or verify `data-section="dashboard-summary"` on the enclosing dashboard summary area. (deferred; Phase 6B proved the metrics section only)
+- [ ] Add `data-section="dashboard-upcoming"` and `data-section="dashboard-activity"` only if they can be done behavior-neutrally in the same selector pass. (deferred)
+- [x] Verify the standalone desktop dashboard still renders.
 
 ### Visual spec correction
 
-- [ ] Update `app.pages.desktop.visual.yml` so the dashboard metrics section compares:
-  - [ ] prototype `[data-section="dashboard-metrics"]`,
-  - [ ] React `[data-section="dashboard-metrics"]`.
-- [ ] Add an optional mobile metrics target only if the mobile prototype has a comparable section.
-- [ ] Run `refresh-spec-mirrors.py`.
-- [ ] Add a ticket-local script such as `scripts/04-smoke-compare-dashboard-metrics.sh`.
-- [ ] Store artifacts under `various/06-css-loop-dashboard-metrics/`.
+- [x] Update `app.pages.desktop.visual.yml` so the dashboard metrics section compares:
+  - [x] prototype `[data-section="dashboard-metrics"]`,
+  - [x] React `[data-section="dashboard-metrics"]`.
+- [x] Add an optional mobile metrics target only if the mobile prototype has a comparable section. (not added; desktop proof only)
+- [x] Run `refresh-spec-mirrors.py`.
+- [x] Add a ticket-local script such as `scripts/04-smoke-compare-dashboard-metrics.sh`.
+- [x] Store artifacts under `various/06-css-loop-dashboard-metrics/`.
 
 ### Inspect-first validation
 
-- [ ] Run the focused dashboard metrics comparison.
-- [ ] Inspect the individual crop files `left_region.png` and `right_region.png` first.
-- [ ] Use the `read` tool to inspect those individual images; do not use `understand_image` for this workflow.
-- [ ] Do not validate from the conjoined/combined `diff_comparison.png`; use it only after the individual crops are understood.
-- [ ] Once the individual crops are close, inspect pixel-diff artifacts such as `diff_only.png` to identify residual drift.
-- [ ] Confirm both crops are the metrics section rather than the full page.
-- [ ] Confirm region sizes are close enough for pixel diff to be meaningful.
-- [ ] Record crop dimensions and first result in the diary.
+- [x] Run the focused dashboard metrics comparison.
+- [x] Inspect the individual crop files `left_region.png` and `right_region.png` first.
+- [x] Use the `read` tool to inspect those individual images; do not use `understand_image` for this workflow.
+- [x] Do not validate from the conjoined/combined `diff_comparison.png`; use it only after the individual crops are understood.
+- [x] Once the individual crops are close, inspect pixel-diff artifacts such as `diff_only.png` to identify residual drift.
+- [x] Confirm both crops are the metrics section rather than the full page.
+- [x] Confirm region sizes are close enough for pixel diff to be meaningful.
+- [x] Record crop dimensions and first result in the diary.
 
 ### Improvement loop
 
 Run at least two iterations:
 
-- [ ] Iteration 1: adjust layout/style based on real section diff evidence.
-- [ ] Rerun focused comparison.
-- [ ] Inspect crop and diff artifacts.
-- [ ] Iteration 2: adjust or document accepted differences.
-- [ ] Rerun focused comparison.
-- [ ] Record before/after metrics and accepted differences.
+- [x] Iteration 1: adjust layout/style based on real section diff evidence.
+- [x] Rerun focused comparison.
+- [x] Inspect crop and diff artifacts.
+- [x] Iteration 2: adjust or document accepted differences.
+- [x] Rerun focused comparison.
+- [x] Record before/after metrics and accepted differences.
 
 ### Acceptance criteria
 
-- [ ] The page-section comparison uses like-for-like crops.
-- [ ] The loop can guide a concrete CSS/layout decision.
-- [ ] The final section result is either accepted/review-band or explicitly deferred with evidence.
-- [ ] The workflow is documented enough that Phase 7 can reuse it for the full Dashboard page.
+- [x] The page-section comparison uses like-for-like crops.
+- [x] The loop can guide a concrete CSS/layout decision.
+- [x] The final section result is either accepted/review-band or explicitly deferred with evidence.
+- [x] Do not chase perfection when individual crops are close and remaining differences are plausibly typography, anti-aliasing, or subtle rendering drift.
+- [x] The workflow is documented enough that Phase 7 can reuse it for the full Dashboard page.
 - [ ] Commit: `Prove pyxis app dashboard section visual loop`.
 
 ---
@@ -526,7 +527,7 @@ Run at least two iterations:
 
 Goal: turn the proven loop into a repeatable short runbook before scaling to pages.
 
-- [ ] Add a ticket document `playbooks/02-pyxis-app-css-visual-improvement-loop.md` or a focused section in the existing intern playbook.
+- [x] Add a ticket document `playbooks/02-pyxis-app-css-visual-improvement-loop.md` or a focused section in the existing intern playbook.
 - [ ] Document the required order:
   1. selector verification,
   2. individual crop inspection with the `read` tool (`left_region.png`, then `right_region.png`),
@@ -536,15 +537,15 @@ Goal: turn the proven loop into a repeatable short runbook before scaling to pag
   6. rerun,
   7. diary/changelog update,
   8. commit.
-- [ ] Include exact commands for MetricCard and dashboard metrics.
+- [x] Include exact commands for MetricCard and dashboard metrics.
 - [ ] Include screenshots/artifact paths from the successful loop.
-- [ ] Document failure modes:
-  - [ ] full-page-vs-component crop mismatch,
-  - [ ] Storybook wrapper padding changing crop bounds,
-  - [ ] accidentally judging from conjoined `diff_comparison.png` instead of individual crops,
-  - [ ] mock data mismatch,
-  - [ ] missing prototype selectors,
-  - [ ] generated artifacts accidentally landing in active source paths.
+- [x] Document failure modes:
+  - [x] full-page-vs-component crop mismatch,
+  - [x] Storybook wrapper padding changing crop bounds,
+  - [x] accidentally judging from conjoined `diff_comparison.png` instead of individual crops,
+  - [x] mock data mismatch,
+  - [x] missing prototype selectors,
+  - [x] generated artifacts accidentally landing in active source paths.
 - [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` with a short pointer to the pyxis-app loop once it is proven.
 - [ ] Commit: `Document pyxis app css visual improvement loop`.
 

@@ -240,8 +240,12 @@ async function compareTarget(target, options) {
       waitMs: target.waitMs,
       name: target.page + '-storybook',
     })
-    for (var i = 0; i < target.sections.length; i++) {
-      var section = target.sections[i]
+    var sections = target.sections || []
+    if (options.section) {
+      sections = sections.filter(function (section) { return section.name === options.section })
+    }
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i]
       await waitForLocator(leftPage, section.original, { visible: true })
       await waitForLocator(rightPage, section.react, { visible: true })
       var artifactDir = catalog.artifactDir(section.name)
@@ -317,6 +321,7 @@ async function compareAllTargets(targets, options) {
       outDir: pageOutDir,
       threshold: options.threshold || 30,
       inspect: options.inspect || 'rich',
+      section: options.section || '',
     })
     var run = pageResult[0]
     pageRuns.push(run)

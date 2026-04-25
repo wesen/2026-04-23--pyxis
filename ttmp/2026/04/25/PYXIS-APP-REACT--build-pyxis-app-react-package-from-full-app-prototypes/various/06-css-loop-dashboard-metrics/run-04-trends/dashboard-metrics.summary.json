@@ -1,0 +1,33 @@
+[
+{
+  "classificationCounts": {
+    "review": 1
+  },
+  "jsonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-04-trends/compare-all-output.json",
+  "markdownPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-04-trends/01-suite-summary.md",
+  "maxChangedPercent": 7.44485294117647,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "review"
+  },
+  "rows": [
+    {
+      "changedPercent": 7.44485294117647,
+      "changedPixels": 9801,
+      "classification": "review",
+      "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-04-trends/dashboard/artifacts/metrics/diff_only.png",
+      "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-04-trends/dashboard/artifacts/metrics/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-metrics\"]",
+      "page": "dashboard",
+      "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-04-trends/dashboard/artifacts/metrics/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-metrics\"]",
+      "section": "metrics",
+      "totalPixels": 131648,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

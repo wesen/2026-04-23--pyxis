@@ -720,3 +720,161 @@ Run summary:
 | `run-03` | Computed-style color/font/radius experiment | `4.1157%` | `1293/31416` | Worse; do not keep all computed-style changes. |
 | `run-04` | Border-radius experiment | `4.1508%` | `1304/31416` | Worse. |
 | `run-05-final` | Reverted to best tuned shape | `3.7242%` | `1170/31416` | Final Phase 6A result. |
+
+## Step 8: Prove the dashboard metrics section loop and compact compare-spec output
+
+I continued into Phase 6B and also improved the JS userland output. The dashboard metrics comparison now runs as a focused section-only comparison using `pyxis pages compare-spec --section metrics --summary`, which prints a compact operator summary while preserving the full `compare-all-output.json` and per-section artifacts on disk.
+
+The section loop is proven enough to proceed: the comparison uses like-for-like metrics section crops, individual crops were inspected with `read`, `diff_only.png` was used only after the crops were comparable, and the final section result is in the `review` band.
+
+### Prompt Context
+
+**User prompt (verbatim):** "can we potentially condense the json output of the tool ? or do you need all that information?"
+
+**Assistant interpretation:** Reduce noisy terminal output from css-visual-diff while keeping full artifacts available when needed.
+
+**Inferred user intent:** Make repeated visual-loop runs easier to scan during iterative tuning.
+
+**User prompt (verbatim):** "we can also modify the js originally no and add a jsverb flag?"
+
+**Assistant interpretation:** Prefer improving the JS userland verb itself, not only wrapping output with shell `jq`.
+
+**Inferred user intent:** Make compact summaries a first-class workflow option for future runs.
+
+**User prompt (verbatim):** "make a note going forward to adjust the JS when you think you are seeing too much useless information in the tool output. because we will be iterating on its output a lot, we want to see all the information needed, but no more. and we can always use the full information if we think we are missing something. Store that in your runbook.
+
+continue"
+
+**Assistant interpretation:** Record a durable rule in the runbook: tune JS verb output when it is noisy, print only the decision-critical summary, and keep full output on disk.
+
+**Inferred user intent:** Establish a feedback loop for the tooling UX itself while continuing implementation.
+
+**Commit (code/docs):** pending at diary write time — intended milestone: `Prove pyxis app dashboard section visual loop`
+
+### What I did
+
+- Added `--section` support to the JS userland `compare-spec` path:
+  - `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`
+  - `prototype-design/visual-diff/userland/lib/compare-region.js`
+- Added `--summary` support to `pyxis pages compare-spec`.
+- Updated ticket scripts to use the JS summary flag instead of shell-side JSON filtering.
+- Added runbook:
+  - `playbooks/02-pyxis-app-css-visual-improvement-loop.md`
+- Stored the user’s tooling-output rule in the runbook: if the command prints too much useless information, update the JS verb/summary output and keep full JSON artifacts on disk.
+- Updated React dashboard metrics data so it matches the prototype section more closely:
+  - labels: `Upcoming`, `Pending bookings`, `Avg draw`, `Capacity use`,
+  - values: `6`, `3`, `84`, `56%`,
+  - captions/trends aligned with the prototype.
+- Added `trend` support to React `MetricCard`.
+- Ran dashboard metrics comparisons and inspected individual crops.
+
+### Why
+
+- The raw compare-spec output was too verbose for iterative use.
+- Phase 6B requires a focused page-section proof, not a full page run.
+- The team will run this loop many times, so operator output needs to remain readable.
+
+### What worked
+
+- `--section metrics --summary` now prints only the decision-critical data:
+  - `classificationCounts`,
+  - `maxChangedPercent`,
+  - row `changedPercent` / pixels,
+  - selectors,
+  - individual crop and `diff_only` paths.
+- Full JSON is still available at the emitted `jsonPath`.
+- Run 03/04 generated only one section row instead of page + summary + metrics noise.
+- Individual crop inspection confirmed the section crops are comparable and are the metrics row, not full pages.
+- Final useful section result after layout/data alignment:
+  - `run-04-trends`,
+  - changed percent: `7.4449%`,
+  - changed pixels: `9801/131648`,
+  - classification: `review`.
+
+### What didn't work
+
+- My first attempt to pass `--section metrics` failed because the JS verb did not support it yet:
+
+```text
+Error: unknown flag: --section
+```
+
+I fixed this by adding the flag to `compareSpec` and filtering sections in `compareTarget`.
+
+- A pure data/trend alignment made the visible crop closer but did not reduce the pixel percentage compared to run 02 (`7.3864%` → `7.4449%`) because adding trend text also adds more comparable text pixels. I kept it because it aligns the section semantically with the prototype, which is more important for page-section proof.
+
+### What I learned
+
+- Tool output is part of the development surface. When it gets noisy, improving the JS verb is better than repeatedly post-processing at the shell layer.
+- `--summary` is enough for the normal loop; full JSON should be opened only when investigating missing details.
+- Section-level visual proof can succeed even when full-page and summary sections remain major mismatches, as long as the focused section crops are comparable.
+
+### What was tricky to build
+
+- `compare-spec` previously filtered by page/priority only. Adding `section` required passing the option through `verbs/pyxis-pages.js`, `compareSpec`, `compareAllTargets`, and `compareTarget` without breaking existing full-page suite behavior.
+- The script should not discard full output; it now relies on the suite’s `jsonPath` plus per-section artifacts instead of printing the full object.
+- The section diff still includes residual text/edge differences, but crop evidence shows the comparison is useful and bounded.
+
+### What warrants a second pair of eyes
+
+- Review the new `--summary` schema in `pyxis-pages.js` and decide if it should include `bounds` by default.
+- Review whether `--section` should error when no section matches instead of returning an empty section suite.
+- Review whether the dashboard metrics final `review` band is good enough for the proof phase before full Dashboard work.
+
+### What should be done in the future
+
+- Use `--summary` for normal repeated visual runs.
+- Add summary fields only when a repeated decision needs them; do not let compact output grow into the full JSON again.
+- Open full JSON only when the compact summary is insufficient.
+- Carry the same focused-output approach into future page specs and scripts.
+
+### Code review instructions
+
+- Review JS userland changes first:
+  - `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`,
+  - `prototype-design/visual-diff/userland/lib/compare-region.js`.
+- Review the runbook note:
+  - `ttmp/.../playbooks/02-pyxis-app-css-visual-improvement-loop.md`.
+- Review dashboard metrics React changes:
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx`,
+  - `web/packages/pyxis-app/src/components/molecules/MetricCard.tsx`,
+  - `web/packages/pyxis-app/src/components/molecules/MetricCard.css`,
+  - `web/packages/pyxis-app/src/components/shell/AppShell.css`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/04-smoke-compare-dashboard-metrics.sh run-review
+```
+
+### Technical details
+
+Key command now supported:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section metrics \
+  --summary \
+  --outDir ttmp/.../various/06-css-loop-dashboard-metrics/run-name \
+  --output json
+```
+
+Run summary:
+
+| Run | Purpose | Changed percent | Changed pixels | Notes |
+|---|---:|---:|---:|---|
+| `run-01` | First metrics section run, before shell width alignment | `9.3145%` | `12237/131376` | Section crop valid; width mismatch. |
+| `run-02` | Shell/content width aligned | `7.3864%` | `9724/131648` | Better bounds and review-band result. |
+| `run-03-summary-flag` | First JS `--summary` + `--section` proof | `7.3864%` | `9724/131648` | Compact terminal output works. |
+| `run-04-trends` | Semantic data/trend alignment | `7.4449%` | `9801/131648` | Final proof result; crops semantically match. |
+
+### Addendum: Stop when the crop is close enough
+
+The user clarified that we do not need to chase perfect pixel parity, especially when individual crops look close and the remaining differences are likely typography, anti-aliasing, gradients, shadows, or other browser rendering details. I added this rule to the Phase 6B acceptance criteria and to the CSS visual improvement loop runbook.
+
+For the dashboard metrics section, the final `run-08-final` crops are close enough for the proof phase: the content, layout, bounds, and data line up, and the remaining `7.4449%` review-band diff is mostly text/edge pixels visible in `diff_only.png`. This is a good point to stop and proceed rather than overfit component CSS to one screenshot.

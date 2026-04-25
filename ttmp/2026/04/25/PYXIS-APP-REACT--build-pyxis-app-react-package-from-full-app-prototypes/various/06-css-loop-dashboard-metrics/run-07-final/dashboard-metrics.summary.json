@@ -1,0 +1,73 @@
+[
+{
+  "classificationCounts": {
+    "review": 1
+  },
+  "jsonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/compare-all-output.json",
+  "markdownPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/01-suite-summary.md",
+  "maxChangedPercent": 8.994340639597556,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "review"
+  },
+  "rows": [
+    {
+      "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/compare.json",
+      "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-metrics-grid"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 2.25,
+          "width": 2,
+          "x": -1,
+          "y": -185.09375
+        },
+        "left": {
+          "height": 135.5,
+          "width": 966,
+          "x": 247,
+          "y": 299.390625
+        },
+        "normalizedHeight": 138,
+        "normalizedWidth": 968,
+        "right": {
+          "height": 137.75,
+          "width": 968,
+          "x": 246,
+          "y": 114.296875
+        }
+      },
+      "changedPercent": 8.994340639597556,
+      "changedPixels": 12015,
+      "classification": "review",
+      "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/diff_comparison.png",
+      "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/diff_only.png",
+      "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-metrics\"]",
+      "page": "dashboard",
+      "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-07-final/dashboard/artifacts/metrics/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-metrics\"]",
+      "section": "metrics",
+      "styleChangeCount": 0,
+      "styleDiffs": [],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 133584,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

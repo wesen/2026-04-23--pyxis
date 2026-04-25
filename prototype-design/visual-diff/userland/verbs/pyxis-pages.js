@@ -5,6 +5,7 @@ __package__({
 })
 
 var lib = require('../lib/index.js')
+var fs = require('fs')
 
 function listTargets(values) {
   return lib.registry.flattenTargets({
@@ -133,10 +134,120 @@ function specDefaults(spec) {
   return (spec && spec.defaults) || spec || {}
 }
 
+function artifactJsonFromRow(row) {
+  try {
+    if (!row || !row.artifactJson) return null
+    var text = fs.readFileSync ? fs.readFileSync(row.artifactJson, 'utf8') : ''
+    return text ? JSON.parse(String(text)) : null
+  } catch (err) {
+    return null
+  }
+}
+
+function styleDiffsFromRow(row) {
+  var artifact = artifactJsonFromRow(row)
+  var changes = row && row.summary && row.summary.style && row.summary.style.changes
+  if (!changes) changes = row && row.summary && row.summary.styles
+  if (!changes) changes = artifact && artifact.styles
+  if (!changes || !changes.map) return []
+  return changes.map(function (change) {
+    return {
+      property: change.property || change.name || '',
+      left: change.left,
+      right: change.right,
+    }
+  })
+}
+
+function attributeDiffsFromRow(row) {
+  var artifact = artifactJsonFromRow(row)
+  var changes = row && row.summary && row.summary.attributes
+  if (!changes) changes = artifact && artifact.attributes
+  if (!changes || !changes.map) return []
+  return changes.filter(function (change) { return change.changed !== false }).map(function (change) {
+    return {
+      attribute: change.name || '',
+      left: change.left,
+      right: change.right,
+    }
+  })
+}
+
+function textSummaryFromRow(row) {
+  var artifact = artifactJsonFromRow(row)
+  var text = row && row.summary && row.summary.text
+  if (!text) text = artifact && artifact.text
+  if (!text) return { changed: row ? row.textChanged : undefined }
+  var summary = { changed: !!text.changed }
+  if (text.changed) {
+    summary.left = text.left
+    summary.right = text.right
+  }
+  return summary
+}
+
+function boundsSummaryFromRow(row) {
+  var bounds = row && row.bounds
+  if (!bounds) return undefined
+  return {
+    changed: !!bounds.changed,
+    left: bounds.left,
+    right: bounds.right,
+    delta: bounds.delta,
+    normalizedWidth: row.normalizedWidth,
+    normalizedHeight: row.normalizedHeight,
+  }
+}
+
+function summarizeCompareSpec(result) {
+  return (result || []).map(function (suite) {
+    return {
+      pageCount: suite.pageCount,
+      sectionCount: suite.sectionCount,
+      maxChangedPercent: suite.maxChangedPercent,
+      classificationCounts: suite.classificationCounts,
+      policy: suite.policy ? {
+        ok: suite.policy.ok,
+        worstClassification: suite.policy.worstClassification,
+        failureCount: suite.policy.failures ? suite.policy.failures.length : 0,
+      } : undefined,
+      jsonPath: suite.jsonPath,
+      markdownPath: suite.markdownPath,
+      rows: (suite.rows || []).map(function (row) {
+        return {
+          page: row.page,
+          variant: row.variant,
+          section: row.section,
+          classification: row.classification,
+          changedPercent: row.changedPercent,
+          changedPixels: row.changedPixels,
+          totalPixels: row.totalPixels,
+          threshold: row.threshold,
+          leftSelector: row.leftSelector,
+          rightSelector: row.rightSelector,
+          bounds: boundsSummaryFromRow(row),
+          text: textSummaryFromRow(row),
+          styleChangeCount: styleDiffsFromRow(row).length,
+          styleDiffs: styleDiffsFromRow(row),
+          attributeChangeCount: attributeDiffsFromRow(row).length,
+          attributeDiffs: attributeDiffsFromRow(row),
+          artifactJson: row.artifactJson,
+          artifactMarkdown: row.artifactMarkdown,
+          leftRegionPath: row.leftRegionPath,
+          rightRegionPath: row.rightRegionPath,
+          diffOnlyPath: row.diffOnlyPath,
+          diffComparisonPath: row.diffComparisonPath,
+        }
+      }),
+    }
+  })
+}
+
 async function compareSpec(spec, values) {
   var defaults = specDefaults(spec)
-  return await lib.compareRegion.compareSpec(spec, {
+  var result = await lib.compareRegion.compareSpec(spec, {
     page: values.page || '',
+    section: values.section || '',
     variant: values.variant || defaults.variant || 'desktop',
     priority: values.priority || '',
     outDir: values.outDir || '',
@@ -146,6 +257,7 @@ async function compareSpec(spec, values) {
     maxChangedPercent: values.maxChangedPercent || (spec && spec.maxChangedPercent),
     maxPolicyBand: values.maxPolicyBand || (spec && spec.maxPolicyBand) || '',
   })
+  return values.summary ? summarizeCompareSpec(result) : result
 }
 
 __verb__('compareSpec', {
@@ -156,6 +268,8 @@ __verb__('compareSpec', {
     spec: { argument: true, type: 'objectFromFile', required: true, help: 'JSON/YAML visual spec with pages and sections' },
     values: { bind: 'all' },
     page: { type: 'string', default: '', help: 'Optional page filter for smoke/debug runs' },
+    section: { type: 'string', default: '', help: 'Optional section filter within matching pages, e.g. metrics' },
+    summary: { type: 'bool', default: false, help: 'Return compact operator summary instead of the full nested result' },
     variant: { type: 'string', default: '', help: 'Optional variant override; defaults to spec.variant or desktop' },
     priority: { type: 'string', default: '', help: 'Optional priority filter' },
     outDir: { type: 'string', default: '', help: 'Output directory for suite artifacts' },

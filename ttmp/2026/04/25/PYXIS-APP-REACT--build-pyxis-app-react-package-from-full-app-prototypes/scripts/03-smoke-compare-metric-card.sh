@@ -7,11 +7,14 @@ SPEC="$ROOT/prototype-design/visual-diff/userland/specs/app.components.visual.ym
 
 cd "$ROOT"
 mkdir -p "$OUT_DIR"
+SUMMARY_JSON="$OUT_DIR/metric-card.summary.json"
+
 css-visual-diff verbs \
   --repository prototype-design/visual-diff/userland \
   pyxis pages compare-spec \
   "$SPEC" \
   --page metric-card \
+  --summary \
   --outDir "$OUT_DIR" \
   --output json \
-  | tee "$OUT_DIR/metric-card.json"
+  | tee "$SUMMARY_JSON"

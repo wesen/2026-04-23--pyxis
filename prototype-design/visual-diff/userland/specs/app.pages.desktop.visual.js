@@ -54,6 +54,11 @@ module.exports = {
           "name": "summary",
           "original": "[data-page=\"dashboard\"]",
           "react": "[data-section=\"dashboard-summary\"]"
+        },
+        {
+          "name": "metrics",
+          "original": "[data-section=\"dashboard-metrics\"]",
+          "react": "[data-section=\"dashboard-metrics\"]"
         }
       ]
     }
