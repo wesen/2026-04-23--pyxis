@@ -1,5 +1,7 @@
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
 import { Button } from '../../atoms/Button';
+import './BookingSuccess.css';
 
 export type BookingSuccessProps = {
   artistName?: string;
@@ -8,18 +10,30 @@ export type BookingSuccessProps = {
 };
 
 export const BookingSuccess = ({ artistName, onSubmitAnother, className }: BookingSuccessProps) => (
-  <div {...pyxisPart('booking-success')} className={className} style={{ textAlign: 'center', padding: '48px 24px' }}>
-    <div style={{ width: 56, height: 56, background: 'var(--color-success-subtle)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-      <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="var(--color-success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <div {...pyxisPart('booking-success')} className={clsx('pyxis-booking-success', className)}>
+    <div className="pyxis-booking-success__icon" {...pyxisPart('booking-success', 'icon')}>
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="var(--color-success)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
         <path d="m4 10.5 4 4 8-9" />
       </svg>
     </div>
-    <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 500, margin: '0 0 8px' }}>
+    <h2 className="pyxis-booking-success__title" {...pyxisPart('booking-success', 'title')}>
       Inquiry sent{artistName ? ` — ${artistName}` : ''}
     </h2>
-    <p style={{ color: 'var(--color-text-secondary)', margin: '0 0 24px' }}>
+    <p className="pyxis-booking-success__message" {...pyxisPart('booking-success', 'message')}>
       We'll be in touch within a week or two. Check your email for a confirmation.
     </p>
-    <Button variant="outline" onClick={onSubmitAnother}>Submit another</Button>
+    <div className="pyxis-booking-success__actions" {...pyxisPart('booking-success', 'actions')}>
+      <Button variant="outline" onClick={onSubmitAnother}>Submit another</Button>
+    </div>
   </div>
 );

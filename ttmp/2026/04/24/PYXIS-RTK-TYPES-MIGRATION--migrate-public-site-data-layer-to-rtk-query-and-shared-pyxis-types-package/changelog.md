@@ -81,4 +81,7 @@
 - Extracted `BookingRules` styles into `web/packages/pyxis-components/src/public/BookingRules/BookingRules.css`.
 - Added part selectors for `title` and `body`, plus narrow and theme override Storybook stories.
 - Validated `BookingRules` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-rules-default.css-visual-diff.yml`; current pixel diff is `2.4789% | 1174/47360`.
+- Extracted `BookingSuccess` styles into `web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.css`.
+- Added part selectors for `icon`, `title`, `message`, and `actions`, plus artist and narrow Storybook stories.
+- Validated `BookingSuccess` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-success-default.css-visual-diff.yml`; current pixel diff is `component 7.3591% | 10401/141336`, `root 9.3157% | 11816/126840`.
 

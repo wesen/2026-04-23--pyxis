@@ -795,3 +795,30 @@ root      2.4789% | 1174/47360
 ```
 
 The config reports width/height differences because the prototype selector is `> *` while the React selector is the component root in its fixture context.
+
+
+## Step 24: Extract `BookingSuccess` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.css`.
+- Moved success icon, title, message, and root layout styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `icon`, `title`, `message`, and `actions`.
+- Updated `BookingSuccess.tsx` to self-import CSS and use `clsx('pyxis-booking-success', className)`.
+- Added `WithArtist` and `Narrow` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-success-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 7.3591% | 10401/141336
+root      9.3157% | 11816/126840
+```
+
+The current config's original root selector targets the first child under the fixture, while the React selector targets the full success component root, so root CSS and pixel comparisons are not apples-to-apples. This component should receive selector/config tuning later if success-state parity is important.

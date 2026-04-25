@@ -161,7 +161,7 @@ Start here to establish the pattern before touching large organisms.
 - [ ] Extract `BookingForm` styles into `BookingForm.css`.
 - [x] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
 - [x] Extract `BookingRules` styles into `BookingRules.css`.
-- [ ] Extract `BookingSuccess` styles into `BookingSuccess.css`.
+- [x] Extract `BookingSuccess` styles into `BookingSuccess.css`.
 - [x] Extract `SaferSpaceAgreement` styles into `SaferSpaceAgreement.css`.
 - [ ] Preserve form label/control relationships in `BookingForm`.
 - [ ] Add tokenized `:focus-visible`, `:disabled`, error, and success styles where relevant.
