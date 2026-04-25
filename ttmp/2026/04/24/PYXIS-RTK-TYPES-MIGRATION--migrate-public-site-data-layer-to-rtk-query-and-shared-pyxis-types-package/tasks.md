@@ -200,7 +200,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Add `unstyled` stories only for components where `unstyled` is actually implemented.
 - [x] Add custom slot/renderer stories only for components that expose slots/renderers.
 - [x] Verify component stories do not require app data fetching unless intentionally page-level.
-- [ ] Run component Storybook smoke checks on `http://localhost:6006`.
+- [x] Run component Storybook smoke checks on `http://localhost:6006`.
 
 ## B7 — CSS extraction validation and cleanup
 

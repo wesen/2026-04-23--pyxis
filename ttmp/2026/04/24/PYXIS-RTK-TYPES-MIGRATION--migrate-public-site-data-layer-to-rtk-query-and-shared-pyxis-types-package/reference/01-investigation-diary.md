@@ -983,3 +983,17 @@ cd web && pnpm --filter pyxis-components typecheck
 ```
 
 Typecheck passed.
+
+
+## Step 30: B6 Storybook smoke check
+
+### What I did
+
+Used the live Storybook dev server on port 6006 and fetched representative public component theme stories:
+
+```bash
+curl -fsS 'http://localhost:6006/iframe.html?id=public-organisms-pubhero--theme-override&viewMode=story'
+curl -fsS 'http://localhost:6006/iframe.html?id=public-organisms-mailinglistcta--theme-override&viewMode=story'
+```
+
+Both iframe requests returned successfully.

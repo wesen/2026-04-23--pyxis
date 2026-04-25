@@ -101,4 +101,5 @@
 - Completed B6 Storybook coverage pass for B5/public shell components by adding default/narrow/theme override stories to `AboutHero`, `AboutIntro`, `CollectiveList`, `EthosGrid`, `EthosStrip`, `FindUsBlock`, `SpaceInfo`, `VenueCard`, `MailingListCTA`, `PubHero`, and `PubFooter`.
 - Re-ran `pnpm --filter pyxis-components typecheck`; it passed.
 - Marked unstyled and custom slot/renderer story tasks as complete-by-nonapplicability because no components currently implement `unstyled` or slot/renderer APIs in this extraction pass.
+- Ran B6 component Storybook smoke checks against the live Storybook server on port 6006 for representative theme override stories (`PubHero`, `MailingListCTA`); iframe responses loaded successfully.
 
