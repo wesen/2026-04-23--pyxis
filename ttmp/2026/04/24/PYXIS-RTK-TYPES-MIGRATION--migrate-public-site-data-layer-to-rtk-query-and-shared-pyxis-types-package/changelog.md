@@ -102,4 +102,7 @@
 - Re-ran `pnpm --filter pyxis-components typecheck`; it passed.
 - Marked unstyled and custom slot/renderer story tasks as complete-by-nonapplicability because no components currently implement `unstyled` or slot/renderer APIs in this extraction pass.
 - Ran B6 component Storybook smoke checks against the live Storybook server on port 6006 for representative theme override stories (`PubHero`, `MailingListCTA`); iframe responses loaded successfully.
+- Completed B7 validation and cleanup. Ran component and recursive workspace typechecks, public molecule and organism `css-visual-diff` config-dir reruns, inline-style scans, TSX/CSS hardcoded color scans, and parity-map updates.
+- Added `reference/02-css-extraction-validation-cleanup.md` with remaining inline style/color classifications and follow-up recommendations.
+- Updated `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with `styleArchitecture` metadata for extracted public components and a deferred taxonomy note for `PubShowRow`.
 

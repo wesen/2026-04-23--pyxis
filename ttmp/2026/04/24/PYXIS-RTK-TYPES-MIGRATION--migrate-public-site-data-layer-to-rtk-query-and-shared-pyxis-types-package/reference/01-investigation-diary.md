@@ -997,3 +997,32 @@ curl -fsS 'http://localhost:6006/iframe.html?id=public-organisms-mailinglistcta-
 ```
 
 Both iframe requests returned successfully.
+
+
+## Step 31: B7 validation and cleanup
+
+### What I did
+
+- Ran component package typecheck and recursive workspace typecheck.
+- Re-ran inline-style and hardcoded-color scans.
+- Re-ran all public molecule and public organism visual-diff config directories.
+- Added `reference/02-css-extraction-validation-cleanup.md` with classification of remaining inline styles and hardcoded colors.
+- Updated `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with `styleArchitecture` metadata for extracted public components.
+
+### Validation commands
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+cd web && pnpm -r typecheck
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/molecules
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/component-system/public/organisms
+```
+
+All commands completed successfully.
+
+### Remaining accepted/documented issues
+
+- Some story/fixture inline styles remain and are acceptable as Storybook/capture layout.
+- `ShowMetaStrip`, `ShowTile`, and `Poster` retain dynamic inline styles for CSS variables.
+- CSS files still contain hardcoded fallback values in component-local variables; future token-hardening should replace these where parity allows.
+- `PubShowRow` remains deferred pending taxonomy.

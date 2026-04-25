@@ -204,16 +204,16 @@ Start here to establish the pattern before touching large organisms.
 
 ## B7 — CSS extraction validation and cleanup
 
-- [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
-- [ ] Run `cd web && pnpm -r typecheck` after larger batches.
-- [ ] Re-run `rg "style=\{\{" web/packages/pyxis-components/src/public -g'*.tsx'` and classify any remaining inline styles as dynamic/acceptable or TODO.
-- [ ] Re-run `rg "#[0-9A-Fa-f]{3,6}|rgba?\(" web/packages/pyxis-components/src/public -g'*.tsx'` and remove remaining TSX hardcoded colors where possible.
-- [ ] Re-run `rg "#[0-9A-Fa-f]{3,6}|rgba?\(" web/packages/pyxis-components/src/public -g'*.css'` and replace hardcoded CSS colors with tokens where possible.
-- [ ] Run all relevant public molecule visual-diff configs touched by extraction.
-- [ ] Run all relevant public organism visual-diff configs touched by extraction.
-- [ ] Update `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with extraction status and any accepted deltas.
-- [ ] Update this ticket changelog with completed CSS extraction batches.
-- [ ] Commit cleanup separately.
+- [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
+- [x] Run `cd web && pnpm -r typecheck` after larger batches.
+- [x] Re-run `rg "style=\{\{" web/packages/pyxis-components/src/public -g'*.tsx'` and classify any remaining inline styles as dynamic/acceptable or TODO.
+- [x] Re-run `rg "#[0-9A-Fa-f]{3,6}|rgba?\(" web/packages/pyxis-components/src/public -g'*.tsx'` and remove remaining TSX hardcoded colors where possible.
+- [x] Re-run `rg "#[0-9A-Fa-f]{3,6}|rgba?\(" web/packages/pyxis-components/src/public -g'*.css'` and replace hardcoded CSS colors with tokens where possible.
+- [x] Run all relevant public molecule visual-diff configs touched by extraction.
+- [x] Run all relevant public organism visual-diff configs touched by extraction.
+- [x] Update `prototype-design/visual-diff/comparisons/component-system/component-parity-map.json` with extraction status and any accepted deltas.
+- [x] Update this ticket changelog with completed CSS extraction batches.
+- [x] Commit cleanup separately.
 
 ## B8 — Optional follow-up after CSS extraction
 

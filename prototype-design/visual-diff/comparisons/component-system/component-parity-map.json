@@ -569,7 +569,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "LineupRow tuned toward prototype table row layout with time, artist, and italic role subtitle. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "LineupRow tuned toward prototype table row layout with time, artist, and italic role subtitle. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/LineupRow/LineupRow.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-ticket-stub-default",
@@ -597,7 +604,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "TicketStub tuned to match public ticket card motif. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "TicketStub tuned to match public ticket card motif. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/TicketStub/TicketStub.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-archive-stats-default",
@@ -625,7 +639,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "ArchiveStats tuned from generic Stat cards to flat public archive strip. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "ArchiveStats tuned from generic Stat cards to flat public archive strip. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ArchiveStats/ArchiveStats.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-year-group-default",
@@ -653,7 +674,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype year header from archive page; React has close structure but token/font/spacing differences. Coverage valid."
+      "notes": "Prototype year header from archive page; React has close structure but token/font/spacing differences. Coverage valid. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/YearGroup/YearGroup.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-pub-show-row-default",
@@ -681,7 +709,11 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype archive row vs React show row are related but not identical: React includes door/price/age stack. Coverage valid; may need separate archive-row vs upcoming-show-row taxonomy."
+      "notes": "Prototype archive row vs React show row are related but not identical: React includes door/price/age stack. Coverage valid; may need separate archive-row vs upcoming-show-row taxonomy. CSS extraction deferred pending taxonomy decision.",
+      "styleArchitecture": {
+        "cssExtraction": "deferred",
+        "reason": "pending public component taxonomy decision versus ShowTile/ShowGrid and ArchiveShowRow"
+      }
     },
     {
       "slug": "public-organisms-pub-footer-default",
@@ -709,7 +741,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Very close public shell component; residual logo color/text anti-aliasing differences remain, kept needs-review pending intentional accepted-difference decision."
+      "notes": "Very close public shell component; residual logo color/text anti-aliasing differences remain, kept needs-review pending intentional accepted-difference decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/PubFooter/PubFooter.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-booking-success-default",
@@ -737,7 +776,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Coverage target; success state is implementation-only/hand-rendered prototype approximation."
+      "notes": "Coverage target; success state is implementation-only/hand-rendered prototype approximation. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/BookingSuccess/BookingSuccess.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-booking-rules-default",
@@ -765,7 +811,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "BookingRules tuned to the dark booking aside motif used by the prototype fixture. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "BookingRules tuned to the dark booking aside motif used by the prototype fixture. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/BookingRules/BookingRules.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-ethos-strip-default",
@@ -793,7 +846,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "EthosStrip changed from dark strip toward light prototype ethos grid motif. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "EthosStrip changed from dark strip toward light prototype ethos grid motif. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/EthosStrip/EthosStrip.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-about-hero-default",
@@ -821,7 +881,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Coverage target only; prototype combines PageHeader/about intro while React AboutHero is simplified tagline hero."
+      "notes": "Coverage target only; prototype combines PageHeader/about intro while React AboutHero is simplified tagline hero. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/AboutHero/AboutHero.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-venue-card-default",
@@ -849,7 +916,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "VenueCard tuned to the dark venue/space aside motif used in detail/book prototype references. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "VenueCard tuned to the dark venue/space aside motif used in detail/book prototype references. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/VenueCard/VenueCard.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-space-info-default",
@@ -877,7 +951,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Coverage target; prototype find-us text block vs React info card have related content but different structure/style."
+      "notes": "Coverage target; prototype find-us text block vs React info card have related content but different structure/style. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/SpaceInfo/SpaceInfo.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-pub-hero-default",
@@ -905,7 +986,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "low",
-      "notes": "Coverage target only; prototype hand-rendered public hero differs from React hero structure/actions."
+      "notes": "Coverage target only; prototype hand-rendered public hero differs from React hero structure/actions. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/PubHero/PubHero.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-mailing-list-cta-default",
@@ -961,7 +1049,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Close but not accepted: logo color differs in React/root evidence and small spacing/font differences remain."
+      "notes": "Close but not accepted: logo color differs in React/root evidence and small spacing/font differences remain. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/PubNav/PubNav.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-booking-form-default",
@@ -989,7 +1084,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Coverage target for the larger public booking workflow. Prototype form has fewer/different fields and underline controls; React BookingForm uses current atom inputs/selects/textareas and additional fields, so this remains needs-review rather than a pixel-tuning target until taxonomy/field parity is decided."
+      "notes": "Coverage target for the larger public booking workflow. Prototype form has fewer/different fields and underline controls; React BookingForm uses current atom inputs/selects/textareas and additional fields, so this remains needs-review rather than a pixel-tuning target until taxonomy/field parity is decided. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/BookingForm/BookingForm.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-poster-redroom",
@@ -1017,7 +1119,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "New React Poster component covering the prototype flyer/poster design element from standalone public Shows. Coverage valid; needs further variant fidelity tuning."
+      "notes": "New React Poster component covering the prototype flyer/poster design element from standalone public Shows. Coverage valid; needs further variant fidelity tuning. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/Poster/Poster.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-show-tile-redroom",
@@ -1045,7 +1154,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "New React ShowTile component covering the prototype flyer + metadata + ticket pill tile from public Shows. Coverage valid; close but needs poster text/detail tuning."
+      "notes": "New React ShowTile component covering the prototype flyer + metadata + ticket pill tile from public Shows. Coverage valid; close but needs poster text/detail tuning. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ShowTile/ShowTile.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-show-grid-desktop",
@@ -1073,7 +1189,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "New React ShowGrid organism covering the desktop public Shows poster grid. Coverage valid; currently only first three fixture shows in the component-system fixture."
+      "notes": "New React ShowGrid organism covering the desktop public Shows poster grid. Coverage valid; currently only first three fixture shows in the component-system fixture. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-public-page-header-default",
@@ -1101,7 +1224,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-reserve-ticket-card-default",
@@ -1129,7 +1259,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ReserveTicketCard/ReserveTicketCard.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-show-detail-header-default",
@@ -1157,7 +1294,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ShowDetailHeader/ShowDetailHeader.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-show-meta-strip-default",
@@ -1185,7 +1329,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ShowMetaStrip/ShowMetaStrip.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-safety-note-default",
@@ -1213,7 +1364,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/SafetyNote/SafetyNote.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-archive-search-filters-default",
@@ -1241,7 +1399,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ArchiveSearchFilters/ArchiveSearchFilters.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-archive-show-row-default",
@@ -1269,7 +1434,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ArchiveShowRow/ArchiveShowRow.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-archive-show-list-default",
@@ -1297,7 +1469,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ArchiveShowList/ArchiveShowList.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-show-type-chips-default",
@@ -1325,7 +1504,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/ShowTypeChips/ShowTypeChips.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-booking-space-aside-default",
@@ -1353,7 +1539,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Prototype fixture expanded to full space-aside content; comparison now reflects fuller component. Re-run after tuning; still needs review/acceptance decision."
+      "notes": "Prototype fixture expanded to full space-aside content; comparison now reflects fuller component. Re-run after tuning; still needs review/acceptance decision. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/BookingSpaceAside/BookingSpaceAside.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-safer-space-agreement-default",
@@ -1381,7 +1574,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/SaferSpaceAgreement/SaferSpaceAgreement.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-about-intro-default",
@@ -1409,7 +1609,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/AboutIntro/AboutIntro.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-organisms-ethos-grid-default",
@@ -1437,7 +1644,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/EthosGrid/EthosGrid.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-collective-list-default",
@@ -1465,7 +1679,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/CollectiveList/CollectiveList.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     },
     {
       "slug": "public-molecules-find-us-block-default",
@@ -1493,7 +1714,14 @@
         "cssDiff": "see cssdiff.md"
       },
       "confidence": "medium",
-      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review."
+      "notes": "Standalone public-page component coverage generated from detail/archive/book/about prototype motifs. Coverage valid; tune or accept per visual review. CSS extraction complete; static inline styles moved into tokenized/component-variable CSS and part selectors added.",
+      "styleArchitecture": {
+        "cssExtraction": "complete",
+        "cssFile": "web/packages/pyxis-components/src/public/FindUsBlock/FindUsBlock.css",
+        "selectorContract": "data-pyxis-component + data-pyxis-part",
+        "storybookThemeCoverage": "representative theme/narrow variants added or verified",
+        "validated": "2026-04-24 css-visual-diff public molecules/organisms config-dir rerun"
+      }
     }
   ]
 }
