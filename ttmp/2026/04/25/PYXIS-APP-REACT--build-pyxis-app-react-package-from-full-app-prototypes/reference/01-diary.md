@@ -30,6 +30,8 @@ RelatedFiles:
       Note: Ticket-local route inventory script
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
       Note: Ticket-local focused visual comparison script
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh
+      Note: Focused desktop/mobile dashboard page visual smoke script
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/left_region.png
       Note: Final prototype individual crop inspected with read
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/right_region.png
@@ -48,10 +50,16 @@ RelatedFiles:
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
       Note: Replaced local surface/status values with app tokens
+    - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
+      Note: Responsive dashboard layout and mobile-specific ordering
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
-      Note: Initial Phase 5-6 staff app organisms and page composition components
+      Note: |-
+        Initial Phase 5-6 staff app organisms and page composition components
+        Dashboard hero
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
-      Note: Replaced local dark-surface colors/shadows/radii with app tokens
+      Note: |-
+        Replaced local dark-surface colors/shadows/radii with app tokens
+        Light desktop sidebar and static mobile bottom nav
     - Path: web/packages/pyxis-app/src/styles/app-tokens.css
       Note: Expanded cohesive app theme variables before Phase 7 (commit fba5369)
     - Path: web/packages/pyxis-types/src/app.ts
@@ -62,6 +70,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
