@@ -1,0 +1,260 @@
+[
+{
+  "diff": {
+    "bounds": {
+      "byField": {
+        "height": {
+          "absDelta": 327.359375,
+          "changed": true,
+          "delta": -327.359375,
+          "left": 1739.109375,
+          "name": "height",
+          "right": 1411.75,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        "width": {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 920,
+          "name": "width",
+          "right": 920,
+          "tolerance": 0,
+          "withinTolerance": true
+        },
+        "x": {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 0,
+          "name": "x",
+          "right": 0,
+          "tolerance": 0,
+          "withinTolerance": true
+        },
+        "y": {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 61,
+          "name": "y",
+          "right": 61,
+          "tolerance": 0,
+          "withinTolerance": true
+        }
+      },
+      "changed": true,
+      "diffs": [
+        {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 0,
+          "name": "x",
+          "right": 0,
+          "tolerance": 0,
+          "withinTolerance": true
+        },
+        {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 61,
+          "name": "y",
+          "right": 61,
+          "tolerance": 0,
+          "withinTolerance": true
+        },
+        {
+          "absDelta": 0,
+          "changed": false,
+          "delta": 0,
+          "left": 920,
+          "name": "width",
+          "right": 920,
+          "tolerance": 0,
+          "withinTolerance": true
+        },
+        {
+          "absDelta": 327.359375,
+          "changed": true,
+          "delta": -327.359375,
+          "left": 1739.109375,
+          "name": "height",
+          "right": 1411.75,
+          "tolerance": 0,
+          "withinTolerance": false
+        }
+      ]
+    },
+    "changed": true,
+    "styles": {
+      "changed": true,
+      "count": 8,
+      "diffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "prop": "background-color",
+          "right": "#ffffff"
+        },
+        {
+          "left": "content-box",
+          "prop": "box-sizing",
+          "right": "border-box"
+        },
+        {
+          "left": "#1f1e1c",
+          "prop": "color",
+          "right": "#1a1a18"
+        },
+        {
+          "left": "16px",
+          "prop": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "1699.11px",
+          "prop": "height",
+          "right": "1411.75px"
+        },
+        {
+          "left": "normal",
+          "prop": "line-height",
+          "right": "21px"
+        },
+        {
+          "left": "40px 32px 0",
+          "prop": "padding",
+          "right": "0 0 72px"
+        },
+        {
+          "left": "856px",
+          "prop": "width",
+          "right": "920px"
+        }
+      ]
+    },
+    "text": {
+      "changed": true,
+      "original": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available…",
+      "react": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or ·…"
+    }
+  },
+  "jsonPath": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/content/snapshot.json",
+  "markdownPath": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/content/01-snapshot.md",
+  "original": {
+    "attributes": {
+      "class": "",
+      "data-page": "shows",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "data-section": "",
+      "id": ""
+    },
+    "bounds": {
+      "height": 1739.109375,
+      "width": 920,
+      "x": 0,
+      "y": 61
+    },
+    "error": "",
+    "exists": true,
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "#1f1e1c",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "16px",
+      "height": "1699.11px",
+      "line-height": "normal",
+      "margin": "0",
+      "min-height": "0",
+      "padding": "40px 32px 0",
+      "width": "856px"
+    },
+    "page": "shows",
+    "section": "content",
+    "selector": "[data-page='shows']",
+    "side": "original",
+    "styles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "rgb(31, 30, 28)",
+      "display": "block",
+      "font-family": "Inter, sans-serif",
+      "font-size": "16px",
+      "height": "1699.11px",
+      "line-height": "normal",
+      "margin": "0px",
+      "min-height": "0px",
+      "padding": "40px 32px 0px",
+      "width": "856px"
+    },
+    "textStart": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available…",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "variant": "desktop",
+    "visible": true
+  },
+  "outDir": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/content",
+  "page": "shows",
+  "react": {
+    "attributes": {
+      "class": "pyxis-public-page pyxis-shows-page",
+      "data-page": "shows",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "data-section": "",
+      "id": ""
+    },
+    "bounds": {
+      "height": 1411.75,
+      "width": 920,
+      "x": 0,
+      "y": 61
+    },
+    "error": "",
+    "exists": true,
+    "normalizedStyles": {
+      "background-color": "#ffffff",
+      "box-sizing": "border-box",
+      "color": "#1a1a18",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "14px",
+      "height": "1411.75px",
+      "line-height": "21px",
+      "margin": "0",
+      "min-height": "0",
+      "padding": "0 0 72px",
+      "width": "920px"
+    },
+    "page": "shows",
+    "section": "content",
+    "selector": "[data-page='shows']",
+    "side": "react",
+    "styles": {
+      "background-color": "rgb(255, 255, 255)",
+      "box-sizing": "border-box",
+      "color": "rgb(26, 26, 24)",
+      "display": "block",
+      "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font-size": "14px",
+      "height": "1411.75px",
+      "line-height": "21px",
+      "margin": "0px",
+      "min-height": "0px",
+      "padding": "0px 0px 72px",
+      "width": "920px"
+    },
+    "textStart": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or ·…",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+    "variant": "desktop",
+    "visible": true
+  },
+  "section": "content",
+  "stylePreset": "pageShell",
+  "variant": "desktop"
+}
+]

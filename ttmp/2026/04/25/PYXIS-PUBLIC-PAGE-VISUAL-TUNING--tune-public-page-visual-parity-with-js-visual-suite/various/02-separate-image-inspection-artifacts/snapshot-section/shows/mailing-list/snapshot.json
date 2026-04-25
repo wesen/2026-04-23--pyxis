@@ -1,0 +1,250 @@
+{
+  "page": "shows",
+  "section": "mailing-list",
+  "variant": "desktop",
+  "stylePreset": "pageShell",
+  "original": {
+    "page": "shows",
+    "variant": "desktop",
+    "section": "mailing-list",
+    "side": "original",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "selector": "[data-section='mailing-list']",
+    "exists": true,
+    "visible": true,
+    "bounds": {
+      "x": 32,
+      "y": 1664.109375,
+      "width": 856,
+      "height": 136
+    },
+    "textStart": "Stay in the loopGet show announcements and venue news.Subscribe",
+    "styles": {
+      "width": "856px",
+      "height": "136px",
+      "margin": "48px 0px 0px",
+      "padding": "0px",
+      "display": "block",
+      "font-family": "Inter, sans-serif",
+      "line-height": "normal",
+      "box-sizing": "content-box",
+      "min-height": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "color": "rgb(31, 30, 28)",
+      "font-size": "16px"
+    },
+    "attributes": {
+      "data-page": "",
+      "data-section": "mailing-list",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "id": "",
+      "class": ""
+    },
+    "error": "",
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "#1f1e1c",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "16px",
+      "height": "136px",
+      "line-height": "normal",
+      "margin": "48px 0 0",
+      "min-height": "0",
+      "padding": "0",
+      "width": "856px"
+    }
+  },
+  "react": {
+    "page": "shows",
+    "variant": "desktop",
+    "section": "mailing-list",
+    "side": "react",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop&viewMode=story",
+    "selector": "[data-section='mailing-list']",
+    "exists": true,
+    "visible": true,
+    "bounds": {
+      "height": 144.5,
+      "x": 48,
+      "y": 1256.25,
+      "width": 824
+    },
+    "textStart": "Stay in the loopGet show announcements and venue news.Subscribe",
+    "styles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "width": "824px",
+      "padding": "0px",
+      "display": "block",
+      "color": "rgb(26, 26, 24)",
+      "font-size": "14px",
+      "line-height": "21px",
+      "box-sizing": "border-box",
+      "height": "144.5px",
+      "min-height": "0px",
+      "margin": "72px 0px 0px"
+    },
+    "attributes": {
+      "class": "pyxis-shows-page__mailing-list",
+      "data-page": "",
+      "data-section": "mailing-list",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "id": ""
+    },
+    "error": "",
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "border-box",
+      "color": "#1a1a18",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "14px",
+      "height": "144.5px",
+      "line-height": "21px",
+      "margin": "72px 0 0",
+      "min-height": "0",
+      "padding": "0",
+      "width": "824px"
+    }
+  },
+  "diff": {
+    "changed": true,
+    "bounds": {
+      "changed": true,
+      "diffs": [
+        {
+          "name": "x",
+          "left": 32,
+          "right": 48,
+          "delta": 16,
+          "absDelta": 16,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "y",
+          "left": 1664.109375,
+          "right": 1256.25,
+          "delta": -407.859375,
+          "absDelta": 407.859375,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "width",
+          "left": 856,
+          "right": 824,
+          "delta": -32,
+          "absDelta": 32,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "height",
+          "left": 136,
+          "right": 144.5,
+          "delta": 8.5,
+          "absDelta": 8.5,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        }
+      ],
+      "byField": {
+        "x": {
+          "name": "x",
+          "left": 32,
+          "right": 48,
+          "delta": 16,
+          "absDelta": 16,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "y": {
+          "name": "y",
+          "left": 1664.109375,
+          "right": 1256.25,
+          "delta": -407.859375,
+          "absDelta": 407.859375,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "width": {
+          "name": "width",
+          "left": 856,
+          "right": 824,
+          "delta": -32,
+          "absDelta": 32,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "height": {
+          "name": "height",
+          "left": 136,
+          "right": 144.5,
+          "delta": 8.5,
+          "absDelta": 8.5,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        }
+      }
+    },
+    "styles": {
+      "changed": true,
+      "count": 7,
+      "diffs": [
+        {
+          "prop": "box-sizing",
+          "left": "content-box",
+          "right": "border-box"
+        },
+        {
+          "prop": "color",
+          "left": "#1f1e1c",
+          "right": "#1a1a18"
+        },
+        {
+          "prop": "font-size",
+          "left": "16px",
+          "right": "14px"
+        },
+        {
+          "prop": "height",
+          "left": "136px",
+          "right": "144.5px"
+        },
+        {
+          "prop": "line-height",
+          "left": "normal",
+          "right": "21px"
+        },
+        {
+          "prop": "margin",
+          "left": "48px 0 0",
+          "right": "72px 0 0"
+        },
+        {
+          "prop": "width",
+          "left": "856px",
+          "right": "824px"
+        }
+      ]
+    },
+    "text": {
+      "changed": false,
+      "original": "Stay in the loopGet show announcements and venue news.Subscribe",
+      "react": "Stay in the loopGet show announcements and venue news.Subscribe"
+    }
+  }
+}

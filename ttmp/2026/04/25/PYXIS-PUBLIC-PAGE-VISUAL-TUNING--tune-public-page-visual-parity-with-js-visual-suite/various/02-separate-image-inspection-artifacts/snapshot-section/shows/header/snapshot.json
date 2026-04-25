@@ -1,0 +1,250 @@
+{
+  "page": "shows",
+  "section": "header",
+  "variant": "desktop",
+  "stylePreset": "pageShell",
+  "original": {
+    "page": "shows",
+    "variant": "desktop",
+    "section": "header",
+    "side": "original",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "selector": "[data-section='shows-header']",
+    "exists": true,
+    "visible": true,
+    "bounds": {
+      "height": 101.09375,
+      "x": 32,
+      "y": 101,
+      "width": 856
+    },
+    "textStart": "Providence, RIUpcoming shows",
+    "styles": {
+      "min-height": "0px",
+      "padding": "0px",
+      "display": "block",
+      "height": "101.094px",
+      "margin": "0px",
+      "background-color": "rgba(0, 0, 0, 0)",
+      "color": "rgb(31, 30, 28)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "16px",
+      "line-height": "normal",
+      "box-sizing": "content-box",
+      "width": "856px"
+    },
+    "attributes": {
+      "class": "",
+      "data-page": "",
+      "data-section": "shows-header",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "id": ""
+    },
+    "error": "",
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "#1f1e1c",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "16px",
+      "height": "101.094px",
+      "line-height": "normal",
+      "margin": "0",
+      "min-height": "0",
+      "padding": "0",
+      "width": "856px"
+    }
+  },
+  "react": {
+    "page": "shows",
+    "variant": "desktop",
+    "section": "header",
+    "side": "react",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop&viewMode=story",
+    "selector": "[data-section='shows-header']",
+    "exists": true,
+    "visible": true,
+    "bounds": {
+      "x": 48,
+      "y": 61,
+      "width": 824,
+      "height": 203.59375
+    },
+    "textStart": "Providence, RIUpcoming shows",
+    "styles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "color": "rgb(26, 26, 24)",
+      "width": "824px",
+      "min-height": "0px",
+      "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font-size": "14px",
+      "line-height": "21px",
+      "box-sizing": "border-box",
+      "height": "203.594px",
+      "margin": "0px",
+      "padding": "44px 0px 28px",
+      "display": "block"
+    },
+    "attributes": {
+      "id": "",
+      "class": "pyxis-shows-page__header",
+      "data-page": "",
+      "data-section": "shows-header",
+      "data-pyxis-component": "",
+      "data-pyxis-part": ""
+    },
+    "error": "",
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "border-box",
+      "color": "#1a1a18",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "14px",
+      "height": "203.594px",
+      "line-height": "21px",
+      "margin": "0",
+      "min-height": "0",
+      "padding": "44px 0 28px",
+      "width": "824px"
+    }
+  },
+  "diff": {
+    "changed": true,
+    "bounds": {
+      "changed": true,
+      "diffs": [
+        {
+          "name": "x",
+          "left": 32,
+          "right": 48,
+          "delta": 16,
+          "absDelta": 16,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "y",
+          "left": 101,
+          "right": 61,
+          "delta": -40,
+          "absDelta": 40,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "width",
+          "left": 856,
+          "right": 824,
+          "delta": -32,
+          "absDelta": 32,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        {
+          "name": "height",
+          "left": 101.09375,
+          "right": 203.59375,
+          "delta": 102.5,
+          "absDelta": 102.5,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        }
+      ],
+      "byField": {
+        "x": {
+          "name": "x",
+          "left": 32,
+          "right": 48,
+          "delta": 16,
+          "absDelta": 16,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "y": {
+          "name": "y",
+          "left": 101,
+          "right": 61,
+          "delta": -40,
+          "absDelta": 40,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "width": {
+          "name": "width",
+          "left": 856,
+          "right": 824,
+          "delta": -32,
+          "absDelta": 32,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        },
+        "height": {
+          "name": "height",
+          "left": 101.09375,
+          "right": 203.59375,
+          "delta": 102.5,
+          "absDelta": 102.5,
+          "tolerance": 0,
+          "withinTolerance": false,
+          "changed": true
+        }
+      }
+    },
+    "styles": {
+      "changed": true,
+      "count": 7,
+      "diffs": [
+        {
+          "prop": "box-sizing",
+          "left": "content-box",
+          "right": "border-box"
+        },
+        {
+          "prop": "color",
+          "left": "#1f1e1c",
+          "right": "#1a1a18"
+        },
+        {
+          "prop": "font-size",
+          "left": "16px",
+          "right": "14px"
+        },
+        {
+          "prop": "height",
+          "left": "101.094px",
+          "right": "203.594px"
+        },
+        {
+          "prop": "line-height",
+          "left": "normal",
+          "right": "21px"
+        },
+        {
+          "prop": "padding",
+          "left": "0",
+          "right": "44px 0 28px"
+        },
+        {
+          "prop": "width",
+          "left": "856px",
+          "right": "824px"
+        }
+      ]
+    },
+    "text": {
+      "changed": false,
+      "original": "Providence, RIUpcoming shows",
+      "react": "Providence, RIUpcoming shows"
+    }
+  }
+}

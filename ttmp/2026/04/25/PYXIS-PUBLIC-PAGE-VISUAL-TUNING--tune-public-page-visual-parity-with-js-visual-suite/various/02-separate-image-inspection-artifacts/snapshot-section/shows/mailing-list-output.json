@@ -1,0 +1,255 @@
+[
+{
+  "diff": {
+    "bounds": {
+      "byField": {
+        "height": {
+          "absDelta": 8.5,
+          "changed": true,
+          "delta": 8.5,
+          "left": 136,
+          "name": "height",
+          "right": 144.5,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        "width": {
+          "absDelta": 32,
+          "changed": true,
+          "delta": -32,
+          "left": 856,
+          "name": "width",
+          "right": 824,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        "x": {
+          "absDelta": 16,
+          "changed": true,
+          "delta": 16,
+          "left": 32,
+          "name": "x",
+          "right": 48,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        "y": {
+          "absDelta": 407.859375,
+          "changed": true,
+          "delta": -407.859375,
+          "left": 1664.109375,
+          "name": "y",
+          "right": 1256.25,
+          "tolerance": 0,
+          "withinTolerance": false
+        }
+      },
+      "changed": true,
+      "diffs": [
+        {
+          "absDelta": 16,
+          "changed": true,
+          "delta": 16,
+          "left": 32,
+          "name": "x",
+          "right": 48,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        {
+          "absDelta": 407.859375,
+          "changed": true,
+          "delta": -407.859375,
+          "left": 1664.109375,
+          "name": "y",
+          "right": 1256.25,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        {
+          "absDelta": 32,
+          "changed": true,
+          "delta": -32,
+          "left": 856,
+          "name": "width",
+          "right": 824,
+          "tolerance": 0,
+          "withinTolerance": false
+        },
+        {
+          "absDelta": 8.5,
+          "changed": true,
+          "delta": 8.5,
+          "left": 136,
+          "name": "height",
+          "right": 144.5,
+          "tolerance": 0,
+          "withinTolerance": false
+        }
+      ]
+    },
+    "changed": true,
+    "styles": {
+      "changed": true,
+      "count": 7,
+      "diffs": [
+        {
+          "left": "content-box",
+          "prop": "box-sizing",
+          "right": "border-box"
+        },
+        {
+          "left": "#1f1e1c",
+          "prop": "color",
+          "right": "#1a1a18"
+        },
+        {
+          "left": "16px",
+          "prop": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "136px",
+          "prop": "height",
+          "right": "144.5px"
+        },
+        {
+          "left": "normal",
+          "prop": "line-height",
+          "right": "21px"
+        },
+        {
+          "left": "48px 0 0",
+          "prop": "margin",
+          "right": "72px 0 0"
+        },
+        {
+          "left": "856px",
+          "prop": "width",
+          "right": "824px"
+        }
+      ]
+    },
+    "text": {
+      "changed": false,
+      "original": "Stay in the loopGet show announcements and venue news.Subscribe",
+      "react": "Stay in the loopGet show announcements and venue news.Subscribe"
+    }
+  },
+  "jsonPath": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/mailing-list/snapshot.json",
+  "markdownPath": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/mailing-list/01-snapshot.md",
+  "original": {
+    "attributes": {
+      "class": "",
+      "data-page": "",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "data-section": "mailing-list",
+      "id": ""
+    },
+    "bounds": {
+      "height": 136,
+      "width": 856,
+      "x": 32,
+      "y": 1664.109375
+    },
+    "error": "",
+    "exists": true,
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "#1f1e1c",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "16px",
+      "height": "136px",
+      "line-height": "normal",
+      "margin": "48px 0 0",
+      "min-height": "0",
+      "padding": "0",
+      "width": "856px"
+    },
+    "page": "shows",
+    "section": "mailing-list",
+    "selector": "[data-section='mailing-list']",
+    "side": "original",
+    "styles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "content-box",
+      "color": "rgb(31, 30, 28)",
+      "display": "block",
+      "font-family": "Inter, sans-serif",
+      "font-size": "16px",
+      "height": "136px",
+      "line-height": "normal",
+      "margin": "48px 0px 0px",
+      "min-height": "0px",
+      "padding": "0px",
+      "width": "856px"
+    },
+    "textStart": "Stay in the loopGet show announcements and venue news.Subscribe",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "variant": "desktop",
+    "visible": true
+  },
+  "outDir": "prototype-design/visual-comparisons/cssvd-js/snapshot-section/shows/mailing-list",
+  "page": "shows",
+  "react": {
+    "attributes": {
+      "class": "pyxis-shows-page__mailing-list",
+      "data-page": "",
+      "data-pyxis-component": "",
+      "data-pyxis-part": "",
+      "data-section": "mailing-list",
+      "id": ""
+    },
+    "bounds": {
+      "height": 144.5,
+      "width": 824,
+      "x": 48,
+      "y": 1256.25
+    },
+    "error": "",
+    "exists": true,
+    "normalizedStyles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "border-box",
+      "color": "#1a1a18",
+      "display": "block",
+      "font-family": "inter",
+      "font-size": "14px",
+      "height": "144.5px",
+      "line-height": "21px",
+      "margin": "72px 0 0",
+      "min-height": "0",
+      "padding": "0",
+      "width": "824px"
+    },
+    "page": "shows",
+    "section": "mailing-list",
+    "selector": "[data-section='mailing-list']",
+    "side": "react",
+    "styles": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "box-sizing": "border-box",
+      "color": "rgb(26, 26, 24)",
+      "display": "block",
+      "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "font-size": "14px",
+      "height": "144.5px",
+      "line-height": "21px",
+      "margin": "72px 0px 0px",
+      "min-height": "0px",
+      "padding": "0px",
+      "width": "824px"
+    },
+    "textStart": "Stay in the loopGet show announcements and venue news.Subscribe",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+    "variant": "desktop",
+    "visible": true
+  },
+  "section": "mailing-list",
+  "stylePreset": "pageShell",
+  "variant": "desktop"
+}
+]
