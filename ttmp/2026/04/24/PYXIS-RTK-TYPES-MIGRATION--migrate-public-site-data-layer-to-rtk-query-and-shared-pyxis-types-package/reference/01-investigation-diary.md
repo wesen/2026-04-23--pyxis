@@ -740,3 +740,31 @@ root      1.5536% | 174/11200
 ```
 
 The remaining CSS diff is limited to box-sizing/font-family.
+
+
+## Step 22: Extract `BookingSpaceAside` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/BookingSpaceAside/BookingSpaceAside.css`.
+- Moved dark panel, title, spec list, footer, and email styles out of JSX.
+- Added stable part hooks for `title`, `spec-list`, `spec`, `spec-label`, `spec-value`, `footer`, and `email`.
+- Moved the repeated spec data into a named `specs` constant.
+- Updated `BookingSpaceAside.tsx` to self-import CSS and use `clsx('pyxis-booking-space-aside', className)`.
+- Added `Narrow` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/booking-space-aside-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/149700
+root      0.0000% | 0/149700
+```
+
+This was an exact pixel-parity extraction.

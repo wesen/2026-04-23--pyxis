@@ -74,4 +74,8 @@
 - Extracted `SaferSpaceAgreement` styles into `web/packages/pyxis-components/src/public/SaferSpaceAgreement/SaferSpaceAgreement.css`.
 - Added part selectors for `checkbox`, `text`, and `link`, tokenized accent/focus styles, and narrow/theme override Storybook stories.
 - Validated `SaferSpaceAgreement` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../safer-space-agreement-default.css-visual-diff.yml`; current pixel diff is `1.5536% | 174/11200`.
+- Extracted `BookingSpaceAside` styles into `web/packages/pyxis-components/src/public/BookingSpaceAside/BookingSpaceAside.css`.
+- Added part selectors for title, spec list/items/labels/values, footer, and email; moved specs into a named constant.
+- Added narrow and theme override Storybook stories.
+- Validated `BookingSpaceAside` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-space-aside-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/149700`.
 

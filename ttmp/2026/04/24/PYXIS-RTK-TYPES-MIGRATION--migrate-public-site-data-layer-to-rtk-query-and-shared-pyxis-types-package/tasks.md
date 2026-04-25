@@ -159,7 +159,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ShowMetaStrip` styles into `ShowMetaStrip.css`.
 - [x] Extract `ReserveTicketCard` styles into `ReserveTicketCard.css`.
 - [ ] Extract `BookingForm` styles into `BookingForm.css`.
-- [ ] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
+- [x] Extract `BookingSpaceAside` styles into `BookingSpaceAside.css` if canonical.
 - [ ] Extract `BookingRules` styles into `BookingRules.css`.
 - [ ] Extract `BookingSuccess` styles into `BookingSuccess.css`.
 - [x] Extract `SaferSpaceAgreement` styles into `SaferSpaceAgreement.css`.
