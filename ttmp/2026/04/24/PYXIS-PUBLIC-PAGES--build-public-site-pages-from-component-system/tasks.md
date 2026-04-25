@@ -188,15 +188,15 @@ prototype-design/standalone/public/about.html
 
 ## Phase 7 — Page-level visual-diff suite and report
 
-- [ ] Ensure all desktop page configs exist.
-- [ ] Ensure all mobile page configs exist if in scope.
-- [ ] Run all page configs with `css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/public-pages`.
-- [ ] Produce a page-level validation report under this ticket's `reference/` directory.
-- [ ] Record each page's pixel diff, CSS diff notes, and accepted differences.
-- [ ] Classify remaining page inline styles.
-- [ ] Classify remaining use of deferred components: `PubShowRow`, `SpaceInfo`, `EthosStrip`.
-- [ ] Update public component taxonomy ADR if page work changes decisions.
-- [ ] Commit page-level visual-diff report separately.
+- [x] Ensure all desktop page configs exist.
+- [x] Ensure all mobile page configs exist if in scope.
+- [x] Run all page configs with `css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/public-pages`.
+- [x] Produce a page-level validation report under this ticket's `reference/` directory.
+- [x] Record each page's pixel diff, CSS diff notes, and accepted differences.
+- [x] Classify remaining page inline styles.
+- [x] Classify remaining use of deferred components: `PubShowRow`, `SpaceInfo`, `EthosStrip`.
+- [x] Update public component taxonomy ADR if page work changes decisions.
+- [x] Commit page-level visual-diff report separately.
 
 ---
 
@@ -204,12 +204,12 @@ prototype-design/standalone/public/about.html
 
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
 - [x] Run `cd web && pnpm -r typecheck`.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site build`.
-- [ ] Run `cd web && pnpm --filter pyxis-user-site build-storybook`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site build`.
+- [x] Run `cd web && pnpm --filter pyxis-user-site build-storybook`.
 - [ ] Attempt `cd web && pnpm -r test`; if it still fails because packages have no test files, document the known issue.
-- [ ] Run search: `rg "style=\{\{" web/packages/pyxis-user-site/src/pages -g'*.tsx'`.
-- [ ] Run search: `rg "PubShowRow|SpaceInfo|EthosStrip" web/packages/pyxis-user-site/src web/packages/pyxis-user-site/stories -g'*.tsx'`.
-- [ ] Run search: `rg "@tanstack|QueryClient|apiFetch" web/packages/pyxis-user-site -g'*.ts' -g'*.tsx' -g'package.json'`.
+- [x] Run search: `rg "style=\{\{" web/packages/pyxis-user-site/src/pages -g'*.tsx'`.
+- [x] Run search: `rg "PubShowRow|SpaceInfo|EthosStrip" web/packages/pyxis-user-site/src web/packages/pyxis-user-site/stories -g'*.tsx'`.
+- [x] Run search: `rg "@tanstack|QueryClient|apiFetch" web/packages/pyxis-user-site -g'*.ts' -g'*.tsx' -g'package.json'`.
 - [ ] Update `index.md` with final document links.
 - [ ] Update `changelog.md` with final implementation summary.
 - [x] Run `docmgr doctor --ticket PYXIS-PUBLIC-PAGES --stale-after 30`.

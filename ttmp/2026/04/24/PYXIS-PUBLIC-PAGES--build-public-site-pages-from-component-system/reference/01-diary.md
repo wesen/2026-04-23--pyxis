@@ -308,3 +308,36 @@ page    18.2795%
 ```
 
 This is a moderate first-pass result and should be tuned after Shows and other higher-priority diffs.
+
+
+## Step 10: Phase 7 page-level suite and report
+
+### What I did
+
+- Added `reference/02-page-level-visual-diff-report.md`.
+- Ran recursive typecheck, user-site build, user-site Storybook build, and all current page-level visual-diff configs.
+- Confirmed all desktop page configs exist and run:
+  - Shows,
+  - ShowDetail,
+  - Archive,
+  - Book,
+  - About.
+- Classified remaining page inline styles. Only `NotFound.tsx` still has inline styles among `src/pages`; the public target pages now use page CSS files for layout.
+- Classified deferred component usage. `PubShowRow`, `SpaceInfo`, and `EthosStrip` no longer appear in `pyxis-user-site/src` or page stories.
+- Confirmed there are no `@tanstack`, `QueryClient`, or `apiFetch` regressions in `pyxis-user-site`.
+
+### Validation commands
+
+```bash
+cd web && pnpm -r typecheck
+cd web && pnpm --filter pyxis-user-site build
+cd web && pnpm --filter pyxis-user-site build-storybook
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/public-pages
+rg "style=\{\{" web/packages/pyxis-user-site/src/pages -g'*.tsx'
+rg "PubShowRow|SpaceInfo|EthosStrip" web/packages/pyxis-user-site/src web/packages/pyxis-user-site/stories -g'*.tsx'
+rg "@tanstack|QueryClient|apiFetch" web/packages/pyxis-user-site -g'*.ts' -g'*.tsx' -g'package.json'
+```
+
+### Notes
+
+Mobile configs are not created yet; this phase treats them as out of scope until desktop selector scopes and page composition stabilize. The taxonomy ADR does not need a revision yet because the page work follows its recommendations rather than changing them.

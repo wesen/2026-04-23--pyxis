@@ -25,3 +25,5 @@
 - Ran cross-page validation for Phases 3-5: recursive typecheck, user-site build, user-site Storybook build, and all current public page visual-diff configs.
 
 - Completed Phase 6 first About composition pass using `AboutHero`, `AboutIntro`, `EthosGrid`, `CollectiveList`, and `FindUsBlock`; removed `EthosStrip` from the page, kept the hero image placeholder for now, and added `about-desktop` visual-diff config. Current first-pass diff: content 20.4334%, page 18.2795%.
+
+- Completed Phase 7 page-level visual-diff suite/report. Added `reference/02-page-level-visual-diff-report.md`, ran all current desktop page configs, classified remaining page inline styles and deferred component usage, and confirmed no TanStack/API-client regressions. Mobile page configs remain out of scope for this first desktop pass.
