@@ -1,5 +1,7 @@
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
 import type { LineupEntry } from '../../mocks/types';
+import './LineupRow.css';
 
 export type LineupRowProps = {
   entry: LineupEntry;
@@ -8,26 +10,20 @@ export type LineupRowProps = {
 
 const roleLabels: Record<LineupEntry['role'], string> = {
   headline: 'headline · dj set',
-  support:  'opener · dj set',
-  dj:       'dj set',
+  support: 'opener · dj set',
+  dj: 'dj set',
 };
 
 export const LineupRow = ({ entry, className }: LineupRowProps) => (
-  <div
-    className={className}
-    {...pyxisPart('lineup-row')}
-    style={{
-      display: 'grid',
-      gridTemplateColumns: '60px 1fr',
-      borderTop: '1px solid #EAE7E0',
-      fontSize: 14,
-      color: '#1F1E1C',
-    }}
-  >
-    <div style={{ padding: '12px 12px 12px 0', color: '#8E887E', fontVariantNumeric: 'tabular-nums', verticalAlign: 'top' }}>{entry.start_time}</div>
-    <div style={{ padding: '12px 0', color: '#C8270D', fontWeight: 600, verticalAlign: 'top' }}>
-      {entry.artist}
-      <div style={{ fontSize: 11.5, color: '#8E887E', fontWeight: 400, marginTop: 2, fontStyle: 'italic' }}>{roleLabels[entry.role]}</div>
+  <div className={clsx('pyxis-lineup-row', className)} {...pyxisPart('lineup-row')}>
+    <div className="pyxis-lineup-row__time" {...pyxisPart('lineup-row', 'time')}>
+      {entry.start_time}
+    </div>
+    <div className="pyxis-lineup-row__artist-block" {...pyxisPart('lineup-row', 'artist-block')}>
+      <span {...pyxisPart('lineup-row', 'artist')}>{entry.artist}</span>
+      <div className="pyxis-lineup-row__role" {...pyxisPart('lineup-row', 'role')}>
+        {roleLabels[entry.role]}
+      </div>
     </div>
   </div>
 );

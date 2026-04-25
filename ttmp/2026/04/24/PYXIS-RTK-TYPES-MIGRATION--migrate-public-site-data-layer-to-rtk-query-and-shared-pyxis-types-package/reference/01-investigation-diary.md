@@ -307,3 +307,30 @@ root      0.3144% | 94/29900
 ```
 
 The residual CSS diff includes box-sizing/font-family and selector-bound width/height differences, but the pixel diff is very low. This is a good example of architecture cleanup preserving visual output closely.
+
+
+## Step 7: Extract `LineupRow` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/LineupRow/LineupRow.css`.
+- Moved root grid, border, time, artist, and role styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `time`, `artist-block`, `artist`, and `role`.
+- Updated `LineupRow.tsx` to self-import CSS and use `clsx('pyxis-lineup-row', className)`.
+- Added `Support` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/lineup-row-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 5.3400% | 1115/20880
+root      6.5709% | 1372/20880
+```
+
+The config compares the prototype's table-row implementation with React's grid implementation, so CSS differences such as `display: table-row` vs `grid` are expected until this component receives a deeper semantic/tuning pass.

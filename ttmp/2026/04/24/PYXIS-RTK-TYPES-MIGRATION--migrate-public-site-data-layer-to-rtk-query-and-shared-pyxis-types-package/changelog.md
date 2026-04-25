@@ -23,4 +23,7 @@
 - Extracted `TicketStub` static inline styles into `web/packages/pyxis-components/src/public/TicketStub/TicketStub.css`.
 - Added `TicketStub` part selectors for `eyebrow`, `title`, `divider`, `meta`, `price`, and `age`, plus long-content and theme override Storybook stories.
 - Validated `TicketStub` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../ticket-stub-default.css-visual-diff.yml`; current pixel diff is `0.3144% | 94/29900`.
+- Extracted `LineupRow` static inline styles into `web/packages/pyxis-components/src/public/LineupRow/LineupRow.css`.
+- Added `LineupRow` part selectors for `time`, `artist-block`, `artist`, and `role`, plus support-role and theme override Storybook stories.
+- Validated `LineupRow` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../lineup-row-default.css-visual-diff.yml`; current pixel diff is `component 5.3400% | 1115/20880`, `root 6.5709% | 1372/20880`.
 

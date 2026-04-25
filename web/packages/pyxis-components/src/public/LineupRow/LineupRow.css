@@ -1,0 +1,36 @@
+/* LineupRow — show detail lineup schedule row. */
+
+:where([data-pyxis-component='lineup-row'][data-pyxis-part='root']) {
+  --pyxis-lineup-row-border-color: #EAE7E0;
+  --pyxis-lineup-row-color: #1F1E1C;
+  --pyxis-lineup-row-muted-color: #8E887E;
+  --pyxis-lineup-row-artist-color: var(--color-accent);
+
+  border-top: 1px solid var(--pyxis-lineup-row-border-color);
+  color: var(--pyxis-lineup-row-color);
+  display: grid;
+  font-size: var(--text-base);
+  grid-template-columns: 60px 1fr;
+}
+
+:where([data-pyxis-component='lineup-row'][data-pyxis-part='time']) {
+  color: var(--pyxis-lineup-row-muted-color);
+  font-variant-numeric: tabular-nums;
+  padding: 12px 12px 12px 0;
+  vertical-align: top;
+}
+
+:where([data-pyxis-component='lineup-row'][data-pyxis-part='artist-block']) {
+  color: var(--pyxis-lineup-row-artist-color);
+  font-weight: var(--weight-semibold);
+  padding: 12px 0;
+  vertical-align: top;
+}
+
+:where([data-pyxis-component='lineup-row'][data-pyxis-part='role']) {
+  color: var(--pyxis-lineup-row-muted-color);
+  font-size: 11.5px;
+  font-style: italic;
+  font-weight: var(--weight-regular);
+  margin-top: 2px;
+}
