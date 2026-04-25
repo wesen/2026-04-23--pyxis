@@ -122,9 +122,9 @@
 
 ## Phase 8 — Promotion decision
 
-- [ ] Decide whether stable code should move to `prototype-design/visual-diff/verbs`, `prototype-design/visual-diff/js-lib`, or `tools/cssvd-pyxis`.
-- [ ] If promoted, move stable scripts out of ticket workspace.
-- [ ] Update docs/playbooks with new command workflow.
-- [ ] Add final validation commands.
+- [x] Decide stable code should move to `prototype-design/visual-diff/userland`.
+- [x] Move stable scripts out of ticket workspace to `prototype-design/visual-diff/userland`.
+- [x] Add `prototype-design/visual-diff/userland/README.md` with promoted command workflow.
+- [x] Add/promote final validation commands under `prototype-design/visual-diff/userland/*.sh`.
 - [ ] Create final postmortem/reference report.
 - [ ] Optionally upload final implementation bundle to reMarkable.

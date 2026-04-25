@@ -1919,3 +1919,147 @@ ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-u
 ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/12-smoke-compare-all-ci-policy-fail.sh
 ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/11-run-compare-all-public-pages.sh
 ```
+
+
+## Step 15: Promote css-visual-diff JS userland out of the ticket workspace
+
+The user asked to move the JS now that the implementation is solid. I promoted the reusable library, verbs, and smoke/run scripts from the ticket-local `scripts/` directory into a stable project path.
+
+### Prompt Context
+
+**User prompt (verbatim):** "move it."
+
+**Assistant interpretation:** Promote the validated css-visual-diff JavaScript userland library from `ttmp` into the repo's visual-diff infrastructure.
+
+**Inferred user intent:** Stop treating the code as an experiment; make it reusable project infrastructure while keeping generated artifacts out of committed source.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+Moved reusable code from:
+
+```text
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/
+```
+
+to:
+
+```text
+prototype-design/visual-diff/userland/
+```
+
+The promoted structure is:
+
+```text
+prototype-design/visual-diff/userland/
+  README.md
+  lib/
+  verbs/
+  01-smoke-list-targets.sh
+  02-smoke-import-mechanism.sh
+  03-smoke-summarize-existing-page-results.sh
+  04-smoke-inspect-section.sh
+  05-smoke-compare-section-command.sh
+  06-smoke-child-process-unavailable.sh
+  07-capture-new-flexible-js-api-docs.sh
+  08-smoke-new-api-compare-section.sh
+  09-smoke-compare-page-archive.sh
+  10-smoke-compare-all-archive-filter.sh
+  11-run-compare-all-public-pages.sh
+  12-smoke-compare-all-ci-policy-fail.sh
+```
+
+I rewrote script repository roots from the ticket path to:
+
+```text
+--repository prototype-design/visual-diff/userland
+```
+
+and changed generated output defaults to live under:
+
+```text
+prototype-design/visual-comparisons/cssvd-js/
+```
+
+Generated validation artifacts were removed after validation so the promotion commit only carries stable source/workflow files, not runtime outputs.
+
+### Why
+
+The userland library now supports registry-driven target listing, import smoke, existing-result summaries, locator inspection, command planning, direct section comparison, page catalogs, suite comparisons, accepted-difference reporting, async `fs` report writing, and CI policy mode. That is stable enough to be project infrastructure.
+
+### What worked
+
+Promoted scripts validated successfully:
+
+```text
+01-smoke-list-targets.sh                 -> 13 rows
+02-smoke-import-mechanism.sh             -> ok
+08-smoke-new-api-compare-section.sh      -> Archive content 7.128146453089244%
+09-smoke-compare-page-archive.sh         -> 2 sections / 2 catalog comparisons
+10-smoke-compare-all-archive-filter.sh   -> 1 page / 2 sections / review: 2
+12-smoke-compare-all-ci-policy-fail.sh   -> wrote reports, failed as expected
+11-run-compare-all-public-pages.sh       -> 5 pages / 13 sections
+```
+
+Full suite result after promotion:
+
+```text
+maxChangedPercent: 66.85658212560386
+classificationCounts:
+  major-mismatch: 5
+  tune-required: 6
+  review: 2
+```
+
+### What didn't work
+
+No runtime failure occurred during promotion. I did remove generated output after validation to avoid committing `prototype-design/visual-comparisons/cssvd-js/*` as source.
+
+### What I learned
+
+The stable repository root must be the userland directory itself, not `verbs/`, because local module imports expect `lib/*` alongside `verbs/*`. The canonical form is now:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-all \
+  --output json
+```
+
+### What was tricky to build
+
+The main tricky part was separating promoted source from generated evidence. The ticket keeps historical generated artifacts under `various/`; the stable scripts write future runtime artifacts under `prototype-design/visual-comparisons/cssvd-js/`, but those generated artifacts should remain uncommitted unless explicitly requested.
+
+### What warrants a second pair of eyes
+
+- Whether the stable directory should remain `prototype-design/visual-diff/userland` or eventually split into `prototype-design/visual-diff/verbs` plus `prototype-design/visual-diff/js-lib`.
+- Whether the historical ticket docs should get a shorter pointer document now that `scripts/` has moved.
+- Whether `objectFromFile` should be the immediate next refactor.
+
+### What should be done in the future
+
+Prototype a spec-driven suite using the newly documented `objectFromFile` field type so route/selector/viewport/threshold/accepted-difference metadata can move out of `lib/registry.js`.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/userland/README.md
+prototype-design/visual-diff/userland/lib/*
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/*.sh
+```
+
+Validate:
+
+```bash
+prototype-design/visual-diff/userland/01-smoke-list-targets.sh
+prototype-design/visual-diff/userland/02-smoke-import-mechanism.sh
+prototype-design/visual-diff/userland/08-smoke-new-api-compare-section.sh
+prototype-design/visual-diff/userland/09-smoke-compare-page-archive.sh
+prototype-design/visual-diff/userland/10-smoke-compare-all-archive-filter.sh
+prototype-design/visual-diff/userland/12-smoke-compare-all-ci-policy-fail.sh
+prototype-design/visual-diff/userland/11-run-compare-all-public-pages.sh
+```

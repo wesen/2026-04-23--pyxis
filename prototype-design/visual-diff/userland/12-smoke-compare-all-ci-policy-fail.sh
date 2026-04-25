@@ -3,14 +3,14 @@ set -euo pipefail
 
 # Validate CI mode: compare-all should write JSON/Markdown reports, then exit
 # non-zero when the configured policy threshold fails.
-BASE="ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library"
-OUT="$BASE/various/07-compare-all/archive-filter-ci-fail"
+BASE="prototype-design/visual-diff/userland"
+OUT="prototype-design/visual-comparisons/cssvd-js/compare-all/archive-filter-ci-fail"
 rm -rf "$OUT"
 mkdir -p "$OUT"
 
 set +e
 css-visual-diff verbs \
-  --repository "$BASE/scripts" \
+  --repository "$BASE" \
   pyxis pages compare-all \
   --page archive \
   --outDir "$OUT" \
@@ -33,7 +33,7 @@ test -f "$OUT/01-suite-summary.md"
 python3 - <<'PY'
 import json
 from pathlib import Path
-base = Path('ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/archive-filter-ci-fail')
+base = Path('prototype-design/visual-comparisons/cssvd-js/compare-all/archive-filter-ci-fail')
 run = json.loads((base / 'compare-all-output.json').read_text())[0]
 assert run['mode'] == 'ci', run['mode']
 assert run['policy']['ok'] is False, run['policy']

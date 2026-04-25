@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
-BASE="ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library"
-OUT="$BASE/various/02-summarize-results"
+BASE="prototype-design/visual-diff/userland"
+OUT="prototype-design/visual-comparisons/cssvd-js/summarize-results"
 mkdir -p "$OUT"
 css-visual-diff verbs \
-  --repository "$BASE/scripts" \
+  --repository "$BASE" \
   pyxis pages summarize-results \
   --resultsDir prototype-design/visual-comparisons/public-pages \
   --jsonOut "$OUT/page-diffs.json" \

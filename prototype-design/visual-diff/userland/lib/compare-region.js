@@ -63,7 +63,7 @@ function findTargetAndSection(pageName, sectionName, options) {
 
 function defaultOutDir(pageName, sectionName, variant) {
   return artifacts.pageSectionOutDir(
-    'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/04-compare-section',
+    'prototype-design/visual-comparisons/cssvd-js/compare-section',
     pageName,
     sectionName,
     variant || 'desktop'
@@ -278,7 +278,7 @@ async function comparePage(pageName, options) {
   var target = registry.findPage(pageName, variant)
   if (!target) throw new Error('unknown page: ' + pageName)
   var outDir = options.outDir || artifacts.artifactDir(
-    'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page',
+    'prototype-design/visual-comparisons/cssvd-js/compare-page',
     pageName,
     variant
   )
@@ -364,7 +364,7 @@ async function compareAll(options) {
     priority: options.priority || '',
   })
   var outDir = options.outDir || artifacts.artifactDir(
-    'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all',
+    'prototype-design/visual-comparisons/cssvd-js/compare-all',
     'public-pages',
     variant
   )

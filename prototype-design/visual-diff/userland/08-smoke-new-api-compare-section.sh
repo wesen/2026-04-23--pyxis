@@ -4,12 +4,12 @@ set -euo pipefail
 # Exercise the new flexible css-visual-diff JS API through our userland verb.
 # This should use cvd.compare.region(...) directly rather than shelling out to
 # the built-in `verbs script compare region` command.
-BASE="ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library"
-OUT="$BASE/various/05-new-api-compare-section/archive-content"
+BASE="prototype-design/visual-diff/userland"
+OUT="prototype-design/visual-comparisons/cssvd-js/compare-section/archive-content"
 mkdir -p "$OUT"
 
 css-visual-diff verbs \
-  --repository "$BASE/scripts" \
+  --repository "$BASE" \
   pyxis pages compare-section archive content \
   --outDir "$OUT" \
   --threshold 30 \

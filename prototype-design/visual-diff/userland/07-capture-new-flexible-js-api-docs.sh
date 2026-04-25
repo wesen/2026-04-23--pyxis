@@ -4,7 +4,7 @@ set -euo pipefail
 # Capture the current css-visual-diff JavaScript API docs after the flexible JS
 # API update, so the experiment can be replayed and the report can cite exactly
 # what was read.
-BASE="ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library"
+BASE="prototype-design/visual-diff/userland"
 OUT="$BASE/sources/css-visual-diff-help-2026-04-25-flexible-js-api"
 mkdir -p "$OUT"
 
