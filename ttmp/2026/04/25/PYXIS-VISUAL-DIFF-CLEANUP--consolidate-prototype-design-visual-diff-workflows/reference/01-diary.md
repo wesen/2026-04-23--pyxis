@@ -1279,7 +1279,7 @@ This gives the next developer a compact entrypoint instead of requiring them to 
 
 **Inferred user intent:** Leave the ticket reviewable and resumable after a large cleanup.
 
-**Commit (docs):** pending at diary-write time — intended message: "Add visual diff cleanup final handoff"
+**Commit (docs):** `9bc9855` — "Add visual diff cleanup final handoff"
 
 ### What I did
 
