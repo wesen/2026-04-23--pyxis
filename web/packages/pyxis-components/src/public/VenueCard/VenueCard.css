@@ -1,0 +1,4 @@
+/* VenueCard — dark compact venue info card. */
+:where([data-pyxis-component='venue-card'][data-pyxis-part='root']) { --pyxis-venue-card-bg: #1F1E1C; --pyxis-venue-card-color: #E8E3D8; --pyxis-venue-card-body: #BCB7AD; background: var(--pyxis-venue-card-bg); border-radius: var(--radius-sm); box-sizing: border-box; color: var(--pyxis-venue-card-color); font-size: var(--text-sm); line-height: 1.7; padding: 26px; }
+:where([data-pyxis-component='venue-card'][data-pyxis-part='title']) { font-family: var(--font-display); font-size: 22px; font-style: italic; font-weight: var(--weight-medium); letter-spacing: -0.02em; margin-bottom: 14px; }
+:where([data-pyxis-component='venue-card'][data-pyxis-part='body']) { color: var(--pyxis-venue-card-body); }

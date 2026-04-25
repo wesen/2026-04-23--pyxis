@@ -173,13 +173,13 @@ Start here to establish the pattern before touching large organisms.
 ## B5 — Extract CSS for about/home/footer/public shell components
 
 - [ ] Extract `AboutHero` styles into `AboutHero.css`.
-- [ ] Extract `AboutIntro` styles into `AboutIntro.css`.
+- [x] Extract `AboutIntro` styles into `AboutIntro.css`.
 - [ ] Extract `EthosGrid` styles into `EthosGrid.css` if canonical.
 - [ ] Extract `EthosStrip` styles into `EthosStrip.css` if retained.
-- [ ] Extract `CollectiveList` styles into `CollectiveList.css`.
-- [ ] Extract `FindUsBlock` styles into `FindUsBlock.css` if canonical.
-- [ ] Extract `SpaceInfo` styles into `SpaceInfo.css` if retained.
-- [ ] Extract `VenueCard` styles into `VenueCard.css` if retained.
+- [x] Extract `CollectiveList` styles into `CollectiveList.css`.
+- [x] Extract `FindUsBlock` styles into `FindUsBlock.css` if canonical.
+- [x] Extract `SpaceInfo` styles into `SpaceInfo.css` if retained.
+- [x] Extract `VenueCard` styles into `VenueCard.css` if retained.
 - [ ] Extract `MailingListCTA` styles into `MailingListCTA.css`.
 - [ ] Extract `PubHero` styles into `PubHero.css`.
 - [ ] Extract `PubFooter` styles into `PubFooter.css`.

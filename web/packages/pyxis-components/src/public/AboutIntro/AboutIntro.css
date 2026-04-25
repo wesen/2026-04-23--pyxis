@@ -1,0 +1,4 @@
+/* AboutIntro — long-form public about-page introduction. */
+:where([data-pyxis-component='about-intro'][data-pyxis-part='root']) { --pyxis-about-intro-accent: var(--color-accent); --pyxis-about-intro-body: #4A463E; max-width: 620px; }
+:where([data-pyxis-component='about-intro'][data-pyxis-part='lead']) { color: var(--pyxis-about-intro-accent); font-family: var(--font-display); font-size: 30px; font-style: italic; font-weight: var(--weight-regular); letter-spacing: -0.015em; line-height: 1.3; margin: 0 0 28px; }
+:where([data-pyxis-component='about-intro'][data-pyxis-part='body']) { color: var(--pyxis-about-intro-body); font-size: 14.5px; line-height: 1.75; margin: 0 0 var(--space-4); }

@@ -1,0 +1,3 @@
+/* SpaceInfo — public address/contact text block. */
+:where([data-pyxis-component='space-info'][data-pyxis-part='root']) { --pyxis-space-info-accent: var(--color-accent); --pyxis-space-info-body: #4A463E; color: var(--pyxis-space-info-body); font-size: var(--text-base); line-height: 1.8; }
+:where([data-pyxis-component='space-info'][data-pyxis-part='email']) { color: var(--pyxis-space-info-accent); }

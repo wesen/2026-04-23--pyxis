@@ -1,0 +1,6 @@
+/* FindUsBlock — about-page address and contact copy. */
+:where([data-pyxis-component='find-us-block'][data-pyxis-part='root']) { --pyxis-find-us-accent: var(--color-accent); --pyxis-find-us-body: #4A463E; --pyxis-find-us-muted: #8E887E; }
+:where([data-pyxis-component='find-us-block'][data-pyxis-part='heading']) { color: var(--pyxis-find-us-muted); font-size: 11px; font-weight: var(--weight-semibold); letter-spacing: 0.14em; margin-bottom: 10px; text-transform: uppercase; }
+:where([data-pyxis-component='find-us-block'][data-pyxis-part='body']) { color: var(--pyxis-find-us-body); font-size: var(--text-base); line-height: 1.8; }
+:where([data-pyxis-component='find-us-block'][data-pyxis-part='email']) { color: var(--pyxis-find-us-accent); }
+:where([data-pyxis-component='find-us-block'][data-pyxis-part='note']) { color: var(--pyxis-find-us-muted); }

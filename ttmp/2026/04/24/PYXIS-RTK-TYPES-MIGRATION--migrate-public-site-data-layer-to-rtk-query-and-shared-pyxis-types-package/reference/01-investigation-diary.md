@@ -853,3 +853,40 @@ root      1.7528% | 5536/315840
 ```
 
 B4 detail/booking CSS extraction is now complete.
+
+
+## Step 26: Start B5 with about/contact/venue components
+
+### What I did
+
+- Created CSS files and extracted static inline styles for:
+  - `AboutIntro`
+  - `CollectiveList`
+  - `FindUsBlock`
+  - `SpaceInfo`
+  - `VenueCard`
+- Added stable `data-pyxis-part` selectors for the significant text/list/card subparts.
+- Updated components to self-import CSS and use `clsx`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config .../about-intro-default.css-visual-diff.yml
+css-visual-diff run --config .../collective-list-default.css-visual-diff.yml
+css-visual-diff run --config .../find-us-block-default.css-visual-diff.yml
+css-visual-diff run --config .../space-info-default.css-visual-diff.yml
+css-visual-diff run --config .../venue-card-default.css-visual-diff.yml
+```
+
+Typecheck passed. Current pixel diffs:
+
+```text
+AboutIntro      component 4.3161% | root 4.5559%
+CollectiveList  component 5.1793% | root 5.1793%
+FindUsBlock     component 5.8667% | root 5.8667%
+SpaceInfo       component 2.4884% | root 2.4884%
+VenueCard       component 2.7831% | root 2.7831%
+```
+
+These were architecture extraction passes, not final visual tuning passes.

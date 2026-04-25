@@ -89,4 +89,7 @@
 - Added tokenized focus-visible and disabled styles, plus submitting/narrow/theme override Storybook stories.
 - Validated `BookingForm` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../booking-form-default.css-visual-diff.yml`; current pixel diff is `1.7528% | 5536/315840`.
 - Completed B4 detail/booking CSS extraction pass.
+- Started B5 about/home/footer extraction with `AboutIntro`, `CollectiveList`, `FindUsBlock`, `SpaceInfo`, and `VenueCard`.
+- Extracted their static inline styles into component CSS files and added stable part selectors for headings/body/contact/list/card subparts.
+- Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `AboutIntro` component `4.3161%`, `CollectiveList` `5.1793%`, `FindUsBlock` `5.8667%`, `SpaceInfo` `2.4884%`, `VenueCard` `2.7831%`.
 

@@ -1,0 +1,7 @@
+/* CollectiveList — about-page collective roster. */
+:where([data-pyxis-component='collective-list'][data-pyxis-part='root']) { --pyxis-collective-accent: var(--color-accent); --pyxis-collective-border: #EAE7E0; --pyxis-collective-muted: #8E887E; }
+:where([data-pyxis-component='collective-list'][data-pyxis-part='heading']) { color: var(--pyxis-collective-muted); font-size: 11px; font-weight: var(--weight-semibold); letter-spacing: 0.14em; margin-bottom: 10px; text-transform: uppercase; }
+:where([data-pyxis-component='collective-list'][data-pyxis-part='list']) { display: grid; gap: var(--space-2); }
+:where([data-pyxis-component='collective-list'][data-pyxis-part='item']) { border-bottom: 1px solid var(--pyxis-collective-border); display: flex; font-size: 13.5px; justify-content: space-between; padding: 9px 0; }
+:where([data-pyxis-component='collective-list'][data-pyxis-part='name']) { color: var(--pyxis-collective-accent); }
+:where([data-pyxis-component='collective-list'][data-pyxis-part='role']) { color: var(--pyxis-collective-muted); font-style: italic; }
