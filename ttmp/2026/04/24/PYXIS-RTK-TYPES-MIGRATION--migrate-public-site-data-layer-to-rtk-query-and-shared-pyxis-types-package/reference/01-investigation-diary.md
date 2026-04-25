@@ -955,3 +955,31 @@ PubNav         component 1.7409% | root 1.7409%
 ```
 
 B5 extraction tasks are now complete. Remaining concerns are taxonomy/ADR-level decisions and visual tuning, not the initial CSS extraction pass.
+
+
+## Step 29: B6 Storybook theme/variant coverage pass
+
+### What I did
+
+- Added or normalized Storybook stories for B5/public shell components:
+  - `AboutHero`
+  - `AboutIntro`
+  - `CollectiveList`
+  - `EthosGrid`
+  - `EthosStrip`
+  - `FindUsBlock`
+  - `SpaceInfo`
+  - `VenueCard`
+  - `MailingListCTA`
+  - `PubHero`
+  - `PubFooter`
+- Added representative narrow/mobile and theme override stories using component-local CSS variables.
+- Kept `unstyled` and custom slot/renderer stories as N/A because this pass did not add those APIs.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+```
+
+Typecheck passed.

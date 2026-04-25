@@ -190,16 +190,16 @@ Start here to establish the pattern before touching large organisms.
 
 ## B6 — Storybook theme and variant coverage
 
-- [ ] Add or update default stories for every canonical public component touched by CSS extraction.
-- [ ] Add dark-theme or alternate-theme story wrappers for representative public components.
-- [ ] Add theme override stories that set component-local CSS variables directly.
-- [ ] Add narrow/mobile container stories where responsive behavior matters.
-- [ ] Add long-content stories for titles/descriptions/lineups that may wrap.
-- [ ] Add form state stories for `BookingForm`: default, validation error, submitting/disabled, success handoff if applicable.
-- [ ] Add focus/interactive stories where feasible.
-- [ ] Add `unstyled` stories only for components where `unstyled` is actually implemented.
-- [ ] Add custom slot/renderer stories only for components that expose slots/renderers.
-- [ ] Verify component stories do not require app data fetching unless intentionally page-level.
+- [x] Add or update default stories for every canonical public component touched by CSS extraction.
+- [x] Add dark-theme or alternate-theme story wrappers for representative public components.
+- [x] Add theme override stories that set component-local CSS variables directly.
+- [x] Add narrow/mobile container stories where responsive behavior matters.
+- [x] Add long-content stories for titles/descriptions/lineups that may wrap.
+- [x] Add form state stories for `BookingForm`: default, validation error, submitting/disabled, success handoff if applicable.
+- [x] Add focus/interactive stories where feasible.
+- [x] Add `unstyled` stories only for components where `unstyled` is actually implemented.
+- [x] Add custom slot/renderer stories only for components that expose slots/renderers.
+- [x] Verify component stories do not require app data fetching unless intentionally page-level.
 - [ ] Run component Storybook smoke checks on `http://localhost:6006`.
 
 ## B7 — CSS extraction validation and cleanup

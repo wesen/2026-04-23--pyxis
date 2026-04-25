@@ -98,4 +98,7 @@
 - Completed B5 shell/home/footer extraction by extracting `MailingListCTA`, `PubHero`, and `PubFooter` styles into component CSS files and cleaning `PubNav.css` to use tokens.
 - Validated with `pnpm --filter pyxis-components typecheck` and matching visual-diff configs. Current pixel diffs: `MailingListCTA` component `3.3797%`, `PubHero` `0.0218%`, `PubFooter` component `0.2511%`, `PubNav` `1.7409%`.
 - B5 extraction tasks are complete, with `SpaceInfo`/`VenueCard` and `FindUsBlock`/`SpaceInfo` taxonomy overlaps still requiring ADR-level decisions later.
+- Completed B6 Storybook coverage pass for B5/public shell components by adding default/narrow/theme override stories to `AboutHero`, `AboutIntro`, `CollectiveList`, `EthosGrid`, `EthosStrip`, `FindUsBlock`, `SpaceInfo`, `VenueCard`, `MailingListCTA`, `PubHero`, and `PubFooter`.
+- Re-ran `pnpm --filter pyxis-components typecheck`; it passed.
+- Marked unstyled and custom slot/renderer story tasks as complete-by-nonapplicability because no components currently implement `unstyled` or slot/renderer APIs in this extraction pass.
 

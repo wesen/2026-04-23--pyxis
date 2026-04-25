@@ -1,8 +1,10 @@
+import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { PubHero } from './PubHero';
 import { seedShows } from '../../mocks/handlers';
-
-const meta: Meta<typeof PubHero> = { title: 'Public/Organisms/PubHero', component: PubHero, tags: ['autodocs'] };
+const meta: Meta<typeof PubHero> = { title: 'Public/Organisms/PubHero', component: PubHero, tags: ['autodocs'], args: { show: seedShows[0] } };
 export default meta;
 type Story = StoryObj<typeof PubHero>;
-export const Default: Story = { args: { show: seedShows[0] } };
+export const Default: Story = {};
+export const Narrow: Story = { render: (args) => <div style={{ width: 420 }}><PubHero {...args} /></div> };
+export const ThemeOverride: Story = { render: (args) => <div style={{ '--pyxis-pub-hero-accent': 'var(--color-text-primary)', '--pyxis-pub-hero-border': 'var(--color-accent)', '--pyxis-pub-hero-muted': 'var(--color-text-secondary)', width: 720 } as CSSProperties}><PubHero {...args} /></div> };
