@@ -29,4 +29,7 @@
 - Extracted `YearGroup` static inline styles into `web/packages/pyxis-components/src/public/YearGroup/YearGroup.css`.
 - Added `YearGroup` part selectors for `header`, `year`, and `count`, plus singular-count and theme override Storybook stories.
 - Validated `YearGroup` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../year-group-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/35280`.
+- Extracted `Poster` static layout/art/text styles into `web/packages/pyxis-components/src/public/Poster/Poster.css`, leaving per-kind art colors/backgrounds as CSS custom properties.
+- Added `Poster` style override support for component-local CSS variables and a theme override Storybook story.
+- Validated `Poster` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../poster-redroom.css-visual-diff.yml`; current pixel diff is `5.3101% | 4846/91260`.
 

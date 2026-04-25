@@ -362,3 +362,31 @@ root      0.0000% | 0/28560
 ```
 
 This was a clean CSS extraction with exact pixel parity.
+
+
+## Step 9: Extract `Poster` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/Poster/Poster.css`.
+- Moved static root, art, kicker, title, mark, and metadata styles out of JSX.
+- Kept dynamic poster artwork values as component-local CSS variables: `--pyxis-poster-bg`, `--pyxis-poster-fg`, `--pyxis-poster-accent`, and `--pyxis-poster-ratio`.
+- Added a `style?: CSSProperties` prop so consumers/stories can override those component-local variables.
+- Added/kept variant selectors keyed by `data-poster-kind` for redroom/pixel808/orphx size differences.
+- Added a `ThemeOverride` Storybook story.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/poster-redroom.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 5.3101% | 4846/91260
+root      5.3101% | 4846/91260
+```
+
+The component still has non-trivial pixel diff and should receive later visual tuning if poster parity becomes a release blocker. The architecture improvement is that static visual structure now lives in CSS while per-kind artwork remains overrideable through CSS variables.

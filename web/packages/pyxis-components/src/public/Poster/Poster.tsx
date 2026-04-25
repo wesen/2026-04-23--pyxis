@@ -1,4 +1,7 @@
+import type { CSSProperties } from 'react';
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
+import './Poster.css';
 
 export type PosterKind = 'redroom' | 'pixel808' | 'petals' | 'meetups' | 'basement' | 'orphx' | 'moor' | 'cygnus' | 'zola';
 
@@ -6,6 +9,7 @@ export type PosterProps = {
   kind?: PosterKind;
   ratio?: string;
   className?: string;
+  style?: CSSProperties;
 };
 
 const variants: Record<PosterKind, { bg: string; fg: string; accent: string; title: string; kicker: string; meta: string; mark: string }> = {
@@ -20,25 +24,56 @@ const variants: Record<PosterKind, { bg: string; fg: string; accent: string; tit
   zola: { bg: 'linear-gradient(180deg, #1A0D1C 0%, #3D1A2E 100%)', fg: '#F5E8D8', accent: '#F5E8D8', title: 'Zola Jesus', kicker: 'an evening with', meta: 'June 6 · 8PM · 21+', mark: '✦' },
 };
 
-export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className }: PosterProps) => {
+export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className, style }: PosterProps) => {
   const v = variants[kind] ?? variants.redroom;
+  const posterStyle = {
+    '--pyxis-poster-bg': v.bg,
+    '--pyxis-poster-fg': v.fg,
+    '--pyxis-poster-accent': v.accent,
+    '--pyxis-poster-ratio': ratio,
+    ...style,
+  } as CSSProperties;
+
   return (
-    <div className={className} {...pyxisPart('poster')} data-poster-kind={kind} style={{ position: 'relative', width: '100%', aspectRatio: ratio, borderRadius: 4, overflow: 'hidden', background: '#111' }}>
-      <div {...pyxisPart('poster', 'art')} style={{ position: 'absolute', inset: 0, background: v.bg, color: v.fg, fontFamily: "var(--font-display), Fraunces, Georgia, serif", padding: '18px 14px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'center', boxSizing: 'border-box' }}>
-        <div>
-          <div {...pyxisPart('poster', 'kicker')} style={{ fontSize: 9, letterSpacing: '.15em', opacity: .65, textTransform: 'uppercase', fontStyle: 'italic' }}>{v.kicker}</div>
-          <div {...pyxisPart('poster', 'title')} style={{ fontSize: kind === 'redroom' ? 20 : kind === 'pixel808' ? 56 : kind === 'orphx' ? 44 : 24, fontWeight: kind === 'redroom' ? 600 : 700, fontStyle: 'italic', marginTop: 8, color: v.accent, letterSpacing: '-.04em', lineHeight: .95 }}>{v.title}</div>
+    <div
+      className={clsx('pyxis-poster', className)}
+      {...pyxisPart('poster')}
+      data-poster-kind={kind}
+      style={posterStyle}
+    >
+      <div className="pyxis-poster__art" {...pyxisPart('poster', 'art')}>
+        <div className="pyxis-poster__header" {...pyxisPart('poster', 'header')}>
+          <div className="pyxis-poster__kicker" {...pyxisPart('poster', 'kicker')}>
+            {v.kicker}
+          </div>
+          <div className="pyxis-poster__title" {...pyxisPart('poster', 'title')}>
+            {v.title}
+          </div>
         </div>
-        <div {...pyxisPart('poster', 'mark')} style={{ fontSize: kind === 'redroom' ? 48 : 34, color: v.accent, opacity: kind === 'redroom' ? .7 : .75, fontWeight: kind === 'redroom' ? 700 : 800, lineHeight: 1, letterSpacing: kind === 'redroom' ? '-.04em' : undefined, transform: kind === 'redroom' ? 'translateY(-8px)' : undefined }}>{v.mark}</div>
+        <div className="pyxis-poster__mark" {...pyxisPart('poster', 'mark')}>
+          {v.mark}
+        </div>
         {kind === 'redroom' ? (
-          <div {...pyxisPart('poster', 'meta')}>
-            <div style={{ fontSize: 16, fontWeight: 600, color: '#E84545', fontStyle: 'italic' }}>{v.meta}</div>
-            <div style={{ fontSize: 7.5, opacity: .55, marginTop: 6, letterSpacing: '.02em' }}>25 Manton Ave, Providence RI</div>
-            <div style={{ fontSize: 7.5, opacity: .55 }}>21+ · tickets available online ($10 – $15)</div>
-            <div style={{ fontSize: 7.5, opacity: .55, marginTop: 8, letterSpacing: '.05em' }}>No Photography · or · Video Recording · Allowed</div>
+          <div className="pyxis-poster__meta" {...pyxisPart('poster', 'meta')}>
+            <div className="pyxis-poster__meta-date" {...pyxisPart('poster', 'meta-date')}>
+              {v.meta}
+            </div>
+            <div className="pyxis-poster__meta-line" {...pyxisPart('poster', 'meta-line')} data-emphasis="location">
+              25 Manton Ave, Providence RI
+            </div>
+            <div className="pyxis-poster__meta-line" {...pyxisPart('poster', 'meta-line')}>
+              21+ · tickets available online ($10 – $15)
+            </div>
+            <div className="pyxis-poster__meta-line" {...pyxisPart('poster', 'meta-line')} data-emphasis="policy">
+              No Photography · or · Video Recording · Allowed
+            </div>
           </div>
         ) : (
-          <div {...pyxisPart('poster', 'meta')} style={{ fontSize: 8, opacity: .72, letterSpacing: '.04em' }}>{v.meta}<br />25 Manton Ave, Providence RI</div>
+          <div className="pyxis-poster__meta" {...pyxisPart('poster', 'meta')}>
+            {v.meta}
+            <br />
+            25 Manton Ave, Providence RI
+          </div>
         )}
       </div>
     </div>

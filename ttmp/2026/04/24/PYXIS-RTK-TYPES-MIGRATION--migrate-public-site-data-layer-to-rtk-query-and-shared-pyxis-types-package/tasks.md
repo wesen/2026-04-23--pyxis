@@ -127,7 +127,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `TicketStub` styles into `TicketStub.css`.
 - [x] Extract `LineupRow` styles into `LineupRow.css`.
 - [x] Extract `YearGroup` styles into `YearGroup.css`.
-- [ ] Extract `Poster` styles into `Poster.css`.
+- [x] Extract `Poster` styles into `Poster.css`.
 - [ ] Extract `ShowTypeChips` styles into `ShowTypeChips.css`.
 - [ ] Add/verify root `className` and `data-pyxis-component` selectors for each component.
 - [ ] Add/verify important `data-pyxis-part` selectors for titles, metadata, badges, chips, and actions.
