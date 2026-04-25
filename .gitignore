@@ -4,9 +4,10 @@ prototype-design/baseline/sample/
 prototype-design/baseline/sample-public-components/
 prototype-design/baseline/sample-full-app/
 
-# Local IDE / Playwright MCP state.
+# Local IDE / Playwright MCP / direnv state.
 .idea/
 .playwright-mcp/
+.envrc
 prototype-design/storybook-catalog/artifacts/
 prototype-design/storybook-catalog/sample-atoms/
 

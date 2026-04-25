@@ -1,0 +1,4 @@
+# Optional direnv helper for css-visual-diff repository-scanned verbs.
+# Copy to .envrc locally and run `direnv allow` if you want css-visual-diff
+# commands to discover the promoted Pyxis userland verb repository by default.
+export CSS_VISUAL_DIFF_VERB_REPOSITORIES=prototype-design/visual-diff/userland

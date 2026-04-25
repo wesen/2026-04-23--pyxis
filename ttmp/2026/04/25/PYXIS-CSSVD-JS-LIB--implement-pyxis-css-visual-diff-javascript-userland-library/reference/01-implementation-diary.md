@@ -2063,3 +2063,77 @@ prototype-design/visual-diff/userland/10-smoke-compare-all-archive-filter.sh
 prototype-design/visual-diff/userland/12-smoke-compare-all-ci-policy-fail.sh
 prototype-design/visual-diff/userland/11-run-compare-all-public-pages.sh
 ```
+
+
+## Step 16: Restore local `.envrc` as ignored direnv state
+
+The user chose option B for `.envrc`: keep the file locally but do not commit it. I restored the local `.envrc` with the css-visual-diff verb repository setting and added `.envrc` to `.gitignore`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "B"
+
+**Assistant interpretation:** Restore `.envrc` as a local-only helper and ignore it rather than committing it.
+
+**Inferred user intent:** Preserve local direnv convenience while keeping repository commands explicit and reproducible.
+
+### What I did
+
+Restored local file:
+
+```text
+.envrc
+```
+
+with:
+
+```bash
+export CSS_VISUAL_DIFF_VERB_REPOSITORIES=prototype-design/visual-diff/userland
+```
+
+Updated:
+
+```text
+.gitignore
+```
+
+to ignore `.envrc` under the local IDE/Playwright/direnv section.
+
+### Validation
+
+`git status --short --ignored .envrc .gitignore` shows `.gitignore` as modified and `.envrc` as ignored local state.
+
+### Note
+
+The promoted scripts still pass `--repository prototype-design/visual-diff/userland` explicitly, so `.envrc` is only a developer convenience.
+
+
+## Step 17: Add `.envrc.example` for optional verb repository discovery
+
+The user clarified that the local `.envrc` helper should be saved as `.envrc.example`. I added a tracked example file and kept `.envrc` ignored as local machine state.
+
+### Prompt Context
+
+**User prompt (verbatim):** "save it s .envrc.example though"
+
+**Assistant interpretation:** Track an example direnv file in the repo, while keeping the actual `.envrc` local/ignored.
+
+### What I did
+
+Added:
+
+```text
+.envrc.example
+```
+
+with:
+
+```bash
+export CSS_VISUAL_DIFF_VERB_REPOSITORIES=prototype-design/visual-diff/userland
+```
+
+The example explains that developers can copy it to `.envrc` and run `direnv allow` if they want css-visual-diff commands to discover the promoted Pyxis userland repository by default.
+
+### Validation
+
+`git status --short --ignored .envrc .envrc.example .gitignore` shows `.envrc.example` as tracked candidate and `.envrc` ignored.

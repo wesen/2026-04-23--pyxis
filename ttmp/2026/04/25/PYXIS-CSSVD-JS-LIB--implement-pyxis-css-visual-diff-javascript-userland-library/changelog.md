@@ -54,3 +54,5 @@ Created clean maintainer follow-up request document containing only current desi
 - Implemented `pyxis pages compare-all` with per-page catalogs, aggregate JSON/Markdown suite summary, policy classification counts, and accepted-difference reporting; validated all 5 desktop public pages / 13 sections.
 - Updated compare-all to use newly enabled JS verb `require("fs")` support for directory creation/report writes; added authoring/CI modes plus `--maxChangedPercent` and `--maxPolicyBand` policy thresholds.
 - Promoted the validated css-visual-diff JavaScript userland library from the ticket workspace to `prototype-design/visual-diff/userland`, updated default output paths to `prototype-design/visual-comparisons/cssvd-js`, added a stable README, and validated the promoted smoke/run scripts.
+- Restored local `.envrc` convenience for `CSS_VISUAL_DIFF_VERB_REPOSITORIES` and ignored it as direnv/local machine state.
+- Added `.envrc.example` documenting the optional `CSS_VISUAL_DIFF_VERB_REPOSITORIES` direnv helper while keeping local `.envrc` ignored.
