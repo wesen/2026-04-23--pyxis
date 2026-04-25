@@ -13,7 +13,7 @@ import { DashboardOverview } from '../src/components/organisms/Panels';
 const meta: Meta = { title: 'Pyxis App/Components' };
 export default meta;
 type Story = StoryObj;
-export const MetricCardDefault: Story = { render: () => <div style={{ width: 240, padding: 24 }}><MetricCard label="Upcoming shows" value={6} caption="confirmed" tone="accent"/></div> };
+export const MetricCardDefault: Story = { render: () => <div style={{ width: 231 }}><MetricCard label="Upcoming" value={6} caption="Next 60 days" tone="accent"/></div> };
 export const StatusDots: Story = { render: () => <div style={{ display: 'flex', gap: 18, padding: 24 }}><StatusDot tone="confirmed"/><StatusDot tone="pending"/><StatusDot tone="declined"/><StatusDot tone="bot"/></div> };
 export const DateChipDefault: Story = { render: () => <div style={{ padding: 24 }}><DateChip date="2025-05-02"/></div> };
 export const ActivityItemDefault: Story = { render: () => <div style={{ width: 420, padding: 24 }}><ActivityFeedItem item={auditLog[0]}/></div> };

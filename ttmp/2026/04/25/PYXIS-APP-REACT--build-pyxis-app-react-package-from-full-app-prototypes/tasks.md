@@ -393,67 +393,68 @@ This phase is a **hard gate** before Phase 7. Do not continue into page tuning u
 
 Use `MetricCard` unless a lead chooses another small repeated component.
 
-- [ ] Confirm the prototype source location for the chosen component shape.
-- [ ] Confirm the React component story renders one isolated component state.
-- [ ] Confirm both sides have stable selectors that crop the same visual object, not a whole page on one side and one component on the other.
-- [ ] If the prototype lacks selectors, add them in a selector-only change before tuning styles.
+- [x] Confirm the prototype source location for the chosen component shape.
+- [x] Confirm the React component story renders one isolated component state.
+- [x] Confirm both sides have stable selectors that crop the same visual object, not a whole page on one side and one component on the other.
+- [x] If the prototype lacks selectors, add them in a selector-only change before tuning styles.
 
 ### Prototype selector instrumentation
 
-- [ ] Add `data-pyxis-component="metric-card"` / `data-pyxis-part="root"` to the prototype metric/stat card root.
-- [ ] Add part selectors for important comparable internals:
-  - [ ] `label`,
-  - [ ] `value`,
-  - [ ] `caption`.
-- [ ] Keep the selector change behavior-neutral.
-- [ ] Verify the standalone prototype still renders after selector additions.
-- [ ] Commit selector-only prototype changes if they touch prototype sources.
+- [x] Add `data-pyxis-component="metric-card"` / `data-pyxis-part="root"` to the prototype metric/stat card root.
+- [x] Add part selectors for important comparable internals:
+  - [x] `label`,
+  - [x] `value`,
+  - [x] `caption`.
+- [x] Keep the selector change behavior-neutral.
+- [x] Verify the standalone prototype still renders after selector additions.
+- [x] Commit selector-only prototype changes if they touch prototype sources.
 
 ### React selector verification
 
-- [ ] Verify React `MetricCard` root uses `data-pyxis-component="metric-card"`.
-- [ ] Verify React `MetricCard` uses part selectors for `label`, `value`, and `caption`.
-- [ ] Verify Storybook story dimensions do not add misleading wrapper padding to the crop selector.
+- [x] Verify React `MetricCard` root uses `data-pyxis-component="metric-card"`.
+- [x] Verify React `MetricCard` uses part selectors for `label`, `value`, and `caption`.
+- [x] Verify Storybook story dimensions do not add misleading wrapper padding to the crop selector.
 
 ### Visual spec correction
 
-- [ ] Update `app.components.visual.yml` so the MetricCard target uses like-for-like selectors:
-  - [ ] prototype `original` selector targets the prototype metric card root,
-  - [ ] React `react` selector targets the React metric card root.
-- [ ] Run `prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py`.
-- [ ] Add a ticket-local script such as `scripts/03-smoke-compare-metric-card.sh` for the focused command.
-- [ ] Store artifacts under `various/05-css-loop-metric-card/`.
+- [x] Update `app.components.visual.yml` so the MetricCard target uses like-for-like selectors:
+  - [x] prototype `original` selector targets the prototype metric card root,
+  - [x] React `react` selector targets the React metric card root.
+- [x] Run `prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py`.
+- [x] Add a ticket-local script such as `scripts/03-smoke-compare-metric-card.sh` for the focused command.
+- [x] Store artifacts under `various/05-css-loop-metric-card/`.
 
 ### Inspect-first validation
 
-- [ ] Run the focused `compare-spec` for MetricCard.
-- [ ] Inspect the individual crop files `left_region.png` and `right_region.png` before reading the numeric diff.
-- [ ] Use the `read` tool to inspect those individual images; do not use `understand_image` for this workflow.
-- [ ] Do not validate from the conjoined/combined `diff_comparison.png`; use it only after the individual crops are understood.
-- [ ] Confirm the two crops have comparable bounds and content.
-- [ ] If bounds differ materially, fix selectors/spec/story wrappers before changing CSS.
-- [ ] Record crop dimensions and first result in the diary.
+- [x] Run the focused `compare-spec` for MetricCard.
+- [x] Inspect the individual crop files `left_region.png` and `right_region.png` before reading the numeric diff.
+- [x] Use the `read` tool to inspect those individual images; do not use `understand_image` for this workflow.
+- [x] Do not validate from the conjoined/combined `diff_comparison.png`; use it only after the individual crops are understood.
+- [x] Once the individual crops are close, inspect pixel-diff artifacts such as `diff_only.png` to identify residual drift.
+- [x] Confirm the two crops have comparable bounds and content.
+- [x] If bounds differ materially, fix selectors/spec/story wrappers before changing CSS.
+- [x] Record crop dimensions and first result in the diary.
 
 ### Improvement loop
 
 Run at least two iterations:
 
-- [ ] Iteration 1: adjust React CSS/tokens based on crop evidence.
-- [ ] Rerun focused `compare-spec`.
-- [ ] Inspect crop and diff artifacts.
-- [ ] Iteration 2: adjust only if the diff evidence still points to real style drift.
-- [ ] Rerun focused `compare-spec`.
-- [ ] Record before/after changed-percent, changed-pixel count, and accepted differences.
+- [x] Iteration 1: adjust React CSS/tokens based on crop evidence.
+- [x] Rerun focused `compare-spec`.
+- [x] Inspect crop and diff artifacts.
+- [x] Iteration 2: adjust only if the diff evidence still points to real style drift.
+- [x] Rerun focused `compare-spec`.
+- [x] Record before/after changed-percent, changed-pixel count, and accepted differences.
 
 ### Acceptance criteria
 
-- [ ] The visual diff compares like-for-like component crops.
-- [ ] The loop identifies at least one concrete style issue or explicitly records why the first implementation is already close enough.
-- [ ] The final MetricCard result is either:
-  - [ ] in the `accepted` or `review` policy band, or
+- [x] The visual diff compares like-for-like component crops.
+- [x] The loop identifies at least one concrete style issue or explicitly records why the first implementation is already close enough.
+- [x] The final MetricCard result is either:
+  - [x] in the `accepted` or `review` policy band, or
   - [ ] documented as intentionally deferred with exact reasons and crop evidence.
-- [ ] The diary includes exact commands, artifacts, failures, and review instructions.
-- [ ] Commit: `Prove pyxis app component visual loop`.
+- [x] The diary includes exact commands, artifacts, failures, and review instructions.
+- [x] Commit: `Prove pyxis app component visual loop`.
 
 ---
 
@@ -495,6 +496,7 @@ Recommended section: `dashboard-metrics`.
 - [ ] Inspect the individual crop files `left_region.png` and `right_region.png` first.
 - [ ] Use the `read` tool to inspect those individual images; do not use `understand_image` for this workflow.
 - [ ] Do not validate from the conjoined/combined `diff_comparison.png`; use it only after the individual crops are understood.
+- [ ] Once the individual crops are close, inspect pixel-diff artifacts such as `diff_only.png` to identify residual drift.
 - [ ] Confirm both crops are the metrics section rather than the full page.
 - [ ] Confirm region sizes are close enough for pixel diff to be meaningful.
 - [ ] Record crop dimensions and first result in the diary.
@@ -528,11 +530,12 @@ Goal: turn the proven loop into a repeatable short runbook before scaling to pag
 - [ ] Document the required order:
   1. selector verification,
   2. individual crop inspection with the `read` tool (`left_region.png`, then `right_region.png`),
-  3. optional combined diff review only after individual crops are understood,
-  4. CSS/token change,
-  5. rerun,
-  6. diary/changelog update,
-  7. commit.
+  3. pixel-diff artifact review (`diff_only.png`) once crops are close,
+  4. optional combined diff review only after individual crops are understood,
+  5. CSS/token change,
+  6. rerun,
+  7. diary/changelog update,
+  8. commit.
 - [ ] Include exact commands for MetricCard and dashboard metrics.
 - [ ] Include screenshots/artifact paths from the successful loop.
 - [ ] Document failure modes:

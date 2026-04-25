@@ -29,7 +29,7 @@ targets:
     storyId: pyxis-app-components--metric-card-default
     sections:
       - name: component
-        original: '#root'
+        original: '[data-pyxis-component="metric-card"][data-metric-card="upcoming"]'
         react: '[data-pyxis-component="metric-card"]'
   - page: activity-feed-item
     variant: component

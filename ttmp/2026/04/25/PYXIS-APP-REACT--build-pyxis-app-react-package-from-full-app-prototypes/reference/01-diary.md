@@ -550,3 +550,162 @@ various/05-css-loop-metric-card/
 various/06-css-loop-dashboard-metrics/
 playbooks/02-pyxis-app-css-visual-improvement-loop.md
 ```
+
+## Step 7: Prove the component-level CSS visual improvement loop with MetricCard
+
+I executed Phase 6A for `MetricCard`. The important change was moving from a misleading full-page-vs-component comparison to a like-for-like crop: prototype `[data-pyxis-component="metric-card"][data-metric-card="upcoming"]` against React `[data-pyxis-component="metric-card"]`. I inspected the individual `left_region.png` and `right_region.png` files with the `read` tool before using pixel-diff evidence.
+
+The loop now works: selectors crop the same visual object, the first meaningful comparison identified concrete style drift, and CSS/story adjustments reduced the diff from 9.6416% to 3.7242% while keeping the result in the `review` band.
+
+### Prompt Context
+
+**User prompt (verbatim):** "remember to use the read call to read images, not uderstand images, and to use the dindividual images to validate, not the conjoined large images"
+
+**Assistant interpretation:** For css-visual-diff review, inspect generated image artifacts with the `read` tool and validate from the separate left/right crops rather than from a combined comparison image.
+
+**Inferred user intent:** Prevent visual validation from hiding crop mismatches or hallucinating image details through an image-understanding tool.
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue implementing the CSS visual improvement loop proof phase using the clarified image-inspection rules.
+
+**Inferred user intent:** Move beyond planning into a real proof of the visual loop.
+
+**User prompt (verbatim):** "you can look at the pixel diff when you get close as well"
+
+**Assistant interpretation:** After the individual crops are confirmed comparable, inspect the pixel-diff artifact to identify residual drift.
+
+**Inferred user intent:** Use pixel diff as a secondary diagnostic once crop validity is established.
+
+**Commit (code):** this commit — "Prove pyxis app component visual loop"
+
+### What I did
+
+- Added behavior-neutral selector pass in prototype code:
+  - `prototype-design/lib/components.jsx`
+  - `prototype-design/screens/auth-dash.jsx`
+- Extended prototype `Card` to pass through rest attributes.
+- Added prototype `MetricCard` / `Stat` selectors:
+  - `data-pyxis-component="metric-card"`
+  - `data-pyxis-part="root|accent|label|value|caption|trend"`
+  - `data-metric-card="upcoming"` for the first Dashboard metric.
+- Added `data-section="dashboard-metrics"` to the prototype Dashboard metrics grid.
+- Updated React MetricCard story fixture to match the prototype content (`Upcoming`, `6`, `Next 60 days`) and crop width.
+- Updated `app.components.visual.yml` to use like-for-like selectors.
+- Regenerated spec mirrors.
+- Added ticket-local script:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
+```
+
+- Ran focused comparisons and preserved artifacts under:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/
+```
+
+### Why
+
+- The earlier `MetricCard` run compared the full dashboard prototype root against a single React card, so the numeric diff was not useful.
+- A component-level proof is required before scaling visual tuning to page sections and full pages.
+- Inspecting individual crops first validates the selector contract before any CSS tuning.
+
+### What worked
+
+- Run 01 produced a real like-for-like crop after selector instrumentation:
+  - left bounds: `231 × 135.5`,
+  - right bounds: `164 × 116`,
+  - changed percent: `9.6416%`,
+  - changed pixels: `3029/31416`,
+  - classification: `review`.
+- Reading individual crops showed the React card had the right content but wrong crop width/height, background tint, border treatment, and missing prototype-style accent rule layout.
+- After Storybook wrapper and CSS tuning, Run 02 produced nearly identical crop bounds:
+  - left bounds: `231 × 135.5`,
+  - right bounds: `231 × 136`,
+  - changed percent: `3.7242%`,
+  - changed pixels: `1170/31416`,
+  - classification: `review`.
+- I inspected `left_region.png` and `right_region.png` with `read` for Run 02, Run 03, Run 04, and Run 05-final.
+- Once crops were close, I inspected `diff_only.png` with `read` to locate residual text/edge drift.
+- Final chosen result is Run 05-final:
+  - `3.7242%`, `1170/31416`, `review` band.
+
+### What didn't work
+
+- A mistaken command invocation with a trailing slash failed silently because it was guarded with `|| true` during quick shell testing:
+
+```bash
+./ttmp/.../scripts/03-smoke-compare-metric-card.sh/ 2>/dev/null || true
+```
+
+The actual script path worked when invoked normally:
+
+```bash
+ttmp/.../scripts/03-smoke-compare-metric-card.sh run-01
+```
+
+- Run 03 and Run 04 tested root color/font/radius adjustments from computed style diffs, but the pixel result got slightly worse (`4.1157%` and `4.1508%`). I reverted to the visually better Run 02/Run 05-final CSS shape except for the useful crop/size fixes.
+
+### What I learned
+
+- The crop inspection rule is correct: Run 01’s numeric result only became meaningful after individual left/right images showed the crop was now the same object.
+- CSS computed diffs are helpful evidence, but not every computed root style difference improves pixels. Some differences came from the prototype card root versus React root measurement and should not be blindly forced.
+- Pixel diff is most useful after crop sizes match; before that, it mostly reports selector/story-wrapper problems.
+
+### What was tricky to build
+
+- The prototype `Stat` component was nested inside a generic `Card`, so adding attributes required first allowing `Card` to spread `...rest` onto its root. Without that, the visual suite could not target the card root directly.
+- Storybook wrapper padding affected crop bounds. The React story initially wrapped the card in a padded container, which was fine for viewing but wrong for crop comparison. Removing wrapper padding and setting the wrapper width made the selected React component match the prototype crop dimensions.
+- The final diff remains mostly text anti-aliasing/position and edge differences. The individual crops look close; the `diff_only.png` highlights residual text and border pixels.
+
+### What warrants a second pair of eyes
+
+- Review whether the final `MetricCard` CSS should keep prototype-specific values or be re-tokenized after more app components are compared.
+- Review whether the prototype `Stat` selectors should stay in `lib/components.jsx` or be limited to dashboard-only fixtures if future prototype comparisons need multiple metric-card variants.
+- Review whether `3.7242%` in the review band is acceptable for the proof phase or whether a stricter accepted-band target is needed before Phase 6B.
+
+### What should be done in the future
+
+- Execute Phase 6B using the same inspect-first process for `dashboard-metrics`.
+- Use `left_region.png` and `right_region.png` first, then inspect `diff_only.png` once crops are close.
+- Avoid `diff_comparison.png` as the primary validation artifact.
+
+### Code review instructions
+
+- Start with prototype selector changes:
+  - `prototype-design/lib/components.jsx`
+  - `prototype-design/screens/auth-dash.jsx`
+- Then review React MetricCard changes:
+  - `web/packages/pyxis-app/src/components/molecules/MetricCard.css`
+  - `web/packages/pyxis-app/stories/AppComponents.stories.tsx`
+- Then review the spec/script:
+  - `prototype-design/visual-diff/userland/specs/app.components.visual.yml`
+  - `ttmp/.../scripts/03-smoke-compare-metric-card.sh`
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh run-review
+```
+
+- Inspect individual images with `read`:
+
+```text
+various/05-css-loop-metric-card/run-review/metric-card/artifacts/component/left_region.png
+various/05-css-loop-metric-card/run-review/metric-card/artifacts/component/right_region.png
+various/05-css-loop-metric-card/run-review/metric-card/artifacts/component/diff_only.png
+```
+
+### Technical details
+
+Run summary:
+
+| Run | Purpose | Changed percent | Changed pixels | Notes |
+|---|---:|---:|---:|---|
+| `run-01` | First like-for-like selector run | `9.6416%` | `3029/31416` | Crops same object but React crop too small/tinted. |
+| `run-02` | Story width + MetricCard visual tuning | `3.7242%` | `1170/31416` | Best crop/diff shape; review band. |
+| `run-03` | Computed-style color/font/radius experiment | `4.1157%` | `1293/31416` | Worse; do not keep all computed-style changes. |
+| `run-04` | Border-radius experiment | `4.1508%` | `1304/31416` | Worse. |
+| `run-05-final` | Reverted to best tuned shape | `3.7242%` | `1170/31416` | Final Phase 6A result. |

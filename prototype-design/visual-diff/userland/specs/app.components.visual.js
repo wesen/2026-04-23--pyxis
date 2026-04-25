@@ -47,7 +47,7 @@ module.exports = {
       "sections": [
         {
           "name": "component",
-          "original": "#root",
+          "original": "[data-pyxis-component=\"metric-card\"][data-metric-card=\"upcoming\"]",
           "react": "[data-pyxis-component=\"metric-card\"]"
         }
       ]

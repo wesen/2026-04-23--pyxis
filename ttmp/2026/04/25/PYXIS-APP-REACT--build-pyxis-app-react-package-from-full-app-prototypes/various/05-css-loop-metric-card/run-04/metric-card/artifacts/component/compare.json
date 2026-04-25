@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-04/metric-card/artifacts/component/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-04/metric-card/artifacts/component/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-metric-card"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 0.5,
+      "width": 0,
+      "x": -247,
+      "y": -299.390625
+    },
+    "left": {
+      "height": 135.5,
+      "width": 231,
+      "x": 247,
+      "y": 299.390625
+    },
+    "right": {
+      "height": 136,
+      "width": 231,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 135.5,
+      "width": 231,
+      "x": 247,
+      "y": 299.390625
+    },
+    "exists": true,
+    "name": "metric-card-component",
+    "selector": "[data-pyxis-component=\"metric-card\"][data-metric-card=\"upcoming\"]",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "metric-card-component",
+  "pixel": {
+    "changedPercent": 4.150751209574739,
+    "changedPixels": 1304,
+    "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-04/metric-card/artifacts/component/diff_comparison.png",
+    "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-04/metric-card/artifacts/component/diff_only.png",
+    "normalizedHeight": 136,
+    "normalizedWidth": 231,
+    "threshold": 30,
+    "totalPixels": 31416
+  },
+  "right": {
+    "bounds": {
+      "height": 136,
+      "width": 231,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "metric-card-component",
+    "selector": "[data-pyxis-component=\"metric-card\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-components--metric-card-default\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "12px",
+      "name": "border-radius",
+      "right": "10px"
+    },
+    {
+      "changed": true,
+      "left": "18px",
+      "name": "padding-left",
+      "right": "26px"
+    }
+  ],
+  "text": {
+    "changed": false,
+    "left": "Upcoming6Next 60 days",
+    "right": "Upcoming6Next 60 days"
+  }
+}
