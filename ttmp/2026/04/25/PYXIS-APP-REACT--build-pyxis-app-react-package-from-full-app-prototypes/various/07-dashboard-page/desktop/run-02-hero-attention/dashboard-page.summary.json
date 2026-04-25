@@ -1,0 +1,111 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/compare-all-output.json",
+  "markdownPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/01-suite-summary.md",
+  "maxChangedPercent": 28.453474975886827,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.json",
+      "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 444.125,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 760,
+          "width": 1240,
+          "x": 0,
+          "y": 0
+        },
+        "normalizedHeight": 1204,
+        "normalizedWidth": 1240,
+        "right": {
+          "height": 1204.125,
+          "width": 1240,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 28.453474975886827,
+      "changedPixels": 424799,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_only.png",
+      "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/left_region.png",
+      "leftSelector": "[data-page=\"dashboard\"]",
+      "page": "dashboard",
+      "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/right_region.png",
+      "rightSelector": "[data-page=\"dashboard\"]",
+      "section": "page",
+      "styleChangeCount": 5,
+      "styleDiffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "property": "background-color",
+          "right": "rgb(243, 241, 235)"
+        },
+        {
+          "left": "rgb(0, 0, 0)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "Inter, -apple-system, sans-serif",
+          "property": "font-family",
+          "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew showNext on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorView on DiscordEdit showUpcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025Upcoming showsPinned to #upcoming-showsView allDateArtistDoorsAgeStatusMay 2FridayBurial HexDarkwave8:00 PM21+ConfirmedMay 9FridayMoor MotherExperimental7:00 PMAll AgesConfirmedMay 17SaturdayCygnus + GuestsTechno9:00 PM18+ConfirmedMay 23FridayOpen Mic NightVarious7:00 PMAll AgesConfirmedMay 30FridayBasement FrequenciesTechno10:00 PM21+ConfirmedQuick actionsAdd a showReview bookings · 3Open audit logRecent activityliveToday · 11:42jamie approved show #47 · Orphx · Jul 4Today · 11:39bot posted + pinned #47 in #upcoming-showsToday · 09:14sam declined submission · Arca · Jul 12Apr 22 · 23:00bot auto-archived 2 past shows (Planning for Burial, Actress)Apr 21 · 16:30jamie edited show #42 · updated doors to 8:00 PMBot statuspyxis-bot OnlineHollow Earth · 247 members · v1.2.0SettingsPinned3upcomingLast sync12magoUptime99.4%30 dayNeeds your attention2 past shows need loggingPlanning for Burial · Mar 14 and Actress · Feb 28Zola Jesus · Jun 6Price still says $20 — is that right for a 160-draw headliner?Discord token expires in 14 daysReconnect to keep pinning and archival running",
+        "right": "pyxisstaff portalDashboardShowsCalendarBookingsArtistsPost-showAudit logDiscordSettingsHome / DashboardWelcome back, AdaNew showpyxisWed, Apr 23⌕ADWelcome backGood morning, Ada.6 shows booked · 3 need your eye.Next on stage · in 9 daysBurial HexFri, May 2, 2025 Doors 8:00 PM 21+ $12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscord✦Upcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›Upcoming showsFriMay 2Burial HexDarkwave · doors 8:00 PM · 21+ 70/150 expected · $12 adv / $15 doorFriMay 9Moor MotherExperimental · doors 7:00 PM · All Ages 120/150 expected · $15SatMay 17Cygnus + GuestsTechno · doors 9:00 PM · 18+ 90/150 expected · $8Quick actionsAdd a showReview bookings · 3Open audit logRecent activityliveapproved show #47 · Orphx · Jul 4Today · 11:42 · jamieposted + pinned #47 in #upcoming-showsToday · 11:39 · botdeclined submission · Arca · Jul 12Today · 09:14 · samauto-archived 2 past shows (Planning for Burial, Actress)Apr 22 · 23:00 · botedited show #42 · updated doors to 8:00 PMApr 21 · 16:30 · jamieDashboardShowsCalendarBookingsArtists"
+      },
+      "threshold": 30,
+      "totalPixels": 1492960,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

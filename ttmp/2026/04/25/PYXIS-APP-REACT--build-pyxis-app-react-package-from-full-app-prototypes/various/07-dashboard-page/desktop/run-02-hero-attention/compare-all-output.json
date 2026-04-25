@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 28.453474975886827,
+    "classificationCounts": {
+      "major-mismatch": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "major-mismatch",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "outDir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard",
+        "sectionCount": 1,
+        "maxChangedPercent": 28.453474975886827,
+        "classificationCounts": {
+          "major-mismatch": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/manifest.json",
+        "indexPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "dashboard",
+            "variant": "desktop",
+            "section": "page",
+            "outDir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+            "leftSelector": "[data-page=\"dashboard\"]",
+            "rightSelector": "[data-page=\"dashboard\"]",
+            "threshold": 30,
+            "changedPercent": 28.453474975886827,
+            "changedPixels": 424799,
+            "totalPixels": 1492960,
+            "normalizedWidth": 1240,
+            "normalizedHeight": 1204,
+            "bounds": {
+              "delta": {
+                "y": 0,
+                "width": 0,
+                "height": 444.125,
+                "x": 0
+              },
+              "changed": true,
+              "left": {
+                "y": 0,
+                "width": 1240,
+                "height": 760,
+                "x": 0
+              },
+              "right": {
+                "y": 0,
+                "width": 1240,
+                "height": 1204.125,
+                "x": 0
+              }
+            },
+            "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.json",
+            "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.md",
+            "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/left_region.png",
+            "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/right_region.png",
+            "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.json",
+              "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "left": {
+                  "bounds": {
+                    "width": 1240,
+                    "height": 760,
+                    "x": 0,
+                    "y": 0
+                  },
+                  "name": "dashboard-page",
+                  "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+                  "selector": "[data-page=\"dashboard\"]",
+                  "exists": true,
+                  "visible": true
+                },
+                "name": "dashboard-page",
+                "pixel": {
+                  "normalizedHeight": 1204,
+                  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 1492960,
+                  "changedPixels": 424799,
+                  "changedPercent": 28.453474975886827,
+                  "normalizedWidth": 1240
+                },
+                "right": {
+                  "bounds": {
+                    "width": 1240,
+                    "height": 1204.125,
+                    "x": 0,
+                    "y": 0
+                  },
+                  "name": "dashboard-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+                  "selector": "[data-page=\"dashboard\"]",
+                  "exists": true,
+                  "visible": true
+                },
+                "styleChanges": 5,
+                "attributeChanges": 3,
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": true
+              },
+            "classification": "major-mismatch",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "section": "page",
+        "outDir": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+        "leftSelector": "[data-page=\"dashboard\"]",
+        "rightSelector": "[data-page=\"dashboard\"]",
+        "threshold": 30,
+        "changedPercent": 28.453474975886827,
+        "changedPixels": 424799,
+        "totalPixels": 1492960,
+        "normalizedWidth": 1240,
+        "normalizedHeight": 1204,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 1240,
+            "height": 760
+          },
+          "right": {
+            "y": 0,
+            "width": 1240,
+            "height": 1204.125,
+            "x": 0
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 444.125
+          }
+        },
+        "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.json",
+        "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.md",
+        "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/left_region.png",
+        "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/right_region.png",
+        "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.json",
+          "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "right": {
+              "name": "dashboard-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+              "selector": "[data-page=\"dashboard\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 1204.125
+              }
+            },
+            "styleChanges": 5,
+            "attributeChanges": 3,
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "textChanged": true,
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "left": {
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              },
+              "name": "dashboard-page",
+              "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+              "selector": "[data-page=\"dashboard\"]",
+              "exists": true
+            },
+            "name": "dashboard-page",
+            "pixel": {
+              "totalPixels": 1492960,
+              "changedPixels": 424799,
+              "changedPercent": 28.453474975886827,
+              "normalizedWidth": 1240,
+              "normalizedHeight": 1204,
+              "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-02-hero-attention/dashboard/artifacts/page/diff_only.png",
+              "threshold": 30
+            }
+          },
+        "classification": "major-mismatch",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

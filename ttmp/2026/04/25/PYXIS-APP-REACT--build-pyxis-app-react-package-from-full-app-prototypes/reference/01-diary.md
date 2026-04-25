@@ -1051,3 +1051,65 @@ The crops remain aligned; the diff remains mostly typography/edge pixels, so thi
 ### Why this matters for Phase 7
 
 The Dashboard page can now compose shell, panels, rows, metric cards, and mobile nav from a more coherent app theme. Any future page-level tuning should first ask whether a value belongs in `app-tokens.css` before adding local CSS.
+
+## Step 11: Start Phase 7 Dashboard composition
+
+I continued into Phase 7 after the token-hardening pass. The goal was to improve the full responsive Dashboard page structurally using the proven loop, not to chase exact pixels.
+
+### What changed
+
+- Added dashboard-specific composition inside `DashboardOverview`:
+  - desktop/mobile hero section for the next show,
+  - mobile dashboard header and welcome copy,
+  - quick actions panel,
+  - needs-attention list,
+  - desktop upcoming-shows table with the existing table/row components,
+  - responsive mobile ordering that hides upcoming shows to match the mobile prototype more closely.
+- Adjusted `AppShell`:
+  - desktop sidebar now uses the light surface theme to match the full-app prototype and the cohesive theme tokens,
+  - mobile dashboard hides the generic topbar in favor of the mobile dashboard header,
+  - mobile bottom nav is static at page bottom and labels the fifth item as `More`.
+- Added ticket script:
+
+```bash
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh desktop run-name
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/05-smoke-compare-dashboard-page.sh mobile run-name
+```
+
+### Validation
+
+- Typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Desktop page runs:
+  - `run-01-baseline`: `42.4321%`, major mismatch.
+  - `run-02-hero-attention`: `28.4535%`, major/tune band depending on classification label.
+  - `run-03-table-mobile-trim`: `28.7209%`, major/tune band.
+  - `run-04-light-sidebar`: `16.4150%`, `245069` changed pixels, `tune-required`.
+
+- Mobile page runs:
+  - `run-01-baseline`: `33.4386%`, major mismatch.
+  - `run-02-hero-attention`: `27.9984%`, major/tune band.
+  - `run-03-table-mobile-trim`: `29.1554%`, major/tune band.
+  - `run-04-bottom-nav-static`: `25.9643%`, major/tune band.
+
+I inspected representative final crops with `read`:
+
+```text
+various/07-dashboard-page/desktop/run-04-light-sidebar/dashboard/artifacts/page/right_region.png
+various/07-dashboard-page/mobile/run-04-bottom-nav-static/dashboard/artifacts/page/right_region.png
+```
+
+### Current assessment
+
+The full page is now structurally much closer: hero, metrics, upcoming, quick actions, activity, mobile attention cards, and mobile bottom nav are all present. The full-page diff remains above review-band because the full prototype has richer sidebar/topbar details, different table density, extra bot/status/attention desktop panels, and different hidden/visible text contracts. This should be treated as a Phase 7 checkpoint, not a final visual acceptance.
+
+### Next tuning ideas
+
+- Add desktop sidebar grouping/user footer only if needed for the page diff.
+- Add desktop bot-status and settings mini panels if full-page parity matters.
+- Decide whether mobile metric labels should use mobile-specific copy (`Pending`, `Capacity`) or remain shared semantic labels.
+- Consider adding focused section specs for `dashboard-hero`, `dashboard-upcoming`, `dashboard-activity`, and `dashboard-attention` rather than tuning only the full-page crop.

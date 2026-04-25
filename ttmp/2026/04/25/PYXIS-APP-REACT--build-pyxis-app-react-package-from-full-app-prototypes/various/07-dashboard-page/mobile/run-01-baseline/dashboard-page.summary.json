@@ -1,0 +1,116 @@
+[
+{
+  "classificationCounts": {
+    "major-mismatch": 1
+  },
+  "jsonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/compare-all-output.json",
+  "markdownPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/01-suite-summary.md",
+  "maxChangedPercent": 33.438578477510625,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "artifactJson": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/compare.json",
+      "artifactMarkdown": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 679.265625,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1118.9375,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        "normalizedHeight": 1798,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 1798.203125,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 33.438578477510625,
+      "changedPixels": 234478,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/diff_only.png",
+      "leftRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/left_region.png",
+      "leftSelector": "[data-page=\"dashboard\"]",
+      "page": "dashboard",
+      "rightRegionPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/mobile/run-01-baseline/dashboard/artifacts/page/right_region.png",
+      "rightSelector": "[data-page=\"dashboard\"]",
+      "section": "page",
+      "styleChangeCount": 6,
+      "styleDiffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "property": "background-color",
+          "right": "rgb(232, 228, 218)"
+        },
+        {
+          "left": "rgb(0, 0, 0)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "Inter, -apple-system, sans-serif",
+          "property": "font-family",
+          "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "0px",
+          "property": "padding-bottom",
+          "right": "72px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "9:41pyxisWed, Apr 23ADWelcome backGood morning, Ada.6 shows booked · 3 need your eye.Next on stage · in 9 daysBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+Open showDiscordUpcoming6next 60 daysPending3review neededAvg draw84last 6 showsCapacity56%May 2025Needs your attention32 past shows need loggingPlanning for Burial · ActressZola Jesus · Jun 6Check price for a 160-draw headlinerDiscord token expires in 14dReconnect to keep pinning workingRecent activityTodayjamie approved show #47 · Orphx · Jul 4Today · 11:42bot posted + pinned #47 in #upcoming-showsToday · 11:39sam declined submission · Arca · Jul 12Today · 09:14HomeShows3BookingsArtistsMore",
+        "right": "pyxisstaff portalDashboardShowsCalendarBookingsArtistsPost-showAudit logDiscordSettingsHome / DashboardWelcome back, AdaNew showUpcoming6Next 60 daysPending bookings3Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025Upcoming showsFriMay 2Burial HexDarkwave · doors 8:00 PM · 21+ 70/150 expected · $12 adv / $15 doorFriMay 9Moor MotherExperimental · doors 7:00 PM · All Ages 120/150 expected · $15SatMay 17Cygnus + GuestsTechno · doors 9:00 PM · 18+ 90/150 expected · $8Recent activityapproved show #47 · Orphx · Jul 4Today · 11:42 · jamieposted + pinned #47 in #upcoming-showsToday · 11:39 · botdeclined submission · Arca · Jul 12Today · 09:14 · samauto-archived 2 past shows (Planning for Burial, Actress)Apr 22 · 23:00 · botedited show #42 · updated doors to 8:00 PMApr 21 · 16:30 · jamieDashboardShowsCalendarBookingsArtists"
+      },
+      "threshold": 30,
+      "totalPixels": 701220,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

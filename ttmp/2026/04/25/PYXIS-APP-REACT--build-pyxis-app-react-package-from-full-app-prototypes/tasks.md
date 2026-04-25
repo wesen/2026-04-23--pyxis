@@ -557,32 +557,32 @@ Goal: compose the first full page once the core components exist.
 
 ### Desktop Dashboard
 
-- [ ] Create `Dashboard.tsx` page.
-- [ ] Compose from `AppShell`, `DashboardOverview`, metric cards, activity panels.
-- [ ] Add `data-page="dashboard"`.
+- [x] Create/extend Dashboard page composition in `Pages.tsx` / `DashboardOverview`.
+- [x] Compose from `AppShell`, `DashboardOverview`, metric cards, hero, quick actions, attention, upcoming, and activity panels.
+- [x] Add `data-page="dashboard"`.
 - [ ] Add sections:
-  - [ ] `dashboard-summary`
-  - [ ] `dashboard-metrics`
-  - [ ] `dashboard-upcoming`
-  - [ ] `dashboard-activity`
+  - [x] `dashboard-summary`
+  - [x] `dashboard-metrics`
+  - [x] `dashboard-upcoming`
+  - [x] `dashboard-activity`
 
 ### Mobile Dashboard viewport
 
-- [ ] Same `Dashboard.tsx` page responds to 390px viewport.
-- [ ] Use CSS/layout variants, not `MobileDashboard.tsx`, unless unavoidable.
-- [ ] Match `prototype-design/standalone/mobile/home.html` as the mobile baseline.
+- [x] Same Dashboard composition responds to 390px viewport.
+- [x] Use CSS/layout variants, not `MobileDashboard.tsx`.
+- [x] Use `prototype-design/standalone/mobile/home.html` as the mobile baseline; final checkpoint is tune-required, not accepted.
 
 ### Storybook
 
-- [ ] Add `DashboardDesktop` story.
-- [ ] Add `DashboardMobile` story using the same page route/component.
+- [x] Add `DashboardDesktop` story.
+- [x] Add `DashboardMobile` story using the same page route/component.
 
 ### Visual specs
 
-- [ ] Add dashboard target to `app.pages.desktop.visual.yml`.
-- [ ] Add dashboard target to `app.pages.mobile.visual.yml`.
-- [ ] Run both focused comparisons.
-- [ ] Preserve artifacts under numbered folders.
+- [x] Add dashboard target to `app.pages.desktop.visual.yml`.
+- [x] Add dashboard target to `app.pages.mobile.visual.yml`.
+- [x] Run both focused comparisons (desktop and mobile full-page checkpoints).
+- [x] Preserve artifacts under numbered folders.
 
 ### Deliverable
 
