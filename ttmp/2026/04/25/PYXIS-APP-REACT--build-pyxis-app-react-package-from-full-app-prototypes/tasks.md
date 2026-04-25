@@ -19,24 +19,24 @@ Summary: Task checklist for designing and implementing the pyxis-app React packa
 
 - [x] Create docmgr ticket workspace.
 - [x] Start diary.
-- [ ] Relate current source/playbook files to the ticket.
+- [x] Relate current source/playbook files to the ticket.
 
 ## Phase 1 — Research and system mapping
 
-- [ ] Study existing prototype full-app/mobile sources and standalone outputs.
-- [ ] Study existing component-system/public-site package structure.
-- [ ] Study existing JS-canonical visual-diff userland and visual suite specs.
-- [ ] Study existing playbooks and identify what needs adjustment.
+- [x] Study existing prototype full-app/mobile sources and standalone outputs.
+- [x] Study existing component-system/public-site package structure.
+- [x] Study existing JS-canonical visual-diff userland and visual suite specs.
+- [x] Study existing playbooks and identify what needs adjustment.
 
 ## Phase 2 — Detailed guide
 
-- [ ] Write detailed analysis/design/implementation guide for a new intern.
-- [ ] Include architecture diagrams, file references, APIs, workflow phases, pseudocode, and command references.
-- [ ] Explain how to reuse current JS/YML visual-diff setup for `pyxis-app`.
-- [ ] Explain experiment-script hygiene under ticket `scripts/` / `experiments/`.
+- [x] Write detailed analysis/design/implementation guide for a new intern.
+- [x] Include architecture diagrams, file references, APIs, workflow phases, pseudocode, and command references.
+- [x] Explain how to reuse current JS/YML visual-diff setup for `pyxis-app`.
+- [x] Explain experiment-script hygiene under ticket `scripts/` / `experiments/`.
 
 ## Phase 3 — Review and delivery
 
-- [ ] Validate docmgr metadata.
-- [ ] Upload guide bundle to reMarkable with dry-run first.
+- [x] Validate docmgr metadata (only known topic-vocabulary warning remains).
+- [x] Upload guide bundle to reMarkable with dry-run first.
 - [ ] Commit ticket setup and guide in coherent chunks.
