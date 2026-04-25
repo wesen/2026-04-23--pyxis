@@ -32,4 +32,8 @@
 - Extracted `Poster` static layout/art/text styles into `web/packages/pyxis-components/src/public/Poster/Poster.css`, leaving per-kind art colors/backgrounds as CSS custom properties.
 - Added `Poster` style override support for component-local CSS variables and a theme override Storybook story.
 - Validated `Poster` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../poster-redroom.css-visual-diff.yml`; current pixel diff is `5.3101% | 4846/91260`.
+- Extracted `ShowTypeChips` static inline styles into `web/packages/pyxis-components/src/public/ShowTypeChips/ShowTypeChips.css`.
+- Added `ShowTypeChips` part selectors for `chip`, active state via `data-state`, focus-visible styling, wrapped layout and theme override Storybook stories.
+- Validated `ShowTypeChips` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-type-chips-default.css-visual-diff.yml`; current pixel diff is `0.0102% | 4/39200`.
+- Completed the initial B2 small public molecule CSS extraction batch: `SafetyNote`, `ArchiveStats`, `TicketStub`, `LineupRow`, `YearGroup`, `Poster`, and `ShowTypeChips`.
 

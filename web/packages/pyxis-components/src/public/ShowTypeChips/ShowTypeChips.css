@@ -1,0 +1,36 @@
+/* ShowTypeChips — booking form show-type selector chips. */
+
+:where([data-pyxis-component='show-type-chips'][data-pyxis-part='root']) {
+  --pyxis-show-type-chips-active-bg: #1F1E1C;
+  --pyxis-show-type-chips-active-color: var(--color-text-inverse);
+  --pyxis-show-type-chips-bg: var(--color-surface);
+  --pyxis-show-type-chips-border-color: #EAE7E0;
+  --pyxis-show-type-chips-color: var(--color-accent);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+:where([data-pyxis-component='show-type-chips'][data-pyxis-part='chip']) {
+  background: var(--pyxis-show-type-chips-bg);
+  border: 1px solid var(--pyxis-show-type-chips-border-color);
+  border-radius: var(--radius-full);
+  color: var(--pyxis-show-type-chips-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: var(--weight-medium);
+  padding: 7px 14px;
+}
+
+:where([data-pyxis-component='show-type-chips'][data-pyxis-part='chip'][data-state='active']) {
+  background: var(--pyxis-show-type-chips-active-bg);
+  border: none;
+  color: var(--pyxis-show-type-chips-active-color);
+}
+
+:where([data-pyxis-component='show-type-chips'][data-pyxis-part='chip']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}

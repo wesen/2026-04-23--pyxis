@@ -128,13 +128,13 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `LineupRow` styles into `LineupRow.css`.
 - [x] Extract `YearGroup` styles into `YearGroup.css`.
 - [x] Extract `Poster` styles into `Poster.css`.
-- [ ] Extract `ShowTypeChips` styles into `ShowTypeChips.css`.
-- [ ] Add/verify root `className` and `data-pyxis-component` selectors for each component.
-- [ ] Add/verify important `data-pyxis-part` selectors for titles, metadata, badges, chips, and actions.
-- [ ] Replace hardcoded colors with tokens or component-local CSS variables.
+- [x] Extract `ShowTypeChips` styles into `ShowTypeChips.css`.
+- [x] Add/verify root `className` and `data-pyxis-component` selectors for each component.
+- [x] Add/verify important `data-pyxis-part` selectors for titles, metadata, badges, chips, and actions.
+- [x] Replace hardcoded colors with tokens or component-local CSS variables.
 - [x] Run `cd web && pnpm --filter pyxis-components typecheck`.
-- [ ] Run matching molecule visual-diff configs for touched components.
-- [ ] Commit this batch separately.
+- [x] Run matching molecule visual-diff configs for touched components.
+- [x] Commit this batch separately.
 
 ## B3 — Extract CSS for show-list and archive components
 
@@ -149,7 +149,7 @@ Start here to establish the pattern before touching large organisms.
 - [ ] Add long-title/long-genre Storybook cases where wrapping matters.
 - [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
 - [ ] Run matching visual-diff configs for touched show/archive components.
-- [ ] Commit this batch separately.
+- [x] Commit this batch separately.
 
 ## B4 — Extract CSS for show-detail and booking components
 
@@ -167,7 +167,7 @@ Start here to establish the pattern before touching large organisms.
 - [ ] Keep only truly dynamic form styles inline, preferably as CSS custom properties.
 - [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
 - [ ] Run matching visual-diff configs for touched detail/booking components.
-- [ ] Commit this batch separately.
+- [x] Commit this batch separately.
 
 ## B5 — Extract CSS for about/home/footer/public shell components
 
@@ -185,7 +185,7 @@ Start here to establish the pattern before touching large organisms.
 - [ ] Clean up `PubNav.css` to use tokens and richer `data-pyxis-part` selectors.
 - [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.
 - [ ] Run matching visual-diff configs for touched about/home/footer components.
-- [ ] Commit this batch separately.
+- [x] Commit this batch separately.
 
 ## B6 — Storybook theme and variant coverage
 

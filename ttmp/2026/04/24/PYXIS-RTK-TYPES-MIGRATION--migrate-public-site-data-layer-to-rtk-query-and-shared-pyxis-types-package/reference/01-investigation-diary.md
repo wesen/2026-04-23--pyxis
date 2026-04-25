@@ -390,3 +390,46 @@ root      5.3101% | 4846/91260
 ```
 
 The component still has non-trivial pixel diff and should receive later visual tuning if poster parity becomes a release blocker. The architecture improvement is that static visual structure now lives in CSS while per-kind artwork remains overrideable through CSS variables.
+
+
+## Step 10: Extract `ShowTypeChips` CSS and complete B2 small molecule batch
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ShowTypeChips/ShowTypeChips.css`.
+- Moved flex layout and button chip styles out of JSX.
+- Added stable `data-pyxis-part='chip'` hooks and `data-state='active'` for the active chip.
+- Added tokenized `:focus-visible` styling.
+- Updated `ShowTypeChips.tsx` to self-import CSS and use `clsx('pyxis-show-type-chips', className)`.
+- Added `Wrapped` and `ThemeOverride` Storybook stories.
+- Updated B2 tasks to mark the small public molecule extraction batch as complete.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/show-type-chips-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output after preserving the active chip's no-border style:
+
+```text
+component 0.0102% | 4/39200
+root      0.0102% | 4/39200
+```
+
+### Batch status
+
+B2 small public molecule CSS extraction is now complete for:
+
+```text
+SafetyNote
+ArchiveStats
+TicketStub
+LineupRow
+YearGroup
+Poster
+ShowTypeChips
+```
+
+Some components still have residual visual diff from pre-existing semantic/layout differences, but static inline styles have been extracted and all touched components passed typecheck plus their matching visual-diff configs.
