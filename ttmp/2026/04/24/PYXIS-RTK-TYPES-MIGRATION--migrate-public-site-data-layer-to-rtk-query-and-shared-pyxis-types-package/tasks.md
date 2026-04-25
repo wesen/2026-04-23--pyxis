@@ -142,7 +142,7 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ArchiveShowRow` styles into `ArchiveShowRow.css`.
 - [x] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
 - [x] Extract `ArchiveSearchFilters` styles into `ArchiveSearchFilters.css`.
-- [ ] Extract `ShowTile` styles into `ShowTile.css`.
+- [x] Extract `ShowTile` styles into `ShowTile.css`.
 - [ ] Extract `ShowGrid` styles into `ShowGrid.css`.
 - [ ] Ensure `ShowGrid` owns only layout and does not duplicate `ShowTile` internals.
 - [x] Ensure `ArchiveShowList` owns only list layout and does not duplicate `ArchiveShowRow` internals.

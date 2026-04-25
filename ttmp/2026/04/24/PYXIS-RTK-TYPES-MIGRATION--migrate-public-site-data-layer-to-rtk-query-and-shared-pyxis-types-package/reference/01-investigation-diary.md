@@ -517,3 +517,32 @@ root      0.0000% | 0/25920
 ```
 
 This was an exact pixel-parity extraction.
+
+
+## Step 14: Extract `ShowTile` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ShowTile/ShowTile.css`.
+- Moved static root, info, title, meta, price, and ticket-pill styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `info`, `title`, `meta`, `price`, and `ticket-pill`.
+- Added `data-compact='true'` for the compact sizing variant.
+- Kept dynamic ticket-pill values as component-local CSS variables on the root.
+- Updated `ShowTile.tsx` to self-import CSS and use `clsx('pyxis-show-tile', className)`.
+- Added `SoldOut` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/show-tile-redroom.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 4.0975% | 4890/119340
+root      4.0975% | 4890/119340
+```
+
+`ShowTile` still inherits the poster-level residual diff from the `Poster` component, but the static card-info styles are now extracted and themeable.

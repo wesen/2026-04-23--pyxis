@@ -47,4 +47,8 @@
 - Added part selectors for `input`, `years`, and `year-button`, active state via `data-state`, and tokenized focus-visible styles.
 - Added wrapped and theme override Storybook stories for `ArchiveSearchFilters`.
 - Validated `ArchiveSearchFilters` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-search-filters-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/46080`.
+- Extracted `ShowTile` styles into `web/packages/pyxis-components/src/public/ShowTile/ShowTile.css`.
+- Added `ShowTile` part selectors for `info`, `title`, `meta`, `price`, and `ticket-pill`, compact state via `data-compact`, focus-visible styling, and theme/sold-out Storybook stories.
+- Kept ticket-pill kind colors as component-local CSS variables.
+- Validated `ShowTile` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-tile-redroom.css-visual-diff.yml`; current pixel diff is `4.0975% | 4890/119340`.
 
