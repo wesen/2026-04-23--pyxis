@@ -1471,7 +1471,7 @@ This did not change application code. It changed the implementation plan so the 
 
 **Inferred user intent:** Prevent future work from becoming a page-by-page styling scramble; make each route follow the same reusable component extraction and cohesive-token process.
 
-**Commit (docs):** pending at diary write time — intended milestone: `Split remaining pyxis app page phases`
+**Commit (docs):** 49f0664 — "Split remaining pyxis app page phases"
 
 ### What I did
 
@@ -1549,4 +1549,89 @@ The runbook now states the multi-page workflow as:
 
 ```text
 atoms/molecules already exist or are extracted → page-specific organisms are extracted and covered in Storybook → shared values are promoted into tokens → section comparisons pass or reach review-band → full-page checkpoint
+```
+
+## Step 15: Add explicit Dashboard consolidation phases before remaining pages
+
+The user clarified that Dashboard should not be considered done. The existing work is only a structural checkpoint; header/menu, upcoming shows, quick actions, recent activity, metrics/attention, and shell/mobile navigation still need proper consolidation before Phase 8 page work proceeds.
+
+I updated the ticket task plan so Phase 7 is no longer a single completed Dashboard item. It now has explicit Dashboard consolidation subphases and a final acceptance checkpoint, using the same bottom-up organism/story/token workflow required for the rest of the app.
+
+### Prompt Context
+
+**User prompt (verbatim):** "add phase for the dashboard, because it's not done at all: upcoming shows, menu, quick actions, recent activity, header, all need to be consolidated"
+
+**Assistant interpretation:** Reopen/expand Dashboard planning with explicit unfinished Dashboard phases before the remaining page work.
+
+**Inferred user intent:** Prevent the team from moving on to other routes while the Dashboard is still an unconsolidated checkpoint; make the remaining Dashboard work concrete and reviewable.
+
+**Commit (docs):** 85ab0c5 — "Add dashboard consolidation phases"
+
+### What I did
+
+- Replaced the old Phase 7 Dashboard section with a new `Dashboard consolidation` plan.
+- Marked the previous Dashboard work as `Phase 7.0 — Dashboard checkpoint already completed`, not final completion.
+- Added a shared Dashboard consolidation checklist requiring:
+  - prototype re-read,
+  - atom/molecule/organism identification,
+  - reuse before introducing new components,
+  - named organism extraction,
+  - stable `data-section` selectors,
+  - rich Storybook stories,
+  - token consolidation,
+  - focused section comparisons before full-page checkpoints,
+  - diary/changelog updates.
+- Added explicit Dashboard subphases:
+  - Phase 7.1 Dashboard header and shell/menu consolidation,
+  - Phase 7.2 Dashboard hero consolidation,
+  - Phase 7.3 Dashboard metrics and attention consolidation,
+  - Phase 7.4 Dashboard upcoming shows consolidation,
+  - Phase 7.5 Dashboard quick actions consolidation,
+  - Phase 7.6 Dashboard recent activity consolidation,
+  - Phase 7.7 Dashboard full-page acceptance checkpoint.
+
+### Why
+
+- The Dashboard currently has a working checkpoint but not a finished component architecture.
+- The sections named by the user are exactly the sections that should become focused organisms and Storybook stories before final page acceptance.
+- Making these explicit prevents Phase 8 from starting on an unstable Dashboard foundation.
+
+### What worked
+
+- `tasks.md` now clearly distinguishes the completed Dashboard checkpoint from the unfinished Dashboard consolidation work.
+- The new Phase 7 mirrors the Phase 8 page-phase discipline: bottom-up extraction, token consolidation, focused section comparisons, then page checkpoint.
+
+### What didn't work
+
+- N/A; this was a planning/documentation update only.
+
+### What I learned
+
+- A “responsive page checkpoint” is not the same as “page done.” The task plan needs to reflect that distinction or later sessions may skip necessary consolidation work.
+
+### What was tricky to build
+
+The tricky part was preserving the fact that real Dashboard work was already completed while still making it obvious that Dashboard is not accepted. I split that work into `Phase 7.0` and then added explicit unfinished phases for each major section.
+
+### What warrants a second pair of eyes
+
+- Review the order of Dashboard subphases; shell/header may need to happen before section tuning because it affects full-page crops.
+- Review whether `DashboardMetricsGrid` and `DashboardAttentionPanel` should be separate phases or remain coupled.
+
+### What should be done in the future
+
+- Start with Phase 7.1 or Phase 7.4 rather than Phase 8.1.
+- Do not mark Dashboard done until Phase 7.7 records focused section results plus desktop/mobile full-page checkpoints.
+
+### Code review instructions
+
+- Review `ttmp/.../tasks.md` Phase 7.
+- Confirm the plan explicitly includes unfinished work for header/menu, upcoming shows, quick actions, recent activity, metrics/attention, hero, and final page acceptance.
+
+### Technical details
+
+The new Dashboard flow is:
+
+```text
+Phase 7.0 checkpoint already completed → 7.1 shell/header/menu → 7.2 hero → 7.3 metrics/attention → 7.4 upcoming shows → 7.5 quick actions → 7.6 recent activity → 7.7 final full-page acceptance checkpoint
 ```

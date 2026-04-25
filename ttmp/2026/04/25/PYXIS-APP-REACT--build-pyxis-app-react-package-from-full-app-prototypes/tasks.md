@@ -551,42 +551,119 @@ Goal: turn the proven loop into a repeatable short runbook before scaling to pag
 
 ---
 
-## Phase 7 — First responsive page: Dashboard
+## Phase 7 — First responsive page: Dashboard consolidation
 
-Goal: compose the first full page once the core components exist.
+Goal: finish Dashboard before moving to the remaining pages. The current Dashboard is a structural checkpoint, not done. Continue bottom-up by consolidating the header/menu, upcoming shows, quick actions, recent activity, metrics/attention, and shell/navigation organisms before treating the Dashboard page as complete.
 
-### Desktop Dashboard
+### Phase 7.0 — Dashboard checkpoint already completed
 
 - [x] Create/extend Dashboard page composition in `Pages.tsx` / `DashboardOverview`.
 - [x] Compose from `AppShell`, `DashboardOverview`, metric cards, hero, quick actions, attention, upcoming, and activity panels.
 - [x] Add `data-page="dashboard"`.
-- [ ] Add sections:
+- [x] Add initial sections:
   - [x] `dashboard-summary`
   - [x] `dashboard-metrics`
   - [x] `dashboard-upcoming`
   - [x] `dashboard-activity`
-
-### Mobile Dashboard viewport
-
-- [x] Same Dashboard composition responds to 390px viewport.
-- [x] Use CSS/layout variants, not `MobileDashboard.tsx`.
-- [x] Use `prototype-design/standalone/mobile/home.html` as the mobile baseline; final checkpoint is tune-required, not accepted.
-
-### Storybook
-
+  - [x] `dashboard-hero`
+  - [x] `dashboard-quick-actions`
+  - [x] `dashboard-attention`
 - [x] Add `DashboardDesktop` story.
 - [x] Add `DashboardMobile` story using the same page route/component.
+- [x] Add dashboard targets to desktop/mobile app visual specs.
+- [x] Run desktop/mobile full-page checkpoints and preserve artifacts.
+- [x] Commit checkpoint: `Compose responsive dashboard page checkpoint`.
 
-### Visual specs
+### Shared Dashboard consolidation checklist
 
-- [x] Add dashboard target to `app.pages.desktop.visual.yml`.
-- [x] Add dashboard target to `app.pages.mobile.visual.yml`.
-- [x] Run both focused comparisons (desktop and mobile full-page checkpoints).
-- [x] Preserve artifacts under numbered folders.
+Use this checklist for every Phase 7.x Dashboard section:
 
-### Deliverable
+- [ ] Re-read the matching desktop/mobile prototype area before changing React/CSS.
+- [ ] Identify whether the section should be an atom, molecule, organism, or page-level composition.
+- [ ] Reuse existing atoms/molecules before introducing new ones.
+- [ ] Extract or finish a named organism instead of adding more anonymous JSX to `DashboardOverview`.
+- [ ] Add/verify stable `data-section` selectors in prototype and React.
+- [ ] Add rich Storybook stories for the organism:
+  - [ ] desktop/default,
+  - [ ] mobile/narrow when layout differs,
+  - [ ] dense/empty/long-content states when relevant,
+  - [ ] token/theme override story if local variables are exposed.
+- [ ] Consolidate repeated spacing/surface/radius/shadow/status decisions into shared tokens.
+- [ ] Run focused section comparisons before the full dashboard page checkpoint.
+- [ ] Inspect `left_region.png` and `right_region.png` with `read` before tuning.
+- [ ] Inspect `diff_only.png` only after crops are aligned.
+- [ ] Update diary/changelog with exact commands and final section result.
+- [ ] Commit at a coherent Dashboard section checkpoint.
 
-- [ ] Commit: `Compose responsive dashboard page`.
+### Phase 7.1 — Dashboard header and shell/menu consolidation
+
+- [ ] Consolidate desktop sidebar/menu with prototype grouping, active state, pending badge, and user footer where appropriate.
+- [ ] Consolidate desktop topbar/header actions: breadcrumb, title, subtitle/date line, search, bell, new-show button.
+- [ ] Consolidate mobile header and bottom nav with the prototype labels/icons/badge behavior.
+- [ ] Extract organisms/molecules as needed:
+  - [ ] `DashboardHeader`,
+  - [ ] `DashboardMobileHeader`,
+  - [ ] `AppSidebarMenu` / `AppSidebarUserFooter`,
+  - [ ] `AppMobileBottomNav`.
+- [ ] Add Storybook stories for shell/menu/header variants.
+- [ ] Add focused visual sections/specs for header/menu/mobile nav if feasible.
+- [ ] Commit: `Consolidate dashboard shell and header`.
+
+### Phase 7.2 — Dashboard hero consolidation
+
+- [ ] Finish `DashboardHero` as a named organism with desktop/mobile variants.
+- [ ] Align content contract with prototypes: date, doors, age, price, action labels, decorative mark.
+- [ ] Reuse Button/Icon atoms instead of local button styling where possible.
+- [ ] Add Storybook stories for desktop, mobile, no-next-show, long-artist-name states.
+- [ ] Tune `dashboard-hero` focused comparisons before full page.
+- [ ] Commit: `Consolidate dashboard hero organism`.
+
+### Phase 7.3 — Dashboard metrics and attention consolidation
+
+- [ ] Extract `DashboardMetricsGrid` around `MetricCard`.
+- [ ] Decide and document desktop vs mobile copy variants (`Pending bookings` vs `Pending`, `Capacity use` vs `Capacity`).
+- [ ] Finish `DashboardAttentionPanel` as an organism using shared status/icon tokens.
+- [ ] Add Storybook stories for desktop/mobile metrics, dense attention, empty attention.
+- [ ] Tune `dashboard-metrics` and `dashboard-attention` focused comparisons.
+- [ ] Commit: `Consolidate dashboard metrics and attention`.
+
+### Phase 7.4 — Dashboard upcoming shows consolidation
+
+- [ ] Extract `DashboardUpcomingPanel` as an organism.
+- [ ] Reuse `ShowTableRow`, `TodayShowCard`, `DateChip`, and `StatusDot` where possible.
+- [ ] Align desktop table columns/density with prototype: date, artist, doors, age, status, pinned affordance.
+- [ ] Align mobile behavior: decide whether upcoming shows are hidden on mobile home or represented by cards in a later route.
+- [ ] Add Storybook stories for desktop table, mobile cards/hidden state, empty state, long artist names.
+- [ ] Tune `dashboard-upcoming` focused comparison before full page.
+- [ ] Commit: `Consolidate dashboard upcoming shows`.
+
+### Phase 7.5 — Dashboard quick actions consolidation
+
+- [ ] Extract `DashboardQuickActionsPanel` as an organism.
+- [ ] Reuse Button/Icon atoms and shared panel tokens.
+- [ ] Align button labels, icon presence, spacing, and full-width behavior with prototype.
+- [ ] Add Storybook stories for default, no-pending-bookings, mobile/narrow if applicable.
+- [ ] Tune `dashboard-quick-actions` focused comparison before full page.
+- [ ] Commit: `Consolidate dashboard quick actions`.
+
+### Phase 7.6 — Dashboard recent activity consolidation
+
+- [ ] Extract `DashboardActivityPanel` as an organism around `ActivityFeedItem`.
+- [ ] Decide and document desktop/mobile item-count behavior (`5` desktop, `3` mobile prototype home).
+- [ ] Align metadata order/copy with prototype (`time/user/action` differences) without overfitting if data model differs.
+- [ ] Add Storybook stories for desktop, mobile, bot-only, empty, long activity text.
+- [ ] Tune `dashboard-activity` focused comparison before full page.
+- [ ] Commit: `Consolidate dashboard recent activity`.
+
+### Phase 7.7 — Dashboard full-page acceptance checkpoint
+
+- [ ] Run all focused Dashboard section comparisons and record final classifications.
+- [ ] Run desktop full-page Dashboard comparison.
+- [ ] Run mobile full-page Dashboard comparison.
+- [ ] Inspect final full-page `left_region.png`, `right_region.png`, and `diff_only.png` with `read`.
+- [ ] Document accepted differences rather than chasing typography/anti-aliasing/rendering drift.
+- [ ] Update diary, changelog, tasks, and docmgr relations.
+- [ ] Commit: `Finish responsive dashboard page`.
 
 ---
 
