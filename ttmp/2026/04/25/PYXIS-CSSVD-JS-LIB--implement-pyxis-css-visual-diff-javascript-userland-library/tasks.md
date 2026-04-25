@@ -101,15 +101,15 @@
 
 ## Phase 6 — Snapshot and semantic diff tooling
 
-- [ ] Create `scripts/lib/normalizers.js`.
-- [ ] Create `scripts/lib/tolerances.js`.
-- [ ] Implement userland color/zero/font-family normalization.
-- [ ] Implement userland numeric tolerance filtering for bounds.
-- [ ] Implement `pyxis pages snapshot-section <page> <section>`.
+- [x] Create `prototype-design/visual-diff/userland/lib/normalizers.js`.
+- [x] Create `prototype-design/visual-diff/userland/lib/tolerances.js`.
+- [x] Implement userland color/zero/font-family normalization.
+- [x] Implement userland numeric tolerance filtering for bounds.
+- [x] Implement `pyxis pages snapshot-section <page> <section>`.
 - [ ] Implement optional `pyxis pages diff-snapshots`.
-- [ ] Write JSON and Markdown semantic reports.
-- [ ] Validate with Shows header or Archive content.
-- [ ] Record results in diary.
+- [x] Write JSON and Markdown semantic reports.
+- [x] Validate with Archive content.
+- [x] Record Phase 6 first slice results in diary.
 
 ## Phase 7 — Accepted differences and maintainer feedback loop
 

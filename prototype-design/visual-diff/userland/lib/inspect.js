@@ -12,6 +12,18 @@ function textStart(text, max) {
 async function inspectLocator(page, selector, options) {
   options = options || {}
   var locator = page.locator(selector)
+  if (options.wait !== false) {
+    try {
+      await locator.waitFor({
+        timeoutMs: options.timeoutMs || 30000,
+        pollIntervalMs: options.pollIntervalMs || 100,
+        visible: options.visible !== false,
+        afterWaitMs: options.afterWaitMs == null ? 500 : options.afterWaitMs,
+      })
+    } catch (err) {
+      // Preserve status-based diagnostics below when waiting fails.
+    }
+  }
   var status = await locator.status()
   var row = {
     exists: !!status.exists,

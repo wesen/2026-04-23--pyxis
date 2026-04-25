@@ -9,6 +9,9 @@ module.exports = {
   styles: require('./styles.js'),
   inspect: require('./inspect.js'),
   compareRegion: require('./compare-region.js'),
+  normalizers: require('./normalizers.js'),
+  tolerances: require('./tolerances.js'),
+  snapshot: require('./snapshot.js'),
 }
 
 

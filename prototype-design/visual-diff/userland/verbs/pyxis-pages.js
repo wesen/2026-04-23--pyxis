@@ -234,3 +234,37 @@ __verb__('compareSpec', {
     maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band' },
   },
 })
+
+async function snapshotSection(page, section, values) {
+  return await lib.snapshot.snapshotSection(page, section, {
+    variant: values.variant || 'desktop',
+    outDir: values.outDir || '',
+    stylePreset: values.stylePreset || 'pageShell',
+    boundsTolerance: {
+      x: values.toleranceX || 0,
+      y: values.toleranceY || 0,
+      width: values.toleranceWidth || 0,
+      height: values.toleranceHeight || 0,
+    },
+    failOnMissing: !!values.failOnMissing,
+  })
+}
+
+__verb__('snapshotSection', {
+  parents: ['pyxis', 'pages'],
+  short: 'Write a semantic snapshot/diff for one page section',
+  output: 'structured',
+  fields: {
+    page: { argument: true, required: true, help: 'Registered page slug' },
+    section: { argument: true, required: true, help: 'Registered section name' },
+    values: { bind: 'all' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    outDir: { type: 'string', default: '', help: 'Output directory for snapshot artifacts' },
+    stylePreset: { type: 'choice', choices: ['typography', 'layout', 'surface', 'spacing', 'pageShell'], default: 'pageShell', help: 'Style property preset to extract' },
+    toleranceX: { type: 'float', default: 0, help: 'Allowed x delta' },
+    toleranceY: { type: 'float', default: 0, help: 'Allowed y delta' },
+    toleranceWidth: { type: 'float', default: 0, help: 'Allowed width delta' },
+    toleranceHeight: { type: 'float', default: 0, help: 'Allowed height delta' },
+    failOnMissing: { type: 'bool', default: true, help: 'Fail when the selector is missing or hidden' },
+  },
+})

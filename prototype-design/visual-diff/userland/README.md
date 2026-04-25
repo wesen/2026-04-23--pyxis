@@ -44,6 +44,7 @@ pyxis pages compare-section
 pyxis pages compare-page
 pyxis pages compare-all
 pyxis pages compare-spec
+pyxis pages snapshot-section
 ```
 
 ## Common commands
@@ -84,6 +85,12 @@ Run the CI policy failure smoke:
 
 ```bash
 prototype-design/visual-diff/userland/12-smoke-compare-all-ci-policy-fail.sh
+```
+
+Write a semantic snapshot/diff for one section:
+
+```bash
+prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
 ```
 
 ## Policy modes

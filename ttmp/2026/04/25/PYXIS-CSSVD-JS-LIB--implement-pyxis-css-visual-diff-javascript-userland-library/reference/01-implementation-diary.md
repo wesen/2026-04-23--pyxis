@@ -2291,3 +2291,123 @@ All section `changedPixels` and `changedPercent` values matched exactly.
 ### What should be done next
 
 Yes, Phase 6 should be tackled next. The most useful first slice is semantic/snapshot diff tooling for a single section, because that will explain why large pixel diffs exist before we tune Shows.
+
+
+## Step 20: Start Phase 6 semantic snapshot tooling
+
+After validating the YAML spec suite, I started Phase 6. The first useful slice is a semantic snapshot command that explains differences in bounds, selected computed styles, and text without doing pixel diffing.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue into Phase 6 now that spec-driven suite equivalence is proven.
+
+**Inferred user intent:** Start the snapshot/semantic diff tooling that was deferred while page/suite orchestration stabilized.
+
+### What I did
+
+Added:
+
+```text
+prototype-design/visual-diff/userland/lib/normalizers.js
+prototype-design/visual-diff/userland/lib/tolerances.js
+prototype-design/visual-diff/userland/lib/snapshot.js
+prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
+```
+
+Updated:
+
+```text
+prototype-design/visual-diff/userland/lib/index.js
+prototype-design/visual-diff/userland/lib/inspect.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/README.md
+```
+
+New verb:
+
+```text
+pyxis pages snapshot-section <page> <section>
+```
+
+### Why
+
+Pixel diffs show how much changed, but not why. For tuning work, especially Shows, we need fast semantic reports that show bounds deltas, normalized style differences, and text differences for targeted sections.
+
+### What worked
+
+Archive content snapshot smoke passed and wrote:
+
+```text
+prototype-design/visual-comparisons/cssvd-js/snapshot-section/archive-content/snapshot.json
+prototype-design/visual-comparisons/cssvd-js/snapshot-section/archive-content/01-snapshot.md
+```
+
+The generated report identified:
+
+```text
+styleDiffs: 7
+bounds y delta: 61
+bounds height delta: -118.9375
+```
+
+Selected normalized style differences included:
+
+```text
+box-sizing: content-box -> border-box
+color: #1f1e1c -> #1a1a18
+font-size: 16px -> 14px
+line-height: normal -> 21px
+min-height: 1100px -> 0
+padding: 0 -> 0 0 72px
+```
+
+### What didn't work
+
+The first snapshot smoke failed with:
+
+```text
+selector missing or hidden: react [data-page='archive']
+```
+
+The issue was that `inspectLocator(...)` checked locator status immediately without waiting for Storybook/RTK/MSW rendering. I fixed this by adding `locator.waitFor(...)` to `inspectLocator(...)` before collecting status/bounds/styles.
+
+### What I learned
+
+The semantic snapshot path needs the same readiness discipline as pixel comparison. Storybook page stories can be present but not ready immediately.
+
+### What was tricky to build
+
+The normalizers are intentionally conservative. They normalize zero units, rgb/hex colors, and primary font-family only. They do not try to hide meaningful layout differences.
+
+### What warrants a second pair of eyes
+
+- Whether `textStart` differences should be included by default for large page-level sections, since data-order differences can make text noisy.
+- Whether the initial style presets are sufficient for Shows tuning.
+- Whether snapshot output should eventually be grouped by accepted differences.
+
+### What should be done in the future
+
+- Add optional `diff-snapshots` once snapshot files are useful across runs.
+- Run `snapshot-section shows header` and `snapshot-section shows shows-list` before tuning Shows.
+- Consider adding an option to suppress text comparison for broad page sections.
+
+### Code review instructions
+
+Review:
+
+```text
+prototype-design/visual-diff/userland/lib/normalizers.js
+prototype-design/visual-diff/userland/lib/tolerances.js
+prototype-design/visual-diff/userland/lib/snapshot.js
+prototype-design/visual-diff/userland/lib/inspect.js
+prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
+```
+
+Validate:
+
+```bash
+prototype-design/visual-diff/userland/15-smoke-snapshot-section-archive-content.sh
+```
