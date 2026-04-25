@@ -12,7 +12,6 @@ DocType: reference
 Intent: short-term
 Owners: []
 RelatedFiles:
-    - Path:       Note: Representative retired native config classified for later removal
     - Path: prototype-design/visual-diff/userland/lib/registry.js
       Note: Default target loader/normalizer rewired away from hard-coded PUBLIC_PAGES
     - Path: prototype-design/visual-diff/userland/scripts/run-compare-spec-public-pages.sh
