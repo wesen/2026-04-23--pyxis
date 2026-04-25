@@ -750,7 +750,7 @@ This step closes the drift risk identified during Phases 1–3: the YAML spec re
 
 **Inferred user intent:** Keep moving through the next practical cleanup items, committing coherent milestones and keeping the diary detailed.
 
-**Commit (code):** pending at diary-write time — intended message: "Refresh visual suite baselines"
+**Commit (code):** `0c142fe` — "Refresh visual suite baselines"
 
 ### What I did
 
