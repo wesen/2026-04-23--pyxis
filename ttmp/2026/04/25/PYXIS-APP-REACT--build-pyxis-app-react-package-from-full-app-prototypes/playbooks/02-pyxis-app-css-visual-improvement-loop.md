@@ -59,6 +59,33 @@ Examples:
 - `MetricCard`, `TodayShowCard`, panels, rows, and shell surfaces should share the same surface/border/radius/shadow vocabulary.
 - Do not make `MetricCard` look correct by introducing values that make dashboard panels or booking cards drift away from the same design language.
 
+## Extract page sections before tuning the whole page
+
+Do not tackle a full dashboard/page crop as the primary feedback loop once the page has more than a few regions. Full-page comparisons are useful checkpoints, but they are too noisy for everyday tuning because shell, typography, table density, section order, and scroll-height differences all overlap.
+
+Preferred page workflow:
+
+1. Start with the page inventory and identify organisms/sections such as:
+   - `DashboardHero`,
+   - `DashboardMetricsGrid`,
+   - `DashboardUpcomingPanel`,
+   - `DashboardQuickActionsPanel`,
+   - `DashboardActivityPanel`,
+   - `DashboardAttentionPanel`,
+   - mobile bottom navigation or mobile header if they are page-specific enough.
+2. Add stable `data-section` selectors to both prototype and React for each section before tuning.
+3. Extract reusable React components/organisms for those sections instead of growing one large page component.
+4. Add rich Storybook stories for every extracted section:
+   - default desktop,
+   - mobile/narrow when the section changes layout,
+   - dense/empty/long-content states when relevant,
+   - theme/token override examples if the section exposes local variables.
+5. Compare and tune one extracted section at a time using `--section`, individual crop inspection, and `diff_only.png` only after crops are aligned.
+6. Promote repeated style decisions from section work into shared tokens as you go. This keeps the feedback loop small while preventing component-by-component token drift.
+7. Re-run one small component, the focused section, and then an occasional full-page checkpoint after token changes.
+
+Concrete example: for the dashboard, tune `DashboardUpcomingPanel` as an organism with its own Storybook story and focused visual spec before trying to improve the full dashboard page number. If its crop is close but the full page is still noisy, move to the next organism rather than overfitting the page.
+
 ## Required loop order
 
 1. Verify prototype and React selectors exist.

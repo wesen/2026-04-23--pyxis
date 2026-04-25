@@ -1168,3 +1168,24 @@ Continue tuning via extracted section stories/specs, not the full page only. The
 - `DashboardMetricsGrid` as an organism around `MetricCard`, with desktop/mobile label variants if needed.
 - `DashboardActivityPanel` around `ActivityFeedItem`, with desktop/mobile item-count behavior.
 - A dedicated mobile bottom nav atom/molecule if route pages need richer mobile parity.
+
+## Step 13: Add runbook guidance for organism extraction before full-page tuning
+
+The user clarified that the visual loop should explicitly say to extract organisms such as `DashboardUpcomingPanel` rather than tackling full pages at once. I updated the runbook accordingly.
+
+### What changed
+
+- Added a new runbook section: `Extract page sections before tuning the whole page`.
+- The runbook now says full-page comparisons are checkpoints, not the default tuning loop.
+- It instructs future work to:
+  - identify organisms/sections first,
+  - add stable `data-section` selectors to prototype and React,
+  - extract reusable React components/organisms,
+  - add rich Storybook stories for desktop/mobile/dense/empty/theme states,
+  - compare/tune one section with `--section`,
+  - consolidate repeated values into shared tokens as the section work proceeds,
+  - then run occasional full-page checkpoints.
+
+### Why
+
+This keeps the feedback loop small and prevents token drift: section stories provide faster visual evidence, while token consolidation keeps the app cohesive as Dashboard and later pages grow.
