@@ -245,7 +245,7 @@ The most important outcome is that the JS userland now reflects the cleanup deci
 
 **Inferred user intent:** Turn the revised plan into committed repo changes while keeping detailed diary records and committing at a coherent milestone.
 
-**Commit (code):** pending at diary-write time — intended message: "Consolidate visual diff JS userland"
+**Commit (code):** `5373ea0` — "Consolidate visual diff JS userland"
 
 ### What I did
 
