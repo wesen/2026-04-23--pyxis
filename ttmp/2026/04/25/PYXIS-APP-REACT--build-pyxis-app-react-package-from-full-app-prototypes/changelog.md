@@ -30,3 +30,13 @@ Step 7: Proved the component-level css-visual-diff loop with MetricCard; final l
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — MetricCard spec now uses like-for-like selectors
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard.css — CSS tuned from individual crop evidence
 
+
+## 2026-04-25
+
+Step 8: Proved dashboard metrics section visual loop and added compare-spec --section/--summary output; final section crop is review-band at 7.4449% / 9801 pixels (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/verbs/pyxis-pages.js — Compact summary output for visual iteration
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md — Runbook note for tuning tool output and not chasing pixel perfection
+

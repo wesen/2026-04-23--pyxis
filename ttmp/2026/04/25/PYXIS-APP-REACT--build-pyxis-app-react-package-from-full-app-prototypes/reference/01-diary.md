@@ -14,8 +14,14 @@ Owners: []
 RelatedFiles:
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
+    - Path: prototype-design/visual-diff/userland/lib/compare-region.js
+      Note: Threaded section filter through compare-spec target execution
     - Path: prototype-design/visual-diff/userland/specs/app.components.visual.yml
       Note: Initial pyxis-app component visual suite
+    - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+      Note: Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
+      Note: Runbook for compact-output visual loop and stop-when-close rule
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/02-inventory-prototype-routes.mjs
       Note: Ticket-local route inventory script
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
@@ -24,6 +30,10 @@ RelatedFiles:
       Note: Final prototype individual crop inspected with read
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/right_region.png
       Note: Final React individual crop inspected with read
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/left_region.png
+      Note: Final dashboard metrics prototype crop inspected with read
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/right_region.png
+      Note: Final dashboard metrics React crop inspected with read
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -40,6 +50,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
