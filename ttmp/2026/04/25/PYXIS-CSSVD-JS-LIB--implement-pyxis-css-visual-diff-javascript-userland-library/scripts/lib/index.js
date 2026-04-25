@@ -6,5 +6,8 @@ module.exports = {
   policies: require('./policies.js'),
   markdown: require('./markdown.js'),
   results: require('./results.js'),
+  styles: require('./styles.js'),
+  inspect: require('./inspect.js'),
 }
+
 

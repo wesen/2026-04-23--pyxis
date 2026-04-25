@@ -46,15 +46,16 @@
 
 ## Phase 3 — Locator-first inspect command
 
-- [ ] Create `scripts/lib/styles.js` with typography/layout/surface/spacing presets.
-- [ ] Create `scripts/lib/inspect.js` using `cvd.browser()`, `browser.page()`, and locators.
-- [ ] Implement page/section selector lookup from registry.
-- [ ] Implement `pyxis pages inspect-section <page> <section>`.
-- [ ] Support `--side original|react|both`.
-- [ ] Support `--stylePreset typography|layout|surface|spacing|pageShell`.
-- [ ] Support `--failOnMissing`.
-- [ ] Add smoke script `scripts/03-smoke-inspect-section.sh`.
-- [ ] Validate with Archive content and Shows header.
+- [x] Create `scripts/lib/styles.js` with typography/layout/surface/spacing presets.
+- [x] Create `scripts/lib/inspect.js` using `cvd.browser()`, `browser.page()`, and locators.
+- [x] Implement page/section selector lookup from registry.
+- [x] Implement `pyxis pages inspect-section <page> <section>`.
+- [x] Support `--side original|react|both`.
+- [x] Support `--stylePreset typography|layout|surface|spacing|pageShell`.
+- [x] Support `--failOnMissing`.
+- [x] Add smoke script `scripts/04-smoke-inspect-section.sh`.
+- [x] Validate with Archive content.
+- [ ] Validate with Shows header before using it for Shows tuning.
 - [x] Record results in diary.
 
 ## Phase 4 — Pixel compare-section bridge

@@ -78,3 +78,27 @@ __verb__('summarizeResults', {
     priority: { type: 'string', default: '', help: 'Filter by priority label' },
   },
 })
+
+async function inspectSection(page, section, values) {
+  return await lib.inspect.inspectSection(page, section, {
+    variant: values.variant || 'desktop',
+    side: values.side || 'both',
+    stylePreset: values.stylePreset || 'pageShell',
+    failOnMissing: !!values.failOnMissing,
+  })
+}
+
+__verb__('inspectSection', {
+  parents: ['pyxis', 'pages'],
+  short: 'Inspect one registered Pyxis page section on prototype and/or Storybook side',
+  output: 'structured',
+  fields: {
+    page: { argument: true, required: true, help: 'Registered page slug' },
+    section: { argument: true, required: true, help: 'Registered section name' },
+    values: { bind: 'all' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    side: { type: 'choice', choices: ['both', 'original', 'react'], default: 'both', help: 'Side to inspect' },
+    stylePreset: { type: 'choice', choices: ['typography', 'layout', 'surface', 'spacing', 'pageShell'], default: 'pageShell', help: 'Style property preset to extract' },
+    failOnMissing: { type: 'bool', default: false, help: 'Fail when the selector is missing or hidden' },
+  },
+})

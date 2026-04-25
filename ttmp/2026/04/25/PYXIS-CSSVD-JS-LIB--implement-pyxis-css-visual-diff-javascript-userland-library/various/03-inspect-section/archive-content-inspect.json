@@ -1,0 +1,82 @@
+[
+{
+  "attributes": {
+    "class": "",
+    "data-page": "",
+    "data-pyxis-component": "",
+    "data-pyxis-part": "",
+    "data-section": "",
+    "id": ""
+  },
+  "bounds": {
+    "height": 1558.03125,
+    "width": 920,
+    "x": 0,
+    "y": 0
+  },
+  "error": "",
+  "exists": true,
+  "page": "archive",
+  "section": "content",
+  "selector": "#root \u003e *",
+  "side": "original",
+  "styles": {
+    "background-color": "rgb(255, 255, 255)",
+    "box-sizing": "content-box",
+    "color": "rgb(31, 30, 28)",
+    "display": "block",
+    "font-family": "Inter, sans-serif",
+    "font-size": "16px",
+    "height": "1558.03px",
+    "line-height": "normal",
+    "margin": "0px",
+    "min-height": "1100px",
+    "padding": "0px",
+    "width": "920px"
+  },
+  "textStart": "ppxisShowsArchiveBook usAboutSince 2023The archive194shows312artists31residencies0cops calledAll20252024202320258 showsDec 12Winter Solstice RaveElectronicrecap →Nov 29Jake Meginsk…",
+  "url": "http://localhost:7070/standalone/public/archive.html",
+  "variant": "desktop",
+  "visible": true
+}
+, {
+  "attributes": {
+    "class": "pyxis-public-page pyxis-archive-page",
+    "data-page": "archive",
+    "data-pyxis-component": "",
+    "data-pyxis-part": "",
+    "data-section": "",
+    "id": ""
+  },
+  "bounds": {
+    "height": 1439.09375,
+    "width": 920,
+    "x": 0,
+    "y": 61
+  },
+  "error": "",
+  "exists": true,
+  "page": "archive",
+  "section": "content",
+  "selector": "[data-page='archive']",
+  "side": "react",
+  "styles": {
+    "background-color": "rgb(255, 255, 255)",
+    "box-sizing": "border-box",
+    "color": "rgb(26, 26, 24)",
+    "display": "block",
+    "font-family": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "font-size": "14px",
+    "height": "1439.09px",
+    "line-height": "21px",
+    "margin": "0px",
+    "min-height": "0px",
+    "padding": "0px 0px 72px",
+    "width": "920px"
+  },
+  "textStart": "Every show since day oneArchive12 of 247 showsAll202520242023247shows18,400artists4residencies132cops called20253 showsMar 14Planning for BurialAmbientrecap →Feb 28ActressElectroni…",
+  "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+  "variant": "desktop",
+  "visible": true
+}
+]

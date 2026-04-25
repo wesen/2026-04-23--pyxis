@@ -23,3 +23,4 @@ Created implementation planning ticket with userland library guide, maintainer f
 - Uploaded the whole current ticket bundle to reMarkable as `PYXIS css-visual-diff JS Userland Library Current Ticket` under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB` before starting implementation.
 - Completed Phase 1 library skeleton and registry: added slug/storybook/artifact/registry modules, `pyxis pages list-targets`, `pyxis pages import-smoke`, and smoke scripts validating relative imports and target registry output.
 - Completed Phase 2 existing result summarizer: added result parsing, policy classification, Markdown report generation, `pyxis pages summarize-results`, and a smoke script that produces 13 sorted public-page diff rows from existing `pixeldiff.md` artifacts.
+- Completed Phase 3 locator-first inspect command: added style presets, browser/locator inspection helper, `pyxis pages inspect-section`, and an Archive content smoke test with two visible sides.

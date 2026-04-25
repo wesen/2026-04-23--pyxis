@@ -608,3 +608,141 @@ diffComparisonPath
 ```
 
 The source is currently `yaml-run`, because rows are parsed from official YAML-generated `pixeldiff.md` artifacts.
+
+
+## Step 5: Implement Phase 3 locator-first inspect-section command
+
+I added the first browser-backed command in the userland library: `pyxis pages inspect-section`. Unlike the pixel comparison commands, this does not need image diff internals. It uses the public `css-visual-diff` JavaScript browser/page/locator APIs to answer the first authoring question: do both sides render the selector we intend to compare, and what browser-computed facts do they have?
+
+This command is the lightweight preflight/debug layer we wanted before expensive screenshot comparisons.
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 3)
+
+**Assistant interpretation:** Continue implementing validated library pieces incrementally.
+
+**Inferred user intent:** Build real workflow helpers with tests, especially checks that prove the library can use css-visual-diff APIs correctly.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added:
+
+```text
+scripts/lib/styles.js
+scripts/lib/inspect.js
+```
+
+- Updated:
+
+```text
+scripts/lib/index.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Implemented verb:
+
+```text
+pyxis pages inspect-section <page> <section>
+```
+
+- Added smoke script:
+
+```text
+scripts/04-smoke-inspect-section.sh
+```
+
+- Ran the smoke against Archive content and wrote:
+
+```text
+various/03-inspect-section/archive-content-inspect.json
+```
+
+- Validated with Python assertions that two rows exist, one for `original` and one for `react`, and both are visible with bounds.
+
+### Why
+
+The visual workflow should not jump straight to pixel diffs. First it should prove that each selector exists, is visible, and points at the intended element. This command gives us that authoring layer using locators.
+
+### What worked
+
+The Archive content smoke passed. It returned two rows:
+
+```text
+original #root > *
+react    [data-page='archive']
+```
+
+Both rows had:
+
+```text
+exists: true
+visible: true
+bounds: present
+styles: pageShell preset values
+```
+
+The original side showed the expected prototype shell facts such as:
+
+```text
+font-family: Inter, sans-serif
+font-size: 16px
+box-sizing: content-box
+```
+
+The React side showed tokenized app facts such as the React page class and page-shell styles.
+
+### What didn't work
+
+No command failure occurred in this step.
+
+### What I learned
+
+The public browser/page/locator API is enough for a useful authoring command. This validates the earlier assumption that not all workflow improvements need new core primitives. Pixel comparison is the main missing callable primitive, but locator-based inspection is already fully viable.
+
+### What was tricky to build
+
+The command has to keep page/section lookup separate from side inspection. The registry knows target URLs and selectors; `inspect.js` only knows how to load a URL and inspect a selector. That separation should make later page/component registry changes less invasive.
+
+### What warrants a second pair of eyes
+
+- Whether `textStart` should be included by default; for full page sections it can be very long/noisy even when truncated.
+- Whether the `pageShell` preset is the right default for broad sections.
+
+### What should be done in the future
+
+- Validate `inspect-section shows header` before using this command for Shows tuning.
+- Add `--props` custom property list later if presets are too coarse.
+- Consider a compact mode that omits full `styles` maps for table output.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/inspect.js
+scripts/lib/styles.js
+scripts/verbs/pyxis-pages.js
+scripts/04-smoke-inspect-section.sh
+various/03-inspect-section/archive-content-inspect.json
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/04-smoke-inspect-section.sh
+```
+
+### Technical details
+
+The command supports:
+
+```text
+--side both|original|react
+--stylePreset typography|layout|surface|spacing|pageShell
+--failOnMissing
+```
+
+It uses `cvd.browser()`, `browser.page()`, `page.locator()`, `locator.status()`, `locator.text()`, `locator.bounds()`, `locator.computedStyle()`, and `locator.attributes()`.
