@@ -16,3 +16,5 @@
 - Completed Phase 1 shared shell cleanup with `PublicPage.css` and Layout class names replacing obvious shell inline styles.
 - Completed Phase 2 first Shows composition pass: replaced `PubShowRow` list with canonical `ShowGrid`/`ShowTile`, added `PublicPageHeader`, preserved RTK Query loading/empty/error behavior, and kept `MailingListCTA`. Desktop visual diff now runs with full section coverage; residual page diff remains high and is documented as expected first-pass page composition work.
 
+
+- Completed Phase 3 first ShowDetail composition pass using `ShowDetailHeader`, `ShowMetaStrip`, `ReserveTicketCard`, `LineupRow`, `SafetyNote`, and `VenueCard`; added page CSS and `show-detail-desktop` visual-diff config. Current first-pass diff: content 24.4647%, page 18.5282%.

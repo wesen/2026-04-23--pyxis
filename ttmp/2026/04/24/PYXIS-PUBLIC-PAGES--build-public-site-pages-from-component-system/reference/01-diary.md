@@ -173,3 +173,36 @@ css-visual-diff run --config prototype-design/visual-diff/comparisons/public-pag
 ```
 
 All commands completed successfully. The visual diff still has large residual differences and should be treated as the next tuning target rather than accepted parity.
+
+
+## Step 6: Phase 3 ShowDetail first composition pass
+
+### What I did
+
+- Replaced custom show-detail hero markup with `ShowDetailHeader`.
+- Added `ShowMetaStrip` for doors/age/price metadata.
+- Replaced ad hoc ticket/action area with `ReserveTicketCard`.
+- Preserved route-param parsing, loading state, and not-found state.
+- Kept `LineupRow` for lineup rendering.
+- Added `SafetyNote`.
+- Kept `VenueCard` for the detail-page aside; per taxonomy this is the compact detail-page venue card, while `BookingSpaceAside` remains better suited for the booking page.
+- Added `web/packages/pyxis-user-site/src/pages/ShowDetail.css`.
+- Added `prototype-design/visual-diff/comparisons/public-pages/show-detail-desktop.css-visual-diff.yml`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-user-site typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/public-pages/show-detail-desktop.css-visual-diff.yml
+```
+
+### Result
+
+The config runs with full two-section coverage. First-pass residual diffs:
+
+```text
+content 24.4647%
+page    18.5282%
+```
+
+This is a substantial improvement over the Shows first-pass diff, but still needs tuning before parity acceptance.

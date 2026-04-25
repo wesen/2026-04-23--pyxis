@@ -82,23 +82,23 @@ web/packages/pyxis-user-site/src/pages/ShowDetail.tsx
 prototype-design/standalone/public/detail.html
 ```
 
-- [ ] Inspect `detail.html` and identify sections.
-- [ ] Replace custom hero markup with `ShowDetailHeader` if matching baseline.
-- [ ] Add `ShowMetaStrip` for show metadata.
-- [ ] Replace ad hoc ticket/action area with `ReserveTicketCard`.
-- [ ] Keep `LineupRow` for lineup entries.
-- [ ] Add `SafetyNote` where capacity/sell-out/safety note appears.
-- [ ] Decide `VenueCard` vs `BookingSpaceAside` for detail-page aside.
-- [ ] Document the venue-card decision in the diary.
-- [ ] Preserve route-param parsing and invalid/not-found behavior.
+- [x] Inspect `detail.html` and identify sections.
+- [x] Replace custom hero markup with `ShowDetailHeader` if matching baseline.
+- [x] Add `ShowMetaStrip` for show metadata.
+- [x] Replace ad hoc ticket/action area with `ReserveTicketCard`.
+- [x] Keep `LineupRow` for lineup entries.
+- [x] Add `SafetyNote` where capacity/sell-out/safety note appears.
+- [x] Decide `VenueCard` vs `BookingSpaceAside` for detail-page aside.
+- [x] Document the venue-card decision in the diary.
+- [x] Preserve route-param parsing and invalid/not-found behavior.
 - [x] Preserve loading state.
-- [ ] Add or update ShowDetail page CSS file.
+- [x] Add or update ShowDetail page CSS file.
 - [ ] Add cancelled/not-found/long-lineup story variants if useful.
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Add and run `show-detail-desktop` visual-diff config.
+- [x] Add and run `show-detail-desktop` visual-diff config.
 - [ ] Add `show-detail-mobile` config after desktop stabilizes.
 - [x] Update diary with exact diffs and accepted differences.
-- [ ] Commit ShowDetail changes separately.
+- [x] Commit ShowDetail changes separately.
 
 ---
 

@@ -1,0 +1,69 @@
+metadata:
+  slug: public-page-show-detail-desktop
+  title: Public page show detail desktop — standalone prototype vs user-site Storybook
+  domain: public
+  level: page
+  component: ShowDetailPage
+  state: desktop
+  storybook_story_id: public-site-pages--show-detail-desktop
+
+original:
+  name: standalone-public-show-detail-desktop
+  url: http://localhost:7070/standalone/public/detail.html
+  wait_ms: 1000
+  viewport: { width: 920, height: 1460 }
+  root_selector: "#root"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('#root') && document.querySelector('#root').children.length > 0"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#fff';
+    after_wait_ms: 1000
+
+react:
+  name: storybook-public-show-detail-desktop
+  url: http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 920, height: 1460 }
+  root_selector: "[data-story-frame='pyxis-page-shell']"
+  prepare:
+    type: script
+    wait_for: "document.querySelector('[data-story-frame=\"pyxis-page-shell\"] [data-page=\"show-detail\"]')"
+    wait_for_timeout_ms: 30000
+    script: |
+      document.body.style.margin = '0';
+      document.documentElement.style.background = '#fff';
+    after_wait_ms: 1000
+
+sections:
+  - name: page
+    selector_original: "#root"
+    selector_react: "[data-story-frame='pyxis-page-shell']"
+  - name: content
+    selector_original: "#root > *"
+    selector_react: "[data-page='show-detail']"
+
+styles:
+  - name: page
+    selector_original: "#root"
+    selector_react: "[data-story-frame='pyxis-page-shell']"
+    include_bounds: true
+    props: [box-sizing, width, height, min-height, margin, padding, display, background, background-color, color, font-family, font-size, line-height]
+  - name: content
+    selector_original: "#root > *"
+    selector_react: "[data-page='show-detail']"
+    include_bounds: true
+    props: [box-sizing, width, height, margin, padding, display, gap, background, background-color, color, font-family, font-size, line-height]
+
+output:
+  dir: /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/show-detail-desktop
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture, cssdiff, matched-styles, pixeldiff, html-report]
