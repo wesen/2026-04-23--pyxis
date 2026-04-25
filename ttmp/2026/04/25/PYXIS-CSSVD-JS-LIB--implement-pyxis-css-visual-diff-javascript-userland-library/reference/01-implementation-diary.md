@@ -1141,3 +1141,87 @@ ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-u
 ### Technical details
 
 The new command uses `comparison.summary()` for compact stdout and `comparison.toJSON()` / `comparison.artifacts.write(...)` for durable artifacts. The resulting `changedPercent` exactly matches the previous built-in CLI smoke and YAML result for Archive content.
+
+
+## Step 9: Upload the flexible JS API evaluation to reMarkable
+
+After committing the flexible API evaluation work, I uploaded the report and the focused experiment source files to reMarkable. This makes both the technical conclusion and the scripts that produced it available for offline review.
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 8)
+
+**Assistant interpretation:** Finish the report workflow by publishing the evaluation bundle to reMarkable.
+
+**Inferred user intent:** Preserve the latest API evaluation and experiment source in a reader-friendly format.
+
+**Commit (code):** `d2167f5` — "Evaluate flexible css visual diff JS API"
+
+### What I did
+
+Uploaded a Markdown report bundle:
+
+```text
+PYXIS css-visual-diff Flexible JS API Evaluation
+```
+
+Uploaded a source bundle:
+
+```text
+PYXIS css-visual-diff Flexible JS API Experiment Source
+```
+
+Verified with:
+
+```bash
+remarquee cloud ls /ai/2026/04/25/PYXIS-CSSVD-JS-LIB --long --non-interactive
+```
+
+### Why
+
+The new API evaluation changes the direction of the userland library: `cvd.compare.region(...)` replaces the previous shell/subprocess bridge plan. It should be easy to review independently.
+
+### What worked
+
+The remote directory now includes:
+
+```text
+PYXIS css-visual-diff Flexible JS API Evaluation
+PYXIS css-visual-diff Flexible JS API Experiment Source
+```
+
+### What didn't work
+
+No upload failure occurred.
+
+### What I learned
+
+For evaluation work, a focused report bundle plus a focused source bundle is more useful than only uploading the whole ticket.
+
+### What was tricky to build
+
+N/A.
+
+### What warrants a second pair of eyes
+
+Review the report's revised maintainer recommendations before sharing externally, because the previous P0 request is now marked satisfied.
+
+### What should be done in the future
+
+Upload a new bundle after implementing `compare-page` / catalog orchestration.
+
+### Code review instructions
+
+Verify remote state with:
+
+```bash
+remarquee cloud ls /ai/2026/04/25/PYXIS-CSSVD-JS-LIB --long --non-interactive
+```
+
+### Technical details
+
+Remote path:
+
+```text
+/ai/2026/04/25/PYXIS-CSSVD-JS-LIB
+```

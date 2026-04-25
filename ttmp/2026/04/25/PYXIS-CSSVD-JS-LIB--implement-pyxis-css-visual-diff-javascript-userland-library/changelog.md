@@ -38,3 +38,4 @@ Evaluated new flexible css-visual-diff JS API, updated compare-section to use cv
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/08-smoke-new-api-compare-section.sh — Validation smoke script
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/lib/compare-region.js — cvd.compare.region implementation
 
+- Uploaded `PYXIS css-visual-diff Flexible JS API Evaluation` and `PYXIS css-visual-diff Flexible JS API Experiment Source` to reMarkable under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB` and verified both documents.
