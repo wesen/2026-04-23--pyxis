@@ -546,3 +546,31 @@ root      4.0975% | 4890/119340
 ```
 
 `ShowTile` still inherits the poster-level residual diff from the `Poster` component, but the static card-info styles are now extracted and themeable.
+
+
+## Step 15: Extract `ShowGrid` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.css`.
+- Moved grid layout and compact layout styles out of JSX.
+- Added `data-compact='true'` to represent compact/mobile layout state.
+- Updated `ShowGrid.tsx` to self-import CSS and use `clsx('pyxis-show-grid', className)`.
+- Kept `ShowGrid` responsible only for grid layout; it does not duplicate `ShowTile` internals.
+- Added a `ThemeOverride` Storybook story that demonstrates inherited `ShowTile` CSS variables through the grid.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/organisms/show-grid-desktop.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 4.3076% | 16224/376640
+root      4.3076% | 16224/376640
+```
+
+The residual diff mostly follows child `ShowTile`/`Poster` differences rather than new grid layout drift.

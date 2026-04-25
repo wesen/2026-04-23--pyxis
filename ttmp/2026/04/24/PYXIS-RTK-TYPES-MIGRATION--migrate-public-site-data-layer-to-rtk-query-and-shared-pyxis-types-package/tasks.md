@@ -143,8 +143,8 @@ Start here to establish the pattern before touching large organisms.
 - [x] Extract `ArchiveShowList` styles into `ArchiveShowList.css`.
 - [x] Extract `ArchiveSearchFilters` styles into `ArchiveSearchFilters.css`.
 - [x] Extract `ShowTile` styles into `ShowTile.css`.
-- [ ] Extract `ShowGrid` styles into `ShowGrid.css`.
-- [ ] Ensure `ShowGrid` owns only layout and does not duplicate `ShowTile` internals.
+- [x] Extract `ShowGrid` styles into `ShowGrid.css`.
+- [x] Ensure `ShowGrid` owns only layout and does not duplicate `ShowTile` internals.
 - [x] Ensure `ArchiveShowList` owns only list layout and does not duplicate `ArchiveShowRow` internals.
 - [ ] Add long-title/long-genre Storybook cases where wrapping matters.
 - [ ] Run `cd web && pnpm --filter pyxis-components typecheck`.

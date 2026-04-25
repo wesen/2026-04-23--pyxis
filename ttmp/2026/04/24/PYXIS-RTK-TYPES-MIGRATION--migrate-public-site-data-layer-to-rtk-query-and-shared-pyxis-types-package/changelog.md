@@ -51,4 +51,8 @@
 - Added `ShowTile` part selectors for `info`, `title`, `meta`, `price`, and `ticket-pill`, compact state via `data-compact`, focus-visible styling, and theme/sold-out Storybook stories.
 - Kept ticket-pill kind colors as component-local CSS variables.
 - Validated `ShowTile` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-tile-redroom.css-visual-diff.yml`; current pixel diff is `4.0975% | 4890/119340`.
+- Extracted `ShowGrid` layout into `web/packages/pyxis-components/src/public/ShowGrid/ShowGrid.css`.
+- Kept `ShowGrid` responsible only for grid layout and compact state, delegating tile internals to `ShowTile`.
+- Added a theme override Storybook story that demonstrates inherited `ShowTile` CSS variables through the grid.
+- Validated `ShowGrid` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../show-grid-desktop.css-visual-diff.yml`; current pixel diff is `4.3076% | 16224/376640`.
 

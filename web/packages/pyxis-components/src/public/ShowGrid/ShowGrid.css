@@ -1,0 +1,13 @@
+/* ShowGrid — responsive grid container for public show tiles. */
+
+:where([data-pyxis-component='show-grid'][data-pyxis-part='root']) {
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+:where([data-pyxis-component='show-grid'][data-pyxis-part='root'][data-compact='true']) {
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
