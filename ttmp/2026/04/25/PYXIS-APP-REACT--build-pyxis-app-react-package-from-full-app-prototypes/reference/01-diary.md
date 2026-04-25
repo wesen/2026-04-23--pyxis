@@ -268,3 +268,9 @@ Dry-run succeeded first. `remarquee cloud ls` shows both `PYXIS App React Intern
 ### Validation
 
 `docmgr doctor --ticket PYXIS-APP-REACT --stale-after 30` reports only the known topic-vocabulary warning.
+
+### Commit
+
+```text
+60830ec Add pyxis app intern handoff playbook
+```

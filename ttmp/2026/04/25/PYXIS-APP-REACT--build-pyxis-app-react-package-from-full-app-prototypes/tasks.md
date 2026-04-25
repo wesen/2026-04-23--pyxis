@@ -516,4 +516,4 @@ Do not commit:
 - [x] Detailed intern task plan written.
 - [x] Detailed intern playbook written.
 - [x] Updated intern handoff bundle uploaded to reMarkable.
-- [ ] Updated docs committed.
+- [x] Updated docs committed.
