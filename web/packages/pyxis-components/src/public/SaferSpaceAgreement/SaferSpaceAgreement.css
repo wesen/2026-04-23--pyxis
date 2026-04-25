@@ -1,0 +1,27 @@
+/* SaferSpaceAgreement — booking form policy acknowledgement. */
+
+:where([data-pyxis-component='safer-space-agreement'][data-pyxis-part='root']) {
+  --pyxis-safer-space-accent-color: var(--color-accent);
+  --pyxis-safer-space-muted-color: #8E887E;
+
+  align-items: flex-start;
+  color: var(--pyxis-safer-space-muted-color);
+  display: flex;
+  font-size: 12.5px;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+:where([data-pyxis-component='safer-space-agreement'][data-pyxis-part='checkbox']) {
+  accent-color: var(--pyxis-safer-space-accent-color);
+  margin-top: 2px;
+}
+
+:where([data-pyxis-component='safer-space-agreement'][data-pyxis-part='link']) {
+  color: var(--pyxis-safer-space-accent-color);
+}
+
+:where([data-pyxis-component='safer-space-agreement'][data-pyxis-part='link']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}

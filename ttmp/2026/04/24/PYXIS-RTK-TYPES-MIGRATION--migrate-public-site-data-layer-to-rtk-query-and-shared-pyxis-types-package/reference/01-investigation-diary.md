@@ -712,3 +712,31 @@ Typecheck passed. The visual-diff command completed all modes. Current output:
 component 1.1681% | 560/47940
 root      1.1681% | 560/47940
 ```
+
+
+## Step 21: Extract `SaferSpaceAgreement` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/SaferSpaceAgreement/SaferSpaceAgreement.css`.
+- Moved label layout, checkbox accent, and link color styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `checkbox`, `text`, and `link`.
+- Added tokenized focus-visible styling for the policy link.
+- Updated `SaferSpaceAgreement.tsx` to self-import CSS and use `clsx('pyxis-safer-space-agreement', className)`.
+- Added `Narrow` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/safer-space-agreement-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 1.5536% | 174/11200
+root      1.5536% | 174/11200
+```
+
+The remaining CSS diff is limited to box-sizing/font-family.

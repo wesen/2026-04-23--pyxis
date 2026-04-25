@@ -71,4 +71,7 @@
 - Extracted `ReserveTicketCard` styles into `web/packages/pyxis-components/src/public/ReserveTicketCard/ReserveTicketCard.css`.
 - Added part selectors for `header`, `eyebrow`, `code`, `price`, `note`, and `cta`, plus compact and theme override Storybook stories.
 - Validated `ReserveTicketCard` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../reserve-ticket-card-default.css-visual-diff.yml`; current pixel diff is `1.1681% | 560/47940`.
+- Extracted `SaferSpaceAgreement` styles into `web/packages/pyxis-components/src/public/SaferSpaceAgreement/SaferSpaceAgreement.css`.
+- Added part selectors for `checkbox`, `text`, and `link`, tokenized accent/focus styles, and narrow/theme override Storybook stories.
+- Validated `SaferSpaceAgreement` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../safer-space-agreement-default.css-visual-diff.yml`; current pixel diff is `1.5536% | 174/11200`.
 

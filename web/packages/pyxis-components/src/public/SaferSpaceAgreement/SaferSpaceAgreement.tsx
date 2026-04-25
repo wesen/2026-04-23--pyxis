@@ -1,7 +1,25 @@
+import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-export const SaferSpaceAgreement = ({ className }: { className?: string }) => (
-  <label {...pyxisPart('safer-space-agreement')} className={className} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 12.5, color: '#8E887E', lineHeight: 1.55 }}>
-    <input type="checkbox" defaultChecked style={{ marginTop: 2, accentColor: '#C8270D' }} />
-    <span>i've read the <a href="#" style={{ color: '#C8270D' }}>safer-space policy</a> and agree to uphold it for my show.</span>
+import './SaferSpaceAgreement.css';
+
+export type SaferSpaceAgreementProps = {
+  className?: string;
+};
+
+export const SaferSpaceAgreement = ({ className }: SaferSpaceAgreementProps) => (
+  <label {...pyxisPart('safer-space-agreement')} className={clsx('pyxis-safer-space-agreement', className)}>
+    <input
+      className="pyxis-safer-space-agreement__checkbox"
+      {...pyxisPart('safer-space-agreement', 'checkbox')}
+      type="checkbox"
+      defaultChecked
+    />
+    <span className="pyxis-safer-space-agreement__text" {...pyxisPart('safer-space-agreement', 'text')}>
+      i've read the{' '}
+      <a className="pyxis-safer-space-agreement__link" {...pyxisPart('safer-space-agreement', 'link')} href="#">
+        safer-space policy
+      </a>{' '}
+      and agree to uphold it for my show.
+    </span>
   </label>
 );
