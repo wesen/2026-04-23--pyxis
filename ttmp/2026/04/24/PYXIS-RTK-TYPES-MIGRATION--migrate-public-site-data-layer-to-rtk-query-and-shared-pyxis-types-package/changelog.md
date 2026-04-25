@@ -58,4 +58,7 @@
 - Completed the implemented portion of B3 show/archive CSS extraction for `ArchiveShowRow`, `ArchiveShowList`, `ArchiveSearchFilters`, `ShowTile`, and `ShowGrid`.
 - Left `PubShowRow` deferred pending taxonomy decision against `ShowTile`/`ShowGrid` and `ArchiveShowRow`; it remains exported and covered, but should not be polished until canonical usage is decided.
 - Ran final B3 `pnpm --filter pyxis-components typecheck`, which passed.
+- Started B4 detail/booking extraction by extracting `PublicPageHeader` styles into `web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css`.
+- Added part selectors for `kicker`, `title`, and `divider`, plus long-title and theme override Storybook stories.
+- Validated `PublicPageHeader` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../public-page-header-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/110424`.
 

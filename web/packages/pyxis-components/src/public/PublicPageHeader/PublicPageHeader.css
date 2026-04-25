@@ -1,0 +1,34 @@
+/* PublicPageHeader — public page eyebrow, title, and divider. */
+
+:where([data-pyxis-component='public-page-header'][data-pyxis-part='root']) {
+  --pyxis-public-page-header-accent-color: var(--color-accent);
+  --pyxis-public-page-header-border-color: #EAE7E0;
+  --pyxis-public-page-header-muted-color: #8E887E;
+
+  margin-bottom: var(--space-7);
+}
+
+:where([data-pyxis-component='public-page-header'][data-pyxis-part='kicker']) {
+  color: var(--pyxis-public-page-header-muted-color);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='public-page-header'][data-pyxis-part='title']) {
+  color: var(--pyxis-public-page-header-accent-color);
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+:where([data-pyxis-component='public-page-header'][data-pyxis-part='divider']) {
+  background: var(--pyxis-public-page-header-border-color);
+  height: 1px;
+  margin-top: 28px;
+}

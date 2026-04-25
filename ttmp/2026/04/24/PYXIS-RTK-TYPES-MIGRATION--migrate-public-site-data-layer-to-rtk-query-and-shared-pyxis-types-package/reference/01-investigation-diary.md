@@ -602,3 +602,31 @@ ArchiveShowRow      — canonical archive/recap row layout
 ```
 
 The task list already says to extract `PubShowRow` only "if the component remains canonical." Rather than polishing a possibly deprecated overlap component, I documented it as pending taxonomy decision.
+
+
+## Step 17: Extract `PublicPageHeader` CSS
+
+### What I did
+
+- Started B4 show-detail and booking CSS extraction.
+- Created `web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css`.
+- Moved root margin, kicker, title, and divider styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `kicker`, `title`, and `divider`.
+- Updated `PublicPageHeader.tsx` to self-import CSS and use `clsx('pyxis-public-page-header', className)`.
+- Added `LongTitle` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/public-page-header-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/110424
+root      0.0000% | 0/83032
+```
+
+This was an exact pixel-parity extraction.
