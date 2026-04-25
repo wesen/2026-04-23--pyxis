@@ -10,7 +10,7 @@ Topics:
   - pyxis
 DocType: tasks
 Intent: short-term
-Summary: Task checklist for consolidating prototype-design visual-diff workflows.
+Summary: Task checklist for consolidating prototype-design visual-diff workflows around project-specific JS userland with no native run-config compatibility requirement.
 ---
 
 # Tasks
@@ -21,39 +21,40 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 - [x] Write intern-facing analysis/design/implementation guide.
 - [x] Relate key source files to the guide/ticket.
 - [x] Upload guide to reMarkable.
+- [x] Revise guide to make JS userland the canonical workflow and remove backwards-compatibility requirements for native `css-visual-diff run` configs.
 
 ## Phase 1 — Inventory and classification
 
 - [ ] Produce tracked inventory of `prototype-design` visual assets, configs, scripts, and generated outputs.
-- [ ] Classify paths as canonical-source, compatibility, generated, historical, or obsolete.
+- [ ] Classify paths as canonical-source, retired-native, generated, historical, or obsolete.
 - [ ] Decide which generated/historical paths under `prototype-design/baseline` should remain tracked.
 
 ## Phase 2 — Source-of-truth cleanup
 
 - [ ] Formalize `*.visual.yml` schema with `schemaVersion`, `defaults`, `targets`, `policy`, and `acceptedDifferences`.
-- [ ] Decide loader strategy for default ergonomic verbs.
-- [ ] Stop maintaining hard-coded selector truth in `lib/registry.js` or mark it as compatibility only.
-- [ ] Keep `compare-spec` as the canonical explicit suite runner.
+- [ ] Keep `compare-spec` and project-specific JS userland as the canonical suite runner.
+- [ ] Stop maintaining hard-coded selector truth in `lib/registry.js`; convert it into a loader/normalizer or remove registry-backed shortcuts.
+- [ ] Do not add or maintain new native `*.css-visual-diff.yml` configs.
 
 ## Phase 3 — Selector stabilization
 
 - [ ] Add stable `data-page` / `data-section` selectors to public prototypes where missing.
 - [ ] Update visual suite spec selectors to use stable selectors.
 - [ ] Validate Shows semantic diagnostics before and after selector changes.
-- [ ] Update native compatibility configs if they remain hand-maintained.
+- [ ] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
 
 ## Phase 4 — Script and docs cleanup
 
 - [ ] Rename/reorganize promoted userland scripts into stable non-ticket-era names.
 - [ ] Update `prototype-design/visual-diff/userland/README.md`.
 - [ ] Add `prototype-design/visual-diff/userland/specs/README.md`.
-- [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md`.
+- [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` to remove native `css-visual-diff run` as the Pyxis workflow.
 
-## Phase 5 — Legacy config policy
+## Phase 5 — Native run-config removal
 
-- [ ] Classify `prototype-design/visual-diff/comparisons/**` as compatibility/native-run configs or generated outputs.
-- [ ] Decide whether to generate native css-visual-diff configs from the visual suite spec.
-- [ ] Move or annotate legacy configs so they do not compete with the canonical suite spec.
+- [ ] Mine `prototype-design/visual-diff/comparisons/**` for useful data missing from suite specs.
+- [ ] Delete native run configs from active workflow paths after migration.
+- [ ] Record removed paths and rationale in the cleanup diary/postmortem.
 
 ## Phase 6 — Final validation and handoff
 

@@ -19,3 +19,5 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Added intern-facing analysis/design/implementation guide at `design/01-prototype-design-visual-diff-cleanup-analysis-design-implementation-guide.md`.
 - Added concrete phased task checklist and planning diary.
 - Uploaded guide bundle to reMarkable at `/ai/2026/04/25/PYXIS-VISUAL-DIFF-CLEANUP` as `PYXIS Visual Diff Cleanup Guide`.
+- Revised cleanup guide and task list to make project-specific JS userland the canonical workflow and remove backwards-compatibility requirements for native `css-visual-diff run` configs.
+- Uploaded revised JS-canonical cleanup guide bundle to reMarkable as `PYXIS Visual Diff Cleanup Guide - JS Canonical`.

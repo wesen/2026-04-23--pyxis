@@ -15,21 +15,21 @@ RelatedFiles:
     - Path: prototype-design/screens/ppxis.jsx
       Note: Prototype public-page implementation where stable data-page/data-section selectors should be added
     - Path: prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml
-      Note: Representative native css-visual-diff config to classify as compatibility or generated from spec
+      Note: Representative retired native css-visual-diff config to mine for data and then remove from active workflow paths
     - Path: prototype-design/visual-diff/userland/README.md
       Note: Promoted userland workflow overview that the cleanup should preserve and refine
     - Path: prototype-design/visual-diff/userland/lib/compare-region.js
       Note: Core compare-section/page/all/spec orchestration implementation
     - Path: prototype-design/visual-diff/userland/lib/registry.js
-      Note: Current duplicated target registry that should become a loader or compatibility adapter
+      Note: Current duplicated target registry that should become a loader or loader/normalizer
     - Path: prototype-design/visual-diff/userland/lib/snapshot.js
       Note: Phase 6 semantic snapshot and snapshot-diff implementation
     - Path: prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
-      Note: Current working visual suite spec and likely future source of truth
+      Note: Current working visual suite spec and likely canonical source of truth
 ExternalSources: []
-Summary: Intern-facing guide for consolidating Pyxis prototype-design visual comparison workflows around the promoted css-visual-diff JavaScript userland layer and suite specs.
+Summary: Intern-facing guide for consolidating Pyxis prototype-design visual comparison workflows around project-specific css-visual-diff JavaScript userland and removing native run-config compatibility as a source of truth.
 LastUpdated: 2026-04-25T18:20:00-04:00
-WhatFor: Use this as the implementation plan for a full cleanup of prototype-design, visual-diff scripts, specs, legacy configs, generated artifacts, and documentation.
+WhatFor: Use this as the implementation plan for a full cleanup of prototype-design, visual-diff scripts, project-specific suite specs, generated artifacts, and documentation, with no backwards compatibility requirement for native run configs.
 WhenToUse: Read before editing prototype-design/visual-diff, promoted CSSVD JS userland scripts, public prototype selectors, or page-level visual parity workflows.
 ---
 
@@ -40,7 +40,7 @@ WhenToUse: Read before editing prototype-design/visual-diff, promoted CSSVD JS u
 
 This document is for a new intern joining the Pyxis visual parity work. The goal is not only to say which files to move. The goal is to build a mental model of the system: what `prototype-design` is, why `css-visual-diff` is used, what Storybook is doing in the loop, what the promoted JavaScript userland layer provides, and how to clean the folder structure without breaking the visual comparison workflow.
 
-The cleanup should leave the repo with solid foundations for future visual tuning. At the moment, the project has several generations of visual-diff work living side by side. That is expected after a prototype-to-production migration: first we collected screenshots, then we wrote native `css-visual-diff` YAML configs, then we added Storybook fixtures, then we promoted a JavaScript workflow layer that can compare sections, pages, suites, and semantic snapshots. Each layer solved a real problem. The cleanup task is to preserve the useful parts, make the current architecture explicit, and remove or quarantine the paths that would confuse the next developer.
+The cleanup should leave the repo with solid foundations for future visual tuning. At the moment, the project has several generations of visual-diff work living side by side. That is expected after a prototype-to-production migration: first we collected screenshots, then we wrote native `css-visual-diff` YAML configs, then we added Storybook fixtures, then we promoted a JavaScript workflow layer that can compare sections, pages, suites, and semantic snapshots. Each layer solved a real problem at the time. The cleanup task is now more decisive: keep the project-specific JavaScript workflow, make the suite spec canonical, and cut ties with native run-config compatibility inside Pyxis. We do not need to preserve two equal workflows. The JS API was developed precisely so project-specific orchestration can live in code that understands Pyxis concepts.
 
 The target result is simple to describe:
 
@@ -79,7 +79,7 @@ The current visual workflow compares two renderings of the same UI:
                           └─────────────────────────────────────┘
 ```
 
-The cleanup should strengthen this picture. If a file does not fit into one of these boxes, we should classify it carefully: source, compatibility fixture, historical evidence, or generated output.
+The cleanup should strengthen this picture. If a file does not fit into one of these boxes, classify it carefully as canonical source, generated output, historical ticket evidence, or obsolete. Do not keep native-run compatibility files merely because they existed before.
 
 ## 2. Vocabulary and concepts
 
@@ -159,9 +159,9 @@ main > div:nth-child(2)
 
 A brittle selector may work today, but it stops describing intent as soon as the DOM changes. A stable selector says what the region means.
 
-### 2.4 Native css-visual-diff config
+### 2.4 Retired native css-visual-diff config
 
-Native configs are YAML files consumed by:
+Native configs are YAML files consumed by the low-level command:
 
 ```bash
 css-visual-diff run --config path/to/file.css-visual-diff.yml
@@ -173,7 +173,7 @@ Example:
 prototype-design/visual-diff/comparisons/public-pages/shows-desktop.css-visual-diff.yml
 ```
 
-These files are low-level runner configs. They describe URLs, selectors, output paths, and modes for `css-visual-diff run`.
+These files describe URLs, selectors, output paths, and modes for `css-visual-diff run`. They were useful before the JavaScript API matured. For Pyxis cleanup, they are no longer a compatibility target and should not be maintained as a parallel workflow. The cleanup should migrate any still-useful information into the Pyxis visual suite spec and then remove or archive the native configs outside active workflow paths.
 
 ### 2.5 Pyxis visual suite spec
 
@@ -274,7 +274,7 @@ Optional local direnv discovery is documented in:
 
 ### 3.4 `prototype-design/visual-diff/comparisons`
 
-Purpose: older/native `css-visual-diff run` YAML configs.
+Purpose: retired older/native `css-visual-diff run` YAML configs that should be mined for useful data and then removed from the active workflow.
 
 Important paths:
 
@@ -283,7 +283,7 @@ prototype-design/visual-diff/comparisons/component-system/
 prototype-design/visual-diff/comparisons/public-pages/
 ```
 
-These configs are still useful for native-run compatibility and historical evidence. The cleanup should decide whether they remain hand-maintained, get generated from the new suite spec, or move under a clearly named compatibility folder.
+These configs should not remain hand-maintained. The cleanup should mine them for any selectors or notes that are missing from the Pyxis suite spec, then delete or archive them as historical evidence in the cleanup ticket. Do not generate or preserve native configs unless a future upstream css-visual-diff bug report explicitly needs a minimal repro.
 
 ### 3.5 `prototype-design/visual-comparisons`
 
@@ -313,7 +313,7 @@ That is the core cleanup problem.
 
 The current promoted YAML and the JS registry have been proven equivalent for the public page suite. That means the hard-coded registry no longer needs to be a source of truth. It can become a loader/adapter.
 
-The older native `*.css-visual-diff.yml` configs should not be deleted blindly. They still document the previous runner workflow and may be useful for `css-visual-diff run`. But they should not compete with the new suite spec as the canonical page inventory.
+The older native `*.css-visual-diff.yml` configs should not be deleted blindly, but the desired end state is clear: they should not remain in active workflow paths. Mine them for useful information, record what was removed, and cut ties with native `css-visual-diff run` as a Pyxis workflow.
 
 ## 5. Target architecture after cleanup
 
@@ -337,17 +337,15 @@ css-visual-diff JavaScript API
 prototype-design/visual-comparisons/cssvd-js/*
 ```
 
-The original native configs then become compatibility inputs/outputs:
+There is no compatibility branch in the target architecture:
 
 ```text
 Pyxis visual suite spec
         │
-        ├── JS userland workflow: compare-spec, snapshot-section, diff-snapshots
-        │
-        └── optional future emitter: generate native *.css-visual-diff.yml configs
+        └── JS userland workflow: compare-spec, compare-page, compare-all, snapshot-section, diff-snapshots
 ```
 
-The key point is that the suite spec owns intent. Native configs can remain as compatibility, but they should not be the primary source of truth for Pyxis orchestration.
+The suite spec owns intent, and the JavaScript userland owns execution. Native run configs are not part of the future Pyxis workflow.
 
 ## 6. Proposed canonical spec schema
 
@@ -600,7 +598,7 @@ Classify files as:
 | Class | Meaning | Action |
 | --- | --- | --- |
 | canonical-source | Future source of truth. | Keep and document. |
-| compatibility | Still useful for old/native workflows. | Keep but label clearly. |
+| retired-native | Old `css-visual-diff run` config or script. | Mine for data, then remove/archive outside active paths. |
 | generated | Produced by tools. | Ignore/remove from commits. |
 | historical | Useful as ticket evidence. | Keep in ticket/reference/archive, not active paths. |
 | obsolete | Superseded and not useful. | Delete after validation. |
@@ -611,7 +609,7 @@ Expected classification:
 prototype-design/visual-diff/userland/specs/*.visual.yml      canonical-source
 prototype-design/visual-diff/userland/lib/*                   canonical-source
 prototype-design/visual-diff/userland/verbs/*                 canonical-source
-prototype-design/visual-diff/comparisons/**/*.yml             compatibility
+prototype-design/visual-diff/comparisons/**/*.yml             retired-native / obsolete after migration
 prototype-design/visual-comparisons/**                        generated
 prototype-design/baseline/sample*/**                          generated/historical, needs review
 ```
@@ -746,55 +744,25 @@ prototype-design/visual-diff/userland/scripts/
 
 Update `README.md` accordingly.
 
-### Phase E: Decide legacy config handling
+### Phase E: Remove native run-config workflow
 
-Do not delete native configs immediately. First add a note, either in a README or in the cleanup report:
+Do not maintain native `*.css-visual-diff.yml` configs as a second workflow. The cleanup should do a deliberate removal pass:
+
+1. Read each native config under `prototype-design/visual-diff/comparisons/**`.
+2. Check whether its page, URL, viewport, wait behavior, and selectors are represented in the Pyxis visual suite spec.
+3. If useful data is missing, migrate that data into the suite spec.
+4. Record the migration/removal in the cleanup diary.
+5. Delete the native config from the active path.
+
+Use this rule:
 
 ```text
-prototype-design/visual-diff/comparisons/** contains native css-visual-diff run configs.
-The canonical Pyxis visual suite source is userland/specs/*.visual.yml.
-Native configs are retained for compatibility and historical reproducibility.
+If Pyxis needs to compare it, it belongs in a project-specific *.visual.yml suite spec and JS verb flow.
+If Pyxis no longer needs it, delete it or move the evidence into the ticket archive.
+Do not keep native run configs for backwards compatibility.
 ```
 
-Potential later step: implement an emitter:
-
-```bash
-pyxis pages emit-native-configs public-pages.desktop.visual.yml \
-  --outDir prototype-design/visual-diff/comparisons/generated/public-pages
-```
-
-Pseudo-code:
-
-```js
-function emitNativeConfig(target, sectionSet) {
-  return {
-    metadata: { slug, title, domain, level, component, state },
-    original: {
-      name: target.page + '-prototype',
-      url: target.prototypeUrl,
-      wait_ms: target.waitMs,
-      viewport: target.viewport,
-      root_selector: target.prototype.rootSelector || '#root',
-      prepare: { wait_for: target.prototype.waitFor }
-    },
-    react: {
-      name: target.page + '-storybook',
-      url: target.storybookUrl,
-      wait_ms: target.waitMs,
-      viewport: target.viewport,
-      root_selector: target.storybook.rootSelector || "[data-story-frame='pyxis-page-shell']",
-      prepare: { wait_for: target.storybook.waitFor }
-    },
-    sections: target.sections.map(section => ({
-      name: section.id,
-      selector_original: section.original,
-      selector_react: section.react
-    })),
-    output: { dir: computedOutputDir },
-    modes: ['capture', 'cssdiff', 'matched-styles', 'pixeldiff', 'html-report']
-  }
-}
-```
+If a future upstream css-visual-diff bug report needs a minimal native repro, create that repro at that time in the relevant ticket. Do not keep a permanent native-config compatibility layer in the product repo.
 
 ### Phase F: Documentation cleanup
 
@@ -810,7 +778,7 @@ The playbook should say:
 
 - Use live Storybook in tmux.
 - Use `prototype-design/visual-diff/userland` as the promoted verb repository.
-- Use `compare-spec` for canonical suite runs.
+- Use `compare-spec` for canonical suite runs; do not add new native `css-visual-diff run` configs.
 - Use `snapshot-section` before tuning CSS when pixel diffs are large.
 - Use the `read` tool for PNG/image inspection, not general image-understanding tools.
 - Do not commit generated outputs under `prototype-design/visual-comparisons` unless explicitly requested.
@@ -1032,14 +1000,14 @@ Commit message:
 Organize visual diff userland scripts
 ```
 
-### Commit 5: Legacy compatibility cleanup
+### Commit 5: Native run-config removal
 
 Files depend on inventory. Do not do this until every path has a classification.
 
 Commit message:
 
 ```text
-Classify legacy visual diff configs
+Remove retired native visual diff configs
 ```
 
 ## 12. Risks and how to avoid them
@@ -1084,10 +1052,10 @@ If generated outputs appear in `git status`, remove them unless explicitly reque
 The cleanup ticket is done when:
 
 - The canonical suite spec is documented and validated.
-- The JS registry no longer duplicates selector truth, or is clearly marked as a compatibility adapter.
+- The JS registry no longer duplicates selector truth, or is clearly marked as a loader/normalizer.
 - Public prototype sections use stable `data-page` and `data-section` selectors for canonical comparisons.
 - Promoted userland scripts are organized and documented.
-- Native config YAMLs are classified as compatibility, generated, or deprecated.
+- Native `*.css-visual-diff.yml` configs are removed from active workflow paths after useful data is migrated into suite specs.
 - Generated artifacts are ignored and absent from commits unless requested.
 - The playbook points developers to the promoted workflow.
 - The full spec suite and smoke scripts pass.
