@@ -26,3 +26,15 @@ Created implementation planning ticket with userland library guide, maintainer f
 - Completed Phase 3 locator-first inspect command: added style presets, browser/locator inspection helper, `pyxis pages inspect-section`, and an Archive content smoke test with two visible sides.
 - Started Phase 4 compare bridge investigation: added compare-region command planner, `pyxis pages compare-section-command`, smoke output for Archive content, and documented that `child_process` is unavailable in the current css-visual-diff Goja runtime.
 - Uploaded post-implementation progress docs bundle and source bundle to reMarkable; verified `Current Ticket`, `Plan`, `Progress`, and `Source` documents under `/ai/2026/04/25/PYXIS-CSSVD-JS-LIB`.
+- Evaluated the newer flexible css-visual-diff JavaScript API, captured updated docs, replaced the command-planner-only compare bridge with direct `cvd.compare.region(...)`, validated Archive content at `7.128146453089244%`, and wrote `reference/02-flexible-javascript-api-evaluation-report.md`.
+
+## 2026-04-25
+
+Evaluated new flexible css-visual-diff JS API, updated compare-section to use cvd.compare.region directly, validated Archive content parity, and wrote the technical evaluation report.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/reference/02-flexible-javascript-api-evaluation-report.md — Technical evaluation report
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/08-smoke-new-api-compare-section.sh — Validation smoke script
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/lib/compare-region.js — cvd.compare.region implementation
+

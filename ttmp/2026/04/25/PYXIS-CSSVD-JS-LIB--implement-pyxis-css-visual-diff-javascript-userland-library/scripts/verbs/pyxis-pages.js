@@ -122,3 +122,27 @@ __verb__('compareSectionCommand', {
     outDir: { type: 'string', default: '', help: 'Output directory for artifacts' },
   },
 })
+
+async function compareSection(page, section, values) {
+  return [await lib.compareRegion.compareSection(page, section, {
+    variant: values.variant || 'desktop',
+    outDir: values.outDir || '',
+    threshold: values.threshold || 30,
+    inspect: values.inspect || 'rich',
+  })]
+}
+
+__verb__('compareSection', {
+  parents: ['pyxis', 'pages'],
+  short: 'Compare one registered Pyxis page section using cvd.compare.region',
+  output: 'structured',
+  fields: {
+    page: { argument: true, required: true, help: 'Registered page slug' },
+    section: { argument: true, required: true, help: 'Registered section name' },
+    values: { bind: 'all' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    outDir: { type: 'string', default: '', help: 'Output directory for artifacts' },
+    threshold: { type: 'int', default: 30, help: 'Pixel threshold 0-255' },
+    inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
+  },
+})

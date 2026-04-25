@@ -16,6 +16,8 @@
 - [x] Upload implementation progress docs bundle to reMarkable.
 - [x] Upload implementation source bundle to reMarkable.
 - [x] Verify progress/source uploads exist on reMarkable.
+- [x] Capture newer flexible JavaScript API docs with `scripts/07-capture-new-flexible-js-api-docs.sh`.
+- [x] Store new API experiment scripts in the ticket `scripts/` folder.
 
 ## Phase 1 — Library skeleton and registry
 
@@ -68,13 +70,13 @@
 - [x] Implement `pyxis pages compare-section-command <page> <section>` as a command-plan bridge.
 - [x] Add smoke script `scripts/05-smoke-compare-section-command.sh`.
 - [x] Add diagnostic script `scripts/06-smoke-child-process-unavailable.sh`.
-- [ ] Use `child_process.spawn` to invoke `css-visual-diff verbs script compare region`. (Blocked: `child_process` is not exposed in current Goja runtime.)
-- [ ] Create output directories before spawning commands.
-- [ ] Read generated `compare.json`.
-- [ ] Wrap generated Markdown with docmgr-compatible frontmatter when output lives under `ttmp`.
-- [ ] Implement `pyxis pages compare-section <page> <section>`. (Blocked pending JS-callable pixel compare or process execution API.)
-- [ ] Add smoke script `scripts/04-smoke-compare-section.sh`.
-- [ ] Validate Archive content result is approximately `7.1281%`.
+- [x] Replace `child_process` bridge plan with direct `cvd.compare.region(...)` implementation.
+- [x] Create output directories before direct `cvd.compare.region(...)` artifact writes.
+- [x] Read/validate generated `compare.json` from `comparison.artifacts.write(...)`.
+- [x] Wrap generated Markdown with docmgr-compatible frontmatter when output lives under `ttmp`.
+- [x] Implement `pyxis pages compare-section <page> <section>` using `cvd.compare.region(...)`.
+- [x] Add smoke script `scripts/08-smoke-new-api-compare-section.sh`.
+- [x] Validate Archive content result is exactly `7.128146453089244%` / `102172` changed pixels.
 - [x] Record results in diary.
 
 ## Phase 5 — Page and suite orchestration
@@ -88,7 +90,7 @@
 - [ ] Add smoke script `scripts/05-smoke-compare-page.sh`.
 - [ ] Add smoke script `scripts/06-smoke-compare-all.sh`.
 - [ ] Validate all current desktop page sections run from registry.
-- [x] Record results in diary.
+- [ ] Record results in diary.
 
 ## Phase 6 — Snapshot and semantic diff tooling
 
@@ -100,14 +102,14 @@
 - [ ] Implement optional `pyxis pages diff-snapshots`.
 - [ ] Write JSON and Markdown semantic reports.
 - [ ] Validate with Shows header or Archive content.
-- [x] Record results in diary.
+- [ ] Record results in diary.
 
 ## Phase 7 — Accepted differences and maintainer feedback loop
 
 - [ ] Add accepted-difference metadata support to registry or sidecar JSON.
 - [ ] Include accepted differences in Markdown reports.
-- [ ] Revisit maintainer feature-request document after implementation experience.
-- [ ] Mark which requested features are still needed after userland prototypes.
+- [x] Revisit maintainer feature-request document after flexible JS API implementation experience.
+- [x] Mark core pixel compare request as satisfied by `cvd.compare.region(...)`.
 - [ ] Prepare upstream issue text or discussion notes.
 
 ## Phase 8 — Promotion decision

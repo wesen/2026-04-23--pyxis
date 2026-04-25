@@ -1,0 +1,76 @@
+
+  # css-visual-diff - Compare rendered HTML/CSS across browser targets        
+                                                                              
+  Run css-visual-diff help --ui to open the interactive help TUI.             
+                                                                              
+  ## Usage:                                                                   
+                                                                              
+  css-visual-diff [command]                                                   
+                                                                              
+  ## Available Commands:                                                      
+                                                                              
+  • **chromedp-probe** Run a minimal chromedp probe against a URL             
+  • **compare**        Compare a single element between two URLs (screenshots +
+  CSS + pixel diff)                                                           
+  • **completion**     Generate the autocompletion script for the specified   
+  shell                                                                       
+  • **css-json**       Write computed CSS for one inspected selector as JSON  
+  • **css-md**         Write computed CSS for one inspected selector as       
+  Markdown                                                                    
+  • **help**           Help about any command or topic                        
+  • **html**           Write prepared HTML for one inspected selector         
+  • **inspect**        Inspect one side of a css-visual-diff config and write 
+  screenshot/HTML/CSS artifacts                                               
+  • **inspect-json**   Write DOM inspection JSON for one inspected selector   
+  • **llm-review**     Compare a region and ask an LLM for a multimodal review
+  using Pinocchio profile settings                                            
+  • **run**            Run css-visual-diff capture and analysis modes         
+  • **screenshot**     Capture one inspected selector as a PNG file           
+  • **verbs**          Run annotated css-visual-diff workflow verbs           
+                                                                              
+  ## Flags:                                                                   
+                                                                              
+                   --log-file    Log file (default: stderr)                   
+                 --log-format    Log format (json, text) (default "text")     
+                  --log-level    Log level (trace, debug, info, warn, error,  
+  fatal) (default "error")                                                    
+              --log-to-stdout    Log to stdout even when log-file is set      
+          --logstash-app-name    Application name for Logstash logs (default  
+  "css-visual-diff")                                                          
+           --logstash-enabled    Enable logging to Logstash                   
+       --logstash-environment    Environment name for Logstash logs           
+  (development, staging, production) (default "development")                  
+              --logstash-host    Logstash host (default "logstash")           
+              --logstash-port    Logstash port (default 5044)                 
+          --logstash-protocol    Logstash protocol (tcp, udp) (default "tcp") 
+                  --long-help    Show long help                               
+                --with-caller    Log caller information                       
+                                                                              
+  Use css-visual-diff [command] --help for more information about a command.  
+  Use                                                                         
+  css-visual-diff --help --long-help for information about all flags.         
+                                                                              
+  ## General topics                                                           
+                                                                              
+  Run css-visual-diff help <topic> to view a topic's page.                    
+                                                                              
+  • config-selectors - Config Selectors: Regions and CSS Probes               
+  • javascript-api - JavaScript API: require("css-visual-diff")               
+  • javascript-verbs - JavaScript Verbs and Repository-Scanned Workflows      
+                                                                              
+  ## Examples                                                                 
+                                                                              
+  Run css-visual-diff help <example> to view an example in full.              
+                                                                              
+  • artifact-commands - Artifact Commands for Selector Tuning                 
+                                                                              
+  ## Tutorials                                                                
+                                                                              
+  Run css-visual-diff help <tutorial> to view a tutorial in full.             
+                                                                              
+  • inspect-workflow - Inspect One Side Before Comparing                      
+  • pixel-accuracy-scripting-guide - Building Pixel-Accurate Websites with css-
+  visual-diff Scripts                                                         
+  • story-config-authoring - Author a Story css-visual-diff Config with       
+  Inspect                                                                     
+

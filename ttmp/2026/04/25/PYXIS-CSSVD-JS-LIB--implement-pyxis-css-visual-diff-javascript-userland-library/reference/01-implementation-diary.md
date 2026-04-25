@@ -975,3 +975,169 @@ Remote path:
 ```text
 /ai/2026/04/25/PYXIS-CSSVD-JS-LIB
 ```
+
+
+## Step 8: Evaluate the new flexible css-visual-diff JavaScript API and update compare-section
+
+The user reported that css-visual-diff now has an entirely new, more flexible JavaScript API and asked me to read the docs, update the scripts/workflow, experiment with it, and write a technical report. I captured the new docs into the ticket, then replaced the previous command-planner-only compare bridge with a direct `cvd.compare.region(...)` implementation.
+
+This is the most important turning point in the ticket: the core primitive we had requested upstream now exists, and it works for the Pyxis Archive content comparison.
+
+### Prompt Context
+
+**User prompt (verbatim):** "We implemented an entirely new more flexible JS API in css-visual-diff, read the docs (css-visual-diff help), and update your current scripts / update your workflow to see if that helps improve things, play around with it a bit, and then write me a report on what you think, detailed and technical, in the ticket, and upload to remarkable."
+
+**Assistant interpretation:** Re-read the css-visual-diff help for the new JS API, change the current userland library to use it, run experiments, document findings in the ticket, and upload the result.
+
+**Inferred user intent:** Validate the new API against real Pyxis workflows and produce actionable technical feedback.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added docs capture script:
+
+```text
+scripts/07-capture-new-flexible-js-api-docs.sh
+```
+
+- Captured updated help docs under:
+
+```text
+sources/css-visual-diff-help-2026-04-25-flexible-js-api/
+```
+
+- Added new API smoke script:
+
+```text
+scripts/08-smoke-new-api-compare-section.sh
+```
+
+- Updated:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Implemented:
+
+```text
+pyxis pages compare-section <page> <section>
+```
+
+using:
+
+```js
+await cvd.compare.region({
+  left: leftPage.locator(section.original),
+  right: rightPage.locator(section.react),
+  outDir,
+  threshold,
+  inspect: 'rich',
+})
+```
+
+- Wrote technical report:
+
+```text
+reference/02-flexible-javascript-api-evaluation-report.md
+```
+
+### Why
+
+Our previous Phase 4 implementation was blocked at the exact boundary the new API addresses. We could plan a compare-region command, but could not execute it from Goja because `child_process` is unavailable. `cvd.compare.region(...)` removes that blocker.
+
+### What worked
+
+The Archive content comparison succeeded through our own userland verb and reproduced the previous baselines exactly:
+
+```text
+changedPercent: 7.128146453089244
+changedPixels: 102172
+totalPixels: 1433360
+normalized size: 920 x 1558
+```
+
+Generated artifacts:
+
+```text
+various/05-new-api-compare-section/archive-content/01-compare-report.md
+various/05-new-api-compare-section/archive-content/compare.json
+various/05-new-api-compare-section/archive-content/compare-section-output.json
+various/05-new-api-compare-section/archive-content/diff_comparison.png
+various/05-new-api-compare-section/archive-content/diff_only.png
+various/05-new-api-compare-section/archive-content/left_region.png
+various/05-new-api-compare-section/archive-content/right_region.png
+```
+
+### What didn't work
+
+1. A first run occasionally saw the Storybook selector as missing. I fixed this by explicitly waiting for both selectors with `page.prepare({ waitFor })`.
+
+2. `page.prepare` failed when I used an empty script:
+
+```text
+PrepareError: prepare target "archive-prototype": script prepare requires script or script_file
+```
+
+Fix:
+
+```js
+script: 'void 0'
+```
+
+3. I repeated the shell `tee` directory timing footgun. If a script creates `$OUT`, the caller cannot pipe to `tee "$OUT/file"` unless the directory exists before the pipeline starts.
+
+### What I learned
+
+The new API is exactly the primitive we wanted. The most important new pieces are:
+
+```text
+locator.collect(...)
+cvd.collect.selection(...)
+cvd.compare.region(...)
+cvd.compare.selections(...)
+cvd.image.diff(...)
+cvd.catalog.create(...).record(comparison)
+```
+
+This changes the implementation plan: `pyxis pages compare-section`, `compare-page`, and `compare-all` should use `cvd.compare.region(...)` directly. The shell command planner remains useful for compatibility/debugging, but it is no longer the primary path.
+
+### What was tricky to build
+
+The tricky part was not the new comparison API itself; it was the page readiness contract. Storybook/RTK/MSW pages can be loaded before the meaningful selector exists. The userland library should always wait for the registered section selectors before comparing.
+
+### What warrants a second pair of eyes
+
+- Whether `page.prepare({ type: 'script', waitFor, script: 'void 0' })` is the intended no-op wait pattern or whether css-visual-diff should expose a dedicated selector wait helper.
+- Whether `comparison.toJSON().artifacts` should list `compare.json` and `compare.md` after `comparison.artifacts.write(outDir, ['json', 'markdown'])`; currently the compact wrapper sees PNG artifact entries but not JSON/Markdown entries.
+
+### What should be done in the future
+
+- Implement `pyxis pages compare-page` using a loop over registry sections plus `cvd.catalog.create(...)`.
+- Update the external maintainer request doc before sharing it broadly: the P0 core primitive request is now satisfied.
+- Keep explicit selector waits in all browser-backed comparison verbs.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+scripts/07-capture-new-flexible-js-api-docs.sh
+scripts/08-smoke-new-api-compare-section.sh
+reference/02-flexible-javascript-api-evaluation-report.md
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/07-capture-new-flexible-js-api-docs.sh
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/08-smoke-new-api-compare-section.sh
+```
+
+### Technical details
+
+The new command uses `comparison.summary()` for compact stdout and `comparison.toJSON()` / `comparison.artifacts.write(...)` for durable artifacts. The resulting `changedPercent` exactly matches the previous built-in CLI smoke and YAML result for Archive content.

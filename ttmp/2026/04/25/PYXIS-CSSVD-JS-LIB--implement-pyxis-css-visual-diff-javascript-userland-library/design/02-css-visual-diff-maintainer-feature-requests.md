@@ -43,6 +43,25 @@ The JavaScript API is already useful for:
 
 The remaining pain points are mostly workflow orchestration. We can build many of them in userland. This document lists the few features that would be especially valuable if supported directly by `css-visual-diff`, plus smaller convenience helpers that could be considered later.
 
+## 2026-04-25 update: core pixel compare request is now satisfied
+
+After this document was first written, css-visual-diff gained the flexible public JS API documented under `css-visual-diff help javascript-api`, including:
+
+```js
+cvd.compare.region(...)
+cvd.compare.selections(...)
+cvd.image.diff(...)
+```
+
+We validated `cvd.compare.region(...)` in the Pyxis userland library against Archive content and reproduced the existing baseline exactly:
+
+```text
+changedPercent: 7.128146453089244
+changedPixels: 102172
+```
+
+Therefore the original P0 request for a JS-callable pixel/region comparison primitive should be treated as **satisfied**. Remaining maintainer feedback should focus on ergonomics and documentation details: selector wait helpers, artifact naming/schema clarity, multi-section examples, catalog examples, and normalization/tolerance helpers. See `reference/02-flexible-javascript-api-evaluation-report.md` for the detailed evaluation.
+
 ## Request priority summary
 
 | Priority | Request | Why it matters |
