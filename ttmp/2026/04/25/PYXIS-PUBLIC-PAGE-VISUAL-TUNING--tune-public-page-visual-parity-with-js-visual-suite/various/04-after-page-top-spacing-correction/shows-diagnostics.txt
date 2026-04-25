@@ -1,0 +1,30 @@
+[
+  {
+    "section": "header",
+    "changed": true,
+    "styleDiffs": 5,
+    "yDelta": 0,
+    "heightDelta": -1.5
+  },
+  {
+    "section": "shows-list",
+    "changed": true,
+    "styleDiffs": 5,
+    "yDelta": 2.5,
+    "heightDelta": 34.5
+  },
+  {
+    "section": "mailing-list",
+    "changed": true,
+    "styleDiffs": 5,
+    "yDelta": 37,
+    "heightDelta": 8.5
+  },
+  {
+    "section": "content",
+    "changed": true,
+    "styleDiffs": 8,
+    "yDelta": 0,
+    "heightDelta": 117.5
+  }
+]

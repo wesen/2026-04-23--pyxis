@@ -1,0 +1,117 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "pyxis-shows-page__header"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 38.5,
+      "width": 0,
+      "x": 0,
+      "y": -40
+    },
+    "left": {
+      "height": 101.09375,
+      "width": 856,
+      "x": 32,
+      "y": 101
+    },
+    "right": {
+      "height": 139.59375,
+      "width": 856,
+      "x": 32,
+      "y": 61
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 101.09375,
+      "width": 856,
+      "x": 32,
+      "y": 101
+    },
+    "exists": true,
+    "name": "shows-header",
+    "selector": "[data-section='shows-header']",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "visible": true
+  },
+  "name": "shows-header",
+  "pixel": {
+    "changedPercent": 10.772696929238986,
+    "changedPixels": 12910,
+    "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+    "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+    "normalizedHeight": 140,
+    "normalizedWidth": 856,
+    "threshold": 30,
+    "totalPixels": 119840
+  },
+  "right": {
+    "bounds": {
+      "height": 139.59375,
+      "width": 856,
+      "x": 32,
+      "y": 61
+    },
+    "exists": true,
+    "name": "shows-header",
+    "selector": "[data-section='shows-header']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(31, 30, 28)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "Inter, sans-serif",
+      "name": "font-family",
+      "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    },
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "padding-top",
+      "right": "40px"
+    }
+  ],
+  "text": {
+    "changed": false,
+    "left": "Providence, RIUpcoming shows",
+    "right": "Providence, RIUpcoming shows"
+  }
+}

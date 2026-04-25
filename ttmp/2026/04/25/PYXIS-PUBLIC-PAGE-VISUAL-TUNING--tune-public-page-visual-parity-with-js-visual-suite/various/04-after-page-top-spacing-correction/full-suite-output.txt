@@ -1,0 +1,2720 @@
+[
+{
+  "acceptedDifferenceCount": 0,
+  "classificationCounts": {
+    "major-mismatch": 1,
+    "review": 4,
+    "tune-required": 8
+  },
+  "jsonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/compare-all-output.json",
+  "markdownPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/01-suite-summary.md",
+  "maxChangedPercent": 29.3355501525553,
+  "mode": "authoring",
+  "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop",
+  "pageCount": 5,
+  "pages": [
+    {
+      "acceptedDifferenceCount": 0,
+      "catalog": {
+        "artifactCount": 10,
+        "comparisonCount": 5,
+        "failureCount": 0,
+        "preflightCount": 0,
+        "resultCount": 0,
+        "targetCount": 5
+      },
+      "classificationCounts": {
+        "review": 2,
+        "tune-required": 3
+      },
+      "indexPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/01-catalog-index.md",
+      "manifestPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/manifest.json",
+      "maxChangedPercent": 20.490654205607477,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows",
+      "page": "shows",
+      "sectionCount": 5,
+      "sections": [
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.md",
+          "baselineChangedPercent": 46.3495,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 122.5,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1984.046875,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            },
+            "right": {
+              "height": 2106.546875,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "changedPercent": 15.211097583623944,
+          "changedPixels": 294858,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/left_region.png",
+          "leftSelector": "#root",
+          "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+          "normalizedHeight": 2107,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page",
+          "page": "shows",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/right_region.png",
+          "rightSelector": "[data-story-frame='pyxis-page-shell']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "section": "page",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1984.046875,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "shows-page",
+              "selector": "#root",
+              "url": "http://localhost:7070/standalone/public/shows.html",
+              "visible": true
+            },
+            "name": "shows-page",
+            "pixel": {
+              "changedPercent": 15.211097583623944,
+              "changedPixels": 294858,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png",
+              "normalizedHeight": 2107,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1938440
+            },
+            "right": {
+              "bounds": {
+                "height": 2106.546875,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "shows-page",
+              "selector": "[data-story-frame='pyxis-page-shell']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1938440,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.md",
+          "baselineChangedPercent": 52.4196,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 117.5,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1739.109375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            },
+            "right": {
+              "height": 1856.609375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            }
+          },
+          "changedPercent": 16.798599892299407,
+          "changedPixels": 286994,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/left_region.png",
+          "leftSelector": "[data-page='shows']",
+          "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+          "normalizedHeight": 1857,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content",
+          "page": "shows",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/right_region.png",
+          "rightSelector": "[data-page='shows']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "section": "content",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1739.109375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "shows-content",
+              "selector": "[data-page='shows']",
+              "url": "http://localhost:7070/standalone/public/shows.html",
+              "visible": true
+            },
+            "name": "shows-content",
+            "pixel": {
+              "changedPercent": 16.798599892299407,
+              "changedPixels": 286994,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png",
+              "normalizedHeight": 1857,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1708440
+            },
+            "right": {
+              "bounds": {
+                "height": 1856.609375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "shows-content",
+              "selector": "[data-page='shows']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1708440,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.md",
+          "baselineChangedPercent": 7.2648,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": -1.5,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 101.09375,
+              "width": 856,
+              "x": 32,
+              "y": 101
+            },
+            "right": {
+              "height": 99.59375,
+              "width": 856,
+              "x": 32,
+              "y": 101
+            }
+          },
+          "changedPercent": 7.472008883131304,
+          "changedPixels": 6460,
+          "classification": "review",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/left_region.png",
+          "leftSelector": "[data-section='shows-header']",
+          "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+          "normalizedHeight": 101,
+          "normalizedWidth": 856,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header",
+          "page": "shows",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/right_region.png",
+          "rightSelector": "[data-section='shows-header']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "section": "header",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 101.09375,
+                "width": 856,
+                "x": 32,
+                "y": 101
+              },
+              "exists": true,
+              "name": "shows-header",
+              "selector": "[data-section='shows-header']",
+              "url": "http://localhost:7070/standalone/public/shows.html",
+              "visible": true
+            },
+            "name": "shows-header",
+            "pixel": {
+              "changedPercent": 7.472008883131304,
+              "changedPixels": 6460,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+              "normalizedHeight": 101,
+              "normalizedWidth": 856,
+              "threshold": 30,
+              "totalPixels": 86456
+            },
+            "right": {
+              "bounds": {
+                "height": 99.59375,
+                "width": 856,
+                "x": 32,
+                "y": 101
+              },
+              "exists": true,
+              "name": "shows-header",
+              "selector": "[data-section='shows-header']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 4,
+            "textChanged": false
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 86456,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.md",
+          "baselineChangedPercent": 66.0368,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 34.5,
+              "width": 0,
+              "x": 0,
+              "y": 2.5
+            },
+            "left": {
+              "height": 1386.015625,
+              "width": 856,
+              "x": 32,
+              "y": 230.09375
+            },
+            "right": {
+              "height": 1420.515625,
+              "width": 856,
+              "x": 32,
+              "y": 232.59375
+            }
+          },
+          "changedPercent": 20.490654205607477,
+          "changedPixels": 249068,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/left_region.png",
+          "leftSelector": "[data-section='shows-list']",
+          "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+          "normalizedHeight": 1420,
+          "normalizedWidth": 856,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list",
+          "page": "shows",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/right_region.png",
+          "rightSelector": "[data-section='shows-list']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "section": "shows-list",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1386.015625,
+                "width": 856,
+                "x": 32,
+                "y": 230.09375
+              },
+              "exists": true,
+              "name": "shows-shows-list",
+              "selector": "[data-section='shows-list']",
+              "url": "http://localhost:7070/standalone/public/shows.html",
+              "visible": true
+            },
+            "name": "shows-shows-list",
+            "pixel": {
+              "changedPercent": 20.490654205607477,
+              "changedPixels": 249068,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+              "normalizedHeight": 1420,
+              "normalizedWidth": 856,
+              "threshold": 30,
+              "totalPixels": 1215520
+            },
+            "right": {
+              "bounds": {
+                "height": 1420.515625,
+                "width": 856,
+                "x": 32,
+                "y": 232.59375
+              },
+              "exists": true,
+              "name": "shows-shows-list",
+              "selector": "[data-section='shows-list']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 4,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1215520,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.md",
+          "baselineChangedPercent": 9.9766,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 8.5,
+              "width": 0,
+              "x": 0,
+              "y": 37
+            },
+            "left": {
+              "height": 136,
+              "width": 856,
+              "x": 32,
+              "y": 1664.109375
+            },
+            "right": {
+              "height": 144.5,
+              "width": 856,
+              "x": 32,
+              "y": 1701.109375
+            }
+          },
+          "changedPercent": 8.809216886883661,
+          "changedPixels": 10934,
+          "classification": "review",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/left_region.png",
+          "leftSelector": "[data-section='mailing-list']",
+          "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+          "normalizedHeight": 145,
+          "normalizedWidth": 856,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list",
+          "page": "shows",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/right_region.png",
+          "rightSelector": "[data-section='mailing-list']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "section": "mailing-list",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 136,
+                "width": 856,
+                "x": 32,
+                "y": 1664.109375
+              },
+              "exists": true,
+              "name": "shows-mailing-list",
+              "selector": "[data-section='mailing-list']",
+              "url": "http://localhost:7070/standalone/public/shows.html",
+              "visible": true
+            },
+            "name": "shows-mailing-list",
+            "pixel": {
+              "changedPercent": 8.809216886883661,
+              "changedPixels": 10934,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png",
+              "normalizedHeight": 145,
+              "normalizedWidth": 856,
+              "threshold": 30,
+              "totalPixels": 124120
+            },
+            "right": {
+              "bounds": {
+                "height": 144.5,
+                "width": 856,
+                "x": 32,
+                "y": 1701.109375
+              },
+              "exists": true,
+              "name": "shows-mailing-list",
+              "selector": "[data-section='mailing-list']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 4,
+            "textChanged": false
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 124120,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.md"
+          ]
+        }
+      ],
+      "variant": "desktop"
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "catalog": {
+        "artifactCount": 4,
+        "comparisonCount": 2,
+        "failureCount": 0,
+        "preflightCount": 0,
+        "resultCount": 0,
+        "targetCount": 2
+      },
+      "classificationCounts": {
+        "major-mismatch": 1,
+        "tune-required": 1
+      },
+      "indexPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/01-catalog-index.md",
+      "manifestPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/manifest.json",
+      "maxChangedPercent": 29.3355501525553,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail",
+      "page": "show-detail",
+      "sectionCount": 2,
+      "sections": [
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.md",
+          "baselineChangedPercent": 18.5282,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 360,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1100,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            },
+            "right": {
+              "height": 1460,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "changedPercent": 18.815217391304348,
+          "changedPixels": 252726,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/left_region.png",
+          "leftSelector": "#root",
+          "leftUrl": "http://localhost:7070/standalone/public/detail.html",
+          "normalizedHeight": 1460,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page",
+          "page": "show-detail",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/right_region.png",
+          "rightSelector": "[data-story-frame='pyxis-page-shell']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "section": "page",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1100,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "show-detail-page",
+              "selector": "#root",
+              "url": "http://localhost:7070/standalone/public/detail.html",
+              "visible": true
+            },
+            "name": "show-detail-page",
+            "pixel": {
+              "changedPercent": 18.815217391304348,
+              "changedPixels": 252726,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+              "normalizedHeight": 1460,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1343200
+            },
+            "right": {
+              "bounds": {
+                "height": 1460,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "show-detail-page",
+              "selector": "[data-story-frame='pyxis-page-shell']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1343200,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.md",
+          "baselineChangedPercent": 30.0792,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 197.25,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 714.65625,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            },
+            "right": {
+              "height": 911.90625,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            }
+          },
+          "changedPercent": 29.3355501525553,
+          "changedPixels": 246137,
+          "classification": "major-mismatch",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/left_region.png",
+          "leftSelector": "[data-page='show-detail']",
+          "leftUrl": "http://localhost:7070/standalone/public/detail.html",
+          "normalizedHeight": 912,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content",
+          "page": "show-detail",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/right_region.png",
+          "rightSelector": "[data-page='show-detail']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "section": "content",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 714.65625,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "show-detail-content",
+              "selector": "[data-page='show-detail']",
+              "url": "http://localhost:7070/standalone/public/detail.html",
+              "visible": true
+            },
+            "name": "show-detail-content",
+            "pixel": {
+              "changedPercent": 29.3355501525553,
+              "changedPixels": 246137,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+              "normalizedHeight": 912,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 839040
+            },
+            "right": {
+              "bounds": {
+                "height": 911.90625,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "show-detail-content",
+              "selector": "[data-page='show-detail']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 839040,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.md"
+          ]
+        }
+      ],
+      "variant": "desktop"
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "catalog": {
+        "artifactCount": 4,
+        "comparisonCount": 2,
+        "failureCount": 0,
+        "preflightCount": 0,
+        "resultCount": 0,
+        "targetCount": 2
+      },
+      "classificationCounts": {
+        "review": 2
+      },
+      "indexPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/01-catalog-index.md",
+      "manifestPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/manifest.json",
+      "maxChangedPercent": 6.853999470852809,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive",
+      "page": "archive",
+      "sectionCount": 2,
+      "sections": [
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.md",
+          "baselineChangedPercent": 6.6511,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 171,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1558.03125,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            },
+            "right": {
+              "height": 1729.03125,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "changedPercent": 6.356463902230493,
+          "changedPixels": 101111,
+          "classification": "review",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/left_region.png",
+          "leftSelector": "#root",
+          "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+          "normalizedHeight": 1729,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page",
+          "page": "archive",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/right_region.png",
+          "rightSelector": "[data-story-frame='pyxis-page-shell']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "section": "page",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1558.03125,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "archive-page",
+              "selector": "#root",
+              "url": "http://localhost:7070/standalone/public/archive.html",
+              "visible": true
+            },
+            "name": "archive-page",
+            "pixel": {
+              "changedPercent": 6.356463902230493,
+              "changedPixels": 101111,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_only.png",
+              "normalizedHeight": 1729,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1590680
+            },
+            "right": {
+              "bounds": {
+                "height": 1729.03125,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "archive-page",
+              "selector": "[data-story-frame='pyxis-page-shell']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1590680,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.md",
+          "baselineChangedPercent": 7.2126,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 166,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1313.09375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            },
+            "right": {
+              "height": 1479.09375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            }
+          },
+          "changedPercent": 6.853999470852809,
+          "changedPixels": 93261,
+          "classification": "review",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/left_region.png",
+          "leftSelector": "[data-page='archive']",
+          "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+          "normalizedHeight": 1479,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content",
+          "page": "archive",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/right_region.png",
+          "rightSelector": "[data-page='archive']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "section": "content",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1313.09375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "archive-content",
+              "selector": "[data-page='archive']",
+              "url": "http://localhost:7070/standalone/public/archive.html",
+              "visible": true
+            },
+            "name": "archive-content",
+            "pixel": {
+              "changedPercent": 6.853999470852809,
+              "changedPixels": 93261,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_only.png",
+              "normalizedHeight": 1479,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1360680
+            },
+            "right": {
+              "bounds": {
+                "height": 1479.09375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "archive-content",
+              "selector": "[data-page='archive']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1360680,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.md"
+          ]
+        }
+      ],
+      "variant": "desktop"
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "catalog": {
+        "artifactCount": 4,
+        "comparisonCount": 2,
+        "failureCount": 0,
+        "preflightCount": 0,
+        "resultCount": 0,
+        "targetCount": 2
+      },
+      "classificationCounts": {
+        "tune-required": 2
+      },
+      "indexPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/01-catalog-index.md",
+      "manifestPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/manifest.json",
+      "maxChangedPercent": 16.77795782650785,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book",
+      "page": "book",
+      "sectionCount": 2,
+      "sections": [
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.md",
+          "baselineChangedPercent": 12.1006,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 260,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1200,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            },
+            "right": {
+              "height": 1460,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "changedPercent": 12.44133412745682,
+          "changedPixels": 167112,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/left_region.png",
+          "leftSelector": "#root",
+          "leftUrl": "http://localhost:7070/standalone/public/book.html",
+          "normalizedHeight": 1460,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page",
+          "page": "book",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/right_region.png",
+          "rightSelector": "[data-story-frame='pyxis-page-shell']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+          "section": "page",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1200,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "book-page",
+              "selector": "#root",
+              "url": "http://localhost:7070/standalone/public/book.html",
+              "visible": true
+            },
+            "name": "book-page",
+            "pixel": {
+              "changedPercent": 12.44133412745682,
+              "changedPixels": 167112,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_only.png",
+              "normalizedHeight": 1460,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1343200
+            },
+            "right": {
+              "bounds": {
+                "height": 1460,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "book-page",
+              "selector": "[data-story-frame='pyxis-page-shell']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1343200,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.md",
+          "baselineChangedPercent": 16.9306,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 157.0625,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 876.34375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            },
+            "right": {
+              "height": 1033.40625,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            }
+          },
+          "changedPercent": 16.77795782650785,
+          "changedPixels": 159451,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/left_region.png",
+          "leftSelector": "[data-page='book']",
+          "leftUrl": "http://localhost:7070/standalone/public/book.html",
+          "normalizedHeight": 1033,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content",
+          "page": "book",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/right_region.png",
+          "rightSelector": "[data-page='book']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+          "section": "content",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 876.34375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "book-content",
+              "selector": "[data-page='book']",
+              "url": "http://localhost:7070/standalone/public/book.html",
+              "visible": true
+            },
+            "name": "book-content",
+            "pixel": {
+              "changedPercent": 16.77795782650785,
+              "changedPixels": 159451,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_only.png",
+              "normalizedHeight": 1033,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 950360
+            },
+            "right": {
+              "bounds": {
+                "height": 1033.40625,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "book-content",
+              "selector": "[data-page='book']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 950360,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.md"
+          ]
+        }
+      ],
+      "variant": "desktop"
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "catalog": {
+        "artifactCount": 4,
+        "comparisonCount": 2,
+        "failureCount": 0,
+        "preflightCount": 0,
+        "resultCount": 0,
+        "targetCount": 2
+      },
+      "classificationCounts": {
+        "tune-required": 2
+      },
+      "indexPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/01-catalog-index.md",
+      "manifestPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/manifest.json",
+      "maxChangedPercent": 20.727370963640986,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about",
+      "page": "about",
+      "sectionCount": 2,
+      "sections": [
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.md",
+          "baselineChangedPercent": 18.2795,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 626.71875,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1333.65625,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            },
+            "right": {
+              "height": 1960.375,
+              "width": 920,
+              "x": 0,
+              "y": 0
+            }
+          },
+          "changedPercent": 18.48996228926353,
+          "changedPixels": 333411,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/left_region.png",
+          "leftSelector": "#root",
+          "leftUrl": "http://localhost:7070/standalone/public/about.html",
+          "normalizedHeight": 1960,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page",
+          "page": "about",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/right_region.png",
+          "rightSelector": "[data-story-frame='pyxis-page-shell']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "section": "page",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1333.65625,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "about-page",
+              "selector": "#root",
+              "url": "http://localhost:7070/standalone/public/about.html",
+              "visible": true
+            },
+            "name": "about-page",
+            "pixel": {
+              "changedPercent": 18.48996228926353,
+              "changedPixels": 333411,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_only.png",
+              "normalizedHeight": 1960,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1803200
+            },
+            "right": {
+              "bounds": {
+                "height": 1960.375,
+                "width": 920,
+                "x": 0,
+                "y": 0
+              },
+              "exists": true,
+              "name": "about-page",
+              "selector": "[data-story-frame='pyxis-page-shell']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1803200,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.md"
+          ]
+        },
+        {
+          "acceptedDifferenceCount": 0,
+          "acceptedDifferenceSummary": "",
+          "acceptedDifferences": [],
+          "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.json",
+          "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.md",
+          "baselineChangedPercent": 20.5467,
+          "bounds": {
+            "changed": true,
+            "delta": {
+              "height": 621.71875,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            },
+            "left": {
+              "height": 1088.71875,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            },
+            "right": {
+              "height": 1710.4375,
+              "width": 920,
+              "x": 0,
+              "y": 61
+            }
+          },
+          "changedPercent": 20.727370963640986,
+          "changedPixels": 326083,
+          "classification": "tune-required",
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_only.png",
+          "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/left_region.png",
+          "leftSelector": "[data-page='about']",
+          "leftUrl": "http://localhost:7070/standalone/public/about.html",
+          "normalizedHeight": 1710,
+          "normalizedWidth": 920,
+          "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content",
+          "page": "about",
+          "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/right_region.png",
+          "rightSelector": "[data-page='about']",
+          "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "section": "content",
+          "source": "cvd.compare.region",
+          "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 1088.71875,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "about-content",
+              "selector": "[data-page='about']",
+              "url": "http://localhost:7070/standalone/public/about.html",
+              "visible": true
+            },
+            "name": "about-content",
+            "pixel": {
+              "changedPercent": 20.727370963640986,
+              "changedPixels": 326083,
+              "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+              "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_only.png",
+              "normalizedHeight": 1710,
+              "normalizedWidth": 920,
+              "threshold": 30,
+              "totalPixels": 1573200
+            },
+            "right": {
+              "bounds": {
+                "height": 1710.4375,
+                "width": 920,
+                "x": 0,
+                "y": 61
+              },
+              "exists": true,
+              "name": "about-content",
+              "selector": "[data-page='about']",
+              "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 9,
+            "textChanged": true
+          },
+          "textChanged": null,
+          "threshold": 30,
+          "totalPixels": 1573200,
+          "variant": "desktop",
+          "writtenArtifacts": [
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.json",
+            "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.md"
+          ]
+        }
+      ],
+      "variant": "desktop"
+    }
+  ],
+  "policy": {
+    "failures": [],
+    "maxChangedPercent": null,
+    "maxPolicyBand": "",
+    "ok": true,
+    "worstClassification": "major-mismatch"
+  },
+  "rows": [
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.md",
+      "baselineChangedPercent": 30.0792,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 197.25,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 714.65625,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        },
+        "right": {
+          "height": 911.90625,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 29.3355501525553,
+      "changedPixels": 246137,
+      "classification": "major-mismatch",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/left_region.png",
+      "leftSelector": "[data-page='show-detail']",
+      "leftUrl": "http://localhost:7070/standalone/public/detail.html",
+      "normalizedHeight": 912,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content",
+      "page": "show-detail",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='show-detail']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+      "section": "content",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 714.65625,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "show-detail-content",
+          "selector": "[data-page='show-detail']",
+          "url": "http://localhost:7070/standalone/public/detail.html",
+          "visible": true
+        },
+        "name": "show-detail-content",
+        "pixel": {
+          "changedPercent": 29.3355501525553,
+          "changedPixels": 246137,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+          "normalizedHeight": 912,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 839040
+        },
+        "right": {
+          "bounds": {
+            "height": 911.90625,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "show-detail-content",
+          "selector": "[data-page='show-detail']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 9,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 839040,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/content/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.md",
+      "baselineChangedPercent": 20.5467,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 621.71875,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1088.71875,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        },
+        "right": {
+          "height": 1710.4375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 20.727370963640986,
+      "changedPixels": 326083,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/left_region.png",
+      "leftSelector": "[data-page='about']",
+      "leftUrl": "http://localhost:7070/standalone/public/about.html",
+      "normalizedHeight": 1710,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content",
+      "page": "about",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='about']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+      "section": "content",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1088.71875,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "about-content",
+          "selector": "[data-page='about']",
+          "url": "http://localhost:7070/standalone/public/about.html",
+          "visible": true
+        },
+        "name": "about-content",
+        "pixel": {
+          "changedPercent": 20.727370963640986,
+          "changedPixels": 326083,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/diff_only.png",
+          "normalizedHeight": 1710,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1573200
+        },
+        "right": {
+          "bounds": {
+            "height": 1710.4375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "about-content",
+          "selector": "[data-page='about']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 9,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1573200,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/content/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.md",
+      "baselineChangedPercent": 66.0368,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 34.5,
+          "width": 0,
+          "x": 0,
+          "y": 2.5
+        },
+        "left": {
+          "height": 1386.015625,
+          "width": 856,
+          "x": 32,
+          "y": 230.09375
+        },
+        "right": {
+          "height": 1420.515625,
+          "width": 856,
+          "x": 32,
+          "y": 232.59375
+        }
+      },
+      "changedPercent": 20.490654205607477,
+      "changedPixels": 249068,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/left_region.png",
+      "leftSelector": "[data-section='shows-list']",
+      "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+      "normalizedHeight": 1420,
+      "normalizedWidth": 856,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list",
+      "page": "shows",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/right_region.png",
+      "rightSelector": "[data-section='shows-list']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+      "section": "shows-list",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1386.015625,
+            "width": 856,
+            "x": 32,
+            "y": 230.09375
+          },
+          "exists": true,
+          "name": "shows-shows-list",
+          "selector": "[data-section='shows-list']",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "visible": true
+        },
+        "name": "shows-shows-list",
+        "pixel": {
+          "changedPercent": 20.490654205607477,
+          "changedPixels": 249068,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+          "normalizedHeight": 1420,
+          "normalizedWidth": 856,
+          "threshold": 30,
+          "totalPixels": 1215520
+        },
+        "right": {
+          "bounds": {
+            "height": 1420.515625,
+            "width": 856,
+            "x": 32,
+            "y": 232.59375
+          },
+          "exists": true,
+          "name": "shows-shows-list",
+          "selector": "[data-section='shows-list']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 4,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1215520,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.md",
+      "baselineChangedPercent": 18.5282,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 360,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1100,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1460,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 18.815217391304348,
+      "changedPixels": 252726,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/detail.html",
+      "normalizedHeight": 1460,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page",
+      "page": "show-detail",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+      "section": "page",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1100,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "show-detail-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/detail.html",
+          "visible": true
+        },
+        "name": "show-detail-page",
+        "pixel": {
+          "changedPercent": 18.815217391304348,
+          "changedPixels": 252726,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+          "normalizedHeight": 1460,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1343200
+        },
+        "right": {
+          "bounds": {
+            "height": 1460,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "show-detail-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1343200,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/show-detail/artifacts/page/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.md",
+      "baselineChangedPercent": 18.2795,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 626.71875,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1333.65625,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1960.375,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 18.48996228926353,
+      "changedPixels": 333411,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/about.html",
+      "normalizedHeight": 1960,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page",
+      "page": "about",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+      "section": "page",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1333.65625,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "about-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/about.html",
+          "visible": true
+        },
+        "name": "about-page",
+        "pixel": {
+          "changedPercent": 18.48996228926353,
+          "changedPixels": 333411,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/diff_only.png",
+          "normalizedHeight": 1960,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1803200
+        },
+        "right": {
+          "bounds": {
+            "height": 1960.375,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "about-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1803200,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/about/artifacts/page/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.md",
+      "baselineChangedPercent": 52.4196,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 117.5,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1739.109375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        },
+        "right": {
+          "height": 1856.609375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 16.798599892299407,
+      "changedPixels": 286994,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/left_region.png",
+      "leftSelector": "[data-page='shows']",
+      "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+      "normalizedHeight": 1857,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content",
+      "page": "shows",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='shows']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+      "section": "content",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1739.109375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "shows-content",
+          "selector": "[data-page='shows']",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "visible": true
+        },
+        "name": "shows-content",
+        "pixel": {
+          "changedPercent": 16.798599892299407,
+          "changedPixels": 286994,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png",
+          "normalizedHeight": 1857,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1708440
+        },
+        "right": {
+          "bounds": {
+            "height": 1856.609375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "shows-content",
+          "selector": "[data-page='shows']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 9,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1708440,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.md",
+      "baselineChangedPercent": 16.9306,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 157.0625,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 876.34375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        },
+        "right": {
+          "height": 1033.40625,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 16.77795782650785,
+      "changedPixels": 159451,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/left_region.png",
+      "leftSelector": "[data-page='book']",
+      "leftUrl": "http://localhost:7070/standalone/public/book.html",
+      "normalizedHeight": 1033,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content",
+      "page": "book",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='book']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+      "section": "content",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 876.34375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "book-content",
+          "selector": "[data-page='book']",
+          "url": "http://localhost:7070/standalone/public/book.html",
+          "visible": true
+        },
+        "name": "book-content",
+        "pixel": {
+          "changedPercent": 16.77795782650785,
+          "changedPixels": 159451,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/diff_only.png",
+          "normalizedHeight": 1033,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 950360
+        },
+        "right": {
+          "bounds": {
+            "height": 1033.40625,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "book-content",
+          "selector": "[data-page='book']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 9,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 950360,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/content/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.md",
+      "baselineChangedPercent": 46.3495,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 122.5,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1984.046875,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 2106.546875,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 15.211097583623944,
+      "changedPixels": 294858,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+      "normalizedHeight": 2107,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page",
+      "page": "shows",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+      "section": "page",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1984.046875,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "shows-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "visible": true
+        },
+        "name": "shows-page",
+        "pixel": {
+          "changedPercent": 15.211097583623944,
+          "changedPixels": 294858,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png",
+          "normalizedHeight": 2107,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1938440
+        },
+        "right": {
+          "bounds": {
+            "height": 2106.546875,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "shows-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1938440,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.md",
+      "baselineChangedPercent": 12.1006,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 260,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1200,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1460,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 12.44133412745682,
+      "changedPixels": 167112,
+      "classification": "tune-required",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/book.html",
+      "normalizedHeight": 1460,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page",
+      "page": "book",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+      "section": "page",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1200,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "book-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/book.html",
+          "visible": true
+        },
+        "name": "book-page",
+        "pixel": {
+          "changedPercent": 12.44133412745682,
+          "changedPixels": 167112,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/diff_only.png",
+          "normalizedHeight": 1460,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1343200
+        },
+        "right": {
+          "bounds": {
+            "height": 1460,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "book-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1343200,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/book/artifacts/page/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.md",
+      "baselineChangedPercent": 9.9766,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 8.5,
+          "width": 0,
+          "x": 0,
+          "y": 37
+        },
+        "left": {
+          "height": 136,
+          "width": 856,
+          "x": 32,
+          "y": 1664.109375
+        },
+        "right": {
+          "height": 144.5,
+          "width": 856,
+          "x": 32,
+          "y": 1701.109375
+        }
+      },
+      "changedPercent": 8.809216886883661,
+      "changedPixels": 10934,
+      "classification": "review",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/left_region.png",
+      "leftSelector": "[data-section='mailing-list']",
+      "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+      "normalizedHeight": 145,
+      "normalizedWidth": 856,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list",
+      "page": "shows",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/right_region.png",
+      "rightSelector": "[data-section='mailing-list']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+      "section": "mailing-list",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 136,
+            "width": 856,
+            "x": 32,
+            "y": 1664.109375
+          },
+          "exists": true,
+          "name": "shows-mailing-list",
+          "selector": "[data-section='mailing-list']",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "visible": true
+        },
+        "name": "shows-mailing-list",
+        "pixel": {
+          "changedPercent": 8.809216886883661,
+          "changedPixels": 10934,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png",
+          "normalizedHeight": 145,
+          "normalizedWidth": 856,
+          "threshold": 30,
+          "totalPixels": 124120
+        },
+        "right": {
+          "bounds": {
+            "height": 144.5,
+            "width": 856,
+            "x": 32,
+            "y": 1701.109375
+          },
+          "exists": true,
+          "name": "shows-mailing-list",
+          "selector": "[data-section='mailing-list']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 4,
+        "textChanged": false
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 124120,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.md",
+      "baselineChangedPercent": 7.2648,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": -1.5,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 101.09375,
+          "width": 856,
+          "x": 32,
+          "y": 101
+        },
+        "right": {
+          "height": 99.59375,
+          "width": 856,
+          "x": 32,
+          "y": 101
+        }
+      },
+      "changedPercent": 7.472008883131304,
+      "changedPixels": 6460,
+      "classification": "review",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/left_region.png",
+      "leftSelector": "[data-section='shows-header']",
+      "leftUrl": "http://localhost:7070/standalone/public/shows.html",
+      "normalizedHeight": 101,
+      "normalizedWidth": 856,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header",
+      "page": "shows",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/right_region.png",
+      "rightSelector": "[data-section='shows-header']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+      "section": "header",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 101.09375,
+            "width": 856,
+            "x": 32,
+            "y": 101
+          },
+          "exists": true,
+          "name": "shows-header",
+          "selector": "[data-section='shows-header']",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "visible": true
+        },
+        "name": "shows-header",
+        "pixel": {
+          "changedPercent": 7.472008883131304,
+          "changedPixels": 6460,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+          "normalizedHeight": 101,
+          "normalizedWidth": 856,
+          "threshold": 30,
+          "totalPixels": 86456
+        },
+        "right": {
+          "bounds": {
+            "height": 99.59375,
+            "width": 856,
+            "x": 32,
+            "y": 101
+          },
+          "exists": true,
+          "name": "shows-header",
+          "selector": "[data-section='shows-header']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 4,
+        "textChanged": false
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 86456,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.md",
+      "baselineChangedPercent": 7.2126,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 166,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1313.09375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        },
+        "right": {
+          "height": 1479.09375,
+          "width": 920,
+          "x": 0,
+          "y": 61
+        }
+      },
+      "changedPercent": 6.853999470852809,
+      "changedPixels": 93261,
+      "classification": "review",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/left_region.png",
+      "leftSelector": "[data-page='archive']",
+      "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+      "normalizedHeight": 1479,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content",
+      "page": "archive",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/right_region.png",
+      "rightSelector": "[data-page='archive']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+      "section": "content",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1313.09375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "archive-content",
+          "selector": "[data-page='archive']",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "visible": true
+        },
+        "name": "archive-content",
+        "pixel": {
+          "changedPercent": 6.853999470852809,
+          "changedPixels": 93261,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/diff_only.png",
+          "normalizedHeight": 1479,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1360680
+        },
+        "right": {
+          "bounds": {
+            "height": 1479.09375,
+            "width": 920,
+            "x": 0,
+            "y": 61
+          },
+          "exists": true,
+          "name": "archive-content",
+          "selector": "[data-page='archive']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 9,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1360680,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/content/compare.md"
+      ]
+    },
+    {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
+      "artifactJson": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.json",
+      "artifactMarkdown": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.md",
+      "baselineChangedPercent": 6.6511,
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 171,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 1558.03125,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        },
+        "right": {
+          "height": 1729.03125,
+          "width": 920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 6.356463902230493,
+      "changedPixels": 101111,
+      "classification": "review",
+      "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_only.png",
+      "leftRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/left_region.png",
+      "leftSelector": "#root",
+      "leftUrl": "http://localhost:7070/standalone/public/archive.html",
+      "normalizedHeight": 1729,
+      "normalizedWidth": 920,
+      "outDir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page",
+      "page": "archive",
+      "rightRegionPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/right_region.png",
+      "rightSelector": "[data-story-frame='pyxis-page-shell']",
+      "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+      "section": "page",
+      "source": "cvd.compare.region",
+      "summary": {
+        "artifactCount": 2,
+        "attributeChanges": 1,
+        "boundsChanged": true,
+        "left": {
+          "bounds": {
+            "height": 1558.03125,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "archive-page",
+          "selector": "#root",
+          "url": "http://localhost:7070/standalone/public/archive.html",
+          "visible": true
+        },
+        "name": "archive-page",
+        "pixel": {
+          "changedPercent": 6.356463902230493,
+          "changedPixels": 101111,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/diff_only.png",
+          "normalizedHeight": 1729,
+          "normalizedWidth": 920,
+          "threshold": 30,
+          "totalPixels": 1590680
+        },
+        "right": {
+          "bounds": {
+            "height": 1729.03125,
+            "width": 920,
+            "x": 0,
+            "y": 0
+          },
+          "exists": true,
+          "name": "archive-page",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
+          "visible": true
+        },
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "styleChanges": 3,
+        "textChanged": true
+      },
+      "textChanged": null,
+      "threshold": 30,
+      "totalPixels": 1590680,
+      "variant": "desktop",
+      "writtenArtifacts": [
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.json",
+        "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/archive/artifacts/page/compare.md"
+      ]
+    }
+  ],
+  "sectionCount": 13,
+  "variant": "desktop"
+}
+]

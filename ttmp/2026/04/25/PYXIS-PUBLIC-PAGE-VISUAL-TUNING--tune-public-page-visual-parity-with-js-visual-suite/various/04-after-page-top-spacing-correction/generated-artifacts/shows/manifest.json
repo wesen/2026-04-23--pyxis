@@ -1,0 +1,714 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: shows desktop",
+  "out_dir": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T22:32:57.343066924Z",
+  "updated_at": "2026-04-25T22:33:09.113358171Z",
+  "targets": [
+    {
+      "slug": "page",
+      "name": "shows page",
+      "url": "http://localhost:7070/standalone/public/shows.html",
+      "selector": "#root",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "content",
+      "name": "shows content",
+      "url": "http://localhost:7070/standalone/public/shows.html",
+      "selector": "[data-page='shows']",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "header",
+      "name": "shows header",
+      "url": "http://localhost:7070/standalone/public/shows.html",
+      "selector": "[data-section='shows-header']",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "shows-list",
+      "name": "shows shows-list",
+      "url": "http://localhost:7070/standalone/public/shows.html",
+      "selector": "[data-section='shows-list']",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "mailing-list",
+      "name": "shows mailing-list",
+      "url": "http://localhost:7070/standalone/public/shows.html",
+      "selector": "[data-section='mailing-list']",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "page",
+        "name": "shows page",
+        "url": "http://localhost:7070/standalone/public/shows.html",
+        "selector": "#root",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-page",
+        "left": {
+          "name": "shows-page",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "selector": "#root",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1984.046875
+          }
+        },
+        "right": {
+          "name": "shows-page",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 2106.546875
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1938440,
+          "changedPixels": 294858,
+          "changedPercent": 15.211097583623944,
+          "normalizedWidth": 920,
+          "normalizedHeight": 2107,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1984.046875
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 2106.546875
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 122.5
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAboutProvidence, RIUpcoming showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoFri, Feb 14 · 9:00 PM · 25+$10 adv / $15 doorTickets →808The heart of the beatthat changed music808 CollectiveFri, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective · Delightful IntentionsPresentsPetals of LoveJoin us for an evening of community, connection, crafts and making floral bouquets honoring love in all its forms.ALL SUPPLIES PROVIDEDMOCKTAILS AND LIGHT FARE PROVIDED(WHILE SUPPLIES LAST)13thFEB 2026HOSTS:SHAE M.MHINA J.6:30 PMEVENTBRITE LINK IN BIOATTIRESPECIAL OCCASIONDRESS-TO-IMPRESSLOCATIONppxis25 MANTON AVE,PROVIDENCE, RI 02909Limited supply of tickets for Early Bird, BIPOC \u0026 LGBTQIA+@DyvynHERCollective · @delightful.intentionsPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →CLUBCLUBMONDAYMEET-UPSCome explore DJ gear, instruments, and make pals! Just sign up and hop in!No experience necessary! This is a place of learning! :)Mondays 7p – 10p25 Manton Ave. · Unit #2Providence, RI 02999$0 - 30slidingscale!Monday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →BasementFrequenciesan underground electronic nightheavy bass · dark vibes.Feb 28th, 2026Doors 9:30pm · ppxis25 Manton Ave, Providence RI21+ · $12Basement FrequenciesFri, Feb 28 · 9:30 PM · 21+$12Tickets →ORPHXindustrial / ebmlive performanceJULY 4TH, 2026PPXIS · 9PM · 18+ · $12OrphxFri, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoorMother— noise poetry —MAY 9 · 2025DOORS 7PM · ALL AGES · $15Moor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guests TBAMAY.17 · 9PMPPXIS · 18+ · $8Cygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZolaJesus· art pop / darkwave ·JUNE 6 · 2025PPXIS · 8PM · 21+ · $20Zola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →Stay in the loopGet show announcements and venue news.Subscribeppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "ppxisShowsArchiveBook usAboutProvidence, RIUpcoming showsA Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoSat, Feb 14 · 9:00 PM · 21+$10 adv / $15 doorTickets →The heart of the beat808▮▮▮Fri Feb 21 · 8PM · 21+25 Manton Ave, Providence RI808 CollectiveSat, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective presentsPetals of Love♥Feb 28 · 6:30 PM · All Ages25 Manton Ave, Providence RIPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →Club clubMonday Meet-ups$0–30Mondays 7p – 10p25 Manton Ave, Providence RIMonday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →underground electronic nightBasement Frequencies☠Feb 28 · 9:30PM · 21+25 Manton Ave, Providence RIBasement FrequenciesSat, Feb 28 · 9:30 PM · 21+$12Tickets →industrial / ebmORPHX▲July 4 · 9PM · 18+25 Manton Ave, Providence RIOrphxSat, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoor Mother—May 9 · all ages · $1525 Manton Ave, Providence RIMoor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guestsMay 17 · 9PM · 18+25 Manton Ave, Providence RICygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZola Jesus✦June 6 · 8PM · 21+25 Manton Ave, Providence RIZola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →Stay in the loopGet show announcements and venue news.Subscribeppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(0, 0, 0)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "id",
+            "left": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/page/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T22:33:03.218673758Z"
+    },
+    {
+      "target": {
+        "slug": "content",
+        "name": "shows content",
+        "url": "http://localhost:7070/standalone/public/shows.html",
+        "selector": "[data-page='shows']",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-content",
+        "left": {
+          "name": "shows-content",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "selector": "[data-page='shows']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1739.109375
+          }
+        },
+        "right": {
+          "name": "shows-content",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-page='shows']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1856.609375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1708440,
+          "changedPixels": 286994,
+          "changedPercent": 16.798599892299407,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1857,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1739.109375
+          },
+          "right": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1856.609375
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 117.5
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoFri, Feb 14 · 9:00 PM · 25+$10 adv / $15 doorTickets →808The heart of the beatthat changed music808 CollectiveFri, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective · Delightful IntentionsPresentsPetals of LoveJoin us for an evening of community, connection, crafts and making floral bouquets honoring love in all its forms.ALL SUPPLIES PROVIDEDMOCKTAILS AND LIGHT FARE PROVIDED(WHILE SUPPLIES LAST)13thFEB 2026HOSTS:SHAE M.MHINA J.6:30 PMEVENTBRITE LINK IN BIOATTIRESPECIAL OCCASIONDRESS-TO-IMPRESSLOCATIONppxis25 MANTON AVE,PROVIDENCE, RI 02909Limited supply of tickets for Early Bird, BIPOC \u0026 LGBTQIA+@DyvynHERCollective · @delightful.intentionsPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →CLUBCLUBMONDAYMEET-UPSCome explore DJ gear, instruments, and make pals! Just sign up and hop in!No experience necessary! This is a place of learning! :)Mondays 7p – 10p25 Manton Ave. · Unit #2Providence, RI 02999$0 - 30slidingscale!Monday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →BasementFrequenciesan underground electronic nightheavy bass · dark vibes.Feb 28th, 2026Doors 9:30pm · ppxis25 Manton Ave, Providence RI21+ · $12Basement FrequenciesFri, Feb 28 · 9:30 PM · 21+$12Tickets →ORPHXindustrial / ebmlive performanceJULY 4TH, 2026PPXIS · 9PM · 18+ · $12OrphxFri, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoorMother— noise poetry —MAY 9 · 2025DOORS 7PM · ALL AGES · $15Moor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guests TBAMAY.17 · 9PMPPXIS · 18+ · $8Cygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZolaJesus· art pop / darkwave ·JUNE 6 · 2025PPXIS · 8PM · 21+ · $20Zola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →Stay in the loopGet show announcements and venue news.Subscribe",
+          "right": "Providence, RIUpcoming showsA Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoSat, Feb 14 · 9:00 PM · 21+$10 adv / $15 doorTickets →The heart of the beat808▮▮▮Fri Feb 21 · 8PM · 21+25 Manton Ave, Providence RI808 CollectiveSat, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective presentsPetals of Love♥Feb 28 · 6:30 PM · All Ages25 Manton Ave, Providence RIPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →Club clubMonday Meet-ups$0–30Mondays 7p – 10p25 Manton Ave, Providence RIMonday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →underground electronic nightBasement Frequencies☠Feb 28 · 9:30PM · 21+25 Manton Ave, Providence RIBasement FrequenciesSat, Feb 28 · 9:30 PM · 21+$12Tickets →industrial / ebmORPHX▲July 4 · 9PM · 18+25 Manton Ave, Providence RIOrphxSat, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoor Mother—May 9 · all ages · $1525 Manton Ave, Providence RIMoor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guestsMay 17 · 9PM · 18+25 Manton Ave, Providence RICygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZola Jesus✦June 6 · 8PM · 21+25 Manton Ave, Providence RIZola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →Stay in the loopGet show announcements and venue news.Subscribe"
+        },
+        "styles": [
+          {
+            "name": "background-color",
+            "left": "rgba(0, 0, 0, 0)",
+            "right": "rgb(255, 255, 255)",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "0px",
+            "right": "72px",
+            "changed": true
+          },
+          {
+            "name": "padding-left",
+            "left": "32px",
+            "right": "0px",
+            "changed": true
+          },
+          {
+            "name": "padding-right",
+            "left": "32px",
+            "right": "0px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "40px",
+            "right": "0px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-public-page pyxis-shows-page",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/content/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T22:33:04.992443722Z"
+    },
+    {
+      "target": {
+        "slug": "header",
+        "name": "shows header",
+        "url": "http://localhost:7070/standalone/public/shows.html",
+        "selector": "[data-section='shows-header']",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-header",
+        "left": {
+          "name": "shows-header",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "selector": "[data-section='shows-header']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 101,
+            "width": 856,
+            "height": 101.09375
+          }
+        },
+        "right": {
+          "name": "shows-header",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-section='shows-header']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 101,
+            "width": 856,
+            "height": 99.59375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 86456,
+          "changedPixels": 6460,
+          "changedPercent": 7.472008883131304,
+          "normalizedWidth": 856,
+          "normalizedHeight": 101,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 32,
+            "y": 101,
+            "width": 856,
+            "height": 101.09375
+          },
+          "right": {
+            "x": 32,
+            "y": 101,
+            "width": 856,
+            "height": 99.59375
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": -1.5
+          }
+        },
+        "text": {
+          "changed": false,
+          "left": "Providence, RIUpcoming shows",
+          "right": "Providence, RIUpcoming shows"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-shows-page__header",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/header/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T22:33:06.138744132Z"
+    },
+    {
+      "target": {
+        "slug": "shows-list",
+        "name": "shows shows-list",
+        "url": "http://localhost:7070/standalone/public/shows.html",
+        "selector": "[data-section='shows-list']",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-shows-list",
+        "left": {
+          "name": "shows-shows-list",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "selector": "[data-section='shows-list']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 230.09375,
+            "width": 856,
+            "height": 1386.015625
+          }
+        },
+        "right": {
+          "name": "shows-shows-list",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-section='shows-list']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 232.59375,
+            "width": 856,
+            "height": 1420.515625
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1215520,
+          "changedPixels": 249068,
+          "changedPercent": 20.490654205607477,
+          "normalizedWidth": 856,
+          "normalizedHeight": 1420,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 32,
+            "y": 230.09375,
+            "width": 856,
+            "height": 1386.015625
+          },
+          "right": {
+            "x": 32,
+            "y": 232.59375,
+            "width": 856,
+            "height": 1420.515625
+          },
+          "delta": {
+            "x": 0,
+            "y": 2.5,
+            "width": 0,
+            "height": 34.5
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "A Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoFri, Feb 14 · 9:00 PM · 25+$10 adv / $15 doorTickets →808The heart of the beatthat changed music808 CollectiveFri, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective · Delightful IntentionsPresentsPetals of LoveJoin us for an evening of community, connection, crafts and making floral bouquets honoring love in all its forms.ALL SUPPLIES PROVIDEDMOCKTAILS AND LIGHT FARE PROVIDED(WHILE SUPPLIES LAST)13thFEB 2026HOSTS:SHAE M.MHINA J.6:30 PMEVENTBRITE LINK IN BIOATTIRESPECIAL OCCASIONDRESS-TO-IMPRESSLOCATIONppxis25 MANTON AVE,PROVIDENCE, RI 02909Limited supply of tickets for Early Bird, BIPOC \u0026 LGBTQIA+@DyvynHERCollective · @delightful.intentionsPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →CLUBCLUBMONDAYMEET-UPSCome explore DJ gear, instruments, and make pals! Just sign up and hop in!No experience necessary! This is a place of learning! :)Mondays 7p – 10p25 Manton Ave. · Unit #2Providence, RI 02999$0 - 30slidingscale!Monday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →BasementFrequenciesan underground electronic nightheavy bass · dark vibes.Feb 28th, 2026Doors 9:30pm · ppxis25 Manton Ave, Providence RI21+ · $12Basement FrequenciesFri, Feb 28 · 9:30 PM · 21+$12Tickets →ORPHXindustrial / ebmlive performanceJULY 4TH, 2026PPXIS · 9PM · 18+ · $12OrphxFri, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoorMother— noise poetry —MAY 9 · 2025DOORS 7PM · ALL AGES · $15Moor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guests TBAMAY.17 · 9PMPPXIS · 18+ · $8Cygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZolaJesus· art pop / darkwave ·JUNE 6 · 2025PPXIS · 8PM · 21+ · $20Zola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →",
+          "right": "A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoSat, Feb 14 · 9:00 PM · 21+$10 adv / $15 doorTickets →The heart of the beat808▮▮▮Fri Feb 21 · 8PM · 21+25 Manton Ave, Providence RI808 CollectiveSat, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective presentsPetals of Love♥Feb 28 · 6:30 PM · All Ages25 Manton Ave, Providence RIPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →Club clubMonday Meet-ups$0–30Mondays 7p – 10p25 Manton Ave, Providence RIMonday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →underground electronic nightBasement Frequencies☠Feb 28 · 9:30PM · 21+25 Manton Ave, Providence RIBasement FrequenciesSat, Feb 28 · 9:30 PM · 21+$12Tickets →industrial / ebmORPHX▲July 4 · 9PM · 18+25 Manton Ave, Providence RIOrphxSat, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoor Mother—May 9 · all ages · $1525 Manton Ave, Providence RIMoor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guestsMay 17 · 9PM · 18+25 Manton Ave, Providence RICygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZola Jesus✦June 6 · 8PM · 21+25 Manton Ave, Providence RIZola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-shows-page__grid-section",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T22:33:07.890457254Z"
+    },
+    {
+      "target": {
+        "slug": "mailing-list",
+        "name": "shows mailing-list",
+        "url": "http://localhost:7070/standalone/public/shows.html",
+        "selector": "[data-section='mailing-list']",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-mailing-list",
+        "left": {
+          "name": "shows-mailing-list",
+          "url": "http://localhost:7070/standalone/public/shows.html",
+          "selector": "[data-section='mailing-list']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 1664.109375,
+            "width": 856,
+            "height": 136
+          }
+        },
+        "right": {
+          "name": "shows-mailing-list",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-section='mailing-list']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 32,
+            "y": 1701.109375,
+            "width": 856,
+            "height": 144.5
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 124120,
+          "changedPixels": 10934,
+          "changedPercent": 8.809216886883661,
+          "normalizedWidth": 856,
+          "normalizedHeight": 145,
+          "diffComparisonPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+          "diffOnlyPath": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 32,
+            "y": 1664.109375,
+            "width": 856,
+            "height": 136
+          },
+          "right": {
+            "x": 32,
+            "y": 1701.109375,
+            "width": 856,
+            "height": 144.5
+          },
+          "delta": {
+            "x": 0,
+            "y": 37,
+            "width": 0,
+            "height": 8.5
+          }
+        },
+        "text": {
+          "changed": false,
+          "left": "Stay in the loopGet show announcements and venue news.Subscribe",
+          "right": "Stay in the loopGet show announcements and venue news.Subscribe"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-shows-page__mailing-list",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "prototype-design/visual-comparisons/cssvd-js/compare-spec/public-pages-desktop/shows/artifacts/mailing-list/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T22:33:09.113355022Z"
+    }
+  ],
+  "summary": {
+    "target_count": 5,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 5,
+    "failure_count": 0,
+    "artifact_count": 10
+  }
+}

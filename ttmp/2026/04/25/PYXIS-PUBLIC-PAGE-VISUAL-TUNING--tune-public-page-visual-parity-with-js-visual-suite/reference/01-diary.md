@@ -236,3 +236,26 @@ various/03-after-page-gutter-and-header-spacing/
 ```
 
 Active workflow paths stay clean; ticket history keeps the trail.
+
+
+## Step 4: Pause tuning and preserve interrupted experiment patch
+
+The user pivoted before this tuning pass was complete, asking to document the full end-to-end workflow for transforming prototype pages into modular, themable React/RTK Query packages. Before switching contexts, I preserved the in-progress source changes as an experiment patch and will revert the active source files so the documentation work starts from a clean tree.
+
+### Prompt Context
+
+**User prompt (verbatim excerpt):** "Ok, before we get too far into the details, we actually want to document our end to end workflow..."
+
+**Assistant interpretation:** Stop detailed Shows tuning for now; document the larger repeatable workflow. Preserve the interrupted experiment without leaving half-finished source changes applied.
+
+### What I preserved
+
+```text
+experiments/01-interrupted-shows-fixture-spacing-pass.patch
+```
+
+The patch includes the incomplete Shows fixture/data and page spacing tuning pass.
+
+### Why revert active source
+
+The pass was not complete, and type-checking exposed friction around mock/generated type declarations. Since the next task is a design/implementation guide rather than a finished tuning commit, keeping the patch in `experiments/` is cleaner than committing half-applied UI changes.

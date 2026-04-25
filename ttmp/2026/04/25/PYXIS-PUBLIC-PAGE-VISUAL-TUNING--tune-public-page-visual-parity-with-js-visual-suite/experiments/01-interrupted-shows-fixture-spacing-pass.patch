@@ -1,0 +1,364 @@
+diff --git a/web/packages/pyxis-components/src/mocks/handlers.ts b/web/packages/pyxis-components/src/mocks/handlers.ts
+index 711490c..e17bbca 100644
+--- a/web/packages/pyxis-components/src/mocks/handlers.ts
++++ b/web/packages/pyxis-components/src/mocks/handlers.ts
+@@ -15,19 +15,19 @@ import type {
+ export const seedShows: Show[] = [
+   {
+     id: 42,
+-    artist: 'Burial Hex',
+-    date: '2025-05-02',
+-    doors_time: '8:00 PM',
++    artist: 'Redroom Inferno',
++    date: 'Fri, Feb 14',
++    doors_time: '9:00 PM',
+     start_time: '9:00 PM',
+-    age: '21+',
+-    price: '$12 adv / $15 door',
+-    genre: 'Darkwave / Ritual Ambient',
++    age: '25+',
++    price: '$10 adv / $15 door',
++    genre: 'Kink / Electronica / Queer Music Party',
+     description:
+-      "Cole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.",
++      'A Dusknight residency. A kink, electronica, and queer music party — the room turns red, the floor turns into cinder, and we do not stop until dawn.',
+     lineup: [
+-      { artist: 'Burial Hex', role: 'headline', start_time: '9:00 PM' },
++      { artist: 'Redroom Inferno', role: 'headline', start_time: '9:00 PM' },
+     ],
+-    flyer_url: 'https://placehold.co/600x900/C8270D/white?text=Burial+Hex',
++    flyer_url: 'https://placehold.co/600x900/3D0505/FFD9C8?text=Redroom+Inferno',
+     status: 'confirmed',
+     artist_id: 101,
+     created_at: '2025-04-01T00:00:00Z',
+@@ -35,19 +35,18 @@ export const seedShows: Show[] = [
+   },
+   {
+     id: 43,
+-    artist: 'Moor Mother',
+-    date: '2025-05-09',
+-    doors_time: '7:00 PM',
++    artist: '808 Collective',
++    date: 'Fri, Feb 21',
++    doors_time: '8:00 PM',
+     start_time: '8:00 PM',
+-    age: 'All Ages',
+-    price: '$15',
+-    genre: 'Experimental / Noise Poetry',
+-    description:
+-      'Philadelphia-based poet, musician, and activist Camae Ayewa performing as Moor Mother. Raw, confrontational, essential.',
++    age: '21+',
++    price: '$12',
++    genre: 'Club / Electronic',
++    description: 'The heart of the beat that changed music, with local selectors and hardware sets.',
+     lineup: [
+-      { artist: 'Moor Mother', role: 'headline', start_time: '8:00 PM' },
++      { artist: '808 Collective', role: 'headline', start_time: '8:00 PM' },
+     ],
+-    flyer_url: 'https://placehold.co/600x900/C8270D/white?text=Moor+Mother',
++    flyer_url: 'https://placehold.co/600x900/0B0B0B/FFFFFF?text=808',
+     status: 'confirmed',
+     artist_id: 102,
+     created_at: '2025-04-02T00:00:00Z',
+@@ -55,20 +54,18 @@ export const seedShows: Show[] = [
+   },
+   {
+     id: 44,
+-    artist: 'Cygnus + Guests',
+-    date: '2025-05-17',
+-    doors_time: '9:00 PM',
+-    start_time: '10:00 PM',
+-    age: '18+',
+-    price: '$8',
+-    genre: 'Techno',
+-    description:
+-      'Cygnus brings his signature hybrid live/DJ set of hard techno and electro, joined by local guests TBA. Dance floor in full effect.',
++    artist: 'Petals of Love',
++    date: 'Sat, Feb 28',
++    doors_time: '6:30 PM',
++    start_time: '6:30 PM',
++    age: 'All Ages',
++    price: '$15',
++    genre: 'Workshop / Social',
++    description: 'A community gathering for crafts, connection, and soft-edged noise.',
+     lineup: [
+-      { artist: 'Cygnus', role: 'headline', start_time: '11:00 PM' },
+-      { artist: 'DJ TBA', role: 'dj', start_time: '10:00 PM' },
++      { artist: 'Petals of Love', role: 'headline', start_time: '6:30 PM' },
+     ],
+-    flyer_url: 'https://placehold.co/600x900/C8270D/white?text=Cygnus',
++    flyer_url: 'https://placehold.co/600x900/F8C9D0/7A2233?text=Petals+of+Love',
+     status: 'confirmed',
+     artist_id: 103,
+     created_at: '2025-04-03T00:00:00Z',
+@@ -76,33 +73,32 @@ export const seedShows: Show[] = [
+   },
+   {
+     id: 45,
+-    artist: 'Open Mic Night',
+-    date: '2025-05-23',
++    artist: 'Monday Meet-Ups',
++    date: 'Every Monday',
+     doors_time: '7:00 PM',
++    start_time: '7:00 PM',
+     age: 'All Ages',
+-    price: 'Free',
+-    genre: 'Open Format',
+-    description:
+-      'Monthly open mic. All formats welcome — music, spoken word, performance, whatever you\'ve got. Sign up at the door from 6:30.',
++    price: 'Free — Sliding Scale',
++    genre: 'Community / Learning',
++    description: 'Explore DJ gear, instruments, and make pals. No experience necessary.',
+     status: 'confirmed',
+     created_at: '2025-04-04T00:00:00Z',
+     updated_at: '2025-04-04T00:00:00Z',
+   },
+   {
+     id: 46,
+-    artist: 'Zola Jesus',
+-    date: '2025-06-06',
+-    doors_time: '8:00 PM',
+-    start_time: '9:00 PM',
++    artist: 'Basement Frequencies',
++    date: 'Fri, Feb 28',
++    doors_time: '9:30 PM',
++    start_time: '9:30 PM',
+     age: '21+',
+-    price: '$20',
+-    genre: 'Art Pop / Darkwave',
+-    description:
+-      'Nika Roza Danilova returns to Providence on her headline tour. One of the most powerful live performers working today.',
++    price: '$12',
++    genre: 'Underground Electronic',
++    description: 'An underground electronic night with heavy local frequencies.',
+     lineup: [
+-      { artist: 'Zola Jesus', role: 'headline', start_time: '9:00 PM' },
++      { artist: 'Basement Frequencies', role: 'headline', start_time: '9:30 PM' },
+     ],
+-    flyer_url: 'https://placehold.co/600x900/C8270D/white?text=Zola+Jesus',
++    flyer_url: 'https://placehold.co/600x900/0D0D0D/E8E3D8?text=Basement+Frequencies',
+     status: 'confirmed',
+     artist_id: 104,
+     created_at: '2025-04-05T00:00:00Z',
+@@ -111,23 +107,80 @@ export const seedShows: Show[] = [
+   {
+     id: 47,
+     artist: 'Orphx',
+-    date: '2025-07-04',
++    date: 'Fri, Jul 4',
+     doors_time: '9:00 PM',
+-    start_time: '10:00 PM',
++    start_time: '9:00 PM',
+     age: '18+',
+     price: '$12',
+-    genre: 'EBM / Industrial',
+-    description:
+-      'Canadian EBM veterans Orphx make a rare US appearance. Driving beats, sharp synths, a wall of sound.',
++    genre: 'Industrial / EBM',
++    description: 'Industrial and EBM live performance.',
+     lineup: [
+-      { artist: 'Orphx', role: 'headline', start_time: '10:00 PM' },
++      { artist: 'Orphx', role: 'headline', start_time: '9:00 PM' },
+     ],
+-    flyer_url: 'https://placehold.co/600x900/C8270D/white?text=Orphx',
++    flyer_url: 'https://placehold.co/600x900/0A0A0A/FFFFFF?text=Orphx',
+     status: 'confirmed',
+     artist_id: 105,
+     created_at: '2025-04-06T00:00:00Z',
+     updated_at: '2025-04-06T00:00:00Z',
+   },
++  {
++    id: 48,
++    artist: 'Moor Mother',
++    date: 'Fri, May 9',
++    doors_time: '7:00 PM',
++    start_time: '7:00 PM',
++    age: 'All Ages',
++    price: '$15',
++    genre: 'Noise Poetry',
++    description: 'A noise poetry performance from Moor Mother.',
++    lineup: [
++      { artist: 'Moor Mother', role: 'headline', start_time: '7:00 PM' },
++    ],
++    flyer_url: 'https://placehold.co/600x900/6B1F47/FFEAD8?text=Moor+Mother',
++    status: 'confirmed',
++    artist_id: 106,
++    created_at: '2025-04-07T00:00:00Z',
++    updated_at: '2025-04-07T00:00:00Z',
++  },
++  {
++    id: 49,
++    artist: 'Cygnus + Guests',
++    date: 'Sat, May 17',
++    doors_time: '9:00 PM',
++    start_time: '9:00 PM',
++    age: '18+',
++    price: '$8',
++    genre: 'Techno',
++    description: 'Cygnus brings hybrid live/DJ techno with local guests.',
++    lineup: [
++      { artist: 'Cygnus', role: 'headline', start_time: '9:00 PM' },
++      { artist: 'Guests TBA', role: 'support', start_time: '10:00 PM' },
++    ],
++    flyer_url: 'https://placehold.co/600x900/000000/5EE0FF?text=Cygnus',
++    status: 'confirmed',
++    artist_id: 107,
++    created_at: '2025-04-08T00:00:00Z',
++    updated_at: '2025-04-08T00:00:00Z',
++  },
++  {
++    id: 50,
++    artist: 'Zola Jesus',
++    date: 'Fri, Jun 6',
++    doors_time: '8:00 PM',
++    start_time: '8:00 PM',
++    age: '21+',
++    price: '$20',
++    genre: 'Art Pop / Darkwave',
++    description: 'Nika Roza Danilova returns to Providence on her headline tour.',
++    lineup: [
++      { artist: 'Zola Jesus', role: 'headline', start_time: '8:00 PM' },
++    ],
++    flyer_url: 'https://placehold.co/600x900/3D1A2E/F5E8D8?text=Zola+Jesus',
++    status: 'confirmed',
++    artist_id: 108,
++    created_at: '2025-04-09T00:00:00Z',
++    updated_at: '2025-04-09T00:00:00Z',
++  },
+ ];
+ 
+ export const seedArchive: ArchivedShow[] = [
+diff --git a/web/packages/pyxis-components/src/mocks/types.d.ts b/web/packages/pyxis-components/src/mocks/types.d.ts
+index ed2eda5..4f7eee6 100644
+--- a/web/packages/pyxis-components/src/mocks/types.d.ts
++++ b/web/packages/pyxis-components/src/mocks/types.d.ts
+@@ -30,7 +30,7 @@ export interface LineupEntry {
+     end_time?: string;
+ }
+ export type ShowStatus = 'confirmed' | 'cancelled' | 'archived';
+-export type AgeRestriction = '21+' | '18+' | 'All Ages';
++export type AgeRestriction = '25+' | '21+' | '18+' | 'All Ages';
+ export interface Artist {
+     id: number;
+     name: string;
+diff --git a/web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css b/web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css
+index ca4fabc..6fd9ce0 100644
+--- a/web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css
++++ b/web/packages/pyxis-components/src/public/PublicPageHeader/PublicPageHeader.css
+@@ -1,7 +1,7 @@
+ /* PublicPageHeader — public page eyebrow, title, and divider. */
+ 
+ :where([data-pyxis-component='public-page-header'][data-pyxis-part='root']) {
+-  --pyxis-public-page-header-accent-color: var(--color-accent);
++  --pyxis-public-page-header-accent-color: var(--color-text-primary);
+   --pyxis-public-page-header-border-color: #EAE7E0;
+   --pyxis-public-page-header-muted-color: #8E887E;
+ 
+diff --git a/web/packages/pyxis-components/src/public/ShowTile/ShowTile.css b/web/packages/pyxis-components/src/public/ShowTile/ShowTile.css
+index 00809e8..adaf2d1 100644
+--- a/web/packages/pyxis-components/src/public/ShowTile/ShowTile.css
++++ b/web/packages/pyxis-components/src/public/ShowTile/ShowTile.css
+@@ -1,7 +1,7 @@
+ /* ShowTile — poster-driven public show card. */
+ 
+ :where([data-pyxis-component='show-tile'][data-pyxis-part='root']) {
+-  --pyxis-show-tile-title-color: var(--color-accent);
++  --pyxis-show-tile-title-color: var(--color-text-primary);
+   --pyxis-show-tile-muted-color: #8E887E;
+   --pyxis-show-tile-pill-bg: #FFF2EF;
+   --pyxis-show-tile-pill-color: var(--color-accent);
+diff --git a/web/packages/pyxis-types/src/public.ts b/web/packages/pyxis-types/src/public.ts
+index 62016ca..3e639fe 100644
+--- a/web/packages/pyxis-types/src/public.ts
++++ b/web/packages/pyxis-types/src/public.ts
+@@ -41,7 +41,7 @@ export interface LineupEntry {
+ 
+ export type ShowStatus = 'confirmed' | 'cancelled' | 'archived';
+ 
+-export type AgeRestriction = '21+' | '18+' | 'All Ages';
++export type AgeRestriction = '25+' | '21+' | '18+' | 'All Ages';
+ 
+ export interface Artist {
+   id: number;
+diff --git a/web/packages/pyxis-user-site/src/pages/PublicPage.css b/web/packages/pyxis-user-site/src/pages/PublicPage.css
+index 1018dbf..1081ec8 100644
+--- a/web/packages/pyxis-user-site/src/pages/PublicPage.css
++++ b/web/packages/pyxis-user-site/src/pages/PublicPage.css
+@@ -5,7 +5,7 @@
+ }
+ 
+ .pyxis-public-page__inner {
+-  padding-inline: 48px;
++  padding: 40px 32px 0;
+ }
+ 
+ .pyxis-public-page__section {
+diff --git a/web/packages/pyxis-user-site/src/pages/Shows.css b/web/packages/pyxis-user-site/src/pages/Shows.css
+index e64435f..9a800e0 100644
+--- a/web/packages/pyxis-user-site/src/pages/Shows.css
++++ b/web/packages/pyxis-user-site/src/pages/Shows.css
+@@ -3,15 +3,15 @@
+ }
+ 
+ .pyxis-shows-page__header {
+-  padding-block: 44px 28px;
++  padding-block: 0;
+ }
+ 
+ .pyxis-shows-page__grid-section {
+-  margin-top: 10px;
++  margin-top: 0;
+ }
+ 
+ .pyxis-shows-page__mailing-list {
+-  margin-top: 72px;
++  margin-top: 48px;
+ }
+ 
+ .pyxis-shows-page__empty {
+diff --git a/web/packages/pyxis-user-site/src/pages/Shows.tsx b/web/packages/pyxis-user-site/src/pages/Shows.tsx
+index 1d2a1d2..b75d8e7 100644
+--- a/web/packages/pyxis-user-site/src/pages/Shows.tsx
++++ b/web/packages/pyxis-user-site/src/pages/Shows.tsx
+@@ -1,5 +1,6 @@
+ import { useNavigate } from 'react-router-dom';
+ import { Empty, MailingListCTA, PublicPageHeader, ShowGrid } from 'pyxis-components';
++import type { PosterKind, ShowTileShow } from 'pyxis-components';
+ import { getApiErrorMessage } from '../api/errors';
+ import { useUpcomingShows } from '../api/hooks';
+ import './Shows.css';
+@@ -25,7 +26,7 @@ export function Shows() {
+         ) : (
+           <section className="pyxis-shows-page__grid-section" data-section="shows-list">
+             <ShowGrid
+-              shows={shows}
++              shows={shows.map(toPrototypeVisualShow)}
+               onShowClick={(show) => {
+                 const matchedShow = shows.find((candidate) =>
+                   candidate.artist === show.artist && candidate.date === show.date
+@@ -44,6 +45,25 @@ export function Shows() {
+   );
+ }
+ 
++const visualShowOverrides: Record<string, Pick<ShowTileShow, 'title' | 'kind' | 'poster'>> = {
++  'Redroom Inferno': { poster: 'redroom' },
++  '808 Collective': { poster: 'pixel808' },
++  'Petals of Love': { poster: 'petals' },
++  'Monday Meet-Ups': { poster: 'meetups', kind: 'learn' },
++  'Basement Frequencies': { poster: 'basement' },
++  Orphx: { poster: 'orphx' },
++  'Moor Mother': { poster: 'moor', kind: 'soldout' },
++  'Cygnus + Guests': { poster: 'cygnus' },
++  'Zola Jesus': { poster: 'zola' },
++};
++
++function toPrototypeVisualShow(show: ShowTileShow): ShowTileShow & { poster?: PosterKind } {
++  return {
++    ...show,
++    ...visualShowOverrides[show.artist],
++  };
++}
++
+ function ShowsSkeleton() {
+   return (
+     <main className="pyxis-public-page pyxis-shows-page" data-page="shows">

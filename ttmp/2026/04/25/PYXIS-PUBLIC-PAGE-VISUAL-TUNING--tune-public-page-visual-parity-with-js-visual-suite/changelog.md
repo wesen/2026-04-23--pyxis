@@ -6,3 +6,4 @@
 
 - Inspected separate Shows left/right crops and identified fixture/data mismatch plus page gutter/header spacing as first tuning targets.
 - Preserved separate-image inspection artifacts under `various/02-separate-image-inspection-artifacts/` and cleaned active generated visual-comparison output.
+- Preserved interrupted Shows tuning changes as `experiments/01-interrupted-shows-fixture-spacing-pass.patch` before pivoting to workflow documentation.
