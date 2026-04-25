@@ -237,3 +237,41 @@ page    6.6511%
 ```
 
 This is close enough for a strong first composition pass, but still needs review/tuning before final acceptance.
+
+
+## Step 8: Phase 5 Book and BookSuccess first composition pass
+
+### What I did
+
+- Replaced local booking page title/intro with `PublicPageHeader`.
+- Kept `BookingForm` as the canonical form implementation.
+- Preserved `useSubmitBooking()` RTK Query mutation behavior and navigation to `/book/success`.
+- Replaced `SpaceInfo` with `BookingSpaceAside` per taxonomy guidance for booking pages.
+- Kept `BookingRules`.
+- Added `SaferSpaceAgreement`.
+- Updated `BookSuccess.tsx` to use the public page wrapper and `BookingSuccess`.
+- Added `BookSuccessDesktop` story route to `PublicPages.stories.tsx`.
+- Added `web/packages/pyxis-user-site/src/pages/Book.css`.
+- Added `prototype-design/visual-diff/comparisons/public-pages/book-desktop.css-visual-diff.yml`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-user-site typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/public-pages/book-desktop.css-visual-diff.yml
+cd web && pnpm -r typecheck
+cd web && pnpm --filter pyxis-user-site build
+cd web && pnpm --filter pyxis-user-site build-storybook
+css-visual-diff run --config-dir prototype-design/visual-diff/comparisons/public-pages
+```
+
+### Result
+
+The book config runs with full two-section coverage. First-pass residual diffs:
+
+```text
+content 14.5896%
+page    12.1006%
+```
+
+The full page config directory also runs successfully for Shows, ShowDetail, Archive, and Book. Storybook build still reports non-blocking large chunk warnings and Storybook package compatibility warnings.

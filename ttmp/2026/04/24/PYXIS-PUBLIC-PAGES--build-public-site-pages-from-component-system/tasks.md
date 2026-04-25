@@ -141,22 +141,22 @@ web/packages/pyxis-user-site/src/pages/BookSuccess.tsx
 prototype-design/standalone/public/book.html
 ```
 
-- [ ] Inspect `book.html` and identify sections.
-- [ ] Replace local title/intro with `PublicPageHeader` if matching baseline.
-- [ ] Keep `BookingForm` as the form implementation.
-- [ ] Preserve `useSubmitBooking()` RTK Query mutation behavior.
-- [ ] Preserve successful navigation to `/book/success` or intentionally replace with inline success state.
-- [ ] Replace `SpaceInfo` with `BookingSpaceAside` if baseline supports taxonomy decision.
-- [ ] Keep `BookingRules` where shown.
-- [ ] Add `SaferSpaceAgreement` where shown.
-- [ ] Use `BookingSuccess` in `BookSuccess.tsx` or add a page story using it.
-- [ ] Add submitting and validation-error stories if useful.
-- [ ] Add or update Book page CSS file.
+- [x] Inspect `book.html` and identify sections.
+- [x] Replace local title/intro with `PublicPageHeader` if matching baseline.
+- [x] Keep `BookingForm` as the form implementation.
+- [x] Preserve `useSubmitBooking()` RTK Query mutation behavior.
+- [x] Preserve successful navigation to `/book/success` or intentionally replace with inline success state.
+- [x] Replace `SpaceInfo` with `BookingSpaceAside` if baseline supports taxonomy decision.
+- [x] Keep `BookingRules` where shown.
+- [x] Add `SaferSpaceAgreement` where shown.
+- [x] Use `BookingSuccess` in `BookSuccess.tsx` or add a page story using it.
+- [x] Add submitting and validation-error stories if useful.
+- [x] Add or update Book page CSS file.
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Add and run `book-desktop` visual-diff config.
+- [x] Add and run `book-desktop` visual-diff config.
 - [ ] Add `book-mobile` config after desktop stabilizes.
 - [x] Update diary with exact diffs and accepted differences.
-- [ ] Commit Book/BookSuccess changes separately.
+- [x] Commit Book/BookSuccess changes separately.
 
 ---
 

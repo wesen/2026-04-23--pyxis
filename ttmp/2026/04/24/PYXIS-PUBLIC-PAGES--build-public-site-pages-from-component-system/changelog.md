@@ -20,3 +20,6 @@
 - Completed Phase 3 first ShowDetail composition pass using `ShowDetailHeader`, `ShowMetaStrip`, `ReserveTicketCard`, `LineupRow`, `SafetyNote`, and `VenueCard`; added page CSS and `show-detail-desktop` visual-diff config. Current first-pass diff: content 24.4647%, page 18.5282%.
 
 - Completed Phase 4 first Archive composition pass using `PublicPageHeader`, controlled `ArchiveSearchFilters`, `ArchiveStats`, `YearGroup`, `ArchiveShowList`, and `ArchiveShowRow`; added page CSS and `archive-desktop` visual-diff config. Current first-pass diff: content 7.1281%, page 6.6511%.
+
+- Completed Phase 5 first Book/BookSuccess composition pass using `PublicPageHeader`, `BookingForm`, `BookingSpaceAside`, `BookingRules`, `SaferSpaceAgreement`, and `BookingSuccess`; added page CSS, BookSuccess Storybook route/story, and `book-desktop` visual-diff config. Current first-pass diff: content 14.5896%, page 12.1006%.
+- Ran cross-page validation for Phases 3-5: recursive typecheck, user-site build, user-site Storybook build, and all current public page visual-diff configs.

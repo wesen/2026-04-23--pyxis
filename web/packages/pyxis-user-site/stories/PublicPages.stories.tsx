@@ -7,6 +7,7 @@ import { Shows } from '../src/pages/Shows';
 import { ShowDetail } from '../src/pages/ShowDetail';
 import { Archive } from '../src/pages/Archive';
 import { Book } from '../src/pages/Book';
+import { BookSuccess } from '../src/pages/BookSuccess';
 import { About } from '../src/pages/About';
 import { makeStore } from '../src/store';
 
@@ -55,6 +56,7 @@ function PublicPageRoute({ route, storyName, width, minHeight }: PublicPageRoute
                 <Route path="shows/:id" element={<ShowDetail />} />
                 <Route path="archive" element={<Archive />} />
                 <Route path="book" element={<Book />} />
+                <Route path="book/success" element={<BookSuccess />} />
                 <Route path="about" element={<About />} />
               </Route>
             </Routes>
@@ -106,6 +108,11 @@ export const BookDesktop: Story = {
 export const BookMobile: Story = {
   args: { ...mobileArgs, route: '/book', storyName: 'book-mobile' },
   parameters: { viewport: { defaultViewport: 'pyxisMobile' } },
+};
+
+export const BookSuccessDesktop: Story = {
+  args: { ...desktopArgs, route: '/book/success', storyName: 'book-success-desktop' },
+  parameters: { viewport: { defaultViewport: 'pyxisDesktop' } },
 };
 
 export const AboutDesktop: Story = {
