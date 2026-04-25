@@ -41,3 +41,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Added final cleanup postmortem/handoff and related it to key active/quarantine files.
 - Committed final cleanup postmortem/handoff.
 - Added detailed cleanup postmortem to close the visual-diff cleanup chapter and frame the next proper visual-diff tuning phase.
+- Committed detailed visual-diff cleanup postmortem.

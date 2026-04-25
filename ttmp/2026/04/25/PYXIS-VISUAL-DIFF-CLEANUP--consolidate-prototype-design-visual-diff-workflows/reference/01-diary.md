@@ -1360,7 +1360,7 @@ This is intentionally more reflective than the final handoff. The handoff is a c
 
 **Inferred user intent:** Preserve cleanup context for future review and avoid re-litigating old workflow decisions when starting the next phase.
 
-**Commit (docs):** pending at diary-write time — intended message: "Add detailed visual diff cleanup postmortem"
+**Commit (docs):** `6d666ca` — "Add detailed visual diff cleanup postmortem"
 
 ### What I did
 
