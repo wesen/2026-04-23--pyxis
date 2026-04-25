@@ -488,3 +488,32 @@ root      0.4888% | 549/112320
 ```
 
 The remaining root CSS diff is mostly wrapper/default inherited style differences; the pixel diff remains low.
+
+
+## Step 13: Extract `ArchiveSearchFilters` CSS
+
+### What I did
+
+- Created `web/packages/pyxis-components/src/public/ArchiveSearchFilters/ArchiveSearchFilters.css`.
+- Moved root layout, input, year button, and active button styles out of JSX.
+- Added stable `data-pyxis-part` hooks for `input`, `years`, and `year-button`.
+- Added `data-state='active'` for the active year button.
+- Added tokenized focus-visible styles for input and buttons.
+- Updated `ArchiveSearchFilters.tsx` to self-import CSS and use `clsx('pyxis-archive-search-filters', className)`.
+- Added `Wrapped` and `ThemeOverride` Storybook stories.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/component-system/public/molecules/archive-search-filters-default.css-visual-diff.yml
+```
+
+Typecheck passed. The visual-diff command completed all modes. Current output:
+
+```text
+component 0.0000% | 0/46080
+root      0.0000% | 0/25920
+```
+
+This was an exact pixel-parity extraction.

@@ -43,4 +43,8 @@
 - Refactored `ArchiveShowList` defaults into a named constant and kept the list container responsible only for layout, delegating row visuals to `ArchiveShowRow`.
 - Added long-content and theme override Storybook stories for `ArchiveShowList`.
 - Validated `ArchiveShowList` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-show-list-default.css-visual-diff.yml`; current pixel diff is `0.4888% | 549/112320`.
+- Extracted `ArchiveSearchFilters` styles into `web/packages/pyxis-components/src/public/ArchiveSearchFilters/ArchiveSearchFilters.css`.
+- Added part selectors for `input`, `years`, and `year-button`, active state via `data-state`, and tokenized focus-visible styles.
+- Added wrapped and theme override Storybook stories for `ArchiveSearchFilters`.
+- Validated `ArchiveSearchFilters` with `pnpm --filter pyxis-components typecheck` and `css-visual-diff run --config .../archive-search-filters-default.css-visual-diff.yml`; current pixel diff is `0.0000% | 0/46080`.
 

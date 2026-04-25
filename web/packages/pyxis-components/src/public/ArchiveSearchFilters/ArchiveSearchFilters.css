@@ -1,0 +1,61 @@
+/* ArchiveSearchFilters — search input and year chips for archive pages. */
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='root']) {
+  --pyxis-archive-search-active-bg: #1F1E1C;
+  --pyxis-archive-search-active-color: var(--color-text-inverse);
+  --pyxis-archive-search-bg: var(--color-surface);
+  --pyxis-archive-search-border-color: #EAE7E0;
+  --pyxis-archive-search-color: var(--color-accent);
+
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='input']) {
+  background: var(--pyxis-archive-search-bg);
+  border: 1px solid var(--pyxis-archive-search-border-color);
+  border-radius: var(--radius-xs);
+  color: var(--pyxis-archive-search-color);
+  flex: 1;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  min-width: 200px;
+  outline: none;
+  padding: 9px 12px;
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='input']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='years']) {
+  display: flex;
+  gap: 6px;
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='year-button']) {
+  background: var(--pyxis-archive-search-bg);
+  border: 1px solid var(--pyxis-archive-search-border-color);
+  border-radius: var(--radius-xs);
+  color: var(--pyxis-archive-search-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  padding: 8px 12px;
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='year-button'][data-state='active']) {
+  background: var(--pyxis-archive-search-active-bg);
+  border: none;
+  color: var(--pyxis-archive-search-active-color);
+}
+
+:where([data-pyxis-component='archive-search-filters'][data-pyxis-part='year-button']:focus-visible) {
+  outline: var(--ring-width) solid var(--ring-color);
+  outline-offset: 2px;
+}
