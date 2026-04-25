@@ -12,14 +12,24 @@ DocType: reference
 Intent: diary
 Owners: []
 RelatedFiles:
+    - Path: prototype-design/lib/components.jsx
+      Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/visual-diff/userland/specs/app.components.visual.yml
       Note: Initial pyxis-app component visual suite
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/02-inventory-prototype-routes.mjs
       Note: Ticket-local route inventory script
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
+      Note: Ticket-local focused visual comparison script
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/left_region.png
+      Note: Final prototype individual crop inspected with read
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/right_region.png
+      Note: Final React individual crop inspected with read
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
       Note: RTK Query app API slice and hooks
+    - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
+      Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
       Note: Initial Phase 5-6 staff app organisms and page composition components
     - Path: web/packages/pyxis-types/src/app.ts
@@ -30,6 +40,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Pyxis App React Diary

@@ -20,3 +20,13 @@ Step 5: Completed phases 0-6 with pyxis-app scaffold, app data contracts, respon
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/App.tsx — New responsive app package route entry
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-types/src/app.ts — New staff app type contracts
 
+
+## 2026-04-25
+
+Step 7: Proved the component-level css-visual-diff loop with MetricCard; final like-for-like crop is in review band at 3.7242% / 1170 changed pixels (commits bb41b0c and 3946816)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — MetricCard spec now uses like-for-like selectors
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard.css — CSS tuned from individual crop evidence
+
