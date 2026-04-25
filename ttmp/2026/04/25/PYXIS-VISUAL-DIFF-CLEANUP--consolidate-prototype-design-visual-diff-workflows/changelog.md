@@ -28,3 +28,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Recorded final hygiene validation note after Phase 1–3 cleanup; list-targets returned 13 rows and docmgr only reported the known topic-vocabulary warning.
 - Deleted five retired public-page native `css-visual-diff run` configs after validating the spec-backed public-page suite still produces 5 pages / 13 sections.
 - Committed public-page native config deletion.
+- Stabilized public prototype selectors by adding `data-page` to the shell, Shows section selectors, a prototype mailing-list CTA counterpart, and matching visual-suite selectors; validated Shows diagnostics and Archive spec smoke.

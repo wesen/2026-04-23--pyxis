@@ -606,3 +606,131 @@ rm -rf prototype-design/visual-comparisons/cssvd-js
 ### Technical details
 
 The removed files are still referenced by older ticket documentation and previous exploratory scripts. Those references document historical workflows and were not updated in this deletion pass.
+
+
+## Step 10: Stabilize public-page prototype selectors
+
+After deleting the safest native configs, I continued into Phase 4 selector stabilization. The public prototype shell now exposes `data-page`, and the Shows prototype has section-level selectors for the header, show grid, and mailing-list CTA. The suite spec now compares prototype and React sections using matching stable selectors instead of broad `#root > *` crops.
+
+This is intentionally selector/composition cleanup, not final CSS tuning. The residual diffs changed because the comparison windows are now more structurally equivalent, especially for Shows.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 9)
+
+**Assistant interpretation:** Continue after the safe deletion commit by implementing the next cleanup item: selector stabilization.
+
+**Inferred user intent:** Keep progressing through the cleanup ticket toward a better foundation for later visual tuning.
+
+**Commit (code):** pending at diary-write time — intended message: "Stabilize public page visual selectors"
+
+### What I did
+
+Updated:
+
+```text
+prototype-design/screens/ppxis.jsx
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js
+tasks.md
+```
+
+Specific prototype changes:
+
+- Added `data-page={cur === "detail" ? "show-detail" : cur}` to the public prototype shell `<main>`.
+- Wrapped the Shows page header with `data-section="shows-header"`.
+- Wrapped the Shows grid with `data-section="shows-list"`.
+- Added a prototype mailing-list CTA section with `data-section="mailing-list"` and `data-pyxis-component="mailing-list-cta"` parts so the React mailing-list comparison has a real prototype counterpart.
+
+Specific spec changes:
+
+- Shows `content` now compares `[data-page='shows']` to `[data-page='shows']`.
+- Shows `header`, `shows-list`, and `mailing-list` now compare matching `[data-section=...]` selectors.
+- Show detail, Archive, Book, and About `content` sections now compare matching `[data-page=...]` selectors on both sides.
+- Page-level comparison still uses prototype `#root` versus Storybook frame, because that is the outer whole-page crop.
+
+### Why
+
+The old Shows selectors compared broad prototype regions like `#root > *` against section-specific React selectors. That inflated section-level diffs and made later CSS tuning misleading. Stable selectors let the visual diff answer the intended question: how close is this section to its counterpart?
+
+### What worked
+
+`list-targets` now shows stable selectors for Shows:
+
+```text
+content      [data-page='shows']          -> [data-page='shows']
+header       [data-section='shows-header'] -> [data-section='shows-header']
+shows-list   [data-section='shows-list']   -> [data-section='shows-list']
+mailing-list [data-section='mailing-list'] -> [data-section='mailing-list']
+```
+
+Shows semantic diagnostics now run with the new section scopes:
+
+```bash
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+```
+
+Result:
+
+```text
+header       styleDiffs=7 yDelta=-40 heightDelta=102.5
+shows-list   styleDiffs=7 yDelta=44.5 heightDelta=-476.359375
+mailing-list styleDiffs=7 yDelta=-407.859375 heightDelta=8.5
+content      styleDiffs=8 yDelta=0 heightDelta=-327.359375
+```
+
+Archive spec smoke also still runs after `content` selector stabilization:
+
+```text
+pageCount=1
+sectionCount=2
+maxChangedPercent=7.2125872435568175
+content selector: [data-page='archive'] -> [data-page='archive']
+page selector: #root -> [data-story-frame='pyxis-page-shell']
+```
+
+### What didn't work
+
+N/A. The scripts ran successfully.
+
+### What I learned
+
+Changing from broad prototype selectors to stable section selectors can change the measured diff even before CSS tuning. That is expected and desirable: the numbers now describe the intended section crops rather than unrelated page chrome or full-content spans.
+
+### What was tricky to build
+
+The tricky part was the Shows mailing-list section. React already had a mailing-list section, while the prototype Shows page did not have an equivalent page-level CTA. I added a small prototype CTA using the same text and `data-pyxis-component`/`data-pyxis-part` contract as the React component. This moves the comparison from "missing prototype counterpart" to "real section with styling differences to tune later."
+
+### What warrants a second pair of eyes
+
+- Confirm that adding the prototype mailing-list CTA is acceptable as prototype composition stabilization rather than overfitting to React.
+- Review whether page-level `#root` should eventually become a more explicit prototype frame selector, or whether it is fine for whole-page comparisons.
+- Review the changed Archive content diff baseline; it moved from ~7.128% to ~7.213% because the selector crop changed to `[data-page='archive']`.
+
+### What should be done in the future
+
+- Re-run the full spec suite and update baselineDiffs in the visual spec once selector stabilization is accepted.
+- Tune Shows CSS/composition using the now-stable section diagnostics.
+- Continue with native config removal for component-system/public-component configs in a separate pass.
+
+### Code review instructions
+
+Start with:
+
+```text
+prototype-design/screens/ppxis.jsx
+prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml
+```
+
+Validate with:
+
+```bash
+prototype-design/visual-diff/userland/scripts/smoke-list-targets.sh
+prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
+prototype-design/visual-diff/userland/scripts/smoke-compare-spec-archive.sh
+rm -rf prototype-design/visual-comparisons/cssvd-js
+```
+
+### Technical details
+
+The JS spec mirror was regenerated manually after YAML edits. This reinforces the follow-up need for a generator/check to prevent drift.

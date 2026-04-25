@@ -47,9 +47,9 @@ Summary: Task checklist for consolidating prototype-design visual-diff workflows
 
 ## Phase 4 — Selector stabilization
 
-- [ ] Add stable `data-page` / `data-section` selectors to public prototypes where missing.
-- [ ] Update visual suite spec selectors to use stable selectors.
-- [ ] Validate Shows semantic diagnostics before and after selector changes.
+- [x] Add stable `data-page` / `data-section` selectors to public prototypes where missing.
+- [x] Update visual suite spec selectors to use stable selectors.
+- [x] Validate Shows semantic diagnostics before and after selector changes.
 - [ ] Remove or archive native configs after useful selector data is migrated into the visual suite spec.
 
 ## Phase 5 — Script and docs cleanup

@@ -59,22 +59,22 @@ module.exports = {
         },
         {
           "name": "content",
-          "original": "#root > *",
+          "original": "[data-page='shows']",
           "react": "[data-page='shows']"
         },
         {
           "name": "header",
-          "original": "#root > *",
+          "original": "[data-section='shows-header']",
           "react": "[data-section='shows-header']"
         },
         {
           "name": "shows-list",
-          "original": "#root > *",
+          "original": "[data-section='shows-list']",
           "react": "[data-section='shows-list']"
         },
         {
           "name": "mailing-list",
-          "original": "#root > *",
+          "original": "[data-section='mailing-list']",
           "react": "[data-section='mailing-list']"
         }
       ]
@@ -97,7 +97,7 @@ module.exports = {
         },
         {
           "name": "content",
-          "original": "#root > *",
+          "original": "[data-page='show-detail']",
           "react": "[data-page='show-detail']"
         }
       ]
@@ -120,7 +120,7 @@ module.exports = {
         },
         {
           "name": "content",
-          "original": "#root > *",
+          "original": "[data-page='archive']",
           "react": "[data-page='archive']"
         }
       ]
@@ -143,7 +143,7 @@ module.exports = {
         },
         {
           "name": "content",
-          "original": "#root > *",
+          "original": "[data-page='book']",
           "react": "[data-page='book']"
         }
       ]
@@ -166,7 +166,7 @@ module.exports = {
         },
         {
           "name": "content",
-          "original": "#root > *",
+          "original": "[data-page='about']",
           "react": "[data-page='about']"
         }
       ]

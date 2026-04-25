@@ -399,10 +399,24 @@ function ShowsPage({ onOpen, compact }) {
   const shows = compact ? P_SHOWS.slice(0, 6) : P_SHOWS;
   return (
     <>
-      <PageHeader kicker="Providence, RI" title="Upcoming shows" compact={compact} />
-      <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(3, 1fr)", gap: compact ? 24 : "32px 24px" }}>
-        {shows.map(s => <ShowTile key={s.id} show={s} compact={compact} onClick={() => onOpen && onOpen(s)} />)}
-      </div>
+      <header data-section="shows-header">
+        <PageHeader kicker="Providence, RI" title="Upcoming shows" compact={compact} />
+      </header>
+      <section data-section="shows-list">
+        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(3, 1fr)", gap: compact ? 24 : "32px 24px" }}>
+          {shows.map(s => <ShowTile key={s.id} show={s} compact={compact} onClick={() => onOpen && onOpen(s)} />)}
+        </div>
+      </section>
+      <section data-section="mailing-list" style={{ marginTop: compact ? 34 : 48 }}>
+        <div data-pyxis-component="mailing-list-cta" data-pyxis-part="root" style={{ borderTop: `1px solid ${PRULE}`, paddingTop: compact ? 22 : 28 }}>
+          <h3 data-pyxis-component="mailing-list-cta" data-pyxis-part="title" style={{ fontFamily: "'Fraunces', serif", fontSize: compact ? 22 : 24, fontWeight: 500, color: "#C8270D", margin: "0 0 8px" }}>Stay in the loop</h3>
+          <p data-pyxis-component="mailing-list-cta" data-pyxis-part="description" style={{ color: PMUTE, fontSize: 14, margin: "0 0 16px" }}>Get show announcements and venue news.</p>
+          <form data-pyxis-component="mailing-list-cta" data-pyxis-part="form" style={{ display: "flex", gap: 8 }}>
+            <input data-pyxis-component="mailing-list-cta" data-pyxis-part="input" placeholder="your@email.com" style={{ flex: 1, border: `1px solid ${PRULE}`, fontFamily: "inherit", fontSize: 14, padding: "9px 12px" }} />
+            <button data-pyxis-component="mailing-list-cta" data-pyxis-part="button" type="button" style={{ background: "#1F1E1C", border: "none", borderRadius: 4, color: "#fff", fontFamily: "inherit", padding: "9px 14px" }}>Subscribe</button>
+          </form>
+        </div>
+      </section>
     </>
   );
 }
@@ -741,7 +755,7 @@ function PPXShell({ page = "shows", compact = false }) {
   return (
     <div style={{ width: W, minHeight: compact ? 844 : 1100, background: "#fff", fontFamily: "'Inter', sans-serif", color: PINK }}>
       <PPXNav page={cur} onNav={setCur} compact={compact} />
-      <main style={{ maxWidth: W, margin: "0 auto", padding: compact ? "26px 18px 0" : "40px 32px 0" }}>
+      <main data-page={cur === "detail" ? "show-detail" : cur} style={{ maxWidth: W, margin: "0 auto", padding: compact ? "26px 18px 0" : "40px 32px 0" }}>
         {content}
       </main>
       <PPXFooter compact={compact} />
