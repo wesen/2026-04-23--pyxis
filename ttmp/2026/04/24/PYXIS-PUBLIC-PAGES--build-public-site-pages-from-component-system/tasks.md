@@ -169,20 +169,20 @@ web/packages/pyxis-user-site/src/pages/About.tsx
 prototype-design/standalone/public/about.html
 ```
 
-- [ ] Inspect `about.html` and identify sections.
-- [ ] Keep `AboutHero` for the headline section if matching baseline.
-- [ ] Replace local prose blocks with `AboutIntro`.
-- [ ] Prefer `EthosGrid` over `EthosStrip` for about-page ethos content.
-- [ ] Add `CollectiveList`.
-- [ ] Replace local visit/contact block with `FindUsBlock`.
-- [ ] Decide how to handle the hero image placeholder.
-- [ ] Add or update About page CSS file.
-- [ ] Add long-copy or mobile story variant if useful.
+- [x] Inspect `about.html` and identify sections.
+- [x] Keep `AboutHero` for the headline section if matching baseline.
+- [x] Replace local prose blocks with `AboutIntro`.
+- [x] Prefer `EthosGrid` over `EthosStrip` for about-page ethos content.
+- [x] Add `CollectiveList`.
+- [x] Replace local visit/contact block with `FindUsBlock`.
+- [x] Decide how to handle the hero image placeholder.
+- [x] Add or update About page CSS file.
+- [x] Add long-copy or mobile story variant if useful.
 - [x] Run `cd web && pnpm --filter pyxis-user-site typecheck`.
-- [ ] Add and run `about-desktop` visual-diff config.
+- [x] Add and run `about-desktop` visual-diff config.
 - [ ] Add `about-mobile` config after desktop stabilizes.
 - [x] Update diary with exact diffs and accepted differences.
-- [ ] Commit About changes separately.
+- [x] Commit About changes separately.
 
 ---
 

@@ -1,47 +1,44 @@
-import { AboutHero, EthosStrip, Button } from 'pyxis-components';
+import {
+  AboutHero,
+  AboutIntro,
+  Button,
+  CollectiveList,
+  EthosGrid,
+  FindUsBlock,
+} from 'pyxis-components';
+import './About.css';
 
 export function About() {
   return (
-    <div data-page="about">
-      <div data-section="about-hero" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px' }}>
-        <AboutHero />
-      </div>
+    <main className="pyxis-public-page pyxis-about-page" data-page="about">
+      <div className="pyxis-public-page__inner">
+        <section className="pyxis-about-page__hero" data-section="about-hero">
+          <AboutHero />
+        </section>
 
-      {/* Hero image placeholder */}
-      <div data-section="about-image" style={{ background: 'var(--color-border)', height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-disabled)', marginBottom: 64 }}>
-        [Hero image — venue interior]
-      </div>
-
-      <div data-section="about-content" style={{ maxWidth: 980, margin: '0 auto', padding: '0 32px 64px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
-        <div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', fontWeight: 500, marginBottom: 16 }}>What we do</h2>
-          <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
-            Pyxis is a 150-capacity venue in the heart of Providence. We book underground,
-            experimental, and boundary-pushing acts. Darkwave, noise, techno, ambient,
-            EBM, industrial, experimental. The shows that other venues turn away.
-          </p>
-          <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginTop: 16 }}>
-            We've been running since 2021. Over {new Date().getFullYear() - 2021} years of weird shows.
-          </p>
+        <div className="pyxis-about-page__image" data-section="about-image">
+          [Hero image — venue interior]
         </div>
-        <div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', fontWeight: 500, marginBottom: 16 }}>Visit</h2>
-          <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '4px 24px', fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
-            <dt style={{ color: 'var(--color-text-tertiary)' }}>Address</dt>
-            <dd>25 Manton Ave, Providence, RI 02909</dd>
-            <dt style={{ color: 'var(--color-text-tertiary)' }}>Capacity</dt>
-            <dd>~150</dd>
-            <dt style={{ color: 'var(--color-text-tertiary)' }}>Contact</dt>
-            <dd><a href="mailto:info@pyxis.xyz" style={{ color: 'var(--color-accent)' }}>info@pyxis.xyz</a></dd>
-          </dl>
+
+        <div className="pyxis-about-page__sections" data-section="about-content">
+          <section data-section="about-intro">
+            <AboutIntro />
+          </section>
+
+          <section data-section="about-ethos">
+            <EthosGrid />
+          </section>
+
+          <section className="pyxis-about-page__split" data-section="about-collective-find-us">
+            <CollectiveList />
+            <FindUsBlock />
+          </section>
+
+          <section className="pyxis-about-page__cta" data-section="about-cta">
+            <Button variant="primary" iconRight="chevron-right">Book the space</Button>
+          </section>
         </div>
       </div>
-
-      <div data-section="about-ethos"><EthosStrip /></div>
-
-      <div data-section="about-cta" style={{ maxWidth: 980, margin: '0 auto', padding: '64px 32px', textAlign: 'center' }}>
-        <Button variant="primary" iconRight="chevron-right">Book the space</Button>
-      </div>
-    </div>
+    </main>
   );
 }

@@ -275,3 +275,36 @@ page    12.1006%
 ```
 
 The full page config directory also runs successfully for Shows, ShowDetail, Archive, and Book. Storybook build still reports non-blocking large chunk warnings and Storybook package compatibility warnings.
+
+
+## Step 9: Phase 6 About first composition pass
+
+### What I did
+
+- Replaced local about prose and visit markup with canonical public components.
+- Kept `AboutHero` for the headline section.
+- Added `AboutIntro`.
+- Replaced `EthosStrip` with `EthosGrid` per the taxonomy ADR.
+- Added `CollectiveList`.
+- Replaced the local visit/contact block with `FindUsBlock`.
+- Kept the hero image placeholder for now because the baseline still includes an image/venue-interior slot and no real asset has been chosen.
+- Added `web/packages/pyxis-user-site/src/pages/About.css`.
+- Added `prototype-design/visual-diff/comparisons/public-pages/about-desktop.css-visual-diff.yml`.
+
+### Validation
+
+```bash
+cd web && pnpm --filter pyxis-user-site typecheck
+css-visual-diff run --config prototype-design/visual-diff/comparisons/public-pages/about-desktop.css-visual-diff.yml
+```
+
+### Result
+
+The about config runs with full two-section coverage. First-pass residual diffs:
+
+```text
+content 20.4334%
+page    18.2795%
+```
+
+This is a moderate first-pass result and should be tuned after Shows and other higher-priority diffs.

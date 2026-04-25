@@ -23,3 +23,5 @@
 
 - Completed Phase 5 first Book/BookSuccess composition pass using `PublicPageHeader`, `BookingForm`, `BookingSpaceAside`, `BookingRules`, `SaferSpaceAgreement`, and `BookingSuccess`; added page CSS, BookSuccess Storybook route/story, and `book-desktop` visual-diff config. Current first-pass diff: content 14.5896%, page 12.1006%.
 - Ran cross-page validation for Phases 3-5: recursive typecheck, user-site build, user-site Storybook build, and all current public page visual-diff configs.
+
+- Completed Phase 6 first About composition pass using `AboutHero`, `AboutIntro`, `EthosGrid`, `CollectiveList`, and `FindUsBlock`; removed `EthosStrip` from the page, kept the hero image placeholder for now, and added `about-desktop` visual-diff config. Current first-pass diff: content 20.4334%, page 18.2795%.
