@@ -881,7 +881,7 @@ This aligns the general playbook with the cleanup ticket's implementation state:
 
 **Inferred user intent:** Keep consolidating the workflow so future developers follow the JS suite path rather than resurrecting native config-dir runs.
 
-**Commit (code/docs):** pending at diary-write time — intended message: "Update visual parity playbook for JS suite"
+**Commit (code/docs):** `ad70940` — "Update visual parity playbook for JS suite"
 
 ### What I did
 

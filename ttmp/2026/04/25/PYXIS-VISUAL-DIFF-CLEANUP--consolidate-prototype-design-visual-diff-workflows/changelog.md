@@ -33,3 +33,4 @@ Summary: Changelog for the prototype-design visual-diff cleanup ticket.
 - Refreshed public-page visual suite baselines after selector stabilization and added `scripts/refresh-spec-mirrors.py` to regenerate CommonJS mirrors from YAML specs.
 - Committed refreshed selector-stabilized baselines and spec mirror generator.
 - Updated bottom-up visual parity playbook to point public-page validation at JS visual suite scripts and mark native component config directories as retired inputs.
+- Committed visual parity playbook JS-suite update.
