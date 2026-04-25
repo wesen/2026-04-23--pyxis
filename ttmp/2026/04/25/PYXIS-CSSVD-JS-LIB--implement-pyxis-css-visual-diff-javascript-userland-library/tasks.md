@@ -31,17 +31,17 @@
 
 ## Phase 2 — Existing result summarizer
 
-- [ ] Create `scripts/lib/results.js`.
-- [ ] Create `scripts/lib/policies.js`.
-- [ ] Create `scripts/lib/markdown.js`.
-- [ ] Parse `pixeldiff.md` tables from `prototype-design/visual-comparisons/public-pages`.
-- [ ] Parse built-in `compare.json` output shape.
-- [ ] Normalize result rows with page, variant, section, changed percent, artifact paths, and source.
-- [ ] Implement threshold classification bands: accepted, review, tune-required, major-mismatch.
-- [ ] Implement `pyxis pages summarize-results`.
-- [ ] Add smoke script `scripts/02-smoke-summarize-existing-page-results.sh`.
-- [ ] Generate JSON and Markdown summary under `various/`.
-- [ ] Confirm generated summary reproduces the previous Phase 7 page-diff report.
+- [x] Create `scripts/lib/results.js`.
+- [x] Create `scripts/lib/policies.js`.
+- [x] Create `scripts/lib/markdown.js`.
+- [x] Parse `pixeldiff.md` tables from `prototype-design/visual-comparisons/public-pages`.
+- [ ] Parse built-in `compare.json` output shape. (Deferred to Phase 4 compare bridge.)
+- [x] Normalize result rows with page, variant, section, changed percent, artifact paths, and source.
+- [x] Implement threshold classification bands: accepted, review, tune-required, major-mismatch.
+- [x] Implement `pyxis pages summarize-results`.
+- [x] Add smoke script `scripts/03-smoke-summarize-existing-page-results.sh`.
+- [x] Generate JSON and Markdown summary under `various/`.
+- [x] Confirm generated summary reproduces the previous Phase 7 page-diff report.
 - [x] Record results in diary.
 
 ## Phase 3 — Locator-first inspect command

@@ -427,6 +427,23 @@ function normalizeFontFamily(value) {}
 function normalizeCssValue(prop, value) {}
 ```
 
+
+### Import/repository root note from implementation
+
+The initial Phase 1 smoke tests found that relative imports such as `require('../lib/index.js')` work when the verb repository root is the common `scripts/` directory:
+
+```bash
+css-visual-diff verbs --repository ttmp/.../scripts pyxis pages import-smoke --output json
+```
+
+Using the nested `scripts/verbs/` directory as the repository root failed with:
+
+```text
+Error: GoError: Invalid module at github.com/dop251/goja_nodejs/require.(*RequireModule).require-fm (native)
+```
+
+Therefore future commands should pass `--repository <ticket-or-project>/scripts` when verbs import sibling modules from `scripts/lib`.
+
 ## JS verb commands to implement
 
 ### `pyxis pages list-targets`

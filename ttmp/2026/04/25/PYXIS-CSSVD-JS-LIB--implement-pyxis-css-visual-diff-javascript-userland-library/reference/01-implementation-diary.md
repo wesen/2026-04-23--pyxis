@@ -442,3 +442,169 @@ ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-u
 ### Technical details
 
 The registry currently hard-codes the desktop public pages and first-pass baseline diff percentages from the previous page-level visual-diff report. This is intentional for Phase 1; Phase 2 will parse official generated results instead of relying only on baselines embedded in the registry.
+
+
+## Step 4: Implement Phase 2 result summarizer
+
+The next implementation slice avoids browser work and focuses on immediate workflow value: replacing manual page-diff report copying with a userland parser and report generator. The new command reads existing `pixeldiff.md` artifacts from `prototype-design/visual-comparisons/public-pages`, normalizes rows, classifies them by policy bands, and writes JSON/Markdown summaries.
+
+This proves that useful project-level tooling can be built entirely in JavaScript userland before touching pixel comparison internals.
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 3)
+
+**Assistant interpretation:** Continue implementing the library step by step after validating import mechanics.
+
+**Inferred user intent:** Build practical commands with smoke tests and documentation rather than stopping at planning.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added modules:
+
+```text
+scripts/lib/policies.js
+scripts/lib/markdown.js
+scripts/lib/results.js
+```
+
+- Updated:
+
+```text
+scripts/lib/index.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Implemented verb:
+
+```text
+pyxis pages summarize-results
+```
+
+- Added smoke script:
+
+```text
+scripts/03-smoke-summarize-existing-page-results.sh
+```
+
+- Generated outputs:
+
+```text
+various/02-summarize-results/page-diffs.json
+various/02-summarize-results/01-page-diffs.md
+various/02-summarize-results/summarize-output.json
+```
+
+- Validated with Python assertions:
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+base=Path('ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/02-summarize-results')
+rows=json.loads((base/'page-diffs.json').read_text())
+out=json.loads((base/'summarize-output.json').read_text())
+assert rows == out
+assert len(rows) == 13
+assert (base/'01-page-diffs.md').read_text().startswith('---')
+print('validated rerun summarized rows=', len(rows))
+PY
+```
+
+### Why
+
+This command directly improves the workflow from the public pages Phase 7 report. Instead of manually copying pixel diff rows, the library now parses existing artifacts and produces a sorted summary with policy classifications.
+
+### What worked
+
+The summarizer produced 13 rows sorted by changed percentage. The highest row is the expected Shows mismatch:
+
+```text
+shows / shows-list / 66.8566% / major-mismatch
+```
+
+Archive is classified as review-level:
+
+```text
+archive / content / 7.1281% / review
+archive / page / 6.6511% / review
+```
+
+The generated Markdown report has docmgr-compatible frontmatter and can be bundled later if needed.
+
+### What didn't work
+
+I initially piped the smoke script into `tee` with the target file inside a directory created by the script:
+
+```bash
+"$BASE/scripts/03-smoke-summarize-existing-page-results.sh" | tee "$BASE/various/02-summarize-results/summarize-output.json"
+```
+
+This failed because `tee` opened the output path before the script-created directory was available:
+
+```text
+tee: ttmp/.../various/02-summarize-results/summarize-output.json: No such file or directory
+```
+
+Fix: create the directory before invoking `tee`, or redirect after ensuring the directory exists. The final smoke run uses an existing directory and succeeds.
+
+### What I learned
+
+The Goja `fs` module available inside css-visual-diff verbs supports enough file operations for this phase: `readFileSync` and `writeFileSync`. It does not expose the full Node `fs` API, so scripts should not assume `existsSync`, `mkdirSync`, or directory walking.
+
+This shapes the library: use known registry paths instead of filesystem discovery, and have shell smoke scripts create directories before JS writes files.
+
+### What was tricky to build
+
+The main trick was parsing Markdown robustly without a filesystem directory walk. The implementation uses the registry to know which result directories should exist, then reads each expected `pixeldiff.md`. This is more deterministic than discovering arbitrary files, and it fits the current page registry model.
+
+### What warrants a second pair of eyes
+
+- The classification bands are simple: accepted <= 1%, review <= 10%, tune-required <= 25%, major-mismatch > 25%. They are useful for authoring but may need adjustment before CI use.
+- `compare.json` parsing is deferred to the Phase 4 compare bridge, despite being originally listed in Phase 2.
+
+### What should be done in the future
+
+- Implement a built-in `compare.json` reader when the compare bridge exists.
+- Add optional `--classification` or `--minChangedPercent` filters if summaries get large.
+- Consider writing summary reports into a predictable docs/report path once the command graduates from ticket-local scripts.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/results.js
+scripts/lib/policies.js
+scripts/lib/markdown.js
+scripts/verbs/pyxis-pages.js
+scripts/03-smoke-summarize-existing-page-results.sh
+various/02-summarize-results/01-page-diffs.md
+```
+
+Validate:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/03-smoke-summarize-existing-page-results.sh
+```
+
+### Technical details
+
+The normalized row shape currently includes:
+
+```text
+page
+variant
+section
+changedPercent
+changedPixels
+totalPixels
+classification
+source
+artifactDir
+diffComparisonPath
+```
+
+The source is currently `yaml-run`, because rows are parsed from official YAML-generated `pixeldiff.md` artifacts.

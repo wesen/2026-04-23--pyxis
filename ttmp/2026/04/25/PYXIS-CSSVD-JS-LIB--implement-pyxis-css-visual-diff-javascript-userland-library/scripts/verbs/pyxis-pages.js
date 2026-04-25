@@ -48,3 +48,33 @@ __verb__('importSmoke', {
   output: 'structured',
   fields: {},
 })
+
+function summarizeResults(values) {
+  var rows = lib.results.readPageVisualComparisonResults(values.resultsDir, {
+    page: values.page || '',
+    variant: values.variant || '',
+    priority: values.priority || '',
+  })
+  if (values.jsonOut) {
+    lib.results.writeJson(values.jsonOut, rows)
+  }
+  if (values.markdown) {
+    lib.results.writeText(values.markdown, lib.markdown.renderPageSummary(rows, { resultsDir: values.resultsDir }))
+  }
+  return rows
+}
+
+__verb__('summarizeResults', {
+  parents: ['pyxis', 'pages'],
+  short: 'Summarize existing Pyxis public page visual comparison pixeldiff artifacts',
+  output: 'structured',
+  fields: {
+    values: { bind: 'all' },
+    resultsDir: { type: 'string', default: 'prototype-design/visual-comparisons/public-pages', help: 'Directory containing page visual comparison output folders' },
+    markdown: { type: 'string', default: '', help: 'Optional Markdown report output path; parent directory must exist' },
+    jsonOut: { type: 'string', default: '', help: 'Optional JSON report output path; parent directory must exist' },
+    page: { type: 'string', default: '', help: 'Filter by page slug' },
+    variant: { type: 'string', default: '', help: 'Filter by variant' },
+    priority: { type: 'string', default: '', help: 'Filter by priority label' },
+  },
+})

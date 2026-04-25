@@ -1,0 +1,158 @@
+[
+{
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/shows-desktop",
+  "changedPercent": 66.8566,
+  "changedPixels": 1107145,
+  "classification": "major-mismatch",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/shows-desktop/pixeldiff_shows-list_diff_comparison.png",
+  "page": "shows",
+  "section": "shows-list",
+  "source": "yaml-run",
+  "totalPixels": 1656000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/shows-desktop",
+  "changedPercent": 51.2191,
+  "changedPixels": 848189,
+  "classification": "major-mismatch",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/shows-desktop/pixeldiff_mailing-list_diff_comparison.png",
+  "page": "shows",
+  "section": "mailing-list",
+  "source": "yaml-run",
+  "totalPixels": 1656000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/shows-desktop",
+  "changedPercent": 51.0775,
+  "changedPixels": 845843,
+  "classification": "major-mismatch",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/shows-desktop/pixeldiff_header_diff_comparison.png",
+  "page": "shows",
+  "section": "header",
+  "source": "yaml-run",
+  "totalPixels": 1656000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/shows-desktop",
+  "changedPercent": 50.5245,
+  "changedPixels": 836685,
+  "classification": "major-mismatch",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/shows-desktop/pixeldiff_page_diff_comparison.png",
+  "page": "shows",
+  "section": "page",
+  "source": "yaml-run",
+  "totalPixels": 1656000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/shows-desktop",
+  "changedPercent": 49.094,
+  "changedPixels": 812996,
+  "classification": "major-mismatch",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/shows-desktop/pixeldiff_content_diff_comparison.png",
+  "page": "shows",
+  "section": "content",
+  "source": "yaml-run",
+  "totalPixels": 1656000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/show-detail-desktop",
+  "changedPercent": 24.4647,
+  "changedPixels": 247583,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/show-detail-desktop/pixeldiff_content_diff_comparison.png",
+  "page": "show-detail",
+  "section": "content",
+  "source": "yaml-run",
+  "totalPixels": 1012000,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/about-desktop",
+  "changedPercent": 20.4334,
+  "changedPixels": 313938,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/about-desktop/pixeldiff_content_diff_comparison.png",
+  "page": "about",
+  "section": "content",
+  "source": "yaml-run",
+  "totalPixels": 1536400,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/show-detail-desktop",
+  "changedPercent": 18.5282,
+  "changedPixels": 248871,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/show-detail-desktop/pixeldiff_page_diff_comparison.png",
+  "page": "show-detail",
+  "section": "page",
+  "source": "yaml-run",
+  "totalPixels": 1343200,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/about-desktop",
+  "changedPercent": 18.2795,
+  "changedPixels": 322889,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/about-desktop/pixeldiff_page_diff_comparison.png",
+  "page": "about",
+  "section": "page",
+  "source": "yaml-run",
+  "totalPixels": 1766400,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/book-desktop",
+  "changedPercent": 14.5896,
+  "changedPixels": 150465,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/book-desktop/pixeldiff_content_diff_comparison.png",
+  "page": "book",
+  "section": "content",
+  "source": "yaml-run",
+  "totalPixels": 1031320,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/book-desktop",
+  "changedPercent": 12.1006,
+  "changedPixels": 162535,
+  "classification": "tune-required",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/book-desktop/pixeldiff_page_diff_comparison.png",
+  "page": "book",
+  "section": "page",
+  "source": "yaml-run",
+  "totalPixels": 1343200,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/archive-desktop",
+  "changedPercent": 7.1281,
+  "changedPixels": 102172,
+  "classification": "review",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/archive-desktop/pixeldiff_content_diff_comparison.png",
+  "page": "archive",
+  "section": "content",
+  "source": "yaml-run",
+  "totalPixels": 1433360,
+  "variant": "desktop"
+}
+, {
+  "artifactDir": "prototype-design/visual-comparisons/public-pages/archive-desktop",
+  "changedPercent": 6.6511,
+  "changedPixels": 103350,
+  "classification": "review",
+  "diffComparisonPath": "/home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-comparisons/public-pages/archive-desktop/pixeldiff_page_diff_comparison.png",
+  "page": "archive",
+  "section": "page",
+  "source": "yaml-run",
+  "totalPixels": 1553880,
+  "variant": "desktop"
+}
+]
