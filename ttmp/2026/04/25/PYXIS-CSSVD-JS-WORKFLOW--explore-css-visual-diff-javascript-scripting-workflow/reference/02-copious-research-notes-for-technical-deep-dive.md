@@ -893,3 +893,67 @@ cvd.report(result).blogMarkdown({
 ```
 
 Why it matters: high-quality technical writeups need both evidence and explanation. A report builder could reduce manual transcription errors.
+
+
+## Which JS API wishlist items need new primitives vs userland JS?
+
+A useful correction: many wishlist items do **not** require fundamental new `css-visual-diff` primitives. They are workflow conveniences that can be prototyped in ticket-local JavaScript first. The core boundary is whether a feature needs access to pixel comparison internals, browser/image artifact generation internals, or existing Go/YAML runner semantics that are not exposed as JS-callable functions.
+
+### Can be built in userland JS now
+
+These are primarily orchestration, policy, reporting, or normalization layers:
+
+- Page/target registry primitives.
+- Direct Storybook story URL helper.
+- Stable artifact directory and slug helpers.
+- Authoring vs CI policy helpers.
+- Computed-style property presets.
+- CSS/text/value normalization for snapshot/structural diffs.
+- Numeric tolerances layered on top of `cvd.diff` by pre-normalizing snapshots or post-filtering diff entries.
+- Accepted-difference annotations.
+- Blog/report-oriented Markdown builders.
+- Reading known result files such as `pixeldiff.md` / `compare.json` and summarizing them.
+- A Pyxis page registry DSL that emits built-in command invocations or JS jobs.
+
+These should be written in ticket scripts first. If they prove reusable across projects, they can graduate into helper libraries or upstream API sugar later.
+
+### Can be built in userland, but awkward without core helpers
+
+These are possible but involve shelling out, parsing generated artifacts, or duplicating behavior:
+
+- Multi-section compare runner: possible by invoking `css-visual-diff verbs script compare region` once per section and collecting `compare.json`, but a JS-callable pixel compare function would be cleaner.
+- YAML-to-JS bridge beyond `loadConfig`: possible by inspecting the loaded config object and constructing jobs, but a supported `jobFromConfig` would reduce drift from Go runner semantics.
+- Config-result summary: possible by parsing existing `pixeldiff.md` files or output JSON, but a stable result schema/reader would make it safer.
+- Cataloging compare results: possible by manually writing manifests/Markdown around compare artifacts, but better if compare outputs and catalog outputs share conventions.
+
+These are good candidates for userland prototypes that may reveal the right upstream abstraction.
+
+### Likely needs core/API exposure to be clean
+
+These are the only wishlist items that feel like they need new or newly-exposed primitives in `css-visual-diff` itself:
+
+1. **First-class JS pixel comparison primitive**
+
+   The built-in compare-region verb clearly has access to image capture/diff behavior, but a custom JS verb needs a documented function such as `cvd.comparePixels(...)` to avoid shelling out or duplicating internals. This is the biggest missing primitive.
+
+2. **Official multi-section pixel comparison primitive**
+
+   This could be userland if `comparePixels` exists. Without `comparePixels`, it requires calling the CLI repeatedly. So it is not fundamentally separate, but it depends on the first primitive.
+
+3. **Stable typed schemas/readers for generated compare artifacts**
+
+   We can parse current JSON/Markdown, but long-term tools need documented schemas for `compare.json`, pixel stats, artifact paths, and coverage/missing-selector status.
+
+4. **Native tolerance/normalization support inside `cvd.diff`**
+
+   We can implement this in userland by normalizing snapshots before diffing or filtering diff output afterwards. It only needs core support if we want it integrated into official reports and equality semantics.
+
+5. **Go/YAML runner parity from JS**
+
+   If the goal is exact behavior parity with `css-visual-diff run --config`, custom JS needs either a `jobFromConfig` / `runConfig` API or must call the CLI. Userland can approximate, but exact parity belongs near the Go config runner.
+
+### Practical conclusion
+
+The next experiments should assume userland first. Build Pyxis scripts that provide registry, policy, report, normalization, and multi-section orchestration. Only promote requests upstream when the userland implementation has to shell out to the CLI, parse unstable artifacts, or duplicate Go/browser/image internals.
+
+The most important upstream primitive to ask for is therefore not a large framework; it is a small JS-callable pixel comparison API. Almost everything else can be layered in JavaScript.

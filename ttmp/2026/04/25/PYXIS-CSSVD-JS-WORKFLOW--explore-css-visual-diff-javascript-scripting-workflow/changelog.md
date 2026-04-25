@@ -22,3 +22,5 @@ Initial css-visual-diff JavaScript workflow exploration: captured docs, proved t
 
 
 - Added JS API wishlist research notes after initial Pyxis experiments, covering first-class pixel compare APIs, multi-section runners, YAML interop helpers, result summarizers, tolerances, CSS normalization, policy helpers, and blog-post-oriented reporting.
+
+- Added a follow-up note classifying JS API wishlist items into userland-buildable workflow helpers, awkward-but-possible wrappers, and genuinely core/API-exposure needs. Conclusion: most can be prototyped in JS; the main missing core primitive is a JS-callable pixel comparison function.
