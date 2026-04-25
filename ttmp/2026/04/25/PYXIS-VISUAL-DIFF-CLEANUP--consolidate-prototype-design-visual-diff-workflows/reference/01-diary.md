@@ -512,7 +512,7 @@ I intentionally did not delete `prototype-design/visual-diff/public-components/*
 
 **Inferred user intent:** Make concrete cleanup progress instead of only planning, while avoiding risky broad deletions.
 
-**Commit (code):** `e24ca46` — "Remove retired public page visual configs"
+**Commit (code):** `6bcbdb7` — "Remove retired public page visual configs"
 
 ### What I did
 
