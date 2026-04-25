@@ -4,10 +4,14 @@ function fixedPercent(value) {
   return n.toFixed(4) + '%'
 }
 
+function esc(value) {
+  return String(value == null ? '' : value).replace(/\|/g, '\\|').replace(/\n/g, ' ')
+}
+
 function renderPixelDiffTable(rows) {
   var lines = []
-  lines.push('| Page | Variant | Section | Changed % | Changed/Total | Classification | Source |')
-  lines.push('| --- | --- | --- | ---: | ---: | --- | --- |')
+  lines.push('| Page | Variant | Section | Changed % | Changed/Total | Classification | Accepted differences | Source |')
+  lines.push('| --- | --- | --- | ---: | ---: | --- | --- | --- |')
   rows.forEach(function (row) {
     lines.push('| ' + [
       row.page,
@@ -16,8 +20,9 @@ function renderPixelDiffTable(rows) {
       fixedPercent(row.changedPercent),
       (row.changedPixels || '') + '/' + (row.totalPixels || ''),
       row.classification,
+      row.acceptedDifferenceSummary || '',
       row.source,
-    ].join(' | ') + ' |')
+    ].map(esc).join(' | ') + ' |')
   })
   return lines.join('\n')
 }
@@ -54,4 +59,59 @@ function renderPageSummary(rows, options) {
   return lines.join('\n')
 }
 
-module.exports = { renderPixelDiffTable, renderPageSummary }
+function renderCompareAllSummary(suite) {
+  var lines = []
+  var rows = suite.rows || []
+  lines.push('---')
+  lines.push('Title: Pyxis css-visual-diff compare-all suite summary')
+  lines.push('Ticket: PYXIS-CSSVD-JS-LIB')
+  lines.push('Status: active')
+  lines.push('Topics:')
+  lines.push('  - frontend')
+  lines.push('  - visual-diff')
+  lines.push('  - storybook')
+  lines.push('  - automation')
+  lines.push('  - pyxis')
+  lines.push('DocType: reference')
+  lines.push('Intent: short-term')
+  lines.push('Summary: Generated suite summary from `pyxis pages compare-all`.')
+  lines.push('---')
+  lines.push('')
+  lines.push('# Pyxis css-visual-diff Compare-all Suite Summary')
+  lines.push('')
+  lines.push('- Out dir: `' + (suite.outDir || '') + '`')
+  lines.push('- Page count: ' + (suite.pageCount || 0))
+  lines.push('- Section count: ' + (suite.sectionCount || rows.length))
+  lines.push('- Max changed percent: ' + fixedPercent(suite.maxChangedPercent))
+  lines.push('')
+  lines.push('## Classification counts')
+  lines.push('')
+  lines.push('| Classification | Count |')
+  lines.push('| --- | ---: |')
+  Object.keys(suite.classificationCounts || {}).sort().forEach(function (key) {
+    lines.push('| ' + esc(key) + ' | ' + suite.classificationCounts[key] + ' |')
+  })
+  lines.push('')
+  lines.push('## Section results')
+  lines.push('')
+  lines.push(renderPixelDiffTable(rows))
+  lines.push('')
+  lines.push('## Accepted-difference reporting')
+  lines.push('')
+  lines.push('Accepted differences are project-authored metadata from the Pyxis registry. They are reported here for review context and do not automatically change the pixel classification.')
+  lines.push('')
+  var acceptedRows = rows.filter(function (row) { return row.acceptedDifferenceCount > 0 })
+  if (!acceptedRows.length) {
+    lines.push('No accepted differences are currently registered for these page sections.')
+  } else {
+    lines.push(renderPixelDiffTable(acceptedRows))
+  }
+  lines.push('')
+  return lines.join('\n')
+}
+
+module.exports = {
+  renderPixelDiffTable: renderPixelDiffTable,
+  renderPageSummary: renderPageSummary,
+  renderCompareAllSummary: renderCompareAllSummary,
+}

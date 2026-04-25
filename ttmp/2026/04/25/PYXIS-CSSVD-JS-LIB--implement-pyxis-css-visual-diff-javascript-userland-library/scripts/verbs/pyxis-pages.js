@@ -169,3 +169,29 @@ __verb__('comparePage', {
     inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
   },
 })
+
+async function compareAll(values) {
+  return await lib.compareRegion.compareAll({
+    page: values.page || '',
+    variant: values.variant || 'desktop',
+    priority: values.priority || '',
+    outDir: values.outDir || '',
+    threshold: values.threshold || 30,
+    inspect: values.inspect || 'rich',
+  })
+}
+
+__verb__('compareAll', {
+  parents: ['pyxis', 'pages'],
+  short: 'Compare all registered Pyxis public pages and write per-page catalogs plus a suite summary',
+  output: 'structured',
+  fields: {
+    values: { bind: 'all' },
+    page: { type: 'string', default: '', help: 'Optional page filter for smoke/debug runs' },
+    variant: { type: 'string', default: 'desktop', help: 'Registered variant' },
+    priority: { type: 'string', default: '', help: 'Optional priority filter' },
+    outDir: { type: 'string', default: '', help: 'Output directory for suite artifacts' },
+    threshold: { type: 'int', default: 30, help: 'Pixel threshold 0-255' },
+    inspect: { type: 'choice', choices: ['minimal', 'rich', 'debug'], default: 'rich', help: 'Collection profile' },
+  },
+})

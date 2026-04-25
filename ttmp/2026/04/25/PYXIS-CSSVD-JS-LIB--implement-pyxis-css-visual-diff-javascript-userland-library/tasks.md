@@ -88,14 +88,14 @@
 ## Phase 5 — Page and suite orchestration
 
 - [x] Implement `pyxis pages compare-page <page>`.
-- [ ] Implement `pyxis pages compare-all`.
+- [x] Implement `pyxis pages compare-all`.
 - [ ] Support `--mode authoring|ci`.
 - [ ] Support `--maxChangedPercent` or policy band failure thresholds.
 - [x] Generate aggregate JSON report for one page (`compare-page-output.json`).
 - [x] Generate catalog Markdown report for one page (`01-catalog-index.md`).
 - [x] Add smoke script `scripts/09-smoke-compare-page-archive.sh`.
-- [ ] Add smoke script `scripts/06-smoke-compare-all.sh`.
-- [ ] Validate all current desktop page sections run from registry. (Archive validated; all-pages pending.)
+- [x] Add smoke scripts `scripts/10-smoke-compare-all-archive-filter.sh` and `scripts/11-run-compare-all-public-pages.sh`.
+- [x] Validate all current desktop page sections run from registry. (5 pages / 13 sections.)
 - [x] Record results in diary.
 
 ## Phase 6 — Snapshot and semantic diff tooling
@@ -112,8 +112,8 @@
 
 ## Phase 7 — Accepted differences and maintainer feedback loop
 
-- [ ] Add accepted-difference metadata support to registry or sidecar JSON.
-- [ ] Include accepted differences in Markdown reports.
+- [x] Add accepted-difference metadata support to registry sections/page records.
+- [x] Include accepted differences in JSON rows and Markdown reports.
 - [x] Revisit maintainer feature-request document after flexible JS API implementation experience.
 - [x] Mark core pixel compare request as satisfied by `cvd.compare.region(...)`.
 - [x] Create clean maintainer follow-up request document with only newly desired features.

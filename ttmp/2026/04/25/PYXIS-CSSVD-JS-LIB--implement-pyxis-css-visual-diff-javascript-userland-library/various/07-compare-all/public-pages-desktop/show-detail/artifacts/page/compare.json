@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "root",
+      "name": "id"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 360,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "left": {
+      "height": 1100,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 1460,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 1100,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "show-detail-page",
+    "selector": "#root",
+    "url": "http://localhost:7070/standalone/public/detail.html",
+    "visible": true
+  },
+  "name": "show-detail-page",
+  "pixel": {
+    "changedPercent": 18.528216200119118,
+    "changedPixels": 248871,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+    "normalizedHeight": 1460,
+    "normalizedWidth": 920,
+    "threshold": 30,
+    "totalPixels": 1343200
+  },
+  "right": {
+    "bounds": {
+      "height": 1460,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "show-detail-page",
+    "selector": "[data-story-frame='pyxis-page-shell']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(0, 0, 0)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "ppxisShowsArchiveBook usAbout← All showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedTicket№ 0214-A$10 – $15sliding. cash or card at door.Reserve ticket →Fri · Feb 14 · 2026 · 9PMRedroom InfernoA Dusknight residency. A kink, electronica \u0026 queer music party — the room turns red, the floor turns into cinder, and we don't stop 'til dawn.Doors9:00 PMAge21+Door$15Lineup9:00Doors9:45sable witchopener · dj set10:45RONElive · hardware12:00DJ VEILEDheadline · dj set2:00Closeno photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+    "right": "ppxisShowsArchiveBook usAbout← All showsFri, May 2, 2025 · 8:00 PM doors · 9:00 PM showBurial HexCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Doors8:00 PMAge21+Door$12 adv / $15 doorAbout the showCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Lineup9:00 PMBurial Hexheadline · dj setTicket№ 0214-A$12 adv / $15 door21+ · Darkwave / Ritual AmbientReserve ticket →no photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.the space150 standing · 80 seatedppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+  }
+}

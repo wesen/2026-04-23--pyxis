@@ -1,0 +1,293 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: about desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T20:03:44.774461383Z",
+  "updated_at": "2026-04-25T20:03:54.052367903Z",
+  "targets": [
+    {
+      "slug": "page",
+      "name": "about page",
+      "url": "http://localhost:7070/standalone/public/about.html",
+      "selector": "#root",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "content",
+      "name": "about content",
+      "url": "http://localhost:7070/standalone/public/about.html",
+      "selector": "#root \u003e *",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "page",
+        "name": "about page",
+        "url": "http://localhost:7070/standalone/public/about.html",
+        "selector": "#root",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "about-page",
+        "left": {
+          "name": "about-page",
+          "url": "http://localhost:7070/standalone/public/about.html",
+          "selector": "#root",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1333.65625
+          }
+        },
+        "right": {
+          "name": "about-page",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1920.375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1766400,
+          "changedPixels": 322889,
+          "changedPercent": 18.279495018115945,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1920,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/page/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1333.65625
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1920.375
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 586.71875
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAboutEst. 2023About ppxisa music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.we opened in the fall of 2023 with one thing in mind: a room for the kind of shows providence keeps losing. dance nights that get to actually go, experimental sets that trust the audience, residencies that let a project grow over six months instead of six hours.we are a worker-run collective. we split door evenly. we do not book shows that conflict with our safer-space policy, and we do not tolerate bullshit at ours.Our ethos01Artists firstwe exist to book weird shows and pay the people who play them. 100% of door to artists for all local shows under 100 cap.02A safer roomno racism, no transphobia, no bullshit. we enforce it. we mean it. the room has to be safe before it can be anything else.03Loud by designthe PA is tuned for real volume. we honor ear protection (free at the door) and we start on time. respect the room, respect each other.The collectiveshae m.bookings, doormhina j.tech, lightsro.sound, residenciesdevon k.operationsemi p.safer-space leadFind us25 Manton Ave, Unit #2Providence, RI 02909hello@ppxis.spacebook@ppxis.space — bookingswe share a block with an auto body. buzzer on the right. steel door painted red.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "ppxisShowsArchiveBook usAboutEst. 2023About ppxisa music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.[Hero image — venue interior]a music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.we opened in the fall of 2023 with one thing in mind: a room for the kind of shows providence keeps losing. dance nights that get to actually go, experimental sets that trust the audience.we are a worker-run collective. we split door evenly. we do not book shows that conflict with our safer-space policy.Our ethos01Artists firstwe exist to book weird shows and pay the people who play them.02A safer roomwe exist to book weird shows and pay the people who play them.03Loud by designwe exist to book weird shows and pay the people who play them.The collectiveshae m.bookings, doormhina j.bookings, doorro.bookings, doorFind us25 Manton Ave, Unit #2Providence, RI 02909hello@ppxis.spacebook@ppxis.space — bookingswe share a block with an auto body. buzzer on the right. steel door painted red.Book the spaceppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(0, 0, 0)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "id",
+            "left": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/page/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/page/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T20:03:52.577680712Z"
+    },
+    {
+      "target": {
+        "slug": "content",
+        "name": "about content",
+        "url": "http://localhost:7070/standalone/public/about.html",
+        "selector": "#root \u003e *",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "about-content",
+        "left": {
+          "name": "about-content",
+          "url": "http://localhost:7070/standalone/public/about.html",
+          "selector": "#root \u003e *",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1333.65625
+          }
+        },
+        "right": {
+          "name": "about-content",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--about-desktop\u0026viewMode=story",
+          "selector": "[data-page='about']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1670.4375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1536400,
+          "changedPixels": 313938,
+          "changedPercent": 20.4333506899245,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1670,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/content/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1333.65625
+          },
+          "right": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 1670.4375
+          },
+          "delta": {
+            "x": 0,
+            "y": 61,
+            "width": 0,
+            "height": 336.78125
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAboutEst. 2023About ppxisa music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.we opened in the fall of 2023 with one thing in mind: a room for the kind of shows providence keeps losing. dance nights that get to actually go, experimental sets that trust the audience, residencies that let a project grow over six months instead of six hours.we are a worker-run collective. we split door evenly. we do not book shows that conflict with our safer-space policy, and we do not tolerate bullshit at ours.Our ethos01Artists firstwe exist to book weird shows and pay the people who play them. 100% of door to artists for all local shows under 100 cap.02A safer roomno racism, no transphobia, no bullshit. we enforce it. we mean it. the room has to be safe before it can be anything else.03Loud by designthe PA is tuned for real volume. we honor ear protection (free at the door) and we start on time. respect the room, respect each other.The collectiveshae m.bookings, doormhina j.tech, lightsro.sound, residenciesdevon k.operationsemi p.safer-space leadFind us25 Manton Ave, Unit #2Providence, RI 02909hello@ppxis.spacebook@ppxis.space — bookingswe share a block with an auto body. buzzer on the right. steel door painted red.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "Est. 2023About ppxisa music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.[Hero image — venue interior]a music artist space in a former print shop — 150 cap, one beautiful PA, and a deep love for the loud end of the spectrum.we opened in the fall of 2023 with one thing in mind: a room for the kind of shows providence keeps losing. dance nights that get to actually go, experimental sets that trust the audience.we are a worker-run collective. we split door evenly. we do not book shows that conflict with our safer-space policy.Our ethos01Artists firstwe exist to book weird shows and pay the people who play them.02A safer roomwe exist to book weird shows and pay the people who play them.03Loud by designwe exist to book weird shows and pay the people who play them.The collectiveshae m.bookings, doormhina j.bookings, doorro.bookings, doorFind us25 Manton Ave, Unit #2Providence, RI 02909hello@ppxis.spacebook@ppxis.space — bookingswe share a block with an auto body. buzzer on the right. steel door painted red.Book the space"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "0px",
+            "right": "72px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-public-page pyxis-about-page",
+            "changed": true
+          },
+          {
+            "name": "data-page",
+            "right": "about",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/content/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/about/artifacts/content/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T20:03:54.052366511Z"
+    }
+  ],
+  "summary": {
+    "target_count": 2,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 2,
+    "failure_count": 0,
+    "artifact_count": 4
+  }
+}

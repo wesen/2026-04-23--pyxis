@@ -1,0 +1,122 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/shows/artifacts/shows-list/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "pyxis-shows-page__grid-section"
+    },
+    {
+      "changed": true,
+      "name": "data-section",
+      "right": "shows-list"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -890.390625,
+      "width": -96,
+      "x": 48,
+      "y": 274.59375
+    },
+    "left": {
+      "height": 1800.046875,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 909.65625,
+      "width": 824,
+      "x": 48,
+      "y": 274.59375
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 1800.046875,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "shows-shows-list",
+    "selector": "#root \u003e *",
+    "url": "http://localhost:7070/standalone/public/shows.html",
+    "visible": true
+  },
+  "name": "shows-shows-list",
+  "pixel": {
+    "changedPercent": 66.85658212560386,
+    "changedPixels": 1107145,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/shows/artifacts/shows-list/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/shows/artifacts/shows-list/diff_only.png",
+    "normalizedHeight": 1800,
+    "normalizedWidth": 920,
+    "threshold": 30,
+    "totalPixels": 1656000
+  },
+  "right": {
+    "bounds": {
+      "height": 909.65625,
+      "width": 824,
+      "x": 48,
+      "y": 274.59375
+    },
+    "exists": true,
+    "name": "shows-shows-list",
+    "selector": "[data-section='shows-list']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--shows-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(255, 255, 255)",
+      "name": "background-color",
+      "right": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "changed": true,
+      "left": "rgb(31, 30, 28)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "Inter, sans-serif",
+      "name": "font-family",
+      "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "ppxisShowsArchiveBook usAboutProvidence, RIUpcoming showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedRedroom InfernoFri, Feb 14 · 9:00 PM · 25+$10 adv / $15 doorTickets →808The heart of the beatthat changed music808 CollectiveFri, Feb 21 · 8:00 PM · 21+$12Tickets →DyvynHER Collective · Delightful IntentionsPresentsPetals of LoveJoin us for an evening of community, connection, crafts and making floral bouquets honoring love in all its forms.ALL SUPPLIES PROVIDEDMOCKTAILS AND LIGHT FARE PROVIDED(WHILE SUPPLIES LAST)13thFEB 2026HOSTS:SHAE M.MHINA J.6:30 PMEVENTBRITE LINK IN BIOATTIRESPECIAL OCCASIONDRESS-TO-IMPRESSLOCATIONppxis25 MANTON AVE,PROVIDENCE, RI 02909Limited supply of tickets for Early Bird, BIPOC \u0026 LGBTQIA+@DyvynHERCollective · @delightful.intentionsPetals of LoveSat, Feb 28 · 6:30 PM · All Ages$15Tickets →CLUBCLUBMONDAYMEET-UPSCome explore DJ gear, instruments, and make pals! Just sign up and hop in!No experience necessary! This is a place of learning! :)Mondays 7p – 10p25 Manton Ave. · Unit #2Providence, RI 02999$0 - 30slidingscale!Monday Meet-UpsEvery Monday · 7:00 PM · All AgesFree — Sliding ScaleLearn more →BasementFrequenciesan underground electronic nightheavy bass · dark vibes.Feb 28th, 2026Doors 9:30pm · ppxis25 Manton Ave, Providence RI21+ · $12Basement FrequenciesFri, Feb 28 · 9:30 PM · 21+$12Tickets →ORPHXindustrial / ebmlive performanceJULY 4TH, 2026PPXIS · 9PM · 18+ · $12OrphxFri, Jul 4 · 9:00 PM · 18+$12Tickets →ppxis presentsMoorMother— noise poetry —MAY 9 · 2025DOORS 7PM · ALL AGES · $15Moor MotherFri, May 9 · 7:00 PM · All Ages$15Sold out//TECHNOCYGNUS+ guests TBAMAY.17 · 9PMPPXIS · 18+ · $8Cygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →an evening withZolaJesus· art pop / darkwave ·JUNE 6 · 2025PPXIS · 8PM · 21+ · $20Zola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+    "right": "A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedBurial HexFri, May 2 · 8:00 PM · 21+$12 adv / $15 doorTickets →A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedMoor MotherFri, May 9 · 7:00 PM · All Ages$15Tickets →A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedCygnus + GuestsSat, May 17 · 9:00 PM · 18+$8Tickets →A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedOpen Mic NightFri, May 23 · 7:00 PM · All AgesFreeTickets →A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedZola JesusFri, Jun 6 · 8:00 PM · 21+$20Tickets →A Dusknight residency at ppxisRedroom Inferno♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedOrphxFri, Jul 4 · 9:00 PM · 18+$12Tickets →"
+  }
+}

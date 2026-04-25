@@ -1,0 +1,122 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "pyxis-public-page pyxis-show-detail-page"
+    },
+    {
+      "changed": true,
+      "name": "data-page",
+      "right": "show-detail"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -228.09375,
+      "width": 0,
+      "x": 0,
+      "y": 61
+    },
+    "left": {
+      "height": 1100,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 871.90625,
+      "width": 920,
+      "x": 0,
+      "y": 61
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 1100,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "show-detail-content",
+    "selector": "#root \u003e *",
+    "url": "http://localhost:7070/standalone/public/detail.html",
+    "visible": true
+  },
+  "name": "show-detail-content",
+  "pixel": {
+    "changedPercent": 24.464723320158104,
+    "changedPixels": 247583,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+    "normalizedHeight": 1100,
+    "normalizedWidth": 920,
+    "threshold": 30,
+    "totalPixels": 1012000
+  },
+  "right": {
+    "bounds": {
+      "height": 871.90625,
+      "width": 920,
+      "x": 0,
+      "y": 61
+    },
+    "exists": true,
+    "name": "show-detail-content",
+    "selector": "[data-page='show-detail']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(31, 30, 28)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "Inter, sans-serif",
+      "name": "font-family",
+      "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    },
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "padding-bottom",
+      "right": "72px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "ppxisShowsArchiveBook usAbout← All showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedTicket№ 0214-A$10 – $15sliding. cash or card at door.Reserve ticket →Fri · Feb 14 · 2026 · 9PMRedroom InfernoA Dusknight residency. A kink, electronica \u0026 queer music party — the room turns red, the floor turns into cinder, and we don't stop 'til dawn.Doors9:00 PMAge21+Door$15Lineup9:00Doors9:45sable witchopener · dj set10:45RONElive · hardware12:00DJ VEILEDheadline · dj set2:00Closeno photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+    "right": "← All showsFri, May 2, 2025 · 8:00 PM doors · 9:00 PM showBurial HexCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Doors8:00 PMAge21+Door$12 adv / $15 doorAbout the showCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Lineup9:00 PMBurial Hexheadline · dj setTicket№ 0214-A$12 adv / $15 door21+ · Darkwave / Ritual AmbientReserve ticket →no photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.the space150 standing · 80 seated"
+  }
+}

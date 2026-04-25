@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/book/artifacts/page/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/book/artifacts/page/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "root",
+      "name": "id"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 260,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "left": {
+      "height": 1200,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 1460,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 1200,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "book-page",
+    "selector": "#root",
+    "url": "http://localhost:7070/standalone/public/book.html",
+    "visible": true
+  },
+  "name": "book-page",
+  "pixel": {
+    "changedPercent": 12.100580702799284,
+    "changedPixels": 162535,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/book/artifacts/page/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/book/artifacts/page/diff_only.png",
+    "normalizedHeight": 1460,
+    "normalizedWidth": 920,
+    "threshold": 30,
+    "totalPixels": 1343200
+  },
+  "right": {
+    "bounds": {
+      "height": 1460,
+      "width": 920,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "book-page",
+    "selector": "[data-story-frame='pyxis-page-shell']",
+    "url": "http://localhost:6007/iframe.html?id=public-site-pages--book-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(0, 0, 0)",
+      "name": "color",
+      "right": "rgb(26, 26, 24)"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "21px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "ppxisShowsArchiveBook usAboutInquiriesBook the spacetell us about your show. we read every submission. responses in 3–7 days. we book 6–10 weeks out; late requests get the unused-dates list.Your nameEmailProject / artist namePreferred dateExpected drawUnder 5050–100100–150150+Show typeDJ nightLive musicListening partyWorkshop / meet-upScreeningOtherTell us about iti've read the safer-space policy and agree to uphold it for my show.Send inquiry →the spaceCapacity150 standing · 80 seatedPAFunktion-One F1201, 4-way · 2× Sub infra 108BacklineCDJ-3000 ×2, DJM-900, Moog Sub37, house drum kitTechprojector, haze, moving heads ×4, basic video chainHoursclose by 2 AM (3 on Sat)25 Manton Ave · Providence RI 02909book@ppxis.spaceppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+    "right": "ppxisShowsArchiveBook usAboutbookingBook ustell us about your show. we read every submission. responses in 3–7 days. we book 6–10 weeks out; late requests get the unused-dates list.Your nameEmailProject / artist namePreferred dateExpected drawUnder 5050–100100–150150+Tell us about itSend inquiry →the spaceCapacity150 standing · 80 seatedPAFunktion-One F1201, 4-way · 2× Sub infra 108BacklineCDJ-3000 ×2, DJM-900, Moog Sub37, house drum kitTechprojector, haze, moving heads ×4, basic video chainHoursclose by 2 AM (3 on Sat)25 Manton Ave · Providence RI 02909book@ppxis.spacethe spacewe book 6–10 weeks out; late requests get the unused-dates list.i've read the safer-space policy and agree to uphold it for my show.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+  }
+}

@@ -1,5 +1,6 @@
 [
 {
+  "acceptedDifferenceCount": 0,
   "catalog": {
     "artifactCount": 4,
     "comparisonCount": 2,
@@ -7,6 +8,9 @@
     "preflightCount": 0,
     "resultCount": 0,
     "targetCount": 2
+  },
+  "classificationCounts": {
+    "review": 2
   },
   "indexPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/01-catalog-index.md",
   "manifestPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/manifest.json",
@@ -16,8 +20,12 @@
   "sectionCount": 2,
   "sections": [
     {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
       "artifactJson": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.json",
       "artifactMarkdown": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/compare.md",
+      "baselineChangedPercent": 6.6511,
       "bounds": {
         "changed": true,
         "delta": {
@@ -41,6 +49,7 @@
       },
       "changedPercent": 6.651092748474785,
       "changedPixels": 103350,
+      "classification": "review",
       "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_comparison.png",
       "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/diff_only.png",
       "leftRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/page/left_region.png",
@@ -54,6 +63,7 @@
       "rightSelector": "[data-story-frame='pyxis-page-shell']",
       "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
       "section": "page",
+      "source": "cvd.compare.region",
       "summary": {
         "artifactCount": 2,
         "attributeChanges": 1,
@@ -109,8 +119,12 @@
       ]
     },
     {
+      "acceptedDifferenceCount": 0,
+      "acceptedDifferenceSummary": "",
+      "acceptedDifferences": [],
       "artifactJson": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.json",
       "artifactMarkdown": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/compare.md",
+      "baselineChangedPercent": 7.1281,
       "bounds": {
         "changed": true,
         "delta": {
@@ -134,6 +148,7 @@
       },
       "changedPercent": 7.128146453089244,
       "changedPixels": 102172,
+      "classification": "review",
       "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_comparison.png",
       "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/diff_only.png",
       "leftRegionPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/06-compare-page/archive/artifacts/content/left_region.png",
@@ -147,6 +162,7 @@
       "rightSelector": "[data-page='archive']",
       "rightUrl": "http://localhost:6007/iframe.html?id=public-site-pages--archive-desktop\u0026viewMode=story",
       "section": "content",
+      "source": "cvd.compare.region",
       "summary": {
         "artifactCount": 2,
         "attributeChanges": 2,

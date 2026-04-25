@@ -2,6 +2,8 @@ var cvd = require('css-visual-diff')
 var fs = require('fs')
 var registry = require('./registry.js')
 var artifacts = require('./artifacts.js')
+var policies = require('./policies.js')
+var markdown = require('./markdown.js')
 
 var DEFAULT_STYLE_PROPS = [
   'font-family',
@@ -120,7 +122,8 @@ async function waitForLocator(page, selector, options) {
 
 function comparisonRow(target, section, outDir, threshold, summary, json, written, bounds) {
   var pixel = summary.pixel || (json && json.pixel) || {}
-  return {
+  var baselineChangedPercent = target.baselineDiffs ? target.baselineDiffs[section.name] : undefined
+  return policies.withClassification({
     page: target.page,
     variant: target.variant,
     section: section.name,
@@ -144,8 +147,11 @@ function comparisonRow(target, section, outDir, threshold, summary, json, writte
     diffComparisonPath: written.diffComparison || artifactPath(json.artifacts, 'diffComparison'),
     diffOnlyPath: written.diffOnly || artifactPath(json.artifacts, 'diffOnly'),
     writtenArtifacts: written.written || [],
+    baselineChangedPercent: baselineChangedPercent,
+    acceptedDifferences: section.acceptedDifferences || [],
+    source: 'cvd.compare.region',
     summary: summary,
-  }
+  })
 }
 
 function ensureDocmgrMarkdown(path, title) {
@@ -223,6 +229,22 @@ async function compareSection(pageName, sectionName, options) {
   }
 }
 
+function countByClassification(rows) {
+  var counts = {}
+  rows.forEach(function (row) {
+    var key = row.classification || policies.classifyChangedPercent(row.changedPercent)
+    counts[key] = (counts[key] || 0) + 1
+  })
+  return counts
+}
+
+function maxChangedPercent(rows) {
+  return rows.reduce(function (max, row) {
+    var value = Number(row.changedPercent || 0)
+    return value > max ? value : max
+  }, 0)
+}
+
 async function comparePage(pageName, options) {
   options = options || {}
   var variant = options.variant || 'desktop'
@@ -291,10 +313,9 @@ async function comparePage(pageName, options) {
       variant: target.variant,
       outDir: outDir,
       sectionCount: rows.length,
-      maxChangedPercent: rows.reduce(function (max, row) {
-        var value = Number(row.changedPercent || 0)
-        return value > max ? value : max
-      }, 0),
+      maxChangedPercent: maxChangedPercent(rows),
+      classificationCounts: countByClassification(rows),
+      acceptedDifferenceCount: rows.reduce(function (count, row) { return count + (row.acceptedDifferenceCount || 0) }, 0),
       manifestPath: manifestPath,
       indexPath: indexPath,
       catalog: catalog.summary(),
@@ -307,10 +328,60 @@ async function comparePage(pageName, options) {
   }
 }
 
+async function compareAll(options) {
+  options = options || {}
+  var variant = options.variant || 'desktop'
+  var targets = registry.listTargets({
+    page: options.page || '',
+    variant: variant,
+    priority: options.priority || '',
+  })
+  var outDir = options.outDir || artifacts.artifactDir(
+    'ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all',
+    'public-pages',
+    variant
+  )
+  var pageRuns = []
+  var rows = []
+  for (var i = 0; i < targets.length; i++) {
+    var target = targets[i]
+    var pageOutDir = artifacts.artifactDir(outDir, target.page)
+    var pageResult = await comparePage(target.page, {
+      variant: target.variant,
+      outDir: pageOutDir,
+      threshold: options.threshold || 30,
+      inspect: options.inspect || 'rich',
+    })
+    var run = pageResult[0]
+    pageRuns.push(run)
+    rows = rows.concat(run.sections || [])
+  }
+  rows = policies.sortByChangedPercentDesc(rows)
+  var suite = {
+    variant: variant,
+    outDir: outDir,
+    pageCount: pageRuns.length,
+    sectionCount: rows.length,
+    maxChangedPercent: maxChangedPercent(rows),
+    classificationCounts: countByClassification(rows),
+    acceptedDifferenceCount: rows.reduce(function (count, row) { return count + (row.acceptedDifferenceCount || 0) }, 0),
+    pages: pageRuns,
+    rows: rows,
+  }
+  var jsonPath = outDir.replace(/\/+$/g, '') + '/compare-all-output.json'
+  var markdownPath = outDir.replace(/\/+$/g, '') + '/01-suite-summary.md'
+  fs.writeFileSync(jsonPath, JSON.stringify([suite], null, 2))
+  fs.writeFileSync(markdownPath, markdown.renderCompareAllSummary(suite))
+  suite.jsonPath = jsonPath
+  suite.markdownPath = markdownPath
+  return [suite]
+}
+
 module.exports = {
   buildCompareRegionArgs: buildCompareRegionArgs,
   argsToShellCommand: argsToShellCommand,
   planCompareSection: planCompareSection,
   compareSection: compareSection,
   comparePage: comparePage,
+  compareAll: compareAll,
 }

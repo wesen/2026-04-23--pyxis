@@ -11,8 +11,20 @@ function prototypeUrl(path) {
   return DEFAULTS.prototypeBase.replace(/\/+$/, '') + '/' + String(path || '').replace(/^\/+/, '')
 }
 
+function normalizeAcceptedDifferences(config) {
+  var accepted = config.acceptedDifferences || {}
+  return accepted
+}
+
 function pageRecord(config) {
   var storyUrl = storybook.storybookIframeUrl(DEFAULTS.storybookBase, config.storyId)
+  var accepted = normalizeAcceptedDifferences(config)
+  var sections = (config.sections || []).map(function (section) {
+    var copy = {}
+    Object.keys(section).forEach(function (key) { copy[key] = section[key] })
+    copy.acceptedDifferences = copy.acceptedDifferences || accepted[copy.name] || []
+    return copy
+  })
   return {
     page: config.page,
     variant: config.variant || 'desktop',
@@ -22,8 +34,9 @@ function pageRecord(config) {
     storybookUrl: storyUrl,
     viewport: config.viewport || DEFAULTS.viewport,
     waitMs: config.waitMs || DEFAULTS.waitMs,
-    sections: config.sections || [],
+    sections: sections,
     baselineDiffs: config.baselineDiffs || {},
+    acceptedDifferences: accepted,
   }
 }
 

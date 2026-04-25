@@ -1601,3 +1601,154 @@ ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-u
 ### Technical details
 
 The page smoke currently validates Archive because it has two stable sections and the closest first-pass parity. `compare-all` should come next, after deciding whether to include all Shows sub-sections with their current broad prototype selectors.
+
+
+## Step 13: Implement compare-all and accepted-difference reporting
+
+I extended the page orchestration work into the full suite command: `pyxis pages compare-all`. The command loops over registered public pages, calls the page-level comparison/catalog workflow for each page, aggregates all section rows, classifies them with the existing policy bands, and writes a suite JSON/Markdown summary.
+
+I also added accepted-difference metadata plumbing. Page records can now define accepted differences per section, comparison rows include `acceptedDifferences`, `acceptedDifferenceCount`, and `acceptedDifferenceSummary`, and Markdown tables include an accepted-differences column. No public page accepted differences are currently registered, so the generated suite report explicitly says that none are registered. This is intentional: reporting support exists without pretending residual page diffs are accepted.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Continue with docmgr ticket:
+
+ - PYXIS-CSSVD-JS-LIB implementation beyond compare-section.                                             
+ - Implement pyxis pages compare-page using cvd.compare.region(...) in a loop.                           
+ - Implement pyxis pages compare-all.                                                                    
+ - Add catalog recording with cvd.catalog.create(...).record(comparison).                                
+ - Add accepted-difference reporting.                             
+
+---
+
+Continue task by task, commit at appropriate intervals, keep a frequent diary."
+
+**Assistant interpretation:** Finish the page/suite orchestration tasks, keep the docmgr ticket current, and commit a coherent checkpoint after validation.
+
+**Inferred user intent:** Move the CSSVD JS userland library from single-section tooling to reusable page/suite automation with review-friendly reports.
+
+**Commit (code):** Pending at the time this diary entry was written.
+
+### What I did
+
+- Added accepted-difference metadata support to:
+
+```text
+scripts/lib/registry.js
+scripts/lib/policies.js
+scripts/lib/markdown.js
+scripts/lib/compare-region.js
+```
+
+- Added compare-all orchestration to:
+
+```text
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+```
+
+- Added smoke/run scripts:
+
+```text
+scripts/10-smoke-compare-all-archive-filter.sh
+scripts/11-run-compare-all-public-pages.sh
+```
+
+- Generated suite artifacts:
+
+```text
+various/07-compare-all/archive-filter/*
+various/07-compare-all/public-pages-desktop/*
+```
+
+### Why
+
+`compare-section` and `compare-page` are useful for local tuning, but public page work needs a command that can produce one reviewable suite report for all registered pages. This also creates a natural place to report project policy and accepted-difference context.
+
+### What worked
+
+The filtered smoke passed for Archive:
+
+```text
+pageCount: 1
+sectionCount: 2
+classificationCounts: { review: 2 }
+acceptedDifferenceCount: 0
+maxChangedPercent: 7.128146453089244
+```
+
+The full public-pages run passed:
+
+```text
+pageCount: 5
+sectionCount: 13
+maxChangedPercent: 66.85658212560386
+classificationCounts:
+  major-mismatch: 5
+  tune-required: 6
+  review: 2
+acceptedDifferenceCount: 0
+```
+
+The generated suite Markdown lists all sections in descending changed-percent order and includes an accepted-differences column.
+
+### What didn't work
+
+The first compare-all smoke failed because I used:
+
+```js
+fs.mkdirSync(outDir, { recursive: true })
+```
+
+inside the css-visual-diff Goja runtime. The Goja `fs` implementation available to verbs supports the file operations we were already using, such as `readFileSync` and `writeFileSync`, but did not expose `mkdirSync`.
+
+I fixed this by making shell smoke scripts create the requested output directory and relying on `comparison.artifacts.write(...)` / catalog artifact writing for nested artifact directories.
+
+### What I learned
+
+- The userland suite should avoid assuming Node's full `fs` API is available inside css-visual-diff verbs.
+- Accepted-difference reporting should not alter classification by default. It is review context, not a magic waiver.
+- The full compare-all output exactly reproduces the earlier page-level first-pass ordering: Shows is the dominant mismatch, Archive is closest.
+
+### What was tricky to build
+
+The tricky part was preserving the right boundary between project policy and css-visual-diff measurements. The implementation now keeps measurements/artifacts from css-visual-diff, while policy bands and accepted-difference metadata live in Pyxis userland.
+
+### What warrants a second pair of eyes
+
+- Whether accepted-difference metadata should live inline in `registry.js` or move to a separate JSON sidecar as the list grows.
+- Whether `compare-all` should default to `inspect: minimal` for CI/high-volume use, leaving `rich` for authoring.
+- Whether generated `compare.md` artifacts should be ignored by `docmgr doctor`, renamed, or kept as generated css-visual-diff outputs with known numeric-prefix warnings.
+
+### What should be done in the future
+
+- Add `--mode authoring|ci` and threshold/failure behavior.
+- Add accepted-difference examples only when there is a real accepted page-level difference to document.
+- Use the suite report to guide Shows tuning.
+
+### Code review instructions
+
+Review:
+
+```text
+scripts/lib/registry.js
+scripts/lib/policies.js
+scripts/lib/markdown.js
+scripts/lib/compare-region.js
+scripts/verbs/pyxis-pages.js
+scripts/10-smoke-compare-all-archive-filter.sh
+scripts/11-run-compare-all-public-pages.sh
+various/07-compare-all/public-pages-desktop/01-suite-summary.md
+```
+
+Validate filtered smoke:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/10-smoke-compare-all-archive-filter.sh
+```
+
+Validate full suite:
+
+```bash
+ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/scripts/11-run-compare-all-public-pages.sh
+```

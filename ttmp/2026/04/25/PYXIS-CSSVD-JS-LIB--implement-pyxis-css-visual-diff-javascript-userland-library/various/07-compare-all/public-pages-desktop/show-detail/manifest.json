@@ -1,0 +1,293 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: show-detail desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-25T20:03:22.728263771Z",
+  "updated_at": "2026-04-25T20:03:29.863122109Z",
+  "targets": [
+    {
+      "slug": "page",
+      "name": "show-detail page",
+      "url": "http://localhost:7070/standalone/public/detail.html",
+      "selector": "#root",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    },
+    {
+      "slug": "content",
+      "name": "show-detail content",
+      "url": "http://localhost:7070/standalone/public/detail.html",
+      "selector": "#root \u003e *",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "page",
+        "name": "show-detail page",
+        "url": "http://localhost:7070/standalone/public/detail.html",
+        "selector": "#root",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "show-detail-page",
+        "left": {
+          "name": "show-detail-page",
+          "url": "http://localhost:7070/standalone/public/detail.html",
+          "selector": "#root",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1100
+          }
+        },
+        "right": {
+          "name": "show-detail-page",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "selector": "[data-story-frame='pyxis-page-shell']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1460
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1343200,
+          "changedPixels": 248871,
+          "changedPercent": 18.528216200119118,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1460,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1100
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1460
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 360
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAbout← All showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedTicket№ 0214-A$10 – $15sliding. cash or card at door.Reserve ticket →Fri · Feb 14 · 2026 · 9PMRedroom InfernoA Dusknight residency. A kink, electronica \u0026 queer music party — the room turns red, the floor turns into cinder, and we don't stop 'til dawn.Doors9:00 PMAge21+Door$15Lineup9:00Doors9:45sable witchopener · dj set10:45RONElive · hardware12:00DJ VEILEDheadline · dj set2:00Closeno photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "ppxisShowsArchiveBook usAbout← All showsFri, May 2, 2025 · 8:00 PM doors · 9:00 PM showBurial HexCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Doors8:00 PMAge21+Door$12 adv / $15 doorAbout the showCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Lineup9:00 PMBurial Hexheadline · dj setTicket№ 0214-A$12 adv / $15 door21+ · Darkwave / Ritual AmbientReserve ticket →no photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.the space150 standing · 80 seatedppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(0, 0, 0)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "id",
+            "left": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/page/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T20:03:28.122892672Z"
+    },
+    {
+      "target": {
+        "slug": "content",
+        "name": "show-detail content",
+        "url": "http://localhost:7070/standalone/public/detail.html",
+        "selector": "#root \u003e *",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "show-detail-content",
+        "left": {
+          "name": "show-detail-content",
+          "url": "http://localhost:7070/standalone/public/detail.html",
+          "selector": "#root \u003e *",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1100
+          }
+        },
+        "right": {
+          "name": "show-detail-content",
+          "url": "http://localhost:6007/iframe.html?id=public-site-pages--show-detail-desktop\u0026viewMode=story",
+          "selector": "[data-page='show-detail']",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 871.90625
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 1012000,
+          "changedPixels": 247583,
+          "changedPercent": 24.464723320158104,
+          "normalizedWidth": 920,
+          "normalizedHeight": 1100,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 920,
+            "height": 1100
+          },
+          "right": {
+            "x": 0,
+            "y": 61,
+            "width": 920,
+            "height": 871.90625
+          },
+          "delta": {
+            "x": 0,
+            "y": 61,
+            "width": 0,
+            "height": -228.09375
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "ppxisShowsArchiveBook usAbout← All showsA Dusknight residency at ppxisRedroom InfernoA Kink · Electronica · Queer Music Party♡Feb. 14th, 202625 Manton Ave, Providence RI21+ · tickets available online ($10 – $15)No Photography · or · Video Recording · AllowedTicket№ 0214-A$10 – $15sliding. cash or card at door.Reserve ticket →Fri · Feb 14 · 2026 · 9PMRedroom InfernoA Dusknight residency. A kink, electronica \u0026 queer music party — the room turns red, the floor turns into cinder, and we don't stop 'til dawn.Doors9:00 PMAge21+Door$15Lineup9:00Doors9:45sable witchopener · dj set10:45RONElive · hardware12:00DJ VEILEDheadline · dj set2:00Closeno photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.ppxisa music artist space25 Manton Ave, Providence RI 02909InstagramDiscordMailing list",
+          "right": "← All showsFri, May 2, 2025 · 8:00 PM doors · 9:00 PM showBurial HexCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Doors8:00 PMAge21+Door$12 adv / $15 doorAbout the showCole Coonce's long-running ritual electronics project. Heavy drones, processed vocals, and an immersive ceremony-like performance. Support TBA.Lineup9:00 PMBurial Hexheadline · dj setTicket№ 0214-A$12 adv / $15 door21+ · Darkwave / Ritual AmbientReserve ticket →no photo / no video. take care of each other. we honor request-for-removal and safer-space principles. if anything feels off, find a staff member with a red armband.the space150 standing · 80 seated"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(31, 30, 28)",
+            "right": "rgb(26, 26, 24)",
+            "changed": true
+          },
+          {
+            "name": "font-family",
+            "left": "Inter, sans-serif",
+            "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "16px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "normal",
+            "right": "21px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "0px",
+            "right": "72px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "pyxis-public-page pyxis-show-detail-page",
+            "changed": true
+          },
+          {
+            "name": "data-page",
+            "right": "show-detail",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-CSSVD-JS-LIB--implement-pyxis-css-visual-diff-javascript-userland-library/various/07-compare-all/public-pages-desktop/show-detail/artifacts/content/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-25T20:03:29.863120877Z"
+    }
+  ],
+  "summary": {
+    "target_count": 2,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 2,
+    "failure_count": 0,
+    "artifact_count": 4
+  }
+}

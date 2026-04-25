@@ -51,3 +51,4 @@ Created clean maintainer follow-up request document containing only current desi
 
 - Updated Pyxis compare-section to use newly landed `locator.waitFor(...)` and stable `comparison.artifacts.write(...)` paths; rewrote the clean maintainer request document to remove landed beta ergonomics requests and keep only remaining deferred/policy-oriented asks.
 - Implemented `pyxis pages compare-page <page>` using `cvd.compare.region(...)` across registered sections and `cvd.catalog.create(...).record(...)`; added Archive page smoke producing two section comparisons plus catalog manifest/index.
+- Implemented `pyxis pages compare-all` with per-page catalogs, aggregate JSON/Markdown suite summary, policy classification counts, and accepted-difference reporting; validated all 5 desktop public pages / 13 sections.
