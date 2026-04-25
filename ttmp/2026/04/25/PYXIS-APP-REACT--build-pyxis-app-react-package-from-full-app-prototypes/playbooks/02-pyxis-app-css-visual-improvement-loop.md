@@ -40,6 +40,25 @@ The goal is: **all information needed, and no more, while preserving full eviden
 
 Once individual crops are close and the comparison is in the `review` band, stop and document accepted differences if the remaining diff is mostly typography anti-aliasing, font rendering, gradients, shadows, or subtle browser rendering drift. Pixel diffs are evidence for decisions, not a requirement to make every screenshot mathematically identical.
 
+## Keep the theme cohesive
+
+Do not tune each component into a one-off clone of its current prototype crop. Use the visual loop to discover shared theme decisions, then encode those decisions in reusable tokens and variables.
+
+Preferred order:
+
+1. Fix selector/crop/data mismatches first.
+2. Identify whether a visual difference is component-specific or theme-wide.
+3. If it is theme-wide, update shared app tokens in `web/packages/pyxis-app/src/styles/app-tokens.css` or existing package tokens instead of patching one component.
+4. If a component needs an override, expose a component-local CSS variable with a sensible default from the shared tokens.
+5. Avoid hard-coded hex/spacing/font values in individual components unless they are temporary parity evidence; document those as follow-up token-hardening work.
+6. Re-run a small component and one page section after token changes to make sure the theme still holds together.
+
+Examples:
+
+- Surface, border, shadow, radius, accent/status colors, body/display font, and base text sizes should come from shared variables.
+- `MetricCard`, `TodayShowCard`, panels, rows, and shell surfaces should share the same surface/border/radius/shadow vocabulary.
+- Do not make `MetricCard` look correct by introducing values that make dashboard panels or booking cards drift away from the same design language.
+
 ## Required loop order
 
 1. Verify prototype and React selectors exist.
@@ -69,6 +88,24 @@ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-pro
 ```
 
 Both scripts print compact summaries and preserve full artifacts under numbered `various/` folders.
+
+## Proven artifact examples
+
+MetricCard component proof:
+
+```text
+various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/left_region.png
+various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/right_region.png
+various/05-css-loop-metric-card/run-05-final/metric-card/artifacts/component/diff_only.png
+```
+
+Dashboard metrics section proof:
+
+```text
+various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/left_region.png
+various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/right_region.png
+various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/diff_only.png
+```
 
 ## Failure modes
 

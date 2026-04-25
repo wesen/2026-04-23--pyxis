@@ -343,6 +343,23 @@ prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
 rm -rf prototype-design/visual-comparisons/cssvd-js
 ```
 
+### Pyxis app CSS visual loop
+
+For the responsive staff app (`web/packages/pyxis-app`), use the ticket runbook while the app package is being built:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
+```
+
+Key additions from that loop:
+
+- use JS/YAML specs and `pyxis pages compare-spec`, not native `*.css-visual-diff.yml` configs,
+- prefer `--summary` operator output for repeated runs, but keep full JSON/artifacts on disk,
+- inspect individual `left_region.png` and `right_region.png` with the `read` tool before trusting numbers,
+- inspect `diff_only.png` once crops are close,
+- keep CSS changes cohesive by promoting shared visual decisions to app/theme tokens instead of tuning every component independently,
+- stop at review-band when crops are close and remaining differences are typography, anti-aliasing, gradients, shadows, or similar rendering drift.
+
 ### Updating the parity map after CSS extraction
 
 For extracted public components, add or update a `styleArchitecture` object in:

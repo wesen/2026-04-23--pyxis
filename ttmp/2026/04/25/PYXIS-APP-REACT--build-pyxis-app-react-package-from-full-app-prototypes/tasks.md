@@ -519,7 +519,7 @@ Run at least two iterations:
 - [x] The final section result is either accepted/review-band or explicitly deferred with evidence.
 - [x] Do not chase perfection when individual crops are close and remaining differences are plausibly typography, anti-aliasing, or subtle rendering drift.
 - [x] The workflow is documented enough that Phase 7 can reuse it for the full Dashboard page.
-- [ ] Commit: `Prove pyxis app dashboard section visual loop`.
+- [x] Commit: `Prove pyxis app dashboard section visual loop`.
 
 ---
 
@@ -528,7 +528,7 @@ Run at least two iterations:
 Goal: turn the proven loop into a repeatable short runbook before scaling to pages.
 
 - [x] Add a ticket document `playbooks/02-pyxis-app-css-visual-improvement-loop.md` or a focused section in the existing intern playbook.
-- [ ] Document the required order:
+- [x] Document the required order:
   1. selector verification,
   2. individual crop inspection with the `read` tool (`left_region.png`, then `right_region.png`),
   3. pixel-diff artifact review (`diff_only.png`) once crops are close,
@@ -538,7 +538,7 @@ Goal: turn the proven loop into a repeatable short runbook before scaling to pag
   7. diary/changelog update,
   8. commit.
 - [x] Include exact commands for MetricCard and dashboard metrics.
-- [ ] Include screenshots/artifact paths from the successful loop.
+- [x] Include screenshots/artifact paths from the successful loop.
 - [x] Document failure modes:
   - [x] full-page-vs-component crop mismatch,
   - [x] Storybook wrapper padding changing crop bounds,
@@ -546,8 +546,8 @@ Goal: turn the proven loop into a repeatable short runbook before scaling to pag
   - [x] mock data mismatch,
   - [x] missing prototype selectors,
   - [x] generated artifacts accidentally landing in active source paths.
-- [ ] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` with a short pointer to the pyxis-app loop once it is proven.
-- [ ] Commit: `Document pyxis app css visual improvement loop`.
+- [x] Update `docs/playbooks/05-bottom-up-component-visual-parity.md` with a short pointer to the pyxis-app loop once it is proven.
+- [x] Commit: `Document pyxis app css visual improvement loop`.
 
 ---
 

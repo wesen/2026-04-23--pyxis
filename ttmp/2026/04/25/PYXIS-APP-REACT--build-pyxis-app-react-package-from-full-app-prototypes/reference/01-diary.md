@@ -889,3 +889,73 @@ Run summary:
 The user clarified that we do not need to chase perfect pixel parity, especially when individual crops look close and the remaining differences are likely typography, anti-aliasing, gradients, shadows, or other browser rendering details. I added this rule to the Phase 6B acceptance criteria and to the CSS visual improvement loop runbook.
 
 For the dashboard metrics section, the final `run-08-final` crops are close enough for the proof phase: the content, layout, bounds, and data line up, and the remaining `7.4449%` review-band diff is mostly text/edge pixels visible in `diff_only.png`. This is a good point to stop and proceed rather than overfit component CSS to one screenshot.
+
+## Step 9: Finish the CSS visual loop runbook and cohesive-theme guidance
+
+I completed Phase 6C by turning the proven MetricCard and dashboard metrics loops into a reusable runbook and linking it from the central bottom-up visual parity playbook. I also added a theme-cohesion rule so future tuning does not make each component a one-off prototype clone.
+
+### Prompt Context
+
+**User prompt (verbatim):** "do 6C, we're nearing the end of the session. also try to make sure we are using a cohesive theme and should reuse variables across components instead of tuning components individually."
+
+**Assistant interpretation:** Finish the runbook phase, add a pointer from the central visual-parity docs, and make explicit that future CSS tuning should promote shared decisions into variables/tokens rather than hard-coding per-component fixes.
+
+**Inferred user intent:** Leave the next session with a durable process and avoid style fragmentation as the app grows.
+
+**Commit (docs):** this commit — "Document pyxis app css visual improvement loop"
+
+### What I did
+
+- Added cohesive-theme guidance to `playbooks/02-pyxis-app-css-visual-improvement-loop.md`.
+- Added proven artifact paths for MetricCard and dashboard metrics.
+- Added a pointer from `docs/playbooks/05-bottom-up-component-visual-parity.md` to the pyxis-app runbook.
+- Marked Phase 6C tasks complete except for the final commit.
+
+### Why
+
+- We need a repeatable visual loop before moving into larger page work.
+- The app should converge on shared design tokens for surfaces, borders, shadows, radii, typography, and status colors.
+- Visual diffs should guide token/theme decisions, not encourage local overfitting.
+
+### What worked
+
+- The runbook now captures the user’s preferences for compact output, individual image inspection, pixel-diff usage, stop-when-close policy, and cohesive theme variables.
+- The central playbook now points future developers to the ticket-specific pyxis-app loop.
+
+### What didn't work
+
+- N/A; this was a documentation/runbook update.
+
+### What I learned
+
+- The visual loop needs two parallel feedback paths: UI parity feedback and tooling-output feedback.
+- Theme cohesion should be treated as part of visual parity, not a later cleanup task.
+
+### What was tricky to build
+
+- The runbook had to balance two constraints that can conflict: preserving exact prototype evidence and avoiding component-specific hard-coded tuning. The guidance now says to fix crop/data issues first, then decide whether a difference is component-specific or theme-wide before changing CSS.
+
+### What warrants a second pair of eyes
+
+- Review whether current `MetricCard` hard-coded values should be promoted into `app-tokens.css` before Phase 7.
+- Review whether the `--summary` output has the right amount of information or should include a smaller/larger CSS diff subset.
+
+### What should be done in the future
+
+- Before tuning Dashboard as a whole, consider a short token-hardening pass for app surfaces/radii/shadows/status colors.
+- Apply token changes across a small component and page-section comparison to ensure the theme remains cohesive.
+
+### Code review instructions
+
+- Review:
+  - `ttmp/.../playbooks/02-pyxis-app-css-visual-improvement-loop.md`,
+  - `docs/playbooks/05-bottom-up-component-visual-parity.md`,
+  - `ttmp/.../tasks.md` Phase 6C.
+
+### Technical details
+
+The runbook now explicitly says:
+
+```text
+Do not tune each component into a one-off clone of its current prototype crop. Use the visual loop to discover shared theme decisions, then encode those decisions in reusable tokens and variables.
+```
