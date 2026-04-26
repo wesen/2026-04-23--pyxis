@@ -15,16 +15,16 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-type MigrateCommand struct {
+type SeedCommand struct {
 	*cmds.CommandDescription
 }
 
-type MigrateSettings struct {
-	DBURL  string `glazed:"db-url"`
-	Action string `glazed:"action"`
+type SeedSettings struct {
+	DBURL    string `glazed:"db-url"`
+	Fixtures string `glazed:"fixtures"`
 }
 
-func NewMigrateCommand() (*MigrateCommand, error) {
+func NewSeedCommand() (*SeedCommand, error) {
 	glazedSection, err := settings.NewGlazedSchema()
 	if err != nil {
 		return nil, err
@@ -36,13 +36,9 @@ func NewMigrateCommand() (*MigrateCommand, error) {
 	}
 
 	cmdDesc := cmds.NewCommandDescription(
-		"migrate",
-		cmds.WithShort("Database migrations"),
-		cmds.WithLong(`Run database migrations up or down.
-
-Examples:
-  pyxis migrate up
-  pyxis migrate down`),
+		"seed",
+		cmds.WithShort("Seed the database with initial data"),
+		cmds.WithLong(`Populate the database with sample shows, artists, and submissions for local development.`),
 		cmds.WithFlags(
 			fields.New(
 				"db-url",
@@ -50,28 +46,25 @@ Examples:
 				fields.WithDefault("postgres://pyxis:pyxis@localhost:5433/pyxis?sslmode=disable"),
 				fields.WithHelp("PostgreSQL connection string"),
 			),
-		),
-		cmds.WithArguments(
 			fields.New(
-				"action",
+				"fixtures",
 				fields.TypeString,
-				fields.WithDefault("up"),
-				fields.WithHelp("Migration action: up or down"),
-				fields.WithIsArgument(true),
+				fields.WithDefault("fixtures/dev.yaml"),
+				fields.WithHelp("Path to fixtures file"),
 			),
 		),
 		cmds.WithSections(glazedSection, loggingSection),
 	)
 
-	return &MigrateCommand{CommandDescription: cmdDesc}, nil
+	return &SeedCommand{CommandDescription: cmdDesc}, nil
 }
 
-func (c *MigrateCommand) RunIntoGlazeProcessor(
+func (c *SeedCommand) RunIntoGlazeProcessor(
 	ctx context.Context,
 	vals *values.Values,
 	gp middlewares.Processor,
 ) error {
-	s := &MigrateSettings{}
+	s := &SeedSettings{}
 	if err := vals.DecodeSectionInto(schema.DefaultSlug, s); err != nil {
 		return err
 	}
@@ -82,21 +75,7 @@ func (c *MigrateCommand) RunIntoGlazeProcessor(
 	}
 	defer database.Close()
 
-	switch s.Action {
-	case "up":
-		if err := database.MigrateUp(); err != nil {
-			return fmt.Errorf("migrate up: %w", err)
-		}
-		fmt.Println("Migrations applied successfully")
-	case "down":
-		if err := database.MigrateDown(); err != nil {
-			return fmt.Errorf("migrate down: %w", err)
-		}
-		fmt.Println("Migration rolled back successfully")
-	default:
-		return fmt.Errorf("unknown action: %s (use 'up' or 'down')", s.Action)
-	}
-
-	log.Info().Str("action", s.Action).Msg("migrate command completed")
+	log.Info().Str("fixtures", s.Fixtures).Msg("seed command (not yet implemented)")
+	fmt.Println("Seed would load fixtures from", s.Fixtures)
 	return nil
 }

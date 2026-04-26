@@ -17,8 +17,14 @@ func NewCommandGroup() ([]glazedcmds.Command, error) {
 		return nil, err
 	}
 
+	seedCmd, err := pyxiscmds.NewSeedCommand()
+	if err != nil {
+		return nil, err
+	}
+
 	return []glazedcmds.Command{
 		serveCmd,
 		migrateCmd,
+		seedCmd,
 	}, nil
 }
