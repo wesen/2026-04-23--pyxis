@@ -3,14 +3,19 @@
 .app-panel > header span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 13px; font-weight: 500; }
 .app-panel h2 { margin: 0; font-family: var(--font-body, Inter, system-ui, sans-serif); font-weight: 800; font-size: 14px; }
 .app-dashboard-mobile-header, .app-dashboard-mobile-copy, .app-dashboard-mobile-attention { display: none; }
-.app-dashboard-hero { position: relative; overflow: hidden; min-height: 142px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; padding: 28px 26px; border-radius: var(--app-radius-md); background: var(--app-ink); color: var(--app-on-dark); }
-.app-dashboard-hero span { color: var(--app-on-dark-muted); text-transform: uppercase; letter-spacing: .11em; font-size: 11px; font-weight: 800; }
-.app-dashboard-hero h2 { margin: 8px 0 6px; color: var(--app-on-dark); font-family: var(--font-display, Georgia, serif); font-size: 40px; font-weight: 500; line-height: .95; }
+.app-dashboard-hero { position: relative; box-sizing: border-box; overflow: hidden; min-height: 142px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; padding: 26px; border-radius: var(--app-radius-md); background: #1a1a18; color: var(--app-on-dark); }
+.app-dashboard-hero > div:first-child { flex: 1; position: relative; z-index: 1; }
+.app-dashboard-hero > div:first-child > span { color: var(--app-on-dark-muted); text-transform: uppercase; letter-spacing: .11em; font-size: 11px; font-weight: 800; }
+.app-dashboard-hero h2 { margin: 8px 0 6px; color: var(--app-on-dark); font-family: var(--font-display, Georgia, serif); font-size: 40px; font-weight: 500; line-height: 1.05; }
 .app-dashboard-hero p { margin: 0; color: var(--app-on-dark-muted); }
-.app-dashboard-hero i::before { content: '·'; margin: 0 10px; font-style: normal; }
-.app-dashboard-hero-actions { position: relative; z-index: 1; display: flex; gap: 10px; }
-.app-dashboard-hero-actions .pyxis-button { --button-bg: transparent; --button-color: var(--app-on-dark); --button-border: rgba(255, 255, 255, .34); }
-.app-dashboard-hero-mark { position: absolute; right: 6px; top: -4px; color: rgba(255,255,255,.11); font-size: 170px; line-height: 1; }
+.app-dashboard-hero-desktop { display: flex; gap: 16px; align-items: center; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.7); }
+.app-dashboard-hero-actions { position: relative; z-index: 1; display: flex; gap: 8px; }
+.app-dashboard-hero-actions .pyxis-btn { border-radius: var(--app-radius-sm) !important; font-size: 13px !important; font-weight: 500 !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-discord { background: rgba(255,255,255,.08) !important; color: var(--app-on-dark) !important; border-color: rgba(255,255,255,.2) !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-edit { background: var(--app-on-dark) !important; color: var(--app-ink) !important; border-color: var(--app-on-dark) !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-edit [data-pyxis-part='label'], .app-dashboard-hero-actions .app-dashboard-hero-edit svg { color: var(--app-ink) !important; }
+.app-dashboard-hero-mark { position: absolute; right: -60px; top: -80px; color: rgba(255,255,255,.1); opacity: .9; line-height: 1; }
+.app-dashboard-hero-mark svg { width: 300px; height: 300px; color: currentColor; stroke: currentColor; }
 .app-dashboard-hero-mobile { display: none; }
 .app-metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
 .app-metrics-grid.compact { grid-template-columns: repeat(3, minmax(0,1fr)); margin-bottom: 16px; }

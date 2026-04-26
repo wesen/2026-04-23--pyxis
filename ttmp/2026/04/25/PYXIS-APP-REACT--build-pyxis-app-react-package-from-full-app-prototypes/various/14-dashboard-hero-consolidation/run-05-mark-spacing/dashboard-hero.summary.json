@@ -1,0 +1,86 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/01-suite-summary.md",
+  "maxChangedPercent": 14.75811390079608,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/compare.md",
+      "attributeChangeCount": 1,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-dashboard-hero"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0.75
+        },
+        "left": {
+          "height": 142,
+          "width": 966,
+          "x": 247,
+          "y": 137.390625
+        },
+        "normalizedHeight": 142,
+        "normalizedWidth": 966,
+        "right": {
+          "height": 142,
+          "width": 966,
+          "x": 247,
+          "y": 138.140625
+        }
+      },
+      "changedPercent": 14.75811390079608,
+      "changedPixels": 20244,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-hero\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-05-mark-spacing/dashboard/artifacts/hero/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-hero\"]",
+      "section": "hero",
+      "styleChangeCount": 2,
+      "styleDiffs": [
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorView on DiscordEdit show",
+        "right": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on DiscordEdit show"
+      },
+      "threshold": 30,
+      "totalPixels": 137172,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

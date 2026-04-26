@@ -5,6 +5,7 @@ __package__({
 })
 
 var lib = require('../lib/index.js')
+var cvd = require('css-visual-diff')
 var fs = require('fs')
 
 function listTargets(values) {
@@ -198,6 +199,127 @@ function boundsSummaryFromRow(row) {
     normalizedHeight: row.normalizedHeight,
   }
 }
+
+function splitElements(elements) {
+  return String(elements || '').split(',').map(function (s) { return s.trim() }).filter(Boolean)
+}
+
+function findSpecTarget(spec, page, variant) {
+  var defaults = specDefaults(spec)
+  var targets = lib.registry.targetsFromSpec(spec || {})
+  for (var i = 0; i < targets.length; i++) {
+    if (targets[i].page === page && (!variant || targets[i].variant === variant || targets[i].variant === (defaults.variant || 'desktop'))) return targets[i]
+  }
+  return null
+}
+
+function findTargetSection(target, sectionName) {
+  var sections = (target && target.sections) || []
+  for (var i = 0; i < sections.length; i++) {
+    if (sections[i].name === sectionName) return sections[i]
+  }
+  return null
+}
+
+function scopeElementSelector(sectionSelector, elementSelector) {
+  var element = String(elementSelector || '').trim()
+  if (!element) return sectionSelector
+  if (element.indexOf('&') === 0) return element.replace(/^&/, sectionSelector)
+  if (element.indexOf('[data-section=') >= 0) return element
+  if (element.indexOf('html') === 0 || element.indexOf('body') === 0) return element
+  return sectionSelector + ' ' + element
+}
+
+async function inspectSelectorOnPage(page, selector, props) {
+  var locator = page.locator(selector)
+  var status = await locator.status()
+  var row = {
+    selector: selector,
+    exists: !!status.exists,
+    visible: !!status.visible,
+    bounds: status.bounds || null,
+    text: '',
+    styles: {},
+    attributes: {},
+    error: status.error || '',
+  }
+  if (row.exists) {
+    try { row.text = await locator.text({ normalizeWhitespace: true, trim: true }) } catch (err) { row.text = '' }
+    try { row.bounds = await locator.bounds() } catch (err2) {}
+    try { row.styles = await locator.computedStyle(props) } catch (err3) { row.error = String(err3 && err3.message || err3) }
+    try { row.attributes = await locator.attributes(['id', 'class', 'data-page', 'data-section', 'data-element', 'data-pyxis-component', 'data-pyxis-part', 'style']) } catch (err4) {}
+  }
+  return row
+}
+
+function diffStyleMaps(left, right) {
+  var keys = {}
+  Object.keys(left || {}).forEach(function (k) { keys[k] = true })
+  Object.keys(right || {}).forEach(function (k) { keys[k] = true })
+  return Object.keys(keys).map(function (key) {
+    return { property: key, left: left && left[key], right: right && right[key], changed: String(left && left[key]) !== String(right && right[key]) }
+  })
+}
+
+async function inspectSpec(spec, values) {
+  var defaults = specDefaults(spec)
+  var variant = values.variant || defaults.variant || 'desktop'
+  var target = findSpecTarget(spec, values.page || '', variant)
+  if (!target) throw new Error('unknown page in spec: ' + (values.page || ''))
+  var section = findTargetSection(target, values.section || '')
+  if (!section) throw new Error('unknown section in spec: ' + target.page + '/' + (values.section || ''))
+  var props = lib.styles.propsForPreset(values.stylePreset || 'typography')
+  var elements = splitElements(values.elements || '')
+  if (!elements.length) elements = ['&']
+  var browser = await cvd.browser()
+  var rows = []
+  try {
+    var originalPage = await browser.page(target.prototypeUrl, { viewport: target.viewport, waitMs: target.waitMs, name: target.page + '-inspect-original' })
+    var reactPage = await browser.page(target.storybookUrl, { viewport: target.viewport, waitMs: target.waitMs, name: target.page + '-inspect-react' })
+    for (var i = 0; i < elements.length; i++) {
+      var element = elements[i]
+      var leftSelector = scopeElementSelector(section.original, element)
+      var rightSelector = scopeElementSelector(section.react, element)
+      var left = await inspectSelectorOnPage(originalPage, leftSelector, props)
+      var right = await inspectSelectorOnPage(reactPage, rightSelector, props)
+      rows.push({
+        page: target.page,
+        variant: target.variant,
+        section: section.name,
+        element: element,
+        stylePreset: values.stylePreset || 'typography',
+        leftSelector: leftSelector,
+        rightSelector: rightSelector,
+        left: left,
+        right: right,
+        textChanged: String(left.text || '') !== String(right.text || ''),
+        boundsChanged: JSON.stringify(left.bounds || null) !== JSON.stringify(right.bounds || null),
+        styleDiffs: diffStyleMaps(left.styles, right.styles).filter(function (d) { return values.summary ? d.changed : true }),
+      })
+    }
+    await originalPage.close()
+    await reactPage.close()
+  } finally {
+    await browser.close()
+  }
+  return rows
+}
+
+__verb__('inspectSpec', {
+  parents: ['pyxis', 'pages'],
+  short: 'Inspect nested elements from a JSON/YAML visual spec on prototype and React sides',
+  output: 'structured',
+  fields: {
+    spec: { argument: true, type: 'objectFromFile', required: true, help: 'JSON/YAML visual spec with pages and sections' },
+    values: { bind: 'all' },
+    page: { type: 'string', required: true, help: 'Page slug in the spec' },
+    section: { type: 'string', required: true, help: 'Section name in the spec' },
+    elements: { type: 'string', default: '&', help: 'Comma-separated subelement selectors; use & for section root. Relative selectors are scoped under the section selector.' },
+    stylePreset: { type: 'choice', choices: ['typography', 'layout', 'surface', 'spacing', 'pageShell'], default: 'typography', help: 'Style property preset to extract' },
+    variant: { type: 'string', default: '', help: 'Optional variant override; defaults to spec/default variant' },
+    summary: { type: 'bool', default: false, help: 'Only include changed style properties' },
+  },
+})
 
 function summarizeCompareSpec(result) {
   return (result || []).map(function (suite) {

@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-02-actions-height/dashboard/artifacts/hero/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-02-actions-height/dashboard/artifacts/hero/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-dashboard-hero"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 2.59375,
+      "width": 0,
+      "x": 0,
+      "y": 0.75
+    },
+    "left": {
+      "height": 142,
+      "width": 966,
+      "x": 247,
+      "y": 137.390625
+    },
+    "right": {
+      "height": 144.59375,
+      "width": 966,
+      "x": 247,
+      "y": 138.140625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 142,
+      "width": 966,
+      "x": 247,
+      "y": 137.390625
+    },
+    "exists": true,
+    "name": "dashboard-hero",
+    "selector": "[data-section=\"dashboard-hero\"]",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "dashboard-hero",
+  "pixel": {
+    "changedPercent": 16.38680659670165,
+    "changedPixels": 22953,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-02-actions-height/dashboard/artifacts/hero/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-02-actions-height/dashboard/artifacts/hero/diff_only.png",
+    "normalizedHeight": 145,
+    "normalizedWidth": 966,
+    "threshold": 30,
+    "totalPixels": 140070
+  },
+  "right": {
+    "bounds": {
+      "height": 144.59375,
+      "width": 966,
+      "x": 247,
+      "y": 138.140625
+    },
+    "exists": true,
+    "name": "dashboard-hero",
+    "selector": "[data-section=\"dashboard-hero\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorView on DiscordEdit show",
+    "right": "Next on stage · in 9 daysBurial HexFri, May 2, 2025 Doors 8:00 PM 21+ $12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on DiscordEdit show✦"
+  }
+}

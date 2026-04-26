@@ -116,7 +116,7 @@ const Tag = ({ children, color = C.ink2 }) => (
 
 /* ─────────── BUTTONS ─────────── */
 
-const Btn = ({ variant = "primary", size = "md", icon, iconRight, onClick, children, disabled, full, style }) => {
+const Btn = ({ variant = "primary", size = "md", icon, iconRight, onClick, children, disabled, full, style, ...rest }) => {
   const pads = size === "sm" ? "6px 12px" : size === "lg" ? "11px 22px" : "8px 16px";
   const fs   = size === "sm" ? 12 : 13;
   const variants = {
@@ -130,7 +130,7 @@ const Btn = ({ variant = "primary", size = "md", icon, iconRight, onClick, child
   };
   const v = variants[variant] || variants.primary;
   return (
-    <button className="px-btn" onClick={onClick} disabled={disabled} style={{
+    <button className="px-btn" onClick={onClick} disabled={disabled} {...rest} style={{
       display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7,
       background: v.bg, color: v.fg, border: `1px solid ${v.bd}`, borderRadius: R.md,
       padding: pads, fontSize: fs, fontWeight: 500, cursor: disabled ? "not-allowed" : "pointer",

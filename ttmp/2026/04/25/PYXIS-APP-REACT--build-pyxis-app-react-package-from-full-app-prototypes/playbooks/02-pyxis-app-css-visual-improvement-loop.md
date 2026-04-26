@@ -168,7 +168,7 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
 ```
 
 2. Inspect individual hero crops with `read`.
-3. If the button is wrong, inspect the button root and label typography, not just the hero root. The desired spec-aware command shape is:
+3. If the button is wrong, inspect the button root and label typography, not just the hero root. This command shape has been validated for this ticket via the `inspect-spec` verb:
 
 ```bash
 css-visual-diff verbs --repository prototype-design/visual-diff/userland \
@@ -231,14 +231,30 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
 
 ### When to improve the JS tool
 
-If you need nested CSS information more than once, do not rely on ad-hoc Playwright snippets. Add a JS userland verb/flag that:
+If you need nested CSS information more than once, do not rely on ad-hoc Playwright snippets. Add or use a JS userland verb/flag that:
 
 - accepts a spec path, page, section, and one or more element selectors,
 - resolves prototype and React URLs/selectors from the spec,
 - scopes element selectors under the section selector unless an absolute selector is requested,
-- supports `--stylePreset typography|layout|surface|spacing|debug`,
+- supports `--stylePreset typography|layout|surface|spacing|pageShell`,
 - returns compact rows with text, bounds, styles, and attributes,
-- writes full JSON under the ticket artifact folder.
+- writes full JSON under the ticket artifact folder when the output is too large for the terminal.
+
+This is now implemented as `pyxis pages inspect-spec`. It accepts relative subelement selectors and `&` for the section root. Example validation command:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-discord-action"],[data-element="hero-date-line"],[data-element="hero-date"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+A useful pattern is to run `typography` first, then `layout` only if typography matches but the crop is still off. In the Dashboard Hero example, `inspect-spec` showed the `View on Discord` button typography matched after tuning, while `layout` showed the action group and date-line x/y/bounds differences that still explained residual pixel drift.
 
 This keeps the workflow reproducible and diary-friendly.
 

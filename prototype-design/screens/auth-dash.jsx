@@ -138,17 +138,17 @@ function DashboardScreen() {
         <div style={{ position: "absolute", right: -60, top: -60, opacity: .1 }}><PyxisMark size={300} color="#fff" /></div>
         <div style={{ flex: 1, position: "relative" }}>
           <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: ".1em", color: "rgba(255,255,255,.6)", marginBottom: 6, fontWeight: 600 }}>Next on stage · in {daysAway} days</div>
-          <div className="px-serif" style={{ fontSize: 40, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 6, lineHeight: 1.05 }}>{next.artist}</div>
-          <div style={{ fontSize: 13, color: "rgba(255,255,255,.7)", display: "flex", gap: 16 }}>
-            <span>{U.fmtDate(next.date)}</span>
-            <span>Doors {next.doors}</span>
-            <span>{next.age}</span>
-            <span>{next.price}</span>
+          <div className="px-serif" data-element="hero-artist" style={{ fontSize: 40, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 6, lineHeight: 1.05 }}>{next.artist}</div>
+          <div data-element="hero-date-line" style={{ fontSize: 13, color: "rgba(255,255,255,.7)", display: "flex", gap: 16 }}>
+            <span data-element="hero-date">{U.fmtDate(next.date)}</span>
+            <span data-element="hero-doors">Doors {next.doors}</span>
+            <span data-element="hero-age">{next.age}</span>
+            <span data-element="hero-price">{next.price}</span>
           </div>
         </div>
-        <div style={{ display: "flex", gap: 8, position: "relative" }}>
-          <Btn variant="outline" icon="ext" style={{ background: "rgba(255,255,255,.08)", color: "#fff", borderColor: "rgba(255,255,255,.2)" }}>View on Discord</Btn>
-          <Btn style={{ background: "#fff", color: C.ink, borderColor: "#fff" }} icon="edit">Edit show</Btn>
+        <div data-element="hero-actions" style={{ display: "flex", gap: 8, position: "relative" }}>
+          <Btn variant="outline" icon="ext" data-element="hero-discord-action" style={{ background: "rgba(255,255,255,.08)", color: "#fff", borderColor: "rgba(255,255,255,.2)" }}>View on Discord</Btn>
+          <Btn data-element="hero-edit-action" style={{ background: "#fff", color: C.ink, borderColor: "#fff" }} icon="edit">Edit show</Btn>
         </div>
       </div>
 
