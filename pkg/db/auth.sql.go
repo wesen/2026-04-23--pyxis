@@ -79,6 +79,44 @@ func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
 	return i, err
 }
 
+const upsertDevUser = `-- name: UpsertDevUser :one
+INSERT INTO users (discord_id, discord_username, avatar_url, role, last_login_at)
+VALUES ($1, $2, $3, $4, NOW())
+ON CONFLICT (discord_id) DO UPDATE SET
+    discord_username = EXCLUDED.discord_username,
+    avatar_url = EXCLUDED.avatar_url,
+    role = EXCLUDED.role,
+    last_login_at = NOW()
+RETURNING id, discord_id, discord_username, avatar_url, role, created_at, last_login_at
+`
+
+type UpsertDevUserParams struct {
+	DiscordID       string      `json:"discordId"`
+	DiscordUsername string      `json:"discordUsername"`
+	AvatarUrl       pgtype.Text `json:"avatarUrl"`
+	Role            string      `json:"role"`
+}
+
+func (q *Queries) UpsertDevUser(ctx context.Context, arg UpsertDevUserParams) (User, error) {
+	row := q.db.QueryRow(ctx, upsertDevUser,
+		arg.DiscordID,
+		arg.DiscordUsername,
+		arg.AvatarUrl,
+		arg.Role,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.DiscordID,
+		&i.DiscordUsername,
+		&i.AvatarUrl,
+		&i.Role,
+		&i.CreatedAt,
+		&i.LastLoginAt,
+	)
+	return i, err
+}
+
 const upsertUser = `-- name: UpsertUser :one
 INSERT INTO users (discord_id, discord_username, avatar_url, role, last_login_at)
 VALUES ($1, $2, $3, 'staff', NOW())

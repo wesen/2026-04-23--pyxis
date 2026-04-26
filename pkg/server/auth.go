@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
@@ -39,6 +40,37 @@ func (s *Server) handleDiscordCallback(w http.ResponseWriter, r *http.Request) {
 	})
 
 	respondProtoJSON(w, http.StatusOK, dbUserToProto(user))
+}
+
+func (s *Server) handleDevLogin(w http.ResponseWriter, r *http.Request) {
+	if os.Getenv("PYXIS_DEV_AUTH") != "1" {
+		respondError(w, fmt.Errorf("not found"))
+		return
+	}
+
+	username := r.URL.Query().Get("username")
+	role := r.URL.Query().Get("role")
+	token, user, err := s.authService.CreateDevSession(r.Context(), username, role)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	http.SetCookie(w, &http.Cookie{
+		Name:     "session",
+		Value:    token,
+		Path:     "/",
+		HttpOnly: true,
+		Secure:   false,
+		SameSite: http.SameSiteLaxMode,
+		MaxAge:   7 * 24 * 60 * 60,
+	})
+
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.AuthSession{
+		Authenticated: true,
+		SpaceName:     "Pyxis",
+		User:          dbUserToProto(user),
+	})
 }
 
 func (s *Server) handleGetMe(w http.ResponseWriter, r *http.Request) {

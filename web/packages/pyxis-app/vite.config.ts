@@ -14,6 +14,14 @@ export default defineConfig({
     },
   },
   build: { outDir: 'dist', sourcemap: true },
-  server: { port: 3008, open: true },
+  server: {
+    port: 3008,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:8080',
+      '/auth': 'http://localhost:8080',
+      '/flyers': 'http://localhost:8080',
+    },
+  },
   preview: { port: 3008 },
 });

@@ -105,6 +105,34 @@ func (s *AuthService) ValidateSession(ctx context.Context, token string) (*db.Us
 	return &user, nil
 }
 
+// CreateDevSession creates or updates a local development user and returns a
+// session token. It is intended for explicit PYXIS_DEV_AUTH=1 workflows only.
+func (s *AuthService) CreateDevSession(ctx context.Context, username, role string) (sessionToken string, user *db.User, err error) {
+	if username == "" {
+		username = "dev-admin"
+	}
+	if role == "" {
+		role = "admin"
+	}
+
+	row, err := s.queries.UpsertDevUser(ctx, db.UpsertDevUserParams{
+		DiscordID:       "dev:" + username,
+		DiscordUsername: username,
+		AvatarUrl:       pgtype.Text{},
+		Role:            role,
+	})
+	if err != nil {
+		return "", nil, fmt.Errorf("upsert dev user: %w", err)
+	}
+
+	sessionToken, err = s.createSession(ctx, row.ID)
+	if err != nil {
+		return "", nil, fmt.Errorf("create dev session: %w", err)
+	}
+
+	return sessionToken, &row, nil
+}
+
 // Logout deletes a session.
 func (s *AuthService) Logout(ctx context.Context, token string) error {
 	return s.queries.DeleteSession(ctx, token)

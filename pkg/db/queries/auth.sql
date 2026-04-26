@@ -7,6 +7,16 @@ ON CONFLICT (discord_id) DO UPDATE SET
     last_login_at = NOW()
 RETURNING *;
 
+-- name: UpsertDevUser :one
+INSERT INTO users (discord_id, discord_username, avatar_url, role, last_login_at)
+VALUES ($1, $2, $3, $4, NOW())
+ON CONFLICT (discord_id) DO UPDATE SET
+    discord_username = EXCLUDED.discord_username,
+    avatar_url = EXCLUDED.avatar_url,
+    role = EXCLUDED.role,
+    last_login_at = NOW()
+RETURNING *;
+
 -- name: GetUser :one
 SELECT * FROM users WHERE id = $1;
 

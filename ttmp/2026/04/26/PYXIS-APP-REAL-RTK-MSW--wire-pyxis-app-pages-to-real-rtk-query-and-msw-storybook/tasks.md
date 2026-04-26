@@ -2,11 +2,12 @@
 
 ## Phase 1: Vite proxy and API base URL
 
-- [ ] Add Vite dev proxy to `web/packages/pyxis-app/vite.config.ts` for `/api`, `/auth`, and `/flyers`.
-- [ ] Add Vite dev proxy to `web/packages/pyxis-user-site/vite.config.ts` for `/api`, `/auth`, and `/flyers` if needed.
-- [ ] Change `API_BASE_URL` default in `web/packages/pyxis-app/src/api/appApi.ts` from `http://localhost:8080` to `''`.
-- [ ] Change `API_BASE_URL` default in `web/packages/pyxis-user-site/src/api/publicApi.ts` from `http://localhost:8080` to `''`.
-- [ ] Verify browser requests hit Vite origin (`localhost:3008/api/...`) and proxy to Go.
+- [x] Add Vite dev proxy to `web/packages/pyxis-app/vite.config.ts` for `/api`, `/auth`, and `/flyers`.
+- [x] Add Vite dev proxy to `web/packages/pyxis-user-site/vite.config.ts` for `/api`, `/auth`, and `/flyers` if needed.
+- [x] Change `API_BASE_URL` default in `web/packages/pyxis-app/src/api/appApi.ts` from `http://localhost:8080` to `''`.
+- [x] Change `API_BASE_URL` default in `web/packages/pyxis-user-site/src/api/publicApi.ts` from `http://localhost:8080` to `''`.
+- [x] Add explicit `PYXIS_DEV_AUTH=1` dev-login endpoint for local staff API testing.
+- [x] Verify browser requests hit Vite origin (`localhost:3008/api/...`) and proxy to Go.
 
 ## Phase 2: Staff RTK Query mutations
 
@@ -97,13 +98,13 @@
 
 ## Phase 9: Validation and handoff
 
-- [ ] `go build ./...` passes.
+- [x] `go build ./...` passes via `go test ./...` during Phase 1 validation.
 - [ ] `cd web/packages/pyxis-types && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-app && pnpm build` passes.
+- [x] `cd web/packages/pyxis-app && pnpm build` passes.
 - [ ] `cd web/packages/pyxis-components && pnpm build` passes.
 - [ ] `cd web/packages/pyxis-user-site && pnpm build` passes.
 - [ ] `cd web && pnpm build` passes.
-- [ ] Manual app test via Vite proxy passes.
-- [ ] Storybook page stories render with MSW and no backend.
-- [ ] Diary updated with commands, failures, and validation results.
-- [ ] Changelog updated.
+- [x] Manual app test via Vite proxy passes for dev-login/session/shows smoke.
+- [x] Storybook page stories build with MSW and no backend.
+- [x] Diary updated with commands, failures, and validation results.
+- [x] Changelog updated.

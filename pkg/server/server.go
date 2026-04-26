@@ -81,6 +81,8 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.HandleFunc("POST /api/public/submissions", s.handleCreateSubmission)
 
 	// Auth
+	mux.HandleFunc("POST /auth/dev-login", s.handleDevLogin)
+	mux.HandleFunc("GET /auth/dev-login", s.handleDevLogin)
 	mux.HandleFunc("GET /auth/discord/callback", s.handleDiscordCallback)
 	mux.Handle("GET /auth/me", s.requireAuth(http.HandlerFunc(s.handleGetMe)))
 	mux.Handle("POST /auth/logout", s.requireAuth(http.HandlerFunc(s.handleLogout)))

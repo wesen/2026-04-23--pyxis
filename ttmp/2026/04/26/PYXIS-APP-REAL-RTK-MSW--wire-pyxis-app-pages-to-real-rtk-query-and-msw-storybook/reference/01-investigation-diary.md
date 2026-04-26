@@ -14,16 +14,31 @@ DocType: reference
 Intent: long-term
 Owners: []
 RelatedFiles:
+    - Path: pkg/db/queries/auth.sql
+      Note: Adds UpsertDevUser query for local staff API testing.
+    - Path: pkg/server/auth.go
+      Note: Adds explicit PYXIS_DEV_AUTH-gated dev login endpoint.
+    - Path: pkg/service/auth_service.go
+      Note: Adds dev session creation using normal sessions table.
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs
       Note: Ticket helper script for scraping seeded backend responses into MSW fixture JSON.
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/tasks.md
       Note: Phased implementation checklist for intern handoff.
+    - Path: web/packages/pyxis-app/src/api/appApi.ts
+      Note: Defaults API base URL to same-origin for Vite proxy and production.
+    - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
+      Note: Changes prototype fixed-height shell into full-height app shell.
+    - Path: web/packages/pyxis-app/src/styles/global.css
+      Note: Removes component CSS imports now owned by atoms.
+    - Path: web/packages/pyxis-app/vite.config.ts
+      Note: Adds staff Vite proxy for /api
 ExternalSources: []
 Summary: Chronological investigation diary for the Pyxis app RTK Query and MSW Storybook wiring plan.
 LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 # Diary
@@ -157,3 +172,122 @@ node ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-qu
   --cookie 'session=test-session-abc' \
   --out ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/msw-seed.json
 ```
+
+## Step 2: Staff App Real Vite Proxy and Dev Auth
+
+I started applying the real-app finishing-line playbook to `pyxis-app`.
+
+### Vite proxy and same-origin API client
+
+Changed the staff app API base URL from a hard-coded backend origin to same-origin default:
+
+```ts
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? '';
+```
+
+Added Vite dev proxy entries in `web/packages/pyxis-app/vite.config.ts`:
+
+```ts
+proxy: {
+  '/api': 'http://localhost:8080',
+  '/auth': 'http://localhost:8080',
+  '/flyers': 'http://localhost:8080',
+}
+```
+
+This matches the public-site pattern: the browser calls `localhost:3008/api/...`, Vite proxies to the Go backend, and the eventual production/embedded app can call `/api/...` on the same origin.
+
+### Dev auth for real staff endpoints
+
+The staff API is protected by the `session` cookie. To test the real API without finishing Keycloak/OAuth yet, I added an explicit local-only development login endpoint:
+
+```text
+GET/POST /auth/dev-login?username=dev-admin&role=admin
+```
+
+It is only active when the backend process has:
+
+```bash
+PYXIS_DEV_AUTH=1
+```
+
+Implementation notes:
+
+- Added `UpsertDevUser` sqlc query.
+- Added `AuthService.CreateDevSession(...)`.
+- Added `Server.handleDevLogin(...)`.
+- The endpoint creates/updates a dev user, creates a normal `sessions` row, sets the normal `session` cookie, and returns a protobuf `AuthSession`.
+- If `PYXIS_DEV_AUTH` is not enabled, the endpoint returns a protobuf `NOT_FOUND` error.
+
+This keeps the production auth surface closed while giving us a reliable real staff API test path.
+
+### Real Vite smoke
+
+Restarted the development services:
+
+```bash
+tmux new-session -d -s pyxis-backend-dev 'PYXIS_DEV_AUTH=1 go run ./cmd/pyxis serve --bind :8080'
+tmux new-session -d -s pyxis-app-vite -c web 'pnpm --filter pyxis-app dev --host 0.0.0.0'
+```
+
+Verified through the Vite proxy:
+
+```bash
+curl -i http://127.0.0.1:3008/api/app/shows
+# -> 401 before login
+
+curl -i -c /tmp/pyxis-app-cookie.jar 'http://127.0.0.1:3008/auth/dev-login?username=dev-admin&role=admin'
+# -> 200 and Set-Cookie: session=...
+
+curl -i -b /tmp/pyxis-app-cookie.jar http://127.0.0.1:3008/api/app/session
+# -> 200
+
+curl -i -b /tmp/pyxis-app-cookie.jar http://127.0.0.1:3008/api/app/shows
+# -> 200, 15 shows
+```
+
+### Desktop app height issue
+
+While looking at the real staff Vite app, the app shell looked like a fixed-height prototype card: the sidebar/main background stopped around 760px and left empty page background below it.
+
+Root cause:
+
+```css
+.app-shell { height: 760px; ... border-radius: var(--app-radius-lg); }
+```
+
+That was appropriate for a captured prototype but wrong for a real app. I changed it to a full viewport application shell:
+
+```css
+.app-shell {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+}
+
+.app-sidebar {
+  min-height: 100vh;
+}
+```
+
+The main content still scrolls inside `.app-main-scroll`, but the application frame now fills the viewport.
+
+### CSS ownership cleanup for staff app globals
+
+Because we chose component-owned CSS, I removed individual `pyxis-components` atom CSS imports from `web/packages/pyxis-app/src/styles/global.css`. Shared atoms now import their own colocated CSS, so the staff app should not mask missing component CSS via globals.
+
+### Validation
+
+Passed:
+
+```bash
+go test ./...
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+### Next
+
+The next real-app step is page-state cleanup: remove `seed*` fallbacks from staff pages, add explicit loading/error/empty states, and make pages visibly reflect unauthenticated/API-error conditions instead of silently rendering mock data.

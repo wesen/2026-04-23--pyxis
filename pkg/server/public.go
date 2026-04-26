@@ -226,14 +226,14 @@ func artistToProto(artist *domain.Artist) *pyxisv1.Artist {
 
 func submissionToProto(sub *domain.Submission) *pyxisv1.Submission {
 	pb := &pyxisv1.Submission{
-		Id:          int32(sub.ID),
-		ArtistName:  sub.ArtistName,
-		Genre:       sub.Genre,
-		Links:       sub.Links,
-		TechRider:   sub.TechRider,
-		Message:     sub.Message,
-		Status:      submissionStatusFromString(sub.Status),
-		CreatedAt:   sub.CreatedAt.Format(time.RFC3339),
+		Id:         int32(sub.ID),
+		ArtistName: sub.ArtistName,
+		Genre:      sub.Genre,
+		Links:      sub.Links,
+		TechRider:  sub.TechRider,
+		Message:    sub.Message,
+		Status:     submissionStatusFromString(sub.Status),
+		CreatedAt:  sub.CreatedAt.Format(time.RFC3339),
 	}
 	if sub.ArtistID != nil {
 		pb.ArtistId = int32(*sub.ArtistID)
@@ -370,6 +370,9 @@ func respondError(w http.ResponseWriter, err error) {
 		status = http.StatusNotFound
 		code = "NOT_FOUND"
 	case message == "no rows in result set":
+		status = http.StatusNotFound
+		code = "NOT_FOUND"
+	case message == "not found":
 		status = http.StatusNotFound
 		code = "NOT_FOUND"
 	case message == "unauthenticated":
