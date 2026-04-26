@@ -1486,3 +1486,92 @@ cd web && pnpm build
 - `web/packages/pyxis-types/src/generated/proto/pyxis/v1/show_pb.ts`
 
 **Commit:** `cd725d0` — "Phase 14: Frontend enum migration — replace all string status comparisons with ShowStatus/SubmissionStatus enums"
+
+---
+
+## Step 17: Refactor StatusDot/StatusPill to Accept Proto Enums Directly
+
+The user asked why string helpers were needed at all — the answer was that `StatusDot` and `StatusPill` only accepted a `StatusTone` string union, forcing every caller to map from `ShowStatus`/`SubmissionStatus` numeric enums to strings. The fix was to make the components accept the enum directly and derive tone + label internally.
+
+### Prompt Context
+
+**User prompt (verbatim):** "why do we need the string helpers in javascript? when do we have to map to strings?"
+
+**Assistant interpretation:** The user wants to understand why `showStatusString()` and `submissionStatusString()` helpers exist, and whether they can be eliminated entirely by making `StatusDot`/`StatusPill` accept proto enums.
+
+**Inferred user intent:** Eliminate duplicated string-mapping logic across components by centralizing enum → presentation mapping inside the component layer.
+
+**Commit (code):** `4eb06bb` — "Refactor: StatusDot/StatusPill accept proto enums directly — eliminate string helpers"
+
+### What I did
+
+**`StatusDot.tsx`:**
+- Added `ProtoStatus = ShowStatus | SubmissionStatus` type
+- Added `statusToTone()` mapping function (internal, exported for reuse)
+- Added `statusToLabel()` mapping function (exported for display text)
+- Changed props to accept `tone?: StatusTone` (for string-based callers like `ActivityFeedItem`) OR `status?: ProtoStatus` (for enum callers)
+- Component resolves tone from `status` if provided, falls back to `tone`, defaults to `'neutral'`
+
+**`StatusPill.tsx`:**
+- Changed props to accept `tone?: StatusTone` OR `status?: ProtoStatus`
+- Added optional `children?: ReactNode` for label override
+- When `status` is provided, derives both tone (via `statusToTone`) and label (via `statusToLabel`)
+- When `children` is provided, uses that instead of derived label
+
+**Updated callers:**
+- `TodayShowCard.tsx`: `<StatusDot status={show.status} />` (was complex `tone={...}` expression)
+- `ShowTableRow.tsx`: `<StatusPill status={show.status} />` (was `tone={tone}>{label}</StatusPill>`)
+- `BookingCard.tsx`: `<StatusPill status={booking.status} />` (was `tone={...}>{...}</StatusPill>` in two places)
+- `ShowDetailHero.tsx`: `<StatusDot status={show.status} />` + `{statusToLabel(show.status)}` for display text
+- `BookingReviewHero.tsx`: `<StatusDot status={booking.status} />` + `{statusToLabel(booking.status)}` for display text
+
+**Deleted helpers:**
+- `showStatusString()` from `ShowTableRow.tsx`
+- `submissionStatusString()` from `BookingCard.tsx`
+- `showStatusString()` from `ShowDetailHero.tsx`
+- `submissionStatusString()` from `BookingReviewHero.tsx`
+
+**Kept `tone` prop for non-proto callers:**
+- `ActivityFeedItem.tsx`: derives tone from audit log action strings (`toneForAction`)
+- `CalendarEventChip.tsx`: uses `event.status` string from view model
+- `CalendarAgenda.tsx`: uses hardcoded `tone="confirmed"`
+
+### Why
+
+- String helpers were duplicated across 4+ files. Every new status required updates in multiple places.
+- `StatusTone` is a presentation concern (CSS class mapping). The component layer should own it, not every caller.
+- `ShowStatus`/`SubmissionStatus` are data concerns. Callers should pass data and let components handle presentation.
+
+### What worked
+
+- `StatusPill status={booking.status}` renders the correct tone + label with zero boilerplate.
+- `statusToLabel()` is exported for cases where display text is needed outside the component (ShowDetailHero, BookingReviewHero).
+- Backward compatibility: `tone` prop still works for string-based callers.
+
+### What didn't work
+
+- None — all packages build green.
+
+### What should be done in the future
+
+- Consider updating `CalendarEventChip` to use a proto enum if `CalendarEvent` becomes a proto message.
+- Consider adding `StatusDot`/`StatusPill` stories that exercise all enum values.
+
+### Code review instructions
+
+- Review `StatusDot.tsx` and `StatusPill.tsx` for the mapping logic.
+- Check that no `showStatusString` or `submissionStatusString` references remain in `pyxis-app/src/`.
+- Validate: `cd web && pnpm build` passes.
+
+### Technical details
+
+**Files modified:**
+- `web/packages/pyxis-app/src/components/atoms/StatusDot/StatusDot.tsx`
+- `web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx`
+- `web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx`
+- `web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx`
+- `web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.tsx`
+- `web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx`
+
+**Commit:** `4eb06bb` — "Refactor: StatusDot/StatusPill accept proto enums directly — eliminate string helpers"
