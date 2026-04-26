@@ -24,14 +24,20 @@ RelatedFiles:
       Note: Ticket helper script for scraping seeded backend responses into MSW fixture JSON.
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/tasks.md
       Note: Phased implementation checklist for intern handoff.
+    - Path: web/packages/pyxis-app/.storybook/preview.tsx
+      Note: Adds router initialEntries support for route-param stories.
     - Path: web/packages/pyxis-app/src/api/appApi.ts
       Note: |-
         Defaults API base URL to same-origin for Vite proxy and production.
         Adds staff RTK Query mutations with protobuf response decoding and tag invalidation.
     - Path: web/packages/pyxis-app/src/api/endpoints.ts
       Note: Adds staff mutation endpoint paths.
+    - Path: web/packages/pyxis-app/src/api/mockHandlers.ts
+      Note: Expands protobuf-shaped MSW handlers and mutation state for staff page stories.
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: Changes prototype fixed-height shell into full-height app shell.
+    - Path: web/packages/pyxis-app/src/pages
+      Note: Per-page Storybook folders with Page.stories.tsx files.
     - Path: web/packages/pyxis-app/src/pages/Pages.tsx
       Note: |-
         Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
@@ -40,6 +46,8 @@ RelatedFiles:
       Note: |-
         Adds page-state styling for loading/error/empty panels.
         Adds action error styling for failed mutations.
+    - Path: web/packages/pyxis-app/src/pages/storybook.tsx
+      Note: Shared page story helpers for fresh mock state and route-param stories.
     - Path: web/packages/pyxis-app/src/styles/global.css
       Note: Removes component CSS imports now owned by atoms.
     - Path: web/packages/pyxis-app/vite.config.ts
@@ -50,6 +58,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -494,3 +503,97 @@ This proves at least one real staff mutation path works end-to-end through Vite 
 ### Next
 
 Next steps are to wire the remaining visible actions (`announceShow`, `archiveShow`, settings update, attendance update, calendar actions where UI exists) and then harden MSW handlers for these mutations so Storybook remains deterministic.
+
+## Step 5: Page Story Split and Mutation Stories
+
+I split the monolithic staff page Storybook file into per-page folders, matching the component-system convention.
+
+### What changed
+
+Removed:
+
+```text
+web/packages/pyxis-app/src/pages/Pages.stories.tsx
+```
+
+Added one `Page.stories.tsx` per route page:
+
+```text
+web/packages/pyxis-app/src/pages/DashboardPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/CalendarPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/AuditLogPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/DiscordPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/LoginPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/SetupPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ModalShowcasePage/Page.stories.tsx
+```
+
+Added a small page-story helper:
+
+```text
+web/packages/pyxis-app/src/pages/storybook.tsx
+```
+
+It provides:
+
+```text
+renderWithFreshMockState(...)
+RoutedPage
+```
+
+The staff Storybook preview now supports route-specific initial entries:
+
+```ts
+parameters: {
+  router: { initialEntries: ['/shows/42'] }
+}
+```
+
+This lets detail page stories exercise `useParams()` with realistic route params.
+
+### Mutation stories
+
+Before this step there were no page stories that exercised RTK mutations. I added two interaction stories under the Bookings page stories:
+
+```text
+pyxis-app-pages-bookings--approve-mutation
+pyxis-app-pages-bookings--decline-mutation
+```
+
+Both use MSW-backed in-memory mock state:
+
+- assert `Awaiting review · 3`
+- click the first `Approve` or `Decline` button
+- assert the pending count changes to `Awaiting review · 2`
+
+This proves the page, RTK mutation hook, MSW handler, invalidation/refetch, and rendered UI all work together without the live backend.
+
+### MSW hardening
+
+I expanded `web/packages/pyxis-app/src/api/mockHandlers.ts` so it returns protobuf JSON via `toJson(...)`, not raw Buf message instances. It now includes handlers for the staff mutation paths that were added in the previous step, including booking approve/decline, show cancel/archive/announce, calendar hold/blocked, attendance update, settings update, and artist/settings GETs.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+Storybook index now includes per-page IDs such as:
+
+```text
+pyxis-app-pages-dashboard--desktop
+pyxis-app-pages-shows--desktop
+pyxis-app-pages-show-detail--desktop
+pyxis-app-pages-bookings--approve-mutation
+pyxis-app-pages-bookings--decline-mutation
+```

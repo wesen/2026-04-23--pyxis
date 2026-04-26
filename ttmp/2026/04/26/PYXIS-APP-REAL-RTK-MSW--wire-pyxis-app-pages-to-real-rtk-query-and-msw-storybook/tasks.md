@@ -69,14 +69,15 @@
 
 ## Phase 6: MSW Storybook hardening
 
-- [ ] Expand `web/packages/pyxis-app/src/api/mockHandlers.ts` to cover every staff GET endpoint.
-- [ ] Add MSW handlers for every mutation added in Phase 2.
-- [ ] Make MSW handlers return protobuf-shaped wrappers (`{ shows }`, `{ submissions }`, `{ error: { code, message } }`, etc.).
-- [ ] Add in-memory mutable fixture state with `resetMockState()`.
+- [x] Expand `web/packages/pyxis-app/src/api/mockHandlers.ts` to cover every staff GET endpoint.
+- [x] Add MSW handlers for every mutation added in Phase 2.
+- [x] Make MSW handlers return protobuf-shaped wrappers (`{ shows }`, `{ submissions }`, `{ error: { code, message } }`, etc.).
+- [x] Add in-memory mutable fixture state with `resetMockState()`.
 - [ ] Add story-level handlers for loading/error/empty states.
-- [ ] Add page-level stories that render actual pages using RTK Query hooks.
-- [ ] Add route-param Storybook wrappers for `/shows/:id` and `/bookings/review/:id`.
-- [ ] Confirm Storybook works without Go backend running.
+- [x] Add page-level stories that render actual pages using RTK Query hooks.
+- [x] Add route-param Storybook wrappers for `/shows/:id` and `/bookings/review/:id`.
+- [x] Confirm Storybook works without Go backend running.
+- [x] Add mutation interaction stories for booking approve/decline.
 
 ## Phase 7: Fixture scraping automation
 

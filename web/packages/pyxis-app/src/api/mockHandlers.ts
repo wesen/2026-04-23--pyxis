@@ -1,16 +1,165 @@
 import { http, HttpResponse } from 'msw';
-import { artists, attendance, auditLog, bookings, discordMappings, session, settings, shows } from './mockData';
+import {
+  create,
+  toJson,
+  ArtistListSchema,
+  ArtistSchema,
+  AttendanceLogSchema,
+  AttendanceLogListSchema,
+  AuditLogEntryListSchema,
+  AuthSessionSchema,
+  CalendarBlockedSchema,
+  CalendarHoldSchema,
+  CalendarResponseSchema,
+  SettingsSchema,
+  ShowSchema,
+  ShowListSchema,
+  ShowStatus,
+  SubmissionSchema,
+  SubmissionListSchema,
+  SubmissionStatus,
+  SuccessResponseSchema,
+} from 'pyxis-types';
+import type { AppShow, Submission } from 'pyxis-types';
+import { artists, attendance, auditLog, bookings, session, settings, shows } from './mockData';
+
+function appShowToShow(show: AppShow) {
+  return create(ShowSchema, {
+    id: show.id,
+    artist: show.artist,
+    date: show.date,
+    doorsTime: show.doors,
+    age: show.age,
+    price: show.price,
+    status: show.status,
+    genre: show.genre,
+    draw: show.draw,
+    capacity: show.capacity,
+    notes: show.notes,
+  });
+}
+
+type MockState = {
+  shows: ReturnType<typeof appShowToShow>[];
+  bookings: Submission[];
+};
+
+let state: MockState;
+
+export function resetMockState() {
+  state = {
+    shows: shows.map(appShowToShow),
+    bookings: bookings.map(cloneSubmission),
+  };
+}
+
+function cloneSubmission(booking: Submission) {
+  return create(SubmissionSchema, booking as any);
+}
+
+function ensureMockState() {
+  if (!state) {
+    state = {
+      shows: shows.map(appShowToShow),
+      bookings: bookings.map(cloneSubmission),
+    };
+  }
+  return state;
+}
+
+function successJson() {
+  return toJson(SuccessResponseSchema, create(SuccessResponseSchema, { success: true }));
+}
+
+resetMockState();
 
 export const mockHandlers = [
-  http.get('*/api/app/session', () => HttpResponse.json(session)),
-  http.get('*/api/app/shows', () => HttpResponse.json({ shows })),
-  http.get('*/api/app/shows/:id', ({ params }) => HttpResponse.json(shows.find((show) => show.id === Number(params.id)) ?? shows[0])),
-  http.get('*/api/app/bookings', () => HttpResponse.json({ submissions: bookings })),
-  http.get('*/api/app/artists', () => HttpResponse.json({ artists })),
-  http.get('*/api/app/artists/:id', ({ params }) => HttpResponse.json(artists.find((artist) => artist.id === Number(params.id)) ?? artists[0])),
-  http.get('*/api/app/calendar', () => HttpResponse.json({ holds: [], blocked: [] })),
-  http.get('*/api/app/attendance', () => HttpResponse.json({ logs: attendance })),
-  http.get('*/api/app/audit-log', () => HttpResponse.json({ entries: auditLog })),
-  http.get('*/api/app/discord', () => HttpResponse.json(discordMappings)),
-  http.get('*/api/app/settings', () => HttpResponse.json(settings)),
+  http.get('*/api/app/session', () => HttpResponse.json(toJson(AuthSessionSchema, session))),
+
+  http.get('*/api/app/shows', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows: current.shows })));
+  }),
+
+  http.get('*/api/app/shows/:id', ({ params }) => {
+    const current = ensureMockState();
+    const show = current.shows.find((candidate) => candidate.id === Number(params.id)) ?? current.shows[0];
+    return HttpResponse.json(toJson(ShowSchema, show));
+  }),
+
+  http.patch('*/api/app/shows/:id/cancel', ({ params }) => {
+    const current = ensureMockState();
+    const show = current.shows.find((candidate) => candidate.id === Number(params.id)) ?? current.shows[0];
+    const updated = create(ShowSchema, { ...show, status: ShowStatus.CANCELLED });
+    current.shows = current.shows.map((candidate) => (candidate.id === updated.id ? updated : candidate));
+    return HttpResponse.json(toJson(ShowSchema, updated));
+  }),
+
+  http.patch('*/api/app/shows/:id/archive', () => HttpResponse.json(successJson())),
+  http.post('*/api/app/shows/:id/announce', () => HttpResponse.json(successJson())),
+
+  http.get('*/api/app/bookings', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(SubmissionListSchema, create(SubmissionListSchema, { submissions: current.bookings })));
+  }),
+
+  http.patch('*/api/app/bookings/:id/approve', ({ params }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const booking = current.bookings.find((candidate) => candidate.id === id) ?? current.bookings[0];
+    current.bookings = current.bookings.map((candidate) =>
+      candidate.id === id ? create(SubmissionSchema, { ...candidate, status: SubmissionStatus.APPROVED }) : candidate
+    );
+    const show = create(ShowSchema, {
+      id: 900 + id,
+      artist: booking.artistName,
+      date: booking.preferredDate,
+      doorsTime: '8:00 PM',
+      age: '21+',
+      price: '$12',
+      status: ShowStatus.CONFIRMED,
+      genre: booking.genre,
+      draw: booking.expectedDraw,
+      capacity: 150,
+    });
+    current.shows = [...current.shows, show];
+    return HttpResponse.json(toJson(ShowSchema, show));
+  }),
+
+  http.patch('*/api/app/bookings/:id/decline', ({ params }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    current.bookings = current.bookings.map((candidate) =>
+      candidate.id === id ? create(SubmissionSchema, { ...candidate, status: SubmissionStatus.DECLINED }) : candidate
+    );
+    return HttpResponse.json(successJson());
+  }),
+
+  http.get('*/api/app/artists', () => HttpResponse.json(toJson(ArtistListSchema, create(ArtistListSchema, { artists })))),
+  http.get('*/api/app/artists/:id', ({ params }) => {
+    const artist = artists.find((candidate) => candidate.id === Number(params.id)) ?? artists[0];
+    return HttpResponse.json(toJson(ArtistSchema, artist));
+  }),
+
+  http.get('*/api/app/calendar', () =>
+    HttpResponse.json(toJson(CalendarResponseSchema, create(CalendarResponseSchema, { holds: [], blocked: [] })))
+  ),
+  http.post('*/api/app/calendar/holds', async ({ request }) => {
+    const body = await request.json() as { date?: string; label?: string };
+    const hold = create(CalendarHoldSchema, { id: 101, date: body.date ?? '2025-06-01', label: body.label ?? 'Hold' });
+    return HttpResponse.json(toJson(CalendarHoldSchema, hold), { status: 201 });
+  }),
+  http.delete('*/api/app/calendar/holds/:id', () => new HttpResponse(null, { status: 204 })),
+  http.post('*/api/app/calendar/blocked', async ({ request }) => {
+    const body = await request.json() as { date?: string; reason?: string };
+    const blocked = create(CalendarBlockedSchema, { id: 201, date: body.date ?? '2025-06-02', reason: body.reason ?? 'Closed' });
+    return HttpResponse.json(toJson(CalendarBlockedSchema, blocked), { status: 201 });
+  }),
+  http.delete('*/api/app/calendar/blocked/:id', () => new HttpResponse(null, { status: 204 })),
+
+  http.get('*/api/app/attendance', () => HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: attendance })))),
+  http.patch('*/api/app/attendance/:showId', () => HttpResponse.json(toJson(AttendanceLogSchema, attendance[0]))),
+  http.get('*/api/app/audit-log', () => HttpResponse.json(toJson(AuditLogEntryListSchema, create(AuditLogEntryListSchema, { entries: auditLog })))),
+  http.get('*/api/app/settings', () => HttpResponse.json(toJson(SettingsSchema, settings))),
+  http.patch('*/api/app/settings', async ({ request }) => HttpResponse.json(await request.json())),
 ];

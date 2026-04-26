@@ -52,3 +52,15 @@ Added staff RTK mutation surface and wired first real UI actions for booking app
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Wires booking approve/decline and show cancel UI callbacks to real mutations.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds action error styling for failed mutations.
 
+
+## 2026-04-26
+
+Split staff page stories into per-page Page.stories.tsx files and added MSW-backed mutation interaction stories for booking approve/decline.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/.storybook/preview.tsx — Adds router initialEntries support for route-param stories.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/mockHandlers.ts — Expands protobuf-shaped MSW handlers and mutation state for staff page stories.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages — Per-page Storybook folders with Page.stories.tsx files.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/storybook.tsx — Shared page story helpers for fresh mock state and route-param stories.
+
