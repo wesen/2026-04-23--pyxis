@@ -1212,6 +1212,63 @@ The user established the principle: every JSON response crossing the wire must b
 - Add missing settings fields to proto (`timezone`, `bookingEmail`, `autoArchive`, `discordPosting`, `safeSpaceRequired`)
 - Replace `StatusTone` casts with proper proto enum or string union
 
+---
+
+## Step 15: Schema Refinement — Add Missing Fields to Show + Settings
+
+**User prompt (verbatim):** "do the schema refinment."
+
+**Assistant interpretation:** The user wants the refinements noted in the previous diary entry: add `draw`/`capacity` to `Show`, expand `Settings` with missing fields, and eliminate hardcoded frontend mappings.
+
+**Commit (code):** `917b053` — "Schema refinement: add draw/capacity/notes to Show, add settings fields, migrate all mock data to create()"
+
+### What I did
+
+**Database migration:**
+- Created `000002_add_show_capacity_draw_settings_fields.up.sql`
+- Added `draw INT`, `capacity INT` to `shows` table
+- Added `timezone TEXT`, `booking_email TEXT`, `auto_archive BOOLEAN`, `discord_posting BOOLEAN`, `safe_space_required BOOLEAN` to `settings` table
+
+**Go backend:**
+- Updated `domain.Show` with `Draw`, `Capacity`, `Notes`
+- Updated `domain.Settings` with `Timezone`, `BookingEmail`, `AutoArchive`, `DiscordPosting`, `SafeSpaceRequired`
+- Updated `Show` proto: added `notes=17`, `draw=18`, `capacity=19`
+- Updated `Settings` proto: added `timezone=15`, `booking_email=16`, `auto_archive=17`, `discord_posting=18`, `safe_space_required=19`
+- Updated sqlc queries (`shows.sql`, `settings.sql`) to include new columns
+- Updated `show_repo.go` and `settings_repo.go` mappers
+- Updated `showToProto` and `settingsToProto` in `public.go`
+- Updated `protoToDomainShow` to parse new fields
+
+**Frontend:**
+- Rebuilt `pyxis-types` dist
+- Updated `appApi.ts` `getShows` mapping: uses real `show.draw` and `show.capacity` from proto
+- Updated `SettingsPanel` to use real `settings.autoArchive`, `settings.discordPosting`, `settings.safeSpaceRequired`
+- Updated mock data with realistic values for new fields
+- Migrated all remaining `pyxis-components` mock data to use `create(Schema, {...})`
+
+**Build status:**
+- `go build ./...` ✅
+- `pyxis-app` ✅
+- `pyxis-components` ✅
+- `pyxis-user-site` ✅
+- Full workspace `pnpm build` ✅
+
+### What worked
+
+- Adding columns via migration + updating sqlc queries + regenerating is a clean 3-step process
+- `create(Schema, {...})` works consistently across all packages for mock data
+
+### What didn't work / was tricky
+
+- `pyxis-components` had many story files with plain object literals for proto types. Required systematic replacement with `create()`.
+- `Show` proto field numbering: adding new fields at the end (17, 18, 19) avoids renumbering existing fields.
+
+### What should be done in the future
+
+- Replace `StatusTone` string casts with proper proto enums for show/submission status
+- Consider adding `AppShowList` proto and having backend return it directly instead of frontend mapping
+- Add `pinned` to DB (or derive from `discord_message_id`) if it needs to persist
+
 ### Technical details
 
 **Proto additions:**
