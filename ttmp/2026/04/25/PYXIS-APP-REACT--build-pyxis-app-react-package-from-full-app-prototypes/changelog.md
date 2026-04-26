@@ -94,3 +94,15 @@ Step 17: Consolidated Dashboard quick actions; extracted DashboardQuickActionsPa
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Dashboard side-column layout
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — DashboardQuickActionsPanel extraction
 
+
+## 2026-04-25
+
+Step 18: Consolidated Dashboard shell/header organisms and lightened the shared app canvas tokens; sidebar 6.3630% review, topbar 8.4701% review, desktop page checkpoint 11.4830% tune-required (commit 80661fc).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml — Added sidebar/topbar focused specs
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppShell.css — Shell/header/menu layout and responsive behavior
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppShell.tsx — Extracted shell/header organisms
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/styles/app-tokens.css — Whiter canvas/surface token update
+

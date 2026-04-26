@@ -44,6 +44,8 @@ RelatedFiles:
       Note: Final inspected React crop for dashboard-upcoming review-band result (commit 7510483)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png
       Note: Final inspected React crop for dashboard-quick-actions review-band result (commit 12cc17c)
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/right_region.png
+      Note: Final topbar crop evidence (commit 80661fc)
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -74,8 +76,13 @@ RelatedFiles:
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
         Light desktop sidebar and static mobile bottom nav
+        Dashboard shell/header visual tuning (commit 80661fc)
+    - Path: web/packages/pyxis-app/src/components/shell/AppShell.tsx
+      Note: Dashboard shell/header organism extraction (commit 80661fc)
     - Path: web/packages/pyxis-app/src/styles/app-tokens.css
-      Note: Expanded cohesive app theme variables before Phase 7 (commit fba5369)
+      Note: |-
+        Expanded cohesive app theme variables before Phase 7 (commit fba5369)
+        Whiter app canvas tokens (commit 80661fc)
     - Path: web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx
       Note: |-
         Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
@@ -88,6 +95,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -1970,4 +1978,164 @@ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-pro
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/diff_only.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-05-column-width-guard/dashboard/artifacts/upcoming/right_region.png
+```
+
+## Step 18: Park premature Phase 8 work and consolidate Dashboard shell/header
+
+The user clarified that I should finish the still-open Phase 7 subphases before moving into Phase 8. I parked the premature Phase 8 login/setup/shows work in a named git stash, then returned to Dashboard consolidation and handled Phase 7.1 shell/header/menu.
+
+This step also addressed the user's complaint that the app background looked too cream-colored. I lightened the shared canvas/surface tokens so Storybook and page crops read as whitish while preserving the off-white hierarchy through tokens rather than one-off page CSS.
+
+### Prompt Context
+
+**User prompt (verbatim):** "the cream color backgorund is weird, can you fix that ? then continue"
+
+**Assistant interpretation:** Make the app background less cream/beige, then continue Dashboard consolidation in the correct Phase 7 order.
+
+**Inferred user intent:** Keep visual tuning cohesive and avoid moving into Phase 8 before Dashboard shell/header and other open Dashboard phases are complete.
+
+**Commit (code):** 80661fc — "Consolidate dashboard shell and header"
+
+### What I did
+
+- Parked premature Phase 8 work in a named stash:
+
+```bash
+git stash push -u -m "WIP phase 8 login setup shows premature" -- ...
+```
+
+- Consolidated shell/header organisms:
+  - `AppSidebarMenu`,
+  - `AppSidebarUserFooter`,
+  - `AppMobileBottomNav`,
+  - richer `AppTopBar` subtitle/actions.
+- Updated `AppShell` to match the prototype shell structure more closely:
+  - fixed 1240×760 desktop shell bounds,
+  - sidebar section grouping,
+  - icons,
+  - bookings badge,
+  - user footer,
+  - search/bell/new-show topbar actions,
+  - scrollable main content area.
+- Added Storybook stories for shell/header surfaces:
+  - `AppSidebarMenu`,
+  - `AppTopBarDashboard`,
+  - `AppMobileBottomNavigation`.
+- Added focused visual spec sections for Dashboard shell/header:
+  - `sidebar`,
+  - `topbar`.
+- Refreshed JS visual spec mirrors.
+- Lightened shared tokens in `app-tokens.css`:
+  - `--app-canvas` from warm cream to a whiter `#f8f7f3`,
+  - `--app-mobile-canvas` to a lighter warm canvas,
+  - `--app-surface` to white,
+  - login glow/edge and muted surfaces adjusted accordingly.
+- Ran typecheck and focused visual comparisons.
+
+### Why
+
+- Phase 7.1 was still open and Dashboard shell/header differences were a major full-page mismatch source.
+- The shell is shared by every later page, so it should be an organism-level foundation before Phase 8 pages are implemented.
+- The cream color issue was best fixed in tokens so all Storybook/page surfaces update consistently.
+
+### What worked
+
+- TypeScript validation passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Focused sidebar comparison after shell extraction and whiter canvas:
+
+```text
+run-02-whiter-canvas sidebar: 6.363036699448308%, 10611 changed pixels, review
+```
+
+- Focused topbar comparison after shell extraction and whiter canvas:
+
+```text
+run-02-whiter-canvas topbar: 8.47006141701623%, 9571 changed pixels, review
+```
+
+- Desktop full-page Dashboard checkpoint improved and had exact bounds alignment:
+
+```text
+run-07-shell-header-whiter-canvas: 11.4830220713073%, 108216 changed pixels, tune-required
+bounds changed: false, 1240×760 vs 1240×760
+```
+
+- Inspected crops with `read`:
+
+```text
+various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/sidebar/dashboard/artifacts/sidebar/left_region.png
+various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/sidebar/dashboard/artifacts/sidebar/right_region.png
+various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/left_region.png
+various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/right_region.png
+various/07-dashboard-page/desktop/run-07-shell-header-whiter-canvas/dashboard/artifacts/page/right_region.png
+```
+
+### What didn't work
+
+- I had started Phase 8 too early. That work is now parked in the stash named:
+
+```text
+WIP phase 8 login setup shows premature
+```
+
+- The first shell/header run still had the cream surface in shared tokens, so I adjusted tokens and reran the focused comparisons.
+
+### What I learned
+
+- The shell/header work is foundational; it changes bounds and page chrome for every later full-app page.
+- The app background concern should be solved with shared tokens, not local Storybook wrappers.
+- Focused shell sections are useful because full-page Dashboard still contains remaining hero/metrics/attention noise.
+
+### What was tricky to build
+
+The tricky part was preserving reusable shell organisms while matching prototype-specific Dashboard chrome. The sidebar and topbar are not Dashboard-only, but Dashboard is the current tuning surface. I extracted `AppSidebarMenu`, `AppSidebarUserFooter`, and `AppMobileBottomNav` as shell organisms and validated them through Dashboard-focused specs.
+
+The background color change was also delicate because changing `--app-canvas` affects every page. I kept it token-level and verified sidebar/topbar plus a full-page Dashboard checkpoint.
+
+### What warrants a second pair of eyes
+
+- Review whether `AppShell` should remain fixed-height at desktop Storybook/app compare time or whether production should use a separate min-height mode later.
+- Review the whiter canvas token choice before Phase 8 pages depend on it.
+- Review whether `AppTopBar` actions should use icon-only buttons long-term or a dedicated `AppTopBarActions` organism.
+
+### What should be done in the future
+
+- Continue Phase 7.2 hero and Phase 7.3 metrics/attention before restoring Phase 8 work.
+- Re-run a final Dashboard full-page checkpoint after hero/metrics/attention are consolidated.
+- Keep the Phase 8 stash parked until Dashboard reaches Phase 7.7.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/shell/AppShell.tsx`,
+  - `web/packages/pyxis-app/src/components/shell/AppShell.css`,
+  - `web/packages/pyxis-app/src/styles/app-tokens.css`,
+  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Optional visual validation:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml --page dashboard --section sidebar --summary --outDir ttmp/.../various/13-dashboard-shell-header/desktop/run-review/sidebar --output json
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml --page dashboard --section topbar --summary --outDir ttmp/.../various/13-dashboard-shell-header/desktop/run-review/topbar --output json
+```
+
+### Technical details
+
+Final evidence paths:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/sidebar/dashboard/artifacts/sidebar/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-07-shell-header-whiter-canvas/dashboard/artifacts/page/right_region.png
 ```
