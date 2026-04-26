@@ -298,3 +298,14 @@ Step 36: Added named props, callbacks, mobile copy/header props, and richer stor
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.tsx — Dashboard overview props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardQuickActionsContent/DashboardQuickActionsContent.tsx — Dashboard quick action callbacks
 
+
+## 2026-04-25
+
+Step 37: Added named props, empty states, booking callbacks, and stories for route-support organisms (commit 2109537).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.tsx — Route support organism props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx — Booking queue callbacks
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx — Settings organism props
+

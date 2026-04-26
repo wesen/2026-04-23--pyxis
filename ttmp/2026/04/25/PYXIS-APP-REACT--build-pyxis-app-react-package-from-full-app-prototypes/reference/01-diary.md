@@ -156,6 +156,22 @@ RelatedFiles:
       Note: Phase 8C molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx
       Note: Phase 8C molecule props
+    - Path: web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.tsx
+      Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
+      Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.tsx
+      Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx
+      Note: Phase 8C route-support callbacks
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
       Note: |-
         Story colocation validation
@@ -216,6 +232,10 @@ RelatedFiles:
         Compatibility barrel after dashboard widget folderization
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx
       Note: Phase 8C dashboard props/callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.tsx
+      Note: Phase 8C route-support props
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
@@ -241,6 +261,10 @@ RelatedFiles:
         Bookings queue and processed organism composition (commit caeefa4)
         Calendar month and agenda organisms tuned (commit f3295d5)
         Compatibility barrel after phase 8 widget folderization
+    - Path: web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
+      Note: Phase 8C route-support props
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.tsx
@@ -249,6 +273,10 @@ RelatedFiles:
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
       Note: Phase 8C organism props
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsFilterBar/ShowsFilterBar.stories.tsx
+      Note: Phase 8C route-support stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsFilterBar/ShowsFilterBar.tsx
+      Note: Phase 8C route-support props
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
       Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.stories.tsx
@@ -290,6 +318,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4922,3 +4951,114 @@ The successful visual guard outputs were:
 dashboard hero: 11.25010935176275%, tune-required, bounds aligned, text caveat from mobile copy
 dashboard metrics: 4.994062842528316%, review, text unchanged
 ```
+
+## Step 37: Type route-support organisms and add utility route stories
+
+I continued Phase 8C through the support-route organism cluster: artist roster, attendance, audit log, booking queue, Discord mappings, settings, and the shows filter bar. These sections are less prominent in the current visual-spec suite, but they still need named props and Storybook coverage before route wiring.
+
+This pass also continued the callback-ready pattern for booking rows by forwarding booking action handlers through the generic `BookingQueue` organism.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the Phase 8C props/stories pass through the remaining non-detail organisms.
+
+**Inferred user intent:** Finish making app sections explicit and story-covered so the next pass can focus on reuse decisions and RTK wiring.
+
+**Commit (code):** `2109537` — "Type route support organisms and add stories"
+
+### What I did
+
+- Added named exported prop types:
+  - `ArtistRosterProps`,
+  - `AttendancePanelProps`,
+  - `AuditLogPanelProps`,
+  - `BookingQueueProps`,
+  - `DiscordMappingPanelProps`,
+  - `SettingsPanelProps`,
+  - `ShowsFilterBarProps`.
+- Added booking action callback forwarding to `BookingQueue`:
+  - `onHold`,
+  - `onDecline`,
+  - `onApprove`.
+- Added lightweight empty states for:
+  - artist roster,
+  - attendance panel,
+  - audit log panel,
+  - booking queue,
+  - Discord mapping panel.
+- Added stories for:
+  - `ArtistRoster`,
+  - `AttendancePanel`,
+  - `AuditLogPanel`,
+  - `BookingQueue`,
+  - `DiscordMappingPanel`,
+  - `SettingsPanel`,
+  - `ShowsFilterBar`.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Why
+
+These organisms appear on secondary routes and need the same prop/story discipline as the visually tuned dashboard/shows/bookings/calendar sections. Adding stories now makes them easier to inspect before deciding whether to reuse `Table`, `Empty`, `Card`, or other `pyxis-components` primitives.
+
+### What worked
+
+- Typecheck passed.
+- Route-support sections now have explicit props and default/empty/dense or mobile stories where relevant.
+- Booking action callbacks now flow through both `BookingsInboxPanel` and the more generic `BookingQueue` organism.
+
+### What didn't work
+
+No implementation failure in this step.
+
+I did not run focused visual-diff guards for this cluster because these support-route organisms are not currently represented in the app component/page visual specs. This should be revisited if artists, attendance, audit log, Discord, or settings routes become visual parity targets.
+
+### What I learned
+
+The secondary route organisms expose the next reuse targets clearly: roster/booking tables should be audited against `pyxis-components/Table`, and the new `.app-empty-state` usages should be audited against `pyxis-components/Empty` in a dedicated cluster.
+
+### What was tricky to build
+
+Some route-support organisms are table-row or mobile-card hybrids. I kept the stories realistic by rendering them in desktop/mobile wrappers rather than introducing a new table abstraction prematurely.
+
+### What warrants a second pair of eyes
+
+- Review `BookingQueueProps` callback names for consistency with `BookingsInboxPanelProps`.
+- Review whether the route-support empty-state copy is acceptable before switching to the shared `Empty` component.
+- Review whether support-route tables should be converted to the shared `Table` API or remain app-specific.
+
+### What should be done in the future
+
+- Add visual spec targets for artists/attendance/audit/settings/Discord if these routes need prototype parity.
+- Run a dedicated `Empty` reuse pass.
+- Run a dedicated `Table` reuse/audit pass.
+- Continue Phase 8C into show-detail and booking-review detail organisms.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.tsx
+web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
+web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx
+web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.tsx
+web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowsFilterBar/ShowsFilterBar.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Technical details
+
+This step intentionally did not introduce shared `Table`/`Empty` replacements. It only made current section APIs explicit and added story coverage.
