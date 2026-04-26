@@ -21,7 +21,9 @@ RelatedFiles:
     - Path: prototype-design/visual-diff/userland/lib/styles.js
       Note: Expanded inspect presets for typography/layout debugging (commit ed55e40)
     - Path: prototype-design/visual-diff/userland/specs/app.components.visual.yml
-      Note: Initial pyxis-app component visual suite
+      Note: |-
+        Initial pyxis-app component visual suite
+        Focused component visual targets for Shows panels (commits 4020ea8
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
       Note: |-
         Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
@@ -65,9 +67,13 @@ RelatedFiles:
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
-      Note: Replaced local surface/status values with app tokens
+      Note: |-
+        Replaced local surface/status values with app tokens
+        Shows table typography tokens and row layout tuning (commits b1d3c0b
     - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx
-      Note: Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
+      Note: |-
+        Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
+        Shows table row structure and archived variant matched to prototype columns (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
@@ -85,6 +91,8 @@ RelatedFiles:
         DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
         DashboardQuickActionsPanel extraction (commit 12cc17c)
         Attention panel organism wrapper and page reuse (commit b1180ae)
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
+      Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
@@ -106,6 +114,8 @@ RelatedFiles:
       Note: Direct Hero organism story target (commit b1180ae)
     - Path: web/packages/pyxis-app/stories/DashboardMetricsGrid.stories.tsx
       Note: Direct MetricsGrid organism story target (commit b1180ae)
+    - Path: web/packages/pyxis-app/stories/ShowsOrganisms.stories.tsx
+      Note: Direct Storybook targets for Shows organisms (commit 4020ea8)
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -114,6 +124,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -2717,4 +2728,188 @@ pyxis-app-organisms-dashboardactivitypanel--default
 pyxis-app-organisms-dashboardattentionpanel--desktop
 pyxis-app-organisms-dashboardattentionpanel--dense
 pyxis-app-organisms-dashboardattentionpanel--empty
+```
+
+## Step 22: Refocus Shows visual tuning around extracted table organisms
+
+The Shows page had drifted into a page-level checkpoint that was not visually credible enough. I reset the loop around the Confirmed and Archived shows panels as focused organisms, then used the existing inspect/compare tooling to make the table rows, status pills, age badges, draw meters, icons, and archived table content match the prototype more closely.
+
+This step is deliberately scoped to Shows rather than all Phase 8.4–8.7 pages. It extracts the right reusable pieces first, adds story targets, validates with individual crops, and records where the tool still has a weakness for below-the-fold prototype sections.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Read the diary skill, Read the runbook. We are losing the plot a bit, 8.4 - 8.7 are not up to snuff visually, and we should focus on some of the sub elements in there. Let's start with shows. This is the starting point /tmp/pi-clipboard-70daf102-8bbd-48e7-9aea-7e600d73a1c8.png  and then this is /tmp/pi-clipboard-2b56ac72-aa8e-47a7-9ed2-cd24b40229a4.png where we are at right now. We want to tune this up visually by having our own organism story that we can t arget specifically to make sure the rows and typography colors and columns and all that matches, because this doesn't look good.
+
+Continue keeping a diary, read up on where we are, use your javascript tools to the best of their flexibility, and commit as we go.
+
+Start with shows"
+
+**Assistant interpretation:** Stop broad Phase 8 page work, focus on the Shows page with direct organism stories and subelement inspection, and commit incremental visual improvements.
+
+**Inferred user intent:** Recover the bottom-up visual parity workflow by tuning the Shows table at the row/atom/column level instead of accepting noisy full-page checkpoints.
+
+**Commit (code):** 4020ea8 — "Tune shows confirmed organism"
+
+**Commit (code):** b1d3c0b — "Align shows row typography atoms"
+
+**Commit (code):** f980631 — "Align shows archived table and tokens"
+
+### What I did
+
+- Re-read the diary skill and the Pyxis app CSS visual improvement loop runbook before making further changes.
+- Added prototype section hooks for Shows:
+  - `data-section="shows-filters"`,
+  - `data-section="shows-confirmed"`,
+  - `data-section="shows-archived"`.
+- Extracted Shows-specific organisms:
+  - `ShowsFilterBar`,
+  - `ShowsConfirmedPanel`,
+  - `ShowsArchivedPanel`.
+- Added reusable table atoms:
+  - `AgeBadge`,
+  - `StatusPill`,
+  - `DrawProgress`.
+- Added direct Shows organism stories:
+  - `ConfirmedPanel`,
+  - `ArchivedPanel`,
+  - `Filters`,
+  - `RowAtoms`.
+- Updated the full Shows page to use the extracted organisms rather than inline panel/table composition.
+- Reworked `ShowTableRow` so the full Shows table includes the prototype columns:
+  - `#`,
+  - `Date`,
+  - `Artist`,
+  - `Doors`,
+  - `Age`,
+  - `Price`,
+  - `Draw`,
+  - `Status`,
+  - edit action.
+- Matched the confirmed row content and row atom behavior:
+  - status pill label case and dot placement,
+  - SVG pin/edit icons instead of glyph fallbacks,
+  - draw progress bar with over-capacity accent state,
+  - age badge sizing/weight/color,
+  - date and price typography.
+- Fixed archived content so it matches the prototype columns instead of incorrectly reusing the confirmed table:
+  - `Date`,
+  - `Artist`,
+  - `Genre`,
+  - `Draw`,
+  - `Status`.
+- Consolidated Shows table typography into CSS variables on `.app-shows-table` / `.app-shows-archived-table` rather than continuing to scatter one-off font values.
+- Added visual spec targets for `shows-confirmed-panel` and `shows-archived-panel` in `app.components.visual.yml` and regenerated JS mirrors.
+
+### Why
+
+The previous Shows checkpoint was visually wrong even when the page-level diff looked tolerable. The table had date chips instead of prototype inline date cells, no `#` column, no edit column, plain status text instead of a pill, no draw progress bar, and the archived table reused the confirmed table content. Those are structural mismatches, not subtle rendering differences.
+
+Extracting the organisms and row atoms gives the visual loop stable Storybook targets and reusable building blocks for future Shows/detail pages.
+
+### What worked
+
+- Typecheck passed after each tuning step:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Confirmed panel visual loop moved from tune-required to review:
+
+```text
+run-01-baseline: 11.665332654199714%, tune-required
+run-06-svg-icons-label: 9.78222670425462%, review
+run-09-status-pill-fix: 9.564375456845118%, review
+```
+
+- `inspect-spec` confirmed that some row typography now matches directly:
+  - price text: no style diffs after setting 12px / 400 / 18px,
+  - age badge: no typography style diffs after setting 11px / 400 / 16.5px,
+  - date cell wrapper: no typography style diffs after setting 13px / 19.5px.
+- Archived table text content now matches the prototype:
+
+```text
+Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived
+```
+
+- Archived panel page checkpoint improved to accepted-band numerically after the content and token pass:
+
+```text
+run-04-font-tokens: 0.9796495480482755%, accepted
+```
+
+### What didn't work
+
+- I initially missed the exact date/price/status/age font weight and size differences until the user called them out.
+- I first inspected `td:nth-child(8) span`, which selected the React wrapper span instead of the actual `StatusPill`; this made the status pill look like it still had the wrong font even after the pill itself was closer.
+- The archived organism spec still has a prototype capture issue: because the prototype archived panel is below the fold in `shows.html`, the individual left crop can appear blank even with a tall viewport. The page checkpoint text/content evidence is still useful, but the organism spec needs a better prototype-only target or scroll support before it is a trustworthy crop source for archived.
+
+### What I learned
+
+- Structural table parity matters before pixel percentages. The confirmed table needed the same columns and inline row atoms before CSS tuning was meaningful.
+- The global `.app-table-row span` rule can accidentally override atom layout; this caused the `StatusPill` dot to stack above the label until the pill and nested dot forced inline layout in table rows.
+- `inspect-spec` is useful, but selectors must target the same semantic element on both sides; otherwise it can report diffs on wrapper elements rather than the visible atom.
+
+### What was tricky to build
+
+The hardest part was separating table-wide typography from atom-level overrides. Shows rows share the generic app table CSS, but the prototype table uses tighter, smaller typography than several other app pages. I introduced Shows-scoped CSS variables on `.app-shows-table` / `.app-shows-archived-table` so the confirmed and archived rows can share values without changing every app table globally.
+
+The archived visual loop was also tricky because the prototype archived panel sits below the visible crop area. I added a direct Storybook target for the React side, but the prototype side still comes from the full Shows page. That produced good text/content comparison evidence, but the individual crop can be blank. This should be fixed with a standalone prototype section target or a deliberate scroll-aware tool improvement before doing deeper archived visual tuning.
+
+### What warrants a second pair of eyes
+
+- Review whether the Shows table CSS variables belong in a dedicated Shows CSS file instead of `Rows.css` once more Shows-specific organisms are added.
+- Review whether the archived panel should get a standalone prototype route/fixture so its organism crop is not affected by below-the-fold capture behavior.
+- Review whether `StatusPill`, `AgeBadge`, and `DrawProgress` should be exported from `web/packages/pyxis-app/src/index.ts` for reuse by future pages/stories.
+
+### What should be done in the future
+
+- Add a prototype-side isolated Shows confirmed/archived fixture or improve the visual tool deliberately for below-the-fold section capture.
+- Continue Shows tuning with filter chips and full page checkpoint after confirmed/archived sections are stable.
+- Apply the same atom/organism-first loop to the next problematic Phase 8 page instead of moving broadly through multiple routes.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx`,
+  - `web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx`,
+  - `web/packages/pyxis-app/src/components/molecules/Rows.css`,
+  - `web/packages/pyxis-app/src/components/atoms/StatusPill.tsx`,
+  - `web/packages/pyxis-app/src/components/atoms/AgeBadge.tsx`,
+  - `web/packages/pyxis-app/src/components/atoms/DrawProgress.tsx`,
+  - `web/packages/pyxis-app/stories/ShowsOrganisms.stories.tsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Re-run focused visual checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --section component \
+  --summary \
+  --outDir ttmp/.../various/17-shows-confirmed-tuning/run-N \
+  --output json
+```
+
+### Technical details
+
+Important artifact folders:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/
+```
+
+Important final checkpoints:
+
+```text
+confirmed: run-09-status-pill-fix, 9.564375456845118%, review
+archived content: run-03-action-copy, 1.3387880235706322%, review, text unchanged
+archived font-token pass: run-04-font-tokens, 0.9796495480482755%, accepted numerically but crop caveat applies
 ```

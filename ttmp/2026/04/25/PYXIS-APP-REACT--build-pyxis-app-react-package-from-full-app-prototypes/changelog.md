@@ -141,3 +141,13 @@ Step 21: Added standalone Dashboard organism Storybook files for Hero, MetricsGr
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx — Direct attention organism story target
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/DashboardMetricsGrid.stories.tsx — Direct metrics organism story target
 
+
+## 2026-04-25
+
+Step 22: Refocused Shows tuning around extracted organisms and row atoms; confirmed panel reached review band and archived content now matches prototype (commits 4020ea8, b1d3c0b, f980631).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/Rows.css — Shows typography token consolidation
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx — Shows organism extraction
+
