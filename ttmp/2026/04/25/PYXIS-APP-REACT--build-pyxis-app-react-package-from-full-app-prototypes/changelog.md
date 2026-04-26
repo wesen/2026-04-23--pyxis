@@ -360,3 +360,33 @@ Step 42: Reused pyxis-components Card inside app Panel while preserving Panel AP
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — Panel now composes shared Card
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Card/Card.tsx — Card supports padding none and bodyClassName
 
+
+## 2026-04-26
+
+Step 43: Reused pyxis-components Stat for MetricCard with dashboard metric visual guards improving to review band (commit e044de7).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.tsx — MetricCard now composes shared Stat
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Stat/Stat.tsx — Wrapper-friendly Stat props
+
+
+## 2026-04-26
+
+Step 44: Wrapped app StatusPill and AgeBadge with shared Badge and Tag, with shows visual guards just above review threshold (commit 4f87bda).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx — StatusPill now wraps Badge
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/atoms/Badge/Badge.tsx — Badge rootProps for app wrappers
+
+
+## 2026-04-26
+
+Step 45: Audited Table reuse and deferred conversion because the shared Table API would flatten app domain row molecules.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx — Retains app-specific row molecules for now
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Table/Table.tsx — Current data/columns API not yet fit for app domain rows
+
