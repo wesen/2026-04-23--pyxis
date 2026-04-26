@@ -157,15 +157,27 @@ RelatedFiles:
     - Path: web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx
       Note: Phase 8C molecule props
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
-      Note: Story colocation validation
+      Note: |-
+        Story colocation validation
+        Phase 8C organism stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx
+      Note: Phase 8C callback-ready organism
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.stories.tsx
+      Note: Phase 8C organism stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx
+      Note: Phase 8C organism props
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
         Hero subelement hooks and WIP tuning (commit ed55e40)
         Metrics and attention organism extraction (commit b1180ae)
         Compatibility barrel after dashboard widget folderization
+    - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
+      Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
-      Note: Phase 8B folderized Panel widget
+      Note: |-
+        Phase 8B folderized Panel widget
+        Phase 8C organism props
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
@@ -185,8 +197,20 @@ RelatedFiles:
         Bookings queue and processed organism composition (commit caeefa4)
         Calendar month and agenda organisms tuned (commit f3295d5)
         Compatibility barrel after phase 8 widget folderization
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.stories.tsx
+      Note: Phase 8C organism stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.tsx
+      Note: Phase 8C organism props
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsConfirmedPanel/ShowsConfirmedPanel.stories.tsx
+      Note: Phase 8C organism stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+      Note: Phase 8C organism props
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
       Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.stories.tsx
+      Note: Phase 8C organism stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx
+      Note: Phase 8C organism props
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
@@ -222,6 +246,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4346,3 +4371,165 @@ shows-confirmed-panel: 9.821005081874647%, review
 ```
 
 The remaining diffs are pre-existing visual/data-order issues, not introduced by this prop/story pass.
+
+## Step 34: Type booking/show organisms and expand organism story coverage
+
+I continued Phase 8C into the first organism cluster: the shared `Panel`, show tables/panels, and booking queue/processed panels. This moves the prop/story discipline from small reusable widgets into page-section components that are used by focused visual specs.
+
+This pass still avoids the higher-risk `Card`, `Table`, and `Empty` component-system swaps. I added named props, callback forwarding, and richer stories first so the reuse audit can happen with explicit APIs and stable visual guard targets.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok cool, continue"
+
+**Assistant interpretation:** Continue Phase 8C into the next set of components, prioritizing organized props/stories while keeping visual-diff guard checks.
+
+**Inferred user intent:** Keep systematically improving component boundaries and Storybook coverage before deeper component-system reuse or RTK wiring.
+
+**Commit (code):** `78135d7` — "Type booking and show organisms and add stories"
+
+### What I did
+
+- Added named exported prop types:
+  - `PanelProps`,
+  - `ShowsTableProps`,
+  - `BookingsInboxPanelProps`,
+  - `BookingsProcessedPanelProps`,
+  - `ShowsConfirmedPanelProps`,
+  - `ShowsArchivedPanelProps`.
+- Forwarded `BookingsInboxPanel` action callbacks into `BookingCard`:
+  - `onHold`,
+  - `onDecline`,
+  - `onApprove`.
+- Added empty-state rendering for:
+  - `BookingsInboxPanel`,
+  - `BookingsProcessedPanel`,
+  - `ShowsConfirmedPanel`,
+  - `ShowsArchivedPanel`.
+- Added a new `Panel.stories.tsx` with default/action/long-header/dense-body examples.
+- Expanded stories for:
+  - `ShowsTable`: full, dashboard, archived, empty, long content, row atoms,
+  - `BookingsInboxPanel`: default, callbacks, empty, narrow, dense,
+  - `BookingsProcessedPanel`: default, empty, dense,
+  - `ShowsConfirmedPanel`: default, empty, dense,
+  - `ShowsArchivedPanel`: default, empty, dense.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran focused visual guard checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-organisms-bookings-queue \
+  --output json
+```
+
+Result: `11.72947581936586%`, `tune-required` — unchanged from the known Bookings queue checkpoint.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-organisms-shows-confirmed \
+  --output json
+```
+
+Result: `9.821005081874647%`, `review` — still in the known review band with the same show-order text difference.
+
+### Why
+
+These organisms are visual-spec targets and route-section building blocks. They need explicit prop contracts and stories before larger reuse work such as `Panel -> Card`, app tables -> `Table`, or app empty state -> `Empty`.
+
+Forwarding booking callbacks through `BookingsInboxPanel` keeps the section component ready for page-level RTK Query mutation wiring without moving mutation logic into the organism.
+
+### What worked
+
+- Typecheck passed.
+- Existing visual guard targets stayed at their known levels.
+- Existing visual-spec story exports were preserved, avoiding story ID churn.
+- The booking action boundary is now present at both molecule and organism level.
+
+### What didn't work
+
+No implementation failure in this step.
+
+I intentionally did not switch `.app-empty-state` to the shared `Empty` component yet. That should be a separate reuse cluster because it will change markup, style, and likely visual diffs.
+
+### What I learned
+
+The safest path is to type and story organism APIs before replacing underlying surfaces/tables/empty states. The visual guard output is much easier to interpret when API cleanup and shared-primitive replacement are not mixed in the same commit.
+
+### What was tricky to build
+
+The `ShowsTable` story needed to preserve `RowAtoms` because it is useful as an atom composition showcase, while also adding proper table stories. I kept it under the same Storybook title and added richer table states around it.
+
+Empty states were added with existing `.app-empty-state` markup rather than the shared `Empty` primitive to keep visual changes small and attributable.
+
+### What warrants a second pair of eyes
+
+- Review whether `Panel` should wrap `pyxis-components/Card` in a later dedicated reuse cluster.
+- Review whether `ShowsTable` and booking tables should use or influence `pyxis-components/Table`.
+- Review the new empty-state copy before route-level empty handling is finalized.
+
+### What should be done in the future
+
+- Audit `.app-empty-state` against shared `Empty` in a separate commit with visual guard checks.
+- Audit `Panel` against `Card`/`CardHead` in a separate commit.
+- Continue Phase 8C into calendar and dashboard organisms.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx
+web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-organisms-bookings-queue \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-organisms-shows-confirmed \
+  --output json
+```
+
+### Technical details
+
+The organism visual guard outputs stayed at known values:
+
+```text
+bookings-queue-panel: 11.72947581936586%, tune-required
+shows-confirmed-panel: 9.821005081874647%, review
+```

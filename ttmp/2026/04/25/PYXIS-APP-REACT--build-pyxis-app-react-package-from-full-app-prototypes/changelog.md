@@ -265,3 +265,14 @@ Step 33: Added named props/stories for domain molecules, added BookingCard actio
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx — Booking molecule props and callbacks
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx — Show row props
 
+
+## 2026-04-25
+
+Step 34: Added named props, callback forwarding, empty states, and richer stories for booking/show organisms (commit 78135d7).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx — Booking callbacks forwarded to cards
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — PanelProps and stories
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx — ShowsTableProps and stories
+
