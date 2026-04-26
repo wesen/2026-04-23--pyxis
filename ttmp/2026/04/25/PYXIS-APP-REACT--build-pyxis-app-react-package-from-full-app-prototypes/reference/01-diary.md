@@ -13,7 +13,11 @@ Intent: diary
 Owners: []
 RelatedFiles:
     - Path: docs/playbooks/05-bottom-up-component-visual-parity.md
-      Note: Central playbook pointer to pyxis-app visual loop (commit d7f3692199b72a4933a5389c090c87230f753f89)
+      Note: |-
+        Central playbook pointer to pyxis-app visual loop (commit d7f3692199b72a4933a5389c090c87230f753f89)
+        Links to widget organization guide
+    - Path: docs/playbooks/06-react-widget-folder-storybook-css-organization.md
+      Note: New reusable guide for future React widgets
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/screens/roster.jsx
@@ -158,6 +162,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3636,4 +3641,83 @@ Visual smoke artifacts:
 
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/24-storybook-sidebar-structure/run-01-smoke/
+```
+
+## Step 29: Document React widget folder, CSS, and Storybook conventions
+
+I wrote a reusable repository playbook so future React work starts with the folder-per-widget structure instead of needing a cleanup pass later.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Actually, write down a guide for organizing react components and css this way, so that we do it correctly from the getgo next time"
+
+**Assistant interpretation:** Turn the lessons from the pyxis-app widget/CSS/Storybook reorganization into a reusable guide for future React component work.
+
+**Inferred user intent:** Avoid repeating the bucket-file/flat-story cleanup by documenting the preferred structure clearly.
+
+**Commit:** `27919aa` — `Document React widget organization conventions`
+
+### What I did
+
+- Added `docs/playbooks/06-react-widget-folder-storybook-css-organization.md`.
+- Linked it from `docs/playbooks/05-bottom-up-component-visual-parity.md`.
+- Added a pointer from the ticket CSS visual loop runbook.
+
+### Why
+
+The `pyxis-app` cleanup showed the preferred architecture: each widget owns its TSX, CSS, Storybook stories, and index export. The new guide makes that the default from the start.
+
+### What worked
+
+The guide covers:
+
+- folder-per-widget structure,
+- Storybook title hierarchy mirroring disk paths,
+- CSS ownership and avoiding bucket files,
+- shared primitives such as `Panel` and `Table`,
+- exported prop types,
+- stable visual hooks/parts,
+- RTK Query readiness,
+- visual spec updates when Storybook IDs change,
+- restart guidance after large Vite/Storybook file moves.
+
+### What didn't work
+
+No implementation failure; this was a documentation-only step.
+
+### What I learned
+
+The architecture rule is simple enough to be checklist-driven: `WidgetName.tsx`, `WidgetName.css`, `WidgetName.stories.tsx`, and `index.ts`, with Storybook titles following the same path.
+
+### What was tricky to build
+
+The tricky part was balancing strict folder mirroring with practical exceptions for shared primitives and page-level stories.
+
+### What warrants a second pair of eyes
+
+- Review whether the guide should require page folders immediately for all page work.
+- Review whether prop-type guidance should mandate `ReactNode` over `string` for children in all reusable atoms.
+
+### What should be done in the future
+
+- Use the guide before creating new React widgets.
+- Apply it during the upcoming props/types/story pass.
+
+### Code review instructions
+
+Read:
+
+```text
+docs/playbooks/06-react-widget-folder-storybook-css-organization.md
+```
+
+Check that it aligns with `web/packages/pyxis-components/src/public/*` and current `web/packages/pyxis-app/src/components/*`.
+
+### Technical details
+
+The guide is linked from:
+
+```text
+docs/playbooks/05-bottom-up-component-visual-parity.md
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
 ```

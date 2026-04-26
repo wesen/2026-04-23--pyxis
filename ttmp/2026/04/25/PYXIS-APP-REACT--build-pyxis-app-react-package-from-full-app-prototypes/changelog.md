@@ -212,3 +212,12 @@ Step 28: Updated colocated Storybook titles so the sidebar mirrors src folder st
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — Story IDs updated after sidebar hierarchy change
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx — Story title mirrors widget folder
 
+
+## 2026-04-25
+
+Step 29: Added reusable React widget folder/CSS/Storybook organization guide and linked it from the visual parity playbooks (commit 27919aa).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/06-react-widget-folder-storybook-css-organization.md — Canonical React widget organization guide
+
