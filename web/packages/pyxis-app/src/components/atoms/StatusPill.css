@@ -1,3 +1,5 @@
-.app-status-pill { display: inline-flex; align-items: center; gap: 6px; width: fit-content; border-radius: var(--app-radius-pill); padding: 4px 10px 4px 8px; background: var(--app-surface-muted); color: var(--app-muted); font-size: 12px; font-weight: 600; line-height: 1; text-transform: capitalize; white-space: nowrap; }
-.app-status-pill[data-tone='confirmed'], .app-status-pill[data-tone='approved'] { background: var(--app-surface-success); color: var(--app-success); }
+.app-status-pill { display: inline-flex; align-items: center; gap: 5px; width: fit-content; border-radius: var(--app-radius-pill); padding: 2px 9px; background: var(--app-surface-muted); color: var(--app-muted); font-size: 11px; font-weight: 500; line-height: 1.6; text-transform: none; white-space: nowrap; }
+.app-table-row .app-status-pill { display: inline-flex !important; align-items: center; color: var(--app-muted); font-size: 11px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+.app-table-row .app-status-pill .app-status-dot { display: inline-block !important; flex: 0 0 auto; }
+.app-status-pill[data-tone='confirmed'], .app-status-pill[data-tone='approved'], .app-table-row .app-status-pill[data-tone='confirmed'], .app-table-row .app-status-pill[data-tone='approved'] { background: var(--app-surface-success); color: var(--app-success); }
 .app-status-pill .app-status-dot { width: 5px; height: 5px; box-shadow: none; }
