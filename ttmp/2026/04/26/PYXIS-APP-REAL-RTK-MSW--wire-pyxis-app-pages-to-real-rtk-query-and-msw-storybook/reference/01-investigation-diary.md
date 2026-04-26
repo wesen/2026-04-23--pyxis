@@ -38,10 +38,14 @@ RelatedFiles:
       Note: Changes prototype fixed-height shell into full-height app shell.
     - Path: web/packages/pyxis-app/src/pages
       Note: Per-page Storybook folders with Page.stories.tsx files.
+    - Path: web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx
+      Note: Adds loading/error/empty state stories with protobuf-shaped MSW responses.
     - Path: web/packages/pyxis-app/src/pages/Pages.tsx
       Note: |-
         Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
         Wires booking approve/decline and show cancel UI callbacks to real mutations.
+    - Path: web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+      Note: Adds loading/error/empty state stories with protobuf-shaped MSW responses.
     - Path: web/packages/pyxis-app/src/pages/pages.css
       Note: |-
         Adds page-state styling for loading/error/empty panels.
@@ -58,6 +62,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -596,4 +601,72 @@ pyxis-app-pages-shows--desktop
 pyxis-app-pages-show-detail--desktop
 pyxis-app-pages-bookings--approve-mutation
 pyxis-app-pages-bookings--decline-mutation
+```
+
+## Step 6: Loading, Error, and Empty Page Stories
+
+I added Storybook state variants for the first two real staff page clusters: Shows and Bookings.
+
+### Shows page state stories
+
+Added to:
+
+```text
+web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+```
+
+New stories:
+
+```text
+pyxis-app-pages-shows--loading
+pyxis-app-pages-shows--error
+pyxis-app-pages-shows--empty
+```
+
+The stories use story-level MSW handlers:
+
+- `Loading` uses `delay('infinite')` for `GET /api/app/shows`.
+- `Error` returns a protobuf-shaped error envelope with `500`.
+- `Empty` returns `toJson(ShowListSchema, create(ShowListSchema, { shows: [] }))`.
+
+### Bookings page state stories
+
+Added to:
+
+```text
+web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx
+```
+
+New stories:
+
+```text
+pyxis-app-pages-bookings--loading
+pyxis-app-pages-bookings--error
+pyxis-app-pages-bookings--empty
+```
+
+The stories use story-level MSW handlers for `GET /api/app/bookings`, including an empty protobuf `SubmissionList` response.
+
+### Why this matters
+
+The staff pages no longer fall back to mock data, so Storybook needs explicit coverage for request lifecycle states. These stories prove the page-level loading/error/empty panels render without requiring the live backend and without pretending failed API calls are successful mock data.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+Storybook index now includes:
+
+```text
+pyxis-app-pages-shows--loading
+pyxis-app-pages-shows--error
+pyxis-app-pages-shows--empty
+pyxis-app-pages-bookings--loading
+pyxis-app-pages-bookings--error
+pyxis-app-pages-bookings--empty
 ```

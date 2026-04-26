@@ -73,7 +73,7 @@
 - [x] Add MSW handlers for every mutation added in Phase 2.
 - [x] Make MSW handlers return protobuf-shaped wrappers (`{ shows }`, `{ submissions }`, `{ error: { code, message } }`, etc.).
 - [x] Add in-memory mutable fixture state with `resetMockState()`.
-- [ ] Add story-level handlers for loading/error/empty states.
+- [x] Add story-level handlers for loading/error/empty states on the Shows and Bookings page clusters.
 - [x] Add page-level stories that render actual pages using RTK Query hooks.
 - [x] Add route-param Storybook wrappers for `/shows/:id` and `/bookings/review/:id`.
 - [x] Confirm Storybook works without Go backend running.

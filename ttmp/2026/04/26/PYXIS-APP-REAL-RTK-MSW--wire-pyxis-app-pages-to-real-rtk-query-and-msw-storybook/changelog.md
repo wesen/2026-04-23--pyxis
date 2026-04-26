@@ -64,3 +64,13 @@ Split staff page stories into per-page Page.stories.tsx files and added MSW-back
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages — Per-page Storybook folders with Page.stories.tsx files.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/storybook.tsx — Shared page story helpers for fresh mock state and route-param stories.
 
+
+## 2026-04-26
+
+Added staff page loading/error/empty Storybook variants for Shows and Bookings using story-level MSW handlers.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx — Adds loading/error/empty state stories with protobuf-shaped MSW responses.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx — Adds loading/error/empty state stories with protobuf-shaped MSW responses.
+
