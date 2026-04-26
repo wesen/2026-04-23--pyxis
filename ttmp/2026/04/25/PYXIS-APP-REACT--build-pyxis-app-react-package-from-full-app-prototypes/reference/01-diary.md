@@ -106,14 +106,26 @@ RelatedFiles:
       Note: Phase 8C molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.tsx
       Note: Phase 8C molecule props
+    - Path: web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.stories.tsx
+      Note: Phase 8C domain molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx
+      Note: Phase 8C shared Avatar reuse
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.css
       Note: Owned BookingCard styles after Rows.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
       Note: Pending booking card and processed row shape tuned for Bookings organisms (commit caeefa4)
+    - Path: web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx
+      Note: Phase 8C domain molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx
+      Note: Phase 8C domain molecule props and callbacks
     - Path: web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.stories.tsx
       Note: Phase 8C molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx
       Note: Phase 8C molecule props
+    - Path: web/packages/pyxis-app/src/components/molecules/DiscordChannelRow/DiscordChannelRow.stories.tsx
+      Note: Phase 8C domain molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/DiscordChannelRow/DiscordChannelRow.tsx
+      Note: Phase 8C domain molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx
@@ -126,10 +138,18 @@ RelatedFiles:
       Note: |-
         Replaced local surface/status values with app tokens
         Shows table typography tokens and row layout tuning (commits b1d3c0b
+    - Path: web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.stories.tsx
+      Note: Phase 8C domain molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx
+      Note: Phase 8C domain molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx
       Note: |-
         Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
         Shows table row structure and archived variant matched to prototype columns (commits 4020ea8
+    - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.stories.tsx
+      Note: Phase 8C domain molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
+      Note: Phase 8C domain molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/Table.css
       Note: Shared table primitive styles extracted from Rows.css (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.stories.tsx
@@ -202,6 +222,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4162,3 +4183,166 @@ TodayShowDefault
 ```
 
 This avoids changing visual-spec story IDs during a props/story pass.
+
+## Step 33: Type domain molecules, add action callbacks, and reuse Avatar for artist cards
+
+I continued Phase 8C through the remaining domain molecule cluster. This pass focused on booking cards/rows, show table rows, artist cards/rows, settings rows, and Discord channel rows.
+
+The most important behavior-facing change is that `BookingCard` now accepts action callbacks. This prepares the molecule for RTK Query mutations or page-level handlers without making the molecule fetch or dispatch on its own.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue."
+
+**Assistant interpretation:** Continue the Phase 8C typed props/stories/reuse pass and commit at another appropriate checkpoint.
+
+**Inferred user intent:** Keep moving through the component inventory systematically while preserving the diary and validation discipline.
+
+**Commit (code):** `14e63b7` — "Type domain pyxis app molecules and add stories"
+
+### What I did
+
+- Added named exported prop/action types:
+  - `BookingActionHandler`,
+  - `BookingCardProps`,
+  - `BookingQueueRowProps`,
+  - `ShowTableRowProps`,
+  - `ShowTableRowVariant`,
+  - `ArtistCardProps`,
+  - `ArtistRosterRowProps`,
+  - `SettingsToggleRowProps`,
+  - `DiscordChannelRowProps`.
+- Added callback props to `BookingCard`:
+  - `onHold`,
+  - `onDecline`,
+  - `onApprove`.
+- Reused the shared `pyxis-components` `Avatar` inside `ArtistCard` instead of hand-rendering initials.
+- Added or expanded stories:
+  - `BookingCard`: default, callbacks, approved, declined, long content, narrow, list, queue rows,
+  - `ShowTableRow`: full, dashboard, archived, over-capacity, long content, row set,
+  - `ArtistCard`: default, no average draw, long content, card list, roster rows,
+  - `SettingsToggleRow`: default, disabled, long description, row list,
+  - `DiscordChannelRow`: default, disabled, long channel id, row list.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran visual guard checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-bookings-queue-after \
+  --output json
+```
+
+Result: `bookings-queue-panel` stayed at its known `11.72947581936586%` / `tune-required` level.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shows-confirmed-after \
+  --output json
+```
+
+Result: `shows-confirmed-panel` stayed in review band at `9.821005081874647%` with the same known show-order text difference.
+
+### Why
+
+These molecules are the pieces most likely to need real app handlers and typed domain boundaries. `BookingCard` in particular needs to be presentational but action-ready; page/container code can later provide mutation callbacks without moving data fetching into the molecule.
+
+Adding richer stories before deeper reuse work gives us isolated examples for state variants and long-content stress cases.
+
+### What worked
+
+- Typecheck passed.
+- The booking and shows visual guard numbers remained at their known levels, indicating this props/story pass did not introduce obvious regressions in the guarded organisms.
+- The `BookingCard` action buttons are now ready for page-level or RTK mutation handlers.
+- `ArtistCard` now uses a shared component-system primitive for initials/avatar rendering.
+
+### What didn't work
+
+No implementation failure in this step.
+
+One caveat: `ArtistCard` now uses the shared `Avatar`, which has fixed tokenized dimensions. There is not currently an artists visual spec target, so this should be visually reviewed in Storybook or covered by a future artists page/spec if exact parity matters.
+
+### What I learned
+
+The callback boundary is a good pattern for Phase 8C: keep molecules presentational and data-shaped, but expose action hooks so route containers can wire mutations later.
+
+For component-system reuse, `Avatar` was an easy first reuse because it is generic and exported by `pyxis-components`. Other reuse candidates such as `Badge`, `Tag`, `Stat`, `Card`, and `Table` are more visually sensitive and should be handled with baselines.
+
+### What was tricky to build
+
+The row stories needed realistic table wrappers so row components render in a valid context. I kept those wrappers local to stories instead of turning them into new app components prematurely.
+
+Using shared `Avatar` changes the implementation shape of `ArtistCard` slightly. Because no focused artist visual spec exists, this should not be treated as proven visual parity yet.
+
+### What warrants a second pair of eyes
+
+- Review `ArtistCard` after the `Avatar` reuse; check whether the shared avatar size should be extended or locally wrapped for exact app visual sizing.
+- Review `BookingCard` callback prop names before RTK Query mutation wiring.
+- Review table row stories to ensure they are useful without implying a premature table abstraction.
+
+### What should be done in the future
+
+- Add or update visual specs for artist/settings/discord sections if these routes become visually important.
+- Continue Phase 8C into organisms: `Panel`, `BookingsInboxPanel`, `BookingsProcessedPanel`, `ShowsTable`, `ShowsConfirmedPanel`, `CalendarMonthPanel`, and dashboard panels.
+- Audit `ShowsTable`/booking tables against the shared `Table` component in a separate cluster.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
+web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx
+web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx
+web/packages/pyxis-app/src/components/molecules/DiscordChannelRow/DiscordChannelRow.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-bookings-queue-after \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shows-confirmed-after \
+  --output json
+```
+
+### Technical details
+
+The visual guard outputs stayed at known values:
+
+```text
+bookings-queue-panel: 11.72947581936586%, tune-required
+shows-confirmed-panel: 9.821005081874647%, review
+```
+
+The remaining diffs are pre-existing visual/data-order issues, not introduced by this prop/story pass.

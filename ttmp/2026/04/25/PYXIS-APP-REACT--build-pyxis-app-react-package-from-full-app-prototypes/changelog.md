@@ -254,3 +254,14 @@ Step 32: Added named prop types and richer stories for core reusable molecules; 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.tsx — Named molecule props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx — Named molecule props
 
+
+## 2026-04-25
+
+Step 33: Added named props/stories for domain molecules, added BookingCard action callbacks, and reused pyxis-components Avatar in ArtistCard (commit 14e63b7).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx — Artist card props and shared Avatar reuse
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx — Booking molecule props and callbacks
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx — Show row props
+
