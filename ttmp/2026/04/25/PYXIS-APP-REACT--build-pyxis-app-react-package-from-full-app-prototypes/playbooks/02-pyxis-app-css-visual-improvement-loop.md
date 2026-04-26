@@ -42,6 +42,8 @@ Once individual crops are close and the comparison is in the `review` band, stop
 
 ## Keep CSS ownership local enough for Storybook
 
+Canonical organization guide: `docs/playbooks/06-react-widget-folder-storybook-css-organization.md`.
+
 Do not let large bucket stylesheets become hidden dependencies for many unrelated stories. Broad files such as `Rows.css` or `Panels.css` are fragile in Vite/Storybook because a stale or empty transformed CSS module can silently remove styles from many organisms at once.
 
 Preferred ownership model:

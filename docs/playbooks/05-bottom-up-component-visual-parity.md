@@ -343,6 +343,16 @@ prototype-design/visual-diff/userland/scripts/diagnose-shows-sections.sh
 rm -rf prototype-design/visual-comparisons/cssvd-js
 ```
 
+### Pyxis app component/story organization
+
+For React widget folder, CSS ownership, and colocated Storybook conventions, use:
+
+```text
+docs/playbooks/06-react-widget-folder-storybook-css-organization.md
+```
+
+Follow the folder-per-widget pattern (`WidgetName.tsx`, `WidgetName.css`, `WidgetName.stories.tsx`, `index.ts`) from the beginning of new React work.
+
 ### Pyxis app CSS visual loop
 
 For the responsive staff app (`web/packages/pyxis-app`), use the ticket runbook while the app package is being built:
