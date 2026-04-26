@@ -7,6 +7,7 @@ import {
   YearGroup,
 } from 'pyxis-components';
 import type { ArchivedShow } from 'pyxis-types';
+import { getApiErrorMessage } from '../api/errors';
 import { useArchive, useArchiveStats } from '../api/hooks';
 import './Archive.css';
 
@@ -17,9 +18,9 @@ type ArchiveGroup = {
 
 export function Archive() {
   const [search, setSearch] = useState('');
-  const { data: list, isLoading } = useArchive(search || undefined);
+  const { data: list, isLoading, isError: isArchiveError, error: archiveError } = useArchive(search || undefined);
   const shows = list?.shows ?? [];
-  const { data: stats } = useArchiveStats();
+  const { data: stats, isError: isStatsError } = useArchiveStats();
   const groups = groupShowsByYear(shows);
 
   return (
@@ -43,7 +44,18 @@ export function Archive() {
           </section>
         )}
 
-        {groups.length > 0 ? (
+        {isStatsError && (
+          <p className="pyxis-public-page__status-detail" role="status" data-section="archive-stats-error">
+            Archive totals are temporarily unavailable.
+          </p>
+        )}
+
+        {isArchiveError ? (
+          <section className="pyxis-public-page__status" role="alert" data-section="archive-error">
+            <p className="pyxis-public-page__status-message">Failed to load archive.</p>
+            <p className="pyxis-public-page__status-detail">{getApiErrorMessage(archiveError)}</p>
+          </section>
+        ) : groups.length > 0 ? (
           <section className="pyxis-archive-page__years" data-section="archive-years">
             {groups.map((group) => (
               <YearGroup key={group.year} year={group.year} showCount={group.shows.length}>

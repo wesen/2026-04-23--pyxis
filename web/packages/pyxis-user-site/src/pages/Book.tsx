@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   BookingForm,
@@ -7,16 +8,23 @@ import {
   SaferSpaceAgreement,
 } from 'pyxis-components';
 import type { BookingFormData } from 'pyxis-types';
+import { getApiErrorMessage } from '../api/errors';
 import { useSubmitBooking } from '../api/hooks';
 import './Book.css';
 
 export function Book() {
   const navigate = useNavigate();
   const submit = useSubmitBooking();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (data: BookingFormData) => {
-    await submit.mutateAsync(data);
-    navigate('/book/success');
+    setSubmitError(null);
+    try {
+      await submit.mutateAsync(data);
+      navigate('/book/success');
+    } catch (error) {
+      setSubmitError(getApiErrorMessage(error));
+    }
   };
 
   return (
@@ -28,6 +36,12 @@ export function Book() {
 
         <section className="pyxis-book-page__layout" data-section="book-layout">
           <div className="pyxis-book-page__form-column" data-section="book-form">
+            {submitError && (
+              <div className="pyxis-public-page__status" role="alert" data-section="book-submit-error">
+                <p className="pyxis-public-page__status-message">Booking request failed.</p>
+                <p className="pyxis-public-page__status-detail">{submitError}</p>
+              </div>
+            )}
             <BookingForm onSubmit={handleSubmit} isSubmitting={submit.isPending} />
           </div>
 

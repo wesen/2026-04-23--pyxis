@@ -176,7 +176,7 @@ export const seedStats: ArchiveStats = create(ArchiveStatsSchema, {
 export const handlers = [
   // GET /public/shows
   http.get('*/api/public/shows', () => {
-    return HttpResponse.json(seedShows);
+    return HttpResponse.json({ shows: seedShows });
   }),
 
   // GET /public/shows/:id
@@ -213,15 +213,15 @@ export const handlers = [
     const search = url.searchParams.get('search');
     if (search) {
       const q = search.toLowerCase();
-      return HttpResponse.json(
-        seedArchive.filter(
+      return HttpResponse.json({
+        shows: seedArchive.filter(
           (s) =>
             s.artist.toLowerCase().includes(q) ||
             s.genre.toLowerCase().includes(q)
-        )
-      );
+        ),
+      });
     }
-    return HttpResponse.json(seedArchive);
+    return HttpResponse.json({ shows: seedArchive });
   }),
 
   // GET /public/archive/stats
