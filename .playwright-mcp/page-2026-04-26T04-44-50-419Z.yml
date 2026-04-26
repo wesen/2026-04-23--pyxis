@@ -1,0 +1,128 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - complementary [ref=e6]:
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - generic [ref=e15]:
+          - generic [ref=e16]: pyxis
+          - generic [ref=e17]: staff portal
+      - navigation [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Program
+          - button "Dashboard" [ref=e21] [cursor=pointer]:
+            - img [ref=e22]
+            - generic [ref=e24]: Dashboard
+          - button "Shows" [ref=e25] [cursor=pointer]:
+            - img [ref=e27]
+            - generic [ref=e31]: Shows
+          - button "Calendar" [ref=e32] [cursor=pointer]:
+            - img [ref=e33]
+            - generic [ref=e39]: Calendar
+          - button "Bookings 3" [ref=e40] [cursor=pointer]:
+            - img [ref=e41]
+            - generic [ref=e44]: Bookings
+            - generic [ref=e45]: "3"
+        - generic [ref=e46]:
+          - generic [ref=e47]: Roster
+          - button "Artists" [ref=e48] [cursor=pointer]:
+            - img [ref=e49]
+            - generic [ref=e53]: Artists
+          - button "Post-show log" [ref=e54] [cursor=pointer]:
+            - img [ref=e55]
+            - generic [ref=e57]: Post-show log
+        - generic [ref=e58]:
+          - generic [ref=e59]: Operate
+          - button "Audit log" [ref=e60] [cursor=pointer]:
+            - img [ref=e61]
+            - generic [ref=e63]: Audit log
+          - button "Discord" [ref=e64] [cursor=pointer]:
+            - img [ref=e65]
+            - generic [ref=e69]: Discord
+          - button "Settings" [ref=e70] [cursor=pointer]:
+            - img [ref=e71]
+            - generic [ref=e74]: Settings
+      - generic [ref=e75]:
+        - generic [ref=e76]: AD
+        - generic [ref=e77]:
+          - generic [ref=e78]: Ada Dove
+          - generic [ref=e79]: admin · online
+        - img [ref=e80]
+    - main [ref=e82]:
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: Home / Shows
+          - heading "Shows" [level=1] [ref=e86]
+          - generic [ref=e87]: All confirmed and archived events
+        - generic [ref=e88]:
+          - button [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+          - button "New show" [ref=e93] [cursor=pointer]:
+            - img [ref=e94]
+            - text: New show
+      - generic [ref=e97]:
+        - heading "Confirmed · 6" [level=2] [ref=e99]
+        - table [ref=e101]:
+          - rowgroup [ref=e102]:
+            - row "Date Artist Status" [ref=e103]:
+              - columnheader "Date" [ref=e104]
+              - columnheader "Artist" [ref=e105]
+              - columnheader "Status" [ref=e106]
+          - rowgroup [ref=e107]:
+            - row "May 2 Burial Hex Confirmed" [ref=e108]:
+              - cell "May 2" [ref=e109]
+              - cell "Burial Hex" [ref=e110]
+              - cell "Confirmed" [ref=e111]:
+                - generic [ref=e112]: Confirmed
+            - row "May 9 Moor Mother Confirmed" [ref=e114]:
+              - cell "May 9" [ref=e115]
+              - cell "Moor Mother" [ref=e116]
+              - cell "Confirmed" [ref=e117]:
+                - generic [ref=e118]: Confirmed
+            - row "May 17 Cygnus + Guests Confirmed" [ref=e120]:
+              - cell "May 17" [ref=e121]
+              - cell "Cygnus + Guests" [ref=e122]
+              - cell "Confirmed" [ref=e123]:
+                - generic [ref=e124]: Confirmed
+            - row "May 23 Open Mic Night Confirmed" [ref=e126]:
+              - cell "May 23" [ref=e127]
+              - cell "Open Mic Night" [ref=e128]
+              - cell "Confirmed" [ref=e129]:
+                - generic [ref=e130]: Confirmed
+  - generic [ref=e133]:
+    - generic [ref=e134]:
+      - generic [ref=e135]:
+        - heading "Add new show" [level=2] [ref=e136]
+        - generic [ref=e137]: "Will be posted to #upcoming-shows on confirmation"
+      - button [ref=e138] [cursor=pointer]:
+        - img [ref=e139]
+    - generic [ref=e141]:
+      - generic [ref=e142]:
+        - generic [ref=e143]: Artist / act name
+        - textbox [ref=e145]: Pharmakon
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - generic [ref=e148]: Date
+          - textbox [ref=e150]: 2025-06-14
+        - generic [ref=e151]:
+          - generic [ref=e152]: Doors
+          - textbox [ref=e154]: 8:00 PM
+        - generic [ref=e155]:
+          - generic [ref=e156]: Age
+          - combobox [ref=e157]:
+            - option "All Ages"
+            - option "18+"
+            - option "21+" [selected]
+        - generic [ref=e158]:
+          - generic [ref=e159]: Price
+          - textbox [ref=e161]: $15 / $18
+      - generic [ref=e162]:
+        - generic [ref=e163]: Genre
+        - textbox [ref=e165]: Industrial
+      - generic [ref=e166]:
+        - generic [ref=e167]: Notes
+        - textbox [ref=e168]: Very loud — warn neighbours about curfew.
+        - generic [ref=e169]: Visible to staff only
+    - generic [ref=e170]:
+      - button "Cancel" [ref=e171] [cursor=pointer]
+      - button "Save as hold" [ref=e172] [cursor=pointer]
+      - button "Confirm & post" [ref=e173] [cursor=pointer]
