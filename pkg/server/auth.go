@@ -107,6 +107,13 @@ func (s *Server) handleLogout(w http.ResponseWriter, r *http.Request) {
 func (s *Server) handleGetSession(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
+	if user == nil {
+		if cookie, err := r.Cookie("session"); err == nil {
+			if validated, err := s.authService.ValidateSession(ctx, cookie.Value); err == nil {
+				user = validated
+			}
+		}
+	}
 
 	session := &pyxisv1.AuthSession{
 		Authenticated: user != nil,

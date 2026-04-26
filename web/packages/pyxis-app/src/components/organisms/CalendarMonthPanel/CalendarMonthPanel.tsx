@@ -27,7 +27,7 @@ export function CalendarMonthPanel({ events, monthLabel = 'May 2025', year = 202
       <div className="app-calendar-weekdays">{['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map((day) => <span key={day}>{day}</span>)}</div>
       <div className="app-calendar-month-grid">{cells.map((day, index) => {
         const dayEvents = day ? eventsOnDay(events, day) : [];
-        return <div key={index} className="app-calendar-cell" data-empty={!day || undefined} data-today={day === 2 || undefined}>{day && <><b>{day}</b>{dayEvents.map((event) => <CalendarEventChip key={event.date + event.label} event={event}/>)}</>}</div>;
+        return <div key={index} className="app-calendar-cell" data-empty={!day || undefined} data-today={day === 2 || undefined}>{day && <><b>{day}</b>{dayEvents.map((event) => <CalendarEventChip key={`${event.kind}-${event.id}-${event.date}-${event.label}`} event={event}/>)}</>}</div>;
       })}</div>
       <CalendarLegend />
     </section>

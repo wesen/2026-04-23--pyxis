@@ -19,7 +19,9 @@ RelatedFiles:
     - Path: pkg/server/app.go
       Note: GET /api/app/calendar now returns unified CalendarEventList.
     - Path: pkg/server/auth.go
-      Note: Adds explicit PYXIS_DEV_AUTH-gated dev login endpoint.
+      Note: |-
+        Adds explicit PYXIS_DEV_AUTH-gated dev login endpoint.
+        Session endpoint now validates the session cookie when no context user is present.
     - Path: pkg/server/public.go
       Note: Adds domain-to-CalendarEvent mapping helpers.
     - Path: pkg/service/auth_service.go
@@ -51,6 +53,10 @@ RelatedFiles:
       Note: Makes settings rows clickable mutation affordances.
     - Path: web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
       Note: Adds row-level attendance update action affordance.
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonth/CalendarMonth.tsx
+      Note: Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx
+      Note: Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
     - Path: web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
       Note: Adds callbacks for settings toggle mutations.
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
@@ -85,6 +91,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -963,3 +970,177 @@ Sample returned events included protojson enum strings:
 ```
 
 This closes Phase 8. The calendar UI now receives protobuf-backed events with IDs and enum statuses. A later UI pass can use `event.kind` and `event.id` to add delete affordances for holds and blocked dates.
+
+## Step 10: End-to-end Current Status Test
+
+I ran the current-status test checklist against the local development environment.
+
+### Environment
+
+PostgreSQL was running through Docker Compose:
+
+```bash
+docker compose up -d db
+```
+
+I ran migrations and loaded the SQL dev fixture:
+
+```bash
+go run ./cmd/pyxis migrate up
+docker compose exec -T db psql -U pyxis -d pyxis < fixtures/dev.sql
+```
+
+One stale `:8080` backend process was still serving an older build. That was visible because `/api/app/calendar` returned the pre-Phase-8 `{ holds, blocked }` shape. I killed that process and restarted the current source build with dev auth:
+
+```bash
+PYXIS_DEV_AUTH=1 go run ./cmd/pyxis serve --bind :8080
+```
+
+### Backend API smoke
+
+Public endpoints passed:
+
+```text
+GET /health                  -> 200
+GET /api/public/shows        -> 200, 12 shows
+GET /api/public/archive      -> 200, 7 shows
+GET /api/public/archive/stats -> 200
+```
+
+Staff dev auth and protected endpoints passed after the session fix below:
+
+```text
+GET /auth/dev-login?username=dev-admin&role=admin -> 200
+GET /api/app/session with cookie                   -> authenticated=true
+GET /api/app/shows with cookie                     -> 21 shows
+GET /api/app/calendar with cookie                  -> { events: [...] }, 16 events
+```
+
+The calendar sample had the new Phase 8 proto shape:
+
+```json
+{
+  "id": 10,
+  "date": "2026-05-23",
+  "label": "Open Mic Night",
+  "status": "SHOW_STATUS_CONFIRMED",
+  "kind": "CALENDAR_EVENT_KIND_SHOW"
+}
+```
+
+### Mutation smoke
+
+I tested non-destructive/light dev mutations through the real backend:
+
+```text
+POST  /api/app/shows/<id>/announce -> 200
+POST  /api/app/calendar/holds      -> 201
+PATCH /api/app/settings            -> 200
+```
+
+### Frontend/Vite smoke
+
+Public Vite site on `:3000` returned HTML for:
+
+```text
+/
+/shows
+/archive
+/book
+```
+
+and proxied public API correctly:
+
+```text
+GET http://127.0.0.1:3000/api/public/shows -> 200, 12 shows
+```
+
+Staff Vite app on `:3008` returned HTML for:
+
+```text
+/
+/shows
+/calendar
+/settings
+```
+
+and proxied staff API correctly:
+
+```text
+GET /auth/dev-login?...        -> 200
+GET /api/app/shows with cookie -> 200, 21 shows
+GET /api/app/calendar          -> 200, { events: [...] }, 16 events
+```
+
+I restarted a stale staff Vite process after it reported an old HMR/module export error.
+
+### Browser smoke
+
+Playwright loaded the public home page successfully:
+
+```text
+http://127.0.0.1:3000/
+```
+
+Playwright loaded the staff calendar successfully after dev login:
+
+```text
+http://127.0.0.1:3008/calendar
+```
+
+The final staff calendar load had zero console errors and only the expected React Router v7 future-flag warnings.
+
+### Embedded public site smoke
+
+I ran:
+
+```bash
+make build-embed
+PYXIS_DEV_AUTH=1 ./bin/pyxis serve --bind :18081
+```
+
+Smoke results:
+
+```text
+GET /                 -> 200 text/html
+GET /shows/1          -> 200 text/html
+GET /api/public/shows -> 200 application/json
+```
+
+I reverted the generated embedded asset hash changes after the test so the worktree did not keep noisy build-output churn.
+
+### Full validation
+
+Passed:
+
+```bash
+go test ./...
+cd web/packages/pyxis-types && pnpm build
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+After the small fixes below, I reran:
+
+```bash
+go test ./...
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+cd web && pnpm build
+```
+
+All passed.
+
+### Fixes from test findings
+
+The test pass exposed two small issues, both fixed:
+
+1. `GET /api/app/session` was not validating the `session` cookie because the route is intentionally public and therefore had no `userContextKey`. It returned only `{ "spaceName": "Pyxis" }` even with a valid cookie. `handleGetSession` now validates the cookie directly when no context user exists.
+2. Staff calendar rendering emitted duplicate React key warnings when fixture data contained duplicate show/date/label rows. Calendar event chip keys now include `kind`, `id`, `date`, and `label`.
+
+### Known caveat
+
+Re-applying `fixtures/dev.sql` is not fully idempotent; the dev DB now contains duplicate fixture rows, which is why counts are higher than a fresh fixture load. This reinforces the existing follow-up to make the seed/bootstrap workflow reliable and repeatable.

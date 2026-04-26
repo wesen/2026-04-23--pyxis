@@ -111,3 +111,14 @@ Completed Phase 8 CalendarEvent proto cleanup: unified calendar endpoint now ret
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx — Uses enum status with StatusDot while preserving data-status tone.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-types/src/app.ts — Removes hand-written CalendarEvent.
 
+
+## 2026-04-26
+
+Ran end-to-end current-status test across DB, backend APIs, Vite apps, Storybook, full web/go builds, and embedded public site; fixed staff session cookie validation and calendar duplicate React keys.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/auth.go — Session endpoint now validates the session cookie when no context user is present.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonth/CalendarMonth.tsx — Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx — Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
+
