@@ -1,0 +1,9 @@
+.app-modal-backdrop { position: fixed; inset: 0; background: var(--app-backdrop); display: grid; place-items: center; padding: 20px; z-index: 10; }
+.app-modal { width: min(620px, 100%); background: var(--app-surface); border-radius: var(--app-radius-2xl); padding: 24px; box-shadow: var(--app-shadow-modal); }
+.app-modal h2 { margin: 0 0 6px; font-family: var(--font-display, Georgia, serif); font-size: 30px; font-weight: 500; }
+.app-modal p { margin: 0; color: var(--app-muted); }
+.app-form-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin: 20px 0; }
+.app-form-grid label { display: grid; gap: 6px; font-weight: 700; }
+.app-form-grid input { border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 10px; background: var(--app-surface-strong); }
+.app-modal footer { display: flex; justify-content: flex-end; gap: 10px; }
+@media (max-width: 760px) { .app-form-grid { grid-template-columns: 1fr; } }

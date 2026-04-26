@@ -1,0 +1,103 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -17,
+      "width": 0,
+      "x": -223,
+      "y": -113.390625
+    },
+    "left": {
+      "height": 579.5,
+      "width": 646,
+      "x": 247,
+      "y": 137.390625
+    },
+    "right": {
+      "height": 562.5,
+      "width": 646,
+      "x": 24,
+      "y": 24
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 579.5,
+      "width": 646,
+      "x": 247,
+      "y": 137.390625
+    },
+    "exists": true,
+    "name": "bookings-queue-panel-component",
+    "selector": "[data-section=\"bookings-queue\"]",
+    "url": "http://localhost:7070/standalone/full-app/bookings.html",
+    "visible": true
+  },
+  "name": "bookings-queue-panel-component",
+  "pixel": {
+    "changedPercent": 11.72947581936586,
+    "changedPixels": 43948,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png",
+    "normalizedHeight": 580,
+    "normalizedWidth": 646,
+    "threshold": 30,
+    "totalPixels": 374680
+  },
+  "right": {
+    "bounds": {
+      "height": 562.5,
+      "width": 646,
+      "x": 24,
+      "y": 24
+    },
+    "exists": true,
+    "name": "bookings-queue-panel-component",
+    "selector": "[data-section=\"bookings-queue\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonPending Sat, Jun 14, 2025 Industrial ~80 est. draw pharmakon.bandcamp.comSubmitted Apr 19·Date is availableHoldDeclineApproveLust for YouthPending Sat, Jun 21, 2025 Darkwave ~120 est. draw instagram.com/lustyouthSubmitted Apr 20·Date is availableHoldDeclineApproveContainerPending Sat, Jul 19, 2025 Noise ~55 est. draw container.bandcamp.comSubmitted Apr 22·Date is availableHoldDeclineApprove",
+    "right": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonPendingSat, Jun 14, 2025Industrial~80 est. drawpharmakon.bandcamp.comSubmitted Apr 19·Date is availableHoldDeclineApproveLust for YouthPendingSat, Jun 21, 2025Darkwave~120 est. drawinstagram.com/lustyouthSubmitted Apr 20·Date is availableHoldDeclineApproveContainerPendingSat, Jul 19, 2025Noise~55 est. drawcontainer.bandcamp.comSubmitted Apr 22·Date is availableHoldDeclineApprove"
+  }
+}

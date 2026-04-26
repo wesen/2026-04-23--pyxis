@@ -730,15 +730,15 @@ Goal: align `pyxis-app` component organization with `pyxis-components/src/public
   - [x] `Rows/` compatibility shim.
 - [x] Update relative imports after folderization.
 - [x] Run typecheck after atom/molecule folderization.
-- [ ] Split organism bucket files into widget folders:
-  - [ ] `Panel/`, `DashboardOverview/`, `DashboardHero/`, `DashboardMetricsGrid/`, `DashboardQuickActionsPanel/`, `DashboardAttentionPanel/`, `DashboardActivityPanel/`,
-  - [ ] `ShowsFilterBar/`, `ShowsConfirmedPanel/`, `ShowsArchivedPanel/`,
-  - [ ] `CalendarMonthPanel/`, `CalendarAgenda/`, `CalendarLegend/`, `CalendarBoard/`,
-  - [ ] `BookingsInboxPanel/`, `BookingsProcessedPanel/`, `BookingsInsightsPanel/`,
-  - [ ] `ShowDetailHero/`, `ShowDetailInfoPanel/`, `ShowDetailDiscordPanel/`,
-  - [ ] `BookingReviewHero/`, `BookingReviewRequestPanel/`, `BookingReviewDatePanel/`, `BookingReviewNotePanel/`.
+- [x] Split organism bucket files into widget folders:
+  - [x] `Panel/`, `DashboardOverview/`, `DashboardHero/`, `DashboardMetricsGrid/`, `DashboardQuickActionsPanel/`, `DashboardAttentionPanel/`, `DashboardActivityPanel/`,
+  - [x] `ShowsFilterBar/`, `ShowsConfirmedPanel/`, `ShowsArchivedPanel/`,
+  - [x] `CalendarMonthPanel/`, `CalendarAgenda/`, `CalendarLegend/`, `CalendarBoard/`,
+  - [x] `BookingsInboxPanel/`, `BookingsProcessedPanel/`, `BookingsInsightsPanel/`,
+  - [x] `ShowDetailHero/`, `ShowDetailInfoPanel/`, `ShowDetailDiscordPanel/`,
+  - [x] `BookingReviewHero/`, `BookingReviewRequestPanel/`, `BookingReviewDatePanel/`, `BookingReviewNotePanel/`.
 - [ ] Split/relocate route-level `pages.css` into page-owned files once organism widgets no longer depend on it.
-- [ ] Run representative Storybook CSS transform checks and focused visual smokes.
+- [x] Run representative Storybook CSS transform checks and focused visual smokes.
 - [ ] Update diary/changelog and commit final Phase 8B.
 
 ### Phase 8.1 — Login and mobile login

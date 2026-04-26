@@ -1,0 +1,10 @@
+.app-live-label, .app-attention-count { color: var(--app-accent); font-size: 12px; font-weight: 700; }
+.app-attention-list { display: grid; overflow: hidden; border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); background: var(--app-surface-strong); }
+.app-attention-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--app-rule); }
+.app-attention-item:last-child { border-bottom: 0; }
+.app-attention-item b { width: 28px; height: 28px; display: grid; place-items: center; border-radius: var(--app-radius-xs); background: var(--app-accent-soft); color: var(--app-accent); font-size: 13px; }
+.app-attention-item[data-tone='info'] b { background: rgba(var(--app-info-rgb), .11); color: var(--app-info); }
+.app-attention-item[data-tone='warning'] b { background: rgba(var(--app-warning-rgb), .12); color: var(--app-warning); }
+.app-attention-item strong { display: block; }
+.app-attention-item span { color: var(--app-muted); font-size: 13px; }
+.app-attention-item em { color: var(--app-muted); font-style: normal; font-size: 22px; }

@@ -1,0 +1,5 @@
+.app-calendar-month { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); overflow: hidden; background: var(--app-surface-strong); }
+.app-calendar-day { min-height: 108px; border-right: 1px solid var(--app-rule); border-bottom: 1px solid var(--app-rule); padding: 9px; display: flex; flex-direction: column; gap: 7px; }
+.app-calendar-day:nth-child(7n) { border-right: 0; }
+.app-calendar-day b { color: var(--app-muted); font-size: 12px; }
+@media (max-width: 760px) { .app-calendar-month { grid-template-columns: 1fr; } .app-calendar-day { min-height: auto; border-right: 0; } }

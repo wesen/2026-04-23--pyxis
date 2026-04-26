@@ -1,33 +1,15 @@
-import type React from 'react';
-import type { AppShow, ArtistProfile, AttendanceEntry, AuditLogEntry, BookingRequest, CalendarEvent, DiscordChannelMapping, SpaceSettings } from 'pyxis-types';
-import { Button } from 'pyxis-components';
-import { ActivityFeedItem } from '../molecules/ActivityFeedItem';
-import { ArtistCard, ArtistRosterRow } from '../molecules/ArtistCard';
-import { AttendanceStat } from '../molecules/AttendanceStat';
-import { BookingCard, BookingQueueRow } from '../molecules/BookingCard';
-import { CalendarEventChip } from '../molecules/CalendarEventChip';
-import { DiscordChannelRow } from '../molecules/DiscordChannelRow';
-import { DashboardAttentionContent, DashboardAttentionCount, DashboardHero, DashboardMetricsGrid, DashboardMobileCopy, DashboardMobileHeader, DashboardQuickActionsContent, type DashboardAttentionItem, defaultDashboardAttentionItems } from './DashboardSections';
-import { SettingsToggleRow } from '../molecules/SettingsToggleRow';
-import { ShowTableRow } from '../molecules/ShowTableRow';
-import { TodayShowCard } from '../molecules/TodayShowCard';
-import { appPart } from '../parts';
-import '../molecules/Table/Table.css';
-import '../molecules/BookingCard/BookingCard.css';
-import './Panels.css';
-
-export function Panel({ title, kicker, action, children, section }: { title: string; kicker?: string; action?: React.ReactNode; children: React.ReactNode; section?: string }) { return <section className="app-panel" data-section={section} {...appPart('panel')}><header><div><h2>{title}</h2>{kicker && <span>{kicker}</span>}</div>{action}</header>{children}</section>; }
-export function DashboardOverview({ shows, bookings, log }: { shows: AppShow[]; bookings: BookingRequest[]; log: AuditLogEntry[] }) { const upcoming = shows.filter((s) => s.status === 'confirmed').sort((a,b) => a.date.localeCompare(b.date)); const pending = bookings.filter((b) => b.status === 'pending'); return <div className="app-dashboard-overview" {...appPart('dashboard-overview')}><DashboardMobileHeader/><DashboardMobileCopy/><DashboardHero show={upcoming[0]}/><DashboardMetricsGrid upcomingCount={upcoming.length} pendingCount={pending.length}/><div className="app-dashboard-mobile-attention"><DashboardAttentionPanel variant="mobile"/></div><div className="app-dashboard-columns"><DashboardUpcomingPanel shows={upcoming}/><div className="app-dashboard-side"><div className="app-dashboard-desktop-quick"><DashboardQuickActionsPanel pendingCount={pending.length}/></div><DashboardActivityPanel log={log}/></div></div></div>; }
-export function DashboardUpcomingPanel({ shows }: { shows: AppShow[] }) { const visible = shows.slice(0, 5); return <Panel title="Upcoming shows" kicker="Pinned to #upcoming-shows" action={<Button variant="outline" size="sm">View all ›</Button>} section="dashboard-upcoming"><div className="app-desktop-only"><ShowsTable shows={visible} variant="dashboard"/></div><div className="app-stack app-mobile-only">{shows.slice(0,3).map((show) => <TodayShowCard key={show.id} show={show}/>)}</div>{shows.length === 0 && <p className="app-empty-state">No confirmed shows yet.</p>}</Panel>; }
-export function DashboardQuickActionsPanel({ pendingCount }: { pendingCount: number }) { return <Panel title="Quick actions" section="dashboard-quick-actions"><DashboardQuickActionsContent pendingCount={pendingCount}/></Panel>; }
-export function DashboardAttentionPanel({ variant = 'desktop', items = defaultDashboardAttentionItems }: { variant?: 'desktop' | 'mobile'; items?: DashboardAttentionItem[] }) { return <Panel title="Needs your attention" action={variant === 'mobile' ? <DashboardAttentionCount count={items.length}/> : undefined} section="dashboard-attention"><DashboardAttentionContent items={items}/></Panel>; }
-export function DashboardActivityPanel({ log, limit = 5 }: { log: AuditLogEntry[]; limit?: number }) { return <Panel title="Recent activity" action={<span className="app-live-label">live</span>} section="dashboard-activity"><ul className="app-feed app-feed-timeline">{log.slice(0,limit).map((item)=><ActivityFeedItem key={item.id} item={item} variant="timeline"/>)}</ul></Panel>; }
-export function ShowsTable({ shows, variant = 'full' }: { shows: AppShow[]; variant?: 'full' | 'dashboard' | 'archived' }) { const dashboard = variant === 'dashboard'; const archived = variant === 'archived'; return <div className="app-table-wrap" {...appPart('shows-table')}><table className={`app-table${dashboard ? ' app-table-dashboard' : archived ? ' app-shows-archived-table' : ' app-shows-table'}`}><thead><tr>{dashboard ? <><th>Date</th><th>Artist</th><th>Doors</th><th>Age</th><th>Status</th></> : archived ? <><th>Date</th><th>Artist</th><th>Genre</th><th>Draw</th><th>Status</th></> : <><th>#</th><th>Date</th><th>Artist</th><th>Doors</th><th>Age</th><th>Price</th><th>Draw</th><th>Status</th><th aria-label="Actions" /></>}</tr></thead><tbody>{shows.map((show)=><ShowTableRow key={show.id} show={show} variant={variant}/>)}</tbody></table></div>; }
-export function BookingQueue({ bookings }: { bookings: BookingRequest[] }) { return <div {...appPart('booking-queue')}><div className="app-card-list app-mobile-only">{bookings.map((booking)=><BookingCard key={booking.id} booking={booking}/>)}</div><div className="app-table-wrap app-desktop-only"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{bookings.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div></div>; }
-export function CalendarMonth({ events }: { events: CalendarEvent[] }) { const days = Array.from({ length: 35 }, (_, i) => i + 1); return <div className="app-calendar-month" {...appPart('calendar-month')}>{days.map((day)=><div className="app-calendar-day" key={day}><b>{day}</b>{events.filter((e)=>new Date(`${e.date}T00:00:00`).getDate()===day).map((event)=><CalendarEventChip key={event.date+event.label} event={event}/>)}</div>)}</div>; }
-export function ArtistRoster({ artists }: { artists: ArtistProfile[] }) { return <div {...appPart('artist-roster')}><div className="app-card-list app-mobile-only">{artists.map((artist)=><ArtistCard key={artist.id} artist={artist}/>)}</div><div className="app-table-wrap app-desktop-only"><table className="app-table"><thead><tr><th>Artist</th><th>Genre</th><th>Shows</th><th>Avg draw</th><th>Last show</th><th>Notes</th></tr></thead><tbody>{artists.map((artist)=><ArtistRosterRow key={artist.id} artist={artist}/>)}</tbody></table></div></div>; }
-export function AttendancePanel({ entries }: { entries: AttendanceEntry[] }) { const logged = entries.filter((e)=>e.logged); const avg = Math.round(logged.reduce((n,e)=>n+(e.draw ?? 0),0)/Math.max(logged.length,1)); return <div {...appPart('attendance-panel')}><div className="app-metrics-grid compact"><AttendanceStat label="Logged" value={logged.length}/><AttendanceStat label="Needs log" value={entries.length-logged.length}/><AttendanceStat label="Average draw" value={avg}/></div><div className="app-card-list">{entries.map((entry)=><article className="app-booking-card" key={entry.id}><h3>{entry.artist}</h3><p>{entry.date} · {entry.logged ? `${entry.draw} attendees` : 'needs report'}</p><small>{entry.notes ?? 'No notes yet.'}</small></article>)}</div></div>; }
-export function AuditLogPanel({ log }: { log: AuditLogEntry[] }) { return <ul className="app-feed" {...appPart('audit-log-panel')}>{log.map((item)=><ActivityFeedItem key={item.id} item={item}/>)}</ul>; }
-export function DiscordMappingPanel({ mappings }: { mappings: DiscordChannelMapping[] }) { return <div {...appPart('discord-mapping-panel')}>{mappings.map((mapping)=><DiscordChannelRow key={mapping.kind} mapping={mapping}/>)}</div>; }
-export function SettingsPanel({ settings }: { settings: SpaceSettings }) { return <div {...appPart('settings-panel')}><div className="app-settings-summary"><strong>{settings.name}</strong><span>{settings.address} · {settings.capacity} cap · {settings.timezone}</span></div><SettingsToggleRow label="Auto archive past shows" description="Move completed shows to archive after their date." enabled={settings.autoArchive}/><SettingsToggleRow label="Discord posting" description="Post approved events and booking activity to mapped channels." enabled={settings.discordPosting}/><SettingsToggleRow label="Safer-space agreement" description="Require agreement text before confirming public bookings." enabled={settings.safeSpaceRequired}/></div>; }
-export function NewShowModal() { return <div className="app-modal-backdrop" {...appPart('new-show-modal','backdrop')}><section className="app-modal" {...appPart('new-show-modal')}><header><h2>Add new show</h2><p>Create a confirmed or held date from the staff app.</p></header><div className="app-form-grid"><label>Artist<input placeholder="Artist name" /></label><label>Date<input type="date" /></label><label>Doors<input placeholder="8:00 PM" /></label><label>Price<input placeholder="$12 adv / $15 door" /></label></div><footer><Button variant="outline">Cancel</Button><Button>Add show</Button></footer></section></div>; }
+export * from './Panel';
+export * from './DashboardOverview';
+export * from './DashboardUpcomingPanel';
+export * from './DashboardQuickActionsPanel';
+export * from './DashboardAttentionPanel';
+export * from './DashboardActivityPanel';
+export * from './ShowsTable';
+export * from './BookingQueue';
+export * from './CalendarMonth';
+export * from './ArtistRoster';
+export * from './AttendancePanel';
+export * from './AuditLogPanel';
+export * from './DiscordMappingPanel';
+export * from './SettingsPanel';
+export * from './NewShowModal';

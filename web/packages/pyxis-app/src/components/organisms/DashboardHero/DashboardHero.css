@@ -1,0 +1,15 @@
+.app-dashboard-hero { position: relative; box-sizing: border-box; overflow: hidden; min-height: 142px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; padding: 26px; border-radius: var(--app-radius-md); background: #1a1a18; color: var(--app-on-dark); }
+.app-dashboard-hero > div:first-child { flex: 1; position: relative; z-index: 1; }
+.app-dashboard-hero > div:first-child > span { color: var(--app-on-dark-muted); text-transform: uppercase; letter-spacing: .11em; font-size: 11px; font-weight: 800; }
+.app-dashboard-hero h2 { margin: 0 0 6px; color: var(--app-on-dark); font-family: var(--font-display, Georgia, serif); font-size: 40px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
+.app-dashboard-hero p { margin: 0; color: var(--app-on-dark-muted); }
+.app-dashboard-hero-desktop { display: flex; gap: 16px; align-items: center; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.7); }
+.app-dashboard-hero-actions { position: relative; z-index: 1; display: flex; gap: 8px; }
+.app-dashboard-hero-actions .pyxis-btn { border-radius: var(--app-radius-sm) !important; font-size: 13px !important; font-weight: 500 !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-discord { background: rgba(255,255,255,.08) !important; color: var(--app-on-dark) !important; border-color: rgba(255,255,255,.2) !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-edit { background: var(--app-on-dark) !important; color: var(--app-ink) !important; border-color: var(--app-on-dark) !important; }
+.app-dashboard-hero-actions .app-dashboard-hero-edit [data-pyxis-part='label'], .app-dashboard-hero-actions .app-dashboard-hero-edit svg { color: var(--app-ink) !important; }
+.app-dashboard-hero-mark { position: absolute; right: -60px; top: -80px; color: rgba(255,255,255,.1); opacity: .9; line-height: 1; }
+.app-dashboard-hero-mark svg { width: 300px; height: 300px; color: currentColor; stroke: currentColor; }
+.app-dashboard-hero-mobile { display: none; }
+@media (max-width: 760px) { .app-dashboard-hero { display: block; min-height: 148px; margin: 0 0 20px; padding: 18px; border-radius: var(--app-radius-md); } .app-dashboard-hero h2 { font-size: 26px; } .app-dashboard-hero-desktop { display: none; } .app-dashboard-hero-mobile { display: block; } .app-dashboard-hero-actions { position: relative; left: auto; bottom: auto; margin-top: 14px; } .app-dashboard-hero-actions .pyxis-button:first-child { --button-bg: var(--app-on-dark); --button-color: var(--app-ink); } .app-dashboard-hero-actions .pyxis-button:last-child { --button-bg: transparent; --button-color: var(--app-on-dark); --button-border: transparent; } .app-dashboard-hero-mark { right: -8px; top: 8px; font-size: 130px; } }

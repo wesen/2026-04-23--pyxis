@@ -1,0 +1,4 @@
+.app-panel[data-section='dashboard-activity'] { padding: 18px; }
+.app-panel[data-section='dashboard-activity'] > header { margin-bottom: 12px; }
+.app-feed-timeline { display: grid; }
+.app-panel[data-section='dashboard-activity'] .app-live-label { color: var(--app-muted); font-size: 11px; font-weight: 500; }
