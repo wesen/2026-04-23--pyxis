@@ -47,9 +47,9 @@
 
 ## Phase 6: Archive cluster
 
-- [ ] Move `ArchiveSearchFilters`, `ArchiveStats`, `YearGroup`, and archive list components according to finalized classification.
-- [ ] Ensure archive page keeps only RTK Query/search/page-state logic.
-- [ ] Validate archive stories and public page stories.
+- [x] Move `ArchiveSearchFilters`, `ArchiveStats`, `YearGroup`, and archive list components according to finalized classification.
+- [x] Ensure archive page keeps only RTK Query/search/page-state logic.
+- [x] Validate archive stories and public page stories.
 
 ## Phase 7: About/venue/shell cluster
 

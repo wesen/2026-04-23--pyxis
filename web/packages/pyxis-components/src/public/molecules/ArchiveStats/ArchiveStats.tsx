@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import type { ArchiveStats as ArchiveStatsData } from 'pyxis-types';
 import './ArchiveStats.css';
 

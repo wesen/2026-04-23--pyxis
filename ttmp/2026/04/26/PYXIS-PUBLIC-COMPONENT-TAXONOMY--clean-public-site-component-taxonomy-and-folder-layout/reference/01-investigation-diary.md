@@ -30,12 +30,18 @@ RelatedFiles:
       Note: Saved public user-site page story IDs after cleanup.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/04-pyxis-components-storybook-ids-after-shows-detail.md
       Note: Captured story IDs after shows/detail cluster.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/05-pyxis-components-storybook-ids-after-archive.md
+      Note: Captured Storybook IDs after archive cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
+    - Path: web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
+      Note: Moved archive search/filter component into public molecules taxonomy.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowList
       Note: Moved public archive list molecule in pilot batch.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowRow
       Note: Moved public archive row molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/ArchiveStats
+      Note: Moved ArchiveStats into public molecules; props remain generated ArchiveStats protobuf type.
     - Path: web/packages/pyxis-components/src/public/molecules/LineupRow
       Note: Moved public lineup row molecule in pilot batch.
     - Path: web/packages/pyxis-components/src/public/molecules/Poster
@@ -52,6 +58,8 @@ RelatedFiles:
       Note: Moved to public molecules; ShowTileShow now extends generated Show and preserves id.
     - Path: web/packages/pyxis-components/src/public/molecules/TicketStub
       Note: Moved show-backed ticket display molecule.
+    - Path: web/packages/pyxis-components/src/public/molecules/YearGroup
+      Note: Moved archive year grouping component into public molecules taxonomy.
     - Path: web/packages/pyxis-components/src/public/organisms/ShowGrid
       Note: Moved to public organisms; click callback now receives ShowTileShow with show.id.
     - Path: web/packages/pyxis-user-site/src/pages/Shows.tsx
@@ -62,6 +70,7 @@ LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -484,3 +493,80 @@ Live browser validation hit the moved component stories in the running component
 - `Poster` is still a static design/demo molecule with variant names, not a proto-backed flyer. That is acceptable because it does not cross the API boundary and does not represent a backend payload.
 - `ReserveTicketCard` remains primitive-prop-based (`price`, `note`, `cta`) because it is a CTA display card rather than a direct `Show` renderer. `ShowDetail.tsx` still passes show-derived values into it.
 - Historical visual parity docs mention old `public-molecules-*` IDs. No active visual spec update was required in this pass.
+
+## Step 4: Archive Cluster Move
+
+I continued the taxonomy cleanup with the archive cluster. This cluster is intentionally smaller than the shows/detail pass because the most identity-sensitive archive components (`ArchiveShowRow` and `ArchiveShowList`) had already moved in the first molecule pilot.
+
+### What changed
+
+Moved these public archive molecules:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
+web/packages/pyxis-components/src/public/molecules/ArchiveStats
+web/packages/pyxis-components/src/public/molecules/YearGroup
+```
+
+Updated:
+
+- `web/packages/pyxis-components/src/index.ts` barrel exports.
+- `web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx` imports.
+- moved story titles to:
+  - `Public Site/Components/Molecules/ArchiveSearchFilters`
+  - `Public Site/Components/Molecules/ArchiveStats`
+  - `Public Site/Components/Molecules/YearGroup`
+- moved component `pyxisPart` imports for the deeper folder path.
+- `ArchiveStats.stories.tsx` seed import from `../../../mocks/handlers` after the move.
+
+### Proto/type alignment
+
+- `ArchiveStats` already accepts the generated protobuf `ArchiveStats` type from `pyxis-types`, so it remained API-shape aligned.
+- `ArchiveSearchFilters` remains primitive-prop-based (`value`, `yearOptions`, callbacks, result label) because it is a UI control, not an API payload renderer.
+- `YearGroup` remains primitive/slot-based (`year`, `showCount`, `children`) because it is a layout/grouping molecule, not a backend message.
+- The page `Archive.tsx` still owns RTK Query, search state, error states, and grouping. That is consistent with the decomposition runbook: pages own route/data state and pass typed props down.
+
+### Evidence captured
+
+Added:
+
+```text
+sources/05-pyxis-components-storybook-ids-after-archive.md
+```
+
+Story IDs after the move include:
+
+```text
+public-site-components-molecules-archivesearchfilters--default
+public-site-components-molecules-archivestats--default
+public-site-components-molecules-yeargroup--default
+```
+
+The search for old `public-molecules-*` archive IDs only found historical source snapshots from earlier evidence files in this ticket, not active visual-diff specs requiring updates.
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && pnpm build-storybook
+cd web && pnpm build
+```
+
+Live browser validation passed against:
+
+```text
+public-site-components-molecules-archivesearchfilters--default
+public-site-components-molecules-archivestats--default
+public-site-components-molecules-yeargroup--default
+public-site-pages--archive-desktop
+```
+
+No story-level errors or warnings were observed after filtering harmless favicon and existing React Router future-flag warnings.
+
+### What remains
+
+- The archive component folder taxonomy is now mostly complete.
+- The next logical batch is either the booking cluster (`BookingForm`, booking aside/rules/agreement/success) or about/venue/shell cluster (`PubNav`, `PubFooter`, `VenueCard`, etc.).

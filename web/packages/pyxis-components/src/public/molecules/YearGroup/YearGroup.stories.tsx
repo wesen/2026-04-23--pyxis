@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { YearGroup } from './YearGroup';
 
 const meta: Meta<typeof YearGroup> = {
-  title: 'Public/Molecules/YearGroup',
+  title: 'Public Site/Components/Molecules/YearGroup',
   component: YearGroup,
   tags: ['autodocs'],
 };

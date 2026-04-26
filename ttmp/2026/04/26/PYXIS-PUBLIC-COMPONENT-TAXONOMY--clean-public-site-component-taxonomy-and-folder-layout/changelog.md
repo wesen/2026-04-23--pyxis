@@ -48,3 +48,15 @@ Completed shows/detail taxonomy cluster and aligned ShowTile/ShowGrid props with
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/ShowGrid — Moved ShowGrid to public organisms and preserved show identity through onShowClick.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/src/pages/Shows.tsx — Simplified navigation to use show.id from ShowGrid callback.
 
+
+## 2026-04-26
+
+Completed archive taxonomy cluster: moved ArchiveSearchFilters, ArchiveStats, and YearGroup to public molecules and validated archive page/component stories.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/05-pyxis-components-storybook-ids-after-archive.md — Captured Storybook IDs after archive cluster.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters — Moved archive search/filter molecule.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ArchiveStats — Moved protobuf-backed archive stats molecule.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/YearGroup — Moved archive year grouping molecule.
+

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ArchiveSearchFilters } from './ArchiveSearchFilters';
 
 const meta: Meta<typeof ArchiveSearchFilters> = {
-  title: 'Public/Molecules/ArchiveSearchFilters',
+  title: 'Public Site/Components/Molecules/ArchiveSearchFilters',
   component: ArchiveSearchFilters,
   tags: ['autodocs'],
 };

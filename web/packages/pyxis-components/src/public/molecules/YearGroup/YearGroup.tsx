@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import './YearGroup.css';
 
 export type YearGroupProps = {
