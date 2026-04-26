@@ -1,7 +1,7 @@
 -- name: ListUpcomingShows :many
 SELECT id, artist, date, doors_time, start_time, age, price, genre,
-       description, status, flyer_url, submission_id, artist_id,
-       created_at, updated_at
+       description, notes, status, flyer_url, draw, capacity,
+       submission_id, artist_id, created_at, updated_at
 FROM shows
 WHERE status = 'confirmed' AND date >= CURRENT_DATE
 ORDER BY date ASC;
@@ -30,14 +30,16 @@ GROUP BY s.id;
 
 -- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
-                   genre, description, status, submission_id, artist_id, created_by)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+                   genre, description, notes, status, draw, capacity,
+                   submission_id, artist_id, created_by)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
 RETURNING *;
 
 -- name: UpdateShow :one
 UPDATE shows
 SET artist = $2, date = $3, doors_time = $4, start_time = $5,
-    age = $6, price = $7, genre = $8, description = $9, status = $10,
+    age = $6, price = $7, genre = $8, description = $9, notes = $10,
+    status = $11, draw = $12, capacity = $13,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;

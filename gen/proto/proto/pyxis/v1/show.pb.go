@@ -32,8 +32,11 @@ type Show struct {
 	Price         string                 `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`
 	Genre         string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
 	Description   string                 `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
+	Notes         string                 `protobuf:"bytes,17,opt,name=notes,proto3" json:"notes,omitempty"`
 	Lineup        []*Show_LineupEntry    `protobuf:"bytes,10,rep,name=lineup,proto3" json:"lineup,omitempty"`
 	FlyerUrl      string                 `protobuf:"bytes,11,opt,name=flyer_url,json=flyerUrl,proto3" json:"flyer_url,omitempty"`
+	Draw          int32                  `protobuf:"varint,18,opt,name=draw,proto3" json:"draw,omitempty"`
+	Capacity      int32                  `protobuf:"varint,19,opt,name=capacity,proto3" json:"capacity,omitempty"`
 	Status        string                 `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`
 	SubmissionId  int32                  `protobuf:"varint,13,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
 	ArtistId      int32                  `protobuf:"varint,14,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
@@ -136,6 +139,13 @@ func (x *Show) GetDescription() string {
 	return ""
 }
 
+func (x *Show) GetNotes() string {
+	if x != nil {
+		return x.Notes
+	}
+	return ""
+}
+
 func (x *Show) GetLineup() []*Show_LineupEntry {
 	if x != nil {
 		return x.Lineup
@@ -148,6 +158,20 @@ func (x *Show) GetFlyerUrl() string {
 		return x.FlyerUrl
 	}
 	return ""
+}
+
+func (x *Show) GetDraw() int32 {
+	if x != nil {
+		return x.Draw
+	}
+	return 0
+}
+
+func (x *Show) GetCapacity() int32 {
+	if x != nil {
+		return x.Capacity
+	}
+	return 0
 }
 
 func (x *Show) GetStatus() string {
@@ -1673,6 +1697,11 @@ type Settings struct {
 	DiscordChBookings      string                 `protobuf:"bytes,12,opt,name=discord_ch_bookings,json=discordChBookings,proto3" json:"discord_ch_bookings,omitempty"`
 	SetupComplete          bool                   `protobuf:"varint,13,opt,name=setup_complete,json=setupComplete,proto3" json:"setup_complete,omitempty"`
 	UpdatedAt              string                 `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Timezone               string                 `protobuf:"bytes,15,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	BookingEmail           string                 `protobuf:"bytes,16,opt,name=booking_email,json=bookingEmail,proto3" json:"booking_email,omitempty"`
+	AutoArchive            bool                   `protobuf:"varint,17,opt,name=auto_archive,json=autoArchive,proto3" json:"auto_archive,omitempty"`
+	DiscordPosting         bool                   `protobuf:"varint,18,opt,name=discord_posting,json=discordPosting,proto3" json:"discord_posting,omitempty"`
+	SafeSpaceRequired      bool                   `protobuf:"varint,19,opt,name=safe_space_required,json=safeSpaceRequired,proto3" json:"safe_space_required,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1803,6 +1832,41 @@ func (x *Settings) GetUpdatedAt() string {
 		return x.UpdatedAt
 	}
 	return ""
+}
+
+func (x *Settings) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
+func (x *Settings) GetBookingEmail() string {
+	if x != nil {
+		return x.BookingEmail
+	}
+	return ""
+}
+
+func (x *Settings) GetAutoArchive() bool {
+	if x != nil {
+		return x.AutoArchive
+	}
+	return false
+}
+
+func (x *Settings) GetDiscordPosting() bool {
+	if x != nil {
+		return x.DiscordPosting
+	}
+	return false
+}
+
+func (x *Settings) GetSafeSpaceRequired() bool {
+	if x != nil {
+		return x.SafeSpaceRequired
+	}
+	return false
 }
 
 type SuccessResponse struct {
@@ -2061,7 +2125,7 @@ var File_proto_pyxis_v1_show_proto protoreflect.FileDescriptor
 
 const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\xbe\x04\n" +
+	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\x84\x05\n" +
 	"\x04Show\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
@@ -2073,10 +2137,13 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x03age\x18\x06 \x01(\tR\x03age\x12\x14\n" +
 	"\x05price\x18\a \x01(\tR\x05price\x12\x14\n" +
 	"\x05genre\x18\b \x01(\tR\x05genre\x12 \n" +
-	"\vdescription\x18\t \x01(\tR\vdescription\x122\n" +
+	"\vdescription\x18\t \x01(\tR\vdescription\x12\x14\n" +
+	"\x05notes\x18\x11 \x01(\tR\x05notes\x122\n" +
 	"\x06lineup\x18\n" +
 	" \x03(\v2\x1a.pyxis.v1.Show.LineupEntryR\x06lineup\x12\x1b\n" +
-	"\tflyer_url\x18\v \x01(\tR\bflyerUrl\x12\x16\n" +
+	"\tflyer_url\x18\v \x01(\tR\bflyerUrl\x12\x12\n" +
+	"\x04draw\x18\x12 \x01(\x05R\x04draw\x12\x1a\n" +
+	"\bcapacity\x18\x13 \x01(\x05R\bcapacity\x12\x16\n" +
 	"\x06status\x18\f \x01(\tR\x06status\x12#\n" +
 	"\rsubmission_id\x18\r \x01(\x05R\fsubmissionId\x12\x1b\n" +
 	"\tartist_id\x18\x0e \x01(\x05R\bartistId\x12\x1d\n" +
@@ -2226,7 +2293,7 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\tR\tcreatedAt\"F\n" +
 	"\x11AuditLogEntryList\x121\n" +
-	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xfc\x03\n" +
+	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xb9\x05\n" +
 	"\bSettings\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1d\n" +
 	"\n" +
@@ -2244,7 +2311,12 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x13discord_ch_bookings\x18\f \x01(\tR\x11discordChBookings\x12%\n" +
 	"\x0esetup_complete\x18\r \x01(\bR\rsetupComplete\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x0e \x01(\tR\tupdatedAt\"+\n" +
+	"updated_at\x18\x0e \x01(\tR\tupdatedAt\x12\x1a\n" +
+	"\btimezone\x18\x0f \x01(\tR\btimezone\x12#\n" +
+	"\rbooking_email\x18\x10 \x01(\tR\fbookingEmail\x12!\n" +
+	"\fauto_archive\x18\x11 \x01(\bR\vautoArchive\x12'\n" +
+	"\x0fdiscord_posting\x18\x12 \x01(\bR\x0ediscordPosting\x12.\n" +
+	"\x13safe_space_required\x18\x13 \x01(\bR\x11safeSpaceRequired\"+\n" +
 	"\x0fSuccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"{\n" +
 	"\rErrorResponse\x123\n" +

@@ -1,0 +1,10 @@
+ALTER TABLE shows
+    ADD COLUMN IF NOT EXISTS draw     INT,
+    ADD COLUMN IF NOT EXISTS capacity INT;
+
+ALTER TABLE settings
+    ADD COLUMN IF NOT EXISTS timezone             TEXT,
+    ADD COLUMN IF NOT EXISTS booking_email        TEXT,
+    ADD COLUMN IF NOT EXISTS auto_archive         BOOLEAN DEFAULT FALSE,
+    ADD COLUMN IF NOT EXISTS discord_posting      BOOLEAN DEFAULT FALSE,
+    ADD COLUMN IF NOT EXISTS safe_space_required  BOOLEAN DEFAULT FALSE;

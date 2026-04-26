@@ -23,8 +23,11 @@ type Show struct {
 	Price        string
 	Genre        string
 	Description  string
+	Notes        string
 	Lineup       []LineupEntry
 	FlyerURL     string
+	Draw         int
+	Capacity     int
 	Status       string
 	SubmissionID *int
 	ArtistID     *int

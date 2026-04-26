@@ -5,7 +5,7 @@ import { ShowTile } from './ShowTile';
 const show = {
   artist: 'Redroom Inferno',
   date: 'Fri, Feb 14',
-  doors_time: '9:00 PM',
+  doorsTime: '9:00 PM',
   age: '25+',
   price: '$10 adv / $15 door',
   kind: 'tickets' as const,

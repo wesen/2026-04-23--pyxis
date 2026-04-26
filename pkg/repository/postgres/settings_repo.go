@@ -63,6 +63,11 @@ func (r *SettingsRepo) Update(ctx context.Context, settings *domain.Settings) (*
 		params.DiscordChBookings = pgtype.Text{String: settings.DiscordChBookings, Valid: true}
 	}
 	params.SetupComplete = pgtype.Bool{Bool: settings.SetupComplete, Valid: true}
+	params.Timezone = pgtype.Text{String: settings.Timezone, Valid: settings.Timezone != ""}
+	params.BookingEmail = pgtype.Text{String: settings.BookingEmail, Valid: settings.BookingEmail != ""}
+	params.AutoArchive = pgtype.Bool{Bool: settings.AutoArchive, Valid: true}
+	params.DiscordPosting = pgtype.Bool{Bool: settings.DiscordPosting, Valid: true}
+	params.SafeSpaceRequired = pgtype.Bool{Bool: settings.SafeSpaceRequired, Valid: true}
 
 	row, err := r.queries.UpdateSettings(ctx, params)
 	if err != nil {
@@ -78,6 +83,7 @@ func dbSettingsToDomain(row db.Setting) *domain.Settings {
 		Tagline:                row.Tagline.String,
 		Address:                row.Address.String,
 		ContactEmail:           row.ContactEmail.String,
+		BookingEmail:           row.BookingEmail.String,
 		Website:                row.Website.String,
 		DiscordGuildID:         row.DiscordGuildID.String,
 		DiscordChUpcoming:      row.DiscordChUpcoming.String,
@@ -85,6 +91,10 @@ func dbSettingsToDomain(row db.Setting) *domain.Settings {
 		DiscordChStaff:         row.DiscordChStaff.String,
 		DiscordChBookings:      row.DiscordChBookings.String,
 		SetupComplete:          row.SetupComplete.Bool,
+		Timezone:               row.Timezone.String,
+		AutoArchive:            row.AutoArchive.Bool,
+		DiscordPosting:         row.DiscordPosting.Bool,
+		SafeSpaceRequired:      row.SafeSpaceRequired.Bool,
 		UpdatedAt:              row.UpdatedAt.Time,
 	}
 	if row.Capacity.Valid {

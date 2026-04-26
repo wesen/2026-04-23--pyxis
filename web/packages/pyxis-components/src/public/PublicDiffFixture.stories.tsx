@@ -20,6 +20,7 @@ import { Poster } from './Poster';
 import { ShowTile, type ShowTileShow } from './ShowTile';
 import { ShowGrid } from './ShowGrid';
 
+import { create, ShowSchema, Show_LineupEntrySchema, ArchiveStatsSchema } from 'pyxis-types';
 import { PublicPageHeader } from './PublicPageHeader';
 import { ReserveTicketCard } from './ReserveTicketCard';
 import { ShowDetailHeader } from './ShowDetailHeader';
@@ -45,36 +46,36 @@ function FixtureRow({ label, children }: { label: string; children: React.ReactN
   );
 }
 
-const show = {
+const show = create(ShowSchema, {
   id: 1,
   artist: 'Redroom Inferno',
   date: '2026-02-14',
-  doors_time: '9:00 PM',
+  doorsTime: '9:00 PM',
   genre: 'electronic / noise',
   price: '$10 adv / $15 door',
-  age: '21+' as const,
-  status: 'confirmed' as const,
-  created_at: '2026-01-01T00:00:00Z',
-  updated_at: '2026-01-01T00:00:00Z',
-};
+  age: '21+',
+  status: 'confirmed',
+  createdAt: '2026-01-01T00:00:00Z',
+  updatedAt: '2026-01-01T00:00:00Z',
+});
 
-const archiveShow = {
+const archiveShow = create(ShowSchema, {
   id: 2,
   artist: 'Winter Solstice Rave',
   date: '2025-12-12',
-  doors_time: '9:00 PM',
+  doorsTime: '9:00 PM',
   genre: 'Electronic',
   price: '$12',
-  age: '21+' as const,
-  status: 'archived' as const,
-  created_at: '2025-01-01T00:00:00Z',
-  updated_at: '2025-01-01T00:00:00Z',
-};
+  age: '21+',
+  status: 'archived',
+  createdAt: '2025-01-01T00:00:00Z',
+  updatedAt: '2025-01-01T00:00:00Z',
+});
 
 const tileShows: ShowTileShow[] = [
-  { artist: 'Redroom Inferno', date: 'Fri, Feb 14', doors_time: '9:00 PM', age: '25+', price: '$10 adv / $15 door', kind: 'tickets', poster: 'redroom' },
-  { artist: '808 Collective', date: 'Fri, Feb 21', doors_time: '8:00 PM', age: '21+', price: '$12', kind: 'tickets', poster: 'pixel808' },
-  { artist: 'Petals of Love', date: 'Sat, Feb 28', doors_time: '6:30 PM', age: 'All Ages', price: '$15', kind: 'tickets', poster: 'petals' },
+  { artist: 'Redroom Inferno', date: 'Fri, Feb 14', doorsTime: '9:00 PM', age: '25+', price: '$10 adv / $15 door', kind: 'tickets', poster: 'redroom' },
+  { artist: '808 Collective', date: 'Fri, Feb 21', doorsTime: '8:00 PM', age: '21+', price: '$12', kind: 'tickets', poster: 'pixel808' },
+  { artist: 'Petals of Love', date: 'Sat, Feb 28', doorsTime: '6:30 PM', age: 'All Ages', price: '$15', kind: 'tickets', poster: 'petals' },
 ];
 
 function PublicDiffFixture() {
@@ -96,7 +97,7 @@ function PublicDiffFixture() {
 
       <FixtureRow label="Lineup">
         <div data-comp="public-lineup-row-default" style={{ width: 360 }}>
-          <LineupRow entry={{ start_time: '9:45', artist: 'sable witch', role: 'support' }} />
+          <LineupRow entry={create(Show_LineupEntrySchema, { startTime: '9:45', artist: 'sable witch', role: 'support' })} />
         </div>
       </FixtureRow>
 
@@ -117,7 +118,7 @@ function PublicDiffFixture() {
 
       <FixtureRow label="Archive stats">
         <div data-comp="public-archive-stats-default" style={{ width: 680 }}>
-          <ArchiveStats stats={{ total_shows: 194, total_attendance: 312, years_running: 31, unique_artists: 0 }} />
+          <ArchiveStats stats={create(ArchiveStatsSchema, { totalShows: 194, totalAttendance: 312, yearsRunning: 31, uniqueArtists: 0 })} />
         </div>
       </FixtureRow>
 

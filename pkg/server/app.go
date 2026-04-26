@@ -171,7 +171,10 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 		Price:       pb.Price,
 		Genre:       pb.Genre,
 		Description: pb.Description,
+		Notes:       pb.Notes,
 		FlyerURL:    pb.FlyerUrl,
+		Draw:        int(pb.Draw),
+		Capacity:    int(pb.Capacity),
 		Status:      pb.Status,
 	}
 	if pb.Date != "" {

@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { create, Show_LineupEntrySchema } from 'pyxis-types';
 import { LineupRow } from './LineupRow';
 
 const meta: Meta<typeof LineupRow> = {
@@ -12,15 +13,15 @@ export default meta;
 type Story = StoryObj<typeof LineupRow>;
 
 export const Default: Story = {
-  args: { entry: { artist: 'Burial Hex', role: 'headline', start_time: '9:00 PM' } },
+  args: { entry: create(Show_LineupEntrySchema, { artist: 'Burial Hex', role: 'headline', startTime: '9:00 PM' }) },
 };
 
 export const Support: Story = {
-  args: { entry: { artist: 'DJ TBA', role: 'support', start_time: '8:15 PM' } },
+  args: { entry: create(Show_LineupEntrySchema, { artist: 'DJ TBA', role: 'support', startTime: '8:15 PM' }) },
 };
 
 export const ThemeOverride: Story = {
-  args: { entry: { artist: 'Burial Hex', role: 'headline', start_time: '9:00 PM' } },
+  args: { entry: create(Show_LineupEntrySchema, { artist: 'Burial Hex', role: 'headline', startTime: '9:00 PM' }) },
   render: (args) => (
     <div
       style={{

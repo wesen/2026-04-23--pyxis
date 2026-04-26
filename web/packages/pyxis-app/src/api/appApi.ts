@@ -58,10 +58,10 @@ export const appApi = createApi({
             price: show.price,
             status: show.status,
             genre: show.genre,
-            draw: 0,
-            capacity: 150,
+            draw: show.draw,
+            capacity: show.capacity,
             pinned: false,
-            notes: '',
+            notes: show.notes,
           })
         );
       },

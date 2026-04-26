@@ -14,8 +14,11 @@ message Show {
   string price         = 7;
   string genre         = 8;
   string description   = 9;
+  string notes         = 17;
   repeated LineupEntry lineup = 10;
   string flyer_url     = 11;
+  int32  draw          = 18;
+  int32  capacity      = 19;
   string status        = 12;
   int32  submission_id = 13;
   int32  artist_id     = 14;
@@ -199,6 +202,11 @@ message Settings {
   string discord_ch_bookings      = 12;
   bool   setup_complete           = 13;
   string updated_at               = 14;
+  string timezone                 = 15;
+  string booking_email            = 16;
+  bool   auto_archive             = 17;
+  bool   discord_posting          = 18;
+  bool   safe_space_required      = 19;
 }
 
 message SuccessResponse {

@@ -79,6 +79,11 @@ type Setting struct {
 	DiscordChBookings      pgtype.Text        `json:"discordChBookings"`
 	SetupComplete          pgtype.Bool        `json:"setupComplete"`
 	UpdatedAt              pgtype.Timestamptz `json:"updatedAt"`
+	Timezone               pgtype.Text        `json:"timezone"`
+	BookingEmail           pgtype.Text        `json:"bookingEmail"`
+	AutoArchive            pgtype.Bool        `json:"autoArchive"`
+	DiscordPosting         pgtype.Bool        `json:"discordPosting"`
+	SafeSpaceRequired      pgtype.Bool        `json:"safeSpaceRequired"`
 }
 
 type Show struct {
@@ -101,6 +106,8 @@ type Show struct {
 	CreatedBy        pgtype.Int4        `json:"createdBy"`
 	CreatedAt        pgtype.Timestamptz `json:"createdAt"`
 	UpdatedAt        pgtype.Timestamptz `json:"updatedAt"`
+	Draw             pgtype.Int4        `json:"draw"`
+	Capacity         pgtype.Int4        `json:"capacity"`
 }
 
 type ShowLineup struct {

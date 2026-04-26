@@ -82,6 +82,11 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 	if show.Description != "" {
 		params.Description = pgtype.Text{String: show.Description, Valid: true}
 	}
+	if show.Notes != "" {
+		params.Notes = pgtype.Text{String: show.Notes, Valid: true}
+	}
+	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
+	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 	if show.SubmissionID != nil {
 		params.SubmissionID = pgtype.Int4{Int32: int32(*show.SubmissionID), Valid: true}
 	}
@@ -127,6 +132,11 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 	if show.Description != "" {
 		params.Description = pgtype.Text{String: show.Description, Valid: true}
 	}
+	if show.Notes != "" {
+		params.Notes = pgtype.Text{String: show.Notes, Valid: true}
+	}
+	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
+	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 
 	row, err := r.queries.UpdateShow(ctx, params)
 	if err != nil {
@@ -197,7 +207,10 @@ func upcomingRowToShow(row db.ListUpcomingShowsRow) domain.Show {
 		Price:       row.Price.String,
 		Genre:       row.Genre.String,
 		Description: row.Description.String,
+		Notes:       row.Notes.String,
 		FlyerURL:    row.FlyerUrl.String,
+		Draw:        int(row.Draw.Int32),
+		Capacity:    int(row.Capacity.Int32),
 		Status:      row.Status,
 		CreatedAt:   row.CreatedAt.Time,
 		UpdatedAt:   row.UpdatedAt.Time,
@@ -224,7 +237,10 @@ func rowToShow(row db.Show) *domain.Show {
 		Price:       row.Price.String,
 		Genre:       row.Genre.String,
 		Description: row.Description.String,
+		Notes:       row.Notes.String,
 		FlyerURL:    row.FlyerUrl.String,
+		Draw:        int(row.Draw.Int32),
+		Capacity:    int(row.Capacity.Int32),
 		Status:      row.Status,
 		CreatedAt:   row.CreatedAt.Time,
 		UpdatedAt:   row.UpdatedAt.Time,

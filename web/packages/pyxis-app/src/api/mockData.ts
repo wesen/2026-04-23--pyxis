@@ -81,6 +81,7 @@ export const settings = create(SettingsSchema, {
   address: '319 N 11th St, Philadelphia, PA',
   capacity: 150,
   contactEmail: 'booking@pyxis.xyz',
+  bookingEmail: 'booking@pyxis.xyz',
   website: '',
   discordGuildId: '',
   discordChUpcoming: '',
@@ -88,6 +89,10 @@ export const settings = create(SettingsSchema, {
   discordChStaff: '',
   discordChBookings: '',
   setupComplete: true,
+  timezone: 'America/New_York',
+  autoArchive: true,
+  discordPosting: true,
+  safeSpaceRequired: true,
   updatedAt: '',
 });
 

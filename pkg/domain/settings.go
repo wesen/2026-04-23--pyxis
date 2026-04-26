@@ -9,8 +9,13 @@ type Settings struct {
 	Tagline                string
 	Address                string
 	Capacity               *int
+	Timezone               string
 	ContactEmail           string
+	BookingEmail           string
 	Website                string
+	AutoArchive            bool
+	DiscordPosting         bool
+	SafeSpaceRequired      bool
 	DiscordGuildID         string
 	DiscordChUpcoming      string
 	DiscordChAnnouncements string

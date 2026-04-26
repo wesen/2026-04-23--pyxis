@@ -12,7 +12,7 @@ import (
 )
 
 const getSettings = `-- name: GetSettings :one
-SELECT id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at FROM settings WHERE id = 1
+SELECT id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required FROM settings WHERE id = 1
 `
 
 func (q *Queries) GetSettings(ctx context.Context) (Setting, error) {
@@ -33,6 +33,11 @@ func (q *Queries) GetSettings(ctx context.Context) (Setting, error) {
 		&i.DiscordChBookings,
 		&i.SetupComplete,
 		&i.UpdatedAt,
+		&i.Timezone,
+		&i.BookingEmail,
+		&i.AutoArchive,
+		&i.DiscordPosting,
+		&i.SafeSpaceRequired,
 	)
 	return i, err
 }
@@ -51,9 +56,14 @@ SET space_name = COALESCE($1, space_name),
     discord_ch_staff = COALESCE($10, discord_ch_staff),
     discord_ch_bookings = COALESCE($11, discord_ch_bookings),
     setup_complete = COALESCE($12, setup_complete),
+    timezone = COALESCE($13, timezone),
+    booking_email = COALESCE($14, booking_email),
+    auto_archive = COALESCE($15, auto_archive),
+    discord_posting = COALESCE($16, discord_posting),
+    safe_space_required = COALESCE($17, safe_space_required),
     updated_at = NOW()
 WHERE id = 1
-RETURNING id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at
+RETURNING id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required
 `
 
 type UpdateSettingsParams struct {
@@ -69,6 +79,11 @@ type UpdateSettingsParams struct {
 	DiscordChStaff         pgtype.Text `json:"discordChStaff"`
 	DiscordChBookings      pgtype.Text `json:"discordChBookings"`
 	SetupComplete          pgtype.Bool `json:"setupComplete"`
+	Timezone               pgtype.Text `json:"timezone"`
+	BookingEmail           pgtype.Text `json:"bookingEmail"`
+	AutoArchive            pgtype.Bool `json:"autoArchive"`
+	DiscordPosting         pgtype.Bool `json:"discordPosting"`
+	SafeSpaceRequired      pgtype.Bool `json:"safeSpaceRequired"`
 }
 
 func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) (Setting, error) {
@@ -85,6 +100,11 @@ func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) 
 		arg.DiscordChStaff,
 		arg.DiscordChBookings,
 		arg.SetupComplete,
+		arg.Timezone,
+		arg.BookingEmail,
+		arg.AutoArchive,
+		arg.DiscordPosting,
+		arg.SafeSpaceRequired,
 	)
 	var i Setting
 	err := row.Scan(
@@ -102,6 +122,11 @@ func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) 
 		&i.DiscordChBookings,
 		&i.SetupComplete,
 		&i.UpdatedAt,
+		&i.Timezone,
+		&i.BookingEmail,
+		&i.AutoArchive,
+		&i.DiscordPosting,
+		&i.SafeSpaceRequired,
 	)
 	return i, err
 }

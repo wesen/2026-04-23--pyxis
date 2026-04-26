@@ -12,7 +12,7 @@ import (
 )
 
 const archiveShow = `-- name: ArchiveShow :one
-UPDATE shows AS s SET status = 'archived', updated_at = NOW() WHERE s.id = $1 RETURNING s.id, s.artist, s.date, s.doors_time, s.start_time, s.age, s.price, s.genre, s.description, s.notes, s.status, s.flyer_url, s.discord_message_id, s.discord_channel_id, s.submission_id, s.artist_id, s.created_by, s.created_at, s.updated_at
+UPDATE shows AS s SET status = 'archived', updated_at = NOW() WHERE s.id = $1 RETURNING s.id, s.artist, s.date, s.doors_time, s.start_time, s.age, s.price, s.genre, s.description, s.notes, s.status, s.flyer_url, s.discord_message_id, s.discord_channel_id, s.submission_id, s.artist_id, s.created_by, s.created_at, s.updated_at, s.draw, s.capacity
 `
 
 func (q *Queries) ArchiveShow(ctx context.Context, id int32) (Show, error) {
@@ -38,15 +38,18 @@ func (q *Queries) ArchiveShow(ctx context.Context, id int32) (Show, error) {
 		&i.CreatedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
 	)
 	return i, err
 }
 
 const createShow = `-- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
-                   genre, description, status, submission_id, artist_id, created_by)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-RETURNING id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at
+                   genre, description, notes, status, draw, capacity,
+                   submission_id, artist_id, created_by)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+RETURNING id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at, draw, capacity
 `
 
 type CreateShowParams struct {
@@ -58,7 +61,10 @@ type CreateShowParams struct {
 	Price        pgtype.Text `json:"price"`
 	Genre        pgtype.Text `json:"genre"`
 	Description  pgtype.Text `json:"description"`
+	Notes        pgtype.Text `json:"notes"`
 	Status       string      `json:"status"`
+	Draw         pgtype.Int4 `json:"draw"`
+	Capacity     pgtype.Int4 `json:"capacity"`
 	SubmissionID pgtype.Int4 `json:"submissionId"`
 	ArtistID     pgtype.Int4 `json:"artistId"`
 	CreatedBy    pgtype.Int4 `json:"createdBy"`
@@ -74,7 +80,10 @@ func (q *Queries) CreateShow(ctx context.Context, arg CreateShowParams) (Show, e
 		arg.Price,
 		arg.Genre,
 		arg.Description,
+		arg.Notes,
 		arg.Status,
+		arg.Draw,
+		arg.Capacity,
 		arg.SubmissionID,
 		arg.ArtistID,
 		arg.CreatedBy,
@@ -100,6 +109,8 @@ func (q *Queries) CreateShow(ctx context.Context, arg CreateShowParams) (Show, e
 		&i.CreatedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
 	)
 	return i, err
 }
@@ -135,7 +146,7 @@ func (q *Queries) GetArchiveStats(ctx context.Context) (GetArchiveStatsRow, erro
 }
 
 const getShow = `-- name: GetShow :one
-SELECT id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at FROM shows WHERE id = $1
+SELECT id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at, draw, capacity FROM shows WHERE id = $1
 `
 
 func (q *Queries) GetShow(ctx context.Context, id int32) (Show, error) {
@@ -161,13 +172,15 @@ func (q *Queries) GetShow(ctx context.Context, id int32) (Show, error) {
 		&i.CreatedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
 	)
 	return i, err
 }
 
 const getShowWithLineup = `-- name: GetShowWithLineup :one
 SELECT
-    s.id, s.artist, s.date, s.doors_time, s.start_time, s.age, s.price, s.genre, s.description, s.notes, s.status, s.flyer_url, s.discord_message_id, s.discord_channel_id, s.submission_id, s.artist_id, s.created_by, s.created_at, s.updated_at,
+    s.id, s.artist, s.date, s.doors_time, s.start_time, s.age, s.price, s.genre, s.description, s.notes, s.status, s.flyer_url, s.discord_message_id, s.discord_channel_id, s.submission_id, s.artist_id, s.created_by, s.created_at, s.updated_at, s.draw, s.capacity,
     COALESCE(
         jsonb_agg(
             jsonb_build_object(
@@ -205,6 +218,8 @@ type GetShowWithLineupRow struct {
 	CreatedBy        pgtype.Int4        `json:"createdBy"`
 	CreatedAt        pgtype.Timestamptz `json:"createdAt"`
 	UpdatedAt        pgtype.Timestamptz `json:"updatedAt"`
+	Draw             pgtype.Int4        `json:"draw"`
+	Capacity         pgtype.Int4        `json:"capacity"`
 	Lineup           interface{}        `json:"lineup"`
 }
 
@@ -231,13 +246,15 @@ func (q *Queries) GetShowWithLineup(ctx context.Context, id int32) (GetShowWithL
 		&i.CreatedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
 		&i.Lineup,
 	)
 	return i, err
 }
 
 const listAllShows = `-- name: ListAllShows :many
-SELECT id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at FROM shows ORDER BY date DESC
+SELECT id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at, draw, capacity FROM shows ORDER BY date DESC
 `
 
 func (q *Queries) ListAllShows(ctx context.Context) ([]Show, error) {
@@ -269,6 +286,8 @@ func (q *Queries) ListAllShows(ctx context.Context) ([]Show, error) {
 			&i.CreatedBy,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.Draw,
+			&i.Capacity,
 		); err != nil {
 			return nil, err
 		}
@@ -282,8 +301,8 @@ func (q *Queries) ListAllShows(ctx context.Context) ([]Show, error) {
 
 const listUpcomingShows = `-- name: ListUpcomingShows :many
 SELECT id, artist, date, doors_time, start_time, age, price, genre,
-       description, status, flyer_url, submission_id, artist_id,
-       created_at, updated_at
+       description, notes, status, flyer_url, draw, capacity,
+       submission_id, artist_id, created_at, updated_at
 FROM shows
 WHERE status = 'confirmed' AND date >= CURRENT_DATE
 ORDER BY date ASC
@@ -299,8 +318,11 @@ type ListUpcomingShowsRow struct {
 	Price        pgtype.Text        `json:"price"`
 	Genre        pgtype.Text        `json:"genre"`
 	Description  pgtype.Text        `json:"description"`
+	Notes        pgtype.Text        `json:"notes"`
 	Status       string             `json:"status"`
 	FlyerUrl     pgtype.Text        `json:"flyerUrl"`
+	Draw         pgtype.Int4        `json:"draw"`
+	Capacity     pgtype.Int4        `json:"capacity"`
 	SubmissionID pgtype.Int4        `json:"submissionId"`
 	ArtistID     pgtype.Int4        `json:"artistId"`
 	CreatedAt    pgtype.Timestamptz `json:"createdAt"`
@@ -326,8 +348,11 @@ func (q *Queries) ListUpcomingShows(ctx context.Context) ([]ListUpcomingShowsRow
 			&i.Price,
 			&i.Genre,
 			&i.Description,
+			&i.Notes,
 			&i.Status,
 			&i.FlyerUrl,
+			&i.Draw,
+			&i.Capacity,
 			&i.SubmissionID,
 			&i.ArtistID,
 			&i.CreatedAt,
@@ -389,10 +414,11 @@ func (q *Queries) SearchArchive(ctx context.Context, dollar_1 string) ([]SearchA
 const updateShow = `-- name: UpdateShow :one
 UPDATE shows
 SET artist = $2, date = $3, doors_time = $4, start_time = $5,
-    age = $6, price = $7, genre = $8, description = $9, status = $10,
+    age = $6, price = $7, genre = $8, description = $9, notes = $10,
+    status = $11, draw = $12, capacity = $13,
     updated_at = NOW()
 WHERE id = $1
-RETURNING id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at
+RETURNING id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at, draw, capacity
 `
 
 type UpdateShowParams struct {
@@ -405,7 +431,10 @@ type UpdateShowParams struct {
 	Price       pgtype.Text `json:"price"`
 	Genre       pgtype.Text `json:"genre"`
 	Description pgtype.Text `json:"description"`
+	Notes       pgtype.Text `json:"notes"`
 	Status      string      `json:"status"`
+	Draw        pgtype.Int4 `json:"draw"`
+	Capacity    pgtype.Int4 `json:"capacity"`
 }
 
 func (q *Queries) UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, error) {
@@ -419,7 +448,10 @@ func (q *Queries) UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, e
 		arg.Price,
 		arg.Genre,
 		arg.Description,
+		arg.Notes,
 		arg.Status,
+		arg.Draw,
+		arg.Capacity,
 	)
 	var i Show
 	err := row.Scan(
@@ -442,6 +474,8 @@ func (q *Queries) UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, e
 		&i.CreatedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
 	)
 	return i, err
 }
