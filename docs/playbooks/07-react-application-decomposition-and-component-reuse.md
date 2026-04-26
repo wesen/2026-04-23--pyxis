@@ -588,6 +588,61 @@ move files + rewrite props + switch to shared component + retune CSS
 
 That creates too many possible regression causes.
 
+### Phase 8C visual guard loop
+
+During a props/reuse refactor, use `css-visual-diff` as a guardrail, not only as a final acceptance test.
+
+Use this sequence for each cluster:
+
+1. **Baseline before refactor** — run the focused component/organism target and save the summary output outside source-controlled paths or under ticket `various/` for temporary inspection.
+2. **Inspect crops first** — open `left_region.png` and `right_region.png`; do not rely only on `diff_only.png`.
+3. **Refactor only API/ownership first** — named props, stories, callbacks, wrapper components, and CSS relocation should preserve rendered markup/values unless the cluster explicitly includes visual tuning.
+4. **Re-run the same focused target** — compare changed percent, bounds, text, and style diffs against the baseline.
+5. **Use `inspect-spec` for nested drift** — if the component still appears close but a label/badge/button/row moved, inspect the nested element with typography/layout/surface presets instead of guessing.
+6. **Run a page-section checkpoint** — after a reusable molecule/atom changes, check at least one organism/page section that uses it.
+7. **Only then broaden** — run the full page or suite when the affected focused targets are stable.
+
+Example focused component baseline:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page metric-card \
+  --summary \
+  --outDir ttmp/.../various/25-phase-8c-visual-guard/baseline-metric-card \
+  --output json
+```
+
+Example nested inspection after a shared row/badge/button change:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --section component \
+  --elements '[data-pyxis-component="show-table-row"] [data-cell="status"],[data-pyxis-component="status-pill"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+Example section checkpoint after changing a shared molecule:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page shows \
+  --section confirmed \
+  --summary \
+  --outDir ttmp/.../various/25-phase-8c-visual-guard/shows-confirmed-after \
+  --output json
+```
+
+For a pure props/story pass, the expected visual result is **no meaningful movement**. A changed percent may still drift slightly due to rendering noise, but text, crop bounds, and root styles should stay stable. If a reuse change intentionally swaps to `Card`, `Stat`, `Badge`, `Table`, `Empty`, or `Modal`, document the visual delta and decide whether to tune immediately or defer with an accepted reason.
+
 ## RTK Query decomposition pattern
 
 ### Before
