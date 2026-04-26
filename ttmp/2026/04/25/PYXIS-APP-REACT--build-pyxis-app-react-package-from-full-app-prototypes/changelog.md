@@ -106,3 +106,16 @@ Step 18: Consolidated Dashboard shell/header organisms and lightened the shared 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppShell.tsx — Extracted shell/header organisms
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/styles/app-tokens.css — Whiter canvas/surface token update
 
+
+## 2026-04-25
+
+Step 19: Added and validated spec-aware nested visual inspection for Dashboard Hero; button/date typography can now be inspected directly, but Hero remains tune-required at 18.0894% / 25862 px (commit ed55e40).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/screens/auth-dash.jsx — prototype Dashboard Hero data-element hooks
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/lib/styles.js — expanded typography/layout presets
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/verbs/pyxis-pages.js — inspect-spec verb for nested element inspection
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png — Final Hero crop evidence for WIP checkpoint
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx — React Dashboard Hero data-element hooks and button/date tuning
+

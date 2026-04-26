@@ -18,10 +18,14 @@ RelatedFiles:
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/visual-diff/userland/lib/compare-region.js
       Note: Threaded section filter through compare-spec target execution
+    - Path: prototype-design/visual-diff/userland/lib/styles.js
+      Note: Expanded inspect presets for typography/layout debugging (commit ed55e40)
     - Path: prototype-design/visual-diff/userland/specs/app.components.visual.yml
       Note: Initial pyxis-app component visual suite
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
-      Note: Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
+      Note: |-
+        Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
+        Validated nested inspect-spec workflow (commit ed55e40)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
       Note: |-
         Runbook for compact-output visual loop and stop-when-close rule
@@ -46,6 +50,8 @@ RelatedFiles:
       Note: Final inspected React crop for dashboard-quick-actions review-band result (commit 12cc17c)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/right_region.png
       Note: Final topbar crop evidence (commit 80661fc)
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png
+      Note: Final inspected Hero crop for current WIP checkpoint (commit ed55e40)
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -61,7 +67,9 @@ RelatedFiles:
     - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx
       Note: Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
-      Note: Dashboard quick action button icon/full-width reuse (commit 12cc17c)
+      Note: |-
+        Dashboard quick action button icon/full-width reuse (commit 12cc17c)
+        Hero subelement hooks and WIP tuning (commit ed55e40)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
@@ -95,6 +103,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -2138,4 +2147,203 @@ Final evidence paths:
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/sidebar/dashboard/artifacts/sidebar/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-07-shell-header-whiter-canvas/dashboard/artifacts/page/right_region.png
+```
+
+## Step 19: Validate nested visual inspection and pause Dashboard Hero tuning with evidence
+
+The user asked me to validate the new flexible inspection workflow instead of only documenting a desired command shape. I implemented and exercised a spec-aware nested inspection verb, then used it on the Dashboard Hero to inspect the exact button and date-line typography/layout that were difficult to reason about from the section crop alone.
+
+The Hero is not finished yet. The nested inspection proved the instructions and made the button/date typography much more diagnosable, but the final hero crop remains `tune-required`; the next session should continue from the saved evidence rather than guessing at root-level section CSS.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, validate your instructions. to make sure they are correct. make the hero perfect."
+
+**Assistant interpretation:** Turn the runbook's proposed nested inspection workflow into a working tool path, validate it against Dashboard Hero subelements, and use it to improve the Hero.
+
+**Inferred user intent:** Avoid speculative CSS tuning by making the visual tooling expose the exact typography/layout differences for nested elements like buttons and date text.
+
+**Commit (code):** ed55e40 — "Add nested visual inspection for dashboard hero"
+
+### What I did
+
+- Implemented `pyxis pages inspect-spec` in `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`.
+- Extended typography/layout/surface presets in `prototype-design/visual-diff/userland/lib/styles.js` so nested inspection can report properties such as:
+  - `text-transform`,
+  - `opacity`,
+  - `visibility`,
+  - `white-space`,
+  - `overflow`,
+  - flex/grid alignment,
+  - min/max dimensions.
+- Updated prototype `Btn` in `prototype-design/lib/components.jsx` to forward rest props so diagnostic `data-element` hooks can be attached.
+- Added matching prototype and React `data-element` hooks for Dashboard Hero:
+  - `hero-artist`,
+  - `hero-date-line`,
+  - `hero-date`,
+  - `hero-doors`,
+  - `hero-age`,
+  - `hero-price`,
+  - `hero-actions`,
+  - `hero-discord-action`,
+  - `hero-edit-action`.
+- Validated the runbook command pattern against real Dashboard Hero elements using `inspect-spec`.
+- Used the new inspection output to tune the Hero button typography/layout and date-line typography/layout.
+- Updated the runbook to say the command shape is now validated and to explain when to use `typography` vs `layout` inspection.
+- Preserved Dashboard Hero visual artifacts under:
+  - `various/14-dashboard-hero-consolidation/`.
+
+### Why
+
+- The `compare-spec --summary` row only reports root-level section styles, so it could not explain why the `View on Discord` button label looked wrong or why the `Fri, May 2, 2025` line drifted.
+- Nested inspection lets us compare the same subelement on the prototype and React side with the exact CSS properties needed for the current question.
+- Stable hooks are more reliable than one-off Playwright snippets and make the diary/review evidence reproducible.
+
+### What worked
+
+- TypeScript validation passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- The new `inspect-spec` command worked for app specs after the earlier default-registry failure:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-discord-action"],[data-element="hero-date-line"],[data-element="hero-date"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+- It proved the `View on Discord` typography matched after tuning:
+
+```text
+hero-discord-action typography: no styleDiffs
+textChanged: false
+left/right text: View on Discord
+font-size: 13px both
+font-weight: 500 both
+line-height: 15.6px both
+color: rgb(255, 255, 255) both
+```
+
+- It proved the date text content and typography mostly matched:
+
+```text
+hero-date textChanged: false
+left/right text: Fri, May 2, 2025
+font-size: 13px both
+font-weight: 400 both
+line-height: 19.5px both
+letter-spacing: normal both
+remaining typography diff: rgba(255,255,255,.7) vs rgba(255,255,255,.72)
+```
+
+- Layout inspection then exposed remaining positional/bounds differences for the same elements:
+
+```text
+hero-discord-action layout: display/gap/padding/width/height matched after tuning
+hero-actions layout: display/gap/width/height matched after tuning
+hero-date-line layout: x matched, but width differed after allowing the text column to flex
+hero-artist layout: width differed and React still had margin-top 8px vs prototype 0px
+```
+
+- Final section comparison improved some element-level details but did not finish the section:
+
+```text
+run-06-button-date-inspect: 18.089362654580047%, 25862 changed pixels, tune-required
+```
+
+- Inspected final crops:
+
+```text
+various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/left_region.png
+various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png
+various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/diff_only.png
+```
+
+### What didn't work
+
+- The first attempt to use the old `inspect-section` command failed because it read the default public-page registry rather than the app visual spec:
+
+```text
+Error: unknown page: dashboard
+```
+
+- The root-level Hero comparison stayed in `tune-required` even after nested typography matched, because residual differences are now layout/mark/overall section composition rather than just button/date typography.
+- A `data-pyxis-part="label"` selector is available on React buttons but not on the prototype `Btn`, so comparing the button root is more reliable unless prototype button internals also get part hooks.
+
+### What I learned
+
+- The new workflow is valid: use `compare-spec` to find the mismatching section, inspect individual crops, then use `inspect-spec` with `typography` and `layout` on specific subelements.
+- Button and date typography were not the only remaining Hero problem. After those matched, the hero still drifted because of positioning, decorative mark geometry, and text-column/action-column proportions.
+- Subelement hooks should be added to both prototype and React before repeated tuning; otherwise selectors either miss on one side or compare the wrong level.
+
+### What was tricky to build
+
+The tricky part was making inspection spec-aware without disrupting the existing compare flow. The old registry-based inspect path did not know about `app.pages.desktop.visual.yml`, so I added a new `inspect-spec` verb that resolves page, section, URLs, viewport, and selectors directly from the passed spec.
+
+The other tricky part was selector scoping. The new command treats element selectors as relative to the section selector by default, supports `&` for the section root, and lets absolute-ish selectors pass through when they already include `data-section`, `html`, or `body`.
+
+### What warrants a second pair of eyes
+
+- Review `inspect-spec` implementation for selector scoping edge cases and whether comma-separated selectors are enough or whether it should eventually accept YAML/JSON element specs.
+- Review whether prototype `Btn` should get `data-pyxis-component`/`data-pyxis-part` hooks to make shared component subpart comparisons easier.
+- Review the current Dashboard Hero CSS before continuing; the section is not accepted and should not be marked complete.
+
+### What should be done in the future
+
+- Continue Phase 7.2 Hero tuning from the nested inspection evidence.
+- Next likely Hero targets:
+  - remove React `hero-artist` margin-top drift,
+  - align Hero text column/action column proportions,
+  - tune decorative `PyxisMark` placement/opacity/shape,
+  - re-run `inspect-spec --stylePreset layout` for `hero-artist`, `hero-date-line`, and `hero-actions`,
+  - then re-run the Hero section comparison.
+- Consider adding a ticket script for nested inspect commands once the pattern is used more than once.
+
+### Code review instructions
+
+- Start with:
+  - `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`,
+  - `prototype-design/visual-diff/userland/lib/styles.js`,
+  - `prototype-design/lib/components.jsx`,
+  - `prototype-design/screens/auth-dash.jsx`,
+  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`,
+  - `ttmp/.../playbooks/02-pyxis-app-css-visual-improvement-loop.md`.
+- Validate the new tool path with:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-discord-action"],[data-element="hero-date-line"],[data-element="hero-date"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+- Validate the app with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Technical details
+
+Final evidence paths:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/left_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/diff_only.png
 ```
