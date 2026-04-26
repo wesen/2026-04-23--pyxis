@@ -416,6 +416,101 @@ func submissionToProto(sub *domain.Submission) map[string]interface{} {
 	return pb
 }
 
+func (s *Server) handleAnnounceShow(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	actorName := user.DiscordUsername
+
+	if err := s.showService.Announce(ctx, id, actorID, actorName); err != nil {
+		respondError(w, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"success":true}`))
+}
+
+func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	showID, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		respondError(w, fmt.Errorf("parse form: %w", err))
+		return
+	}
+
+	file, header, err := r.FormFile("flyer")
+	if err != nil {
+		respondError(w, fmt.Errorf("get file: %w", err))
+		return
+	}
+	defer file.Close()
+
+	url, err := s.flyerStore.Upload(ctx, showID, header.Filename, file)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"url": url,
+	})
+}
+
+func (s *Server) handleDeleteFlyer(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	showID, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	filename := r.URL.Query().Get("filename")
+	if filename == "" {
+		respondError(w, fmt.Errorf("filename required"))
+		return
+	}
+
+	if err := s.flyerStore.Delete(ctx, showID, filename); err != nil {
+		respondError(w, err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+}
+
 func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 

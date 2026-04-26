@@ -22,9 +22,15 @@ func NewCommandGroup() ([]glazedcmds.Command, error) {
 		return nil, err
 	}
 
+	exportCmd, err := pyxiscmds.NewExportCommand()
+	if err != nil {
+		return nil, err
+	}
+
 	return []glazedcmds.Command{
 		serveCmd,
 		migrateCmd,
 		seedCmd,
+		exportCmd,
 	}, nil
 }

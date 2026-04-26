@@ -7,8 +7,10 @@ import (
 
 	"github.com/go-go-golems/pyxis/pkg/config"
 	"github.com/go-go-golems/pyxis/pkg/db"
+	"github.com/go-go-golems/pyxis/pkg/discord"
 	"github.com/go-go-golems/pyxis/pkg/repository/postgres"
 	"github.com/go-go-golems/pyxis/pkg/service"
+	"github.com/go-go-golems/pyxis/pkg/storage"
 	"github.com/rs/zerolog/log"
 )
 
@@ -24,6 +26,7 @@ type Server struct {
 	settingsService   *service.SettingsService
 	auditService      service.AuditService
 	authService       *service.AuthService
+	flyerStore        storage.FlyerStore
 }
 
 // New creates a new Server with routes wired.
@@ -40,9 +43,13 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	attendanceRepo := postgres.NewAttendanceRepo(queries)
 	settingsRepo := postgres.NewSettingsRepo(queries)
 
+	// Storage layer
+	s.flyerStore = storage.NewLocalFlyerStore("./data/flyers", "/flyers")
+
 	// Service layer
+	discordClient := discord.Client(&discord.NoOpClient{})
 	s.auditService = service.NewAuditService(auditRepo)
-	s.showService = service.NewShowService(showRepo, s.auditService)
+	s.showService = service.NewShowService(showRepo, s.auditService, discordClient)
 	s.artistService = service.NewArtistService(artistRepo)
 	s.calendarService = service.NewCalendarService(calendarRepo)
 	s.attendanceService = service.NewAttendanceService(attendanceRepo)
@@ -85,6 +92,11 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("PATCH /api/app/shows/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateShow))))
 	mux.Handle("PATCH /api/app/shows/{id}/cancel", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCancelShow))))
 	mux.Handle("PATCH /api/app/shows/{id}/archive", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleArchiveShow))))
+	mux.Handle("POST /api/app/shows/{id}/announce", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleAnnounceShow))))
+
+	// Staff flyer endpoints
+	mux.Handle("POST /api/app/shows/{id}/flyer", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUploadFlyer))))
+	mux.Handle("DELETE /api/app/shows/{id}/flyer", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeleteFlyer))))
 
 	// Staff booking endpoints
 	mux.Handle("GET /api/app/bookings", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleListBookings))))

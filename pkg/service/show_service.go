@@ -4,19 +4,24 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/go-go-golems/pyxis/pkg/discord"
 	"github.com/go-go-golems/pyxis/pkg/domain"
 	"github.com/go-go-golems/pyxis/pkg/repository"
 )
 
 // ShowService provides business logic for shows.
 type ShowService struct {
-	shows repository.ShowRepository
-	audit AuditService
+	shows   repository.ShowRepository
+	audit   AuditService
+	discord discord.Client
 }
 
 // NewShowService creates a new ShowService.
-func NewShowService(shows repository.ShowRepository, audit AuditService) *ShowService {
-	return &ShowService{shows: shows, audit: audit}
+func NewShowService(shows repository.ShowRepository, audit AuditService, discordClient discord.Client) *ShowService {
+	if discordClient == nil {
+		discordClient = &discord.NoOpClient{}
+	}
+	return &ShowService{shows: shows, audit: audit, discord: discordClient}
 }
 
 // ListUpcoming returns confirmed shows for the public site.
@@ -87,6 +92,24 @@ func (s *ShowService) Cancel(ctx context.Context, id int, actorID int, actorName
 	})
 
 	return updated, nil
+}
+
+// Announce posts a show announcement to Discord.
+func (s *ShowService) Announce(ctx context.Context, id int, actorID int, actorName string) error {
+	show, err := s.shows.GetByID(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	if err := s.discord.AnnounceShow(ctx, id, show.Artist, show.Date.Format("2006-01-02")); err != nil {
+		return fmt.Errorf("discord announce: %w", err)
+	}
+
+	_ = s.audit.Log(ctx, actorID, actorName, "show.announce", "show", &id, map[string]interface{}{
+		"artist": show.Artist,
+	})
+
+	return nil
 }
 
 // Archive marks a show as archived and logs the action.
