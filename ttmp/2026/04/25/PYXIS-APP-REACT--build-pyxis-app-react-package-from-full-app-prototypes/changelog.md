@@ -129,3 +129,15 @@ Step 20: Stopped Dashboard Hero work at a targeted title-typography checkpoint; 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png — React Hero crop after title typography checkpoint
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Dashboard Hero title margin and letter-spacing parity
 
+
+## 2026-04-25
+
+Step 21: Added standalone Dashboard organism Storybook files for Hero, MetricsGrid, Upcoming, QuickActions, Activity, and Attention; extracted DashboardMetricsGrid and DashboardAttentionPanel for direct no-scroll story targets (commit b1180ae).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx — DashboardMetricsGrid and typed attention item/content extraction
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — DashboardAttentionPanel organism wrapper and DashboardOverview reuse
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx — Direct attention organism story target
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/DashboardMetricsGrid.stories.tsx — Direct metrics organism story target
+

@@ -620,10 +620,10 @@ Use this checklist for every Phase 7.x Dashboard section:
 
 ### Phase 7.3 — Dashboard metrics and attention consolidation
 
-- [ ] Extract `DashboardMetricsGrid` around `MetricCard`.
-- [ ] Decide and document desktop vs mobile copy variants (`Pending bookings` vs `Pending`, `Capacity use` vs `Capacity`).
-- [ ] Finish `DashboardAttentionPanel` as an organism using shared status/icon tokens.
-- [ ] Add Storybook stories for desktop/mobile metrics, dense attention, empty attention.
+- [x] Extract `DashboardMetricsGrid` around `MetricCard`.
+- [x] Decide and document desktop vs mobile copy variants (`Pending bookings` vs `Pending`, `Capacity use` vs `Capacity`).
+- [x] Finish `DashboardAttentionPanel` as an organism using shared status/icon tokens.
+- [x] Add Storybook stories for desktop/mobile metrics, dense attention, empty attention.
 - [ ] Tune `dashboard-metrics` and `dashboard-attention` focused comparisons.
 - [ ] Commit: `Consolidate dashboard metrics and attention`.
 

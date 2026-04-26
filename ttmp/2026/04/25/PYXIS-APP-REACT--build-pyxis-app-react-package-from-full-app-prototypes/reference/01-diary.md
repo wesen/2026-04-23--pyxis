@@ -72,6 +72,7 @@ RelatedFiles:
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
         Hero subelement hooks and WIP tuning (commit ed55e40)
+        Metrics and attention organism extraction (commit b1180ae)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
@@ -83,6 +84,7 @@ RelatedFiles:
         Dashboard hero
         DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
         DashboardQuickActionsPanel extraction (commit 12cc17c)
+        Attention panel organism wrapper and page reuse (commit b1180ae)
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
@@ -98,6 +100,12 @@ RelatedFiles:
       Note: |-
         Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
         QuickActionsPanel and no-pending Storybook states (commit 12cc17c)
+    - Path: web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx
+      Note: Direct AttentionPanel organism story target (commit b1180ae)
+    - Path: web/packages/pyxis-app/stories/DashboardHero.stories.tsx
+      Note: Direct Hero organism story target (commit b1180ae)
+    - Path: web/packages/pyxis-app/stories/DashboardMetricsGrid.stories.tsx
+      Note: Direct MetricsGrid organism story target (commit b1180ae)
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -106,6 +114,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -2570,4 +2579,142 @@ Final checkpoint artifacts:
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/left_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/diff_only.png
+```
+
+## Step 21: Split Dashboard organisms into their own Storybook stories
+
+The user asked to extract the Dashboard organisms into their own stories so section review and future visual comparison can happen without depending on full-page scroll position. I separated the already-extracted Dashboard sections into organism-level Storybook files and kept the aggregate Dashboard sections story as a broad showcase.
+
+This is a Phase 7.3 setup step, not the final metrics/attention visual-tuning step. It gives each Dashboard organism a direct iframe story target, which should make focused visual specs simpler and avoid debugging offscreen page crops.
+
+### Prompt Context
+
+**User prompt (verbatim):** "can you extract the organisms into their own stories?"
+
+**Assistant interpretation:** Create standalone Storybook story files for Dashboard organisms rather than relying on the large combined Dashboard sections story or full page stories.
+
+**Inferred user intent:** Make focused review and visual-diff crops target the organism iframe directly, avoiding page scrolling/offscreen screenshot issues.
+
+**Commit (code):** b1180ae — "Add dashboard organism Storybook coverage"
+
+### What I did
+
+- Extracted `DashboardMetricsGrid` around the existing `MetricCard` usage.
+- Added desktop/mobile metric copy variants:
+  - desktop: `Pending bookings`, `Capacity use`, fuller captions/trends,
+  - mobile: `Pending`, `Capacity`, shorter captions, hidden trend lines.
+- Turned the attention list data into typed `DashboardAttentionItem` records.
+- Made `DashboardAttentionContent` accept custom items and support an empty state.
+- Added `DashboardAttentionPanel` as a named organism wrapper.
+- Added standalone organism Storybook files:
+  - `DashboardHero.stories.tsx`,
+  - `DashboardMetricsGrid.stories.tsx`,
+  - `DashboardUpcomingPanel.stories.tsx`,
+  - `DashboardQuickActionsPanel.stories.tsx`,
+  - `DashboardActivityPanel.stories.tsx`,
+  - `DashboardAttentionPanel.stories.tsx`.
+- Updated the combined `AppDashboardSections.stories.tsx` to reuse the new organisms instead of duplicating metric/attention JSX.
+- Updated Phase 7.3 task checkboxes for metrics/attention extraction and Storybook coverage.
+
+### Why
+
+Full dashboard/page stories are useful checkpoints, but they are too noisy for focused organism work. Separate organism stories make it possible to point reviewers and future visual specs at a direct iframe such as:
+
+```text
+pyxis-app-organisms-dashboardmetricsgrid--desktop
+pyxis-app-organisms-dashboardattentionpanel--desktop
+```
+
+That avoids offscreen section capture problems and keeps tuning loops scoped to one organism.
+
+### What worked
+
+- Typecheck passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Story modules loaded over the live Storybook server:
+
+```bash
+curl -fsS http://localhost:6008/stories/DashboardHero.stories.tsx
+curl -fsS http://localhost:6008/stories/DashboardMetricsGrid.stories.tsx
+curl -fsS http://localhost:6008/stories/DashboardAttentionPanel.stories.tsx
+```
+
+- Playwright confirmed the direct organism iframe stories render without app errors:
+
+```text
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardmetricsgrid--desktop&viewMode=story
+selector present: [data-section="dashboard-metrics"]
+
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardattentionpanel--desktop&viewMode=story
+selector present: [data-section="dashboard-attention"]
+
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardhero--desktop&viewMode=story
+selector present: [data-section="dashboard-hero"]
+```
+
+### What didn't work
+
+- I briefly tried to solve the desktop attention comparison by changing compare-region scrolling/viewport behavior and by adding page-level desktop reminder composition. I reverted those changes because the user clarified that organism stories should avoid needing scroll-based screenshots in the first place.
+- The focused metrics/attention visual comparison step is not complete yet; this step only creates the organism story targets needed for the next clean comparison pass.
+
+### What I learned
+
+- Standalone organism stories are the right target for the next visual specs when a section sits below the fold in the full page.
+- The combined Dashboard sections story is still useful as an overview, but it should not be the primary target for focused section validation.
+
+### What was tricky to build
+
+The tricky part was separating reusable organism data/config from page composition without accidentally changing the dashboard page behavior. The first attempt mixed in extra desktop reminder composition, which would have changed the page. I backed that out and kept the commit focused on organism extraction and Storybook targets.
+
+### What warrants a second pair of eyes
+
+- Confirm whether future visual specs should add dedicated organism targets for the new story IDs instead of using full-page dashboard sections.
+- Review the mobile-vs-desktop metric copy decision before final visual acceptance.
+- Review whether `DashboardAttentionPanel` should eventually use real icon atoms instead of the current symbolic glyphs.
+
+### What should be done in the future
+
+- Add focused visual spec entries that compare metrics/attention against direct organism stories rather than full-page scroll positions.
+- Run visual comparisons for `DashboardMetricsGrid` and `DashboardAttentionPanel` from those story targets.
+- Continue Phase 7.3 visual tuning, then proceed to Phase 7.7 dashboard acceptance.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx`,
+  - `web/packages/pyxis-app/stories/DashboardMetricsGrid.stories.tsx`,
+  - `web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Smoke direct Storybook organism iframes:
+
+```text
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardhero--desktop&viewMode=story
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardmetricsgrid--desktop&viewMode=story
+http://localhost:6008/iframe.html?id=pyxis-app-organisms-dashboardattentionpanel--desktop&viewMode=story
+```
+
+### Technical details
+
+New organism story IDs include:
+
+```text
+pyxis-app-organisms-dashboardhero--desktop
+pyxis-app-organisms-dashboardmetricsgrid--desktop
+pyxis-app-organisms-dashboardmetricsgrid--mobile
+pyxis-app-organisms-dashboardupcomingpanel--desktop
+pyxis-app-organisms-dashboardquickactionspanel--default
+pyxis-app-organisms-dashboardactivitypanel--default
+pyxis-app-organisms-dashboardattentionpanel--desktop
+pyxis-app-organisms-dashboardattentionpanel--dense
+pyxis-app-organisms-dashboardattentionpanel--empty
 ```
