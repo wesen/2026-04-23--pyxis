@@ -175,6 +175,18 @@ func archivedShowToProto(show *domain.ArchivedShow) *pyxisv1.ArchivedShow {
 	}
 }
 
+func artistToProto(artist *domain.Artist) *pyxisv1.Artist {
+	return &pyxisv1.Artist{
+		Id:        int32(artist.ID),
+		Name:      artist.Name,
+		Genre:     artist.Genre,
+		Links:     artist.Links,
+		Notes:     artist.Notes,
+		CreatedAt: artist.CreatedAt.Format(time.RFC3339),
+		UpdatedAt: artist.UpdatedAt.Format(time.RFC3339),
+	}
+}
+
 func respondProtoJSON(w http.ResponseWriter, status int, msg proto.Message) {
 	b, err := protojson.Marshal(msg)
 	if err != nil {

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file proto/pyxis/v1/show.proto.
  */
 export const file_proto_pyxis_v1_show: GenFile = /*@__PURE__*/
-  fileDesc("Chlwcm90by9weXhpcy92MS9zaG93LnByb3RvEghweXhpcy52MSKMAwoEU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRISCgpkb29yc190aW1lGAQgASgJEhIKCnN0YXJ0X3RpbWUYBSABKAkSCwoDYWdlGAYgASgJEg0KBXByaWNlGAcgASgJEg0KBWdlbnJlGAggASgJEhMKC2Rlc2NyaXB0aW9uGAkgASgJEioKBmxpbmV1cBgKIAMoCzIaLnB5eGlzLnYxLlNob3cuTGluZXVwRW50cnkSEQoJZmx5ZXJfdXJsGAsgASgJEg4KBnN0YXR1cxgMIAEoCRIVCg1zdWJtaXNzaW9uX2lkGA0gASgFEhEKCWFydGlzdF9pZBgOIAEoBRISCgpjcmVhdGVkX2F0GA8gASgJEhIKCnVwZGF0ZWRfYXQYECABKAkaUQoLTGluZXVwRW50cnkSDgoGYXJ0aXN0GAEgASgJEgwKBHJvbGUYAiABKAkSEgoKc3RhcnRfdGltZRgDIAEoCRIQCghlbmRfdGltZRgEIAEoCSK8AQoHQXBwU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVkb29ycxgEIAEoCRILCgNhZ2UYBSABKAkSDQoFcHJpY2UYBiABKAkSDgoGc3RhdHVzGAcgASgJEg0KBWdlbnJlGAggASgJEgwKBGRyYXcYCSABKAUSEAoIY2FwYWNpdHkYCiABKAUSDgoGcGlubmVkGAsgASgIEg0KBW5vdGVzGAwgASgJIlUKDEFyY2hpdmVkU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVnZW5yZRgEIAEoCRIMCgRkcmF3GAUgASgFImwKDEFyY2hpdmVTdGF0cxITCgt0b3RhbF9zaG93cxgBIAEoBRIYChB0b3RhbF9hdHRlbmRhbmNlGAIgASgFEhUKDXllYXJzX3J1bm5pbmcYAyABKAUSFgoOdW5pcXVlX2FydGlzdHMYBCABKAUimAEKD0Jvb2tpbmdGb3JtRGF0YRITCgthcnRpc3RfbmFtZRgBIAEoCRINCgVnZW5yZRgCIAEoCRIWCg5wcmVmZXJyZWRfZGF0ZRgDIAEoCRIVCg1leHBlY3RlZF9kcmF3GAQgASgFEg0KBWxpbmtzGAUgASgJEhIKCnRlY2hfcmlkZXIYBiABKAkSDwoHbWVzc2FnZRgHIAEoCSIpCghTaG93TGlzdBIdCgVzaG93cxgBIAMoCzIOLnB5eGlzLnYxLlNob3ciOQoQQXJjaGl2ZWRTaG93TGlzdBIlCgVzaG93cxgBIAMoCzIWLnB5eGlzLnYxLkFyY2hpdmVkU2hvdyI9ChNCb29raW5nQ29uZmlybWF0aW9uEg8KB3N1Y2Nlc3MYASABKAgSFQoNc3VibWlzc2lvbl9pZBgCIAEoBSKZAgoKU3VibWlzc2lvbhIKCgJpZBgBIAEoBRIRCglhcnRpc3RfaWQYAiABKAUSEwoLYXJ0aXN0X25hbWUYAyABKAkSFgoOcHJlZmVycmVkX2RhdGUYBCABKAkSDQoFZ2VucmUYBSABKAkSFQoNZXhwZWN0ZWRfZHJhdxgGIAEoBRINCgVsaW5rcxgHIAEoCRISCgp0ZWNoX3JpZGVyGAggASgJEg8KB21lc3NhZ2UYCSABKAkSFwoPY29udGFjdF9kaXNjb3JkGAogASgJEg4KBnN0YXR1cxgLIAEoCRITCgtyZXZpZXdlZF9ieRgMIAEoBRITCgtyZXZpZXdlZF9hdBgNIAEoCRISCgpjcmVhdGVkX2F0GA4gASgJIo0BCgRVc2VyEgoKAmlkGAEgASgFEhIKCmRpc2NvcmRfaWQYAiABKAkSGAoQZGlzY29yZF91c2VybmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEgwKBHJvbGUYBSABKAkSEgoKY3JlYXRlZF9hdBgGIAEoCRIVCg1sYXN0X2xvZ2luX2F0GAcgASgJIlYKC0F1dGhTZXNzaW9uEhUKDWF1dGhlbnRpY2F0ZWQYASABKAgSHAoEdXNlchgCIAEoCzIOLnB5eGlzLnYxLlVzZXISEgoKc3BhY2VfbmFtZRgDIAEoCUI6WjhnaXRodWIuY29tL2dvLWdvLWdvbGVtcy9weXhpcy9nZW4vcHJvdG8vcHl4aXMvdjE7cHl4aXN2MWIGcHJvdG8z");
+  fileDesc("Chlwcm90by9weXhpcy92MS9zaG93LnByb3RvEghweXhpcy52MSKMAwoEU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRISCgpkb29yc190aW1lGAQgASgJEhIKCnN0YXJ0X3RpbWUYBSABKAkSCwoDYWdlGAYgASgJEg0KBXByaWNlGAcgASgJEg0KBWdlbnJlGAggASgJEhMKC2Rlc2NyaXB0aW9uGAkgASgJEioKBmxpbmV1cBgKIAMoCzIaLnB5eGlzLnYxLlNob3cuTGluZXVwRW50cnkSEQoJZmx5ZXJfdXJsGAsgASgJEg4KBnN0YXR1cxgMIAEoCRIVCg1zdWJtaXNzaW9uX2lkGA0gASgFEhEKCWFydGlzdF9pZBgOIAEoBRISCgpjcmVhdGVkX2F0GA8gASgJEhIKCnVwZGF0ZWRfYXQYECABKAkaUQoLTGluZXVwRW50cnkSDgoGYXJ0aXN0GAEgASgJEgwKBHJvbGUYAiABKAkSEgoKc3RhcnRfdGltZRgDIAEoCRIQCghlbmRfdGltZRgEIAEoCSK8AQoHQXBwU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVkb29ycxgEIAEoCRILCgNhZ2UYBSABKAkSDQoFcHJpY2UYBiABKAkSDgoGc3RhdHVzGAcgASgJEg0KBWdlbnJlGAggASgJEgwKBGRyYXcYCSABKAUSEAoIY2FwYWNpdHkYCiABKAUSDgoGcGlubmVkGAsgASgIEg0KBW5vdGVzGAwgASgJIlUKDEFyY2hpdmVkU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVnZW5yZRgEIAEoCRIMCgRkcmF3GAUgASgFImwKDEFyY2hpdmVTdGF0cxITCgt0b3RhbF9zaG93cxgBIAEoBRIYChB0b3RhbF9hdHRlbmRhbmNlGAIgASgFEhUKDXllYXJzX3J1bm5pbmcYAyABKAUSFgoOdW5pcXVlX2FydGlzdHMYBCABKAUimAEKD0Jvb2tpbmdGb3JtRGF0YRITCgthcnRpc3RfbmFtZRgBIAEoCRINCgVnZW5yZRgCIAEoCRIWCg5wcmVmZXJyZWRfZGF0ZRgDIAEoCRIVCg1leHBlY3RlZF9kcmF3GAQgASgFEg0KBWxpbmtzGAUgASgJEhIKCnRlY2hfcmlkZXIYBiABKAkSDwoHbWVzc2FnZRgHIAEoCSIpCghTaG93TGlzdBIdCgVzaG93cxgBIAMoCzIOLnB5eGlzLnYxLlNob3ciOQoQQXJjaGl2ZWRTaG93TGlzdBIlCgVzaG93cxgBIAMoCzIWLnB5eGlzLnYxLkFyY2hpdmVkU2hvdyI9ChNCb29raW5nQ29uZmlybWF0aW9uEg8KB3N1Y2Nlc3MYASABKAgSFQoNc3VibWlzc2lvbl9pZBgCIAEoBSKZAgoKU3VibWlzc2lvbhIKCgJpZBgBIAEoBRIRCglhcnRpc3RfaWQYAiABKAUSEwoLYXJ0aXN0X25hbWUYAyABKAkSFgoOcHJlZmVycmVkX2RhdGUYBCABKAkSDQoFZ2VucmUYBSABKAkSFQoNZXhwZWN0ZWRfZHJhdxgGIAEoBRINCgVsaW5rcxgHIAEoCRISCgp0ZWNoX3JpZGVyGAggASgJEg8KB21lc3NhZ2UYCSABKAkSFwoPY29udGFjdF9kaXNjb3JkGAogASgJEg4KBnN0YXR1cxgLIAEoCRITCgtyZXZpZXdlZF9ieRgMIAEoBRITCgtyZXZpZXdlZF9hdBgNIAEoCRISCgpjcmVhdGVkX2F0GA4gASgJIo0BCgRVc2VyEgoKAmlkGAEgASgFEhIKCmRpc2NvcmRfaWQYAiABKAkSGAoQZGlzY29yZF91c2VybmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEgwKBHJvbGUYBSABKAkSEgoKY3JlYXRlZF9hdBgGIAEoCRIVCg1sYXN0X2xvZ2luX2F0GAcgASgJIlYKC0F1dGhTZXNzaW9uEhUKDWF1dGhlbnRpY2F0ZWQYASABKAgSHAoEdXNlchgCIAEoCzIOLnB5eGlzLnYxLlVzZXISEgoKc3BhY2VfbmFtZRgDIAEoCSJ3CgZBcnRpc3QSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRINCgVnZW5yZRgDIAEoCRINCgVsaW5rcxgEIAEoCRINCgVub3RlcxgFIAEoCRISCgpjcmVhdGVkX2F0GAYgASgJEhIKCnVwZGF0ZWRfYXQYByABKAkiLwoKQXJ0aXN0TGlzdBIhCgdhcnRpc3RzGAEgAygLMhAucHl4aXMudjEuQXJ0aXN0IjcKDENhbGVuZGFySG9sZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg0KBWxhYmVsGAMgASgJIjsKD0NhbGVuZGFyQmxvY2tlZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg4KBnJlYXNvbhgDIAEoCSJlChBDYWxlbmRhclJlc3BvbnNlEiUKBWhvbGRzGAEgAygLMhYucHl4aXMudjEuQ2FsZW5kYXJIb2xkEioKB2Jsb2NrZWQYAiADKAsyGS5weXhpcy52MS5DYWxlbmRhckJsb2NrZWQizAEKDUF0dGVuZGFuY2VMb2cSCgoCaWQYASABKAUSDwoHc2hvd19pZBgCIAEoBRIOCgZhcnRpc3QYAyABKAkSDAoEZGF0ZRgEIAEoCRIMCgRkcmF3GAUgASgFEg0KBW5vdGVzGAYgASgJEhAKCGluY2lkZW50GAcgASgIEhYKDmluY2lkZW50X25vdGVzGAggASgJEhEKCWxvZ2dlZF9ieRgJIAEoBRISCgpjcmVhdGVkX2F0GAogASgJEhIKCnVwZGF0ZWRfYXQYCyABKAkiOgoRQXR0ZW5kYW5jZUxvZ0xpc3QSJQoEbG9ncxgBIAMoCzIXLnB5eGlzLnYxLkF0dGVuZGFuY2VMb2cimgEKDUF1ZGl0TG9nRW50cnkSCgoCaWQYASABKAUSDQoFYWN0b3IYAiABKAkSEAoIYWN0b3JfaWQYAyABKAUSDgoGYWN0aW9uGAQgASgJEhMKC2VudGl0eV90eXBlGAUgASgJEhEKCWVudGl0eV9pZBgGIAEoBRIQCghtZXRhZGF0YRgHIAEoCRISCgpjcmVhdGVkX2F0GAggASgJIj0KEUF1ZGl0TG9nRW50cnlMaXN0EigKB2VudHJpZXMYASADKAsyFy5weXhpcy52MS5BdWRpdExvZ0VudHJ5IrYCCghTZXR0aW5ncxISCgpzcGFjZV9uYW1lGAEgASgJEg8KB3RhZ2xpbmUYAiABKAkSDwoHYWRkcmVzcxgDIAEoCRIQCghjYXBhY2l0eRgEIAEoBRIVCg1jb250YWN0X2VtYWlsGAUgASgJEg8KB3dlYnNpdGUYBiABKAkSGAoQZGlzY29yZF9ndWlsZF9pZBgHIAEoCRIbChNkaXNjb3JkX2NoX3VwY29taW5nGAggASgJEiAKGGRpc2NvcmRfY2hfYW5ub3VuY2VtZW50cxgJIAEoCRIYChBkaXNjb3JkX2NoX3N0YWZmGAogASgJEhsKE2Rpc2NvcmRfY2hfYm9va2luZ3MYCyABKAkSFgoOc2V0dXBfY29tcGxldGUYDCABKAgSEgoKdXBkYXRlZF9hdBgNIAEoCSIiCg9TdWNjZXNzUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCJlCg1FcnJvclJlc3BvbnNlEiwKBWVycm9yGAEgASgLMh0ucHl4aXMudjEuRXJyb3JSZXNwb25zZS5FcnJvchomCgVFcnJvchIMCgRjb2RlGAEgASgJEg8KB21lc3NhZ2UYAiABKAkiIgoTRmx5ZXJVcGxvYWRSZXNwb25zZRILCgN1cmwYASABKAlCOlo4Z2l0aHViLmNvbS9nby1nby1nb2xlbXMvcHl4aXMvZ2VuL3Byb3RvL3B5eGlzL3YxO3B5eGlzdjFiBnByb3RvMw");
 
 /**
  * @generated from message pyxis.v1.Show
@@ -535,4 +535,447 @@ export type AuthSession = Message<"pyxis.v1.AuthSession"> & {
  */
 export const AuthSessionSchema: GenMessage<AuthSession> = /*@__PURE__*/
   messageDesc(file_proto_pyxis_v1_show, 10);
+
+/**
+ * @generated from message pyxis.v1.Artist
+ */
+export type Artist = Message<"pyxis.v1.Artist"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string genre = 3;
+   */
+  genre: string;
+
+  /**
+   * @generated from field: string links = 4;
+   */
+  links: string;
+
+  /**
+   * @generated from field: string notes = 5;
+   */
+  notes: string;
+
+  /**
+   * @generated from field: string created_at = 6;
+   */
+  createdAt: string;
+
+  /**
+   * @generated from field: string updated_at = 7;
+   */
+  updatedAt: string;
+};
+
+/**
+ * Describes the message pyxis.v1.Artist.
+ * Use `create(ArtistSchema)` to create a new message.
+ */
+export const ArtistSchema: GenMessage<Artist> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 11);
+
+/**
+ * @generated from message pyxis.v1.ArtistList
+ */
+export type ArtistList = Message<"pyxis.v1.ArtistList"> & {
+  /**
+   * @generated from field: repeated pyxis.v1.Artist artists = 1;
+   */
+  artists: Artist[];
+};
+
+/**
+ * Describes the message pyxis.v1.ArtistList.
+ * Use `create(ArtistListSchema)` to create a new message.
+ */
+export const ArtistListSchema: GenMessage<ArtistList> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 12);
+
+/**
+ * @generated from message pyxis.v1.CalendarHold
+ */
+export type CalendarHold = Message<"pyxis.v1.CalendarHold"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string date = 2;
+   */
+  date: string;
+
+  /**
+   * @generated from field: string label = 3;
+   */
+  label: string;
+};
+
+/**
+ * Describes the message pyxis.v1.CalendarHold.
+ * Use `create(CalendarHoldSchema)` to create a new message.
+ */
+export const CalendarHoldSchema: GenMessage<CalendarHold> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 13);
+
+/**
+ * @generated from message pyxis.v1.CalendarBlocked
+ */
+export type CalendarBlocked = Message<"pyxis.v1.CalendarBlocked"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string date = 2;
+   */
+  date: string;
+
+  /**
+   * @generated from field: string reason = 3;
+   */
+  reason: string;
+};
+
+/**
+ * Describes the message pyxis.v1.CalendarBlocked.
+ * Use `create(CalendarBlockedSchema)` to create a new message.
+ */
+export const CalendarBlockedSchema: GenMessage<CalendarBlocked> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 14);
+
+/**
+ * @generated from message pyxis.v1.CalendarResponse
+ */
+export type CalendarResponse = Message<"pyxis.v1.CalendarResponse"> & {
+  /**
+   * @generated from field: repeated pyxis.v1.CalendarHold holds = 1;
+   */
+  holds: CalendarHold[];
+
+  /**
+   * @generated from field: repeated pyxis.v1.CalendarBlocked blocked = 2;
+   */
+  blocked: CalendarBlocked[];
+};
+
+/**
+ * Describes the message pyxis.v1.CalendarResponse.
+ * Use `create(CalendarResponseSchema)` to create a new message.
+ */
+export const CalendarResponseSchema: GenMessage<CalendarResponse> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 15);
+
+/**
+ * @generated from message pyxis.v1.AttendanceLog
+ */
+export type AttendanceLog = Message<"pyxis.v1.AttendanceLog"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: int32 show_id = 2;
+   */
+  showId: number;
+
+  /**
+   * @generated from field: string artist = 3;
+   */
+  artist: string;
+
+  /**
+   * @generated from field: string date = 4;
+   */
+  date: string;
+
+  /**
+   * @generated from field: int32 draw = 5;
+   */
+  draw: number;
+
+  /**
+   * @generated from field: string notes = 6;
+   */
+  notes: string;
+
+  /**
+   * @generated from field: bool incident = 7;
+   */
+  incident: boolean;
+
+  /**
+   * @generated from field: string incident_notes = 8;
+   */
+  incidentNotes: string;
+
+  /**
+   * @generated from field: int32 logged_by = 9;
+   */
+  loggedBy: number;
+
+  /**
+   * @generated from field: string created_at = 10;
+   */
+  createdAt: string;
+
+  /**
+   * @generated from field: string updated_at = 11;
+   */
+  updatedAt: string;
+};
+
+/**
+ * Describes the message pyxis.v1.AttendanceLog.
+ * Use `create(AttendanceLogSchema)` to create a new message.
+ */
+export const AttendanceLogSchema: GenMessage<AttendanceLog> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 16);
+
+/**
+ * @generated from message pyxis.v1.AttendanceLogList
+ */
+export type AttendanceLogList = Message<"pyxis.v1.AttendanceLogList"> & {
+  /**
+   * @generated from field: repeated pyxis.v1.AttendanceLog logs = 1;
+   */
+  logs: AttendanceLog[];
+};
+
+/**
+ * Describes the message pyxis.v1.AttendanceLogList.
+ * Use `create(AttendanceLogListSchema)` to create a new message.
+ */
+export const AttendanceLogListSchema: GenMessage<AttendanceLogList> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 17);
+
+/**
+ * @generated from message pyxis.v1.AuditLogEntry
+ */
+export type AuditLogEntry = Message<"pyxis.v1.AuditLogEntry"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string actor = 2;
+   */
+  actor: string;
+
+  /**
+   * @generated from field: int32 actor_id = 3;
+   */
+  actorId: number;
+
+  /**
+   * @generated from field: string action = 4;
+   */
+  action: string;
+
+  /**
+   * @generated from field: string entity_type = 5;
+   */
+  entityType: string;
+
+  /**
+   * @generated from field: int32 entity_id = 6;
+   */
+  entityId: number;
+
+  /**
+   * @generated from field: string metadata = 7;
+   */
+  metadata: string;
+
+  /**
+   * @generated from field: string created_at = 8;
+   */
+  createdAt: string;
+};
+
+/**
+ * Describes the message pyxis.v1.AuditLogEntry.
+ * Use `create(AuditLogEntrySchema)` to create a new message.
+ */
+export const AuditLogEntrySchema: GenMessage<AuditLogEntry> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 18);
+
+/**
+ * @generated from message pyxis.v1.AuditLogEntryList
+ */
+export type AuditLogEntryList = Message<"pyxis.v1.AuditLogEntryList"> & {
+  /**
+   * @generated from field: repeated pyxis.v1.AuditLogEntry entries = 1;
+   */
+  entries: AuditLogEntry[];
+};
+
+/**
+ * Describes the message pyxis.v1.AuditLogEntryList.
+ * Use `create(AuditLogEntryListSchema)` to create a new message.
+ */
+export const AuditLogEntryListSchema: GenMessage<AuditLogEntryList> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 19);
+
+/**
+ * @generated from message pyxis.v1.Settings
+ */
+export type Settings = Message<"pyxis.v1.Settings"> & {
+  /**
+   * @generated from field: string space_name = 1;
+   */
+  spaceName: string;
+
+  /**
+   * @generated from field: string tagline = 2;
+   */
+  tagline: string;
+
+  /**
+   * @generated from field: string address = 3;
+   */
+  address: string;
+
+  /**
+   * @generated from field: int32 capacity = 4;
+   */
+  capacity: number;
+
+  /**
+   * @generated from field: string contact_email = 5;
+   */
+  contactEmail: string;
+
+  /**
+   * @generated from field: string website = 6;
+   */
+  website: string;
+
+  /**
+   * @generated from field: string discord_guild_id = 7;
+   */
+  discordGuildId: string;
+
+  /**
+   * @generated from field: string discord_ch_upcoming = 8;
+   */
+  discordChUpcoming: string;
+
+  /**
+   * @generated from field: string discord_ch_announcements = 9;
+   */
+  discordChAnnouncements: string;
+
+  /**
+   * @generated from field: string discord_ch_staff = 10;
+   */
+  discordChStaff: string;
+
+  /**
+   * @generated from field: string discord_ch_bookings = 11;
+   */
+  discordChBookings: string;
+
+  /**
+   * @generated from field: bool setup_complete = 12;
+   */
+  setupComplete: boolean;
+
+  /**
+   * @generated from field: string updated_at = 13;
+   */
+  updatedAt: string;
+};
+
+/**
+ * Describes the message pyxis.v1.Settings.
+ * Use `create(SettingsSchema)` to create a new message.
+ */
+export const SettingsSchema: GenMessage<Settings> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 20);
+
+/**
+ * @generated from message pyxis.v1.SuccessResponse
+ */
+export type SuccessResponse = Message<"pyxis.v1.SuccessResponse"> & {
+  /**
+   * @generated from field: bool success = 1;
+   */
+  success: boolean;
+};
+
+/**
+ * Describes the message pyxis.v1.SuccessResponse.
+ * Use `create(SuccessResponseSchema)` to create a new message.
+ */
+export const SuccessResponseSchema: GenMessage<SuccessResponse> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 21);
+
+/**
+ * @generated from message pyxis.v1.ErrorResponse
+ */
+export type ErrorResponse = Message<"pyxis.v1.ErrorResponse"> & {
+  /**
+   * @generated from field: pyxis.v1.ErrorResponse.Error error = 1;
+   */
+  error?: ErrorResponse_Error | undefined;
+};
+
+/**
+ * Describes the message pyxis.v1.ErrorResponse.
+ * Use `create(ErrorResponseSchema)` to create a new message.
+ */
+export const ErrorResponseSchema: GenMessage<ErrorResponse> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 22);
+
+/**
+ * @generated from message pyxis.v1.ErrorResponse.Error
+ */
+export type ErrorResponse_Error = Message<"pyxis.v1.ErrorResponse.Error"> & {
+  /**
+   * @generated from field: string code = 1;
+   */
+  code: string;
+
+  /**
+   * @generated from field: string message = 2;
+   */
+  message: string;
+};
+
+/**
+ * Describes the message pyxis.v1.ErrorResponse.Error.
+ * Use `create(ErrorResponse_ErrorSchema)` to create a new message.
+ */
+export const ErrorResponse_ErrorSchema: GenMessage<ErrorResponse_Error> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 22, 0);
+
+/**
+ * @generated from message pyxis.v1.FlyerUploadResponse
+ */
+export type FlyerUploadResponse = Message<"pyxis.v1.FlyerUploadResponse"> & {
+  /**
+   * @generated from field: string url = 1;
+   */
+  url: string;
+};
+
+/**
+ * Describes the message pyxis.v1.FlyerUploadResponse.
+ * Use `create(FlyerUploadResponseSchema)` to create a new message.
+ */
+export const FlyerUploadResponseSchema: GenMessage<FlyerUploadResponse> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 23);
 

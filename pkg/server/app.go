@@ -288,21 +288,12 @@ func (s *Server) handleListArtists(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbArtists := make([]map[string]interface{}, len(artists))
+	pbArtists := make([]*pyxisv1.Artist, len(artists))
 	for i, artist := range artists {
-		pbArtists[i] = map[string]interface{}{
-			"id":        artist.ID,
-			"name":      artist.Name,
-			"genre":     artist.Genre,
-			"links":     artist.Links,
-			"notes":     artist.Notes,
-			"createdAt": artist.CreatedAt.Format(time.RFC3339),
-		}
+		pbArtists[i] = artistToProto(&artist)
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"artists": pbArtists,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.ArtistList{Artists: pbArtists})
 }
 
 func (s *Server) handleGetArtist(w http.ResponseWriter, r *http.Request) {
@@ -320,14 +311,7 @@ func (s *Server) handleGetArtist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":        artist.ID,
-		"name":      artist.Name,
-		"genre":     artist.Genre,
-		"links":     artist.Links,
-		"notes":     artist.Notes,
-		"createdAt": artist.CreatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, artistToProto(artist))
 }
 
 func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
@@ -376,14 +360,7 @@ func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":        updated.ID,
-		"name":      updated.Name,
-		"genre":     updated.Genre,
-		"links":     updated.Links,
-		"notes":     updated.Notes,
-		"createdAt": updated.CreatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, artistToProto(updated))
 }
 
 func submissionToProto(sub *domain.Submission) map[string]interface{} {

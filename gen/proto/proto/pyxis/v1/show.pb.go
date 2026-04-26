@@ -993,6 +993,898 @@ func (x *AuthSession) GetSpaceName() string {
 	return ""
 }
 
+type Artist struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Genre         string                 `protobuf:"bytes,3,opt,name=genre,proto3" json:"genre,omitempty"`
+	Links         string                 `protobuf:"bytes,4,opt,name=links,proto3" json:"links,omitempty"`
+	Notes         string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Artist) Reset() {
+	*x = Artist{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Artist) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Artist) ProtoMessage() {}
+
+func (x *Artist) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Artist.ProtoReflect.Descriptor instead.
+func (*Artist) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *Artist) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Artist) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Artist) GetGenre() string {
+	if x != nil {
+		return x.Genre
+	}
+	return ""
+}
+
+func (x *Artist) GetLinks() string {
+	if x != nil {
+		return x.Links
+	}
+	return ""
+}
+
+func (x *Artist) GetNotes() string {
+	if x != nil {
+		return x.Notes
+	}
+	return ""
+}
+
+func (x *Artist) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *Artist) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+type ArtistList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Artists       []*Artist              `protobuf:"bytes,1,rep,name=artists,proto3" json:"artists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArtistList) Reset() {
+	*x = ArtistList{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArtistList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtistList) ProtoMessage() {}
+
+func (x *ArtistList) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtistList.ProtoReflect.Descriptor instead.
+func (*ArtistList) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ArtistList) GetArtists() []*Artist {
+	if x != nil {
+		return x.Artists
+	}
+	return nil
+}
+
+type CalendarHold struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Date          string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	Label         string                 `protobuf:"bytes,3,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CalendarHold) Reset() {
+	*x = CalendarHold{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CalendarHold) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CalendarHold) ProtoMessage() {}
+
+func (x *CalendarHold) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CalendarHold.ProtoReflect.Descriptor instead.
+func (*CalendarHold) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CalendarHold) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CalendarHold) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *CalendarHold) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+type CalendarBlocked struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Date          string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CalendarBlocked) Reset() {
+	*x = CalendarBlocked{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CalendarBlocked) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CalendarBlocked) ProtoMessage() {}
+
+func (x *CalendarBlocked) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CalendarBlocked.ProtoReflect.Descriptor instead.
+func (*CalendarBlocked) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CalendarBlocked) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CalendarBlocked) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *CalendarBlocked) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+type CalendarResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Holds         []*CalendarHold        `protobuf:"bytes,1,rep,name=holds,proto3" json:"holds,omitempty"`
+	Blocked       []*CalendarBlocked     `protobuf:"bytes,2,rep,name=blocked,proto3" json:"blocked,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CalendarResponse) Reset() {
+	*x = CalendarResponse{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CalendarResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CalendarResponse) ProtoMessage() {}
+
+func (x *CalendarResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CalendarResponse.ProtoReflect.Descriptor instead.
+func (*CalendarResponse) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *CalendarResponse) GetHolds() []*CalendarHold {
+	if x != nil {
+		return x.Holds
+	}
+	return nil
+}
+
+func (x *CalendarResponse) GetBlocked() []*CalendarBlocked {
+	if x != nil {
+		return x.Blocked
+	}
+	return nil
+}
+
+type AttendanceLog struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ShowId        int32                  `protobuf:"varint,2,opt,name=show_id,json=showId,proto3" json:"show_id,omitempty"`
+	Artist        string                 `protobuf:"bytes,3,opt,name=artist,proto3" json:"artist,omitempty"`
+	Date          string                 `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
+	Draw          int32                  `protobuf:"varint,5,opt,name=draw,proto3" json:"draw,omitempty"`
+	Notes         string                 `protobuf:"bytes,6,opt,name=notes,proto3" json:"notes,omitempty"`
+	Incident      bool                   `protobuf:"varint,7,opt,name=incident,proto3" json:"incident,omitempty"`
+	IncidentNotes string                 `protobuf:"bytes,8,opt,name=incident_notes,json=incidentNotes,proto3" json:"incident_notes,omitempty"`
+	LoggedBy      int32                  `protobuf:"varint,9,opt,name=logged_by,json=loggedBy,proto3" json:"logged_by,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttendanceLog) Reset() {
+	*x = AttendanceLog{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttendanceLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttendanceLog) ProtoMessage() {}
+
+func (x *AttendanceLog) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttendanceLog.ProtoReflect.Descriptor instead.
+func (*AttendanceLog) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AttendanceLog) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AttendanceLog) GetShowId() int32 {
+	if x != nil {
+		return x.ShowId
+	}
+	return 0
+}
+
+func (x *AttendanceLog) GetArtist() string {
+	if x != nil {
+		return x.Artist
+	}
+	return ""
+}
+
+func (x *AttendanceLog) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *AttendanceLog) GetDraw() int32 {
+	if x != nil {
+		return x.Draw
+	}
+	return 0
+}
+
+func (x *AttendanceLog) GetNotes() string {
+	if x != nil {
+		return x.Notes
+	}
+	return ""
+}
+
+func (x *AttendanceLog) GetIncident() bool {
+	if x != nil {
+		return x.Incident
+	}
+	return false
+}
+
+func (x *AttendanceLog) GetIncidentNotes() string {
+	if x != nil {
+		return x.IncidentNotes
+	}
+	return ""
+}
+
+func (x *AttendanceLog) GetLoggedBy() int32 {
+	if x != nil {
+		return x.LoggedBy
+	}
+	return 0
+}
+
+func (x *AttendanceLog) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *AttendanceLog) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+type AttendanceLogList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Logs          []*AttendanceLog       `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttendanceLogList) Reset() {
+	*x = AttendanceLogList{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttendanceLogList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttendanceLogList) ProtoMessage() {}
+
+func (x *AttendanceLogList) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttendanceLogList.ProtoReflect.Descriptor instead.
+func (*AttendanceLogList) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AttendanceLogList) GetLogs() []*AttendanceLog {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+type AuditLogEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Actor         string                 `protobuf:"bytes,2,opt,name=actor,proto3" json:"actor,omitempty"`
+	ActorId       int32                  `protobuf:"varint,3,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	Action        string                 `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
+	EntityType    string                 `protobuf:"bytes,5,opt,name=entity_type,json=entityType,proto3" json:"entity_type,omitempty"`
+	EntityId      int32                  `protobuf:"varint,6,opt,name=entity_id,json=entityId,proto3" json:"entity_id,omitempty"`
+	Metadata      string                 `protobuf:"bytes,7,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditLogEntry) Reset() {
+	*x = AuditLogEntry{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditLogEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditLogEntry) ProtoMessage() {}
+
+func (x *AuditLogEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditLogEntry.ProtoReflect.Descriptor instead.
+func (*AuditLogEntry) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *AuditLogEntry) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AuditLogEntry) GetActor() string {
+	if x != nil {
+		return x.Actor
+	}
+	return ""
+}
+
+func (x *AuditLogEntry) GetActorId() int32 {
+	if x != nil {
+		return x.ActorId
+	}
+	return 0
+}
+
+func (x *AuditLogEntry) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *AuditLogEntry) GetEntityType() string {
+	if x != nil {
+		return x.EntityType
+	}
+	return ""
+}
+
+func (x *AuditLogEntry) GetEntityId() int32 {
+	if x != nil {
+		return x.EntityId
+	}
+	return 0
+}
+
+func (x *AuditLogEntry) GetMetadata() string {
+	if x != nil {
+		return x.Metadata
+	}
+	return ""
+}
+
+func (x *AuditLogEntry) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+type AuditLogEntryList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Entries       []*AuditLogEntry       `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditLogEntryList) Reset() {
+	*x = AuditLogEntryList{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditLogEntryList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditLogEntryList) ProtoMessage() {}
+
+func (x *AuditLogEntryList) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditLogEntryList.ProtoReflect.Descriptor instead.
+func (*AuditLogEntryList) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *AuditLogEntryList) GetEntries() []*AuditLogEntry {
+	if x != nil {
+		return x.Entries
+	}
+	return nil
+}
+
+type Settings struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	SpaceName              string                 `protobuf:"bytes,1,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
+	Tagline                string                 `protobuf:"bytes,2,opt,name=tagline,proto3" json:"tagline,omitempty"`
+	Address                string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	Capacity               int32                  `protobuf:"varint,4,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	ContactEmail           string                 `protobuf:"bytes,5,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`
+	Website                string                 `protobuf:"bytes,6,opt,name=website,proto3" json:"website,omitempty"`
+	DiscordGuildId         string                 `protobuf:"bytes,7,opt,name=discord_guild_id,json=discordGuildId,proto3" json:"discord_guild_id,omitempty"`
+	DiscordChUpcoming      string                 `protobuf:"bytes,8,opt,name=discord_ch_upcoming,json=discordChUpcoming,proto3" json:"discord_ch_upcoming,omitempty"`
+	DiscordChAnnouncements string                 `protobuf:"bytes,9,opt,name=discord_ch_announcements,json=discordChAnnouncements,proto3" json:"discord_ch_announcements,omitempty"`
+	DiscordChStaff         string                 `protobuf:"bytes,10,opt,name=discord_ch_staff,json=discordChStaff,proto3" json:"discord_ch_staff,omitempty"`
+	DiscordChBookings      string                 `protobuf:"bytes,11,opt,name=discord_ch_bookings,json=discordChBookings,proto3" json:"discord_ch_bookings,omitempty"`
+	SetupComplete          bool                   `protobuf:"varint,12,opt,name=setup_complete,json=setupComplete,proto3" json:"setup_complete,omitempty"`
+	UpdatedAt              string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Settings) Reset() {
+	*x = Settings{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Settings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Settings) ProtoMessage() {}
+
+func (x *Settings) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Settings.ProtoReflect.Descriptor instead.
+func (*Settings) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *Settings) GetSpaceName() string {
+	if x != nil {
+		return x.SpaceName
+	}
+	return ""
+}
+
+func (x *Settings) GetTagline() string {
+	if x != nil {
+		return x.Tagline
+	}
+	return ""
+}
+
+func (x *Settings) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *Settings) GetCapacity() int32 {
+	if x != nil {
+		return x.Capacity
+	}
+	return 0
+}
+
+func (x *Settings) GetContactEmail() string {
+	if x != nil {
+		return x.ContactEmail
+	}
+	return ""
+}
+
+func (x *Settings) GetWebsite() string {
+	if x != nil {
+		return x.Website
+	}
+	return ""
+}
+
+func (x *Settings) GetDiscordGuildId() string {
+	if x != nil {
+		return x.DiscordGuildId
+	}
+	return ""
+}
+
+func (x *Settings) GetDiscordChUpcoming() string {
+	if x != nil {
+		return x.DiscordChUpcoming
+	}
+	return ""
+}
+
+func (x *Settings) GetDiscordChAnnouncements() string {
+	if x != nil {
+		return x.DiscordChAnnouncements
+	}
+	return ""
+}
+
+func (x *Settings) GetDiscordChStaff() string {
+	if x != nil {
+		return x.DiscordChStaff
+	}
+	return ""
+}
+
+func (x *Settings) GetDiscordChBookings() string {
+	if x != nil {
+		return x.DiscordChBookings
+	}
+	return ""
+}
+
+func (x *Settings) GetSetupComplete() bool {
+	if x != nil {
+		return x.SetupComplete
+	}
+	return false
+}
+
+func (x *Settings) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+type SuccessResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuccessResponse) Reset() {
+	*x = SuccessResponse{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuccessResponse) ProtoMessage() {}
+
+func (x *SuccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuccessResponse.ProtoReflect.Descriptor instead.
+func (*SuccessResponse) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *SuccessResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ErrorResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Error         *ErrorResponse_Error   `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ErrorResponse) Reset() {
+	*x = ErrorResponse{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ErrorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ErrorResponse) ProtoMessage() {}
+
+func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ErrorResponse.ProtoReflect.Descriptor instead.
+func (*ErrorResponse) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ErrorResponse) GetError() *ErrorResponse_Error {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type FlyerUploadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FlyerUploadResponse) Reset() {
+	*x = FlyerUploadResponse{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FlyerUploadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FlyerUploadResponse) ProtoMessage() {}
+
+func (x *FlyerUploadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FlyerUploadResponse.ProtoReflect.Descriptor instead.
+func (*FlyerUploadResponse) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *FlyerUploadResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 type Show_LineupEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Artist        string                 `protobuf:"bytes,1,opt,name=artist,proto3" json:"artist,omitempty"`
@@ -1005,7 +1897,7 @@ type Show_LineupEntry struct {
 
 func (x *Show_LineupEntry) Reset() {
 	*x = Show_LineupEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1017,7 +1909,7 @@ func (x *Show_LineupEntry) String() string {
 func (*Show_LineupEntry) ProtoMessage() {}
 
 func (x *Show_LineupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1057,6 +1949,58 @@ func (x *Show_LineupEntry) GetStartTime() string {
 func (x *Show_LineupEntry) GetEndTime() string {
 	if x != nil {
 		return x.EndTime
+	}
+	return ""
+}
+
+type ErrorResponse_Error struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ErrorResponse_Error) Reset() {
+	*x = ErrorResponse_Error{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ErrorResponse_Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ErrorResponse_Error) ProtoMessage() {}
+
+func (x *ErrorResponse_Error) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ErrorResponse_Error.ProtoReflect.Descriptor instead.
+func (*ErrorResponse_Error) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{22, 0}
+}
+
+func (x *ErrorResponse_Error) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ErrorResponse_Error) GetMessage() string {
+	if x != nil {
+		return x.Message
 	}
 	return ""
 }
@@ -1174,7 +2118,87 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\rauthenticated\x18\x01 \x01(\bR\rauthenticated\x12\"\n" +
 	"\x04user\x18\x02 \x01(\v2\x0e.pyxis.v1.UserR\x04user\x12\x1d\n" +
 	"\n" +
-	"space_name\x18\x03 \x01(\tR\tspaceNameB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
+	"space_name\x18\x03 \x01(\tR\tspaceName\"\xac\x01\n" +
+	"\x06Artist\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05genre\x18\x03 \x01(\tR\x05genre\x12\x14\n" +
+	"\x05links\x18\x04 \x01(\tR\x05links\x12\x14\n" +
+	"\x05notes\x18\x05 \x01(\tR\x05notes\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\a \x01(\tR\tupdatedAt\"8\n" +
+	"\n" +
+	"ArtistList\x12*\n" +
+	"\aartists\x18\x01 \x03(\v2\x10.pyxis.v1.ArtistR\aartists\"H\n" +
+	"\fCalendarHold\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\x12\x14\n" +
+	"\x05label\x18\x03 \x01(\tR\x05label\"M\n" +
+	"\x0fCalendarBlocked\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\x12\x16\n" +
+	"\x06reason\x18\x03 \x01(\tR\x06reason\"u\n" +
+	"\x10CalendarResponse\x12,\n" +
+	"\x05holds\x18\x01 \x03(\v2\x16.pyxis.v1.CalendarHoldR\x05holds\x123\n" +
+	"\ablocked\x18\x02 \x03(\v2\x19.pyxis.v1.CalendarBlockedR\ablocked\"\xac\x02\n" +
+	"\rAttendanceLog\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x17\n" +
+	"\ashow_id\x18\x02 \x01(\x05R\x06showId\x12\x16\n" +
+	"\x06artist\x18\x03 \x01(\tR\x06artist\x12\x12\n" +
+	"\x04date\x18\x04 \x01(\tR\x04date\x12\x12\n" +
+	"\x04draw\x18\x05 \x01(\x05R\x04draw\x12\x14\n" +
+	"\x05notes\x18\x06 \x01(\tR\x05notes\x12\x1a\n" +
+	"\bincident\x18\a \x01(\bR\bincident\x12%\n" +
+	"\x0eincident_notes\x18\b \x01(\tR\rincidentNotes\x12\x1b\n" +
+	"\tlogged_by\x18\t \x01(\x05R\bloggedBy\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\v \x01(\tR\tupdatedAt\"@\n" +
+	"\x11AttendanceLogList\x12+\n" +
+	"\x04logs\x18\x01 \x03(\v2\x17.pyxis.v1.AttendanceLogR\x04logs\"\xe1\x01\n" +
+	"\rAuditLogEntry\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x14\n" +
+	"\x05actor\x18\x02 \x01(\tR\x05actor\x12\x19\n" +
+	"\bactor_id\x18\x03 \x01(\x05R\aactorId\x12\x16\n" +
+	"\x06action\x18\x04 \x01(\tR\x06action\x12\x1f\n" +
+	"\ventity_type\x18\x05 \x01(\tR\n" +
+	"entityType\x12\x1b\n" +
+	"\tentity_id\x18\x06 \x01(\x05R\bentityId\x12\x1a\n" +
+	"\bmetadata\x18\a \x01(\tR\bmetadata\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\b \x01(\tR\tcreatedAt\"F\n" +
+	"\x11AuditLogEntryList\x121\n" +
+	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xec\x03\n" +
+	"\bSettings\x12\x1d\n" +
+	"\n" +
+	"space_name\x18\x01 \x01(\tR\tspaceName\x12\x18\n" +
+	"\atagline\x18\x02 \x01(\tR\atagline\x12\x18\n" +
+	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1a\n" +
+	"\bcapacity\x18\x04 \x01(\x05R\bcapacity\x12#\n" +
+	"\rcontact_email\x18\x05 \x01(\tR\fcontactEmail\x12\x18\n" +
+	"\awebsite\x18\x06 \x01(\tR\awebsite\x12(\n" +
+	"\x10discord_guild_id\x18\a \x01(\tR\x0ediscordGuildId\x12.\n" +
+	"\x13discord_ch_upcoming\x18\b \x01(\tR\x11discordChUpcoming\x128\n" +
+	"\x18discord_ch_announcements\x18\t \x01(\tR\x16discordChAnnouncements\x12(\n" +
+	"\x10discord_ch_staff\x18\n" +
+	" \x01(\tR\x0ediscordChStaff\x12.\n" +
+	"\x13discord_ch_bookings\x18\v \x01(\tR\x11discordChBookings\x12%\n" +
+	"\x0esetup_complete\x18\f \x01(\bR\rsetupComplete\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\"+\n" +
+	"\x0fSuccessResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"{\n" +
+	"\rErrorResponse\x123\n" +
+	"\x05error\x18\x01 \x01(\v2\x1d.pyxis.v1.ErrorResponse.ErrorR\x05error\x1a5\n" +
+	"\x05Error\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"'\n" +
+	"\x13FlyerUploadResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03urlB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
 
 var (
 	file_proto_pyxis_v1_show_proto_rawDescOnce sync.Once
@@ -1188,7 +2212,7 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 	return file_proto_pyxis_v1_show_proto_rawDescData
 }
 
-var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*Show)(nil),                // 0: pyxis.v1.Show
 	(*AppShow)(nil),             // 1: pyxis.v1.AppShow
@@ -1201,18 +2225,38 @@ var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*Submission)(nil),          // 8: pyxis.v1.Submission
 	(*User)(nil),                // 9: pyxis.v1.User
 	(*AuthSession)(nil),         // 10: pyxis.v1.AuthSession
-	(*Show_LineupEntry)(nil),    // 11: pyxis.v1.Show.LineupEntry
+	(*Artist)(nil),              // 11: pyxis.v1.Artist
+	(*ArtistList)(nil),          // 12: pyxis.v1.ArtistList
+	(*CalendarHold)(nil),        // 13: pyxis.v1.CalendarHold
+	(*CalendarBlocked)(nil),     // 14: pyxis.v1.CalendarBlocked
+	(*CalendarResponse)(nil),    // 15: pyxis.v1.CalendarResponse
+	(*AttendanceLog)(nil),       // 16: pyxis.v1.AttendanceLog
+	(*AttendanceLogList)(nil),   // 17: pyxis.v1.AttendanceLogList
+	(*AuditLogEntry)(nil),       // 18: pyxis.v1.AuditLogEntry
+	(*AuditLogEntryList)(nil),   // 19: pyxis.v1.AuditLogEntryList
+	(*Settings)(nil),            // 20: pyxis.v1.Settings
+	(*SuccessResponse)(nil),     // 21: pyxis.v1.SuccessResponse
+	(*ErrorResponse)(nil),       // 22: pyxis.v1.ErrorResponse
+	(*FlyerUploadResponse)(nil), // 23: pyxis.v1.FlyerUploadResponse
+	(*Show_LineupEntry)(nil),    // 24: pyxis.v1.Show.LineupEntry
+	(*ErrorResponse_Error)(nil), // 25: pyxis.v1.ErrorResponse.Error
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	11, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	24, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
 	0,  // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
 	2,  // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
 	9,  // 3: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
-	4,  // [4:4] is the sub-list for method output_type
-	4,  // [4:4] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	11, // 4: pyxis.v1.ArtistList.artists:type_name -> pyxis.v1.Artist
+	13, // 5: pyxis.v1.CalendarResponse.holds:type_name -> pyxis.v1.CalendarHold
+	14, // 6: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
+	16, // 7: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
+	18, // 8: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
+	25, // 9: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_proto_pyxis_v1_show_proto_init() }
@@ -1226,7 +2270,7 @@ func file_proto_pyxis_v1_show_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

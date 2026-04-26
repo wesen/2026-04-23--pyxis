@@ -115,3 +115,99 @@ message AuthSession {
   User   user          = 2;
   string space_name    = 3;
 }
+
+message Artist {
+  int32  id         = 1;
+  string name       = 2;
+  string genre      = 3;
+  string links      = 4;
+  string notes      = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message ArtistList {
+  repeated Artist artists = 1;
+}
+
+message CalendarHold {
+  int32  id         = 1;
+  string date       = 2;
+  string label      = 3;
+}
+
+message CalendarBlocked {
+  int32  id     = 1;
+  string date   = 2;
+  string reason = 3;
+}
+
+message CalendarResponse {
+  repeated CalendarHold    holds   = 1;
+  repeated CalendarBlocked blocked = 2;
+}
+
+message AttendanceLog {
+  int32  id             = 1;
+  int32  show_id        = 2;
+  string artist         = 3;
+  string date           = 4;
+  int32  draw           = 5;
+  string notes          = 6;
+  bool   incident       = 7;
+  string incident_notes = 8;
+  int32  logged_by      = 9;
+  string created_at     = 10;
+  string updated_at     = 11;
+}
+
+message AttendanceLogList {
+  repeated AttendanceLog logs = 1;
+}
+
+message AuditLogEntry {
+  int32  id          = 1;
+  string actor       = 2;
+  int32  actor_id    = 3;
+  string action      = 4;
+  string entity_type = 5;
+  int32  entity_id   = 6;
+  string metadata    = 7;
+  string created_at  = 8;
+}
+
+message AuditLogEntryList {
+  repeated AuditLogEntry entries = 1;
+}
+
+message Settings {
+  string space_name               = 1;
+  string tagline                  = 2;
+  string address                  = 3;
+  int32  capacity                 = 4;
+  string contact_email            = 5;
+  string website                  = 6;
+  string discord_guild_id         = 7;
+  string discord_ch_upcoming      = 8;
+  string discord_ch_announcements = 9;
+  string discord_ch_staff         = 10;
+  string discord_ch_bookings      = 11;
+  bool   setup_complete           = 12;
+  string updated_at               = 13;
+}
+
+message SuccessResponse {
+  bool success = 1;
+}
+
+message ErrorResponse {
+  Error error = 1;
+  message Error {
+    string code    = 1;
+    string message = 2;
+  }
+}
+
+message FlyerUploadResponse {
+  string url = 1;
+}
