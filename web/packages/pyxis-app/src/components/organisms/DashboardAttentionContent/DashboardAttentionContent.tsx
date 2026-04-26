@@ -1,4 +1,5 @@
 import './DashboardAttentionContent.css';
+import { AppEmptyState } from '../../molecules/AppEmptyState';
 
 export type DashboardAttentionTone = 'warning' | 'info' | 'danger';
 export type DashboardAttentionItem = { tone: DashboardAttentionTone; title: string; caption: string; };
@@ -11,6 +12,6 @@ export type DashboardAttentionCountProps = { count?: number };
 export type DashboardAttentionContentProps = { items?: DashboardAttentionItem[] };
 export function DashboardAttentionCount({ count = defaultDashboardAttentionItems.length }: DashboardAttentionCountProps) { return <span className="app-attention-count">{count}</span>; }
 export function DashboardAttentionContent({ items = defaultDashboardAttentionItems }: DashboardAttentionContentProps) {
-  if (items.length === 0) return <p className="app-empty-state">No issues need attention right now.</p>;
+  if (items.length === 0) return <AppEmptyState title="No issues need attention right now." />;
   return <div className="app-attention-list">{items.map(({ tone, title, caption }) => <article key={title} className="app-attention-item" data-tone={tone}><b>{tone === 'info' ? '✺' : '△'}</b><div><strong>{title}</strong><span>{caption}</span></div><em>›</em></article>)}</div>;
 }

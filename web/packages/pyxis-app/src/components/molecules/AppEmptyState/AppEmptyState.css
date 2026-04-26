@@ -1,0 +1,9 @@
+.app-empty-state {
+  margin: 0;
+  border: 1px dashed var(--app-rule);
+  border-radius: var(--app-radius-md);
+  padding: 18px;
+  color: var(--app-muted);
+  background: var(--app-surface-strong);
+  text-align: center;
+}

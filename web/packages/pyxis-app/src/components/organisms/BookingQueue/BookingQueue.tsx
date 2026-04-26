@@ -4,6 +4,7 @@ import { appPart } from '../../parts';
 import '../../molecules/Table/Table.css';
 import '../../molecules/BookingCard/BookingCard.css';
 import './BookingQueue.css';
+import { AppEmptyState } from '../../molecules/AppEmptyState';
 
 export type BookingQueueProps = {
   bookings: BookingRequest[];
@@ -13,5 +14,5 @@ export type BookingQueueProps = {
 };
 
 export function BookingQueue({ bookings, onHold, onDecline, onApprove }: BookingQueueProps) {
-  return <div {...appPart('booking-queue')}>{bookings.length > 0 ? <><div className="app-card-list app-mobile-only">{bookings.map((booking)=><BookingCard key={booking.id} booking={booking} onHold={onHold} onDecline={onDecline} onApprove={onApprove}/>)}</div><div className="app-table-wrap app-desktop-only"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{bookings.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div></> : <p className="app-empty-state">No booking requests yet.</p>}</div>;
+  return <div {...appPart('booking-queue')}>{bookings.length > 0 ? <><div className="app-card-list app-mobile-only">{bookings.map((booking)=><BookingCard key={booking.id} booking={booking} onHold={onHold} onDecline={onDecline} onApprove={onApprove}/>)}</div><div className="app-table-wrap app-desktop-only"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{bookings.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div></> : <AppEmptyState title="No booking requests yet." />}</div>;
 }

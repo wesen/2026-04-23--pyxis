@@ -6,9 +6,11 @@ export type EmptyProps = {
   title: string;
   description?: string;
   action?: React.ReactNode;
+  className?: string;
 };
-export const Empty = ({ icon = 'sparkle', title, description, action }: EmptyProps) => (
+export const Empty = ({ icon = 'sparkle', title, description, action, className }: EmptyProps) => (
   <div
+    className={className}
     {...pyxisPart('empty')}
     style={{
       textAlign: 'center',
