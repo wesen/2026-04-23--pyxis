@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { shows } from '../src/api/mockData';
-import { DashboardHero } from '../src/components/organisms/DashboardSections';
+import { shows } from '../../../api/mockData';
+import { DashboardHero } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 const longArtistShow = { ...confirmedShows[0], artist: 'Moor Mother with Special Guests and Ensemble' };

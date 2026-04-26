@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { auditLog, bookings, shows } from '../src/api/mockData';
+import { auditLog, bookings, shows } from '../../../api/mockData';
 import {
   DashboardHero,
   DashboardMetricsGrid,
   DashboardMobileCopy,
   DashboardMobileHeader,
-} from '../src/components/organisms/DashboardSections';
-import { DashboardActivityPanel, DashboardAttentionPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel } from '../src/components/organisms/Panels';
-import { AppSidebar, AppTopBar, AppMobileBottomNav } from '../src/components/shell/AppShell';
+} from '../DashboardSections';
+import { DashboardActivityPanel, DashboardAttentionPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel } from '../Panels';
+import { AppSidebar, AppTopBar, AppMobileBottomNav } from '../../shell/AppShell';
 
 const meta: Meta = {
   title: 'Pyxis App/Dashboard Sections',

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DashboardAttentionPanel } from '../src/components/organisms/Panels';
-import { defaultDashboardAttentionItems } from '../src/components/organisms/DashboardSections';
+import { DashboardAttentionPanel } from '.';
+import { defaultDashboardAttentionItems } from '../DashboardAttentionContent';
 
 const denseItems = [
   ...defaultDashboardAttentionItems,

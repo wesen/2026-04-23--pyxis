@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { bookings, shows } from '../src/api/mockData';
-import { DashboardMetricsGrid } from '../src/components/organisms/DashboardSections';
+import { bookings, shows } from '../../../api/mockData';
+import { DashboardMetricsGrid } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 const pendingBookings = bookings.filter((booking) => booking.status === 'pending');

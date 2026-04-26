@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { auditLog } from '../src/api/mockData';
-import { DashboardActivityPanel } from '../src/components/organisms/Panels';
+import { auditLog } from '../../../api/mockData';
+import { DashboardActivityPanel } from '.';
 
 const meta: Meta<typeof DashboardActivityPanel> = {
   title: 'Pyxis App/Organisms/DashboardActivityPanel',

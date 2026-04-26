@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { shows } from '../src/api/mockData';
-import { DashboardUpcomingPanel } from '../src/components/organisms/Panels';
+import { shows } from '../../../api/mockData';
+import { DashboardUpcomingPanel } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 

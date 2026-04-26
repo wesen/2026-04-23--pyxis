@@ -737,6 +737,9 @@ Goal: align `pyxis-app` component organization with `pyxis-components/src/public
   - [x] `BookingsInboxPanel/`, `BookingsProcessedPanel/`, `BookingsInsightsPanel/`,
   - [x] `ShowDetailHero/`, `ShowDetailInfoPanel/`, `ShowDetailDiscordPanel/`,
   - [x] `BookingReviewHero/`, `BookingReviewRequestPanel/`, `BookingReviewDatePanel/`, `BookingReviewNotePanel/`.
+- [x] Colocate Storybook stories with their widgets/pages and remove the old top-level `stories/` folder.
+- [x] Preserve existing Storybook titles/story export names where visual specs depend on stable story IDs.
+- [x] Update Storybook config to scan colocated `src/**/*.stories.*` files only.
 - [ ] Split/relocate route-level `pages.css` into page-owned files once organism widgets no longer depend on it.
 - [x] Run representative Storybook CSS transform checks and focused visual smokes.
 - [ ] Update diary/changelog and commit final Phase 8B.

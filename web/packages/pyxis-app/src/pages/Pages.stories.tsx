@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DashboardPage, ShowsPage, ShowDetailPage, CalendarPage, BookingsPage, BookingReviewPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from '../src/pages/Pages';
+import { DashboardPage, ShowsPage, ShowDetailPage, CalendarPage, BookingsPage, BookingReviewPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from './Pages';
 const meta: Meta = { title: 'Pyxis App/Pages', parameters: { layout: 'fullscreen' } };
 export default meta;
 type Story = StoryObj;

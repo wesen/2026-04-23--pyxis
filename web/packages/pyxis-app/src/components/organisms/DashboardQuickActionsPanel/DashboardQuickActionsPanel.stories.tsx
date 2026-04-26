@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { bookings } from '../src/api/mockData';
-import { DashboardQuickActionsPanel } from '../src/components/organisms/Panels';
+import { bookings } from '../../../api/mockData';
+import { DashboardQuickActionsPanel } from '.';
 
 const pendingCount = bookings.filter((booking) => booking.status === 'pending').length;
 
