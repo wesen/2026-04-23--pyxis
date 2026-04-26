@@ -72,8 +72,8 @@ export { SpaceInfo } from './public/SpaceInfo';
 export type { SpaceInfoProps } from './public/SpaceInfo';
 export { BookingRules } from './public/organisms/BookingRules';
 export type { BookingRulesProps } from './public/organisms/BookingRules';
-export { AboutHero } from './public/AboutHero';
-export type { AboutHeroProps } from './public/AboutHero';
+export { AboutHero } from './public/organisms/AboutHero';
+export type { AboutHeroProps } from './public/organisms/AboutHero';
 export { EthosStrip } from './public/EthosStrip';
 export type { EthosStripProps } from './public/EthosStrip';
 
@@ -90,10 +90,14 @@ export { BookingSpaceAside } from './public/organisms/BookingSpaceAside';
 export type { BookingSpaceAsideProps } from './public/organisms/BookingSpaceAside';
 export { SaferSpaceAgreement } from './public/organisms/SaferSpaceAgreement';
 export type { SaferSpaceAgreementProps } from './public/organisms/SaferSpaceAgreement';
-export { AboutIntro } from './public/AboutIntro';
-export { EthosGrid } from './public/EthosGrid';
-export { CollectiveList } from './public/CollectiveList';
-export { FindUsBlock } from './public/FindUsBlock';
+export { AboutIntro } from './public/organisms/AboutIntro';
+export type { AboutIntroProps } from './public/organisms/AboutIntro';
+export { EthosGrid } from './public/organisms/EthosGrid';
+export type { EthosGridProps } from './public/organisms/EthosGrid';
+export { CollectiveList } from './public/organisms/CollectiveList';
+export type { CollectiveListProps } from './public/organisms/CollectiveList';
+export { FindUsBlock } from './public/organisms/FindUsBlock';
+export type { FindUsBlockProps } from './public/organisms/FindUsBlock';
 
 // Tokens
 export {

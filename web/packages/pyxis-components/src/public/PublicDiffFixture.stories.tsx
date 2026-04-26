@@ -8,7 +8,7 @@ import { YearGroup } from './molecules/YearGroup';
 import { PubNav } from './PubNav';
 import { PubFooter } from './PubFooter';
 import { PubHero } from './PubHero';
-import { AboutHero } from './AboutHero';
+import { AboutHero } from './organisms/AboutHero';
 import { VenueCard } from './VenueCard';
 import { SpaceInfo } from './SpaceInfo';
 import { EthosStrip } from './EthosStrip';
@@ -32,10 +32,10 @@ import { ArchiveShowList } from './molecules/ArchiveShowList';
 import { ShowTypeChips } from './ShowTypeChips';
 import { BookingSpaceAside } from './organisms/BookingSpaceAside';
 import { SaferSpaceAgreement } from './organisms/SaferSpaceAgreement';
-import { AboutIntro } from './AboutIntro';
-import { EthosGrid } from './EthosGrid';
-import { CollectiveList } from './CollectiveList';
-import { FindUsBlock } from './FindUsBlock';
+import { AboutIntro } from './organisms/AboutIntro';
+import { EthosGrid } from './organisms/EthosGrid';
+import { CollectiveList } from './organisms/CollectiveList';
+import { FindUsBlock } from './organisms/FindUsBlock';
 
 function FixtureRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (

@@ -74,3 +74,17 @@ Completed booking taxonomy cluster: moved booking workflow components to public 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/BookingSuccess — Moved booking success organism.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/SaferSpaceAgreement — Moved safer-space agreement organism and exported props type.
 
+
+## 2026-04-26
+
+Completed about content taxonomy cluster: moved about page content blocks to public organisms and validated component plus about page stories.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/07-pyxis-components-storybook-ids-after-about.md — Captured Storybook IDs after about cluster.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/AboutHero — Moved about hero organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/AboutIntro — Moved about intro organism and exported props type.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/CollectiveList — Moved collective list organism and exported props type.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/EthosGrid — Moved ethos grid organism and exported props type.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/FindUsBlock — Moved find-us block organism and exported props type.
+

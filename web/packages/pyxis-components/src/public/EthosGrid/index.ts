@@ -1,1 +1,0 @@
-export { EthosGrid } from './EthosGrid';

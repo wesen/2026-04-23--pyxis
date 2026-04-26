@@ -34,6 +34,8 @@ RelatedFiles:
       Note: Captured Storybook IDs after archive cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/06-pyxis-components-storybook-ids-after-booking.md
       Note: Captured Storybook IDs after booking cluster move.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/07-pyxis-components-storybook-ids-after-about.md
+      Note: Captured Storybook IDs after about cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
@@ -62,6 +64,10 @@ RelatedFiles:
       Note: Moved show-backed ticket display molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/YearGroup
       Note: Moved archive year grouping component into public molecules taxonomy.
+    - Path: web/packages/pyxis-components/src/public/organisms/AboutHero
+      Note: Moved about hero organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/AboutIntro
+      Note: Moved about intro organism and exported props type.
     - Path: web/packages/pyxis-components/src/public/organisms/BookingForm
       Note: Moved booking form organism; still emits generated BookingFormData payloads.
     - Path: web/packages/pyxis-components/src/public/organisms/BookingRules
@@ -70,6 +76,12 @@ RelatedFiles:
       Note: Moved booking space aside organism.
     - Path: web/packages/pyxis-components/src/public/organisms/BookingSuccess
       Note: Moved booking success organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/CollectiveList
+      Note: Moved collective list organism and exported props type.
+    - Path: web/packages/pyxis-components/src/public/organisms/EthosGrid
+      Note: Moved ethos grid organism and exported props type.
+    - Path: web/packages/pyxis-components/src/public/organisms/FindUsBlock
+      Note: Moved find-us block organism and exported props type.
     - Path: web/packages/pyxis-components/src/public/organisms/SaferSpaceAgreement
       Note: Moved safer-space agreement organism.
     - Path: web/packages/pyxis-components/src/public/organisms/ShowGrid
@@ -82,6 +94,7 @@ LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -665,3 +678,83 @@ No story-level errors or warnings were observed after filtering harmless favicon
 ### What remains
 
 The next obvious cluster is about/venue/shell: `PubNav`, `PubFooter`, `AboutHero`, `AboutIntro`, `EthosStrip`, `EthosGrid`, `CollectiveList`, `FindUsBlock`, `VenueCard`, `SpaceInfo`, `MailingListCTA`, and possibly `PubHero` / `PublicPageHeader` classification cleanup.
+
+## Step 6: About Content Cluster Move
+
+I moved the about-page content components into `public/organisms`. The design guide's target taxonomy lists these as organisms because they are named page sections/content blocks, not generic or reusable primitive rows.
+
+### Components moved
+
+Moved to `web/packages/pyxis-components/src/public/organisms/`:
+
+```text
+AboutHero
+AboutIntro
+EthosGrid
+CollectiveList
+FindUsBlock
+```
+
+### Classification notes
+
+- `AboutHero` is the about page hero section.
+- `AboutIntro` is a long-form about section, despite its prior Storybook title under `Public/Molecules`.
+- `EthosGrid` owns a coherent ethos card/grid section.
+- `CollectiveList` owns the collective roster block.
+- `FindUsBlock` owns address/contact content for the about page.
+- None of these components fetch data or depend on router state; `About.tsx` remains the route-level composer.
+
+### Import/export updates
+
+- Updated public barrel exports in `web/packages/pyxis-components/src/index.ts` to point at `./public/organisms/*`.
+- Added missing type exports for `AboutIntroProps`, `EthosGridProps`, `CollectiveListProps`, and `FindUsBlockProps`.
+- Updated `PublicDiffFixture.stories.tsx` imports.
+- Updated moved `pyxisPart` imports from `../../utils/parts` to `../../../utils/parts`.
+- Updated Storybook titles to `Public Site/Components/Organisms/*`.
+
+### Evidence captured
+
+Added:
+
+```text
+sources/07-pyxis-components-storybook-ids-after-about.md
+```
+
+New story IDs include:
+
+```text
+public-site-components-organisms-abouthero--long-tagline
+public-site-components-organisms-aboutintro--default
+public-site-components-organisms-ethosgrid--default
+public-site-components-organisms-collectivelist--default
+public-site-components-organisms-findusblock--default
+```
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && pnpm build-storybook
+cd web/packages/pyxis-user-site && pnpm build-storybook
+cd web && pnpm build
+```
+
+Live Storybook validation passed for the moved component stories and the canonical route page story:
+
+```text
+public-site-components-organisms-abouthero--long-tagline
+public-site-components-organisms-aboutintro--default
+public-site-components-organisms-ethosgrid--default
+public-site-components-organisms-collectivelist--default
+public-site-components-organisms-findusblock--default
+public-site-pages--about-desktop
+```
+
+No story-level errors or warnings were observed after filtering harmless favicon and existing React Router future-flag warnings.
+
+### What remains
+
+Continue the phase with shell/home/venue organisms: `PubNav`, `PubFooter`, `PubHero`, `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`, and `PublicPageHeader`/`SafetyNote`/`ShowTypeChips` classification cleanup.

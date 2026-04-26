@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import './EthosGrid.css';
 
 export type EthosGridProps = { className?: string };

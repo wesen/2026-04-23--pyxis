@@ -55,7 +55,9 @@
 
 - [ ] Move `PubNav` and `PubFooter` to public organisms.
 - [ ] Move `AboutHero`, `AboutIntro`, `EthosStrip`, `EthosGrid`, `CollectiveList`, `FindUsBlock`, `VenueCard`, `SpaceInfo`, and `MailingListCTA` according to finalized classification.
-- [ ] Validate about/public shell stories.
+  - [x] Move about content components: `AboutHero`, `AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`.
+  - [ ] Move remaining home/venue components: `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`.
+- [x] Validate about/public shell stories for the about content cluster.
 
 ## Phase 8: Thin public route pages
 

@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { AboutHero } from './AboutHero';
-const meta: Meta<typeof AboutHero> = { title: 'Public/Organisms/AboutHero', component: AboutHero, tags: ['autodocs'] };
+const meta: Meta<typeof AboutHero> = { title: 'Public Site/Components/Organisms/AboutHero', component: AboutHero, tags: ['autodocs'] };
 export default meta;
 type Story = StoryObj<typeof AboutHero>;
 export const Default: Story = { args: {} };
