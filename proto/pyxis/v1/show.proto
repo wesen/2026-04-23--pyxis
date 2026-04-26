@@ -82,3 +82,20 @@ message BookingConfirmation {
   bool  success       = 1;
   int32 submission_id = 2;
 }
+
+message Submission {
+  int32  id             = 1;
+  int32  artist_id      = 2;
+  string artist_name    = 3;
+  string preferred_date = 4;
+  string genre          = 5;
+  int32  expected_draw  = 6;
+  string links          = 7;
+  string tech_rider     = 8;
+  string message        = 9;
+  string contact_discord = 10;
+  string status         = 11;
+  int32  reviewed_by    = 12;
+  string reviewed_at    = 13;
+  string created_at     = 14;
+}

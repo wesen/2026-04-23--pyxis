@@ -693,6 +693,154 @@ func (x *BookingConfirmation) GetSubmissionId() int32 {
 	return 0
 }
 
+type Submission struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ArtistId       int32                  `protobuf:"varint,2,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
+	ArtistName     string                 `protobuf:"bytes,3,opt,name=artist_name,json=artistName,proto3" json:"artist_name,omitempty"`
+	PreferredDate  string                 `protobuf:"bytes,4,opt,name=preferred_date,json=preferredDate,proto3" json:"preferred_date,omitempty"`
+	Genre          string                 `protobuf:"bytes,5,opt,name=genre,proto3" json:"genre,omitempty"`
+	ExpectedDraw   int32                  `protobuf:"varint,6,opt,name=expected_draw,json=expectedDraw,proto3" json:"expected_draw,omitempty"`
+	Links          string                 `protobuf:"bytes,7,opt,name=links,proto3" json:"links,omitempty"`
+	TechRider      string                 `protobuf:"bytes,8,opt,name=tech_rider,json=techRider,proto3" json:"tech_rider,omitempty"`
+	Message        string                 `protobuf:"bytes,9,opt,name=message,proto3" json:"message,omitempty"`
+	ContactDiscord string                 `protobuf:"bytes,10,opt,name=contact_discord,json=contactDiscord,proto3" json:"contact_discord,omitempty"`
+	Status         string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	ReviewedBy     int32                  `protobuf:"varint,12,opt,name=reviewed_by,json=reviewedBy,proto3" json:"reviewed_by,omitempty"`
+	ReviewedAt     string                 `protobuf:"bytes,13,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
+	CreatedAt      string                 `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Submission) Reset() {
+	*x = Submission{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Submission) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Submission) ProtoMessage() {}
+
+func (x *Submission) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Submission.ProtoReflect.Descriptor instead.
+func (*Submission) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Submission) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Submission) GetArtistId() int32 {
+	if x != nil {
+		return x.ArtistId
+	}
+	return 0
+}
+
+func (x *Submission) GetArtistName() string {
+	if x != nil {
+		return x.ArtistName
+	}
+	return ""
+}
+
+func (x *Submission) GetPreferredDate() string {
+	if x != nil {
+		return x.PreferredDate
+	}
+	return ""
+}
+
+func (x *Submission) GetGenre() string {
+	if x != nil {
+		return x.Genre
+	}
+	return ""
+}
+
+func (x *Submission) GetExpectedDraw() int32 {
+	if x != nil {
+		return x.ExpectedDraw
+	}
+	return 0
+}
+
+func (x *Submission) GetLinks() string {
+	if x != nil {
+		return x.Links
+	}
+	return ""
+}
+
+func (x *Submission) GetTechRider() string {
+	if x != nil {
+		return x.TechRider
+	}
+	return ""
+}
+
+func (x *Submission) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *Submission) GetContactDiscord() string {
+	if x != nil {
+		return x.ContactDiscord
+	}
+	return ""
+}
+
+func (x *Submission) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *Submission) GetReviewedBy() int32 {
+	if x != nil {
+		return x.ReviewedBy
+	}
+	return 0
+}
+
+func (x *Submission) GetReviewedAt() string {
+	if x != nil {
+		return x.ReviewedAt
+	}
+	return ""
+}
+
+func (x *Submission) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
 type Show_LineupEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Artist        string                 `protobuf:"bytes,1,opt,name=artist,proto3" json:"artist,omitempty"`
@@ -705,7 +853,7 @@ type Show_LineupEntry struct {
 
 func (x *Show_LineupEntry) Reset() {
 	*x = Show_LineupEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[8]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -717,7 +865,7 @@ func (x *Show_LineupEntry) String() string {
 func (*Show_LineupEntry) ProtoMessage() {}
 
 func (x *Show_LineupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[8]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -836,7 +984,29 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x05shows\x18\x01 \x03(\v2\x16.pyxis.v1.ArchivedShowR\x05shows\"T\n" +
 	"\x13BookingConfirmation\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12#\n" +
-	"\rsubmission_id\x18\x02 \x01(\x05R\fsubmissionIdB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
+	"\rsubmission_id\x18\x02 \x01(\x05R\fsubmissionId\"\xad\x03\n" +
+	"\n" +
+	"Submission\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1b\n" +
+	"\tartist_id\x18\x02 \x01(\x05R\bartistId\x12\x1f\n" +
+	"\vartist_name\x18\x03 \x01(\tR\n" +
+	"artistName\x12%\n" +
+	"\x0epreferred_date\x18\x04 \x01(\tR\rpreferredDate\x12\x14\n" +
+	"\x05genre\x18\x05 \x01(\tR\x05genre\x12#\n" +
+	"\rexpected_draw\x18\x06 \x01(\x05R\fexpectedDraw\x12\x14\n" +
+	"\x05links\x18\a \x01(\tR\x05links\x12\x1d\n" +
+	"\n" +
+	"tech_rider\x18\b \x01(\tR\ttechRider\x12\x18\n" +
+	"\amessage\x18\t \x01(\tR\amessage\x12'\n" +
+	"\x0fcontact_discord\x18\n" +
+	" \x01(\tR\x0econtactDiscord\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1f\n" +
+	"\vreviewed_by\x18\f \x01(\x05R\n" +
+	"reviewedBy\x12\x1f\n" +
+	"\vreviewed_at\x18\r \x01(\tR\n" +
+	"reviewedAt\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\tR\tcreatedAtB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
 
 var (
 	file_proto_pyxis_v1_show_proto_rawDescOnce sync.Once
@@ -850,7 +1020,7 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 	return file_proto_pyxis_v1_show_proto_rawDescData
 }
 
-var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*Show)(nil),                // 0: pyxis.v1.Show
 	(*AppShow)(nil),             // 1: pyxis.v1.AppShow
@@ -860,10 +1030,11 @@ var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*ShowList)(nil),            // 5: pyxis.v1.ShowList
 	(*ArchivedShowList)(nil),    // 6: pyxis.v1.ArchivedShowList
 	(*BookingConfirmation)(nil), // 7: pyxis.v1.BookingConfirmation
-	(*Show_LineupEntry)(nil),    // 8: pyxis.v1.Show.LineupEntry
+	(*Submission)(nil),          // 8: pyxis.v1.Submission
+	(*Show_LineupEntry)(nil),    // 9: pyxis.v1.Show.LineupEntry
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	8, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	9, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
 	0, // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
 	2, // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
 	3, // [3:3] is the sub-list for method output_type
@@ -884,7 +1055,7 @@ func file_proto_pyxis_v1_show_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

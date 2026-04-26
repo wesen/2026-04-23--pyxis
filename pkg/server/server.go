@@ -14,9 +14,10 @@ import (
 
 // Server holds the HTTP handler and dependencies.
 type Server struct {
-	cfg         *config.Config
-	handler     http.Handler
-	showService *service.ShowService
+	cfg               *config.Config
+	handler           http.Handler
+	showService       *service.ShowService
+	submissionService *service.SubmissionService
 }
 
 // New creates a new Server with routes wired.
@@ -26,9 +27,11 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// Repository layer
 	queries := db.New(database.Pool)
 	showRepo := postgres.NewShowRepo(queries)
+	submissionRepo := postgres.NewSubmissionRepo(queries)
 
 	// Service layer
 	s.showService = service.NewShowService(showRepo)
+	s.submissionService = service.NewSubmissionService(submissionRepo)
 
 	// Router
 	mux := http.NewServeMux()
@@ -42,6 +45,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.HandleFunc("GET /api/public/shows/{id}", s.handleGetPublicShow)
 	mux.HandleFunc("GET /api/public/archive", s.handleGetArchive)
 	mux.HandleFunc("GET /api/public/archive/stats", s.handleGetArchiveStats)
+	mux.HandleFunc("POST /api/public/submissions", s.handleCreateSubmission)
 
 	s.handler = mux
 	return s

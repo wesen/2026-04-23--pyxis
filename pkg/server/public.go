@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
@@ -15,6 +16,51 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
+
+func (s *Server) handleCreateSubmission(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req pyxisv1.BookingFormData
+	if err := protojson.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	sub := &domain.Submission{
+		ArtistName: req.ArtistName,
+		Genre:      req.Genre,
+		Links:      req.Links,
+		TechRider:  req.TechRider,
+		Message:    req.Message,
+	}
+	if req.PreferredDate != "" {
+		t, err := time.Parse(time.DateOnly, req.PreferredDate)
+		if err == nil {
+			sub.PreferredDate = &t
+		}
+	}
+	if req.ExpectedDraw > 0 {
+		v := int(req.ExpectedDraw)
+		sub.ExpectedDraw = &v
+	}
+
+	created, err := s.submissionService.Create(ctx, sub)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusCreated, &pyxisv1.BookingConfirmation{
+		Success:      true,
+		SubmissionId: int32(created.ID),
+	})
+}
 
 func (s *Server) handleListPublicShows(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()

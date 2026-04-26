@@ -11,9 +11,12 @@ import (
 type Querier interface {
 	ArchiveShow(ctx context.Context, id int32) (Show, error)
 	CreateShow(ctx context.Context, arg CreateShowParams) (Show, error)
+	CreateSubmission(ctx context.Context, arg CreateSubmissionParams) (Submission, error)
 	GetArchiveStats(ctx context.Context) (GetArchiveStatsRow, error)
 	GetShow(ctx context.Context, id int32) (Show, error)
 	GetShowWithLineup(ctx context.Context, id int32) (GetShowWithLineupRow, error)
+	GetSubmission(ctx context.Context, id int32) (Submission, error)
+	ListSubmissions(ctx context.Context, status string) ([]Submission, error)
 	ListUpcomingShows(ctx context.Context) ([]ListUpcomingShowsRow, error)
 	SearchArchive(ctx context.Context, dollar_1 string) ([]SearchArchiveRow, error)
 	UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, error)
