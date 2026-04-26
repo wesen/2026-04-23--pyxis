@@ -116,3 +116,8 @@ Completed final public classification: moved PublicPageHeader and SafetyNote to 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/PublicPageHeader — Moved reusable public page header molecule.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/SafetyNote — Moved reusable public safety note molecule.
 
+
+## 2026-04-26
+
+Closed public component taxonomy ticket: folder classification complete; remaining route-page thinning deferred to real app embedding follow-up.
+

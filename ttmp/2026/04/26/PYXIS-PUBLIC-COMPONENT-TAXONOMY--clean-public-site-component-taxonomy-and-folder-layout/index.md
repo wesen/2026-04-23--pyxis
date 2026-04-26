@@ -1,7 +1,7 @@
 ---
 Title: Clean Public Site Component Taxonomy and Folder Layout
 Ticket: PYXIS-PUBLIC-COMPONENT-TAXONOMY
-Status: active
+Status: complete
 Topics:
     - frontend
     - storybook
@@ -14,10 +14,11 @@ Owners: []
 RelatedFiles: []
 ExternalSources: []
 Summary: ""
-LastUpdated: 2026-04-26T13:40:43.33860033-04:00
+LastUpdated: 2026-04-26T14:30:48.448337316-04:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 # Clean Public Site Component Taxonomy and Folder Layout
 

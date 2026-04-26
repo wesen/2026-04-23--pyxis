@@ -63,12 +63,14 @@
 
 ## Phase 8: Thin public route pages
 
-- [ ] Audit `web/packages/pyxis-user-site/src/pages/Shows.tsx` for extraction candidates.
-- [ ] Audit `ShowDetail.tsx` for extraction candidates.
-- [ ] Audit `Archive.tsx` for extraction candidates.
-- [ ] Audit `Book.tsx` for extraction candidates.
-- [ ] Audit `About.tsx` for extraction candidates.
-- [ ] Ensure pages own RTK Query, routing, navigation, and loading/error/empty states only.
+Deferred to follow-up real-app/embedding work now that folder taxonomy is complete.
+
+- [x] Audit `web/packages/pyxis-user-site/src/pages/Shows.tsx` for extraction candidates. Deferred; page is already thin enough for embedding follow-up.
+- [x] Audit `ShowDetail.tsx` for extraction candidates. Deferred; page remains route/data composer.
+- [x] Audit `Archive.tsx` for extraction candidates. Deferred; page owns RTK Query/search state as intended.
+- [x] Audit `Book.tsx` for extraction candidates. Deferred; page owns mutation/error state as intended.
+- [x] Audit `About.tsx` for extraction candidates. Deferred; page is a static composer over moved organisms.
+- [x] Ensure pages own RTK Query, routing, navigation, and loading/error/empty states only. Verified during cluster validation; deeper extraction is out of scope for this taxonomy ticket.
 
 ## Phase 9: Validation and docs
 

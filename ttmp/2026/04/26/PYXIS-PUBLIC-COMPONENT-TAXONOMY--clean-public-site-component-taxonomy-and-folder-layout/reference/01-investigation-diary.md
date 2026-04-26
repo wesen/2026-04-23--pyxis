@@ -971,3 +971,23 @@ No story-level errors or warnings were observed after filtering harmless favicon
 ### What remains
 
 The folder taxonomy move is complete. A separate follow-up can now audit whether route pages should extract additional content wrapper sections, but there are no flat public component folders left to classify.
+
+## Step 9: Ticket Closure
+
+I closed the taxonomy ticket after completing the folder classification work. The remaining "thin route pages" checklist is now explicitly marked as deferred to the real-app embedding phase because the public pages are already within the intended boundary for this ticket: route pages own RTK Query/routing/loading/error state, while public presentation components live under `public/atoms`, `public/molecules`, and `public/organisms`.
+
+### Final taxonomy result
+
+The public component package now has composition-level public-domain folders only:
+
+```text
+web/packages/pyxis-components/src/public/atoms
+web/packages/pyxis-components/src/public/molecules
+web/packages/pyxis-components/src/public/organisms
+```
+
+There are no remaining flat component folders directly under `src/public/`.
+
+### Closure rationale
+
+The next requested direction is to make Pyxis a "real app" by serving the public site from the Go backend. Further route-page thinning should happen only if the embedding work exposes concrete runtime/ownership problems. Keeping that work out of this taxonomy ticket avoids extending a completed structural cleanup into a broader application runtime ticket.
