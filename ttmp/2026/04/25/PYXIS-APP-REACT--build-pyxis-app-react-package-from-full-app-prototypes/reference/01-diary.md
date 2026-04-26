@@ -18,6 +18,8 @@ RelatedFiles:
         Links to widget organization guide
     - Path: docs/playbooks/06-react-widget-folder-storybook-css-organization.md
       Note: New reusable guide for future React widgets
+    - Path: docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+      Note: Guide for next props/reuse/RTK pass
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/screens/roster.jsx
@@ -162,6 +164,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3720,4 +3723,92 @@ The guide is linked from:
 ```text
 docs/playbooks/05-bottom-up-component-visual-parity.md
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/playbooks/02-pyxis-app-css-visual-improvement-loop.md
+```
+
+## Step 30: Document app decomposition and component-system reuse strategy
+
+I wrote a detailed decomposition guide for the next pass: deciding atoms/molecules/organisms/pages, auditing reuse of `pyxis-components`, adding named props/story states, and preparing for RTK Query boundaries.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, create a detailed guide about doing this split and decomposing the application, with all the details, so that we can tackle that in the next pass."
+
+**Assistant interpretation:** Create a reusable playbook that goes beyond folder structure and explains extraction decisions, reuse policy, cross-page decomposition, props, stories, and RTK Query readiness.
+
+**Inferred user intent:** Make the next implementation pass systematic rather than ad hoc: first define widget APIs and reuse boundaries, then wire the app.
+
+**Commit:** `bfad5f8` — `Document React app decomposition and reuse`
+
+### What I did
+
+- Added `docs/playbooks/07-react-application-decomposition-and-component-reuse.md`.
+- Linked it from the widget organization guide and bottom-up visual parity playbook.
+- Added Phase 8C to the ticket task list.
+
+### Why
+
+The existing widget folder guide explained where files go, but not how to decide what to extract or when to reuse `pyxis-components`. The app needs this before a props/story/RTK Query pass.
+
+### What worked
+
+The guide now covers:
+
+- atom/molecule/organism/page classification,
+- component-system reuse-first policy,
+- wrapper-vs-duplicate decision rules,
+- current pyxis-app reuse audit checklist,
+- cross-page decomposition examples for Shows/Dashboard/Calendar and Bookings/Booking Review,
+- prop design rules,
+- callback/action props,
+- loading/empty/error boundaries,
+- Storybook state coverage matrix,
+- RTK Query page/container boundary patterns,
+- when to promote app widgets into `pyxis-components`,
+- a concrete next-pass plan for pyxis-app.
+
+### What didn't work
+
+No implementation failure; this was a documentation/planning step.
+
+### What I learned
+
+The most important next-pass distinction is reuse boundary, not folder layout. `pyxis-app` already reuses Button/Icon/Input/Field, but still needs an intentional audit around Card, Stat, Table, Empty, Modal, TopBar, Badge, and Tag.
+
+### What was tricky to build
+
+The guide had to be detailed enough to direct the next pass without prematurely requiring every app-specific widget to become a shared component-system primitive.
+
+### What warrants a second pair of eyes
+
+- Review whether `Panel` should wrap `Card` or stay app-local.
+- Review whether `MetricCard`/`AttendanceStat` should wrap `Stat`.
+- Review whether app tables should move to the shared `Table` API or keep specialized row renderers.
+
+### What should be done in the future
+
+- Execute Phase 8C using the guide.
+- Add named props and richer stories before RTK Query mutation/state wiring.
+- Document non-reuse decisions when an app widget duplicates a component-system primitive.
+
+### Code review instructions
+
+Read:
+
+```text
+docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+```
+
+Then compare it against:
+
+```text
+web/packages/pyxis-components/src/index.ts
+web/packages/pyxis-app/src/components/**
+```
+
+### Technical details
+
+Phase 8C was added to:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md
 ```

@@ -221,3 +221,13 @@ Step 29: Added reusable React widget folder/CSS/Storybook organization guide and
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/06-react-widget-folder-storybook-css-organization.md — Canonical React widget organization guide
 
+
+## 2026-04-25
+
+Step 30: Added detailed React application decomposition and pyxis-components reuse guide plus Phase 8C task plan for props/stories/RTK readiness (commit bfad5f8).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/07-react-application-decomposition-and-component-reuse.md — Detailed decomposition and reuse guide
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md — Phase 8C props/reuse/story plan
+
