@@ -1148,6 +1148,70 @@ The user established the principle: every JSON response crossing the wire must b
 - Frontend: update RTK Query slices to use `fromJson` with new schemas.
 - Components: migrate to camelCase field names from generated types.
 
+---
+
+## Step 14: Complete Proto-Everywhere Migration (Backend + Frontend)
+
+**User prompt (verbatim):** "it's tomorrow, let's continue." + "we don't need backwards compatibility, just update to the new types, remove legacy types, remove snake case where needed. we have full control over the code"
+
+**Assistant interpretation:** The user wants a complete migration with no shims — proto types become the sole source of truth, all snake_case becomes camelCase, and legacy hand-written types are removed.
+
+**Commit (code):** `f55d8b9` — "Phase 12-13: Complete proto-everywhere migration — backend handlers, RTK Query, components, full workspace build green"
+
+### What I did
+
+**Backend (Go):**
+- Migrated all remaining ad-hoc JSON handlers to `protojson.Marshal`:
+  - Bookings, calendar (holds/blocked), attendance, audit log, settings, flyers, announcements
+  - `respondError` now emits `ErrorResponse` proto
+  - Added `SubmissionList`, `id` to `Settings` proto
+- Added mapper functions: `submissionToProto`, `calendarHoldToProto`, `calendarBlockedToProto`, `attendanceLogToProto`, `auditLogEntryToProto`, `settingsToProto`
+- Zero `map[string]interface{}` or `respondJSON` remains in `pkg/server/app.go`
+
+**Frontend (TypeScript):**
+- Updated `pyxis-types/src/index.ts` to export only proto-generated types + minimal frontend-only view models
+- Rebuilt `pyxis-types` dist so downstream packages pick up changes
+- Updated `appApi.ts` RTK Query slice: all endpoints use `fromJson` with `transformResponse`
+- Updated `publicApi.ts` similarly
+- Migrated mock data to use `create(Schema, {...})` instead of plain objects
+- Updated all components to camelCase field names:
+  - `doors_time` → `doorsTime`, `start_time` → `startTime`
+  - `total_shows` → `totalShows`, `total_attendance` → `totalAttendance`
+  - `artist_name` → `artistName`, `expected_draw` → `expectedDraw`
+  - `LineupEntry` → `Show_LineupEntry`
+- Removed legacy type aliases: `ArtistProfile`, `BookingRequest`, `AttendanceEntry`, `SpaceSettings`
+
+**Build status:**
+- `go build ./...` ✅
+- `pyxis-app` pnpm build ✅
+- `pyxis-components` pnpm build ✅
+- `pyxis-user-site` pnpm build ✅
+- Full workspace `pnpm build` ✅
+
+### What worked
+
+- `create(Schema, {...})` from `@bufbuild/protobuf` is the correct way to instantiate proto messages for mock data/stories
+- Casting status strings to `StatusTone` where needed is a minimal, safe shim
+- Extracting arrays from list wrappers in `transformResponse` (e.g., `list.shows`, `list.artists`) keeps component interfaces simple
+
+### What didn't work / was tricky
+
+- Proto-generated types are class-based (`Message<"pyxis.v1.Show">`), not plain interfaces. Plain object literals are NOT assignable to them. This broke every Storybook story that passed mock data directly.
+  - **Solution:** Use `create(Schema, {...})` for mock data
+- `pyxis-types` has `main`/`types` pointing to `dist/`. Changes to `src/index.ts` don't affect consumers until `pnpm build` is run in `pyxis-types`.
+  - **Solution:** Run `pnpm build` in `pyxis-types` after every export change
+- `Show` vs `AppShow` are different proto messages. The staff app dashboard uses `AppShow` (compact, with `draw`/`capacity`), while show detail uses `Show` (full fields).
+  - **Solution:** `getShows` endpoint maps `Show` → `AppShow` in `transformResponse`
+- `BookingFormData` proto has all fields required in the generated TypeScript type. Passing partial objects fails.
+  - **Solution:** Use `create(BookingFormDataSchema, {...})` which accepts partial initialization
+
+### What should be done in the future
+
+- Add `draw` and `capacity` to the `Show` proto message so the `Show` → `AppShow` mapping isn't needed
+- Add `AppShowList` proto and update backend `handleListAppShows` to return it directly
+- Add missing settings fields to proto (`timezone`, `bookingEmail`, `autoArchive`, `discordPosting`, `safeSpaceRequired`)
+- Replace `StatusTone` casts with proper proto enum or string union
+
 ### Technical details
 
 **Proto additions:**
