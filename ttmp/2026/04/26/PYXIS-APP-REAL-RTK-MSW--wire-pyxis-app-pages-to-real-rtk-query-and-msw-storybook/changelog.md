@@ -87,3 +87,13 @@ Completed Phase 5 mutation wiring: show archive/announce/cancel, settings toggle
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Wires remaining visible page mutation actions with unwrap success/error handling.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds success and inline action styling for mutation feedback.
 
+
+## 2026-04-26
+
+Completed fixture scrape and full validation: captured real backend JSON for public/staff endpoints through Vite proxy and ran full Go/web build ladder.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs — Ticket-local scraper used with dev-auth session cookie.
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/01-msw-seed-real-backend.json — Real backend scraped fixture evidence for public and staff endpoints.
+

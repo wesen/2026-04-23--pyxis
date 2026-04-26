@@ -82,11 +82,11 @@
 ## Phase 7: Fixture scraping automation
 
 - [x] Add initial scraper script to ticket workspace: `scripts/scrape-msw-seed.mjs`.
-- [ ] Run scraper against seeded local Go server with a valid staff session cookie.
-- [ ] Store generated fixture JSON under ticket `sources/` for review.
-- [ ] Decide whether to copy scraper into repo (`web/scripts/` or `scripts/`) after review.
-- [ ] Decide whether generated fixtures should live in `pyxis-app/src/api/fixtures/`.
-- [ ] Document fixture refresh workflow in README or playbook.
+- [x] Run scraper against seeded local Go server with a valid staff session cookie.
+- [x] Store generated fixture JSON under ticket `sources/` for review.
+- [x] Decide whether to copy scraper into repo (`web/scripts/` or `scripts/`) after review. Decision: keep ticket-local until fixture format/use is stable.
+- [x] Decide whether generated fixtures should live in `pyxis-app/src/api/fixtures/`. Decision: not yet; keep as review evidence until replacing curated mockData is intentional.
+- [x] Document fixture refresh workflow in README or playbook. Documented in the ticket diary for now.
 
 ## Phase 8: Optional CalendarEvent proto cleanup
 
@@ -100,11 +100,11 @@
 ## Phase 9: Validation and handoff
 
 - [x] `go build ./...` passes via `go test ./...` during Phase 1 validation.
-- [ ] `cd web/packages/pyxis-types && pnpm build` passes.
+- [x] `cd web/packages/pyxis-types && pnpm build` passes.
 - [x] `cd web/packages/pyxis-app && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-components && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-user-site && pnpm build` passes.
-- [ ] `cd web && pnpm build` passes.
+- [x] `cd web/packages/pyxis-components && pnpm build` passes.
+- [x] `cd web/packages/pyxis-user-site && pnpm build` passes.
+- [x] `cd web && pnpm build` passes.
 - [x] Manual app test via Vite proxy passes for dev-login/session/shows smoke.
 - [x] Storybook page stories build with MSW and no backend.
 - [x] Diary updated with commands, failures, and validation results.

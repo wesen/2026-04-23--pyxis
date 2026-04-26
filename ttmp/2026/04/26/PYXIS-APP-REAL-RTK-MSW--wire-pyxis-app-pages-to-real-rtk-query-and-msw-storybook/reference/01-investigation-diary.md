@@ -21,7 +21,11 @@ RelatedFiles:
     - Path: pkg/service/auth_service.go
       Note: Adds dev session creation using normal sessions table.
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs
-      Note: Ticket helper script for scraping seeded backend responses into MSW fixture JSON.
+      Note: |-
+        Ticket helper script for scraping seeded backend responses into MSW fixture JSON.
+        Ticket-local scraper used with dev-auth session cookie.
+    - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/01-msw-seed-real-backend.json
+      Note: Real backend scraped fixture evidence for public and staff endpoints.
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/tasks.md
       Note: Phased implementation checklist for intern handoff.
     - Path: web/packages/pyxis-app/.storybook/preview.tsx
@@ -70,6 +74,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -761,3 +766,82 @@ PATCH /api/app/settings            -> HTTP/1.1 200 OK
 ```
 
 This completes the Phase 5 UI mutation wiring as far as the current UI and backend support allow. The only explicitly deferred part is calendar delete, due to missing IDs/affordance in the current frontend view model.
+
+## Step 8: Fixture Scrape and Full Validation
+
+I completed the fixture scraping phase against the real local backend through the staff Vite proxy.
+
+### Scrape setup
+
+The backend was running with explicit dev auth:
+
+```bash
+PYXIS_DEV_AUTH=1 go run ./cmd/pyxis serve --bind :8080
+```
+
+The staff Vite app was running on:
+
+```text
+http://127.0.0.1:3008
+```
+
+I created a normal staff session cookie through the Vite proxy:
+
+```bash
+curl -fsS -c /tmp/pyxis-app-scrape-cookie.jar \
+  'http://127.0.0.1:3008/auth/dev-login?username=dev-admin&role=admin'
+```
+
+Then ran the ticket-local scraper:
+
+```bash
+node ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs \
+  --base-url http://127.0.0.1:3008 \
+  --cookie "$cookie" \
+  --out ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/01-msw-seed-real-backend.json
+```
+
+### Captured evidence
+
+Added:
+
+```text
+ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/01-msw-seed-real-backend.json
+```
+
+All scraped endpoints returned `200`:
+
+```text
+publicShows         200
+publicArchive       200
+publicArchiveStats  200
+session             200
+appShows            200
+bookings            200
+artists             200
+calendar            200
+attendance          200
+auditLog            200
+settings            200
+```
+
+This file is evidence for reviewing real backend response shapes. I decided not to copy the scraper or generated fixture into `web/` yet. The curated `mockData.ts` and MSW handlers are now working, and replacing them with scraped fixtures should be a deliberate follow-up once we decide how much real DB state should become deterministic Storybook seed data.
+
+### Full validation
+
+I ran the broader validation ladder:
+
+```bash
+cd web/packages/pyxis-types && pnpm build
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web && pnpm build
+go test ./...
+```
+
+All passed.
+
+### Remaining scope
+
+The main remaining optional technical cleanup is Phase 8: make `CalendarEvent` protobuf-backed so the frontend can retain calendar hold/blocked IDs and support delete affordances cleanly.
