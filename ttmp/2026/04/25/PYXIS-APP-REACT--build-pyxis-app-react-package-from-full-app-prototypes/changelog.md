@@ -309,3 +309,14 @@ Step 37: Added named props, empty states, booking callbacks, and stories for rou
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx — Booking queue callbacks
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx — Settings organism props
 
+
+## 2026-04-26
+
+Step 38: Added named props, callbacks, injectable copy, and richer stories for detail/review organisms and NewShowModal (commit a8c21fd).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.tsx — Review organism props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx — Modal callback props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx — Detail organism props
+

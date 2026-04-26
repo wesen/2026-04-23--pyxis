@@ -172,12 +172,32 @@ RelatedFiles:
       Note: Phase 8C route-support stories
     - Path: web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx
       Note: Phase 8C route-support callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewDatePanel/BookingReviewDatePanel.stories.tsx
+      Note: Phase 8C review stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewDatePanel/BookingReviewDatePanel.tsx
+      Note: Phase 8C review props
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.stories.tsx
+      Note: Phase 8C review stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.tsx
+      Note: Phase 8C review props
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.stories.tsx
+      Note: Phase 8C review stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx
+      Note: Phase 8C review props
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel.stories.tsx
+      Note: Phase 8C review stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel.tsx
+      Note: Phase 8C review props
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
       Note: |-
         Story colocation validation
         Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx
       Note: Phase 8C callback-ready organism
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsInsightsPanel/BookingsInsightsPanel.stories.tsx
+      Note: Phase 8C insights stories
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsInsightsPanel/BookingsInsightsPanel.tsx
+      Note: Phase 8C insights props
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx
@@ -236,6 +256,10 @@ RelatedFiles:
       Note: Phase 8C route-support stories
     - Path: web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.tsx
       Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx
+      Note: Phase 8C modal stories
+    - Path: web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+      Note: Phase 8C modal callbacks
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
@@ -265,6 +289,18 @@ RelatedFiles:
       Note: Phase 8C route-support stories
     - Path: web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
       Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailDiscordPanel/ShowDetailDiscordPanel.stories.tsx
+      Note: Phase 8C detail stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailDiscordPanel/ShowDetailDiscordPanel.tsx
+      Note: Phase 8C detail callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.stories.tsx
+      Note: Phase 8C detail stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx
+      Note: Phase 8C detail props
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailInfoPanel/ShowDetailInfoPanel.stories.tsx
+      Note: Phase 8C detail stories
+    - Path: web/packages/pyxis-app/src/components/organisms/ShowDetailInfoPanel/ShowDetailInfoPanel.tsx
+      Note: Phase 8C detail props
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsArchivedPanel/ShowsArchivedPanel.tsx
@@ -318,6 +354,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -5062,3 +5099,185 @@ cd web && pnpm --filter pyxis-app typecheck
 ### Technical details
 
 This step intentionally did not introduce shared `Table`/`Empty` replacements. It only made current section APIs explicit and added story coverage.
+
+## Step 38: Type detail/review organisms and add detail state stories
+
+I continued Phase 8C through the detail and review organism cluster: show detail hero/info/Discord panels, booking review hero/request/date/note panels, booking insights, and the new-show modal.
+
+This pass focused on named props, callback seams, and story coverage. I intentionally did not convert `NewShowModal` to the shared `Modal` primitive yet because that is a higher-risk reuse cluster that should get its own before/after visual guard.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue Phase 8C into the remaining detail/review organisms and commit another focused checkpoint.
+
+**Inferred user intent:** Finish prop/story readiness across the app before moving into shared primitive replacement or RTK wiring.
+
+**Commit (code):** `a8c21fd` — "Type detail organisms and add stories"
+
+### What I did
+
+- Added named exported prop types:
+  - `ShowDetailHeroProps`,
+  - `ShowDetailInfoPanelProps`,
+  - `ShowDetailDiscordPanelProps`,
+  - `BookingReviewHeroProps`,
+  - `BookingReviewRequestPanelProps`,
+  - `BookingReviewDatePanelProps`,
+  - `BookingReviewNotePanelProps`,
+  - `BookingsInsightsPanelProps`,
+  - `NewShowModalProps`.
+- Added callback props:
+  - `ShowDetailDiscordPanel.onOpenPost`,
+  - `NewShowModal.onCancel`,
+  - `NewShowModal.onSubmit`.
+- Made detail/review copy injectable where route/API state will later own it:
+  - `ShowDetailHero.dateLabel`,
+  - `BookingReviewRequestPanel.preferredDateLabel`,
+  - `BookingReviewDatePanel.statusLabel/detail`,
+  - `BookingReviewNotePanel.fallbackNote`,
+  - `BookingsInsightsPanel.weeklySubmissions/responseSummary/templates`,
+  - `NewShowModal.title/description`.
+- Added or expanded stories for:
+  - `ShowDetailHero`,
+  - `ShowDetailInfoPanel`,
+  - `ShowDetailDiscordPanel`,
+  - `BookingReviewHero`,
+  - `BookingReviewRequestPanel`,
+  - `BookingReviewDatePanel`,
+  - `BookingReviewNotePanel`,
+  - `BookingsInsightsPanel`,
+  - `NewShowModal`.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran mobile visual guard checks for detail/review hero sections:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml \
+  --page show-detail \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-show-detail-hero \
+  --output json
+```
+
+Result: `show-detail/hero` reported `12.273321775101135%`, `tune-required`.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml \
+  --page booking-review \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-booking-review-hero \
+  --output json
+```
+
+Result: `booking-review/hero` reported `17.73071588605569%`, `tune-required`.
+
+Both runs show a known spec/selector caveat: the prototype side uses broad page selectors (`[data-page="show-detail"]`, `[data-page="booking-review"]`) while the React side targets only the hero section. I did not tune based on these numbers.
+
+### Why
+
+These detail/review organisms are route-facing widgets. Making their copy and action seams explicit is necessary before route params, API state, and mutation/navigation handlers are wired.
+
+The modal received callbacks and copy props now, but not a shared `Modal` implementation, so that the visual/reuse risk remains isolated for a later pass.
+
+### What worked
+
+- Typecheck passed.
+- Detail/review widgets now have named props and meaningful story variants.
+- The visual guard commands exposed selector limitations clearly through bounds/text summaries.
+- `NewShowModal` is callback-ready without changing its current DOM structure more than necessary.
+
+### What didn't work
+
+The mobile visual guard targets for show-detail and booking-review hero are not reliable focused section guards yet because prototype selectors capture the whole page:
+
+```text
+show-detail hero leftSelector: [data-page="show-detail"]
+booking-review hero leftSelector: [data-page="booking-review"]
+```
+
+The React side targets only the hero sections, so the reported `tune-required` values should be read as spec-selector caveats, not a regression from the prop/story pass.
+
+### What I learned
+
+Phase 8C has now surfaced several visual-spec quality issues. For next visual work, prototype hooks should be tightened before using these detail/review hero numbers for acceptance.
+
+### What was tricky to build
+
+The detail panels contain hard-coded prototype copy. I made only the pieces likely to come from route/API state injectable while keeping default copy identical. This preserves current rendering while making the components ready for real data.
+
+### What warrants a second pair of eyes
+
+- Review callback names for `ShowDetailDiscordPanel` and `NewShowModal` before route wiring.
+- Review whether `NewShowModal` should be converted to shared `Modal` in a separate reuse pass.
+- Review mobile visual spec selectors for show-detail and booking-review hero sections.
+
+### What should be done in the future
+
+- Tighten prototype section hooks for mobile show-detail and booking-review comparisons.
+- Run a dedicated `NewShowModal -> Modal` reuse audit with visual guard before/after.
+- Continue into any remaining anonymous prop types in shell/pages.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetailInfoPanel/ShowDetailInfoPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetailDiscordPanel/ShowDetailDiscordPanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.tsx
+web/packages/pyxis-app/src/components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingReviewDatePanel/BookingReviewDatePanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx
+web/packages/pyxis-app/src/components/organisms/BookingsInsightsPanel/BookingsInsightsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards, with selector caveat:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml \
+  --page show-detail \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-show-detail-hero \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml \
+  --page booking-review \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-booking-review-hero \
+  --output json
+```
+
+### Technical details
+
+The visual guard outputs were:
+
+```text
+show-detail hero: 12.273321775101135%, tune-required, prototype selector captures whole page
+booking-review hero: 17.73071588605569%, tune-required, prototype selector captures whole page
+```
