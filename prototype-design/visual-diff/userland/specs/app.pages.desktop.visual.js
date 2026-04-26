@@ -43,7 +43,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/dashboard.html",
-      "storyId": "pyxis-app-pages--dashboard-desktop",
+      "storyId": "pyxis-app-pages-pages--dashboard-desktop",
       "sections": [
         {
           "name": "page",
@@ -102,7 +102,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "phase-8",
       "prototypePath": "/standalone/full-app/login.html",
-      "storyId": "pyxis-app-pages--login-desktop",
+      "storyId": "pyxis-app-pages-pages--login-desktop",
       "sections": [
         {
           "name": "page",
@@ -126,7 +126,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "phase-8",
       "prototypePath": "/standalone/full-app/setup.html",
-      "storyId": "pyxis-app-pages--setup-desktop",
+      "storyId": "pyxis-app-pages-pages--setup-desktop",
       "sections": [
         {
           "name": "page",
@@ -155,7 +155,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "phase-8",
       "prototypePath": "/standalone/full-app/shows.html",
-      "storyId": "pyxis-app-pages--shows-desktop",
+      "storyId": "pyxis-app-pages-pages--shows-desktop",
       "sections": [
         {
           "name": "page",
@@ -184,7 +184,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "phase-8",
       "prototypePath": "/standalone/full-app/calendar.html",
-      "storyId": "pyxis-app-pages--calendar-desktop",
+      "storyId": "pyxis-app-pages-pages--calendar-desktop",
       "sections": [
         {
           "name": "page",
@@ -208,7 +208,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "phase-8",
       "prototypePath": "/standalone/full-app/bookings.html",
-      "storyId": "pyxis-app-pages--bookings-desktop",
+      "storyId": "pyxis-app-pages-pages--bookings-desktop",
       "sections": [
         {
           "name": "page",

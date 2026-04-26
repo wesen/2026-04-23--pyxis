@@ -10,7 +10,7 @@ import { DashboardActivityPanel, DashboardAttentionPanel, DashboardQuickActionsP
 import { AppSidebar, AppTopBar, AppMobileBottomNav } from '../../shell/AppShell';
 
 const meta: Meta = {
-  title: 'Pyxis App/Dashboard Sections',
+  title: 'Pyxis App/Components/Organisms/DashboardOverview/DashboardSections',
   parameters: { layout: 'fullscreen' },
 };
 export default meta;

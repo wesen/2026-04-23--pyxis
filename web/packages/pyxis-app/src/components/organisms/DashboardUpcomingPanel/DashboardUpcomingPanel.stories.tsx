@@ -5,7 +5,7 @@ import { DashboardUpcomingPanel } from '.';
 const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 
 const meta: Meta<typeof DashboardUpcomingPanel> = {
-  title: 'Pyxis App/Organisms/DashboardUpcomingPanel',
+  title: 'Pyxis App/Components/Organisms/DashboardUpcomingPanel',
   component: DashboardUpcomingPanel,
   parameters: { layout: 'fullscreen' },
   args: { shows: confirmedShows },

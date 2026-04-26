@@ -6,7 +6,7 @@ const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort(
 const pendingBookings = bookings.filter((booking) => booking.status === 'pending');
 
 const meta: Meta<typeof DashboardMetricsGrid> = {
-  title: 'Pyxis App/Organisms/DashboardMetricsGrid',
+  title: 'Pyxis App/Components/Organisms/DashboardMetricsGrid',
   component: DashboardMetricsGrid,
   parameters: { layout: 'fullscreen' },
   args: {

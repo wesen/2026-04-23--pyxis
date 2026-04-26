@@ -3,7 +3,7 @@ import { auditLog } from '../../../api/mockData';
 import { DashboardActivityPanel } from '.';
 
 const meta: Meta<typeof DashboardActivityPanel> = {
-  title: 'Pyxis App/Organisms/DashboardActivityPanel',
+  title: 'Pyxis App/Components/Organisms/DashboardActivityPanel',
   component: DashboardActivityPanel,
   parameters: { layout: 'fullscreen' },
   args: { log: auditLog },

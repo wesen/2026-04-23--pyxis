@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardPage, ShowsPage, ShowDetailPage, CalendarPage, BookingsPage, BookingReviewPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from './Pages';
-const meta: Meta = { title: 'Pyxis App/Pages', parameters: { layout: 'fullscreen' } };
+const meta: Meta = { title: 'Pyxis App/Pages/Pages', parameters: { layout: 'fullscreen' } };
 export default meta;
 type Story = StoryObj;
 export const DashboardDesktop: Story = { render: () => <DashboardPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };

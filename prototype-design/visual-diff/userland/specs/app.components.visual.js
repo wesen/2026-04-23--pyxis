@@ -43,7 +43,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/dashboard.html",
-      "storyId": "pyxis-app-components--metric-card-default",
+      "storyId": "pyxis-app-components-molecules-metriccard--metric-card-default",
       "sections": [
         {
           "name": "component",
@@ -57,7 +57,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/dashboard.html",
-      "storyId": "pyxis-app-components--activity-item-default",
+      "storyId": "pyxis-app-components-molecules-activityfeeditem--activity-item-default",
       "sections": [
         {
           "name": "component",
@@ -71,7 +71,7 @@ module.exports = {
       "variant": "component",
       "priority": "normal",
       "prototypePath": "/standalone/full-app/dashboard.html",
-      "storyId": "pyxis-app-components--today-show-default",
+      "storyId": "pyxis-app-components-molecules-todayshowcard--today-show-default",
       "sections": [
         {
           "name": "component",
@@ -85,7 +85,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/shows.html",
-      "storyId": "pyxis-app-organisms-shows--confirmed-panel",
+      "storyId": "pyxis-app-components-organisms-showsconfirmedpanel--confirmed-panel",
       "viewport": {
         "width": 1080,
         "height": 720
@@ -103,7 +103,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/shows.html",
-      "storyId": "pyxis-app-organisms-shows--archived-panel",
+      "storyId": "pyxis-app-components-organisms-showsarchivedpanel--archived-panel",
       "viewport": {
         "width": 1080,
         "height": 1100
@@ -121,7 +121,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/bookings.html",
-      "storyId": "pyxis-app-organisms-bookings--inbox-panel",
+      "storyId": "pyxis-app-components-organisms-bookingsinboxpanel--inbox-panel",
       "viewport": {
         "width": 900,
         "height": 620
@@ -139,7 +139,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/bookings.html",
-      "storyId": "pyxis-app-organisms-bookings--processed-panel",
+      "storyId": "pyxis-app-components-organisms-bookingsprocessedpanel--processed-panel",
       "viewport": {
         "width": 900,
         "height": 420
@@ -157,7 +157,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/calendar.html",
-      "storyId": "pyxis-app-organisms-calendar--month-panel",
+      "storyId": "pyxis-app-components-organisms-calendarmonthpanel--month-panel",
       "viewport": {
         "width": 980,
         "height": 720
@@ -175,7 +175,7 @@ module.exports = {
       "variant": "component",
       "priority": "tune-first",
       "prototypePath": "/standalone/full-app/calendar.html",
-      "storyId": "pyxis-app-organisms-calendar--agenda",
+      "storyId": "pyxis-app-components-organisms-calendaragenda--agenda",
       "viewport": {
         "width": 420,
         "height": 520

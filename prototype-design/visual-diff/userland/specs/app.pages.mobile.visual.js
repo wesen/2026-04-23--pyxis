@@ -43,7 +43,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "tune-first",
       "prototypePath": "/standalone/mobile/home.html",
-      "storyId": "pyxis-app-pages--dashboard-mobile",
+      "storyId": "pyxis-app-pages-pages--dashboard-mobile",
       "sections": [
         {
           "name": "page",
@@ -82,7 +82,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/login.html",
-      "storyId": "pyxis-app-pages--login-mobile",
+      "storyId": "pyxis-app-pages-pages--login-mobile",
       "sections": [
         {
           "name": "page",
@@ -96,7 +96,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/shows.html",
-      "storyId": "pyxis-app-pages--shows-mobile",
+      "storyId": "pyxis-app-pages-pages--shows-mobile",
       "sections": [
         {
           "name": "page",
@@ -110,7 +110,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/show-detail.html",
-      "storyId": "pyxis-app-pages--show-detail-mobile",
+      "storyId": "pyxis-app-pages-pages--show-detail-mobile",
       "sections": [
         {
           "name": "page",
@@ -129,7 +129,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/calendar.html",
-      "storyId": "pyxis-app-pages--calendar-mobile",
+      "storyId": "pyxis-app-pages-pages--calendar-mobile",
       "sections": [
         {
           "name": "page",
@@ -143,7 +143,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/bookings.html",
-      "storyId": "pyxis-app-pages--bookings-mobile",
+      "storyId": "pyxis-app-pages-pages--bookings-mobile",
       "sections": [
         {
           "name": "page",
@@ -162,7 +162,7 @@ module.exports = {
       "variant": "mobile",
       "priority": "phase-8",
       "prototypePath": "/standalone/mobile/booking-review.html",
-      "storyId": "pyxis-app-pages--booking-review-mobile",
+      "storyId": "pyxis-app-pages-pages--booking-review-mobile",
       "sections": [
         {
           "name": "page",

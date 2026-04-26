@@ -5,7 +5,7 @@ import { DashboardQuickActionsPanel } from '.';
 const pendingCount = bookings.filter((booking) => booking.status === 'pending').length;
 
 const meta: Meta<typeof DashboardQuickActionsPanel> = {
-  title: 'Pyxis App/Organisms/DashboardQuickActionsPanel',
+  title: 'Pyxis App/Components/Organisms/DashboardQuickActionsPanel',
   component: DashboardQuickActionsPanel,
   parameters: { layout: 'fullscreen' },
   args: { pendingCount },

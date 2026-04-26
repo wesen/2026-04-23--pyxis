@@ -6,7 +6,7 @@ const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort(
 const longArtistShow = { ...confirmedShows[0], artist: 'Moor Mother with Special Guests and Ensemble' };
 
 const meta: Meta<typeof DashboardHero> = {
-  title: 'Pyxis App/Organisms/DashboardHero',
+  title: 'Pyxis App/Components/Organisms/DashboardHero',
   component: DashboardHero,
   parameters: { layout: 'fullscreen' },
   args: { show: confirmedShows[0] },
