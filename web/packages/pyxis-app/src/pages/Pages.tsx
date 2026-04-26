@@ -11,9 +11,15 @@ import {
   useGetSettingsQuery,
   useGetShowQuery,
   useGetShowsQuery,
+  useAnnounceShowMutation,
   useApproveBookingMutation,
+  useArchiveShowMutation,
   useCancelShowMutation,
+  useCreateCalendarBlockedMutation,
+  useCreateCalendarHoldMutation,
   useDeclineBookingMutation,
+  useUpdateAttendanceMutation,
+  useUpdateSettingsMutation,
 } from '../api/appApi';
 import { discordMappings as seedMappings } from '../api/mockData';
 import { AppShell } from '../components/shell/AppShell';
@@ -70,6 +76,10 @@ function ErrorState({ label = 'The real backend request failed. Check your sessi
 
 function EmptyState({ label = 'No records returned from the real backend yet.' }: { label?: string }) {
   return <PageState title="Nothing here yet" message={label} />;
+}
+
+function ActionMessages({ error, success }: { error?: string; success?: string }) {
+  return <>{error && <div className="app-action-error" role="alert">{error}</div>}{success && <div className="app-action-success" role="status">{success}</div>}</>;
 }
 
 function parseRouteId(raw: string | undefined) {
@@ -165,15 +175,44 @@ export function ShowDetailPage() {
   const id = parseRouteId(useParams().id);
   const { data: show, isLoading, isError } = useGetShowQuery(id ?? 0, { skip: id === undefined });
   const [cancelShow, cancelState] = useCancelShowMutation();
+  const [archiveShow, archiveState] = useArchiveShowMutation();
+  const [announceShow, announceState] = useAnnounceShowMutation();
   const [actionError, setActionError] = useState<string | undefined>();
+  const [actionSuccess, setActionSuccess] = useState<string | undefined>();
 
   const handleCancelShow = async () => {
     if (!id) return;
     setActionError(undefined);
+    setActionSuccess(undefined);
     try {
       await cancelShow(id).unwrap();
+      setActionSuccess('Show cancelled.');
     } catch {
       setActionError('Could not cancel this show. Check your session and backend logs.');
+    }
+  };
+
+  const handleArchiveShow = async () => {
+    if (!id) return;
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await archiveShow(id).unwrap();
+      setActionSuccess('Show archived.');
+    } catch {
+      setActionError('Could not archive this show. Check your session and backend logs.');
+    }
+  };
+
+  const handleAnnounceShow = async () => {
+    if (!id) return;
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await announceShow(id).unwrap();
+      setActionSuccess('Announcement requested.');
+    } catch {
+      setActionError('Could not announce this show. Check your session and backend logs.');
     }
   };
 
@@ -198,8 +237,11 @@ export function ShowDetailPage() {
             <ShowDetailDiscordPanel />
           </div>
           {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
+          {actionSuccess && <div className="app-action-success" role="status">{actionSuccess}</div>}
           <div className="app-detail-actions">
             <Button variant="outline">Duplicate</Button>
+            <Button variant="outline" iconLeft="archive" onClick={handleArchiveShow} disabled={archiveState.isLoading}>Archive</Button>
+            <Button variant="outline" iconLeft="external" onClick={handleAnnounceShow} disabled={announceState.isLoading}>Announce</Button>
             <Button variant="danger" iconLeft="trash" onClick={handleCancelShow} disabled={cancelState.isLoading}>Cancel show</Button>
           </div>
         </>
@@ -210,6 +252,32 @@ export function ShowDetailPage() {
 
 export function CalendarPage() {
   const { data: events, isLoading, isError } = useGetCalendarQuery();
+  const [createHold, holdState] = useCreateCalendarHoldMutation();
+  const [createBlocked, blockedState] = useCreateCalendarBlockedMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+  const [actionSuccess, setActionSuccess] = useState<string | undefined>();
+
+  const handleCreateHold = async () => {
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await createHold({ date: '2026-06-01', label: 'Hold — TBD' }).unwrap();
+      setActionSuccess('Hold created for 2026-06-01.');
+    } catch {
+      setActionError('Could not create hold. Check your session and backend logs.');
+    }
+  };
+
+  const handleCreateBlocked = async () => {
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await createBlocked({ date: '2026-06-02', reason: 'Closed' }).unwrap();
+      setActionSuccess('Blocked date created for 2026-06-02.');
+    } catch {
+      setActionError('Could not create blocked date. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell
@@ -217,16 +285,16 @@ export function CalendarPage() {
       title="Calendar"
       eyebrow="Home / Calendar"
       subtitle="Plan the room · holds, confirms, and off-nights"
-      action={<Button size="sm" iconLeft="plus">Add</Button>}
+      action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="plus" onClick={handleCreateHold} disabled={holdState.isLoading}>Add hold</Button><Button size="sm" iconLeft="warning" onClick={handleCreateBlocked} disabled={blockedState.isLoading}>Block date</Button></div>}
     >
       {isLoading ? (
         <LoadingState />
       ) : isError || !events ? (
         <ErrorState />
       ) : events.length === 0 ? (
-        <EmptyState label="No holds or blocked dates returned yet." />
+        <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No holds or blocked dates returned yet." /></>
       ) : (
-        <CalendarBoard events={events} />
+        <><ActionMessages error={actionError} success={actionSuccess} /><CalendarBoard events={events} /></>
       )}
     </AppShell>
   );
@@ -372,6 +440,26 @@ export function ArtistsPage() {
 
 export function AttendancePage() {
   const { data: entries, isLoading, isError } = useGetAttendanceQuery();
+  const [updateAttendance, updateState] = useUpdateAttendanceMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+  const [actionSuccess, setActionSuccess] = useState<string | undefined>();
+
+  const handleUpdateEntry = async (entry: NonNullable<typeof entries>[number]) => {
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await updateAttendance({
+        showId: entry.showId,
+        draw: entry.draw > 0 ? entry.draw : 1,
+        notes: entry.notes || 'Logged from staff app.',
+        incident: entry.incident,
+        incidentNotes: entry.incidentNotes,
+      }).unwrap();
+      setActionSuccess(`Attendance updated for ${entry.artist}.`);
+    } catch {
+      setActionError('Could not update attendance. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
@@ -380,9 +468,9 @@ export function AttendancePage() {
       ) : isError || !entries ? (
         <ErrorState />
       ) : entries.length === 0 ? (
-        <EmptyState label="No attendance logs returned from the backend." />
+        <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No attendance logs returned from the backend." /></>
       ) : (
-        <Panel title="Past shows" section="attendance-past-shows"><AttendancePanel entries={entries} /></Panel>
+        <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Past shows" section="attendance-past-shows"><AttendancePanel entries={entries} onUpdateEntry={handleUpdateEntry} isUpdating={updateState.isLoading} /></Panel></>
       )}
     </AppShell>
   );
@@ -418,6 +506,21 @@ export function DiscordPage() {
 
 export function SettingsPage() {
   const { data: settings, isLoading, isError } = useGetSettingsQuery();
+  const [updateSettings, updateState] = useUpdateSettingsMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+  const [actionSuccess, setActionSuccess] = useState<string | undefined>();
+
+  const toggleSetting = async (key: 'autoArchive' | 'discordPosting' | 'safeSpaceRequired') => {
+    if (!settings) return;
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await updateSettings({ ...settings, [key]: !settings[key] }).unwrap();
+      setActionSuccess('Settings updated.');
+    } catch {
+      setActionError('Could not update settings. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell page="settings" title="Settings" eyebrow="Home / Settings">
@@ -426,7 +529,7 @@ export function SettingsPage() {
       ) : isError || !settings ? (
         <ErrorState />
       ) : (
-        <Panel title="Space info" section="settings-space-info"><SettingsPanel settings={settings} /></Panel>
+        <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Space info" section="settings-space-info"><SettingsPanel settings={settings} isUpdating={updateState.isLoading} onToggleAutoArchive={() => toggleSetting('autoArchive')} onToggleDiscordPosting={() => toggleSetting('discordPosting')} onToggleSafeSpaceRequired={() => toggleSetting('safeSpaceRequired')} /></Panel></>
       )}
     </AppShell>
   );

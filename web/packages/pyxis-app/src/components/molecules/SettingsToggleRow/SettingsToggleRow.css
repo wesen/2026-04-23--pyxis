@@ -1,5 +1,8 @@
-.app-settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--app-rule); }
+.app-settings-row { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border: 0; border-bottom: 1px solid var(--app-rule); background: transparent; color: inherit; text-align: left; font: inherit; }
 .app-settings-row:last-child { border-bottom: 0; }
+.app-settings-row:not(:disabled) { cursor: pointer; }
+.app-settings-row:not(:disabled):hover strong { color: var(--app-accent); }
+.app-settings-row:disabled { cursor: default; }
 .app-settings-row strong { display: block; }
 .app-settings-row span { color: var(--app-muted); font-size: 13px; }
 .app-settings-row b { border-radius: var(--app-radius-pill); padding: 4px 9px; background: var(--app-surface-muted); color: var(--app-muted); font-size: 12px; }

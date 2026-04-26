@@ -60,12 +60,12 @@
 - [x] Wire `BookingsInboxPanel` `onDecline` to `declineBooking`.
 - [x] Decide whether `onHold` is supported now or deferred. Deferred; no backend hold transition exists for submissions yet.
 - [x] Wire show cancel button in `ShowDetailPage` to `cancelShow`.
-- [ ] Wire show archive action where appropriate.
-- [ ] Wire announce action to `announceShow`.
-- [ ] Wire settings form/toggles to `updateSettings`.
-- [ ] Wire attendance panel edits to `updateAttendance`.
-- [ ] Wire calendar add/delete hold and blocked actions when the UI is ready.
-- [ ] Use `.unwrap()` for mutations that need page-level success/error handling.
+- [x] Wire show archive action where appropriate.
+- [x] Wire announce action to `announceShow`.
+- [x] Wire settings form/toggles to `updateSettings`.
+- [x] Wire attendance panel edits to `updateAttendance`.
+- [x] Wire calendar add/delete hold and blocked actions when the UI is ready. Created hold/blocked actions are wired; delete remains deferred because the current calendar view model drops hold/blocked IDs and has no delete affordance.
+- [x] Use `.unwrap()` for mutations that need page-level success/error handling.
 
 ## Phase 6: MSW Storybook hardening
 

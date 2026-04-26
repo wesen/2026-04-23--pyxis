@@ -34,6 +34,12 @@ RelatedFiles:
       Note: Adds staff mutation endpoint paths.
     - Path: web/packages/pyxis-app/src/api/mockHandlers.ts
       Note: Expands protobuf-shaped MSW handlers and mutation state for staff page stories.
+    - Path: web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx
+      Note: Makes settings rows clickable mutation affordances.
+    - Path: web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
+      Note: Adds row-level attendance update action affordance.
+    - Path: web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
+      Note: Adds callbacks for settings toggle mutations.
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: Changes prototype fixed-height shell into full-height app shell.
     - Path: web/packages/pyxis-app/src/pages
@@ -44,12 +50,14 @@ RelatedFiles:
       Note: |-
         Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
         Wires booking approve/decline and show cancel UI callbacks to real mutations.
+        Wires remaining visible page mutation actions with unwrap success/error handling.
     - Path: web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
       Note: Adds loading/error/empty state stories with protobuf-shaped MSW responses.
     - Path: web/packages/pyxis-app/src/pages/pages.css
       Note: |-
         Adds page-state styling for loading/error/empty panels.
         Adds action error styling for failed mutations.
+        Adds success and inline action styling for mutation feedback.
     - Path: web/packages/pyxis-app/src/pages/storybook.tsx
       Note: Shared page story helpers for fresh mock state and route-param stories.
     - Path: web/packages/pyxis-app/src/styles/global.css
@@ -62,6 +70,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -670,3 +679,85 @@ pyxis-app-pages-bookings--loading
 pyxis-app-pages-bookings--error
 pyxis-app-pages-bookings--empty
 ```
+
+## Step 7: Complete Phase 5 UI Mutation Wiring
+
+I finished the Phase 5 mutation wiring pass for the staff app.
+
+### Show detail actions
+
+`ShowDetailPage` now wires visible actions to real RTK mutations:
+
+```text
+Cancel show -> cancelShow(id).unwrap()
+Archive     -> archiveShow(id).unwrap()
+Announce    -> announceShow(id).unwrap()
+```
+
+Each action clears prior messages, calls `.unwrap()`, and renders either `.app-action-success` or `.app-action-error` in the page.
+
+### Settings toggles
+
+`SettingsPanel` now accepts callbacks for the three visible settings toggles:
+
+```text
+onToggleAutoArchive
+onToggleDiscordPosting
+onToggleSafeSpaceRequired
+```
+
+`SettingsPage` wires those to:
+
+```text
+updateSettings({ ...settings, [key]: !settings[key] }).unwrap()
+```
+
+`SettingsToggleRow` changed from a static row to a button-like row so clicking the visible toggle area performs the update.
+
+### Attendance updates
+
+`AttendancePanel` now accepts:
+
+```text
+onUpdateEntry(entry)
+isUpdating
+```
+
+`AttendancePage` wires row-level `Mark logged` / `Save note` actions to:
+
+```text
+updateAttendance({ showId, draw, notes, incident, incidentNotes }).unwrap()
+```
+
+The current UI is still intentionally minimal, but it now exercises the real attendance mutation path instead of only rendering read-only data.
+
+### Calendar actions
+
+`CalendarPage` now exposes topbar actions:
+
+```text
+Add hold   -> createCalendarHold({ date: '2026-06-01', label: 'Hold — TBD' }).unwrap()
+Block date -> createCalendarBlocked({ date: '2026-06-02', reason: 'Closed' }).unwrap()
+```
+
+Delete actions remain deferred because the current `CalendarEvent` view model is still hand-written and drops the backend hold/blocked IDs. There is also no delete affordance in the current calendar UI. This reinforces the known Phase 8 cleanup: replace the hand-written calendar view model with protobuf-backed calendar event data.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+Real API smoke through Vite proxy and dev-auth cookie:
+
+```text
+POST  /api/app/shows/<id>/announce -> HTTP/1.1 200 OK
+POST  /api/app/calendar/holds      -> HTTP/1.1 201 Created
+PATCH /api/app/settings            -> HTTP/1.1 200 OK
+```
+
+This completes the Phase 5 UI mutation wiring as far as the current UI and backend support allow. The only explicitly deferred part is calendar delete, due to missing IDs/affordance in the current frontend view model.

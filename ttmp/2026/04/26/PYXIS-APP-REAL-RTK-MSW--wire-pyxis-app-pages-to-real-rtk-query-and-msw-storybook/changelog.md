@@ -74,3 +74,16 @@ Added staff page loading/error/empty Storybook variants for Shows and Bookings u
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx — Adds loading/error/empty state stories with protobuf-shaped MSW responses.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx — Adds loading/error/empty state stories with protobuf-shaped MSW responses.
 
+
+## 2026-04-26
+
+Completed Phase 5 mutation wiring: show archive/announce/cancel, settings toggles, attendance row actions, and calendar create hold/blocked actions with validation and real API smoke.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx — Makes settings rows clickable mutation affordances.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx — Adds row-level attendance update action affordance.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx — Adds callbacks for settings toggle mutations.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Wires remaining visible page mutation actions with unwrap success/error handling.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds success and inline action styling for mutation feedback.
+
