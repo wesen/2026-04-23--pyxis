@@ -1,15 +1,16 @@
 import type { CSSProperties } from 'react';
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import type { Show } from 'pyxis-types';
 import { Poster, type PosterKind } from '../Poster';
 import './ShowTile.css';
 
-export type ShowTileShow = Pick<Show, 'artist' | 'date' | 'doorsTime' | 'price'> & {
-  age: string;
+export type ShowTileAction = 'tickets' | 'soldout' | 'learn';
+
+export type ShowTileShow = Show & {
   title?: string;
   time?: string;
-  kind?: 'tickets' | 'soldout' | 'learn';
+  kind?: ShowTileAction;
   poster?: PosterKind;
 };
 
@@ -17,11 +18,11 @@ export type ShowTileProps = {
   show: ShowTileShow;
   compact?: boolean;
   posterKind?: PosterKind;
-  onClick?: () => void;
+  onClick?: (show: ShowTileShow) => void;
   className?: string;
 };
 
-const pillFor = (kind?: ShowTileShow['kind']) => kind === 'soldout'
+const pillFor = (kind?: ShowTileAction) => kind === 'soldout'
   ? { label: 'Sold out', bg: '#F0EFEC', color: '#8E887E' }
   : kind === 'learn'
     ? { label: 'Learn more →', bg: '#FFF2EF', color: '#C8270D' }
@@ -44,8 +45,9 @@ export const ShowTile = ({ show, compact = false, posterKind, onClick, className
     <div
       className={clsx('pyxis-show-tile', className)}
       {...pyxisPart('show-tile')}
+      data-show-id={show.id}
       data-compact={compact ? 'true' : undefined}
-      onClick={onClick}
+      onClick={onClick ? () => onClick(show) : undefined}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
       style={style}

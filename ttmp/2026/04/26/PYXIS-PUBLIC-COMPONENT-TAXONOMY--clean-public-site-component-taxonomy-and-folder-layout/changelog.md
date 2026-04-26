@@ -32,3 +32,19 @@ Uploaded taxonomy guide to reMarkable and completed pilot public molecule move f
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ShowDetailHeader — Moved ShowDetailHeader into public molecule taxonomy folder.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ShowMetaStrip — Moved ShowMetaStrip into public molecule taxonomy folder.
 
+
+## 2026-04-26
+
+Completed shows/detail taxonomy cluster and aligned ShowTile/ShowGrid props with generated Show protobuf data, preserving show IDs through click callbacks.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/04-pyxis-components-storybook-ids-after-shows-detail.md — Captured Storybook IDs after shows/detail taxonomy move.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/Poster — Moved Poster to public molecules.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/PubShowRow — Moved PubShowRow to public molecules.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ReserveTicketCard — Moved ReserveTicketCard to public molecules.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ShowTile — Moved ShowTile to public molecules and changed ShowTileShow to extend generated Show with UI hints.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/TicketStub — Moved TicketStub to public molecules.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/ShowGrid — Moved ShowGrid to public organisms and preserved show identity through onShowClick.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/src/pages/Shows.tsx — Simplified navigation to use show.id from ShowGrid callback.
+

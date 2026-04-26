@@ -5,7 +5,7 @@ import { Poster, type PosterKind } from './Poster';
 const kinds: PosterKind[] = ['redroom', 'pixel808', 'petals', 'meetups', 'basement', 'orphx', 'moor', 'cygnus', 'zola'];
 
 const meta: Meta<typeof Poster> = {
-  title: 'Public/Molecules/Poster',
+  title: 'Public Site/Components/Molecules/Poster',
   component: Poster,
   tags: ['autodocs'],
   args: { kind: 'redroom' },

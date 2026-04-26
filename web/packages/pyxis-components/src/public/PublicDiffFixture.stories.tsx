@@ -2,8 +2,8 @@ import type React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArchiveStats } from './ArchiveStats';
 import { LineupRow } from './molecules/LineupRow';
-import { PubShowRow } from './PubShowRow';
-import { TicketStub } from './TicketStub';
+import { PubShowRow } from './molecules/PubShowRow';
+import { TicketStub } from './molecules/TicketStub';
 import { YearGroup } from './YearGroup';
 import { PubNav } from './PubNav';
 import { PubFooter } from './PubFooter';
@@ -16,13 +16,13 @@ import { MailingListCTA } from './MailingListCTA';
 import { BookingRules } from './BookingRules';
 import { BookingSuccess } from './BookingSuccess';
 import { BookingForm } from './BookingForm';
-import { Poster } from './Poster';
-import { ShowTile, type ShowTileShow } from './ShowTile';
-import { ShowGrid } from './ShowGrid';
+import { Poster } from './molecules/Poster';
+import { ShowTile, type ShowTileShow } from './molecules/ShowTile';
+import { ShowGrid } from './organisms/ShowGrid';
 
 import { create, ShowSchema, Show_LineupEntrySchema, ArchiveStatsSchema, ShowStatus } from 'pyxis-types';
 import { PublicPageHeader } from './PublicPageHeader';
-import { ReserveTicketCard } from './ReserveTicketCard';
+import { ReserveTicketCard } from './molecules/ReserveTicketCard';
 import { ShowDetailHeader } from './molecules/ShowDetailHeader';
 import { ShowMetaStrip } from './molecules/ShowMetaStrip';
 import { SafetyNote } from './SafetyNote';
@@ -72,10 +72,27 @@ const archiveShow = create(ShowSchema, {
   updatedAt: '2025-01-01T00:00:00Z',
 });
 
+const makeTileShow = (partial: Partial<ShowTileShow>): ShowTileShow => ({
+  ...create(ShowSchema, {
+    id: partial.id ?? 0,
+    artist: partial.artist ?? '',
+    date: partial.date ?? '2026-02-14',
+    doorsTime: partial.doorsTime ?? '9:00 PM',
+    age: partial.age ?? '21+',
+    price: partial.price ?? '$12',
+    genre: partial.genre ?? 'electronic',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  kind: partial.kind ?? 'tickets',
+  poster: partial.poster,
+});
+
 const tileShows: ShowTileShow[] = [
-  { artist: 'Redroom Inferno', date: 'Fri, Feb 14', doorsTime: '9:00 PM', age: '25+', price: '$10 adv / $15 door', kind: 'tickets', poster: 'redroom' },
-  { artist: '808 Collective', date: 'Fri, Feb 21', doorsTime: '8:00 PM', age: '21+', price: '$12', kind: 'tickets', poster: 'pixel808' },
-  { artist: 'Petals of Love', date: 'Sat, Feb 28', doorsTime: '6:30 PM', age: 'All Ages', price: '$15', kind: 'tickets', poster: 'petals' },
+  makeTileShow({ id: 1, artist: 'Redroom Inferno', date: '2026-02-14', doorsTime: '9:00 PM', age: '25+', price: '$10 adv / $15 door', poster: 'redroom' }),
+  makeTileShow({ id: 2, artist: '808 Collective', date: '2026-02-21', doorsTime: '8:00 PM', age: '21+', price: '$12', poster: 'pixel808' }),
+  makeTileShow({ id: 3, artist: 'Petals of Love', date: '2026-02-28', doorsTime: '6:30 PM', age: 'All Ages', price: '$15', poster: 'petals' }),
 ];
 
 function PublicDiffFixture() {

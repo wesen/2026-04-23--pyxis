@@ -26,12 +26,7 @@ export function Shows() {
           <section className="pyxis-shows-page__grid-section" data-section="shows-list">
             <ShowGrid
               shows={shows}
-              onShowClick={(show) => {
-                const matchedShow = shows.find((candidate) =>
-                  candidate.artist === show.artist && candidate.date === show.date
-                );
-                if (matchedShow) navigate(`/shows/${matchedShow.id}`);
-              }}
+              onShowClick={(show) => navigate(`/shows/${show.id}`)}
             />
           </section>
         )}

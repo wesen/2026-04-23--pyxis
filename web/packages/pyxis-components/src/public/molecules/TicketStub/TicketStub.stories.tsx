@@ -1,10 +1,10 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { TicketStub } from './TicketStub';
-import { seedShows } from '../../mocks/handlers';
+import { seedShows } from '../../../mocks/handlers';
 
 const meta: Meta<typeof TicketStub> = {
-  title: 'Public/Molecules/TicketStub',
+  title: 'Public Site/Components/Molecules/TicketStub',
   component: TicketStub,
   tags: ['autodocs'],
 };

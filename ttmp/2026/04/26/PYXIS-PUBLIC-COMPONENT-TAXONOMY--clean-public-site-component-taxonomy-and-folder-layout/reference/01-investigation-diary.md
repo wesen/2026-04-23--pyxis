@@ -28,6 +28,8 @@ RelatedFiles:
       Note: Saved component Storybook IDs after molecule pilot.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/03-pyxis-user-site-storybook-page-ids-after-cleanup.md
       Note: Saved public user-site page story IDs after cleanup.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/04-pyxis-components-storybook-ids-after-shows-detail.md
+      Note: Captured story IDs after shows/detail cluster.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowList
@@ -36,16 +38,31 @@ RelatedFiles:
       Note: Moved public archive row molecule in pilot batch.
     - Path: web/packages/pyxis-components/src/public/molecules/LineupRow
       Note: Moved public lineup row molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/Poster
+      Note: Moved poster visual molecule.
+    - Path: web/packages/pyxis-components/src/public/molecules/PubShowRow
+      Note: Moved public show row molecule.
+    - Path: web/packages/pyxis-components/src/public/molecules/ReserveTicketCard
+      Note: Moved reserve CTA card molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/ShowDetailHeader
       Note: Moved public show detail header molecule in pilot batch.
     - Path: web/packages/pyxis-components/src/public/molecules/ShowMetaStrip
       Note: Moved public show metadata strip molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/ShowTile
+      Note: Moved to public molecules; ShowTileShow now extends generated Show and preserves id.
+    - Path: web/packages/pyxis-components/src/public/molecules/TicketStub
+      Note: Moved show-backed ticket display molecule.
+    - Path: web/packages/pyxis-components/src/public/organisms/ShowGrid
+      Note: Moved to public organisms; click callback now receives ShowTileShow with show.id.
+    - Path: web/packages/pyxis-user-site/src/pages/Shows.tsx
+      Note: Uses ShowGrid callback show.id directly instead of artist/date matching.
 ExternalSources: []
 Summary: Chronological diary for the public site component taxonomy and folder layout cleanup ticket.
 LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -336,3 +353,134 @@ Do not jump to all components at once. Either:
 2. start the shows/detail cluster with `ShowTile`, `TicketStub`, `ReserveTicketCard`, and later `ShowGrid`.
 
 The next batch should also create `src/public/organisms/` only when the first actual organism moves.
+
+## Step 3: Shows/Detail Cluster and Proto-Aligned Props
+
+The user asked to continue through the shows/detail cluster and specifically asked whether props are being lined up with protobuf types. I treated this as a requirement to avoid display-only type drift where real public pages carry generated `Show` messages but components accept reduced hand-written objects.
+
+### Prompt Context
+
+**User prompt (verbatim):** "yeah go through shows/detail. Are you properly lining up props and proto types sand stuff?"
+
+**Assistant interpretation:** Move the shows/detail public components into the taxonomy folders and use generated protobuf `Show`-backed props where the component represents actual show data.
+
+**Commit:** Pending at time of diary entry.
+
+### Components moved
+
+Moved public show/detail molecules:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ShowTile
+web/packages/pyxis-components/src/public/molecules/TicketStub
+web/packages/pyxis-components/src/public/molecules/ReserveTicketCard
+web/packages/pyxis-components/src/public/molecules/Poster
+web/packages/pyxis-components/src/public/molecules/PubShowRow
+```
+
+Moved public show/detail organism:
+
+```text
+web/packages/pyxis-components/src/public/organisms/ShowGrid
+```
+
+### Proto prop alignment
+
+Before this pass, `ShowTile` and `ShowGrid` used a reduced hand-written `ShowTileShow` shape:
+
+```ts
+Pick<Show, 'artist' | 'date' | 'doorsTime' | 'price'> & { age: string; ... }
+```
+
+That shape dropped the proto `id`, which forced `Shows.tsx` to reconstruct identity by matching artist/date before navigating. This was fragile and contradicted the proto-everywhere migration direction.
+
+I changed `ShowTileShow` to extend the generated protobuf `Show` type and only add UI hints:
+
+```ts
+export type ShowTileShow = Show & {
+  title?: string;
+  time?: string;
+  kind?: ShowTileAction;
+  poster?: PosterKind;
+};
+```
+
+`ShowTile` now accepts `onClick?: (show: ShowTileShow) => void`, adds `data-show-id={show.id}`, and calls the callback with the full show object. `ShowGrid` passes that callback through and keys tiles by `show.id` when available.
+
+Then `web/packages/pyxis-user-site/src/pages/Shows.tsx` became simpler and safer:
+
+```tsx
+<ShowGrid
+  shows={shows}
+  onShowClick={(show) => navigate(`/shows/${show.id}`)}
+/>
+```
+
+### Story/mock alignment
+
+Because `ShowTileShow` now extends the generated `Show` message type, story fixtures and `PublicDiffFixture` can no longer use plain objects. I updated those fixtures to use:
+
+```ts
+create(ShowSchema, { ... })
+```
+
+and then attach UI-only hints such as `kind` and `poster`. This matches the broader repo rule that mock data for protobuf types should be created via `create(Schema, ...)`, not plain objects.
+
+Existing `TicketStub` and `PubShowRow` already accepted generated `Show`, and their stories already used `seedShows` from the protobuf-shaped mock handlers. After moving folders, I only needed to fix their relative `seedShows` imports from `../../mocks/handlers` to `../../../mocks/handlers`.
+
+### Import/export updates
+
+- Updated `web/packages/pyxis-components/src/index.ts` exports for moved molecules/organism.
+- Updated `web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx` imports and tile fixtures.
+- Updated moved component `pyxisPart` imports for the deeper folder paths.
+- Updated moved Storybook titles:
+  - `Public Site/Components/Molecules/ShowTile`
+  - `Public Site/Components/Molecules/TicketStub`
+  - `Public Site/Components/Molecules/ReserveTicketCard`
+  - `Public Site/Components/Molecules/Poster`
+  - `Public Site/Components/Molecules/PubShowRow`
+  - `Public Site/Components/Organisms/ShowGrid`
+
+### Story IDs captured
+
+Added:
+
+```text
+sources/04-pyxis-components-storybook-ids-after-shows-detail.md
+```
+
+New story IDs include:
+
+```text
+public-site-components-molecules-showtile--default
+public-site-components-molecules-ticketstub--default
+public-site-components-molecules-reserveticketcard--default
+public-site-components-molecules-poster--default
+public-site-components-molecules-pubshowrow--default
+public-site-components-organisms-showgrid--desktop
+```
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && pnpm build-storybook
+cd web && pnpm build
+```
+
+Live browser validation hit the moved component stories in the running component Storybook. No story-level errors appeared; only harmless `favicon.ico` 404s. The public user-site page story still shows the existing React Router v7 future-flag warnings, unrelated to this refactor.
+
+### What worked
+
+- Stable package-barrel imports meant the user-site package needed only the `Shows.tsx` identity simplification, not widespread import changes.
+- Aligning `ShowTileShow` with generated `Show` removed the previous artist/date matching workaround.
+- The build caught plain-object story fixtures immediately, which confirmed the type boundary is now stricter and more proto-aligned.
+
+### Caveats
+
+- `Poster` is still a static design/demo molecule with variant names, not a proto-backed flyer. That is acceptable because it does not cross the API boundary and does not represent a backend payload.
+- `ReserveTicketCard` remains primitive-prop-based (`price`, `note`, `cta`) because it is a CTA display card rather than a direct `Show` renderer. `ShowDetail.tsx` still passes show-derived values into it.
+- Historical visual parity docs mention old `public-molecules-*` IDs. No active visual spec update was required in this pass.

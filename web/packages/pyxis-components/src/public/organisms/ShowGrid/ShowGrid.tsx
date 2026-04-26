@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
-import { ShowTile, type ShowTileShow } from '../ShowTile';
+import { pyxisPart } from '../../../utils/parts';
+import { ShowTile, type ShowTileShow } from '../../molecules/ShowTile';
 import './ShowGrid.css';
 
 export type ShowGridProps = {
@@ -18,10 +18,10 @@ export const ShowGrid = ({ shows, compact = false, onShowClick, className }: Sho
   >
     {shows.map((show, index) => (
       <ShowTile
-        key={`${show.artist}-${show.date}-${index}`}
+        key={show.id || `${show.artist}-${show.date}-${index}`}
         show={show}
         compact={compact}
-        onClick={onShowClick ? () => onShowClick(show) : undefined}
+        onClick={onShowClick}
       />
     ))}
   </div>

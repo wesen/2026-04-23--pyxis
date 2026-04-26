@@ -31,12 +31,12 @@
 
 ## Phase 4: Shows/detail cluster
 
-- [ ] Create `web/packages/pyxis-components/src/public/organisms/`.
-- [ ] Move `ShowGrid` to `public/organisms/ShowGrid`.
-- [ ] Move `ReserveTicketCard`, `TicketStub`, `Poster`, `ShowTile`, `PubShowRow` according to finalized classification.
-- [ ] Fix `ShowGrid` click API so it preserves `show.id` directly if still needed.
-- [ ] Update stories and imports.
-- [ ] Validate `pyxis-components` and `pyxis-user-site` builds.
+- [x] Create `web/packages/pyxis-components/src/public/organisms/`.
+- [x] Move `ShowGrid` to `public/organisms/ShowGrid`.
+- [x] Move `ReserveTicketCard`, `TicketStub`, `Poster`, `ShowTile`, `PubShowRow` according to finalized classification.
+- [x] Fix `ShowGrid` click API so it preserves `show.id` directly if still needed.
+- [x] Update stories and imports.
+- [x] Validate `pyxis-components` and `pyxis-user-site` builds.
 
 ## Phase 5: Booking cluster
 

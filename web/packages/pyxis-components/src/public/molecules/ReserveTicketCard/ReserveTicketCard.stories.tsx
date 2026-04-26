@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ReserveTicketCard } from './ReserveTicketCard';
 
 const meta: Meta<typeof ReserveTicketCard> = {
-  title: 'Public/Molecules/ReserveTicketCard',
+  title: 'Public Site/Components/Molecules/ReserveTicketCard',
   component: ReserveTicketCard,
   tags: ['autodocs'],
 };
