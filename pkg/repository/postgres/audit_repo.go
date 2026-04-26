@@ -49,6 +49,23 @@ func (r *AuditRepo) Create(ctx context.Context, entry *domain.AuditLogEntry) (*d
 	return dbAuditToDomain(row), nil
 }
 
+// List returns audit log entries with pagination.
+func (r *AuditRepo) List(ctx context.Context, limit, offset int) ([]domain.AuditLogEntry, error) {
+	rows, err := r.queries.ListAuditLog(ctx, db.ListAuditLogParams{
+		Limit:  int32(limit),
+		Offset: int32(offset),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	entries := make([]domain.AuditLogEntry, len(rows))
+	for i, row := range rows {
+		entries[i] = *dbAuditToDomain(row)
+	}
+	return entries, nil
+}
+
 func dbAuditToDomain(row db.AuditLog) *domain.AuditLogEntry {
 	entry := &domain.AuditLogEntry{
 		ID:         int(row.ID),

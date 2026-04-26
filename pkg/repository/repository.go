@@ -39,6 +39,13 @@ type ArtistRepository interface {
 // AuditLogRepository defines audit log storage operations.
 type AuditLogRepository interface {
 	Create(ctx context.Context, entry *domain.AuditLogEntry) (*domain.AuditLogEntry, error)
+	List(ctx context.Context, limit, offset int) ([]domain.AuditLogEntry, error)
+}
+
+// SettingsRepository defines settings storage operations.
+type SettingsRepository interface {
+	Get(ctx context.Context) (*domain.Settings, error)
+	Update(ctx context.Context, settings *domain.Settings) (*domain.Settings, error)
 }
 
 // CalendarRepository defines calendar storage operations.

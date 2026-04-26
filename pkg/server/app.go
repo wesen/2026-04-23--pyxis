@@ -710,6 +710,147 @@ func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) 
 	})
 }
 
+func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	settings, err := s.settingsService.Get(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":                     settings.ID,
+		"spaceName":              settings.SpaceName,
+		"tagline":                settings.Tagline,
+		"address":                settings.Address,
+		"capacity":               settings.Capacity,
+		"contactEmail":           settings.ContactEmail,
+		"website":                settings.Website,
+		"discordGuildId":         settings.DiscordGuildID,
+		"discordChUpcoming":      settings.DiscordChUpcoming,
+		"discordChAnnouncements": settings.DiscordChAnnouncements,
+		"discordChStaff":         settings.DiscordChStaff,
+		"discordChBookings":      settings.DiscordChBookings,
+		"setupComplete":          settings.SetupComplete,
+		"updatedAt":              settings.UpdatedAt.Format(time.RFC3339),
+	})
+}
+
+func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req struct {
+		SpaceName              string `json:"spaceName"`
+		Tagline                string `json:"tagline"`
+		Address                string `json:"address"`
+		Capacity               *int   `json:"capacity"`
+		ContactEmail           string `json:"contactEmail"`
+		Website                string `json:"website"`
+		DiscordGuildID         string `json:"discordGuildId"`
+		DiscordChUpcoming      string `json:"discordChUpcoming"`
+		DiscordChAnnouncements string `json:"discordChAnnouncements"`
+		DiscordChStaff         string `json:"discordChStaff"`
+		DiscordChBookings      string `json:"discordChBookings"`
+		SetupComplete          bool   `json:"setupComplete"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	updated, err := s.settingsService.Update(ctx, &domain.Settings{
+		SpaceName:              req.SpaceName,
+		Tagline:                req.Tagline,
+		Address:                req.Address,
+		Capacity:               req.Capacity,
+		ContactEmail:           req.ContactEmail,
+		Website:                req.Website,
+		DiscordGuildID:         req.DiscordGuildID,
+		DiscordChUpcoming:      req.DiscordChUpcoming,
+		DiscordChAnnouncements: req.DiscordChAnnouncements,
+		DiscordChStaff:         req.DiscordChStaff,
+		DiscordChBookings:      req.DiscordChBookings,
+		SetupComplete:          req.SetupComplete,
+	})
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":                     updated.ID,
+		"spaceName":              updated.SpaceName,
+		"tagline":                updated.Tagline,
+		"address":                updated.Address,
+		"capacity":               updated.Capacity,
+		"contactEmail":           updated.ContactEmail,
+		"website":                updated.Website,
+		"discordGuildId":         updated.DiscordGuildID,
+		"discordChAnnouncements": updated.DiscordChAnnouncements,
+		"discordChStaff":         updated.DiscordChStaff,
+		"discordChBookings":      updated.DiscordChBookings,
+		"setupComplete":          updated.SetupComplete,
+		"updatedAt":              updated.UpdatedAt.Format(time.RFC3339),
+	})
+}
+
+func (s *Server) handleListAuditLog(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	limit := 50
+	offset := 0
+	if l := r.URL.Query().Get("limit"); l != "" {
+		if v, err := strconv.Atoi(l); err == nil && v > 0 {
+			limit = v
+		}
+	}
+	if o := r.URL.Query().Get("offset"); o != "" {
+		if v, err := strconv.Atoi(o); err == nil && v >= 0 {
+			offset = v
+		}
+	}
+
+	entries, err := s.auditService.List(ctx, limit, offset)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	pbEntries := make([]map[string]interface{}, len(entries))
+	for i, entry := range entries {
+		pbEntries[i] = map[string]interface{}{
+			"id":         entry.ID,
+			"actor":      entry.Actor,
+			"action":     entry.Action,
+			"entityType": entry.EntityType,
+			"metadata":   entry.Metadata,
+			"createdAt":  entry.CreatedAt.Format(time.RFC3339),
+		}
+		if entry.ActorID != nil {
+			pbEntries[i]["actorId"] = *entry.ActorID
+		}
+		if entry.EntityID != nil {
+			pbEntries[i]["entityId"] = *entry.EntityID
+		}
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"entries": pbEntries,
+	})
+}
+
 func (s *Server) requireRole(roles ...string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

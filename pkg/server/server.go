@@ -21,6 +21,8 @@ type Server struct {
 	artistService     *service.ArtistService
 	calendarService   *service.CalendarService
 	attendanceService *service.AttendanceService
+	settingsService   *service.SettingsService
+	auditService      service.AuditService
 	authService       *service.AuthService
 }
 
@@ -36,15 +38,17 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	auditRepo := postgres.NewAuditRepo(queries)
 	calendarRepo := postgres.NewCalendarRepo(queries)
 	attendanceRepo := postgres.NewAttendanceRepo(queries)
+	settingsRepo := postgres.NewSettingsRepo(queries)
 
 	// Service layer
-	auditSvc := service.NewAuditService(auditRepo)
-	s.showService = service.NewShowService(showRepo, auditSvc)
+	s.auditService = service.NewAuditService(auditRepo)
+	s.showService = service.NewShowService(showRepo, s.auditService)
 	s.artistService = service.NewArtistService(artistRepo)
 	s.calendarService = service.NewCalendarService(calendarRepo)
 	s.attendanceService = service.NewAttendanceService(attendanceRepo)
+	s.settingsService = service.NewSettingsService(settingsRepo)
 	s.submissionService = service.NewSubmissionService(
-		submissionRepo, showRepo, artistRepo, auditSvc, database.Pool,
+		submissionRepo, showRepo, artistRepo, s.auditService, database.Pool,
 	)
 
 	// Auth service (uses placeholder config; override in production)
@@ -103,6 +107,13 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("GET /api/app/attendance", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAttendance))))
 	mux.Handle("GET /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAttendance))))
 	mux.Handle("PATCH /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertAttendance))))
+
+	// Staff settings endpoints
+	mux.Handle("GET /api/app/settings", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetSettings))))
+	mux.Handle("PATCH /api/app/settings", s.requireAuth(s.requireRole("admin")(http.HandlerFunc(s.handleUpdateSettings))))
+
+	// Staff audit log endpoints
+	mux.Handle("GET /api/app/audit-log", s.requireAuth(s.requireRole("admin")(http.HandlerFunc(s.handleListAuditLog))))
 
 	s.handler = mux
 	return s
