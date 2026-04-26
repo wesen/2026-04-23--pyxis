@@ -16,6 +16,8 @@ RelatedFiles:
       Note: Central playbook pointer to pyxis-app visual loop (commit d7f3692199b72a4933a5389c090c87230f753f89)
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
+    - Path: prototype-design/screens/roster.jsx
+      Note: Prototype Calendar section hooks for visual targeting (commit f3295d5)
     - Path: prototype-design/screens/shows-bookings.jsx
       Note: Prototype Bookings section hooks for visual targeting (commit caeefa4)
     - Path: prototype-design/visual-diff/userland/lib/compare-region.js
@@ -26,6 +28,7 @@ RelatedFiles:
       Note: |-
         Initial pyxis-app component visual suite
         Focused component visual targets for Shows panels (commits 4020ea8
+        Calendar focused visual targets (commit f3295d5)
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
       Note: |-
         Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
@@ -96,7 +99,9 @@ RelatedFiles:
         DashboardQuickActionsPanel extraction (commit 12cc17c)
         Attention panel organism wrapper and page reuse (commit b1180ae)
     - Path: web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx
-      Note: Bookings queue and processed organism composition (commit caeefa4)
+      Note: |-
+        Bookings queue and processed organism composition (commit caeefa4)
+        Calendar month and agenda organisms tuned (commit f3295d5)
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
       Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
@@ -116,6 +121,8 @@ RelatedFiles:
         QuickActionsPanel and no-pending Storybook states (commit 12cc17c)
     - Path: web/packages/pyxis-app/stories/BookingsOrganisms.stories.tsx
       Note: Direct Bookings organism story widths for focused visual targets (commit caeefa4)
+    - Path: web/packages/pyxis-app/stories/CalendarOrganisms.stories.tsx
+      Note: Direct Calendar organism story targets (commit f3295d5)
     - Path: web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx
       Note: Direct AttentionPanel organism story target (commit b1180ae)
     - Path: web/packages/pyxis-app/stories/DashboardHero.stories.tsx
@@ -132,6 +139,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3066,4 +3074,143 @@ Important final artifacts:
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-06-booking-status-css/queue/bookings-queue-panel/artifacts/component/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-06-booking-status-css/processed/bookings-processed-panel/artifacts/component/right_region.png
+```
+
+## Step 24: Tune Calendar month and agenda organisms
+
+I applied the same focused organism workflow to the Calendar page after the Shows and Bookings passes. The Calendar work was split into the month grid and right-side agenda, with direct Storybook/component visual targets and prototype hooks before CSS tuning.
+
+The month panel is now structurally aligned with the prototype grid: real weekday headers, blank leading cells, square day cells, compact event chips, a today highlight, month controls, and a legend. The agenda panel now matches the prototype text/content and is visually close enough for a review-band page checkpoint, though its isolated organism crop still carries height/context differences.
+
+### Prompt Context
+
+**User prompt (verbatim):** "next do the calendar, in the same style"
+
+**Assistant interpretation:** Repeat the organism-first visual parity loop for the Calendar page, as done for Shows and Bookings.
+
+**Inferred user intent:** Bring the Calendar route up to credible prototype parity by tuning month-grid and agenda subelements instead of accepting the earlier broad checkpoint.
+
+**Commit (code):** f3295d5 — "Tune calendar month and agenda organisms"
+
+### What I did
+
+- Added prototype `data-section` hooks:
+  - `calendar-month`,
+  - `calendar-agenda`.
+- Updated desktop page specs to use those hooks instead of positional selectors.
+- Added component-level visual targets:
+  - `calendar-month-panel`,
+  - `calendar-agenda-panel`.
+- Added/updated Calendar organism stories:
+  - `MonthPanel`,
+  - `Agenda`,
+  - adjusted wrapper widths for focused crops.
+- Extracted and tuned `CalendarMonthPanel`:
+  - month title/header controls,
+  - weekday headers,
+  - blank leading cells for May 2025,
+  - day cells with today state,
+  - compact event chips,
+  - legend.
+- Tuned `CalendarAgenda`:
+  - May-at-a-glance metric rows,
+  - Today card with `Burial Hex`, confirmed pill, show details, and actions.
+- Added calendar-specific CSS in `Panels.css` / `Rows.css` and added `--app-accent-rgb` token for soft accent surfaces.
+
+### Why
+
+The previous Calendar implementation reused a generic table-like month grid that lacked the prototype's blank leading cells, weekday labels, square card cells, compact chips, and today panel. That made the full-page checkpoint misleading. The calendar needed the same bottom-up organism treatment as Shows and Bookings.
+
+### What worked
+
+- Typecheck passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Focused month panel reached review band:
+
+```text
+run-03-icons-status-width/month: 7.417960701542792%, review, text unchanged
+```
+
+- Full desktop Calendar checkpoint is now review-band across all sections:
+
+```text
+page: 7.13168505942275%, review
+month: 7.874265038444143%, review, text unchanged
+agenda: 7.922558922558923%, review, text unchanged
+```
+
+### What didn't work
+
+- The first agenda organism comparison was tune-required because agenda-specific CSS lived in `Rows.css`, which was not reliably loaded in the isolated agenda story once the agenda stopped rendering `CalendarEventChip`. Moving/duplicating the agenda rules into `Panels.css` fixed the visible layout.
+- The initial month controls used literal `‹` / `›` text, causing text mismatch. Replacing them with `Icon` components removed the text diff.
+- The isolated agenda component target still reports tune-required in one run because the prototype agenda column includes more vertical context/blank space than the standalone Storybook crop. The full page section comparison is a better acceptance checkpoint for agenda at this moment.
+
+### What I learned
+
+- Calendar has a stronger layout contract than most pages: missing blank leading cells or weekday headers creates large visual drift even when data is correct.
+- Story-level CSS loading needs attention. If a CSS rule is only indirectly imported through a child component that is later removed, the isolated organism story can silently lose styling.
+- Page-section comparison can be more representative than direct organism comparison for sidebars whose prototype crop includes full-column height/context.
+
+### What was tricky to build
+
+The tricky part was balancing direct organism stories with the prototype's page-context dimensions. The month panel worked well as an isolated organism after matching the 670px panel width. The agenda panel was visually correct in content and full-page section context, but direct isolated comparison still differs because the prototype captures the entire right column's vertical extent.
+
+### What warrants a second pair of eyes
+
+- Review whether `CalendarMonthPanel`, `CalendarLegend`, and `CalendarAgenda` should move out of `Phase8Sections.tsx` into a dedicated calendar organism file.
+- Review whether the agenda component target should use a page-section checkpoint only, or whether we should add a standalone prototype route for the agenda.
+- Review mobile calendar behavior after the desktop organism pass; this step focused on desktop parity.
+
+### What should be done in the future
+
+- Add explicit `data-element` hooks for calendar day cells/events if further chip/day typography tuning is needed.
+- Revisit the mobile Calendar route after the desktop month/agenda structure is accepted.
+- Consider a dedicated `CalendarSections.tsx` file to mirror `ShowsSections.tsx` once calendar work continues.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`,
+  - `web/packages/pyxis-app/src/components/molecules/Rows.css`,
+  - `web/packages/pyxis-app/stories/CalendarOrganisms.stories.tsx`,
+  - `prototype-design/screens/roster.jsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Re-run focused checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page calendar-month-panel \
+  --section component \
+  --summary \
+  --outDir ttmp/.../various/20-calendar-panels-tuning/run-N/month \
+  --output json
+```
+
+### Technical details
+
+Important artifact folder:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/
+```
+
+Final checkpoint evidence:
+
+```text
+run-03-icons-status-width/month: 7.417960701542792%, review, text unchanged
+run-05-page-checkpoint/page: 7.13168505942275%, review
+run-05-page-checkpoint/month: 7.874265038444143%, review, text unchanged
+run-05-page-checkpoint/agenda: 7.922558922558923%, review, text unchanged
 ```

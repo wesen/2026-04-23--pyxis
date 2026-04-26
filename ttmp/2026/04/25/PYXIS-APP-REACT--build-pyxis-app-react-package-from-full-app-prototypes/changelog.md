@@ -161,3 +161,13 @@ Step 23: Tuned Bookings awaiting-review and recently-processed organisms; proces
 - /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — Bookings focused visual targets
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard.tsx — Bookings card/table tuning
 
+
+## 2026-04-25
+
+Step 24: Tuned Calendar month and agenda organisms; desktop Calendar page checkpoint reached review band across page/month/agenda (commit f3295d5).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Calendar layout and agenda styling
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx — Calendar organism composition
+
