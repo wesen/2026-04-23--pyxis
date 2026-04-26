@@ -187,6 +187,115 @@ func artistToProto(artist *domain.Artist) *pyxisv1.Artist {
 	}
 }
 
+func submissionToProto(sub *domain.Submission) *pyxisv1.Submission {
+	pb := &pyxisv1.Submission{
+		Id:          int32(sub.ID),
+		ArtistName:  sub.ArtistName,
+		Genre:       sub.Genre,
+		Links:       sub.Links,
+		TechRider:   sub.TechRider,
+		Message:     sub.Message,
+		Status:      sub.Status,
+		CreatedAt:   sub.CreatedAt.Format(time.RFC3339),
+	}
+	if sub.ArtistID != nil {
+		pb.ArtistId = int32(*sub.ArtistID)
+	}
+	if sub.PreferredDate != nil {
+		pb.PreferredDate = sub.PreferredDate.Format(time.DateOnly)
+	}
+	if sub.ExpectedDraw != nil {
+		pb.ExpectedDraw = int32(*sub.ExpectedDraw)
+	}
+	if sub.ReviewedBy != nil {
+		pb.ReviewedBy = int32(*sub.ReviewedBy)
+	}
+	if sub.ReviewedAt != nil {
+		pb.ReviewedAt = sub.ReviewedAt.Format(time.RFC3339)
+	}
+	return pb
+}
+
+func calendarHoldToProto(h *domain.CalendarHold) *pyxisv1.CalendarHold {
+	return &pyxisv1.CalendarHold{
+		Id:    int32(h.ID),
+		Date:  h.Date.Format(time.DateOnly),
+		Label: h.Label,
+	}
+}
+
+func calendarBlockedToProto(b *domain.CalendarBlocked) *pyxisv1.CalendarBlocked {
+	return &pyxisv1.CalendarBlocked{
+		Id:     int32(b.ID),
+		Date:   b.Date.Format(time.DateOnly),
+		Reason: b.Reason,
+	}
+}
+
+func attendanceLogToProto(log *domain.AttendanceLog) *pyxisv1.AttendanceLog {
+	pb := &pyxisv1.AttendanceLog{
+		Id:            int32(log.ID),
+		ShowId:        int32(log.ShowID),
+		Artist:        log.Artist,
+		Date:          log.Date.Format(time.DateOnly),
+		Notes:         log.Notes,
+		Incident:      log.Incident,
+		IncidentNotes: log.IncidentNotes,
+		CreatedAt:     log.CreatedAt.Format(time.RFC3339),
+		UpdatedAt:     log.UpdatedAt.Format(time.RFC3339),
+	}
+	if log.Draw != nil {
+		pb.Draw = int32(*log.Draw)
+	}
+	if log.LoggedBy != nil {
+		pb.LoggedBy = int32(*log.LoggedBy)
+	}
+	return pb
+}
+
+func auditLogEntryToProto(entry *domain.AuditLogEntry) *pyxisv1.AuditLogEntry {
+	pb := &pyxisv1.AuditLogEntry{
+		Id:         int32(entry.ID),
+		Actor:      entry.Actor,
+		Action:     entry.Action,
+		EntityType: entry.EntityType,
+		CreatedAt:  entry.CreatedAt.Format(time.RFC3339),
+	}
+	if entry.ActorID != nil {
+		pb.ActorId = int32(*entry.ActorID)
+	}
+	if entry.EntityID != nil {
+		pb.EntityId = int32(*entry.EntityID)
+	}
+	if entry.Metadata != nil {
+		b, _ := json.Marshal(entry.Metadata)
+		pb.Metadata = string(b)
+	}
+	return pb
+}
+
+func settingsToProto(settings *domain.Settings) *pyxisv1.Settings {
+	pb := &pyxisv1.Settings{
+		Id:                     int32(settings.ID),
+		SpaceName:              settings.SpaceName,
+		Tagline:                settings.Tagline,
+		Address:                settings.Address,
+		ContactEmail:           settings.ContactEmail,
+		Website:                settings.Website,
+		DiscordGuildId:         settings.DiscordGuildID,
+		DiscordChUpcoming:      settings.DiscordChUpcoming,
+		DiscordChAnnouncements: settings.DiscordChAnnouncements,
+		DiscordChStaff:         settings.DiscordChStaff,
+		DiscordChBookings:      settings.DiscordChBookings,
+		SetupComplete:          settings.SetupComplete,
+		UpdatedAt:              settings.UpdatedAt.Format(time.RFC3339),
+	}
+	if settings.Capacity != nil {
+		pb.Capacity = int32(*settings.Capacity)
+	}
+	return pb
+}
+
 func respondProtoJSON(w http.ResponseWriter, status int, msg proto.Message) {
 	b, err := protojson.Marshal(msg)
 	if err != nil {
@@ -229,12 +338,13 @@ func respondError(w http.ResponseWriter, err error) {
 		code = "FORBIDDEN"
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"error": map[string]string{
-			"code":    code,
-			"message": message,
+	b, _ := protojson.Marshal(&pyxisv1.ErrorResponse{
+		Error: &pyxisv1.ErrorResponse_Error{
+			Code:    code,
+			Message: message,
 		},
 	})
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	w.Write(b)
 }

@@ -841,6 +841,50 @@ func (x *Submission) GetCreatedAt() string {
 	return ""
 }
 
+type SubmissionList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Submissions   []*Submission          `protobuf:"bytes,1,rep,name=submissions,proto3" json:"submissions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmissionList) Reset() {
+	*x = SubmissionList{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmissionList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmissionList) ProtoMessage() {}
+
+func (x *SubmissionList) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmissionList.ProtoReflect.Descriptor instead.
+func (*SubmissionList) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SubmissionList) GetSubmissions() []*Submission {
+	if x != nil {
+		return x.Submissions
+	}
+	return nil
+}
+
 type User struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -856,7 +900,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -868,7 +912,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -881,7 +925,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{9}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *User) GetId() int32 {
@@ -944,7 +988,7 @@ type AuthSession struct {
 
 func (x *AuthSession) Reset() {
 	*x = AuthSession{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -956,7 +1000,7 @@ func (x *AuthSession) String() string {
 func (*AuthSession) ProtoMessage() {}
 
 func (x *AuthSession) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -969,7 +1013,7 @@ func (x *AuthSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthSession.ProtoReflect.Descriptor instead.
 func (*AuthSession) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{10}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *AuthSession) GetAuthenticated() bool {
@@ -1008,7 +1052,7 @@ type Artist struct {
 
 func (x *Artist) Reset() {
 	*x = Artist{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1064,7 @@ func (x *Artist) String() string {
 func (*Artist) ProtoMessage() {}
 
 func (x *Artist) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1077,7 @@ func (x *Artist) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Artist.ProtoReflect.Descriptor instead.
 func (*Artist) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{11}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Artist) GetId() int32 {
@@ -1094,7 +1138,7 @@ type ArtistList struct {
 
 func (x *ArtistList) Reset() {
 	*x = ArtistList{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1106,7 +1150,7 @@ func (x *ArtistList) String() string {
 func (*ArtistList) ProtoMessage() {}
 
 func (x *ArtistList) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[12]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1119,7 +1163,7 @@ func (x *ArtistList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArtistList.ProtoReflect.Descriptor instead.
 func (*ArtistList) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{12}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ArtistList) GetArtists() []*Artist {
@@ -1140,7 +1184,7 @@ type CalendarHold struct {
 
 func (x *CalendarHold) Reset() {
 	*x = CalendarHold{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1152,7 +1196,7 @@ func (x *CalendarHold) String() string {
 func (*CalendarHold) ProtoMessage() {}
 
 func (x *CalendarHold) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[13]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1165,7 +1209,7 @@ func (x *CalendarHold) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalendarHold.ProtoReflect.Descriptor instead.
 func (*CalendarHold) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{13}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CalendarHold) GetId() int32 {
@@ -1200,7 +1244,7 @@ type CalendarBlocked struct {
 
 func (x *CalendarBlocked) Reset() {
 	*x = CalendarBlocked{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1212,7 +1256,7 @@ func (x *CalendarBlocked) String() string {
 func (*CalendarBlocked) ProtoMessage() {}
 
 func (x *CalendarBlocked) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[14]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1225,7 +1269,7 @@ func (x *CalendarBlocked) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalendarBlocked.ProtoReflect.Descriptor instead.
 func (*CalendarBlocked) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{14}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CalendarBlocked) GetId() int32 {
@@ -1259,7 +1303,7 @@ type CalendarResponse struct {
 
 func (x *CalendarResponse) Reset() {
 	*x = CalendarResponse{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1271,7 +1315,7 @@ func (x *CalendarResponse) String() string {
 func (*CalendarResponse) ProtoMessage() {}
 
 func (x *CalendarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[15]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1284,7 +1328,7 @@ func (x *CalendarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalendarResponse.ProtoReflect.Descriptor instead.
 func (*CalendarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{15}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CalendarResponse) GetHolds() []*CalendarHold {
@@ -1320,7 +1364,7 @@ type AttendanceLog struct {
 
 func (x *AttendanceLog) Reset() {
 	*x = AttendanceLog{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1332,7 +1376,7 @@ func (x *AttendanceLog) String() string {
 func (*AttendanceLog) ProtoMessage() {}
 
 func (x *AttendanceLog) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[16]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1345,7 +1389,7 @@ func (x *AttendanceLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttendanceLog.ProtoReflect.Descriptor instead.
 func (*AttendanceLog) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{16}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *AttendanceLog) GetId() int32 {
@@ -1434,7 +1478,7 @@ type AttendanceLogList struct {
 
 func (x *AttendanceLogList) Reset() {
 	*x = AttendanceLogList{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1446,7 +1490,7 @@ func (x *AttendanceLogList) String() string {
 func (*AttendanceLogList) ProtoMessage() {}
 
 func (x *AttendanceLogList) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[17]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1459,7 +1503,7 @@ func (x *AttendanceLogList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttendanceLogList.ProtoReflect.Descriptor instead.
 func (*AttendanceLogList) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{17}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AttendanceLogList) GetLogs() []*AttendanceLog {
@@ -1485,7 +1529,7 @@ type AuditLogEntry struct {
 
 func (x *AuditLogEntry) Reset() {
 	*x = AuditLogEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1497,7 +1541,7 @@ func (x *AuditLogEntry) String() string {
 func (*AuditLogEntry) ProtoMessage() {}
 
 func (x *AuditLogEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[18]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1510,7 +1554,7 @@ func (x *AuditLogEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditLogEntry.ProtoReflect.Descriptor instead.
 func (*AuditLogEntry) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{18}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *AuditLogEntry) GetId() int32 {
@@ -1578,7 +1622,7 @@ type AuditLogEntryList struct {
 
 func (x *AuditLogEntryList) Reset() {
 	*x = AuditLogEntryList{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1590,7 +1634,7 @@ func (x *AuditLogEntryList) String() string {
 func (*AuditLogEntryList) ProtoMessage() {}
 
 func (x *AuditLogEntryList) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[19]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1603,7 +1647,7 @@ func (x *AuditLogEntryList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditLogEntryList.ProtoReflect.Descriptor instead.
 func (*AuditLogEntryList) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{19}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *AuditLogEntryList) GetEntries() []*AuditLogEntry {
@@ -1615,26 +1659,27 @@ func (x *AuditLogEntryList) GetEntries() []*AuditLogEntry {
 
 type Settings struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
-	SpaceName              string                 `protobuf:"bytes,1,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
-	Tagline                string                 `protobuf:"bytes,2,opt,name=tagline,proto3" json:"tagline,omitempty"`
-	Address                string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Capacity               int32                  `protobuf:"varint,4,opt,name=capacity,proto3" json:"capacity,omitempty"`
-	ContactEmail           string                 `protobuf:"bytes,5,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`
-	Website                string                 `protobuf:"bytes,6,opt,name=website,proto3" json:"website,omitempty"`
-	DiscordGuildId         string                 `protobuf:"bytes,7,opt,name=discord_guild_id,json=discordGuildId,proto3" json:"discord_guild_id,omitempty"`
-	DiscordChUpcoming      string                 `protobuf:"bytes,8,opt,name=discord_ch_upcoming,json=discordChUpcoming,proto3" json:"discord_ch_upcoming,omitempty"`
-	DiscordChAnnouncements string                 `protobuf:"bytes,9,opt,name=discord_ch_announcements,json=discordChAnnouncements,proto3" json:"discord_ch_announcements,omitempty"`
-	DiscordChStaff         string                 `protobuf:"bytes,10,opt,name=discord_ch_staff,json=discordChStaff,proto3" json:"discord_ch_staff,omitempty"`
-	DiscordChBookings      string                 `protobuf:"bytes,11,opt,name=discord_ch_bookings,json=discordChBookings,proto3" json:"discord_ch_bookings,omitempty"`
-	SetupComplete          bool                   `protobuf:"varint,12,opt,name=setup_complete,json=setupComplete,proto3" json:"setup_complete,omitempty"`
-	UpdatedAt              string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id                     int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SpaceName              string                 `protobuf:"bytes,2,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
+	Tagline                string                 `protobuf:"bytes,3,opt,name=tagline,proto3" json:"tagline,omitempty"`
+	Address                string                 `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	Capacity               int32                  `protobuf:"varint,5,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	ContactEmail           string                 `protobuf:"bytes,6,opt,name=contact_email,json=contactEmail,proto3" json:"contact_email,omitempty"`
+	Website                string                 `protobuf:"bytes,7,opt,name=website,proto3" json:"website,omitempty"`
+	DiscordGuildId         string                 `protobuf:"bytes,8,opt,name=discord_guild_id,json=discordGuildId,proto3" json:"discord_guild_id,omitempty"`
+	DiscordChUpcoming      string                 `protobuf:"bytes,9,opt,name=discord_ch_upcoming,json=discordChUpcoming,proto3" json:"discord_ch_upcoming,omitempty"`
+	DiscordChAnnouncements string                 `protobuf:"bytes,10,opt,name=discord_ch_announcements,json=discordChAnnouncements,proto3" json:"discord_ch_announcements,omitempty"`
+	DiscordChStaff         string                 `protobuf:"bytes,11,opt,name=discord_ch_staff,json=discordChStaff,proto3" json:"discord_ch_staff,omitempty"`
+	DiscordChBookings      string                 `protobuf:"bytes,12,opt,name=discord_ch_bookings,json=discordChBookings,proto3" json:"discord_ch_bookings,omitempty"`
+	SetupComplete          bool                   `protobuf:"varint,13,opt,name=setup_complete,json=setupComplete,proto3" json:"setup_complete,omitempty"`
+	UpdatedAt              string                 `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Settings) Reset() {
 	*x = Settings{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1646,7 +1691,7 @@ func (x *Settings) String() string {
 func (*Settings) ProtoMessage() {}
 
 func (x *Settings) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[20]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1659,7 +1704,14 @@ func (x *Settings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Settings.ProtoReflect.Descriptor instead.
 func (*Settings) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{20}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *Settings) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *Settings) GetSpaceName() string {
@@ -1762,7 +1814,7 @@ type SuccessResponse struct {
 
 func (x *SuccessResponse) Reset() {
 	*x = SuccessResponse{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1774,7 +1826,7 @@ func (x *SuccessResponse) String() string {
 func (*SuccessResponse) ProtoMessage() {}
 
 func (x *SuccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[21]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1787,7 +1839,7 @@ func (x *SuccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuccessResponse.ProtoReflect.Descriptor instead.
 func (*SuccessResponse) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{21}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *SuccessResponse) GetSuccess() bool {
@@ -1806,7 +1858,7 @@ type ErrorResponse struct {
 
 func (x *ErrorResponse) Reset() {
 	*x = ErrorResponse{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1818,7 +1870,7 @@ func (x *ErrorResponse) String() string {
 func (*ErrorResponse) ProtoMessage() {}
 
 func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[22]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1831,7 +1883,7 @@ func (x *ErrorResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorResponse.ProtoReflect.Descriptor instead.
 func (*ErrorResponse) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{22}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ErrorResponse) GetError() *ErrorResponse_Error {
@@ -1850,7 +1902,7 @@ type FlyerUploadResponse struct {
 
 func (x *FlyerUploadResponse) Reset() {
 	*x = FlyerUploadResponse{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1862,7 +1914,7 @@ func (x *FlyerUploadResponse) String() string {
 func (*FlyerUploadResponse) ProtoMessage() {}
 
 func (x *FlyerUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[23]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1875,7 +1927,7 @@ func (x *FlyerUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlyerUploadResponse.ProtoReflect.Descriptor instead.
 func (*FlyerUploadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{23}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *FlyerUploadResponse) GetUrl() string {
@@ -1897,7 +1949,7 @@ type Show_LineupEntry struct {
 
 func (x *Show_LineupEntry) Reset() {
 	*x = Show_LineupEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1909,7 +1961,7 @@ func (x *Show_LineupEntry) String() string {
 func (*Show_LineupEntry) ProtoMessage() {}
 
 func (x *Show_LineupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[24]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1963,7 +2015,7 @@ type ErrorResponse_Error struct {
 
 func (x *ErrorResponse_Error) Reset() {
 	*x = ErrorResponse_Error{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1975,7 +2027,7 @@ func (x *ErrorResponse_Error) String() string {
 func (*ErrorResponse_Error) ProtoMessage() {}
 
 func (x *ErrorResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[25]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1988,7 +2040,7 @@ func (x *ErrorResponse_Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorResponse_Error.ProtoReflect.Descriptor instead.
 func (*ErrorResponse_Error) Descriptor() ([]byte, []int) {
-	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{22, 0}
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{23, 0}
 }
 
 func (x *ErrorResponse_Error) GetCode() string {
@@ -2102,7 +2154,9 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\vreviewed_at\x18\r \x01(\tR\n" +
 	"reviewedAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\tR\tcreatedAt\"\xd6\x01\n" +
+	"created_at\x18\x0e \x01(\tR\tcreatedAt\"H\n" +
+	"\x0eSubmissionList\x126\n" +
+	"\vsubmissions\x18\x01 \x03(\v2\x14.pyxis.v1.SubmissionR\vsubmissions\"\xd6\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1d\n" +
 	"\n" +
@@ -2172,24 +2226,25 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\tR\tcreatedAt\"F\n" +
 	"\x11AuditLogEntryList\x121\n" +
-	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xec\x03\n" +
-	"\bSettings\x12\x1d\n" +
+	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xfc\x03\n" +
+	"\bSettings\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1d\n" +
 	"\n" +
-	"space_name\x18\x01 \x01(\tR\tspaceName\x12\x18\n" +
-	"\atagline\x18\x02 \x01(\tR\atagline\x12\x18\n" +
-	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1a\n" +
-	"\bcapacity\x18\x04 \x01(\x05R\bcapacity\x12#\n" +
-	"\rcontact_email\x18\x05 \x01(\tR\fcontactEmail\x12\x18\n" +
-	"\awebsite\x18\x06 \x01(\tR\awebsite\x12(\n" +
-	"\x10discord_guild_id\x18\a \x01(\tR\x0ediscordGuildId\x12.\n" +
-	"\x13discord_ch_upcoming\x18\b \x01(\tR\x11discordChUpcoming\x128\n" +
-	"\x18discord_ch_announcements\x18\t \x01(\tR\x16discordChAnnouncements\x12(\n" +
-	"\x10discord_ch_staff\x18\n" +
-	" \x01(\tR\x0ediscordChStaff\x12.\n" +
-	"\x13discord_ch_bookings\x18\v \x01(\tR\x11discordChBookings\x12%\n" +
-	"\x0esetup_complete\x18\f \x01(\bR\rsetupComplete\x12\x1d\n" +
+	"space_name\x18\x02 \x01(\tR\tspaceName\x12\x18\n" +
+	"\atagline\x18\x03 \x01(\tR\atagline\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x1a\n" +
+	"\bcapacity\x18\x05 \x01(\x05R\bcapacity\x12#\n" +
+	"\rcontact_email\x18\x06 \x01(\tR\fcontactEmail\x12\x18\n" +
+	"\awebsite\x18\a \x01(\tR\awebsite\x12(\n" +
+	"\x10discord_guild_id\x18\b \x01(\tR\x0ediscordGuildId\x12.\n" +
+	"\x13discord_ch_upcoming\x18\t \x01(\tR\x11discordChUpcoming\x128\n" +
+	"\x18discord_ch_announcements\x18\n" +
+	" \x01(\tR\x16discordChAnnouncements\x12(\n" +
+	"\x10discord_ch_staff\x18\v \x01(\tR\x0ediscordChStaff\x12.\n" +
+	"\x13discord_ch_bookings\x18\f \x01(\tR\x11discordChBookings\x12%\n" +
+	"\x0esetup_complete\x18\r \x01(\bR\rsetupComplete\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\tR\tupdatedAt\"+\n" +
+	"updated_at\x18\x0e \x01(\tR\tupdatedAt\"+\n" +
 	"\x0fSuccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"{\n" +
 	"\rErrorResponse\x123\n" +
@@ -2212,7 +2267,7 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 	return file_proto_pyxis_v1_show_proto_rawDescData
 }
 
-var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*Show)(nil),                // 0: pyxis.v1.Show
 	(*AppShow)(nil),             // 1: pyxis.v1.AppShow
@@ -2223,40 +2278,42 @@ var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*ArchivedShowList)(nil),    // 6: pyxis.v1.ArchivedShowList
 	(*BookingConfirmation)(nil), // 7: pyxis.v1.BookingConfirmation
 	(*Submission)(nil),          // 8: pyxis.v1.Submission
-	(*User)(nil),                // 9: pyxis.v1.User
-	(*AuthSession)(nil),         // 10: pyxis.v1.AuthSession
-	(*Artist)(nil),              // 11: pyxis.v1.Artist
-	(*ArtistList)(nil),          // 12: pyxis.v1.ArtistList
-	(*CalendarHold)(nil),        // 13: pyxis.v1.CalendarHold
-	(*CalendarBlocked)(nil),     // 14: pyxis.v1.CalendarBlocked
-	(*CalendarResponse)(nil),    // 15: pyxis.v1.CalendarResponse
-	(*AttendanceLog)(nil),       // 16: pyxis.v1.AttendanceLog
-	(*AttendanceLogList)(nil),   // 17: pyxis.v1.AttendanceLogList
-	(*AuditLogEntry)(nil),       // 18: pyxis.v1.AuditLogEntry
-	(*AuditLogEntryList)(nil),   // 19: pyxis.v1.AuditLogEntryList
-	(*Settings)(nil),            // 20: pyxis.v1.Settings
-	(*SuccessResponse)(nil),     // 21: pyxis.v1.SuccessResponse
-	(*ErrorResponse)(nil),       // 22: pyxis.v1.ErrorResponse
-	(*FlyerUploadResponse)(nil), // 23: pyxis.v1.FlyerUploadResponse
-	(*Show_LineupEntry)(nil),    // 24: pyxis.v1.Show.LineupEntry
-	(*ErrorResponse_Error)(nil), // 25: pyxis.v1.ErrorResponse.Error
+	(*SubmissionList)(nil),      // 9: pyxis.v1.SubmissionList
+	(*User)(nil),                // 10: pyxis.v1.User
+	(*AuthSession)(nil),         // 11: pyxis.v1.AuthSession
+	(*Artist)(nil),              // 12: pyxis.v1.Artist
+	(*ArtistList)(nil),          // 13: pyxis.v1.ArtistList
+	(*CalendarHold)(nil),        // 14: pyxis.v1.CalendarHold
+	(*CalendarBlocked)(nil),     // 15: pyxis.v1.CalendarBlocked
+	(*CalendarResponse)(nil),    // 16: pyxis.v1.CalendarResponse
+	(*AttendanceLog)(nil),       // 17: pyxis.v1.AttendanceLog
+	(*AttendanceLogList)(nil),   // 18: pyxis.v1.AttendanceLogList
+	(*AuditLogEntry)(nil),       // 19: pyxis.v1.AuditLogEntry
+	(*AuditLogEntryList)(nil),   // 20: pyxis.v1.AuditLogEntryList
+	(*Settings)(nil),            // 21: pyxis.v1.Settings
+	(*SuccessResponse)(nil),     // 22: pyxis.v1.SuccessResponse
+	(*ErrorResponse)(nil),       // 23: pyxis.v1.ErrorResponse
+	(*FlyerUploadResponse)(nil), // 24: pyxis.v1.FlyerUploadResponse
+	(*Show_LineupEntry)(nil),    // 25: pyxis.v1.Show.LineupEntry
+	(*ErrorResponse_Error)(nil), // 26: pyxis.v1.ErrorResponse.Error
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	24, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	25, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
 	0,  // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
 	2,  // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
-	9,  // 3: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
-	11, // 4: pyxis.v1.ArtistList.artists:type_name -> pyxis.v1.Artist
-	13, // 5: pyxis.v1.CalendarResponse.holds:type_name -> pyxis.v1.CalendarHold
-	14, // 6: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
-	16, // 7: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
-	18, // 8: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
-	25, // 9: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8,  // 3: pyxis.v1.SubmissionList.submissions:type_name -> pyxis.v1.Submission
+	10, // 4: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
+	12, // 5: pyxis.v1.ArtistList.artists:type_name -> pyxis.v1.Artist
+	14, // 6: pyxis.v1.CalendarResponse.holds:type_name -> pyxis.v1.CalendarHold
+	15, // 7: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
+	17, // 8: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
+	19, // 9: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
+	26, // 10: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_proto_pyxis_v1_show_proto_init() }
@@ -2270,7 +2327,7 @@ func file_proto_pyxis_v1_show_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

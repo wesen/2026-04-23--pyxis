@@ -141,25 +141,25 @@
 - [x] 12.2.1 Update `handleListArtists` → `ArtistList` via `protojson.Marshal`
 - [x] 12.2.2 Update `handleGetArtist` → `Artist` via `protojson.Marshal`
 - [x] 12.2.3 Update `handleUpdateArtist` → `Artist` via `protojson.Marshal`
-- [ ] 12.2.4 Update `handleListCalendar` → `CalendarResponse` via `protojson.Marshal`
-- [ ] 12.2.5 Update `handleCreateCalendarHold` → `CalendarHold` via `protojson.Marshal`
-- [ ] 12.2.6 Update `handleCreateCalendarBlocked` → `CalendarBlocked` via `protojson.Marshal`
-- [ ] 12.2.7 Update `handleListAttendance` → `AttendanceLogList` via `protojson.Marshal`
-- [ ] 12.2.8 Update `handleGetAttendance` → `AttendanceLog` via `protojson.Marshal`
-- [ ] 12.2.9 Update `handleUpsertAttendance` → `AttendanceLog` via `protojson.Marshal`
-- [ ] 12.2.10 Update `handleGetSettings` → `Settings` via `protojson.Marshal`
-- [ ] 12.2.11 Update `handleUpdateSettings` → `Settings` via `protojson.Marshal`
-- [ ] 12.2.12 Update `handleListAuditLog` → `AuditLogEntryList` via `protojson.Marshal`
-- [ ] 12.2.13 Update `handleListBookings` → `SubmissionList` via `protojson.Marshal`
-- [ ] 12.2.14 Update `handleApproveBooking` → `Show` via `protojson.Marshal` (already done)
-- [ ] 12.2.15 Update `handleDeclineBooking` → `SuccessResponse` via `protojson.Marshal`
-- [ ] 12.2.16 Update `handleAnnounceShow` → `SuccessResponse` via `protojson.Marshal`
-- [ ] 12.2.17 Update `handleUploadFlyer` → `FlyerUploadResponse` via `protojson.Marshal`
-- [ ] 12.2.18 Update `handleDeleteFlyer` → `SuccessResponse` or `204`
-- [ ] 12.2.19 Update `handleDeleteCalendarHold` → `204` or `SuccessResponse`
-- [ ] 12.2.20 Update `handleDeleteCalendarBlocked` → `204` or `SuccessResponse`
-- [ ] 12.2.21 Standardize `respondError` → `ErrorResponse` via `protojson.Marshal`
-- [ ] 12.2.22 Commit backend handler migration
+- [x] 12.2.4 Update `handleListCalendar` → `CalendarResponse` via `protojson.Marshal`
+- [x] 12.2.5 Update `handleCreateCalendarHold` → `CalendarHold` via `protojson.Marshal`
+- [x] 12.2.6 Update `handleCreateCalendarBlocked` → `CalendarBlocked` via `protojson.Marshal`
+- [x] 12.2.7 Update `handleListAttendance` → `AttendanceLogList` via `protojson.Marshal`
+- [x] 12.2.8 Update `handleGetAttendance` → `AttendanceLog` via `protojson.Marshal`
+- [x] 12.2.9 Update `handleUpsertAttendance` → `AttendanceLog` via `protojson.Marshal`
+- [x] 12.2.10 Update `handleGetSettings` → `Settings` via `protojson.Marshal`
+- [x] 12.2.11 Update `handleUpdateSettings` → `Settings` via `protojson.Marshal`
+- [x] 12.2.12 Update `handleListAuditLog` → `AuditLogEntryList` via `protojson.Marshal`
+- [x] 12.2.13 Update `handleListBookings` → `SubmissionList` via `protojson.Marshal`
+- [x] 12.2.14 Update `handleApproveBooking` → `Show` via `protojson.Marshal` (already done)
+- [x] 12.2.15 Update `handleDeclineBooking` → `SuccessResponse` via `protojson.Marshal`
+- [x] 12.2.16 Update `handleAnnounceShow` → `SuccessResponse` via `protojson.Marshal`
+- [x] 12.2.17 Update `handleUploadFlyer` → `FlyerUploadResponse` via `protojson.Marshal`
+- [x] 12.2.18 Update `handleDeleteFlyer` → `204` (no body — no proto needed)
+- [x] 12.2.19 Update `handleDeleteCalendarHold` → `204` (no body — no proto needed)
+- [x] 12.2.20 Update `handleDeleteCalendarBlocked` → `204` (no body — no proto needed)
+- [x] 12.2.21 Standardize `respondError` → `ErrorResponse` via `protojson.Marshal`
+- [x] 12.2.22 Commit backend handler migration
 
 ### 12.3 Frontend RTK Query Migration (TypeScript)
 

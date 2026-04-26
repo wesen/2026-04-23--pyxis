@@ -159,9 +159,7 @@ func (s *Server) handleArchiveShow(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"success":true}`))
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.SuccessResponse{Success: true})
 }
 
 func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
@@ -214,14 +212,12 @@ func (s *Server) handleListBookings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbSubs := make([]map[string]interface{}, len(subs))
+	pbSubs := make([]*pyxisv1.Submission, len(subs))
 	for i, sub := range subs {
 		pbSubs[i] = submissionToProto(&sub)
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"submissions": pbSubs,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.SubmissionList{Submissions: pbSubs})
 }
 
 func (s *Server) handleApproveBooking(w http.ResponseWriter, r *http.Request) {
@@ -274,9 +270,7 @@ func (s *Server) handleDeclineBooking(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"success":true}`))
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.SuccessResponse{Success: true})
 }
 
 func (s *Server) handleListArtists(w http.ResponseWriter, r *http.Request) {
@@ -363,36 +357,6 @@ func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, artistToProto(updated))
 }
 
-func submissionToProto(sub *domain.Submission) map[string]interface{} {
-	pb := map[string]interface{}{
-		"id":             sub.ID,
-		"artistName":     sub.ArtistName,
-		"genre":          sub.Genre,
-		"links":          sub.Links,
-		"techRider":      sub.TechRider,
-		"message":        sub.Message,
-		"contactDiscord": sub.ContactDiscord,
-		"status":         sub.Status,
-		"createdAt":      sub.CreatedAt.Format(time.RFC3339),
-	}
-	if sub.ArtistID != nil {
-		pb["artistId"] = *sub.ArtistID
-	}
-	if sub.PreferredDate != nil {
-		pb["preferredDate"] = sub.PreferredDate.Format(time.DateOnly)
-	}
-	if sub.ExpectedDraw != nil {
-		pb["expectedDraw"] = *sub.ExpectedDraw
-	}
-	if sub.ReviewedBy != nil {
-		pb["reviewedBy"] = *sub.ReviewedBy
-	}
-	if sub.ReviewedAt != nil {
-		pb["reviewedAt"] = sub.ReviewedAt.Format(time.RFC3339)
-	}
-	return pb
-}
-
 func (s *Server) handleAnnounceShow(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -416,9 +380,7 @@ func (s *Server) handleAnnounceShow(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"success":true}`))
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.SuccessResponse{Success: true})
 }
 
 func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
@@ -454,9 +416,7 @@ func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"url": url,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.FlyerUploadResponse{Url: url})
 }
 
 func (s *Server) handleDeleteFlyer(w http.ResponseWriter, r *http.Request) {
@@ -503,27 +463,19 @@ func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbHolds := make([]map[string]interface{}, len(holds))
+	pbHolds := make([]*pyxisv1.CalendarHold, len(holds))
 	for i, h := range holds {
-		pbHolds[i] = map[string]interface{}{
-			"id":    h.ID,
-			"date":  h.Date.Format(time.DateOnly),
-			"label": h.Label,
-		}
+		pbHolds[i] = calendarHoldToProto(&h)
 	}
 
-	pbBlocked := make([]map[string]interface{}, len(blocked))
+	pbBlocked := make([]*pyxisv1.CalendarBlocked, len(blocked))
 	for i, b := range blocked {
-		pbBlocked[i] = map[string]interface{}{
-			"id":     b.ID,
-			"date":   b.Date.Format(time.DateOnly),
-			"reason": b.Reason,
-		}
+		pbBlocked[i] = calendarBlockedToProto(&b)
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"holds":   pbHolds,
-		"blocked": pbBlocked,
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.CalendarResponse{
+		Holds:   pbHolds,
+		Blocked: pbBlocked,
 	})
 }
 
@@ -567,11 +519,7 @@ func (s *Server) handleCreateCalendarHold(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]interface{}{
-		"id":    created.ID,
-		"date":  created.Date.Format(time.DateOnly),
-		"label": created.Label,
-	})
+	respondProtoJSON(w, http.StatusCreated, calendarHoldToProto(created))
 }
 
 func (s *Server) handleDeleteCalendarHold(w http.ResponseWriter, r *http.Request) {
@@ -632,11 +580,7 @@ func (s *Server) handleCreateCalendarBlocked(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, map[string]interface{}{
-		"id":     created.ID,
-		"date":   created.Date.Format(time.DateOnly),
-		"reason": created.Reason,
-	})
+	respondProtoJSON(w, http.StatusCreated, calendarBlockedToProto(created))
 }
 
 func (s *Server) handleDeleteCalendarBlocked(w http.ResponseWriter, r *http.Request) {
@@ -679,24 +623,12 @@ func (s *Server) handleListAttendance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbLogs := make([]map[string]interface{}, len(logs))
+	pbLogs := make([]*pyxisv1.AttendanceLog, len(logs))
 	for i, log := range logs {
-		pbLogs[i] = map[string]interface{}{
-			"id":            log.ID,
-			"showId":        log.ShowID,
-			"artist":        log.Artist,
-			"date":          log.Date.Format(time.DateOnly),
-			"draw":          log.Draw,
-			"notes":         log.Notes,
-			"incident":      log.Incident,
-			"incidentNotes": log.IncidentNotes,
-			"createdAt":     log.CreatedAt.Format(time.RFC3339),
-		}
+		pbLogs[i] = attendanceLogToProto(&log)
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"logs": pbLogs,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.AttendanceLogList{Logs: pbLogs})
 }
 
 func (s *Server) handleGetAttendance(w http.ResponseWriter, r *http.Request) {
@@ -714,15 +646,7 @@ func (s *Server) handleGetAttendance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":            log.ID,
-		"showId":        log.ShowID,
-		"draw":          log.Draw,
-		"notes":         log.Notes,
-		"incident":      log.Incident,
-		"incidentNotes": log.IncidentNotes,
-		"createdAt":     log.CreatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(log))
 }
 
 func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) {
@@ -771,15 +695,7 @@ func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":            updated.ID,
-		"showId":        updated.ShowID,
-		"draw":          updated.Draw,
-		"notes":         updated.Notes,
-		"incident":      updated.Incident,
-		"incidentNotes": updated.IncidentNotes,
-		"createdAt":     updated.CreatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(updated))
 }
 
 func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
@@ -791,22 +707,7 @@ func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":                     settings.ID,
-		"spaceName":              settings.SpaceName,
-		"tagline":                settings.Tagline,
-		"address":                settings.Address,
-		"capacity":               settings.Capacity,
-		"contactEmail":           settings.ContactEmail,
-		"website":                settings.Website,
-		"discordGuildId":         settings.DiscordGuildID,
-		"discordChUpcoming":      settings.DiscordChUpcoming,
-		"discordChAnnouncements": settings.DiscordChAnnouncements,
-		"discordChStaff":         settings.DiscordChStaff,
-		"discordChBookings":      settings.DiscordChBookings,
-		"setupComplete":          settings.SetupComplete,
-		"updatedAt":              settings.UpdatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, settingsToProto(settings))
 }
 
 func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
@@ -861,21 +762,7 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"id":                     updated.ID,
-		"spaceName":              updated.SpaceName,
-		"tagline":                updated.Tagline,
-		"address":                updated.Address,
-		"capacity":               updated.Capacity,
-		"contactEmail":           updated.ContactEmail,
-		"website":                updated.Website,
-		"discordGuildId":         updated.DiscordGuildID,
-		"discordChAnnouncements": updated.DiscordChAnnouncements,
-		"discordChStaff":         updated.DiscordChStaff,
-		"discordChBookings":      updated.DiscordChBookings,
-		"setupComplete":          updated.SetupComplete,
-		"updatedAt":              updated.UpdatedAt.Format(time.RFC3339),
-	})
+	respondProtoJSON(w, http.StatusOK, settingsToProto(updated))
 }
 
 func (s *Server) handleListAuditLog(w http.ResponseWriter, r *http.Request) {
@@ -900,27 +787,12 @@ func (s *Server) handleListAuditLog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbEntries := make([]map[string]interface{}, len(entries))
+	pbEntries := make([]*pyxisv1.AuditLogEntry, len(entries))
 	for i, entry := range entries {
-		pbEntries[i] = map[string]interface{}{
-			"id":         entry.ID,
-			"actor":      entry.Actor,
-			"action":     entry.Action,
-			"entityType": entry.EntityType,
-			"metadata":   entry.Metadata,
-			"createdAt":  entry.CreatedAt.Format(time.RFC3339),
-		}
-		if entry.ActorID != nil {
-			pbEntries[i]["actorId"] = *entry.ActorID
-		}
-		if entry.EntityID != nil {
-			pbEntries[i]["entityId"] = *entry.EntityID
-		}
+		pbEntries[i] = auditLogEntryToProto(&entry)
 	}
 
-	respondJSON(w, http.StatusOK, map[string]interface{}{
-		"entries": pbEntries,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.AuditLogEntryList{Entries: pbEntries})
 }
 
 func (s *Server) requireRole(roles ...string) func(http.Handler) http.Handler {

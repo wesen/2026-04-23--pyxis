@@ -100,6 +100,10 @@ message Submission {
   string created_at     = 14;
 }
 
+message SubmissionList {
+  repeated Submission submissions = 1;
+}
+
 message User {
   int32  id              = 1;
   string discord_id      = 2;
@@ -181,19 +185,20 @@ message AuditLogEntryList {
 }
 
 message Settings {
-  string space_name               = 1;
-  string tagline                  = 2;
-  string address                  = 3;
-  int32  capacity                 = 4;
-  string contact_email            = 5;
-  string website                  = 6;
-  string discord_guild_id         = 7;
-  string discord_ch_upcoming      = 8;
-  string discord_ch_announcements = 9;
-  string discord_ch_staff         = 10;
-  string discord_ch_bookings      = 11;
-  bool   setup_complete           = 12;
-  string updated_at               = 13;
+  int32  id                       = 1;
+  string space_name               = 2;
+  string tagline                  = 3;
+  string address                  = 4;
+  int32  capacity                 = 5;
+  string contact_email            = 6;
+  string website                  = 7;
+  string discord_guild_id         = 8;
+  string discord_ch_upcoming      = 9;
+  string discord_ch_announcements = 10;
+  string discord_ch_staff         = 11;
+  string discord_ch_bookings      = 12;
+  bool   setup_complete           = 13;
+  string updated_at               = 14;
 }
 
 message SuccessResponse {
