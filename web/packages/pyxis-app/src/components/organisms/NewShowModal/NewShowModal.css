@@ -1,9 +1,62 @@
-.app-modal-backdrop { position: fixed; inset: 0; background: var(--app-backdrop); display: grid; place-items: center; padding: 20px; z-index: 10; }
-.app-modal { width: min(620px, 100%); background: var(--app-surface); border-radius: var(--app-radius-2xl); padding: 24px; box-shadow: var(--app-shadow-modal); }
-.app-modal h2 { margin: 0 0 6px; font-family: var(--font-display, Georgia, serif); font-size: 30px; font-weight: 500; }
-.app-modal p { margin: 0; color: var(--app-muted); }
-.app-form-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin: 20px 0; }
-.app-form-grid label { display: grid; gap: 6px; font-weight: 700; }
-.app-form-grid input { border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 10px; background: var(--app-surface-strong); }
-.app-modal footer { display: flex; justify-content: flex-end; gap: 10px; }
-@media (max-width: 760px) { .app-form-grid { grid-template-columns: 1fr; } }
+.app-new-show-modal-form {
+  display: block;
+}
+
+.app-new-show-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+}
+
+.app-new-show-modal-field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.app-new-show-modal-field span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary, var(--app-muted));
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.app-new-show-modal-field input,
+.app-new-show-modal-field select,
+.app-new-show-modal-field textarea {
+  width: 100%;
+  padding: 8px 11px;
+  border-radius: var(--radius-sm, var(--app-radius-sm));
+  border: 1px solid var(--color-border, var(--app-rule));
+  font-size: 13px;
+  background: var(--color-surface-raised, var(--app-surface-strong));
+  color: var(--color-text-primary, var(--app-ink));
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.app-new-show-modal-field input,
+.app-new-show-modal-field select {
+  height: 34px;
+}
+
+.app-new-show-modal-field textarea {
+  min-height: 50px;
+  resize: vertical;
+}
+
+.app-new-show-modal-field small {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-tertiary, var(--app-muted));
+  margin-top: 5px;
+}
+
+@media (max-width: 760px) {
+  .app-new-show-modal-grid {
+    grid-template-columns: 1fr;
+  }
+}

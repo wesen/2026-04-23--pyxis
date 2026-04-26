@@ -187,6 +187,24 @@ module.exports = {
           "react": "[data-section=\"calendar-agenda\"]"
         }
       ]
+    },
+    {
+      "page": "new-show-modal",
+      "variant": "component",
+      "priority": "phase-8c-reuse",
+      "prototypePath": "/standalone/full-app/modal.html",
+      "storyId": "pyxis-app-components-organisms-newshowmodal--default",
+      "viewport": {
+        "width": 1240,
+        "height": 760
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "#root > div > div > div:nth-of-type(2) > div",
+          "react": "[data-pyxis-component=\"new-show-modal\"][data-pyxis-part=\"root\"]"
+        }
+      ]
     }
   ]
 }

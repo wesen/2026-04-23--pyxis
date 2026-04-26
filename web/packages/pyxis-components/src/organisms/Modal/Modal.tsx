@@ -8,9 +8,14 @@ export type ModalProps = {
   width?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   footer?: React.ReactNode;
+  className?: string;
+  panelClassName?: string;
+  bodyClassName?: string;
+  footerClassName?: string;
+  panelProps?: React.HTMLAttributes<HTMLDivElement>;
 };
 const widths = { sm: 402, md: 522, lg: 722 };
-export const Modal = ({ isOpen, onClose, title, subtitle, width = 'md', children, footer }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, title, subtitle, width = 'md', children, footer, className, panelClassName, bodyClassName, footerClassName, panelProps }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (isOpen) {
@@ -23,9 +28,9 @@ export const Modal = ({ isOpen, onClose, title, subtitle, width = 'md', children
   }, [isOpen]);
   if (!isOpen) return null;
   return (
-    <div {...pyxisPart('modal')} role="dialog" aria-modal aria-labelledby="modal-title" style={{ position: 'fixed', inset: 0, zIndex: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+    <div className={className} {...pyxisPart('modal')} role="dialog" aria-modal aria-labelledby="modal-title" style={{ position: 'fixed', inset: 0, zIndex: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div {...pyxisPart('modal', 'backdrop')} style={{ position: 'absolute', inset: 0, background: 'rgba(26, 24, 22, 0.35)', backdropFilter: 'blur(2px)' }} onClick={onClose} />
-      <div ref={ref} {...pyxisPart('modal', 'panel')} style={{ position: 'relative', background: 'var(--color-surface)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', boxShadow: '0 20px 60px rgba(26, 24, 22, 0.18)', width: '100%', maxWidth: widths[width], maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div ref={ref} {...pyxisPart('modal', 'panel')} {...panelProps} className={panelClassName} style={{ position: 'relative', background: 'var(--color-surface)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', boxShadow: '0 20px 60px rgba(26, 24, 22, 0.18)', width: '100%', maxWidth: widths[width], maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         <div {...pyxisPart('modal', 'header')} style={{ padding: '18px 22px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <h2 id="modal-title" style={{ margin: 0, fontSize: 15, fontWeight: 600, color: 'var(--color-text-primary)', letterSpacing: '-0.01em' }}>{title}</h2>
@@ -35,8 +40,8 @@ export const Modal = ({ isOpen, onClose, title, subtitle, width = 'md', children
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="m5 5 10 10M15 5 5 15" /></svg>
           </button>
         </div>
-        <div {...pyxisPart('modal', 'body')} style={{ padding: 22, overflowY: 'auto', flex: 1 }}>{children}</div>
-        {footer && <div {...pyxisPart('modal', 'footer')} style={{ padding: '14px 22px', borderTop: '1px solid var(--color-border)', display: 'flex', gap: 10, justifyContent: 'flex-end', background: 'var(--color-surface-raised)' }}>{footer}</div>}
+        <div className={bodyClassName} {...pyxisPart('modal', 'body')} style={{ padding: 22, overflowY: 'auto', flex: 1 }}>{children}</div>
+        {footer && <div className={footerClassName} {...pyxisPart('modal', 'footer')} style={{ padding: '14px 22px', borderTop: '1px solid var(--color-border)', display: 'flex', gap: 10, justifyContent: 'flex-end', background: 'var(--color-surface-raised)' }}>{footer}</div>}
       </div>
     </div>
   );
