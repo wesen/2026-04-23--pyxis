@@ -96,6 +96,152 @@ For multi-page work, split the backlog into one phase per route/page. Each page 
 
 This keeps feedback loops small, prevents one page from inventing private visual rules, and makes the app feel like one cohesive system as each route is added.
 
+## Use the tool at the right inspection depth
+
+Do not treat the visual tool as only a screenshot diff. Use it flexibly at the level that matches the current question.
+
+Recommended levels:
+
+1. **Page checkpoint** — compare `section: page` only to understand overall drift, scroll height, shell alignment, and gross content gaps.
+2. **Organism/section crop** — compare a stable `data-section` such as `dashboard-hero`, `dashboard-upcoming`, or `dashboard-activity` for normal tuning.
+3. **Element/subelement inspection** — inspect nested selectors inside a section when the crop is close but a specific thing looks wrong: a button label, date text, icon, badge, table cell, or headline.
+4. **CSS preset inspection** — ask for only the CSS family that matters:
+   - `typography`: `font-family`, `font-size`, `font-weight`, `line-height`, `letter-spacing`, `text-transform`, `color`, `opacity`, `visibility`.
+   - `layout`: `display`, `position`, `width`, `height`, `min-height`, `gap`, flex/grid alignment, margins.
+   - `spacing`: margins and padding only.
+   - `surface`: background, border, radius, shadow.
+   - `debug`: a larger mixed set when the focused presets do not explain the difference.
+
+The normal `compare-spec --summary` output is intentionally root-level. If a problem is inside a section, do not keep guessing CSS from the root row. Add/use a spec-aware inspection verb that can query nested selectors on both the prototype and React sides and print compact rows for the selected CSS preset.
+
+### Targeting subelements
+
+Sufficiently stable selectors should exist for repeatable tuning. Prefer explicit `data-*` hooks where the subelement is important to visual parity:
+
+```tsx
+<section data-section="dashboard-hero">
+  <p data-element="hero-date-line">
+    <span data-element="hero-date">Fri, May 2, 2025</span>
+    <span data-element="hero-doors">Doors 8:00 PM</span>
+  </p>
+  <div data-element="hero-actions">
+    <Button data-element="hero-discord-action">View on Discord</Button>
+    <Button data-element="hero-edit-action">Edit show</Button>
+  </div>
+</section>
+```
+
+If the prototype cannot easily receive matching `data-element` hooks yet, use selectors relative to the section crop as a temporary diagnostic, but prefer adding stable prototype + React hooks before repeated work.
+
+Examples of useful subelement targets:
+
+```text
+[data-section="dashboard-hero"] [data-element="hero-discord-action"]
+[data-section="dashboard-hero"] [data-element="hero-discord-action"] [data-pyxis-part="label"]
+[data-section="dashboard-hero"] [data-element="hero-date-line"]
+[data-section="dashboard-hero"] [data-element="hero-date"]
+```
+
+For third-party/shared components, target the part attributes too:
+
+```text
+[data-pyxis-component="button"][data-pyxis-part="root"]
+[data-pyxis-component="button"] [data-pyxis-part="label"]
+[data-pyxis-component="button"] [data-pyxis-part="icon-start"]
+```
+
+### How to dial in a specific Dashboard Hero element
+
+For the **“View on Discord”** button:
+
+1. Compare the whole hero section first:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --summary \
+  --outDir ttmp/.../various/14-dashboard-hero-consolidation/run-N \
+  --output json
+```
+
+2. Inspect individual hero crops with `read`.
+3. If the button is wrong, inspect the button root and label typography, not just the hero root. The desired spec-aware command shape is:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-discord-action"],[data-element="hero-discord-action"] [data-pyxis-part="label"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+Expected decision-critical output:
+
+```json
+{
+  "element": "hero-discord-action label",
+  "text": { "left": "View on Discord", "right": "View on Discord" },
+  "bounds": { "left": { "width": 142, "height": 34 }, "right": { "width": 154, "height": 32 } },
+  "styles": {
+    "font-size": { "left": "13px", "right": "13px" },
+    "font-weight": { "left": "600", "right": "700" },
+    "letter-spacing": { "left": "normal", "right": "0.08em" },
+    "text-transform": { "left": "none", "right": "uppercase" },
+    "color": { "left": "rgb(255,255,255)", "right": "rgb(255,255,255)" }
+  }
+}
+```
+
+Then tune only the property that explains the mismatch. For example, if the label is invisible, inspect `color`, `opacity`, `visibility`, `overflow`, and the label part. If the label is clipped, inspect `width`, `height`, `padding`, `display`, and `white-space`.
+
+For the **“Fri, May 2, 2025”** text in the hero:
+
+1. Target the date line and individual date span:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-date-line"],[data-element="hero-date"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+```
+
+2. If the text content is different, fix data/copy first (`Fri, May 2, 2025` vs generated locale output).
+3. If content is correct but visual placement is off, switch to layout/spacing:
+
+```bash
+# Same command shape, but use:
+--stylePreset layout
+# or:
+--stylePreset spacing
+```
+
+4. If separators are wrong, inspect the child spans and CSS pseudo/markup strategy. Use actual spans/gaps when possible; pseudo separators can be harder to inspect and compare.
+
+### When to improve the JS tool
+
+If you need nested CSS information more than once, do not rely on ad-hoc Playwright snippets. Add a JS userland verb/flag that:
+
+- accepts a spec path, page, section, and one or more element selectors,
+- resolves prototype and React URLs/selectors from the spec,
+- scopes element selectors under the section selector unless an absolute selector is requested,
+- supports `--stylePreset typography|layout|surface|spacing|debug`,
+- returns compact rows with text, bounds, styles, and attributes,
+- writes full JSON under the ticket artifact folder.
+
+This keeps the workflow reproducible and diary-friendly.
+
 ## Required loop order
 
 1. Verify prototype and React selectors exist.
