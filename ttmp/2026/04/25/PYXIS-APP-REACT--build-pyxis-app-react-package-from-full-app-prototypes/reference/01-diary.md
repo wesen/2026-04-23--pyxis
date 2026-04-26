@@ -6195,3 +6195,84 @@ shows-confirmed-panel after Card reuse: 9.821005081874647%, review
 bookings-processed-panel after Card reuse: 5.097559219526244%, review
 shows confirmed after Badge/Tag reuse: ~10.03%, tune-required but visually close
 ```
+
+## Step 46: Close pyxis-app React component architecture ticket and hand off RTK route wiring
+
+I updated the old ticket task list to reflect the work that actually completed in Phase 8C and to move the remaining route/data/backend work into a new follow-up ticket. This closes the original React package/component architecture ticket as complete for its current scope.
+
+The new ticket is `PYXIS-APP-RTK-ROUTES`. It focuses on backend-connected route state, response normalization, RTK Query mutations, and freshening the pages now that the Go backend exposes staff endpoints.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, update tasks and close the ticket, create a new one to create routes + rtk-query fresheninng up now that the backend exists. Create an analysis + implementation guide in the new ticket.\n\nreate a detailed analysis / design / implementation guide that is very detailed for a new intern, explaining all the parts of the system needed to understand what it is, with prose paragraphs and bullet  \npoint sand pseudocode and diagrams and api references and file                                                                                                                                              \n  references.                                                                                                                                                                                               \n  It should be very clear and detailed. Store in the ticket and the nupload to remarkable.                                                                                                                  \n                                                                                                                                                                                                            \nYou can write scripts and all kinds of other things in the scripts/ folder of the ticket."
+
+**Assistant interpretation:** Finish bookkeeping for this ticket, close it, and create a detailed new implementation ticket for backend/RTK route integration.
+
+**Inferred user intent:** Treat the UI/component architecture phase as done and start a clean backend-connected data-wiring phase.
+
+### What I did
+
+- Updated `tasks.md` to mark completed Phase 8C work and annotate deferred items.
+- Added a closure note explaining that follow-up work moved to `PYXIS-APP-RTK-ROUTES`.
+- Created the new ticket and wrote a detailed intern implementation guide there:
+
+```text
+ttmp/2026/04/26/PYXIS-APP-RTK-ROUTES--wire-pyxis-app-routes-to-backend-rtk-query/design/01-route-and-rtk-query-backend-freshening-guide.md
+```
+
+- Added a helper script in the new ticket:
+
+```text
+ttmp/2026/04/26/PYXIS-APP-RTK-ROUTES--wire-pyxis-app-routes-to-backend-rtk-query/scripts/01-inventory-app-api.py
+```
+
+### Why
+
+The original ticket successfully produced the app package, component architecture, visual-diff workflow, and component-system reuse pass. The remaining work is qualitatively different: it is backend contract alignment, route state, and mutation wiring. Splitting that into a new ticket keeps the next phase focused and avoids burying backend integration decisions inside an already-large UI ticket.
+
+### What worked
+
+- The task file now distinguishes completed component architecture from deferred backend route work.
+- The new ticket has a guide, tasks, diary, changelog, and helper script.
+- The guide records known frontend/backend drift such as the frontend `/api/app/discord` query that has no backend route yet.
+
+### What didn't work
+
+The first run of the new API inventory script failed because it used a fixed parent-depth assumption to find the repo root. That was fixed in the new ticket by walking upward until `go.mod` and `web/pnpm-workspace.yaml` are found.
+
+### What I learned
+
+The natural boundary is clear: `PYXIS-APP-REACT` owns UI architecture and visual/component readiness; `PYXIS-APP-RTK-ROUTES` owns live backend data contracts and mutations.
+
+### What was tricky to build
+
+The old task list had many stale unchecked items from earlier phases that were completed in later commits. I updated Phase 8C directly and added a closure note rather than trying to rewrite the entire historical task file.
+
+### What warrants a second pair of eyes
+
+- Review the deferred items in the old ticket closure note and ensure they are represented in the new RTK/routes task list.
+- Review whether `PYXIS-APP-REACT` should be marked `complete` despite known visual caveats; those caveats are documented and not blockers for the architecture scope.
+
+### What should be done in the future
+
+- Start the new ticket with API normalization and route-state refactoring.
+- Keep backend contract changes separate from frontend route changes when possible.
+- Preserve Storybook fixture data for visual parity while live routes use real backend data.
+
+### Code review instructions
+
+Review:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md
+ttmp/2026/04/26/PYXIS-APP-RTK-ROUTES--wire-pyxis-app-routes-to-backend-rtk-query/design/01-route-and-rtk-query-backend-freshening-guide.md
+ttmp/2026/04/26/PYXIS-APP-RTK-ROUTES--wire-pyxis-app-routes-to-backend-rtk-query/tasks.md
+```
+
+### Technical details
+
+The new ticket ID is:
+
+```text
+PYXIS-APP-RTK-ROUTES
+```

@@ -390,3 +390,18 @@ Step 45: Audited Table reuse and deferred conversion because the shared Table AP
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx — Retains app-specific row molecules for now
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Table/Table.tsx — Current data/columns API not yet fit for app domain rows
 
+
+## 2026-04-26
+
+Step 46: Updated tasks, recorded closure scope, and created follow-up PYXIS-APP-RTK-ROUTES for backend-connected route/RTK work.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md — Closure note and Phase 8C task status
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-APP-RTK-ROUTES--wire-pyxis-app-routes-to-backend-rtk-query/design/01-route-and-rtk-query-backend-freshening-guide.md — Follow-up implementation guide
+
+
+## 2026-04-26
+
+Closed after responsive pyxis-app package, Phase 8C component architecture/reuse pass, visual workflow documentation, and handoff to PYXIS-APP-RTK-ROUTES for backend-connected route/RTK work.
+

@@ -1,7 +1,7 @@
 ---
 Title: Detailed Implementation Tasks
 Ticket: PYXIS-APP-REACT
-Status: active
+Status: complete
 Topics:
   - frontend
   - visual-diff
@@ -754,29 +754,29 @@ Reference guide:
 docs/playbooks/07-react-application-decomposition-and-component-reuse.md
 ```
 
-- [ ] Add named exported prop types for reusable atoms, molecules, organisms, shell widgets, and page route components.
-- [ ] Replace anonymous inline prop types in widget implementations.
-- [ ] Add callback props for hard-coded actions that will later dispatch RTK mutations or route actions.
-- [ ] Add story states for priority atoms/molecules/organisms:
-  - [ ] default,
-  - [ ] empty,
-  - [ ] long content,
-  - [ ] mobile/narrow,
-  - [ ] status/variant cases.
-- [ ] Audit reuse against `pyxis-components` by cluster:
-  - [ ] `Panel` vs `Card` / `CardHead`,
-  - [ ] `MetricCard` / `AttendanceStat` vs `Stat`,
-  - [ ] app tables vs `Table`,
-  - [ ] `.app-empty-state` vs `Empty`,
-  - [ ] `NewShowModal` vs `Modal`,
-  - [ ] `AppTopBar` vs `TopBar`,
-  - [ ] `StatusPill` / `AgeBadge` vs `Badge` / `Tag`,
-  - [ ] form markup vs `Field` / `Input` / `Select` / `Textarea`.
-- [ ] Document each non-reuse decision with a reason: app semantics, visual parity, missing shared API, or planned upstream improvement.
-- [ ] Extract remaining inline Login/Setup page sections before RTK state wiring.
-- [ ] Split/relocate route-level `pages.css` once page sections have widget owners.
-- [ ] Keep pages as RTK Query/container boundaries and pass typed props into widgets.
-- [ ] Run typecheck, Storybook smoke, and focused visual checks for any changed visual-spec targets.
+- [x] Add named exported prop types for reusable atoms, molecules, organisms, shell widgets, and page route components.
+- [x] Replace anonymous inline prop types in widget implementations. (Remaining grep hit is a local Storybook helper, not a reusable widget.)
+- [x] Add callback props for hard-coded actions that will later dispatch RTK mutations or route actions.
+- [x] Add story states for priority atoms/molecules/organisms:
+  - [x] default,
+  - [x] empty,
+  - [x] long content,
+  - [x] mobile/narrow,
+  - [x] status/variant cases.
+- [x] Audit reuse against `pyxis-components` by cluster:
+  - [x] `Panel` vs `Card` / `CardHead` (Panel root now wraps `Card`; `CardHead` reuse deferred pending wrapper-friendly API).
+  - [x] `MetricCard` / `AttendanceStat` vs `Stat` (`MetricCard` wraps `Stat`; `AttendanceStat` deferred pending compact/value-first `Stat` variant).
+  - [x] app tables vs `Table` (audited and deferred; shared `Table` needs compound/render-row API to preserve domain row molecules).
+  - [x] `.app-empty-state` vs `Empty` (`AppEmptyState` wraps shared `Empty`).
+  - [x] `NewShowModal` vs `Modal` (`NewShowModal` composes shared `Modal`).
+  - [ ] `AppTopBar` vs `TopBar` (deferred to follow-up; current shell visual guards are review-band and route wiring is higher priority).
+  - [x] `StatusPill` / `AgeBadge` vs `Badge` / `Tag` (wrappers added; shows guard is just above review threshold and documented).
+  - [ ] form markup vs `Field` / `Input` / `Select` / `Textarea` (deferred to new RTK/routes ticket together with real mutation payloads).
+- [x] Document each non-reuse decision with a reason: app semantics, visual parity, missing shared API, or planned upstream improvement.
+- [ ] Extract remaining inline Login/Setup page sections before RTK state wiring. (Moved to follow-up RTK/routes ticket.)
+- [ ] Split/relocate route-level `pages.css` once page sections have widget owners. (Moved to follow-up RTK/routes ticket.)
+- [ ] Keep pages as RTK Query/container boundaries and pass typed props into widgets. (Moved to follow-up RTK/routes ticket now that backend endpoints exist.)
+- [x] Run typecheck, Storybook smoke, and focused visual checks for any changed visual-spec targets.
 
 ### Phase 8.1 — Login and mobile login
 
@@ -880,6 +880,8 @@ docs/playbooks/07-react-application-decomposition-and-component-reuse.md
 
 ### Phase 8.8 — Artists and mobile artists
 
+> Follow-up note: route exists with typed support organisms/stories, but full route/RTK/page visual hardening is moved to the new RTK/routes ticket.
+
 - [ ] Inventory desktop/mobile artists prototype routes.
 - [ ] Reuse `ArtistCard`, `ArtistRosterRow`, status/list molecules where applicable.
 - [ ] Extract organisms as needed:
@@ -963,17 +965,19 @@ docs/playbooks/07-react-application-decomposition-and-component-reuse.md
 
 ### Phase 8.14 — New show modal
 
-- [ ] Inventory desktop/mobile new show modal prototype state.
-- [ ] Reuse form fields/buttons/date/show atoms and molecules.
+> Follow-up note: modal shell reuse and focused visual target are complete. NewShowForm extraction, validation/submitting stories, and real mutation wiring are moved to the new RTK/routes ticket.
+
+- [x] Inventory desktop/mobile new show modal prototype state.
+- [x] Reuse form fields/buttons/date/show atoms and molecules. (Modal shell/buttons done; Field/Input/Select/Textarea form primitive pass moved to follow-up.)
 - [ ] Extract organisms as needed:
-  - [ ] `NewShowModal`,
-  - [ ] `NewShowForm`,
-  - [ ] `NewShowModalFooter`,
-  - [ ] mobile sheet variant if prototype requires it.
-- [ ] Add Storybook stories for empty, filled, validation error, submitting, mobile sheet.
-- [ ] Add visual spec target(s) for modal panel/header/body/footer.
-- [ ] Run focused modal comparisons and page/modal checkpoint.
-- [ ] Commit: `Compose new show modal`.
+  - [x] `NewShowModal`,
+  - [ ] `NewShowForm` (moved to follow-up),
+  - [ ] `NewShowModalFooter` (moved to follow-up),
+  - [ ] mobile sheet variant if prototype requires it (moved to follow-up).
+- [ ] Add Storybook stories for empty, filled, validation error, submitting, mobile sheet. (Moved to follow-up with mutation wiring.)
+- [x] Add visual spec target(s) for modal panel/header/body/footer. (Focused `new-show-modal` target added.)
+- [x] Run focused modal comparisons and page/modal checkpoint. (Final panel guard: 8.6815%, review, text unchanged.)
+- [x] Commit: `Compose new show modal`. (Implemented as `Reuse shared Modal for new show dialog`.)
 
 ---
 
@@ -1039,3 +1043,27 @@ Do not commit:
 - [x] Detailed intern playbook written.
 - [x] Updated intern handoff bundle uploaded to reMarkable.
 - [x] Updated docs committed.
+
+
+## Closure note — 2026-04-26
+
+This ticket is closed as the responsive `pyxis-app` package and Phase 8C component architecture/reuse pass. Remaining work is intentionally moved to a follow-up ticket focused on real route state, RTK Query freshness, backend contract alignment, and mutation wiring now that backend endpoints exist.
+
+Closed scope includes:
+
+- responsive app scaffold, Storybook, Redux/RTK Query skeleton, and MSW-ready mock data,
+- primary route/page implementations through booking review,
+- widget folder architecture, colocated stories, and Storybook hierarchy,
+- CSS ownership split sufficient to avoid the known Vite empty-CSS-module regression,
+- component-system reuse clusters for Empty, Modal, Card, Stat, Badge, and Tag,
+- Table reuse audit with a documented deferral pending a compound/shared row API,
+- visual-diff userland workflow improvements and focused visual targets for the main tuned organisms.
+
+Follow-up scope moved out of this ticket:
+
+- real backend response normalization and RTK Query route state handling,
+- mutations for shows/bookings/calendar/attendance/settings,
+- secondary route visual hardening for artists, attendance, audit log, Discord, and settings,
+- Login/Setup extraction and `pages.css` split,
+- form primitive reuse in `NewShowModal`,
+- `AppTopBar -> TopBar`, `AttendanceStat -> Stat compact`, and shared Table compound API design.
