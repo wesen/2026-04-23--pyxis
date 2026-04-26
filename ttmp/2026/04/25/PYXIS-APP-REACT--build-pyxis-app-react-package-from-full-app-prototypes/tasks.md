@@ -744,6 +744,40 @@ Goal: align `pyxis-app` component organization with `pyxis-components/src/public
 - [x] Run representative Storybook CSS transform checks and focused visual smokes.
 - [ ] Update diary/changelog and commit final Phase 8B.
 
+### Phase 8C — Props, decomposition, component-system reuse, and story state coverage
+
+Goal: prepare for proper RTK Query and app wiring by making widget APIs explicit, increasing Storybook state coverage, and auditing app widgets against `pyxis-components` before duplicating generic primitives.
+
+Reference guide:
+
+```text
+docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+```
+
+- [ ] Add named exported prop types for reusable atoms, molecules, organisms, shell widgets, and page route components.
+- [ ] Replace anonymous inline prop types in widget implementations.
+- [ ] Add callback props for hard-coded actions that will later dispatch RTK mutations or route actions.
+- [ ] Add story states for priority atoms/molecules/organisms:
+  - [ ] default,
+  - [ ] empty,
+  - [ ] long content,
+  - [ ] mobile/narrow,
+  - [ ] status/variant cases.
+- [ ] Audit reuse against `pyxis-components` by cluster:
+  - [ ] `Panel` vs `Card` / `CardHead`,
+  - [ ] `MetricCard` / `AttendanceStat` vs `Stat`,
+  - [ ] app tables vs `Table`,
+  - [ ] `.app-empty-state` vs `Empty`,
+  - [ ] `NewShowModal` vs `Modal`,
+  - [ ] `AppTopBar` vs `TopBar`,
+  - [ ] `StatusPill` / `AgeBadge` vs `Badge` / `Tag`,
+  - [ ] form markup vs `Field` / `Input` / `Select` / `Textarea`.
+- [ ] Document each non-reuse decision with a reason: app semantics, visual parity, missing shared API, or planned upstream improvement.
+- [ ] Extract remaining inline Login/Setup page sections before RTK state wiring.
+- [ ] Split/relocate route-level `pages.css` once page sections have widget owners.
+- [ ] Keep pages as RTK Query/container boundaries and pass typed props into widgets.
+- [ ] Run typecheck, Storybook smoke, and focused visual checks for any changed visual-spec targets.
+
 ### Phase 8.1 — Login and mobile login
 
 - [x] Inventory desktop login and mobile login prototype routes.

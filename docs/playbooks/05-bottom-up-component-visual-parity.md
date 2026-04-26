@@ -351,6 +351,12 @@ For React widget folder, CSS ownership, and colocated Storybook conventions, use
 docs/playbooks/06-react-widget-folder-storybook-css-organization.md
 ```
 
+For deciding what to extract as atoms/molecules/organisms, how to reuse `pyxis-components`, and how to decompose a multi-page app before RTK Query wiring, use:
+
+```text
+docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+```
+
 Follow the folder-per-widget pattern (`WidgetName.tsx`, `WidgetName.css`, `WidgetName.stories.tsx`, `index.ts`) from the beginning of new React work.
 
 ### Pyxis app CSS visual loop

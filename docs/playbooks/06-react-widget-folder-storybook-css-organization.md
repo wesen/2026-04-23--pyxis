@@ -4,6 +4,12 @@ Use this guide when creating or refactoring React UI packages in this repo. The 
 
 This mirrors the established pattern in `web/packages/pyxis-components/src/public/*` and should be used for `pyxis-app` and future React packages.
 
+This guide explains where files go. For what to extract, when to reuse existing component-system widgets, and how to decompose a coherent app across multiple pages, read:
+
+```text
+docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+```
+
 ## Principle
 
 Organize by widget ownership, not by file type.
