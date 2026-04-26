@@ -97,3 +97,17 @@ Completed fixture scrape and full validation: captured real backend JSON for pub
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs — Ticket-local scraper used with dev-auth session cookie.
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/sources/01-msw-seed-real-backend.json — Real backend scraped fixture evidence for public and staff endpoints.
 
+
+## 2026-04-26
+
+Completed Phase 8 CalendarEvent proto cleanup: unified calendar endpoint now returns CalendarEventList, frontend decodes generated CalendarEvent, and calendar stories/MSW use protobuf fixtures.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — GET /api/app/calendar now returns unified CalendarEventList.
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go — Adds domain-to-CalendarEvent mapping helpers.
+- /home/manuel/code/wesen/2026-04-23--pyxis/proto/pyxis/v1/show.proto — Adds CalendarEventKind
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts — Decodes calendar endpoint with CalendarEventListSchema.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx — Uses enum status with StatusDot while preserving data-status tone.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-types/src/app.ts — Removes hand-written CalendarEvent.
+

@@ -90,12 +90,12 @@
 
 ## Phase 8: Optional CalendarEvent proto cleanup
 
-- [ ] Add `CalendarEvent` and `CalendarEventList` proto messages.
-- [ ] Update backend `GET /api/app/calendar` to return unified confirmed-show/hold/blocked events.
-- [ ] Regenerate Go and TypeScript protobuf code.
-- [ ] Remove hand-written `CalendarEvent` from `pyxis-types/src/app.ts`.
-- [ ] Update `appApi.ts` to use `CalendarEventListSchema`.
-- [ ] Update `CalendarEventChip` to use enum status with `StatusDot status={event.status}`.
+- [x] Add `CalendarEvent` and `CalendarEventList` proto messages.
+- [x] Update backend `GET /api/app/calendar` to return unified confirmed-show/hold/blocked events.
+- [x] Regenerate Go and TypeScript protobuf code.
+- [x] Remove hand-written `CalendarEvent` from `pyxis-types/src/app.ts`.
+- [x] Update `appApi.ts` to use `CalendarEventListSchema`.
+- [x] Update `CalendarEventChip` to use enum status with `StatusDot status={event.status}`.
 
 ## Phase 9: Validation and handoff
 

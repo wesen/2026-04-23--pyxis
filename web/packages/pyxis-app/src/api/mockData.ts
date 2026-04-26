@@ -2,6 +2,8 @@ import {
   create,
   AppShowSchema,
   ArtistSchema,
+  CalendarEventKind,
+  CalendarEventSchema,
   AttendanceLogSchema,
   AuditLogEntrySchema,
   AuthSessionSchema,
@@ -53,13 +55,13 @@ export const auditLog = [
 ];
 
 export const calendarEvents: CalendarEvent[] = [
-  { date: '2025-05-02', label: 'Burial Hex', status: 'confirmed' },
-  { date: '2025-05-09', label: 'Moor Mother', status: 'confirmed' },
-  { date: '2025-05-14', label: 'Hold — TBD', status: 'hold' },
-  { date: '2025-05-17', label: 'Cygnus + Guests', status: 'confirmed' },
-  { date: '2025-05-23', label: 'Open Mic', status: 'confirmed' },
-  { date: '2025-05-26', label: 'Closed', status: 'blocked' },
-  { date: '2025-05-30', label: 'Basement Freq.', status: 'confirmed' },
+  create(CalendarEventSchema, { id: 42, date: '2025-05-02', label: 'Burial Hex', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+  create(CalendarEventSchema, { id: 43, date: '2025-05-09', label: 'Moor Mother', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+  create(CalendarEventSchema, { id: 101, date: '2025-05-14', label: 'Hold — TBD', status: ShowStatus.HOLD, kind: CalendarEventKind.HOLD }),
+  create(CalendarEventSchema, { id: 44, date: '2025-05-17', label: 'Cygnus + Guests', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+  create(CalendarEventSchema, { id: 45, date: '2025-05-23', label: 'Open Mic', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+  create(CalendarEventSchema, { id: 201, date: '2025-05-26', label: 'Closed', status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED }),
+  create(CalendarEventSchema, { id: 47, date: '2025-05-30', label: 'Basement Freq.', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
 ];
 
 export const attendance = [

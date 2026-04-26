@@ -37,8 +37,14 @@ export {
   CalendarHoldSchema,
   type CalendarBlocked,
   CalendarBlockedSchema,
+  type CalendarEvent,
+  CalendarEventSchema,
+  type CalendarEventList,
+  CalendarEventListSchema,
   type CalendarResponse,
   CalendarResponseSchema,
+  CalendarEventKind,
+  CalendarEventKindSchema,
   type AttendanceLog,
   AttendanceLogSchema,
   type AttendanceLogList,
@@ -64,7 +70,6 @@ export {
 // Frontend-only types (not backed by protobuf — view models / UI concerns)
 export type {
   AppDashboardSummary,
-  CalendarEvent,
   DiscordChannelMapping,
   StaffMember,
 } from './app';

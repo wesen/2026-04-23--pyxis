@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file proto/pyxis/v1/show.proto.
  */
 export const file_proto_pyxis_v1_show: GenFile = /*@__PURE__*/
-  fileDesc("Chlwcm90by9weXhpcy92MS9zaG93LnByb3RvEghweXhpcy52MSLRAwoEU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRISCgpkb29yc190aW1lGAQgASgJEhIKCnN0YXJ0X3RpbWUYBSABKAkSCwoDYWdlGAYgASgJEg0KBXByaWNlGAcgASgJEg0KBWdlbnJlGAggASgJEhMKC2Rlc2NyaXB0aW9uGAkgASgJEg0KBW5vdGVzGBEgASgJEioKBmxpbmV1cBgKIAMoCzIaLnB5eGlzLnYxLlNob3cuTGluZXVwRW50cnkSEQoJZmx5ZXJfdXJsGAsgASgJEgwKBGRyYXcYEiABKAUSEAoIY2FwYWNpdHkYEyABKAUSJAoGc3RhdHVzGAwgASgOMhQucHl4aXMudjEuU2hvd1N0YXR1cxIVCg1zdWJtaXNzaW9uX2lkGA0gASgFEhEKCWFydGlzdF9pZBgOIAEoBRISCgpjcmVhdGVkX2F0GA8gASgJEhIKCnVwZGF0ZWRfYXQYECABKAkaUQoLTGluZXVwRW50cnkSDgoGYXJ0aXN0GAEgASgJEgwKBHJvbGUYAiABKAkSEgoKc3RhcnRfdGltZRgDIAEoCRIQCghlbmRfdGltZRgEIAEoCSLSAQoHQXBwU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVkb29ycxgEIAEoCRILCgNhZ2UYBSABKAkSDQoFcHJpY2UYBiABKAkSJAoGc3RhdHVzGAcgASgOMhQucHl4aXMudjEuU2hvd1N0YXR1cxINCgVnZW5yZRgIIAEoCRIMCgRkcmF3GAkgASgFEhAKCGNhcGFjaXR5GAogASgFEg4KBnBpbm5lZBgLIAEoCBINCgVub3RlcxgMIAEoCSJVCgxBcmNoaXZlZFNob3cSCgoCaWQYASABKAUSDgoGYXJ0aXN0GAIgASgJEgwKBGRhdGUYAyABKAkSDQoFZ2VucmUYBCABKAkSDAoEZHJhdxgFIAEoBSJsCgxBcmNoaXZlU3RhdHMSEwoLdG90YWxfc2hvd3MYASABKAUSGAoQdG90YWxfYXR0ZW5kYW5jZRgCIAEoBRIVCg15ZWFyc19ydW5uaW5nGAMgASgFEhYKDnVuaXF1ZV9hcnRpc3RzGAQgASgFIpgBCg9Cb29raW5nRm9ybURhdGESEwoLYXJ0aXN0X25hbWUYASABKAkSDQoFZ2VucmUYAiABKAkSFgoOcHJlZmVycmVkX2RhdGUYAyABKAkSFQoNZXhwZWN0ZWRfZHJhdxgEIAEoBRINCgVsaW5rcxgFIAEoCRISCgp0ZWNoX3JpZGVyGAYgASgJEg8KB21lc3NhZ2UYByABKAkiKQoIU2hvd0xpc3QSHQoFc2hvd3MYASADKAsyDi5weXhpcy52MS5TaG93IjkKEEFyY2hpdmVkU2hvd0xpc3QSJQoFc2hvd3MYASADKAsyFi5weXhpcy52MS5BcmNoaXZlZFNob3ciPQoTQm9va2luZ0NvbmZpcm1hdGlvbhIPCgdzdWNjZXNzGAEgASgIEhUKDXN1Ym1pc3Npb25faWQYAiABKAUitQIKClN1Ym1pc3Npb24SCgoCaWQYASABKAUSEQoJYXJ0aXN0X2lkGAIgASgFEhMKC2FydGlzdF9uYW1lGAMgASgJEhYKDnByZWZlcnJlZF9kYXRlGAQgASgJEg0KBWdlbnJlGAUgASgJEhUKDWV4cGVjdGVkX2RyYXcYBiABKAUSDQoFbGlua3MYByABKAkSEgoKdGVjaF9yaWRlchgIIAEoCRIPCgdtZXNzYWdlGAkgASgJEhcKD2NvbnRhY3RfZGlzY29yZBgKIAEoCRIqCgZzdGF0dXMYCyABKA4yGi5weXhpcy52MS5TdWJtaXNzaW9uU3RhdHVzEhMKC3Jldmlld2VkX2J5GAwgASgFEhMKC3Jldmlld2VkX2F0GA0gASgJEhIKCmNyZWF0ZWRfYXQYDiABKAkiOwoOU3VibWlzc2lvbkxpc3QSKQoLc3VibWlzc2lvbnMYASADKAsyFC5weXhpcy52MS5TdWJtaXNzaW9uIo0BCgRVc2VyEgoKAmlkGAEgASgFEhIKCmRpc2NvcmRfaWQYAiABKAkSGAoQZGlzY29yZF91c2VybmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEgwKBHJvbGUYBSABKAkSEgoKY3JlYXRlZF9hdBgGIAEoCRIVCg1sYXN0X2xvZ2luX2F0GAcgASgJIlYKC0F1dGhTZXNzaW9uEhUKDWF1dGhlbnRpY2F0ZWQYASABKAgSHAoEdXNlchgCIAEoCzIOLnB5eGlzLnYxLlVzZXISEgoKc3BhY2VfbmFtZRgDIAEoCSJ3CgZBcnRpc3QSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRINCgVnZW5yZRgDIAEoCRINCgVsaW5rcxgEIAEoCRINCgVub3RlcxgFIAEoCRISCgpjcmVhdGVkX2F0GAYgASgJEhIKCnVwZGF0ZWRfYXQYByABKAkiLwoKQXJ0aXN0TGlzdBIhCgdhcnRpc3RzGAEgAygLMhAucHl4aXMudjEuQXJ0aXN0IjcKDENhbGVuZGFySG9sZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg0KBWxhYmVsGAMgASgJIjsKD0NhbGVuZGFyQmxvY2tlZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg4KBnJlYXNvbhgDIAEoCSJlChBDYWxlbmRhclJlc3BvbnNlEiUKBWhvbGRzGAEgAygLMhYucHl4aXMudjEuQ2FsZW5kYXJIb2xkEioKB2Jsb2NrZWQYAiADKAsyGS5weXhpcy52MS5DYWxlbmRhckJsb2NrZWQizAEKDUF0dGVuZGFuY2VMb2cSCgoCaWQYASABKAUSDwoHc2hvd19pZBgCIAEoBRIOCgZhcnRpc3QYAyABKAkSDAoEZGF0ZRgEIAEoCRIMCgRkcmF3GAUgASgFEg0KBW5vdGVzGAYgASgJEhAKCGluY2lkZW50GAcgASgIEhYKDmluY2lkZW50X25vdGVzGAggASgJEhEKCWxvZ2dlZF9ieRgJIAEoBRISCgpjcmVhdGVkX2F0GAogASgJEhIKCnVwZGF0ZWRfYXQYCyABKAkiOgoRQXR0ZW5kYW5jZUxvZ0xpc3QSJQoEbG9ncxgBIAMoCzIXLnB5eGlzLnYxLkF0dGVuZGFuY2VMb2cimgEKDUF1ZGl0TG9nRW50cnkSCgoCaWQYASABKAUSDQoFYWN0b3IYAiABKAkSEAoIYWN0b3JfaWQYAyABKAUSDgoGYWN0aW9uGAQgASgJEhMKC2VudGl0eV90eXBlGAUgASgJEhEKCWVudGl0eV9pZBgGIAEoBRIQCghtZXRhZGF0YRgHIAEoCRISCgpjcmVhdGVkX2F0GAggASgJIj0KEUF1ZGl0TG9nRW50cnlMaXN0EigKB2VudHJpZXMYASADKAsyFy5weXhpcy52MS5BdWRpdExvZ0VudHJ5IrcDCghTZXR0aW5ncxIKCgJpZBgBIAEoBRISCgpzcGFjZV9uYW1lGAIgASgJEg8KB3RhZ2xpbmUYAyABKAkSDwoHYWRkcmVzcxgEIAEoCRIQCghjYXBhY2l0eRgFIAEoBRIVCg1jb250YWN0X2VtYWlsGAYgASgJEg8KB3dlYnNpdGUYByABKAkSGAoQZGlzY29yZF9ndWlsZF9pZBgIIAEoCRIbChNkaXNjb3JkX2NoX3VwY29taW5nGAkgASgJEiAKGGRpc2NvcmRfY2hfYW5ub3VuY2VtZW50cxgKIAEoCRIYChBkaXNjb3JkX2NoX3N0YWZmGAsgASgJEhsKE2Rpc2NvcmRfY2hfYm9va2luZ3MYDCABKAkSFgoOc2V0dXBfY29tcGxldGUYDSABKAgSEgoKdXBkYXRlZF9hdBgOIAEoCRIQCgh0aW1lem9uZRgPIAEoCRIVCg1ib29raW5nX2VtYWlsGBAgASgJEhQKDGF1dG9fYXJjaGl2ZRgRIAEoCBIXCg9kaXNjb3JkX3Bvc3RpbmcYEiABKAgSGwoTc2FmZV9zcGFjZV9yZXF1aXJlZBgTIAEoCCIiCg9TdWNjZXNzUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCJlCg1FcnJvclJlc3BvbnNlEiwKBWVycm9yGAEgASgLMh0ucHl4aXMudjEuRXJyb3JSZXNwb25zZS5FcnJvchomCgVFcnJvchIMCgRjb2RlGAEgASgJEg8KB21lc3NhZ2UYAiABKAkiIgoTRmx5ZXJVcGxvYWRSZXNwb25zZRILCgN1cmwYASABKAkqvwEKClNob3dTdGF0dXMSGwoXU0hPV19TVEFUVVNfVU5TUEVDSUZJRUQQABIZChVTSE9XX1NUQVRVU19DT05GSVJNRUQQARIZChVTSE9XX1NUQVRVU19DQU5DRUxMRUQQAhIYChRTSE9XX1NUQVRVU19BUkNISVZFRBADEhUKEVNIT1dfU1RBVFVTX0RSQUZUEAQSFAoQU0hPV19TVEFUVVNfSE9MRBAFEhcKE1NIT1dfU1RBVFVTX0JMT0NLRUQQBirRAQoQU3VibWlzc2lvblN0YXR1cxIhCh1TVUJNSVNTSU9OX1NUQVRVU19VTlNQRUNJRklFRBAAEh0KGVNVQk1JU1NJT05fU1RBVFVTX1BFTkRJTkcQARIeChpTVUJNSVNTSU9OX1NUQVRVU19BUFBST1ZFRBACEh4KGlNVQk1JU1NJT05fU1RBVFVTX0RFQ0xJTkVEEAMSGgoWU1VCTUlTU0lPTl9TVEFUVVNfSE9MRBAEEh8KG1NVQk1JU1NJT05fU1RBVFVTX0NBTkNFTExFRBAFQjpaOGdpdGh1Yi5jb20vZ28tZ28tZ29sZW1zL3B5eGlzL2dlbi9wcm90by9weXhpcy92MTtweXhpc3YxYgZwcm90bzM");
+  fileDesc("Chlwcm90by9weXhpcy92MS9zaG93LnByb3RvEghweXhpcy52MSLRAwoEU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRISCgpkb29yc190aW1lGAQgASgJEhIKCnN0YXJ0X3RpbWUYBSABKAkSCwoDYWdlGAYgASgJEg0KBXByaWNlGAcgASgJEg0KBWdlbnJlGAggASgJEhMKC2Rlc2NyaXB0aW9uGAkgASgJEg0KBW5vdGVzGBEgASgJEioKBmxpbmV1cBgKIAMoCzIaLnB5eGlzLnYxLlNob3cuTGluZXVwRW50cnkSEQoJZmx5ZXJfdXJsGAsgASgJEgwKBGRyYXcYEiABKAUSEAoIY2FwYWNpdHkYEyABKAUSJAoGc3RhdHVzGAwgASgOMhQucHl4aXMudjEuU2hvd1N0YXR1cxIVCg1zdWJtaXNzaW9uX2lkGA0gASgFEhEKCWFydGlzdF9pZBgOIAEoBRISCgpjcmVhdGVkX2F0GA8gASgJEhIKCnVwZGF0ZWRfYXQYECABKAkaUQoLTGluZXVwRW50cnkSDgoGYXJ0aXN0GAEgASgJEgwKBHJvbGUYAiABKAkSEgoKc3RhcnRfdGltZRgDIAEoCRIQCghlbmRfdGltZRgEIAEoCSLSAQoHQXBwU2hvdxIKCgJpZBgBIAEoBRIOCgZhcnRpc3QYAiABKAkSDAoEZGF0ZRgDIAEoCRINCgVkb29ycxgEIAEoCRILCgNhZ2UYBSABKAkSDQoFcHJpY2UYBiABKAkSJAoGc3RhdHVzGAcgASgOMhQucHl4aXMudjEuU2hvd1N0YXR1cxINCgVnZW5yZRgIIAEoCRIMCgRkcmF3GAkgASgFEhAKCGNhcGFjaXR5GAogASgFEg4KBnBpbm5lZBgLIAEoCBINCgVub3RlcxgMIAEoCSJVCgxBcmNoaXZlZFNob3cSCgoCaWQYASABKAUSDgoGYXJ0aXN0GAIgASgJEgwKBGRhdGUYAyABKAkSDQoFZ2VucmUYBCABKAkSDAoEZHJhdxgFIAEoBSJsCgxBcmNoaXZlU3RhdHMSEwoLdG90YWxfc2hvd3MYASABKAUSGAoQdG90YWxfYXR0ZW5kYW5jZRgCIAEoBRIVCg15ZWFyc19ydW5uaW5nGAMgASgFEhYKDnVuaXF1ZV9hcnRpc3RzGAQgASgFIpgBCg9Cb29raW5nRm9ybURhdGESEwoLYXJ0aXN0X25hbWUYASABKAkSDQoFZ2VucmUYAiABKAkSFgoOcHJlZmVycmVkX2RhdGUYAyABKAkSFQoNZXhwZWN0ZWRfZHJhdxgEIAEoBRINCgVsaW5rcxgFIAEoCRISCgp0ZWNoX3JpZGVyGAYgASgJEg8KB21lc3NhZ2UYByABKAkiKQoIU2hvd0xpc3QSHQoFc2hvd3MYASADKAsyDi5weXhpcy52MS5TaG93IjkKEEFyY2hpdmVkU2hvd0xpc3QSJQoFc2hvd3MYASADKAsyFi5weXhpcy52MS5BcmNoaXZlZFNob3ciPQoTQm9va2luZ0NvbmZpcm1hdGlvbhIPCgdzdWNjZXNzGAEgASgIEhUKDXN1Ym1pc3Npb25faWQYAiABKAUitQIKClN1Ym1pc3Npb24SCgoCaWQYASABKAUSEQoJYXJ0aXN0X2lkGAIgASgFEhMKC2FydGlzdF9uYW1lGAMgASgJEhYKDnByZWZlcnJlZF9kYXRlGAQgASgJEg0KBWdlbnJlGAUgASgJEhUKDWV4cGVjdGVkX2RyYXcYBiABKAUSDQoFbGlua3MYByABKAkSEgoKdGVjaF9yaWRlchgIIAEoCRIPCgdtZXNzYWdlGAkgASgJEhcKD2NvbnRhY3RfZGlzY29yZBgKIAEoCRIqCgZzdGF0dXMYCyABKA4yGi5weXhpcy52MS5TdWJtaXNzaW9uU3RhdHVzEhMKC3Jldmlld2VkX2J5GAwgASgFEhMKC3Jldmlld2VkX2F0GA0gASgJEhIKCmNyZWF0ZWRfYXQYDiABKAkiOwoOU3VibWlzc2lvbkxpc3QSKQoLc3VibWlzc2lvbnMYASADKAsyFC5weXhpcy52MS5TdWJtaXNzaW9uIo0BCgRVc2VyEgoKAmlkGAEgASgFEhIKCmRpc2NvcmRfaWQYAiABKAkSGAoQZGlzY29yZF91c2VybmFtZRgDIAEoCRISCgphdmF0YXJfdXJsGAQgASgJEgwKBHJvbGUYBSABKAkSEgoKY3JlYXRlZF9hdBgGIAEoCRIVCg1sYXN0X2xvZ2luX2F0GAcgASgJIlYKC0F1dGhTZXNzaW9uEhUKDWF1dGhlbnRpY2F0ZWQYASABKAgSHAoEdXNlchgCIAEoCzIOLnB5eGlzLnYxLlVzZXISEgoKc3BhY2VfbmFtZRgDIAEoCSJ3CgZBcnRpc3QSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRINCgVnZW5yZRgDIAEoCRINCgVsaW5rcxgEIAEoCRINCgVub3RlcxgFIAEoCRISCgpjcmVhdGVkX2F0GAYgASgJEhIKCnVwZGF0ZWRfYXQYByABKAkiLwoKQXJ0aXN0TGlzdBIhCgdhcnRpc3RzGAEgAygLMhAucHl4aXMudjEuQXJ0aXN0IjcKDENhbGVuZGFySG9sZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg0KBWxhYmVsGAMgASgJIjsKD0NhbGVuZGFyQmxvY2tlZBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg4KBnJlYXNvbhgDIAEoCSKJAQoNQ2FsZW5kYXJFdmVudBIKCgJpZBgBIAEoBRIMCgRkYXRlGAIgASgJEg0KBWxhYmVsGAMgASgJEiQKBnN0YXR1cxgEIAEoDjIULnB5eGlzLnYxLlNob3dTdGF0dXMSKQoEa2luZBgFIAEoDjIbLnB5eGlzLnYxLkNhbGVuZGFyRXZlbnRLaW5kIjwKEUNhbGVuZGFyRXZlbnRMaXN0EicKBmV2ZW50cxgBIAMoCzIXLnB5eGlzLnYxLkNhbGVuZGFyRXZlbnQiZQoQQ2FsZW5kYXJSZXNwb25zZRIlCgVob2xkcxgBIAMoCzIWLnB5eGlzLnYxLkNhbGVuZGFySG9sZBIqCgdibG9ja2VkGAIgAygLMhkucHl4aXMudjEuQ2FsZW5kYXJCbG9ja2VkIswBCg1BdHRlbmRhbmNlTG9nEgoKAmlkGAEgASgFEg8KB3Nob3dfaWQYAiABKAUSDgoGYXJ0aXN0GAMgASgJEgwKBGRhdGUYBCABKAkSDAoEZHJhdxgFIAEoBRINCgVub3RlcxgGIAEoCRIQCghpbmNpZGVudBgHIAEoCBIWCg5pbmNpZGVudF9ub3RlcxgIIAEoCRIRCglsb2dnZWRfYnkYCSABKAUSEgoKY3JlYXRlZF9hdBgKIAEoCRISCgp1cGRhdGVkX2F0GAsgASgJIjoKEUF0dGVuZGFuY2VMb2dMaXN0EiUKBGxvZ3MYASADKAsyFy5weXhpcy52MS5BdHRlbmRhbmNlTG9nIpoBCg1BdWRpdExvZ0VudHJ5EgoKAmlkGAEgASgFEg0KBWFjdG9yGAIgASgJEhAKCGFjdG9yX2lkGAMgASgFEg4KBmFjdGlvbhgEIAEoCRITCgtlbnRpdHlfdHlwZRgFIAEoCRIRCgllbnRpdHlfaWQYBiABKAUSEAoIbWV0YWRhdGEYByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSI9ChFBdWRpdExvZ0VudHJ5TGlzdBIoCgdlbnRyaWVzGAEgAygLMhcucHl4aXMudjEuQXVkaXRMb2dFbnRyeSK3AwoIU2V0dGluZ3MSCgoCaWQYASABKAUSEgoKc3BhY2VfbmFtZRgCIAEoCRIPCgd0YWdsaW5lGAMgASgJEg8KB2FkZHJlc3MYBCABKAkSEAoIY2FwYWNpdHkYBSABKAUSFQoNY29udGFjdF9lbWFpbBgGIAEoCRIPCgd3ZWJzaXRlGAcgASgJEhgKEGRpc2NvcmRfZ3VpbGRfaWQYCCABKAkSGwoTZGlzY29yZF9jaF91cGNvbWluZxgJIAEoCRIgChhkaXNjb3JkX2NoX2Fubm91bmNlbWVudHMYCiABKAkSGAoQZGlzY29yZF9jaF9zdGFmZhgLIAEoCRIbChNkaXNjb3JkX2NoX2Jvb2tpbmdzGAwgASgJEhYKDnNldHVwX2NvbXBsZXRlGA0gASgIEhIKCnVwZGF0ZWRfYXQYDiABKAkSEAoIdGltZXpvbmUYDyABKAkSFQoNYm9va2luZ19lbWFpbBgQIAEoCRIUCgxhdXRvX2FyY2hpdmUYESABKAgSFwoPZGlzY29yZF9wb3N0aW5nGBIgASgIEhsKE3NhZmVfc3BhY2VfcmVxdWlyZWQYEyABKAgiIgoPU3VjY2Vzc1Jlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgiZQoNRXJyb3JSZXNwb25zZRIsCgVlcnJvchgBIAEoCzIdLnB5eGlzLnYxLkVycm9yUmVzcG9uc2UuRXJyb3IaJgoFRXJyb3ISDAoEY29kZRgBIAEoCRIPCgdtZXNzYWdlGAIgASgJIiIKE0ZseWVyVXBsb2FkUmVzcG9uc2USCwoDdXJsGAEgASgJKr8BCgpTaG93U3RhdHVzEhsKF1NIT1dfU1RBVFVTX1VOU1BFQ0lGSUVEEAASGQoVU0hPV19TVEFUVVNfQ09ORklSTUVEEAESGQoVU0hPV19TVEFUVVNfQ0FOQ0VMTEVEEAISGAoUU0hPV19TVEFUVVNfQVJDSElWRUQQAxIVChFTSE9XX1NUQVRVU19EUkFGVBAEEhQKEFNIT1dfU1RBVFVTX0hPTEQQBRIXChNTSE9XX1NUQVRVU19CTE9DS0VEEAYq0QEKEFN1Ym1pc3Npb25TdGF0dXMSIQodU1VCTUlTU0lPTl9TVEFUVVNfVU5TUEVDSUZJRUQQABIdChlTVUJNSVNTSU9OX1NUQVRVU19QRU5ESU5HEAESHgoaU1VCTUlTU0lPTl9TVEFUVVNfQVBQUk9WRUQQAhIeChpTVUJNSVNTSU9OX1NUQVRVU19ERUNMSU5FRBADEhoKFlNVQk1JU1NJT05fU1RBVFVTX0hPTEQQBBIfChtTVUJNSVNTSU9OX1NUQVRVU19DQU5DRUxMRUQQBSqVAQoRQ2FsZW5kYXJFdmVudEtpbmQSIwofQ0FMRU5EQVJfRVZFTlRfS0lORF9VTlNQRUNJRklFRBAAEhwKGENBTEVOREFSX0VWRU5UX0tJTkRfU0hPVxABEhwKGENBTEVOREFSX0VWRU5UX0tJTkRfSE9MRBACEh8KG0NBTEVOREFSX0VWRU5UX0tJTkRfQkxPQ0tFRBADQjpaOGdpdGh1Yi5jb20vZ28tZ28tZ29sZW1zL3B5eGlzL2dlbi9wcm90by9weXhpcy92MTtweXhpc3YxYgZwcm90bzM");
 
 /**
  * @generated from message pyxis.v1.Show
@@ -687,6 +687,60 @@ export const CalendarBlockedSchema: GenMessage<CalendarBlocked> = /*@__PURE__*/
   messageDesc(file_proto_pyxis_v1_show, 15);
 
 /**
+ * @generated from message pyxis.v1.CalendarEvent
+ */
+export type CalendarEvent = Message<"pyxis.v1.CalendarEvent"> & {
+  /**
+   * @generated from field: int32 id = 1;
+   */
+  id: number;
+
+  /**
+   * @generated from field: string date = 2;
+   */
+  date: string;
+
+  /**
+   * @generated from field: string label = 3;
+   */
+  label: string;
+
+  /**
+   * @generated from field: pyxis.v1.ShowStatus status = 4;
+   */
+  status: ShowStatus;
+
+  /**
+   * @generated from field: pyxis.v1.CalendarEventKind kind = 5;
+   */
+  kind: CalendarEventKind;
+};
+
+/**
+ * Describes the message pyxis.v1.CalendarEvent.
+ * Use `create(CalendarEventSchema)` to create a new message.
+ */
+export const CalendarEventSchema: GenMessage<CalendarEvent> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 16);
+
+/**
+ * @generated from message pyxis.v1.CalendarEventList
+ */
+export type CalendarEventList = Message<"pyxis.v1.CalendarEventList"> & {
+  /**
+   * @generated from field: repeated pyxis.v1.CalendarEvent events = 1;
+   */
+  events: CalendarEvent[];
+};
+
+/**
+ * Describes the message pyxis.v1.CalendarEventList.
+ * Use `create(CalendarEventListSchema)` to create a new message.
+ */
+export const CalendarEventListSchema: GenMessage<CalendarEventList> = /*@__PURE__*/
+  messageDesc(file_proto_pyxis_v1_show, 17);
+
+/**
  * @generated from message pyxis.v1.CalendarResponse
  */
 export type CalendarResponse = Message<"pyxis.v1.CalendarResponse"> & {
@@ -706,7 +760,7 @@ export type CalendarResponse = Message<"pyxis.v1.CalendarResponse"> & {
  * Use `create(CalendarResponseSchema)` to create a new message.
  */
 export const CalendarResponseSchema: GenMessage<CalendarResponse> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 16);
+  messageDesc(file_proto_pyxis_v1_show, 18);
 
 /**
  * @generated from message pyxis.v1.AttendanceLog
@@ -773,7 +827,7 @@ export type AttendanceLog = Message<"pyxis.v1.AttendanceLog"> & {
  * Use `create(AttendanceLogSchema)` to create a new message.
  */
 export const AttendanceLogSchema: GenMessage<AttendanceLog> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 17);
+  messageDesc(file_proto_pyxis_v1_show, 19);
 
 /**
  * @generated from message pyxis.v1.AttendanceLogList
@@ -790,7 +844,7 @@ export type AttendanceLogList = Message<"pyxis.v1.AttendanceLogList"> & {
  * Use `create(AttendanceLogListSchema)` to create a new message.
  */
 export const AttendanceLogListSchema: GenMessage<AttendanceLogList> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 18);
+  messageDesc(file_proto_pyxis_v1_show, 20);
 
 /**
  * @generated from message pyxis.v1.AuditLogEntry
@@ -842,7 +896,7 @@ export type AuditLogEntry = Message<"pyxis.v1.AuditLogEntry"> & {
  * Use `create(AuditLogEntrySchema)` to create a new message.
  */
 export const AuditLogEntrySchema: GenMessage<AuditLogEntry> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 19);
+  messageDesc(file_proto_pyxis_v1_show, 21);
 
 /**
  * @generated from message pyxis.v1.AuditLogEntryList
@@ -859,7 +913,7 @@ export type AuditLogEntryList = Message<"pyxis.v1.AuditLogEntryList"> & {
  * Use `create(AuditLogEntryListSchema)` to create a new message.
  */
 export const AuditLogEntryListSchema: GenMessage<AuditLogEntryList> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 20);
+  messageDesc(file_proto_pyxis_v1_show, 22);
 
 /**
  * @generated from message pyxis.v1.Settings
@@ -966,7 +1020,7 @@ export type Settings = Message<"pyxis.v1.Settings"> & {
  * Use `create(SettingsSchema)` to create a new message.
  */
 export const SettingsSchema: GenMessage<Settings> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 21);
+  messageDesc(file_proto_pyxis_v1_show, 23);
 
 /**
  * @generated from message pyxis.v1.SuccessResponse
@@ -983,7 +1037,7 @@ export type SuccessResponse = Message<"pyxis.v1.SuccessResponse"> & {
  * Use `create(SuccessResponseSchema)` to create a new message.
  */
 export const SuccessResponseSchema: GenMessage<SuccessResponse> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 22);
+  messageDesc(file_proto_pyxis_v1_show, 24);
 
 /**
  * @generated from message pyxis.v1.ErrorResponse
@@ -1000,7 +1054,7 @@ export type ErrorResponse = Message<"pyxis.v1.ErrorResponse"> & {
  * Use `create(ErrorResponseSchema)` to create a new message.
  */
 export const ErrorResponseSchema: GenMessage<ErrorResponse> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 23);
+  messageDesc(file_proto_pyxis_v1_show, 25);
 
 /**
  * @generated from message pyxis.v1.ErrorResponse.Error
@@ -1022,7 +1076,7 @@ export type ErrorResponse_Error = Message<"pyxis.v1.ErrorResponse.Error"> & {
  * Use `create(ErrorResponse_ErrorSchema)` to create a new message.
  */
 export const ErrorResponse_ErrorSchema: GenMessage<ErrorResponse_Error> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 23, 0);
+  messageDesc(file_proto_pyxis_v1_show, 25, 0);
 
 /**
  * @generated from message pyxis.v1.FlyerUploadResponse
@@ -1039,7 +1093,7 @@ export type FlyerUploadResponse = Message<"pyxis.v1.FlyerUploadResponse"> & {
  * Use `create(FlyerUploadResponseSchema)` to create a new message.
  */
 export const FlyerUploadResponseSchema: GenMessage<FlyerUploadResponse> = /*@__PURE__*/
-  messageDesc(file_proto_pyxis_v1_show, 24);
+  messageDesc(file_proto_pyxis_v1_show, 26);
 
 /**
  * @generated from enum pyxis.v1.ShowStatus
@@ -1127,4 +1181,35 @@ export enum SubmissionStatus {
  */
 export const SubmissionStatusSchema: GenEnum<SubmissionStatus> = /*@__PURE__*/
   enumDesc(file_proto_pyxis_v1_show, 1);
+
+/**
+ * @generated from enum pyxis.v1.CalendarEventKind
+ */
+export enum CalendarEventKind {
+  /**
+   * @generated from enum value: CALENDAR_EVENT_KIND_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: CALENDAR_EVENT_KIND_SHOW = 1;
+   */
+  SHOW = 1,
+
+  /**
+   * @generated from enum value: CALENDAR_EVENT_KIND_HOLD = 2;
+   */
+  HOLD = 2,
+
+  /**
+   * @generated from enum value: CALENDAR_EVENT_KIND_BLOCKED = 3;
+   */
+  BLOCKED = 3,
+}
+
+/**
+ * Describes the enum pyxis.v1.CalendarEventKind.
+ */
+export const CalendarEventKindSchema: GenEnum<CalendarEventKind> = /*@__PURE__*/
+  enumDesc(file_proto_pyxis_v1_show, 2);
 

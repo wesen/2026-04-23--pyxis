@@ -16,10 +16,16 @@ Owners: []
 RelatedFiles:
     - Path: pkg/db/queries/auth.sql
       Note: Adds UpsertDevUser query for local staff API testing.
+    - Path: pkg/server/app.go
+      Note: GET /api/app/calendar now returns unified CalendarEventList.
     - Path: pkg/server/auth.go
       Note: Adds explicit PYXIS_DEV_AUTH-gated dev login endpoint.
+    - Path: pkg/server/public.go
+      Note: Adds domain-to-CalendarEvent mapping helpers.
     - Path: pkg/service/auth_service.go
       Note: Adds dev session creation using normal sessions table.
+    - Path: proto/pyxis/v1/show.proto
+      Note: Adds CalendarEventKind
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/scripts/scrape-msw-seed.mjs
       Note: |-
         Ticket helper script for scraping seeded backend responses into MSW fixture JSON.
@@ -34,10 +40,13 @@ RelatedFiles:
       Note: |-
         Defaults API base URL to same-origin for Vite proxy and production.
         Adds staff RTK Query mutations with protobuf response decoding and tag invalidation.
+        Decodes calendar endpoint with CalendarEventListSchema.
     - Path: web/packages/pyxis-app/src/api/endpoints.ts
       Note: Adds staff mutation endpoint paths.
     - Path: web/packages/pyxis-app/src/api/mockHandlers.ts
       Note: Expands protobuf-shaped MSW handlers and mutation state for staff page stories.
+    - Path: web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx
+      Note: Uses enum status with StatusDot while preserving data-status tone.
     - Path: web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx
       Note: Makes settings rows clickable mutation affordances.
     - Path: web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
@@ -68,12 +77,15 @@ RelatedFiles:
       Note: Removes component CSS imports now owned by atoms.
     - Path: web/packages/pyxis-app/vite.config.ts
       Note: Adds staff Vite proxy for /api
+    - Path: web/packages/pyxis-types/src/app.ts
+      Note: Removes hand-written CalendarEvent.
 ExternalSources: []
 Summary: Chronological investigation diary for the Pyxis app RTK Query and MSW Storybook wiring plan.
 LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -845,3 +857,109 @@ All passed.
 ### Remaining scope
 
 The main remaining optional technical cleanup is Phase 8: make `CalendarEvent` protobuf-backed so the frontend can retain calendar hold/blocked IDs and support delete affordances cleanly.
+
+## Step 9: Phase 8 CalendarEvent Proto Cleanup
+
+I completed the optional CalendarEvent proto cleanup that was blocking clean calendar semantics.
+
+### Proto schema
+
+Added protobuf-backed calendar events to `proto/pyxis/v1/show.proto`:
+
+```text
+CalendarEventKind
+CalendarEvent
+CalendarEventList
+```
+
+`CalendarEvent` carries:
+
+```text
+id      - source entity id: show id, hold id, or blocked id
+date    - yyyy-mm-dd
+label   - artist, hold label, or blocked reason
+status  - ShowStatus enum, reused by the existing status presentation system
+kind    - CalendarEventKind enum so callers can distinguish show/hold/blocked sources
+```
+
+I regenerated Go and TypeScript code with:
+
+```bash
+make generate
+```
+
+### Backend response shape
+
+`GET /api/app/calendar` now returns a protojson `CalendarEventList` instead of the old hold/blocked wrapper.
+
+The handler builds one unified list from:
+
+```text
+confirmed shows -> CALENDAR_EVENT_KIND_SHOW + SHOW_STATUS_CONFIRMED
+calendar holds  -> CALENDAR_EVENT_KIND_HOLD + SHOW_STATUS_HOLD
+blocked dates   -> CALENDAR_EVENT_KIND_BLOCKED + SHOW_STATUS_BLOCKED
+```
+
+This preserves IDs for hold/blocked items and removes the frontend-only adapter that had been dropping IDs.
+
+### Frontend type cleanup
+
+Removed the hand-written `CalendarEvent` interface from `web/packages/pyxis-types/src/app.ts` and exported the generated protobuf type/schema from `web/packages/pyxis-types/src/index.ts`.
+
+`appApi.ts` now decodes calendar data with:
+
+```ts
+fromJson(CalendarEventListSchema, response as any).events
+```
+
+### Calendar components and stories
+
+Updated calendar mock data and dense stories to use generated protobuf messages via:
+
+```ts
+create(CalendarEventSchema, ...)
+```
+
+`CalendarEventChip` now passes the enum directly to status presentation:
+
+```tsx
+<StatusDot status={event.status} />
+```
+
+It still derives a string tone for `data-status` so existing CSS selectors continue to work.
+
+### MSW
+
+Updated staff MSW calendar handlers to return `CalendarEventListSchema` JSON with `toJson(...)` and to maintain mutable in-memory calendar events for create/delete hold/blocked handlers.
+
+### Validation
+
+Passed:
+
+```bash
+make generate
+cd web/packages/pyxis-types && pnpm build
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+Real endpoint smoke against a temporary server on `:18080` returned the new shape:
+
+```text
+GET /api/app/calendar -> { "events": [...] }
+```
+
+Sample returned events included protojson enum strings:
+
+```json
+{
+  "id": 4,
+  "date": "2026-05-23",
+  "label": "Open Mic Night",
+  "status": "SHOW_STATUS_CONFIRMED",
+  "kind": "CALENDAR_EVENT_KIND_SHOW"
+}
+```
+
+This closes Phase 8. The calendar UI now receives protobuf-backed events with IDs and enum statuses. A later UI pass can use `event.kind` and `event.id` to add delete affordances for holds and blocked dates.

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
 import { calendarEvents } from '../../../api/mockData';
 import { CalendarEventChip } from './CalendarEventChip';
 
@@ -19,21 +20,21 @@ export const CalendarEventDefault: Story = {
 
 export const Hold: Story = {
   args: {
-    event: calendarEvents.find((event) => event.status === 'hold') ?? calendarEvents[0],
+    event: calendarEvents.find((event) => event.status === ShowStatus.HOLD) ?? calendarEvents[0],
   },
   render: (args) => <div style={{ width: 180, padding: 24 }}><CalendarEventChip {...args} /></div>,
 };
 
 export const Blocked: Story = {
   args: {
-    event: calendarEvents.find((event) => event.status === 'blocked') ?? calendarEvents[0],
+    event: calendarEvents.find((event) => event.status === ShowStatus.BLOCKED) ?? calendarEvents[0],
   },
   render: (args) => <div style={{ width: 180, padding: 24 }}><CalendarEventChip {...args} /></div>,
 };
 
 export const LongLabel: Story = {
   args: {
-    event: { date: '2025-05-31', label: 'Very Long Artist Name + Guests', status: 'confirmed' },
+    event: create(CalendarEventSchema, { id: 999, date: '2025-05-31', label: 'Very Long Artist Name + Guests', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
   },
   render: (args) => <div style={{ width: 180, padding: 24 }}><CalendarEventChip {...args} /></div>,
 };

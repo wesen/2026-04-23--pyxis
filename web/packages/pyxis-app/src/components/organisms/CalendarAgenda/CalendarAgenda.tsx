@@ -1,3 +1,4 @@
+import { ShowStatus } from 'pyxis-types';
 import type { AppShow, CalendarEvent } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { shows as seedShows } from '../../../api/mockData';
@@ -17,9 +18,9 @@ function countStatus(events: CalendarEvent[], status: CalendarEvent['status']) {
 }
 
 export function CalendarAgenda({ events, todayShow = seedShows[0], onOpenShow, onAddToday }: CalendarAgendaProps) {
-  const confirmedCount = countStatus(events, 'confirmed');
-  const holdCount = countStatus(events, 'hold');
-  const blockedCount = countStatus(events, 'blocked');
+  const confirmedCount = countStatus(events, ShowStatus.CONFIRMED);
+  const holdCount = countStatus(events, ShowStatus.HOLD);
+  const blockedCount = countStatus(events, ShowStatus.BLOCKED);
   const openNights = Math.max(0, 31 - events.length);
 
   return (

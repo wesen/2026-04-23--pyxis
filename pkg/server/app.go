@@ -454,6 +454,12 @@ func (s *Server) handleDeleteFlyer(w http.ResponseWriter, r *http.Request) {
 func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	shows, err := s.showService.ListAll(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
 	holds, err := s.calendarService.ListHolds(ctx)
 	if err != nil {
 		respondError(w, err)
@@ -466,20 +472,20 @@ func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pbHolds := make([]*pyxisv1.CalendarHold, len(holds))
-	for i, h := range holds {
-		pbHolds[i] = calendarHoldToProto(&h)
+	events := make([]*pyxisv1.CalendarEvent, 0, len(shows)+len(holds)+len(blocked))
+	for i := range shows {
+		if shows[i].Status == domain.StatusConfirmed {
+			events = append(events, showToCalendarEvent(&shows[i]))
+		}
+	}
+	for i := range holds {
+		events = append(events, calendarHoldToEvent(&holds[i]))
+	}
+	for i := range blocked {
+		events = append(events, calendarBlockedToEvent(&blocked[i]))
 	}
 
-	pbBlocked := make([]*pyxisv1.CalendarBlocked, len(blocked))
-	for i, b := range blocked {
-		pbBlocked[i] = calendarBlockedToProto(&b)
-	}
-
-	respondProtoJSON(w, http.StatusOK, &pyxisv1.CalendarResponse{
-		Holds:   pbHolds,
-		Blocked: pbBlocked,
-	})
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.CalendarEventList{Events: events})
 }
 
 func (s *Server) handleCreateCalendarHold(w http.ResponseWriter, r *http.Request) {

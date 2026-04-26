@@ -269,6 +269,36 @@ func calendarBlockedToProto(b *domain.CalendarBlocked) *pyxisv1.CalendarBlocked 
 	}
 }
 
+func showToCalendarEvent(show *domain.Show) *pyxisv1.CalendarEvent {
+	return &pyxisv1.CalendarEvent{
+		Id:     int32(show.ID),
+		Date:   show.Date.Format(time.DateOnly),
+		Label:  show.Artist,
+		Status: showStatusFromString(show.Status),
+		Kind:   pyxisv1.CalendarEventKind_CALENDAR_EVENT_KIND_SHOW,
+	}
+}
+
+func calendarHoldToEvent(h *domain.CalendarHold) *pyxisv1.CalendarEvent {
+	return &pyxisv1.CalendarEvent{
+		Id:     int32(h.ID),
+		Date:   h.Date.Format(time.DateOnly),
+		Label:  h.Label,
+		Status: pyxisv1.ShowStatus_SHOW_STATUS_HOLD,
+		Kind:   pyxisv1.CalendarEventKind_CALENDAR_EVENT_KIND_HOLD,
+	}
+}
+
+func calendarBlockedToEvent(b *domain.CalendarBlocked) *pyxisv1.CalendarEvent {
+	return &pyxisv1.CalendarEvent{
+		Id:     int32(b.ID),
+		Date:   b.Date.Format(time.DateOnly),
+		Label:  b.Reason,
+		Status: pyxisv1.ShowStatus_SHOW_STATUS_BLOCKED,
+		Kind:   pyxisv1.CalendarEventKind_CALENDAR_EVENT_KIND_BLOCKED,
+	}
+}
+
 func attendanceLogToProto(log *domain.AttendanceLog) *pyxisv1.AttendanceLog {
 	pb := &pyxisv1.AttendanceLog{
 		Id:            int32(log.ID),

@@ -16,7 +16,7 @@ import {
   ArtistListSchema,
   ArtistSchema,
   CalendarEvent,
-  CalendarResponseSchema,
+  CalendarEventListSchema,
   CalendarHold,
   CalendarHoldSchema,
   CalendarBlocked,
@@ -176,12 +176,8 @@ export const appApi = createApi({
     getCalendar: builder.query<CalendarEvent[], void>({
       query: () => endpoints.calendar,
       transformResponse: (response: unknown) => {
-        const cal = fromJson(CalendarResponseSchema, response as any);
-        const events: CalendarEvent[] = [
-          ...cal.holds.map((h) => ({ date: h.date, label: h.label, status: 'hold' as const })),
-          ...cal.blocked.map((b) => ({ date: b.date, label: b.reason, status: 'blocked' as const })),
-        ];
-        return events;
+        const list = fromJson(CalendarEventListSchema, response as any);
+        return list.events;
       },
       providesTags: ['Calendar'],
     }),

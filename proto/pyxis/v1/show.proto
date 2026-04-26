@@ -168,6 +168,25 @@ message CalendarBlocked {
   string reason = 3;
 }
 
+enum CalendarEventKind {
+  CALENDAR_EVENT_KIND_UNSPECIFIED = 0;
+  CALENDAR_EVENT_KIND_SHOW        = 1;
+  CALENDAR_EVENT_KIND_HOLD        = 2;
+  CALENDAR_EVENT_KIND_BLOCKED     = 3;
+}
+
+message CalendarEvent {
+  int32             id      = 1;
+  string            date    = 2;
+  string            label   = 3;
+  ShowStatus        status  = 4;
+  CalendarEventKind kind    = 5;
+}
+
+message CalendarEventList {
+  repeated CalendarEvent events = 1;
+}
+
 message CalendarResponse {
   repeated CalendarHold    holds   = 1;
   repeated CalendarBlocked blocked = 2;

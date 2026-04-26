@@ -42,12 +42,6 @@ export interface ArtistProfile {
   notes: string;
 }
 
-export interface CalendarEvent {
-  date: string;
-  label: string;
-  status: AppShowStatus;
-}
-
 export interface AttendanceEntry {
   id: number;
   artist: string;

@@ -9,8 +9,10 @@ import {
   AuditLogEntryListSchema,
   AuthSessionSchema,
   CalendarBlockedSchema,
+  CalendarEventKind,
+  CalendarEventListSchema,
+  CalendarEventSchema,
   CalendarHoldSchema,
-  CalendarResponseSchema,
   SettingsSchema,
   ShowSchema,
   ShowListSchema,
@@ -21,7 +23,7 @@ import {
   SuccessResponseSchema,
 } from 'pyxis-types';
 import type { AppShow, Submission } from 'pyxis-types';
-import { artists, attendance, auditLog, bookings, session, settings, shows } from './mockData';
+import { artists, attendance, auditLog, bookings, calendarEvents, session, settings, shows } from './mockData';
 
 function appShowToShow(show: AppShow) {
   return create(ShowSchema, {
@@ -42,6 +44,7 @@ function appShowToShow(show: AppShow) {
 type MockState = {
   shows: ReturnType<typeof appShowToShow>[];
   bookings: Submission[];
+  calendarEvents: typeof calendarEvents;
 };
 
 let state: MockState;
@@ -50,6 +53,7 @@ export function resetMockState() {
   state = {
     shows: shows.map(appShowToShow),
     bookings: bookings.map(cloneSubmission),
+    calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
   };
 }
 
@@ -62,6 +66,7 @@ function ensureMockState() {
     state = {
       shows: shows.map(appShowToShow),
       bookings: bookings.map(cloneSubmission),
+      calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
     };
   }
   return state;
@@ -141,21 +146,34 @@ export const mockHandlers = [
     return HttpResponse.json(toJson(ArtistSchema, artist));
   }),
 
-  http.get('*/api/app/calendar', () =>
-    HttpResponse.json(toJson(CalendarResponseSchema, create(CalendarResponseSchema, { holds: [], blocked: [] })))
-  ),
+  http.get('*/api/app/calendar', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(CalendarEventListSchema, create(CalendarEventListSchema, { events: current.calendarEvents })));
+  }),
   http.post('*/api/app/calendar/holds', async ({ request }) => {
     const body = await request.json() as { date?: string; label?: string };
-    const hold = create(CalendarHoldSchema, { id: 101, date: body.date ?? '2025-06-01', label: body.label ?? 'Hold' });
+    const current = ensureMockState();
+    const hold = create(CalendarHoldSchema, { id: 101 + current.calendarEvents.length, date: body.date ?? '2025-06-01', label: body.label ?? 'Hold' });
+    current.calendarEvents = [...current.calendarEvents, create(CalendarEventSchema, { id: hold.id, date: hold.date, label: hold.label, status: ShowStatus.HOLD, kind: CalendarEventKind.HOLD })];
     return HttpResponse.json(toJson(CalendarHoldSchema, hold), { status: 201 });
   }),
-  http.delete('*/api/app/calendar/holds/:id', () => new HttpResponse(null, { status: 204 })),
+  http.delete('*/api/app/calendar/holds/:id', ({ params }) => {
+    const current = ensureMockState();
+    current.calendarEvents = current.calendarEvents.filter((event) => !(event.kind === CalendarEventKind.HOLD && event.id === Number(params.id)));
+    return new HttpResponse(null, { status: 204 });
+  }),
   http.post('*/api/app/calendar/blocked', async ({ request }) => {
     const body = await request.json() as { date?: string; reason?: string };
-    const blocked = create(CalendarBlockedSchema, { id: 201, date: body.date ?? '2025-06-02', reason: body.reason ?? 'Closed' });
+    const current = ensureMockState();
+    const blocked = create(CalendarBlockedSchema, { id: 201 + current.calendarEvents.length, date: body.date ?? '2025-06-02', reason: body.reason ?? 'Closed' });
+    current.calendarEvents = [...current.calendarEvents, create(CalendarEventSchema, { id: blocked.id, date: blocked.date, label: blocked.reason, status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED })];
     return HttpResponse.json(toJson(CalendarBlockedSchema, blocked), { status: 201 });
   }),
-  http.delete('*/api/app/calendar/blocked/:id', () => new HttpResponse(null, { status: 204 })),
+  http.delete('*/api/app/calendar/blocked/:id', ({ params }) => {
+    const current = ensureMockState();
+    current.calendarEvents = current.calendarEvents.filter((event) => !(event.kind === CalendarEventKind.BLOCKED && event.id === Number(params.id)));
+    return new HttpResponse(null, { status: 204 });
+  }),
 
   http.get('*/api/app/attendance', () => HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: attendance })))),
   http.patch('*/api/app/attendance/:showId', () => HttpResponse.json(toJson(AttendanceLogSchema, attendance[0]))),

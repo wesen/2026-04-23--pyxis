@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
 import { calendarEvents } from '../../../api/mockData';
 import { CalendarBoard } from './CalendarBoard';
 
@@ -34,9 +35,9 @@ export const Dense: Story = {
   args: {
     events: [
       ...calendarEvents,
-      { date: '2025-05-02', label: 'Late DJ set', status: 'hold' },
-      { date: '2025-05-17', label: 'Afterparty', status: 'confirmed' },
-      { date: '2025-05-30', label: 'Volunteer meeting', status: 'blocked' },
+      create(CalendarEventSchema, { id: 301, date: '2025-05-02', label: 'Late DJ set', status: ShowStatus.HOLD, kind: CalendarEventKind.HOLD }),
+      create(CalendarEventSchema, { id: 302, date: '2025-05-17', label: 'Afterparty', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+      create(CalendarEventSchema, { id: 303, date: '2025-05-30', label: 'Volunteer meeting', status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED }),
     ],
   },
   render: (args) => <div style={{ width: 980, padding: 24, background: 'var(--app-canvas)' }}><CalendarBoard {...args} /></div>,
