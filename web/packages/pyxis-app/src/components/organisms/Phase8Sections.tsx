@@ -6,6 +6,7 @@ import { StatusPill } from '../atoms/StatusPill';
 import { BookingCard, BookingQueueRow } from '../molecules/BookingCard';
 import { CalendarEventChip } from '../molecules/CalendarEventChip';
 import { Panel } from './Panels';
+import './Phase8Sections.css';
 
 export function ShowDetailHero({ show }: { show: AppShow }) {
   return (

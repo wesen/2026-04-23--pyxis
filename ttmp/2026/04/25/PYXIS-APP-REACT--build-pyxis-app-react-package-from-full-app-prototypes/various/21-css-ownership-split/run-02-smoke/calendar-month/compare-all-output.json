@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "component",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 7.252374491180462,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "calendar-month-panel",
+        "variant": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel",
+        "sectionCount": 1,
+        "maxChangedPercent": 7.252374491180462,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "calendar-month-panel",
+            "variant": "component",
+            "section": "component",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component",
+            "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--month-panel&viewMode=story",
+            "leftSelector": "[data-section=\"calendar-month\"]",
+            "rightSelector": "[data-section=\"calendar-month\"]",
+            "threshold": 30,
+            "changedPercent": 7.252374491180462,
+            "changedPixels": 28863,
+            "totalPixels": 397980,
+            "normalizedWidth": 670,
+            "normalizedHeight": 594,
+            "bounds": {
+              "left": {
+                "x": 247,
+                "y": 137.390625,
+                "width": 670,
+                "height": 593.25
+              },
+              "right": {
+                "x": 24,
+                "y": 24,
+                "width": 670,
+                "height": 590.84375
+              },
+              "delta": {
+                "height": -2.40625,
+                "x": -223,
+                "y": -113.390625,
+                "width": 0
+              },
+              "changed": true
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "name": "calendar-month-panel-component",
+                "pixel": {
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 397980,
+                  "changedPixels": 28863,
+                  "changedPercent": 7.252374491180462,
+                  "normalizedWidth": 670,
+                  "normalizedHeight": 594,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_comparison.png"
+                },
+                "styleChanges": 1,
+                "artifactCount": 2,
+                "right": {
+                  "name": "calendar-month-panel-component",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--month-panel&viewMode=story",
+                  "selector": "[data-section=\"calendar-month\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 24,
+                    "y": 24,
+                    "width": 670,
+                    "height": 590.84375
+                  }
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": false,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "left": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 137.390625,
+                    "width": 670,
+                    "height": 593.25
+                  },
+                  "name": "calendar-month-panel-component",
+                  "url": "http://localhost:7070/standalone/full-app/calendar.html",
+                  "selector": "[data-section=\"calendar-month\"]"
+                }
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "calendar-month-panel",
+        "variant": "component",
+        "section": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component",
+        "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--month-panel&viewMode=story",
+        "leftSelector": "[data-section=\"calendar-month\"]",
+        "rightSelector": "[data-section=\"calendar-month\"]",
+        "threshold": 30,
+        "changedPercent": 7.252374491180462,
+        "changedPixels": 28863,
+        "totalPixels": 397980,
+        "normalizedWidth": 670,
+        "normalizedHeight": 594,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "height": 593.25,
+            "x": 247,
+            "y": 137.390625,
+            "width": 670
+          },
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 670,
+            "height": 590.84375
+          },
+          "delta": {
+            "width": 0,
+            "height": -2.40625,
+            "x": -223,
+            "y": -113.390625
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "boundsChanged": true,
+            "left": {
+              "url": "http://localhost:7070/standalone/full-app/calendar.html",
+              "selector": "[data-section=\"calendar-month\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 247,
+                "y": 137.390625,
+                "width": 670,
+                "height": 593.25
+              },
+              "name": "calendar-month-panel-component"
+            },
+            "name": "calendar-month-panel-component",
+            "pixel": {
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 397980,
+              "changedPixels": 28863,
+              "changedPercent": 7.252374491180462,
+              "normalizedWidth": 670,
+              "normalizedHeight": 594,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/calendar-month/calendar-month-panel/artifacts/component/diff_comparison.png"
+            },
+            "styleChanges": 1,
+            "artifactCount": 2,
+            "right": {
+              "visible": true,
+              "bounds": {
+                "width": 670,
+                "height": 590.84375,
+                "x": 24,
+                "y": 24
+              },
+              "name": "calendar-month-panel-component",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--month-panel&viewMode=story",
+              "selector": "[data-section=\"calendar-month\"]",
+              "exists": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "textChanged": false,
+            "attributeChanges": 3
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

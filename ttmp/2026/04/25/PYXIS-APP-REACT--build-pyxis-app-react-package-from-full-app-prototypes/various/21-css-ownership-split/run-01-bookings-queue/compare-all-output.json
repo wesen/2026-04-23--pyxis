@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "component",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 11.72947581936586,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "bookings-queue-panel",
+        "variant": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel",
+        "sectionCount": 1,
+        "maxChangedPercent": 11.72947581936586,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "bookings-queue-panel",
+            "variant": "component",
+            "section": "component",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component",
+            "leftUrl": "http://localhost:7070/standalone/full-app/bookings.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel&viewMode=story",
+            "leftSelector": "[data-section=\"bookings-queue\"]",
+            "rightSelector": "[data-section=\"bookings-queue\"]",
+            "threshold": 30,
+            "changedPercent": 11.72947581936586,
+            "changedPixels": 43948,
+            "totalPixels": 374680,
+            "normalizedWidth": 646,
+            "normalizedHeight": 580,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 247,
+                "y": 137.390625,
+                "width": 646,
+                "height": 579.5
+              },
+              "right": {
+                "height": 562.5,
+                "x": 24,
+                "y": 24,
+                "width": 646
+              },
+              "delta": {
+                "height": -17,
+                "x": -223,
+                "y": -113.390625,
+                "width": 0
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "pixel": {
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 374680,
+                  "changedPixels": 43948,
+                  "changedPercent": 11.72947581936586,
+                  "normalizedWidth": 646,
+                  "normalizedHeight": 580
+                },
+                "right": {
+                  "name": "bookings-queue-panel-component",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel&viewMode=story",
+                  "selector": "[data-section=\"bookings-queue\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "width": 646,
+                    "height": 562.5,
+                    "x": 24,
+                    "y": 24
+                  }
+                },
+                "boundsChanged": true,
+                "name": "bookings-queue-panel-component",
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 1,
+                "textChanged": true,
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "left": {
+                  "bounds": {
+                    "x": 247,
+                    "y": 137.390625,
+                    "width": 646,
+                    "height": 579.5
+                  },
+                  "name": "bookings-queue-panel-component",
+                  "url": "http://localhost:7070/standalone/full-app/bookings.html",
+                  "selector": "[data-section=\"bookings-queue\"]",
+                  "exists": true,
+                  "visible": true
+                }
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "bookings-queue-panel",
+        "variant": "component",
+        "section": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component",
+        "leftUrl": "http://localhost:7070/standalone/full-app/bookings.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel&viewMode=story",
+        "leftSelector": "[data-section=\"bookings-queue\"]",
+        "rightSelector": "[data-section=\"bookings-queue\"]",
+        "threshold": 30,
+        "changedPercent": 11.72947581936586,
+        "changedPixels": 43948,
+        "totalPixels": 374680,
+        "normalizedWidth": 646,
+        "normalizedHeight": 580,
+        "bounds": {
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 646,
+            "height": 562.5
+          },
+          "delta": {
+            "height": -17,
+            "x": -223,
+            "y": -113.390625,
+            "width": 0
+          },
+          "changed": true,
+          "left": {
+            "y": 137.390625,
+            "width": 646,
+            "height": 579.5,
+            "x": 247
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 1,
+            "textChanged": true,
+            "artifactCount": 2,
+            "attributeChanges": 3,
+            "left": {
+              "selector": "[data-section=\"bookings-queue\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 247,
+                "y": 137.390625,
+                "width": 646,
+                "height": 579.5
+              },
+              "name": "bookings-queue-panel-component",
+              "url": "http://localhost:7070/standalone/full-app/bookings.html"
+            },
+            "pixel": {
+              "totalPixels": 374680,
+              "changedPixels": 43948,
+              "changedPercent": 11.72947581936586,
+              "normalizedWidth": 646,
+              "normalizedHeight": 580,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/bookings-queue-panel/artifacts/component/diff_only.png",
+              "threshold": 30
+            },
+            "right": {
+              "visible": true,
+              "bounds": {
+                "width": 646,
+                "height": 562.5,
+                "x": 24,
+                "y": 24
+              },
+              "name": "bookings-queue-panel-component",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel&viewMode=story",
+              "selector": "[data-section=\"bookings-queue\"]",
+              "exists": true
+            },
+            "boundsChanged": true,
+            "name": "bookings-queue-panel-component"
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

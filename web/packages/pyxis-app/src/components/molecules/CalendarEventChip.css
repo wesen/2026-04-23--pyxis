@@ -1,0 +1,5 @@
+.app-calendar-event-chip { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; border-radius: var(--app-radius-pill); border: 1px solid var(--app-rule); padding: 6px 9px; background: var(--app-surface-strong); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-calendar-month-grid .app-calendar-event-chip { display: block; border: 0; border-radius: 3px; padding: 2px 5px; margin-bottom: 2px; background: var(--app-surface-success); color: var(--app-success); font-size: 10.5px; font-weight: 500; line-height: 1.5; }
+.app-calendar-month-grid .app-calendar-event-chip .app-status-dot { display: none; }
+.app-calendar-month-grid .app-calendar-event-chip[data-status='hold'] { background: rgba(var(--app-info-rgb), .10); color: var(--app-info); }
+.app-calendar-month-grid .app-calendar-event-chip[data-status='blocked'] { background: var(--app-surface-muted); color: var(--app-muted); }

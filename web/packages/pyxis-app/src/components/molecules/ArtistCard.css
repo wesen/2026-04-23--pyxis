@@ -1,0 +1,5 @@
+.app-artist-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--app-rule); border-radius: var(--app-radius-md); background: #faf8f3; padding: 16px; }
+.app-artist-card h3 { margin: 0; }
+.app-artist-card p { margin: 0 0 6px; color: var(--app-muted); }
+.app-artist-card small { color: var(--app-faint); }
+.app-avatar { width: 42px; height: 42px; border-radius: var(--app-radius-pill); background: var(--app-ink); color: var(--app-on-dark); display: grid; place-items: center; font-weight: 800; }

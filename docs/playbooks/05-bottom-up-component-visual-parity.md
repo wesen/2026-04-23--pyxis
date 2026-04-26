@@ -357,6 +357,10 @@ Key additions from that loop:
 - prefer `--summary` operator output for repeated runs, but keep full JSON/artifacts on disk,
 - inspect individual `left_region.png` and `right_region.png` with the `read` tool before trusting numbers,
 - inspect `diff_only.png` once crops are close,
+- extract route/page sections into organisms and tune those before using full-page numbers as acceptance evidence,
+- keep CSS ownership local: atoms/molecules/organisms should import owned CSS files, while broad bucket files such as `Rows.css`/`Panels.css` should be split once they start hiding dependencies or triggering empty Vite CSS transforms,
+- verify isolated Storybook organism stories load all organism-critical CSS directly, not only through child components that may later disappear,
+- when a standalone organism crop has different vertical/page context than the prototype, use the organism for local tuning but make the final decision from the page-section crop,
 - keep CSS changes cohesive by promoting shared visual decisions to app/theme tokens instead of tuning every component independently,
 - stop at review-band when crops are close and remaining differences are typography, anti-aliasing, gradients, shadows, or similar rendering drift.
 

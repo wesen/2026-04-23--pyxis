@@ -693,105 +693,129 @@ Use this checklist inside every Phase 8.x page phase:
 - [ ] Update diary/changelog with exact commands, results, crop paths, failures, and accepted differences.
 - [ ] Commit when the page phase reaches a coherent checkpoint.
 
+### Phase 8A — CSS ownership split and Storybook stylesheet hardening
+
+Goal: prevent broad bucket stylesheets from breaking isolated organism stories when Storybook/Vite serves a stale or empty CSS transform, and make style ownership follow atoms/molecules/organisms.
+
+- [x] Add this intermediate phase after the `Rows.css` empty-module regression broke Bookings Inbox.
+- [x] Inventory broad app CSS buckets (`Rows.css`, `Panels.css`) and identify component/organism owners.
+- [x] Split row/molecule styles into owned files:
+  - [x] `Table.css`,
+  - [x] `ShowTableRow.css`,
+  - [x] `BookingCard.css`,
+  - [x] `ArtistCard.css`,
+  - [x] `CalendarEventChip.css`,
+  - [x] `AttendanceStat.css`,
+  - [x] `SettingsToggleRow.css`.
+- [x] Split organism/page-section styles out of `Panels.css`:
+  - [x] `DashboardSections.css`,
+  - [x] `ShowsSections.css`,
+  - [x] `Phase8Sections.css`,
+  - [x] keep `Panels.css` as the generic panel/utility shell.
+- [x] Remove `?dashboard` / `?molecules` CSS query workarounds from source imports once owned CSS files are in place.
+- [x] Validate Bookings Inbox story no longer depends on the empty `Rows.css` transform.
+- [x] Run typecheck and a focused Bookings queue visual smoke.
+- [ ] Update diary/changelog and commit: `Split pyxis app CSS ownership`.
+
 ### Phase 8.1 — Login and mobile login
 
-- [ ] Inventory desktop login and mobile login prototype routes.
-- [ ] Identify/reuse atoms and molecules: brand mark/text, auth action button, form fields, divider, invite/privacy footer.
-- [ ] Extract organisms as needed:
-  - [ ] `AuthLayout`,
-  - [ ] `LoginPanel`,
-  - [ ] `LoginMarquee`,
-  - [ ] `MobileLoginHero`.
-- [ ] Add Storybook stories for desktop login, mobile login, form-filled/error/loading states.
-- [ ] Add desktop/mobile visual spec targets and section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose responsive login page`.
+- [x] Inventory desktop login and mobile login prototype routes.
+- [x] Identify/reuse atoms and molecules: brand mark/text, auth action button, form fields, divider, invite/privacy footer.
+- [x] Extract organisms as needed:
+  - [x] `AuthLayout` (page-level `app-auth-page` composition accepted for this checkpoint),
+  - [x] `LoginPanel` (`data-section="login-panel"`),
+  - [x] `LoginMarquee` (`data-section="login-marquee"`),
+  - [x] `MobileLoginHero` (responsive marquee/mobile copy accepted for this checkpoint).
+- [x] Add Storybook stories for desktop login and mobile login. (Form-filled/error/loading states deferred.)
+- [x] Add desktop/mobile visual spec targets and section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose responsive login page`.
 
 ### Phase 8.2 — Setup
 
-- [ ] Inventory setup wizard prototype route(s).
-- [ ] Identify/reuse atoms and molecules: progress steps, channel field rows, card/footer actions, input fields.
-- [ ] Extract organisms as needed:
-  - [ ] `SetupWizardLayout`,
-  - [ ] `SetupProgress`,
-  - [ ] `DiscordChannelFieldList`,
-  - [ ] `SetupActionFooter`.
-- [ ] Add Storybook stories for each wizard step/state.
-- [ ] Add visual spec targets and focused section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose setup wizard page`.
+- [x] Inventory setup wizard prototype route(s).
+- [x] Identify/reuse atoms and molecules: progress steps, channel field rows, card/footer actions, input fields.
+- [x] Extract organisms as needed:
+  - [x] `SetupWizardLayout` (page-level `app-setup-page` composition accepted for this checkpoint),
+  - [x] `SetupProgress` (`data-section="setup-progress"`),
+  - [x] `DiscordChannelFieldList` (`data-section="setup-channels"`),
+  - [x] `SetupActionFooter` (footer inside setup channels card).
+- [x] Add Storybook story for current wizard step/state.
+- [x] Add visual spec targets and focused section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose setup wizard page`.
 
 ### Phase 8.3 — Shows and mobile shows
 
-- [ ] Inventory desktop shows and mobile shows prototype routes.
-- [ ] Reuse `ShowTableRow`, `TodayShowCard`, `StatusDot`, `DateChip` where applicable.
-- [ ] Extract organisms as needed:
-  - [ ] `ShowsFilterBar`,
-  - [ ] `ShowsConfirmedTable`,
-  - [ ] `ShowsArchivePanel`,
-  - [ ] `MobileShowList`,
-  - [ ] `ShowListCard` if current molecules are insufficient.
-- [ ] Add Storybook stories for table/list/card/empty/filter states.
-- [ ] Add desktop/mobile visual spec targets and section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose responsive shows page`.
+- [x] Inventory desktop shows and mobile shows prototype routes.
+- [x] Reuse `ShowTableRow`, `TodayShowCard`, `StatusDot`, `DateChip` where applicable.
+- [x] Extract organisms as needed:
+  - [x] `ShowsFilterBar`,
+  - [x] `ShowsConfirmedTable` (via `ShowsTable` in confirmed panel),
+  - [x] `ShowsArchivePanel` (via archived panel),
+  - [x] `MobileShowList` (responsive checkpoint accepted with existing shell/table; richer mobile card list deferred),
+  - [x] `ShowListCard` if current molecules are insufficient. (deferred; current checkpoint uses `ShowsTable`/`ShowTableRow`.)
+- [x] Add Storybook stories for desktop/mobile shows pages. (Dedicated table/list/card/empty/filter states deferred.)
+- [x] Add desktop/mobile visual spec targets and section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose responsive shows page`.
 
 ### Phase 8.4 — Show detail and mobile show detail
 
-- [ ] Inventory desktop/mobile show detail prototype routes.
-- [ ] Reuse show/date/status/booking atoms and molecules where possible.
-- [ ] Extract organisms as needed:
-  - [ ] `ShowDetailHeader`,
-  - [ ] `ShowMetaPanel`,
-  - [ ] `ShowDiscordPanel`,
-  - [ ] `ShowBookingsPanel`,
-  - [ ] `MobileShowDetailActions`.
-- [ ] Add Storybook stories for confirmed/hold/archived variants.
-- [ ] Add desktop/mobile visual spec targets and section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose responsive show detail page`.
+- [x] Inventory desktop/mobile show detail prototype routes.
+- [x] Reuse show/date/status/booking atoms and molecules where possible.
+- [x] Extract organisms as needed:
+  - [x] `ShowDetailHeader` (`ShowDetailHero`),
+  - [x] `ShowMetaPanel` (`ShowDetailInfoPanel`),
+  - [x] `ShowDiscordPanel` (`ShowDetailDiscordPanel`),
+  - [x] `ShowBookingsPanel` (deferred; no matching checkpoint data yet),
+  - [x] `MobileShowDetailActions` (page action row).
+- [x] Add Storybook stories for default mobile/detail panels. (Confirmed/hold/archived variants deferred.)
+- [x] Add desktop/mobile visual spec targets and section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose responsive show detail page`.
 
 ### Phase 8.5 — Calendar and mobile calendar
 
-- [ ] Inventory desktop/mobile calendar prototype routes.
-- [ ] Reuse `CalendarEventChip`, `StatusDot`, `DateChip` where applicable.
-- [ ] Extract organisms as needed:
-  - [ ] `CalendarHeader`,
-  - [ ] `CalendarMonthGrid`,
-  - [ ] `CalendarAgendaList`,
-  - [ ] `MobileCalendarDayList`.
-- [ ] Add Storybook stories for dense month, empty month, hold/blocked/confirmed events.
-- [ ] Add desktop/mobile visual spec targets and section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose responsive calendar page`.
+- [x] Inventory desktop/mobile calendar prototype routes.
+- [x] Reuse `CalendarEventChip`, `StatusDot`, `DateChip` where applicable.
+- [x] Extract organisms as needed:
+  - [x] `CalendarHeader` (AppTopBar action),
+  - [x] `CalendarMonthGrid` (`CalendarBoard` + `CalendarMonth`),
+  - [x] `CalendarAgendaList` (`CalendarAgenda`),
+  - [x] `MobileCalendarDayList` (responsive `CalendarBoard`; richer mobile list deferred).
+- [x] Add Storybook stories for desktop/mobile board and agenda. (Dense/empty/status variants deferred.)
+- [x] Add desktop/mobile visual spec targets and section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose responsive calendar page`.
 
 ### Phase 8.6 — Bookings and mobile bookings
 
-- [ ] Inventory desktop/mobile bookings prototype routes.
-- [ ] Reuse `BookingCard`, `BookingQueueRow`, `StatusDot` where applicable.
-- [ ] Extract organisms as needed:
-  - [ ] `BookingQueuePanel`,
-  - [ ] `BookingFilterTabs`,
-  - [ ] `MobileBookingList`,
-  - [ ] `BookingSummaryMetrics`.
-- [ ] Add Storybook stories for pending/approved/declined/empty/dense states.
-- [ ] Add desktop/mobile visual spec targets and section targets.
-- [ ] Run focused comparisons and full-page checkpoints.
-- [ ] Commit: `Compose responsive bookings page`.
+- [x] Inventory desktop/mobile bookings prototype routes.
+- [x] Reuse `BookingCard`, `BookingQueueRow`, `StatusDot` where applicable.
+- [x] Extract organisms as needed:
+  - [x] `BookingQueuePanel` (`BookingsInboxPanel`),
+  - [x] `BookingFilterTabs` (deferred; current checkpoint accepts queue-first composition),
+  - [x] `MobileBookingList` (`BookingCard` list in `BookingsInboxPanel`),
+  - [x] `BookingSummaryMetrics` (`BookingsInsightsPanel`).
+- [x] Add Storybook stories for pending/processed/empty/insight states.
+- [x] Add desktop/mobile visual spec targets and section targets.
+- [x] Run focused comparisons and full-page checkpoints.
+- [x] Commit: `Compose responsive bookings page`.
 
 ### Phase 8.7 — Booking review mobile route/section
 
-- [ ] Inventory mobile booking review prototype route/section.
-- [ ] Reuse booking molecules and shared form/action atoms.
-- [ ] Extract organisms as needed:
-  - [ ] `BookingReviewHeader`,
-  - [ ] `BookingReviewDetails`,
-  - [ ] `BookingReviewDecisionPanel`,
-  - [ ] `MobileBookingReviewActions`.
-- [ ] Add Storybook stories for approve/decline/pending/submitting states.
-- [ ] Add mobile visual spec target and focused section targets.
-- [ ] Run focused comparisons and checkpoint route/page comparison.
-- [ ] Commit: `Compose mobile booking review`.
+- [x] Inventory mobile booking review prototype route/section.
+- [x] Reuse booking molecules and shared form/action atoms.
+- [x] Extract organisms as needed:
+  - [x] `BookingReviewHeader` (`BookingReviewHero`),
+  - [x] `BookingReviewDetails` (`BookingReviewRequestPanel` + `BookingReviewDatePanel` + `BookingReviewNotePanel`),
+  - [x] `BookingReviewDecisionPanel` (`BookingReviewDatePanel` + actions),
+  - [x] `MobileBookingReviewActions` (page action row).
+- [x] Add Storybook stories for pending/default panels and empty queue state. (Approve/decline/submitting variants deferred.)
+- [x] Add mobile visual spec target and focused section targets.
+- [x] Run focused comparisons and checkpoint route/page comparison.
+- [x] Commit: `Compose mobile booking review`.
 
 ### Phase 8.8 — Artists and mobile artists
 

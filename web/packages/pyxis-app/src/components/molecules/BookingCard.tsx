@@ -3,7 +3,8 @@ import { Button, Icon } from 'pyxis-components';
 import { StatusPill } from '../atoms/StatusPill';
 import { appPart } from '../parts';
 import '../atoms/StatusPill.css';
-import './Rows.css';
+import './Table.css';
+import './BookingCard.css';
 
 function formatBookingDate(date: string, format: 'full' | 'short' = 'full') {
   const value = new Date(`${date}T00:00:00`);

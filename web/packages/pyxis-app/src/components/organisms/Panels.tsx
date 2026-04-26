@@ -12,7 +12,9 @@ import { SettingsToggleRow } from '../molecules/SettingsToggleRow';
 import { ShowTableRow } from '../molecules/ShowTableRow';
 import { TodayShowCard } from '../molecules/TodayShowCard';
 import { appPart } from '../parts';
-import './Panels.css?dashboard';
+import '../molecules/Table.css';
+import '../molecules/BookingCard.css';
+import './Panels.css';
 
 export function Panel({ title, kicker, action, children, section }: { title: string; kicker?: string; action?: React.ReactNode; children: React.ReactNode; section?: string }) { return <section className="app-panel" data-section={section} {...appPart('panel')}><header><div><h2>{title}</h2>{kicker && <span>{kicker}</span>}</div>{action}</header>{children}</section>; }
 export function DashboardOverview({ shows, bookings, log }: { shows: AppShow[]; bookings: BookingRequest[]; log: AuditLogEntry[] }) { const upcoming = shows.filter((s) => s.status === 'confirmed').sort((a,b) => a.date.localeCompare(b.date)); const pending = bookings.filter((b) => b.status === 'pending'); return <div className="app-dashboard-overview" {...appPart('dashboard-overview')}><DashboardMobileHeader/><DashboardMobileCopy/><DashboardHero show={upcoming[0]}/><DashboardMetricsGrid upcomingCount={upcoming.length} pendingCount={pending.length}/><div className="app-dashboard-mobile-attention"><DashboardAttentionPanel variant="mobile"/></div><div className="app-dashboard-columns"><DashboardUpcomingPanel shows={upcoming}/><div className="app-dashboard-side"><div className="app-dashboard-desktop-quick"><DashboardQuickActionsPanel pendingCount={pending.length}/></div><DashboardActivityPanel log={log}/></div></div></div>; }

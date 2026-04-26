@@ -1,6 +1,7 @@
 import type { AppShow } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { Panel, ShowsTable } from './Panels';
+import './ShowsSections.css';
 
 export function ShowsFilterBar({ confirmedCount }: { confirmedCount: number }) {
   const filters = ['All', 'Confirmed', 'Hold', 'Cancelled', 'Archived'];

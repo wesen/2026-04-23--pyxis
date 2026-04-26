@@ -40,6 +40,22 @@ The goal is: **all information needed, and no more, while preserving full eviden
 
 Once individual crops are close and the comparison is in the `review` band, stop and document accepted differences if the remaining diff is mostly typography anti-aliasing, font rendering, gradients, shadows, or subtle browser rendering drift. Pixel diffs are evidence for decisions, not a requirement to make every screenshot mathematically identical.
 
+## Keep CSS ownership local enough for Storybook
+
+Do not let large bucket stylesheets become hidden dependencies for many unrelated stories. Broad files such as `Rows.css` or `Panels.css` are fragile in Vite/Storybook because a stale or empty transformed CSS module can silently remove styles from many organisms at once.
+
+Preferred ownership model:
+
+1. Atoms import their own atom CSS.
+2. Molecules import their own molecule CSS plus small shared primitives such as `Table.css` when needed.
+3. Organisms import their own section CSS, for example `DashboardSections.css`, `ShowsSections.css`, or `Phase8Sections.css`.
+4. Generic shells such as `Panels.css` should contain only the reusable shell/utility rules for `Panel`, `.app-card-list`, `.app-empty-state`, and similar cross-section primitives.
+5. Avoid relying on transitive CSS from a child component. If an organism's layout needs a rule, import that organism stylesheet from the organism module.
+
+Use query-suffixed CSS imports such as `Panels.css?dashboard` only as a short-term diagnostic/workaround. If a suffix fixes an empty CSS module, follow up by splitting the stylesheet into owned component/organism files and removing the suffix from source imports.
+
+Before accepting a split, verify at least one affected isolated Storybook story by fetching or inspecting the transformed CSS module: it should contain real CSS, not `const __vite__css = ""`.
+
 ## Keep the theme cohesive
 
 Do not tune each component into a one-off clone of its current prototype crop. Use the visual loop to discover shared theme decisions, then encode those decisions in reusable tokens and variables.
@@ -81,10 +97,13 @@ Preferred page workflow:
    - dense/empty/long-content states when relevant,
    - theme/token override examples if the section exposes local variables.
 5. Compare and tune one extracted section at a time using `--section`, individual crop inspection, and `diff_only.png` only after crops are aligned.
-6. Promote repeated style decisions from section work into shared tokens as you go. This keeps the feedback loop small while preventing component-by-component token drift.
-7. Re-run one small component, the focused section, and then an occasional full-page checkpoint after token changes.
+6. If a page section is awkward to crop because it is below the fold or depends on full-column context, add a standalone organism story for focused structure/tuning, then validate the final section in the real page context before accepting it.
+7. Promote repeated style decisions from section work into shared tokens as you go. This keeps the feedback loop small while preventing component-by-component token drift.
+8. Re-run one small component, the focused section, and then an occasional full-page checkpoint after token changes.
 
 Concrete example: for the dashboard, tune `DashboardUpcomingPanel` as an organism with its own Storybook story and focused visual spec before trying to improve the full dashboard page number. If its crop is close but the full page is still noisy, move to the next organism rather than overfitting the page.
+
+Calendar example: tune `CalendarMonthPanel` as a standalone organism because the grid geometry, weekday labels, leading blank cells, and event chips are easy to validate in isolation. For `CalendarAgenda`, use the standalone story to verify content and local styling, but trust the full page `calendar-agenda` section checkpoint more for final acceptance because the prototype captures the entire right-column height and page context.
 
 For multi-page work, split the backlog into one phase per route/page. Each page phase should begin by listing the organisms it needs and the atoms/molecules it should reuse. Do not start with a generic “remaining pages” pass. The per-page phase should prove consistency bottom-up:
 
@@ -267,10 +286,12 @@ This keeps the workflow reproducible and diary-friendly.
    - `right_region.png`.
 4. Only after crops are comparable, inspect `diff_only.png` for residual pixel drift.
 5. Treat `diff_comparison.png` as optional context, not the validation source.
-6. Make the smallest CSS/token/story/data change suggested by the evidence.
-7. Rerun the focused comparison.
-8. Record changed percent, changed pixels, crop dimensions, and accepted differences in the diary.
-9. Commit at a coherent milestone.
+6. Confirm the Storybook story actually loads the CSS needed by the organism. If a story stops rendering a child component that used to import a stylesheet, move the organism-critical rules into the organism stylesheet or import the stylesheet directly; otherwise an isolated story can silently lose styling even while the page looks correct.
+7. Make the smallest CSS/token/story/data change suggested by the evidence.
+8. Rerun the focused comparison.
+9. Run a page-section checkpoint when the standalone organism crop has known context differences such as full-column height, below-the-fold placement, or wrapper width differences.
+10. Record changed percent, changed pixels, crop dimensions, and accepted differences in the diary.
+11. Commit at a coherent milestone.
 
 ## Commands
 
@@ -310,6 +331,8 @@ various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/d
 
 - Full-page-vs-component crop mismatch: fix selectors before CSS.
 - Storybook wrapper padding changing crop bounds: adjust story wrapper or crop selector.
+- Storybook organism missing CSS that only used to arrive through a child component import: import the stylesheet directly or move organism-critical rules into the organism stylesheet.
+- Standalone organism crop has different vertical context than the prototype page column: use the story for local tuning, then accept/reject using the page-section crop.
 - Mock data mismatch: align fixture data before tuning style.
 - Missing prototype selectors: add selector-only prototype changes and commit separately.
 - Judging from `diff_comparison.png`: use individual crops first.

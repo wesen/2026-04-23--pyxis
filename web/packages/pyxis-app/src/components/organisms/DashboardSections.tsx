@@ -1,6 +1,7 @@
 import type { AppShow } from 'pyxis-types';
 import { Button, PyxisMark } from 'pyxis-components';
 import { MetricCard } from '../molecules/MetricCard';
+import './DashboardSections.css';
 
 export function DashboardMobileHeader() {
   return (

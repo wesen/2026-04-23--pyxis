@@ -5,7 +5,8 @@ import { DateChip } from '../atoms/DateChip';
 import { DrawProgress } from '../atoms/DrawProgress';
 import { StatusPill } from '../atoms/StatusPill';
 import { appPart } from '../parts';
-import './Rows.css';
+import './Table.css';
+import './ShowTableRow.css';
 
 function formatShowDate(date: string) {
   const value = new Date(`${date}T00:00:00`);
