@@ -231,3 +231,14 @@ Step 30: Added detailed React application decomposition and pyxis-components reu
 - /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/07-react-application-decomposition-and-component-reuse.md — Detailed decomposition and reuse guide
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md — Phase 8C props/reuse/story plan
 
+
+## 2026-04-25
+
+Step 31: Started Phase 8C by adding named app atom prop types, richer atom stories, and a css-visual-diff guard loop for refactors (commit 40f1932).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/07-react-application-decomposition-and-component-reuse.md — Phase 8C visual guard loop
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/atoms/AgeBadge/AgeBadge.tsx — Named atom props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx — Named atom props
+

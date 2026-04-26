@@ -19,7 +19,9 @@ RelatedFiles:
     - Path: docs/playbooks/06-react-widget-folder-storybook-css-organization.md
       Note: New reusable guide for future React widgets
     - Path: docs/playbooks/07-react-application-decomposition-and-component-reuse.md
-      Note: Guide for next props/reuse/RTK pass
+      Note: |-
+        Guide for next props/reuse/RTK pass
+        Visual guard process for Phase 8C refactors
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
     - Path: prototype-design/screens/roster.jsx
@@ -76,10 +78,30 @@ RelatedFiles:
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
       Note: RTK Query app API slice and hooks
+    - Path: web/packages/pyxis-app/src/components/atoms/AgeBadge/AgeBadge.stories.tsx
+      Note: Phase 8C atom stories
+    - Path: web/packages/pyxis-app/src/components/atoms/AgeBadge/AgeBadge.tsx
+      Note: Phase 8C atom props
     - Path: web/packages/pyxis-app/src/components/atoms/DateChip.tsx
       Note: Inline date chip variant for dashboard table rows (commit 7510483)
+    - Path: web/packages/pyxis-app/src/components/atoms/DateChip/DateChip.stories.tsx
+      Note: Phase 8C atom stories
+    - Path: web/packages/pyxis-app/src/components/atoms/DateChip/DateChip.tsx
+      Note: Phase 8C atom props
+    - Path: web/packages/pyxis-app/src/components/atoms/DrawProgress/DrawProgress.stories.tsx
+      Note: Phase 8C atom stories
+    - Path: web/packages/pyxis-app/src/components/atoms/DrawProgress/DrawProgress.tsx
+      Note: Phase 8C atom props
     - Path: web/packages/pyxis-app/src/components/atoms/StatusDot.css
       Note: Centralized status colors/rings through CSS variables
+    - Path: web/packages/pyxis-app/src/components/atoms/StatusDot/StatusDot.stories.tsx
+      Note: Phase 8C atom stories
+    - Path: web/packages/pyxis-app/src/components/atoms/StatusDot/StatusDot.tsx
+      Note: Phase 8C atom props
+    - Path: web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.stories.tsx
+      Note: Phase 8C atom stories
+    - Path: web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx
+      Note: Phase 8C atom props
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.css
       Note: Owned BookingCard styles after Rows.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
@@ -164,6 +186,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3812,3 +3835,169 @@ Phase 8C was added to:
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/tasks.md
 ```
+
+## Step 31: Start Phase 8C with typed app atoms, richer stories, and a visual guard loop
+
+I started Phase 8C at the atom layer. The goal was to make the smallest reusable app widgets ready for the broader decomposition pass: named exported props, meaningful stories, and a repeatable `css-visual-diff` guard workflow for future refactors.
+
+This was intentionally a low-risk first commit. It does not try to swap atoms to `Badge`/`Tag` yet; it only makes their APIs explicit and expands story coverage so later reuse decisions can be made with isolated visual examples.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Continue your diary as you go (see skill), let's continue working on organizing and reusing existing components from the component system , Phase 8C. Commit at appropriate intervals."
+
+**Additional prompt:** "Study how to use css-visual-diff to ensure we do the proper job with our component refactor as well, maybe there is a way to improve the process."
+
+**Additional prompt:** "further more, we want to update components to have proper prop types and props, with a few stories, which is also something that is probably good to be doing at this stage."
+
+**Assistant interpretation:** Continue Phase 8C by improving component API/story quality while incorporating a visual-diff guard process so refactors do not accidentally change tuned visuals.
+
+**Inferred user intent:** Prepare the app for safer component-system reuse and RTK Query wiring by first making component boundaries explicit and visually guarded.
+
+**Commit (code):** `40f1932` — "Type pyxis app atoms and add stories"
+
+### What I did
+
+- Added a Phase 8C visual guard loop to `docs/playbooks/07-react-application-decomposition-and-component-reuse.md`.
+- Added named exported prop types for app atoms:
+  - `AgeBadgeProps`,
+  - `DateChipProps`,
+  - `DateChipVariant`,
+  - `DrawProgressProps`,
+  - `StatusDotProps`,
+  - `StatusPillProps`.
+- Added or expanded atom stories:
+  - `AgeBadge`: default, all-ages, variants,
+  - `DateChip`: default, custom kicker, inline, variants,
+  - `DrawProgress`: default, low draw, near capacity, over capacity, variants,
+  - `StatusDot`: default, pending, all tones, accessible label,
+  - `StatusPill`: default, pending, long label, all tones.
+- Restarted Storybook in tmux:
+
+```bash
+tmux kill-session -t pyxis-app-storybook 2>/dev/null || true
+tmux new-session -d -s pyxis-app-storybook \
+  'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-app storybook'
+```
+
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran visual guard experiments with `css-visual-diff`:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page metric-card \
+  --summary \
+  --outDir ttmp/.../various/25-phase-8c-visual-guard/baseline-metric-card \
+  --output json
+```
+
+Result: `metric-card` remained in review band at `3.724216959511077%`.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir ttmp/.../various/25-phase-8c-visual-guard/atoms-props-shows-confirmed \
+  --output json
+```
+
+Result: `shows-confirmed-panel` stayed in review band at `9.821005081874647%`. The result still reported text-order differences between the prototype and React data ordering; I did not treat that as caused by the atom prop refactor because the atom changes did not alter the show sorting/data path.
+
+Generated visual artifacts were removed after inspection rather than committed, following the promoted userland cleanup policy.
+
+### Why
+
+Phase 8C needs safe, explicit component boundaries before larger reuse changes. Atoms are the right first layer because many molecules and organisms depend on them; adding types and stories here reduces ambiguity before touching rows, cards, panels, and tables.
+
+The visual guard documentation was added because component-system reuse can be visually risky. Swapping to shared primitives such as `Badge`, `Tag`, `Stat`, or `Card` should be done with baseline/follow-up comparisons rather than by eyeballing whole pages.
+
+### What worked
+
+- TypeScript accepted the atom prop type changes.
+- Existing atom DOM/class structure stayed essentially unchanged.
+- Storybook started successfully on `http://localhost:6008`.
+- `css-visual-diff compare-spec --summary` provided compact enough evidence for a refactor guard loop.
+- The guide now describes a concrete baseline → refactor → rerun → inspect nested elements workflow.
+
+### What didn't work
+
+- Storybook was initially down:
+
+```text
+storybook-down
+prototype-ok
+```
+
+I restarted `pyxis-app-storybook` before running visual checks.
+
+- The `shows-confirmed-panel` comparison still reported text-order drift between prototype and React ordering. I did not resolve that in this step because it is unrelated to atom prop typing and should be handled in a data/order parity pass if needed.
+
+### What I learned
+
+The current JS userland already has the essential pieces needed for Phase 8C visual safety:
+
+- `compare-spec --summary` for compact before/after checks,
+- component and page specs for focused targets,
+- `inspect-spec` for nested selectors and style presets,
+- artifact paths for crop inspection.
+
+The main process improvement is procedural: treat visual checks as a guardrail for each refactor cluster, not as a single final full-page run.
+
+### What was tricky to build
+
+The atom changes needed to improve API quality without changing existing DOM or class names. I avoided adding wrapper elements or switching to shared `Badge`/`Tag` in this first atom pass, because that would combine API cleanup with visual replacement and make diffs harder to attribute.
+
+The visual guard step also showed that some component targets have pre-existing content/data differences. For Phase 8C, each visual run needs interpretation: distinguish regressions from pre-existing review-band caveats.
+
+### What warrants a second pair of eyes
+
+- Review whether `AgeBadge` and `StatusPill` should later become wrappers around `Tag`/`Badge` once we are ready to accept or tune visual deltas.
+- Review the `shows-confirmed-panel` text-order drift separately from atom typing.
+- Review whether atom stories should include themed/unstyled examples once shared primitive wrapping begins.
+
+### What should be done in the future
+
+- Continue Phase 8C with molecules: `MetricCard`, `ActivityFeedItem`, `BookingCard`, `CalendarEventChip`, `ShowTableRow`, and `TodayShowCard`.
+- Add callback props to actionable molecules such as `BookingCard`.
+- Use visual guard baselines before replacing app-local visuals with `pyxis-components` primitives.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/atoms/*/*.tsx
+web/packages/pyxis-app/src/components/atoms/*/*.stories.tsx
+docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guard:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shows-confirmed \
+  --output json
+```
+
+### Technical details
+
+The atom stories now use `Meta<typeof Component>`/`StoryObj<typeof meta>` so controls can infer the typed prop surface. Story export names changed only for atom stories that are not referenced by current visual specs.
