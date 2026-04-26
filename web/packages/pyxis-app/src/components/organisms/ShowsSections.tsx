@@ -12,5 +12,5 @@ export function ShowsConfirmedPanel({ shows }: { shows: AppShow[] }) {
 }
 
 export function ShowsArchivedPanel({ shows }: { shows: AppShow[] }) {
-  return <Panel title={`Archived · ${shows.length}`} action={<Button variant="ghost" size="sm">See all past shows ›</Button>} section="shows-archived"><ShowsTable shows={shows}/></Panel>;
+  return <Panel title={`Archived · ${shows.length}`} action={<Button variant="ghost" size="sm">See all past shows</Button>} section="shows-archived"><ShowsTable shows={shows} variant="archived"/></Panel>;
 }

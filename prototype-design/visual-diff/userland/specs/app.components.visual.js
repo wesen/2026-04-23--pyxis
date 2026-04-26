@@ -97,6 +97,24 @@ module.exports = {
           "react": "[data-section=\"shows-confirmed\"]"
         }
       ]
+    },
+    {
+      "page": "shows-archived-panel",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/shows.html",
+      "storyId": "pyxis-app-organisms-shows--archived-panel",
+      "viewport": {
+        "width": 1080,
+        "height": 1100
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "[data-section=\"shows-archived\"]",
+          "react": "[data-section=\"shows-archived\"]"
+        }
+      ]
     }
   ]
 }

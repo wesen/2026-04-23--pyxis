@@ -12,13 +12,18 @@ function formatShowDate(date: string) {
   return {
     short: value.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
     day: value.toLocaleDateString('en-US', { weekday: 'long' }),
+    full: value.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }),
   };
 }
 
-export function ShowTableRow({ show, variant = 'full' }: { show: AppShow; variant?: 'full' | 'dashboard' }) {
+export function ShowTableRow({ show, variant = 'full' }: { show: AppShow; variant?: 'full' | 'dashboard' | 'archived' }) {
   const statusLabel = show.status.charAt(0).toUpperCase() + show.status.slice(1);
   const status = <span className="app-row-status"><StatusPill tone={show.status === 'archived' ? 'archived' : show.status}>{statusLabel}</StatusPill></span>;
   const date = formatShowDate(show.date);
+
+  if (variant === 'archived') {
+    return <tr className="app-table-row app-show-table-row app-show-table-row-archived" {...appPart('show-table-row')}><td>{date.full}</td><td><strong>{show.artist}</strong></td><td>{show.genre}</td><td><span className="app-show-attended">{show.draw} attended</span></td><td>{status}</td></tr>;
+  }
 
   if (variant === 'dashboard') {
     return (

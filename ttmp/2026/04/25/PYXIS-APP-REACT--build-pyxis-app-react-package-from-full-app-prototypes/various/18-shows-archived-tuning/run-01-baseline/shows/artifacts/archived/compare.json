@@ -1,0 +1,115 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 54.703125,
+      "width": 0,
+      "x": 0,
+      "y": -14.6875
+    },
+    "left": {
+      "height": 199.734375,
+      "width": 966,
+      "x": 247,
+      "y": 737.140625
+    },
+    "right": {
+      "height": 254.4375,
+      "width": 966,
+      "x": 247,
+      "y": 722.453125
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 199.734375,
+      "width": 966,
+      "x": 247,
+      "y": 737.140625
+    },
+    "exists": true,
+    "name": "shows-archived",
+    "selector": "[data-section=\"shows-archived\"]",
+    "url": "http://localhost:7070/standalone/full-app/shows.html",
+    "visible": true
+  },
+  "name": "shows-archived",
+  "pixel": {
+    "changedPercent": 1.102180002435757,
+    "changedPixels": 2715,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+    "normalizedHeight": 255,
+    "normalizedWidth": 966,
+    "threshold": 30,
+    "totalPixels": 246330
+  },
+  "right": {
+    "bounds": {
+      "height": 254.4375,
+      "width": 966,
+      "x": 247,
+      "y": 722.453125
+    },
+    "exists": true,
+    "name": "shows-archived",
+    "selector": "[data-section=\"shows-archived\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived",
+    "right": "Archived · 2See all past shows ›#DateArtistDoorsAgePriceDrawStatus#40Mar 14FridayPlanning for BurialAmbient8:00 PM18+$1034/150Archived#41Feb 28FridayActressElectronic9:00 PM21+$1261/150Archived"
+  }
+}

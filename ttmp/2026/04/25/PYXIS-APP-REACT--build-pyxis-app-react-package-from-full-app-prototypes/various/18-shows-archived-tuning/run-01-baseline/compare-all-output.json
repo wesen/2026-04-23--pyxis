@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 1.102180002435757,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "shows",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows",
+        "sectionCount": 1,
+        "maxChangedPercent": 1.102180002435757,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "shows",
+            "variant": "desktop",
+            "section": "archived",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived",
+            "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+            "leftSelector": "[data-section=\"shows-archived\"]",
+            "rightSelector": "[data-section=\"shows-archived\"]",
+            "threshold": 30,
+            "changedPercent": 1.102180002435757,
+            "changedPixels": 2715,
+            "totalPixels": 246330,
+            "normalizedWidth": 966,
+            "normalizedHeight": 255,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "height": 199.734375,
+                "x": 247,
+                "y": 737.140625,
+                "width": 966
+              },
+              "right": {
+                "x": 247,
+                "y": 722.453125,
+                "width": 966,
+                "height": 254.4375
+              },
+              "delta": {
+                "x": 0,
+                "y": -14.6875,
+                "width": 0,
+                "height": 54.703125
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "pixel": {
+                  "normalizedWidth": 966,
+                  "normalizedHeight": 255,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 246330,
+                  "changedPixels": 2715,
+                  "changedPercent": 1.102180002435757
+                },
+                "right": {
+                  "name": "shows-archived",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+                  "selector": "[data-section=\"shows-archived\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 722.453125,
+                    "width": 966,
+                    "height": 254.4375
+                  }
+                },
+                "attributeChanges": 3,
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 3,
+                "textChanged": true,
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "left": {
+                  "name": "shows-archived",
+                  "url": "http://localhost:7070/standalone/full-app/shows.html",
+                  "selector": "[data-section=\"shows-archived\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 737.140625,
+                    "width": 966,
+                    "height": 199.734375
+                  }
+                },
+                "name": "shows-archived"
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "shows",
+        "variant": "desktop",
+        "section": "archived",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived",
+        "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+        "leftSelector": "[data-section=\"shows-archived\"]",
+        "rightSelector": "[data-section=\"shows-archived\"]",
+        "threshold": 30,
+        "changedPercent": 1.102180002435757,
+        "changedPixels": 2715,
+        "totalPixels": 246330,
+        "normalizedWidth": 966,
+        "normalizedHeight": 255,
+        "bounds": {
+          "delta": {
+            "height": 54.703125,
+            "x": 0,
+            "y": -14.6875,
+            "width": 0
+          },
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 737.140625,
+            "width": 966,
+            "height": 199.734375
+          },
+          "right": {
+            "width": 966,
+            "height": 254.4375,
+            "x": 247,
+            "y": 722.453125
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "attributeChanges": 3,
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": true,
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "left": {
+              "name": "shows-archived",
+              "url": "http://localhost:7070/standalone/full-app/shows.html",
+              "selector": "[data-section=\"shows-archived\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 737.140625,
+                "width": 966,
+                "height": 199.734375,
+                "x": 247
+              }
+            },
+            "name": "shows-archived",
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 246330,
+              "changedPixels": 2715,
+              "changedPercent": 1.102180002435757,
+              "normalizedWidth": 966,
+              "normalizedHeight": 255
+            },
+            "right": {
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+              "selector": "[data-section=\"shows-archived\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 247,
+                "y": 722.453125,
+                "width": 966,
+                "height": 254.4375
+              },
+              "name": "shows-archived"
+            }
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

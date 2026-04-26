@@ -1,0 +1,158 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: shows desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T01:23:23.836514709Z",
+  "updated_at": "2026-04-26T01:23:29.762714702Z",
+  "targets": [
+    {
+      "slug": "archived",
+      "name": "shows archived",
+      "url": "http://localhost:7070/standalone/full-app/shows.html",
+      "selector": "[data-section=\"shows-archived\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "archived",
+        "name": "shows archived",
+        "url": "http://localhost:7070/standalone/full-app/shows.html",
+        "selector": "[data-section=\"shows-archived\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-archived",
+        "left": {
+          "name": "shows-archived",
+          "url": "http://localhost:7070/standalone/full-app/shows.html",
+          "selector": "[data-section=\"shows-archived\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 737.140625,
+            "width": 966,
+            "height": 199.734375
+          }
+        },
+        "right": {
+          "name": "shows-archived",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop\u0026viewMode=story",
+          "selector": "[data-section=\"shows-archived\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 722.453125,
+            "width": 966,
+            "height": 254.4375
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 246330,
+          "changedPixels": 2715,
+          "changedPercent": 1.102180002435757,
+          "normalizedWidth": 966,
+          "normalizedHeight": 255,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 737.140625,
+            "width": 966,
+            "height": 199.734375
+          },
+          "right": {
+            "x": 247,
+            "y": 722.453125,
+            "width": 966,
+            "height": 254.4375
+          },
+          "delta": {
+            "x": 0,
+            "y": -14.6875,
+            "width": 0,
+            "height": 54.703125
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived",
+          "right": "Archived · 2See all past shows ›#DateArtistDoorsAgePriceDrawStatus#40Mar 14FridayPlanning for BurialAmbient8:00 PM18+$1034/150Archived#41Feb 28FridayActressElectronic9:00 PM21+$1261/150Archived"
+        },
+        "styles": [
+          {
+            "name": "box-shadow",
+            "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+            "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-01-baseline/shows/artifacts/archived/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T01:23:29.762714434Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

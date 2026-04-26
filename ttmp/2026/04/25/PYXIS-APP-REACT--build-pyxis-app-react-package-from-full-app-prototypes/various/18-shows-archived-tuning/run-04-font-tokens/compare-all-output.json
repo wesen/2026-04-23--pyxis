@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 0.9796495480482755,
+    "classificationCounts": {
+      "accepted": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "accepted",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "shows",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows",
+        "sectionCount": 1,
+        "maxChangedPercent": 0.9796495480482755,
+        "classificationCounts": {
+          "accepted": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "shows",
+            "variant": "desktop",
+            "section": "archived",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived",
+            "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+            "leftSelector": "[data-section=\"shows-archived\"]",
+            "rightSelector": "[data-section=\"shows-archived\"]",
+            "threshold": 30,
+            "changedPercent": 0.9796495480482755,
+            "changedPixels": 1940,
+            "totalPixels": 198030,
+            "normalizedWidth": 966,
+            "normalizedHeight": 205,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 247,
+                "y": 737.140625,
+                "width": 966,
+                "height": 199.734375
+              },
+              "right": {
+                "x": 247,
+                "y": 731.609375,
+                "width": 966,
+                "height": 204.9375
+              },
+              "delta": {
+                "x": 0,
+                "y": -5.53125,
+                "width": 0,
+                "height": 5.203125
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "left": {
+                  "bounds": {
+                    "x": 247,
+                    "y": 737.140625,
+                    "width": 966,
+                    "height": 199.734375
+                  },
+                  "name": "shows-archived",
+                  "url": "http://localhost:7070/standalone/full-app/shows.html",
+                  "selector": "[data-section=\"shows-archived\"]",
+                  "exists": true,
+                  "visible": true
+                },
+                "name": "shows-archived",
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 3,
+                "textChanged": false,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "pixel": {
+                  "changedPercent": 0.9796495480482755,
+                  "normalizedWidth": 966,
+                  "normalizedHeight": 205,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 198030,
+                  "changedPixels": 1940
+                },
+                "right": {
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+                  "selector": "[data-section=\"shows-archived\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 731.609375,
+                    "width": 966,
+                    "height": 204.9375
+                  },
+                  "name": "shows-archived"
+                }
+              },
+            "classification": "accepted",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "shows",
+        "variant": "desktop",
+        "section": "archived",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived",
+        "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+        "leftSelector": "[data-section=\"shows-archived\"]",
+        "rightSelector": "[data-section=\"shows-archived\"]",
+        "threshold": 30,
+        "changedPercent": 0.9796495480482755,
+        "changedPixels": 1940,
+        "totalPixels": 198030,
+        "normalizedWidth": 966,
+        "normalizedHeight": 205,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "width": 966,
+            "height": 199.734375,
+            "x": 247,
+            "y": 737.140625
+          },
+          "right": {
+            "x": 247,
+            "y": 731.609375,
+            "width": 966,
+            "height": 204.9375
+          },
+          "delta": {
+            "x": 0,
+            "y": -5.53125,
+            "width": 0,
+            "height": 5.203125
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": false,
+            "attributeChanges": 3,
+            "boundsChanged": true,
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-04-font-tokens/shows/artifacts/archived/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 198030,
+              "changedPixels": 1940,
+              "changedPercent": 0.9796495480482755,
+              "normalizedWidth": 966,
+              "normalizedHeight": 205
+            },
+            "right": {
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 247,
+                "y": 731.609375,
+                "width": 966,
+                "height": 204.9375
+              },
+              "name": "shows-archived",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop&viewMode=story",
+              "selector": "[data-section=\"shows-archived\"]"
+            },
+            "artifactCount": 2,
+            "left": {
+              "name": "shows-archived",
+              "url": "http://localhost:7070/standalone/full-app/shows.html",
+              "selector": "[data-section=\"shows-archived\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "height": 199.734375,
+                "x": 247,
+                "y": 737.140625,
+                "width": 966
+              }
+            },
+            "name": "shows-archived"
+          },
+        "classification": "accepted",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

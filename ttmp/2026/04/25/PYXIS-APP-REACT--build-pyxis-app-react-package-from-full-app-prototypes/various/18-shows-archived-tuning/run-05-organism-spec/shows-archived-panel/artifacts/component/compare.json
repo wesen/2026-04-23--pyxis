@@ -1,0 +1,115 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-05-organism-spec/shows-archived-panel/artifacts/component/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-05-organism-spec/shows-archived-panel/artifacts/component/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 5.203125,
+      "width": 0,
+      "x": -221,
+      "y": -711.140625
+    },
+    "left": {
+      "height": 199.734375,
+      "width": 966,
+      "x": 247,
+      "y": 737.140625
+    },
+    "right": {
+      "height": 204.9375,
+      "width": 966,
+      "x": 26,
+      "y": 26
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 199.734375,
+      "width": 966,
+      "x": 247,
+      "y": 737.140625
+    },
+    "exists": true,
+    "name": "shows-archived-panel-component",
+    "selector": "[data-section=\"shows-archived\"]",
+    "url": "http://localhost:7070/standalone/full-app/shows.html",
+    "visible": true
+  },
+  "name": "shows-archived-panel-component",
+  "pixel": {
+    "changedPercent": 4.902792506185931,
+    "changedPixels": 9709,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-05-organism-spec/shows-archived-panel/artifacts/component/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/18-shows-archived-tuning/run-05-organism-spec/shows-archived-panel/artifacts/component/diff_only.png",
+    "normalizedHeight": 205,
+    "normalizedWidth": 966,
+    "threshold": 30,
+    "totalPixels": 198030
+  },
+  "right": {
+    "bounds": {
+      "height": 204.9375,
+      "width": 966,
+      "x": 26,
+      "y": 26
+    },
+    "exists": true,
+    "name": "shows-archived-panel-component",
+    "selector": "[data-section=\"shows-archived\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--archived-panel\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": false,
+    "left": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived",
+    "right": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+  }
+}
