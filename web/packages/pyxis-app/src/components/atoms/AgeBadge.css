@@ -1,0 +1,1 @@
+.app-age-badge { display: inline-flex; align-items: center; width: fit-content; border: 1px solid var(--app-rule); border-radius: 5px; padding: 3px 9px; background: #faf8f3; color: var(--app-ink) !important; font-size: 11.5px !important; font-weight: 500; line-height: 1.2; }

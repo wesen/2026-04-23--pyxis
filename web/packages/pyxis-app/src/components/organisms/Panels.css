@@ -2,6 +2,9 @@
 .app-panel > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
 .app-panel > header span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 13px; font-weight: 500; }
 .app-panel h2 { margin: 0; font-family: var(--font-body, Inter, system-ui, sans-serif); font-weight: 800; font-size: 14px; }
+.app-panel[data-section='shows-confirmed'], .app-panel[data-section='shows-archived'] { padding: 0; overflow: hidden; color: #1a1a18; }
+.app-panel[data-section='shows-confirmed'] > header, .app-panel[data-section='shows-archived'] > header { align-items: center; margin: 0; padding: 16px 22px; border-bottom: 1px solid var(--app-rule); }
+.app-panel[data-section='shows-confirmed'] .app-table-wrap, .app-panel[data-section='shows-archived'] .app-table-wrap { padding: 4px 22px 8px; }
 .app-dashboard-mobile-header, .app-dashboard-mobile-copy, .app-dashboard-mobile-attention { display: none; }
 .app-dashboard-hero { position: relative; box-sizing: border-box; overflow: hidden; min-height: 142px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; padding: 26px; border-radius: var(--app-radius-md); background: #1a1a18; color: var(--app-on-dark); }
 .app-dashboard-hero > div:first-child { flex: 1; position: relative; z-index: 1; }

@@ -1,0 +1,5 @@
+.app-draw-progress { display: grid; gap: 3px; width: 90px; color: var(--app-muted); font-size: 11.5px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.app-draw-progress > span { display: block; color: var(--app-muted); font-size: 11.5px; }
+.app-draw-progress > i { display: block; height: 3px; overflow: hidden; border-radius: 2px; background: var(--app-rule); }
+.app-draw-progress > i > b { display: block; height: 100%; border-radius: inherit; background: var(--app-success); }
+.app-draw-progress[data-over-capacity='true'] > i > b { background: var(--app-accent); }

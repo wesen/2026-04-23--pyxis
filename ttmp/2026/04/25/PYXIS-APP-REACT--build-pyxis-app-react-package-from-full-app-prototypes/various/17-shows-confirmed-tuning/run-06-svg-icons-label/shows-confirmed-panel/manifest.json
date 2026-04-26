@@ -1,0 +1,164 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: shows-confirmed-panel component",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-06-svg-icons-label/shows-confirmed-panel",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T01:19:16.086137472Z",
+  "updated_at": "2026-04-26T01:19:21.597706815Z",
+  "targets": [
+    {
+      "slug": "component",
+      "name": "shows-confirmed-panel component",
+      "url": "http://localhost:7070/standalone/full-app/shows.html",
+      "selector": "[data-section=\"shows-confirmed\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "component",
+        "name": "shows-confirmed-panel component",
+        "url": "http://localhost:7070/standalone/full-app/shows.html",
+        "selector": "[data-section=\"shows-confirmed\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "shows-confirmed-panel-component",
+        "left": {
+          "name": "shows-confirmed-panel-component",
+          "url": "http://localhost:7070/standalone/full-app/shows.html",
+          "selector": "[data-section=\"shows-confirmed\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 185.390625,
+            "width": 966,
+            "height": 531.75
+          }
+        },
+        "right": {
+          "name": "shows-confirmed-panel-component",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--confirmed-panel\u0026viewMode=story",
+          "selector": "[data-section=\"shows-confirmed\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 26,
+            "y": 26,
+            "width": 966,
+            "height": 541.640625
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 523572,
+          "changedPixels": 51217,
+          "changedPercent": 9.78222670425462,
+          "normalizedWidth": 966,
+          "normalizedHeight": 542,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-06-svg-icons-label/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-06-svg-icons-label/shows-confirmed-panel/artifacts/component/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 185.390625,
+            "width": 966,
+            "height": 531.75
+          },
+          "right": {
+            "x": 26,
+            "y": 26,
+            "width": 966,
+            "height": 541.640625
+          },
+          "delta": {
+            "x": -221,
+            "y": -159.390625,
+            "width": 0,
+            "height": 9.890625
+          }
+        },
+        "text": {
+          "changed": false,
+          "left": "Confirmed · 6Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#42May 2FridayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#43May 9FridayMoor MotherExperimental7:00 PMAll Ages$15120/150Confirmed#44May 17SaturdayCygnus + GuestsTechno9:00 PM18+$890/150Confirmed#45May 23FridayOpen Mic NightVarious7:00 PMAll AgesFree40/150Confirmed#47May 30FridayBasement FrequenciesTechno10:00 PM21+$1085/150Confirmed#46Jun 6FridayZola JesusDarkwave8:00 PM21+$20160/150Confirmed",
+          "right": "Confirmed · 6Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#42May 2FridayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#43May 9FridayMoor MotherExperimental7:00 PMAll Ages$15120/150Confirmed#44May 17SaturdayCygnus + GuestsTechno9:00 PM18+$890/150Confirmed#45May 23FridayOpen Mic NightVarious7:00 PMAll AgesFree40/150Confirmed#47May 30FridayBasement FrequenciesTechno10:00 PM21+$1085/150Confirmed#46Jun 6FridayZola JesusDarkwave8:00 PM21+$20160/150Confirmed"
+        },
+        "styles": [
+          {
+            "name": "box-shadow",
+            "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+            "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-06-svg-icons-label/shows-confirmed-panel/artifacts/component/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-06-svg-icons-label/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T01:19:21.597705951Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

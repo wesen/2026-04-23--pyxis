@@ -1,11 +1,24 @@
 import type { AppShow } from 'pyxis-types';
+import { Icon } from 'pyxis-components';
+import { AgeBadge } from '../atoms/AgeBadge';
 import { DateChip } from '../atoms/DateChip';
-import { StatusDot } from '../atoms/StatusDot';
+import { DrawProgress } from '../atoms/DrawProgress';
+import { StatusPill } from '../atoms/StatusPill';
 import { appPart } from '../parts';
 import './Rows.css';
 
+function formatShowDate(date: string) {
+  const value = new Date(`${date}T00:00:00`);
+  return {
+    short: value.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    day: value.toLocaleDateString('en-US', { weekday: 'long' }),
+  };
+}
+
 export function ShowTableRow({ show, variant = 'full' }: { show: AppShow; variant?: 'full' | 'dashboard' }) {
-  const status = <span className="app-row-status"><StatusDot tone={show.status === 'archived' ? 'archived' : show.status} />{show.status}</span>;
+  const statusLabel = show.status.charAt(0).toUpperCase() + show.status.slice(1);
+  const status = <span className="app-row-status"><StatusPill tone={show.status === 'archived' ? 'archived' : show.status}>{statusLabel}</StatusPill></span>;
+  const date = formatShowDate(show.date);
 
   if (variant === 'dashboard') {
     return (
@@ -13,11 +26,11 @@ export function ShowTableRow({ show, variant = 'full' }: { show: AppShow; varian
         <td><DateChip date={show.date} kicker={new Date(`${show.date}T00:00:00`).toLocaleDateString('en-US', { weekday: 'long' })} variant="inline" /></td>
         <td><strong>{show.artist}</strong><span>{show.genre}</span></td>
         <td>{show.doors}</td>
-        <td><span className="app-row-tag">{show.age}</span></td>
+        <td><AgeBadge>{show.age}</AgeBadge></td>
         <td><span className="app-row-status-wrap">{status}{show.pinned && <span className="app-row-pin" aria-label="Pinned to Discord">⌖</span>}</span></td>
       </tr>
     );
   }
 
-  return <tr className="app-table-row" {...appPart('show-table-row')}><td><DateChip date={show.date} /></td><td><strong>{show.artist}</strong><span>{show.genre}</span></td><td>{show.doors}</td><td>{show.age}</td><td>{show.price}</td><td>{show.draw}/{show.capacity}</td><td>{status}</td></tr>;
+  return <tr className="app-table-row app-show-table-row" {...appPart('show-table-row')}><td data-cell="id"><span className="app-show-id">#{show.id}</span></td><td data-cell="date"><div className="app-show-date"><strong>{date.short}</strong><span>{date.day}</span></div></td><td data-cell="artist"><strong>{show.artist}</strong><span>{show.genre}</span></td><td data-cell="doors">{show.doors}</td><td data-cell="age"><AgeBadge>{show.age}</AgeBadge></td><td data-cell="price"><span className="app-show-price">{show.price}</span></td><td data-cell="draw"><DrawProgress value={show.draw} max={show.capacity}/></td><td data-cell="status"><span className="app-row-status-wrap">{status}{show.pinned && <Icon className="app-row-pin" name="pin" size={12} aria-label="Pinned to Discord"/>}</span></td><td data-cell="edit"><button className="app-row-edit" aria-label={`Edit ${show.artist}`}><Icon name="edit" size={14}/></button></td></tr>;
 }

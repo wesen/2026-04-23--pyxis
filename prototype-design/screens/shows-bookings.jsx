@@ -16,7 +16,7 @@ function ShowsScreen() {
       </>}
     >
       {/* Filter chips */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}>
+      <div data-section="shows-filters" style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}>
         {["All", "Confirmed", "Hold", "Cancelled", "Archived"].map((f, i) => (
           <div key={f} style={{ padding: "6px 12px", borderRadius: R.pill, fontSize: 12, fontWeight: 500,
             background: i === 1 ? C.ink : C.surface, color: i === 1 ? "#fff" : C.ink2,
@@ -28,7 +28,7 @@ function ShowsScreen() {
         <div style={{ fontSize: 11.5, color: C.ink3 }}>Sort: <strong style={{ color: C.ink2 }}>Date ascending</strong></div>
       </div>
 
-      <Card style={{ padding: 0 }}>
+      <Card data-section="shows-confirmed" style={{ padding: 0 }}>
         <div style={{ padding: "16px 22px", borderBottom: `1px solid ${C.line2}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <SectionH>Confirmed · {upcoming.length}</SectionH>
           <div style={{ fontSize: 11.5, color: C.ink3 }}>Pinned shows appear in #upcoming-shows</div>
@@ -57,7 +57,7 @@ function ShowsScreen() {
       </Card>
 
       <div style={{ marginTop: 20 }}>
-        <Card style={{ padding: 0 }}>
+        <Card data-section="shows-archived" style={{ padding: 0 }}>
           <div style={{ padding: "16px 22px", borderBottom: `1px solid ${C.line2}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Icon name="archive" size={15} color={C.ink3} />

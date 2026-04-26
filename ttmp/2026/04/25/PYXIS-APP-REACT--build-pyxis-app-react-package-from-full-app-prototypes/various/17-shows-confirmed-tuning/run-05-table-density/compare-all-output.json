@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "component",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 10.143370849483958,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "shows-confirmed-panel",
+        "variant": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel",
+        "sectionCount": 1,
+        "maxChangedPercent": 10.143370849483958,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "shows-confirmed-panel",
+            "variant": "component",
+            "section": "component",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component",
+            "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--confirmed-panel&viewMode=story",
+            "leftSelector": "[data-section=\"shows-confirmed\"]",
+            "rightSelector": "[data-section=\"shows-confirmed\"]",
+            "threshold": 30,
+            "changedPercent": 10.143370849483958,
+            "changedPixels": 52128,
+            "totalPixels": 513912,
+            "normalizedWidth": 966,
+            "normalizedHeight": 532,
+            "bounds": {
+              "right": {
+                "height": 523.25,
+                "x": 26,
+                "y": 26,
+                "width": 966
+              },
+              "delta": {
+                "x": -221,
+                "y": -159.390625,
+                "width": 0,
+                "height": -8.5
+              },
+              "changed": true,
+              "left": {
+                "x": 247,
+                "y": 185.390625,
+                "width": 966,
+                "height": 531.75
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "name": "shows-confirmed-panel-component",
+                "pixel": {
+                  "changedPercent": 10.143370849483958,
+                  "normalizedWidth": 966,
+                  "normalizedHeight": 532,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 513912,
+                  "changedPixels": 52128
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": true,
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "left": {
+                  "url": "http://localhost:7070/standalone/full-app/shows.html",
+                  "selector": "[data-section=\"shows-confirmed\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 185.390625,
+                    "width": 966,
+                    "height": 531.75
+                  },
+                  "name": "shows-confirmed-panel-component"
+                },
+                "right": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 26,
+                    "y": 26,
+                    "width": 966,
+                    "height": 523.25
+                  },
+                  "name": "shows-confirmed-panel-component",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--confirmed-panel&viewMode=story",
+                  "selector": "[data-section=\"shows-confirmed\"]"
+                },
+                "styleChanges": 4,
+                "boundsChanged": true
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "shows-confirmed-panel",
+        "variant": "component",
+        "section": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component",
+        "leftUrl": "http://localhost:7070/standalone/full-app/shows.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--confirmed-panel&viewMode=story",
+        "leftSelector": "[data-section=\"shows-confirmed\"]",
+        "rightSelector": "[data-section=\"shows-confirmed\"]",
+        "threshold": 30,
+        "changedPercent": 10.143370849483958,
+        "changedPixels": 52128,
+        "totalPixels": 513912,
+        "normalizedWidth": 966,
+        "normalizedHeight": 532,
+        "bounds": {
+          "delta": {
+            "width": 0,
+            "height": -8.5,
+            "x": -221,
+            "y": -159.390625
+          },
+          "changed": true,
+          "left": {
+            "y": 185.390625,
+            "width": 966,
+            "height": 531.75,
+            "x": 247
+          },
+          "right": {
+            "y": 26,
+            "width": 966,
+            "height": 523.25,
+            "x": 26
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "textChanged": true,
+            "artifactCount": 2,
+            "attributeChanges": 3,
+            "left": {
+              "name": "shows-confirmed-panel-component",
+              "url": "http://localhost:7070/standalone/full-app/shows.html",
+              "selector": "[data-section=\"shows-confirmed\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 247,
+                "y": 185.390625,
+                "width": 966,
+                "height": 531.75
+              }
+            },
+            "right": {
+              "name": "shows-confirmed-panel-component",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-shows--confirmed-panel&viewMode=story",
+              "selector": "[data-section=\"shows-confirmed\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 26,
+                "width": 966,
+                "height": 523.25,
+                "x": 26
+              }
+            },
+            "styleChanges": 4,
+            "boundsChanged": true,
+            "name": "shows-confirmed-panel-component",
+            "pixel": {
+              "threshold": 30,
+              "totalPixels": 513912,
+              "changedPixels": 52128,
+              "changedPercent": 10.143370849483958,
+              "normalizedWidth": 966,
+              "normalizedHeight": 532,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/17-shows-confirmed-tuning/run-05-table-density/shows-confirmed-panel/artifacts/component/diff_only.png"
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1"
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

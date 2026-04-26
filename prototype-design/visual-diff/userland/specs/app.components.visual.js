@@ -79,6 +79,24 @@ module.exports = {
           "react": "[data-pyxis-component=\"today-show-card\"]"
         }
       ]
+    },
+    {
+      "page": "shows-confirmed-panel",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/shows.html",
+      "storyId": "pyxis-app-organisms-shows--confirmed-panel",
+      "viewport": {
+        "width": 1080,
+        "height": 720
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "[data-section=\"shows-confirmed\"]",
+          "react": "[data-section=\"shows-confirmed\"]"
+        }
+      ]
     }
   ]
 }

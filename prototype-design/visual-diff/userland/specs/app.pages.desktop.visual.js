@@ -164,17 +164,17 @@ module.exports = {
         },
         {
           "name": "filters",
-          "original": "[data-page=\"shows\"] main > div:first-child",
+          "original": "[data-section=\"shows-filters\"]",
           "react": "[data-section=\"shows-filters\"]"
         },
         {
           "name": "confirmed",
-          "original": "[data-page=\"shows\"] main > div:nth-child(2)",
+          "original": "[data-section=\"shows-confirmed\"]",
           "react": "[data-section=\"shows-confirmed\"]"
         },
         {
           "name": "archived",
-          "original": "[data-page=\"shows\"] main > div:nth-child(3)",
+          "original": "[data-section=\"shows-archived\"]",
           "react": "[data-section=\"shows-archived\"]"
         }
       ]

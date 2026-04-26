@@ -1,0 +1,3 @@
+.app-status-pill { display: inline-flex; align-items: center; gap: 6px; width: fit-content; border-radius: var(--app-radius-pill); padding: 4px 10px 4px 8px; background: var(--app-surface-muted); color: var(--app-muted); font-size: 12px; font-weight: 600; line-height: 1; text-transform: capitalize; white-space: nowrap; }
+.app-status-pill[data-tone='confirmed'], .app-status-pill[data-tone='approved'] { background: var(--app-surface-success); color: var(--app-success); }
+.app-status-pill .app-status-dot { width: 5px; height: 5px; box-shadow: none; }
