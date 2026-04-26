@@ -5,6 +5,16 @@ topics:
       description: Backend services
     - slug: websocket
       description: WebSocket lifecycle & events
+    - slug: api-design
+      description: API design and endpoint specification
+    - slug: architecture
+      description: Software architecture and system design
+    - slug: glazed
+      description: Glazed command framework
+    - slug: go
+      description: Go programming language
+    - slug: postgresql
+      description: PostgreSQL database
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes

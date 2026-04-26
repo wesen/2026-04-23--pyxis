@@ -36,3 +36,4 @@ postgres-data/
 # OS
 .DS_Store
 Thumbs.db
+.envrc
