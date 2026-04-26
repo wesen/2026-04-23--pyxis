@@ -59,12 +59,12 @@
 
 ## Phase 5 — Staff API — Shows CRUD
 
-- [ ] 5.1 Implement show mutations: create, update, cancel, archive
-- [ ] 5.2 Add audit logging for every mutation
-- [ ] 5.3 Wire `POST /api/app/shows`, `PATCH /api/app/shows/{id}`
-- [ ] 5.4 Wire `PATCH /api/app/shows/{id}/cancel`, `PATCH /api/app/shows/{id}/archive`
-- [ ] 5.5 Add role checks (Admin/Booker only for cancel)
-- [ ] 5.6 Commit Phase 5
+- [x] 5.1 Implement show mutations: create, update, cancel, archive
+- [x] 5.2 Add audit logging for every mutation
+- [x] 5.3 Wire `POST /api/app/shows`, `PATCH /api/app/shows/{id}`
+- [x] 5.4 Wire `PATCH /api/app/shows/{id}/cancel`, `PATCH /api/app/shows/{id}/archive`
+- [x] 5.5 Add role checks (Admin/Booker only for cancel)
+- [x] 5.6 Commit Phase 5
 
 ## Phase 6 — Staff API — Submissions + Artists
 

@@ -46,3 +46,14 @@ Phases 2-4 implemented: public API read endpoints, submission creation, Discord 
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go — Public API handlers with protojson
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/auth_service.go — Discord OAuth + session management
 
+
+## 2026-04-26
+
+Step 6: Phase 5 complete — staff show CRUD, audit logging, role middleware (commit 9f54adc)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Staff handlers with role-based access control
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go — Audit service interface and implementation
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — Show mutations with audit logging
+

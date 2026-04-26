@@ -522,8 +522,141 @@ go run ./cmd/pyxis serve      # server on :8080
 - `7e7fdb4` — Phase 2: Public API Read-Only
 - `c6dfad2` — Phase 3: Public API Write (Submissions)
 - `be09733` — Phase 4: Auth + Session
+- `0123fec` — Phase 5 start: show mutations in repo, audit queries, domain types
+- `9f54adc` — Phase 5: Staff API show CRUD + audit logging + role middleware
 
 **Open questions from today:**
 - Should `show.proto` be split into multiple proto files?
-- How should Discord OAuth credentials be passed (env vars, flags, config file)?
+- Discord OAuth will be replaced with Keycloak/OAuth — how does this affect the session and user models?
 - Should we use `testcontainers-go` for integration tests?
+
+---
+
+## Step 6: Implementation — Phase 5 (Staff API Shows CRUD + Audit Logging)
+
+Picked up where yesterday left off. Phase 5 was partially complete — the repository mutations (`Create`, `Update`, `Archive`, `ListAll`) existed but were not wired to HTTP handlers. The task was to add service-layer mutations, audit logging, role-based middleware, and staff HTTP handlers.
+
+### Prompt Context
+
+**User prompt (verbatim):** "we'll do auth through keycloak / oauth"
+
+**Assistant interpretation:** The user is providing architectural direction for auth — Keycloak/OAuth will replace the Discord OAuth skeleton. This is a future refactor, not an immediate change.
+
+**Inferred user intent:** Keep the current auth skeleton functional but note that it will be replaced with a proper OAuth2/Keycloak integration later.
+
+**Commit (code):** `9f54adc` — "Phase 5: Staff API show CRUD + audit logging + role middleware"
+
+### What I did
+
+- Fixed `show_repo.go` build errors: `ListUpcoming` now uses `upcomingRowToShow` helper for `ListUpcomingShowsRow` type; `ListAll` dereferences the pointer from `rowToShow`.
+- Committed yesterday's uncommitted Phase 5 start work as `0123fec`.
+- Created `pkg/repository/postgres/audit_repo.go` implementing `AuditLogRepository` with JSON metadata serialization.
+- Created `pkg/service/audit_service.go` with `AuditService` interface and `Log` method.
+- Updated `pkg/service/show_service.go` to add `Create`, `Update`, `Cancel`, `Archive`, `ListAll` methods — each logs to audit on success.
+- Created `pkg/server/app.go` with staff handlers: `handleListAppShows`, `handleCreateShow`, `handleUpdateShow`, `handleCancelShow`, `handleArchiveShow`.
+- Added `requireRole` middleware in `app.go` for role-based access control (`admin`, `booker`, `door`).
+- Updated `pkg/server/server.go` to wire audit service, update `ShowService` constructor, and register staff routes with auth + role middleware.
+- Fixed `respondError` in `public.go` to return 401 for "unauthenticated" and 403 for "forbidden".
+- Created test user (`Test Booker`, role `booker`) and session in PostgreSQL for manual endpoint testing.
+- Tested all staff endpoints via curl on port 8282:
+  - `GET /api/app/shows` — returns all shows (auth required)
+  - `POST /api/app/shows` — creates show, returns 201
+  - `PATCH /api/app/shows/{id}` — updates show, returns 200
+  - `PATCH /api/app/shows/{id}/cancel` — cancels show (sets status `cancelled`), returns 200
+  - `PATCH /api/app/shows/{id}/archive` — archives show, returns 200 with `{"success":true}`
+- Updated `tasks.md` to mark Phase 5 tasks complete.
+- Updated changelog via docmgr.
+
+### Why
+
+- Staff mutations need audit trails for accountability (who created/cancelled/archived what show and when).
+- Role-based access control prevents unauthorized mutations (e.g., `door` staff can view but not modify shows).
+- The `ShowService` now owns both read and write operations, keeping handlers thin.
+
+### What worked
+
+- All staff endpoints tested successfully with curl and session cookie.
+- `requireAuth` + `requireRole` middleware chaining works correctly with Go 1.22 `http.ServeMux`.
+- Audit logging fires on every mutation without blocking the response (errors are silently ignored with `_ = s.audit.Log(...)`).
+
+### What didn't work
+
+- **Build failures after Phase 5 start commit:** `rowToShow` returned `*domain.Show` but `ListUpcoming`/`ListAll` assigned to `domain.Show` values. Also `ListUpcomingShowsRow` is a different type than `db.Show`. Fixed by creating `upcomingRowToShow` and dereferencing pointers.
+- **Port conflicts:** 8080 and 8081 were in use by frontend dev servers. Used 8282 for testing.
+- **Accidental commit of 3857 prototype files:** `git add -A` staged visual comparison artifacts from `prototype-design/-deprecated/`. Had to `git reset --soft` and redo the commit with selective staging.
+- **Show ID extraction in bash test script failed:** `grep -o '"id":[0-9]*'` didn't extract properly when curl body and HTTP code were on separate lines. Tested with hardcoded ID instead.
+
+### What I learned
+
+- `sqlc` generates different row types for queries that select different column subsets (`ListUpcomingShowsRow` vs `Show`). Each needs its own mapping helper.
+- Go 1.22 `http.ServeMux` method patterns (`GET /path`) work with `mux.Handle` but not `mux.HandleFunc` when wrapping with middleware that returns `http.Handler`.
+- Always use selective `git add` in repos with large untracked artifact directories.
+
+### What was tricky to build
+
+- The `requireAuth` + `requireRole` middleware chaining: `s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(handler)))`. The order matters — auth must run before role check, but both return `http.Handler`, so they compose naturally.
+- Deciding whether to make audit logging blocking or fire-and-forget. Chose fire-and-forget (ignore error) to avoid failing user requests due to audit log issues, but this means audit gaps are silent.
+
+### What warrants a second pair of eyes
+
+- The `Archive` mutation doesn't check if the show is already archived or cancelled — it just runs `UPDATE ... SET status = 'archived'`. Should we guard against archiving an already-archived show?
+- `handleArchiveShow` returns raw JSON `{"success":true}` instead of a proto message. Inconsistent with other endpoints but acceptable for simple success responses.
+- Role values are hardcoded strings (`"admin"`, `"booker"`, `"door"`). Should be constants or enums.
+
+### What should be done in the future
+
+- Phase 6: Submissions + Artists (approval/decline flow with transactions).
+- Phase 7-10: Calendar, attendance, settings, flyers, CLI polish.
+- Refactor auth to Keycloak/OAuth as directed by user.
+- Add proper error types (`ErrInvalidInput`, `ErrUnauthorized`) instead of string matching in `respondError`.
+- Consider making audit logging async or queued to avoid any latency impact.
+
+### Code review instructions
+
+- Start with `pkg/server/app.go` for the staff handler patterns and role middleware.
+- Review `pkg/service/show_service.go` for audit integration in mutations.
+- Check `pkg/server/server.go` for route wiring and middleware chaining.
+- Validate by running the server and testing with curl (see Technical details).
+
+### Technical details
+
+**Key commands run:**
+
+```bash
+# Fix build errors
+go build ./...
+
+# Commit Phase 5 start work
+git add pkg/db/querier.go pkg/db/queries/shows.sql pkg/db/shows.sql.go pkg/domain/show.go pkg/repository/postgres/show_repo.go pkg/repository/repository.go pkg/db/audit.sql.go pkg/db/queries/audit.sql pkg/domain/audit.go
+git commit -m "Phase 5 start: show mutations in repo, audit queries, domain types"
+
+# Test endpoints
+go run ./cmd/pyxis serve --bind :8282
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/shows
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X POST http://localhost:8282/api/app/shows -d '{"artist":"Test","date":"2026-07-01","status":"draft"}'
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH http://localhost:8282/api/app/shows/14 -d '{"artist":"Updated"}'
+curl -s -H "Cookie: session=test-session-abc" -X PATCH http://localhost:8282/api/app/shows/14/cancel
+curl -s -H "Cookie: session=test-session-abc" -X PATCH http://localhost:8282/api/app/shows/14/archive
+```
+
+**Test user/session setup:**
+
+```sql
+INSERT INTO users (discord_id, discord_username, role, created_at, last_login_at)
+VALUES ('test123', 'Test Booker', 'booker', NOW(), NOW())
+ON CONFLICT (discord_id) DO UPDATE SET role = 'booker', last_login_at = NOW();
+
+INSERT INTO sessions (id, user_id, expires_at, created_at)
+VALUES ('test-session-abc', (SELECT id FROM users WHERE discord_id = 'test123'), NOW() + INTERVAL '7 days', NOW())
+ON CONFLICT (id) DO UPDATE SET expires_at = NOW() + INTERVAL '7 days';
+```
+
+**Files created/modified:**
+
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go` — Staff handlers + role middleware
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/server.go` — Route wiring
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go` — Error status codes
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go` — Mutation methods + audit
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go` — Audit service
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/audit_repo.go` — Audit repo
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/show_repo.go` — Build fixes
