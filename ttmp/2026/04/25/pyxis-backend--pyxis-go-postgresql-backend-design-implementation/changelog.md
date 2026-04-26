@@ -68,3 +68,14 @@ Step 7: Phase 6 complete — submission approval/decline with transactions, arti
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Booking and artist handlers
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/submission_service.go — Approve transaction across submissions/artists/shows
 
+
+## 2026-04-26
+
+Step 8: Phase 7 complete — calendar holds/blocked + attendance logging (commit 310cbd5)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/attendance.sql — Attendance queries with ON CONFLICT upsert
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/calendar.sql — Calendar queries
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Calendar and attendance handlers
+

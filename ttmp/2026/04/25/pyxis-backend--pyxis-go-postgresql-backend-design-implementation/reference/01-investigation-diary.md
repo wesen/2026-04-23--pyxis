@@ -795,3 +795,71 @@ curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go` — Booking + artist handlers
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/server.go` — Route wiring
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go` — `respondJSON` + 404 handling
+
+---
+
+## Step 8: Implementation — Phase 7 (Calendar + Attendance)
+
+Phase 7 adds calendar management (holds and blocked dates) and attendance logging endpoints. Calendar holds represent tentative reservations, blocked dates represent unavailable days, and attendance logs track post-show metrics.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue implementing the Pyxis backend. Phase 7 is next: calendar + attendance.
+
+**Inferred user intent:** Build out staff-side calendar and attendance management.
+
+**Commit (code):** `310cbd5` — "Phase 7: Calendar + Attendance endpoints"
+
+### What I did
+
+- Created `pkg/db/queries/calendar.sql` with `ListCalendarHolds`, `CreateCalendarHold`, `DeleteCalendarHold`, `ListCalendarBlocked`, `CreateCalendarBlocked`, `DeleteCalendarBlocked`.
+- Created `pkg/db/queries/attendance.sql` with `GetAttendanceLog`, `UpsertAttendanceLog` (using `ON CONFLICT` for idempotent updates), `ListAttendanceLogs` (with JOIN to shows for artist/date).
+- Regenerated sqlc code.
+- Created `pkg/domain/calendar.go` with `CalendarHold` and `CalendarBlocked` structs.
+- Created `pkg/domain/attendance.go` with `AttendanceLog` struct.
+- Updated `pkg/repository/repository.go` with `CalendarRepository` and `AttendanceRepository` interfaces.
+- Created `pkg/repository/postgres/calendar_repo.go` and `attendance_repo.go`.
+- Created `pkg/service/calendar_service.go` and `attendance_service.go`.
+- Added handlers in `pkg/server/app.go`:
+  - `GET /api/app/calendar` — returns holds + blocked combined
+  - `POST /api/app/calendar/holds` — create hold
+  - `DELETE /api/app/calendar/holds/{id}` — delete hold
+  - `POST /api/app/calendar/blocked` — create blocked date
+  - `DELETE /api/app/calendar/blocked/{id}` — delete blocked date
+  - `GET /api/app/attendance` — list logs with pagination
+  - `GET /api/app/attendance/{showId}` — get log by show
+  - `PATCH /api/app/attendance/{showId}` — upsert log
+- Wired routes in `pkg/server/server.go` with auth + role middleware.
+- Tested all endpoints:
+  - Calendar CRUD ✓
+  - Attendance list/get/upsert ✓
+
+### What worked
+
+- `ON CONFLICT (show_id) DO UPDATE` in `UpsertAttendanceLog` gives idempotent attendance recording.
+- Combined calendar endpoint (`GET /api/app/calendar`) returns both holds and blocked in one response, reducing frontend round-trips.
+- `ListAttendanceLogs` JOINs with `shows` to include artist name and date, making the list view self-contained.
+
+### What didn't work
+
+- **`ListAttendanceLogsRow` artist field type:** sqlc inferred `Artist` as `string` (not `pgtype.Text`) because the join column is `NOT NULL` in the shows table. Had to fix the mapping in `attendance_repo.go`.
+
+### What should be done in the future
+
+- Phase 8: Settings + Audit Log read endpoints.
+- Phase 9: Flyers + Discord skeleton.
+- Phase 10: CLI polish + export.
+
+### Technical details
+
+**Test commands:**
+
+```bash
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/calendar
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X POST http://localhost:8282/api/app/calendar/holds -d '{"date":"2026-10-01","label":"Potential Show"}'
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X POST http://localhost:8282/api/app/calendar/blocked -d '{"date":"2026-10-15","reason":"Venue Maintenance"}'
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/attendance
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH http://localhost:8282/api/app/attendance/1 -d '{"draw":45,"notes":"Good crowd"}'
+```

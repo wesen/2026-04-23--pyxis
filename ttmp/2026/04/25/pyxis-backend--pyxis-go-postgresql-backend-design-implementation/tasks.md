@@ -76,11 +76,11 @@
 
 ## Phase 7 — Calendar + Attendance
 
-- [ ] 7.1 Implement `calendar_holds` and `calendar_blocked` repositories
-- [ ] 7.2 Add calendar endpoints
-- [ ] 7.3 Implement `attendance_logs` repository
-- [ ] 7.4 Add attendance endpoints
-- [ ] 7.5 Commit Phase 7
+- [x] 7.1 Implement `calendar_holds` and `calendar_blocked` repositories
+- [x] 7.2 Add calendar endpoints
+- [x] 7.3 Implement `attendance_logs` repository
+- [x] 7.4 Add attendance endpoints
+- [x] 7.5 Commit Phase 7
 
 ## Phase 8 — Settings + Audit Log
 
