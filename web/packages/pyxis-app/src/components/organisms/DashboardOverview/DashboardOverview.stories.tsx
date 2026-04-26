@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ShowStatus, SubmissionStatus } from 'pyxis-types';
 import { auditLog, bookings, shows } from '../../../api/mockData';
 import { DashboardActivityPanel } from '../DashboardActivityPanel';
 import { DashboardAttentionPanel } from '../DashboardAttentionPanel';
@@ -18,8 +19,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
-const pendingBookings = bookings.filter((booking) => booking.status === 'pending');
+const confirmedShows = shows.filter((show) => show.status === ShowStatus.CONFIRMED).sort((a, b) => a.date.localeCompare(b.date));
+const pendingBookings = bookings.filter((booking) => booking.status === SubmissionStatus.PENDING);
 
 export const Default: Story = {
   render: (args) => <div style={{ padding: 24 }}><DashboardOverview {...args}/></div>,

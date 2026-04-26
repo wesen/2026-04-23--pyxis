@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { SubmissionStatus } from 'pyxis-types';
 import { bookings } from '../../../api/mockData';
 import { BookingsProcessedPanel } from './BookingsProcessedPanel';
 
@@ -20,14 +21,14 @@ export const ProcessedPanel: Story = {
 
 export const Empty: Story = {
   args: {
-    bookings: bookings.filter((booking) => booking.status === 'pending'),
+    bookings: bookings.filter((booking) => booking.status === SubmissionStatus.PENDING),
   },
   render: (args) => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsProcessedPanel {...args} /></div>,
 };
 
 export const Dense: Story = {
   args: {
-    bookings: [...bookings, ...bookings.filter((booking) => booking.status !== 'pending').map((booking) => ({ ...booking, id: booking.id + 200, artistName: `${booking.artistName} archived` }))],
+    bookings: [...bookings, ...bookings.filter((booking) => booking.status !== SubmissionStatus.PENDING).map((booking) => ({ ...booking, id: booking.id + 200, artistName: `${booking.artistName} archived` }))],
   },
   render: (args) => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsProcessedPanel {...args} /></div>,
 };

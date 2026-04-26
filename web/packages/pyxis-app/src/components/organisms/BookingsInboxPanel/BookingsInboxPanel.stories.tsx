@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { SubmissionStatus } from 'pyxis-types';
 import { bookings } from '../../../api/mockData';
 import { BookingsInboxPanel } from './BookingsInboxPanel';
 
@@ -29,7 +30,7 @@ export const WithCallbacks: Story = {
 
 export const InboxEmpty: Story = {
   args: {
-    bookings: bookings.filter((booking) => booking.status !== 'pending'),
+    bookings: bookings.filter((booking) => booking.status !== SubmissionStatus.PENDING),
   },
   render: (args) => <div style={{ width: 720, padding: 24, background: 'var(--app-canvas)' }}><BookingsInboxPanel {...args} /></div>,
 };
@@ -40,7 +41,7 @@ export const Narrow: Story = {
 
 export const Dense: Story = {
   args: {
-    bookings: [...bookings, ...bookings.filter((booking) => booking.status === 'pending').map((booking) => ({ ...booking, id: booking.id + 100, artistName: `${booking.artistName} II` }))],
+    bookings: [...bookings, ...bookings.filter((booking) => booking.status === SubmissionStatus.PENDING).map((booking) => ({ ...booking, id: booking.id + 100, artistName: `${booking.artistName} II` }))],
   },
   render: (args) => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsInboxPanel {...args} /></div>,
 };

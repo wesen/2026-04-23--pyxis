@@ -4,6 +4,25 @@ package pyxis.v1;
 
 option go_package = "github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1";
 
+enum ShowStatus {
+  SHOW_STATUS_UNSPECIFIED = 0;
+  SHOW_STATUS_CONFIRMED   = 1;
+  SHOW_STATUS_CANCELLED   = 2;
+  SHOW_STATUS_ARCHIVED    = 3;
+  SHOW_STATUS_DRAFT       = 4;
+  SHOW_STATUS_HOLD        = 5;
+  SHOW_STATUS_BLOCKED     = 6;
+}
+
+enum SubmissionStatus {
+  SUBMISSION_STATUS_UNSPECIFIED = 0;
+  SUBMISSION_STATUS_PENDING     = 1;
+  SUBMISSION_STATUS_APPROVED    = 2;
+  SUBMISSION_STATUS_DECLINED    = 3;
+  SUBMISSION_STATUS_HOLD        = 4;
+  SUBMISSION_STATUS_CANCELLED   = 5;
+}
+
 message Show {
   int32  id            = 1;
   string artist        = 2;
@@ -19,7 +38,7 @@ message Show {
   string flyer_url     = 11;
   int32  draw          = 18;
   int32  capacity      = 19;
-  string status        = 12;
+  ShowStatus status    = 12;
   int32  submission_id = 13;
   int32  artist_id     = 14;
   string created_at    = 15;
@@ -40,7 +59,7 @@ message AppShow {
   string doors    = 4;
   string age      = 5;
   string price    = 6;
-  string status   = 7;
+  ShowStatus status = 7;
   string genre    = 8;
   int32  draw     = 9;
   int32  capacity = 10;
@@ -97,7 +116,7 @@ message Submission {
   string tech_rider     = 8;
   string message        = 9;
   string contact_discord = 10;
-  string status         = 11;
+  SubmissionStatus status = 11;
   int32  reviewed_by    = 12;
   string reviewed_at    = 13;
   string created_at     = 14;
@@ -224,3 +243,4 @@ message ErrorResponse {
 message FlyerUploadResponse {
   string url = 1;
 }
+

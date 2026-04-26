@@ -55,6 +55,10 @@ export {
   ErrorResponseSchema,
   type FlyerUploadResponse,
   FlyerUploadResponseSchema,
+  ShowStatus,
+  ShowStatusSchema,
+  SubmissionStatus,
+  SubmissionStatusSchema,
 } from './generated/proto/pyxis/v1/show_pb';
 
 // Frontend-only types (not backed by protobuf — view models / UI concerns)
@@ -67,8 +71,6 @@ export type {
 
 export type {
   AgeRestriction,
-  ShowStatus,
-  SubmissionStatus,
   ApiError,
   LineupEntry,
 } from './public';

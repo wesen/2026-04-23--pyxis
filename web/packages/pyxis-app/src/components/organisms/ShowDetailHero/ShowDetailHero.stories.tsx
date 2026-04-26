@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ShowStatus } from 'pyxis-types';
 import { shows } from '../../../api/mockData';
 import { ShowDetailHero } from './ShowDetailHero';
 
@@ -24,7 +25,7 @@ export const Desktop: Story = {
 };
 
 export const Archived: Story = {
-  args: { show: shows.find((item) => item.status === 'archived') ?? show, dateLabel: 'Fri, Mar 14, 2025' },
+  args: { show: shows.find((item) => item.status === ShowStatus.ARCHIVED) ?? show, dateLabel: 'Fri, Mar 14, 2025' },
   render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><ShowDetailHero {...args}/></div>,
 };
 

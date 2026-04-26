@@ -175,7 +175,7 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 		FlyerURL:    pb.FlyerUrl,
 		Draw:        int(pb.Draw),
 		Capacity:    int(pb.Capacity),
-		Status:      pb.Status,
+		Status:      pb.Status.String(),
 	}
 	if pb.Date != "" {
 		t, _ := time.Parse(time.DateOnly, pb.Date)
@@ -200,7 +200,7 @@ func domainShowToAppShow(show *domain.Show) *pyxisv1.AppShow {
 		Doors:  show.DoorsTime,
 		Age:    show.Age,
 		Price:  show.Price,
-		Status: show.Status,
+		Status: showStatusFromString(show.Status),
 		Genre:  show.Genre,
 	}
 }

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ShowStatus } from 'pyxis-types';
 import { shows } from '../../../api/mockData';
 import { ShowTableRow } from './ShowTableRow';
 
@@ -38,7 +39,7 @@ export const Dashboard: Story = {
 
 export const Archived: Story = {
   args: {
-    show: shows.find((show) => show.status === 'archived') ?? shows[0],
+    show: shows.find((show) => show.status === ShowStatus.ARCHIVED) ?? shows[0],
     variant: 'archived',
   },
   render: (args) => <TableFrame archived><ShowTableRow {...args} /></TableFrame>,

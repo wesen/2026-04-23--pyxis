@@ -20,7 +20,7 @@ import { Poster } from './Poster';
 import { ShowTile, type ShowTileShow } from './ShowTile';
 import { ShowGrid } from './ShowGrid';
 
-import { create, ShowSchema, Show_LineupEntrySchema, ArchiveStatsSchema } from 'pyxis-types';
+import { create, ShowSchema, Show_LineupEntrySchema, ArchiveStatsSchema, ShowStatus } from 'pyxis-types';
 import { PublicPageHeader } from './PublicPageHeader';
 import { ReserveTicketCard } from './ReserveTicketCard';
 import { ShowDetailHeader } from './ShowDetailHeader';
@@ -54,7 +54,7 @@ const show = create(ShowSchema, {
   genre: 'electronic / noise',
   price: '$10 adv / $15 door',
   age: '21+',
-  status: 'confirmed',
+  status: ShowStatus.CONFIRMED,
   createdAt: '2026-01-01T00:00:00Z',
   updatedAt: '2026-01-01T00:00:00Z',
 });
@@ -67,7 +67,7 @@ const archiveShow = create(ShowSchema, {
   genre: 'Electronic',
   price: '$12',
   age: '21+',
-  status: 'archived',
+  status: ShowStatus.ARCHIVED,
   createdAt: '2025-01-01T00:00:00Z',
   updatedAt: '2025-01-01T00:00:00Z',
 });

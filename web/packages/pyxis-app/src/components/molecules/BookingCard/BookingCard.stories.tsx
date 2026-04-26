@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { SubmissionStatus } from 'pyxis-types';
 import { bookings } from '../../../api/mockData';
 import { BookingCard, BookingQueueRow } from './BookingCard';
 
@@ -28,14 +29,14 @@ export const WithCallbacks: Story = {
 
 export const Approved: Story = {
   args: {
-    booking: bookings.find((booking) => booking.status === 'approved') ?? bookings[0],
+    booking: bookings.find((booking) => booking.status === SubmissionStatus.APPROVED) ?? bookings[0],
   },
   render: (args) => <div style={{ width: 520, padding: 24 }}><BookingCard {...args} /></div>,
 };
 
 export const Declined: Story = {
   args: {
-    booking: bookings.find((booking) => booking.status === 'declined') ?? bookings[0],
+    booking: bookings.find((booking) => booking.status === SubmissionStatus.DECLINED) ?? bookings[0],
   },
   render: (args) => <div style={{ width: 520, padding: 24 }}><BookingCard {...args} /></div>,
 };

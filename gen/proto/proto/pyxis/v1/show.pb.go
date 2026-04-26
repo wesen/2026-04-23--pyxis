@@ -21,6 +21,125 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ShowStatus int32
+
+const (
+	ShowStatus_SHOW_STATUS_UNSPECIFIED ShowStatus = 0
+	ShowStatus_SHOW_STATUS_CONFIRMED   ShowStatus = 1
+	ShowStatus_SHOW_STATUS_CANCELLED   ShowStatus = 2
+	ShowStatus_SHOW_STATUS_ARCHIVED    ShowStatus = 3
+	ShowStatus_SHOW_STATUS_DRAFT       ShowStatus = 4
+	ShowStatus_SHOW_STATUS_HOLD        ShowStatus = 5
+	ShowStatus_SHOW_STATUS_BLOCKED     ShowStatus = 6
+)
+
+// Enum value maps for ShowStatus.
+var (
+	ShowStatus_name = map[int32]string{
+		0: "SHOW_STATUS_UNSPECIFIED",
+		1: "SHOW_STATUS_CONFIRMED",
+		2: "SHOW_STATUS_CANCELLED",
+		3: "SHOW_STATUS_ARCHIVED",
+		4: "SHOW_STATUS_DRAFT",
+		5: "SHOW_STATUS_HOLD",
+		6: "SHOW_STATUS_BLOCKED",
+	}
+	ShowStatus_value = map[string]int32{
+		"SHOW_STATUS_UNSPECIFIED": 0,
+		"SHOW_STATUS_CONFIRMED":   1,
+		"SHOW_STATUS_CANCELLED":   2,
+		"SHOW_STATUS_ARCHIVED":    3,
+		"SHOW_STATUS_DRAFT":       4,
+		"SHOW_STATUS_HOLD":        5,
+		"SHOW_STATUS_BLOCKED":     6,
+	}
+)
+
+func (x ShowStatus) Enum() *ShowStatus {
+	p := new(ShowStatus)
+	*p = x
+	return p
+}
+
+func (x ShowStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShowStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_proto_pyxis_v1_show_proto_enumTypes[0].Descriptor()
+}
+
+func (ShowStatus) Type() protoreflect.EnumType {
+	return &file_proto_pyxis_v1_show_proto_enumTypes[0]
+}
+
+func (x ShowStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShowStatus.Descriptor instead.
+func (ShowStatus) EnumDescriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{0}
+}
+
+type SubmissionStatus int32
+
+const (
+	SubmissionStatus_SUBMISSION_STATUS_UNSPECIFIED SubmissionStatus = 0
+	SubmissionStatus_SUBMISSION_STATUS_PENDING     SubmissionStatus = 1
+	SubmissionStatus_SUBMISSION_STATUS_APPROVED    SubmissionStatus = 2
+	SubmissionStatus_SUBMISSION_STATUS_DECLINED    SubmissionStatus = 3
+	SubmissionStatus_SUBMISSION_STATUS_HOLD        SubmissionStatus = 4
+	SubmissionStatus_SUBMISSION_STATUS_CANCELLED   SubmissionStatus = 5
+)
+
+// Enum value maps for SubmissionStatus.
+var (
+	SubmissionStatus_name = map[int32]string{
+		0: "SUBMISSION_STATUS_UNSPECIFIED",
+		1: "SUBMISSION_STATUS_PENDING",
+		2: "SUBMISSION_STATUS_APPROVED",
+		3: "SUBMISSION_STATUS_DECLINED",
+		4: "SUBMISSION_STATUS_HOLD",
+		5: "SUBMISSION_STATUS_CANCELLED",
+	}
+	SubmissionStatus_value = map[string]int32{
+		"SUBMISSION_STATUS_UNSPECIFIED": 0,
+		"SUBMISSION_STATUS_PENDING":     1,
+		"SUBMISSION_STATUS_APPROVED":    2,
+		"SUBMISSION_STATUS_DECLINED":    3,
+		"SUBMISSION_STATUS_HOLD":        4,
+		"SUBMISSION_STATUS_CANCELLED":   5,
+	}
+)
+
+func (x SubmissionStatus) Enum() *SubmissionStatus {
+	p := new(SubmissionStatus)
+	*p = x
+	return p
+}
+
+func (x SubmissionStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SubmissionStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_proto_pyxis_v1_show_proto_enumTypes[1].Descriptor()
+}
+
+func (SubmissionStatus) Type() protoreflect.EnumType {
+	return &file_proto_pyxis_v1_show_proto_enumTypes[1]
+}
+
+func (x SubmissionStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SubmissionStatus.Descriptor instead.
+func (SubmissionStatus) EnumDescriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{1}
+}
+
 type Show struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -37,7 +156,7 @@ type Show struct {
 	FlyerUrl      string                 `protobuf:"bytes,11,opt,name=flyer_url,json=flyerUrl,proto3" json:"flyer_url,omitempty"`
 	Draw          int32                  `protobuf:"varint,18,opt,name=draw,proto3" json:"draw,omitempty"`
 	Capacity      int32                  `protobuf:"varint,19,opt,name=capacity,proto3" json:"capacity,omitempty"`
-	Status        string                 `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`
+	Status        ShowStatus             `protobuf:"varint,12,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
 	SubmissionId  int32                  `protobuf:"varint,13,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
 	ArtistId      int32                  `protobuf:"varint,14,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -174,11 +293,11 @@ func (x *Show) GetCapacity() int32 {
 	return 0
 }
 
-func (x *Show) GetStatus() string {
+func (x *Show) GetStatus() ShowStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return ShowStatus_SHOW_STATUS_UNSPECIFIED
 }
 
 func (x *Show) GetSubmissionId() int32 {
@@ -217,7 +336,7 @@ type AppShow struct {
 	Doors         string                 `protobuf:"bytes,4,opt,name=doors,proto3" json:"doors,omitempty"`
 	Age           string                 `protobuf:"bytes,5,opt,name=age,proto3" json:"age,omitempty"`
 	Price         string                 `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
-	Status        string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Status        ShowStatus             `protobuf:"varint,7,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
 	Genre         string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
 	Draw          int32                  `protobuf:"varint,9,opt,name=draw,proto3" json:"draw,omitempty"`
 	Capacity      int32                  `protobuf:"varint,10,opt,name=capacity,proto3" json:"capacity,omitempty"`
@@ -299,11 +418,11 @@ func (x *AppShow) GetPrice() string {
 	return ""
 }
 
-func (x *AppShow) GetStatus() string {
+func (x *AppShow) GetStatus() ShowStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return ShowStatus_SHOW_STATUS_UNSPECIFIED
 }
 
 func (x *AppShow) GetGenre() string {
@@ -729,7 +848,7 @@ type Submission struct {
 	TechRider      string                 `protobuf:"bytes,8,opt,name=tech_rider,json=techRider,proto3" json:"tech_rider,omitempty"`
 	Message        string                 `protobuf:"bytes,9,opt,name=message,proto3" json:"message,omitempty"`
 	ContactDiscord string                 `protobuf:"bytes,10,opt,name=contact_discord,json=contactDiscord,proto3" json:"contact_discord,omitempty"`
-	Status         string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	Status         SubmissionStatus       `protobuf:"varint,11,opt,name=status,proto3,enum=pyxis.v1.SubmissionStatus" json:"status,omitempty"`
 	ReviewedBy     int32                  `protobuf:"varint,12,opt,name=reviewed_by,json=reviewedBy,proto3" json:"reviewed_by,omitempty"`
 	ReviewedAt     string                 `protobuf:"bytes,13,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
 	CreatedAt      string                 `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -837,11 +956,11 @@ func (x *Submission) GetContactDiscord() string {
 	return ""
 }
 
-func (x *Submission) GetStatus() string {
+func (x *Submission) GetStatus() SubmissionStatus {
 	if x != nil {
 		return x.Status
 	}
-	return ""
+	return SubmissionStatus_SUBMISSION_STATUS_UNSPECIFIED
 }
 
 func (x *Submission) GetReviewedBy() int32 {
@@ -2125,7 +2244,7 @@ var File_proto_pyxis_v1_show_proto protoreflect.FileDescriptor
 
 const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\x84\x05\n" +
+	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\x9a\x05\n" +
 	"\x04Show\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
@@ -2143,8 +2262,8 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	" \x03(\v2\x1a.pyxis.v1.Show.LineupEntryR\x06lineup\x12\x1b\n" +
 	"\tflyer_url\x18\v \x01(\tR\bflyerUrl\x12\x12\n" +
 	"\x04draw\x18\x12 \x01(\x05R\x04draw\x12\x1a\n" +
-	"\bcapacity\x18\x13 \x01(\x05R\bcapacity\x12\x16\n" +
-	"\x06status\x18\f \x01(\tR\x06status\x12#\n" +
+	"\bcapacity\x18\x13 \x01(\x05R\bcapacity\x12,\n" +
+	"\x06status\x18\f \x01(\x0e2\x14.pyxis.v1.ShowStatusR\x06status\x12#\n" +
 	"\rsubmission_id\x18\r \x01(\x05R\fsubmissionId\x12\x1b\n" +
 	"\tartist_id\x18\x0e \x01(\x05R\bartistId\x12\x1d\n" +
 	"\n" +
@@ -2156,15 +2275,15 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x03 \x01(\tR\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x04 \x01(\tR\aendTime\"\x8f\x02\n" +
+	"\bend_time\x18\x04 \x01(\tR\aendTime\"\xa5\x02\n" +
 	"\aAppShow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
 	"\x04date\x18\x03 \x01(\tR\x04date\x12\x14\n" +
 	"\x05doors\x18\x04 \x01(\tR\x05doors\x12\x10\n" +
 	"\x03age\x18\x05 \x01(\tR\x03age\x12\x14\n" +
-	"\x05price\x18\x06 \x01(\tR\x05price\x12\x16\n" +
-	"\x06status\x18\a \x01(\tR\x06status\x12\x14\n" +
+	"\x05price\x18\x06 \x01(\tR\x05price\x12,\n" +
+	"\x06status\x18\a \x01(\x0e2\x14.pyxis.v1.ShowStatusR\x06status\x12\x14\n" +
 	"\x05genre\x18\b \x01(\tR\x05genre\x12\x12\n" +
 	"\x04draw\x18\t \x01(\x05R\x04draw\x12\x1a\n" +
 	"\bcapacity\x18\n" +
@@ -2199,7 +2318,7 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x05shows\x18\x01 \x03(\v2\x16.pyxis.v1.ArchivedShowR\x05shows\"T\n" +
 	"\x13BookingConfirmation\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12#\n" +
-	"\rsubmission_id\x18\x02 \x01(\x05R\fsubmissionId\"\xad\x03\n" +
+	"\rsubmission_id\x18\x02 \x01(\x05R\fsubmissionId\"\xc9\x03\n" +
 	"\n" +
 	"Submission\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1b\n" +
@@ -2214,8 +2333,8 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"tech_rider\x18\b \x01(\tR\ttechRider\x12\x18\n" +
 	"\amessage\x18\t \x01(\tR\amessage\x12'\n" +
 	"\x0fcontact_discord\x18\n" +
-	" \x01(\tR\x0econtactDiscord\x12\x16\n" +
-	"\x06status\x18\v \x01(\tR\x06status\x12\x1f\n" +
+	" \x01(\tR\x0econtactDiscord\x122\n" +
+	"\x06status\x18\v \x01(\x0e2\x1a.pyxis.v1.SubmissionStatusR\x06status\x12\x1f\n" +
 	"\vreviewed_by\x18\f \x01(\x05R\n" +
 	"reviewedBy\x12\x1f\n" +
 	"\vreviewed_at\x18\r \x01(\tR\n" +
@@ -2325,7 +2444,23 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"'\n" +
 	"\x13FlyerUploadResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03urlB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
+	"\x03url\x18\x01 \x01(\tR\x03url*\xbf\x01\n" +
+	"\n" +
+	"ShowStatus\x12\x1b\n" +
+	"\x17SHOW_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15SHOW_STATUS_CONFIRMED\x10\x01\x12\x19\n" +
+	"\x15SHOW_STATUS_CANCELLED\x10\x02\x12\x18\n" +
+	"\x14SHOW_STATUS_ARCHIVED\x10\x03\x12\x15\n" +
+	"\x11SHOW_STATUS_DRAFT\x10\x04\x12\x14\n" +
+	"\x10SHOW_STATUS_HOLD\x10\x05\x12\x17\n" +
+	"\x13SHOW_STATUS_BLOCKED\x10\x06*\xd1\x01\n" +
+	"\x10SubmissionStatus\x12!\n" +
+	"\x1dSUBMISSION_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19SUBMISSION_STATUS_PENDING\x10\x01\x12\x1e\n" +
+	"\x1aSUBMISSION_STATUS_APPROVED\x10\x02\x12\x1e\n" +
+	"\x1aSUBMISSION_STATUS_DECLINED\x10\x03\x12\x1a\n" +
+	"\x16SUBMISSION_STATUS_HOLD\x10\x04\x12\x1f\n" +
+	"\x1bSUBMISSION_STATUS_CANCELLED\x10\x05B:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
 
 var (
 	file_proto_pyxis_v1_show_proto_rawDescOnce sync.Once
@@ -2339,53 +2474,59 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 	return file_proto_pyxis_v1_show_proto_rawDescData
 }
 
+var file_proto_pyxis_v1_show_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
-	(*Show)(nil),                // 0: pyxis.v1.Show
-	(*AppShow)(nil),             // 1: pyxis.v1.AppShow
-	(*ArchivedShow)(nil),        // 2: pyxis.v1.ArchivedShow
-	(*ArchiveStats)(nil),        // 3: pyxis.v1.ArchiveStats
-	(*BookingFormData)(nil),     // 4: pyxis.v1.BookingFormData
-	(*ShowList)(nil),            // 5: pyxis.v1.ShowList
-	(*ArchivedShowList)(nil),    // 6: pyxis.v1.ArchivedShowList
-	(*BookingConfirmation)(nil), // 7: pyxis.v1.BookingConfirmation
-	(*Submission)(nil),          // 8: pyxis.v1.Submission
-	(*SubmissionList)(nil),      // 9: pyxis.v1.SubmissionList
-	(*User)(nil),                // 10: pyxis.v1.User
-	(*AuthSession)(nil),         // 11: pyxis.v1.AuthSession
-	(*Artist)(nil),              // 12: pyxis.v1.Artist
-	(*ArtistList)(nil),          // 13: pyxis.v1.ArtistList
-	(*CalendarHold)(nil),        // 14: pyxis.v1.CalendarHold
-	(*CalendarBlocked)(nil),     // 15: pyxis.v1.CalendarBlocked
-	(*CalendarResponse)(nil),    // 16: pyxis.v1.CalendarResponse
-	(*AttendanceLog)(nil),       // 17: pyxis.v1.AttendanceLog
-	(*AttendanceLogList)(nil),   // 18: pyxis.v1.AttendanceLogList
-	(*AuditLogEntry)(nil),       // 19: pyxis.v1.AuditLogEntry
-	(*AuditLogEntryList)(nil),   // 20: pyxis.v1.AuditLogEntryList
-	(*Settings)(nil),            // 21: pyxis.v1.Settings
-	(*SuccessResponse)(nil),     // 22: pyxis.v1.SuccessResponse
-	(*ErrorResponse)(nil),       // 23: pyxis.v1.ErrorResponse
-	(*FlyerUploadResponse)(nil), // 24: pyxis.v1.FlyerUploadResponse
-	(*Show_LineupEntry)(nil),    // 25: pyxis.v1.Show.LineupEntry
-	(*ErrorResponse_Error)(nil), // 26: pyxis.v1.ErrorResponse.Error
+	(ShowStatus)(0),             // 0: pyxis.v1.ShowStatus
+	(SubmissionStatus)(0),       // 1: pyxis.v1.SubmissionStatus
+	(*Show)(nil),                // 2: pyxis.v1.Show
+	(*AppShow)(nil),             // 3: pyxis.v1.AppShow
+	(*ArchivedShow)(nil),        // 4: pyxis.v1.ArchivedShow
+	(*ArchiveStats)(nil),        // 5: pyxis.v1.ArchiveStats
+	(*BookingFormData)(nil),     // 6: pyxis.v1.BookingFormData
+	(*ShowList)(nil),            // 7: pyxis.v1.ShowList
+	(*ArchivedShowList)(nil),    // 8: pyxis.v1.ArchivedShowList
+	(*BookingConfirmation)(nil), // 9: pyxis.v1.BookingConfirmation
+	(*Submission)(nil),          // 10: pyxis.v1.Submission
+	(*SubmissionList)(nil),      // 11: pyxis.v1.SubmissionList
+	(*User)(nil),                // 12: pyxis.v1.User
+	(*AuthSession)(nil),         // 13: pyxis.v1.AuthSession
+	(*Artist)(nil),              // 14: pyxis.v1.Artist
+	(*ArtistList)(nil),          // 15: pyxis.v1.ArtistList
+	(*CalendarHold)(nil),        // 16: pyxis.v1.CalendarHold
+	(*CalendarBlocked)(nil),     // 17: pyxis.v1.CalendarBlocked
+	(*CalendarResponse)(nil),    // 18: pyxis.v1.CalendarResponse
+	(*AttendanceLog)(nil),       // 19: pyxis.v1.AttendanceLog
+	(*AttendanceLogList)(nil),   // 20: pyxis.v1.AttendanceLogList
+	(*AuditLogEntry)(nil),       // 21: pyxis.v1.AuditLogEntry
+	(*AuditLogEntryList)(nil),   // 22: pyxis.v1.AuditLogEntryList
+	(*Settings)(nil),            // 23: pyxis.v1.Settings
+	(*SuccessResponse)(nil),     // 24: pyxis.v1.SuccessResponse
+	(*ErrorResponse)(nil),       // 25: pyxis.v1.ErrorResponse
+	(*FlyerUploadResponse)(nil), // 26: pyxis.v1.FlyerUploadResponse
+	(*Show_LineupEntry)(nil),    // 27: pyxis.v1.Show.LineupEntry
+	(*ErrorResponse_Error)(nil), // 28: pyxis.v1.ErrorResponse.Error
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	25, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
-	0,  // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
-	2,  // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
-	8,  // 3: pyxis.v1.SubmissionList.submissions:type_name -> pyxis.v1.Submission
-	10, // 4: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
-	12, // 5: pyxis.v1.ArtistList.artists:type_name -> pyxis.v1.Artist
-	14, // 6: pyxis.v1.CalendarResponse.holds:type_name -> pyxis.v1.CalendarHold
-	15, // 7: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
-	17, // 8: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
-	19, // 9: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
-	26, // 10: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	27, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	0,  // 1: pyxis.v1.Show.status:type_name -> pyxis.v1.ShowStatus
+	0,  // 2: pyxis.v1.AppShow.status:type_name -> pyxis.v1.ShowStatus
+	2,  // 3: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
+	4,  // 4: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
+	1,  // 5: pyxis.v1.Submission.status:type_name -> pyxis.v1.SubmissionStatus
+	10, // 6: pyxis.v1.SubmissionList.submissions:type_name -> pyxis.v1.Submission
+	12, // 7: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
+	14, // 8: pyxis.v1.ArtistList.artists:type_name -> pyxis.v1.Artist
+	16, // 9: pyxis.v1.CalendarResponse.holds:type_name -> pyxis.v1.CalendarHold
+	17, // 10: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
+	19, // 11: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
+	21, // 12: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
+	28, // 13: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_proto_pyxis_v1_show_proto_init() }
@@ -2398,13 +2539,14 @@ func file_proto_pyxis_v1_show_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      2,
 			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_proto_pyxis_v1_show_proto_goTypes,
 		DependencyIndexes: file_proto_pyxis_v1_show_proto_depIdxs,
+		EnumInfos:         file_proto_pyxis_v1_show_proto_enumTypes,
 		MessageInfos:      file_proto_pyxis_v1_show_proto_msgTypes,
 	}.Build()
 	File_proto_pyxis_v1_show_proto = out.File

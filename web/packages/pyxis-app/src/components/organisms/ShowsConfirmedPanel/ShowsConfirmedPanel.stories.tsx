@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ShowStatus } from 'pyxis-types';
 import { shows } from '../../../api/mockData';
 import { ShowsConfirmedPanel } from './ShowsConfirmedPanel';
 
-const confirmed = shows.filter((show) => show.status === 'confirmed');
+const confirmed = shows.filter((show) => show.status === ShowStatus.CONFIRMED);
 
 const meta = {
   title: 'Pyxis App/Components/Organisms/ShowsConfirmedPanel',

@@ -132,6 +132,40 @@ func (s *Server) handleGetArchiveStats(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func showStatusFromString(s string) pyxisv1.ShowStatus {
+	switch s {
+	case "confirmed":
+		return pyxisv1.ShowStatus_SHOW_STATUS_CONFIRMED
+	case "cancelled":
+		return pyxisv1.ShowStatus_SHOW_STATUS_CANCELLED
+	case "archived":
+		return pyxisv1.ShowStatus_SHOW_STATUS_ARCHIVED
+	case "draft":
+		return pyxisv1.ShowStatus_SHOW_STATUS_DRAFT
+	case "hold":
+		return pyxisv1.ShowStatus_SHOW_STATUS_HOLD
+	case "blocked":
+		return pyxisv1.ShowStatus_SHOW_STATUS_BLOCKED
+	}
+	return pyxisv1.ShowStatus_SHOW_STATUS_UNSPECIFIED
+}
+
+func submissionStatusFromString(s string) pyxisv1.SubmissionStatus {
+	switch s {
+	case "pending":
+		return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_PENDING
+	case "approved":
+		return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_APPROVED
+	case "declined":
+		return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_DECLINED
+	case "hold":
+		return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_HOLD
+	case "cancelled":
+		return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_CANCELLED
+	}
+	return pyxisv1.SubmissionStatus_SUBMISSION_STATUS_UNSPECIFIED
+}
+
 func showToProto(show *domain.Show) *pyxisv1.Show {
 	pb := &pyxisv1.Show{
 		Id:          int32(show.ID),
@@ -147,7 +181,7 @@ func showToProto(show *domain.Show) *pyxisv1.Show {
 		FlyerUrl:    show.FlyerURL,
 		Draw:        int32(show.Draw),
 		Capacity:    int32(show.Capacity),
-		Status:      show.Status,
+		Status:      showStatusFromString(show.Status),
 		CreatedAt:   show.CreatedAt.Format(time.RFC3339),
 		UpdatedAt:   show.UpdatedAt.Format(time.RFC3339),
 	}
@@ -198,7 +232,7 @@ func submissionToProto(sub *domain.Submission) *pyxisv1.Submission {
 		Links:       sub.Links,
 		TechRider:   sub.TechRider,
 		Message:     sub.Message,
-		Status:      sub.Status,
+		Status:      submissionStatusFromString(sub.Status),
 		CreatedAt:   sub.CreatedAt.Format(time.RFC3339),
 	}
 	if sub.ArtistID != nil {

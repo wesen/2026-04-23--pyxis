@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ShowStatus } from 'pyxis-types';
 import { shows } from '../../../api/mockData';
 import { AgeBadge } from '../../atoms/AgeBadge';
 import { DrawProgress } from '../../atoms/DrawProgress';
 import { StatusPill } from '../../atoms/StatusPill';
 import { ShowsTable } from './ShowsTable';
 
-const confirmed = shows.filter((show) => show.status === 'confirmed');
-const archived = shows.filter((show) => show.status === 'archived');
+const confirmed = shows.filter((show) => show.status === ShowStatus.CONFIRMED);
+const archived = shows.filter((show) => show.status === ShowStatus.ARCHIVED);
 
 const meta = {
   title: 'Pyxis App/Components/Organisms/ShowsTable',

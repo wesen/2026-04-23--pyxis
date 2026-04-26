@@ -1,4 +1,5 @@
 import type { AppShow, AuditLogEntry, Submission } from 'pyxis-types';
+import { ShowStatus, SubmissionStatus } from 'pyxis-types';
 import { DashboardMobileHeader } from '../DashboardMobileHeader';
 import { DashboardMobileCopy } from '../DashboardMobileCopy';
 import { DashboardHero } from '../DashboardHero';
@@ -17,7 +18,7 @@ export type DashboardOverviewProps = {
 };
 
 export function DashboardOverview({ shows, bookings, log }: DashboardOverviewProps) {
-  const upcoming = shows.filter((s) => s.status === 'confirmed').sort((a,b) => a.date.localeCompare(b.date));
-  const pending = bookings.filter((b) => b.status === 'pending');
+  const upcoming = shows.filter((s) => s.status === ShowStatus.CONFIRMED).sort((a,b) => a.date.localeCompare(b.date));
+  const pending = bookings.filter((b) => b.status === SubmissionStatus.PENDING);
   return <div className="app-dashboard-overview" {...appPart('dashboard-overview')}><DashboardMobileHeader/><DashboardMobileCopy/><DashboardHero show={upcoming[0]}/><DashboardMetricsGrid upcomingCount={upcoming.length} pendingCount={pending.length}/><div className="app-dashboard-mobile-attention"><DashboardAttentionPanel variant="mobile"/></div><div className="app-dashboard-columns"><DashboardUpcomingPanel shows={upcoming}/><div className="app-dashboard-side"><div className="app-dashboard-desktop-quick"><DashboardQuickActionsPanel pendingCount={pending.length}/></div><DashboardActivityPanel log={log}/></div></div></div>;
 }

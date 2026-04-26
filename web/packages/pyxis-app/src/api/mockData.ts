@@ -8,26 +8,28 @@ import {
   SubmissionSchema,
   UserSchema,
   SettingsSchema,
+  ShowStatus,
+  SubmissionStatus,
 } from 'pyxis-types';
 import type { CalendarEvent, DiscordChannelMapping } from 'pyxis-types';
 
 export const shows = [
-  create(AppShowSchema, { id: 42, artist: 'Burial Hex', date: '2025-05-02', doors: '8:00 PM', age: '21+', price: '$12 adv / $15 door', status: 'confirmed', genre: 'Darkwave', draw: 70, capacity: 150, pinned: true, notes: '' }),
-  create(AppShowSchema, { id: 43, artist: 'Moor Mother', date: '2025-05-09', doors: '7:00 PM', age: 'All Ages', price: '$15', status: 'confirmed', genre: 'Experimental', draw: 120, capacity: 150, pinned: true, notes: '' }),
-  create(AppShowSchema, { id: 44, artist: 'Cygnus + Guests', date: '2025-05-17', doors: '9:00 PM', age: '18+', price: '$8', status: 'confirmed', genre: 'Techno', draw: 90, capacity: 150, pinned: true, notes: '' }),
-  create(AppShowSchema, { id: 45, artist: 'Open Mic Night', date: '2025-05-23', doors: '7:00 PM', age: 'All Ages', price: 'Free', status: 'confirmed', genre: 'Various', draw: 40, capacity: 150, notes: '' }),
-  create(AppShowSchema, { id: 46, artist: 'Zola Jesus', date: '2025-06-06', doors: '8:00 PM', age: '21+', price: '$20', status: 'confirmed', genre: 'Darkwave', draw: 160, capacity: 150, notes: '' }),
-  create(AppShowSchema, { id: 47, artist: 'Basement Frequencies', date: '2025-05-30', doors: '10:00 PM', age: '21+', price: '$10', status: 'confirmed', genre: 'Techno', draw: 85, capacity: 150, notes: '' }),
-  create(AppShowSchema, { id: 40, artist: 'Planning for Burial', date: '2025-03-14', doors: '8:00 PM', age: '18+', price: '$10', status: 'archived', genre: 'Ambient', draw: 34, capacity: 150, notes: '' }),
-  create(AppShowSchema, { id: 41, artist: 'Actress', date: '2025-02-28', doors: '9:00 PM', age: '21+', price: '$12', status: 'archived', genre: 'Electronic', draw: 61, capacity: 150, notes: '' }),
+  create(AppShowSchema, { id: 42, artist: 'Burial Hex', date: '2025-05-02', doors: '8:00 PM', age: '21+', price: '$12 adv / $15 door', status: ShowStatus.CONFIRMED, genre: 'Darkwave', draw: 70, capacity: 150, pinned: true, notes: '' }),
+  create(AppShowSchema, { id: 43, artist: 'Moor Mother', date: '2025-05-09', doors: '7:00 PM', age: 'All Ages', price: '$15', status: ShowStatus.CONFIRMED, genre: 'Experimental', draw: 120, capacity: 150, pinned: true, notes: '' }),
+  create(AppShowSchema, { id: 44, artist: 'Cygnus + Guests', date: '2025-05-17', doors: '9:00 PM', age: '18+', price: '$8', status: ShowStatus.CONFIRMED, genre: 'Techno', draw: 90, capacity: 150, pinned: true, notes: '' }),
+  create(AppShowSchema, { id: 45, artist: 'Open Mic Night', date: '2025-05-23', doors: '7:00 PM', age: 'All Ages', price: 'Free', status: ShowStatus.CONFIRMED, genre: 'Various', draw: 40, capacity: 150, notes: '' }),
+  create(AppShowSchema, { id: 46, artist: 'Zola Jesus', date: '2025-06-06', doors: '8:00 PM', age: '21+', price: '$20', status: ShowStatus.CONFIRMED, genre: 'Darkwave', draw: 160, capacity: 150, notes: '' }),
+  create(AppShowSchema, { id: 47, artist: 'Basement Frequencies', date: '2025-05-30', doors: '10:00 PM', age: '21+', price: '$10', status: ShowStatus.CONFIRMED, genre: 'Techno', draw: 85, capacity: 150, notes: '' }),
+  create(AppShowSchema, { id: 40, artist: 'Planning for Burial', date: '2025-03-14', doors: '8:00 PM', age: '18+', price: '$10', status: ShowStatus.ARCHIVED, genre: 'Ambient', draw: 34, capacity: 150, notes: '' }),
+  create(AppShowSchema, { id: 41, artist: 'Actress', date: '2025-02-28', doors: '9:00 PM', age: '21+', price: '$12', status: ShowStatus.ARCHIVED, genre: 'Electronic', draw: 61, capacity: 150, notes: '' }),
 ];
 
 export const bookings = [
-  create(SubmissionSchema, { id: 1, artistId: 0, artistName: 'Pharmakon', preferredDate: '2025-06-14', genre: 'Industrial', expectedDraw: 80, links: 'pharmakon.bandcamp.com', techRider: '', message: '', contactDiscord: '', status: 'pending', reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 19' }),
-  create(SubmissionSchema, { id: 2, artistId: 0, artistName: 'Lust for Youth', preferredDate: '2025-06-21', genre: 'Darkwave', expectedDraw: 120, links: 'instagram.com/lustyouth', techRider: '', message: '', contactDiscord: '', status: 'pending', reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 20' }),
-  create(SubmissionSchema, { id: 5, artistId: 0, artistName: 'Container', preferredDate: '2025-07-19', genre: 'Noise', expectedDraw: 55, links: 'container.bandcamp.com', techRider: '', message: '', contactDiscord: '', status: 'pending', reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 22' }),
-  create(SubmissionSchema, { id: 3, artistId: 0, artistName: 'Orphx', preferredDate: '2025-07-04', genre: 'EBM', expectedDraw: 60, links: 'orphx.com', techRider: '', message: '', contactDiscord: '', status: 'approved', reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 18' }),
-  create(SubmissionSchema, { id: 4, artistId: 0, artistName: 'Arca', preferredDate: '2025-07-12', genre: 'Experimental', expectedDraw: 200, links: 'arca1000.com', techRider: '', message: '', contactDiscord: '', status: 'declined', reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 15' }),
+  create(SubmissionSchema, { id: 1, artistId: 0, artistName: 'Pharmakon', preferredDate: '2025-06-14', genre: 'Industrial', expectedDraw: 80, links: 'pharmakon.bandcamp.com', techRider: '', message: '', contactDiscord: '', status: SubmissionStatus.PENDING, reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 19' }),
+  create(SubmissionSchema, { id: 2, artistId: 0, artistName: 'Lust for Youth', preferredDate: '2025-06-21', genre: 'Darkwave', expectedDraw: 120, links: 'instagram.com/lustyouth', techRider: '', message: '', contactDiscord: '', status: SubmissionStatus.PENDING, reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 20' }),
+  create(SubmissionSchema, { id: 5, artistId: 0, artistName: 'Container', preferredDate: '2025-07-19', genre: 'Noise', expectedDraw: 55, links: 'container.bandcamp.com', techRider: '', message: '', contactDiscord: '', status: SubmissionStatus.PENDING, reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 22' }),
+  create(SubmissionSchema, { id: 3, artistId: 0, artistName: 'Orphx', preferredDate: '2025-07-04', genre: 'EBM', expectedDraw: 60, links: 'orphx.com', techRider: '', message: '', contactDiscord: '', status: SubmissionStatus.APPROVED, reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 18' }),
+  create(SubmissionSchema, { id: 4, artistId: 0, artistName: 'Arca', preferredDate: '2025-07-12', genre: 'Experimental', expectedDraw: 200, links: 'arca1000.com', techRider: '', message: '', contactDiscord: '', status: SubmissionStatus.DECLINED, reviewedBy: 0, reviewedAt: '', createdAt: 'Apr 15' }),
 ];
 
 export const artists = [
