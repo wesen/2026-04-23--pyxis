@@ -7,4 +7,16 @@ RETURNING *;
 SELECT * FROM submissions WHERE id = $1;
 
 -- name: ListSubmissions :many
-SELECT * FROM submissions WHERE status = COALESCE($1, status) ORDER BY created_at DESC;
+SELECT * FROM submissions WHERE ($1 = '' OR status = $1) ORDER BY created_at DESC;
+
+-- name: ApproveSubmission :one
+UPDATE submissions
+SET status = 'approved', reviewed_by = $2, reviewed_at = NOW()
+WHERE id = $1
+RETURNING *;
+
+-- name: DeclineSubmission :one
+UPDATE submissions
+SET status = 'declined', reviewed_by = $2, reviewed_at = NOW()
+WHERE id = $1
+RETURNING *;

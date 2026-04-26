@@ -11,6 +11,40 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const approveSubmission = `-- name: ApproveSubmission :one
+UPDATE submissions
+SET status = 'approved', reviewed_by = $2, reviewed_at = NOW()
+WHERE id = $1
+RETURNING id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at
+`
+
+type ApproveSubmissionParams struct {
+	ID         int32       `json:"id"`
+	ReviewedBy pgtype.Int4 `json:"reviewedBy"`
+}
+
+func (q *Queries) ApproveSubmission(ctx context.Context, arg ApproveSubmissionParams) (Submission, error) {
+	row := q.db.QueryRow(ctx, approveSubmission, arg.ID, arg.ReviewedBy)
+	var i Submission
+	err := row.Scan(
+		&i.ID,
+		&i.ArtistID,
+		&i.ArtistName,
+		&i.PreferredDate,
+		&i.Genre,
+		&i.ExpectedDraw,
+		&i.Links,
+		&i.TechRider,
+		&i.Message,
+		&i.ContactDiscord,
+		&i.Status,
+		&i.ReviewedBy,
+		&i.ReviewedAt,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const createSubmission = `-- name: CreateSubmission :one
 INSERT INTO submissions (artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'pending')
@@ -59,6 +93,40 @@ func (q *Queries) CreateSubmission(ctx context.Context, arg CreateSubmissionPara
 	return i, err
 }
 
+const declineSubmission = `-- name: DeclineSubmission :one
+UPDATE submissions
+SET status = 'declined', reviewed_by = $2, reviewed_at = NOW()
+WHERE id = $1
+RETURNING id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at
+`
+
+type DeclineSubmissionParams struct {
+	ID         int32       `json:"id"`
+	ReviewedBy pgtype.Int4 `json:"reviewedBy"`
+}
+
+func (q *Queries) DeclineSubmission(ctx context.Context, arg DeclineSubmissionParams) (Submission, error) {
+	row := q.db.QueryRow(ctx, declineSubmission, arg.ID, arg.ReviewedBy)
+	var i Submission
+	err := row.Scan(
+		&i.ID,
+		&i.ArtistID,
+		&i.ArtistName,
+		&i.PreferredDate,
+		&i.Genre,
+		&i.ExpectedDraw,
+		&i.Links,
+		&i.TechRider,
+		&i.Message,
+		&i.ContactDiscord,
+		&i.Status,
+		&i.ReviewedBy,
+		&i.ReviewedAt,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getSubmission = `-- name: GetSubmission :one
 SELECT id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at FROM submissions WHERE id = $1
 `
@@ -86,11 +154,11 @@ func (q *Queries) GetSubmission(ctx context.Context, id int32) (Submission, erro
 }
 
 const listSubmissions = `-- name: ListSubmissions :many
-SELECT id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at FROM submissions WHERE status = COALESCE($1, status) ORDER BY created_at DESC
+SELECT id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at FROM submissions WHERE ($1 = '' OR status = $1) ORDER BY created_at DESC
 `
 
-func (q *Queries) ListSubmissions(ctx context.Context, status string) ([]Submission, error) {
-	rows, err := q.db.Query(ctx, listSubmissions, status)
+func (q *Queries) ListSubmissions(ctx context.Context, dollar_1 interface{}) ([]Submission, error) {
+	rows, err := q.db.Query(ctx, listSubmissions, dollar_1)
 	if err != nil {
 		return nil, err
 	}

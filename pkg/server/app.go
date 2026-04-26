@@ -1,6 +1,7 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -201,6 +202,218 @@ func domainShowToAppShow(show *domain.Show) *pyxisv1.AppShow {
 		Status: show.Status,
 		Genre:  show.Genre,
 	}
+}
+
+func (s *Server) handleListBookings(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	status := r.URL.Query().Get("status")
+
+	subs, err := s.submissionService.List(ctx, status)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	pbSubs := make([]map[string]interface{}, len(subs))
+	for i, sub := range subs {
+		pbSubs[i] = submissionToProto(&sub)
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"submissions": pbSubs,
+	})
+}
+
+func (s *Server) handleApproveBooking(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid booking ID: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	actorName := user.DiscordUsername
+
+	created, err := s.submissionService.Approve(ctx, id, actorID, actorName)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, showToProto(created))
+}
+
+func (s *Server) handleDeclineBooking(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid booking ID: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	actorName := user.DiscordUsername
+
+	if err := s.submissionService.Decline(ctx, id, actorID, actorName); err != nil {
+		respondError(w, err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"success":true}`))
+}
+
+func (s *Server) handleListArtists(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	artists, err := s.artistService.List(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	pbArtists := make([]map[string]interface{}, len(artists))
+	for i, artist := range artists {
+		pbArtists[i] = map[string]interface{}{
+			"id":        artist.ID,
+			"name":      artist.Name,
+			"genre":     artist.Genre,
+			"links":     artist.Links,
+			"notes":     artist.Notes,
+			"createdAt": artist.CreatedAt.Format(time.RFC3339),
+		}
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"artists": pbArtists,
+	})
+}
+
+func (s *Server) handleGetArtist(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid artist ID: %w", err))
+		return
+	}
+
+	artist, err := s.artistService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":        artist.ID,
+		"name":      artist.Name,
+		"genre":     artist.Genre,
+		"links":     artist.Links,
+		"notes":     artist.Notes,
+		"createdAt": artist.CreatedAt.Format(time.RFC3339),
+	})
+}
+
+func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid artist ID: %w", err))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req struct {
+		Name  string `json:"name"`
+		Genre string `json:"genre"`
+		Links string `json:"links"`
+		Notes string `json:"notes"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	artist := &domain.Artist{
+		ID:    id,
+		Name:  req.Name,
+		Genre: req.Genre,
+		Links: req.Links,
+		Notes: req.Notes,
+	}
+
+	updated, err := s.artistService.Update(ctx, artist)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":        updated.ID,
+		"name":      updated.Name,
+		"genre":     updated.Genre,
+		"links":     updated.Links,
+		"notes":     updated.Notes,
+		"createdAt": updated.CreatedAt.Format(time.RFC3339),
+	})
+}
+
+func submissionToProto(sub *domain.Submission) map[string]interface{} {
+	pb := map[string]interface{}{
+		"id":             sub.ID,
+		"artistName":     sub.ArtistName,
+		"genre":          sub.Genre,
+		"links":          sub.Links,
+		"techRider":      sub.TechRider,
+		"message":        sub.Message,
+		"contactDiscord": sub.ContactDiscord,
+		"status":         sub.Status,
+		"createdAt":      sub.CreatedAt.Format(time.RFC3339),
+	}
+	if sub.ArtistID != nil {
+		pb["artistId"] = *sub.ArtistID
+	}
+	if sub.PreferredDate != nil {
+		pb["preferredDate"] = sub.PreferredDate.Format(time.DateOnly)
+	}
+	if sub.ExpectedDraw != nil {
+		pb["expectedDraw"] = *sub.ExpectedDraw
+	}
+	if sub.ReviewedBy != nil {
+		pb["reviewedBy"] = *sub.ReviewedBy
+	}
+	if sub.ReviewedAt != nil {
+		pb["reviewedAt"] = sub.ReviewedAt.Format(time.RFC3339)
+	}
+	return pb
 }
 
 func (s *Server) requireRole(roles ...string) func(http.Handler) http.Handler {

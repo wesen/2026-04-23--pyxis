@@ -18,6 +18,7 @@ type Server struct {
 	handler           http.Handler
 	showService       *service.ShowService
 	submissionService *service.SubmissionService
+	artistService     *service.ArtistService
 	authService       *service.AuthService
 }
 
@@ -29,12 +30,16 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	queries := db.New(database.Pool)
 	showRepo := postgres.NewShowRepo(queries)
 	submissionRepo := postgres.NewSubmissionRepo(queries)
+	artistRepo := postgres.NewArtistRepo(queries)
 	auditRepo := postgres.NewAuditRepo(queries)
 
 	// Service layer
 	auditSvc := service.NewAuditService(auditRepo)
 	s.showService = service.NewShowService(showRepo, auditSvc)
-	s.submissionService = service.NewSubmissionService(submissionRepo)
+	s.artistService = service.NewArtistService(artistRepo)
+	s.submissionService = service.NewSubmissionService(
+		submissionRepo, showRepo, artistRepo, auditSvc, database.Pool,
+	)
 
 	// Auth service (uses placeholder config; override in production)
 	s.authService = service.NewAuthService(queries, service.DiscordOAuthConfig{
@@ -62,12 +67,6 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("GET /auth/me", s.requireAuth(http.HandlerFunc(s.handleGetMe)))
 	mux.Handle("POST /auth/logout", s.requireAuth(http.HandlerFunc(s.handleLogout)))
 
-	// Staff API (auth + role required)
-	staff := s.requireAuth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Sub-router for staff API
-	}))
-	_ = staff
-
 	mux.HandleFunc("GET /api/app/session", s.handleGetSession)
 
 	// Staff show endpoints
@@ -76,6 +75,16 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("PATCH /api/app/shows/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateShow))))
 	mux.Handle("PATCH /api/app/shows/{id}/cancel", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCancelShow))))
 	mux.Handle("PATCH /api/app/shows/{id}/archive", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleArchiveShow))))
+
+	// Staff booking endpoints
+	mux.Handle("GET /api/app/bookings", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleListBookings))))
+	mux.Handle("PATCH /api/app/bookings/{id}/approve", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleApproveBooking))))
+	mux.Handle("PATCH /api/app/bookings/{id}/decline", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeclineBooking))))
+
+	// Staff artist endpoints
+	mux.Handle("GET /api/app/artists", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListArtists))))
+	mux.Handle("GET /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetArtist))))
+	mux.Handle("PATCH /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateArtist))))
 
 	s.handler = mux
 	return s

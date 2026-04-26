@@ -186,6 +186,17 @@ func respondProtoJSON(w http.ResponseWriter, status int, msg proto.Message) {
 	w.Write(b)
 }
 
+func respondJSON(w http.ResponseWriter, status int, v interface{}) {
+	b, err := json.Marshal(v)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	w.Write(b)
+}
+
 func respondError(w http.ResponseWriter, err error) {
 	status := http.StatusInternalServerError
 	code := "INTERNAL_ERROR"
@@ -193,6 +204,9 @@ func respondError(w http.ResponseWriter, err error) {
 
 	switch {
 	case errors.Is(err, service.ErrNotFound):
+		status = http.StatusNotFound
+		code = "NOT_FOUND"
+	case message == "no rows in result set":
 		status = http.StatusNotFound
 		code = "NOT_FOUND"
 	case message == "unauthenticated":
