@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "mobile",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 14.322674052624954,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "shows",
+        "variant": "mobile",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows",
+        "sectionCount": 1,
+        "maxChangedPercent": 14.322674052624954,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "shows",
+            "variant": "mobile",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/mobile/shows.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-mobile&viewMode=story",
+            "leftSelector": "[data-page=\"shows\"]",
+            "rightSelector": "[data-page=\"shows\"]",
+            "threshold": 30,
+            "changedPercent": 14.322674052624954,
+            "changedPixels": 68259,
+            "totalPixels": 476580,
+            "normalizedWidth": 390,
+            "normalizedHeight": 1222,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 964.75
+              },
+              "right": {
+                "width": 390,
+                "height": 1222.078125,
+                "x": 0,
+                "y": 0
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 257.328125
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "right": {
+                  "name": "shows-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-mobile&viewMode=story",
+                  "selector": "[data-page=\"shows\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 1222.078125
+                  }
+                },
+                "textChanged": true,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 6,
+                "artifactCount": 2,
+                "left": {
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 964.75
+                  },
+                  "name": "shows-page",
+                  "url": "http://localhost:7070/standalone/mobile/shows.html",
+                  "selector": "[data-page=\"shows\"]",
+                  "exists": true
+                },
+                "name": "shows-page",
+                "pixel": {
+                  "normalizedHeight": 1222,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 476580,
+                  "changedPixels": 68259,
+                  "changedPercent": 14.322674052624954,
+                  "normalizedWidth": 390
+                }
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "shows",
+        "variant": "mobile",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/mobile/shows.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-mobile&viewMode=story",
+        "leftSelector": "[data-page=\"shows\"]",
+        "rightSelector": "[data-page=\"shows\"]",
+        "threshold": 30,
+        "changedPercent": 14.322674052624954,
+        "changedPixels": 68259,
+        "totalPixels": 476580,
+        "normalizedWidth": 390,
+        "normalizedHeight": 1222,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 964.75
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1222.078125
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 257.328125
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 476580,
+              "changedPixels": 68259,
+              "changedPercent": 14.322674052624954,
+              "normalizedWidth": 390,
+              "normalizedHeight": 1222
+            },
+            "right": {
+              "visible": true,
+              "bounds": {
+                "width": 390,
+                "height": 1222.078125,
+                "x": 0,
+                "y": 0
+              },
+              "name": "shows-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-mobile&viewMode=story",
+              "selector": "[data-page=\"shows\"]",
+              "exists": true
+            },
+            "textChanged": true,
+            "attributeChanges": 3,
+            "boundsChanged": true,
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 6,
+            "artifactCount": 2,
+            "left": {
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 964.75
+              },
+              "name": "shows-page",
+              "url": "http://localhost:7070/standalone/mobile/shows.html",
+              "selector": "[data-page=\"shows\"]",
+              "exists": true
+            },
+            "name": "shows-page"
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 6.132427843803056,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "login",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login",
+        "sectionCount": 1,
+        "maxChangedPercent": 6.132427843803056,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "login",
+            "variant": "desktop",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/full-app/login.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--login-desktop&viewMode=story",
+            "leftSelector": "[data-page=\"login\"]",
+            "rightSelector": "[data-page=\"login\"]",
+            "threshold": 30,
+            "changedPercent": 6.132427843803056,
+            "changedPixels": 57792,
+            "totalPixels": 942400,
+            "normalizedWidth": 1240,
+            "normalizedHeight": 760,
+            "bounds": {
+              "changed": false,
+              "left": {
+                "height": 760,
+                "x": 0,
+                "y": 0,
+                "width": 1240
+              },
+              "right": {
+                "height": 760,
+                "x": 0,
+                "y": 0,
+                "width": 1240
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 1,
+                "boundsChanged": false,
+                "left": {
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1240,
+                    "height": 760
+                  },
+                  "name": "login-page",
+                  "url": "http://localhost:7070/standalone/full-app/login.html",
+                  "selector": "[data-page=\"login\"]",
+                  "exists": true,
+                  "visible": true
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 5,
+                "name": "login-page",
+                "pixel": {
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 942400,
+                  "changedPixels": 57792,
+                  "changedPercent": 6.132427843803056,
+                  "normalizedWidth": 1240,
+                  "normalizedHeight": 760,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_comparison.png"
+                },
+                "right": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "width": 1240,
+                    "height": 760,
+                    "x": 0,
+                    "y": 0
+                  },
+                  "name": "login-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--login-desktop&viewMode=story",
+                  "selector": "[data-page=\"login\"]"
+                },
+                "textChanged": false
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "login",
+        "variant": "desktop",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/full-app/login.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--login-desktop&viewMode=story",
+        "leftSelector": "[data-page=\"login\"]",
+        "rightSelector": "[data-page=\"login\"]",
+        "threshold": 30,
+        "changedPercent": 6.132427843803056,
+        "changedPixels": 57792,
+        "totalPixels": 942400,
+        "normalizedWidth": 1240,
+        "normalizedHeight": 760,
+        "bounds": {
+          "changed": false,
+          "left": {
+            "width": 1240,
+            "height": 760,
+            "x": 0,
+            "y": 0
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 1240,
+            "height": 760
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "name": "login-page",
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/login-desktop-page/login/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 942400,
+              "changedPixels": 57792,
+              "changedPercent": 6.132427843803056,
+              "normalizedWidth": 1240,
+              "normalizedHeight": 760
+            },
+            "right": {
+              "name": "login-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--login-desktop&viewMode=story",
+              "selector": "[data-page=\"login\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              }
+            },
+            "textChanged": false,
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": false,
+            "left": {
+              "name": "login-page",
+              "url": "http://localhost:7070/standalone/full-app/login.html",
+              "selector": "[data-page=\"login\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 0,
+                "width": 1240,
+                "height": 760,
+                "x": 0
+              }
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 5
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

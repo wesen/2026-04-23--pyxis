@@ -1,0 +1,133 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-desktop-page/shows/artifacts/page/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-desktop-page/shows/artifacts/page/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-shell"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "app-shell"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": false,
+    "delta": {
+      "height": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "left": {
+      "height": 760,
+      "width": 1240,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 760,
+      "width": 1240,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 760,
+      "width": 1240,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "shows-page",
+    "selector": "[data-page=\"shows\"]",
+    "url": "http://localhost:7070/standalone/full-app/shows.html",
+    "visible": true
+  },
+  "name": "shows-page",
+  "pixel": {
+    "changedPercent": 10.14028013582343,
+    "changedPixels": 95562,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-desktop-page/shows/artifacts/page/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-desktop-page/shows/artifacts/page/diff_only.png",
+    "normalizedHeight": 760,
+    "normalizedWidth": 1240,
+    "threshold": 30,
+    "totalPixels": 942400
+  },
+  "right": {
+    "bounds": {
+      "height": 760,
+      "width": 1240,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "shows-page",
+    "selector": "[data-page=\"shows\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--shows-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(0, 0, 0, 0)",
+      "name": "background-color",
+      "right": "rgb(248, 247, 243)"
+    },
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "border-radius",
+      "right": "18px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(0, 0, 0)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "Inter, -apple-system, sans-serif",
+      "name": "font-family",
+      "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / ShowsShowsAll confirmed and archived eventsNew showAll Confirmed 6Hold Cancelled Archived Sort: Date ascendingConfirmed · 6Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#42May 2FridayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#43May 9FridayMoor MotherExperimental7:00 PMAll Ages$15120/150Confirmed#44May 17SaturdayCygnus + GuestsTechno9:00 PM18+$890/150Confirmed#45May 23FridayOpen Mic NightVarious7:00 PMAll AgesFree40/150Confirmed#47May 30FridayBasement FrequenciesTechno10:00 PM21+$1085/150Confirmed#46Jun 6FridayZola JesusDarkwave8:00 PM21+$20160/150ConfirmedArchived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived",
+    "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / ShowsShowsNew showAllConfirmed 6HoldCancelledArchivedSort: Date ascendingConfirmed · 6Pinned shows appear in #upcoming-showsDateArtistDoorsAgePriceDrawStatusFriMay 2Burial HexDarkwave8:00 PM21+$12 adv / $15 door70/150confirmedFriMay 9Moor MotherExperimental7:00 PMAll Ages$15120/150confirmedSatMay 17Cygnus + GuestsTechno9:00 PM18+$890/150confirmedFriMay 23Open Mic NightVarious7:00 PMAll AgesFree40/150confirmedFriMay 30Basement FrequenciesTechno10:00 PM21+$1085/150confirmedFriJun 6Zola JesusDarkwave8:00 PM21+$20160/150confirmedArchived · 2See all past shows ›DateArtistDoorsAgePriceDrawStatusFriMar 14Planning for BurialAmbient8:00 PM18+$1034/150archivedFriFeb 28ActressElectronic9:00 PM21+$1261/150archivedDashboardShowsCalendarBookingsMore"
+  }
+}

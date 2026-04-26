@@ -1,0 +1,116 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/01-suite-summary.md",
+  "maxChangedPercent": 14.322674052624954,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 257.328125,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 964.75,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        "normalizedHeight": 1222,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 1222.078125,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 14.322674052624954,
+      "changedPixels": 68259,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/left_region.png",
+      "leftSelector": "[data-page=\"shows\"]",
+      "page": "shows",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/shows-mobile-page/shows/artifacts/page/right_region.png",
+      "rightSelector": "[data-page=\"shows\"]",
+      "section": "page",
+      "styleChangeCount": 6,
+      "styleDiffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "property": "background-color",
+          "right": "rgb(243, 241, 235)"
+        },
+        {
+          "left": "rgb(0, 0, 0)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "Inter, -apple-system, sans-serif",
+          "property": "font-family",
+          "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "0px",
+          "property": "padding-bottom",
+          "right": "72px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "9:41ShowsConfirmed6 upcoming · May 2025AllConfirmedHoldArchivedMay2FriBurial HexDarkwave · Doors 8:00 PM · 21+Confirmed~70/150May9FriMoor MotherExperimental · Doors 7:00 PM · All AgesConfirmed~120/150May17SatCygnus + GuestsTechno · Doors 9:00 PM · 18+Confirmed~90/150May23FriOpen Mic NightVarious · Doors 7:00 PM · All AgesConfirmed~40/150May30FriBasement FrequenciesTechno · Doors 10:00 PM · 21+Confirmed~85/150Jun6FriZola JesusDarkwave · Doors 8:00 PM · 21+Confirmed~160/150HomeShows3BookingsArtistsMore",
+        "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / ShowsShowsNew showAllConfirmed 6HoldCancelledArchivedSort: Date ascendingConfirmed · 6Pinned shows appear in #upcoming-showsDateArtistDoorsAgePriceDrawStatusFriMay 2Burial HexDarkwave8:00 PM21+$12 adv / $15 door70/150confirmedFriMay 9Moor MotherExperimental7:00 PMAll Ages$15120/150confirmedSatMay 17Cygnus + GuestsTechno9:00 PM18+$890/150confirmedFriMay 23Open Mic NightVarious7:00 PMAll AgesFree40/150confirmedFriMay 30Basement FrequenciesTechno10:00 PM21+$1085/150confirmedFriJun 6Zola JesusDarkwave8:00 PM21+$20160/150confirmedArchived · 2See all past shows ›DateArtistDoorsAgePriceDrawStatusFriMar 14Planning for BurialAmbient8:00 PM18+$1034/150archivedFriFeb 28ActressElectronic9:00 PM21+$1261/150archivedDashboardShowsCalendarBookingsMore"
+      },
+      "threshold": 30,
+      "totalPixels": 476580,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

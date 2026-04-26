@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 6.0353353140916814,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "setup",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup",
+        "sectionCount": 1,
+        "maxChangedPercent": 6.0353353140916814,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/01-catalog-index.md",
+        "catalog": {
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0
+        },
+        "sections": [
+          {
+            "page": "setup",
+            "variant": "desktop",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/full-app/setup.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--setup-desktop&viewMode=story",
+            "leftSelector": "[data-page=\"setup\"]",
+            "rightSelector": "[data-page=\"setup\"]",
+            "threshold": 30,
+            "changedPercent": 6.0353353140916814,
+            "changedPixels": 56877,
+            "totalPixels": 942400,
+            "normalizedWidth": 1240,
+            "normalizedHeight": 760,
+            "bounds": {
+              "left": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              },
+              "right": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              },
+              "delta": {
+                "height": 0,
+                "x": 0,
+                "y": 0,
+                "width": 0
+              },
+              "changed": false
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "pixel": {
+                  "totalPixels": 942400,
+                  "changedPixels": 56877,
+                  "changedPercent": 6.0353353140916814,
+                  "normalizedWidth": 1240,
+                  "normalizedHeight": 760,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_only.png",
+                  "threshold": 30
+                },
+                "styleChanges": 9,
+                "boundsChanged": false,
+                "name": "setup-page",
+                "right": {
+                  "visible": true,
+                  "bounds": {
+                    "y": 0,
+                    "width": 1240,
+                    "height": 760,
+                    "x": 0
+                  },
+                  "name": "setup-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--setup-desktop&viewMode=story",
+                  "selector": "[data-page=\"setup\"]",
+                  "exists": true
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": true,
+                "artifactCount": 2,
+                "attributeChanges": 1,
+                "left": {
+                  "name": "setup-page",
+                  "url": "http://localhost:7070/standalone/full-app/setup.html",
+                  "selector": "[data-page=\"setup\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1240,
+                    "height": 760
+                  }
+                }
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "setup",
+        "variant": "desktop",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/full-app/setup.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--setup-desktop&viewMode=story",
+        "leftSelector": "[data-page=\"setup\"]",
+        "rightSelector": "[data-page=\"setup\"]",
+        "threshold": 30,
+        "changedPercent": 6.0353353140916814,
+        "changedPixels": 56877,
+        "totalPixels": 942400,
+        "normalizedWidth": 1240,
+        "normalizedHeight": 760,
+        "bounds": {
+          "changed": false,
+          "left": {
+            "x": 0,
+            "y": 0,
+            "width": 1240,
+            "height": 760
+          },
+          "right": {
+            "y": 0,
+            "width": 1240,
+            "height": 760,
+            "x": 0
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "right": {
+              "selector": "[data-page=\"setup\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              },
+              "name": "setup-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--setup-desktop&viewMode=story"
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "textChanged": true,
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "left": {
+              "name": "setup-page",
+              "url": "http://localhost:7070/standalone/full-app/setup.html",
+              "selector": "[data-page=\"setup\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "width": 1240,
+                "height": 760,
+                "x": 0,
+                "y": 0
+              }
+            },
+            "pixel": {
+              "changedPixels": 56877,
+              "changedPercent": 6.0353353140916814,
+              "normalizedWidth": 1240,
+              "normalizedHeight": 760,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/12-phase-8-0-to-8-3/current/setup-desktop-page/setup/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 942400
+            },
+            "styleChanges": 9,
+            "boundsChanged": false,
+            "name": "setup-page"
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

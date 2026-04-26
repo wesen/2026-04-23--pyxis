@@ -1,4 +1,3 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ArtistsPage, AttendancePage, AuditLogPage, BookingsPage, CalendarPage, DashboardPage, DiscordPage, LoginPage, ModalShowcasePage, SettingsPage, SetupPage, ShowsPage } from './pages/Pages';
-import './pages/pages.css';
 export function App() { return <Routes><Route path="/login" element={<LoginPage/>}/><Route path="/setup" element={<SetupPage/>}/><Route path="/" element={<DashboardPage/>}/><Route path="/shows" element={<ShowsPage/>}/><Route path="/calendar" element={<CalendarPage/>}/><Route path="/bookings" element={<BookingsPage/>}/><Route path="/artists" element={<ArtistsPage/>}/><Route path="/attendance" element={<AttendancePage/>}/><Route path="/log" element={<AuditLogPage/>}/><Route path="/discord" element={<DiscordPage/>}/><Route path="/settings" element={<SettingsPage/>}/><Route path="/modal" element={<ModalShowcasePage/>}/><Route path="*" element={<Navigate to="/" replace/>}/></Routes>; }

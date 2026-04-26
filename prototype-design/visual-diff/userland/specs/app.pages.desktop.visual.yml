@@ -58,3 +58,55 @@ targets:
       - name: attention
         original: '[data-section="dashboard-attention"]'
         react: '[data-section="dashboard-attention"]'
+
+  - page: login
+    variant: desktop
+    priority: phase-8
+    prototypePath: /standalone/full-app/login.html
+    storyId: pyxis-app-pages--login-desktop
+    sections:
+      - name: page
+        original: '[data-page="login"]'
+        react: '[data-page="login"]'
+      - name: marquee
+        original: '.px-root > div:first-child'
+        react: '[data-section="login-marquee"]'
+      - name: panel
+        original: '.px-root > div:last-child'
+        react: '[data-section="login-panel"]'
+  - page: setup
+    variant: desktop
+    priority: phase-8
+    prototypePath: /standalone/full-app/setup.html
+    storyId: pyxis-app-pages--setup-desktop
+    sections:
+      - name: page
+        original: '[data-page="setup"]'
+        react: '[data-page="setup"]'
+      - name: header
+        original: '.px-root > div:nth-child(1), .px-root > div:nth-child(2), .px-root > div:nth-child(3)'
+        react: '[data-section="setup-header"]'
+      - name: progress
+        original: '.px-root > div:nth-child(4)'
+        react: '[data-section="setup-progress"]'
+      - name: channels
+        original: '.px-root > div:nth-child(5)'
+        react: '[data-section="setup-channels"]'
+  - page: shows
+    variant: desktop
+    priority: phase-8
+    prototypePath: /standalone/full-app/shows.html
+    storyId: pyxis-app-pages--shows-desktop
+    sections:
+      - name: page
+        original: '[data-page="shows"]'
+        react: '[data-page="shows"]'
+      - name: filters
+        original: '[data-page="shows"] main > div:first-child'
+        react: '[data-section="shows-filters"]'
+      - name: confirmed
+        original: '[data-page="shows"] main > div:nth-child(2)'
+        react: '[data-section="shows-confirmed"]'
+      - name: archived
+        original: '[data-page="shows"] main > div:nth-child(3)'
+        react: '[data-section="shows-archived"]'

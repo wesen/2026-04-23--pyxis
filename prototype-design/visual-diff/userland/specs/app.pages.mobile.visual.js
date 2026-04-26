@@ -76,6 +76,34 @@ module.exports = {
           "react": "[data-section=\"dashboard-activity\"]"
         }
       ]
+    },
+    {
+      "page": "login",
+      "variant": "mobile",
+      "priority": "phase-8",
+      "prototypePath": "/standalone/mobile/login.html",
+      "storyId": "pyxis-app-pages--login-mobile",
+      "sections": [
+        {
+          "name": "page",
+          "original": "[data-page=\"login\"]",
+          "react": "[data-page=\"login\"]"
+        }
+      ]
+    },
+    {
+      "page": "shows",
+      "variant": "mobile",
+      "priority": "phase-8",
+      "prototypePath": "/standalone/mobile/shows.html",
+      "storyId": "pyxis-app-pages--shows-mobile",
+      "sections": [
+        {
+          "name": "page",
+          "original": "[data-page=\"shows\"]",
+          "react": "[data-page=\"shows\"]"
+        }
+      ]
     }
   ]
 }
