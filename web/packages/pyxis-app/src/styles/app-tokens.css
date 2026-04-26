@@ -1,12 +1,12 @@
 :root {
-  --app-canvas: #f3f1eb;
-  --app-mobile-canvas: #e8e4da;
-  --app-login-glow: #fff7e8;
-  --app-login-edge: #e7e0d3;
+  --app-canvas: #f8f7f3;
+  --app-mobile-canvas: #f3f1eb;
+  --app-login-glow: #ffffff;
+  --app-login-edge: #ede9df;
 
-  --app-surface: #fffaf2;
+  --app-surface: #ffffff;
   --app-surface-strong: #ffffff;
-  --app-surface-muted: #eee8dc;
+  --app-surface-muted: #f0ede6;
   --app-surface-success: #e8f2e9;
 
   --app-ink: #1f1e1c;

@@ -51,6 +51,16 @@ module.exports = {
           "react": "[data-page=\"dashboard\"]"
         },
         {
+          "name": "sidebar",
+          "original": "aside",
+          "react": "[data-section=\"app-sidebar\"]"
+        },
+        {
+          "name": "topbar",
+          "original": "main > div:first-child",
+          "react": "[data-section=\"app-topbar\"]"
+        },
+        {
           "name": "summary",
           "original": "[data-page=\"dashboard\"]",
           "react": "[data-section=\"dashboard-summary\"]"

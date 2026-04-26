@@ -597,16 +597,16 @@ Use this checklist for every Phase 7.x Dashboard section:
 
 ### Phase 7.1 — Dashboard header and shell/menu consolidation
 
-- [ ] Consolidate desktop sidebar/menu with prototype grouping, active state, pending badge, and user footer where appropriate.
-- [ ] Consolidate desktop topbar/header actions: breadcrumb, title, subtitle/date line, search, bell, new-show button.
-- [ ] Consolidate mobile header and bottom nav with the prototype labels/icons/badge behavior.
-- [ ] Extract organisms/molecules as needed:
+- [x] Consolidate desktop sidebar/menu with prototype grouping, active state, pending badge, and user footer where appropriate.
+- [x] Consolidate desktop topbar/header actions: breadcrumb, title, subtitle/date line, search, bell, new-show button.
+- [x] Consolidate mobile header and bottom nav with the prototype labels/icons/badge behavior.
+- [x] Extract organisms/molecules as needed:
   - [ ] `DashboardHeader`,
-  - [ ] `DashboardMobileHeader`,
-  - [ ] `AppSidebarMenu` / `AppSidebarUserFooter`,
-  - [ ] `AppMobileBottomNav`.
-- [ ] Add Storybook stories for shell/menu/header variants.
-- [ ] Add focused visual sections/specs for header/menu/mobile nav if feasible.
+  - [x] `DashboardMobileHeader`,
+  - [x] `AppSidebarMenu` / `AppSidebarUserFooter`,
+  - [x] `AppMobileBottomNav`.
+- [x] Add Storybook stories for shell/menu/header variants.
+- [x] Add focused visual sections/specs for header/menu/mobile nav if feasible.
 - [ ] Commit: `Consolidate dashboard shell and header`.
 
 ### Phase 7.2 — Dashboard hero consolidation
@@ -653,7 +653,7 @@ Use this checklist for every Phase 7.x Dashboard section:
 - [x] Align metadata order/copy with prototype (`time/user/action` differences) without overfitting if data model differs.
 - [x] Add Storybook stories for desktop, mobile, bot-only, empty, long activity text.
 - [x] Tune `dashboard-activity` focused comparison before full page.
-- [ ] Commit: `Consolidate dashboard recent activity`.
+- [x] Commit: `Consolidate dashboard recent activity`.
 
 ### Phase 7.7 — Dashboard full-page acceptance checkpoint
 

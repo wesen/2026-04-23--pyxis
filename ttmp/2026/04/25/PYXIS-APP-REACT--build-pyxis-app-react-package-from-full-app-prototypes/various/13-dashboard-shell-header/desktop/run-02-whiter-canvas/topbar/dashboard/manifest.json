@@ -1,0 +1,163 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T00:20:51.495604377Z",
+  "updated_at": "2026-04-26T00:20:56.750884982Z",
+  "targets": [
+    {
+      "slug": "topbar",
+      "name": "dashboard topbar",
+      "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+      "selector": "main \u003e div:first-child",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "topbar",
+        "name": "dashboard topbar",
+        "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "selector": "main \u003e div:first-child",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "dashboard-topbar",
+        "left": {
+          "name": "dashboard-topbar",
+          "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+          "selector": "main \u003e div:first-child",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          }
+        },
+        "right": {
+          "name": "dashboard-topbar",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+          "selector": "[data-section=\"app-topbar\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 111.140625
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 112998,
+          "changedPixels": 9571,
+          "changedPercent": 8.47006141701623,
+          "normalizedWidth": 1018,
+          "normalizedHeight": 111,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          },
+          "right": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 111.140625
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0.75
+          }
+        },
+        "text": {
+          "changed": false,
+          "left": "Home / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew show",
+          "right": "Home / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew show"
+        },
+        "styles": [
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-topbar",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "app-topbar",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          },
+          {
+            "name": "data-section",
+            "right": "app-topbar",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-02-whiter-canvas/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T00:20:56.750883997Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

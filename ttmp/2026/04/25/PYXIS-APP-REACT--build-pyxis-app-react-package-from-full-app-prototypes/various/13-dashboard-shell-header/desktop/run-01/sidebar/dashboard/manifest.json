@@ -1,0 +1,169 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/sidebar/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T00:19:28.403662204Z",
+  "updated_at": "2026-04-26T00:19:34.171323703Z",
+  "targets": [
+    {
+      "slug": "sidebar",
+      "name": "dashboard sidebar",
+      "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+      "selector": "aside",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "sidebar",
+        "name": "dashboard sidebar",
+        "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "selector": "aside",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "dashboard-sidebar",
+        "left": {
+          "name": "dashboard-sidebar",
+          "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+          "selector": "aside",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 220,
+            "height": 758
+          }
+        },
+        "right": {
+          "name": "dashboard-sidebar",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+          "selector": "[data-section=\"app-sidebar\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 1,
+            "y": 1,
+            "width": 220,
+            "height": 758
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 166760,
+          "changedPixels": 10606,
+          "changedPercent": 6.360038378508036,
+          "normalizedWidth": 220,
+          "normalizedHeight": 758,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/sidebar/dashboard/artifacts/sidebar/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/sidebar/dashboard/artifacts/sidebar/diff_only.png"
+        },
+        "bounds": {
+          "changed": false,
+          "left": {
+            "x": 1,
+            "y": 1,
+            "width": 220,
+            "height": 758
+          },
+          "right": {
+            "x": 1,
+            "y": 1,
+            "width": 220,
+            "height": 758
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        "text": {
+          "changed": false,
+          "left": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · online",
+          "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · online"
+        },
+        "styles": [
+          {
+            "name": "background-color",
+            "left": "rgb(255, 255, 255)",
+            "right": "rgb(255, 250, 242)",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-sidebar",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "app-sidebar",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          },
+          {
+            "name": "data-section",
+            "right": "app-sidebar",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/sidebar/dashboard/artifacts/sidebar/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/sidebar/dashboard/artifacts/sidebar/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T00:19:34.17132325Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

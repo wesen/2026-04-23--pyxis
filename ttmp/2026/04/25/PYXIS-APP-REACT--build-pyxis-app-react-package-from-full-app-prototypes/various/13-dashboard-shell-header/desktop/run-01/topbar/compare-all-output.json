@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 8.49395564523266,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard",
+        "sectionCount": 1,
+        "maxChangedPercent": 8.49395564523266,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "dashboard",
+            "variant": "desktop",
+            "section": "topbar",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar",
+            "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+            "leftSelector": "main > div:first-child",
+            "rightSelector": "[data-section=\"app-topbar\"]",
+            "threshold": 30,
+            "changedPercent": 8.49395564523266,
+            "changedPixels": 9598,
+            "totalPixels": 112998,
+            "normalizedWidth": 1018,
+            "normalizedHeight": 111,
+            "bounds": {
+              "right": {
+                "x": 221,
+                "y": 1,
+                "width": 1018,
+                "height": 111.140625
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0.75
+              },
+              "changed": true,
+              "left": {
+                "y": 1,
+                "width": 1018,
+                "height": 110.390625,
+                "x": 221
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 4,
+                "left": {
+                  "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+                  "selector": "main > div:first-child",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 221,
+                    "y": 1,
+                    "width": 1018,
+                    "height": 110.390625
+                  },
+                  "name": "dashboard-topbar"
+                },
+                "pixel": {
+                  "normalizedWidth": 1018,
+                  "normalizedHeight": 111,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 112998,
+                  "changedPixels": 9598,
+                  "changedPercent": 8.49395564523266
+                },
+                "right": {
+                  "selector": "[data-section=\"app-topbar\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "height": 111.140625,
+                    "x": 221,
+                    "y": 1,
+                    "width": 1018
+                  },
+                  "name": "dashboard-topbar",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story"
+                },
+                "styleChanges": 4,
+                "boundsChanged": true,
+                "name": "dashboard-topbar",
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": false
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "section": "topbar",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar",
+        "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+        "leftSelector": "main > div:first-child",
+        "rightSelector": "[data-section=\"app-topbar\"]",
+        "threshold": 30,
+        "changedPercent": 8.49395564523266,
+        "changedPixels": 9598,
+        "totalPixels": 112998,
+        "normalizedWidth": 1018,
+        "normalizedHeight": 111,
+        "bounds": {
+          "left": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          },
+          "right": {
+            "height": 111.140625,
+            "x": 221,
+            "y": 1,
+            "width": 1018
+          },
+          "delta": {
+            "width": 0,
+            "height": 0.75,
+            "x": 0,
+            "y": 0
+          },
+          "changed": true
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 4,
+            "left": {
+              "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+              "selector": "main > div:first-child",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 1,
+                "width": 1018,
+                "height": 110.390625,
+                "x": 221
+              },
+              "name": "dashboard-topbar"
+            },
+            "pixel": {
+              "changedPercent": 8.49395564523266,
+              "normalizedWidth": 1018,
+              "normalizedHeight": 111,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 112998,
+              "changedPixels": 9598
+            },
+            "right": {
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 221,
+                "y": 1,
+                "width": 1018,
+                "height": 111.140625
+              },
+              "name": "dashboard-topbar",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+              "selector": "[data-section=\"app-topbar\"]"
+            },
+            "styleChanges": 4,
+            "boundsChanged": true,
+            "name": "dashboard-topbar",
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "textChanged": false
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,109 @@
+[
+{
+  "classificationCounts": {
+    "review": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/01-suite-summary.md",
+  "maxChangedPercent": 8.49395564523266,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "review"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/compare.md",
+      "attributeChangeCount": 4,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-topbar"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-topbar"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        },
+        {
+          "attribute": "data-section",
+          "left": null,
+          "right": "app-topbar"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 0.75,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 110.390625,
+          "width": 1018,
+          "x": 221,
+          "y": 1
+        },
+        "normalizedHeight": 111,
+        "normalizedWidth": 1018,
+        "right": {
+          "height": 111.140625,
+          "width": 1018,
+          "x": 221,
+          "y": 1
+        }
+      },
+      "changedPercent": 8.49395564523266,
+      "changedPixels": 9598,
+      "classification": "review",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/left_region.png",
+      "leftSelector": "main \u003e div:first-child",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/13-dashboard-shell-header/desktop/run-01/topbar/dashboard/artifacts/topbar/right_region.png",
+      "rightSelector": "[data-section=\"app-topbar\"]",
+      "section": "topbar",
+      "styleChangeCount": 4,
+      "styleDiffs": [
+        {
+          "left": "rgb(255, 255, 255)",
+          "property": "background-color",
+          "right": "rgb(255, 250, 242)"
+        },
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 112998,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

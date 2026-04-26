@@ -1,9 +1,23 @@
 import { NavLink } from 'react-router-dom';
-import { Button } from 'pyxis-components';
+import { Avatar, Button, Icon, PyxisLogo } from 'pyxis-components';
 import { appPart } from '../parts';
 import './AppShell.css';
-const nav = [ ['/', 'Dashboard'], ['/shows', 'Shows'], ['/calendar', 'Calendar'], ['/bookings', 'Bookings'], ['/artists', 'Artists'], ['/attendance', 'Post-show'], ['/log', 'Audit log'], ['/discord', 'Discord'], ['/settings', 'Settings'] ] as const;
-export function AppSidebar() { return <aside className="app-sidebar" {...appPart('app-sidebar')}><div className="app-brand"><b>pyxis</b><span>staff portal</span></div><nav>{nav.map(([to,label])=><NavLink key={to} to={to} end={to === '/'}>{label}</NavLink>)}</nav></aside>; }
-export function AppTopBar({ title, eyebrow, action }: { title: string; eyebrow?: string; action?: React.ReactNode }) { return <header className="app-topbar" {...appPart('app-topbar')}><div><span>{eyebrow ?? 'Home'}</span><h1>{title}</h1></div>{action ?? <Button size="sm">New show</Button>}</header>; }
-export function AppBottomNav() { const mobileNav = [ ['/', 'Dashboard'], ['/shows', 'Shows'], ['/calendar', 'Calendar'], ['/bookings', 'Bookings'], ['/settings', 'More'] ] as const; return <nav className="app-bottom-nav" {...appPart('app-bottom-nav')}>{mobileNav.map(([to,label])=><NavLink key={to} to={to} end={to === '/'}>{label}</NavLink>)}</nav>; }
-export function AppShell({ title, eyebrow, action, children, page }: { title: string; eyebrow?: string; action?: React.ReactNode; children: React.ReactNode; page: string }) { return <div className="app-shell" data-page={page} {...appPart('app-shell')}><AppSidebar/><main className="app-main"><AppTopBar title={title} eyebrow={eyebrow} action={action}/>{children}</main><AppBottomNav/></div>; }
+
+const navSections = [
+  { heading: 'Program', items: [ ['/', 'Dashboard', 'home'], ['/shows', 'Shows', 'music'], ['/calendar', 'Calendar', 'calendar'], ['/bookings', 'Bookings', 'mail', 3] ] },
+  { heading: 'Roster', items: [ ['/artists', 'Artists', 'users'], ['/attendance', 'Post-show log', 'check'] ] },
+  { heading: 'Operate', items: [ ['/log', 'Audit log', 'log'], ['/discord', 'Discord', 'discord'], ['/settings', 'Settings', 'cog'] ] },
+] as const;
+
+export function AppSidebarMenu() {
+  return <nav className="app-sidebar-menu" data-section="app-sidebar-menu">{navSections.map((section) => <div className="app-sidebar-section" key={section.heading}><span>{section.heading}</span>{section.items.map(([to,label,icon,badge])=><NavLink key={to} to={to} end={to === '/'}><Icon name={icon} size={15}/><b>{label}</b>{badge && <em>{badge}</em>}</NavLink>)}</div>)}</nav>;
+}
+
+export function AppSidebarUserFooter() {
+  return <footer className="app-sidebar-user" data-section="app-sidebar-user"><Avatar name="Ada Dove" size="sm"/><div><strong>Ada Dove</strong><span>admin · online</span></div><Icon name="chevron-right" size={14}/></footer>;
+}
+
+export function AppSidebar() { return <aside className="app-sidebar" data-section="app-sidebar" {...appPart('app-sidebar')}><div className="app-brand"><PyxisLogo size={26} stack /></div><AppSidebarMenu/><AppSidebarUserFooter/></aside>; }
+export function AppTopBar({ title, eyebrow, subtitle, action }: { title: string; eyebrow?: string; subtitle?: string; action?: React.ReactNode }) { return <header className="app-topbar" data-section="app-topbar" {...appPart('app-topbar')}><div><span>{eyebrow ?? 'Home'}</span><h1>{title}</h1>{subtitle && <p>{subtitle}</p>}</div>{action ?? <div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="search" aria-label="Search"/><Button variant="outline" size="sm" iconLeft="bell" aria-label="Notifications"/><Button size="sm" iconLeft="plus">New show</Button></div>}</header>; }
+export function AppMobileBottomNav() { const mobileNav = [ ['/', 'Dashboard'], ['/shows', 'Shows'], ['/calendar', 'Calendar'], ['/bookings', 'Bookings'], ['/settings', 'More'] ] as const; return <nav className="app-bottom-nav" data-section="app-mobile-bottom-nav" {...appPart('app-bottom-nav')}>{mobileNav.map(([to,label])=><NavLink key={to} to={to} end={to === '/'}>{label}</NavLink>)}</nav>; }
+export function AppShell({ title, eyebrow, subtitle, action, children, page }: { title: string; eyebrow?: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode; page: string }) { return <div className="app-shell" data-page={page} {...appPart('app-shell')}><AppSidebar/><main className="app-main"><AppTopBar title={title} eyebrow={eyebrow} subtitle={subtitle} action={action}/><div className="app-main-scroll">{children}</div></main><AppMobileBottomNav/></div>; }

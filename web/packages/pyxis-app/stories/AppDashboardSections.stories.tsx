@@ -9,6 +9,7 @@ import {
   DashboardMobileHeader,
 } from '../src/components/organisms/DashboardSections';
 import { DashboardActivityPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
+import { AppSidebar, AppTopBar, AppMobileBottomNav } from '../src/components/shell/AppShell';
 
 const meta: Meta = {
   title: 'Pyxis App/Dashboard Sections',
@@ -23,6 +24,19 @@ const pendingBookings = bookings.filter((booking) => booking.status === 'pending
 
 export const HeroDesktop: Story = {
   render: () => <div style={{ padding: 24, background: 'var(--app-canvas)' }}><DashboardHero show={confirmedShows[0]} /></div>,
+};
+
+export const AppSidebarMenu: Story = {
+  render: () => <div style={{ width: 220, height: 760 }}><AppSidebar /></div>,
+};
+
+export const AppTopBarDashboard: Story = {
+  render: () => <div style={{ width: 1020 }}><AppTopBar title="Welcome back, Ada" eyebrow="Home / Dashboard" subtitle="Wednesday, April 23 · 6 shows booked this month" /></div>,
+};
+
+export const AppMobileBottomNavigation: Story = {
+  render: () => <div style={{ width: 390, paddingTop: 700, background: 'var(--app-mobile-canvas)' }}><AppMobileBottomNav /></div>,
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
 };
 
 export const MobileHeaderAndCopy: Story = {
