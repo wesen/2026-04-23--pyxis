@@ -1,3 +1,3 @@
 .app-panel[data-section='shows-archived'] { padding: 0; overflow: hidden; color: #1a1a18; }
-.app-panel[data-section='shows-archived'] > header { align-items: center; margin: 0; padding: 16px 22px; border-bottom: 1px solid var(--app-rule); }
+.app-panel[data-section='shows-archived'] .app-panel-header { align-items: center; margin: 0; padding: 16px 22px; border-bottom: 1px solid var(--app-rule); }
 .app-panel[data-section='shows-archived'] .app-table-wrap { padding: 4px 22px 8px; }

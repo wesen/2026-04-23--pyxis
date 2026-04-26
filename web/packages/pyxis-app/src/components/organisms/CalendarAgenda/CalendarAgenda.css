@@ -1,6 +1,6 @@
 .app-calendar-side { color: #1a1a18; font-size: 13px; line-height: 1.5; }
 .app-calendar-side .app-panel { padding: 18px; border-radius: var(--app-radius-md); }
-.app-calendar-side .app-panel > header { margin-bottom: 14px; }
+.app-calendar-side .app-panel .app-panel-header { margin-bottom: 14px; }
 .app-calendar-glance-list { display: grid; }
 .app-calendar-glance-list span { display: flex !important; justify-content: space-between; padding: 7px 0; border-top: 1px solid var(--app-rule); color: var(--app-muted); font-size: 13px; }
 .app-calendar-glance-list b { color: var(--app-faint); font-weight: 600; }

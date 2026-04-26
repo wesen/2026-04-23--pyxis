@@ -1,6 +1,6 @@
 .app-panel { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-md); padding: 22px; box-shadow: var(--app-shadow-card); }
-.app-panel > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
-.app-panel > header span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 13px; font-weight: 500; }
+.app-panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.app-panel-header span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 13px; font-weight: 500; }
 .app-panel h2 { margin: 0; font-family: var(--font-body, Inter, system-ui, sans-serif); font-weight: 800; font-size: 14px; }
 .app-panel-link-action { border: 0; background: transparent; color: var(--app-muted); font-size: 12px; font-weight: 500; padding: 0; cursor: pointer; }
 .app-stack, .app-card-list { display: grid; gap: 12px; }

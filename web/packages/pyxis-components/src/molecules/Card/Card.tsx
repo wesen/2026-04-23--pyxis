@@ -1,11 +1,12 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
+import './Card.css';
 
 export type CardProps = {
   children: React.ReactNode;
   /** Inner padding. Default: 'md' (22px) */
-  padding?: 'sm' | 'md' | 'lg';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
   /** Interactive — adds hover effect */
   interactive?: boolean;
   /** Optional header slot */
@@ -13,6 +14,7 @@ export type CardProps = {
   /** Optional footer slot */
   footer?: React.ReactNode;
   className?: string;
+  bodyClassName?: string;
 };
 
 
@@ -36,6 +38,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       header,
       footer,
       className,
+      bodyClassName,
       ...rest
     },
     ref
@@ -49,7 +52,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         {...rest}
       >
         {header && <div className="pyxis-card__header" {...pyxisPart('card', 'header')}>{header}</div>}
-        <div className="pyxis-card__body" {...pyxisPart('card', 'body')}>{children}</div>
+        <div className={clsx('pyxis-card__body', bodyClassName)} {...pyxisPart('card', 'body')}>{children}</div>
         {footer && <div className="pyxis-card__footer" {...pyxisPart('card', 'footer')}>{footer}</div>}
       </div>
     );

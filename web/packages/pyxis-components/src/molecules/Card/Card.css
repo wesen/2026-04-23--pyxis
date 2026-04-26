@@ -11,6 +11,7 @@
 }
 
 /* Padding variants */
+[data-pyxis-component='card'][data-pyxis-part='root'][data-padding='none'] .pyxis-card__body { padding: 0; }
 [data-pyxis-component='card'][data-pyxis-part='root'][data-padding='sm'] .pyxis-card__body { padding: 16px; }
 [data-pyxis-component='card'][data-pyxis-part='root'][data-padding='md'] .pyxis-card__body { padding: 22px; }
 [data-pyxis-component='card'][data-pyxis-part='root'][data-padding='lg'] .pyxis-card__body { padding: 32px; }
