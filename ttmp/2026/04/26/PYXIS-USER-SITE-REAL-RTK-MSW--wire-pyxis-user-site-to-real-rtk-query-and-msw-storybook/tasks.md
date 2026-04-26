@@ -4,7 +4,7 @@
 
 - [x] Add Vite proxy to `web/packages/pyxis-user-site/vite.config.ts` for `/api`, `/auth`, and `/flyers`.
 - [x] Change `API_BASE_URL` default in `web/packages/pyxis-user-site/src/api/publicApi.ts` from `http://localhost:8080` to `''`.
-- [ ] Verify `GET /api/public/shows` works through Vite proxy at `localhost:3000` with Go running on `localhost:8080`.
+- [x] Verify `GET /api/public/shows` works through Vite proxy at `localhost:3000` with Go running on `localhost:8080`.
 - [x] Document optional `VITE_API_URL` override behavior.
 
 ## Phase 2: Fix public MSW response envelopes
@@ -18,15 +18,13 @@
 - [x] Build `pyxis-components`.
 - [x] Build `pyxis-user-site`.
 
-## Phase 3: Convert user-site stories to MSW v2 handlers
+## Phase 3: Clean up user-site Storybook page stories
 
-- [x] Replace old `{ type: 'rest', method, url, sts, body }` descriptors in `stories/Shows.stories.tsx` with `http.get` handlers.
-- [x] Replace old descriptors in `stories/Archive.stories.tsx`.
-- [x] Replace old descriptors in `stories/Book.stories.tsx`.
-- [x] Replace old descriptors in `stories/ShowDetail.stories.tsx`.
-- [x] Ensure all list stories return protobuf wrapper objects.
-- [x] Ensure all mutation stories return camelCase protobuf JSON.
-- [x] Keep `PublicPages.stories.tsx` as canonical full-page route story harness.
+- [x] Remove redundant standalone `Pages/*` route stories (`Shows`, `Archive`, `Book`, `ShowDetail`, `About`) to avoid confusing them with the canonical route harness.
+- [x] Keep `PublicPages.stories.tsx` as the canonical full-page route story harness.
+- [x] Ensure canonical page stories use shared MSW handlers returning protobuf JSON envelopes.
+- [x] Ensure shared MSW mutation handlers return camelCase protobuf JSON.
+- [x] Verify Storybook index contains only `Public Site/Pages` page stories for `pyxis-user-site`.
 
 ## Phase 4: Public page runtime polish
 
@@ -60,9 +58,17 @@
 - [x] `cd web/packages/pyxis-components && pnpm build` passes.
 - [x] `cd web/packages/pyxis-user-site && pnpm build` passes.
 - [x] `cd web && pnpm build` passes.
-- [ ] Manual runtime test through Vite proxy passes with Go backend.
+- [x] Manual runtime test through Vite proxy passes with Go backend.
 - [x] `cd web/packages/pyxis-user-site && pnpm build-storybook` passes.
-- [ ] Storybook renders public page stories without Go backend running.
-- [ ] No `fromJson` shape errors appear in console.
+- [x] Storybook renders public page stories without Go backend running.
+- [x] No `fromJson` shape errors appear in console after converting mock protobuf messages through `toJson(...)` helpers.
 - [x] Diary updated with implementation results.
 - [x] Changelog updated.
+
+## Phase 8: Public component decomposition follow-up
+
+- [x] Locate existing component decomposition and Storybook organization playbooks.
+- [ ] Use `docs/playbooks/06-react-widget-folder-storybook-css-organization.md` when moving public route stories/components toward colocated widget folders.
+- [ ] Use `docs/playbooks/07-react-application-decomposition-and-component-reuse.md` to decide page vs organism vs molecule extraction boundaries.
+- [ ] Use `docs/component-system-and-public-site-components.md` to keep public-site domain components distinct from generic design-system atoms/molecules/organisms.
+- [ ] Create a separate cleanup ticket for public-site component decomposition if this becomes larger than RTK/MSW wiring.

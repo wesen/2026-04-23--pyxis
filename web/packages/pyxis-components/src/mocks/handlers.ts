@@ -4,9 +4,13 @@
 import { http, HttpResponse } from 'msw';
 import {
   create,
+  toJson,
   ShowSchema,
   ArchivedShowSchema,
   ArchiveStatsSchema,
+  BookingConfirmationSchema,
+  ShowListSchema,
+  ArchivedShowListSchema,
   Show_LineupEntrySchema,
   ShowStatus,
 } from 'pyxis-types';
@@ -171,12 +175,37 @@ export const seedStats: ArchiveStats = create(ArchiveStatsSchema, {
   uniqueArtists: 132,
 });
 
+/* ─── Protobuf JSON response helpers ──────────────────── */
+
+export function showListJson(shows: Show[] = seedShows) {
+  return toJson(ShowListSchema, create(ShowListSchema, { shows }));
+}
+
+export function archivedShowListJson(shows: ArchivedShow[] = seedArchive) {
+  return toJson(ArchivedShowListSchema, create(ArchivedShowListSchema, { shows }));
+}
+
+export function showJson(show: Show) {
+  return toJson(ShowSchema, show);
+}
+
+export function archiveStatsJson(stats: ArchiveStats = seedStats) {
+  return toJson(ArchiveStatsSchema, stats);
+}
+
+export function bookingConfirmationJson(submissionId = 999) {
+  return toJson(BookingConfirmationSchema, create(BookingConfirmationSchema, {
+    success: true,
+    submissionId,
+  }));
+}
+
 /* ─── Handlers ────────────────────────────────────────── */
 
 export const handlers = [
   // GET /public/shows
   http.get('*/api/public/shows', () => {
-    return HttpResponse.json({ shows: seedShows });
+    return HttpResponse.json(showListJson());
   }),
 
   // GET /public/shows/:id
@@ -189,7 +218,7 @@ export const handlers = [
         { status: 404 }
       );
     }
-    return HttpResponse.json(show);
+    return HttpResponse.json(showJson(show));
   }),
 
   // GET /public/shows/:id/flyer
@@ -213,20 +242,20 @@ export const handlers = [
     const search = url.searchParams.get('search');
     if (search) {
       const q = search.toLowerCase();
-      return HttpResponse.json({
-        shows: seedArchive.filter(
+      return HttpResponse.json(archivedShowListJson(
+        seedArchive.filter(
           (s) =>
             s.artist.toLowerCase().includes(q) ||
             s.genre.toLowerCase().includes(q)
-        ),
-      });
+        )
+      ));
     }
-    return HttpResponse.json({ shows: seedArchive });
+    return HttpResponse.json(archivedShowListJson());
   }),
 
   // GET /public/archive/stats
   http.get('*/api/public/archive/stats', () => {
-    return HttpResponse.json(seedStats);
+    return HttpResponse.json(archiveStatsJson());
   }),
 
   // POST /public/submissions
@@ -243,9 +272,6 @@ export const handlers = [
         { status: 422 }
       );
     }
-    return HttpResponse.json({
-      success: true,
-      submissionId: 999,
-    });
+    return HttpResponse.json(bookingConfirmationJson());
   }),
 ];

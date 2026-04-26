@@ -32,3 +32,16 @@ Implemented public user-site RTK/MSW phase: same-origin Vite proxy, protobuf-sha
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/stories/Shows.stories.tsx — Converted shows page stories to MSW v2 handlers with ShowList envelope responses.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/vite.config.ts — Added /api
 
+
+## 2026-04-26
+
+Cleaned public user-site Storybook: serialized MSW protobuf mocks through toJson helpers, removed confusing standalone Pages/* stories, and documented component decomposition playbook references.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/component-system-and-public-site-components.md — Found public-site domain component taxonomy reference.
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/06-react-widget-folder-storybook-css-organization.md — Found folder/story/CSS organization playbook for future public-site decomposition.
+- /home/manuel/code/wesen/2026-04-23--pyxis/docs/playbooks/07-react-application-decomposition-and-component-reuse.md — Found page-vs-organism-vs-molecule decomposition and reuse guide.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/mocks/handlers.ts — Added protobuf JSON helper functions and returns toJson-shaped MSW responses.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/stories/PublicPages.stories.tsx — Canonical remaining public page route story harness.
+

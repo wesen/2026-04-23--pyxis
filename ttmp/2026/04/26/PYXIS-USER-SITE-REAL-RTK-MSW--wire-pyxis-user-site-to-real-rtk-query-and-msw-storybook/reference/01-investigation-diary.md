@@ -13,6 +13,16 @@ DocType: reference
 Intent: long-term
 Owners: []
 RelatedFiles:
+    - Path: docs/component-system-and-public-site-components.md
+      Note: Reference explaining generic vs public-site component taxonomy and page-story role.
+    - Path: docs/playbooks/06-react-widget-folder-storybook-css-organization.md
+      Note: Runbook for widget folder layout
+    - Path: docs/playbooks/07-react-application-decomposition-and-component-reuse.md
+      Note: Runbook for page/container vs organism/molecule/atom extraction and component-system reuse decisions.
+    - Path: ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md
+      Note: Bottom-up visual parity guide for atoms to public-domain components to pages.
+    - Path: ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md
+      Note: Public-site component visual parity handoff and warnings against starting from full-page tuning.
     - Path: ttmp/2026/04/26/PYXIS-USER-SITE-REAL-RTK-MSW--wire-pyxis-user-site-to-real-rtk-query-and-msw-storybook/scripts/scrape-public-msw-seed.mjs
       Note: Public unauthenticated backend response scraper for MSW fixture generation.
     - Path: ttmp/2026/04/26/PYXIS-USER-SITE-REAL-RTK-MSW--wire-pyxis-user-site-to-real-rtk-query-and-msw-storybook/tasks.md
@@ -41,6 +51,7 @@ LastUpdated: 2026-04-26T13:40:00-04:00
 WhatFor: Use this diary to understand the public-site-specific RTK Query/MSW analysis, what evidence was gathered, and what implementation phases are recommended.
 WhenToUse: When continuing the public user site real-data wiring ticket or reviewing the public Storybook/MSW protobuf-shape gaps.
 ---
+
 
 
 
@@ -260,3 +271,92 @@ All commands passed. Storybook emitted the expected generic warning about no `sr
 - Inspect Storybook in a browser and check console/network output.
 - Decide whether to improve `ShowGrid` click API so it preserves `show.id` directly.
 - Decide whether `src/api/types.ts` can be removed after checking package external consumers.
+
+## Step 3: Storybook Cleanup and Public Component Decomposition References
+
+After testing Storybook in a browser, I found a real issue: the first MSW wrapper fix removed raw-array envelopes, but it still returned `@bufbuild/protobuf` message objects directly. Those objects include runtime-only keys such as `$typeName`, and `fromJson(ShowListSchema, ...)` rejects `$typeName` because real Go `protojson` never emits it. I fixed the shared MSW layer so mock responses are serialized through `toJson(...)` helpers before being passed to `HttpResponse.json(...)`.
+
+The user also pointed out that `book-default` and similar standalone stories are confusing/broken compared with the canonical `Public Site/Pages` route stories. I removed the standalone `Pages/*` stories from `web/packages/pyxis-user-site/stories/` and kept `PublicPages.stories.tsx` as the only page-level Storybook entrypoint for the public user-site package.
+
+### What I changed
+
+- Added protobuf JSON helper functions in `web/packages/pyxis-components/src/mocks/handlers.ts`:
+  - `showListJson(...)`
+  - `archivedShowListJson(...)`
+  - `showJson(...)`
+  - `archiveStatsJson(...)`
+  - `bookingConfirmationJson(...)`
+- Updated shared MSW handlers to return `toJson(...)` output instead of protobuf message instances.
+- Removed redundant standalone user-site page stories:
+  - `web/packages/pyxis-user-site/stories/About.stories.tsx`
+  - `web/packages/pyxis-user-site/stories/Archive.stories.tsx`
+  - `web/packages/pyxis-user-site/stories/Book.stories.tsx`
+  - `web/packages/pyxis-user-site/stories/ShowDetail.stories.tsx`
+  - `web/packages/pyxis-user-site/stories/Shows.stories.tsx`
+- Rebuilt Storybook and verified `storybook-static/index.json` now contains only the canonical `Public Site/Pages` stories for public route pages.
+
+### Why
+
+There are two different Storybook needs:
+
+1. Page-level route harnesses that exercise RTK Query, MemoryRouter, Redux, and MSW together.
+2. Component-system stories for atoms, molecules, organisms, and public-domain components.
+
+The deleted `Pages/Book`, `Pages/Shows`, etc. stories were neither good page harnesses nor proper colocated component stories. They duplicated routes already covered by `PublicPages.stories.tsx`, had story IDs like `pages-book--default`, and made it easy to open the wrong story. Keeping only `Public Site/Pages` reduces ambiguity.
+
+### Playbook / runbook references found
+
+The public/component decomposition guidance already exists in the repo:
+
+- `docs/playbooks/06-react-widget-folder-storybook-css-organization.md`
+  - Use this for folder layout, colocated stories, CSS ownership, Storybook title hierarchy, stable data hooks, and the recommendation to avoid broad top-level `stories/` folders for component stories.
+- `docs/playbooks/07-react-application-decomposition-and-component-reuse.md`
+  - Use this for the decision tree: shared primitive → atom → molecule → organism → page/container. It explains that pages own RTK Query and routing while organisms/molecules receive typed props.
+- `docs/component-system-and-public-site-components.md`
+  - Use this for the public-site taxonomy. It explicitly distinguishes generic atoms/molecules/organisms from public-domain components like `PubNav`, `BookingForm`, `VenueCard`, `YearGroup`, and page stories.
+- `ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/analysis/01-bottom-up-prototype-to-storybook-visual-parity-implementation-guide.md`
+  - Use this for bottom-up visual parity workflow: atoms → molecules → organisms → public-domain components → sections → pages.
+- `ttmp/2026/04/24/PYXIS-COMPONENT-VISUAL-PARITY--run-bottom-up-component-visual-parity-comparisons/reference/04-public-site-component-parity-handoff.md`
+  - Use this for public-site-specific visual parity caveats. It warns not to start by tuning full public pages and not to force public-domain components into generic molecule/organism configs.
+
+### Validation
+
+Commands:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build-storybook
+cd web && pnpm build
+```
+
+Browser checks:
+
+- Vite proxy: `http://127.0.0.1:3000/api/public/shows` returned JSON from the Go backend through the Vite proxy.
+- Vite page: `http://127.0.0.1:3000/` loaded with no console errors; only React Router future-flag warnings.
+- Storybook static iframe checks passed for canonical stories:
+  - `public-site-pages--shows-desktop`
+  - `public-site-pages--show-detail-desktop`
+  - `public-site-pages--archive-desktop`
+  - `public-site-pages--book-desktop`
+- The second Storybook check had zero console errors/warnings for the canonical page stories after switching mocks to `toJson(...)` helpers.
+
+Storybook index verification showed only canonical public page stories:
+
+```text
+public-site-pages--shows-desktop
+public-site-pages--shows-mobile
+public-site-pages--show-detail-desktop
+public-site-pages--show-detail-mobile
+public-site-pages--archive-desktop
+public-site-pages--archive-mobile
+public-site-pages--book-desktop
+public-site-pages--book-mobile
+public-site-pages--book-success-desktop
+public-site-pages--about-desktop
+public-site-pages--about-mobile
+```
+
+### What remains
+
+- Decide whether to create a new decomposition cleanup ticket for the public site. This should probably not be bundled too deeply into the RTK/MSW ticket.
+- When decomposing, follow the playbooks: page owns RTK Query; public organisms/molecules live in `pyxis-components/src/public/*`; stories should be colocated with the widget, not placed in another standalone page-story bucket.
