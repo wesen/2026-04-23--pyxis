@@ -68,11 +68,11 @@
 
 ## Phase 6 — Staff API — Submissions + Artists
 
-- [ ] 6.1 Implement submission approval/decline with transaction
-- [ ] 6.2 Implement artist creation on approval
-- [ ] 6.3 Wire `GET /api/app/bookings`, `PATCH /api/app/bookings/{id}/approve`
-- [ ] 6.4 Wire `GET /api/app/artists`, `GET /api/app/artists/{id}`, `PATCH /api/app/artists/{id}`
-- [ ] 6.5 Commit Phase 6
+- [x] 6.1 Implement submission approval/decline with transaction
+- [x] 6.2 Implement artist creation on approval
+- [x] 6.3 Wire `GET /api/app/bookings`, `PATCH /api/app/bookings/{id}/approve`
+- [x] 6.4 Wire `GET /api/app/artists`, `GET /api/app/artists/{id}`, `PATCH /api/app/artists/{id}`
+- [x] 6.5 Commit Phase 6
 
 ## Phase 7 — Calendar + Attendance
 

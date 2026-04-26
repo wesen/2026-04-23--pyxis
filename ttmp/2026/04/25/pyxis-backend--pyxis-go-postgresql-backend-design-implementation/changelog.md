@@ -57,3 +57,14 @@ Step 6: Phase 5 complete — staff show CRUD, audit logging, role middleware (co
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go — Audit service interface and implementation
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — Show mutations with audit logging
 
+
+## 2026-04-26
+
+Step 7: Phase 6 complete — submission approval/decline with transactions, artist CRUD (commit 9bdffc8)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/artist_repo.go — Artist repository
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Booking and artist handlers
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/submission_service.go — Approve transaction across submissions/artists/shows
+

@@ -660,3 +660,138 @@ ON CONFLICT (id) DO UPDATE SET expires_at = NOW() + INTERVAL '7 days';
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go` — Audit service
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/audit_repo.go` — Audit repo
 - `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/show_repo.go` — Build fixes
+
+---
+
+## Step 7: Implementation — Phase 6 (Staff API Submissions + Artists)
+
+Phase 6 implements the booking approval/decline flow and artist management. When a submission is approved, the system creates a new artist (or links an existing one by name) and creates a draft show from the submission data — all in a single database transaction.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue implementing the Pyxis backend through the remaining phases. Phase 6 is next: submissions + artists.
+
+**Inferred user intent:** Build out the staff-side booking management and artist catalog.
+
+**Commit (code):** `9bdffc8` — "Phase 6: Staff API submissions + artists — approval/decline flow with transactions"
+
+### What I did
+
+- Added `ApproveSubmission`, `DeclineSubmission` queries to `pkg/db/queries/submissions.sql`.
+- Created `pkg/db/queries/artists.sql` with `ListArtists`, `GetArtist`, `GetArtistByName`, `CreateArtist`, `UpdateArtist`.
+- Regenerated sqlc code.
+- Created `pkg/domain/artist.go` with `Artist` domain struct.
+- Updated `pkg/repository/repository.go` with `ArtistRepository` interface and expanded `SubmissionRepository`.
+- Created `pkg/repository/postgres/artist_repo.go` implementing all artist operations.
+- Updated `pkg/repository/postgres/submission_repo.go` with `GetByID`, `List`, `Approve`, `Decline` methods.
+- Created `pkg/service/artist_service.go` for artist business logic.
+- Updated `pkg/service/submission_service.go` with:
+  - `List` and `GetByID` methods
+  - `Approve` method with transaction across submissions → artists → shows
+  - `Decline` method with audit logging
+  - Pool dependency for transaction management
+- Created staff handlers in `pkg/server/app.go`:
+  - `handleListBookings` (`GET /api/app/bookings?status=`)
+  - `handleApproveBooking` (`PATCH /api/app/bookings/{id}/approve`)
+  - `handleDeclineBooking` (`PATCH /api/app/bookings/{id}/decline`)
+  - `handleListArtists` (`GET /api/app/artists`)
+  - `handleGetArtist` (`GET /api/app/artists/{id}`)
+  - `handleUpdateArtist` (`PATCH /api/app/artists/{id}`)
+- Added `respondJSON` helper in `pkg/server/public.go` for non-proto responses.
+- Fixed `respondError` to return 404 for "no rows in result set" (pgx not-found).
+- Fixed `ListSubmissions` query: `COALESCE($1, status)` didn't work with empty string; changed to `($1 = '' OR status = $1)`.
+- Wired all routes in `pkg/server/server.go` with auth + role middleware.
+- Tested all endpoints:
+  - List all bookings ✓
+  - List pending bookings ✓
+  - Approve booking → creates artist + draft show ✓
+  - Decline booking ✓
+  - List artists ✓
+  - Get artist by ID (404 for missing) ✓
+  - Update artist ✓
+
+### Why
+
+- The approval flow spans three tables (submissions, artists, shows) and must be atomic — a partial approval would leave the database in an inconsistent state.
+- Artist deduplication by name prevents creating duplicate artists when the same group submits multiple times.
+- Draft shows from approved submissions give bookers a starting point they can refine before confirming.
+
+### What worked
+
+- The transaction pattern using `pgxpool.Pool.Begin()` + `db.New(tx)` + per-tx repos works cleanly.
+- Artist auto-creation on approval: `GetArtistByName` first, then `CreateArtist` if not found.
+- The `respondJSON` helper handles non-proto responses without forcing everything into protobuf.
+
+### What didn't work
+
+- **`ListSubmissions` COALESCE bug:** `SELECT * WHERE status = COALESCE($1, status)` with `$1 = ''` evaluated to `status = ''`, which matches nothing. Fixed by using `($1 = '' OR status = $1)`.
+- **Approval failed with null date:** The test submission had no `preferred_date`, and `shows.date` is `NOT NULL`. Added a guard in `Approve` that returns an error if no preferred date is set.
+- **Stale server process:** A previous `pyxis serve` was still running on port 8282, causing the new server to fail with "address already in use". Responses came from the old process with old code. Killed stale processes with `pkill`.
+- **Build error in `artist_repo.go`:** `dbArtistToDomain` returns `*domain.Artist` but `List` assigned to `domain.Artist` values. Fixed by dereferencing.
+
+### What I learned
+
+- `sqlc` `COALESCE($1, status)` is not the right pattern for optional filters — it evaluates the parameter first, and if the parameter is empty string, it compares against empty string, not "skip the filter". Use `($1 = '' OR status = $1)` instead.
+- `pgx.Tx` implements `DBTX` so `db.New(tx)` creates transaction-scoped queries. This is the key to repository-level transactions with sqlc.
+- `protojson.Marshal` only works with `proto.Message`; for ad-hoc JSON responses (like artist lists without a protobuf message), use `json.Marshal` directly.
+
+### What was tricky to build
+
+- Structuring the transaction in `SubmissionService.Approve`: the service holds separate repos, but for the transaction it needs tx-scoped versions. The solution was to start a tx, create new `db.New(tx)` queries, and instantiate new repos from those queries. This is slightly verbose but keeps the transaction logic in one place.
+- Deciding where to handle the "artist already exists" case. Chose to check by name in the service during approval, rather than adding a uniqueness constraint or upsert. This allows intentional duplicates (e.g., two different bands with the same name) while preventing accidental ones.
+
+### What warrants a second pair of eyes
+
+- The `Approve` transaction commits before audit logging. If audit logging fails, the transaction is already committed. This is acceptable for now (audit is best-effort) but should be documented.
+- Artist deduplication is by exact name match. This could cause issues with slight variations ("The Band" vs "The band"). Consider case-insensitive matching or fuzzy matching.
+- The `SubmissionList` and artist list responses are not protobuf messages — they use `respondJSON` with `map[string]interface{}`. For consistency, these should eventually have protobuf message types.
+
+### What should be done in the future
+
+- Phase 7-10: Calendar, attendance, settings, flyers, CLI polish.
+- Add protobuf messages for `SubmissionList`, `ArtistList`, `Artist`.
+- Consider adding `DELETE /api/app/artists/{id}` if artists need to be removable.
+- Add pagination to `ListSubmissions` and `ListArtists`.
+
+### Code review instructions
+
+- Start with `pkg/service/submission_service.go` for the approval transaction logic.
+- Review `pkg/repository/postgres/artist_repo.go` for artist CRUD patterns.
+- Check `pkg/db/queries/submissions.sql` and `artists.sql` for query correctness.
+- Validate by running the server and testing with curl (see Technical details).
+
+### Technical details
+
+**Key commands run:**
+
+```bash
+sqlc generate
+go build ./...
+
+# Test endpoints
+go run ./cmd/pyxis serve --bind :8282
+curl -s -H "Cookie: session=test-session-abc" "http://localhost:8282/api/app/bookings"
+curl -s -H "Cookie: session=test-session-abc" "http://localhost:8282/api/app/bookings?status=pending"
+curl -s -H "Cookie: session=test-session-abc" -X PATCH "http://localhost:8282/api/app/bookings/1/approve"
+curl -s -H "Cookie: session=test-session-abc" -X PATCH "http://localhost:8282/api/app/bookings/2/decline"
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/artists
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/artists/2
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH "http://localhost:8282/api/app/artists/2" -d '{"name":"Updated","genre":"Noise-Rock"}'
+```
+
+**Files created/modified:**
+
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/artists.sql` — Artist queries
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/submissions.sql` — Approve/decline queries
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/artists.sql.go` — Generated artist query code
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/domain/artist.go` — Artist domain type
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/repository.go` — Updated interfaces
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/artist_repo.go` — Artist repo
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/submission_repo.go` — Updated submission repo
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/artist_service.go` — Artist service
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/submission_service.go` — Approval/decline logic
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go` — Booking + artist handlers
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/server.go` — Route wiring
+- `/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go` — `respondJSON` + 404 handling
