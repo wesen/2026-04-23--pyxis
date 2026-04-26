@@ -119,3 +119,13 @@ Step 19: Added and validated spec-aware nested visual inspection for Dashboard H
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png — Final Hero crop evidence for WIP checkpoint
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx — React Dashboard Hero data-element hooks and button/date tuning
 
+
+## 2026-04-25
+
+Step 20: Stopped Dashboard Hero work at a targeted title-typography checkpoint; hero-artist typography now has no inspect-spec style diffs and focused Hero improved to 11.2501% / 15432 px, still tune-required for non-title drift (commit b2fd3dc).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png — React Hero crop after title typography checkpoint
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Dashboard Hero title margin and letter-spacing parity
+

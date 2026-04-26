@@ -52,6 +52,8 @@ RelatedFiles:
       Note: Final topbar crop evidence (commit 80661fc)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png
       Note: Final inspected Hero crop for current WIP checkpoint (commit ed55e40)
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png
+      Note: Evidence crop for title typography stop point (commit b2fd3dc)
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -74,6 +76,7 @@ RelatedFiles:
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
         Dashboard side-column and quick-actions panel layout tuning (commit 12cc17c)
+        Hero title typography checkpoint (commit b2fd3dc)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
       Note: |-
         Initial Phase 5-6 staff app organisms and page composition components
@@ -103,6 +106,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -2346,4 +2350,224 @@ Final evidence paths:
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/left_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/diff_only.png
+```
+
+## Step 20: Stop Hero work after title typography parity checkpoint
+
+After the user clarified that the remaining Hero background/decorative mark drift was not the priority, I focused only on the left-side title typography. I used the validated `inspect-spec` workflow to compare the `hero-artist` element directly, made the smallest CSS change, and saved a focused Hero comparison as a checkpoint before moving on.
+
+This does not complete Phase 7.2. It records an intentional stop point: the title typography is now aligned, the section diff improved materially, and the remaining drift is mostly non-title composition/mark/layout work that should not block moving to the next Dashboard section.
+
+### Prompt Context
+
+**User prompt (verbatim):** "\"diffOnlyPath\":                                                                               
+ \"ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14 
+ -dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/diff_only.png\",   
+       \"leftRegionPath\":                                                                             
+ \"ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14 
+ -dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/left_region.png\", 
+       \"leftSelector\": \"[data-section=\\\"dashboard-hero\\\"]\",                                          
+       \"page\": \"dashboard\",                                                                          
+       \"rightRegionPath\":                                                                            
+ \"ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14 
+ -dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png\" 
+ ,                                                                                                   
+       \"rightSelector\": \"[data-section=\\\"dashboard-hero\\\"]\",                                         
+       \"section\": \"hero\",                                                                            
+       \"styleChangeCount\": 2,                                                                        
+       \"styleDiffs\": [                                                                               
+         {                                                                                           
+           \"left\": \"13px\",                                                                           
+           \"property\": \"font-size\",                                                                  
+           \"right\": \"14px\"                                                                            
+         },                                                                                          
+         {                                                                                           
+           \"left\": \"19.5px\",                                                                         
+           \"property\": \"line-height\",                                                                
+           \"right\": \"20.3px\"                                                                         
+         }                                                                                            
+       ],                                                                                            
+       \"text\": {                                                                                     
+         \"changed\": true,                                                                            
+         \"left\": \"Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15   
+ doorView on DiscordEdit show\",                                                                      
+         \"right\": \"Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15  
+ doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on DiscordEdit show\"                                 
+       },                                                                                            
+       \"threshold\": 30,                                                                              
+       \"totalPixels\": 142968,                                                                      
+       \"variant\": \"desktop\"                                                                          
+     }                                                                                               
+   ],                                                                                                
+   \"sectionCount\": 1                                                                                 
+ }                                                                                                   
+ ]                                                                                                   
+                                                                                                     
+ Took 5.6s                                                                                           
+                                                                                                     
+
+                                                                                                     
+ read                                                                                                
+ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14- 
+ dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/left_region.png    
+                                                                                                     
+ Read image file [image/png]                                                                         
+                                                                                                     
+
+
+
+
+
+                                                                                                     
+ read                                                                                                
+ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14- 
+ dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/right_region.png   
+                                                                                                     
+ Read image file [image/png]                                                                         
+                                                                                                     
+
+
+
+
+
+                                                                                                     
+ read                                                                                                
+ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14- 
+ dashboard-hero-consolidation/run-06-button-date-inspect/dashboard/artifacts/hero/diff_only.png      
+                                                                                                     
+ Read image file [image/png]                                                                         
+                                                                                                     
+
+
+
+
+
+ Adjusting mark sizes                                                                                
+                                                                                                     
+ I see that the marks are visually close, but the left mark is too far or too large. The right       
+ circle starts at x=794 but appears larger, possibly due to stroke differences. In the prototype,    
+ PyxisMark size is set to 300 on the right, and I need to adjust the top from -80 to -60. The left   
+ mark's opacity is .1 and the right mark's is .9. I also need to consider hero height and align the  
+ content correctly. It seems I need to set height to 142, not min-height, to ensure everything lines 
+ up visually.                                                                                        
+                                                                                                     
+ Evaluating adjustments                                                                              
+                                                                                                     
+ It looks like the alignment might be off by about 3 pixels, but it's generally fine. The text       
+ differences include a mobile paragraph that's hidden, so I could add aria-hidden to it; it won’t    
+ affect the pixel layout. For the summary, I might consider removing the mobile paragraph from the   
+ text—it might not be necessary. To reduce pixel discrepancies, I may need to adjust the mark.       
+ There's also a visible rectangle on the right hero at x=755 that aligns with the left, but the mark 
+ appears slightly darker and larger. I should run this.      
+
+---
+
+This is where we stopped. Don't worry about background, focus on typography on the left for the title, then move on ."
+
+**Assistant interpretation:** Ignore remaining decorative/background drift, verify and fix the left-side Hero title typography only, then stop chasing the Hero and continue to the next section.
+
+**Inferred user intent:** Preserve momentum near the end of the Dashboard pass by accepting a targeted Hero typography checkpoint instead of spending more time on mark/background pixel drift.
+
+**Commit (code):** b2fd3dc — "Tune dashboard hero title typography"
+
+### What I did
+
+- Ran `inspect-spec` against `[data-element="hero-artist"]` with `--stylePreset typography`.
+- Found that the React Hero title matched font family, size, weight, line-height, and color, but missed prototype letter-spacing:
+  - prototype: `letter-spacing: -0.8px`,
+  - React: `letter-spacing: normal`.
+- Updated `web/packages/pyxis-app/src/components/organisms/Panels.css` so `.app-dashboard-hero h2` uses:
+  - `margin: 0 0 6px`,
+  - `letter-spacing: -0.02em`.
+- Re-ran typography and layout inspection for `hero-artist`.
+- Re-ran the focused Hero comparison and saved artifacts in:
+  - `various/14-dashboard-hero-consolidation/run-07-title-typography/`.
+- Inspected `left_region.png`, `right_region.png`, and `diff_only.png` with `read`.
+- Validated the app typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Why
+
+The user explicitly asked not to worry about the background and to focus on the left-side title typography. The previous diff still had many red pixels around the decorative mark, but the actionable typography mismatch was the title letter-spacing and vertical offset.
+
+### What worked
+
+- `inspect-spec` confirmed title typography parity after the CSS change:
+
+```text
+hero-artist typography: no styleDiffs
+textChanged: false
+font-family: Fraunces, Georgia, "Times New Roman", serif both
+font-size: 40px both
+font-weight: 500 both
+letter-spacing: -0.8px both
+line-height: 42px both
+color: rgb(255, 255, 255) both
+```
+
+- The focused Hero comparison improved:
+
+```text
+previous run-06-button-date-inspect: 18.089362654580047%, 25862 changed pixels, tune-required
+run-07-title-typography: 11.25010935176275%, 15432 changed pixels, tune-required
+bounds: 966 x 142 on both sides, y delta 0.75
+```
+
+- The left and right crops showed the title placement/shape is now close enough for this targeted checkpoint.
+
+### What didn't work
+
+- The Hero section is still not in review-band. Remaining red pixels are mostly around the decorative mark/action area and overall composition, not title typography.
+- The section summary still reports root-level `font-size`/`line-height` differences because the root crop includes mixed text; subelement inspection is the reliable evidence for the title itself.
+
+### What I learned
+
+- Subelement inspection prevented over-tuning the whole Hero root when only the title was in scope.
+- Removing the React title's top margin mattered as much as letter-spacing because the previous title y-position drift made the crop look more different than the typography properties alone suggested.
+
+### What was tricky to build
+
+The tricky part was not being distracted by `diff_only.png`. The diff still highlights large decorative mark and action-area differences, but the user's instruction narrowed the task to title typography. I used `inspect-spec` to keep the decision scoped to `hero-artist` and avoided unrelated background/mark adjustments.
+
+### What warrants a second pair of eyes
+
+- Confirm whether Phase 7.2 should remain open for a future Hero organism/storybook pass or whether this targeted typography checkpoint is enough for the current Dashboard acceptance strategy.
+- Review whether `.app-dashboard-hero h2` should eventually use a shared display-title token instead of local letter-spacing.
+
+### What should be done in the future
+
+- Move on to Phase 7.3 Dashboard metrics/attention consolidation.
+- If returning to Hero later, focus on named organism extraction/story states and the decorative mark/action-area layout, not the title typography.
+
+### Code review instructions
+
+- Review:
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`, `.app-dashboard-hero h2`.
+- Validate with:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages inspect-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --elements '[data-element="hero-artist"]' \
+  --stylePreset typography \
+  --summary \
+  --output json
+
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Technical details
+
+Final checkpoint artifacts:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/left_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/diff_only.png
 ```
