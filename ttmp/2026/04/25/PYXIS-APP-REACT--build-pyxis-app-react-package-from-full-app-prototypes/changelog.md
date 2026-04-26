@@ -287,3 +287,14 @@ Step 35: Added named props, callbacks, derived count handling, and richer storie
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarBoard/CalendarBoard.tsx — Calendar board props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx — Calendar month panel props
 
+
+## 2026-04-25
+
+Step 36: Added named props, callbacks, mobile copy/header props, and richer stories for dashboard organisms (commit 104edbc).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.tsx — Dashboard hero props and callbacks
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.tsx — Dashboard overview props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardQuickActionsContent/DashboardQuickActionsContent.tsx — Dashboard quick action callbacks
+

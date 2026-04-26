@@ -182,12 +182,40 @@ RelatedFiles:
       Note: Phase 8C calendar stories
     - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx
       Note: Phase 8C calendar month panel props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardActivityPanel/DashboardActivityPanel.tsx
+      Note: Phase 8C dashboard props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardAttentionPanel/DashboardAttentionPanel.tsx
+      Note: Phase 8C dashboard props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.stories.tsx
+      Note: Phase 8C dashboard stories
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.tsx
+      Note: Phase 8C dashboard props/callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardMetricsGrid/DashboardMetricsGrid.tsx
+      Note: Phase 8C dashboard props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardMobileCopy/DashboardMobileCopy.stories.tsx
+      Note: Phase 8C dashboard mobile stories
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardMobileCopy/DashboardMobileCopy.tsx
+      Note: Phase 8C dashboard mobile props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardMobileHeader/DashboardMobileHeader.stories.tsx
+      Note: Phase 8C dashboard mobile stories
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardMobileHeader/DashboardMobileHeader.tsx
+      Note: Phase 8C dashboard mobile props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.stories.tsx
+      Note: Phase 8C dashboard overview stories
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.tsx
+      Note: Phase 8C dashboard overview props
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardQuickActionsContent/DashboardQuickActionsContent.tsx
+      Note: Phase 8C dashboard callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardQuickActionsPanel/DashboardQuickActionsPanel.tsx
+      Note: Phase 8C dashboard props
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
         Hero subelement hooks and WIP tuning (commit ed55e40)
         Metrics and attention organism extraction (commit b1180ae)
         Compatibility barrel after dashboard widget folderization
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx
+      Note: Phase 8C dashboard props/callbacks
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
@@ -262,6 +290,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4704,4 +4733,192 @@ The visual guard outputs stayed at known/review values:
 ```text
 calendar-month-panel: 7.22398110457812%, review, text unchanged
 calendar page agenda section: 7.922558922558923%, review, text unchanged
+```
+
+## Step 36: Type dashboard organisms and add callback-ready dashboard stories
+
+I continued Phase 8C through the dashboard organism cluster. This pass added named prop types, callback seams for dashboard actions, explicit mobile copy/header props, and additional DashboardOverview stories for empty and busy states.
+
+The dashboard pass also exercised the visual guard process after a Storybook restart. The first visual command failed because the running Storybook instance was stale/unresponsive for the page sections; after killing the lingering Node process and restarting Storybook, the guard checks ran successfully.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue Phase 8C into the next component cluster, keeping commits focused and recording validation/failures.
+
+**Inferred user intent:** Keep improving app organization and RTK-readiness with typed props, stories, and visual safety checks.
+
+**Commit (code):** `104edbc` — "Type dashboard organisms and add stories"
+
+### What I did
+
+- Added named exported props/variant types for dashboard organisms:
+  - `DashboardHeroProps`,
+  - `DashboardMetricsGridProps`,
+  - `DashboardMetricsGridVariant`,
+  - `DashboardQuickActionsContentProps`,
+  - `DashboardQuickActionsPanelProps`,
+  - `DashboardActivityPanelProps`,
+  - `DashboardAttentionTone`,
+  - `DashboardAttentionCountProps`,
+  - `DashboardAttentionContentProps`,
+  - `DashboardAttentionPanelVariant`,
+  - `DashboardAttentionPanelProps`,
+  - `DashboardUpcomingPanelProps`,
+  - `DashboardMobileHeaderProps`,
+  - `DashboardMobileCopyProps`,
+  - `DashboardOverviewProps`.
+- Added callback props for action-ready dashboard widgets:
+  - `DashboardHero`: `onViewDiscord`, `onEditShow`,
+  - `DashboardQuickActionsContent`/`Panel`: `onAddShow`, `onReviewBookings`, `onOpenAuditLog`,
+  - `DashboardUpcomingPanel`: `onViewAll`.
+- Added empty handling to `DashboardActivityPanel`.
+- Added standalone stories for:
+  - `DashboardMobileHeader`,
+  - `DashboardMobileCopy`.
+- Expanded existing stories:
+  - `DashboardHero`: callback story,
+  - `DashboardQuickActionsPanel`: callback story,
+  - `DashboardUpcomingPanel`: callback story,
+  - `DashboardOverview`: typed meta plus empty and busy stories.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Restarted Storybook after an initial visual failure:
+
+```bash
+kill 2462142 || true
+tmux kill-session -t pyxis-app-storybook 2>/dev/null || true
+tmux new-session -d -s pyxis-app-storybook \
+  'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-app storybook'
+```
+
+- Ran focused visual guard checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-dashboard-hero \
+  --output json
+```
+
+Result: `dashboard/hero` reported `11.25010935176275%`, `tune-required`. Bounds remained aligned, but text summary includes the mobile-only date copy on the React side. This appears to be a pre-existing hidden-text extraction caveat rather than a visible regression from the prop/callback pass.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section metrics \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-dashboard-metrics \
+  --output json
+```
+
+Result: `dashboard/metrics` stayed in review band at `4.994062842528316%`, with text unchanged.
+
+### Why
+
+Dashboard organisms are central to the app shell and will need route-level wiring soon. Adding callback seams now lets future containers route actions without embedding navigation/mutation logic inside presentational sections.
+
+The mobile header/copy components had hard-coded text. Making that text prop-driven allows route/page state to feed them later while preserving current defaults.
+
+### What worked
+
+- Typecheck passed.
+- The metrics visual guard stayed in review band with unchanged text.
+- Dashboard widgets now expose clear callback and data props rather than relying only on hard-coded copy/actions.
+- Story coverage now includes standalone mobile header/copy stories and DashboardOverview empty/busy states.
+
+### What didn't work
+
+The first dashboard visual guard attempt failed before the Storybook restart:
+
+```text
+Error: promise rejected: SelectorError: selector "[data-section=\"dashboard-hero\"]" did not become visible within 30000ms
+Error: promise rejected: SelectorError: selector "[data-section=\"dashboard-metrics\"]" did not become visible within 30000ms
+```
+
+After checking the port, there was still a lingering Node listener on port `6008`. I killed it and restarted Storybook, then the visual checks ran successfully.
+
+### What I learned
+
+The known Vite/Storybook caveat still applies even for prop/story refactors: after enough Storybook/source movement, a clean server restart is safer before trusting visual guard failures.
+
+The dashboard hero comparison also shows that hidden mobile text can affect text summaries even when visible bounds are aligned. For dashboard hero follow-up, nested inspection or a text-extraction filter may be better than treating root text as a strict gate.
+
+### What was tricky to build
+
+The action callbacks had to be added without changing visible button labels, order, or class names. I only added `onClick` handlers and kept default behavior inert when callbacks are omitted.
+
+`DashboardOverview` stories needed typed args without disrupting the existing composed mobile stack story. I converted the meta to `satisfies Meta<typeof DashboardOverview>` and kept the custom mobile stories intact.
+
+### What warrants a second pair of eyes
+
+- Review dashboard callback names before route/navigation wiring.
+- Review whether dashboard hero should hide mobile copy from text extraction or use a more specific visual text guard.
+- Review whether DashboardMetricsGrid should eventually wrap `pyxis-components/Stat` or keep the app-specific `MetricCard`.
+
+### What should be done in the future
+
+- Continue Phase 8C into remaining route/detail organisms.
+- Add a dedicated reuse cluster for `MetricCard` vs shared `Stat` only after a stable baseline.
+- Consider improving `css-visual-diff` text summaries to optionally ignore invisible text.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.tsx
+web/packages/pyxis-app/src/components/organisms/DashboardQuickActionsContent/DashboardQuickActionsContent.tsx
+web/packages/pyxis-app/src/components/organisms/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx
+web/packages/pyxis-app/src/components/organisms/DashboardMobileHeader/DashboardMobileHeader.tsx
+web/packages/pyxis-app/src/components/organisms/DashboardMobileCopy/DashboardMobileCopy.tsx
+web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section hero \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-dashboard-hero \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section metrics \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-dashboard-metrics \
+  --output json
+```
+
+### Technical details
+
+The successful visual guard outputs were:
+
+```text
+dashboard hero: 11.25010935176275%, tune-required, bounds aligned, text caveat from mobile copy
+dashboard metrics: 4.994062842528316%, review, text unchanged
 ```
