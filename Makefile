@@ -1,0 +1,40 @@
+.PHONY: build test lint migrate migrate-down seed generate clean dev
+
+BINARY_NAME=pyxis
+GO=go
+DOCKER_COMPOSE=docker-compose
+
+build:
+	$(GO) build -o bin/$(BINARY_NAME) ./cmd/pyxis
+
+test:
+	$(GO) test ./... -count=1
+
+lint:
+	golangci-lint run ./...
+
+migrate:
+	$(GO) run ./cmd/pyxis migrate up
+
+migrate-down:
+	$(GO) run ./cmd/pyxis migrate down
+
+seed:
+	$(GO) run ./cmd/pyxis seed --fixtures fixtures/dev.yaml
+
+generate:
+	# Generate sqlc code
+	sqlc generate
+	# Generate protobuf code
+	buf generate
+
+dev:
+	$(DOCKER_COMPOSE) up -d db
+	@echo "Waiting for PostgreSQL to be healthy..."
+	@sleep 3
+	$(GO) run ./cmd/pyxis migrate up
+	$(GO) run ./cmd/pyxis serve --bind :8080
+
+clean:
+	$(DOCKER_COMPOSE) down -v
+	rm -rf bin/

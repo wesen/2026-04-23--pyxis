@@ -1,24 +1,38 @@
-# Generated prototype baseline artifacts. Keep manifest/index tracked; keep heavy PNG/CSS/HTML bundles local.
-prototype-design/baseline/artifacts/
-prototype-design/baseline/sample/
-prototype-design/baseline/sample-public-components/
-prototype-design/baseline/sample-full-app/
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 
-# Local IDE / Playwright MCP / direnv state.
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go vendor directory
+vendor/
+
+# IDE
 .idea/
-.playwright-mcp/
-.envrc
-prototype-design/storybook-catalog/artifacts/
-prototype-design/storybook-catalog/sample-atoms/
+.vscode/
+*.swp
+*.swo
+*~
 
-# Generated prototype-vs-Storybook comparison outputs
-prototype-design/visual-comparisons/
+# Environment
+.env
+.env.local
 
-# Deprecated generated prototype-design outputs kept locally for historical inspection.
-prototype-design/-deprecated/generated-output/baseline/artifacts/
-prototype-design/-deprecated/generated-output/baseline/sample/
-prototype-design/-deprecated/generated-output/baseline/sample-public-components/
-prototype-design/-deprecated/generated-output/baseline/sample-full-app/
-prototype-design/-deprecated/generated-output/storybook-catalog/artifacts/
-prototype-design/-deprecated/generated-output/storybook-catalog/sample-atoms/
-prototype-design/-deprecated/generated-output/visual-comparisons/
+# Generated code
+# (We commit generated protobuf/sqlc code for now)
+# gen/
+
+# Database data (local dev)
+postgres-data/
+
+# OS
+.DS_Store
+Thumbs.db
