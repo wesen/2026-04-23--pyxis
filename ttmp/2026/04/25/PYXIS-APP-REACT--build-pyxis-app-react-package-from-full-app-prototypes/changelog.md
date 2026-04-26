@@ -242,3 +242,15 @@ Step 31: Started Phase 8C by adding named app atom prop types, richer atom stori
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/atoms/AgeBadge/AgeBadge.tsx — Named atom props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx — Named atom props
 
+
+## 2026-04-25
+
+Step 32: Added named prop types and richer stories for core reusable molecules; metric-card visual guard remained stable and today-show-card spec issue was identified (commit c8f2537).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.tsx — Named molecule props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx — Named molecule props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.tsx — Named molecule props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx — Named molecule props
+

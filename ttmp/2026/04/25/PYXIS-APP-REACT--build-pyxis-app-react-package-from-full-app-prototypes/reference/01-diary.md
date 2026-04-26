@@ -102,14 +102,26 @@ RelatedFiles:
       Note: Phase 8C atom stories
     - Path: web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx
       Note: Phase 8C atom props
+    - Path: web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.stories.tsx
+      Note: Phase 8C molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.tsx
+      Note: Phase 8C molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.css
       Note: Owned BookingCard styles after Rows.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
       Note: Pending booking card and processed row shape tuned for Bookings organisms (commit caeefa4)
+    - Path: web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.stories.tsx
+      Note: Phase 8C molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx
+      Note: Phase 8C molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx
-      Note: Storybook title hierarchy mirrors folder path
+      Note: |-
+        Storybook title hierarchy mirrors folder path
+        Phase 8C molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.tsx
+      Note: Phase 8C molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
       Note: |-
         Replaced local surface/status values with app tokens
@@ -120,6 +132,10 @@ RelatedFiles:
         Shows table row structure and archived variant matched to prototype columns (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/molecules/Table.css
       Note: Shared table primitive styles extracted from Rows.css (commit 8ab1a74)
+    - Path: web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.stories.tsx
+      Note: Phase 8C molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx
+      Note: Phase 8C molecule props
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
       Note: Story colocation validation
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
@@ -186,6 +202,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4001,3 +4018,147 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
 ### Technical details
 
 The atom stories now use `Meta<typeof Component>`/`StoryObj<typeof meta>` so controls can infer the typed prop surface. Story export names changed only for atom stories that are not referenced by current visual specs.
+
+## Step 32: Type core reusable molecules and expand their story state coverage
+
+I continued Phase 8C into the first molecule cluster: metric cards, activity feed items, calendar event chips, and today show cards. These are reusable presentational pieces that feed larger dashboard, calendar, and mobile/show organisms.
+
+This pass still avoids changing rendering semantics. The point was to make the prop contracts explicit and give Storybook enough state coverage for later component-system reuse decisions and visual checks.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 31)
+
+**Assistant interpretation:** Continue the Phase 8C prop/story coverage pass, now moving from app atoms into reusable molecules while keeping css-visual-diff as a guardrail.
+
+**Inferred user intent:** Make reusable presentational components easier to review, reuse, and wire before deeper app data work.
+
+**Commit (code):** `c8f2537` — "Type core pyxis app molecules and add stories"
+
+### What I did
+
+- Added named exported prop/variant types:
+  - `MetricCardProps`, `MetricCardTone`,
+  - `ActivityFeedItemProps`, `ActivityFeedItemVariant`,
+  - `CalendarEventChipProps`,
+  - `TodayShowCardProps`.
+- Expanded molecule stories while preserving existing visual-spec story export names:
+  - `MetricCardDefault`, plus trend/long/tone-grid stories,
+  - `ActivityItemDefault`, plus timeline/bot/long/list stories,
+  - `CalendarEventDefault`, plus hold/blocked/long/list stories,
+  - `TodayShowDefault`, plus all-ages/over-capacity/long/narrow/list stories.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran visual guard checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page metric-card \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-metric-card-after \
+  --output json
+```
+
+Result: `metric-card` stayed unchanged in review band at `3.724216959511077%` with text unchanged.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page today-show-card \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-today-show-after \
+  --output json
+```
+
+Result: `today-show-card` reported `21.580857385398982%` / `tune-required`, but the summary revealed a target/spec problem: the prototype selector is `#root`, so the left crop captures the whole dashboard page while the right crop captures only the `TodayShowCard` component. I did not tune the molecule from that invalid comparison.
+
+### Why
+
+These molecules are high-leverage: they appear in dashboard, calendar, shows, and mobile contexts. Named props and richer stories make later work safer when we decide whether to wrap `Stat`, `Badge`, `Tag`, `Table`, or other `pyxis-components` primitives.
+
+Preserving existing story export names was important because `app.components.visual.yml` references story IDs such as `pyxis-app-components-molecules-metriccard--metric-card-default`.
+
+### What worked
+
+- Typecheck passed after the molecule prop/story changes.
+- `MetricCard` visual guard stayed stable, confirming that the story refactor did not alter the tuned component target.
+- Story coverage is now broad enough to inspect default, long, list, timeline, and tone/status variants in Storybook.
+
+### What didn't work
+
+- The `today-show-card` visual target is not usable as a component guard yet because the prototype selector is `#root` and captures the entire dashboard. The run exposed this clearly through `bounds`, text, and selector summaries.
+
+### What I learned
+
+The visual guard process should include selector validity as a first-class check. A high diff is not necessarily a component regression; it can indicate that the visual spec still points at an overly broad prototype selector.
+
+For Phase 8C, focused targets should be reviewed before trusting their numbers. `MetricCard` is a reliable guard target; `TodayShowCard` needs a prototype hook or better selector before it can protect refactors.
+
+### What was tricky to build
+
+The main constraint was preserving story IDs used by specs while modernizing Storybook types. I kept existing export names for visual-spec targets and added additional stories around them rather than renaming the canonical stories.
+
+### What warrants a second pair of eyes
+
+- Review whether `TodayShowCard` should get a proper prototype hook/spec target or be removed from component visual guard until one exists.
+- Review whether `MetricCard` should remain app-local or eventually wrap/extend `pyxis-components/Stat`.
+- Review whether `CalendarEventChip` should continue using app-local `StatusDot` or map to shared `Badge`/`Tag` primitives later.
+
+### What should be done in the future
+
+- Fix the `today-show-card` component visual target before using it as a regression guard.
+- Continue with actionable/domain molecules: `BookingCard`, `BookingQueueRow`, `ShowTableRow`, `ArtistCard`, `SettingsToggleRow`, and `DiscordChannelRow`.
+- Add callback props to `BookingCard` in the next molecule pass.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.tsx
+web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx
+web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.tsx
+web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.stories.tsx
+web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.tsx
+web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.stories.tsx
+web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx
+web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.stories.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Use `MetricCard` as the currently reliable visual guard:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page metric-card \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-metric-card-after \
+  --output json
+```
+
+### Technical details
+
+The canonical story exports used by visual specs were preserved:
+
+```text
+MetricCardDefault
+ActivityItemDefault
+CalendarEventDefault
+TodayShowDefault
+```
+
+This avoids changing visual-spec story IDs during a props/story pass.
