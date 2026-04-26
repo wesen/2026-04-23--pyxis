@@ -22,14 +22,31 @@ RelatedFiles:
       Note: |-
         Initial audit script for classifying current public-domain components.
         Initial public component taxonomy audit script.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/01-public-component-taxonomy-audit.md
+      Note: Saved initial taxonomy audit output.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/02-pyxis-components-storybook-ids-after-pilot.md
+      Note: Saved component Storybook IDs after molecule pilot.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/03-pyxis-user-site-storybook-page-ids-after-cleanup.md
+      Note: Saved public user-site page story IDs after cleanup.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
+    - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowList
+      Note: Moved public archive list molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowRow
+      Note: Moved public archive row molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/LineupRow
+      Note: Moved public lineup row molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/ShowDetailHeader
+      Note: Moved public show detail header molecule in pilot batch.
+    - Path: web/packages/pyxis-components/src/public/molecules/ShowMetaStrip
+      Note: Moved public show metadata strip molecule in pilot batch.
 ExternalSources: []
 Summary: Chronological diary for the public site component taxonomy and folder layout cleanup ticket.
 LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 # Diary
@@ -153,7 +170,169 @@ Before moving files, run the audit script and save full output:
 
 ```bash
 node ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/scripts/audit-public-component-taxonomy.mjs \
-  > ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/public-component-taxonomy-audit.md
+  > ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/01-public-component-taxonomy-audit.md
 ```
 
 Then manually review the ambiguous components and move a small molecule pilot batch first.
+
+## Step 2: Upload and Public Molecule Pilot Move
+
+The user asked to upload the taxonomy guide to reMarkable and then work through the first pilot move. I uploaded the guide bundle, started live Storybook in tmux so the user can follow along, moved the first five public-domain molecule folders, updated imports/exports/story titles, and validated both package builds and Storybook.
+
+### Prompt Context
+
+**User prompt (verbatim):** "upload to remarkable. then add tasks, and work through that first pilot move"
+
+**Follow-up prompt:** "are you running the 6007 storybook again? run in a tmux so I can follow your work."
+
+**Follow-up prompt:** "alright, go do it"
+
+**Assistant interpretation:** Publish the taxonomy ticket bundle, keep a visible Storybook process running in tmux, and implement the low-risk public molecule move defined in the ticket.
+
+**Commit:** Pending at time of diary entry.
+
+### reMarkable upload
+
+Uploaded:
+
+```text
+/ai/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY/PYXIS-PUBLIC-COMPONENT-TAXONOMY Implementation Guide
+```
+
+Verified with:
+
+```bash
+remarquee cloud ls /ai/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY --long --non-interactive
+```
+
+### tmux Storybook sessions
+
+Started user-site Storybook for the user to follow route-page work:
+
+```bash
+tmux attach -t pyxis-user-site-storybook
+# http://localhost:6007/
+```
+
+Started component Storybook for the pilot molecule validation:
+
+```bash
+tmux attach -t pyxis-components-storybook
+# http://localhost:6006/
+```
+
+Both have the usual non-blocking Storybook 8 package-version warnings and `--host 0.0.0.0` allowed-hosts warning.
+
+### Components moved
+
+Moved from the flat public folder:
+
+```text
+web/packages/pyxis-components/src/public/LineupRow
+web/packages/pyxis-components/src/public/ShowMetaStrip
+web/packages/pyxis-components/src/public/ShowDetailHeader
+web/packages/pyxis-components/src/public/ArchiveShowRow
+web/packages/pyxis-components/src/public/ArchiveShowList
+```
+
+Moved to:
+
+```text
+web/packages/pyxis-components/src/public/molecules/LineupRow
+web/packages/pyxis-components/src/public/molecules/ShowMetaStrip
+web/packages/pyxis-components/src/public/molecules/ShowDetailHeader
+web/packages/pyxis-components/src/public/molecules/ArchiveShowRow
+web/packages/pyxis-components/src/public/molecules/ArchiveShowList
+```
+
+### Import/export updates
+
+- Updated relative `pyxisPart` imports from `../../utils/parts` to `../../../utils/parts` in moved components.
+- Updated `ArchiveShowList` sibling import to keep using `../ArchiveShowRow` inside `public/molecules`.
+- Updated `web/packages/pyxis-components/src/index.ts` barrel exports to the new paths.
+- Updated `web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx` imports to the new `./molecules/...` paths.
+
+### Storybook title updates
+
+Updated moved stories to the new hierarchy:
+
+```text
+Public Site/Components/Molecules/LineupRow
+Public Site/Components/Molecules/ShowMetaStrip
+Public Site/Components/Molecules/ShowDetailHeader
+Public Site/Components/Molecules/ArchiveShowRow
+Public Site/Components/Molecules/ArchiveShowList
+```
+
+Resulting story IDs include:
+
+```text
+public-site-components-molecules-lineuprow--default
+public-site-components-molecules-showmetastrip--default
+public-site-components-molecules-showdetailheader--default
+public-site-components-molecules-archiveshowrow--default
+public-site-components-molecules-archiveshowlist--default
+```
+
+### Sources captured
+
+Saved audit and Storybook ID references under `sources/`:
+
+```text
+sources/01-public-component-taxonomy-audit.md
+sources/02-pyxis-components-storybook-ids-after-pilot.md
+sources/03-pyxis-user-site-storybook-page-ids-after-cleanup.md
+```
+
+### Visual-diff/spec reference check
+
+Searched for active references to the moved public story IDs. The only matches found were historical ticket references to `public-molecules-lineup-row-default` in the 2026-04-24 visual parity handoff/diary. No active spec file update was required in this pass.
+
+Command shape:
+
+```bash
+rg "public-molecules-(lineup-row|show-meta-strip|show-detail-header|archive-show-row|archive-show-list)|public-organisms-archive-show-list" prototype-design docs ttmp web -n
+```
+
+### Validation
+
+Quiet validation commands passed:
+
+```bash
+cd web/packages/pyxis-user-site && pnpm build-storybook
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-components && pnpm build-storybook
+cd web && pnpm build
+```
+
+I redirected noisy Vite/Storybook build output to `/tmp/...` logs for the final validation pass to avoid printing every emitted asset size.
+
+Live browser validation against component Storybook on `localhost:6006` loaded these moved stories without console errors or warnings, excluding the harmless missing favicon request:
+
+```text
+public-site-components-molecules-lineuprow--default
+public-site-components-molecules-showmetastrip--default
+public-site-components-molecules-showdetailheader--default
+public-site-components-molecules-archiveshowrow--default
+public-site-components-molecules-archiveshowlist--default
+```
+
+### What worked
+
+- The pilot move proved the mechanical workflow: `git mv`, fix relative imports, update barrel exports, update fixture imports, update story titles, validate builds, and inspect Storybook IDs.
+- Public page package builds still pass because consumers import through the stable `pyxis-components` barrel.
+- Component Storybook now exposes the moved components under the intended `Public Site/Components/Molecules/*` hierarchy.
+
+### What was tricky
+
+- `PublicDiffFixture.stories.tsx` had direct relative imports from `./LineupRow`, `./ShowDetailHeader`, etc.; these needed manual updates because they are internal story-only imports, not package-barrel imports.
+- Changing Storybook titles changes story IDs. I captured the new IDs and searched references before committing.
+
+### Next recommended batch
+
+Do not jump to all components at once. Either:
+
+1. finish the archive cluster by classifying/moving `ArchiveSearchFilters`, `ArchiveStats`, and `YearGroup`, or
+2. start the shows/detail cluster with `ShowTile`, `TicketStub`, `ReserveTicketCard`, and later `ShowGrid`.
+
+The next batch should also create `src/public/organisms/` only when the first actual organism moves.

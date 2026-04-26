@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ShowMetaStrip } from './ShowMetaStrip';
 
 const meta: Meta<typeof ShowMetaStrip> = {
-  title: 'Public/Molecules/ShowMetaStrip',
+  title: 'Public Site/Components/Molecules/ShowMetaStrip',
   component: ShowMetaStrip,
   tags: ['autodocs'],
 };

@@ -6,28 +6,28 @@
 - [x] Add public component taxonomy/folder layout design guide.
 - [x] Add public component taxonomy audit script.
 - [x] Locate existing decomposition and Storybook organization playbooks.
-- [ ] Run full taxonomy audit and save output under `sources/`.
+- [x] Run full taxonomy audit and save output under `sources/`.
 - [ ] Manually review each `needs-review` classification.
 - [ ] Finalize public atom/molecule/organism/fixture classification table.
 
 ## Phase 2: Storybook baseline
 
-- [ ] Confirm `pyxis-user-site` only exposes canonical `Public Site/Pages` route stories.
-- [ ] Confirm no stale `Pages/Book`, `Pages/Shows`, `Pages/Archive`, or `Pages/ShowDetail` stories exist.
-- [ ] Record current `storybook-static/index.json` story IDs under `sources/`.
-- [ ] Search active visual-diff specs for public component story IDs before moving files.
+- [x] Confirm `pyxis-user-site` only exposes canonical `Public Site/Pages` route stories.
+- [x] Confirm no stale `Pages/Book`, `Pages/Shows`, `Pages/Archive`, or `Pages/ShowDetail` stories exist.
+- [x] Record current `storybook-static/index.json` story IDs under `sources/`.
+- [x] Search active visual-diff specs for public component story IDs before moving files.
 
 ## Phase 3: Pilot move — public molecules
 
-- [ ] Create `web/packages/pyxis-components/src/public/molecules/`.
-- [ ] Move `LineupRow` to `public/molecules/LineupRow`.
-- [ ] Move `ShowMetaStrip` to `public/molecules/ShowMetaStrip`.
-- [ ] Move `ShowDetailHeader` to `public/molecules/ShowDetailHeader`.
-- [ ] Move `ArchiveShowRow` to `public/molecules/ArchiveShowRow`.
-- [ ] Move `ArchiveShowList` to `public/molecules/ArchiveShowList`.
-- [ ] Update relative imports and barrel exports.
-- [ ] Update Storybook titles to `Public Site/Components/Molecules/*`.
-- [ ] Run `cd web/packages/pyxis-components && pnpm build`.
+- [x] Create `web/packages/pyxis-components/src/public/molecules/`.
+- [x] Move `LineupRow` to `public/molecules/LineupRow`.
+- [x] Move `ShowMetaStrip` to `public/molecules/ShowMetaStrip`.
+- [x] Move `ShowDetailHeader` to `public/molecules/ShowDetailHeader`.
+- [x] Move `ArchiveShowRow` to `public/molecules/ArchiveShowRow`.
+- [x] Move `ArchiveShowList` to `public/molecules/ArchiveShowList`.
+- [x] Update relative imports and barrel exports.
+- [x] Update Storybook titles to `Public Site/Components/Molecules/*`.
+- [x] Run `cd web/packages/pyxis-components && pnpm build`.
 
 ## Phase 4: Shows/detail cluster
 
@@ -68,12 +68,12 @@
 
 ## Phase 9: Validation and docs
 
-- [ ] `cd web/packages/pyxis-components && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-user-site && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-user-site && pnpm build-storybook` passes.
-- [ ] `cd web && pnpm build` passes.
-- [ ] Storybook index contains expected page and component story IDs.
-- [ ] Any changed visual-diff story IDs are updated in specs.
-- [ ] Diary updated with move batches and caveats.
-- [ ] Changelog updated.
-- [ ] `docmgr doctor --ticket PYXIS-PUBLIC-COMPONENT-TAXONOMY --stale-after 30` passes.
+- [x] `cd web/packages/pyxis-components && pnpm build` passes.
+- [x] `cd web/packages/pyxis-user-site && pnpm build` passes.
+- [x] `cd web/packages/pyxis-user-site && pnpm build-storybook` passes.
+- [x] `cd web && pnpm build` passes.
+- [x] Storybook index contains expected page and component story IDs.
+- [x] Any changed visual-diff story IDs are updated in specs or confirmed to be historical references only.
+- [x] Diary updated with move batches and caveats.
+- [x] Changelog updated.
+- [x] `docmgr doctor --ticket PYXIS-PUBLIC-COMPONENT-TAXONOMY --stale-after 30` passes.

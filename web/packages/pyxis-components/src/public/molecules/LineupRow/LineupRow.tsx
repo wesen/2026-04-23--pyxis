@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import type { Show_LineupEntry as LineupEntry } from 'pyxis-types';
 import './LineupRow.css';
 

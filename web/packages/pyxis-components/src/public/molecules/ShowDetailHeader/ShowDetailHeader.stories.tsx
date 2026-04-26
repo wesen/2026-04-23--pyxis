@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ShowDetailHeader } from './ShowDetailHeader';
 
 const meta: Meta<typeof ShowDetailHeader> = {
-  title: 'Public/Molecules/ShowDetailHeader',
+  title: 'Public Site/Components/Molecules/ShowDetailHeader',
   component: ShowDetailHeader,
   tags: ['autodocs'],
 };

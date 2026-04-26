@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import './ShowMetaStrip.css';
 
 export type ShowMetaStripProps = {

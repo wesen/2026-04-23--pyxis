@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ArchiveShowList } from './ArchiveShowList';
 
 const meta: Meta<typeof ArchiveShowList> = {
-  title: 'Public/Organisms/ArchiveShowList',
+  title: 'Public Site/Components/Molecules/ArchiveShowList',
   component: ArchiveShowList,
   tags: ['autodocs'],
 };

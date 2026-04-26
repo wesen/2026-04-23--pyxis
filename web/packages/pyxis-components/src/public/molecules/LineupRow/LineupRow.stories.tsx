@@ -4,7 +4,7 @@ import { create, Show_LineupEntrySchema } from 'pyxis-types';
 import { LineupRow } from './LineupRow';
 
 const meta: Meta<typeof LineupRow> = {
-  title: 'Public/Molecules/LineupRow',
+  title: 'Public Site/Components/Molecules/LineupRow',
   component: LineupRow,
   tags: ['autodocs'],
 };
