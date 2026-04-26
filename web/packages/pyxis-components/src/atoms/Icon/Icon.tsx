@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
+import './Icon.css';
 
 /* ─── SVG icon paths (thin, custom-drawn at 20×20 viewBox) ─── */
 

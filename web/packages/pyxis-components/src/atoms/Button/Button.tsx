@@ -3,6 +3,7 @@ import { clsx } from 'clsx';
 import { Icon, type IconName } from '../Icon';
 import { buttonVariants, buttonSizes, type ButtonVariant, type ButtonSize } from '../../tokens';
 import { pyxisPart } from '../../utils/parts';
+import './Button.css';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;

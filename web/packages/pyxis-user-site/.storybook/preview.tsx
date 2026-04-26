@@ -5,10 +5,6 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { makeStore } from '../src/store';
 import '../src/styles/global.css';
 import '../../pyxis-components/src/tokens/tokens.css';
-import '../../pyxis-components/src/atoms/Button/Button.css';
-import '../../pyxis-components/src/atoms/Icon/Icon.css';
-import '../../pyxis-components/src/atoms/Input/Input.css';
-import '../../pyxis-components/src/atoms/Select/Select.css';
 
 initialize({ onUnhandledRequest: 'bypass' });
 

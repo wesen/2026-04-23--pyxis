@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
+import './Textarea.css';
 
 export type TextareaProps = Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> & {
   label?: string;

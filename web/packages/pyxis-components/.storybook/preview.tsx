@@ -1,11 +1,5 @@
 import type { Preview } from '@storybook/react';
 import '../src/tokens/tokens.css';
-import '../src/atoms/Button/Button.css';
-import '../src/atoms/Icon/Icon.css';
-import '../src/atoms/Input/Input.css';
-import '../src/atoms/Select/Select.css';
-import '../src/atoms/Textarea/Textarea.css';
-import '../src/molecules/Card/Card.css';
 
 const preview: Preview = {
   decorators: [

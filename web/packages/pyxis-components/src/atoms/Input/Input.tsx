@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { Icon, type IconName } from '../Icon';
 import { pyxisPart } from '../../utils/parts';
+import './Input.css';
 
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   /** Label text */
