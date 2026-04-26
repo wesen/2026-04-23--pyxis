@@ -635,7 +635,7 @@ Use this checklist for every Phase 7.x Dashboard section:
 - [x] Align mobile behavior: decide whether upcoming shows are hidden on mobile home or represented by cards in a later route.
 - [x] Add Storybook stories for desktop table, mobile cards/hidden state, empty state, long artist names.
 - [x] Tune `dashboard-upcoming` focused comparison before full page.
-- [ ] Commit: `Consolidate dashboard upcoming shows`.
+- [x] Commit: `Consolidate dashboard upcoming shows`.
 
 ### Phase 7.5 — Dashboard quick actions consolidation
 

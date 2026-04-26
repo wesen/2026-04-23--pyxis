@@ -70,3 +70,15 @@ Step 11: Composed responsive Dashboard page checkpoint with hero, metrics, upcom
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page — Phase 7 visual artifacts
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — Dashboard composition
 
+
+## 2026-04-25
+
+Step 16: Consolidated Dashboard upcoming shows organism; extracted DashboardUpcomingPanel, reused show/date/status molecules, added Storybook states, and recorded review-band focused visual result 6.5581% / 29541 px (commit 7510483).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png — Final visual crop evidence
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx — Dashboard row variant
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — DashboardUpcomingPanel extraction
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx — Upcoming panel stories
+

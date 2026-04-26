@@ -40,28 +40,37 @@ RelatedFiles:
       Note: Final dashboard metrics prototype crop inspected with read
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/06-css-loop-dashboard-metrics/run-08-final/dashboard/artifacts/metrics/right_region.png
       Note: Final dashboard metrics React crop inspected with read
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png
+      Note: Final inspected React crop for dashboard-upcoming review-band result (commit 7510483)
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
       Note: RTK Query app API slice and hooks
+    - Path: web/packages/pyxis-app/src/components/atoms/DateChip.tsx
+      Note: Inline date chip variant for dashboard table rows (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/atoms/StatusDot.css
       Note: Centralized status colors/rings through CSS variables
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
       Note: Replaced local surface/status values with app tokens
+    - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx
+      Note: Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: Responsive dashboard layout and mobile-specific ordering
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
       Note: |-
         Initial Phase 5-6 staff app organisms and page composition components
         Dashboard hero
+        DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
         Light desktop sidebar and static mobile bottom nav
     - Path: web/packages/pyxis-app/src/styles/app-tokens.css
       Note: Expanded cohesive app theme variables before Phase 7 (commit fba5369)
+    - Path: web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx
+      Note: Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -70,6 +79,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -1634,4 +1644,177 @@ The new Dashboard flow is:
 
 ```text
 Phase 7.0 checkpoint already completed → 7.1 shell/header/menu → 7.2 hero → 7.3 metrics/attention → 7.4 upcoming shows → 7.5 quick actions → 7.6 recent activity → 7.7 final full-page acceptance checkpoint
+```
+
+## Step 16: Consolidate the Dashboard upcoming shows organism
+
+I resumed the ticket by following the startup hygiene the user requested: read the diary skill, read the docmgr skill, and re-read the recent diary/task/runbook context before coding. I chose Phase 7.4 because the user accepted that the upcoming-shows section was good enough as a consolidation checkpoint and asked me to continue.
+
+This step extracted the Dashboard upcoming shows section into a named organism and made the table reuse existing show/date/status pieces instead of staying as anonymous page JSX. The focused visual result is in the `review` band, so I stopped rather than chasing pixel perfection before the neighboring Dashboard organisms are consolidated.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, fair enough, continue."
+
+**Assistant interpretation:** Accept the review-band upcoming section assessment, commit the checkpoint, and continue the ticket workflow.
+
+**Inferred user intent:** Keep moving through Dashboard consolidation without overfitting one section before header/menu, quick actions, and activity are handled.
+
+**Commit (code):** 7510483 — "Consolidate dashboard upcoming shows"
+
+### What I did
+
+- Re-read the required skills and prior context:
+  - `/home/manuel/.pi/agent/skills/diary/SKILL.md`,
+  - `/home/manuel/.pi/agent/skills/docmgr/SKILL.md`,
+  - recent diary Steps 10–15,
+  - `tasks.md` Phase 7,
+  - the CSS visual improvement runbook.
+- Extracted `DashboardUpcomingPanel` in `web/packages/pyxis-app/src/components/organisms/Panels.tsx`.
+- Updated `DashboardOverview` to use `DashboardUpcomingPanel` and to sort confirmed shows by date before display.
+- Extended `ShowsTable` with a `variant="dashboard"` mode so Dashboard uses the prototype columns: date, artist, doors, age, status.
+- Extended `ShowTableRow` with a Dashboard variant that reuses:
+  - `DateChip`,
+  - `StatusDot`,
+  - shared row/tag styles,
+  - pinned show affordance.
+- Extended `DateChip` with an `inline` variant for compact table date cells.
+- Added row/tag/pin/empty-state styling in shared CSS.
+- Added richer Storybook stories:
+  - `UpcomingPanelDesktop`,
+  - `UpcomingPanelMobileCards`,
+  - `UpcomingPanelLongArtistNames`,
+  - `UpcomingPanelEmpty`.
+- Marked Phase 7.4 checklist items complete in `tasks.md`, leaving the commit checkbox for the documentation follow-up.
+- Preserved focused visual artifacts under:
+  - `various/09-dashboard-upcoming-consolidation/`.
+- Preserved the desktop full-page checkpoint under:
+  - `various/07-dashboard-page/desktop/run-06-upcoming-consolidation/`.
+
+### Why
+
+- Dashboard upcoming shows was still embedded in the page composition and needed to become a reusable organism before other routes/pages copy similar show-list logic.
+- Reusing `DateChip`, `ShowTableRow`, `StatusDot`, and `TodayShowCard` keeps the Dashboard aligned with the component system instead of growing one-off table markup.
+- The section-level visual loop is the right validation surface; the full-page Dashboard is still too noisy because header/menu/activity/attention are not consolidated.
+
+### What worked
+
+- TypeScript validation passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Focused section run after correcting the section name passed in review band:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section upcoming \
+  --summary \
+  --outDir ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline \
+  --output json
+```
+
+Final focused result:
+
+```text
+classification: review
+changedPercent: 6.558108558108558
+changedPixels: 29541
+totalPixels: 450450
+```
+
+- The inspected crops were structurally close enough for a checkpoint:
+
+```text
+various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/left_region.png
+various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png
+various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/diff_only.png
+```
+
+- Desktop full-page checkpoint improved from the previous known `16.414974279284106%` to:
+
+```text
+run-06-upcoming-consolidation: 12.380606824031984%, 180846 changed pixels, tune-required
+```
+
+### What didn't work
+
+- My first focused visual command used the selector-like section name:
+
+```bash
+--section dashboard-upcoming
+```
+
+It returned no rows because the visual spec section is named `upcoming` even though its selectors are `[data-section="dashboard-upcoming"]`:
+
+```text
+sectionCount: 0
+rows: []
+```
+
+- A combined command ran `css-visual-diff` from inside `web/` after typecheck, which made the relative repository path wrong:
+
+```text
+CLI repository "prototype-design/visual-diff/userland": stat /home/manuel/code/wesen/2026-04-23--pyxis/web/prototype-design/visual-diff/userland: no such file or directory
+```
+
+I reran the visual command from the repository root and removed the accidental `web/ttmp/` output directory.
+
+### What I learned
+
+- For `compare-spec --section`, use the spec section name (`upcoming`), not the `data-section` attribute value (`dashboard-upcoming`).
+- Sorting mock shows before passing them into the Dashboard matters; otherwise the table can show `Zola Jesus` before `Basement Frequencies`, drifting from the prototype order.
+- The Dashboard table date presentation is best modeled as a `DateChip` variant, not a separate local date cell.
+
+### What was tricky to build
+
+The tricky part was improving upcoming-shows parity without making one-off components. The prototype table has a compact date cell and limited columns, while the generic `ShowsTable` had full columns including price and draw.
+
+The solution was to add a `dashboard` variant to `ShowsTable`/`ShowTableRow` and an `inline` variant to `DateChip`. This kept reuse explicit while allowing the Dashboard organism to match the prototype's narrower information architecture.
+
+### What warrants a second pair of eyes
+
+- Review whether adding `variant="dashboard"` to `ShowsTable`/`ShowTableRow` is the right abstraction or whether a future dedicated `DashboardShowRow` molecule would be cleaner.
+- Review the shared `Panel` CSS change because it affects quick actions, activity, attention, and other page panels.
+- Review the `DateChip` `inline` API before other tables reuse it.
+
+### What should be done in the future
+
+- Move on to Phase 7.1 header/menu or Phase 7.5/7.6 quick actions/recent activity.
+- Re-check `dashboard-upcoming` only after neighboring Dashboard organisms are consolidated, to avoid overfitting this section in isolation.
+- Consider adding a small helper for stable date formatting if more table variants need weekday/month-day combinations.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx` (`DashboardUpcomingPanel`, `ShowsTable`),
+  - `web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx`,
+  - `web/packages/pyxis-app/src/components/atoms/DateChip.tsx`,
+  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Optional visual validation:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml --page dashboard --section upcoming --summary --outDir ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-review --output json
+```
+
+### Technical details
+
+Final evidence paths:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/left_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/diff_only.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-06-upcoming-consolidation/dashboard/artifacts/page/right_region.png
 ```
