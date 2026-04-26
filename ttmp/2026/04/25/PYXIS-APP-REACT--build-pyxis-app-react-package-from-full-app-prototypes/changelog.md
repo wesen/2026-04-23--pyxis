@@ -181,3 +181,14 @@ Step 25: Added Phase 8A and split pyxis-app CSS ownership after the Bookings Inb
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard.css — Booking card CSS ownership split
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Generic panel CSS trimmed after split
 
+
+## 2026-04-25
+
+Step 26: Continued Phase 8B widget folder architecture; atoms, molecules, Phase 8 organisms, Dashboard/Shows/Panel organisms now follow folder-per-widget pattern with compatibility barrels (commits 7463325, 2a686d9, 19c4872).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx — BookingsInboxPanel widget folder
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.tsx — DashboardHero widget folder
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — Panel widget folder
+

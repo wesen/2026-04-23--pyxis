@@ -91,6 +91,9 @@ RelatedFiles:
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
         Hero subelement hooks and WIP tuning (commit ed55e40)
         Metrics and attention organism extraction (commit b1180ae)
+        Compatibility barrel after dashboard widget folderization
+    - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
+      Note: Phase 8B folderized Panel widget
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
@@ -109,6 +112,7 @@ RelatedFiles:
       Note: |-
         Bookings queue and processed organism composition (commit caeefa4)
         Calendar month and agenda organisms tuned (commit f3295d5)
+        Compatibility barrel after phase 8 widget folderization
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
       Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
@@ -146,6 +150,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3350,4 +3355,106 @@ Fix validation evidence:
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/
+```
+
+## Step 26: Folderize pyxis-app widgets like pyxis-components/public
+
+After the CSS ownership split, the user clarified that each widget should follow the `pyxis-components/src/public` pattern: a dedicated folder with its own `.tsx`, `.css`, and `index.ts`. I continued Phase 8B by converting the flat atom/molecule files and the remaining organism buckets into widget folders.
+
+### Prompt Context
+
+**User prompt (verbatim):** "each widget should have its own folder, with own tsx and its own css, look at pyxis-components/public for example." Then: "continue. because now organisms bookings and such are broken again. I guess you are not yet done?" and "continue"
+
+**Assistant interpretation:** Complete the architectural cleanup so `pyxis-app` widgets follow the same folder-per-widget convention as public Pyxis components, and restart Storybook after large file moves because Vite keeps stale module paths.
+
+**Inferred user intent:** Make component ownership obvious and prevent flat/bucket files from causing Storybook, CSS, and visual-tuning fragility.
+
+**Commits:**
+- `7463325` — `Folderize pyxis app atom and molecule widgets`
+- `2a686d9` — `Folderize phase 8 organism widgets`
+- `19c4872` — `Folderize dashboard shows and panel organisms`
+
+### What I did
+
+- Added Phase 8B to `tasks.md` for widget folder architecture.
+- Folderized atoms and molecules into `WidgetName/WidgetName.tsx`, `WidgetName/WidgetName.css`, `WidgetName/index.ts`.
+- Folderized Phase 8 route organisms:
+  - Calendar, Bookings, Show Detail, Booking Review widgets.
+- Folderized Dashboard, Shows, and generic panel-adjacent organisms:
+  - `Panel`, `DashboardOverview`, `DashboardHero`, metrics, attention, quick actions, activity, upcoming, shows panels/table, artist roster, attendance, audit, discord, settings, and modal widgets.
+- Converted `DashboardSections.tsx`, `Phase8Sections.tsx`, `ShowsSections.tsx`, and `Panels.tsx` into compatibility barrels.
+- Converted their old CSS files into deprecated compatibility shims.
+- Restarted Storybook after file moves to clear stale Vite module references to now-moved files.
+
+### Why
+
+The previous cleanup split CSS ownership but still left the file layout unlike the established `pyxis-components/src/public` convention. Folderizing widgets makes the ownership boundary explicit: each widget owns its implementation, stylesheet, and export surface.
+
+### What worked
+
+- Typecheck passed after each major split:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Restarting Storybook fixed stale module 404s after file moves.
+- Bookings Inbox organism story loaded with no console errors after restart.
+- CSS transform sanity checks showed non-empty CSS modules for representative owned organism styles.
+- Focused visual smokes remained stable:
+
+```text
+bookings-queue-panel: 11.72947581936586%, tune-required
+calendar-month-panel: 7.252374491180462%, review
+```
+
+### What didn't work
+
+Storybook HMR did not handle the atom/molecule file moves cleanly. It continued requesting old paths such as `src/components/atoms/StatusDot.tsx` and `src/components/molecules/BookingCard.tsx` until the Storybook server was restarted.
+
+### What I learned
+
+- After renaming/moving many TSX/CSS files, always restart Storybook before judging whether an organism is broken.
+- Barrels are useful compatibility bridges while stories/pages are updated gradually.
+- Some widgets still rely on route-level `pages.css` for generic detail/page layout; that is now the next ownership target.
+
+### What was tricky to build
+
+The tricky part was preserving compatibility for existing imports while moving implementation and CSS into folders. `Panels.tsx` and the section bucket files had to remain as barrels because stories/pages still import from those names.
+
+### What warrants a second pair of eyes
+
+- Review whether compatibility barrels should remain long-term or imports should be rewritten to direct widget folders.
+- Review placeholder CSS files that currently document reliance on `pages.css`; those are signals for the next page-style split.
+- Review whether some shared primitives, such as `Table` and `Panel`, should live in a separate `primitives/` directory later.
+
+### What should be done in the future
+
+- Split/relocate `pages.css` into page-owned or widget-owned files.
+- Replace compatibility shim CSS files with deleted files once no imports reference them.
+- Update stories over time to import direct widget folders instead of broad compatibility barrels when helpful.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx` and compare folder pattern against `web/packages/pyxis-components/src/public/*`.
+- Check that old bucket files are barrels/shims, not new style owners.
+- Run:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Restart Storybook after reviewing/moving files:
+
+```bash
+tmux kill-session -t pyxis-app-storybook 2>/dev/null || true
+tmux new-session -d -s pyxis-app-storybook 'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-app storybook'
+```
+
+### Technical details
+
+Visual smoke artifacts:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/
 ```
