@@ -1,4 +1,4 @@
-import { appPart } from '../parts';
+import { appPart } from '../../parts';
 import './DrawProgress.css';
 
 export function DrawProgress({ value, max }: { value: number; max: number }) {

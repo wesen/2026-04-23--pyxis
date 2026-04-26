@@ -1,4 +1,4 @@
-import { appPart } from '../parts';
+import { appPart } from '../../parts';
 import './DateChip.css';
 export function formatShortDate(date: string) { return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
 export function DateChip({ date, kicker, variant = 'chip' }: { date: string; kicker?: string; variant?: 'chip' | 'inline' }) {

@@ -1,9 +1,8 @@
 import type { BookingRequest } from 'pyxis-types';
 import { Button, Icon } from 'pyxis-components';
-import { StatusPill } from '../atoms/StatusPill';
-import { appPart } from '../parts';
-import '../atoms/StatusPill.css';
-import './Table.css';
+import { StatusPill } from '../../atoms/StatusPill';
+import { appPart } from '../../parts';
+import '../Table/Table.css';
 import './BookingCard.css';
 
 function formatBookingDate(date: string, format: 'full' | 'short' = 'full') {

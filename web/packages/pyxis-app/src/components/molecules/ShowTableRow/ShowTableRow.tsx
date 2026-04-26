@@ -1,11 +1,11 @@
 import type { AppShow } from 'pyxis-types';
 import { Icon } from 'pyxis-components';
-import { AgeBadge } from '../atoms/AgeBadge';
-import { DateChip } from '../atoms/DateChip';
-import { DrawProgress } from '../atoms/DrawProgress';
-import { StatusPill } from '../atoms/StatusPill';
-import { appPart } from '../parts';
-import './Table.css';
+import { AgeBadge } from '../../atoms/AgeBadge';
+import { DateChip } from '../../atoms/DateChip';
+import { DrawProgress } from '../../atoms/DrawProgress';
+import { StatusPill } from '../../atoms/StatusPill';
+import { appPart } from '../../parts';
+import '../Table/Table.css';
 import './ShowTableRow.css';
 
 function formatShowDate(date: string) {

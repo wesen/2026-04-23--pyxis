@@ -717,6 +717,30 @@ Goal: prevent broad bucket stylesheets from breaking isolated organism stories w
 - [x] Run typecheck and a focused Bookings queue visual smoke.
 - [x] Update diary/changelog and commit: `Split pyxis app CSS ownership` (`8ab1a74`).
 
+### Phase 8B — Widget folder architecture
+
+Goal: align `pyxis-app` component organization with `pyxis-components/src/public`: every widget owns a folder with its own `.tsx`, `.css`, and `index.ts` export, rather than flat component directories or multi-widget bucket files.
+
+- [x] Convert atoms to widget folders:
+  - [x] `AgeBadge/`, `DateChip/`, `DrawProgress/`, `StatusDot/`, `StatusPill/`.
+- [x] Convert molecules to widget folders:
+  - [x] `ActivityFeedItem/`, `ArtistCard/`, `AttendanceStat/`, `BookingCard/`, `CalendarEventChip/`, `DiscordChannelRow/`, `MetricCard/`, `SettingsToggleRow/`, `ShowTableRow/`, `TodayShowCard/`.
+- [x] Move shared molecule primitives into folders:
+  - [x] `Table/`,
+  - [x] `Rows/` compatibility shim.
+- [x] Update relative imports after folderization.
+- [x] Run typecheck after atom/molecule folderization.
+- [ ] Split organism bucket files into widget folders:
+  - [ ] `Panel/`, `DashboardOverview/`, `DashboardHero/`, `DashboardMetricsGrid/`, `DashboardQuickActionsPanel/`, `DashboardAttentionPanel/`, `DashboardActivityPanel/`,
+  - [ ] `ShowsFilterBar/`, `ShowsConfirmedPanel/`, `ShowsArchivedPanel/`,
+  - [ ] `CalendarMonthPanel/`, `CalendarAgenda/`, `CalendarLegend/`, `CalendarBoard/`,
+  - [ ] `BookingsInboxPanel/`, `BookingsProcessedPanel/`, `BookingsInsightsPanel/`,
+  - [ ] `ShowDetailHero/`, `ShowDetailInfoPanel/`, `ShowDetailDiscordPanel/`,
+  - [ ] `BookingReviewHero/`, `BookingReviewRequestPanel/`, `BookingReviewDatePanel/`, `BookingReviewNotePanel/`.
+- [ ] Split/relocate route-level `pages.css` into page-owned files once organism widgets no longer depend on it.
+- [ ] Run representative Storybook CSS transform checks and focused visual smokes.
+- [ ] Update diary/changelog and commit final Phase 8B.
+
 ### Phase 8.1 — Login and mobile login
 
 - [x] Inventory desktop login and mobile login prototype routes.

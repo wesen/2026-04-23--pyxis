@@ -1,6 +1,6 @@
 import type { AuditLogEntry } from 'pyxis-types';
-import { StatusDot } from '../atoms/StatusDot';
-import { appPart } from '../parts';
+import { StatusDot } from '../../atoms/StatusDot';
+import { appPart } from '../../parts';
 import './ActivityFeedItem.css';
 
 function toneForType(type: AuditLogEntry['type']) {

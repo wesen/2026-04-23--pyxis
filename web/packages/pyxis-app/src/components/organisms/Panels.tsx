@@ -12,8 +12,8 @@ import { SettingsToggleRow } from '../molecules/SettingsToggleRow';
 import { ShowTableRow } from '../molecules/ShowTableRow';
 import { TodayShowCard } from '../molecules/TodayShowCard';
 import { appPart } from '../parts';
-import '../molecules/Table.css';
-import '../molecules/BookingCard.css';
+import '../molecules/Table/Table.css';
+import '../molecules/BookingCard/BookingCard.css';
 import './Panels.css';
 
 export function Panel({ title, kicker, action, children, section }: { title: string; kicker?: string; action?: React.ReactNode; children: React.ReactNode; section?: string }) { return <section className="app-panel" data-section={section} {...appPart('panel')}><header><div><h2>{title}</h2>{kicker && <span>{kicker}</span>}</div>{action}</header>{children}</section>; }

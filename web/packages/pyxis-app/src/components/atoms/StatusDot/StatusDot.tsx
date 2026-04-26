@@ -1,4 +1,4 @@
-import { appPart } from '../parts';
+import { appPart } from '../../parts';
 import './StatusDot.css';
 export type StatusTone = 'confirmed' | 'pending' | 'approved' | 'declined' | 'archived' | 'hold' | 'blocked' | 'draft' | 'bot' | 'neutral';
 export function StatusDot({ tone = 'neutral', label }: { tone?: StatusTone; label?: string }) {

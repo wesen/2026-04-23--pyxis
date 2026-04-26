@@ -1,4 +1,4 @@
-import { appPart } from '../parts';
+import { appPart } from '../../parts';
 import './AgeBadge.css';
 
 export function AgeBadge({ children }: { children: string }) {

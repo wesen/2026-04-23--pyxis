@@ -46,11 +46,12 @@ Do not let large bucket stylesheets become hidden dependencies for many unrelate
 
 Preferred ownership model:
 
-1. Atoms import their own atom CSS.
-2. Molecules import their own molecule CSS plus small shared primitives such as `Table.css` when needed.
-3. Organisms import their own section CSS, for example `DashboardSections.css`, `ShowsSections.css`, or `Phase8Sections.css`.
-4. Generic shells such as `Panels.css` should contain only the reusable shell/utility rules for `Panel`, `.app-card-list`, `.app-empty-state`, and similar cross-section primitives.
-5. Avoid relying on transitive CSS from a child component. If an organism's layout needs a rule, import that organism stylesheet from the organism module.
+1. Match the `pyxis-components/src/public` folder pattern: each widget gets `WidgetName/WidgetName.tsx`, `WidgetName/WidgetName.css`, and `WidgetName/index.ts`.
+2. Atoms import their own atom CSS from inside their folder.
+3. Molecules import their own molecule CSS plus small shared primitives such as `Table/Table.css` when needed.
+4. Organisms should also become widget folders. Avoid long-lived buckets such as `DashboardSections.tsx` or `Phase8Sections.tsx` once a section is stable enough to tune visually.
+5. Generic shells such as `Panel/Panel.css` should contain only the reusable shell/utility rules for `Panel`, `.app-card-list`, `.app-empty-state`, and similar cross-section primitives.
+6. Avoid relying on transitive CSS from a child component. If an organism's layout needs a rule, import that organism stylesheet from the organism module.
 
 Use query-suffixed CSS imports such as `Panels.css?dashboard` only as a short-term diagnostic/workaround. If a suffix fixes an empty CSS module, follow up by splitting the stylesheet into owned component/organism files and removing the suffix from source imports.
 
