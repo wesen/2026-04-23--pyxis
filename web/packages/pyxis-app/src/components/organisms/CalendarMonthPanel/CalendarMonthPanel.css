@@ -1,0 +1,17 @@
+.app-calendar-month-panel { padding: 20px; border-radius: var(--app-radius-md); color: #1a1a18; font-size: 13px; line-height: 1.5; }
+.app-calendar-month-panel > header.app-calendar-month-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 18px; }
+.app-calendar-month-header h2 { margin: 0; font-family: var(--font-display, Georgia, serif); font-size: 24px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
+.app-calendar-controls { display: flex; align-items: center; gap: 6px; }
+.app-calendar-controls > button { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); background: var(--app-surface-strong); color: var(--app-muted); font-size: 18px; line-height: 1; }
+.app-calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 6px; }
+.app-calendar-weekdays span { text-align: center; color: var(--app-faint); font-size: 10.5px; font-weight: 600; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; padding: 2px 0; }
+.app-calendar-month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.app-calendar-cell { min-height: 82px; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 6px 8px; background: #faf8f3; overflow: hidden; }
+.app-calendar-cell[data-empty='true'] { background: transparent; }
+.app-calendar-cell[data-today='true'] { border: 1.5px solid var(--app-accent); background: var(--app-accent-soft); }
+.app-calendar-cell b { display: block; margin-bottom: 4px; color: var(--app-muted); font-size: 12px; font-weight: 500; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.app-calendar-cell .app-calendar-event-chip { display: block !important; border: 0 !important; border-radius: 3px !important; padding: 2px 5px !important; margin-bottom: 2px; background: var(--app-surface-success) !important; color: var(--app-success) !important; font-size: 10.5px !important; font-weight: 500 !important; line-height: 1.5 !important; }
+.app-calendar-cell .app-calendar-event-chip .app-status-dot { display: none !important; }
+.app-calendar-cell .app-calendar-event-chip[data-status='hold'] { background: rgba(var(--app-info-rgb), .10) !important; color: var(--app-info) !important; }
+.app-calendar-cell .app-calendar-event-chip[data-status='blocked'] { background: var(--app-surface-muted) !important; color: var(--app-muted) !important; }
+.app-calendar-cell[data-today='true'] b { color: var(--app-accent); font-weight: 700; }

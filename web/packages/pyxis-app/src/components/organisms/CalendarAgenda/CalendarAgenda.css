@@ -1,0 +1,14 @@
+.app-calendar-side { color: #1a1a18; font-size: 13px; line-height: 1.5; }
+.app-calendar-side .app-panel { padding: 18px; border-radius: var(--app-radius-md); }
+.app-calendar-side .app-panel > header { margin-bottom: 14px; }
+.app-calendar-glance-list { display: grid; }
+.app-calendar-glance-list span { display: flex !important; justify-content: space-between; padding: 7px 0; border-top: 1px solid var(--app-rule); color: var(--app-muted); font-size: 13px; }
+.app-calendar-glance-list b { color: var(--app-faint); font-weight: 600; }
+.app-calendar-glance-list [data-status='confirmed'] b { color: var(--app-success); }
+.app-calendar-glance-list [data-status='hold'] b { color: var(--app-info); }
+.app-calendar-today-card { margin-bottom: 10px; border: 1px solid rgba(var(--app-accent-rgb), .14); border-radius: var(--app-radius-sm); padding: 12px; background: var(--app-accent-soft); }
+.app-calendar-today-card header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.app-calendar-today-card strong { color: var(--app-accent); font-size: 13px; font-weight: 600; }
+.app-calendar-today-card p { margin: 0 0 10px; color: var(--app-muted); font-size: 11.5px; line-height: 1.6; }
+.app-calendar-today-card .app-status-pill { display: inline-flex; align-items: center; gap: 5px; border-radius: var(--app-radius-pill); padding: 2px 9px; background: var(--app-surface-success); color: var(--app-success); font-size: 11px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
+.app-calendar-today-card .app-status-pill .app-status-dot { width: 5px; height: 5px; box-shadow: none; }

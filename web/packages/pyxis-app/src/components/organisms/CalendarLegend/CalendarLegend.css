@@ -1,0 +1,5 @@
+.app-calendar-legend { display: flex; gap: 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--app-rule); }
+.app-calendar-legend span { display: flex; align-items: center; gap: 7px; color: var(--app-muted); font-size: 11px; }
+.app-calendar-legend i { width: 12px; height: 12px; border-radius: 3px; background: var(--app-surface-muted); border: 1px solid var(--app-faint); }
+.app-calendar-legend span[data-status='confirmed'] i { background: var(--app-surface-success); border-color: var(--app-success); }
+.app-calendar-legend span[data-status='hold'] i { background: rgba(var(--app-info-rgb), .10); border-color: var(--app-info); }
