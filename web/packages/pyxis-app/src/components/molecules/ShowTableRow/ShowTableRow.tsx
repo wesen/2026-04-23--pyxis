@@ -8,6 +8,13 @@ import { appPart } from '../../parts';
 import '../Table/Table.css';
 import './ShowTableRow.css';
 
+export type ShowTableRowVariant = 'full' | 'dashboard' | 'archived';
+
+export type ShowTableRowProps = {
+  show: AppShow;
+  variant?: ShowTableRowVariant;
+};
+
 function formatShowDate(date: string) {
   const value = new Date(`${date}T00:00:00`);
   return {
@@ -17,7 +24,7 @@ function formatShowDate(date: string) {
   };
 }
 
-export function ShowTableRow({ show, variant = 'full' }: { show: AppShow; variant?: 'full' | 'dashboard' | 'archived' }) {
+export function ShowTableRow({ show, variant = 'full' }: ShowTableRowProps) {
   const statusLabel = show.status.charAt(0).toUpperCase() + show.status.slice(1);
   const status = <span className="app-row-status"><StatusPill tone={show.status === 'archived' ? 'archived' : show.status}>{statusLabel}</StatusPill></span>;
   const date = formatShowDate(show.date);

@@ -16,7 +16,20 @@ function statusLabel(status: BookingRequest['status']) {
   return status.charAt(0).toUpperCase() + status.slice(1);
 }
 
-export function BookingCard({ booking }: { booking: BookingRequest }) {
+export type BookingActionHandler = (booking: BookingRequest) => void;
+
+export type BookingCardProps = {
+  booking: BookingRequest;
+  onHold?: BookingActionHandler;
+  onDecline?: BookingActionHandler;
+  onApprove?: BookingActionHandler;
+};
+
+export type BookingQueueRowProps = {
+  booking: BookingRequest;
+};
+
+export function BookingCard({ booking, onHold, onDecline, onApprove }: BookingCardProps) {
   return (
     <article className="app-booking-card" data-status={booking.status} {...appPart('booking-card')}>
       <div className="app-booking-card-main">
@@ -33,12 +46,12 @@ export function BookingCard({ booking }: { booking: BookingRequest }) {
           </div>
           <div className="app-booking-submitted-row"><span>Submitted {booking.submitted}</span><span>·</span><span>Date is available</span></div>
         </div>
-        {booking.status === 'pending' && <div className="app-booking-card-actions"><Button variant="ghost" size="sm">Hold</Button><Button variant="danger" size="sm" iconLeft="x">Decline</Button><Button variant="success" size="sm" iconLeft="check">Approve</Button></div>}
+        {booking.status === 'pending' && <div className="app-booking-card-actions"><Button variant="ghost" size="sm" onClick={() => onHold?.(booking)}>Hold</Button><Button variant="danger" size="sm" iconLeft="x" onClick={() => onDecline?.(booking)}>Decline</Button><Button variant="success" size="sm" iconLeft="check" onClick={() => onApprove?.(booking)}>Approve</Button></div>}
       </div>
     </article>
   );
 }
 
-export function BookingQueueRow({ booking }: { booking: BookingRequest }) {
+export function BookingQueueRow({ booking }: BookingQueueRowProps) {
   return <tr className="app-table-row app-booking-queue-row" {...appPart('booking-queue-row')}><td><strong>{booking.artist}</strong></td><td>{formatBookingDate(booking.date, 'short')}</td><td>{booking.genre}</td><td>{booking.submitted}</td><td><StatusPill tone={booking.status}>{statusLabel(booking.status)}</StatusPill></td></tr>;
 }
