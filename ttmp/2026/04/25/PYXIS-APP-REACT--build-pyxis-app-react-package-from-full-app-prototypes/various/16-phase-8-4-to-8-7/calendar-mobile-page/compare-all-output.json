@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "mobile",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 8.283654702681961,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "calendar",
+        "variant": "mobile",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar",
+        "sectionCount": 1,
+        "maxChangedPercent": 8.283654702681961,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/01-catalog-index.md",
+        "catalog": {
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1
+        },
+        "sections": [
+          {
+            "page": "calendar",
+            "variant": "mobile",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/mobile/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-mobile&viewMode=story",
+            "leftSelector": "[data-page=\"calendar\"]",
+            "rightSelector": "[data-page=\"calendar\"]",
+            "threshold": 30,
+            "changedPercent": 8.283654702681961,
+            "changedPixels": 60445,
+            "totalPixels": 729690,
+            "normalizedWidth": 390,
+            "normalizedHeight": 1871,
+            "bounds": {
+              "left": {
+                "y": 0,
+                "width": 390,
+                "height": 786.15625,
+                "x": 0
+              },
+              "right": {
+                "y": 0,
+                "width": 390,
+                "height": 1870.921875,
+                "x": 0
+              },
+              "delta": {
+                "height": 1084.765625,
+                "x": 0,
+                "y": 0,
+                "width": 0
+              },
+              "changed": true
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "left": {
+                  "name": "calendar-page",
+                  "url": "http://localhost:7070/standalone/mobile/calendar.html",
+                  "selector": "[data-page=\"calendar\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 786.15625
+                  }
+                },
+                "name": "calendar-page",
+                "pixel": {
+                  "threshold": 30,
+                  "totalPixels": 729690,
+                  "changedPixels": 60445,
+                  "changedPercent": 8.283654702681961,
+                  "normalizedWidth": 390,
+                  "normalizedHeight": 1871,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_only.png"
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 6,
+                "right": {
+                  "name": "calendar-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-mobile&viewMode=story",
+                  "selector": "[data-page=\"calendar\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "y": 0,
+                    "width": 390,
+                    "height": 1870.921875,
+                    "x": 0
+                  }
+                },
+                "textChanged": true
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "calendar",
+        "variant": "mobile",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/mobile/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-mobile&viewMode=story",
+        "leftSelector": "[data-page=\"calendar\"]",
+        "rightSelector": "[data-page=\"calendar\"]",
+        "threshold": 30,
+        "changedPercent": 8.283654702681961,
+        "changedPixels": 60445,
+        "totalPixels": 729690,
+        "normalizedWidth": 390,
+        "normalizedHeight": 1871,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "height": 786.15625,
+            "x": 0,
+            "y": 0,
+            "width": 390
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1870.921875
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 1084.765625
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "artifactCount": 2,
+            "attributeChanges": 3,
+            "boundsChanged": true,
+            "left": {
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "width": 390,
+                "height": 786.15625,
+                "x": 0,
+                "y": 0
+              },
+              "name": "calendar-page",
+              "url": "http://localhost:7070/standalone/mobile/calendar.html",
+              "selector": "[data-page=\"calendar\"]"
+            },
+            "name": "calendar-page",
+            "pixel": {
+              "changedPercent": 8.283654702681961,
+              "normalizedWidth": 390,
+              "normalizedHeight": 1871,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/calendar-mobile-page/calendar/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 729690,
+              "changedPixels": 60445
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 6,
+            "right": {
+              "name": "calendar-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-mobile&viewMode=story",
+              "selector": "[data-page=\"calendar\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 1870.921875
+              }
+            },
+            "textChanged": true
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

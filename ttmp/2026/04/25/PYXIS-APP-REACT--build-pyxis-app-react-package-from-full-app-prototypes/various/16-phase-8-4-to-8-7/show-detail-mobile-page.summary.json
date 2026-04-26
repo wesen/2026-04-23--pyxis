@@ -1,0 +1,116 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/01-suite-summary.md",
+  "maxChangedPercent": 14.612451418933784,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 205.828125,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 842.765625,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        "normalizedHeight": 1049,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 1048.59375,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 14.612451418933784,
+      "changedPixels": 59781,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/left_region.png",
+      "leftSelector": "[data-page=\"show-detail\"]",
+      "page": "show-detail",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/show-detail-mobile-page/show-detail/artifacts/page/right_region.png",
+      "rightSelector": "[data-page=\"show-detail\"]",
+      "section": "page",
+      "styleChangeCount": 6,
+      "styleDiffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "property": "background-color",
+          "right": "rgb(243, 241, 235)"
+        },
+        {
+          "left": "rgb(0, 0, 0)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "Inter, -apple-system, sans-serif",
+          "property": "font-family",
+          "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "0px",
+          "property": "padding-bottom",
+          "right": "72px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "9:41 ShowsConfirmedDarkwave pinnedBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+poster · 1080×1080DetailsDoors8:00 PMPrice$12 adv / $15 doorExpected draw70 / 150GenreDarkwavePosted to Discord#upcoming-showsPinned · 4 days ago · 12 reactionsDuplicateCancel show",
+        "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineShows / DetailBurial HexEditconfirmedBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+poster · 1080×1080DetailsDoors 8:00 PMPrice $12 adv / $15 doorExpected draw 70 / 150Genre DarkwavePosted to Discord#upcoming-shows · Pinned · 4 days ago · 12 reactionsOpen postDuplicateCancel showDashboardShowsCalendarBookingsMore"
+      },
+      "threshold": 30,
+      "totalPixels": 409110,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

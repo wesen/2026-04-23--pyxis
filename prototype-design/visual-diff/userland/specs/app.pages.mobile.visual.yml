@@ -65,3 +65,48 @@ targets:
       - name: page
         original: '[data-page="shows"]'
         react: '[data-page="shows"]'
+  - page: show-detail
+    variant: mobile
+    priority: phase-8
+    prototypePath: /standalone/mobile/show-detail.html
+    storyId: pyxis-app-pages--show-detail-mobile
+    sections:
+      - name: page
+        original: '[data-page="show-detail"]'
+        react: '[data-page="show-detail"]'
+      - name: hero
+        original: '[data-page="show-detail"]'
+        react: '[data-section="show-detail-hero"]'
+  - page: calendar
+    variant: mobile
+    priority: phase-8
+    prototypePath: /standalone/mobile/calendar.html
+    storyId: pyxis-app-pages--calendar-mobile
+    sections:
+      - name: page
+        original: '[data-page="calendar"]'
+        react: '[data-page="calendar"]'
+  - page: bookings
+    variant: mobile
+    priority: phase-8
+    prototypePath: /standalone/mobile/bookings.html
+    storyId: pyxis-app-pages--bookings-mobile
+    sections:
+      - name: page
+        original: '[data-page="bookings"]'
+        react: '[data-page="bookings"]'
+      - name: queue
+        original: '[data-page="bookings"]'
+        react: '[data-section="bookings-queue"]'
+  - page: booking-review
+    variant: mobile
+    priority: phase-8
+    prototypePath: /standalone/mobile/booking-review.html
+    storyId: pyxis-app-pages--booking-review-mobile
+    sections:
+      - name: page
+        original: '[data-page="booking-review"]'
+        react: '[data-page="booking-review"]'
+      - name: hero
+        original: '[data-page="booking-review"]'
+        react: '[data-section="booking-review-hero"]'

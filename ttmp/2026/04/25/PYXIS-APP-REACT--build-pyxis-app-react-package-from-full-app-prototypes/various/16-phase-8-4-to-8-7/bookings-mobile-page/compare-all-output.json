@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "mobile",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 15.8892500300951,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "bookings",
+        "variant": "mobile",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings",
+        "sectionCount": 1,
+        "maxChangedPercent": 15.8892500300951,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/01-catalog-index.md",
+        "catalog": {
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1
+        },
+        "sections": [
+          {
+            "page": "bookings",
+            "variant": "mobile",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/mobile/bookings.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-mobile&viewMode=story",
+            "leftSelector": "[data-page=\"bookings\"]",
+            "rightSelector": "[data-page=\"bookings\"]",
+            "threshold": 30,
+            "changedPercent": 15.8892500300951,
+            "changedPixels": 65996,
+            "totalPixels": 415350,
+            "normalizedWidth": 390,
+            "normalizedHeight": 1065,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "y": 0,
+                "width": 390,
+                "height": 817.75,
+                "x": 0
+              },
+              "right": {
+                "width": 390,
+                "height": 1065.4375,
+                "x": 0,
+                "y": 0
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 247.6875
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "left": {
+                  "name": "bookings-page",
+                  "url": "http://localhost:7070/standalone/mobile/bookings.html",
+                  "selector": "[data-page=\"bookings\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "height": 817.75,
+                    "x": 0,
+                    "y": 0,
+                    "width": 390
+                  }
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "textChanged": true,
+                "name": "bookings-page",
+                "pixel": {
+                  "threshold": 30,
+                  "totalPixels": 415350,
+                  "changedPixels": 65996,
+                  "changedPercent": 15.8892500300951,
+                  "normalizedWidth": 390,
+                  "normalizedHeight": 1065,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png"
+                },
+                "right": {
+                  "selector": "[data-page=\"bookings\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 1065.4375
+                  },
+                  "name": "bookings-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-mobile&viewMode=story"
+                },
+                "styleChanges": 6
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "bookings",
+        "variant": "mobile",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/mobile/bookings.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-mobile&viewMode=story",
+        "leftSelector": "[data-page=\"bookings\"]",
+        "rightSelector": "[data-page=\"bookings\"]",
+        "threshold": 30,
+        "changedPercent": 15.8892500300951,
+        "changedPixels": 65996,
+        "totalPixels": 415350,
+        "normalizedWidth": 390,
+        "normalizedHeight": 1065,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "y": 0,
+            "width": 390,
+            "height": 817.75,
+            "x": 0
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1065.4375
+          },
+          "delta": {
+            "width": 0,
+            "height": 247.6875,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "attributeChanges": 3,
+            "boundsChanged": true,
+            "left": {
+              "url": "http://localhost:7070/standalone/mobile/bookings.html",
+              "selector": "[data-page=\"bookings\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 0,
+                "width": 390,
+                "height": 817.75,
+                "x": 0
+              },
+              "name": "bookings-page"
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "textChanged": true,
+            "name": "bookings-page",
+            "pixel": {
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 415350,
+              "changedPixels": 65996,
+              "changedPercent": 15.8892500300951,
+              "normalizedWidth": 390,
+              "normalizedHeight": 1065,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png"
+            },
+            "right": {
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 1065.4375
+              },
+              "name": "bookings-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-mobile&viewMode=story",
+              "selector": "[data-page=\"bookings\"]",
+              "exists": true
+            },
+            "styleChanges": 6,
+            "artifactCount": 2
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

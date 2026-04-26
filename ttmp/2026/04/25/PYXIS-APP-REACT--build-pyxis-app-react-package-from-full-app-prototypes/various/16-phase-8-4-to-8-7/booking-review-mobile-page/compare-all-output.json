@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "mobile",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 17.266786899814424,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "booking-review",
+        "variant": "mobile",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review",
+        "sectionCount": 1,
+        "maxChangedPercent": 17.266786899814424,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "booking-review",
+            "variant": "mobile",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/mobile/booking-review.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--booking-review-mobile&viewMode=story",
+            "leftSelector": "[data-page=\"booking-review\"]",
+            "rightSelector": "[data-page=\"booking-review\"]",
+            "threshold": 30,
+            "changedPercent": 17.266786899814424,
+            "changedPixels": 66061,
+            "totalPixels": 382590,
+            "normalizedWidth": 390,
+            "normalizedHeight": 981,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 720.84375
+              },
+              "right": {
+                "y": 0,
+                "width": 390,
+                "height": 981.359375,
+                "x": 0
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 260.515625
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "attributeChanges": 3,
+                "name": "booking-review-page",
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "left": {
+                  "url": "http://localhost:7070/standalone/mobile/booking-review.html",
+                  "selector": "[data-page=\"booking-review\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 720.84375
+                  },
+                  "name": "booking-review-page"
+                },
+                "pixel": {
+                  "threshold": 30,
+                  "totalPixels": 382590,
+                  "changedPixels": 66061,
+                  "changedPercent": 17.266786899814424,
+                  "normalizedWidth": 390,
+                  "normalizedHeight": 981,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_only.png"
+                },
+                "right": {
+                  "name": "booking-review-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--booking-review-mobile&viewMode=story",
+                  "selector": "[data-page=\"booking-review\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 390,
+                    "height": 981.359375
+                  }
+                },
+                "styleChanges": 6,
+                "textChanged": true
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "booking-review",
+        "variant": "mobile",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/mobile/booking-review.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--booking-review-mobile&viewMode=story",
+        "leftSelector": "[data-page=\"booking-review\"]",
+        "rightSelector": "[data-page=\"booking-review\"]",
+        "threshold": 30,
+        "changedPercent": 17.266786899814424,
+        "changedPixels": 66061,
+        "totalPixels": 382590,
+        "normalizedWidth": 390,
+        "normalizedHeight": 981,
+        "bounds": {
+          "left": {
+            "height": 720.84375,
+            "x": 0,
+            "y": 0,
+            "width": 390
+          },
+          "right": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 981.359375
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 260.515625
+          },
+          "changed": true
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "textChanged": true,
+            "attributeChanges": 3,
+            "name": "booking-review-page",
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "left": {
+              "name": "booking-review-page",
+              "url": "http://localhost:7070/standalone/mobile/booking-review.html",
+              "selector": "[data-page=\"booking-review\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 0,
+                "width": 390,
+                "height": 720.84375,
+                "x": 0
+              }
+            },
+            "pixel": {
+              "normalizedWidth": 390,
+              "normalizedHeight": 981,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/booking-review-mobile-page/booking-review/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 382590,
+              "changedPixels": 66061,
+              "changedPercent": 17.266786899814424
+            },
+            "right": {
+              "name": "booking-review-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--booking-review-mobile&viewMode=story",
+              "selector": "[data-page=\"booking-review\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 981.359375
+              }
+            },
+            "styleChanges": 6
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

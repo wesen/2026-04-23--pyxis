@@ -1,0 +1,133 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-shell"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "app-shell"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 247.6875,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "left": {
+      "height": 817.75,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "right": {
+      "height": 1065.4375,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 817.75,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "bookings-page",
+    "selector": "[data-page=\"bookings\"]",
+    "url": "http://localhost:7070/standalone/mobile/bookings.html",
+    "visible": true
+  },
+  "name": "bookings-page",
+  "pixel": {
+    "changedPercent": 15.8892500300951,
+    "changedPixels": 65996,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png",
+    "normalizedHeight": 1065,
+    "normalizedWidth": 390,
+    "threshold": 30,
+    "totalPixels": 415350
+  },
+  "right": {
+    "bounds": {
+      "height": 1065.4375,
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "bookings-page",
+    "selector": "[data-page=\"bookings\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-mobile\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(0, 0, 0, 0)",
+      "name": "background-color",
+      "right": "rgb(243, 241, 235)"
+    },
+    {
+      "changed": true,
+      "left": "rgb(0, 0, 0)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "Inter, -apple-system, sans-serif",
+      "name": "font-family",
+      "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    {
+      "changed": true,
+      "left": "16px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "20.3px"
+    },
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "padding-bottom",
+      "right": "72px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "9:41BookingsInbox3 awaiting review · 2 new todayPending 3Approved 1Declined 1PharmakonPending Jun 14 Industrial ~80pharmakon.bandcamp.comDeclineHoldApproveLust for YouthPending Jun 21 Darkwave ~120instagram.com/lustyouthDeclineHoldApproveContainerPending Jul 19 Noise ~55container.bandcamp.comDeclineHoldApproveHomeShows3BookingsArtistsMore",
+    "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-reviewAwaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonpendingIndustrial · requested 2025-06-14 · est. 80pharmakon.bandcamp.com · submitted Apr 19Lust for YouthpendingDarkwave · requested 2025-06-21 · est. 120instagram.com/lustyouth · submitted Apr 20ContainerpendingNoise · requested 2025-07-19 · est. 55container.bandcamp.com · submitted Apr 22Recently processedOrphxapprovedEBM · requested 2025-07-04 · est. 60orphx.com · submitted Apr 18ArcadeclinedExperimental · requested 2025-07-12 · est. 200arca1000.com · submitted Apr 15ArtistRequestedGenreDrawSubmittedStatusOrphxorphx.com2025-07-04EBM60Apr 18approvedArcaarca1000.com2025-07-12Experimental200Apr 15declinedInbox rhythmSubmissions, last 12 weeks · avg response 2.1 days.Decline templatesNot a fit right now ›Double-booked that night ›Too soon — try next season ›Need more info ›DashboardShowsCalendarBookingsMore"
+  }
+}

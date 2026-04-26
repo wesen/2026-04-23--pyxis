@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DashboardPage, ShowsPage, CalendarPage, BookingsPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from '../src/pages/Pages';
+import { DashboardPage, ShowsPage, ShowDetailPage, CalendarPage, BookingsPage, BookingReviewPage, ArtistsPage, AttendancePage, AuditLogPage, DiscordPage, SettingsPage, LoginPage, SetupPage, ModalShowcasePage } from '../src/pages/Pages';
 const meta: Meta = { title: 'Pyxis App/Pages', parameters: { layout: 'fullscreen' } };
 export default meta;
 type Story = StoryObj;
@@ -10,8 +10,12 @@ export const LoginMobile: Story = { render: () => <LoginPage/>, parameters: { vi
 export const SetupDesktop: Story = { render: () => <SetupPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };
 export const ShowsDesktop: Story = { render: () => <ShowsPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };
 export const ShowsMobile: Story = { render: () => <ShowsPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
-export const CalendarDesktop: Story = { render: () => <CalendarPage/> };
-export const BookingsDesktop: Story = { render: () => <BookingsPage/> };
+export const ShowDetailMobile: Story = { render: () => <ShowDetailPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+export const CalendarDesktop: Story = { render: () => <CalendarPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };
+export const CalendarMobile: Story = { render: () => <CalendarPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+export const BookingsDesktop: Story = { render: () => <BookingsPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } } };
+export const BookingsMobile: Story = { render: () => <BookingsPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+export const BookingReviewMobile: Story = { render: () => <BookingReviewPage/>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
 export const ArtistsDesktop: Story = { render: () => <ArtistsPage/> };
 export const AttendanceDesktop: Story = { render: () => <AttendancePage/> };
 export const AuditLogDesktop: Story = { render: () => <AuditLogPage/> };

@@ -1,0 +1,116 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/01-suite-summary.md",
+  "maxChangedPercent": 15.8892500300951,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "app-shell"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": 247.6875,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 817.75,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        },
+        "normalizedHeight": 1065,
+        "normalizedWidth": 390,
+        "right": {
+          "height": 1065.4375,
+          "width": 390,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "changedPercent": 15.8892500300951,
+      "changedPixels": 65996,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/left_region.png",
+      "leftSelector": "[data-page=\"bookings\"]",
+      "page": "bookings",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/16-phase-8-4-to-8-7/bookings-mobile-page/bookings/artifacts/page/right_region.png",
+      "rightSelector": "[data-page=\"bookings\"]",
+      "section": "page",
+      "styleChangeCount": 6,
+      "styleDiffs": [
+        {
+          "left": "rgba(0, 0, 0, 0)",
+          "property": "background-color",
+          "right": "rgb(243, 241, 235)"
+        },
+        {
+          "left": "rgb(0, 0, 0)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "Inter, -apple-system, sans-serif",
+          "property": "font-family",
+          "right": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        {
+          "left": "16px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "normal",
+          "property": "line-height",
+          "right": "20.3px"
+        },
+        {
+          "left": "0px",
+          "property": "padding-bottom",
+          "right": "72px"
+        }
+      ],
+      "text": {
+        "changed": true,
+        "left": "9:41BookingsInbox3 awaiting review · 2 new todayPending 3Approved 1Declined 1PharmakonPending Jun 14 Industrial ~80pharmakon.bandcamp.comDeclineHoldApproveLust for YouthPending Jun 21 Darkwave ~120instagram.com/lustyouthDeclineHoldApproveContainerPending Jul 19 Noise ~55container.bandcamp.comDeclineHoldApproveHomeShows3BookingsArtistsMore",
+        "right": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsADAda Doveadmin · onlineHome / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-reviewAwaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonpendingIndustrial · requested 2025-06-14 · est. 80pharmakon.bandcamp.com · submitted Apr 19Lust for YouthpendingDarkwave · requested 2025-06-21 · est. 120instagram.com/lustyouth · submitted Apr 20ContainerpendingNoise · requested 2025-07-19 · est. 55container.bandcamp.com · submitted Apr 22Recently processedOrphxapprovedEBM · requested 2025-07-04 · est. 60orphx.com · submitted Apr 18ArcadeclinedExperimental · requested 2025-07-12 · est. 200arca1000.com · submitted Apr 15ArtistRequestedGenreDrawSubmittedStatusOrphxorphx.com2025-07-04EBM60Apr 18approvedArcaarca1000.com2025-07-12Experimental200Apr 15declinedInbox rhythmSubmissions, last 12 weeks · avg response 2.1 days.Decline templatesNot a fit right now ›Double-booked that night ›Too soon — try next season ›Need more info ›DashboardShowsCalendarBookingsMore"
+      },
+      "threshold": 30,
+      "totalPixels": 415350,
+      "variant": "mobile"
+    }
+  ],
+  "sectionCount": 1
+}
+]

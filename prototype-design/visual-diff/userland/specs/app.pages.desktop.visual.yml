@@ -110,3 +110,34 @@ targets:
       - name: archived
         original: '[data-page="shows"] main > div:nth-child(3)'
         react: '[data-section="shows-archived"]'
+
+  - page: calendar
+    variant: desktop
+    priority: phase-8
+    prototypePath: /standalone/full-app/calendar.html
+    storyId: pyxis-app-pages--calendar-desktop
+    sections:
+      - name: page
+        original: '[data-page="calendar"]'
+        react: '[data-page="calendar"]'
+      - name: month
+        original: '[data-page="calendar"] main > div:first-child'
+        react: '[data-section="calendar-month"]'
+      - name: agenda
+        original: '[data-page="calendar"] main > div:nth-child(2)'
+        react: '[data-section="calendar-agenda"]'
+  - page: bookings
+    variant: desktop
+    priority: phase-8
+    prototypePath: /standalone/full-app/bookings.html
+    storyId: pyxis-app-pages--bookings-desktop
+    sections:
+      - name: page
+        original: '[data-page="bookings"]'
+        react: '[data-page="bookings"]'
+      - name: queue
+        original: '[data-page="bookings"] main > div:first-child'
+        react: '[data-section="bookings-queue"]'
+      - name: processed
+        original: '[data-page="bookings"] main > div:nth-child(2)'
+        react: '[data-section="bookings-processed"]'
