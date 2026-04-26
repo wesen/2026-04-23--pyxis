@@ -2,4 +2,6 @@
 .app-table-row .app-status-pill { display: inline-flex !important; align-items: center; color: var(--app-muted); font-size: 11px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
 .app-table-row .app-status-pill .app-status-dot { display: inline-block !important; flex: 0 0 auto; }
 .app-status-pill[data-tone='confirmed'], .app-status-pill[data-tone='approved'], .app-table-row .app-status-pill[data-tone='confirmed'], .app-table-row .app-status-pill[data-tone='approved'] { background: var(--app-surface-success); color: var(--app-success); }
+.app-status-pill[data-tone='pending'], .app-status-pill[data-tone='hold'], .app-table-row .app-status-pill[data-tone='pending'], .app-table-row .app-status-pill[data-tone='hold'] { background: rgba(var(--app-warning-rgb), .12); color: var(--app-warning); }
+.app-status-pill[data-tone='declined'], .app-status-pill[data-tone='blocked'], .app-table-row .app-status-pill[data-tone='declined'], .app-table-row .app-status-pill[data-tone='blocked'] { background: var(--app-accent-soft); color: var(--app-accent); }
 .app-status-pill .app-status-dot { width: 5px; height: 5px; box-shadow: none; }

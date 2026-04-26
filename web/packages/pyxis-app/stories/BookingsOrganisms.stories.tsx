@@ -7,8 +7,8 @@ const meta: Meta = { title: 'Pyxis App/Organisms/Bookings', parameters: { layout
 export default meta;
 type Story = StoryObj;
 
-export const InboxPanel: Story = { render: () => <div style={{ width: 720, padding: 24, background: 'var(--app-canvas)' }}><BookingsInboxPanel bookings={bookings}/></div> };
-export const ProcessedPanel: Story = { render: () => <div style={{ width: 720, padding: 24, background: 'var(--app-canvas)' }}><BookingsProcessedPanel bookings={bookings}/></div> };
+export const InboxPanel: Story = { render: () => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsInboxPanel bookings={bookings}/></div> };
+export const ProcessedPanel: Story = { render: () => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsProcessedPanel bookings={bookings}/></div> };
 export const InsightsPanel: Story = { render: () => <div style={{ width: 330, padding: 24, background: 'var(--app-canvas)' }}><BookingsInsightsPanel/></div> };
 export const ReviewHeroMobile: Story = { render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero booking={booking}/></div>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
 export const ReviewRequestPanel: Story = { render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewRequestPanel booking={booking}/></div> };

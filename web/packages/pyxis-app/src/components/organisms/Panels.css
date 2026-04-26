@@ -3,6 +3,8 @@
 .app-panel > header span { display: block; margin-top: 4px; color: var(--app-muted); font-size: 13px; font-weight: 500; }
 .app-panel h2 { margin: 0; font-family: var(--font-body, Inter, system-ui, sans-serif); font-weight: 800; font-size: 14px; }
 .app-panel[data-section='shows-confirmed'], .app-panel[data-section='shows-archived'] { padding: 0; overflow: hidden; color: #1a1a18; }
+.app-panel[data-section='bookings-queue'], .app-panel[data-section='bookings-processed'] { border-radius: var(--app-radius-md); color: #1a1a18; font-size: 13px; line-height: 1.5; }
+.app-panel-link-action { border: 0; background: transparent; color: var(--app-muted); font-size: 12px; font-weight: 500; padding: 0; cursor: pointer; }
 .app-panel[data-section='shows-confirmed'] > header, .app-panel[data-section='shows-archived'] > header { align-items: center; margin: 0; padding: 16px 22px; border-bottom: 1px solid var(--app-rule); }
 .app-panel[data-section='shows-confirmed'] .app-table-wrap, .app-panel[data-section='shows-archived'] .app-table-wrap { padding: 4px 22px 8px; }
 .app-dashboard-mobile-header, .app-dashboard-mobile-copy, .app-dashboard-mobile-attention { display: none; }

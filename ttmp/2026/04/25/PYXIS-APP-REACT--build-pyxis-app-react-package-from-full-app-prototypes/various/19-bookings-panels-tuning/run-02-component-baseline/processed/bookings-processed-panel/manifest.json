@@ -1,0 +1,194 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: bookings-processed-panel component",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-02-component-baseline/processed/bookings-processed-panel",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T01:30:04.050010686Z",
+  "updated_at": "2026-04-26T01:30:09.362739879Z",
+  "targets": [
+    {
+      "slug": "component",
+      "name": "bookings-processed-panel component",
+      "url": "http://localhost:7070/standalone/full-app/bookings.html",
+      "selector": "[data-section=\"bookings-processed\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "component",
+        "name": "bookings-processed-panel component",
+        "url": "http://localhost:7070/standalone/full-app/bookings.html",
+        "selector": "[data-section=\"bookings-processed\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "bookings-processed-panel-component",
+        "left": {
+          "name": "bookings-processed-panel-component",
+          "url": "http://localhost:7070/standalone/full-app/bookings.html",
+          "selector": "[data-section=\"bookings-processed\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 732.890625,
+            "width": 646,
+            "height": 214.734375
+          }
+        },
+        "right": {
+          "name": "bookings-processed-panel-component",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--processed-panel\u0026viewMode=story",
+          "selector": "[data-section=\"bookings-processed\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 24,
+            "y": 24,
+            "width": 672,
+            "height": 302.953125
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 203616,
+          "changedPixels": 11573,
+          "changedPercent": 5.683738016658809,
+          "normalizedWidth": 672,
+          "normalizedHeight": 303,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-02-component-baseline/processed/bookings-processed-panel/artifacts/component/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-02-component-baseline/processed/bookings-processed-panel/artifacts/component/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 732.890625,
+            "width": 646,
+            "height": 214.734375
+          },
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 672,
+            "height": 302.953125
+          },
+          "delta": {
+            "x": -223,
+            "y": -708.890625,
+            "width": 26,
+            "height": 88.21875
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Recently processedView archiveArtistRequestedGenreSubmittedStatusOrphxJul 4EBMApr 18ApprovedArcaJul 12ExperimentalApr 15Declined",
+          "right": "Recently processedOrphxapprovedEBM · requested 2025-07-04 · est. 60orphx.com · submitted Apr 18ArcadeclinedExperimental · requested 2025-07-12 · est. 200arca1000.com · submitted Apr 15ArtistRequestedGenreDrawSubmittedStatusOrphxorphx.com2025-07-04EBM60Apr 18approvedArcaarca1000.com2025-07-12Experimental200Apr 15declined"
+        },
+        "styles": [
+          {
+            "name": "border-radius",
+            "left": "12px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "box-shadow",
+            "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+            "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "22px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-left",
+            "left": "22px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-right",
+            "left": "22px",
+            "right": "18px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "22px",
+            "right": "18px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-02-component-baseline/processed/bookings-processed-panel/artifacts/component/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-02-component-baseline/processed/bookings-processed-panel/artifacts/component/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T01:30:09.362739459Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: bookings desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/queue/bookings",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T01:28:10.065722212Z",
+  "updated_at": "2026-04-26T01:28:15.607674252Z",
+  "targets": [
+    {
+      "slug": "queue",
+      "name": "bookings queue",
+      "url": "http://localhost:7070/standalone/full-app/bookings.html",
+      "selector": "[data-page=\"bookings\"] main \u003e div:first-child",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "queue",
+        "name": "bookings queue",
+        "url": "http://localhost:7070/standalone/full-app/bookings.html",
+        "selector": "[data-page=\"bookings\"] main \u003e div:first-child",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "bookings-queue",
+        "left": {
+          "name": "bookings-queue",
+          "url": "http://localhost:7070/standalone/full-app/bookings.html",
+          "selector": "[data-page=\"bookings\"] main \u003e div:first-child",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          }
+        },
+        "right": {
+          "name": "bookings-queue",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-desktop\u0026viewMode=story",
+          "selector": "[data-section=\"bookings-queue\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 138.140625,
+            "width": 648,
+            "height": 454.125
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 462172,
+          "changedPixels": 29256,
+          "changedPercent": 6.330110867815446,
+          "normalizedWidth": 1018,
+          "normalizedHeight": 454,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/queue/bookings/artifacts/queue/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/queue/bookings/artifacts/queue/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          },
+          "right": {
+            "x": 247,
+            "y": 138.140625,
+            "width": 648,
+            "height": 454.125
+          },
+          "delta": {
+            "x": 26,
+            "y": 137.140625,
+            "width": -370,
+            "height": 343.734375
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Home / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-review",
+          "right": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonpendingIndustrial · requested 2025-06-14 · est. 80pharmakon.bandcamp.com · submitted Apr 19Lust for YouthpendingDarkwave · requested 2025-06-21 · est. 120instagram.com/lustyouth · submitted Apr 20ContainerpendingNoise · requested 2025-07-19 · est. 55container.bandcamp.com · submitted Apr 22"
+        },
+        "styles": [
+          {
+            "name": "border-radius",
+            "left": "0px",
+            "right": "12px",
+            "changed": true
+          },
+          {
+            "name": "box-shadow",
+            "left": "none",
+            "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px",
+            "changed": true
+          },
+          {
+            "name": "color",
+            "left": "rgb(26, 26, 24)",
+            "right": "rgb(31, 30, 28)",
+            "changed": true
+          },
+          {
+            "name": "font-size",
+            "left": "13px",
+            "right": "14px",
+            "changed": true
+          },
+          {
+            "name": "line-height",
+            "left": "19.5px",
+            "right": "20.3px",
+            "changed": true
+          },
+          {
+            "name": "padding-bottom",
+            "left": "20px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-left",
+            "left": "28px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-right",
+            "left": "28px",
+            "right": "22px",
+            "changed": true
+          },
+          {
+            "name": "padding-top",
+            "left": "20px",
+            "right": "22px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          },
+          {
+            "name": "data-section",
+            "right": "bookings-queue",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/queue/bookings/artifacts/queue/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/queue/bookings/artifacts/queue/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T01:28:15.607673831Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

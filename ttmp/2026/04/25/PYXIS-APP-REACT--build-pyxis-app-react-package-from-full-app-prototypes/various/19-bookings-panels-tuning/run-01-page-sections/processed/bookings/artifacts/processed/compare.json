@@ -1,0 +1,163 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/processed/bookings/artifacts/processed/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/processed/bookings/artifacts/processed/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "px-scroll",
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    },
+    {
+      "changed": true,
+      "name": "data-section",
+      "right": "bookings-processed"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -414,
+      "width": -370,
+      "x": 26,
+      "y": 498.875
+    },
+    "left": {
+      "height": 647.609375,
+      "width": 1018,
+      "x": 221,
+      "y": 111.390625
+    },
+    "right": {
+      "height": 233.609375,
+      "width": 648,
+      "x": 247,
+      "y": 610.265625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 647.609375,
+      "width": 1018,
+      "x": 221,
+      "y": 111.390625
+    },
+    "exists": true,
+    "name": "bookings-processed",
+    "selector": "[data-page=\"bookings\"] main \u003e div:nth-child(2)",
+    "url": "http://localhost:7070/standalone/full-app/bookings.html",
+    "visible": true
+  },
+  "name": "bookings-processed",
+  "pixel": {
+    "changedPercent": 10.292967328821947,
+    "changedPixels": 67899,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/processed/bookings/artifacts/processed/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-01-page-sections/processed/bookings/artifacts/processed/diff_only.png",
+    "normalizedHeight": 648,
+    "normalizedWidth": 1018,
+    "threshold": 30,
+    "totalPixels": 659664
+  },
+  "right": {
+    "bounds": {
+      "height": 233.609375,
+      "width": 648,
+      "x": 247,
+      "y": 610.265625
+    },
+    "exists": true,
+    "name": "bookings-processed",
+    "selector": "[data-section=\"bookings-processed\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--bookings-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(0, 0, 0, 0)",
+      "name": "background-color",
+      "right": "rgb(255, 255, 255)"
+    },
+    {
+      "changed": true,
+      "left": "0px",
+      "name": "border-radius",
+      "right": "12px"
+    },
+    {
+      "changed": true,
+      "left": "none",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    },
+    {
+      "changed": true,
+      "left": "26px",
+      "name": "padding-bottom",
+      "right": "22px"
+    },
+    {
+      "changed": true,
+      "left": "26px",
+      "name": "padding-left",
+      "right": "22px"
+    },
+    {
+      "changed": true,
+      "left": "26px",
+      "name": "padding-right",
+      "right": "22px"
+    },
+    {
+      "changed": true,
+      "left": "26px",
+      "name": "padding-top",
+      "right": "22px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonPending Sat, Jun 14, 2025 Industrial ~80 est. draw pharmakon.bandcamp.comSubmitted Apr 19·Date is availableHoldDeclineApproveLust for YouthPending Sat, Jun 21, 2025 Darkwave ~120 est. draw instagram.com/lustyouthSubmitted Apr 20·Date is availableHoldDeclineApproveContainerPending Sat, Jul 19, 2025 Noise ~55 est. draw container.bandcamp.comSubmitted Apr 22·Date is availableHoldDeclineApproveRecently processedView archiveArtistRequestedGenreSubmittedStatusOrphxJul 4EBMApr 18ApprovedArcaJul 12ExperimentalApr 15DeclinedInbox rhythmSubmissions, last 12 weeksAvg response time: 2.1 days. Goal is under 3 — you're in good shape.Decline templatesOne click, friendly reply.Not a fit right now Double-booked that night Too soon — try next season Need more info",
+    "right": "Recently processedOrphxapprovedEBM · requested 2025-07-04 · est. 60orphx.com · submitted Apr 18ArcadeclinedExperimental · requested 2025-07-12 · est. 200arca1000.com · submitted Apr 15ArtistRequestedGenreDrawSubmittedStatusOrphxorphx.com2025-07-04EBM60Apr 18approvedArcaarca1000.com2025-07-12Experimental200Apr 15declined"
+  }
+}

@@ -217,12 +217,12 @@ module.exports = {
         },
         {
           "name": "queue",
-          "original": "[data-page=\"bookings\"] main > div:first-child",
+          "original": "[data-section=\"bookings-queue\"]",
           "react": "[data-section=\"bookings-queue\"]"
         },
         {
           "name": "processed",
-          "original": "[data-page=\"bookings\"] main > div:nth-child(2)",
+          "original": "[data-section=\"bookings-processed\"]",
           "react": "[data-section=\"bookings-processed\"]"
         }
       ]

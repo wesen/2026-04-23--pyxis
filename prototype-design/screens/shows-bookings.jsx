@@ -97,7 +97,7 @@ function BookingsScreen() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 20 }}>
         <div>
           {/* Pending queue */}
-          <Card style={{ marginBottom: 16 }}>
+          <Card data-section="bookings-queue" style={{ marginBottom: 16 }}>
             <CardHead title={`Awaiting review · ${pending.length}`} subtitle="Review each request, then approve to add the show or decline with a reason." />
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {pending.map(sub => (
@@ -132,7 +132,7 @@ function BookingsScreen() {
           </Card>
 
           {/* Processed */}
-          <Card>
+          <Card data-section="bookings-processed">
             <CardHead title="Recently processed" action={<Btn variant="ghost" size="sm">View archive</Btn>} />
             <Table
               cols={[

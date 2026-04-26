@@ -1,9 +1,9 @@
 import type { AppShow, BookingRequest, CalendarEvent } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { StatusDot } from '../atoms/StatusDot';
-import { BookingCard } from '../molecules/BookingCard';
+import { BookingCard, BookingQueueRow } from '../molecules/BookingCard';
 import { CalendarEventChip } from '../molecules/CalendarEventChip';
-import { BookingQueue, CalendarMonth, Panel } from './Panels';
+import { CalendarMonth, Panel } from './Panels';
 
 export function ShowDetailHero({ show }: { show: AppShow }) {
   return (
@@ -80,7 +80,7 @@ export function BookingsInboxPanel({ bookings }: { bookings: BookingRequest[] })
 
 export function BookingsProcessedPanel({ bookings }: { bookings: BookingRequest[] }) {
   const processed = bookings.filter((booking) => booking.status !== 'pending');
-  return <Panel title="Recently processed" section="bookings-processed"><BookingQueue bookings={processed}/></Panel>;
+  return <Panel title="Recently processed" action={<button className="app-panel-link-action">View archive</button>} section="bookings-processed"><div className="app-table-wrap"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{processed.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div></Panel>;
 }
 
 export function BookingsInsightsPanel() {

@@ -1,0 +1,146 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: bookings-queue-panel component",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-04-status-root-font/queue/bookings-queue-panel",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T01:32:45.848360603Z",
+  "updated_at": "2026-04-26T01:32:51.42955919Z",
+  "targets": [
+    {
+      "slug": "component",
+      "name": "bookings-queue-panel component",
+      "url": "http://localhost:7070/standalone/full-app/bookings.html",
+      "selector": "[data-section=\"bookings-queue\"]",
+      "viewport": {
+        "Width": 0,
+        "Height": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "target": {
+        "slug": "component",
+        "name": "bookings-queue-panel component",
+        "url": "http://localhost:7070/standalone/full-app/bookings.html",
+        "selector": "[data-section=\"bookings-queue\"]",
+        "viewport": {
+          "Width": 0,
+          "Height": 0
+        }
+      },
+      "comparison": {
+        "schemaVersion": "cssvd.selectionComparison.v1",
+        "name": "bookings-queue-panel-component",
+        "left": {
+          "name": "bookings-queue-panel-component",
+          "url": "http://localhost:7070/standalone/full-app/bookings.html",
+          "selector": "[data-section=\"bookings-queue\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 247,
+            "y": 137.390625,
+            "width": 646,
+            "height": 579.5
+          }
+        },
+        "right": {
+          "name": "bookings-queue-panel-component",
+          "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-bookings--inbox-panel\u0026viewMode=story",
+          "selector": "[data-section=\"bookings-queue\"]",
+          "exists": true,
+          "visible": true,
+          "bounds": {
+            "x": 24,
+            "y": 24,
+            "width": 646,
+            "height": 562.5
+          }
+        },
+        "pixel": {
+          "threshold": 30,
+          "totalPixels": 374680,
+          "changedPixels": 43237,
+          "changedPercent": 11.539713889185437,
+          "normalizedWidth": 646,
+          "normalizedHeight": 580,
+          "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-04-status-root-font/queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+          "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-04-status-root-font/queue/bookings-queue-panel/artifacts/component/diff_only.png"
+        },
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 137.390625,
+            "width": 646,
+            "height": 579.5
+          },
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 646,
+            "height": 562.5
+          },
+          "delta": {
+            "x": -223,
+            "y": -113.390625,
+            "width": 0,
+            "height": -17
+          }
+        },
+        "text": {
+          "changed": true,
+          "left": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonPending Sat, Jun 14, 2025 Industrial ~80 est. draw pharmakon.bandcamp.comSubmitted Apr 19·Date is availableHoldDeclineApproveLust for YouthPending Sat, Jun 21, 2025 Darkwave ~120 est. draw instagram.com/lustyouthSubmitted Apr 20·Date is availableHoldDeclineApproveContainerPending Sat, Jul 19, 2025 Noise ~55 est. draw container.bandcamp.comSubmitted Apr 22·Date is availableHoldDeclineApprove",
+          "right": "Awaiting review · 3Review each request, then approve to add the show or decline with a reason.PharmakonPendingSat, Jun 14, 2025Industrial~80 est. drawpharmakon.bandcamp.comSubmitted Apr 19·Date is availableHoldDeclineApproveLust for YouthPendingSat, Jun 21, 2025Darkwave~120 est. drawinstagram.com/lustyouthSubmitted Apr 20·Date is availableHoldDeclineApproveContainerPendingSat, Jul 19, 2025Noise~55 est. drawcontainer.bandcamp.comSubmitted Apr 22·Date is availableHoldDeclineApprove"
+        },
+        "styles": [
+          {
+            "name": "box-shadow",
+            "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+            "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px",
+            "changed": true
+          }
+        ],
+        "attributes": [
+          {
+            "name": "class",
+            "right": "app-panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-component",
+            "right": "panel",
+            "changed": true
+          },
+          {
+            "name": "data-pyxis-part",
+            "right": "root",
+            "changed": true
+          }
+        ],
+        "artifacts": [
+          {
+            "name": "diffOnly",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-04-status-root-font/queue/bookings-queue-panel/artifacts/component/diff_only.png",
+            "kind": "png"
+          },
+          {
+            "name": "diffComparison",
+            "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-04-status-root-font/queue/bookings-queue-panel/artifacts/component/diff_comparison.png",
+            "kind": "png"
+          }
+        ]
+      },
+      "recorded_at": "2026-04-26T01:32:51.429558082Z"
+    }
+  ],
+  "summary": {
+    "target_count": 1,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 1,
+    "failure_count": 0,
+    "artifact_count": 2
+  }
+}

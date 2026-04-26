@@ -115,6 +115,42 @@ module.exports = {
           "react": "[data-section=\"shows-archived\"]"
         }
       ]
+    },
+    {
+      "page": "bookings-queue-panel",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/bookings.html",
+      "storyId": "pyxis-app-organisms-bookings--inbox-panel",
+      "viewport": {
+        "width": 900,
+        "height": 620
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "[data-section=\"bookings-queue\"]",
+          "react": "[data-section=\"bookings-queue\"]"
+        }
+      ]
+    },
+    {
+      "page": "bookings-processed-panel",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/bookings.html",
+      "storyId": "pyxis-app-organisms-bookings--processed-panel",
+      "viewport": {
+        "width": 900,
+        "height": 420
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "[data-section=\"bookings-processed\"]",
+          "react": "[data-section=\"bookings-processed\"]"
+        }
+      ]
     }
   ]
 }
