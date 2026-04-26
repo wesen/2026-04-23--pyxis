@@ -78,15 +78,15 @@ export type { AboutHeroProps } from './public/organisms/AboutHero';
 export { EthosStrip } from './public/organisms/EthosStrip';
 export type { EthosStripProps } from './public/organisms/EthosStrip';
 
-export { PublicPageHeader } from './public/PublicPageHeader';
+export { PublicPageHeader } from './public/molecules/PublicPageHeader';
 export { ReserveTicketCard } from './public/molecules/ReserveTicketCard';
 export { ShowDetailHeader } from './public/molecules/ShowDetailHeader';
 export { ShowMetaStrip } from './public/molecules/ShowMetaStrip';
-export { SafetyNote } from './public/SafetyNote';
+export { SafetyNote } from './public/molecules/SafetyNote';
 export { ArchiveSearchFilters } from './public/molecules/ArchiveSearchFilters';
 export { ArchiveShowRow } from './public/molecules/ArchiveShowRow';
 export { ArchiveShowList } from './public/molecules/ArchiveShowList';
-export { ShowTypeChips } from './public/ShowTypeChips';
+export { ShowTypeChips } from './public/atoms/ShowTypeChips';
 export { BookingSpaceAside } from './public/organisms/BookingSpaceAside';
 export type { BookingSpaceAsideProps } from './public/organisms/BookingSpaceAside';
 export { SaferSpaceAgreement } from './public/organisms/SaferSpaceAgreement';

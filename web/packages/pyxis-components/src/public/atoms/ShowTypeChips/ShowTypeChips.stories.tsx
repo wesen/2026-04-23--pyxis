@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ShowTypeChips } from './ShowTypeChips';
 
 const meta: Meta<typeof ShowTypeChips> = {
-  title: 'Public/Molecules/ShowTypeChips',
+  title: 'Public Site/Components/Atoms/ShowTypeChips',
   component: ShowTypeChips,
   tags: ['autodocs'],
 };

@@ -7,8 +7,8 @@
 - [x] Add public component taxonomy audit script.
 - [x] Locate existing decomposition and Storybook organization playbooks.
 - [x] Run full taxonomy audit and save output under `sources/`.
-- [ ] Manually review each `needs-review` classification.
-- [ ] Finalize public atom/molecule/organism/fixture classification table.
+- [x] Manually review each `needs-review` classification.
+- [x] Finalize public atom/molecule/organism/fixture classification table.
 
 ## Phase 2: Storybook baseline
 
@@ -58,7 +58,8 @@
   - [x] Move about content components: `AboutHero`, `AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`.
   - [x] Move remaining home/venue components: `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`.
   - [x] Move `PubHero` alongside the home/shell organisms.
-- [x] Validate about/public shell stories for the about and shell/home/venue clusters.
+- [x] Move final flat public components: `PublicPageHeader`, `SafetyNote`, and `ShowTypeChips`.
+- [x] Validate about/public shell stories for the about and shell/home/venue/final classification clusters.
 
 ## Phase 8: Thin public route pages
 

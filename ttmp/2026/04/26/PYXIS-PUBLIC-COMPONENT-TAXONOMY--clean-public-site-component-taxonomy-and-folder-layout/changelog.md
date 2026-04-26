@@ -104,3 +104,15 @@ Completed shell/home/venue taxonomy cluster: moved public layout and venue CTA c
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/SpaceInfo — Moved public space info organism.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/VenueCard — Moved public venue card organism.
 
+
+## 2026-04-26
+
+Completed final public classification: moved PublicPageHeader and SafetyNote to public molecules, ShowTypeChips to public atoms, and validated final Storybook/page stories.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/09-pyxis-components-storybook-ids-after-final-classification.md — Captured Storybook IDs after final classification.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/atoms/ShowTypeChips — Moved small public domain show type chip atom.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/PublicPageHeader — Moved reusable public page header molecule.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/SafetyNote — Moved reusable public safety note molecule.
+

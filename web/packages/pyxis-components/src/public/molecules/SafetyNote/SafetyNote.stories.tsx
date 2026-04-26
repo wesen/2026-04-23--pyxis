@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SafetyNote } from './SafetyNote';
 
 const meta: Meta<typeof SafetyNote> = {
-  title: 'Public/Molecules/SafetyNote',
+  title: 'Public Site/Components/Molecules/SafetyNote',
   component: SafetyNote,
   tags: ['autodocs'],
 };

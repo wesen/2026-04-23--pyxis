@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PublicPageHeader } from './PublicPageHeader';
 
 const meta: Meta<typeof PublicPageHeader> = {
-  title: 'Public/Molecules/PublicPageHeader',
+  title: 'Public Site/Components/Molecules/PublicPageHeader',
   component: PublicPageHeader,
   tags: ['autodocs'],
 };

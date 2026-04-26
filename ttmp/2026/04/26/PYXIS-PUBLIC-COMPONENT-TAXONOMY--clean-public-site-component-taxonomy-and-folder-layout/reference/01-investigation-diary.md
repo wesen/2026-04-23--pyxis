@@ -38,8 +38,12 @@ RelatedFiles:
       Note: Captured Storybook IDs after about cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/08-pyxis-components-storybook-ids-after-shell-home-venue.md
       Note: Captured Storybook IDs after shell/home/venue cluster move.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/09-pyxis-components-storybook-ids-after-final-classification.md
+      Note: Captured Storybook IDs after final classification move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
+    - Path: web/packages/pyxis-components/src/public/atoms/ShowTypeChips
+      Note: Moved small public domain show type chip atom.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
       Note: Moved archive search/filter component into public molecules taxonomy.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveShowList
@@ -54,8 +58,12 @@ RelatedFiles:
       Note: Moved poster visual molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/PubShowRow
       Note: Moved public show row molecule.
+    - Path: web/packages/pyxis-components/src/public/molecules/PublicPageHeader
+      Note: Moved reusable public page header molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/ReserveTicketCard
       Note: Moved reserve CTA card molecule.
+    - Path: web/packages/pyxis-components/src/public/molecules/SafetyNote
+      Note: Moved reusable public safety note molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/ShowDetailHeader
       Note: Moved public show detail header molecule in pilot batch.
     - Path: web/packages/pyxis-components/src/public/molecules/ShowMetaStrip
@@ -110,6 +118,7 @@ LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -867,3 +876,98 @@ No story-level errors or warnings were observed after filtering harmless favicon
 ### What remains
 
 Only the smaller classification cleanup remains in the flat `public/` root: `PublicPageHeader`, `SafetyNote`, and `ShowTypeChips`. The design guide currently suggests `PublicPageHeader` and `SafetyNote` as public molecules and `ShowTypeChips` as a public atom.
+
+## Step 8: Final Flat Public Component Classification
+
+I moved the remaining flat public component folders out of `src/public/` so the public package now has explicit composition-level buckets only: `atoms`, `molecules`, and `organisms`.
+
+### Components moved
+
+Moved to public molecules:
+
+```text
+PublicPageHeader
+SafetyNote
+```
+
+Moved to public atoms:
+
+```text
+ShowTypeChips
+```
+
+### Classification notes
+
+- `PublicPageHeader` is a reusable page-heading/kicker molecule shared by public route pages.
+- `SafetyNote` is a reusable note/aside molecule used on show detail.
+- `ShowTypeChips` is the smallest remaining public-domain component, so it now lives under `public/atoms`.
+- Public route pages still import through the package barrel and continue to own routing, RTK Query, navigation, and page states.
+
+### Import/export updates
+
+- Updated `web/packages/pyxis-components/src/index.ts` exports to the final paths:
+  - `./public/molecules/PublicPageHeader`
+  - `./public/molecules/SafetyNote`
+  - `./public/atoms/ShowTypeChips`
+- Updated `PublicDiffFixture.stories.tsx` imports.
+- Updated moved `pyxisPart` imports to `../../../utils/parts`.
+- Updated Storybook titles to:
+  - `Public Site/Components/Molecules/PublicPageHeader`
+  - `Public Site/Components/Molecules/SafetyNote`
+  - `Public Site/Components/Atoms/ShowTypeChips`
+
+### Evidence captured
+
+Added:
+
+```text
+sources/09-pyxis-components-storybook-ids-after-final-classification.md
+```
+
+New story IDs include:
+
+```text
+public-site-components-molecules-publicpageheader--default
+public-site-components-molecules-safetynote--default
+public-site-components-atoms-showtypechips--default
+```
+
+The final public component directory shape is now:
+
+```text
+web/packages/pyxis-components/src/public/atoms
+web/packages/pyxis-components/src/public/molecules
+web/packages/pyxis-components/src/public/organisms
+```
+
+with no remaining component folders directly under `src/public/` except the fixture story file.
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+cd web/packages/pyxis-user-site && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+cd web && pnpm build
+```
+
+Live Storybook validation passed for:
+
+```text
+public-site-components-molecules-publicpageheader--default
+public-site-components-molecules-safetynote--default
+public-site-components-atoms-showtypechips--default
+public-site-pages--shows-desktop
+public-site-pages--show-detail-desktop
+public-site-pages--archive-desktop
+public-site-pages--book-desktop
+```
+
+No story-level errors or warnings were observed after filtering harmless favicon and existing React Router future-flag warnings.
+
+### What remains
+
+The folder taxonomy move is complete. A separate follow-up can now audit whether route pages should extract additional content wrapper sections, but there are no flat public component folders left to classify.

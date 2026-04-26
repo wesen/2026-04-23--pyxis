@@ -21,15 +21,15 @@ import { ShowTile, type ShowTileShow } from './molecules/ShowTile';
 import { ShowGrid } from './organisms/ShowGrid';
 
 import { create, ShowSchema, Show_LineupEntrySchema, ArchiveStatsSchema, ShowStatus } from 'pyxis-types';
-import { PublicPageHeader } from './PublicPageHeader';
+import { PublicPageHeader } from './molecules/PublicPageHeader';
 import { ReserveTicketCard } from './molecules/ReserveTicketCard';
 import { ShowDetailHeader } from './molecules/ShowDetailHeader';
 import { ShowMetaStrip } from './molecules/ShowMetaStrip';
-import { SafetyNote } from './SafetyNote';
+import { SafetyNote } from './molecules/SafetyNote';
 import { ArchiveSearchFilters } from './molecules/ArchiveSearchFilters';
 import { ArchiveShowRow } from './molecules/ArchiveShowRow';
 import { ArchiveShowList } from './molecules/ArchiveShowList';
-import { ShowTypeChips } from './ShowTypeChips';
+import { ShowTypeChips } from './atoms/ShowTypeChips';
 import { BookingSpaceAside } from './organisms/BookingSpaceAside';
 import { SaferSpaceAgreement } from './organisms/SaferSpaceAgreement';
 import { AboutIntro } from './organisms/AboutIntro';
