@@ -106,6 +106,12 @@ RelatedFiles:
       Note: Phase 8C molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.tsx
       Note: Phase 8C molecule props
+    - Path: web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.css
+      Note: App empty-state styling ownership
+    - Path: web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.stories.tsx
+      Note: Empty-state reuse stories
+    - Path: web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.tsx
+      Note: Dedicated reuse app empty-state wrapper
     - Path: web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.stories.tsx
       Note: Phase 8C domain molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx
@@ -354,6 +360,8 @@ RelatedFiles:
       Note: Direct MetricsGrid organism story target (commit b1180ae)
     - Path: web/packages/pyxis-app/stories/ShowsOrganisms.stories.tsx
       Note: Direct Storybook targets for Shows organisms (commit 4020ea8)
+    - Path: web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
+      Note: Dedicated reuse Empty API extension
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -362,6 +370,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -5463,4 +5472,167 @@ The successful visual guard outputs were:
 ```text
 sidebar: 6.363036699448308%, review, text unchanged, bounds unchanged
 topbar: 8.522274730526204%, review, text unchanged
+```
+
+## Step 40: Start dedicated reuse with shared Empty via AppEmptyState
+
+I started the dedicated component-system reuse phase with the lowest-risk shared primitive: `pyxis-components/Empty`. Instead of replacing every empty state directly with the raw shared component, I added an app wrapper, `AppEmptyState`, that gives the staff app a domain-appropriate API while reusing the shared component-system primitive underneath.
+
+This keeps the app-specific class/token styling centralized and creates a safer path for future empty-state visual tuning without continuing to duplicate raw `<p className="app-empty-state">...` markup across organisms.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, let's start the dedicated reuse. part"
+
+**Assistant interpretation:** Begin the dedicated component-system reuse phase after completing the broad Phase 8C prop/story sweep.
+
+**Inferred user intent:** Move from API/story cleanup into intentional reuse of existing `pyxis-components` primitives, one cluster at a time with validation.
+
+**Commit (code):** `9bfa799` — "Reuse shared Empty for app empty states"
+
+### What I did
+
+- Extended `pyxis-components` `EmptyProps` with an optional `className` prop so app wrappers can apply local styling.
+- Added `AppEmptyState` in `pyxis-app`:
+
+```text
+web/packages/pyxis-app/src/components/molecules/AppEmptyState/
+  AppEmptyState.tsx
+  AppEmptyState.css
+  AppEmptyState.stories.tsx
+  index.ts
+```
+
+- Replaced duplicated raw app empty paragraphs with `AppEmptyState` in:
+  - `ArtistRoster`,
+  - `AttendancePanel`,
+  - `AuditLogPanel`,
+  - `BookingQueue`,
+  - `BookingsInboxPanel`,
+  - `BookingsProcessedPanel`,
+  - `DashboardActivityPanel`,
+  - `DashboardAttentionContent`,
+  - `DashboardUpcomingPanel`,
+  - `DiscordMappingPanel`,
+  - `ShowsArchivedPanel`,
+  - `ShowsConfirmedPanel`.
+- Moved the `.app-empty-state` CSS ownership out of `Panel.css` and into `AppEmptyState.css`.
+- Added `AppEmptyState` stories:
+  - default,
+  - with description,
+  - with action.
+- Ran typechecks:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+```
+
+- Ran focused visual guards for non-empty affected organisms:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel --summary \
+  --outDir /tmp/pyxis-reuse-empty-bookings-queue \
+  --output json
+```
+
+Result: `bookings-queue-panel` stayed at its known `11.72947581936586%`, `tune-required` level.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel --summary \
+  --outDir /tmp/pyxis-reuse-empty-shows-confirmed \
+  --output json
+```
+
+Result: `shows-confirmed-panel` stayed in review band at `9.821005081874647%`.
+
+### Why
+
+Empty states are a clear reuse candidate from the component-system inventory. Starting here is lower risk than `Panel -> Card`, `MetricCard -> Stat`, or tables because it can be wrapped without changing the non-empty default visual targets.
+
+### What worked
+
+- Both `pyxis-components` and `pyxis-app` typechecks passed.
+- Existing non-empty visual guard targets stayed at known levels.
+- Empty-state markup is now centralized and reuses the shared `Empty` primitive.
+- The wrapper approach keeps app-specific styling/copy local while still reducing primitive duplication.
+
+### What didn't work
+
+No implementation failure in this step.
+
+One caveat: existing component/page visual specs mostly cover non-empty states, so this commit validates that common non-empty sections did not regress, but it does not yet provide pixel evidence for every empty state variant.
+
+### What I learned
+
+The safest reuse pattern for app-specific UX is often wrapper-first: extend the shared primitive just enough (`className`), then create an app wrapper with domain naming and app-owned CSS.
+
+### What was tricky to build
+
+`pyxis-components/Empty` previously had inline styles and no `className`, so app-local styling could not be applied without changing the shared component. Adding `className` is a small, generic API extension that does not affect existing consumers.
+
+### What warrants a second pair of eyes
+
+- Review whether `Empty` should also accept a `style` prop or size/density variants in the component system.
+- Review whether `AppEmptyState` should expose richer description/action defaults for specific route states.
+- Review whether empty states should get their own visual-spec targets if they become important route states.
+
+### What should be done in the future
+
+- Consider adding focused empty-state visual specs for important organisms.
+- Continue dedicated reuse clusters:
+  - `NewShowModal -> Modal`,
+  - `Panel -> Card/CardHead`,
+  - `MetricCard`/`AttendanceStat -> Stat`,
+  - app tables -> `Table` or documented non-reuse,
+  - `StatusPill`/`AgeBadge -> Badge/Tag` wrappers.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
+web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.tsx
+web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.css
+```
+
+Then inspect the organism replacements with:
+
+```bash
+rg -n "AppEmptyState|app-empty-state" web/packages/pyxis-app/src/components -g'*.tsx' -g'*.css'
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel --summary \
+  --outDir /tmp/pyxis-reuse-empty-bookings-queue \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel --summary \
+  --outDir /tmp/pyxis-reuse-empty-shows-confirmed \
+  --output json
+```
+
+### Technical details
+
+The non-empty guard outputs remained at known values:
+
+```text
+bookings-queue-panel: 11.72947581936586%, tune-required
+shows-confirmed-panel: 9.821005081874647%, review
 ```

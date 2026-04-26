@@ -330,3 +330,13 @@ Step 39: Added named props/types for AppShell/AppTopBar and AttendanceStat, expa
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx — Named AttendanceStat props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppShell.tsx — Shell props and typed nav/icon data
 
+
+## 2026-04-26
+
+Step 40: Started dedicated reuse by adding AppEmptyState around pyxis-components Empty and replacing duplicated app empty-state markup (commit 9bfa799).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.tsx — App wrapper reusing pyxis-components Empty
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Empty/Empty.tsx — Shared Empty accepts className for app wrappers
+
