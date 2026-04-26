@@ -924,3 +924,63 @@ curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/sett
 curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH http://localhost:8282/api/app/settings -d '{"spaceName":"Pyxis Updated","tagline":"Underground music venue","capacity":120,"setupComplete":true}'
 curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/audit-log
 ```
+
+---
+
+## Step 10: Implementation — Phases 9 & 10 (Flyers + Discord + CLI Export)
+
+Phase 9 adds flyer storage with a local filesystem backend and Discord announcement skeleton. Phase 10 adds a CSV export CLI command.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead"
+
+**Assistant interpretation:** Continue implementing the remaining phases (9 and 10).
+
+**Inferred user intent:** Complete the backend implementation with flyers, Discord integration skeleton, and CLI tooling.
+
+**Commit (code):** `9713379` — "Phase 9-10: Flyer storage + Discord skeleton + CSV export command"
+
+### What I did
+
+- Created `pkg/storage/flyer.go` with `FlyerStore` interface and `LocalFlyerStore` implementation.
+- Added flyer upload (`POST /api/app/shows/{id}/flyer`) and delete (`DELETE /api/app/shows/{id}/flyer`) handlers in `app.go`.
+- Integrated Discord `NoOpClient` into `ShowService` with an `Announce` method.
+- Added `POST /api/app/shows/{id}/announce` handler for Discord announcements.
+- Updated `server.go` to wire flyer store and Discord client.
+- Created `cmd/pyxis/cmds/export.go` with CSV export for shows and archive.
+- Wired export command into `pkg/cmdtools/root.go`.
+- Tested CSV export: `pyxis export --type archive` outputs valid CSV.
+
+### What worked
+
+- `LocalFlyerStore` stores files in `./data/flyers/show-{id}/` with sanitized filenames.
+- `ShowService.Announce` calls `discord.AnnounceShow` and logs to audit.
+- CSV export uses Go's `encoding/csv` for proper escaping.
+
+### What didn't work
+
+- **Flag name collision:** Glazed already has an `--output` flag, so `export --output` conflicted. Renamed to `--outfile`.
+
+### What should be done in the future
+
+- Implement real Discord bot (replace `NoOpClient`).
+- Add S3/R2 `FlyerStore` implementation for production.
+- Write integration tests with `testcontainers-go`.
+- Add GitHub Actions CI workflow.
+
+### Technical details
+
+**Test commands:**
+
+```bash
+# CSV export
+go run ./cmd/pyxis export --type shows
+go run ./cmd/pyxis export --type archive --outfile archive.csv
+
+# Flyer upload (multipart/form-data)
+curl -s -H "Cookie: session=test-session-abc" -F "flyer=@flyer.jpg" http://localhost:8282/api/app/shows/1/flyer
+
+# Discord announce
+curl -s -H "Cookie: session=test-session-abc" -X POST http://localhost:8282/api/app/shows/1/announce
+```

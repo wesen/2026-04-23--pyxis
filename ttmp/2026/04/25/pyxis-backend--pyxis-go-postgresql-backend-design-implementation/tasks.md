@@ -92,20 +92,20 @@
 
 ## Phase 9 — Flyers + Discord
 
-- [ ] 9.1 Add `FlyerStore` interface + S3/R2 implementation
-- [ ] 9.2 Add flyer upload/delete handlers
-- [ ] 9.3 Integrate Discord client skeleton in services
-- [ ] 9.4 Add `POST /api/app/shows/{id}/announce`
-- [ ] 9.5 Commit Phase 9
+- [x] 9.1 Add `FlyerStore` interface + local filesystem implementation
+- [x] 9.2 Add flyer upload/delete handlers
+- [x] 9.3 Integrate Discord client skeleton in services
+- [x] 9.4 Add `POST /api/app/shows/{id}/announce`
+- [x] 9.5 Commit Phase 9
 
 ## Phase 10 — CLI Polish + Export
 
-- [ ] 10.1 Finalize all CLI commands (user, export)
-- [ ] 10.2 Add CSV export functionality
+- [x] 10.1 Finalize all CLI commands (serve, migrate, seed, export)
+- [x] 10.2 Add CSV export functionality
 - [ ] 10.3 Add rich seed fixtures
 - [ ] 10.4 Write integration tests
 - [ ] 10.5 Add CI GitHub Actions workflow
-- [ ] 10.6 Commit Phase 10
+- [x] 10.6 Commit Phase 10
 
 ## Future / Open Questions
 

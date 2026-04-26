@@ -90,3 +90,14 @@ Step 9: Phase 8 complete — settings CRUD + audit log list (commit aaa907a)
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Settings and audit log handlers
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go — Audit service with List method
 
+
+## 2026-04-26
+
+Step 10: Phases 9-10 complete — flyer storage, Discord skeleton, CSV export (commit 9713379)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/cmd/pyxis/cmds/export.go — CSV export command
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — Discord announce integration
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/storage/flyer.go — Local flyer storage
+
