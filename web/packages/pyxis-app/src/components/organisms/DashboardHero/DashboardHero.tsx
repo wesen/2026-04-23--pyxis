@@ -2,7 +2,13 @@ import type { AppShow } from 'pyxis-types';
 import { Button, PyxisMark } from 'pyxis-components';
 import './DashboardHero.css';
 
-export function DashboardHero({ show }: { show?: AppShow }) {
+export type DashboardHeroProps = {
+  show?: AppShow;
+  onViewDiscord?: (show: AppShow) => void;
+  onEditShow?: (show: AppShow) => void;
+};
+
+export function DashboardHero({ show, onViewDiscord, onEditShow }: DashboardHeroProps) {
   if (!show) return null;
   return (
     <section className="app-dashboard-hero" data-section="dashboard-hero">
@@ -12,7 +18,7 @@ export function DashboardHero({ show }: { show?: AppShow }) {
         <p className="app-dashboard-hero-desktop" data-element="hero-date-line"><span data-element="hero-date">Fri, May 2, 2025</span><span data-element="hero-doors">Doors {show.doors}</span><span data-element="hero-age">{show.age}</span><span data-element="hero-price">{show.price}</span></p>
         <p className="app-dashboard-hero-mobile">Fri, May 2, 2025 · Doors {show.doors} · {show.age}</p>
       </div>
-      <div className="app-dashboard-hero-actions" data-element="hero-actions"><Button data-element="hero-discord-action" className="app-dashboard-hero-discord" variant="outline" iconLeft="external">View on Discord</Button><Button data-element="hero-edit-action" className="app-dashboard-hero-edit" variant="outline" iconLeft="edit">Edit show</Button></div>
+      <div className="app-dashboard-hero-actions" data-element="hero-actions"><Button data-element="hero-discord-action" className="app-dashboard-hero-discord" variant="outline" iconLeft="external" onClick={() => onViewDiscord?.(show)}>View on Discord</Button><Button data-element="hero-edit-action" className="app-dashboard-hero-edit" variant="outline" iconLeft="edit" onClick={() => onEditShow?.(show)}>Edit show</Button></div>
       <div className="app-dashboard-hero-mark" aria-hidden="true"><PyxisMark size={300} /></div>
     </section>
   );

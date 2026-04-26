@@ -24,6 +24,14 @@ export const Mobile: Story = {
   parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
 };
 
+export const WithCallbacks: Story = {
+  args: {
+    onViewDiscord: (show) => console.log('view discord', show.id),
+    onEditShow: (show) => console.log('edit show', show.id),
+  },
+  render: (args) => <div style={{ width: 1014, padding: 24, background: 'var(--app-canvas)' }}><DashboardHero {...args} /></div>,
+};
+
 export const LongArtistName: Story = {
   args: { show: longArtistShow },
   render: (args) => <div style={{ width: 1014, padding: 24, background: 'var(--app-canvas)' }}><DashboardHero {...args} /></div>,

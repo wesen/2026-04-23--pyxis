@@ -8,19 +8,31 @@ import { DashboardMobileCopy } from '../DashboardMobileCopy';
 import { DashboardMobileHeader } from '../DashboardMobileHeader';
 import { DashboardOverview } from './DashboardOverview';
 
-const meta: Meta = {
+const meta = {
   title: 'Pyxis App/Components/Organisms/DashboardOverview',
+  component: DashboardOverview,
   parameters: { layout: 'fullscreen' },
-};
+  args: { shows, bookings, log: auditLog },
+} satisfies Meta<typeof DashboardOverview>;
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<typeof meta>;
 
 const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 const pendingBookings = bookings.filter((booking) => booking.status === 'pending');
 
 export const Default: Story = {
-  render: () => <div style={{ padding: 24 }}><DashboardOverview shows={shows} bookings={bookings} log={auditLog}/></div>,
+  render: (args) => <div style={{ padding: 24 }}><DashboardOverview {...args}/></div>,
+};
+
+export const Empty: Story = {
+  args: { shows: [], bookings: [], log: [] },
+  render: (args) => <div style={{ padding: 24 }}><DashboardOverview {...args}/></div>,
+};
+
+export const Busy: Story = {
+  args: { shows: [...shows, ...shows.map((show) => ({ ...show, id: show.id + 100, artist: `${show.artist} late set` }))], bookings: [...bookings, ...bookings.map((booking) => ({ ...booking, id: booking.id + 100, artist: `${booking.artist} follow-up` }))], log: [...auditLog, ...auditLog.map((item) => ({ ...item, id: item.id + 100 }))] },
+  render: (args) => <div style={{ padding: 24 }}><DashboardOverview {...args}/></div>,
 };
 
 export const MobileHeaderAndCopy: Story = {

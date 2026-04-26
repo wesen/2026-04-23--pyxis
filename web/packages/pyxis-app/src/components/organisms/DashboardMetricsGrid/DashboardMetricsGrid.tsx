@@ -1,7 +1,15 @@
 import { MetricCard } from '../../molecules/MetricCard';
 import './DashboardMetricsGrid.css';
 
-export function DashboardMetricsGrid({ upcomingCount, pendingCount, variant = 'desktop' }: { upcomingCount: number; pendingCount: number; variant?: 'desktop' | 'mobile' }) {
+export type DashboardMetricsGridVariant = 'desktop' | 'mobile';
+
+export type DashboardMetricsGridProps = {
+  upcomingCount: number;
+  pendingCount: number;
+  variant?: DashboardMetricsGridVariant;
+};
+
+export function DashboardMetricsGrid({ upcomingCount, pendingCount, variant = 'desktop' }: DashboardMetricsGridProps) {
   const mobile = variant === 'mobile';
   return (
     <div className="app-metrics-grid" data-section="dashboard-metrics" data-variant={variant}>

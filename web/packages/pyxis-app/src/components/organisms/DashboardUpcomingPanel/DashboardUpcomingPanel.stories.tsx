@@ -18,6 +18,11 @@ export const Desktop: Story = {
   render: (args) => <div style={{ width: 690, padding: 24, background: 'var(--app-canvas)' }}><DashboardUpcomingPanel {...args} /></div>,
 };
 
+export const WithCallback: Story = {
+  args: { onViewAll: () => console.log('view all shows') },
+  render: (args) => <div style={{ width: 690, padding: 24, background: 'var(--app-canvas)' }}><DashboardUpcomingPanel {...args} /></div>,
+};
+
 export const MobileCards: Story = {
   render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><DashboardUpcomingPanel {...args} /></div>,
   parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
