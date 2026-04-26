@@ -16,6 +16,8 @@ RelatedFiles:
       Note: Central playbook pointer to pyxis-app visual loop (commit d7f3692199b72a4933a5389c090c87230f753f89)
     - Path: prototype-design/lib/components.jsx
       Note: Prototype Stat/MetricCard selector instrumentation (commit bb41b0c4abad20af5a24a4aa16de8fc837122cda)
+    - Path: prototype-design/screens/shows-bookings.jsx
+      Note: Prototype Bookings section hooks for visual targeting (commit caeefa4)
     - Path: prototype-design/visual-diff/userland/lib/compare-region.js
       Note: Threaded section filter through compare-spec target execution
     - Path: prototype-design/visual-diff/userland/lib/styles.js
@@ -64,6 +66,8 @@ RelatedFiles:
       Note: Inline date chip variant for dashboard table rows (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/atoms/StatusDot.css
       Note: Centralized status colors/rings through CSS variables
+    - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
+      Note: Pending booking card and processed row shape tuned for Bookings organisms (commit caeefa4)
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
@@ -91,6 +95,8 @@ RelatedFiles:
         DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
         DashboardQuickActionsPanel extraction (commit 12cc17c)
         Attention panel organism wrapper and page reuse (commit b1180ae)
+    - Path: web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx
+      Note: Bookings queue and processed organism composition (commit caeefa4)
     - Path: web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx
       Note: Shows organisms extracted and reused by the Shows page (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
@@ -108,6 +114,8 @@ RelatedFiles:
       Note: |-
         Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
         QuickActionsPanel and no-pending Storybook states (commit 12cc17c)
+    - Path: web/packages/pyxis-app/stories/BookingsOrganisms.stories.tsx
+      Note: Direct Bookings organism story widths for focused visual targets (commit caeefa4)
     - Path: web/packages/pyxis-app/stories/DashboardAttentionPanel.stories.tsx
       Note: Direct AttentionPanel organism story target (commit b1180ae)
     - Path: web/packages/pyxis-app/stories/DashboardHero.stories.tsx
@@ -124,6 +132,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -2912,4 +2921,149 @@ Important final checkpoints:
 confirmed: run-09-status-pill-fix, 9.564375456845118%, review
 archived content: run-03-action-copy, 1.3387880235706322%, review, text unchanged
 archived font-token pass: run-04-font-tokens, 0.9796495480482755%, accepted numerically but crop caveat applies
+```
+
+## Step 23: Tune Bookings awaiting-review and recently-processed organisms
+
+After the Shows pass, I applied the same bottom-up workflow to the Bookings page. The focus was only the two primary left-column organisms: `Awaiting review` and `Recently processed`, because those are the sections the user called out and they are the highest-signal areas before tuning the full page.
+
+This step keeps the prototype and React sections targetable, reshapes the React booking cards/table to match the prototype structure, and records the remaining queue-panel difference as a visual review item instead of continuing to guess at page-level CSS.
+
+### Prompt Context
+
+**User prompt (verbatim):** "now do the same with tbookins page, and 
+
+- awaiting review
+- recently processed"
+
+**Assistant interpretation:** Repeat the Shows organism-first visual parity loop for the Bookings page, specifically the awaiting-review queue and recently-processed table.
+
+**Inferred user intent:** Improve the problematic Bookings page by extracting/tuning the main organisms and their row/card subelements rather than accepting broad page-level checkpoints.
+
+**Commit (code):** caeefa4 — "Tune bookings queue and processed organisms"
+
+### What I did
+
+- Added prototype section hooks:
+  - `data-section="bookings-queue"`,
+  - `data-section="bookings-processed"`.
+- Updated desktop visual specs to use the new prototype hooks instead of fragile `main > div:nth-child(...)` selectors.
+- Added component-level visual targets:
+  - `bookings-queue-panel`,
+  - `bookings-processed-panel`.
+- Resized `BookingsOrganisms` stories so the React panel width matches the prototype left-column panel width more closely.
+- Rebuilt `BookingCard` to match the prototype pending-card structure:
+  - Fraunces artist title,
+  - pending status pill,
+  - metadata row with calendar/music/users/external icons,
+  - submitted/date-available row,
+  - Hold / Decline / Approve actions.
+- Rebuilt `BookingQueueRow` and `BookingsProcessedPanel` to match the prototype processed table:
+  - columns: Artist, Requested, Genre, Submitted, Status,
+  - no draw/link columns in processed table,
+  - `View archive` action.
+- Added bookings-specific table/card CSS in `Rows.css` and panel root tuning in `Panels.css`.
+- Extended `StatusPill` pending/hold/declined visual states and added booking-card scoped status pill rules so pending pills render with the correct pale amber surface.
+
+### Why
+
+The previous Bookings React checkpoint showed generic booking cards and a processed section that mixed mobile cards with a desktop table. The prototype has a richer pending-review card and a compact processed table. Matching the section structure first makes later font/spacing tuning meaningful.
+
+### What worked
+
+- Typecheck passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Component comparisons after tuning:
+
+```text
+bookings-queue-panel run-06-booking-status-css: 11.72947581936586%, tune-required
+bookings-processed-panel run-06-booking-status-css: 5.116919433308128%, review
+```
+
+- The processed panel text now matches the prototype:
+
+```text
+Recently processedView archiveArtistRequestedGenreSubmittedStatusOrphxJul 4EBMApr 18ApprovedArcaJul 12ExperimentalApr 15Declined
+```
+
+- The processed right crop now visually shows only the compact table, not the earlier accidental mobile card stack.
+- The queue crop now has the correct pending-card structure, icons, buttons, status pill surface, and artist-title typography.
+
+### What didn't work
+
+- The first page-section selectors for bookings were wrong/noisy: `queue` initially captured the topbar area and `processed` captured too much of the page. Adding prototype `data-section` hooks fixed the target contract.
+- The first processed React organism included hidden/mobile card content in the text comparison and visibly rendered the wrong card view in the organism story. Replacing the organism body with a direct processed table fixed that.
+- `StatusPill.css` did not appear in the bookings card rendering until I added bookings-card scoped status pill rules in `Rows.css`; the status pill had briefly collapsed to transparent text with the dot touching the label.
+
+### What I learned
+
+- Root `styleDiffs` were immediately useful: they showed the panel should inherit 13px / 19.5px instead of 14px / 20.3px. Applying that to the bookings panel roots removed most root style diffs.
+- The component-level story viewport matters: at the earlier viewport, responsive rules made processed render mobile cards, which made the organism comparison lie about desktop table parity.
+- The processed section is now a good candidate for stopping in review band; the queue section still needs more subelement-level work if we want it below 10%.
+
+### What was tricky to build
+
+The tricky part was separating mobile booking-card reuse from the desktop processed table. The old `BookingQueue` organism intentionally included both mobile cards and a desktop table, but for direct desktop organism comparison that made text and crop validation noisy. I kept `BookingQueue` available in `Panels.tsx`, but made `BookingsProcessedPanel` render the exact processed table it needs.
+
+The queue is harder because the prototype card is a dense, multi-row flex layout with action buttons on the right. The React card now has the same content, but residual drift remains from line wrapping, icon rendering, and slight row-density differences.
+
+### What warrants a second pair of eyes
+
+- Review whether `BookingCard` should have explicit variants (`pendingReview`, `mobileSummary`, `processedSummary`) instead of one shape serving all contexts.
+- Review whether the booking-card scoped `StatusPill` CSS should be moved into a more formal shared status-pill token set.
+- Review the queue panel remaining `tune-required` result and decide whether to continue subelement inspection or accept it as a structured checkpoint.
+
+### What should be done in the future
+
+- Continue queue tuning with explicit prototype/React `data-element` hooks on title, status pill, metadata row, submitted row, and action buttons.
+- Add mobile-specific booking-card stories once desktop queue/processed parity is accepted.
+- Re-run the full Bookings page checkpoint after the queue section is under review band or explicitly accepted.
+
+### Code review instructions
+
+- Start with:
+  - `prototype-design/screens/shows-bookings.jsx`,
+  - `web/packages/pyxis-app/src/components/molecules/BookingCard.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx`,
+  - `web/packages/pyxis-app/src/components/molecules/Rows.css`,
+  - `web/packages/pyxis-app/stories/BookingsOrganisms.stories.tsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Re-run focused comparisons:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-queue-panel \
+  --section component \
+  --summary \
+  --outDir ttmp/.../various/19-bookings-panels-tuning/run-N/queue \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-processed-panel \
+  --section component \
+  --summary \
+  --outDir ttmp/.../various/19-bookings-panels-tuning/run-N/processed \
+  --output json
+```
+
+### Technical details
+
+Important final artifacts:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-06-booking-status-css/queue/bookings-queue-panel/artifacts/component/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/19-bookings-panels-tuning/run-06-booking-status-css/processed/bookings-processed-panel/artifacts/component/right_region.png
 ```

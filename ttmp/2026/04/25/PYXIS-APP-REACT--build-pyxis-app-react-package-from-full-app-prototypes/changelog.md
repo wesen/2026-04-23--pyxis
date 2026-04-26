@@ -151,3 +151,13 @@ Step 22: Refocused Shows tuning around extracted organisms and row atoms; confir
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/Rows.css — Shows typography token consolidation
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx — Shows organism extraction
 
+
+## 2026-04-25
+
+Step 23: Tuned Bookings awaiting-review and recently-processed organisms; processed reached review band with matching text, queue now matches structure but remains tune-required (commit caeefa4).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — Bookings focused visual targets
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard.tsx — Bookings card/table tuning
+
