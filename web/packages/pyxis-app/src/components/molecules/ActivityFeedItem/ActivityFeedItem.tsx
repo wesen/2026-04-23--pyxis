@@ -3,11 +3,18 @@ import { StatusDot } from '../../atoms/StatusDot';
 import { appPart } from '../../parts';
 import './ActivityFeedItem.css';
 
+export type ActivityFeedItemVariant = 'stacked' | 'timeline';
+
+export type ActivityFeedItemProps = {
+  item: AuditLogEntry;
+  variant?: ActivityFeedItemVariant;
+};
+
 function toneForType(type: AuditLogEntry['type']) {
   return type === 'bot' ? 'bot' : type === 'decline' ? 'declined' : type === 'approve' || type === 'add' ? 'approved' : 'neutral';
 }
 
-export function ActivityFeedItem({ item, variant = 'stacked' }: { item: AuditLogEntry; variant?: 'stacked' | 'timeline' }) {
+export function ActivityFeedItem({ item, variant = 'stacked' }: ActivityFeedItemProps) {
   if (variant === 'timeline') {
     return (
       <li className="app-activity-feed-item app-activity-feed-item-timeline" {...appPart('activity-feed-item')}>
