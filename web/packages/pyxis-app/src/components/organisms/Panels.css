@@ -6,7 +6,7 @@
 .app-dashboard-hero { position: relative; box-sizing: border-box; overflow: hidden; min-height: 142px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; padding: 26px; border-radius: var(--app-radius-md); background: #1a1a18; color: var(--app-on-dark); }
 .app-dashboard-hero > div:first-child { flex: 1; position: relative; z-index: 1; }
 .app-dashboard-hero > div:first-child > span { color: var(--app-on-dark-muted); text-transform: uppercase; letter-spacing: .11em; font-size: 11px; font-weight: 800; }
-.app-dashboard-hero h2 { margin: 8px 0 6px; color: var(--app-on-dark); font-family: var(--font-display, Georgia, serif); font-size: 40px; font-weight: 500; line-height: 1.05; }
+.app-dashboard-hero h2 { margin: 0 0 6px; color: var(--app-on-dark); font-family: var(--font-display, Georgia, serif); font-size: 40px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; }
 .app-dashboard-hero p { margin: 0; color: var(--app-on-dark-muted); }
 .app-dashboard-hero-desktop { display: flex; gap: 16px; align-items: center; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.7); }
 .app-dashboard-hero-actions { position: relative; z-index: 1; display: flex; gap: 8px; }
