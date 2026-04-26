@@ -2,9 +2,12 @@ package config
 
 // Config holds application configuration loaded from flags/env.
 type Config struct {
-	Bind          string
-	DBURL         string
-	AllowedOrigins []string
+	Bind               string
+	DBURL              string
+	AllowedOrigins     []string
+	DiscordClientID    string
+	DiscordClientSecret string
+	DiscordRedirectURL string
 }
 
 // DefaultConfig returns a Config with sensible defaults for local development.

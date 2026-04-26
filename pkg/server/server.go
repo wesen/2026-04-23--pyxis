@@ -18,6 +18,7 @@ type Server struct {
 	handler           http.Handler
 	showService       *service.ShowService
 	submissionService *service.SubmissionService
+	authService       *service.AuthService
 }
 
 // New creates a new Server with routes wired.
@@ -33,6 +34,13 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	s.showService = service.NewShowService(showRepo)
 	s.submissionService = service.NewSubmissionService(submissionRepo)
 
+	// Auth service (uses placeholder config; override in production)
+	s.authService = service.NewAuthService(queries, service.DiscordOAuthConfig{
+		ClientID:     cfg.DiscordClientID,
+		ClientSecret: cfg.DiscordClientSecret,
+		RedirectURL:  cfg.DiscordRedirectURL,
+	})
+
 	// Router
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -40,12 +48,21 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 		w.Write([]byte(`{"status":"ok"}`))
 	})
 
-	// Public API
+	// Public API (no auth)
 	mux.HandleFunc("GET /api/public/shows", s.handleListPublicShows)
 	mux.HandleFunc("GET /api/public/shows/{id}", s.handleGetPublicShow)
 	mux.HandleFunc("GET /api/public/archive", s.handleGetArchive)
 	mux.HandleFunc("GET /api/public/archive/stats", s.handleGetArchiveStats)
 	mux.HandleFunc("POST /api/public/submissions", s.handleCreateSubmission)
+
+	// Auth
+	mux.HandleFunc("GET /auth/discord/callback", s.handleDiscordCallback)
+	mux.HandleFunc("GET /auth/me", s.handleGetMe)
+	mux.HandleFunc("POST /auth/logout", s.handleLogout)
+
+	// Staff API (auth required)
+	mux.HandleFunc("GET /api/app/session", s.handleGetSession)
+	// TODO: add staff show/booking/artist/calendar/attendance/settings endpoints
 
 	s.handler = mux
 	return s

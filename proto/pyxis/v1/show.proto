@@ -99,3 +99,19 @@ message Submission {
   string reviewed_at    = 13;
   string created_at     = 14;
 }
+
+message User {
+  int32  id              = 1;
+  string discord_id      = 2;
+  string discord_username = 3;
+  string avatar_url      = 4;
+  string role            = 5;
+  string created_at      = 6;
+  string last_login_at   = 7;
+}
+
+message AuthSession {
+  bool   authenticated = 1;
+  User   user          = 2;
+  string space_name    = 3;
+}

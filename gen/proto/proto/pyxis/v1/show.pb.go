@@ -841,6 +841,158 @@ func (x *Submission) GetCreatedAt() string {
 	return ""
 }
 
+type User struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	DiscordId       string                 `protobuf:"bytes,2,opt,name=discord_id,json=discordId,proto3" json:"discord_id,omitempty"`
+	DiscordUsername string                 `protobuf:"bytes,3,opt,name=discord_username,json=discordUsername,proto3" json:"discord_username,omitempty"`
+	AvatarUrl       string                 `protobuf:"bytes,4,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Role            string                 `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
+	CreatedAt       string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastLoginAt     string                 `protobuf:"bytes,7,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *User) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *User) GetDiscordId() string {
+	if x != nil {
+		return x.DiscordId
+	}
+	return ""
+}
+
+func (x *User) GetDiscordUsername() string {
+	if x != nil {
+		return x.DiscordUsername
+	}
+	return ""
+}
+
+func (x *User) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *User) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *User) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *User) GetLastLoginAt() string {
+	if x != nil {
+		return x.LastLoginAt
+	}
+	return ""
+}
+
+type AuthSession struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Authenticated bool                   `protobuf:"varint,1,opt,name=authenticated,proto3" json:"authenticated,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	SpaceName     string                 `protobuf:"bytes,3,opt,name=space_name,json=spaceName,proto3" json:"space_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuthSession) Reset() {
+	*x = AuthSession{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthSession) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthSession) ProtoMessage() {}
+
+func (x *AuthSession) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthSession.ProtoReflect.Descriptor instead.
+func (*AuthSession) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AuthSession) GetAuthenticated() bool {
+	if x != nil {
+		return x.Authenticated
+	}
+	return false
+}
+
+func (x *AuthSession) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *AuthSession) GetSpaceName() string {
+	if x != nil {
+		return x.SpaceName
+	}
+	return ""
+}
+
 type Show_LineupEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Artist        string                 `protobuf:"bytes,1,opt,name=artist,proto3" json:"artist,omitempty"`
@@ -853,7 +1005,7 @@ type Show_LineupEntry struct {
 
 func (x *Show_LineupEntry) Reset() {
 	*x = Show_LineupEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -865,7 +1017,7 @@ func (x *Show_LineupEntry) String() string {
 func (*Show_LineupEntry) ProtoMessage() {}
 
 func (x *Show_LineupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[9]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1006,7 +1158,23 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\vreviewed_at\x18\r \x01(\tR\n" +
 	"reviewedAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x0e \x01(\tR\tcreatedAtB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
+	"created_at\x18\x0e \x01(\tR\tcreatedAt\"\xd6\x01\n" +
+	"\x04User\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1d\n" +
+	"\n" +
+	"discord_id\x18\x02 \x01(\tR\tdiscordId\x12)\n" +
+	"\x10discord_username\x18\x03 \x01(\tR\x0fdiscordUsername\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\x04 \x01(\tR\tavatarUrl\x12\x12\n" +
+	"\x04role\x18\x05 \x01(\tR\x04role\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12\"\n" +
+	"\rlast_login_at\x18\a \x01(\tR\vlastLoginAt\"v\n" +
+	"\vAuthSession\x12$\n" +
+	"\rauthenticated\x18\x01 \x01(\bR\rauthenticated\x12\"\n" +
+	"\x04user\x18\x02 \x01(\v2\x0e.pyxis.v1.UserR\x04user\x12\x1d\n" +
+	"\n" +
+	"space_name\x18\x03 \x01(\tR\tspaceNameB:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
 
 var (
 	file_proto_pyxis_v1_show_proto_rawDescOnce sync.Once
@@ -1020,7 +1188,7 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 	return file_proto_pyxis_v1_show_proto_rawDescData
 }
 
-var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*Show)(nil),                // 0: pyxis.v1.Show
 	(*AppShow)(nil),             // 1: pyxis.v1.AppShow
@@ -1031,17 +1199,20 @@ var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*ArchivedShowList)(nil),    // 6: pyxis.v1.ArchivedShowList
 	(*BookingConfirmation)(nil), // 7: pyxis.v1.BookingConfirmation
 	(*Submission)(nil),          // 8: pyxis.v1.Submission
-	(*Show_LineupEntry)(nil),    // 9: pyxis.v1.Show.LineupEntry
+	(*User)(nil),                // 9: pyxis.v1.User
+	(*AuthSession)(nil),         // 10: pyxis.v1.AuthSession
+	(*Show_LineupEntry)(nil),    // 11: pyxis.v1.Show.LineupEntry
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	9, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
-	0, // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
-	2, // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	11, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	0,  // 1: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
+	2,  // 2: pyxis.v1.ArchivedShowList.shows:type_name -> pyxis.v1.ArchivedShow
+	9,  // 3: pyxis.v1.AuthSession.user:type_name -> pyxis.v1.User
+	4,  // [4:4] is the sub-list for method output_type
+	4,  // [4:4] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_pyxis_v1_show_proto_init() }
@@ -1055,7 +1226,7 @@ func file_proto_pyxis_v1_show_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
