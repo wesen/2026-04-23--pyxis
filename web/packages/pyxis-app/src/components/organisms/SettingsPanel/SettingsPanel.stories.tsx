@@ -17,11 +17,11 @@ export const Default: Story = {
 };
 
 export const AllOff: Story = {
-  args: { settings: { ...settings, autoArchive: false, discordPosting: false, safeSpaceRequired: false } },
+  args: { settings: { ...settings, setupComplete: false } },
   render: (args) => <div style={{ width: 560, padding: 24, background: 'var(--app-canvas)' }}><SettingsPanel {...args} /></div>,
 };
 
 export const LongSpaceName: Story = {
-  args: { settings: { ...settings, name: 'Pyxis Community Arts and Experimental Music Space', address: 'A longer address line for layout stress testing, Providence, RI' } },
+  args: { settings: { ...settings, spaceName: 'Pyxis Community Arts and Experimental Music Space', address: 'A longer address line for layout stress testing, Providence, RI' } },
   render: (args) => <div style={{ width: 560, padding: 24, background: 'var(--app-canvas)' }}><SettingsPanel {...args} /></div>,
 };

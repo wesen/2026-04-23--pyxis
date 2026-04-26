@@ -28,7 +28,7 @@ export const PubShowRow = ({ show, onClick, className }: PubShowRowProps) => {
       <div className="pyxis-show-row__info">
         <h3 className="pyxis-show-row__artist">{show.artist}</h3>
         <p className="pyxis-show-row__genre">{show.genre}</p>
-        <p className="pyxis-show-row__doors">Doors {show.doors_time}</p>
+        <p className="pyxis-show-row__doors">Doors {show.doorsTime}</p>
       </div>
       {/* Price + CTA */}
       <div className="pyxis-show-row__right">

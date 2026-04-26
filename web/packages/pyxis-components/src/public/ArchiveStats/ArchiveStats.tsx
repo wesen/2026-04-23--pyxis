@@ -10,10 +10,10 @@ export type ArchiveStatsProps = {
 
 export const ArchiveStats = ({ stats, className }: ArchiveStatsProps) => {
   const items = [
-    { value: stats.total_shows.toLocaleString(), label: 'shows' },
-    { value: stats.total_attendance.toLocaleString(), label: 'artists' },
-    { value: stats.years_running.toLocaleString(), label: 'residencies' },
-    { value: stats.unique_artists.toLocaleString(), label: 'cops called' },
+    { value: stats.totalShows.toLocaleString(), label: 'shows' },
+    { value: stats.totalAttendance.toLocaleString(), label: 'artists' },
+    { value: stats.yearsRunning.toLocaleString(), label: 'residencies' },
+    { value: stats.uniqueArtists.toLocaleString(), label: 'cops called' },
   ];
 
   return (

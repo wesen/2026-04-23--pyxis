@@ -17,7 +17,8 @@ type ArchiveGroup = {
 
 export function Archive() {
   const [search, setSearch] = useState('');
-  const { data: shows = [], isLoading } = useArchive(search || undefined);
+  const { data: list, isLoading } = useArchive(search || undefined);
+  const shows = list?.shows ?? [];
   const { data: stats } = useArchiveStats();
   const groups = groupShowsByYear(shows);
 
@@ -32,7 +33,7 @@ export function Archive() {
           <ArchiveSearchFilters
             value={search}
             onSearchChange={setSearch}
-            resultLabel={isLoading ? '…' : `${shows.length} of ${stats?.total_shows ?? '—'} shows`}
+            resultLabel={isLoading ? '…' : `${shows.length} of ${stats?.totalShows ?? '—'} shows`}
           />
         </section>
 

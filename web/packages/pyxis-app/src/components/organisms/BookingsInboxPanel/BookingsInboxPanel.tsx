@@ -1,11 +1,11 @@
-import type { BookingRequest } from 'pyxis-types';
+import type { Submission } from 'pyxis-types';
 import { BookingCard, type BookingActionHandler } from '../../molecules/BookingCard';
 import { Panel } from '../Panels';
 import './BookingsInboxPanel.css';
 import { AppEmptyState } from '../../molecules/AppEmptyState';
 
 export type BookingsInboxPanelProps = {
-  bookings: BookingRequest[];
+  bookings: Submission[];
   onHold?: BookingActionHandler;
   onDecline?: BookingActionHandler;
   onApprove?: BookingActionHandler;

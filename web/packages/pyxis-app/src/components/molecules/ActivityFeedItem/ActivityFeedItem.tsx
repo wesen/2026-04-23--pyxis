@@ -10,20 +10,20 @@ export type ActivityFeedItemProps = {
   variant?: ActivityFeedItemVariant;
 };
 
-function toneForType(type: AuditLogEntry['type']) {
-  return type === 'bot' ? 'bot' : type === 'decline' ? 'declined' : type === 'approve' || type === 'add' ? 'approved' : 'neutral';
+function toneForAction(action: string) {
+  return action.includes('decline') ? 'declined' : action.includes('approve') || action.includes('add') ? 'approved' : action.includes('bot') ? 'bot' : 'neutral';
 }
 
 export function ActivityFeedItem({ item, variant = 'stacked' }: ActivityFeedItemProps) {
   if (variant === 'timeline') {
     return (
       <li className="app-activity-feed-item app-activity-feed-item-timeline" {...appPart('activity-feed-item')}>
-        <StatusDot tone={toneForType(item.type)} />
-        <span className="app-activity-time">{item.time}</span>
-        <p><strong>{item.user}</strong> {item.action}</p>
+        <StatusDot tone={toneForAction(item.action)} />
+        <span className="app-activity-time">{item.createdAt}</span>
+        <p><strong>{item.actor}</strong> {item.action}</p>
       </li>
     );
   }
 
-  return <li className="app-activity-feed-item" {...appPart('activity-feed-item')}><StatusDot tone={toneForType(item.type)} /><div {...appPart('activity-feed-item','body')}><p>{item.action}</p><span>{item.time} · {item.user}</span></div></li>;
+  return <li className="app-activity-feed-item" {...appPart('activity-feed-item')}><StatusDot tone={toneForAction(item.action)} /><div {...appPart('activity-feed-item','body')}><p>{item.action}</p><span>{item.createdAt} · {item.actor}</span></div></li>;
 }

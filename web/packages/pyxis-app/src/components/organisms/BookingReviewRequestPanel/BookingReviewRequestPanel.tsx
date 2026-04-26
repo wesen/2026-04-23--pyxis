@@ -1,9 +1,9 @@
-import type { BookingRequest } from 'pyxis-types';
+import type { Submission } from 'pyxis-types';
 import { Panel } from '../Panels';
 import './BookingReviewRequestPanel.css';
 
 export type BookingReviewRequestPanelProps = {
-  booking: BookingRequest;
+  booking: Submission;
   preferredDateLabel?: string;
 };
 
@@ -12,7 +12,7 @@ export function BookingReviewRequestPanel({ booking, preferredDateLabel = 'Sat, 
     <Panel title="Request" section="booking-review-request">
       <div className="app-detail-list">
         <span>Preferred date <b>{preferredDateLabel}</b></span>
-        <span>Expected draw <b>~{booking.draw}</b></span>
+        <span>Expected draw <b>~{booking.expectedDraw}</b></span>
         <span>Links <b>{booking.links}</b></span>
       </div>
     </Panel>

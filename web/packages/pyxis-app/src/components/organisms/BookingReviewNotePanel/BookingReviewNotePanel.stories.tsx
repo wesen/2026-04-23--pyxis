@@ -19,11 +19,11 @@ export const ReviewNotePanel: Story = {
 };
 
 export const ProvidedNote: Story = {
-  args: { booking: { ...booking, notes: 'We can bring a full backline and are flexible on support acts.' } },
+  args: { booking: { ...booking, message: 'We can bring a full backline and are flexible on support acts.' } },
   render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewNotePanel {...args}/></div>,
 };
 
 export const LongNote: Story = {
-  args: { booking: { ...booking, notes: 'This is a much longer note from an artist that describes routing, preferred bill partners, accessibility needs, backline constraints, and timing details for a potential show.' } },
+  args: { booking: { ...booking, message: 'This is a much longer note from an artist that describes routing, preferred bill partners, accessibility needs, backline constraints, and timing details for a potential show.' } },
   render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewNotePanel {...args}/></div>,
 };

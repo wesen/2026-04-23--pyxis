@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
-import type { LineupEntry } from 'pyxis-types';
+import type { Show_LineupEntry as LineupEntry } from 'pyxis-types';
 import './LineupRow.css';
 
 export type LineupRowProps = {
@@ -17,7 +17,7 @@ const roleLabels: Record<LineupEntry['role'], string> = {
 export const LineupRow = ({ entry, className }: LineupRowProps) => (
   <div className={clsx('pyxis-lineup-row', className)} {...pyxisPart('lineup-row')}>
     <div className="pyxis-lineup-row__time" {...pyxisPart('lineup-row', 'time')}>
-      {entry.start_time}
+      {entry.startTime}
     </div>
     <div className="pyxis-lineup-row__artist-block" {...pyxisPart('lineup-row', 'artist-block')}>
       <span {...pyxisPart('lineup-row', 'artist')}>{entry.artist}</span>

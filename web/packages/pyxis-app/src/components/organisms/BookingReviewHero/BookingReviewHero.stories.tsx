@@ -25,6 +25,6 @@ export const Approved: Story = {
 };
 
 export const LongArtistName: Story = {
-  args: { booking: { ...booking, artist: 'A Very Long Booking Request Artist Name' } },
+  args: { booking: { ...booking, artistName: 'A Very Long Booking Request Artist Name' } },
   render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero {...args}/></div>,
 };

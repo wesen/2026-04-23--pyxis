@@ -19,7 +19,7 @@ export const Default: Story = {
 
 export const NoAverageDraw: Story = {
   args: {
-    artist: artists.find((artist) => artist.avgDraw == null) ?? artists[0],
+    artist: artists[0],
   },
   render: (args) => <div style={{ width: 420, padding: 24 }}><ArtistCard {...args} /></div>,
 };

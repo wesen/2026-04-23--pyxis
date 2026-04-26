@@ -1,4 +1,5 @@
 import type { AppShow } from 'pyxis-types';
+import type { StatusTone } from '../../atoms/StatusDot';
 import { StatusDot } from '../../atoms/StatusDot';
 import './ShowDetailHero.css';
 
@@ -11,7 +12,7 @@ export function ShowDetailHero({ show, dateLabel = 'Fri, May 2, 2025' }: ShowDet
   return (
     <section className="app-detail-hero" data-section="show-detail-hero">
       <div>
-        <span className="app-row-status"><StatusDot tone={show.status}/>{show.status}</span>
+        <span className="app-row-status"><StatusDot tone={show.status as StatusTone}/>{show.status}</span>
         <h1>{show.artist}</h1>
         <p>{dateLabel} · Doors {show.doors} · {show.age}</p>
       </div>

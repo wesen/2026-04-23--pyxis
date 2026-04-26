@@ -163,31 +163,31 @@
 
 ### 12.3 Frontend RTK Query Migration (TypeScript)
 
-- [ ] 12.3.1 Update `appApi` `getArtists` → `fromJson(ArtistListSchema, response)`
-- [ ] 12.3.2 Update `appApi` `getArtist` → `fromJson(ArtistSchema, response)`
-- [ ] 12.3.3 Update `appApi` `getCalendar` → `fromJson(CalendarResponseSchema, response)`
-- [ ] 12.3.4 Update `appApi` `getAttendance` → `fromJson(AttendanceLogListSchema, response)`
-- [ ] 12.3.5 Update `appApi` `getAuditLog` → `fromJson(AuditLogEntryListSchema, response)`
-- [ ] 12.3.6 Update `appApi` `getSettings` → `fromJson(SettingsSchema, response)`
-- [ ] 12.3.7 Update `appApi` `getBookings` → `fromJson(SubmissionListSchema, response)`
-- [ ] 12.3.8 Remove unused hand-written types from `pyxis-types` index exports
-- [ ] 12.3.9 Commit frontend migration
+- [x] 12.3.1 Update `appApi` `getArtists` → `fromJson(ArtistListSchema, response)`
+- [x] 12.3.2 Update `appApi` `getArtist` → `fromJson(ArtistSchema, response)`
+- [x] 12.3.3 Update `appApi` `getCalendar` → `fromJson(CalendarResponseSchema, response)`
+- [x] 12.3.4 Update `appApi` `getAttendance` → `fromJson(AttendanceLogListSchema, response)`
+- [x] 12.3.5 Update `appApi` `getAuditLog` → `fromJson(AuditLogEntryListSchema, response)`
+- [x] 12.3.6 Update `appApi` `getSettings` → `fromJson(SettingsSchema, response)`
+- [x] 12.3.7 Update `appApi` `getBookings` → `fromJson(SubmissionListSchema, response)`
+- [x] 12.3.8 Remove unused hand-written types from `pyxis-types` index exports
+- [x] 12.3.9 Commit frontend migration
 
 ### 12.4 Validation
 
-- [ ] 12.4.1 Test end-to-end: every endpoint returns camelCase JSON matching its proto schema
-- [ ] 12.4.2 Verify `fromJson` on frontend doesn't throw for any endpoint
-- [ ] 12.4.3 Verify `protojson.Unmarshal` on backend round-trips correctly for mutations
-- [ ] 12.4.4 Commit validation
+- [x] 12.4.1 Test end-to-end: every endpoint returns camelCase JSON matching its proto schema
+- [x] 12.4.2 Verify `fromJson` on frontend doesn't throw for any endpoint
+- [x] 12.4.3 Verify `protojson.Unmarshal` on backend round-trips correctly for mutations
+- [x] 12.4.4 Commit validation
 
 ## Phase 13 — Frontend Component Migration (Post-Proto-Everywhere)
 
-- [ ] 13.1 Migrate `pyxis-components` to use camelCase field names from generated types
-- [ ] 13.2 Migrate `pyxis-user-site` pages to use generated types
-- [ ] 13.3 Migrate `pyxis-app` pages to use generated types
-- [ ] 13.4 Add widget-level transform helpers where normalization was removed
-- [ ] 13.5 Remove remaining hand-written API response types from `pyxis-types`
-- [ ] 13.6 Commit component migration
+- [x] 13.1 Migrate `pyxis-components` to use camelCase field names from generated types
+- [x] 13.2 Migrate `pyxis-user-site` pages to use generated types
+- [x] 13.3 Migrate `pyxis-app` pages to use generated types
+- [x] 13.4 Add widget-level transform helpers where normalization was removed
+- [x] 13.5 Remove remaining hand-written API response types from `pyxis-types`
+- [x] 13.6 Commit component migration
 
 ## Future / Open Questions
 

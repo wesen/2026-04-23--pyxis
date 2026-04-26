@@ -1,4 +1,4 @@
-import type { AppShow, AuditLogEntry, BookingRequest } from 'pyxis-types';
+import type { AppShow, AuditLogEntry, Submission } from 'pyxis-types';
 import { DashboardMobileHeader } from '../DashboardMobileHeader';
 import { DashboardMobileCopy } from '../DashboardMobileCopy';
 import { DashboardHero } from '../DashboardHero';
@@ -12,7 +12,7 @@ import './DashboardOverview.css';
 
 export type DashboardOverviewProps = {
   shows: AppShow[];
-  bookings: BookingRequest[];
+  bookings: Submission[];
   log: AuditLogEntry[];
 };
 

@@ -31,7 +31,7 @@ export const Empty: Story = {
 };
 
 export const Busy: Story = {
-  args: { shows: [...shows, ...shows.map((show) => ({ ...show, id: show.id + 100, artist: `${show.artist} late set` }))], bookings: [...bookings, ...bookings.map((booking) => ({ ...booking, id: booking.id + 100, artist: `${booking.artist} follow-up` }))], log: [...auditLog, ...auditLog.map((item) => ({ ...item, id: item.id + 100 }))] },
+  args: { shows: [...shows, ...shows.map((show) => ({ ...show, id: show.id + 100, artist: `${show.artist} late set` }))], bookings: [...bookings, ...bookings.map((booking) => ({ ...booking, id: booking.id + 100, artistName: `${booking.artistName} follow-up` }))], log: [...auditLog, ...auditLog.map((item) => ({ ...item, id: item.id + 100 }))] },
   render: (args) => <div style={{ padding: 24 }}><DashboardOverview {...args}/></div>,
 };
 

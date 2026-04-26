@@ -44,7 +44,7 @@ export const LongContent: Story = {
   args: {
     booking: {
       ...bookings[0],
-      artist: 'A Very Long Artist Name With Several Collaborators',
+      artistName: 'A Very Long Artist Name With Several Collaborators',
       genre: 'Experimental industrial noise and darkwave electronics',
       links: 'https://example.com/a-very-long-artist-link-for-review',
     },

@@ -1,4 +1,5 @@
 import type { AppShow } from 'pyxis-types';
+import type { StatusTone } from '../../atoms/StatusDot';
 import { Icon } from 'pyxis-components';
 import { AgeBadge } from '../../atoms/AgeBadge';
 import { DateChip } from '../../atoms/DateChip';
@@ -26,7 +27,7 @@ function formatShowDate(date: string) {
 
 export function ShowTableRow({ show, variant = 'full' }: ShowTableRowProps) {
   const statusLabel = show.status.charAt(0).toUpperCase() + show.status.slice(1);
-  const status = <span className="app-row-status"><StatusPill tone={show.status === 'archived' ? 'archived' : show.status}>{statusLabel}</StatusPill></span>;
+  const status = <span className="app-row-status"><StatusPill tone={show.status === 'archived' ? 'archived' : show.status as StatusTone}>{statusLabel}</StatusPill></span>;
   const date = formatShowDate(show.date);
 
   if (variant === 'archived') {

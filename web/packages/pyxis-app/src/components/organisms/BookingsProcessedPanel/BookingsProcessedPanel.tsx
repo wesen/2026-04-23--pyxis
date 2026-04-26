@@ -1,11 +1,11 @@
-import type { BookingRequest } from 'pyxis-types';
+import type { Submission } from 'pyxis-types';
 import { BookingQueueRow } from '../../molecules/BookingCard';
 import { Panel } from '../Panels';
 import './BookingsProcessedPanel.css';
 import { AppEmptyState } from '../../molecules/AppEmptyState';
 
 export type BookingsProcessedPanelProps = {
-  bookings: BookingRequest[];
+  bookings: Submission[];
 };
 
 export function BookingsProcessedPanel({ bookings }: BookingsProcessedPanelProps) {

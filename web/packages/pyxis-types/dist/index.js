@@ -1,4 +1,4 @@
-// Re-export fromJson so consumers don't need a direct @bufbuild/protobuf dependency
-export { fromJson } from '@bufbuild/protobuf';
-// Re-export generated protobuf types
-export { ShowSchema, AppShowSchema, ArchivedShowSchema, ArchiveStatsSchema, BookingFormDataSchema, ShowListSchema, ArchivedShowListSchema, BookingConfirmationSchema, SubmissionSchema, UserSchema, AuthSessionSchema, } from './generated/proto/pyxis/v1/show_pb';
+// Re-export fromJson / create so consumers don't need a direct @bufbuild/protobuf dependency
+export { fromJson, toJson, create } from '@bufbuild/protobuf';
+// Generated protobuf types — single source of truth for all API shapes
+export { ShowSchema, Show_LineupEntrySchema, AppShowSchema, ArchivedShowSchema, ArchiveStatsSchema, ShowListSchema, ArchivedShowListSchema, BookingFormDataSchema, BookingConfirmationSchema, SubmissionSchema, SubmissionListSchema, UserSchema, AuthSessionSchema, ArtistSchema, ArtistListSchema, CalendarHoldSchema, CalendarBlockedSchema, CalendarResponseSchema, AttendanceLogSchema, AttendanceLogListSchema, AuditLogEntrySchema, AuditLogEntryListSchema, SettingsSchema, SuccessResponseSchema, ErrorResponseSchema, FlyerUploadResponseSchema, } from './generated/proto/pyxis/v1/show_pb';

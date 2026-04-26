@@ -25,7 +25,7 @@ export const PubHero = ({ show, onShowClick, className }: PubHeroProps) => (
     <div className="pyxis-pub-hero__content" {...pyxisPart('pub-hero', 'content')}>
       <h2 {...pyxisPart('pub-hero', 'artist')}>{show.artist}</h2>
       <p {...pyxisPart('pub-hero', 'genre')}>{show.genre}</p>
-      <div {...pyxisPart('pub-hero', 'meta')}>Doors {show.doors_time} · {show.age} · {show.price}</div>
+      <div {...pyxisPart('pub-hero', 'meta')}>Doors {show.doorsTime} · {show.age} · {show.price}</div>
     </div>
   </section>
 );

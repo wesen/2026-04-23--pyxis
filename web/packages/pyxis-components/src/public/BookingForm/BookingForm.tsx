@@ -1,6 +1,7 @@
 import type { FormEvent } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
+import { create, BookingFormDataSchema } from 'pyxis-types';
 import type { BookingFormData } from 'pyxis-types';
 import './BookingForm.css';
 
@@ -19,7 +20,7 @@ const textFields = [
 export const BookingForm = ({ onSubmit, isSubmitting, className }: BookingFormProps) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    await onSubmit?.({ artist_name: '', links: '' });
+    await onSubmit?.(create(BookingFormDataSchema, { artistName: '', links: '' }));
   };
 
   return (

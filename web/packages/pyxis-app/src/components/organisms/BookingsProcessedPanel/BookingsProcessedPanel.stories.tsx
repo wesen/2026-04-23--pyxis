@@ -27,7 +27,7 @@ export const Empty: Story = {
 
 export const Dense: Story = {
   args: {
-    bookings: [...bookings, ...bookings.filter((booking) => booking.status !== 'pending').map((booking) => ({ ...booking, id: booking.id + 200, artist: `${booking.artist} archived` }))],
+    bookings: [...bookings, ...bookings.filter((booking) => booking.status !== 'pending').map((booking) => ({ ...booking, id: booking.id + 200, artistName: `${booking.artistName} archived` }))],
   },
   render: (args) => <div style={{ width: 694, padding: 24, background: 'var(--app-canvas)' }}><BookingsProcessedPanel {...args} /></div>,
 };

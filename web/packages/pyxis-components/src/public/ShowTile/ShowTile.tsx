@@ -5,7 +5,7 @@ import type { Show } from 'pyxis-types';
 import { Poster, type PosterKind } from '../Poster';
 import './ShowTile.css';
 
-export type ShowTileShow = Pick<Show, 'artist' | 'date' | 'doors_time' | 'price'> & {
+export type ShowTileShow = Pick<Show, 'artist' | 'date' | 'doorsTime' | 'price'> & {
   age: string;
   title?: string;
   time?: string;
@@ -34,7 +34,7 @@ const formatDate = (date: string) => date.includes('-')
 export const ShowTile = ({ show, compact = false, posterKind, onClick, className }: ShowTileProps) => {
   const pill = pillFor(show.kind);
   const title = show.title ?? show.artist;
-  const time = show.time ?? show.doors_time;
+  const time = show.time ?? show.doorsTime;
   const style = {
     '--pyxis-show-tile-pill-bg': pill.bg,
     '--pyxis-show-tile-pill-color': pill.color,

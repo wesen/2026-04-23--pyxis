@@ -21,7 +21,7 @@ export function ShowDetail() {
   if (isError || !show) return <ShowDetailNotFound onBack={() => navigate('/')} />;
 
   const dateLabel = formatLongDate(show.date);
-  const timeLabel = show.start_time ? `${show.doors_time} doors · ${show.start_time} show` : `${show.doors_time} doors`;
+  const timeLabel = show.startTime ? `${show.doorsTime} doors · ${show.startTime} show` : `${show.doorsTime} doors`;
 
   return (
     <main className="pyxis-public-page pyxis-show-detail-page" data-page="show-detail">
@@ -38,7 +38,7 @@ export function ShowDetail() {
           <div className="pyxis-show-detail-page__meta" data-section="show-detail-meta">
             <ShowMetaStrip
               items={[
-                { label: 'Doors', value: show.doors_time },
+                { label: 'Doors', value: show.doorsTime },
                 { label: 'Age', value: show.age },
                 { label: 'Door', value: show.price },
               ]}
@@ -60,7 +60,7 @@ export function ShowDetail() {
                 <h2 className="pyxis-show-detail-page__section-title">Lineup</h2>
                 <div className="pyxis-show-detail-page__lineup">
                   {show.lineup.map((entry) => (
-                    <LineupRow key={`${entry.artist}-${entry.start_time}`} entry={entry} />
+                    <LineupRow key={`${entry.artist}-${entry.startTime}`} entry={entry} />
                   ))}
                 </div>
               </section>
