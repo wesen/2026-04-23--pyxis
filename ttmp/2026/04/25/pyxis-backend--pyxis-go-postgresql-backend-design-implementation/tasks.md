@@ -120,6 +120,75 @@
 - [ ] 11.9 Test end-to-end: Go `protojson.Marshal` → TS `fromJson` round-trip
 - [ ] 11.10 Commit Phase 11
 
+## Phase 12 — Proto-Everywhere: Eliminate Ad-Hoc JSON from All API Responses
+
+**Goal:** Every JSON response that crosses the wire must be backed by a protobuf message. No `map[string]interface{}` or raw JSON in API handlers.
+
+### 12.1 Protobuf Schema Expansion
+
+- [x] 12.1.1 Add `Artist` and `ArtistList` messages to `show.proto`
+- [x] 12.1.2 Add `CalendarHold`, `CalendarBlocked`, and `CalendarResponse` messages to `show.proto`
+- [x] 12.1.3 Add `AttendanceLog` and `AttendanceLogList` messages to `show.proto`
+- [x] 12.1.4 Add `AuditLogEntry` and `AuditLogEntryList` messages to `show.proto`
+- [x] 12.1.5 Add `Settings` message to `show.proto`
+- [x] 12.1.6 Add `SuccessResponse` message to `show.proto` (for `{"success": true}`)
+- [x] 12.1.7 Add `ErrorResponse` message to `show.proto` (standardize error shape)
+- [x] 12.1.8 Run `buf generate` and verify Go + TypeScript outputs compile
+- [x] 12.1.9 Commit schema expansion
+
+### 12.2 Backend Handler Migration (Go)
+
+- [x] 12.2.1 Update `handleListArtists` → `ArtistList` via `protojson.Marshal`
+- [x] 12.2.2 Update `handleGetArtist` → `Artist` via `protojson.Marshal`
+- [x] 12.2.3 Update `handleUpdateArtist` → `Artist` via `protojson.Marshal`
+- [ ] 12.2.4 Update `handleListCalendar` → `CalendarResponse` via `protojson.Marshal`
+- [ ] 12.2.5 Update `handleCreateCalendarHold` → `CalendarHold` via `protojson.Marshal`
+- [ ] 12.2.6 Update `handleCreateCalendarBlocked` → `CalendarBlocked` via `protojson.Marshal`
+- [ ] 12.2.7 Update `handleListAttendance` → `AttendanceLogList` via `protojson.Marshal`
+- [ ] 12.2.8 Update `handleGetAttendance` → `AttendanceLog` via `protojson.Marshal`
+- [ ] 12.2.9 Update `handleUpsertAttendance` → `AttendanceLog` via `protojson.Marshal`
+- [ ] 12.2.10 Update `handleGetSettings` → `Settings` via `protojson.Marshal`
+- [ ] 12.2.11 Update `handleUpdateSettings` → `Settings` via `protojson.Marshal`
+- [ ] 12.2.12 Update `handleListAuditLog` → `AuditLogEntryList` via `protojson.Marshal`
+- [ ] 12.2.13 Update `handleListBookings` → `SubmissionList` via `protojson.Marshal`
+- [ ] 12.2.14 Update `handleApproveBooking` → `Show` via `protojson.Marshal` (already done)
+- [ ] 12.2.15 Update `handleDeclineBooking` → `SuccessResponse` via `protojson.Marshal`
+- [ ] 12.2.16 Update `handleAnnounceShow` → `SuccessResponse` via `protojson.Marshal`
+- [ ] 12.2.17 Update `handleUploadFlyer` → `FlyerUploadResponse` via `protojson.Marshal`
+- [ ] 12.2.18 Update `handleDeleteFlyer` → `SuccessResponse` or `204`
+- [ ] 12.2.19 Update `handleDeleteCalendarHold` → `204` or `SuccessResponse`
+- [ ] 12.2.20 Update `handleDeleteCalendarBlocked` → `204` or `SuccessResponse`
+- [ ] 12.2.21 Standardize `respondError` → `ErrorResponse` via `protojson.Marshal`
+- [ ] 12.2.22 Commit backend handler migration
+
+### 12.3 Frontend RTK Query Migration (TypeScript)
+
+- [ ] 12.3.1 Update `appApi` `getArtists` → `fromJson(ArtistListSchema, response)`
+- [ ] 12.3.2 Update `appApi` `getArtist` → `fromJson(ArtistSchema, response)`
+- [ ] 12.3.3 Update `appApi` `getCalendar` → `fromJson(CalendarResponseSchema, response)`
+- [ ] 12.3.4 Update `appApi` `getAttendance` → `fromJson(AttendanceLogListSchema, response)`
+- [ ] 12.3.5 Update `appApi` `getAuditLog` → `fromJson(AuditLogEntryListSchema, response)`
+- [ ] 12.3.6 Update `appApi` `getSettings` → `fromJson(SettingsSchema, response)`
+- [ ] 12.3.7 Update `appApi` `getBookings` → `fromJson(SubmissionListSchema, response)`
+- [ ] 12.3.8 Remove unused hand-written types from `pyxis-types` index exports
+- [ ] 12.3.9 Commit frontend migration
+
+### 12.4 Validation
+
+- [ ] 12.4.1 Test end-to-end: every endpoint returns camelCase JSON matching its proto schema
+- [ ] 12.4.2 Verify `fromJson` on frontend doesn't throw for any endpoint
+- [ ] 12.4.3 Verify `protojson.Unmarshal` on backend round-trips correctly for mutations
+- [ ] 12.4.4 Commit validation
+
+## Phase 13 — Frontend Component Migration (Post-Proto-Everywhere)
+
+- [ ] 13.1 Migrate `pyxis-components` to use camelCase field names from generated types
+- [ ] 13.2 Migrate `pyxis-user-site` pages to use generated types
+- [ ] 13.3 Migrate `pyxis-app` pages to use generated types
+- [ ] 13.4 Add widget-level transform helpers where normalization was removed
+- [ ] 13.5 Remove remaining hand-written API response types from `pyxis-types`
+- [ ] 13.6 Commit component migration
+
 ## Future / Open Questions
 
 - [ ] Implement real Discord bot (replace NoOpClient)

@@ -1093,4 +1093,92 @@ getShows: builder.query<Show[], void>({
   },
 }),
 ```
+
+---
+
+## Step 12: Proto-Everywhere — Eliminate Ad-Hoc JSON from API Responses
+
+The user established the principle: every JSON response crossing the wire must be backed by a protobuf message. No `map[string]interface{}` in API handlers. We added proto messages for all ad-hoc responses and started migrating backend handlers.
+
+### Prompt Context
+
+**User prompt (verbatim):** "should there be any backend api that is not backed by protobuf? it helps us document/enforce the shape of the apis, no?"
+
+**Assistant interpretation:** The user wants 100% protobuf coverage for all API JSON responses — proto is the contract, period.
+
+**Inferred user intent:** Make protobuf the single source of truth for all API shapes, eliminating ad-hoc JSON entirely.
+
+**Commit (code):** `334ae8a` — "Phase 12.1-12.2.2: Add Artist/Calendar/Attendance/AuditLog/Settings proto messages + migrate artist handlers to protojson"
+
+### What I did
+
+- Added proto messages to `proto/pyxis/v1/show.proto`:
+  - `Artist`, `ArtistList`
+  - `CalendarHold`, `CalendarBlocked`, `CalendarResponse`
+  - `AttendanceLog`, `AttendanceLogList`
+  - `AuditLogEntry`, `AuditLogEntryList`
+  - `Settings`
+  - `SuccessResponse`, `ErrorResponse`, `FlyerUploadResponse`
+- Ran `buf generate` — Go and TypeScript outputs both compile.
+- Updated `pkg/server/app.go`:
+  - `handleListArtists` → `respondProtoJSON(ArtistList)`
+  - `handleGetArtist` → `respondProtoJSON(Artist)`
+  - `handleUpdateArtist` → `respondProtoJSON(Artist)`
+- Added `artistToProto` helper in `pkg/server/public.go`.
+- Verified `go build ./...` compiles cleanly.
+- Updated task list with Phase 12 breakdown.
+
+### What worked
+
+- Adding new proto messages to the existing file and regenerating is fast.
+- `respondProtoJSON` + `protojson.Marshal` is a clean pattern that replaces ad-hoc JSON.
+
+### What didn't work
+
+- None so far.
+
+### What warrants a second pair of eyes
+
+- The `ErrorResponse` message has a nested `Error` message — verify the generated JSON shape matches what the frontend expects (`{"error":{"code":"...","message":"..."}}`).
+- `Settings` proto doesn't include `id` or `staff` array — these may need to be added later.
+
+### What should be done in the future
+
+- Continue migrating remaining ad-hoc handlers (calendar, attendance, audit log, settings, bookings, flyers).
+- Frontend: update RTK Query slices to use `fromJson` with new schemas.
+- Components: migrate to camelCase field names from generated types.
+
+### Technical details
+
+**Proto additions:**
+
+```protobuf
+message Artist {
+  int32  id         = 1;
+  string name       = 2;
+  string genre      = 3;
+  string links      = 4;
+  string notes      = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message ArtistList {
+  repeated Artist artists = 1;
+}
+```
+
+**Handler migration pattern:**
+
+```go
+// Before (ad-hoc JSON)
+respondJSON(w, http.StatusOK, map[string]interface{}{
+  "artists": []map[string]interface{}{...},
+})
+
+// After (proto)
+respondProtoJSON(w, http.StatusOK, &pyxisv1.ArtistList{
+  Artists: pbArtists,
+})
+```
 ```
