@@ -2,13 +2,18 @@ import type { AppShow } from 'pyxis-types';
 import { StatusDot } from '../../atoms/StatusDot';
 import './ShowDetailHero.css';
 
-export function ShowDetailHero({ show }: { show: AppShow }) {
+export type ShowDetailHeroProps = {
+  show: AppShow;
+  dateLabel?: string;
+};
+
+export function ShowDetailHero({ show, dateLabel = 'Fri, May 2, 2025' }: ShowDetailHeroProps) {
   return (
     <section className="app-detail-hero" data-section="show-detail-hero">
       <div>
         <span className="app-row-status"><StatusDot tone={show.status}/>{show.status}</span>
         <h1>{show.artist}</h1>
-        <p>Fri, May 2, 2025 · Doors {show.doors} · {show.age}</p>
+        <p>{dateLabel} · Doors {show.doors} · {show.age}</p>
       </div>
       <div className="app-poster-placeholder">poster · 1080×1080</div>
     </section>

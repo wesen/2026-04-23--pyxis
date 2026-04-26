@@ -2,7 +2,11 @@ import type { BookingRequest } from 'pyxis-types';
 import { StatusDot } from '../../atoms/StatusDot';
 import './BookingReviewHero.css';
 
-export function BookingReviewHero({ booking }: { booking: BookingRequest }) {
+export type BookingReviewHeroProps = {
+  booking: BookingRequest;
+};
+
+export function BookingReviewHero({ booking }: BookingReviewHeroProps) {
   return (
     <section className="app-detail-hero app-booking-review-hero" data-section="booking-review-hero">
       <div>

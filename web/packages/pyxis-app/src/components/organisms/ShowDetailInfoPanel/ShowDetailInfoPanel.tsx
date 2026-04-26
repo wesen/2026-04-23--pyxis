@@ -2,7 +2,11 @@ import type { AppShow } from 'pyxis-types';
 import { Panel } from '../Panels';
 import './ShowDetailInfoPanel.css';
 
-export function ShowDetailInfoPanel({ show }: { show: AppShow }) {
+export type ShowDetailInfoPanelProps = {
+  show: AppShow;
+};
+
+export function ShowDetailInfoPanel({ show }: ShowDetailInfoPanelProps) {
   return (
     <Panel title="Details" section="show-detail-info">
       <div className="app-detail-list">

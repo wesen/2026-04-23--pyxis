@@ -1,8 +1,30 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { bookings } from '../../../api/mockData';
 import { BookingReviewHero } from './BookingReviewHero';
+
 const booking = bookings.find((item) => item.status === 'pending') ?? bookings[0];
-const meta: Meta = { title: 'Pyxis App/Components/Organisms/BookingReviewHero', parameters: { layout: 'fullscreen' } };
+
+const meta = {
+  title: 'Pyxis App/Components/Organisms/BookingReviewHero',
+  component: BookingReviewHero,
+  parameters: { layout: 'fullscreen' },
+  args: { booking },
+} satisfies Meta<typeof BookingReviewHero>;
+
 export default meta;
-type Story = StoryObj;
-export const ReviewHeroMobile: Story = { render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero booking={booking}/></div>, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+type Story = StoryObj<typeof meta>;
+
+export const ReviewHeroMobile: Story = {
+  render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero {...args}/></div>,
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
+};
+
+export const Approved: Story = {
+  args: { booking: bookings.find((item) => item.status === 'approved') ?? booking },
+  render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero {...args}/></div>,
+};
+
+export const LongArtistName: Story = {
+  args: { booking: { ...booking, artist: 'A Very Long Booking Request Artist Name' } },
+  render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><BookingReviewHero {...args}/></div>,
+};
