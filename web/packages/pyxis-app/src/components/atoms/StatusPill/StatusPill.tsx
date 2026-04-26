@@ -1,12 +1,13 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { Badge, type BadgeStatus } from 'pyxis-components';
-import type { StatusTone } from '../StatusDot';
+import { statusToTone, statusToLabel, type StatusTone, type ProtoStatus } from '../StatusDot';
 import { appPart } from '../../parts';
 import './StatusPill.css';
 
 export type StatusPillProps = {
   tone?: StatusTone;
-  children: ReactNode;
+  status?: ProtoStatus;
+  children?: ReactNode;
 };
 
 const toneStatus: Record<StatusTone, BadgeStatus> = {
@@ -22,14 +23,15 @@ const toneStatus: Record<StatusTone, BadgeStatus> = {
   neutral: 'draft',
 };
 
-export function StatusPill({ tone = 'neutral', children }: StatusPillProps) {
+export function StatusPill({ tone, status, children }: StatusPillProps) {
+  const resolved = status ? statusToTone(status) : (tone ?? 'neutral');
   return (
     <Badge
       className="app-status-pill"
-      status={toneStatus[tone]}
-      rootProps={{ ...appPart('status-pill'), 'data-tone': tone } as HTMLAttributes<HTMLSpanElement>}
+      status={toneStatus[resolved]}
+      rootProps={{ ...appPart('status-pill'), 'data-tone': resolved } as HTMLAttributes<HTMLSpanElement>}
     >
-      {children}
+      {children ?? (status ? statusToLabel(status) : undefined)}
     </Badge>
   );
 }

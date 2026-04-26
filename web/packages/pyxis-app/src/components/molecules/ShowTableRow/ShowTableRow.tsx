@@ -1,5 +1,4 @@
-import { AppShow, ShowStatus } from 'pyxis-types';
-import type { StatusTone } from '../../atoms/StatusDot';
+import { AppShow } from 'pyxis-types';
 import { Icon } from 'pyxis-components';
 import { AgeBadge } from '../../atoms/AgeBadge';
 import { DateChip } from '../../atoms/DateChip';
@@ -25,23 +24,8 @@ function formatShowDate(date: string) {
   };
 }
 
-function showStatusString(status: ShowStatus): string {
-  const map: Record<ShowStatus, string> = {
-    [ShowStatus.UNSPECIFIED]: 'Unspecified',
-    [ShowStatus.CONFIRMED]: 'Confirmed',
-    [ShowStatus.CANCELLED]: 'Cancelled',
-    [ShowStatus.ARCHIVED]: 'Archived',
-    [ShowStatus.DRAFT]: 'Draft',
-    [ShowStatus.HOLD]: 'Hold',
-    [ShowStatus.BLOCKED]: 'Blocked',
-  };
-  return map[status] ?? 'Unknown';
-}
-
 export function ShowTableRow({ show, variant = 'full' }: ShowTableRowProps) {
-  const label = showStatusString(show.status);
-  const tone = show.status === ShowStatus.ARCHIVED ? 'archived' : label.toLowerCase() as StatusTone;
-  const status = <span className="app-row-status"><StatusPill tone={tone}>{label}</StatusPill></span>;
+  const status = <span className="app-row-status"><StatusPill status={show.status} /></span>;
   const date = formatShowDate(show.date);
 
   if (variant === 'archived') {

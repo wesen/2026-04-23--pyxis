@@ -1,7 +1,6 @@
 import { Submission, SubmissionStatus } from 'pyxis-types';
 import { Button, Icon } from 'pyxis-components';
 import { StatusPill } from '../../atoms/StatusPill';
-import type { StatusTone } from '../../atoms/StatusDot';
 import { appPart } from '../../parts';
 import '../Table/Table.css';
 import './BookingCard.css';
@@ -11,18 +10,6 @@ function formatBookingDate(date: string, format: 'full' | 'short' = 'full') {
   return value.toLocaleDateString('en-US', format === 'full'
     ? { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }
     : { month: 'short', day: 'numeric' });
-}
-
-function submissionStatusString(status: SubmissionStatus): string {
-  const map: Record<SubmissionStatus, string> = {
-    [SubmissionStatus.UNSPECIFIED]: 'Unspecified',
-    [SubmissionStatus.PENDING]: 'Pending',
-    [SubmissionStatus.APPROVED]: 'Approved',
-    [SubmissionStatus.DECLINED]: 'Declined',
-    [SubmissionStatus.HOLD]: 'Hold',
-    [SubmissionStatus.CANCELLED]: 'Cancelled',
-  };
-  return map[status] ?? 'Unknown';
 }
 
 export type BookingActionHandler = (booking: Submission) => void;
@@ -45,7 +32,7 @@ export function BookingCard({ booking, onHold, onDecline, onApprove }: BookingCa
         <div className="app-booking-card-copy">
           <header>
             <h3>{booking.artistName}</h3>
-            <StatusPill tone={submissionStatusString(booking.status).toLowerCase() as StatusTone}>{submissionStatusString(booking.status)}</StatusPill>
+            <StatusPill status={booking.status} />
           </header>
           <div className="app-booking-meta-row">
             <span><Icon name="calendar" size={12}/>{formatBookingDate(booking.preferredDate)}</span>
@@ -62,5 +49,5 @@ export function BookingCard({ booking, onHold, onDecline, onApprove }: BookingCa
 }
 
 export function BookingQueueRow({ booking }: BookingQueueRowProps) {
-  return <tr className="app-table-row app-booking-queue-row" {...appPart('booking-queue-row')}><td><strong>{booking.artistName}</strong></td><td>{formatBookingDate(booking.preferredDate, 'short')}</td><td>{booking.genre}</td><td>{booking.createdAt}</td><td><StatusPill tone={submissionStatusString(booking.status).toLowerCase() as StatusTone}>{submissionStatusString(booking.status)}</StatusPill></td></tr>;
+  return <tr className="app-table-row app-booking-queue-row" {...appPart('booking-queue-row')}><td><strong>{booking.artistName}</strong></td><td>{formatBookingDate(booking.preferredDate, 'short')}</td><td>{booking.genre}</td><td>{booking.createdAt}</td><td><StatusPill status={booking.status} /></td></tr>;
 }
