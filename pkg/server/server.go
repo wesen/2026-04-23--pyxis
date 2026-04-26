@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/go-go-golems/pyxis/internal/web"
 	"github.com/go-go-golems/pyxis/pkg/config"
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/go-go-golems/pyxis/pkg/discord"
@@ -127,7 +128,17 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// Staff audit log endpoints
 	mux.Handle("GET /api/app/audit-log", s.requireAuth(s.requireRole("admin")(http.HandlerFunc(s.handleListAuditLog))))
 
-	s.handler = mux
+	// Public flyer assets. Keep this before the SPA fallback so flyer URLs emitted
+	// by the API resolve to uploaded local files during development/single-binary
+	// deployments. Future S3/R2 storage can replace this route.
+	mux.Handle("GET /flyers/", http.StripPrefix("/flyers/", http.FileServer(http.Dir("./data/flyers"))))
+
+	// Public user-site SPA. The Go 1.22 ServeMux rejects a root catch-all mixed
+	// with method-specific API patterns, so wrap the API mux and delegate only
+	// unmatched 404s to the SPA fallback. React Router browser routes such as
+	// /shows/42 then return index.html while API/auth/health/flyer routes keep
+	// priority.
+	s.handler = spaFallbackHandler{primary: mux, fallback: web.NewSPAHandler()}
 	return s
 }
 

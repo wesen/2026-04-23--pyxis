@@ -1,4 +1,4 @@
-.PHONY: build test lint migrate migrate-down seed generate clean dev
+.PHONY: build build-web generate-web build-embed serve-embed test lint migrate migrate-down seed generate clean dev
 
 BINARY_NAME=pyxis
 GO=go
@@ -6,6 +6,18 @@ DOCKER_COMPOSE=docker-compose
 
 build:
 	$(GO) build -o bin/$(BINARY_NAME) ./cmd/pyxis
+
+build-web:
+	$(GO) run ./cmd/build-web
+
+generate-web:
+	$(GO) generate ./internal/web
+
+build-embed: build-web
+	$(GO) build -tags embed -o bin/$(BINARY_NAME) ./cmd/pyxis
+
+serve-embed: build-web
+	$(GO) run -tags embed ./cmd/pyxis serve --bind :8080
 
 test:
 	$(GO) test ./... -count=1
