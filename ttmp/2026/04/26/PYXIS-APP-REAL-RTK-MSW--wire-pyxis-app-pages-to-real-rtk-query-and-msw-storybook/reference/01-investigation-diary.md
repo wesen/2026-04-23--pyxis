@@ -28,6 +28,10 @@ RelatedFiles:
       Note: Defaults API base URL to same-origin for Vite proxy and production.
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: Changes prototype fixed-height shell into full-height app shell.
+    - Path: web/packages/pyxis-app/src/pages/Pages.tsx
+      Note: Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
+    - Path: web/packages/pyxis-app/src/pages/pages.css
+      Note: Adds page-state styling for loading/error/empty panels.
     - Path: web/packages/pyxis-app/src/styles/global.css
       Note: Removes component CSS imports now owned by atoms.
     - Path: web/packages/pyxis-app/vite.config.ts
@@ -38,6 +42,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -291,3 +296,82 @@ cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
 ### Next
 
 The next real-app step is page-state cleanup: remove `seed*` fallbacks from staff pages, add explicit loading/error/empty states, and make pages visibly reflect unauthenticated/API-error conditions instead of silently rendering mock data.
+
+## Step 3: Remove Staff Page Mock Fallbacks
+
+I continued the staff app real-backend conversion by removing the mock-data fallbacks from route pages. Before this step, many pages used RTK Query but silently fell back to `seed*` data when the real request failed or was still loading. That made the app look healthy even when the authenticated staff API was returning `401` or other errors.
+
+### What changed
+
+Rewrote `web/packages/pyxis-app/src/pages/Pages.tsx` so route pages now show explicit states:
+
+```text
+LoadingState
+ErrorState
+EmptyState
+```
+
+The helpers render inside the real `AppShell` using a `Panel`, so users see in-context backend state instead of mock content.
+
+Removed seed fallbacks from:
+
+```text
+DashboardPage
+ShowsPage
+CalendarPage
+BookingsPage
+ArtistsPage
+AttendancePage
+AuditLogPage
+SettingsPage
+```
+
+Detail routes now read route params and query real data:
+
+```text
+ShowDetailPage      -> useParams().id + useGetShowQuery(id)
+BookingReviewPage   -> useParams().id + select from useGetBookingsQuery()
+```
+
+`ShowDetailPage` needs an `AppShow` view model for the existing detail organisms, while `useGetShowQuery` returns the generated full `Show` proto. I added a local `appShowFromShow(...)` transform using `create(AppShowSchema, ...)`. This is a known transitional pattern until the backend exposes a dedicated `AppShow` detail/list proto or the staff detail organisms accept `Show` directly.
+
+### Remaining intentional mock use
+
+`DiscordPage` still uses static `discordMappings` because the Discord API endpoint is only a skeleton and that page is not part of the first real data cluster. The task list now records this as a placeholder exception.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+With backend and staff Vite running, I also verified browser routes return HTTP 200 through Vite:
+
+```text
+/                   200
+/shows              200
+/calendar           200
+/bookings           200
+/artists            200
+/attendance         200
+/log                200
+/settings           200
+/shows/1            200
+/bookings/review/1  200
+```
+
+The earlier dev-auth smoke remains valid:
+
+```text
+/api/app/shows before login -> 401
+/auth/dev-login             -> 200 + Set-Cookie
+/api/app/session with cookie -> 200
+/api/app/shows with cookie   -> 200
+```
+
+### Next
+
+The next phase should wire real mutations: approve/decline booking, show cancel/archive/announce, settings update, attendance update, and calendar hold/blocked actions where UI affordances exist.

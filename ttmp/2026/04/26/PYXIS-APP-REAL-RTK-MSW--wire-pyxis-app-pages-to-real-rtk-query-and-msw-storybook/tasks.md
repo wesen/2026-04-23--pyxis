@@ -33,25 +33,25 @@
 
 ## Phase 3: Staff page state cleanup
 
-- [ ] Add reusable page loading/error/empty helpers or components.
-- [ ] Remove `seedShows` fallback from `DashboardPage` and add loading/error handling.
-- [ ] Remove `seedShows` fallback from `ShowsPage` and add loading/error handling.
-- [ ] Remove `seedEvents` fallback from `CalendarPage` and add loading/error handling.
-- [ ] Remove `seedBookings` fallback from `BookingsPage` and add loading/error handling.
-- [ ] Remove `seedArtists` fallback from `ArtistsPage` and add loading/error handling.
-- [ ] Remove `seedAttendance` fallback from `AttendancePage` and add loading/error handling.
-- [ ] Remove `seedLog` fallback from `AuditLogPage` and add loading/error handling.
-- [ ] Remove `seedSettings` fallback from `SettingsPage` and add loading/error handling.
-- [ ] Keep `mockData.ts` only for MSW and Storybook fixture construction.
+- [x] Add reusable page loading/error/empty helpers or components.
+- [x] Remove `seedShows` fallback from `DashboardPage` and add loading/error handling.
+- [x] Remove `seedShows` fallback from `ShowsPage` and add loading/error handling.
+- [x] Remove `seedEvents` fallback from `CalendarPage` and add loading/error handling.
+- [x] Remove `seedBookings` fallback from `BookingsPage` and add loading/error handling.
+- [x] Remove `seedArtists` fallback from `ArtistsPage` and add loading/error handling.
+- [x] Remove `seedAttendance` fallback from `AttendancePage` and add loading/error handling.
+- [x] Remove `seedLog` fallback from `AuditLogPage` and add loading/error handling.
+- [x] Remove `seedSettings` fallback from `SettingsPage` and add loading/error handling.
+- [x] Keep `mockData.ts` only for MSW and Storybook fixture construction, except static Discord mapping placeholder until the Discord API is wired.
 
 ## Phase 4: Detail route wiring
 
-- [ ] Update `ShowDetailPage` to read `id` via `useParams()`.
-- [ ] Update `ShowDetailPage` to call `useGetShowQuery(id)`.
-- [ ] Add loading and not-found states to `ShowDetailPage`.
-- [ ] Update `BookingReviewPage` to read `id` via `useParams()`.
-- [ ] Wire `BookingReviewPage` to real query data by selecting from `useGetBookingsQuery()`.
-- [ ] Add loading and not-found states to `BookingReviewPage`.
+- [x] Update `ShowDetailPage` to read `id` via `useParams()`.
+- [x] Update `ShowDetailPage` to call `useGetShowQuery(id)`.
+- [x] Add loading and not-found states to `ShowDetailPage`.
+- [x] Update `BookingReviewPage` to read `id` via `useParams()`.
+- [x] Wire `BookingReviewPage` to real query data by selecting from `useGetBookingsQuery()`.
+- [x] Add loading and not-found states to `BookingReviewPage`.
 - [ ] Optional backend follow-up: add `GET /api/app/bookings/{id}` and `useGetBookingQuery(id)`.
 
 ## Phase 5: Wire mutations to UI callbacks

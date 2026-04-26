@@ -30,3 +30,13 @@ Started staff real-app wiring: added Vite proxy and same-origin API base URL, ex
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/styles/global.css — Removes component CSS imports now owned by atoms.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/vite.config.ts — Adds staff Vite proxy for /api
 
+
+## 2026-04-26
+
+Removed staff page mock fallbacks: route pages now render explicit loading/error/empty states and detail routes read params plus real RTK Query data.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds page-state styling for loading/error/empty panels.
+

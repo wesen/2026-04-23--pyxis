@@ -1,25 +1,384 @@
 import { Button, Field, Input, PyxisMark } from 'pyxis-components';
-import { ShowStatus, SubmissionStatus } from 'pyxis-types';
-import { useGetArtistsQuery, useGetAttendanceQuery, useGetAuditLogQuery, useGetBookingsQuery, useGetCalendarQuery, useGetSettingsQuery, useGetShowsQuery } from '../api/appApi';
-import { artists as seedArtists, attendance as seedAttendance, auditLog as seedLog, bookings as seedBookings, calendarEvents as seedEvents, discordMappings as seedMappings, settings as seedSettings, shows as seedShows } from '../api/mockData';
+import { useParams } from 'react-router-dom';
+import { create, AppShowSchema, ShowStatus, SubmissionStatus } from 'pyxis-types';
+import type { ReactNode } from 'react';
+import {
+  useGetArtistsQuery,
+  useGetAttendanceQuery,
+  useGetAuditLogQuery,
+  useGetBookingsQuery,
+  useGetCalendarQuery,
+  useGetSettingsQuery,
+  useGetShowQuery,
+  useGetShowsQuery,
+} from '../api/appApi';
+import { discordMappings as seedMappings } from '../api/mockData';
 import { AppShell } from '../components/shell/AppShell';
-import { ArtistRoster, AttendancePanel, AuditLogPanel, DashboardOverview, DiscordMappingPanel, NewShowModal, Panel, SettingsPanel } from '../components/organisms/Panels';
-import { BookingReviewDatePanel, BookingReviewHero, BookingReviewNotePanel, BookingReviewRequestPanel, BookingsInboxPanel, BookingsInsightsPanel, BookingsProcessedPanel, CalendarBoard, ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../components/organisms/Phase8Sections';
+import {
+  ArtistRoster,
+  AttendancePanel,
+  AuditLogPanel,
+  DashboardOverview,
+  DiscordMappingPanel,
+  NewShowModal,
+  Panel,
+  SettingsPanel,
+} from '../components/organisms/Panels';
+import {
+  BookingReviewDatePanel,
+  BookingReviewHero,
+  BookingReviewNotePanel,
+  BookingReviewRequestPanel,
+  BookingsInboxPanel,
+  BookingsInsightsPanel,
+  BookingsProcessedPanel,
+  CalendarBoard,
+  ShowDetailDiscordPanel,
+  ShowDetailHero,
+  ShowDetailInfoPanel,
+} from '../components/organisms/Phase8Sections';
 import { ShowsArchivedPanel, ShowsConfirmedPanel, ShowsFilterBar } from '../components/organisms/ShowsSections';
 import './pages.css';
 
-export function DashboardPage() { const { data: shows = seedShows } = useGetShowsQuery(); const { data: bookings = seedBookings } = useGetBookingsQuery(); const { data: log = seedLog } = useGetAuditLogQuery(); return <AppShell page="dashboard" title="Welcome back, Ada" eyebrow="Home / Dashboard" subtitle="Wednesday, April 23 · 6 shows booked this month"><div data-section="dashboard-summary"><DashboardOverview shows={shows} bookings={bookings} log={log}/></div></AppShell>; }
-export function ShowsPage() { const { data: shows = seedShows } = useGetShowsQuery(); const confirmed = shows.filter((s)=>s.status === ShowStatus.CONFIRMED).sort((a,b)=>a.date.localeCompare(b.date)); const archived = shows.filter((s)=>s.status === ShowStatus.ARCHIVED); return <AppShell page="shows" title="Shows" eyebrow="Home / Shows" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="filter" aria-label="Filter shows"/><Button variant="outline" size="sm" iconLeft="search" aria-label="Search shows"/><Button size="sm" iconLeft="plus">New show</Button></div>}><ShowsFilterBar confirmedCount={confirmed.length}/><ShowsConfirmedPanel shows={confirmed}/><div style={{ height: 20 }}/><ShowsArchivedPanel shows={archived}/></AppShell>; }
+type PageStateProps = {
+  title: string;
+  message?: string;
+  action?: ReactNode;
+};
 
-export function ShowDetailPage() { const show = seedShows[0]; return <AppShell page="show-detail" title={show.artist} eyebrow="Shows / Detail" action={<Button size="sm" iconLeft="edit">Edit</Button>}><ShowDetailHero show={show}/><div className="app-detail-grid"><ShowDetailInfoPanel show={show}/><ShowDetailDiscordPanel/></div><div className="app-detail-actions"><Button variant="outline">Duplicate</Button><Button variant="danger" iconLeft="trash">Cancel show</Button></div></AppShell>; }
-export function CalendarPage() { const { data: events = seedEvents } = useGetCalendarQuery(); return <AppShell page="calendar" title="Calendar" eyebrow="Home / Calendar" subtitle="Plan the room · holds, confirms, and off-nights" action={<Button size="sm" iconLeft="plus">Add</Button>}><CalendarBoard events={events}/></AppShell>; }
-export function BookingsPage() { const { data: bookings = seedBookings } = useGetBookingsQuery(); return <AppShell page="bookings" title="Bookings" eyebrow="Home / Bookings" subtitle="Submissions from #booking-requests" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="external">Open form</Button><Button size="sm" iconLeft="sparkle">Auto-review</Button></div>}><div className="app-bookings-layout"><div><BookingsInboxPanel bookings={bookings}/><div style={{ height: 18 }}/><BookingsProcessedPanel bookings={bookings}/></div><BookingsInsightsPanel/></div></AppShell>; }
-export function BookingReviewPage() { const booking = seedBookings.find((b)=>b.status === SubmissionStatus.PENDING) ?? seedBookings[0]; return <AppShell page="booking-review" title={booking.artistName} eyebrow="Bookings / Review" action={<Button variant="outline" size="sm" iconLeft="external">Open link</Button>}><BookingReviewHero booking={booking}/><div className="app-detail-grid"><BookingReviewRequestPanel booking={booking}/><BookingReviewDatePanel/></div><BookingReviewNotePanel booking={booking}/><div className="app-detail-actions"><Button variant="danger" iconLeft="x">Decline</Button><Button variant="success" iconLeft="check">Approve</Button></div></AppShell>; }
-export function ArtistsPage() { const { data: artists = seedArtists } = useGetArtistsQuery(); return <AppShell page="artists" title="Artists" eyebrow="Home / Artists"><Panel title="All artists" section="artists-roster"><ArtistRoster artists={artists}/></Panel></AppShell>; }
-export function AttendancePage() { const { data: entries = seedAttendance } = useGetAttendanceQuery(); return <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log"><Panel title="Past shows" section="attendance-past-shows"><AttendancePanel entries={entries}/></Panel></AppShell>; }
-export function AuditLogPage() { const { data: log = seedLog } = useGetAuditLogQuery(); return <AppShell page="audit-log" title="Audit log" eyebrow="Home / Audit log"><Panel title="Activity" section="audit-log-activity"><AuditLogPanel log={log}/></Panel></AppShell>; }
-export function DiscordPage() { return <AppShell page="discord" title="Discord" eyebrow="Home / Discord"><Panel title="Channel mapping" section="discord-channel-mapping"><DiscordMappingPanel mappings={seedMappings}/></Panel></AppShell>; }
-export function SettingsPage() { const { data: settings = seedSettings } = useGetSettingsQuery(); return <AppShell page="settings" title="Settings" eyebrow="Home / Settings"><Panel title="Space info" section="settings-space-info"><SettingsPanel settings={settings}/></Panel></AppShell>; }
-export function LoginPage() { return <main className="app-auth-page" data-page="login"><section className="app-auth-marquee" data-section="login-marquee"><header><PyxisMark size={30}/><b>pyxis</b></header><div><h1><span className="app-auth-desktop-copy">The operations desk for a small-venue community.</span><span className="app-auth-mobile-copy">Run the room from your pocket.</span></h1><p><span className="app-auth-desktop-copy">Confirm shows, review booking requests, and let a friendly bot handle the Discord posts, pins and archives — so the humans can focus on the music.</span><span className="app-auth-mobile-copy">Confirm shows, review bookings, and keep the Discord humming — wherever you are.</span></p><Button className="app-auth-mobile-cta" variant="discord" size="lg" iconLeft="discord" fullWidth>Continue with Discord</Button></div><footer><span><strong>v1.2.0</strong> · est. 2025</span><span>25 Manton Ave · Providence RI</span></footer></section><section className="app-auth-panel" data-section="login-panel"><span className="app-eyebrow">Staff portal</span><h2>Welcome back</h2><p>Access is invite-only. Sign in with the Discord account your admin has authorised.</p><Button variant="discord" size="lg" iconLeft="discord" fullWidth>Continue with Discord</Button><div className="app-auth-divider"><i/>OR<i/></div><Field label="Email"><Input placeholder="you@venue.xyz" icon="mail" /></Field><Field label="Magic link" hint="We'll email you a one-tap sign-in link."><Input placeholder="We'll send a link…" /></Field><Button variant="outline" size="lg" fullWidth>Email me a link</Button><footer><span>Not on the list? <b>Ask an admin →</b></span><span>Privacy</span></footer></section></main>; }
-export function SetupPage() { const mappings = [['#upcoming-shows','847392017483620355','Public · bot posts + pins confirmed show announcements'],['#announcements','847392017483620356','Public · broader space announcements and cancellations'],['#staff','847392017483620357','Private · auto-archive notices, reminders, bot status'],['#booking-requests','847392017483620358','Private · incoming artist submissions land here']] as const; return <main className="app-setup-page" data-page="setup"><div className="app-setup-heading" data-section="setup-header"><div><PyxisMark size={28}/><b>pyxis</b></div><span className="app-eyebrow">Setup · 3 of 4</span><h1>Map your Discord channels</h1><p>Tell the bot where to post. Right-click any channel in Discord and choose <b>Copy Channel ID</b> (requires Developer Mode).</p></div><div className="app-setup-progress" data-section="setup-progress">{['Space','Server','Channels','Ready'].map((label,index)=><div key={label} data-active={index===2} data-done={index<2}><b>{index<2 ? '✓' : index+1}</b><span>{label}</span></div>)}</div><section className="app-setup-card" data-section="setup-channels">{mappings.map(([name,id,hint])=><Field key={name} label={name} hint={hint}><Input value={id} icon="compass" readOnly /></Field>)}<footer><Button variant="ghost">Back</Button><div><Button variant="outline">Skip for now</Button><Button iconRight="chevron-right">Continue</Button></div></footer></section><p className="app-setup-footnote">You can change any of this later under Settings → Discord.</p></main>; }
-export function ModalShowcasePage() { return <><ShowsPage/><NewShowModal/></>; }
+function PageState({ title, message, action }: PageStateProps) {
+  return (
+    <Panel title={title} section="page-state">
+      <div className="app-page-state">
+        {message && <p>{message}</p>}
+        {action}
+      </div>
+    </Panel>
+  );
+}
+
+function LoadingState({ label = 'Loading real backend data…' }: { label?: string }) {
+  return <PageState title="Loading" message={label} />;
+}
+
+function ErrorState({ label = 'The real backend request failed. Check your session and backend logs.' }: { label?: string }) {
+  return <PageState title="Could not load data" message={label} />;
+}
+
+function EmptyState({ label = 'No records returned from the real backend yet.' }: { label?: string }) {
+  return <PageState title="Nothing here yet" message={label} />;
+}
+
+function parseRouteId(raw: string | undefined) {
+  if (!raw) return undefined;
+  const id = Number(raw);
+  return Number.isFinite(id) && id > 0 ? id : undefined;
+}
+
+function appShowFromShow(show: NonNullable<ReturnType<typeof useGetShowQuery>['data']>) {
+  return create(AppShowSchema, {
+    id: show.id,
+    artist: show.artist,
+    date: show.date,
+    doors: show.doorsTime,
+    age: show.age,
+    price: show.price,
+    status: show.status,
+    genre: show.genre,
+    draw: show.draw,
+    capacity: show.capacity,
+    pinned: false,
+    notes: show.notes,
+  });
+}
+
+export function DashboardPage() {
+  const showsQuery = useGetShowsQuery();
+  const bookingsQuery = useGetBookingsQuery();
+  const logQuery = useGetAuditLogQuery();
+
+  const isLoading = showsQuery.isLoading || bookingsQuery.isLoading || logQuery.isLoading;
+  const isError = showsQuery.isError || bookingsQuery.isError || logQuery.isError;
+
+  return (
+    <AppShell
+      page="dashboard"
+      title="Welcome back, Ada"
+      eyebrow="Home / Dashboard"
+      subtitle="Wednesday, April 23 · live operations data"
+    >
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !showsQuery.data || !bookingsQuery.data || !logQuery.data ? (
+        <ErrorState />
+      ) : (
+        <div data-section="dashboard-summary">
+          <DashboardOverview shows={showsQuery.data} bookings={bookingsQuery.data} log={logQuery.data} />
+        </div>
+      )}
+    </AppShell>
+  );
+}
+
+export function ShowsPage() {
+  const { data: shows, isLoading, isError } = useGetShowsQuery();
+  const confirmed = (shows ?? [])
+    .filter((show) => show.status === ShowStatus.CONFIRMED)
+    .sort((a, b) => a.date.localeCompare(b.date));
+  const archived = (shows ?? []).filter((show) => show.status === ShowStatus.ARCHIVED);
+
+  return (
+    <AppShell
+      page="shows"
+      title="Shows"
+      eyebrow="Home / Shows"
+      action={
+        <div className="app-topbar-actions">
+          <Button variant="outline" size="sm" iconLeft="filter" aria-label="Filter shows" />
+          <Button variant="outline" size="sm" iconLeft="search" aria-label="Search shows" />
+          <Button size="sm" iconLeft="plus">New show</Button>
+        </div>
+      }
+    >
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !shows ? (
+        <ErrorState />
+      ) : shows.length === 0 ? (
+        <EmptyState label="No shows returned from the real backend." />
+      ) : (
+        <>
+          <ShowsFilterBar confirmedCount={confirmed.length} />
+          <ShowsConfirmedPanel shows={confirmed} />
+          <div style={{ height: 20 }} />
+          <ShowsArchivedPanel shows={archived} />
+        </>
+      )}
+    </AppShell>
+  );
+}
+
+export function ShowDetailPage() {
+  const id = parseRouteId(useParams().id);
+  const { data: show, isLoading, isError } = useGetShowQuery(id ?? 0, { skip: id === undefined });
+
+  return (
+    <AppShell
+      page="show-detail"
+      title={show?.artist ?? 'Show detail'}
+      eyebrow="Shows / Detail"
+      action={<Button size="sm" iconLeft="edit" disabled={!show}>Edit</Button>}
+    >
+      {id === undefined ? (
+        <ErrorState label="Invalid show id in the route." />
+      ) : isLoading ? (
+        <LoadingState label="Loading show detail from the backend…" />
+      ) : isError || !show ? (
+        <ErrorState label="Show not found or unavailable." />
+      ) : (
+        <>
+          <ShowDetailHero show={appShowFromShow(show)} />
+          <div className="app-detail-grid">
+            <ShowDetailInfoPanel show={appShowFromShow(show)} />
+            <ShowDetailDiscordPanel />
+          </div>
+          <div className="app-detail-actions">
+            <Button variant="outline">Duplicate</Button>
+            <Button variant="danger" iconLeft="trash">Cancel show</Button>
+          </div>
+        </>
+      )}
+    </AppShell>
+  );
+}
+
+export function CalendarPage() {
+  const { data: events, isLoading, isError } = useGetCalendarQuery();
+
+  return (
+    <AppShell
+      page="calendar"
+      title="Calendar"
+      eyebrow="Home / Calendar"
+      subtitle="Plan the room · holds, confirms, and off-nights"
+      action={<Button size="sm" iconLeft="plus">Add</Button>}
+    >
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !events ? (
+        <ErrorState />
+      ) : events.length === 0 ? (
+        <EmptyState label="No holds or blocked dates returned yet." />
+      ) : (
+        <CalendarBoard events={events} />
+      )}
+    </AppShell>
+  );
+}
+
+export function BookingsPage() {
+  const { data: bookings, isLoading, isError } = useGetBookingsQuery();
+
+  return (
+    <AppShell
+      page="bookings"
+      title="Bookings"
+      eyebrow="Home / Bookings"
+      subtitle="Submissions from #booking-requests"
+      action={
+        <div className="app-topbar-actions">
+          <Button variant="outline" size="sm" iconLeft="external">Open form</Button>
+          <Button size="sm" iconLeft="sparkle">Auto-review</Button>
+        </div>
+      }
+    >
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !bookings ? (
+        <ErrorState />
+      ) : bookings.length === 0 ? (
+        <EmptyState label="No booking submissions returned from the backend." />
+      ) : (
+        <div className="app-bookings-layout">
+          <div>
+            <BookingsInboxPanel bookings={bookings} />
+            <div style={{ height: 18 }} />
+            <BookingsProcessedPanel bookings={bookings} />
+          </div>
+          <BookingsInsightsPanel />
+        </div>
+      )}
+    </AppShell>
+  );
+}
+
+export function BookingReviewPage() {
+  const id = parseRouteId(useParams().id);
+  const { data: bookings, isLoading, isError } = useGetBookingsQuery();
+  const booking = bookings?.find((candidate) => candidate.id === id);
+
+  return (
+    <AppShell
+      page="booking-review"
+      title={booking?.artistName ?? 'Booking review'}
+      eyebrow="Bookings / Review"
+      action={<Button variant="outline" size="sm" iconLeft="external" disabled={!booking}>Open link</Button>}
+    >
+      {id === undefined ? (
+        <ErrorState label="Invalid booking id in the route." />
+      ) : isLoading ? (
+        <LoadingState label="Loading booking submission from the backend…" />
+      ) : isError || !bookings ? (
+        <ErrorState />
+      ) : !booking ? (
+        <EmptyState label="No booking submission with that id was returned." />
+      ) : (
+        <>
+          <BookingReviewHero booking={booking} />
+          <div className="app-detail-grid">
+            <BookingReviewRequestPanel booking={booking} />
+            <BookingReviewDatePanel />
+          </div>
+          <BookingReviewNotePanel booking={booking} />
+          <div className="app-detail-actions">
+            <Button variant="danger" iconLeft="x" disabled={booking.status !== SubmissionStatus.PENDING}>Decline</Button>
+            <Button variant="success" iconLeft="check" disabled={booking.status !== SubmissionStatus.PENDING}>Approve</Button>
+          </div>
+        </>
+      )}
+    </AppShell>
+  );
+}
+
+export function ArtistsPage() {
+  const { data: artists, isLoading, isError } = useGetArtistsQuery();
+
+  return (
+    <AppShell page="artists" title="Artists" eyebrow="Home / Artists">
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !artists ? (
+        <ErrorState />
+      ) : artists.length === 0 ? (
+        <EmptyState label="No artists returned from the backend." />
+      ) : (
+        <Panel title="All artists" section="artists-roster"><ArtistRoster artists={artists} /></Panel>
+      )}
+    </AppShell>
+  );
+}
+
+export function AttendancePage() {
+  const { data: entries, isLoading, isError } = useGetAttendanceQuery();
+
+  return (
+    <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !entries ? (
+        <ErrorState />
+      ) : entries.length === 0 ? (
+        <EmptyState label="No attendance logs returned from the backend." />
+      ) : (
+        <Panel title="Past shows" section="attendance-past-shows"><AttendancePanel entries={entries} /></Panel>
+      )}
+    </AppShell>
+  );
+}
+
+export function AuditLogPage() {
+  const { data: log, isLoading, isError } = useGetAuditLogQuery();
+
+  return (
+    <AppShell page="audit-log" title="Audit log" eyebrow="Home / Audit log">
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !log ? (
+        <ErrorState />
+      ) : log.length === 0 ? (
+        <EmptyState label="No audit log entries returned from the backend." />
+      ) : (
+        <Panel title="Activity" section="audit-log-activity"><AuditLogPanel log={log} /></Panel>
+      )}
+    </AppShell>
+  );
+}
+
+export function DiscordPage() {
+  return (
+    <AppShell page="discord" title="Discord" eyebrow="Home / Discord">
+      <Panel title="Channel mapping" section="discord-channel-mapping">
+        <DiscordMappingPanel mappings={seedMappings} />
+      </Panel>
+    </AppShell>
+  );
+}
+
+export function SettingsPage() {
+  const { data: settings, isLoading, isError } = useGetSettingsQuery();
+
+  return (
+    <AppShell page="settings" title="Settings" eyebrow="Home / Settings">
+      {isLoading ? (
+        <LoadingState />
+      ) : isError || !settings ? (
+        <ErrorState />
+      ) : (
+        <Panel title="Space info" section="settings-space-info"><SettingsPanel settings={settings} /></Panel>
+      )}
+    </AppShell>
+  );
+}
+
+export function LoginPage() {
+  return <main className="app-auth-page" data-page="login"><section className="app-auth-marquee" data-section="login-marquee"><header><PyxisMark size={30}/><b>pyxis</b></header><div><h1><span className="app-auth-desktop-copy">The operations desk for a small-venue community.</span><span className="app-auth-mobile-copy">Run the room from your pocket.</span></h1><p><span className="app-auth-desktop-copy">Confirm shows, review booking requests, and let a friendly bot handle the Discord posts, pins and archives — so the humans can focus on the music.</span><span className="app-auth-mobile-copy">Confirm shows, review bookings, and keep the Discord humming — wherever you are.</span></p><Button className="app-auth-mobile-cta" variant="discord" size="lg" iconLeft="discord" fullWidth>Continue with Discord</Button></div><footer><span><strong>v1.2.0</strong> · est. 2025</span><span>25 Manton Ave · Providence RI</span></footer></section><section className="app-auth-panel" data-section="login-panel"><span className="app-eyebrow">Staff portal</span><h2>Welcome back</h2><p>Access is invite-only. Sign in with the Discord account your admin has authorised.</p><Button variant="discord" size="lg" iconLeft="discord" fullWidth>Continue with Discord</Button><div className="app-auth-divider"><i/>OR<i/></div><Field label="Email"><Input placeholder="you@venue.xyz" icon="mail" /></Field><Field label="Magic link" hint="We'll email you a one-tap sign-in link."><Input placeholder="We'll send a link…" /></Field><Button variant="outline" size="lg" fullWidth>Email me a link</Button><footer><span>Not on the list? <b>Ask an admin →</b></span><span>Privacy</span></footer></section></main>;
+}
+
+export function SetupPage() {
+  const mappings = [['#upcoming-shows','847392017483620355','Public · bot posts + pins confirmed show announcements'],['#announcements','847392017483620356','Public · broader space announcements and cancellations'],['#staff','847392017483620357','Private · auto-archive notices, reminders, bot status'],['#booking-requests','847392017483620358','Private · incoming artist submissions land here']] as const;
+  return <main className="app-setup-page" data-page="setup"><div className="app-setup-heading" data-section="setup-header"><div><PyxisMark size={28}/><b>pyxis</b></div><span className="app-eyebrow">Setup · 3 of 4</span><h1>Map your Discord channels</h1><p>Tell the bot where to post. Right-click any channel in Discord and choose <b>Copy Channel ID</b> (requires Developer Mode).</p></div><div className="app-setup-progress" data-section="setup-progress">{['Space','Server','Channels','Ready'].map((label,index)=><div key={label} data-active={index===2} data-done={index<2}><b>{index<2 ? '✓' : index+1}</b><span>{label}</span></div>)}</div><section className="app-setup-card" data-section="setup-channels">{mappings.map(([name,id,hint])=><Field key={name} label={name} hint={hint}><Input value={id} icon="compass" readOnly /></Field>)}<footer><Button variant="ghost">Back</Button><div><Button variant="outline">Skip for now</Button><Button iconRight="chevron-right">Continue</Button></div></footer></section><p className="app-setup-footnote">You can change any of this later under Settings → Discord.</p></main>;
+}
+
+export function ModalShowcasePage() {
+  return <><ShowsPage/><NewShowModal/></>;
+}
