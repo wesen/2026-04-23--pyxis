@@ -82,3 +82,15 @@ Step 16: Consolidated Dashboard upcoming shows organism; extracted DashboardUpco
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — DashboardUpcomingPanel extraction
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx — Upcoming panel stories
 
+
+## 2026-04-25
+
+Step 17: Consolidated Dashboard quick actions; extracted DashboardQuickActionsPanel, reused Button/Icon props, matched side-column width, and recorded review-band focused visual result 9.8313% / 5946 px (commit 12cc17c).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png — Final visual crop evidence
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx — Quick action button content
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Dashboard side-column layout
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.tsx — DashboardQuickActionsPanel extraction
+

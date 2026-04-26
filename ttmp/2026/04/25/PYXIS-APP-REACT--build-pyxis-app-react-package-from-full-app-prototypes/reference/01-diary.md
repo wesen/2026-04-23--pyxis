@@ -42,6 +42,8 @@ RelatedFiles:
       Note: Final dashboard metrics React crop inspected with read
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png
       Note: Final inspected React crop for dashboard-upcoming review-band result (commit 7510483)
+    - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png
+      Note: Final inspected React crop for dashboard-quick-actions review-band result (commit 12cc17c)
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -56,13 +58,18 @@ RelatedFiles:
       Note: Replaced local surface/status values with app tokens
     - Path: web/packages/pyxis-app/src/components/molecules/ShowTableRow.tsx
       Note: Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
+    - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
+      Note: Dashboard quick action button icon/full-width reuse (commit 12cc17c)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
-      Note: Responsive dashboard layout and mobile-specific ordering
+      Note: |-
+        Responsive dashboard layout and mobile-specific ordering
+        Dashboard side-column and quick-actions panel layout tuning (commit 12cc17c)
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.tsx
       Note: |-
         Initial Phase 5-6 staff app organisms and page composition components
         Dashboard hero
         DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
+        DashboardQuickActionsPanel extraction (commit 12cc17c)
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: |-
         Replaced local dark-surface colors/shadows/radii with app tokens
@@ -70,7 +77,9 @@ RelatedFiles:
     - Path: web/packages/pyxis-app/src/styles/app-tokens.css
       Note: Expanded cohesive app theme variables before Phase 7 (commit fba5369)
     - Path: web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx
-      Note: Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
+      Note: |-
+        Upcoming panel desktop/mobile/empty/long-name stories (commit 7510483)
+        QuickActionsPanel and no-pending Storybook states (commit 12cc17c)
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -79,6 +88,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -1817,4 +1827,147 @@ ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-pro
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/right_region.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-04-date-inline/dashboard/artifacts/upcoming/diff_only.png
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/07-dashboard-page/desktop/run-06-upcoming-consolidation/dashboard/artifacts/page/right_region.png
+```
+
+## Step 17: Consolidate the Dashboard quick actions organism
+
+After committing the upcoming-shows checkpoint, I continued with Phase 7.5 and consolidated the Dashboard quick actions panel. This was a smaller section, but it still needed the same bottom-up treatment: extract a named organism, reuse Button/Icon atoms, add Storybook states, run a focused section comparison, and inspect the crops before accepting the checkpoint.
+
+The final quick-actions focused comparison reached the `review` band. I stopped there because the remaining differences are mostly typography/rendering drift and the app still needs neighboring Dashboard organisms consolidated before final full-page acceptance.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 16)
+
+**Assistant interpretation:** Continue through the next Dashboard consolidation section after accepting the upcoming-shows checkpoint.
+
+**Inferred user intent:** Keep moving section-by-section through Dashboard consolidation using the established visual loop.
+
+**Commit (code):** 12cc17c — "Consolidate dashboard quick actions"
+
+### What I did
+
+- Added `DashboardQuickActionsPanel` as a named organism in `Panels.tsx`.
+- Updated `DashboardOverview` to render `DashboardQuickActionsPanel` instead of inline `Panel` composition.
+- Updated `DashboardQuickActionsContent` to reuse Button icon props and full-width behavior:
+  - `iconLeft="plus"`,
+  - `iconLeft="mail"`,
+  - `iconLeft="log"`,
+  - `fullWidth` for all three actions.
+- Added section-specific quick-actions panel CSS for prototype padding/header spacing while keeping shared panel tokens intact.
+- Adjusted the Dashboard desktop column layout from a fractional side column to `1fr 320px` with a `16px` gap, matching the prototype side-column width and improving both quick-actions and upcoming-shows bounds.
+- Added Storybook coverage:
+  - `QuickActionsPanel`,
+  - `QuickActionsPanelNoPending`.
+- Preserved visual artifacts under:
+  - `various/10-dashboard-quick-actions-consolidation/`,
+  - `various/09-dashboard-upcoming-consolidation/run-05-column-width-guard/`.
+
+### Why
+
+- Quick actions was still a page-local panel despite being a clear Dashboard organism.
+- The prototype uses icons and full-width actions; reusing Button icon props is preferable to local spans or one-off markup.
+- The side-column width was a layout-level mismatch. Fixing it as a shared Dashboard grid decision improved quick actions and guarded upcoming shows at the same time.
+
+### What worked
+
+- TypeScript validation passed after removing an unused Storybook import:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Baseline focused quick-actions comparison before tuning:
+
+```text
+run-01-baseline: 15.177930468669881%, 10360 changed pixels, tune-required
+```
+
+- After icons and padding:
+
+```text
+run-02-icons-padding: 12.03048112669104%, 7799 changed pixels, tune-required
+```
+
+- After matching the Dashboard side column width:
+
+```text
+run-03-column-width: 9.831349206349206%, 5946 changed pixels, review
+```
+
+- The final crops were inspected:
+
+```text
+various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/left_region.png
+various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png
+various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/diff_only.png
+```
+
+- The upcoming-shows guard run stayed in review band after the shared column-width change:
+
+```text
+run-05-column-width-guard: 6.556890001260421%, 29132 changed pixels, review
+```
+
+### What didn't work
+
+- Typecheck initially failed because `DashboardQuickActionsContent` became unused in `AppDashboardSections.stories.tsx` after switching stories to the organism:
+
+```text
+stories/AppDashboardSections.stories.tsx(11,3): error TS6133: 'DashboardQuickActionsContent' is declared but its value is never read.
+```
+
+I removed the unused import and reran typecheck successfully.
+
+### What I learned
+
+- Some section diffs are caused by parent grid layout, not the section internals. Quick actions looked too wide because the Dashboard side column was wider than the prototype.
+- A parent layout fix can improve multiple sections; this is exactly why the runbook says to promote repeated/layout decisions instead of locally forcing one panel.
+
+### What was tricky to build
+
+The tricky part was deciding whether to tune button internals or the surrounding grid. The crops showed matching text and very similar button structure after adding icons, but the bounds still had a width delta. That pointed to the Dashboard column definition rather than the buttons themselves.
+
+Changing `.app-dashboard-columns` to `minmax(0,1fr) 320px` with a `16px` gap aligned quick actions to the prototype side rail and kept upcoming shows in the review band.
+
+### What warrants a second pair of eyes
+
+- Review the shared `.app-dashboard-columns` change because it affects upcoming shows, quick actions, and activity layout.
+- Review whether `DashboardQuickActionsPanel` belongs in `Panels.tsx` long-term or should move to a dedicated Dashboard organisms file once more sections are extracted.
+- Review whether the quick action icon choices (`plus`, `mail`, `log`) match the prototype semantics closely enough.
+
+### What should be done in the future
+
+- Continue with Phase 7.6 recent activity or Phase 7.1 header/menu.
+- Re-run quick actions only after adjacent activity/header layout work changes its bounds.
+- Consider a dedicated visual spec/story for the whole right rail once quick actions and activity are both consolidated.
+
+### Code review instructions
+
+- Start with:
+  - `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.tsx`,
+  - `web/packages/pyxis-app/src/components/organisms/Panels.css`,
+  - `web/packages/pyxis-app/stories/AppDashboardSections.stories.tsx`.
+- Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Optional focused visual validation:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml --page dashboard --section quick-actions --summary --outDir ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-review --output json
+```
+
+### Technical details
+
+Final evidence paths:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/left_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/right_region.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-03-column-width/dashboard/artifacts/quick-actions/diff_only.png
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-05-column-width-guard/dashboard/artifacts/upcoming/right_region.png
 ```

@@ -644,7 +644,7 @@ Use this checklist for every Phase 7.x Dashboard section:
 - [x] Align button labels, icon presence, spacing, and full-width behavior with prototype.
 - [x] Add Storybook stories for default, no-pending-bookings, mobile/narrow if applicable.
 - [x] Tune `dashboard-quick-actions` focused comparison before full page.
-- [ ] Commit: `Consolidate dashboard quick actions`.
+- [x] Commit: `Consolidate dashboard quick actions`.
 
 ### Phase 7.6 — Dashboard recent activity consolidation
 
