@@ -166,6 +166,22 @@ RelatedFiles:
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx
       Note: Phase 8C organism props
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarAgenda/CalendarAgenda.stories.tsx
+      Note: Phase 8C calendar stories
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarAgenda/CalendarAgenda.tsx
+      Note: Phase 8C calendar props/callbacks
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarBoard/CalendarBoard.stories.tsx
+      Note: Phase 8C calendar stories
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarBoard/CalendarBoard.tsx
+      Note: Phase 8C calendar props
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarLegend/CalendarLegend.tsx
+      Note: Phase 8C calendar legend props
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonth/CalendarMonth.tsx
+      Note: Phase 8C calendar month props
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.stories.tsx
+      Note: Phase 8C calendar stories
+    - Path: web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx
+      Note: Phase 8C calendar month panel props
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
@@ -246,6 +262,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -4532,4 +4549,159 @@ The organism visual guard outputs stayed at known values:
 ```text
 bookings-queue-panel: 11.72947581936586%, tune-required
 shows-confirmed-panel: 9.821005081874647%, review
+```
+
+## Step 35: Type calendar organisms and add calendar state stories
+
+I continued Phase 8C through the calendar organism cluster. This pass made the calendar board/month/agenda/legend components expose named props, added callback seams for calendar actions, and expanded Storybook coverage for empty, dense, narrow, and alternate-today states.
+
+I kept this as an API/story pass rather than a visual tuning pass. The focused calendar visual guards were used to ensure the existing tuned sections stayed in their known review band.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the Phase 8C typed props/stories pass into the next organism cluster and commit a focused checkpoint.
+
+**Inferred user intent:** Keep progressing through app organization and reuse-readiness without mixing too many refactor types in one commit.
+
+**Commit (code):** `4b773b9` — "Type calendar organisms and add stories"
+
+### What I did
+
+- Added named exported prop/item types:
+  - `CalendarAgendaProps`,
+  - `CalendarBoardProps`,
+  - `CalendarLegendItem`,
+  - `CalendarLegendProps`,
+  - `CalendarMonthProps`,
+  - `CalendarMonthPanelProps`.
+- Added callback props to `CalendarAgenda`:
+  - `onOpenShow`,
+  - `onAddToday`.
+- Made `CalendarAgenda` derive glance counts from `events` while preserving the current default mock-data output.
+- Added optional `todayShow` injection to `CalendarAgenda` for stories and later route wiring.
+- Added optional `monthLabel`, `year`, and `monthIndex` props to `CalendarMonthPanel` while preserving the current May 2025 defaults.
+- Expanded stories for:
+  - `CalendarAgenda`: default, callbacks, empty month, alternate today, narrow,
+  - `CalendarBoard`: desktop, mobile, empty, dense,
+  - `CalendarMonthPanel`: default, empty month, dense month, narrow.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran focused visual guard checks:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page calendar-month-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-calendar-month \
+  --output json
+```
+
+Result: `calendar-month-panel` stayed in review band at `7.22398110457812%`, with text unchanged.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page calendar \
+  --section agenda \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-calendar-agenda-section \
+  --output json
+```
+
+Result: calendar page `agenda` stayed in review band at `7.922558922558923%`, with text unchanged.
+
+### Why
+
+Calendar components are major page-section organisms and already have focused visual history. They need explicit props and action seams before real route state and RTK Query wiring.
+
+The agenda counts should come from `events` rather than a hard-coded array so the organism behaves correctly in empty/dense stories and later API-backed routes.
+
+### What worked
+
+- Typecheck passed.
+- Existing calendar visual guard targets stayed in the review band.
+- Text stayed unchanged for the default/current calendar stories, which is important because `CalendarAgenda` now derives counts from props.
+- The calendar stories now cover useful route states without requiring data fetching.
+
+### What didn't work
+
+No implementation failure in this step.
+
+One unrelated working-tree issue was present before committing docs: `ttmp/vocabulary.yaml` and an unrelated backend ticket directory were modified/untracked outside this task. I did not stage them.
+
+### What I learned
+
+Calendar was a good example of safe prop extraction: the default props can preserve exact current output while making empty/dense/alternate states possible. Visual guard checks are especially useful when replacing hard-coded display values with derived values.
+
+### What was tricky to build
+
+The agenda counts had to preserve the current prototype text for default mock data. `calendarEvents` contains five confirmed, one hold, one blocked, and seven total events, so `31 - events.length` preserves the existing `Open nights: 24` value.
+
+### What warrants a second pair of eyes
+
+- Review whether `openNights` should count unique occupied dates rather than raw event count if multiple events can happen on one date.
+- Review whether `CalendarMonthPanel` should eventually support arbitrary month lengths instead of the current fixed 31-day May grid.
+- Review `CalendarAgenda` callback names before route/mutation wiring.
+
+### What should be done in the future
+
+- Continue Phase 8C into dashboard organisms.
+- Consider a later calendar logic pass for real month calculations and unique occupied-night counting.
+- Keep visual guard checks around any future calendar logic change.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/organisms/CalendarAgenda/CalendarAgenda.tsx
+web/packages/pyxis-app/src/components/organisms/CalendarBoard/CalendarBoard.tsx
+web/packages/pyxis-app/src/components/organisms/CalendarLegend/CalendarLegend.tsx
+web/packages/pyxis-app/src/components/organisms/CalendarMonth/CalendarMonth.tsx
+web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page calendar-month-panel \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-calendar-month \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page calendar \
+  --section agenda \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-calendar-agenda-section \
+  --output json
+```
+
+### Technical details
+
+The visual guard outputs stayed at known/review values:
+
+```text
+calendar-month-panel: 7.22398110457812%, review, text unchanged
+calendar page agenda section: 7.922558922558923%, review, text unchanged
 ```

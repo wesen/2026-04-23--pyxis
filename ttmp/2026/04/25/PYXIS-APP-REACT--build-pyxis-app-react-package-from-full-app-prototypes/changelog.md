@@ -276,3 +276,14 @@ Step 34: Added named props, callback forwarding, empty states, and richer storie
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — PanelProps and stories
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowsTable/ShowsTable.tsx — ShowsTableProps and stories
 
+
+## 2026-04-25
+
+Step 35: Added named props, callbacks, derived count handling, and richer stories for calendar organisms (commit 4b773b9).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarAgenda/CalendarAgenda.tsx — Calendar agenda props and callbacks
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarBoard/CalendarBoard.tsx — Calendar board props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx — Calendar month panel props
+
