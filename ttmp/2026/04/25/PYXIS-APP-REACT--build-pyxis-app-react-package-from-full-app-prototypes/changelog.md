@@ -320,3 +320,13 @@ Step 38: Added named props, callbacks, injectable copy, and richer stories for d
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx — Modal callback props
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx — Detail organism props
 
+
+## 2026-04-26
+
+Step 39: Added named props/types for AppShell/AppTopBar and AttendanceStat, expanded stories, and confirmed shell visual guards remain in review band (commit 8f41a51).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx — Named AttendanceStat props
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppShell.tsx — Shell props and typed nav/icon data
+

@@ -110,6 +110,10 @@ RelatedFiles:
       Note: Phase 8C domain molecule stories
     - Path: web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx
       Note: Phase 8C shared Avatar reuse
+    - Path: web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx
+      Note: Phase 8C remaining molecule stories
+    - Path: web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx
+      Note: Phase 8C remaining molecule props
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.css
       Note: Owned BookingCard styles after Rows.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
@@ -324,8 +328,12 @@ RelatedFiles:
         Replaced local dark-surface colors/shadows/radii with app tokens
         Light desktop sidebar and static mobile bottom nav
         Dashboard shell/header visual tuning (commit 80661fc)
+    - Path: web/packages/pyxis-app/src/components/shell/AppShell.stories.tsx
+      Note: Phase 8C shell stories
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.tsx
-      Note: Dashboard shell/header organism extraction (commit 80661fc)
+      Note: |-
+        Dashboard shell/header organism extraction (commit 80661fc)
+        Phase 8C shell props
     - Path: web/packages/pyxis-app/src/styles/app-tokens.css
       Note: |-
         Expanded cohesive app theme variables before Phase 7 (commit fba5369)
@@ -354,6 +362,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -5280,4 +5289,178 @@ The visual guard outputs were:
 ```text
 show-detail hero: 12.273321775101135%, tune-required, prototype selector captures whole page
 booking-review hero: 17.73071588605569%, tune-required, prototype selector captures whole page
+```
+
+## Step 39: Type shell widgets and the remaining attendance stat molecule
+
+I ran a final anonymous-prop sweep across `pyxis-app/src` and found the remaining exported inline prop types in the shell and `AttendanceStat`. This step adds named props for those pieces, expands their Storybook stories, and validates the shell with focused visual guards.
+
+This closes the broad Phase 8C props/story sweep for reusable components. The remaining inline prop type found by grep is only a local story helper, not a reusable widget export.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue Phase 8C by sweeping remaining components for anonymous prop types and committing the cleanup.
+
+**Inferred user intent:** Finish the props/story readiness work before moving to shared component replacement clusters.
+
+**Commit (code):** `8f41a51` — "Type shell widgets and attendance stat"
+
+### What I did
+
+- Added named exported props/types for shell widgets:
+  - `AppTopBarProps`,
+  - `AppShellProps`.
+- Added typed nav tuple/section aliases for shell navigation:
+  - `AppNavItem`,
+  - `AppNavSection`.
+- Typed shell icon names using `IconName` from `pyxis-components`.
+- Added named exported props for the remaining molecule:
+  - `AttendanceStatProps`.
+- Added `AttendanceStat.stories.tsx` with default, needs-log, large-value, and row examples.
+- Expanded `AppShell.stories.tsx` with:
+  - full shell story,
+  - shell with custom action,
+  - topbar with action,
+  - topbar long-title story.
+- Ran typecheck:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Ran a grep sweep:
+
+```bash
+rg -n "export function .*\(\{.*\}: \{|\}: \{" web/packages/pyxis-app/src -g'*.tsx'
+```
+
+The only remaining match is a local story helper:
+
+```text
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.stories.tsx:18:function TableFrame(...)
+```
+
+- Ran shell visual guards. The first attempt failed due stale Storybook selectors; after killing the lingering Node process and restarting Storybook, both checks passed in review band:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section sidebar \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shell-sidebar \
+  --output json
+```
+
+Result: `sidebar` at `6.363036699448308%`, `review`, text unchanged, bounds unchanged.
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section topbar \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shell-topbar \
+  --output json
+```
+
+Result: `topbar` at `8.522274730526204%`, `review`, text unchanged.
+
+### Why
+
+The shell is central to every app page, so it should expose named props and typed nav/icon data before RTK and navigation wiring. `AttendanceStat` was the last reusable molecule with an anonymous inline prop type.
+
+### What worked
+
+- Typecheck passed.
+- The grep sweep confirms exported reusable components no longer have anonymous inline prop types.
+- Shell visual guards stayed in review band after restart.
+- Story coverage for shell and attendance stats is more useful for future reuse audits.
+
+### What didn't work
+
+The first shell visual guard attempt failed with missing selectors before restarting Storybook:
+
+```text
+Error: promise rejected: SelectorError: selector "[data-section=\"app-sidebar\"]" did not become visible within 30000ms
+Error: promise rejected: SelectorError: selector "[data-section=\"app-topbar\"]" did not become visible within 30000ms
+```
+
+After killing the lingering Storybook Node process on port 6008 and restarting, the same commands succeeded.
+
+### What I learned
+
+The Phase 8C visual guard loop should always treat selector timeouts after many source edits as potential Storybook staleness first. Restarting Storybook is cheaper than debugging false missing-section failures.
+
+### What was tricky to build
+
+Typing `navSections` required preserving the literal tuple shape while enforcing that icon names are valid `pyxis-components` `IconName` values. The `satisfies readonly AppNavSection[]` pattern keeps that balance.
+
+### What warrants a second pair of eyes
+
+- Review whether `AppTopBar` should eventually wrap shared `TopBar`.
+- Review whether shell action callbacks should be lifted into `AppShellProps` later or remain caller-supplied React nodes.
+- Review whether `AttendanceStat` should eventually wrap shared `Stat`.
+
+### What should be done in the future
+
+- Start dedicated reuse clusters:
+  - `.app-empty-state` -> shared `Empty`,
+  - `NewShowModal` -> shared `Modal`,
+  - `Panel` -> `Card`/`CardHead`,
+  - `MetricCard`/`AttendanceStat` -> `Stat`,
+  - app tables -> shared `Table` or documented non-reuse.
+- Improve visual-spec selectors for detail/review mobile hero sections before using those numbers as guards.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/components/shell/AppShell.tsx
+web/packages/pyxis-app/src/components/shell/AppShell.stories.tsx
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+rg -n "export function .*\(\{.*\}: \{|\}: \{" web/packages/pyxis-app/src -g'*.tsx'
+```
+
+Optional visual guards:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section sidebar \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shell-sidebar \
+  --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml \
+  --page dashboard \
+  --section topbar \
+  --summary \
+  --outDir /tmp/pyxis-phase8c-shell-topbar \
+  --output json
+```
+
+### Technical details
+
+The successful visual guard outputs were:
+
+```text
+sidebar: 6.363036699448308%, review, text unchanged, bounds unchanged
+topbar: 8.522274730526204%, review, text unchanged
 ```
