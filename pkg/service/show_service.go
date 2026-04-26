@@ -11,11 +11,12 @@ import (
 // ShowService provides business logic for shows.
 type ShowService struct {
 	shows repository.ShowRepository
+	audit AuditService
 }
 
 // NewShowService creates a new ShowService.
-func NewShowService(shows repository.ShowRepository) *ShowService {
-	return &ShowService{shows: shows}
+func NewShowService(shows repository.ShowRepository, audit AuditService) *ShowService {
+	return &ShowService{shows: shows, audit: audit}
 }
 
 // ListUpcoming returns confirmed shows for the public site.
@@ -23,9 +24,87 @@ func (s *ShowService) ListUpcoming(ctx context.Context) ([]domain.Show, error) {
 	return s.shows.ListUpcoming(ctx)
 }
 
+// ListAll returns all shows for staff.
+func (s *ShowService) ListAll(ctx context.Context) ([]domain.Show, error) {
+	return s.shows.ListAll(ctx)
+}
+
 // GetByID returns a single show by ID.
 func (s *ShowService) GetByID(ctx context.Context, id int) (*domain.Show, error) {
 	return s.shows.GetByID(ctx, id)
+}
+
+// Create creates a new show and logs the action.
+func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int, actorName string) (*domain.Show, error) {
+	if show.Status == "" {
+		show.Status = "draft"
+	}
+	created, err := s.shows.Create(ctx, show)
+	if err != nil {
+		return nil, err
+	}
+
+	_ = s.audit.Log(ctx, actorID, actorName, "show.create", "show", &created.ID, map[string]interface{}{
+		"artist": show.Artist,
+		"date":   show.Date.Format("2006-01-02"),
+		"status": show.Status,
+	})
+
+	return created, nil
+}
+
+// Update modifies an existing show and logs the action.
+func (s *ShowService) Update(ctx context.Context, show *domain.Show, actorID int, actorName string) (*domain.Show, error) {
+	updated, err := s.shows.Update(ctx, show)
+	if err != nil {
+		return nil, err
+	}
+
+	_ = s.audit.Log(ctx, actorID, actorName, "show.update", "show", &show.ID, map[string]interface{}{
+		"artist": show.Artist,
+		"date":   show.Date.Format("2006-01-02"),
+		"status": show.Status,
+	})
+
+	return updated, nil
+}
+
+// Cancel marks a show as cancelled and logs the action.
+func (s *ShowService) Cancel(ctx context.Context, id int, actorID int, actorName string) (*domain.Show, error) {
+	show, err := s.shows.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	show.Status = "cancelled"
+	updated, err := s.shows.Update(ctx, show)
+	if err != nil {
+		return nil, err
+	}
+
+	_ = s.audit.Log(ctx, actorID, actorName, "show.cancel", "show", &id, map[string]interface{}{
+		"artist": show.Artist,
+	})
+
+	return updated, nil
+}
+
+// Archive marks a show as archived and logs the action.
+func (s *ShowService) Archive(ctx context.Context, id int, actorID int, actorName string) error {
+	show, err := s.shows.GetByID(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	if err := s.shows.Archive(ctx, id); err != nil {
+		return err
+	}
+
+	_ = s.audit.Log(ctx, actorID, actorName, "show.archive", "show", &id, map[string]interface{}{
+		"artist": show.Artist,
+	})
+
+	return nil
 }
 
 // SearchArchive returns archived shows.

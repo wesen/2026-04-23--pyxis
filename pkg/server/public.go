@@ -195,6 +195,12 @@ func respondError(w http.ResponseWriter, err error) {
 	case errors.Is(err, service.ErrNotFound):
 		status = http.StatusNotFound
 		code = "NOT_FOUND"
+	case message == "unauthenticated":
+		status = http.StatusUnauthorized
+		code = "UNAUTHENTICATED"
+	case message == "forbidden":
+		status = http.StatusForbidden
+		code = "FORBIDDEN"
 	}
 
 	w.Header().Set("Content-Type", "application/json")

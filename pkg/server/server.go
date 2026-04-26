@@ -29,9 +29,11 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	queries := db.New(database.Pool)
 	showRepo := postgres.NewShowRepo(queries)
 	submissionRepo := postgres.NewSubmissionRepo(queries)
+	auditRepo := postgres.NewAuditRepo(queries)
 
 	// Service layer
-	s.showService = service.NewShowService(showRepo)
+	auditSvc := service.NewAuditService(auditRepo)
+	s.showService = service.NewShowService(showRepo, auditSvc)
 	s.submissionService = service.NewSubmissionService(submissionRepo)
 
 	// Auth service (uses placeholder config; override in production)
@@ -57,12 +59,23 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Auth
 	mux.HandleFunc("GET /auth/discord/callback", s.handleDiscordCallback)
-	mux.HandleFunc("GET /auth/me", s.handleGetMe)
-	mux.HandleFunc("POST /auth/logout", s.handleLogout)
+	mux.Handle("GET /auth/me", s.requireAuth(http.HandlerFunc(s.handleGetMe)))
+	mux.Handle("POST /auth/logout", s.requireAuth(http.HandlerFunc(s.handleLogout)))
 
-	// Staff API (auth required)
+	// Staff API (auth + role required)
+	staff := s.requireAuth(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Sub-router for staff API
+	}))
+	_ = staff
+
 	mux.HandleFunc("GET /api/app/session", s.handleGetSession)
-	// TODO: add staff show/booking/artist/calendar/attendance/settings endpoints
+
+	// Staff show endpoints
+	mux.Handle("GET /api/app/shows", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAppShows))))
+	mux.Handle("POST /api/app/shows", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateShow))))
+	mux.Handle("PATCH /api/app/shows/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateShow))))
+	mux.Handle("PATCH /api/app/shows/{id}/cancel", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCancelShow))))
+	mux.Handle("PATCH /api/app/shows/{id}/archive", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleArchiveShow))))
 
 	s.handler = mux
 	return s
