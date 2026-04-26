@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PubNav } from './PubNav';
 
 const meta: Meta<typeof PubNav> = {
-  title: 'Public/Organisms/PubNav',
+  title: 'Public Site/Components/Organisms/PubNav',
   component: PubNav,
   tags: ['autodocs'],
   parameters: {

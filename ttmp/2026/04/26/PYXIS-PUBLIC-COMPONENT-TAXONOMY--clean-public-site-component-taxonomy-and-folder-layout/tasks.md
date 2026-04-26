@@ -53,11 +53,12 @@
 
 ## Phase 7: About/venue/shell cluster
 
-- [ ] Move `PubNav` and `PubFooter` to public organisms.
-- [ ] Move `AboutHero`, `AboutIntro`, `EthosStrip`, `EthosGrid`, `CollectiveList`, `FindUsBlock`, `VenueCard`, `SpaceInfo`, and `MailingListCTA` according to finalized classification.
+- [x] Move `PubNav` and `PubFooter` to public organisms.
+- [x] Move `AboutHero`, `AboutIntro`, `EthosStrip`, `EthosGrid`, `CollectiveList`, `FindUsBlock`, `VenueCard`, `SpaceInfo`, and `MailingListCTA` according to finalized classification.
   - [x] Move about content components: `AboutHero`, `AboutIntro`, `EthosGrid`, `CollectiveList`, `FindUsBlock`.
-  - [ ] Move remaining home/venue components: `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`.
-- [x] Validate about/public shell stories for the about content cluster.
+  - [x] Move remaining home/venue components: `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`.
+  - [x] Move `PubHero` alongside the home/shell organisms.
+- [x] Validate about/public shell stories for the about and shell/home/venue clusters.
 
 ## Phase 8: Thin public route pages
 

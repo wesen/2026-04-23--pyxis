@@ -36,6 +36,8 @@ RelatedFiles:
       Note: Captured Storybook IDs after booking cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/07-pyxis-components-storybook-ids-after-about.md
       Note: Captured Storybook IDs after about cluster move.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/08-pyxis-components-storybook-ids-after-shell-home-venue.md
+      Note: Captured Storybook IDs after shell/home/venue cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
@@ -80,12 +82,26 @@ RelatedFiles:
       Note: Moved collective list organism and exported props type.
     - Path: web/packages/pyxis-components/src/public/organisms/EthosGrid
       Note: Moved ethos grid organism and exported props type.
+    - Path: web/packages/pyxis-components/src/public/organisms/EthosStrip
+      Note: Moved public ethos strip organism.
     - Path: web/packages/pyxis-components/src/public/organisms/FindUsBlock
       Note: Moved find-us block organism and exported props type.
+    - Path: web/packages/pyxis-components/src/public/organisms/MailingListCTA
+      Note: Moved public mailing list CTA organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/PubFooter
+      Note: Moved public footer shell organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/PubHero
+      Note: Moved public home/show hero organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/PubNav
+      Note: Moved public navigation shell organism.
     - Path: web/packages/pyxis-components/src/public/organisms/SaferSpaceAgreement
       Note: Moved safer-space agreement organism.
     - Path: web/packages/pyxis-components/src/public/organisms/ShowGrid
       Note: Moved to public organisms; click callback now receives ShowTileShow with show.id.
+    - Path: web/packages/pyxis-components/src/public/organisms/SpaceInfo
+      Note: Moved public space info organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/VenueCard
+      Note: Moved public venue card organism.
     - Path: web/packages/pyxis-user-site/src/pages/Shows.tsx
       Note: Uses ShowGrid callback show.id directly instead of artist/date matching.
 ExternalSources: []
@@ -94,6 +110,7 @@ LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -758,3 +775,95 @@ No story-level errors or warnings were observed after filtering harmless favicon
 ### What remains
 
 Continue the phase with shell/home/venue organisms: `PubNav`, `PubFooter`, `PubHero`, `EthosStrip`, `VenueCard`, `SpaceInfo`, `MailingListCTA`, and `PublicPageHeader`/`SafetyNote`/`ShowTypeChips` classification cleanup.
+
+## Step 7: Shell, Home, and Venue Organism Move
+
+I completed the rest of the large public organism cluster by moving the public shell, home, and venue sections into `public/organisms`.
+
+### Components moved
+
+Moved to `web/packages/pyxis-components/src/public/organisms/`:
+
+```text
+PubNav
+PubFooter
+PubHero
+EthosStrip
+VenueCard
+SpaceInfo
+MailingListCTA
+```
+
+### Classification notes
+
+- `PubNav` and `PubFooter` are public-site shell organisms used by the user-site layout.
+- `PubHero` and `EthosStrip` are coherent home-page/show-list sections.
+- `VenueCard` and `SpaceInfo` are public venue/contact information sections.
+- `MailingListCTA` is a standalone public call-to-action section.
+- These components remain presentation-only; the user-site pages/layout own routing, navigation wiring, and data fetching.
+
+### Import/export updates
+
+- Updated public barrel exports in `web/packages/pyxis-components/src/index.ts`.
+- Added missing `PubFooterProps` export in the public barrel.
+- Updated `PublicDiffFixture.stories.tsx` imports.
+- Updated moved `pyxisPart` imports to `../../../utils/parts`.
+- Updated `PubHero` story mock import to `../../../mocks/handlers`.
+- Updated Storybook titles to `Public Site/Components/Organisms/*`.
+- Updated Storybook preview CSS imports in both:
+  - `web/packages/pyxis-components/.storybook/preview.tsx`
+  - `web/packages/pyxis-user-site/.storybook/preview.tsx`
+
+The preview CSS import was an important catch: the builds passed until Storybook preview tried to import `../src/public/PubNav/PubNav.css` / `../../pyxis-components/src/public/PubNav/PubNav.css`. Those paths now point to `public/organisms/PubNav/PubNav.css`.
+
+### Evidence captured
+
+Added:
+
+```text
+sources/08-pyxis-components-storybook-ids-after-shell-home-venue.md
+```
+
+New story IDs include:
+
+```text
+public-site-components-organisms-pubnav--default
+public-site-components-organisms-pubfooter--default
+public-site-components-organisms-pubhero--narrow
+public-site-components-organisms-ethosstrip--default
+public-site-components-organisms-venuecard--narrow
+public-site-components-organisms-spaceinfo--narrow
+public-site-components-organisms-mailinglistcta--default
+```
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+cd web/packages/pyxis-user-site && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+cd web && pnpm build
+```
+
+Live Storybook validation passed for the moved component stories and route pages that use shell/venue/show-list organisms:
+
+```text
+public-site-components-organisms-pubnav--default
+public-site-components-organisms-pubfooter--default
+public-site-components-organisms-pubhero--narrow
+public-site-components-organisms-ethosstrip--default
+public-site-components-organisms-venuecard--narrow
+public-site-components-organisms-spaceinfo--narrow
+public-site-components-organisms-mailinglistcta--default
+public-site-pages--shows-desktop
+public-site-pages--show-detail-desktop
+```
+
+No story-level errors or warnings were observed after filtering harmless favicon and existing React Router future-flag warnings.
+
+### What remains
+
+Only the smaller classification cleanup remains in the flat `public/` root: `PublicPageHeader`, `SafetyNote`, and `ShowTypeChips`. The design guide currently suggests `PublicPageHeader` and `SafetyNote` as public molecules and `ShowTypeChips` as a public atom.

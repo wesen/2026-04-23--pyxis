@@ -1,4 +1,4 @@
-import { pyxisPart } from '../../utils/parts';
+import { pyxisPart } from '../../../utils/parts';
 import { clsx } from 'clsx';
 
 export type PubNavProps = {

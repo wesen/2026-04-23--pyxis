@@ -9,7 +9,7 @@ import '../../pyxis-components/src/atoms/Button/Button.css';
 import '../../pyxis-components/src/atoms/Icon/Icon.css';
 import '../../pyxis-components/src/atoms/Input/Input.css';
 import '../../pyxis-components/src/atoms/Select/Select.css';
-import '../../pyxis-components/src/public/PubNav/PubNav.css';
+import '../../pyxis-components/src/public/organisms/PubNav/PubNav.css';
 
 initialize({ onUnhandledRequest: 'bypass' });
 

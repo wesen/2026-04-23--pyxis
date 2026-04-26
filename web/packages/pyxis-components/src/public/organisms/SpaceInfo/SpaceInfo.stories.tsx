@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { SpaceInfo } from './SpaceInfo';
-const meta: Meta<typeof SpaceInfo> = { title: 'Public/Organisms/SpaceInfo', component: SpaceInfo, tags: ['autodocs'] };
+const meta: Meta<typeof SpaceInfo> = { title: 'Public Site/Components/Organisms/SpaceInfo', component: SpaceInfo, tags: ['autodocs'] };
 export default meta;
 type Story = StoryObj<typeof SpaceInfo>;
 export const Default: Story = { args: { email: 'book@ppxis.space' } };

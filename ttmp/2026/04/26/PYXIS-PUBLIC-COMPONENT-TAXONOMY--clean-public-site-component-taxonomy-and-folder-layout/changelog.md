@@ -88,3 +88,19 @@ Completed about content taxonomy cluster: moved about page content blocks to pub
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/EthosGrid — Moved ethos grid organism and exported props type.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/FindUsBlock — Moved find-us block organism and exported props type.
 
+
+## 2026-04-26
+
+Completed shell/home/venue taxonomy cluster: moved public layout and venue CTA components to organisms, fixed Storybook preview CSS imports, and validated page stories.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/08-pyxis-components-storybook-ids-after-shell-home-venue.md — Captured Storybook IDs after shell/home/venue cluster.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/EthosStrip — Moved public ethos strip organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/MailingListCTA — Moved public mailing list CTA organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/PubFooter — Moved public footer shell organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/PubHero — Moved public home/show hero organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/PubNav — Moved public navigation shell organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/SpaceInfo — Moved public space info organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/VenueCard — Moved public venue card organism.
+

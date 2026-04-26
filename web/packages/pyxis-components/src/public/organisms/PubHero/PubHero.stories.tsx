@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { PubHero } from './PubHero';
-import { seedShows } from '../../mocks/handlers';
-const meta: Meta<typeof PubHero> = { title: 'Public/Organisms/PubHero', component: PubHero, tags: ['autodocs'], args: { show: seedShows[0] } };
+import { seedShows } from '../../../mocks/handlers';
+const meta: Meta<typeof PubHero> = { title: 'Public Site/Components/Organisms/PubHero', component: PubHero, tags: ['autodocs'], args: { show: seedShows[0] } };
 export default meta;
 type Story = StoryObj<typeof PubHero>;
 export const Default: Story = {};
