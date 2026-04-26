@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   fromJson,
-  ShowList,
   ShowListSchema,
   Show,
   ShowSchema,
@@ -31,7 +30,7 @@ export const publicApi = createApi({
     getUpcomingShows: builder.query<Show[], void>({
       query: () => endpoints.shows,
       transformResponse: (response: unknown) => {
-        const list = fromJson(ShowListSchema, response);
+        const list = fromJson(ShowListSchema, response as any);
         return list.shows;
       },
       providesTags: (result) =>
@@ -45,7 +44,7 @@ export const publicApi = createApi({
 
     getShow: builder.query<Show, number>({
       query: (id) => endpoints.show(id),
-      transformResponse: (response: unknown) => fromJson(ShowSchema, response),
+      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
       providesTags: (_result, _error, id) => [{ type: 'Show', id }],
     }),
 
@@ -54,13 +53,13 @@ export const publicApi = createApi({
         url: endpoints.archive,
         params: search ? { search } : undefined,
       }),
-      transformResponse: (response: unknown) => fromJson(ArchivedShowListSchema, response),
+      transformResponse: (response: unknown) => fromJson(ArchivedShowListSchema, response as any),
       providesTags: [{ type: 'Archive', id: 'LIST' }],
     }),
 
     getArchiveStats: builder.query<ArchiveStats, void>({
       query: () => endpoints.archiveStats,
-      transformResponse: (response: unknown) => fromJson(ArchiveStatsSchema, response),
+      transformResponse: (response: unknown) => fromJson(ArchiveStatsSchema, response as any),
       keepUnusedDataFor: 60 * 60,
       providesTags: [{ type: 'Archive', id: 'STATS' }],
     }),
@@ -71,7 +70,7 @@ export const publicApi = createApi({
         method: 'POST',
         body,
       }),
-      transformResponse: (response: unknown) => fromJson(BookingConfirmationSchema, response),
+      transformResponse: (response: unknown) => fromJson(BookingConfirmationSchema, response as any),
       invalidatesTags: [{ type: 'Submission', id: 'LIST' }],
     }),
   }),

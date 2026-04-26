@@ -34,14 +34,14 @@ export const appApi = createApi({
   endpoints: (builder) => ({
     getSession: builder.query<AuthSession, void>({
       query: () => endpoints.session,
-      transformResponse: (response: unknown) => fromJson(AuthSessionSchema, response),
+      transformResponse: (response: unknown) => fromJson(AuthSessionSchema, response as any),
       providesTags: ['Session'],
     }),
 
     getShows: builder.query<Show[], void>({
       query: () => endpoints.shows,
       transformResponse: (response: unknown) => {
-        const list = fromJson(ShowListSchema, response);
+        const list = fromJson(ShowListSchema, response as any);
         return list.shows;
       },
       providesTags: (result) =>
@@ -52,7 +52,7 @@ export const appApi = createApi({
 
     getShow: builder.query<Show, number>({
       query: (id) => endpoints.show(id),
-      transformResponse: (response: unknown) => fromJson(ShowSchema, response),
+      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
       providesTags: (_r, _e, id) => [{ type: 'Show', id }],
     }),
 
