@@ -1,0 +1,16 @@
+[
+{
+  "classificationCounts": {},
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/01-suite-summary.md",
+  "maxChangedPercent": 0,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "unknown"
+  },
+  "rows": [],
+  "sectionCount": 0
+}
+]

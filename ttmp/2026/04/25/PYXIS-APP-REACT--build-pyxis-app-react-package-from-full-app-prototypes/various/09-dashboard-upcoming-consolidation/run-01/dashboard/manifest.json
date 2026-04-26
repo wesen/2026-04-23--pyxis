@@ -1,0 +1,17 @@
+{
+  "schema_version": "css-visual-diff.catalog.v1",
+  "title": "Pyxis public page comparison: dashboard desktop",
+  "out_dir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/dashboard",
+  "artifact_root": "artifacts",
+  "created_at": "2026-04-26T00:01:32.246074185Z",
+  "updated_at": "2026-04-26T00:01:32.246074185Z",
+  "targets": [],
+  "summary": {
+    "target_count": 0,
+    "preflight_count": 0,
+    "result_count": 0,
+    "comparison_count": 0,
+    "failure_count": 0,
+    "artifact_count": 0
+  }
+}

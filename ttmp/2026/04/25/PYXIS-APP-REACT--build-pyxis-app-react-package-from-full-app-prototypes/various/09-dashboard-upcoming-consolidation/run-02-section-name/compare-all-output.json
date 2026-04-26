@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 6.7667030824925565,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard",
+        "sectionCount": 1,
+        "maxChangedPercent": 6.7667030824925565,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/01-catalog-index.md",
+        "catalog": {
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2,
+          "targetCount": 1
+        },
+        "sections": [
+          {
+            "page": "dashboard",
+            "variant": "desktop",
+            "section": "upcoming",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming",
+            "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+            "leftSelector": "[data-section=\"dashboard-upcoming\"]",
+            "rightSelector": "[data-section=\"dashboard-upcoming\"]",
+            "threshold": 30,
+            "changedPercent": 6.7667030824925565,
+            "changedPixels": 31589,
+            "totalPixels": 466830,
+            "normalizedWidth": 630,
+            "normalizedHeight": 741,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 247,
+                "y": 454.890625,
+                "width": 630,
+                "height": 669.78125
+              },
+              "right": {
+                "x": 246,
+                "y": 436.890625,
+                "width": 606.828125,
+                "height": 741.234375
+              },
+              "delta": {
+                "x": -1,
+                "y": -18,
+                "width": -23.171875,
+                "height": 71.453125
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 6,
+                "textChanged": true,
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "boundsChanged": true,
+                "left": {
+                  "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+                  "selector": "[data-section=\"dashboard-upcoming\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 247,
+                    "y": 454.890625,
+                    "width": 630,
+                    "height": 669.78125
+                  },
+                  "name": "dashboard-upcoming"
+                },
+                "right": {
+                  "name": "dashboard-upcoming",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+                  "selector": "[data-section=\"dashboard-upcoming\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "width": 606.828125,
+                    "height": 741.234375,
+                    "x": 246,
+                    "y": 436.890625
+                  }
+                },
+                "name": "dashboard-upcoming",
+                "pixel": {
+                  "changedPercent": 6.7667030824925565,
+                  "normalizedWidth": 630,
+                  "normalizedHeight": 741,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 466830,
+                  "changedPixels": 31589
+                }
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "dashboard",
+        "variant": "desktop",
+        "section": "upcoming",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming",
+        "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+        "leftSelector": "[data-section=\"dashboard-upcoming\"]",
+        "rightSelector": "[data-section=\"dashboard-upcoming\"]",
+        "threshold": 30,
+        "changedPercent": 6.7667030824925565,
+        "changedPixels": 31589,
+        "totalPixels": 466830,
+        "normalizedWidth": 630,
+        "normalizedHeight": 741,
+        "bounds": {
+          "delta": {
+            "x": -1,
+            "y": -18,
+            "width": -23.171875,
+            "height": 71.453125
+          },
+          "changed": true,
+          "left": {
+            "x": 247,
+            "y": 454.890625,
+            "width": 630,
+            "height": 669.78125
+          },
+          "right": {
+            "x": 246,
+            "y": 436.890625,
+            "width": 606.828125,
+            "height": 741.234375
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "attributeChanges": 3,
+            "boundsChanged": true,
+            "left": {
+              "bounds": {
+                "height": 669.78125,
+                "x": 247,
+                "y": 454.890625,
+                "width": 630
+              },
+              "name": "dashboard-upcoming",
+              "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+              "selector": "[data-section=\"dashboard-upcoming\"]",
+              "exists": true,
+              "visible": true
+            },
+            "right": {
+              "visible": true,
+              "bounds": {
+                "x": 246,
+                "y": 436.890625,
+                "width": 606.828125,
+                "height": 741.234375
+              },
+              "name": "dashboard-upcoming",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop&viewMode=story",
+              "selector": "[data-section=\"dashboard-upcoming\"]",
+              "exists": true
+            },
+            "name": "dashboard-upcoming",
+            "pixel": {
+              "totalPixels": 466830,
+              "changedPixels": 31589,
+              "changedPercent": 6.7667030824925565,
+              "normalizedWidth": 630,
+              "normalizedHeight": 741,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-02-section-name/dashboard/artifacts/upcoming/diff_only.png",
+              "threshold": 30
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 6,
+            "textChanged": true,
+            "artifactCount": 2
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01",
+    "pageCount": 1,
+    "sectionCount": 0,
+    "maxChangedPercent": 0,
+    "classificationCounts": {},
+    "acceptedDifferenceCount": 0,
+    "policy": {
+        "ok": true,
+        "failures": [],
+        "maxChangedPercent": null,
+        "worstClassification": "unknown",
+        "maxPolicyBand": ""
+      },
+    "pages": [
+        {
+          "page": "dashboard",
+          "variant": "desktop",
+          "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/dashboard",
+          "sectionCount": 0,
+          "maxChangedPercent": 0,
+          "classificationCounts": {},
+          "acceptedDifferenceCount": 0,
+          "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/dashboard/manifest.json",
+          "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-01/dashboard/01-catalog-index.md",
+          "catalog": {
+              "comparisonCount": 0,
+              "failureCount": 0,
+              "artifactCount": 0,
+              "targetCount": 0,
+              "preflightCount": 0,
+              "resultCount": 0
+            },
+          "sections": []
+        }
+      ],
+    "rows": []
+  }
+]

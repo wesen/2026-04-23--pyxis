@@ -10,7 +10,7 @@ import {
   DashboardMobileHeader,
   DashboardQuickActionsContent,
 } from '../src/components/organisms/DashboardSections';
-import { Panel, ShowsTable } from '../src/components/organisms/Panels';
+import { DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
 
 const meta: Meta = {
   title: 'Pyxis App/Dashboard Sections',
@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj;
 
-const confirmedShows = shows.filter((show) => show.status === 'confirmed');
+const confirmedShows = shows.filter((show) => show.status === 'confirmed').sort((a, b) => a.date.localeCompare(b.date));
 const pendingBookings = bookings.filter((booking) => booking.status === 'pending');
 
 export const HeroDesktop: Story = {
@@ -46,7 +46,20 @@ export const MetricsGridDesktop: Story = {
 };
 
 export const UpcomingPanelDesktop: Story = {
-  render: () => <div style={{ width: 640, padding: 24, background: 'var(--app-canvas)' }}><Panel title="Upcoming shows" kicker="Pinned to #upcoming-shows" section="dashboard-upcoming"><ShowsTable shows={confirmedShows.slice(0, 5)} /></Panel></div>,
+  render: () => <div style={{ width: 640, padding: 24, background: 'var(--app-canvas)' }}><DashboardUpcomingPanel shows={confirmedShows} /></div>,
+};
+
+export const UpcomingPanelMobileCards: Story = {
+  render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><DashboardUpcomingPanel shows={confirmedShows} /></div>,
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
+};
+
+export const UpcomingPanelLongArtistNames: Story = {
+  render: () => <div style={{ width: 640, padding: 24, background: 'var(--app-canvas)' }}><DashboardUpcomingPanel shows={confirmedShows.map((show, index) => index === 1 ? { ...show, artist: 'Moor Mother with Special Guests and Ensemble' } : show)} /></div>,
+};
+
+export const UpcomingPanelEmpty: Story = {
+  render: () => <div style={{ width: 640, padding: 24, background: 'var(--app-canvas)' }}><DashboardUpcomingPanel shows={[]} /></div>,
 };
 
 export const QuickActionsPanel: Story = {

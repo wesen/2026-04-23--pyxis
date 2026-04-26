@@ -629,12 +629,12 @@ Use this checklist for every Phase 7.x Dashboard section:
 
 ### Phase 7.4 — Dashboard upcoming shows consolidation
 
-- [ ] Extract `DashboardUpcomingPanel` as an organism.
-- [ ] Reuse `ShowTableRow`, `TodayShowCard`, `DateChip`, and `StatusDot` where possible.
-- [ ] Align desktop table columns/density with prototype: date, artist, doors, age, status, pinned affordance.
-- [ ] Align mobile behavior: decide whether upcoming shows are hidden on mobile home or represented by cards in a later route.
-- [ ] Add Storybook stories for desktop table, mobile cards/hidden state, empty state, long artist names.
-- [ ] Tune `dashboard-upcoming` focused comparison before full page.
+- [x] Extract `DashboardUpcomingPanel` as an organism.
+- [x] Reuse `ShowTableRow`, `TodayShowCard`, `DateChip`, and `StatusDot` where possible.
+- [x] Align desktop table columns/density with prototype: date, artist, doors, age, status, pinned affordance.
+- [x] Align mobile behavior: decide whether upcoming shows are hidden on mobile home or represented by cards in a later route.
+- [x] Add Storybook stories for desktop table, mobile cards/hidden state, empty state, long artist names.
+- [x] Tune `dashboard-upcoming` focused comparison before full page.
 - [ ] Commit: `Consolidate dashboard upcoming shows`.
 
 ### Phase 7.5 — Dashboard quick actions consolidation

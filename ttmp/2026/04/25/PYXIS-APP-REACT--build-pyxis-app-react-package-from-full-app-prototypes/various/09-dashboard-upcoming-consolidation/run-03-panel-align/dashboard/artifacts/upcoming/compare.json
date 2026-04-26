@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-03-panel-align/dashboard/artifacts/upcoming/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-03-panel-align/dashboard/artifacts/upcoming/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 45,
+      "width": -23.171875,
+      "x": -1,
+      "y": -18
+    },
+    "left": {
+      "height": 669.78125,
+      "width": 630,
+      "x": 247,
+      "y": 454.890625
+    },
+    "right": {
+      "height": 714.78125,
+      "width": 606.828125,
+      "x": 246,
+      "y": 436.890625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 669.78125,
+      "width": 630,
+      "x": 247,
+      "y": 454.890625
+    },
+    "exists": true,
+    "name": "dashboard-upcoming",
+    "selector": "[data-section=\"dashboard-upcoming\"]",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "dashboard-upcoming",
+  "pixel": {
+    "changedPercent": 7.8166278166278165,
+    "changedPixels": 35210,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-03-panel-align/dashboard/artifacts/upcoming/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/09-dashboard-upcoming-consolidation/run-03-panel-align/dashboard/artifacts/upcoming/diff_only.png",
+    "normalizedHeight": 715,
+    "normalizedWidth": 630,
+    "threshold": 30,
+    "totalPixels": 450450
+  },
+  "right": {
+    "bounds": {
+      "height": 714.78125,
+      "width": 606.828125,
+      "x": 246,
+      "y": 436.890625
+    },
+    "exists": true,
+    "name": "dashboard-upcoming",
+    "selector": "[data-section=\"dashboard-upcoming\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "Upcoming showsPinned to #upcoming-showsView allDateArtistDoorsAgeStatusMay 2FridayBurial HexDarkwave8:00 PM21+ConfirmedMay 9FridayMoor MotherExperimental7:00 PMAll AgesConfirmedMay 17SaturdayCygnus + GuestsTechno9:00 PM18+ConfirmedMay 23FridayOpen Mic NightVarious7:00 PMAll AgesConfirmedMay 30FridayBasement FrequenciesTechno10:00 PM21+Confirmed",
+    "right": "Upcoming showsPinned to #upcoming-showsView all ›DateArtistDoorsAgeStatusFriMay 2Burial HexDarkwave8:00 PM21+confirmed⌖FriMay 9Moor MotherExperimental7:00 PMAll Agesconfirmed⌖SatMay 17Cygnus + GuestsTechno9:00 PM18+confirmed⌖FriMay 23Open Mic NightVarious7:00 PMAll AgesconfirmedFriMay 30Basement FrequenciesTechno10:00 PM21+confirmedFriMay 2Burial HexDarkwave · doors 8:00 PM · 21+ 70/150 expected · $12 adv / $15 doorFriMay 9Moor MotherExperimental · doors 7:00 PM · All Ages 120/150 expected · $15SatMay 17Cygnus + GuestsTechno · doors 9:00 PM · 18+ 90/150 expected · $8"
+  }
+}

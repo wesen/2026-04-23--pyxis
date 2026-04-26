@@ -4,6 +4,9 @@
 .app-table-row strong { display: block; color: var(--app-ink); }
 .app-table-row span { display: block; color: var(--app-muted); font-size: 12px; }
 .app-row-status { display: inline-flex !important; align-items: center; gap: 8px; text-transform: capitalize; }
+.app-row-tag { display: inline-flex !important; align-items: center; width: fit-content; border: 1px solid var(--app-rule); border-radius: var(--app-radius-pill); padding: 3px 8px; background: var(--app-surface-strong); color: var(--app-ink) !important; font-size: 11px !important; font-weight: 700; }
+.app-row-status-wrap { display: inline-flex !important; align-items: center; gap: 8px; }
+.app-row-pin { color: var(--app-muted); font-size: 13px !important; line-height: 1; }
 .app-booking-card, .app-artist-card { border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); background: var(--app-surface-strong); padding: 16px; }
 .app-booking-card header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .app-booking-card h3, .app-artist-card h3 { margin: 0 0 4px; }
