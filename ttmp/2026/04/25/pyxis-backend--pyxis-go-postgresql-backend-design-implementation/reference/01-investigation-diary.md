@@ -1354,3 +1354,135 @@ docmgr doc relate --ticket pyxis-backend \
   --doc reference/02-proto-migration-runbook.md \
   --file-note "/home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts:RTK Query"
 ```
+
+---
+
+## Step 16: Status Enum Refinement — Replace String Comparisons with Proto Enums
+
+After schema refinement, the frontend still used string literals (`'confirmed'`, `'pending'`, `'archived'`) for status comparisons everywhere — in mock data, story filters, component conditional rendering, and RTK Query transform logic. The proto-generated `ShowStatus` and `SubmissionStatus` enums existed in `pyxis-types` but were not yet imported or used. The goal was to eliminate all string-based status handling and use numeric enums consistently.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Continue working on this or so, read diary, keep a diary commit at appropriate intervals, we were trying to use enums everywhere we were using strings"
+
+**Assistant interpretation:** Replace every string status literal (`'confirmed'`, `'pending'`, etc.) with the corresponding `ShowStatus` or `SubmissionStatus` enum member across all frontend packages, then verify all builds are green.
+
+**Inferred user intent:** Complete the enum migration so the frontend treats status as a first-class numeric enum, matching the protobuf contract and eliminating fragile string comparisons.
+
+**Commit (code):** `cd725d0` — "Phase 14: Frontend enum migration — replace all string status comparisons with ShowStatus/SubmissionStatus enums"
+
+### What I did
+
+**Backend (Go):**
+- Added `ShowStatus` and `SubmissionStatus` enums to `proto/pyxis/v1/show.proto` with `UNSPECIFIED=0` defaults and lowercase JSON names (`confirmed`, `pending`, etc.).
+- Regenerated Go + TypeScript protobuf code.
+- Added `showStatusFromString()` and `submissionStatusFromString()` helper functions in `pkg/server/public.go` for parsing incoming string values.
+- Updated backend handlers to use enum values in domain → proto mapping.
+
+**Frontend (`pyxis-app`):**
+- Updated `mockData.ts`: replaced `'confirmed'` → `ShowStatus.CONFIRMED`, `'archived'` → `ShowStatus.ARCHIVED`, `'pending'` → `SubmissionStatus.PENDING`, `'approved'` → `SubmissionStatus.APPROVED`, `'declined'` → `SubmissionStatus.DECLINED` in all `create(Schema, {...})` calls.
+- Fixed components that called `.charAt()` / `.slice()` on enum values:
+  - `BookingCard.tsx`: replaced `statusLabel` with `submissionStatusString()` helper
+  - `ShowTableRow.tsx`: replaced `statusLabel` with `showStatusString()` helper
+  - `BookingReviewHero.tsx`: added `submissionStatusString()` helper
+  - `ShowDetailHero.tsx`: added `showStatusString()` helper
+  - `TodayShowCard.tsx`: used `show.status.toString().toLowerCase()` for StatusDot tone
+- Fixed `StatusPill` / `StatusDot` tone casts: instead of `booking.status as StatusTone` (which fails because numeric enum doesn't overlap with string union), mapped enum → string via helper → `.toLowerCase() as StatusTone`.
+- Fixed string comparisons in components:
+  - `booking.status === 'pending'` → `booking.status === SubmissionStatus.PENDING`
+  - `show.status === 'archived'` → `show.status === ShowStatus.ARCHIVED`
+- Fixed story files with `.filter()` / `.find()` string comparisons:
+  - `bookings.filter(b => b.status === 'pending')` → `bookings.filter(b => b.status === SubmissionStatus.PENDING)`
+  - `shows.filter(s => s.status === 'confirmed')` → `shows.filter(s => s.status === ShowStatus.CONFIRMED)`
+- Added `ShowStatus` / `SubmissionStatus` imports to ~20 files that needed them.
+- Fixed `BookingsInboxPanel.tsx` which had a broken `import type` for `SubmissionStatus` — enums must be value imports, not type imports.
+
+**Frontend (`pyxis-components`):**
+- Updated `src/mocks/handlers.ts`: replaced `status: 'confirmed'` → `ShowStatus.CONFIRMED` in all `create(ShowSchema, {...})` calls.
+- Updated `src/public/PublicDiffFixture.stories.tsx`: replaced `status: 'confirmed'` → `ShowStatus.CONFIRMED`, `status: 'archived'` → `ShowStatus.ARCHIVED`.
+
+**Build verification:**
+- `pyxis-types` build ✅
+- `pyxis-app` build ✅
+- `pyxis-components` build ✅
+- `pyxis-user-site` build ✅
+- Full workspace `pnpm build` ✅
+
+### Why
+
+- String comparisons are fragile — typos like `'confrmed'` compile but silently fail at runtime. Enums give compile-time safety.
+- The protobuf contract defines status as enums. Frontend string handling was a leftover from the pre-protobuf era.
+- `protojson` serializes enums as lowercase strings (`"confirmed"`), so the wire format is identical — no backend changes needed beyond adding the enum definitions.
+
+### What worked
+
+- `ShowStatus.CONFIRMED` is `1`, `ShowStatus.ARCHIVED` is `4` — comparisons are fast and type-safe.
+- `create(Schema, { status: ShowStatus.CONFIRMED })` works cleanly with `@bufbuild/protobuf` v2.
+- The helper pattern (`showStatusString(status: ShowStatus): string`) cleanly separates enum values from display strings.
+
+### What didn't work / was tricky
+
+- **Sed broke imports badly:** A `sed -i 's/from '\''pyxis-types'\''/from '\''pyxis-types'\''\n  ShowStatus,\n  SubmissionStatus,/g'` command corrupted import lines into `from 'pyxis-types', ShowStatus, SubmissionStatus;` — invalid syntax. Reverted and used targeted Node.js scripts instead.
+- **Type vs value import confusion:** `import type { SubmissionStatus }` fails because enums are runtime values in TypeScript. Must use `import { SubmissionStatus } from 'pyxis-types'` (value import).
+- **`StatusTone` cast incompatibility:** `booking.status as StatusTone` fails because `SubmissionStatus` (numeric enum) and `StatusTone` (string union) have no overlap. The fix is to map enum → display string → cast to `StatusTone`.
+- **`.charAt()` on enum:** Components like `ShowTableRow` did `show.status.charAt(0).toUpperCase() + show.status.slice(1)` which fails on numeric enums. Replaced with lookup table helpers.
+- **CalendarEvent is a view model with `status: string`:** The `CalendarEvent` type (used in calendar UI) intentionally uses strings because it's a view model, not a proto message. Kept those as strings.
+
+### What warrants a second pair of eyes
+
+- The `showStatusString()` and `submissionStatusString()` helpers are duplicated across multiple files (`ShowTableRow.tsx`, `ShowDetailHero.tsx`, `BookingCard.tsx`, `BookingReviewHero.tsx`). Consider extracting to a shared utility in `pyxis-types` or `pyxis-app/src/utils/`.
+- `TodayShowCard` uses `show.status.toString().toLowerCase()` for StatusDot tone — this relies on TypeScript enum reverse mapping (`ShowStatus[1] === 'CONFIRMED'`). If we switch to string enums later, this would break.
+
+### What should be done in the future
+
+- Extract status string helpers to a shared module to eliminate duplication.
+- Consider updating `StatusTone` type definition to accept `ShowStatus | SubmissionStatus` directly, eliminating the need for string mapping.
+- Add `StatusDot` / `StatusPill` stories that exercise all enum values.
+- Remove any remaining string status references in view model types (`CalendarEvent`, `Table.stories.tsx`) if they should also use enums.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-app/src/api/mockData.ts` — verify all `create()` calls use enum values.
+- Review `BookingCard.tsx`, `ShowTableRow.tsx`, `ShowDetailHero.tsx`, `BookingReviewHero.tsx` for the helper pattern.
+- Check `pyxis-components/src/mocks/handlers.ts` and `PublicDiffFixture.stories.tsx` for enum usage.
+- Validate: `cd web && pnpm build` should complete with zero errors.
+
+### Technical details
+
+**Key commands run:**
+
+```bash
+# Build all packages sequentially
+cd web/packages/pyxis-types && pnpm build
+cd ../pyxis-app && pnpm build
+cd ../pyxis-components && pnpm build
+cd ../pyxis-user-site && pnpm build
+
+# Full workspace build
+cd web && pnpm build
+```
+
+**Files modified (38 total):**
+
+- `web/packages/pyxis-app/src/api/mockData.ts`
+- `web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx`
+- `web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx`
+- `web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx`
+- `web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.stories.tsx`
+- `web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingReviewHero/BookingReviewHero.stories.tsx`
+- `web/packages/pyxis-app/src/components/organisms/ShowDetailHero/ShowDetailHero.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx`
+- `web/packages/pyxis-app/src/components/organisms/DashboardOverview/DashboardOverview.tsx`
+- `web/packages/pyxis-app/src/components/organisms/*/Dashboard*.stories.tsx` (multiple)
+- `web/packages/pyxis-app/src/components/organisms/*/Shows*.stories.tsx` (multiple)
+- `web/packages/pyxis-app/src/pages/Pages.tsx`
+- `web/packages/pyxis-components/src/mocks/handlers.ts`
+- `web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx`
+- `proto/pyxis/v1/show.proto`
+- `gen/proto/proto/pyxis/v1/show.pb.go`
+- `web/packages/pyxis-types/src/generated/proto/pyxis/v1/show_pb.ts`
+
+**Commit:** `cd725d0` — "Phase 14: Frontend enum migration — replace all string status comparisons with ShowStatus/SubmissionStatus enums"
