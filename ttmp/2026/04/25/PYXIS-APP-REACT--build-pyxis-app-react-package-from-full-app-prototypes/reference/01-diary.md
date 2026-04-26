@@ -29,6 +29,8 @@ RelatedFiles:
         Initial pyxis-app component visual suite
         Focused component visual targets for Shows panels (commits 4020ea8
         Calendar focused visual targets (commit f3295d5)
+    - Path: prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml
+      Note: Page Storybook IDs updated after title hierarchy change
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
       Note: |-
         Added compare-spec --section and --summary operator output (commit 666db83420d99c6d38b5425187af0763e0c8ede9)
@@ -78,6 +80,8 @@ RelatedFiles:
       Note: Pending booking card and processed row shape tuned for Bookings organisms (commit caeefa4)
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
       Note: React MetricCard CSS tuned through Phase 6A visual loop (commit 39468164c2611f748a2b2cdfdad34dd567d6beee)
+    - Path: web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx
+      Note: Storybook title hierarchy mirrors folder path
     - Path: web/packages/pyxis-app/src/components/molecules/Rows.css
       Note: |-
         Replaced local surface/status values with app tokens
@@ -154,6 +158,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3545,4 +3550,90 @@ Visual smoke artifacts:
 
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/23-story-colocation/run-01-smoke/
+```
+
+## Step 28: Align Storybook sidebar hierarchy with widget folders
+
+The user pointed out that although stories were colocated, the Storybook sidebar was still grouped by old broad titles such as `Components`, `Organisms`, and `Dashboard Sections`. I updated story titles so the sidebar mirrors the on-disk structure.
+
+### Prompt Context
+
+**User prompt (verbatim):** "can we put some order into this: /tmp/pi-clipboard-83a24b50-ae77-47a5-8acf-a5a87297c170.png it should mirror the folder structure on disk"
+
+**Assistant interpretation:** Change Storybook `title` values to reflect `src/components/{atoms,molecules,organisms}/WidgetName` and `src/pages/Pages`, then update visual specs for the resulting story ID changes.
+
+**Inferred user intent:** Make Storybook navigation predictable and tied to source ownership rather than historical grouping.
+
+**Commit:** `bd637d9` — `Align Storybook sidebar with widget folders`
+
+### What I did
+
+- Updated story titles to mirror disk folders:
+  - `Pyxis App/Components/Atoms/DateChip`,
+  - `Pyxis App/Components/Molecules/MetricCard`,
+  - `Pyxis App/Components/Organisms/BookingsInboxPanel`,
+  - `Pyxis App/Pages/Pages`, etc.
+- Updated app visual-diff story IDs in YAML specs.
+- Regenerated JS mirrors from YAML specs.
+- Restarted Storybook and checked representative new IDs.
+
+### Why
+
+Colocating files was not enough: Storybook uses the `title` metadata for sidebar grouping. The old titles produced a sidebar that no longer matched the folderized codebase.
+
+### What worked
+
+- Typecheck passed.
+- Storybook loaded representative new IDs without console errors:
+  - `pyxis-app-components-organisms-bookingsinboxpanel--inbox-panel`,
+  - `pyxis-app-components-molecules-metriccard--metric-card-default`,
+  - `pyxis-app-pages-pages--dashboard-desktop`.
+- Visual smoke after spec update stayed stable:
+
+```text
+metric-card: 3.724216959511077%, review
+bookings-queue-panel: 11.72947581936586%, tune-required
+```
+
+### What didn't work
+
+Changing Storybook titles necessarily changed story IDs, so the app visual specs had to be updated in the same step. This was expected but important.
+
+### What I learned
+
+Storybook organization has two layers: file colocation and title hierarchy. Both need to match for the sidebar to mirror disk structure.
+
+### What was tricky to build
+
+The tricky part was preserving visual-diff continuity while changing Storybook IDs. The YAML specs were updated first, then JS mirrors regenerated to avoid registry drift.
+
+### What warrants a second pair of eyes
+
+- Review whether `Pyxis App/Pages/Pages` is the desired final page grouping or whether each page should eventually have its own file/story title.
+- Review whether component category names should be lowercase to match literal disk paths, or title-case for Storybook readability.
+
+### What should be done in the future
+
+- When adding a new widget story, make the Storybook title mirror the widget folder path.
+- If changing story titles, update visual specs and regenerate mirrors in the same commit.
+
+### Code review instructions
+
+- Inspect representative story titles in colocated story files.
+- Verify app visual spec story IDs in:
+  - `prototype-design/visual-diff/userland/specs/app.components.visual.yml`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml`,
+  - `prototype-design/visual-diff/userland/specs/app.pages.mobile.visual.yml`.
+- Run:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Technical details
+
+Visual smoke artifacts:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/24-storybook-sidebar-structure/run-01-smoke/
 ```

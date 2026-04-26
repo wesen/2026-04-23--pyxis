@@ -202,3 +202,13 @@ Step 27: Colocated pyxis-app Storybook stories with widget/page folders and remo
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx — Colocated MetricCard story
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx — Colocated Bookings Inbox story
 
+
+## 2026-04-25
+
+Step 28: Updated colocated Storybook titles so the sidebar mirrors src folder structure, updated app visual spec story IDs, and reran component smoke checks (commit bd637d9).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design/visual-diff/userland/specs/app.components.visual.yml — Story IDs updated after sidebar hierarchy change
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx — Story title mirrors widget folder
+
