@@ -27,6 +27,12 @@ topics:
       description: Protocol Buffers schema and generated code workflows
     - slug: api-integration
       description: Frontend/backend API integration, wiring, and validation
+    - slug: design-system
+      description: Reusable UI component systems, tokens, taxonomy, and design-system organization.
+    - slug: public-site
+      description: Public user-facing Pyxis website pages, components, and route behavior.
+    - slug: react
+      description: React components, hooks, application structure, and frontend implementation.
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
