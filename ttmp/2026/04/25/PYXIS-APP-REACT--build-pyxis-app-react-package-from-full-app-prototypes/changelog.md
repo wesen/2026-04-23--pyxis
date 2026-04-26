@@ -171,3 +171,13 @@ Step 24: Tuned Calendar month and agenda organisms; desktop Calendar page checkp
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Calendar layout and agenda styling
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx — Calendar organism composition
 
+
+## 2026-04-25
+
+Step 25: Added Phase 8A and split pyxis-app CSS ownership after the Bookings Inbox Rows.css empty-module regression; typecheck passed and Bookings queue returned to its prior tuned state (commit 8ab1a74).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/BookingCard.css — Booking card CSS ownership split
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panels.css — Generic panel CSS trimmed after split
+

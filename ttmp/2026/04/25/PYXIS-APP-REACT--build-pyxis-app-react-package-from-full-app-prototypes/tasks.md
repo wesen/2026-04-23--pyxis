@@ -715,7 +715,7 @@ Goal: prevent broad bucket stylesheets from breaking isolated organism stories w
 - [x] Remove `?dashboard` / `?molecules` CSS query workarounds from source imports once owned CSS files are in place.
 - [x] Validate Bookings Inbox story no longer depends on the empty `Rows.css` transform.
 - [x] Run typecheck and a focused Bookings queue visual smoke.
-- [ ] Update diary/changelog and commit: `Split pyxis app CSS ownership`.
+- [x] Update diary/changelog and commit: `Split pyxis app CSS ownership` (`8ab1a74`).
 
 ### Phase 8.1 — Login and mobile login
 

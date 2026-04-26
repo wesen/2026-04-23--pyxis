@@ -37,6 +37,7 @@ RelatedFiles:
       Note: |-
         Runbook for compact-output visual loop and stop-when-close rule
         Completed Phase 6C runbook with cohesive-theme guidance
+        CSS ownership guidance added after empty Vite CSS transform regression
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/02-inventory-prototype-routes.mjs
       Note: Ticket-local route inventory script
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/scripts/03-smoke-compare-metric-card.sh
@@ -69,6 +70,8 @@ RelatedFiles:
       Note: Inline date chip variant for dashboard table rows (commit 7510483)
     - Path: web/packages/pyxis-app/src/components/atoms/StatusDot.css
       Note: Centralized status colors/rings through CSS variables
+    - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.css
+      Note: Owned BookingCard styles after Rows.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/molecules/BookingCard.tsx
       Note: Pending booking card and processed row shape tuned for Bookings organisms (commit caeefa4)
     - Path: web/packages/pyxis-app/src/components/molecules/MetricCard.css
@@ -81,6 +84,8 @@ RelatedFiles:
       Note: |-
         Dashboard show row variant reusing DateChip and StatusDot (commit 7510483)
         Shows table row structure and archived variant matched to prototype columns (commits 4020ea8
+    - Path: web/packages/pyxis-app/src/components/molecules/Table.css
+      Note: Shared table primitive styles extracted from Rows.css (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
@@ -98,6 +103,8 @@ RelatedFiles:
         DashboardUpcomingPanel extraction and ShowsTable dashboard variant (commit 7510483)
         DashboardQuickActionsPanel extraction (commit 12cc17c)
         Attention panel organism wrapper and page reuse (commit b1180ae)
+    - Path: web/packages/pyxis-app/src/components/organisms/Phase8Sections.css
+      Note: Owned Phase 8 Calendar/Bookings organism styles after Panels.css split (commit 8ab1a74)
     - Path: web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx
       Note: |-
         Bookings queue and processed organism composition (commit caeefa4)
@@ -139,6 +146,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3213,4 +3221,133 @@ run-03-icons-status-width/month: 7.417960701542792%, review, text unchanged
 run-05-page-checkpoint/page: 7.13168505942275%, review
 run-05-page-checkpoint/month: 7.874265038444143%, review, text unchanged
 run-05-page-checkpoint/agenda: 7.922558922558923%, review, text unchanged
+```
+
+## Step 25: Split CSS ownership after Bookings Inbox stylesheet regression
+
+A Bookings Inbox Storybook check exposed that the visual regression was not caused by BookingCard markup or tuning. Storybook/Vite was serving `Rows.css` as an empty transformed CSS module, so the Bookings Inbox story rendered without its card, metadata-row, status-pill, and action-row styles.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, go through the CSS and split them. Add that as intermediate task 8A to the ticket, and do it, and cleanup other css files that might have the same issue, and update the runbook. Better do it now."
+
+**Assistant interpretation:** Promote the temporary `?molecules`/`?dashboard` workaround into a real CSS ownership cleanup so Storybook isolated organism stories do not depend on broad bucket stylesheets.
+
+**Inferred user intent:** Fix the root cause of the Bookings Inbox break and prevent similar empty-module failures for other app organisms.
+
+**Commit (code/docs/artifacts):** 8ab1a74 — "Split pyxis app CSS ownership"
+
+### What I did
+
+- Added intermediate ticket phase `Phase 8A — CSS ownership split and Storybook stylesheet hardening` to `tasks.md`.
+- Split the broad `Rows.css` bucket into owned molecule/shared files:
+  - `Table.css`,
+  - `ShowTableRow.css`,
+  - `BookingCard.css`,
+  - `ArtistCard.css`,
+  - `CalendarEventChip.css`,
+  - `AttendanceStat.css`,
+  - `SettingsToggleRow.css`.
+- Split broad section rules out of `Panels.css`:
+  - `DashboardSections.css`,
+  - `ShowsSections.css`,
+  - `Phase8Sections.css`.
+- Reduced `Panels.css` to the generic panel shell, panel utilities, modal/settings basics, and cross-section primitives.
+- Removed the source-level `Rows.css?molecules` and `Panels.css?dashboard` workaround imports.
+- Left `Rows.css` as a one-line deprecated compatibility shim so future changes do not add rules there accidentally.
+- Updated the ticket runbook and central playbook to prefer owned CSS imports over broad bucket stylesheets.
+
+### Why
+
+The `Rows.css?molecules` query suffix proved the Bookings Inbox issue was a Vite/Storybook CSS transform/cache problem: the plain `Rows.css` module was being served with `const __vite__css = ""`. Query suffixes are useful diagnostics, but they are not good long-term architecture. Splitting CSS by component/organism ownership makes isolated stories more robust and makes style dependencies explicit.
+
+### What worked
+
+- Typecheck passed:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Storybook transformed CSS modules were non-empty for the new owned files:
+  - `BookingCard.css`,
+  - `Table.css`,
+  - `ShowTableRow.css`,
+  - `Panels.css`,
+  - `Phase8Sections.css`,
+  - `DashboardSections.css`,
+  - `ShowsSections.css`.
+- Bookings Inbox focused visual smoke returned to the previous tuned state:
+
+```text
+bookings-queue-panel: 11.72947581936586%, tune-required
+```
+
+This matches the pre-regression focused queue result and proves the card styling is loaded again.
+
+- Additional smoke checks stayed in review band:
+
+```text
+shows-confirmed-panel: 9.933996481887949%, review
+calendar-month-panel: 7.252374491180462%, review
+```
+
+### What didn't work
+
+The initial instinct to normalize all `Rows.css` imports to a query-suffixed URL fixed the symptom but would have encoded a Vite cache workaround into app architecture. The better fix was to split the stylesheet and remove the suffixes.
+
+### What I learned
+
+- Empty Vite CSS transforms can look exactly like a component regression because the DOM remains present while style rules disappear.
+- Broad bucket stylesheets make that failure mode high impact: one empty module can break Bookings, Shows, Calendar, Artists, and Settings stories at once.
+- Owned CSS files are easier to validate by fetching the transformed module and checking that it does not contain `const __vite__css = ""`.
+
+### What was tricky to build
+
+The tricky part was preserving current visual parity while moving rules. `Rows.css` mixed table primitives, Shows row styling, Booking cards/tables, Calendar chips/agenda, Artist cards, Attendance stats, and Settings rows. `Panels.css` mixed generic Panel shell styling with Dashboard, Shows, Bookings, Calendar, modal, and settings rules.
+
+### What warrants a second pair of eyes
+
+- Review whether `Phase8Sections.css` should eventually be split again into `CalendarSections.css`, `BookingsSections.css`, and `ShowDetailSections.css` once those organisms stabilize.
+- Review whether `Rows.css` should be deleted entirely after confirming no third-party/story imports reference it.
+- Review whether the remaining page-level `pages.css` should later be split by route, but it was not the source of this regression.
+
+### What should be done in the future
+
+- Do not add new rules to `Rows.css`.
+- Prefer component-owned CSS files for new atoms/molecules and organism-owned CSS files for section layouts.
+- Use query-suffixed CSS imports only as a temporary diagnostic if Vite/Storybook serves an empty module.
+- If a CSS file requires a query suffix to load, schedule a split instead of leaving the suffix as architecture.
+
+### Code review instructions
+
+- Start with the owned CSS files created in commit `8ab1a74`.
+- Confirm imports now point at owned CSS files rather than `Rows.css?molecules` or `Panels.css?dashboard`.
+- Re-run:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+- Optional CSS module sanity check in Storybook iframe:
+
+```js
+await fetch('/src/components/molecules/BookingCard.css').then(r => r.text())
+```
+
+The returned transformed module should contain real CSS, not `const __vite__css = ""`.
+
+### Technical details
+
+Regression evidence:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-bookings-inbox-regression/run-01-current/
+```
+
+Fix validation evidence:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-01-bookings-queue/
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/21-css-ownership-split/run-02-smoke/
 ```
