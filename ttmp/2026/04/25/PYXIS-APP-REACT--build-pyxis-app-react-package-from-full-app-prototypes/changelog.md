@@ -350,3 +350,13 @@ Step 41: Reused pyxis-components Modal for NewShowModal, added a focused modal v
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx — NewShowModal now composes shared Modal
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/Modal/Modal.tsx — Wrapper-friendly Modal props
 
+
+## 2026-04-26
+
+Step 42: Reused pyxis-components Card inside app Panel while preserving Panel API and visual hooks (commit 721f8af).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — Panel now composes shared Card
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Card/Card.tsx — Card supports padding none and bodyClassName
+

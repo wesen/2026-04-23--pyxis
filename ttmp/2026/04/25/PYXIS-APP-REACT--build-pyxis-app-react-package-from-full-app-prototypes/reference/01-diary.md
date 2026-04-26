@@ -275,12 +275,15 @@ RelatedFiles:
       Note: |-
         Phase 8C modal callbacks
         Phase 8C Modal reuse wrapper
+    - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.css
+      Note: Panel header/body selectors after Card wrapper
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
       Note: |-
         Phase 8B folderized Panel widget
         Phase 8C organism props
+        Phase 8C Panel wraps Card
     - Path: web/packages/pyxis-app/src/components/organisms/Panels.css
       Note: |-
         Responsive dashboard layout and mobile-specific ordering
@@ -365,6 +368,10 @@ RelatedFiles:
       Note: Direct MetricsGrid organism story target (commit b1180ae)
     - Path: web/packages/pyxis-app/stories/ShowsOrganisms.stories.tsx
       Note: Direct Storybook targets for Shows organisms (commit 4020ea8)
+    - Path: web/packages/pyxis-components/src/molecules/Card/Card.css
+      Note: Phase 8C Card padding none
+    - Path: web/packages/pyxis-components/src/molecules/Card/Card.tsx
+      Note: Phase 8C Card reuse extension
     - Path: web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
       Note: Dedicated reuse Empty API extension
     - Path: web/packages/pyxis-components/src/organisms/Modal/Modal.tsx
@@ -377,6 +384,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -5777,4 +5785,123 @@ new-show-modal: 8.681495429759522%, review
 text unchanged
 left bounds: 522 x 578.59375 at x=359, y=90.703125
 right bounds: 522 x 586.34375 at x=359, y=86.828125
+```
+
+## Step 42: Reuse shared Card for app Panel surfaces
+
+I continued Phase 8C dedicated reuse with the surface cluster: `Panel -> pyxis-components/Card`. I kept the app `Panel` API and app-specific header/body classes intact while delegating the generic surface container to the shared `Card` primitive.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue throughout all of 8, i'm going swimming."
+
+**Assistant interpretation:** Continue Phase 8C reuse clusters with focused commits, typechecks, visual guards, and diary updates.
+
+**Commit (code):** `721f8af` — "Reuse shared Card for app panels"
+
+### What I did
+
+- Extended shared `Card` with:
+  - `padding="none"`,
+  - `bodyClassName`,
+  - component-local `Card.css` import from `Card.tsx`.
+- Reworked app `Panel` to render `Card` while preserving:
+  - `PanelProps`,
+  - `data-section`,
+  - `data-pyxis-component="panel"`,
+  - app-specific `.app-panel` visual styling.
+- Updated app CSS selectors that had assumed `.app-panel > header` so they target `.app-panel-header` after the Card body wrapper.
+- Intentionally did **not** swap to `CardHead` in this pass; the `Panel` header has app/prototype-specific heading/copy/action CSS and should be audited separately if needed.
+- Ran typechecks:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+```
+
+- Ran focused visual guards:
+
+```text
+shows-confirmed-panel: 9.821005081874647%, review
+bookings-processed-panel: 5.097559219526244%, review
+```
+
+### Why
+
+`Panel` is an app-specific section API, but its root surface is generic card behavior. Wrapping `Card` keeps app sections stable while increasing component-system reuse.
+
+### What worked
+
+- Typechecks passed.
+- The shows confirmed panel returned to its prior review-band value after adjusting header selectors.
+- The bookings processed panel remained in review band.
+- The wrapper preserves visual-spec hooks while reusing `Card` under the app API.
+
+### What didn't work
+
+The first attempt broke section-specific header CSS because `Card` inserts a `.pyxis-card__body` wrapper. Selectors such as:
+
+```css
+.app-panel[data-section='shows-confirmed'] > header
+```
+
+no longer matched. I changed those to target:
+
+```css
+.app-panel[data-section='shows-confirmed'] .app-panel-header
+```
+
+I also accidentally changed the `CalendarMonthPanel` direct-header selector during the batch replacement; I restored it because that component does not use the `Panel` wrapper.
+
+### What I learned
+
+Shared surface reuse is safest when the app component remains the public API. The wrapper shields route organisms from `Card` details and keeps existing visual hooks stable.
+
+### What was tricky to build
+
+The `Card` body wrapper changes selector topology even when pixels are intended to remain the same. Visual regressions came from selector ownership, not from the card surface values.
+
+### What warrants a second pair of eyes
+
+- Review whether `CardHead` should be extended with className/heading element props before attempting `Panel` header reuse.
+- Review whether `Card` should expose a `rootProps`/`bodyProps` API instead of only `bodyClassName`.
+
+### What should be done in the future
+
+- Consider a separate `PanelHeader -> CardHead` audit only after adding wrapper-friendly props to `CardHead`.
+- Continue Phase 8C with Stat, Table, and Badge/Tag reuse clusters.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-components/src/molecules/Card/Card.tsx
+web/packages/pyxis-components/src/molecules/Card/Card.css
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.css
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page shows-confirmed-panel --summary \
+  --outDir /tmp/pyxis-reuse-card-shows-confirmed-2 \
+  --output json
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page bookings-processed-panel --summary \
+  --outDir /tmp/pyxis-reuse-card-bookings-processed-2 \
+  --output json
+```
+
+### Technical details
+
+Final Card/Panel guards:
+
+```text
+shows-confirmed-panel: 9.821005081874647%, review
+bookings-processed-panel: 5.097559219526244%, review
 ```
