@@ -863,3 +863,64 @@ curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json
 curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/attendance
 curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH http://localhost:8282/api/app/attendance/1 -d '{"draw":45,"notes":"Good crowd"}'
 ```
+
+---
+
+## Step 9: Implementation — Phase 8 (Settings + Audit Log)
+
+Phase 8 adds the settings management and audit log read endpoints. Settings is a single-row table with space configuration, and the audit log provides a read-only view of staff actions.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue implementing the Pyxis backend. Phase 8 is next: settings + audit log.
+
+**Inferred user intent:** Build out space configuration and audit log read endpoints.
+
+**Commit (code):** `aaa907a` — "Phase 8: Settings + Audit Log read endpoints"
+
+### What I did
+
+- Created `pkg/db/queries/settings.sql` with `GetSettings` and `UpdateSettings` (using `COALESCE` for partial updates).
+- Regenerated sqlc code.
+- Created `pkg/domain/settings.go` with `Settings` struct.
+- Updated `pkg/repository/repository.go` with `SettingsRepository` interface and expanded `AuditLogRepository` with `List`.
+- Created `pkg/repository/postgres/settings_repo.go` mapping domain → sqlc params.
+- Updated `pkg/repository/postgres/audit_repo.go` with `List` method.
+- Created `pkg/service/settings_service.go`.
+- Updated `pkg/service/audit_service.go` with `List` method on the interface.
+- Added handlers in `pkg/server/app.go`:
+  - `GET /api/app/settings` — read settings (all staff)
+  - `PATCH /api/app/settings` — update settings (admin only)
+  - `GET /api/app/audit-log` — list audit entries with pagination (admin only)
+- Wired routes in `pkg/server/server.go`.
+- Tested all endpoints:
+  - Get settings ✓
+  - Update settings ✓
+  - List audit log ✓
+
+### What worked
+
+- `COALESCE($1, space_name)` pattern in `UpdateSettings` allows partial updates — only provided fields change.
+- Audit log `List` reuses the existing `ListAuditLog` sqlc query with limit/offset pagination.
+
+### What didn't work
+
+- **`UpdateSettingsParams.SpaceName` is plain `string`:** sqlc inferred it as `string` (not `pgtype.Text`) because `space_name` is `NOT NULL`. The helper `strPtrToPgtypeText` failed. Fixed by passing `settings.SpaceName` directly.
+- **Role testing:** Settings update and audit log require `admin` role. The test user was `booker` and got 403. Updated test user to `admin` for validation.
+
+### What should be done in the future
+
+- Phase 9: Flyers + Discord skeleton.
+- Phase 10: CLI polish + export.
+
+### Technical details
+
+**Test commands:**
+
+```bash
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/settings
+curl -s -H "Cookie: session=test-session-abc" -H "Content-Type: application/json" -X PATCH http://localhost:8282/api/app/settings -d '{"spaceName":"Pyxis Updated","tagline":"Underground music venue","capacity":120,"setupComplete":true}'
+curl -s -H "Cookie: session=test-session-abc" http://localhost:8282/api/app/audit-log
+```

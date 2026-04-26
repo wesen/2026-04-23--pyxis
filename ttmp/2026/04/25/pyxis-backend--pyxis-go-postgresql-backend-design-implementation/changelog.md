@@ -79,3 +79,14 @@ Step 8: Phase 7 complete — calendar holds/blocked + attendance logging (commit
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/calendar.sql — Calendar queries
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Calendar and attendance handlers
 
+
+## 2026-04-26
+
+Step 9: Phase 8 complete — settings CRUD + audit log list (commit aaa907a)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/settings_repo.go — Settings repo with COALESCE partial updates
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Settings and audit log handlers
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/audit_service.go — Audit service with List method
+

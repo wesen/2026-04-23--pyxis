@@ -84,11 +84,11 @@
 
 ## Phase 8 — Settings + Audit Log
 
-- [ ] 8.1 Implement settings repository (single-row)
-- [ ] 8.2 Add `GET /api/app/settings`, `PATCH /api/app/settings`
-- [ ] 8.3 Implement audit log repository
-- [ ] 8.4 Add `GET /api/app/audit-log` with pagination
-- [ ] 8.5 Commit Phase 8
+- [x] 8.1 Implement settings repository (single-row)
+- [x] 8.2 Add `GET /api/app/settings`, `PATCH /api/app/settings`
+- [x] 8.3 Implement audit log repository
+- [x] 8.4 Add `GET /api/app/audit-log` with pagination
+- [x] 8.5 Commit Phase 8
 
 ## Phase 9 — Flyers + Discord
 
