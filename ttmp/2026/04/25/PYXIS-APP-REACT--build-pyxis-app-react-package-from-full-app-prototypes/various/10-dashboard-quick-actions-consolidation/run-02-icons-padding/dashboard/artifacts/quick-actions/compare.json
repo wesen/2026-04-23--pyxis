@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -2.203125,
+      "width": 23.171875,
+      "x": -22.171875,
+      "y": -18
+    },
+    "left": {
+      "height": 189.28125,
+      "width": 320,
+      "x": 893,
+      "y": 454.890625
+    },
+    "right": {
+      "height": 187.078125,
+      "width": 343.171875,
+      "x": 870.828125,
+      "y": 436.890625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 189.28125,
+      "width": 320,
+      "x": 893,
+      "y": 454.890625
+    },
+    "exists": true,
+    "name": "dashboard-quick-actions",
+    "selector": "[data-section=\"dashboard-quick-actions\"]",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "dashboard-quick-actions",
+  "pixel": {
+    "changedPercent": 12.03048112669104,
+    "changedPixels": 7799,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_only.png",
+    "normalizedHeight": 189,
+    "normalizedWidth": 343,
+    "threshold": 30,
+    "totalPixels": 64827
+  },
+  "right": {
+    "bounds": {
+      "height": 187.078125,
+      "width": 343.171875,
+      "x": 870.828125,
+      "y": 436.890625
+    },
+    "exists": true,
+    "name": "dashboard-quick-actions",
+    "selector": "[data-section=\"dashboard-quick-actions\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--dashboard-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": false,
+    "left": "Quick actionsAdd a showReview bookings · 3Open audit log",
+    "right": "Quick actionsAdd a showReview bookings · 3Open audit log"
+  }
+}

@@ -14,9 +14,12 @@
 .app-dashboard-hero-mobile { display: none; }
 .app-metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
 .app-metrics-grid.compact { grid-template-columns: repeat(3, minmax(0,1fr)); margin-bottom: 16px; }
-.app-dashboard-columns { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(320px,.82fr); gap: 18px; margin-top: 18px; }
+.app-dashboard-columns { display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: 16px; margin-top: 18px; }
 .app-dashboard-side { display: grid; gap: 18px; align-content: start; }
+.app-panel[data-section='dashboard-quick-actions'] { padding: 18px; }
+.app-panel[data-section='dashboard-quick-actions'] > header { margin-bottom: 12px; }
 .app-quick-actions { display: grid; gap: 8px; }
+.app-quick-actions .pyxis-btn { width: 100%; }
 .app-live-label, .app-attention-count { color: var(--app-accent); font-size: 12px; font-weight: 700; }
 .app-attention-list { display: grid; overflow: hidden; border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); background: var(--app-surface-strong); }
 .app-attention-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--app-rule); }

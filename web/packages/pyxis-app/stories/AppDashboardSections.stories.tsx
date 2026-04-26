@@ -8,9 +8,8 @@ import {
   DashboardHero,
   DashboardMobileCopy,
   DashboardMobileHeader,
-  DashboardQuickActionsContent,
 } from '../src/components/organisms/DashboardSections';
-import { DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
+import { DashboardQuickActionsPanel, DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
 
 const meta: Meta = {
   title: 'Pyxis App/Dashboard Sections',
@@ -63,7 +62,11 @@ export const UpcomingPanelEmpty: Story = {
 };
 
 export const QuickActionsPanel: Story = {
-  render: () => <div style={{ width: 360, padding: 24, background: 'var(--app-canvas)' }}><Panel title="Quick actions" section="dashboard-quick-actions"><DashboardQuickActionsContent pendingCount={pendingBookings.length} /></Panel></div>,
+  render: () => <div style={{ width: 360, padding: 24, background: 'var(--app-canvas)' }}><DashboardQuickActionsPanel pendingCount={pendingBookings.length} /></div>,
+};
+
+export const QuickActionsPanelNoPending: Story = {
+  render: () => <div style={{ width: 360, padding: 24, background: 'var(--app-canvas)' }}><DashboardQuickActionsPanel pendingCount={0} /></div>,
 };
 
 export const AttentionPanelMobile: Story = {

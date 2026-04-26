@@ -1,0 +1,104 @@
+[
+{
+  "classificationCounts": {
+    "tune-required": 1
+  },
+  "jsonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/compare-all-output.json",
+  "markdownPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/01-suite-summary.md",
+  "maxChangedPercent": 12.03048112669104,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "tune-required"
+  },
+  "rows": [
+    {
+      "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/compare.json",
+      "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/compare.md",
+      "attributeChangeCount": 3,
+      "attributeDiffs": [
+        {
+          "attribute": "class",
+          "left": null,
+          "right": "app-panel"
+        },
+        {
+          "attribute": "data-pyxis-component",
+          "left": null,
+          "right": "panel"
+        },
+        {
+          "attribute": "data-pyxis-part",
+          "left": null,
+          "right": "root"
+        }
+      ],
+      "bounds": {
+        "changed": true,
+        "delta": {
+          "height": -2.203125,
+          "width": 23.171875,
+          "x": -22.171875,
+          "y": -18
+        },
+        "left": {
+          "height": 189.28125,
+          "width": 320,
+          "x": 893,
+          "y": 454.890625
+        },
+        "normalizedHeight": 189,
+        "normalizedWidth": 343,
+        "right": {
+          "height": 187.078125,
+          "width": 343.171875,
+          "x": 870.828125,
+          "y": 436.890625
+        }
+      },
+      "changedPercent": 12.03048112669104,
+      "changedPixels": 7799,
+      "classification": "tune-required",
+      "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_comparison.png",
+      "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/diff_only.png",
+      "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/left_region.png",
+      "leftSelector": "[data-section=\"dashboard-quick-actions\"]",
+      "page": "dashboard",
+      "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/10-dashboard-quick-actions-consolidation/run-02-icons-padding/dashboard/artifacts/quick-actions/right_region.png",
+      "rightSelector": "[data-section=\"dashboard-quick-actions\"]",
+      "section": "quick-actions",
+      "styleChangeCount": 4,
+      "styleDiffs": [
+        {
+          "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+          "property": "box-shadow",
+          "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+        },
+        {
+          "left": "rgb(26, 26, 24)",
+          "property": "color",
+          "right": "rgb(31, 30, 28)"
+        },
+        {
+          "left": "13px",
+          "property": "font-size",
+          "right": "14px"
+        },
+        {
+          "left": "19.5px",
+          "property": "line-height",
+          "right": "20.3px"
+        }
+      ],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 64827,
+      "variant": "desktop"
+    }
+  ],
+  "sectionCount": 1
+}
+]

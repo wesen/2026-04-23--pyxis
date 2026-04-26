@@ -52,9 +52,9 @@ export function DashboardHero({ show }: { show?: AppShow }) {
 export function DashboardQuickActionsContent({ pendingCount }: { pendingCount: number }) {
   return (
     <div className="app-quick-actions">
-      <Button>Add a show</Button>
-      <Button variant="outline">Review bookings · {pendingCount}</Button>
-      <Button variant="ghost">Open audit log</Button>
+      <Button fullWidth iconLeft="plus">Add a show</Button>
+      <Button fullWidth variant="outline" iconLeft="mail">Review bookings · {pendingCount}</Button>
+      <Button fullWidth variant="ghost" iconLeft="log">Open audit log</Button>
     </div>
   );
 }
