@@ -192,3 +192,13 @@ Step 26: Continued Phase 8B widget folder architecture; atoms, molecules, Phase 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/DashboardHero/DashboardHero.tsx — DashboardHero widget folder
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx — Panel widget folder
 
+
+## 2026-04-25
+
+Step 27: Colocated pyxis-app Storybook stories with widget/page folders and removed the top-level stories folder while preserving visual-diff story IDs (commit df94c8e).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx — Colocated MetricCard story
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx — Colocated Bookings Inbox story
+

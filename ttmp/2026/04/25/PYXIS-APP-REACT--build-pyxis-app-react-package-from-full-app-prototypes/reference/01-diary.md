@@ -62,6 +62,8 @@ RelatedFiles:
       Note: Final inspected Hero crop for current WIP checkpoint (commit ed55e40)
     - Path: ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/14-dashboard-hero-consolidation/run-07-title-typography/dashboard/artifacts/hero/right_region.png
       Note: Evidence crop for title typography stop point (commit b2fd3dc)
+    - Path: web/packages/pyxis-app/.storybook/main.ts
+      Note: Storybook scans colocated src stories only
     - Path: web/packages/pyxis-app/src/App.tsx
       Note: New responsive app route package scaffold (commit 05b60dad9ef797b0ca29045e14c6218fc9955353)
     - Path: web/packages/pyxis-app/src/api/appApi.ts
@@ -86,6 +88,8 @@ RelatedFiles:
         Shows table row structure and archived variant matched to prototype columns (commits 4020ea8
     - Path: web/packages/pyxis-app/src/components/molecules/Table.css
       Note: Shared table primitive styles extracted from Rows.css (commit 8ab1a74)
+    - Path: web/packages/pyxis-app/src/components/organisms/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
+      Note: Story colocation validation
     - Path: web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx
       Note: |-
         Dashboard quick action button icon/full-width reuse (commit 12cc17c)
@@ -150,6 +154,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -3457,4 +3462,87 @@ Visual smoke artifacts:
 
 ```text
 ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/22-widget-folder-architecture/run-01-smoke/
+```
+
+## Step 27: Colocate pyxis-app Storybook stories with widget folders
+
+I reorganized Storybook stories to match the widget-folder convention used by `pyxis-components/src/public`: stories now live beside the widget or page they exercise instead of in the top-level `web/packages/pyxis-app/stories/` folder.
+
+### Prompt Context
+
+**User prompt (verbatim):** "organize the storybook stories and the storybook folder organization similarly"
+
+**Assistant interpretation:** Move `pyxis-app` stories into colocated widget/page folders, preserving story IDs used by visual specs where possible.
+
+**Inferred user intent:** Make Storybook organization follow the same ownership model as TSX/CSS: each widget owns its implementation, styles, and stories.
+
+**Commit:** `df94c8e` — `Colocate pyxis app Storybook stories`
+
+### What I did
+
+- Moved component stories into atom/molecule widget folders.
+- Moved dashboard, shows, bookings, calendar, show-detail, and page stories into their corresponding widget/page folders.
+- Removed the top-level `web/packages/pyxis-app/stories/` folder.
+- Updated `.storybook/main.ts` to scan only colocated `../src/**/*.stories.*` files.
+- Preserved existing `title` and story export names for visual-diff story IDs such as:
+  - `pyxis-app-components--metric-card-default`,
+  - `pyxis-app-organisms-bookings--inbox-panel`,
+  - `pyxis-app-organisms-calendar--month-panel`.
+
+### Why
+
+The app had been converted to widget folders, but stories were still centralized in a flat folder. That separated evidence/fixtures from the widgets they document and made the codebase diverge from the `pyxis-components/src/public` convention.
+
+### What worked
+
+- Typecheck passed.
+- Storybook restarted and loaded colocated stories without console errors for checked targets.
+- Visual smoke confirmed preserved story IDs still work:
+
+```text
+metric-card: 3.724216959511077%, review
+bookings-queue-panel: 11.72947581936586%, tune-required
+```
+
+### What didn't work
+
+Nothing hard-blocking. The only caveat is that several colocated story files intentionally share old Storybook titles to preserve existing visual-diff story IDs.
+
+### What I learned
+
+Colocating stories does not require changing Storybook IDs if the `title` and export names are preserved. This lets us improve file organization without updating visual specs.
+
+### What was tricky to build
+
+The tricky part was splitting grouped story files like Bookings, Calendar, Shows, and Components while preserving existing story IDs used by the visual suite.
+
+### What warrants a second pair of eyes
+
+- Review whether keeping shared titles across multiple colocated story files is acceptable long term.
+- Review whether some group titles should later be migrated with a coordinated visual spec update.
+
+### What should be done in the future
+
+- Continue keeping new stories beside their widget/page.
+- If story titles change, update visual-diff specs in the same commit.
+
+### Code review instructions
+
+- Check representative colocated stories such as:
+  - `MetricCard/MetricCard.stories.tsx`,
+  - `BookingsInboxPanel/BookingsInboxPanel.stories.tsx`,
+  - `CalendarMonthPanel/CalendarMonthPanel.stories.tsx`,
+  - `pages/Pages.stories.tsx`.
+- Run:
+
+```bash
+cd web && pnpm --filter pyxis-app typecheck
+```
+
+### Technical details
+
+Visual smoke artifacts:
+
+```text
+ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/23-story-colocation/run-01-smoke/
 ```
