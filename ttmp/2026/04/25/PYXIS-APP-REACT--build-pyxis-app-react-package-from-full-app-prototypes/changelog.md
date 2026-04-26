@@ -340,3 +340,13 @@ Step 40: Started dedicated reuse by adding AppEmptyState around pyxis-components
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.tsx — App wrapper reusing pyxis-components Empty
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/molecules/Empty/Empty.tsx — Shared Empty accepts className for app wrappers
 
+
+## 2026-04-26
+
+Step 41: Reused pyxis-components Modal for NewShowModal, added a focused modal visual target, and tuned the dialog to review band (commit cee2ac2).
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx — NewShowModal now composes shared Modal
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/organisms/Modal/Modal.tsx — Wrapper-friendly Modal props
+

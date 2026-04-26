@@ -37,6 +37,7 @@ RelatedFiles:
         Initial pyxis-app component visual suite
         Focused component visual targets for Shows panels (commits 4020ea8
         Calendar focused visual targets (commit f3295d5)
+        Focused new-show-modal visual guard
     - Path: prototype-design/visual-diff/userland/specs/app.pages.desktop.visual.yml
       Note: Page Storybook IDs updated after title hierarchy change
     - Path: prototype-design/visual-diff/userland/verbs/pyxis-pages.js
@@ -266,10 +267,14 @@ RelatedFiles:
       Note: Phase 8C route-support stories
     - Path: web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.tsx
       Note: Phase 8C route-support props
+    - Path: web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.css
+      Note: App modal form styling
     - Path: web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx
       Note: Phase 8C modal stories
     - Path: web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
-      Note: Phase 8C modal callbacks
+      Note: |-
+        Phase 8C modal callbacks
+        Phase 8C Modal reuse wrapper
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
       Note: Phase 8C organism stories
     - Path: web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
@@ -362,6 +367,8 @@ RelatedFiles:
       Note: Direct Storybook targets for Shows organisms (commit 4020ea8)
     - Path: web/packages/pyxis-components/src/molecules/Empty/Empty.tsx
       Note: Dedicated reuse Empty API extension
+    - Path: web/packages/pyxis-components/src/organisms/Modal/Modal.tsx
+      Note: Phase 8C Modal reuse extension
     - Path: web/packages/pyxis-types/src/app.ts
       Note: Shared staff app TypeScript contracts
 ExternalSources: []
@@ -370,6 +377,7 @@ LastUpdated: 0001-01-01T00:00:00Z
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -5635,4 +5643,138 @@ The non-empty guard outputs remained at known values:
 ```text
 bookings-queue-panel: 11.72947581936586%, tune-required
 shows-confirmed-panel: 9.821005081874647%, review
+```
+
+## Step 41: Reuse shared Modal for NewShowModal
+
+I continued Phase 8C dedicated reuse with the overlay cluster: `NewShowModal -> pyxis-components/Modal`. This was a good next target because the prototype modal already matches the shared Modal anatomy closely: fixed overlay, blurred backdrop, panel, header, scrollable body, and footer actions.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue throughout all of 8, i'm going swimming."
+
+**Assistant interpretation:** Continue Phase 8C reuse clusters autonomously, committing at focused checkpoints and keeping diary evidence.
+
+**Commit (code):** `cee2ac2` — "Reuse shared Modal for new show dialog"
+
+### What I did
+
+- Added a focused `new-show-modal` visual target to `app.components.visual.yml` and regenerated the JS mirror.
+- Extended shared `pyxis-components/Modal` with app-wrapper-friendly props:
+  - `className`,
+  - `panelClassName`,
+  - `bodyClassName`,
+  - `footerClassName`,
+  - `panelProps`.
+- Reworked `NewShowModal` to compose `Modal` instead of hand-rolling the overlay/panel shell.
+- Preserved the app-level `data-pyxis-component="new-show-modal"` hook via `panelProps` for focused app visual specs.
+- Expanded the modal body to match the prototype form fields more closely:
+  - artist,
+  - date,
+  - doors,
+  - age,
+  - price,
+  - genre,
+  - notes,
+  - cancel / save-hold / confirm actions.
+- Kept app form styling in `NewShowModal.css`.
+- Ran typechecks:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+```
+
+- Ran the modal visual guard.
+
+Initial baseline with the newly added selector exposed that the old app modal was structurally shorter/different than the prototype:
+
+```text
+new-show-modal baseline: 8.959984373255944%, review
+text changed: true
+```
+
+After reusing shared `Modal`, adding the prototype fields, and tuning field heights/gaps:
+
+```text
+new-show-modal: 8.681495429759522%, review
+text changed: false
+bounds delta: +7.75px height, y -3.875px
+```
+
+### Why
+
+The modal shell is generic UI and belongs in `pyxis-components`; `NewShowModal` should own only the app-specific form and action semantics. The wrapper-friendly Modal props avoid duplicating the overlay while still letting app organisms keep stable visual hooks and local CSS.
+
+### What worked
+
+- Shared `Modal` was close to the prototype already.
+- The focused modal visual spec now gives repeatable evidence for future modal changes.
+- After field-size tuning, the modal landed in review band with unchanged text.
+- Typechecks passed for both `pyxis-components` and `pyxis-app`.
+
+### What didn't work
+
+The first modal visual target used the wrong original selector and captured the full app shell instead of the modal panel. I inspected the prototype DOM with Playwright and corrected the selector to:
+
+```text
+#root > div > div > div:nth-of-type(2) > div
+```
+
+The prototype server and Storybook were also not running initially, so I restarted:
+
+```bash
+tmux new-session -d -s pyxis-prototype-server 'cd /home/manuel/code/wesen/2026-04-23--pyxis/prototype-design && python3 -m http.server 7070'
+tmux new-session -d -s pyxis-app-storybook 'cd /home/manuel/code/wesen/2026-04-23--pyxis/web && pnpm --filter pyxis-app storybook'
+```
+
+### What I learned
+
+This cluster confirms the wrapper-first pattern from the reuse guide: extend the shared primitive with neutral pass-through props, then keep the app organism focused on domain form content and callbacks.
+
+### What was tricky to build
+
+The `panelProps` ordering mattered. `Modal` emits `data-pyxis-component="modal"` by default, but the app visual spec needs the panel to expose `new-show-modal`; the spread order had to allow app-supplied panel data attributes to override the generic modal part for that wrapper.
+
+### What warrants a second pair of eyes
+
+- Review whether `panelProps` is the right long-term Modal extension or whether Modal should expose a first-class `componentName`/`part` override API.
+- Review whether `NewShowModal` should use shared `Field`/`Input`/`Select`/`Textarea` next; this step intentionally focused on the shell and retained local form styling.
+
+### What should be done in the future
+
+- Consider extracting a `NewShowForm` molecule/organism if the modal body grows.
+- Add callbacks for individual form submit payloads when real mutation wiring starts.
+- Continue Phase 8C with Card/Panel, Stat, Table, and Badge/Tag reuse clusters.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-components/src/organisms/Modal/Modal.tsx
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.css
+prototype-design/visual-diff/userland/specs/app.components.visual.yml
+```
+
+Validate with:
+
+```bash
+cd web && pnpm --filter pyxis-components typecheck && pnpm --filter pyxis-app typecheck
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page new-show-modal --summary \
+  --outDir /tmp/pyxis-reuse-modal-after-tuned \
+  --output json
+```
+
+### Technical details
+
+Final modal visual guard:
+
+```text
+new-show-modal: 8.681495429759522%, review
+text unchanged
+left bounds: 522 x 578.59375 at x=359, y=90.703125
+right bounds: 522 x 586.34375 at x=359, y=86.828125
 ```
