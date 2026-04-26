@@ -40,3 +40,20 @@ type ArtistRepository interface {
 type AuditLogRepository interface {
 	Create(ctx context.Context, entry *domain.AuditLogEntry) (*domain.AuditLogEntry, error)
 }
+
+// CalendarRepository defines calendar storage operations.
+type CalendarRepository interface {
+	ListHolds(ctx context.Context) ([]domain.CalendarHold, error)
+	CreateHold(ctx context.Context, hold *domain.CalendarHold) (*domain.CalendarHold, error)
+	DeleteHold(ctx context.Context, id int) error
+	ListBlocked(ctx context.Context) ([]domain.CalendarBlocked, error)
+	CreateBlocked(ctx context.Context, blocked *domain.CalendarBlocked) (*domain.CalendarBlocked, error)
+	DeleteBlocked(ctx context.Context, id int) error
+}
+
+// AttendanceRepository defines attendance log storage operations.
+type AttendanceRepository interface {
+	GetByShowID(ctx context.Context, showID int) (*domain.AttendanceLog, error)
+	Upsert(ctx context.Context, log *domain.AttendanceLog) (*domain.AttendanceLog, error)
+	List(ctx context.Context, limit, offset int) ([]domain.AttendanceLog, error)
+}

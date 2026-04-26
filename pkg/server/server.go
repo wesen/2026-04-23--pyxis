@@ -19,6 +19,8 @@ type Server struct {
 	showService       *service.ShowService
 	submissionService *service.SubmissionService
 	artistService     *service.ArtistService
+	calendarService   *service.CalendarService
+	attendanceService *service.AttendanceService
 	authService       *service.AuthService
 }
 
@@ -32,11 +34,15 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	submissionRepo := postgres.NewSubmissionRepo(queries)
 	artistRepo := postgres.NewArtistRepo(queries)
 	auditRepo := postgres.NewAuditRepo(queries)
+	calendarRepo := postgres.NewCalendarRepo(queries)
+	attendanceRepo := postgres.NewAttendanceRepo(queries)
 
 	// Service layer
 	auditSvc := service.NewAuditService(auditRepo)
 	s.showService = service.NewShowService(showRepo, auditSvc)
 	s.artistService = service.NewArtistService(artistRepo)
+	s.calendarService = service.NewCalendarService(calendarRepo)
+	s.attendanceService = service.NewAttendanceService(attendanceRepo)
 	s.submissionService = service.NewSubmissionService(
 		submissionRepo, showRepo, artistRepo, auditSvc, database.Pool,
 	)
@@ -85,6 +91,18 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("GET /api/app/artists", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListArtists))))
 	mux.Handle("GET /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetArtist))))
 	mux.Handle("PATCH /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateArtist))))
+
+	// Staff calendar endpoints
+	mux.Handle("GET /api/app/calendar", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListCalendar))))
+	mux.Handle("POST /api/app/calendar/holds", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateCalendarHold))))
+	mux.Handle("DELETE /api/app/calendar/holds/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeleteCalendarHold))))
+	mux.Handle("POST /api/app/calendar/blocked", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateCalendarBlocked))))
+	mux.Handle("DELETE /api/app/calendar/blocked/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeleteCalendarBlocked))))
+
+	// Staff attendance endpoints
+	mux.Handle("GET /api/app/attendance", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAttendance))))
+	mux.Handle("GET /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAttendance))))
+	mux.Handle("PATCH /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertAttendance))))
 
 	s.handler = mux
 	return s

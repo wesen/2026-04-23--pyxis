@@ -416,6 +416,300 @@ func submissionToProto(sub *domain.Submission) map[string]interface{} {
 	return pb
 }
 
+func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	holds, err := s.calendarService.ListHolds(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	blocked, err := s.calendarService.ListBlocked(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	pbHolds := make([]map[string]interface{}, len(holds))
+	for i, h := range holds {
+		pbHolds[i] = map[string]interface{}{
+			"id":    h.ID,
+			"date":  h.Date.Format(time.DateOnly),
+			"label": h.Label,
+		}
+	}
+
+	pbBlocked := make([]map[string]interface{}, len(blocked))
+	for i, b := range blocked {
+		pbBlocked[i] = map[string]interface{}{
+			"id":     b.ID,
+			"date":   b.Date.Format(time.DateOnly),
+			"reason": b.Reason,
+		}
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"holds":   pbHolds,
+		"blocked": pbBlocked,
+	})
+}
+
+func (s *Server) handleCreateCalendarHold(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req struct {
+		Date  string `json:"date"`
+		Label string `json:"label"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	t, err := time.Parse(time.DateOnly, req.Date)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid date: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	created, err := s.calendarService.CreateHold(ctx, &domain.CalendarHold{
+		Date:      t,
+		Label:     req.Label,
+		CreatedBy: &actorID,
+	})
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusCreated, map[string]interface{}{
+		"id":    created.ID,
+		"date":  created.Date.Format(time.DateOnly),
+		"label": created.Label,
+	})
+}
+
+func (s *Server) handleDeleteCalendarHold(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid hold ID: %w", err))
+		return
+	}
+
+	if err := s.calendarService.DeleteHold(ctx, id); err != nil {
+		respondError(w, err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (s *Server) handleCreateCalendarBlocked(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req struct {
+		Date   string `json:"date"`
+		Reason string `json:"reason"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	t, err := time.Parse(time.DateOnly, req.Date)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid date: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	created, err := s.calendarService.CreateBlocked(ctx, &domain.CalendarBlocked{
+		Date:      t,
+		Reason:    req.Reason,
+		CreatedBy: &actorID,
+	})
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusCreated, map[string]interface{}{
+		"id":     created.ID,
+		"date":   created.Date.Format(time.DateOnly),
+		"reason": created.Reason,
+	})
+}
+
+func (s *Server) handleDeleteCalendarBlocked(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid blocked ID: %w", err))
+		return
+	}
+
+	if err := s.calendarService.DeleteBlocked(ctx, id); err != nil {
+		respondError(w, err)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (s *Server) handleListAttendance(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	limit := 50
+	offset := 0
+	if l := r.URL.Query().Get("limit"); l != "" {
+		if v, err := strconv.Atoi(l); err == nil && v > 0 {
+			limit = v
+		}
+	}
+	if o := r.URL.Query().Get("offset"); o != "" {
+		if v, err := strconv.Atoi(o); err == nil && v >= 0 {
+			offset = v
+		}
+	}
+
+	logs, err := s.attendanceService.List(ctx, limit, offset)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	pbLogs := make([]map[string]interface{}, len(logs))
+	for i, log := range logs {
+		pbLogs[i] = map[string]interface{}{
+			"id":            log.ID,
+			"showId":        log.ShowID,
+			"artist":        log.Artist,
+			"date":          log.Date.Format(time.DateOnly),
+			"draw":          log.Draw,
+			"notes":         log.Notes,
+			"incident":      log.Incident,
+			"incidentNotes": log.IncidentNotes,
+			"createdAt":     log.CreatedAt.Format(time.RFC3339),
+		}
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"logs": pbLogs,
+	})
+}
+
+func (s *Server) handleGetAttendance(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	showIDStr := r.PathValue("showId")
+	showID, err := strconv.Atoi(showIDStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	log, err := s.attendanceService.GetByShowID(ctx, showID)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":            log.ID,
+		"showId":        log.ShowID,
+		"draw":          log.Draw,
+		"notes":         log.Notes,
+		"incident":      log.Incident,
+		"incidentNotes": log.IncidentNotes,
+		"createdAt":     log.CreatedAt.Format(time.RFC3339),
+	})
+}
+
+func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	showIDStr := r.PathValue("showId")
+	showID, err := strconv.Atoi(showIDStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req struct {
+		Draw          *int   `json:"draw"`
+		Notes         string `json:"notes"`
+		Incident      bool   `json:"incident"`
+		IncidentNotes string `json:"incidentNotes"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{
+		ShowID:        showID,
+		Draw:          req.Draw,
+		Notes:         req.Notes,
+		Incident:      req.Incident,
+		IncidentNotes: req.IncidentNotes,
+		LoggedBy:      &actorID,
+	})
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondJSON(w, http.StatusOK, map[string]interface{}{
+		"id":            updated.ID,
+		"showId":        updated.ShowID,
+		"draw":          updated.Draw,
+		"notes":         updated.Notes,
+		"incident":      updated.Incident,
+		"incidentNotes": updated.IncidentNotes,
+		"createdAt":     updated.CreatedAt.Format(time.RFC3339),
+	})
+}
+
 func (s *Server) requireRole(roles ...string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
