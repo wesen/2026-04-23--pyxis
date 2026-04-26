@@ -3,7 +3,11 @@ import { CalendarMonthPanel } from '../CalendarMonthPanel';
 import { CalendarAgenda } from '../CalendarAgenda';
 import './CalendarBoard.css';
 
-export function CalendarBoard({ events }: { events: CalendarEvent[] }) {
+export type CalendarBoardProps = {
+  events: CalendarEvent[];
+};
+
+export function CalendarBoard({ events }: CalendarBoardProps) {
   return (
     <div className="app-calendar-layout" data-section="calendar-board">
       <CalendarMonthPanel events={events}/>
