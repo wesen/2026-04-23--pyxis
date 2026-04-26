@@ -1,0 +1,103 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-02-agenda-chip-fix/month/calendar-month-panel/artifacts/component/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-02-agenda-chip-fix/month/calendar-month-panel/artifacts/component/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-panel app-calendar-month-panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-component",
+      "right": "panel"
+    },
+    {
+      "changed": true,
+      "name": "data-pyxis-part",
+      "right": "root"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -2.40625,
+      "width": -24,
+      "x": -223,
+      "y": -113.390625
+    },
+    "left": {
+      "height": 593.25,
+      "width": 670,
+      "x": 247,
+      "y": 137.390625
+    },
+    "right": {
+      "height": 590.84375,
+      "width": 646,
+      "x": 24,
+      "y": 24
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 593.25,
+      "width": 670,
+      "x": 247,
+      "y": 137.390625
+    },
+    "exists": true,
+    "name": "calendar-month-panel-component",
+    "selector": "[data-section=\"calendar-month\"]",
+    "url": "http://localhost:7070/standalone/full-app/calendar.html",
+    "visible": true
+  },
+  "name": "calendar-month-panel-component",
+  "pixel": {
+    "changedPercent": 7.7094326348057685,
+    "changedPixels": 30682,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-02-agenda-chip-fix/month/calendar-month-panel/artifacts/component/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-02-agenda-chip-fix/month/calendar-month-panel/artifacts/component/diff_only.png",
+    "normalizedHeight": 594,
+    "normalizedWidth": 670,
+    "threshold": 30,
+    "totalPixels": 397980
+  },
+  "right": {
+    "bounds": {
+      "height": 590.84375,
+      "width": 646,
+      "x": 24,
+      "y": 24
+    },
+    "exists": true,
+    "name": "calendar-month-panel-component",
+    "selector": "[data-section=\"calendar-month\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--month-panel\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(26, 24, 22, 0.04) 0px 1px 2px 0px",
+      "name": "box-shadow",
+      "right": "rgba(31, 30, 28, 0.04) 0px 1px 2px 0px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "May 2025TodaySunMonTueWedThuFriSat12Burial Hex3456789Moor Mother1011121314Hold — TBD151617Cygnus + Guests181920212223Open Mic242526Closed27282930Basement Freq.31ConfirmedHoldBlocked",
+    "right": "May 2025‹Today›SunMonTueWedThuFriSat12Burial Hex3456789Moor Mother1011121314Hold — TBD151617Cygnus + Guests181920212223Open Mic242526Closed27282930Basement Freq.31ConfirmedHoldBlocked"
+  }
+}

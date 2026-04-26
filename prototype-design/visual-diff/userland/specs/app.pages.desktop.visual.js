@@ -193,12 +193,12 @@ module.exports = {
         },
         {
           "name": "month",
-          "original": "[data-page=\"calendar\"] main > div:first-child",
+          "original": "[data-section=\"calendar-month\"]",
           "react": "[data-section=\"calendar-month\"]"
         },
         {
           "name": "agenda",
-          "original": "[data-page=\"calendar\"] main > div:nth-child(2)",
+          "original": "[data-section=\"calendar-agenda\"]",
           "react": "[data-section=\"calendar-agenda\"]"
         }
       ]

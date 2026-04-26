@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "component",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 16.96849446849447,
+    "classificationCounts": {
+      "tune-required": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "tune-required",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "calendar-agenda-panel",
+        "variant": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel",
+        "sectionCount": 1,
+        "maxChangedPercent": 16.96849446849447,
+        "classificationCounts": {
+          "tune-required": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "calendar-agenda-panel",
+            "variant": "component",
+            "section": "component",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component",
+            "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--agenda&viewMode=story",
+            "leftSelector": "[data-section=\"calendar-agenda\"]",
+            "rightSelector": "[data-section=\"calendar-agenda\"]",
+            "threshold": 30,
+            "changedPercent": 16.96849446849447,
+            "changedPixels": 28222,
+            "totalPixels": 166320,
+            "normalizedWidth": 280,
+            "normalizedHeight": 594,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "height": 593.25,
+                "x": 933,
+                "y": 137.390625,
+                "width": 280
+              },
+              "right": {
+                "width": 280,
+                "height": 331.484375,
+                "x": 24,
+                "y": 24
+              },
+              "delta": {
+                "y": -113.390625,
+                "width": 0,
+                "height": -261.765625,
+                "x": -909
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "attributeChanges": 1,
+                "boundsChanged": true,
+                "styleChanges": 0,
+                "textChanged": false,
+                "artifactCount": 2,
+                "left": {
+                  "bounds": {
+                    "x": 933,
+                    "y": 137.390625,
+                    "width": 280,
+                    "height": 593.25
+                  },
+                  "name": "calendar-agenda-panel-component",
+                  "url": "http://localhost:7070/standalone/full-app/calendar.html",
+                  "selector": "[data-section=\"calendar-agenda\"]",
+                  "exists": true,
+                  "visible": true
+                },
+                "name": "calendar-agenda-panel-component",
+                "pixel": {
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 166320,
+                  "changedPixels": 28222,
+                  "changedPercent": 16.96849446849447,
+                  "normalizedWidth": 280,
+                  "normalizedHeight": 594,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png"
+                },
+                "right": {
+                  "name": "calendar-agenda-panel-component",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--agenda&viewMode=story",
+                  "selector": "[data-section=\"calendar-agenda\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 24,
+                    "y": 24,
+                    "width": 280,
+                    "height": 331.484375
+                  }
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1"
+              },
+            "classification": "tune-required",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "calendar-agenda-panel",
+        "variant": "component",
+        "section": "component",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component",
+        "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--agenda&viewMode=story",
+        "leftSelector": "[data-section=\"calendar-agenda\"]",
+        "rightSelector": "[data-section=\"calendar-agenda\"]",
+        "threshold": 30,
+        "changedPercent": 16.96849446849447,
+        "changedPixels": 28222,
+        "totalPixels": 166320,
+        "normalizedWidth": 280,
+        "normalizedHeight": 594,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "y": 137.390625,
+            "width": 280,
+            "height": 593.25,
+            "x": 933
+          },
+          "right": {
+            "x": 24,
+            "y": 24,
+            "width": 280,
+            "height": 331.484375
+          },
+          "delta": {
+            "x": -909,
+            "y": -113.390625,
+            "width": 0,
+            "height": -261.765625
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "pixel": {
+              "normalizedWidth": 280,
+              "normalizedHeight": 594,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-03-icons-status-width/agenda/calendar-agenda-panel/artifacts/component/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 166320,
+              "changedPixels": 28222,
+              "changedPercent": 16.96849446849447
+            },
+            "right": {
+              "name": "calendar-agenda-panel-component",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--agenda&viewMode=story",
+              "selector": "[data-section=\"calendar-agenda\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "height": 331.484375,
+                "x": 24,
+                "y": 24,
+                "width": 280
+              }
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "styleChanges": 0,
+            "textChanged": false,
+            "artifactCount": 2,
+            "left": {
+              "name": "calendar-agenda-panel-component",
+              "url": "http://localhost:7070/standalone/full-app/calendar.html",
+              "selector": "[data-section=\"calendar-agenda\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 933,
+                "y": 137.390625,
+                "width": 280,
+                "height": 593.25
+              }
+            },
+            "name": "calendar-agenda-panel-component"
+          },
+        "classification": "tune-required",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

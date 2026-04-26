@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-01-month-agenda/agenda/calendar-agenda-panel/artifacts/component/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-01-month-agenda/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-calendar-side"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -232.890625,
+      "width": 0,
+      "x": -909,
+      "y": -113.390625
+    },
+    "left": {
+      "height": 593.25,
+      "width": 280,
+      "x": 933,
+      "y": 137.390625
+    },
+    "right": {
+      "height": 360.359375,
+      "width": 280,
+      "x": 24,
+      "y": 24
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 593.25,
+      "width": 280,
+      "x": 933,
+      "y": 137.390625
+    },
+    "exists": true,
+    "name": "calendar-agenda-panel-component",
+    "selector": "[data-section=\"calendar-agenda\"]",
+    "url": "http://localhost:7070/standalone/full-app/calendar.html",
+    "visible": true
+  },
+  "name": "calendar-agenda-panel-component",
+  "pixel": {
+    "changedPercent": 17.043650793650794,
+    "changedPixels": 28347,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-01-month-agenda/agenda/calendar-agenda-panel/artifacts/component/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-01-month-agenda/agenda/calendar-agenda-panel/artifacts/component/diff_only.png",
+    "normalizedHeight": 594,
+    "normalizedWidth": 280,
+    "threshold": 30,
+    "totalPixels": 166320
+  },
+  "right": {
+    "bounds": {
+      "height": 360.359375,
+      "width": 280,
+      "x": 24,
+      "y": 24
+    },
+    "exists": true,
+    "name": "calendar-agenda-panel-component",
+    "selector": "[data-section=\"calendar-agenda\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-organisms-calendar--agenda\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "left": "May at a glanceConfirmed5Hold1Blocked1Open nights24Today · May 2Burial HexConfirmedDoors 8:00 PM · 21+ · $12 advExpected draw: ~70 / 150Open showAdd to today",
+    "right": "May at a glanceConfirmed5Hold1Blocked1Open nights24Today · May 2Burial HexBurial HexDoors 8:00 PM · 21+ · $12 adv / $15 doorExpected draw: ~70 / 150Open showAdd to today"
+  }
+}

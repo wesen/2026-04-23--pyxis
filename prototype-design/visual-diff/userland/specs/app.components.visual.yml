@@ -97,3 +97,27 @@ targets:
       - name: component
         original: '[data-section="bookings-processed"]'
         react: '[data-section="bookings-processed"]'
+  - page: calendar-month-panel
+    variant: component
+    priority: tune-first
+    prototypePath: /standalone/full-app/calendar.html
+    storyId: pyxis-app-organisms-calendar--month-panel
+    viewport:
+      width: 980
+      height: 720
+    sections:
+      - name: component
+        original: '[data-section="calendar-month"]'
+        react: '[data-section="calendar-month"]'
+  - page: calendar-agenda-panel
+    variant: component
+    priority: tune-first
+    prototypePath: /standalone/full-app/calendar.html
+    storyId: pyxis-app-organisms-calendar--agenda
+    viewport:
+      width: 420
+      height: 520
+    sections:
+      - name: component
+        original: '[data-section="calendar-agenda"]'
+        react: '[data-section="calendar-agenda"]'

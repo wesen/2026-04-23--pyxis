@@ -1,0 +1,85 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-calendar-side"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -2.40625,
+      "width": 20,
+      "x": -20,
+      "y": 0.75
+    },
+    "left": {
+      "height": 593.25,
+      "width": 280,
+      "x": 933,
+      "y": 137.390625
+    },
+    "right": {
+      "height": 590.84375,
+      "width": 300,
+      "x": 913,
+      "y": 138.140625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 593.25,
+      "width": 280,
+      "x": 933,
+      "y": 137.390625
+    },
+    "exists": true,
+    "name": "calendar-agenda",
+    "selector": "[data-section=\"calendar-agenda\"]",
+    "url": "http://localhost:7070/standalone/full-app/calendar.html",
+    "visible": true
+  },
+  "name": "calendar-agenda",
+  "pixel": {
+    "changedPercent": 7.922558922558923,
+    "changedPixels": 14118,
+    "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png",
+    "normalizedHeight": 594,
+    "normalizedWidth": 300,
+    "threshold": 30,
+    "totalPixels": 178200
+  },
+  "right": {
+    "bounds": {
+      "height": 590.84375,
+      "width": 300,
+      "x": 913,
+      "y": 138.140625
+    },
+    "exists": true,
+    "name": "calendar-agenda",
+    "selector": "[data-section=\"calendar-agenda\"]",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "text": {
+    "changed": false,
+    "left": "May at a glanceConfirmed5Hold1Blocked1Open nights24Today · May 2Burial HexConfirmedDoors 8:00 PM · 21+ · $12 advExpected draw: ~70 / 150Open showAdd to today",
+    "right": "May at a glanceConfirmed5Hold1Blocked1Open nights24Today · May 2Burial HexConfirmedDoors 8:00 PM · 21+ · $12 advExpected draw: ~70 / 150Open showAdd to today"
+  }
+}

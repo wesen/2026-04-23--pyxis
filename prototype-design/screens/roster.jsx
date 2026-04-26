@@ -86,7 +86,7 @@ function CalendarScreen() {
       </>}
     >
       <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: 16 }}>
-        <Card style={{ padding: 20 }}>
+        <Card data-section="calendar-month" style={{ padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
             <div className="px-serif" style={{ fontSize: 24, fontWeight: 500, letterSpacing: "-0.02em" }}>{monthName}</div>
             <div style={{ display: "flex", gap: 6 }}>
@@ -133,7 +133,7 @@ function CalendarScreen() {
           </div>
         </Card>
 
-        <div>
+        <div data-section="calendar-agenda">
           <Card style={{ padding: 18, marginBottom: 14 }}>
             <CardHead title="May at a glance" style={{ marginBottom: 14 }} />
             {[["Confirmed", 5, C.green], ["Hold", 1, C.blue], ["Blocked", 1, C.mute], ["Open nights", 24, C.ink3]].map(([l, v, clr]) => (

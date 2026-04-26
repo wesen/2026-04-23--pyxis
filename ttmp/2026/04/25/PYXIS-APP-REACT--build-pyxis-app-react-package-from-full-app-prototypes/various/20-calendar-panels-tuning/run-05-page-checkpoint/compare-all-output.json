@@ -1,0 +1,630 @@
+[
+  {
+    "variant": "desktop",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint",
+    "pageCount": 1,
+    "sectionCount": 3,
+    "maxChangedPercent": 7.922558922558923,
+    "classificationCounts": {
+      "review": 3
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "calendar",
+        "variant": "desktop",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar",
+        "sectionCount": 3,
+        "maxChangedPercent": 7.922558922558923,
+        "classificationCounts": {
+          "review": 3
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/manifest.json",
+        "indexPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/01-catalog-index.md",
+        "catalog": {
+          "resultCount": 0,
+          "comparisonCount": 3,
+          "failureCount": 0,
+          "artifactCount": 6,
+          "targetCount": 3,
+          "preflightCount": 0
+        },
+        "sections": [
+          {
+            "page": "calendar",
+            "variant": "desktop",
+            "section": "page",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page",
+            "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+            "leftSelector": "[data-page=\"calendar\"]",
+            "rightSelector": "[data-page=\"calendar\"]",
+            "threshold": 30,
+            "changedPercent": 7.13168505942275,
+            "changedPixels": 67209,
+            "totalPixels": 942400,
+            "normalizedWidth": 1240,
+            "normalizedHeight": 760,
+            "bounds": {
+              "right": {
+                "y": 0,
+                "width": 1240,
+                "height": 760,
+                "x": 0
+              },
+              "delta": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+              },
+              "changed": false,
+              "left": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 3,
+                "left": {
+                  "name": "calendar-page",
+                  "url": "http://localhost:7070/standalone/full-app/calendar.html",
+                  "selector": "[data-page=\"calendar\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1240,
+                    "height": 760
+                  }
+                },
+                "pixel": {
+                  "normalizedWidth": 1240,
+                  "normalizedHeight": 760,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 942400,
+                  "changedPixels": 67209,
+                  "changedPercent": 7.13168505942275
+                },
+                "right": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1240,
+                    "height": 760
+                  },
+                  "name": "calendar-page",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+                  "selector": "[data-page=\"calendar\"]"
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 6,
+                "boundsChanged": false,
+                "name": "calendar-page",
+                "textChanged": true
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          },
+          {
+            "page": "calendar",
+            "variant": "desktop",
+            "section": "month",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month",
+            "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+            "leftSelector": "[data-section=\"calendar-month\"]",
+            "rightSelector": "[data-section=\"calendar-month\"]",
+            "threshold": 30,
+            "changedPercent": 7.874265038444143,
+            "changedPixels": 31338,
+            "totalPixels": 397980,
+            "normalizedWidth": 670,
+            "normalizedHeight": 594,
+            "bounds": {
+              "delta": {
+                "width": -22,
+                "height": -2.40625,
+                "x": 0,
+                "y": 0.75
+              },
+              "changed": true,
+              "left": {
+                "x": 247,
+                "y": 137.390625,
+                "width": 670,
+                "height": 593.25
+              },
+              "right": {
+                "x": 247,
+                "y": 138.140625,
+                "width": 648,
+                "height": 590.84375
+              }
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 1,
+                "textChanged": false,
+                "attributeChanges": 3,
+                "left": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "height": 593.25,
+                    "x": 247,
+                    "y": 137.390625,
+                    "width": 670
+                  },
+                  "name": "calendar-month",
+                  "url": "http://localhost:7070/standalone/full-app/calendar.html",
+                  "selector": "[data-section=\"calendar-month\"]"
+                },
+                "name": "calendar-month",
+                "pixel": {
+                  "changedPercent": 7.874265038444143,
+                  "normalizedWidth": 670,
+                  "normalizedHeight": 594,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 397980,
+                  "changedPixels": 31338
+                },
+                "right": {
+                  "name": "calendar-month",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+                  "selector": "[data-section=\"calendar-month\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "height": 590.84375,
+                    "x": 247,
+                    "y": 138.140625,
+                    "width": 648
+                  }
+                }
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          },
+          {
+            "page": "calendar",
+            "variant": "desktop",
+            "section": "agenda",
+            "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda",
+            "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+            "leftSelector": "[data-section=\"calendar-agenda\"]",
+            "rightSelector": "[data-section=\"calendar-agenda\"]",
+            "threshold": 30,
+            "changedPercent": 7.922558922558923,
+            "changedPixels": 14118,
+            "totalPixels": 178200,
+            "normalizedWidth": 300,
+            "normalizedHeight": 594,
+            "bounds": {
+              "left": {
+                "height": 593.25,
+                "x": 933,
+                "y": 137.390625,
+                "width": 280
+              },
+              "right": {
+                "y": 138.140625,
+                "width": 300,
+                "height": 590.84375,
+                "x": 913
+              },
+              "delta": {
+                "x": -20,
+                "y": 0.75,
+                "width": 20,
+                "height": -2.40625
+              },
+              "changed": true
+            },
+            "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.md",
+            "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.json",
+              "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "artifactCount": 2,
+                "attributeChanges": 1,
+                "boundsChanged": true,
+                "left": {
+                  "visible": true,
+                  "bounds": {
+                    "y": 137.390625,
+                    "width": 280,
+                    "height": 593.25,
+                    "x": 933
+                  },
+                  "name": "calendar-agenda",
+                  "url": "http://localhost:7070/standalone/full-app/calendar.html",
+                  "selector": "[data-section=\"calendar-agenda\"]",
+                  "exists": true
+                },
+                "name": "calendar-agenda",
+                "pixel": {
+                  "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 178200,
+                  "changedPixels": 14118,
+                  "changedPercent": 7.922558922558923,
+                  "normalizedWidth": 300,
+                  "normalizedHeight": 594,
+                  "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png"
+                },
+                "right": {
+                  "name": "calendar-agenda",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+                  "selector": "[data-section=\"calendar-agenda\"]",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "x": 913,
+                    "y": 138.140625,
+                    "width": 300,
+                    "height": 590.84375
+                  }
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 0,
+                "textChanged": false
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "calendar",
+        "variant": "desktop",
+        "section": "agenda",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda",
+        "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+        "leftSelector": "[data-section=\"calendar-agenda\"]",
+        "rightSelector": "[data-section=\"calendar-agenda\"]",
+        "threshold": 30,
+        "changedPercent": 7.922558922558923,
+        "changedPixels": 14118,
+        "totalPixels": 178200,
+        "normalizedWidth": 300,
+        "normalizedHeight": 594,
+        "bounds": {
+          "changed": true,
+          "left": {
+            "x": 933,
+            "y": 137.390625,
+            "width": 280,
+            "height": 593.25
+          },
+          "right": {
+            "x": 913,
+            "y": 138.140625,
+            "width": 300,
+            "height": 590.84375
+          },
+          "delta": {
+            "x": -20,
+            "y": 0.75,
+            "width": 20,
+            "height": -2.40625
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 0,
+            "textChanged": false,
+            "artifactCount": 2,
+            "attributeChanges": 1,
+            "boundsChanged": true,
+            "left": {
+              "visible": true,
+              "bounds": {
+                "x": 933,
+                "y": 137.390625,
+                "width": 280,
+                "height": 593.25
+              },
+              "name": "calendar-agenda",
+              "url": "http://localhost:7070/standalone/full-app/calendar.html",
+              "selector": "[data-section=\"calendar-agenda\"]",
+              "exists": true
+            },
+            "name": "calendar-agenda",
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/agenda/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 178200,
+              "changedPixels": 14118,
+              "changedPercent": 7.922558922558923,
+              "normalizedWidth": 300,
+              "normalizedHeight": 594
+            },
+            "right": {
+              "visible": true,
+              "bounds": {
+                "x": 913,
+                "y": 138.140625,
+                "width": 300,
+                "height": 590.84375
+              },
+              "name": "calendar-agenda",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+              "selector": "[data-section=\"calendar-agenda\"]",
+              "exists": true
+            }
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      },
+      {
+        "page": "calendar",
+        "variant": "desktop",
+        "section": "month",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month",
+        "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+        "leftSelector": "[data-section=\"calendar-month\"]",
+        "rightSelector": "[data-section=\"calendar-month\"]",
+        "threshold": 30,
+        "changedPercent": 7.874265038444143,
+        "changedPixels": 31338,
+        "totalPixels": 397980,
+        "normalizedWidth": 670,
+        "normalizedHeight": 594,
+        "bounds": {
+          "left": {
+            "y": 137.390625,
+            "width": 670,
+            "height": 593.25,
+            "x": 247
+          },
+          "right": {
+            "x": 247,
+            "y": 138.140625,
+            "width": 648,
+            "height": 590.84375
+          },
+          "delta": {
+            "x": 0,
+            "y": 0.75,
+            "width": -22,
+            "height": -2.40625
+          },
+          "changed": true
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 1,
+            "textChanged": false,
+            "attributeChanges": 3,
+            "left": {
+              "visible": true,
+              "bounds": {
+                "y": 137.390625,
+                "width": 670,
+                "height": 593.25,
+                "x": 247
+              },
+              "name": "calendar-month",
+              "url": "http://localhost:7070/standalone/full-app/calendar.html",
+              "selector": "[data-section=\"calendar-month\"]",
+              "exists": true
+            },
+            "name": "calendar-month",
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/month/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 397980,
+              "changedPixels": 31338,
+              "changedPercent": 7.874265038444143,
+              "normalizedWidth": 670,
+              "normalizedHeight": 594
+            },
+            "right": {
+              "name": "calendar-month",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+              "selector": "[data-section=\"calendar-month\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "y": 138.140625,
+                "width": 648,
+                "height": 590.84375,
+                "x": 247
+              }
+            }
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      },
+      {
+        "page": "calendar",
+        "variant": "desktop",
+        "section": "page",
+        "outDir": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page",
+        "leftUrl": "http://localhost:7070/standalone/full-app/calendar.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+        "leftSelector": "[data-page=\"calendar\"]",
+        "rightSelector": "[data-page=\"calendar\"]",
+        "threshold": 30,
+        "changedPercent": 7.13168505942275,
+        "changedPixels": 67209,
+        "totalPixels": 942400,
+        "normalizedWidth": 1240,
+        "normalizedHeight": 760,
+        "bounds": {
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "changed": false,
+          "left": {
+            "width": 1240,
+            "height": 760,
+            "x": 0,
+            "y": 0
+          },
+          "right": {
+            "height": 760,
+            "x": 0,
+            "y": 0,
+            "width": 1240
+          }
+        },
+        "artifactJson": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.md",
+        "leftRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.json",
+          "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 6,
+            "boundsChanged": false,
+            "name": "calendar-page",
+            "textChanged": true,
+            "artifactCount": 2,
+            "attributeChanges": 3,
+            "left": {
+              "name": "calendar-page",
+              "url": "http://localhost:7070/standalone/full-app/calendar.html",
+              "selector": "[data-page=\"calendar\"]",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "height": 760,
+                "x": 0,
+                "y": 0,
+                "width": 1240
+              }
+            },
+            "pixel": {
+              "changedPercent": 7.13168505942275,
+              "normalizedWidth": 1240,
+              "normalizedHeight": 760,
+              "diffComparisonPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/25/PYXIS-APP-REACT--build-pyxis-app-react-package-from-full-app-prototypes/various/20-calendar-panels-tuning/run-05-page-checkpoint/calendar/artifacts/page/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 942400,
+              "changedPixels": 67209
+            },
+            "right": {
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1240,
+                "height": 760
+              },
+              "name": "calendar-page",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-pages--calendar-desktop&viewMode=story",
+              "selector": "[data-page=\"calendar\"]"
+            }
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

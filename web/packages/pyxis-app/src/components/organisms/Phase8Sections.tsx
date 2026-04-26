@@ -1,9 +1,11 @@
 import type { AppShow, BookingRequest, CalendarEvent } from 'pyxis-types';
-import { Button } from 'pyxis-components';
+import { shows as seedShows } from '../../api/mockData';
+import { Button, Icon } from 'pyxis-components';
 import { StatusDot } from '../atoms/StatusDot';
+import { StatusPill } from '../atoms/StatusPill';
 import { BookingCard, BookingQueueRow } from '../molecules/BookingCard';
 import { CalendarEventChip } from '../molecules/CalendarEventChip';
-import { CalendarMonth, Panel } from './Panels';
+import { Panel } from './Panels';
 
 export function ShowDetailHero({ show }: { show: AppShow }) {
   return (
@@ -40,30 +42,58 @@ export function ShowDetailDiscordPanel() {
   );
 }
 
+function eventsOnDay(events: CalendarEvent[], day: number) {
+  return events.filter((event) => new Date(`${event.date}T00:00:00`).getDate() === day);
+}
+
+export function CalendarMonthPanel({ events }: { events: CalendarEvent[] }) {
+  const firstDay = new Date(2025, 4, 1).getDay();
+  const cells: Array<number | null> = [...Array.from({ length: firstDay }, () => null), ...Array.from({ length: 31 }, (_, index) => index + 1)];
+  return (
+    <section className="app-panel app-calendar-month-panel" data-section="calendar-month" data-pyxis-component="panel" data-pyxis-part="root">
+      <header className="app-calendar-month-header">
+        <h2>May 2025</h2>
+        <div className="app-calendar-controls"><button aria-label="Previous month"><Icon name="chevron-left" size={14}/></button><Button variant="outline" size="sm">Today</Button><button aria-label="Next month"><Icon name="chevron-right" size={14}/></button></div>
+      </header>
+      <div className="app-calendar-weekdays">{['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map((day) => <span key={day}>{day}</span>)}</div>
+      <div className="app-calendar-month-grid">{cells.map((day, index) => {
+        const dayEvents = day ? eventsOnDay(events, day) : [];
+        return <div key={index} className="app-calendar-cell" data-empty={!day || undefined} data-today={day === 2 || undefined}>{day && <><b>{day}</b>{dayEvents.map((event) => <CalendarEventChip key={event.date + event.label} event={event}/>)}</>}</div>;
+      })}</div>
+      <CalendarLegend />
+    </section>
+  );
+}
+
+export function CalendarLegend() {
+  return <div className="app-calendar-legend">{[['Confirmed','confirmed'],['Hold','hold'],['Blocked','blocked']].map(([label, status]) => <span key={status} data-status={status}><i/>{label}</span>)}</div>;
+}
+
 export function CalendarBoard({ events }: { events: CalendarEvent[] }) {
   return (
     <div className="app-calendar-layout" data-section="calendar-board">
-      <Panel title="May 2025" action={<Button variant="outline" size="sm">Today</Button>} section="calendar-month">
-        <CalendarMonth events={events}/>
-      </Panel>
+      <CalendarMonthPanel events={events}/>
       <CalendarAgenda events={events}/>
     </div>
   );
 }
 
-export function CalendarAgenda({ events }: { events: CalendarEvent[] }) {
+export function CalendarAgenda({ events: _events }: { events: CalendarEvent[] }) {
+  const todayShow = seedShows[0];
   return (
     <aside className="app-calendar-side" data-section="calendar-agenda">
       <Panel title="May at a glance">
-        <div className="app-detail-list">
-          <span>Confirmed <b>5</b></span>
-          <span>Hold <b>1</b></span>
-          <span>Blocked <b>1</b></span>
-          <span>Open nights <b>24</b></span>
+        <div className="app-calendar-glance-list">
+          {[['Confirmed','5','confirmed'], ['Hold','1','hold'], ['Blocked','1','blocked'], ['Open nights','24','open']].map(([label, value, status]) => <span key={label} data-status={status}>{label}<b>{value}</b></span>)}
         </div>
       </Panel>
-      <Panel title="This week">
-        <div className="app-stack">{events.slice(0,3).map((event)=><CalendarEventChip key={event.date+event.label} event={event}/>)}</div>
+      <Panel title="Today · May 2">
+        <div className="app-calendar-today-card">
+          <header><strong>{todayShow.artist}</strong><StatusPill tone="confirmed">Confirmed</StatusPill></header>
+          <p>Doors {todayShow.doors} · {todayShow.age} · $12 adv<br/>Expected draw: ~{todayShow.draw} / {todayShow.capacity}</p>
+          <Button size="sm" fullWidth>Open show</Button>
+        </div>
+        <Button variant="outline" iconLeft="plus" fullWidth>Add to today</Button>
       </Panel>
     </aside>
   );
