@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { auditLog, bookings, shows } from '../src/api/mockData';
-import { ActivityFeedItem } from '../src/components/molecules/ActivityFeedItem';
 import { MetricCard } from '../src/components/molecules/MetricCard';
 import {
   DashboardAttentionContent,
@@ -9,7 +8,7 @@ import {
   DashboardMobileCopy,
   DashboardMobileHeader,
 } from '../src/components/organisms/DashboardSections';
-import { DashboardQuickActionsPanel, DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
+import { DashboardActivityPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
 
 const meta: Meta = {
   title: 'Pyxis App/Dashboard Sections',
@@ -75,7 +74,16 @@ export const AttentionPanelMobile: Story = {
 };
 
 export const ActivityPanel: Story = {
-  render: () => <div style={{ width: 390, padding: 24, background: 'var(--app-canvas)' }}><Panel title="Recent activity" action={<span className="app-live-label">live</span>} section="dashboard-activity"><ul className="app-feed">{auditLog.slice(0, 5).map((item) => <ActivityFeedItem key={item.id} item={item} />)}</ul></Panel></div>,
+  render: () => <div style={{ width: 390, padding: 24, background: 'var(--app-canvas)' }}><DashboardActivityPanel log={auditLog} /></div>,
+};
+
+export const ActivityPanelMobile: Story = {
+  render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><DashboardActivityPanel log={auditLog} limit={3} /></div>,
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
+};
+
+export const ActivityPanelEmpty: Story = {
+  render: () => <div style={{ width: 390, padding: 24, background: 'var(--app-canvas)' }}><DashboardActivityPanel log={[]} /></div>,
 };
 
 export const MobileDashboardStack: Story = {
@@ -91,7 +99,7 @@ export const MobileDashboardStack: Story = {
         <MetricCard label="Capacity use" value="56%" caption="May 2025" tone="info" />
       </div>
       <div style={{ marginTop: 20 }}><Panel title="Needs your attention" action={<DashboardAttentionCount />} section="dashboard-attention"><DashboardAttentionContent /></Panel></div>
-      <div style={{ marginTop: 20 }}><Panel title="Recent activity" action={<span className="app-live-label">live</span>} section="dashboard-activity"><ul className="app-feed">{auditLog.slice(0, 3).map((item) => <ActivityFeedItem key={item.id} item={item} />)}</ul></Panel></div>
+      <div style={{ marginTop: 20 }}><DashboardActivityPanel log={auditLog} limit={3} /></div>
     </div>
   ),
   parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },

@@ -648,11 +648,11 @@ Use this checklist for every Phase 7.x Dashboard section:
 
 ### Phase 7.6 — Dashboard recent activity consolidation
 
-- [ ] Extract `DashboardActivityPanel` as an organism around `ActivityFeedItem`.
-- [ ] Decide and document desktop/mobile item-count behavior (`5` desktop, `3` mobile prototype home).
-- [ ] Align metadata order/copy with prototype (`time/user/action` differences) without overfitting if data model differs.
-- [ ] Add Storybook stories for desktop, mobile, bot-only, empty, long activity text.
-- [ ] Tune `dashboard-activity` focused comparison before full page.
+- [x] Extract `DashboardActivityPanel` as an organism around `ActivityFeedItem`.
+- [x] Decide and document desktop/mobile item-count behavior (`5` desktop, `3` mobile prototype home).
+- [x] Align metadata order/copy with prototype (`time/user/action` differences) without overfitting if data model differs.
+- [x] Add Storybook stories for desktop, mobile, bot-only, empty, long activity text.
+- [x] Tune `dashboard-activity` focused comparison before full page.
 - [ ] Commit: `Consolidate dashboard recent activity`.
 
 ### Phase 7.7 — Dashboard full-page acceptance checkpoint
