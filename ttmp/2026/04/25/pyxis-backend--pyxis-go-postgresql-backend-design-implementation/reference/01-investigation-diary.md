@@ -983,4 +983,114 @@ curl -s -H "Cookie: session=test-session-abc" -F "flyer=@flyer.jpg" http://local
 
 # Discord announce
 curl -s -H "Cookie: session=test-session-abc" -X POST http://localhost:8282/api/app/shows/1/announce
+
+---
+
+## Step 11: TypeScript Protobuf Generation + RTK Query Migration
+
+The user asked about using generated protobuf types directly in RTK Query hooks instead of hand-written type mirrors, with widget-level transforms instead of global normalization. We updated the `protobuf-go-ts-schema-exchange` skill and started implementing the migration.
+
+### Prompt Context
+
+**User prompt (verbatim):** "So reading the protobuf typescript go document, I think we should probably return the protobuf data from the rtk-query hooks, and use those directly, without doing a normalization pass except when needing inside the pages themselves / use helpers there? there is the data shape from the API and the rtk-query, and then there are the widget relevant data types. Does that make sense?"
+
+**Assistant interpretation:** The user wants to use generated protobuf TypeScript types in RTK Query, keeping the raw proto shape in the cache and transforming only at widget boundaries via helpers/useMemo.
+
+**Inferred user intent:** Establish a clean architecture where `.proto` is the single source of truth for API shapes, RTK Query caches proto messages, and widgets do their own local transforms.
+
+**Commits (code):**
+- `63b3cfe` — "Phase 11a: TypeScript protobuf generation + RTK Query migration start"
+- `fc183b1` — "Phase 11b: Keep legacy exports during migration, fix fromJson types"
+
+### What I did
+
+- Updated `protobuf-go-ts-schema-exchange` skill with RTK Query integration section.
+- Updated `references/templates.md` with Buf config for TypeScript output targeting a shared package.
+- Added `@bufbuild/protobuf` to `pyxis-types` package dependencies.
+- Updated `buf.gen.yaml` with `remote: buf.build/bufbuild/es` plugin outputting to `web/packages/pyxis-types/src/generated`.
+- Ran `buf generate` — produced `web/packages/pyxis-types/src/generated/proto/pyxis/v1/show_pb.ts`.
+- Updated `pyxis-types/src/index.ts` to:
+  - Re-export `fromJson` from `@bufbuild/protobuf`
+  - Re-export generated proto types (aliased as `ProtoShow`, `ProtoAppShow`, etc.)
+  - Keep legacy hand-written types during migration
+- Updated `pyxis-user-site/src/api/publicApi.ts`:
+  - Use `fromJson(ShowListSchema, response)` in `transformResponse`
+  - Use `fromJson(ShowSchema, response)` for single show
+  - Use `fromJson(ArchivedShowListSchema, response)` for archive
+  - Use `fromJson(ArchiveStatsSchema, response)` for stats
+  - Use `fromJson(BookingConfirmationSchema, response)` for submission
+- Updated `pyxis-app/src/api/appApi.ts`:
+  - Use `fromJson(AuthSessionSchema, response)` for session
+  - Use `fromJson(ShowListSchema, response)` for shows list
+  - Use `fromJson(ShowSchema, response)` for single show
+- Rebuilt `pyxis-types` package successfully.
+
+### What worked
+
+- `buf generate` with `remote: buf.build/bufbuild/es` produced valid TypeScript.
+- Generated types have correct camelCase field names matching the Go `protojson.Marshal` output.
+- `pnpm build` in `pyxis-types` succeeds.
+- The pattern `transformResponse: (response) => fromJson(Schema, response as any)` works cleanly.
+
+### What didn't work
+
+- **Many type errors in consuming packages:** Components use old snake_case field names (`doors_time`, `total_shows`). The generated types use camelCase (`doorsTime`, `totalShows`).
+- **Missing exports broke components:** `LineupEntry`, `ApiError`, `AgeRestriction`, `ShowStatus` were removed from exports and broke imports in `pyxis-components` and `pyxis-user-site`.
+- **`fromJson` expects `JsonValue` not `unknown`:** Had to cast `response as any` in `transformResponse` callbacks.
+- **`ShowList` import flagged as unused:** TypeScript didn't recognize the implicit type usage via `fromJson` generic inference.
+
+### What was tricky to build
+
+- Deciding how to handle the migration: update all components at once or keep legacy exports. Chose to keep legacy exports aliased alongside new proto exports for gradual migration.
+- The `ArchivedShowList` return type changed from `ArchivedShow[]` to a message with `.shows` array. Components expecting an array directly would need updates.
+
+### What should be done in the future
+
+- Migrate components to use camelCase field names from generated types.
+- Add protobuf messages for frontend-specific shapes (ArtistProfile, CalendarEvent, AttendanceEntry, AuditLogEntry, SpaceSettings) or keep them as hand-written types.
+- Remove legacy hand-written types once all components are migrated.
+- Add `toJson` helper for mutations that need to send protobuf-shaped JSON.
+
+### Technical details
+
+**Buf config update:**
+
+```yaml
+# buf.gen.yaml
+version: v2
+plugins:
+  - local: protoc-gen-go
+    out: gen/proto
+    opt: [paths=source_relative]
+  - remote: buf.build/bufbuild/es
+    out: web/packages/pyxis-types/src/generated
+    opt: [target=ts, import_extension=none]
+```
+
+**Install runtime:**
+
+```bash
+cd web/packages/pyxis-types
+pnpm add @bufbuild/protobuf
+```
+
+**Generate:**
+
+```bash
+buf generate
+```
+
+**RTK Query pattern:**
+
+```typescript
+import { fromJson, ShowList, ShowListSchema } from 'pyxis-types';
+
+getShows: builder.query<Show[], void>({
+  query: () => '/api/public/shows',
+  transformResponse: (response: unknown) => {
+    const list = fromJson(ShowListSchema, response as any);
+    return list.shows;
+  },
+}),
+```
 ```

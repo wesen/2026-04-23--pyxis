@@ -109,15 +109,16 @@
 
 ## Phase 11 — TypeScript Protobuf Generation + RTK Query Migration
 
-- [ ] 11.1 Install `@bufbuild/protobuf` and configure `buf.gen.yaml` for TypeScript output
-- [ ] 11.2 Generate TypeScript bindings from existing `proto/pyxis/v1/show.proto`
-- [ ] 11.3 Update `pyxis-types` package to export generated types
-- [ ] 11.4 Migrate `publicApi.ts` RTK Query slice to use generated types + `fromJson`
-- [ ] 11.5 Migrate `appApi.ts` RTK Query slice to use generated types + `fromJson`
-- [ ] 11.6 Remove hand-written API response interfaces from `pyxis-types`
-- [ ] 11.7 Add widget-level transform helpers where normalization was removed
-- [ ] 11.8 Test end-to-end: Go `protojson.Marshal` → TS `fromJson` round-trip
-- [ ] 11.9 Commit Phase 11
+- [x] 11.1 Install `@bufbuild/protobuf` and configure `buf.gen.yaml` for TypeScript output
+- [x] 11.2 Generate TypeScript bindings from existing `proto/pyxis/v1/show.proto`
+- [x] 11.3 Update `pyxis-types` package to export generated types
+- [x] 11.4 Migrate `publicApi.ts` RTK Query slice to use generated types + `fromJson`
+- [x] 11.5 Migrate `appApi.ts` RTK Query slice to use generated types + `fromJson`
+- [ ] 11.6 Update components to use camelCase field names from generated types
+- [ ] 11.7 Remove hand-written API response interfaces from `pyxis-types` (after component migration)
+- [ ] 11.8 Add widget-level transform helpers where normalization was removed
+- [ ] 11.9 Test end-to-end: Go `protojson.Marshal` → TS `fromJson` round-trip
+- [ ] 11.10 Commit Phase 11
 
 ## Future / Open Questions
 
