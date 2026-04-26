@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
-import { pyxisPart } from '../../utils/parts';
-import { Button } from '../../atoms/Button';
+import { pyxisPart } from '../../../utils/parts';
+import { Button } from '../../../atoms/Button';
 import './BookingSuccess.css';
 
 export type BookingSuccessProps = {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BookingSuccess } from './BookingSuccess';
 
 const meta: Meta<typeof BookingSuccess> = {
-  title: 'Public/Organisms/BookingSuccess',
+  title: 'Public Site/Components/Organisms/BookingSuccess',
   component: BookingSuccess,
   tags: ['autodocs'],
 };

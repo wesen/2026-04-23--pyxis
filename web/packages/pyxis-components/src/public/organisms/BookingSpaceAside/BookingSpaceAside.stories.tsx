@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BookingSpaceAside } from './BookingSpaceAside';
 
 const meta: Meta<typeof BookingSpaceAside> = {
-  title: 'Public/Organisms/BookingSpaceAside',
+  title: 'Public Site/Components/Organisms/BookingSpaceAside',
   component: BookingSpaceAside,
   tags: ['autodocs'],
 };

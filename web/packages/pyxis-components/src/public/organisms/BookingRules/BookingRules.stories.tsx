@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BookingRules } from './BookingRules';
 
 const meta: Meta<typeof BookingRules> = {
-  title: 'Public/Organisms/BookingRules',
+  title: 'Public Site/Components/Organisms/BookingRules',
   component: BookingRules,
   tags: ['autodocs'],
 };

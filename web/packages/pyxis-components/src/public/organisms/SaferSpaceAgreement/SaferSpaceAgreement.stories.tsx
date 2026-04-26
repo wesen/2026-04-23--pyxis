@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SaferSpaceAgreement } from './SaferSpaceAgreement';
 
 const meta: Meta<typeof SaferSpaceAgreement> = {
-  title: 'Public/Molecules/SaferSpaceAgreement',
+  title: 'Public Site/Components/Organisms/SaferSpaceAgreement',
   component: SaferSpaceAgreement,
   tags: ['autodocs'],
 };

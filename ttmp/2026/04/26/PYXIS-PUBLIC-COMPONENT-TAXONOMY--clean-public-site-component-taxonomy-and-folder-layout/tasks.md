@@ -40,10 +40,10 @@
 
 ## Phase 5: Booking cluster
 
-- [ ] Move `BookingForm` to public organisms.
-- [ ] Move `BookingRules`, `BookingSpaceAside`, `SaferSpaceAgreement`, and `BookingSuccess` according to finalized classification.
-- [ ] Ensure booking stories remain component-level and do not duplicate route-level `Book` page stories.
-- [ ] Validate Storybook.
+- [x] Move `BookingForm` to public organisms.
+- [x] Move `BookingRules`, `BookingSpaceAside`, `SaferSpaceAgreement`, and `BookingSuccess` according to finalized classification.
+- [x] Ensure booking stories remain component-level and do not duplicate route-level `Book` page stories.
+- [x] Validate Storybook.
 
 ## Phase 6: Archive cluster
 

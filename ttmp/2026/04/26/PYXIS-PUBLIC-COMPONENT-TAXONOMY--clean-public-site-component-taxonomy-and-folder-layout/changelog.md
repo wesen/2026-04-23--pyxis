@@ -60,3 +60,17 @@ Completed archive taxonomy cluster: moved ArchiveSearchFilters, ArchiveStats, an
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/ArchiveStats — Moved protobuf-backed archive stats molecule.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/molecules/YearGroup — Moved archive year grouping molecule.
 
+
+## 2026-04-26
+
+Completed booking taxonomy cluster: moved booking workflow components to public organisms and validated component plus route-page stories.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/06-pyxis-components-storybook-ids-after-booking.md — Captured Storybook IDs after booking cluster.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/BookingForm — Moved protobuf-backed booking form organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/BookingRules — Moved booking rules organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/BookingSpaceAside — Moved booking space aside organism and exported props type.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/BookingSuccess — Moved booking success organism.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/SaferSpaceAgreement — Moved safer-space agreement organism and exported props type.
+

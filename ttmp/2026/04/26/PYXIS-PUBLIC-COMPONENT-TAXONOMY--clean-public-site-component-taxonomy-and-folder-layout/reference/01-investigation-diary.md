@@ -32,6 +32,8 @@ RelatedFiles:
       Note: Captured story IDs after shows/detail cluster.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/05-pyxis-components-storybook-ids-after-archive.md
       Note: Captured Storybook IDs after archive cluster move.
+    - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/sources/06-pyxis-components-storybook-ids-after-booking.md
+      Note: Captured Storybook IDs after booking cluster move.
     - Path: ttmp/2026/04/26/PYXIS-PUBLIC-COMPONENT-TAXONOMY--clean-public-site-component-taxonomy-and-folder-layout/tasks.md
       Note: Phased checklist for public taxonomy and folder layout cleanup.
     - Path: web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters
@@ -60,6 +62,16 @@ RelatedFiles:
       Note: Moved show-backed ticket display molecule.
     - Path: web/packages/pyxis-components/src/public/molecules/YearGroup
       Note: Moved archive year grouping component into public molecules taxonomy.
+    - Path: web/packages/pyxis-components/src/public/organisms/BookingForm
+      Note: Moved booking form organism; still emits generated BookingFormData payloads.
+    - Path: web/packages/pyxis-components/src/public/organisms/BookingRules
+      Note: Moved booking rules organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/BookingSpaceAside
+      Note: Moved booking space aside organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/BookingSuccess
+      Note: Moved booking success organism.
+    - Path: web/packages/pyxis-components/src/public/organisms/SaferSpaceAgreement
+      Note: Moved safer-space agreement organism.
     - Path: web/packages/pyxis-components/src/public/organisms/ShowGrid
       Note: Moved to public organisms; click callback now receives ShowTileShow with show.id.
     - Path: web/packages/pyxis-user-site/src/pages/Shows.tsx
@@ -70,6 +82,7 @@ LastUpdated: 2026-04-26T14:45:00-04:00
 WhatFor: Use this diary to understand why this ticket exists, what guidance was found, and how the public-site component taxonomy cleanup should proceed.
 WhenToUse: When continuing the public-site component decomposition work or reviewing Storybook taxonomy decisions.
 ---
+
 
 
 
@@ -570,3 +583,85 @@ No story-level errors or warnings were observed after filtering harmless favicon
 
 - The archive component folder taxonomy is now mostly complete.
 - The next logical batch is either the booking cluster (`BookingForm`, booking aside/rules/agreement/success) or about/venue/shell cluster (`PubNav`, `PubFooter`, `VenueCard`, etc.).
+
+## Step 5: Booking Cluster Move
+
+I continued with the booking cluster, moving the public booking workflow components into the public organism taxonomy. This fits the decomposition guide because these components represent substantial public page sections or workflow states rather than small show/archive rows.
+
+### Components moved
+
+Moved to `web/packages/pyxis-components/src/public/organisms/`:
+
+```text
+BookingForm
+BookingRules
+BookingSpaceAside
+SaferSpaceAgreement
+BookingSuccess
+```
+
+### Type/proto alignment
+
+- `BookingForm` already uses generated protobuf data correctly: it imports `BookingFormData` and creates submission payloads with `create(BookingFormDataSchema, ...)` before calling `onSubmit`.
+- `Book.tsx` remains the page/container that owns the `useSubmitBooking()` RTK mutation and passes `BookingFormData` into the API layer.
+- `BookingRules`, `BookingSpaceAside`, and `SaferSpaceAgreement` remain primitive/static presentation organisms because they do not represent backend messages.
+- `BookingSuccess` remains a route-state/display organism with primitive props (`artistName`, `onSubmitAnother`), not a backend response renderer.
+- I added missing public barrel type exports for `BookingSpaceAsideProps` and `SaferSpaceAgreementProps` while moving their folders.
+
+### Import/export updates
+
+- Updated `web/packages/pyxis-components/src/index.ts` exports to the new organism paths.
+- Updated `web/packages/pyxis-components/src/public/PublicDiffFixture.stories.tsx` imports.
+- Fixed moved `pyxisPart` imports from `../../utils/parts` to `../../../utils/parts`.
+- Fixed `BookingSuccess`'s `Button` import from `../../atoms/Button` to `../../../atoms/Button`.
+- Updated Storybook titles to `Public Site/Components/Organisms/*`.
+
+### Evidence captured
+
+Added:
+
+```text
+sources/06-pyxis-components-storybook-ids-after-booking.md
+```
+
+New story IDs include:
+
+```text
+public-site-components-organisms-bookingform--default
+public-site-components-organisms-bookingrules--default
+public-site-components-organisms-bookingspaceaside--default
+public-site-components-organisms-saferspaceagreement--default
+public-site-components-organisms-bookingsuccess--default
+```
+
+Old booking story ID references were found only in prior ticket evidence/historical visual parity diary entries, not active specs.
+
+### Validation
+
+Quiet validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+cd web/packages/pyxis-components && pnpm build-storybook
+cd web/packages/pyxis-user-site && pnpm build-storybook
+cd web && pnpm build
+```
+
+Live Storybook browser validation passed for:
+
+```text
+public-site-components-organisms-bookingform--default
+public-site-components-organisms-bookingrules--default
+public-site-components-organisms-bookingspaceaside--default
+public-site-components-organisms-saferspaceagreement--default
+public-site-components-organisms-bookingsuccess--default
+public-site-pages--book-desktop
+public-site-pages--book-success-desktop
+```
+
+No story-level errors or warnings were observed after filtering harmless favicon and existing React Router future-flag warnings.
+
+### What remains
+
+The next obvious cluster is about/venue/shell: `PubNav`, `PubFooter`, `AboutHero`, `AboutIntro`, `EthosStrip`, `EthosGrid`, `CollectiveList`, `FindUsBlock`, `VenueCard`, `SpaceInfo`, `MailingListCTA`, and possibly `PubHero` / `PublicPageHeader` classification cleanup.
