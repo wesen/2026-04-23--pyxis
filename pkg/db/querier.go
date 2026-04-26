@@ -10,6 +10,7 @@ import (
 
 type Querier interface {
 	ArchiveShow(ctx context.Context, id int32) (Show, error)
+	CreateAuditLog(ctx context.Context, arg CreateAuditLogParams) (AuditLog, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateShow(ctx context.Context, arg CreateShowParams) (Show, error)
 	CreateSubmission(ctx context.Context, arg CreateSubmissionParams) (Submission, error)
@@ -20,6 +21,8 @@ type Querier interface {
 	GetShowWithLineup(ctx context.Context, id int32) (GetShowWithLineupRow, error)
 	GetSubmission(ctx context.Context, id int32) (Submission, error)
 	GetUser(ctx context.Context, id int32) (User, error)
+	ListAllShows(ctx context.Context) ([]Show, error)
+	ListAuditLog(ctx context.Context, arg ListAuditLogParams) ([]AuditLog, error)
 	ListSubmissions(ctx context.Context, status string) ([]Submission, error)
 	ListUpcomingShows(ctx context.Context) ([]ListUpcomingShowsRow, error)
 	SearchArchive(ctx context.Context, dollar_1 string) ([]SearchArchiveRow, error)

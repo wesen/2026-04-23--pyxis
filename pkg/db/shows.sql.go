@@ -112,7 +112,7 @@ SELECT
     COUNT(DISTINCT artist_id) as unique_artists
 FROM shows s
 LEFT JOIN attendance_logs al ON al.show_id = s.id
-WHERE status = 'archived'
+WHERE s.status = 'archived'
 `
 
 type GetArchiveStatsRow struct {
@@ -234,6 +234,50 @@ func (q *Queries) GetShowWithLineup(ctx context.Context, id int32) (GetShowWithL
 		&i.Lineup,
 	)
 	return i, err
+}
+
+const listAllShows = `-- name: ListAllShows :many
+SELECT id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at FROM shows ORDER BY date DESC
+`
+
+func (q *Queries) ListAllShows(ctx context.Context) ([]Show, error) {
+	rows, err := q.db.Query(ctx, listAllShows)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Show{}
+	for rows.Next() {
+		var i Show
+		if err := rows.Scan(
+			&i.ID,
+			&i.Artist,
+			&i.Date,
+			&i.DoorsTime,
+			&i.StartTime,
+			&i.Age,
+			&i.Price,
+			&i.Genre,
+			&i.Description,
+			&i.Notes,
+			&i.Status,
+			&i.FlyerUrl,
+			&i.DiscordMessageID,
+			&i.DiscordChannelID,
+			&i.SubmissionID,
+			&i.ArtistID,
+			&i.CreatedBy,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const listUpcomingShows = `-- name: ListUpcomingShows :many

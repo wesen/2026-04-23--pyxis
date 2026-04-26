@@ -61,4 +61,7 @@ SELECT
     COUNT(DISTINCT artist_id) as unique_artists
 FROM shows s
 LEFT JOIN attendance_logs al ON al.show_id = s.id
-WHERE status = 'archived';
+WHERE s.status = 'archived';
+
+-- name: ListAllShows :many
+SELECT * FROM shows ORDER BY date DESC;

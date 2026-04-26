@@ -28,6 +28,7 @@ type Show struct {
 	Status       string
 	SubmissionID *int
 	ArtistID     *int
+	CreatedBy    *int
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
