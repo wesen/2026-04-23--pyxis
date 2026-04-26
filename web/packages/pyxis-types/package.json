@@ -29,5 +29,8 @@
   },
   "devDependencies": {
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.12.0"
   }
 }

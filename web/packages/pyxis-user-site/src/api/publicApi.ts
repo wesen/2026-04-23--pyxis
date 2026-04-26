@@ -1,10 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type {
-  ArchiveStats,
-  ArchivedShow,
-  BookingConfirmation,
-  BookingFormData,
+import {
+  fromJson,
+  ShowList,
+  ShowListSchema,
   Show,
+  ShowSchema,
+  ArchivedShowList,
+  ArchivedShowListSchema,
+  ArchiveStats,
+  ArchiveStatsSchema,
+  BookingConfirmation,
+  BookingConfirmationSchema,
+  BookingFormData,
 } from 'pyxis-types';
 import { endpoints } from './endpoints';
 
@@ -23,6 +30,10 @@ export const publicApi = createApi({
   endpoints: (builder) => ({
     getUpcomingShows: builder.query<Show[], void>({
       query: () => endpoints.shows,
+      transformResponse: (response: unknown) => {
+        const list = fromJson(ShowListSchema, response);
+        return list.shows;
+      },
       providesTags: (result) =>
         result
           ? [
@@ -34,19 +45,22 @@ export const publicApi = createApi({
 
     getShow: builder.query<Show, number>({
       query: (id) => endpoints.show(id),
+      transformResponse: (response: unknown) => fromJson(ShowSchema, response),
       providesTags: (_result, _error, id) => [{ type: 'Show', id }],
     }),
 
-    getArchive: builder.query<ArchivedShow[], string | void>({
+    getArchive: builder.query<ArchivedShowList, string | void>({
       query: (search) => ({
         url: endpoints.archive,
         params: search ? { search } : undefined,
       }),
+      transformResponse: (response: unknown) => fromJson(ArchivedShowListSchema, response),
       providesTags: [{ type: 'Archive', id: 'LIST' }],
     }),
 
     getArchiveStats: builder.query<ArchiveStats, void>({
       query: () => endpoints.archiveStats,
+      transformResponse: (response: unknown) => fromJson(ArchiveStatsSchema, response),
       keepUnusedDataFor: 60 * 60,
       providesTags: [{ type: 'Archive', id: 'STATS' }],
     }),
@@ -57,6 +71,7 @@ export const publicApi = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (response: unknown) => fromJson(BookingConfirmationSchema, response),
       invalidatesTags: [{ type: 'Submission', id: 'LIST' }],
     }),
   }),
