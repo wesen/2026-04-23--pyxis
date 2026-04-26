@@ -15,6 +15,18 @@ topics:
       description: Go programming language
     - slug: postgresql
       description: PostgreSQL database
+    - slug: frontend
+      description: Frontend application architecture and implementation
+    - slug: msw
+      description: Mock Service Worker API mocking for tests, Storybook, and development
+    - slug: rtk-query
+      description: Redux Toolkit Query data fetching, caching, and mutations
+    - slug: storybook
+      description: Storybook component and page development environment
+    - slug: protobuf
+      description: Protocol Buffers schema and generated code workflows
+    - slug: api-integration
+      description: Frontend/backend API integration, wiring, and validation
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
