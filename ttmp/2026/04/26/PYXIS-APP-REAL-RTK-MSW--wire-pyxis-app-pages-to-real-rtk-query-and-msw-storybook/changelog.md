@@ -40,3 +40,15 @@ Removed staff page mock fallbacks: route pages now render explicit loading/error
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds page-state styling for loading/error/empty panels.
 
+
+## 2026-04-26
+
+Added staff RTK mutation surface and wired first real UI actions for booking approve/decline and show cancel, with Vite-proxy mutation smoke validation.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts — Adds staff RTK Query mutations with protobuf response decoding and tag invalidation.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/endpoints.ts — Adds staff mutation endpoint paths.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/Pages.tsx — Wires booking approve/decline and show cancel UI callbacks to real mutations.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/pages.css — Adds action error styling for failed mutations.
+

@@ -25,13 +25,21 @@ RelatedFiles:
     - Path: ttmp/2026/04/26/PYXIS-APP-REAL-RTK-MSW--wire-pyxis-app-pages-to-real-rtk-query-and-msw-storybook/tasks.md
       Note: Phased implementation checklist for intern handoff.
     - Path: web/packages/pyxis-app/src/api/appApi.ts
-      Note: Defaults API base URL to same-origin for Vite proxy and production.
+      Note: |-
+        Defaults API base URL to same-origin for Vite proxy and production.
+        Adds staff RTK Query mutations with protobuf response decoding and tag invalidation.
+    - Path: web/packages/pyxis-app/src/api/endpoints.ts
+      Note: Adds staff mutation endpoint paths.
     - Path: web/packages/pyxis-app/src/components/shell/AppShell.css
       Note: Changes prototype fixed-height shell into full-height app shell.
     - Path: web/packages/pyxis-app/src/pages/Pages.tsx
-      Note: Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
+      Note: |-
+        Removes seed fallbacks from staff pages and wires detail routes to real route params/query data.
+        Wires booking approve/decline and show cancel UI callbacks to real mutations.
     - Path: web/packages/pyxis-app/src/pages/pages.css
-      Note: Adds page-state styling for loading/error/empty panels.
+      Note: |-
+        Adds page-state styling for loading/error/empty panels.
+        Adds action error styling for failed mutations.
     - Path: web/packages/pyxis-app/src/styles/global.css
       Note: Removes component CSS imports now owned by atoms.
     - Path: web/packages/pyxis-app/vite.config.ts
@@ -42,6 +50,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -375,3 +384,113 @@ The earlier dev-auth smoke remains valid:
 ### Next
 
 The next phase should wire real mutations: approve/decline booking, show cancel/archive/announce, settings update, attendance update, and calendar hold/blocked actions where UI affordances exist.
+
+## Step 4: Staff RTK Mutations and First UI Actions
+
+I added the staff RTK Query mutation surface and wired the first real UI actions.
+
+### Endpoint map
+
+Extended `web/packages/pyxis-app/src/api/endpoints.ts` with paths for:
+
+```text
+show cancel/archive/announce/flyer
+booking approve/decline
+calendar hold/blocked CRUD
+attendance by show
+settings update
+artist update
+```
+
+### Mutations added
+
+Added RTK Query mutations in `web/packages/pyxis-app/src/api/appApi.ts`:
+
+```text
+createShow
+updateShow
+cancelShow
+archiveShow
+announceShow
+uploadShowFlyer
+deleteShowFlyer
+approveBooking
+declineBooking
+updateArtist
+createCalendarHold
+deleteCalendarHold
+createCalendarBlocked
+deleteCalendarBlocked
+updateAttendance
+updateSettings
+```
+
+Response decoding uses `fromJson(...)` with generated schemas where the backend returns a protobuf body:
+
+```text
+ShowSchema
+SuccessResponseSchema
+FlyerUploadResponseSchema
+ArtistSchema
+CalendarHoldSchema
+CalendarBlockedSchema
+AttendanceLogSchema
+SettingsSchema
+```
+
+For `createShow` / `updateShow`, request bodies use `toJson(ShowSchema, show)` so the frontend sends clean protobuf JSON rather than Buf message instances with `$typeName`.
+
+I removed the blanket `Content-Type: application/json` header from `fetchBaseQuery` so `FormData` flyer uploads can set their multipart boundary correctly. RTK Query/fetchBaseQuery still sets JSON content type automatically for JSON-like request bodies.
+
+### UI actions wired
+
+Wired:
+
+```text
+BookingsPage inbox approve -> approveBooking(...).unwrap()
+BookingsPage inbox decline -> declineBooking(...).unwrap()
+BookingReviewPage approve  -> approveBooking(...).unwrap()
+BookingReviewPage decline  -> declineBooking(...).unwrap()
+ShowDetailPage cancel      -> cancelShow(...).unwrap()
+```
+
+Each page now has a small `actionError` state rendered as `.app-action-error` when the mutation fails.
+
+`onHold` remains deferred because the backend does not currently expose a submission hold transition. Show archive and announce mutations exist in the API layer, but the visible page controls still need final UX placement.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+Real mutation smoke through Vite proxy:
+
+```bash
+curl -fsS -c /tmp/pyxis-app-cookie.jar \
+  'http://127.0.0.1:3008/auth/dev-login?username=dev-admin&role=admin'
+
+curl -fsS -X POST http://127.0.0.1:3008/api/public/submissions \
+  -H 'Content-Type: application/json' \
+  -d '{"artistName":"mutation smoke artist","preferredDate":"2026-06-13","genre":"test","expectedDraw":12,"links":"https://example.com","message":"created by app mutation smoke"}'
+
+curl -i -b /tmp/pyxis-app-cookie.jar \
+  -X PATCH http://127.0.0.1:3008/api/app/bookings/<id>/decline
+```
+
+Observed:
+
+```text
+HTTP/1.1 200 OK
+{"success":true}
+```
+
+This proves at least one real staff mutation path works end-to-end through Vite proxy, dev auth cookie, Go backend, PostgreSQL, protobuf response, and RTK-compatible response shape.
+
+### Next
+
+Next steps are to wire the remaining visible actions (`announceShow`, `archiveShow`, settings update, attendance update, calendar actions where UI exists) and then harden MSW handlers for these mutations so Storybook remains deterministic.

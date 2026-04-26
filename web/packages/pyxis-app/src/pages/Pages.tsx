@@ -1,7 +1,7 @@
 import { Button, Field, Input, PyxisMark } from 'pyxis-components';
 import { useParams } from 'react-router-dom';
 import { create, AppShowSchema, ShowStatus, SubmissionStatus } from 'pyxis-types';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   useGetArtistsQuery,
   useGetAttendanceQuery,
@@ -11,6 +11,9 @@ import {
   useGetSettingsQuery,
   useGetShowQuery,
   useGetShowsQuery,
+  useApproveBookingMutation,
+  useCancelShowMutation,
+  useDeclineBookingMutation,
 } from '../api/appApi';
 import { discordMappings as seedMappings } from '../api/mockData';
 import { AppShell } from '../components/shell/AppShell';
@@ -161,6 +164,18 @@ export function ShowsPage() {
 export function ShowDetailPage() {
   const id = parseRouteId(useParams().id);
   const { data: show, isLoading, isError } = useGetShowQuery(id ?? 0, { skip: id === undefined });
+  const [cancelShow, cancelState] = useCancelShowMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+
+  const handleCancelShow = async () => {
+    if (!id) return;
+    setActionError(undefined);
+    try {
+      await cancelShow(id).unwrap();
+    } catch {
+      setActionError('Could not cancel this show. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell
@@ -182,9 +197,10 @@ export function ShowDetailPage() {
             <ShowDetailInfoPanel show={appShowFromShow(show)} />
             <ShowDetailDiscordPanel />
           </div>
+          {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
           <div className="app-detail-actions">
             <Button variant="outline">Duplicate</Button>
-            <Button variant="danger" iconLeft="trash">Cancel show</Button>
+            <Button variant="danger" iconLeft="trash" onClick={handleCancelShow} disabled={cancelState.isLoading}>Cancel show</Button>
           </div>
         </>
       )}
@@ -218,6 +234,27 @@ export function CalendarPage() {
 
 export function BookingsPage() {
   const { data: bookings, isLoading, isError } = useGetBookingsQuery();
+  const [approveBooking] = useApproveBookingMutation();
+  const [declineBooking] = useDeclineBookingMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+
+  const handleApprove = async (booking: NonNullable<typeof bookings>[number]) => {
+    setActionError(undefined);
+    try {
+      await approveBooking(booking.id).unwrap();
+    } catch {
+      setActionError('Could not approve this booking. Check your session and backend logs.');
+    }
+  };
+
+  const handleDecline = async (booking: NonNullable<typeof bookings>[number]) => {
+    setActionError(undefined);
+    try {
+      await declineBooking(booking.id).unwrap();
+    } catch {
+      setActionError('Could not decline this booking. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell
@@ -241,7 +278,8 @@ export function BookingsPage() {
       ) : (
         <div className="app-bookings-layout">
           <div>
-            <BookingsInboxPanel bookings={bookings} />
+            {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
+            <BookingsInboxPanel bookings={bookings} onApprove={handleApprove} onDecline={handleDecline} />
             <div style={{ height: 18 }} />
             <BookingsProcessedPanel bookings={bookings} />
           </div>
@@ -256,6 +294,29 @@ export function BookingReviewPage() {
   const id = parseRouteId(useParams().id);
   const { data: bookings, isLoading, isError } = useGetBookingsQuery();
   const booking = bookings?.find((candidate) => candidate.id === id);
+  const [approveBooking, approveState] = useApproveBookingMutation();
+  const [declineBooking, declineState] = useDeclineBookingMutation();
+  const [actionError, setActionError] = useState<string | undefined>();
+
+  const handleApprove = async () => {
+    if (!booking) return;
+    setActionError(undefined);
+    try {
+      await approveBooking(booking.id).unwrap();
+    } catch {
+      setActionError('Could not approve this booking. Check your session and backend logs.');
+    }
+  };
+
+  const handleDecline = async () => {
+    if (!booking) return;
+    setActionError(undefined);
+    try {
+      await declineBooking(booking.id).unwrap();
+    } catch {
+      setActionError('Could not decline this booking. Check your session and backend logs.');
+    }
+  };
 
   return (
     <AppShell
@@ -280,9 +341,10 @@ export function BookingReviewPage() {
             <BookingReviewDatePanel />
           </div>
           <BookingReviewNotePanel booking={booking} />
+          {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
           <div className="app-detail-actions">
-            <Button variant="danger" iconLeft="x" disabled={booking.status !== SubmissionStatus.PENDING}>Decline</Button>
-            <Button variant="success" iconLeft="check" disabled={booking.status !== SubmissionStatus.PENDING}>Approve</Button>
+            <Button variant="danger" iconLeft="x" onClick={handleDecline} disabled={booking.status !== SubmissionStatus.PENDING || declineState.isLoading}>Decline</Button>
+            <Button variant="success" iconLeft="check" onClick={handleApprove} disabled={booking.status !== SubmissionStatus.PENDING || approveState.isLoading}>Approve</Button>
           </div>
         </>
       )}

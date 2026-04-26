@@ -11,25 +11,25 @@
 
 ## Phase 2: Staff RTK Query mutations
 
-- [ ] Extend `web/packages/pyxis-app/src/api/endpoints.ts` with mutation paths: show cancel/archive/announce/flyer, booking approve/decline, calendar hold/blocked CRUD, attendance show endpoint.
-- [ ] Add `createShow` mutation.
-- [ ] Add `updateShow` mutation.
-- [ ] Add `cancelShow` mutation.
-- [ ] Add `archiveShow` mutation.
-- [ ] Add `announceShow` mutation.
-- [ ] Add `uploadShowFlyer` mutation.
-- [ ] Add `deleteShowFlyer` mutation.
-- [ ] Add `approveBooking` mutation.
-- [ ] Add `declineBooking` mutation.
-- [ ] Add `updateArtist` mutation.
-- [ ] Add `createCalendarHold` mutation.
-- [ ] Add `deleteCalendarHold` mutation.
-- [ ] Add `createCalendarBlocked` mutation.
-- [ ] Add `deleteCalendarBlocked` mutation.
-- [ ] Add `updateAttendance` mutation.
-- [ ] Add `updateSettings` mutation.
-- [ ] Ensure each mutation decodes the correct proto response with `fromJson`.
-- [ ] Ensure each mutation invalidates relevant RTK Query tags.
+- [x] Extend `web/packages/pyxis-app/src/api/endpoints.ts` with mutation paths: show cancel/archive/announce/flyer, booking approve/decline, calendar hold/blocked CRUD, attendance show endpoint.
+- [x] Add `createShow` mutation.
+- [x] Add `updateShow` mutation.
+- [x] Add `cancelShow` mutation.
+- [x] Add `archiveShow` mutation.
+- [x] Add `announceShow` mutation.
+- [x] Add `uploadShowFlyer` mutation.
+- [x] Add `deleteShowFlyer` mutation.
+- [x] Add `approveBooking` mutation.
+- [x] Add `declineBooking` mutation.
+- [x] Add `updateArtist` mutation.
+- [x] Add `createCalendarHold` mutation.
+- [x] Add `deleteCalendarHold` mutation.
+- [x] Add `createCalendarBlocked` mutation.
+- [x] Add `deleteCalendarBlocked` mutation.
+- [x] Add `updateAttendance` mutation.
+- [x] Add `updateSettings` mutation.
+- [x] Ensure each mutation decodes the correct proto response with `fromJson` where the backend returns a protobuf body.
+- [x] Ensure each mutation invalidates relevant RTK Query tags.
 
 ## Phase 3: Staff page state cleanup
 
@@ -56,10 +56,10 @@
 
 ## Phase 5: Wire mutations to UI callbacks
 
-- [ ] Wire `BookingsInboxPanel` `onApprove` to `approveBooking`.
-- [ ] Wire `BookingsInboxPanel` `onDecline` to `declineBooking`.
-- [ ] Decide whether `onHold` is supported now or deferred.
-- [ ] Wire show cancel button in `ShowDetailPage` to `cancelShow`.
+- [x] Wire `BookingsInboxPanel` `onApprove` to `approveBooking`.
+- [x] Wire `BookingsInboxPanel` `onDecline` to `declineBooking`.
+- [x] Decide whether `onHold` is supported now or deferred. Deferred; no backend hold transition exists for submissions yet.
+- [x] Wire show cancel button in `ShowDetailPage` to `cancelShow`.
 - [ ] Wire show archive action where appropriate.
 - [ ] Wire announce action to `announceShow`.
 - [ ] Wire settings form/toggles to `updateSettings`.
