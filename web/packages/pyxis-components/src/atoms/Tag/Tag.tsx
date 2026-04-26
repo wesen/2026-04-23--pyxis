@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 import { pyxisPart } from '../../utils/parts';
 
@@ -7,6 +7,7 @@ export type TagProps = {
   /** Override the default color */
   color?: string;
   className?: string;
+  rootProps?: HTMLAttributes<HTMLSpanElement>;
 };
 
 /**
@@ -18,13 +19,15 @@ export type TagProps = {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ children, color, className }, ref) => (
+  ({ children, color, className, rootProps }, ref) => (
     <span
       ref={ref}
-      className={clsx('pyxis-tag', className)}
       {...pyxisPart('tag')}
+      {...rootProps}
+      className={clsx('pyxis-tag', className)}
       style={{
-        display: 'inline',
+        display: 'inline-flex',
+        alignItems: 'center',
         fontSize: '11px',
         color: color ?? 'var(--color-text-secondary)',
         background: 'var(--color-surface-raised)',
@@ -32,7 +35,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         padding: '2px 8px',
         borderRadius: 'var(--radius-xs)',
         whiteSpace: 'nowrap',
-        lineHeight: 'normal',
+        lineHeight: 1.5,
       }}
     >
       {children}

@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { Tag } from 'pyxis-components';
 import { appPart } from '../../parts';
 import './AgeBadge.css';
 
@@ -7,5 +8,5 @@ export type AgeBadgeProps = {
 };
 
 export function AgeBadge({ children }: AgeBadgeProps) {
-  return <span className="app-age-badge" {...appPart('age-badge')}>{children}</span>;
+  return <Tag className="app-age-badge" rootProps={appPart('age-badge') as HTMLAttributes<HTMLSpanElement>}>{children}</Tag>;
 }
