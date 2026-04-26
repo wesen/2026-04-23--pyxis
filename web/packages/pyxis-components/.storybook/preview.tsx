@@ -6,7 +6,6 @@ import '../src/atoms/Input/Input.css';
 import '../src/atoms/Select/Select.css';
 import '../src/atoms/Textarea/Textarea.css';
 import '../src/molecules/Card/Card.css';
-import '../src/public/organisms/PubNav/PubNav.css';
 
 const preview: Preview = {
   decorators: [

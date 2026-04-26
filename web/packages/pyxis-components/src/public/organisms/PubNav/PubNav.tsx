@@ -1,5 +1,6 @@
 import { pyxisPart } from '../../../utils/parts';
 import { clsx } from 'clsx';
+import './PubNav.css';
 
 export type PubNavProps = {
   currentPage: 'shows' | 'archive' | 'book' | 'about';

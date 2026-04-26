@@ -28,3 +28,14 @@ Implemented first Go-served public site embedding: Dagger/local build-web comman
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/server.go — Wires flyer static route and public SPA fallback into Go server.
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/spa_fallback.go — Buffers primary mux 404s and delegates browser routes to SPA handler.
 
+
+## 2026-04-26
+
+Fixed real Vite navbar styling by making PubNav import its own CSS and removing Storybook preview CSS masking.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/.storybook/preview.tsx — Removed global PubNav CSS import that masked missing component CSS ownership.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/PubNav/PubNav.tsx — Imports PubNav.css so real Vite app receives navbar styles.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/.storybook/preview.tsx — Removed global PubNav CSS import that masked missing component CSS ownership.
+

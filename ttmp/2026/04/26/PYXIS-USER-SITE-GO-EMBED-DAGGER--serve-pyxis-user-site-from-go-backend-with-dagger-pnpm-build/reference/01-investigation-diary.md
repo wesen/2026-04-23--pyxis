@@ -334,3 +334,48 @@ Observed:
 ```
 
 This confirms API routes still return JSON and browser routes/static assets are served from the Go binary.
+
+## Step 3: Real Vite Smoke — PubNav CSS Ownership Bug
+
+While testing the real Vite public site at `http://localhost:3000/`, the top navigation rendered as raw browser buttons pinned to the top-left. The rest of the page was styled correctly, so this was not a global CSS failure.
+
+### Root cause
+
+`PubNav.tsx` did not import its colocated stylesheet:
+
+```text
+web/packages/pyxis-components/src/public/organisms/PubNav/PubNav.css
+```
+
+Storybook had masked this by importing the PubNav CSS globally from both preview files:
+
+```text
+web/packages/pyxis-components/.storybook/preview.tsx
+web/packages/pyxis-user-site/.storybook/preview.tsx
+```
+
+That made component stories look correct while the real Vite app missed the component-owned CSS.
+
+### Fix
+
+- Added `import './PubNav.css';` to `PubNav.tsx`.
+- Removed the global PubNav CSS imports from both Storybook preview files so the stories now exercise the component's real CSS ownership.
+
+### Validation
+
+Passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm build
+cd web/packages/pyxis-user-site && pnpm build
+```
+
+Live Vite validation at `http://localhost:3000/` showed:
+
+```text
+.pyxis-pub-nav__inner display: flex
+.pyxis-pub-nav__inner max-width: 920px
+.pyxis-pub-nav__logo background: transparent
+```
+
+The navbar is now centered and styled in the real app, not only in Storybook.
