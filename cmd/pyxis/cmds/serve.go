@@ -11,6 +11,9 @@ import (
 	"github.com/go-go-golems/glazed/pkg/cmds/values"
 	"github.com/go-go-golems/glazed/pkg/middlewares"
 	"github.com/go-go-golems/glazed/pkg/settings"
+	"github.com/go-go-golems/pyxis/pkg/config"
+	"github.com/go-go-golems/pyxis/pkg/db"
+	"github.com/go-go-golems/pyxis/pkg/server"
 	"github.com/rs/zerolog/log"
 )
 
@@ -68,11 +71,17 @@ func (c *ServeCommand) RunIntoGlazeProcessor(
 		return err
 	}
 
-	log.Info().
-		Str("bind", s.Bind).
-		Str("db_url", s.DBURL).
-		Msg("starting pyxis server (not yet implemented)")
+	database, err := db.Connect(ctx, s.DBURL)
+	if err != nil {
+		return fmt.Errorf("connect to database: %w", err)
+	}
+	defer database.Close()
 
-	fmt.Println("Server would start on", s.Bind, "with DB", s.DBURL)
-	return nil
+	cfg := config.DefaultConfig()
+	cfg.Bind = s.Bind
+	cfg.DBURL = s.DBURL
+
+	srv := server.New(cfg, database)
+	log.Info().Str("bind", s.Bind).Msg("starting pyxis server")
+	return srv.Start(ctx, s.Bind)
 }

@@ -8,6 +8,7 @@ require (
 	github.com/jackc/pgx/v5 v5.9.2
 	github.com/rs/zerolog v1.34.0
 	github.com/spf13/cobra v1.10.1
+	google.golang.org/protobuf v1.36.7
 )
 
 require (

@@ -1,0 +1,5 @@
+version: v2
+name: buf.build/go-go-golems/pyxis
+
+deps:
+  - buf.build/googleapis/googleapis

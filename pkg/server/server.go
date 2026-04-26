@@ -6,24 +6,42 @@ import (
 	"net/http"
 
 	"github.com/go-go-golems/pyxis/pkg/config"
+	"github.com/go-go-golems/pyxis/pkg/db"
+	"github.com/go-go-golems/pyxis/pkg/repository/postgres"
+	"github.com/go-go-golems/pyxis/pkg/service"
 	"github.com/rs/zerolog/log"
 )
 
 // Server holds the HTTP handler and dependencies.
 type Server struct {
-	cfg     *config.Config
-	handler http.Handler
+	cfg         *config.Config
+	handler     http.Handler
+	showService *service.ShowService
 }
 
-// New creates a new Server with routes wired but no DB yet.
-func New(cfg *config.Config) *Server {
+// New creates a new Server with routes wired.
+func New(cfg *config.Config, database *db.Pool) *Server {
 	s := &Server{cfg: cfg}
 
+	// Repository layer
+	queries := db.New(database.Pool)
+	showRepo := postgres.NewShowRepo(queries)
+
+	// Service layer
+	s.showService = service.NewShowService(showRepo)
+
+	// Router
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"status":"ok"}`))
 	})
+
+	// Public API
+	mux.HandleFunc("GET /api/public/shows", s.handleListPublicShows)
+	mux.HandleFunc("GET /api/public/shows/{id}", s.handleGetPublicShow)
+	mux.HandleFunc("GET /api/public/archive", s.handleGetArchive)
+	mux.HandleFunc("GET /api/public/archive/stats", s.handleGetArchiveStats)
 
 	s.handler = mux
 	return s
