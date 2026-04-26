@@ -1181,4 +1181,55 @@ respondProtoJSON(w, http.StatusOK, &pyxisv1.ArtistList{
   Artists: pbArtists,
 })
 ```
+
+---
+
+## Step 13: Created Proto-Everywhere Migration Runbook for Intern
+
+**User prompt (verbatim):** "give clear instructions for a migration, we are wrapping up and want to have the intern continue tomorrow. Create a little runbook and store it in the ticket so I can point them to it."
+
+**Assistant interpretation:** The user wants a self-contained runbook stored in the ticket workspace that an intern can follow tomorrow to continue migrating ad-hoc JSON endpoints to protobuf.
+
+**Inferred user intent:** Reduce onboarding friction — the intern should be able to pick up the exact next task without asking questions.
+
+**Commit (docs):** Created `reference/02-proto-migration-runbook.md` (not yet committed to git — ticket docs are tracked separately).
+
+### What I did
+
+- Wrote a comprehensive runbook covering:
+  1. Pre-requisites (read diary skill, docmgr skill, existing diary, task list)
+  2. Committing rules
+  3. Codebase layout (relevant files only)
+  4. The 9-step migration recipe (proto → generate → mapper → handler → verify TS → RTK Query → exports → test → document)
+  5. Reference tables: already-migrated handlers (examples) vs. still ad-hoc (next tasks)
+  6. Common pitfalls
+  7. "If you get stuck" troubleshooting guide
+- Used `docmgr doc relate` to link the runbook to `show.proto`, `app.go`, and `appApi.ts`.
+
+### What worked
+
+- The runbook format from the `ticket-research-docmgr-remarkable` skill's deliverable checklist works well for handoffs.
+- Explicit "Before / After" code blocks make the pattern copy-pasteable.
+
+### What should be done in the future
+
+- As the intern completes endpoints, they should update the runbook's "Still Ad-Hoc" table.
+- When all endpoints are migrated, the runbook can be archived or converted to a general "Adding a new endpoint" guide.
+
+### Technical details
+
+**Runbook location:**
+`ttmp/2026/04/25/pyxis-backend--pyxis-go-postgresql-backend-design-implementation/reference/02-proto-migration-runbook.md`
+
+**Docmgr relations:**
+```bash
+docmgr doc relate --ticket pyxis-backend \
+  --doc reference/02-proto-migration-runbook.md \
+  --file-note "/home/manuel/code/wesen/2026-04-23--pyxis/proto/pyxis/v1/show.proto:Proto schema"
+docmgr doc relate --ticket pyxis-backend \
+  --doc reference/02-proto-migration-runbook.md \
+  --file-note "/home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go:Backend handlers"
+docmgr doc relate --ticket pyxis-backend \
+  --doc reference/02-proto-migration-runbook.md \
+  --file-note "/home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts:RTK Query"
 ```
