@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { auditLog, bookings, shows } from '../src/api/mockData';
-import { MetricCard } from '../src/components/molecules/MetricCard';
 import {
-  DashboardAttentionContent,
-  DashboardAttentionCount,
   DashboardHero,
+  DashboardMetricsGrid,
   DashboardMobileCopy,
   DashboardMobileHeader,
 } from '../src/components/organisms/DashboardSections';
-import { DashboardActivityPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel, Panel } from '../src/components/organisms/Panels';
+import { DashboardActivityPanel, DashboardAttentionPanel, DashboardQuickActionsPanel, DashboardUpcomingPanel } from '../src/components/organisms/Panels';
 import { AppSidebar, AppTopBar, AppMobileBottomNav } from '../src/components/shell/AppShell';
 
 const meta: Meta = {
@@ -47,14 +45,18 @@ export const MobileHeaderAndCopy: Story = {
 export const MetricsGridDesktop: Story = {
   render: () => (
     <div style={{ padding: 24, background: 'var(--app-canvas)' }}>
-      <div className="app-metrics-grid" data-section="dashboard-metrics">
-        <MetricCard label="Upcoming" value={confirmedShows.length} caption="Next 60 days" tone="accent" />
-        <MetricCard label="Pending bookings" value={pendingBookings.length} caption="Awaiting review" trend="2 new today" tone="warning" />
-        <MetricCard label="Avg draw" value="84" caption="Last 6 shows" trend="↑ 12 vs. prior 6" tone="success" />
-        <MetricCard label="Capacity use" value="56%" caption="May 2025" tone="info" />
-      </div>
+      <DashboardMetricsGrid upcomingCount={confirmedShows.length} pendingCount={pendingBookings.length} />
     </div>
   ),
+};
+
+export const MetricsGridMobile: Story = {
+  render: () => (
+    <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}>
+      <DashboardMetricsGrid upcomingCount={confirmedShows.length} pendingCount={pendingBookings.length} variant="mobile" />
+    </div>
+  ),
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
 };
 
 export const UpcomingPanelDesktop: Story = {
@@ -82,8 +84,12 @@ export const QuickActionsPanelNoPending: Story = {
   render: () => <div style={{ width: 360, padding: 24, background: 'var(--app-canvas)' }}><DashboardQuickActionsPanel pendingCount={0} /></div>,
 };
 
+export const AttentionPanel: Story = {
+  render: () => <div style={{ width: 390, padding: 24, background: 'var(--app-canvas)' }}><DashboardAttentionPanel /></div>,
+};
+
 export const AttentionPanelMobile: Story = {
-  render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><Panel title="Needs your attention" action={<DashboardAttentionCount />} section="dashboard-attention"><DashboardAttentionContent /></Panel></div>,
+  render: () => <div style={{ width: 390, padding: 14, background: 'var(--app-mobile-canvas)' }}><DashboardAttentionPanel variant="mobile" /></div>,
   parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
 };
 
@@ -106,13 +112,8 @@ export const MobileDashboardStack: Story = {
       <DashboardMobileHeader />
       <DashboardMobileCopy />
       <DashboardHero show={confirmedShows[0]} />
-      <div className="app-metrics-grid" data-section="dashboard-metrics">
-        <MetricCard label="Upcoming" value={confirmedShows.length} caption="Next 60 days" tone="accent" />
-        <MetricCard label="Pending bookings" value={pendingBookings.length} caption="Awaiting review" trend="2 new today" tone="warning" />
-        <MetricCard label="Avg draw" value="84" caption="Last 6 shows" trend="↑ 12 vs. prior 6" tone="success" />
-        <MetricCard label="Capacity use" value="56%" caption="May 2025" tone="info" />
-      </div>
-      <div style={{ marginTop: 20 }}><Panel title="Needs your attention" action={<DashboardAttentionCount />} section="dashboard-attention"><DashboardAttentionContent /></Panel></div>
+      <DashboardMetricsGrid upcomingCount={confirmedShows.length} pendingCount={pendingBookings.length} variant="mobile" />
+      <div style={{ marginTop: 20 }}><DashboardAttentionPanel variant="mobile" /></div>
       <div style={{ marginTop: 20 }}><DashboardActivityPanel log={auditLog} limit={3} /></div>
     </div>
   ),

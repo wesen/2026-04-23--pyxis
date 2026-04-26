@@ -1,5 +1,6 @@
 import type { AppShow } from 'pyxis-types';
 import { Button, PyxisMark } from 'pyxis-components';
+import { MetricCard } from '../molecules/MetricCard';
 
 export function DashboardMobileHeader() {
   return (
@@ -49,6 +50,18 @@ export function DashboardHero({ show }: { show?: AppShow }) {
   );
 }
 
+export function DashboardMetricsGrid({ upcomingCount, pendingCount, variant = 'desktop' }: { upcomingCount: number; pendingCount: number; variant?: 'desktop' | 'mobile' }) {
+  const mobile = variant === 'mobile';
+  return (
+    <div className="app-metrics-grid" data-section="dashboard-metrics" data-variant={variant}>
+      <MetricCard label="Upcoming" value={upcomingCount} caption={mobile ? 'next 60 days' : 'Next 60 days'} tone="accent" />
+      <MetricCard label={mobile ? 'Pending' : 'Pending bookings'} value={pendingCount} caption={mobile ? 'review needed' : 'Awaiting review'} trend={mobile ? undefined : '2 new today'} tone="warning" />
+      <MetricCard label="Avg draw" value="84" caption={mobile ? 'last 6 shows' : 'Last 6 shows'} trend={mobile ? undefined : '↑ 12 vs. prior 6'} tone="success" />
+      <MetricCard label={mobile ? 'Capacity' : 'Capacity use'} value="56%" caption="May 2025" tone="info" />
+    </div>
+  );
+}
+
 export function DashboardQuickActionsContent({ pendingCount }: { pendingCount: number }) {
   return (
     <div className="app-quick-actions">
@@ -59,20 +72,27 @@ export function DashboardQuickActionsContent({ pendingCount }: { pendingCount: n
   );
 }
 
-const attentionItems = [
-  ['warning', '2 past shows need logging', 'Planning for Burial · Actress'],
-  ['info', 'Zola Jesus · Jun 6', 'Check price for a 160-draw headliner'],
-  ['danger', 'Discord token expires in 14d', 'Reconnect to keep pinning working'],
-] as const;
+export type DashboardAttentionItem = {
+  tone: 'warning' | 'info' | 'danger';
+  title: string;
+  caption: string;
+};
 
-export function DashboardAttentionCount() {
-  return <span className="app-attention-count">3</span>;
+export const defaultDashboardAttentionItems: DashboardAttentionItem[] = [
+  { tone: 'warning', title: '2 past shows need logging', caption: 'Planning for Burial · Actress' },
+  { tone: 'info', title: 'Zola Jesus · Jun 6', caption: 'Check price for a 160-draw headliner' },
+  { tone: 'danger', title: 'Discord token expires in 14d', caption: 'Reconnect to keep pinning working' },
+];
+
+export function DashboardAttentionCount({ count = defaultDashboardAttentionItems.length }: { count?: number }) {
+  return <span className="app-attention-count">{count}</span>;
 }
 
-export function DashboardAttentionContent() {
+export function DashboardAttentionContent({ items = defaultDashboardAttentionItems }: { items?: DashboardAttentionItem[] }) {
+  if (items.length === 0) return <p className="app-empty-state">No issues need attention right now.</p>;
   return (
     <div className="app-attention-list">
-      {attentionItems.map(([tone, title, caption]) => (
+      {items.map(({ tone, title, caption }) => (
         <article key={title} className="app-attention-item" data-tone={tone}>
           <b>{tone === 'info' ? '✺' : '△'}</b>
           <div>
