@@ -6,11 +6,14 @@ package db
 
 import (
 	"context"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 type Querier interface {
 	ApproveSubmission(ctx context.Context, arg ApproveSubmissionParams) (Submission, error)
 	ArchiveShow(ctx context.Context, id int32) (Show, error)
+	AttachDiscordMessageToShow(ctx context.Context, arg AttachDiscordMessageToShowParams) (Show, error)
 	CreateArtist(ctx context.Context, arg CreateArtistParams) (Artist, error)
 	CreateAuditLog(ctx context.Context, arg CreateAuditLogParams) (AuditLog, error)
 	CreateCalendarBlocked(ctx context.Context, arg CreateCalendarBlockedParams) (CalendarBlocked, error)
@@ -32,6 +35,7 @@ type Querier interface {
 	GetSession(ctx context.Context, id string) (Session, error)
 	GetSettings(ctx context.Context) (Setting, error)
 	GetShow(ctx context.Context, id int32) (Show, error)
+	GetShowByDiscordMessage(ctx context.Context, arg GetShowByDiscordMessageParams) (Show, error)
 	GetShowWithLineup(ctx context.Context, id int32) (GetShowWithLineupRow, error)
 	GetSubmission(ctx context.Context, id int32) (Submission, error)
 	GetUser(ctx context.Context, id int32) (User, error)
@@ -41,6 +45,7 @@ type Querier interface {
 	ListAuditLog(ctx context.Context, arg ListAuditLogParams) ([]AuditLog, error)
 	ListCalendarBlocked(ctx context.Context) ([]CalendarBlocked, error)
 	ListCalendarHolds(ctx context.Context) ([]CalendarHold, error)
+	ListExpiredConfirmedShows(ctx context.Context, date pgtype.Date) ([]Show, error)
 	ListSubmissions(ctx context.Context, dollar_1 interface{}) ([]Submission, error)
 	ListUpcomingShows(ctx context.Context) ([]ListUpcomingShowsRow, error)
 	SearchArchive(ctx context.Context, dollar_1 string) ([]SearchArchiveRow, error)

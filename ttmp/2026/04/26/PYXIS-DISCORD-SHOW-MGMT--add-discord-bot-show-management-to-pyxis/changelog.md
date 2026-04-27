@@ -44,3 +44,15 @@ Expanded tasks.md into a detailed phase-by-phase implementation checklist for th
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary update for task expansion
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/tasks.md — Detailed implementation checklist
 
+
+## 2026-04-26
+
+Implemented the Phase 0-7 foundation: framework dependency, copied Pyxis bot, Discord metadata propagation, native require("pyxis") module, bot runner, and serve lifecycle flags.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/bot/discord/show-space/index.js — Copied and adapted Discord bot
+- /home/manuel/code/wesen/2026-04-23--pyxis/cmd/pyxis/cmds/serve.go — Bot startup flags and lifecycle
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/discordbot/pyxis_module.go — Goja native Pyxis module
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/discordbot/runner.go — Embedded framework runner
+

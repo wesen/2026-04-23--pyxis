@@ -193,28 +193,30 @@ func (CalendarEventKind) EnumDescriptor() ([]byte, []int) {
 }
 
 type Show struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Artist        string                 `protobuf:"bytes,2,opt,name=artist,proto3" json:"artist,omitempty"`
-	Date          string                 `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	DoorsTime     string                 `protobuf:"bytes,4,opt,name=doors_time,json=doorsTime,proto3" json:"doors_time,omitempty"`
-	StartTime     string                 `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	Age           string                 `protobuf:"bytes,6,opt,name=age,proto3" json:"age,omitempty"`
-	Price         string                 `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`
-	Genre         string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
-	Description   string                 `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
-	Notes         string                 `protobuf:"bytes,17,opt,name=notes,proto3" json:"notes,omitempty"`
-	Lineup        []*Show_LineupEntry    `protobuf:"bytes,10,rep,name=lineup,proto3" json:"lineup,omitempty"`
-	FlyerUrl      string                 `protobuf:"bytes,11,opt,name=flyer_url,json=flyerUrl,proto3" json:"flyer_url,omitempty"`
-	Draw          int32                  `protobuf:"varint,18,opt,name=draw,proto3" json:"draw,omitempty"`
-	Capacity      int32                  `protobuf:"varint,19,opt,name=capacity,proto3" json:"capacity,omitempty"`
-	Status        ShowStatus             `protobuf:"varint,12,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
-	SubmissionId  int32                  `protobuf:"varint,13,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
-	ArtistId      int32                  `protobuf:"varint,14,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Artist           string                 `protobuf:"bytes,2,opt,name=artist,proto3" json:"artist,omitempty"`
+	Date             string                 `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	DoorsTime        string                 `protobuf:"bytes,4,opt,name=doors_time,json=doorsTime,proto3" json:"doors_time,omitempty"`
+	StartTime        string                 `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	Age              string                 `protobuf:"bytes,6,opt,name=age,proto3" json:"age,omitempty"`
+	Price            string                 `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`
+	Genre            string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
+	Description      string                 `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
+	Notes            string                 `protobuf:"bytes,17,opt,name=notes,proto3" json:"notes,omitempty"`
+	Lineup           []*Show_LineupEntry    `protobuf:"bytes,10,rep,name=lineup,proto3" json:"lineup,omitempty"`
+	FlyerUrl         string                 `protobuf:"bytes,11,opt,name=flyer_url,json=flyerUrl,proto3" json:"flyer_url,omitempty"`
+	Draw             int32                  `protobuf:"varint,18,opt,name=draw,proto3" json:"draw,omitempty"`
+	Capacity         int32                  `protobuf:"varint,19,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	DiscordMessageId string                 `protobuf:"bytes,20,opt,name=discord_message_id,json=discordMessageId,proto3" json:"discord_message_id,omitempty"`
+	DiscordChannelId string                 `protobuf:"bytes,21,opt,name=discord_channel_id,json=discordChannelId,proto3" json:"discord_channel_id,omitempty"`
+	Status           ShowStatus             `protobuf:"varint,12,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
+	SubmissionId     int32                  `protobuf:"varint,13,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
+	ArtistId         int32                  `protobuf:"varint,14,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        string                 `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Show) Reset() {
@@ -345,6 +347,20 @@ func (x *Show) GetCapacity() int32 {
 	return 0
 }
 
+func (x *Show) GetDiscordMessageId() string {
+	if x != nil {
+		return x.DiscordMessageId
+	}
+	return ""
+}
+
+func (x *Show) GetDiscordChannelId() string {
+	if x != nil {
+		return x.DiscordChannelId
+	}
+	return ""
+}
+
 func (x *Show) GetStatus() ShowStatus {
 	if x != nil {
 		return x.Status
@@ -381,21 +397,23 @@ func (x *Show) GetUpdatedAt() string {
 }
 
 type AppShow struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Artist        string                 `protobuf:"bytes,2,opt,name=artist,proto3" json:"artist,omitempty"`
-	Date          string                 `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	Doors         string                 `protobuf:"bytes,4,opt,name=doors,proto3" json:"doors,omitempty"`
-	Age           string                 `protobuf:"bytes,5,opt,name=age,proto3" json:"age,omitempty"`
-	Price         string                 `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
-	Status        ShowStatus             `protobuf:"varint,7,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
-	Genre         string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
-	Draw          int32                  `protobuf:"varint,9,opt,name=draw,proto3" json:"draw,omitempty"`
-	Capacity      int32                  `protobuf:"varint,10,opt,name=capacity,proto3" json:"capacity,omitempty"`
-	Pinned        bool                   `protobuf:"varint,11,opt,name=pinned,proto3" json:"pinned,omitempty"`
-	Notes         string                 `protobuf:"bytes,12,opt,name=notes,proto3" json:"notes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Artist           string                 `protobuf:"bytes,2,opt,name=artist,proto3" json:"artist,omitempty"`
+	Date             string                 `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	Doors            string                 `protobuf:"bytes,4,opt,name=doors,proto3" json:"doors,omitempty"`
+	Age              string                 `protobuf:"bytes,5,opt,name=age,proto3" json:"age,omitempty"`
+	Price            string                 `protobuf:"bytes,6,opt,name=price,proto3" json:"price,omitempty"`
+	Status           ShowStatus             `protobuf:"varint,7,opt,name=status,proto3,enum=pyxis.v1.ShowStatus" json:"status,omitempty"`
+	Genre            string                 `protobuf:"bytes,8,opt,name=genre,proto3" json:"genre,omitempty"`
+	Draw             int32                  `protobuf:"varint,9,opt,name=draw,proto3" json:"draw,omitempty"`
+	Capacity         int32                  `protobuf:"varint,10,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	Pinned           bool                   `protobuf:"varint,11,opt,name=pinned,proto3" json:"pinned,omitempty"`
+	Notes            string                 `protobuf:"bytes,12,opt,name=notes,proto3" json:"notes,omitempty"`
+	DiscordMessageId string                 `protobuf:"bytes,13,opt,name=discord_message_id,json=discordMessageId,proto3" json:"discord_message_id,omitempty"`
+	DiscordChannelId string                 `protobuf:"bytes,14,opt,name=discord_channel_id,json=discordChannelId,proto3" json:"discord_channel_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *AppShow) Reset() {
@@ -508,6 +526,20 @@ func (x *AppShow) GetPinned() bool {
 func (x *AppShow) GetNotes() string {
 	if x != nil {
 		return x.Notes
+	}
+	return ""
+}
+
+func (x *AppShow) GetDiscordMessageId() string {
+	if x != nil {
+		return x.DiscordMessageId
+	}
+	return ""
+}
+
+func (x *AppShow) GetDiscordChannelId() string {
+	if x != nil {
+		return x.DiscordChannelId
 	}
 	return ""
 }
@@ -2492,7 +2524,7 @@ var File_proto_pyxis_v1_show_proto protoreflect.FileDescriptor
 
 const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\x9a\x05\n" +
+	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\xf6\x05\n" +
 	"\x04Show\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
@@ -2511,6 +2543,8 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\tflyer_url\x18\v \x01(\tR\bflyerUrl\x12\x12\n" +
 	"\x04draw\x18\x12 \x01(\x05R\x04draw\x12\x1a\n" +
 	"\bcapacity\x18\x13 \x01(\x05R\bcapacity\x12,\n" +
+	"\x12discord_message_id\x18\x14 \x01(\tR\x10discordMessageId\x12,\n" +
+	"\x12discord_channel_id\x18\x15 \x01(\tR\x10discordChannelId\x12,\n" +
 	"\x06status\x18\f \x01(\x0e2\x14.pyxis.v1.ShowStatusR\x06status\x12#\n" +
 	"\rsubmission_id\x18\r \x01(\x05R\fsubmissionId\x12\x1b\n" +
 	"\tartist_id\x18\x0e \x01(\x05R\bartistId\x12\x1d\n" +
@@ -2523,7 +2557,7 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x03 \x01(\tR\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x04 \x01(\tR\aendTime\"\xa5\x02\n" +
+	"\bend_time\x18\x04 \x01(\tR\aendTime\"\x81\x03\n" +
 	"\aAppShow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
@@ -2537,7 +2571,9 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\bcapacity\x18\n" +
 	" \x01(\x05R\bcapacity\x12\x16\n" +
 	"\x06pinned\x18\v \x01(\bR\x06pinned\x12\x14\n" +
-	"\x05notes\x18\f \x01(\tR\x05notes\"t\n" +
+	"\x05notes\x18\f \x01(\tR\x05notes\x12,\n" +
+	"\x12discord_message_id\x18\r \x01(\tR\x10discordMessageId\x12,\n" +
+	"\x12discord_channel_id\x18\x0e \x01(\tR\x10discordChannelId\"t\n" +
 	"\fArchivedShow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +

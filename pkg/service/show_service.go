@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/discord"
 	"github.com/go-go-golems/pyxis/pkg/domain"
@@ -110,6 +111,21 @@ func (s *ShowService) Announce(ctx context.Context, id int, actorID int, actorNa
 	})
 
 	return nil
+}
+
+// AttachDiscordMessage stores the Discord channel/message IDs associated with a show announcement.
+func (s *ShowService) AttachDiscordMessage(ctx context.Context, id int, channelID, messageID string) (*domain.Show, error) {
+	return s.shows.AttachDiscordMessage(ctx, id, channelID, messageID)
+}
+
+// GetByDiscordMessage finds a show by its Discord announcement message.
+func (s *ShowService) GetByDiscordMessage(ctx context.Context, channelID, messageID string) (*domain.Show, error) {
+	return s.shows.GetByDiscordMessage(ctx, channelID, messageID)
+}
+
+// ListExpiredConfirmed returns confirmed shows before the provided date.
+func (s *ShowService) ListExpiredConfirmed(ctx context.Context, before time.Time) ([]domain.Show, error) {
+	return s.shows.ListExpiredConfirmed(ctx, before)
 }
 
 // Archive marks a show as archived and logs the action.

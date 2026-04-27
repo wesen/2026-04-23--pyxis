@@ -14,26 +14,28 @@ const (
 
 // Show is the domain entity for a scheduled event.
 type Show struct {
-	ID           int
-	Artist       string
-	Date         time.Time
-	DoorsTime    string
-	StartTime    string
-	Age          string
-	Price        string
-	Genre        string
-	Description  string
-	Notes        string
-	Lineup       []LineupEntry
-	FlyerURL     string
-	Draw         int
-	Capacity     int
-	Status       string
-	SubmissionID *int
-	ArtistID     *int
-	CreatedBy    *int
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	ID               int
+	Artist           string
+	Date             time.Time
+	DoorsTime        string
+	StartTime        string
+	Age              string
+	Price            string
+	Genre            string
+	Description      string
+	Notes            string
+	Lineup           []LineupEntry
+	FlyerURL         string
+	DiscordMessageID string
+	DiscordChannelID string
+	Draw             int
+	Capacity         int
+	Status           string
+	SubmissionID     *int
+	ArtistID         *int
+	CreatedBy        *int
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 }
 
 // LineupEntry represents one act in a show lineup.

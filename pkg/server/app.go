@@ -184,18 +184,20 @@ func (s *Server) handleArchiveShow(w http.ResponseWriter, r *http.Request) {
 
 func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 	show := &domain.Show{
-		Artist:      pb.Artist,
-		DoorsTime:   pb.DoorsTime,
-		StartTime:   pb.StartTime,
-		Age:         pb.Age,
-		Price:       pb.Price,
-		Genre:       pb.Genre,
-		Description: pb.Description,
-		Notes:       pb.Notes,
-		FlyerURL:    pb.FlyerUrl,
-		Draw:        int(pb.Draw),
-		Capacity:    int(pb.Capacity),
-		Status:      showStatusToString(pb.Status),
+		Artist:           pb.Artist,
+		DoorsTime:        pb.DoorsTime,
+		StartTime:        pb.StartTime,
+		Age:              pb.Age,
+		Price:            pb.Price,
+		Genre:            pb.Genre,
+		Description:      pb.Description,
+		Notes:            pb.Notes,
+		FlyerURL:         pb.FlyerUrl,
+		DiscordMessageID: pb.DiscordMessageId,
+		DiscordChannelID: pb.DiscordChannelId,
+		Draw:             int(pb.Draw),
+		Capacity:         int(pb.Capacity),
+		Status:           showStatusToString(pb.Status),
 	}
 	for _, entry := range pb.Lineup {
 		show.Lineup = append(show.Lineup, domain.LineupEntry{
@@ -241,14 +243,18 @@ func showStatusToString(status pyxisv1.ShowStatus) string {
 
 func domainShowToAppShow(show *domain.Show) *pyxisv1.AppShow {
 	return &pyxisv1.AppShow{
-		Id:     int32(show.ID),
-		Artist: show.Artist,
-		Date:   show.Date.Format(time.DateOnly),
-		Doors:  show.DoorsTime,
-		Age:    show.Age,
-		Price:  show.Price,
-		Status: showStatusFromString(show.Status),
-		Genre:  show.Genre,
+		Id:               int32(show.ID),
+		Artist:           show.Artist,
+		Date:             show.Date.Format(time.DateOnly),
+		Doors:            show.DoorsTime,
+		Age:              show.Age,
+		Price:            show.Price,
+		Status:           showStatusFromString(show.Status),
+		Genre:            show.Genre,
+		Pinned:           show.DiscordMessageID != "",
+		Notes:            show.Notes,
+		DiscordMessageId: show.DiscordMessageID,
+		DiscordChannelId: show.DiscordChannelID,
 	}
 }
 

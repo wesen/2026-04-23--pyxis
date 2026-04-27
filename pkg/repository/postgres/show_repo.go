@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/go-go-golems/pyxis/pkg/domain"
@@ -103,6 +104,12 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 	if show.CreatedBy != nil {
 		params.CreatedBy = pgtype.Int4{Int32: int32(*show.CreatedBy), Valid: true}
 	}
+	if show.DiscordMessageID != "" {
+		params.DiscordMessageID = pgtype.Text{String: show.DiscordMessageID, Valid: true}
+	}
+	if show.DiscordChannelID != "" {
+		params.DiscordChannelID = pgtype.Text{String: show.DiscordChannelID, Valid: true}
+	}
 
 	if r.pool == nil {
 		row, err := r.queries.CreateShow(ctx, params)
@@ -167,6 +174,8 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 		params.Notes = pgtype.Text{String: show.Notes, Valid: true}
 	}
 	params.FlyerUrl = pgtype.Text{String: show.FlyerURL, Valid: show.FlyerURL != ""}
+	params.DiscordMessageID = pgtype.Text{String: show.DiscordMessageID, Valid: show.DiscordMessageID != ""}
+	params.DiscordChannelID = pgtype.Text{String: show.DiscordChannelID, Valid: show.DiscordChannelID != ""}
 	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
 	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 
@@ -199,6 +208,44 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 		return nil, fmt.Errorf("commit update show transaction: %w", err)
 	}
 	return r.GetByID(ctx, int(row.ID))
+}
+
+// AttachDiscordMessage stores the Discord channel/message IDs for a show.
+func (r *ShowRepo) AttachDiscordMessage(ctx context.Context, id int, channelID, messageID string) (*domain.Show, error) {
+	row, err := r.queries.AttachDiscordMessageToShow(ctx, db.AttachDiscordMessageToShowParams{
+		ID:               int32(id),
+		DiscordChannelID: pgtype.Text{String: channelID, Valid: channelID != ""},
+		DiscordMessageID: pgtype.Text{String: messageID, Valid: messageID != ""},
+	})
+	if err != nil {
+		return nil, err
+	}
+	return rowToShow(row), nil
+}
+
+// GetByDiscordMessage returns the show associated with a Discord channel/message pair.
+func (r *ShowRepo) GetByDiscordMessage(ctx context.Context, channelID, messageID string) (*domain.Show, error) {
+	row, err := r.queries.GetShowByDiscordMessage(ctx, db.GetShowByDiscordMessageParams{
+		DiscordChannelID: pgtype.Text{String: channelID, Valid: channelID != ""},
+		DiscordMessageID: pgtype.Text{String: messageID, Valid: messageID != ""},
+	})
+	if err != nil {
+		return nil, err
+	}
+	return rowToShow(row), nil
+}
+
+// ListExpiredConfirmed returns confirmed shows before the provided date.
+func (r *ShowRepo) ListExpiredConfirmed(ctx context.Context, before time.Time) ([]domain.Show, error) {
+	rows, err := r.queries.ListExpiredConfirmedShows(ctx, pgtype.Date{Time: before, Valid: true})
+	if err != nil {
+		return nil, err
+	}
+	shows := make([]domain.Show, len(rows))
+	for i, row := range rows {
+		shows[i] = *rowToShow(row)
+	}
+	return shows, nil
 }
 
 // Archive marks a show as archived.
@@ -254,22 +301,24 @@ func (r *ShowRepo) GetArchiveStats(ctx context.Context) (*domain.ArchiveStats, e
 
 func upcomingRowToShow(row db.ListUpcomingShowsRow) domain.Show {
 	show := domain.Show{
-		ID:          int(row.ID),
-		Artist:      row.Artist,
-		Date:        row.Date.Time,
-		DoorsTime:   row.DoorsTime.String,
-		StartTime:   row.StartTime.String,
-		Age:         row.Age.String,
-		Price:       row.Price.String,
-		Genre:       row.Genre.String,
-		Description: row.Description.String,
-		Notes:       row.Notes.String,
-		FlyerURL:    row.FlyerUrl.String,
-		Draw:        int(row.Draw.Int32),
-		Capacity:    int(row.Capacity.Int32),
-		Status:      row.Status,
-		CreatedAt:   row.CreatedAt.Time,
-		UpdatedAt:   row.UpdatedAt.Time,
+		ID:               int(row.ID),
+		Artist:           row.Artist,
+		Date:             row.Date.Time,
+		DoorsTime:        row.DoorsTime.String,
+		StartTime:        row.StartTime.String,
+		Age:              row.Age.String,
+		Price:            row.Price.String,
+		Genre:            row.Genre.String,
+		Description:      row.Description.String,
+		Notes:            row.Notes.String,
+		FlyerURL:         row.FlyerUrl.String,
+		DiscordMessageID: row.DiscordMessageID.String,
+		DiscordChannelID: row.DiscordChannelID.String,
+		Draw:             int(row.Draw.Int32),
+		Capacity:         int(row.Capacity.Int32),
+		Status:           row.Status,
+		CreatedAt:        row.CreatedAt.Time,
+		UpdatedAt:        row.UpdatedAt.Time,
 	}
 	if row.SubmissionID.Valid {
 		v := int(row.SubmissionID.Int32)
@@ -284,22 +333,24 @@ func upcomingRowToShow(row db.ListUpcomingShowsRow) domain.Show {
 
 func rowWithLineupToShow(row db.GetShowWithLineupRow) (*domain.Show, error) {
 	show := &domain.Show{
-		ID:          int(row.ID),
-		Artist:      row.Artist,
-		Date:        row.Date.Time,
-		DoorsTime:   row.DoorsTime.String,
-		StartTime:   row.StartTime.String,
-		Age:         row.Age.String,
-		Price:       row.Price.String,
-		Genre:       row.Genre.String,
-		Description: row.Description.String,
-		Notes:       row.Notes.String,
-		FlyerURL:    row.FlyerUrl.String,
-		Draw:        int(row.Draw.Int32),
-		Capacity:    int(row.Capacity.Int32),
-		Status:      row.Status,
-		CreatedAt:   row.CreatedAt.Time,
-		UpdatedAt:   row.UpdatedAt.Time,
+		ID:               int(row.ID),
+		Artist:           row.Artist,
+		Date:             row.Date.Time,
+		DoorsTime:        row.DoorsTime.String,
+		StartTime:        row.StartTime.String,
+		Age:              row.Age.String,
+		Price:            row.Price.String,
+		Genre:            row.Genre.String,
+		Description:      row.Description.String,
+		Notes:            row.Notes.String,
+		FlyerURL:         row.FlyerUrl.String,
+		DiscordMessageID: row.DiscordMessageID.String,
+		DiscordChannelID: row.DiscordChannelID.String,
+		Draw:             int(row.Draw.Int32),
+		Capacity:         int(row.Capacity.Int32),
+		Status:           row.Status,
+		CreatedAt:        row.CreatedAt.Time,
+		UpdatedAt:        row.UpdatedAt.Time,
 	}
 	if row.SubmissionID.Valid {
 		v := int(row.SubmissionID.Int32)
@@ -323,22 +374,24 @@ func rowWithLineupToShow(row db.GetShowWithLineupRow) (*domain.Show, error) {
 
 func rowToShow(row db.Show) *domain.Show {
 	show := &domain.Show{
-		ID:          int(row.ID),
-		Artist:      row.Artist,
-		Date:        row.Date.Time,
-		DoorsTime:   row.DoorsTime.String,
-		StartTime:   row.StartTime.String,
-		Age:         row.Age.String,
-		Price:       row.Price.String,
-		Genre:       row.Genre.String,
-		Description: row.Description.String,
-		Notes:       row.Notes.String,
-		FlyerURL:    row.FlyerUrl.String,
-		Draw:        int(row.Draw.Int32),
-		Capacity:    int(row.Capacity.Int32),
-		Status:      row.Status,
-		CreatedAt:   row.CreatedAt.Time,
-		UpdatedAt:   row.UpdatedAt.Time,
+		ID:               int(row.ID),
+		Artist:           row.Artist,
+		Date:             row.Date.Time,
+		DoorsTime:        row.DoorsTime.String,
+		StartTime:        row.StartTime.String,
+		Age:              row.Age.String,
+		Price:            row.Price.String,
+		Genre:            row.Genre.String,
+		Description:      row.Description.String,
+		Notes:            row.Notes.String,
+		FlyerURL:         row.FlyerUrl.String,
+		DiscordMessageID: row.DiscordMessageID.String,
+		DiscordChannelID: row.DiscordChannelID.String,
+		Draw:             int(row.Draw.Int32),
+		Capacity:         int(row.Capacity.Int32),
+		Status:           row.Status,
+		CreatedAt:        row.CreatedAt.Time,
+		UpdatedAt:        row.UpdatedAt.Time,
 	}
 	if row.SubmissionID.Valid {
 		v := int(row.SubmissionID.Int32)

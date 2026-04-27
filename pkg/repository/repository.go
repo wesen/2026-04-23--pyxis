@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/domain"
 )
@@ -13,6 +14,9 @@ type ShowRepository interface {
 	GetByID(ctx context.Context, id int) (*domain.Show, error)
 	Create(ctx context.Context, show *domain.Show) (*domain.Show, error)
 	Update(ctx context.Context, show *domain.Show) (*domain.Show, error)
+	AttachDiscordMessage(ctx context.Context, id int, channelID, messageID string) (*domain.Show, error)
+	GetByDiscordMessage(ctx context.Context, channelID, messageID string) (*domain.Show, error)
+	ListExpiredConfirmed(ctx context.Context, before time.Time) ([]domain.Show, error)
 	Archive(ctx context.Context, id int) error
 	SearchArchive(ctx context.Context, query string) ([]domain.ArchivedShow, error)
 	GetArchiveStats(ctx context.Context) (*domain.ArchiveStats, error)

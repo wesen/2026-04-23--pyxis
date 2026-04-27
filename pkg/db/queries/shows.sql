@@ -1,6 +1,6 @@
 -- name: ListUpcomingShows :many
 SELECT id, artist, date, doors_time, start_time, age, price, genre,
-       description, notes, status, flyer_url, draw, capacity,
+       description, notes, status, flyer_url, discord_message_id, discord_channel_id, draw, capacity,
        submission_id, artist_id, created_at, updated_at
 FROM shows
 WHERE status = 'confirmed' AND date >= CURRENT_DATE
@@ -30,16 +30,17 @@ GROUP BY s.id;
 
 -- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
-                   genre, description, notes, status, flyer_url, draw, capacity,
+                   genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, draw, capacity,
                    submission_id, artist_id, created_by)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
 RETURNING *;
 
 -- name: UpdateShow :one
 UPDATE shows
 SET artist = $2, date = $3, doors_time = $4, start_time = $5,
     age = $6, price = $7, genre = $8, description = $9, notes = $10,
-    status = $11, flyer_url = $12, draw = $13, capacity = $14,
+    status = $11, flyer_url = $12, discord_message_id = $13, discord_channel_id = $14,
+    draw = $15, capacity = $16,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;
@@ -51,6 +52,22 @@ DELETE FROM show_lineup WHERE show_id = $1;
 INSERT INTO show_lineup (show_id, artist, role, start_time, end_time, sort_order)
 VALUES ($1, $2, $3, $4, $5, $6)
 RETURNING *;
+
+-- name: AttachDiscordMessageToShow :one
+UPDATE shows AS s
+SET discord_channel_id = $2, discord_message_id = $3, updated_at = NOW()
+WHERE s.id = $1
+RETURNING s.*;
+
+-- name: GetShowByDiscordMessage :one
+SELECT * FROM shows
+WHERE discord_channel_id = $1 AND discord_message_id = $2
+LIMIT 1;
+
+-- name: ListExpiredConfirmedShows :many
+SELECT * FROM shows
+WHERE status = 'confirmed' AND date < $1
+ORDER BY date ASC;
 
 -- name: ArchiveShow :one
 UPDATE shows AS s SET status = 'archived', updated_at = NOW() WHERE s.id = $1 RETURNING s.*;

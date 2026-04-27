@@ -306,3 +306,152 @@ Updated file:
 ```text
 ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/tasks.md
 ```
+
+
+## Step 4: Implement Phase 0-7 foundation
+
+I started implementation on a dedicated branch and built the first integrated foundation for the Pyxis Discord show-management bot. This step covers the practical Phase 0-7 path: branch setup, framework dependency wiring, copying/renaming the upstream show-space bot, exposing Discord message metadata in the Pyxis data model, adding a bot runner package, adding a native Goja `require("pyxis")` module, porting the bot away from SQLite, and wiring bot startup into `pyxis serve`.
+
+The result is a compile-tested foundation. The bot is now present in the Pyxis repo and the server exposes explicit flags to start it, but a real Discord smoke test has not yet been run because credentials/guild setup are required.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Work on Phase 0 - 7. Commit at appropriate intervals, keep a detailed diary"
+
+**Assistant interpretation:** Start implementing the documented phases up through serve lifecycle integration, make focused commits, and keep the diary current with commands, failures, and validation.
+
+**Inferred user intent:** Move from planning into an implementation branch while preserving a reviewable history and enough narrative context for later continuation.
+
+**Commit (code):** pending at the time this diary entry was written.
+
+### What I did
+
+- Created branch `feature/pyxis-discord-show-bot`.
+- Committed the existing ticket documentation as `ef96f41` (`Document Discord show bot implementation plan`) so implementation work starts from a clean documentation checkpoint.
+- Added local module replacements for:
+  - `github.com/go-go-golems/discord-bot => ../corporate-headquarters/discord-bot`
+  - `github.com/go-go-golems/go-go-goja => ../corporate-headquarters/go-go-goja`
+- Added the Discord framework dependency and direct imports needed by the native module (`goja`, `goja_nodejs/require`, `go-go-goja/engine`).
+- Copied the upstream show-space bot into `bot/discord/show-space/`.
+- Renamed bot metadata to `pyxis-show-space` and changed component IDs to the `pyxis-show-space:*` prefix.
+- Added `bot/discord/show-space/README.md` documenting the upstream source and Pyxis-specific porting notes.
+- Added `bot/discord/show-space/lib/pyxis-store.js` to replace the upstream SQLite store with calls to `require("pyxis")`.
+- Added Discord metadata fields to `domain.Show`, protobuf `Show` / `AppShow`, SQL queries, generated SQLC code, generated Go protobuf code, and generated TypeScript protobuf code.
+- Added repository/service methods for attaching Discord messages, looking up shows by Discord message, and listing expired confirmed shows.
+- Added `pkg/discordbot` with:
+  - `runner.go` for `framework.New(...)` lifecycle integration
+  - `deps.go` for service construction from the shared DB pool
+  - `pyxis_module.go` for the native `require("pyxis")` Goja module
+- Added `pyxis serve` flags:
+  - `--discord-bot`
+  - `--discord-bot-script`
+  - `--discord-sync-on-start`
+  - `--discord-debug`
+  - `--discord-admin-role-id`
+  - `--discord-booker-role-id`
+- Wired bot startup into `cmd/pyxis/cmds/serve.go` using `errgroup.WithContext` when the bot is enabled.
+- Ran `make generate` after protobuf/SQL changes.
+- Ran `go test ./...` after implementation fixes.
+
+### Why
+
+- Pyxis needs a real runtime integration point rather than the current no-op Discord client.
+- The upstream show-space bot already has the desired slash commands and Discord behavior, so copying and adapting it is lower risk than rewriting from scratch.
+- The bot must use Pyxis PostgreSQL-backed services rather than the upstream SQLite store to keep the web app and Discord bot consistent.
+- Discord message/channel IDs must be first-class fields in the domain/API if cancel/archive/unpin flows are to work reliably.
+
+### What worked
+
+- `make generate` succeeded after query/protobuf updates.
+- `go test ./...` succeeded after adding the missing Go module requirements.
+- The public `discord-bot/pkg/framework` API was sufficient for embedding the bot without importing framework internals.
+- The `framework.WithRuntimeModuleRegistrars(...)` hook accepted the Pyxis registrar shape needed for `require("pyxis")`.
+
+### What didn't work
+
+- Initial dependency attempt with `go get github.com/go-go-golems/discord-bot@v0.0.0 && go mod tidy` did not leave all required modules in `go.mod` once new code imports were added. The first `go test ./...` failed with errors including:
+
+```text
+pkg/discordbot/pyxis_module.go:10:2: no required module provides package github.com/dop251/goja; to add it:
+	go get github.com/dop251/goja
+pkg/discordbot/pyxis_module.go:11:2: no required module provides package github.com/dop251/goja_nodejs/require; to add it:
+	go get github.com/dop251/goja_nodejs/require
+pkg/discordbot/runner.go:9:2: module github.com/go-go-golems/discord-bot provides package github.com/go-go-golems/discord-bot/pkg/framework and is replaced but not required; to add it:
+	go get github.com/go-go-golems/discord-bot
+pkg/discordbot/pyxis_module.go:12:2: module github.com/go-go-golems/go-go-goja provides package github.com/go-go-golems/go-go-goja/engine and is replaced but not required; to add it:
+	go get github.com/go-go-golems/go-go-goja
+```
+
+- I fixed this with:
+
+```bash
+go get github.com/go-go-golems/discord-bot@v0.0.0 github.com/go-go-golems/go-go-goja@v0.4.12 github.com/dop251/goja github.com/dop251/goja_nodejs/require
+go mod tidy
+```
+
+### What I learned
+
+- The local Discord bot framework currently requires Go 1.26.1, so Pyxis `go.mod` was upgraded from `go 1.25.5` to `go 1.26.1` when the local replacement was added.
+- The Pyxis database schema already had Discord metadata columns, so most of the data-model work was propagation through domain/repository/protobuf/generated layers rather than a new migration.
+- The upstream bot's store boundary was clean enough to replace with a Pyxis-backed store facade while keeping most command code intact.
+
+### What was tricky to build
+
+- The biggest integration trick was respecting framework package boundaries. Pyxis cannot import `discord-bot/internal/jsdiscord`, so the native module had to implement the public `engine.RuntimeModuleRegistrar` interface through `go-go-goja` and be passed to `framework.WithRuntimeModuleRegistrars(...)`.
+- Another tricky part was preserving the upstream bot behavior while removing SQLite fallback paths. The copied bot initially still referenced `catalog` and `dbPath`; those references were removed so production behavior cannot silently fork to local state.
+- The Goja native module needs careful JS-to-Go coercion. IDs can arrive as strings or numbers, dates arrive as ISO strings, and command actor information may be partially present depending on Discord context.
+
+### What warrants a second pair of eyes
+
+- Review `pkg/discordbot/pyxis_module.go` carefully for Goja coercion behavior and whether any native function should return a JS error object instead of panicking.
+- Review whether duplicating service construction in `discordbot.NewDeps(database)` is acceptable or whether Pyxis should refactor server dependency construction to share a single dependency graph.
+- Review whether the local `replace` directives should be kept long-term or removed before merging once versioned modules are available.
+- Review whether `pyxis serve` should install OS signal handling at the root command level; the current integration follows the existing context behavior.
+
+### What should be done in the future
+
+- Run a real Discord development-guild smoke test with credentials and channel/role IDs.
+- Add tests for the native `require("pyxis")` module and copied bot command dispatch.
+- Continue with Phase 8 to align the web app's `POST /api/app/shows/{id}/announce` path with real Discord posting/pinning behavior.
+- Decide whether settings should become the long-term source of truth for Discord role IDs.
+
+### Code review instructions
+
+Start with these files:
+
+- `cmd/pyxis/cmds/serve.go` — bot startup flags and errgroup lifecycle.
+- `pkg/discordbot/runner.go` — framework embedding.
+- `pkg/discordbot/pyxis_module.go` — native Goja `require("pyxis")` module.
+- `bot/discord/show-space/index.js` — copied and adapted bot commands.
+- `bot/discord/show-space/lib/pyxis-store.js` — JS facade replacing SQLite store.
+- `pkg/db/queries/shows.sql` and `pkg/repository/postgres/show_repo.go` — Discord metadata persistence.
+- `proto/pyxis/v1/show.proto` — API shape changes.
+
+Validation run:
+
+```bash
+make generate
+go test ./...
+```
+
+### Technical details
+
+Key commands run:
+
+```bash
+git switch -c feature/pyxis-discord-show-bot
+git add ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis
+git commit -m "Document Discord show bot implementation plan"
+
+go mod edit -replace github.com/go-go-golems/discord-bot=../corporate-headquarters/discord-bot
+go mod edit -replace github.com/go-go-golems/go-go-goja=../corporate-headquarters/go-go-goja
+go get github.com/go-go-golems/discord-bot@v0.0.0
+go mod tidy
+
+make generate
+go test ./...
+
+go get github.com/go-go-golems/discord-bot@v0.0.0 github.com/go-go-golems/go-go-goja@v0.4.12 github.com/dop251/goja github.com/dop251/goja_nodejs/require
+go mod tidy
+go test ./...
+```
