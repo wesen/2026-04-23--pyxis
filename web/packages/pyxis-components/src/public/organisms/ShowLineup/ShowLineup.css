@@ -1,0 +1,24 @@
+/* ShowLineup — show detail lineup table built from RTK/loader show.lineup data. */
+
+:where([data-pyxis-component='show-lineup'][data-pyxis-part='root']) {
+  --pyxis-show-lineup-border-color: #EAE7E0;
+  --pyxis-show-lineup-title-color: #8E887E;
+
+  display: block;
+}
+
+:where([data-pyxis-component='show-lineup'][data-pyxis-part='title']) {
+  color: var(--pyxis-show-lineup-title-color);
+  font-family: inherit;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+:where([data-pyxis-component='show-lineup'][data-pyxis-part='rows']) {
+  border-top: 1px solid var(--pyxis-show-lineup-border-color);
+}

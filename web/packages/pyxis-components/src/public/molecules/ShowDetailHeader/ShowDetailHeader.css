@@ -1,12 +1,12 @@
 /* ShowDetailHeader — public show detail title block. */
 
 :where([data-pyxis-component='show-detail-header'][data-pyxis-part='root']) {
-  --pyxis-show-detail-header-accent-color: var(--color-accent);
+  --pyxis-show-detail-header-accent-color: var(--color-text-primary);
   --pyxis-show-detail-header-muted-color: #8E887E;
 }
 
 :where([data-pyxis-component='show-detail-header'][data-pyxis-part='meta']) {
-  color: var(--pyxis-show-detail-header-accent-color);
+  color: var(--color-accent);
   font-size: 11px;
   font-weight: var(--weight-semibold);
   letter-spacing: 0.14em;

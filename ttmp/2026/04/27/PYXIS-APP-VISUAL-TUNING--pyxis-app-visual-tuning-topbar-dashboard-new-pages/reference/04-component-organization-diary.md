@@ -3800,3 +3800,99 @@ archive content 6.399% review
 archive page    5.964% review
 book content    5.982% review (unchanged after reverting padding experiment)
 ```
+
+## Step 41: Extract and tune ShowDetail lineup organism
+
+After the Archive rhythm pass, I resumed the stashed ShowDetail work because the remaining ShowDetail feedback asked for an extracted/testable lineup table and for the page to use lineup content from the RTK Query show payload. The earlier weird stacked screenshot was confirmed as a stale/missing CSS transform; the stable Storybook render is desktop grid at 920px, not a responsive breakpoint.
+
+This step extracts the lineup table into a public `ShowLineup` organism and keeps the route data flow simple: `ShowDetail` fetches a show through `useShow`, then passes `show.lineup` to `ShowLineup`. That gives us a standalone Storybook target for lineup/table tuning while preserving top-down data from RTK today and DB/loader data later.
+
+### Prompt Context
+
+**User prompt (verbatim):** "whatever you think is best"
+
+**Assistant interpretation:** Continue with the most valuable next task without waiting for another specific review note.
+
+**Inferred user intent:** Keep moving the visual tuning/code-organization work forward in a disciplined way.
+
+**Commit (code):** pending — this step records the ShowDetail lineup extraction commit.
+
+### What I did
+
+- Re-applied the stashed ShowDetail WIP.
+- Added `ShowLineup` organism under `pyxis-components`:
+  - `ShowLineup.tsx`
+  - `ShowLineup.css`
+  - `ShowLineup.stories.tsx`
+  - `index.ts`
+- Exported `ShowLineup` from the package barrel.
+- Updated `ShowDetailPage` to render `<ShowLineup entries={show.lineup} />` from the RTK Query show response.
+- Tuned public show detail molecules:
+  - `ShowDetailHeader` title defaults to primary text while meta remains accent red.
+  - `ShowMetaStrip` values default to primary text and have slightly tighter vertical padding.
+  - `LineupRow` artist/title text defaults to primary text.
+  - `LineupRow` suppresses role labels for `Doors` and `Close`, matching the prototype rows more closely.
+- Updated Storybook public show-detail handler so `/api/public/shows/1` returns detail-specific data matching the prototype detail view (`21+`, `$15`) while the shows list can keep its list-card data.
+- Regenerated and re-served the review page:
+  - `/tmp/pyxis-public-pages-visual-review-showdetail-lineup-20260427-171854/index.html`
+  - `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The lineup table was previously page-local markup and CSS. Extracting it gives us a focused component/organism to test and tune, and it ensures lineup content comes from the same show payload that RTK Query returns.
+
+### What worked
+
+- TypeScript passed for both packages.
+- `pyxis-user-site` Vite build passed.
+- `pyxis-user-site` Storybook build passed.
+- ShowDetail page remains in review band:
+  - content `8.503%`
+  - page `5.344%`
+- Visual notes addressed:
+  - title color is black/primary
+  - meta-strip values are black/primary
+  - lineup is extracted and story-tested
+  - lineup rows are fed from RTK show data
+  - Lineup typography is closer to prototype uppercase label/table style
+
+### What didn't work
+
+- The pixel percentage did not improve overall; it moved from roughly `8.203%` to `8.503%` for content while improving semantic correctness. The remaining mismatch includes detail data/role copy differences and broader page height/spacing.
+- The current protobuf lineup schema only has coarse roles (`headline`, `support`, `dj`), so it cannot naturally express the prototype-specific `live / hardware` label for RONE without either special casing or schema/data changes.
+
+### What I learned
+
+A slightly worse pixel percentage can still be a better implementation if it removes page-local markup and creates a proper prop-fed organism. The review page remains the source of truth for whether the resulting visual tradeoff is acceptable.
+
+### What was tricky to build
+
+Vite/Storybook again served stale transforms until touched/reloaded. I explicitly touched relevant ShowDetail and lineup CSS/TSX files before rerunning css-visual-diff to avoid judging a missing-CSS render.
+
+### What warrants a second pair of eyes
+
+- Decide whether the lineup schema needs a display label/subtitle field so RONE can say `live / hardware` while DJ VEILED can say `headline · dj set` without code special cases.
+- Confirm that changing ShowDetailHeader/ShowMetaStrip/LineupRow default colors to primary text is acceptable for all component stories/usages.
+
+### What should be done in the future
+
+- Add component-level visual spec targets for `ShowLineup` and maybe `LineupRow` to tune without full-page noise.
+- If exact role labels matter, extend the schema or add a prop-level label override rather than hard-coding artist names.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-components/src/public/organisms/ShowLineup/ShowLineup.tsx`.
+- Then review `LineupRow`, `ShowDetailHeader`, and `ShowMetaStrip` CSS defaults.
+- Finally review `web/packages/pyxis-user-site/src/pages/ShowDetailPage/Page.tsx` and `storybook.tsx` detail fixture data.
+- Validate with:
+  - `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`
+  - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build && pnpm exec storybook build`
+
+### Technical details
+
+Latest full sweep after this step:
+
+```text
+show-detail content 8.503% review
+show-detail page    5.344% review
+```

@@ -53,6 +53,8 @@ export { ShowTile } from './public/molecules/ShowTile';
 export type { ShowTileProps, ShowTileShow } from './public/molecules/ShowTile';
 export { ShowGrid } from './public/organisms/ShowGrid';
 export type { ShowGridProps } from './public/organisms/ShowGrid';
+export { ShowLineup } from './public/organisms/ShowLineup';
+export type { ShowLineupProps } from './public/organisms/ShowLineup';
 export { LineupRow } from './public/molecules/LineupRow';
 export type { LineupRowProps } from './public/molecules/LineupRow';
 export { TicketStub } from './public/molecules/TicketStub';

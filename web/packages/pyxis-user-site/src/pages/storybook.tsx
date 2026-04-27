@@ -42,6 +42,19 @@ export const prototypeShows = [
   create(ShowSchema, { id: 9, artist: 'Zola Jesus', date: 'Fri, Jun 6', doorsTime: '8:00 PM', age: '21+', price: '$20', genre: '', status: ShowStatus.CONFIRMED, createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z' }),
 ];
 
+export const prototypeShowDetail = create(ShowSchema, {
+  ...prototypeShows[0],
+  age: '21+',
+  price: '$15',
+  lineup: [
+    create(Show_LineupEntrySchema, { artist: 'Doors', role: 'dj', startTime: '9:00' }),
+    create(Show_LineupEntrySchema, { artist: 'sable witch', role: 'support', startTime: '9:45' }),
+    create(Show_LineupEntrySchema, { artist: 'RONE', role: 'headline', startTime: '10:45' }),
+    create(Show_LineupEntrySchema, { artist: 'DJ VEILED', role: 'headline', startTime: '12:00' }),
+    create(Show_LineupEntrySchema, { artist: 'Close', role: 'dj', startTime: '2:00' }),
+  ],
+});
+
 export const prototypeArchiveShows = [
   create(ArchivedShowSchema, { id: 101, artist: 'Winter Solstice Rave', date: '2025-12-12', genre: 'Electronic', draw: 118 }),
   create(ArchivedShowSchema, { id: 102, artist: 'Jake Meginsky · live', date: '2025-11-29', genre: 'Noise', draw: 76 }),
@@ -73,7 +86,7 @@ export const prototypePublicHandlers = [
   http.get('*/api/public/archive/stats', () => HttpResponse.json(toJson(ArchiveStatsSchema, prototypeArchiveStats))),
   http.get('*/api/public/shows/:id', ({ params }) => {
     const id = Number(params.id);
-    const show = prototypeShows.find((candidate) => candidate.id === id) ?? prototypeShows[0];
+    const show = id === prototypeShowDetail.id ? prototypeShowDetail : (prototypeShows.find((candidate) => candidate.id === id) ?? prototypeShows[0]);
     return HttpResponse.json(toJson(ShowSchema, show));
   }),
 ];

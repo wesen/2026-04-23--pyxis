@@ -4,9 +4,9 @@
   --pyxis-lineup-row-border-color: #EAE7E0;
   --pyxis-lineup-row-color: #1F1E1C;
   --pyxis-lineup-row-muted-color: #8E887E;
-  --pyxis-lineup-row-artist-color: var(--color-accent);
+  --pyxis-lineup-row-artist-color: var(--color-text-primary);
 
-  border-top: 1px solid var(--pyxis-lineup-row-border-color);
+  border-bottom: 1px solid var(--pyxis-lineup-row-border-color);
   color: var(--pyxis-lineup-row-color);
   display: grid;
   font-size: var(--text-base);

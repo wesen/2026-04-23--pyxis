@@ -2,8 +2,16 @@
   padding-bottom: 72px;
 }
 
+.pyxis-show-detail-page [data-pyxis-component='show-detail-header'],
+.pyxis-show-detail-page [data-pyxis-component='show-meta-strip'],
+.pyxis-show-detail-page [data-pyxis-component='lineup-row'] {
+  --pyxis-show-detail-header-accent-color: var(--color-text-primary);
+  --pyxis-show-meta-strip-accent-color: var(--color-text-primary);
+  --pyxis-lineup-row-artist-color: var(--color-text-primary);
+}
+
 .pyxis-show-detail-page__hero {
-  padding-block: 0 28px;
+  padding-block: 0;
 }
 
 .pyxis-show-detail-page__back {
@@ -34,26 +42,13 @@
 
 .pyxis-show-detail-page__main {
   display: grid;
-  gap: 32px;
-}
-
-.pyxis-show-detail-page__section-title {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: 500;
-  margin: 0 0 16px;
+  gap: 28px;
 }
 
 .pyxis-show-detail-page__description {
   color: var(--color-text-secondary);
   line-height: 1.7;
   margin: 0;
-}
-
-.pyxis-show-detail-page__lineup {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 
 .pyxis-show-detail-page__aside {

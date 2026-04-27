@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
-  LineupRow,
   Poster,
   ReserveTicketCard,
   SafetyNote,
   ShowDetailHeader,
+  ShowLineup,
   ShowMetaStrip,
 } from 'pyxis-components';
 import { useShow } from '../../api/hooks';
@@ -23,7 +23,7 @@ export function ShowDetail() {
   if (isError || !show) return <ShowDetailNotFound onBack={() => navigate('/')} />;
 
   const dateLabel = formatLongDate(show.date);
-  const timeLabel = show.startTime ? `${show.doorsTime} doors · ${show.startTime} show` : `${show.doorsTime} doors`;
+  const timeLabel = formatHeaderTime(show.startTime || show.doorsTime);
   const flyerUrl = isMockPlaceholderFlyer(show.flyerUrl) ? undefined : show.flyerUrl;
 
   return (
@@ -49,7 +49,7 @@ export function ShowDetail() {
           <div className="pyxis-show-detail-page__main">
             <section className="pyxis-show-detail-page__hero" data-section="show-detail-hero">
               <ShowDetailHeader
-                meta={`${dateLabel} · ${timeLabel}`}
+                meta={[dateLabel, timeLabel].filter(Boolean).join(' · ')}
                 title={show.artist}
                 description={show.description ?? show.genre}
               />
@@ -65,14 +65,7 @@ export function ShowDetail() {
             </section>
 
             {show.lineup && show.lineup.length > 0 && (
-              <section data-section="show-detail-lineup">
-                <h2 className="pyxis-show-detail-page__section-title">Lineup</h2>
-                <div className="pyxis-show-detail-page__lineup">
-                  {show.lineup.map((entry) => (
-                    <LineupRow key={`${entry.artist}-${entry.startTime}`} entry={entry} />
-                  ))}
-                </div>
-              </section>
+              <ShowLineup entries={show.lineup} />
             )}
 
             <SafetyNote />
@@ -115,6 +108,11 @@ function formatLongDate(date: string) {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+function formatHeaderTime(time?: string) {
+  if (!time) return '';
+  return time.replace(':00 ', '').replace(' PM', 'PM').replace(' AM', 'AM');
 }
 
 const isMockPlaceholderFlyer = (url?: string) => Boolean(url?.includes('placehold.co/'));
