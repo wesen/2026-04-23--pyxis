@@ -2076,3 +2076,138 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
   --outDir /tmp/pyxis-topbar-after-type \
   --output json
 ```
+
+## Step 20: Tune AppTopBar action buttons
+
+After typography tuning, the TopBar diff was reduced to about 1.98%, and `diff_only.png` showed the remaining mismatch was concentrated around the action buttons.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the TopBar tuning loop from the remaining `diff_only.png` mismatch.
+
+**Inferred user intent:** Finish the next obvious TopBar mismatch, while keeping scripts traceable in the ticket workspace.
+
+**Commit (code):** pending — this step will be committed after diary update.
+
+### What I did
+
+- Switched the search and notifications controls from icon-only `Button` usage to the existing shared `IconButton` primitive:
+
+```tsx
+<IconButton icon="search" label="Search" />
+<IconButton icon="bell" label="Notifications" />
+```
+
+- Removed `size="sm"` from the primary `New show` action so it matches the prototype's default `Btn` sizing:
+
+```tsx
+<Button iconLeft="plus">New show</Button>
+```
+
+- Added a traceable diagnostic helper in the ticket scripts folder:
+
+```text
+ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/04-measure-red-button-bounds.py
+```
+
+The script measures connected accent-red regions in already-captured css-visual-diff images. It is only a diagnostic helper, not a replacement for css-visual-diff.
+
+### Why
+
+The prototype TopBar uses:
+
+```jsx
+<IconBtn icon="search" />
+<IconBtn icon="bell" />
+<Btn icon="plus">New show</Btn>
+```
+
+The app previously used `Button size="sm"` for all three controls. That made the icon-only buttons too wide at first, and then made the primary button too small after switching icon-only controls to `IconButton`.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual diff improved into the accepted band:
+
+```text
+After typography tuning: 1.9750445632798572%
+After action tuning:     0.9135472370766489%
+```
+
+The comparison now reports:
+
+```text
+classification: accepted
+styleChanges: 0
+```
+
+The red-region diagnostic confirms the primary button bounds now match:
+
+```text
+left_region.png  bbox_width=121 bbox_height=33
+right_region.png bbox_width=121 bbox_height=33
+```
+
+### What didn't work
+
+There is still about 0.91% changed pixels. The remaining mismatch is small and mostly around antialiasing, icons, and the known 2px width/x bounds delta from comparing the full prototype shell region to the isolated Storybook component region.
+
+### What I learned
+
+The correct fix was to reuse the more specific primitive (`IconButton`) rather than trying to force `Button` into an icon-only shape through local CSS. For the primary action, the prototype used the default button size, so the app should too.
+
+### What was tricky to build
+
+The visual mismatch was made of two separate issues:
+
+1. icon-only controls needed `IconButton`, not `Button` with an empty label;
+2. the primary action needed default button sizing, not `sm`.
+
+Fixing only the first made the second more obvious.
+
+### What warrants a second pair of eyes
+
+- Whether all TopBar stories should use default-size primary actions for consistency.
+- Whether `IconButton` should be preferred across app toolbars wherever buttons have no visible label.
+
+### What should be done in the future
+
+Run the other Shell component targets (`app-topbar-with-action`, `app-topbar-long-title`, sidebar, mobile nav) to ensure the broader shell suite remains acceptable.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.tsx`
+- `ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/04-measure-red-button-bounds.py`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual check:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-primary-md \
+  --output json
+```
