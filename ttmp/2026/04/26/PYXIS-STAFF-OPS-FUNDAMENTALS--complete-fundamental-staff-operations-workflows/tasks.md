@@ -37,7 +37,7 @@
 
 - [x] Add RTK endpoints/mutations for booking review notes.
 - [x] Add RTK endpoints/mutations for booking detail edit and artist create/edit.
-- [ ] Add remaining RTK endpoints/mutations for core settings APIs.
+- [x] Add remaining RTK endpoints/mutations for core settings APIs.
 - [x] Update MSW mutable state and handlers for show create/update and flyer upload/delete.
 - [x] Ensure show/flyer protobuf-backed MSW responses use `toJson(...)`.
 - [x] Add mutation interaction stories for show create/edit workflows.
@@ -69,9 +69,9 @@
 - [x] `cd web/packages/pyxis-types && pnpm build` passes.
 - [x] `cd web/packages/pyxis-app && pnpm build` passes.
 - [x] `cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook` passes.
-- [ ] `cd web && pnpm build` passes.
+- [x] `cd web && pnpm build` passes.
 - [x] Manual backend smoke for workflow A/B show create/update lineups passes.
 - [x] Manual backend smoke for booking review notes passes.
-- [ ] Manual Vite staff workflow smoke passes.
-- [ ] Diary and changelog are updated.
+- [x] Manual Storybook staff workflow smoke passes for booking, artist, attendance, and settings mutation stories.
+- [x] Diary and changelog are updated.
 - [ ] reMarkable bundle is refreshed if implementation materially changes the design.

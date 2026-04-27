@@ -842,3 +842,73 @@ web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx
 web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx
 web/packages/pyxis-app/src/api/mockHandlers.ts
 ```
+
+## Step 8: Full web validation and live Storybook smoke
+
+I ran the broader validation pass after the staff workflow implementation and used the live pyxis-app Storybook to smoke the mutation stories in-browser.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead."
+
+**Assistant interpretation:** Run the full build/smoke pass and clean up any story issues found while the live Storybook remains available.
+
+### What I did
+
+- Ran full web workspace build:
+  - `cd web && pnpm build`
+- Ran app Storybook production build:
+  - `cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook`
+- Ran Go tests:
+  - `go test ./...`
+- Browser-smoked the live app Storybook stories at `http://localhost:6008/iframe.html`:
+  - `pyxis-app-pages-artists--edit-artist-mutation`
+  - `pyxis-app-pages-booking-review--save-booking-details-mutation`
+  - `pyxis-app-pages-booking-review--save-review-note-mutation`
+  - `pyxis-app-pages-attendance--edit-attendance-mutation`
+  - `pyxis-app-pages-settings--edit-core-settings-mutation`
+
+### What worked
+
+The final validation passed:
+
+```bash
+cd web && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+The Playwright Storybook smoke passed with no captured non-favicon console errors for the checked mutation stories.
+
+### What didn't work
+
+The first Storybook browser smoke found story authoring issues in the Artists stories:
+
+- `CreateArtistMutation` used `findByText(/Story Artist/i)` but the new artist appeared in multiple places.
+- `EditArtistMutation` used `findByText(/Burial Hex/i)` and also matched multiple places.
+
+I fixed both by using `findAllByText(...)` where duplicates are expected.
+
+### What I learned
+
+The production Storybook build can pass even when a `play` function fails at runtime. The live Storybook smoke is therefore useful and should stay part of the finishing checklist for mutation stories.
+
+### What warrants a second pair of eyes
+
+The mutation stories now pass, but a more exhaustive smoke could visit every page story, not only the mutation stories touched by this workflow.
+
+### Code review instructions
+
+Review the story fix here:
+
+```text
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
+```
+
+Re-run:
+
+```bash
+cd web && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```

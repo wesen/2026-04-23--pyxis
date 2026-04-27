@@ -95,3 +95,12 @@ Implemented attendance editing and core settings form, with stateful MSW handler
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx — Adds attendance mutation page story.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx — Adds core settings mutation page story.
 
+
+## 2026-04-26
+
+Ran full web build, app Storybook build, Go tests, and live Storybook mutation smoke; fixed Artists story duplicate-text play-function issues.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx — Uses findAllByText for expected duplicate artist names in play functions.
+
