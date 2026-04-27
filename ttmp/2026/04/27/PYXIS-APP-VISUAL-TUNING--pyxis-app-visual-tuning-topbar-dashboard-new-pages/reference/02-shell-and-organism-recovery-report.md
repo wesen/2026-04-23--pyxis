@@ -332,7 +332,51 @@ That means pyxis-app TypeScript compilation succeeds after:
 
 ---
 
-## 7. What to do differently next time
+## 7. Follow-up: why TypeScript was not enough
+
+After the first recovery, TypeScript passed, but Vite/Storybook still reported:
+
+```text
+[plugin:vite:import-analysis] Failed to resolve import "../DashboardMetricsGrid/DashboardMetricsGrid.css" from "src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx".
+```
+
+This happened because `tsc --noEmit` did not catch that CSS side-effect import. The broken import was:
+
+```ts
+import '../DashboardMetricsGrid/DashboardMetricsGrid.css';
+```
+
+After moving `AttendancePanel` into `Roster/AttendancePanel/`, that path incorrectly resolved inside `Roster/`. The actual target lives in the `Dashboard/` page group, so the correct import is:
+
+```ts
+import '../../Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.css';
+```
+
+To prevent this class of miss, I added another script:
+
+```text
+ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/03-find-unresolved-relative-imports.py
+```
+
+It scans TypeScript/JavaScript source files for relative imports and checks filesystem resolution, including `.css` files and `index.ts(x)` folders. It found exactly one unresolved import, the `DashboardMetricsGrid.css` import above.
+
+Final validation after this fix:
+
+```bash
+python3 ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/03-find-unresolved-relative-imports.py
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+Results:
+
+```text
+unresolved: 0
+tsc: no output
+vite build: ✓ built
+```
+
+## 8. What to do differently next time
 
 1. **Never run a broad import-rewrite script before a dry-run.**
 2. **Store scripts in the ticket `scripts/` folder immediately.**
