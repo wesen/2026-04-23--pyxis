@@ -1,4 +1,4 @@
-import { Panel } from '../Panels';
+import { Panel } from '../../Panels';
 import './BookingReviewDatePanel.css';
 
 export type BookingReviewDatePanelProps = {

@@ -1,9 +1,9 @@
 import type { Submission } from 'pyxis-types';
-import { BookingCard, type BookingActionHandler } from '../../molecules/BookingCard';
-import { BookingQueueRow } from '../../molecules/BookingQueueRow';
-import { appPart } from '../../parts';
+import { BookingCard, type BookingActionHandler } from '../../../molecules/BookingCard';
+import { BookingQueueRow } from '../../../molecules/BookingQueueRow';
+import { appPart } from '../../../parts';
 import './BookingQueue.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type BookingQueueProps = {
   bookings: Submission[];

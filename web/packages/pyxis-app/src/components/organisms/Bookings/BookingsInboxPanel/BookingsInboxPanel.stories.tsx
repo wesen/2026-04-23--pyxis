@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmissionStatus } from 'pyxis-types';
-import { bookings } from '../../../api/mockData';
+import { bookings } from '../../../../api/mockData';
 import { BookingsInboxPanel } from './BookingsInboxPanel';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/BookingsInboxPanel',
+  title: 'Pyxis App/Components/Organisms/Bookings/BookingsInboxPanel',
   component: BookingsInboxPanel,
   parameters: { layout: 'fullscreen' },
   args: {

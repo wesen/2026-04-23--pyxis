@@ -1,9 +1,9 @@
 import type { Submission } from 'pyxis-types';
 import { SubmissionStatus } from 'pyxis-types';
-import { BookingCard, type BookingActionHandler } from '../../molecules/BookingCard';
-import { Panel } from '../Panels';
+import { BookingCard, type BookingActionHandler } from '../../../molecules/BookingCard';
+import { Panel } from '../../Panels';
 import './BookingsInboxPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type BookingsInboxPanelProps = {
   bookings: Submission[];

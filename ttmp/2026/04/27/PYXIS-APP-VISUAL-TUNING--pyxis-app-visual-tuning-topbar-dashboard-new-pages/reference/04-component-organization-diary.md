@@ -1094,3 +1094,110 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 11: Group Bookings organisms under organisms/Bookings
+
+After Shows passed validation, I grouped the Bookings and booking-review organisms into a single `Bookings` page group. This was committed separately from Shows to keep the refactor reviewable and reversible.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Continue with the next page group and keep the small-commit discipline.
+
+**Inferred user intent:** Organize the remaining page-specific organisms while avoiding the earlier all-at-once refactor risk.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/Bookings/`.
+- Used `git mv` to move:
+  - `BookingQueue`
+  - `BookingReviewDatePanel`
+  - `BookingReviewHero`
+  - `BookingReviewNotePanel`
+  - `BookingReviewRequestPanel`
+  - `BookingsInboxPanel`
+  - `BookingsInsightsPanel`
+  - `BookingsProcessedPanel`
+- Added `components/organisms/Bookings/index.ts`.
+- Updated `organisms/index.ts` to export the Bookings group.
+- Updated compatibility shims:
+  - `Panels.tsx`
+  - `Phase8Sections.tsx`
+- Updated one remaining page deep import in `BookingReviewPage/Page.tsx`.
+- Updated Bookings Storybook titles to `Pyxis App/Components/Organisms/Bookings/<Component>`.
+- Marked the Bookings subtask complete in `tasks.md`.
+
+### Why
+
+The Bookings page group has a clear prefix boundary and several related review panels. Grouping it after Shows continues the page-oriented organization without mixing unrelated component families.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+The first resolver pass caught expected remaining old paths in compatibility shims and a page deep import:
+
+```text
+src/components/organisms/Panels.tsx:4: ./BookingQueue
+src/components/organisms/Phase8Sections.tsx:8: ./BookingsInboxPanel
+src/pages/BookingReviewPage/Page.tsx:8: ../../components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel
+```
+
+These were fixed with targeted edits.
+
+### What I learned
+
+The compatibility shims still matter during page grouping. Even if pages use the public organism barrel, legacy shims must remain internally valid until they are retired.
+
+### What was tricky to build
+
+The Bookings group combines two naming prefixes: `BookingReview*` and `Bookings*`. I grouped both under `Bookings` because they serve the same bookings/review domain.
+
+### What warrants a second pair of eyes
+
+- Whether `BookingReview*` should be a nested subgroup later, for example `Bookings/Review/`, or whether the current flat Bookings group is easier to navigate.
+- Visual inspection of the booking review panel stories after the title/path changes.
+
+### What should be done in the future
+
+Proceed to Calendar as the next low-risk group, then ShowDetail, Roster, and Settings/Shared.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Bookings/`
+- `web/packages/pyxis-app/src/components/organisms/Bookings/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- `web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```

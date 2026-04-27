@@ -1,5 +1,5 @@
 import { Submission } from 'pyxis-types';
-import { StatusDot, statusToLabel } from '../../atoms/StatusDot';
+import { StatusDot, statusToLabel } from '../../../atoms/StatusDot';
 import './BookingReviewHero.css';
 
 export type BookingReviewHeroProps = {

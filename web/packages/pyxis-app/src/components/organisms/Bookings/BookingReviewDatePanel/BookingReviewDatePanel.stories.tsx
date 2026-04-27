@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BookingReviewDatePanel } from './BookingReviewDatePanel';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/BookingReviewDatePanel',
+  title: 'Pyxis App/Components/Organisms/Bookings/BookingReviewDatePanel',
   component: BookingReviewDatePanel,
   parameters: { layout: 'fullscreen' },
   args: {},

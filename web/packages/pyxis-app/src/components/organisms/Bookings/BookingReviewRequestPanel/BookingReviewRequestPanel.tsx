@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Submission } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { Panel } from '../Panels';
+import { Panel } from '../../Panels';
 import './BookingReviewRequestPanel.css';
 
 export type BookingDetailsDraft = Pick<Submission, 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'>;

@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmissionStatus } from 'pyxis-types';
-import { bookings } from '../../../api/mockData';
+import { bookings } from '../../../../api/mockData';
 import { BookingReviewHero } from './BookingReviewHero';
 
 const booking = bookings.find((item) => item.status === SubmissionStatus.PENDING) ?? bookings[0];
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/BookingReviewHero',
+  title: 'Pyxis App/Components/Organisms/Bookings/BookingReviewHero',
   component: BookingReviewHero,
   parameters: { layout: 'fullscreen' },
   args: { booking },
