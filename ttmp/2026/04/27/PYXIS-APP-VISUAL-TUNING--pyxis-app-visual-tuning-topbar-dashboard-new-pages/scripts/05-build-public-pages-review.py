@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -45,13 +46,18 @@ def artifact(row: dict, name: str) -> str:
     return str(mapping[name])
 
 
-def rel(path: str, output_dir: Path) -> str:
+def bundle_artifact(path: str, output_dir: Path, page: str, section: str, name: str) -> str:
+    """Copy an artifact into the review bundle and return a relative URL."""
     if not path:
         return ""
-    try:
-        return Path(path).resolve().relative_to(output_dir.resolve()).as_posix()
-    except ValueError:
-        return "file://" + str(Path(path).resolve())
+    source = Path(path)
+    if not source.exists():
+        return ""
+    target_dir = output_dir / "artifacts" / page / section
+    target_dir.mkdir(parents=True, exist_ok=True)
+    target = target_dir / f"{name}{source.suffix}"
+    shutil.copy2(source, target)
+    return target.relative_to(output_dir).as_posix()
 
 
 def main() -> None:
@@ -65,14 +71,16 @@ def main() -> None:
 
     cards = []
     for row in rows:
-        page = html.escape(str(row.get("page", "")))
-        section = html.escape(str(row.get("section", "")))
+        raw_page = str(row.get("page", ""))
+        raw_section = str(row.get("section", ""))
+        page = html.escape(raw_page)
+        section = html.escape(raw_section)
         cls = html.escape(str(row.get("classification", "")))
         pct = float(row.get("changedPercent", 0))
-        diff = rel(artifact(row, "diff"), args.output_dir)
-        left = rel(artifact(row, "left"), args.output_dir)
-        right = rel(artifact(row, "right"), args.output_dir)
-        compare = rel(artifact(row, "compare"), args.output_dir)
+        diff = bundle_artifact(artifact(row, "diff"), args.output_dir, raw_page, raw_section, "diff_only")
+        left = bundle_artifact(artifact(row, "left"), args.output_dir, raw_page, raw_section, "left_region")
+        right = bundle_artifact(artifact(row, "right"), args.output_dir, raw_page, raw_section, "right_region")
+        compare = bundle_artifact(artifact(row, "compare"), args.output_dir, raw_page, raw_section, "compare")
         cards.append(f"""
 <section class='card {cls}' data-page='{page}' data-section='{section}'>
   <header>

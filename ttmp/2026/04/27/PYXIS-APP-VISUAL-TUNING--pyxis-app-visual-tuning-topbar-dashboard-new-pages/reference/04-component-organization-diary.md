@@ -2989,3 +2989,62 @@ archive content     7.251% review
 archive page        6.684% review
 show-detail page    5.688% review
 ```
+
+## Step 33: Bundle review PNGs beside the HTML
+
+The first public-pages review page referenced the css-visual-diff PNGs by absolute `/tmp`/`file://` style paths instead of copying them into the review bundle. That made the HTML less portable and made the image links easy to miss or fail depending on how the browser opened the file.
+
+I updated the review generator so every linked artifact is copied into the output directory under `artifacts/<page>/<section>/`. The HTML now uses relative links such as `artifacts/shows/page/right_region.png`, so opening `index.html` shows and links the PNGs directly.
+
+### Prompt Context
+
+**User prompt (verbatim):** "they're not linked in the html?"
+
+**Assistant interpretation:** The review page should contain working local links/images for the PNG artifacts, not just rely on separate artifact locations.
+
+**Inferred user intent:** Make the review bundle self-contained enough that the HTML page is the entry point for visual review.
+
+**Commit (code):** pending — this step records the review generator fix.
+
+### What I did
+
+- Updated `scripts/05-build-public-pages-review.py` to copy each artifact into the review output directory.
+- Regenerated the bundle at:
+  - `/tmp/pyxis-public-pages-visual-review-bundled-20260427-153551/index.html`
+- Verified files exist under paths like:
+  - `/tmp/pyxis-public-pages-visual-review-bundled-20260427-153551/artifacts/shows/page/right_region.png`
+  - `/tmp/pyxis-public-pages-visual-review-bundled-20260427-153551/artifacts/book/content/diff_only.png`
+
+### Why
+
+The earlier HTML could be read as a summary page, but it was not a clean review bundle. A reviewer should be able to open one folder and see all images via relative links.
+
+### What worked
+
+- The regenerated review folder now contains `index.html`, copied PNGs, and copied `compare.json` files.
+- A grep check found no old `file://` or direct `/tmp/pyxis-public-pages-final-sweep` image links in the generated HTML.
+
+### What didn't work
+
+- The summary text still mentions the source summary JSON path, which is intentional provenance rather than an artifact link.
+
+### What I learned
+
+- For handoff/review HTML, copying artifacts is better than linking across `/tmp` directories, even if the source artifacts remain available.
+
+### What was tricky to build
+
+The script needed to preserve provenance while making assets local. The fix copies only artifact files used by the cards and leaves the source summary path in the header for traceability.
+
+### What warrants a second pair of eyes
+
+- Check the regenerated HTML in a browser and confirm all cards render images immediately.
+
+### What should be done in the future
+
+- Use bundled review directories by default for all future visual review pages.
+
+### Code review instructions
+
+- Review `scripts/05-build-public-pages-review.py`, especially `bundle_artifact()`.
+- Open `/tmp/pyxis-public-pages-visual-review-bundled-20260427-153551/index.html` and verify local image links.
