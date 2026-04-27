@@ -28,7 +28,7 @@ export const CreateArtistMutation: Story = {
     await userEvent.type(await canvas.findByLabelText(/^notes$/i), 'Created from a Storybook interaction.');
     await userEvent.click(await canvas.findByRole('button', { name: /create artist/i }));
     await expect(await canvas.findByText(/Artist created/i)).toBeInTheDocument();
-    await expect(await canvas.findByText(/Story Artist/i)).toBeInTheDocument();
+    await expect((await canvas.findAllByText(/Story Artist/i)).length).toBeGreaterThan(0);
   },
 };
 
@@ -37,7 +37,7 @@ export const EditArtistMutation: Story = {
   parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(await canvas.findByText(/Burial Hex/i));
+    await userEvent.click((await canvas.findAllByText(/Burial Hex/i))[0]);
     const notes = await canvas.findByLabelText(/^notes$/i);
     await userEvent.clear(notes);
     await userEvent.type(notes, 'Updated artist note from Storybook.');
