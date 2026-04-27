@@ -1,1 +1,10 @@
-/* AttendancePanel composes AttendanceStat and booking-card visual primitives. */
+.app-attendance-edit-card { display: grid; gap: 10px; }
+.app-attendance-edit-grid { display: grid; grid-template-columns: 120px 1fr; gap: 10px 12px; }
+.app-attendance-edit-grid label { display: grid; gap: 5px; }
+.app-attendance-edit-grid label:not(.app-attendance-checkbox):nth-of-type(n+3) { grid-column: 1 / -1; }
+.app-attendance-edit-grid span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.app-attendance-edit-grid input[type='number'], .app-attendance-edit-grid textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); background: var(--app-surface-strong); color: var(--app-ink); padding: 8px 9px; font: inherit; font-size: 13px; }
+.app-attendance-edit-grid textarea { resize: vertical; }
+.app-attendance-checkbox { align-self: end; display: flex !important; grid-template-columns: auto 1fr; align-items: center; gap: 8px !important; padding-bottom: 8px; }
+.app-attendance-checkbox input { width: 16px; height: 16px; }
+@media (max-width: 760px) { .app-attendance-edit-grid { grid-template-columns: 1fr; } }

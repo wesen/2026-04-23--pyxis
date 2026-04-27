@@ -48,6 +48,8 @@ type MockState = {
   bookings: Submission[];
   bookingReviews: Record<number, ReturnType<typeof createBookingReview>>;
   artists: Artist[];
+  attendance: typeof attendance;
+  settings: typeof settings;
   calendarEvents: typeof calendarEvents;
 };
 
@@ -59,6 +61,8 @@ export function resetMockState() {
     bookings: bookings.map(cloneSubmission),
     bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
     artists: artists.map((artist) => create(ArtistSchema, artist as any)),
+    attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+    settings: create(SettingsSchema, settings as any),
     calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
   };
 }
@@ -78,6 +82,8 @@ function ensureMockState() {
       bookings: bookings.map(cloneSubmission),
       bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
       artists: artists.map((artist) => create(ArtistSchema, artist as any)),
+      attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+      settings: create(SettingsSchema, settings as any),
       calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
     };
   }
@@ -279,9 +285,28 @@ export const mockHandlers = [
     return new HttpResponse(null, { status: 204 });
   }),
 
-  http.get('*/api/app/attendance', () => HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: attendance })))),
-  http.patch('*/api/app/attendance/:showId', () => HttpResponse.json(toJson(AttendanceLogSchema, attendance[0]))),
+  http.get('*/api/app/attendance', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: current.attendance })));
+  }),
+  http.patch('*/api/app/attendance/:showId', async ({ params, request }) => {
+    const current = ensureMockState();
+    const showId = Number(params.showId);
+    const body = await request.json() as Partial<typeof attendance[number]>;
+    const previous = current.attendance.find((entry) => entry.showId === showId) ?? current.attendance[0];
+    const updated = create(AttendanceLogSchema, { ...previous, ...body, showId, updatedAt: '2026-04-26T00:00:00Z' });
+    current.attendance = current.attendance.map((entry) => entry.showId === showId ? updated : entry);
+    return HttpResponse.json(toJson(AttendanceLogSchema, updated));
+  }),
   http.get('*/api/app/audit-log', () => HttpResponse.json(toJson(AuditLogEntryListSchema, create(AuditLogEntryListSchema, { entries: auditLog })))),
-  http.get('*/api/app/settings', () => HttpResponse.json(toJson(SettingsSchema, settings))),
-  http.patch('*/api/app/settings', async ({ request }) => HttpResponse.json(await request.json())),
+  http.get('*/api/app/settings', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(SettingsSchema, current.settings));
+  }),
+  http.patch('*/api/app/settings', async ({ request }) => {
+    const current = ensureMockState();
+    const body = await request.json() as Partial<typeof settings>;
+    current.settings = create(SettingsSchema, { ...current.settings, ...body });
+    return HttpResponse.json(toJson(SettingsSchema, current.settings));
+  }),
 ];
