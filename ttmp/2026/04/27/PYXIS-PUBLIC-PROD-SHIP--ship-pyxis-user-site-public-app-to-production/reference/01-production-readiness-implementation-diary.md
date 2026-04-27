@@ -296,3 +296,140 @@ Some schema enum fields accepted free-form operator text rather than only enum v
 ### Next steps
 
 Proceed to backend/deployment audit because Manuel explicitly answered `yes` to inspecting the Go backend/Dagger/static embed setup next.
+
+## Step 4: Audit backend static embed and convert launch plan into concrete tasks
+
+Manuel asked me to proceed with the backend/Dagger/static embed audit and then add detailed phased tasks.
+
+### Commands run
+
+```bash
+go test ./... -count=1
+```
+
+Result:
+
+```text
+ok  github.com/go-go-golems/pyxis/pkg/discordbot 0.026s
+```
+
+All other packages either passed or had no test files.
+
+### Files inspected
+
+- `cmd/build-web/main.go`
+- `Makefile`
+- `internal/web/embed.go`
+- `internal/web/embed_none.go`
+- `internal/web/static.go`
+- `internal/web/generate.go`
+- `pkg/server/server.go`
+- `pkg/server/spa_fallback.go`
+- `pkg/server/public.go`
+- `pkg/service/submission_service.go`
+- `pkg/service/show_service.go`
+- `pkg/db/queries/shows.sql`
+- `pkg/db/queries/submissions.sql`
+- `pkg/db/migrations/000001_init.up.sql`
+- `pkg/repository/postgres/show_repo.go`
+- `pkg/repository/postgres/submission_repo.go`
+- `pkg/server/auth.go`
+
+### What I found
+
+The backend already implements the desired production topology: the public site can be built and copied into `internal/web/embed/public`, then served from a Go binary built with `-tags embed`. `make build-embed` runs `build-web` and then builds `bin/pyxis` with the embed tag. `make serve-embed` builds and serves the embedded binary on `:8080`.
+
+The server also already has the same-origin public API routes expected by `pyxis-user-site`:
+
+- `GET /api/public/shows`
+- `GET /api/public/shows/{id}`
+- `GET /api/public/archive`
+- `GET /api/public/archive/stats`
+- `POST /api/public/submissions`
+
+The SPA fallback is also implemented carefully. It reserves `/api`, `/auth`, `/health`, and `/flyers`, while browser routes like `/shows/42` should fall back to `index.html`.
+
+### Key risks discovered
+
+- Public show detail currently appears to call generic `GetByID`; we should verify it does not expose draft/hold/blocked/archived shows unintentionally.
+- Booking validation is minimal: artist name and links only.
+- Manuel accepted no spam mitigation for v1, so this is documented as a risk, not a blocker.
+- Staff auth routes are served by the same binary; `auth.go` still has `Secure: false` cookie TODOs that matter if staff routes are exposed over HTTPS.
+- Static asset cache-control is not customized.
+- Dagger build path exists, but still needs execution in the release environment.
+
+### What I created/updated
+
+- Created backend audit:
+  - `reference/03-backend-static-embed-production-audit.md`
+- Rewrote the task list into a concrete implementation plan with phases T00-T37:
+  - `tasks.md`
+
+### What worked
+
+The codebase is further along than expected. The same-origin Go binary/static embed shape is already implemented; production work can focus on tests, validation, visibility rules, and launch hardening.
+
+### What didn't work
+
+No command failed during the audit. I did not run `make build-embed` yet because it will build/copy frontend assets and should be treated as an implementation/validation task with recorded artifact changes.
+
+### What was tricky to build
+
+The main task was translating broad production readiness into repository-specific tasks. After the audit, the right task list is no longer abstract: it can name exact files, commands, tests, and route behaviors.
+
+### Next steps
+
+Start Phase 1:
+
+1. Run and validate `go run ./cmd/build-web` through Dagger.
+2. Run and validate `BUILD_WEB_LOCAL=1 go run ./cmd/build-web`.
+3. Run and validate `make build-embed`.
+4. Add tests for `internal/web.NewSPAHandler` and `spaFallbackHandler`.
+
+## Step 5: Upload updated backend audit bundle to reMarkable
+
+After adding the backend static embed audit and expanding the task list, I reran docmgr validation and uploaded an updated bundle to reMarkable.
+
+### Commands run
+
+```bash
+docmgr doctor --ticket PYXIS-PUBLIC-PROD-SHIP --stale-after 30
+```
+
+Result:
+
+```text
+✅ All checks passed
+```
+
+Then I ran a dry-run bundle upload and the real upload:
+
+```bash
+remarquee upload bundle --dry-run \
+  design-doc/01-public-site-production-readiness-analysis-and-ship-plan.md \
+  tasks.md \
+  reference/01-production-readiness-implementation-diary.md \
+  reference/02-operator-production-decisions.md \
+  reference/03-backend-static-embed-production-audit.md \
+  --name "PYXIS-PUBLIC-PROD-SHIP backend audit and task plan" \
+  --remote-dir "/ai/2026/04/27/PYXIS-PUBLIC-PROD-SHIP" \
+  --toc-depth 2
+
+remarquee upload bundle ...
+remarquee cloud ls /ai/2026/04/27/PYXIS-PUBLIC-PROD-SHIP --long --non-interactive
+```
+
+Remote listing:
+
+```text
+[f] PYXIS-PUBLIC-PROD-SHIP backend audit and task plan
+[f] PYXIS-PUBLIC-PROD-SHIP public site production readiness
+```
+
+### What worked
+
+The updated bundle now includes the initial design guide, the expanded task list, the diary, operator decisions, and backend audit.
+
+### Next steps
+
+Commit the updated ticket docs, then begin implementation with the build/embed validation and fallback tests.

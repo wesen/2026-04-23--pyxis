@@ -35,3 +35,22 @@ Collected operator production decisions with plz-confirm and recorded interprete
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/sources/02-prod-readiness-operator-answers.json — first parsed plz-confirm answers
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/sources/04-prod-readiness-followup-answers.json — follow-up parsed plz-confirm answers
 
+
+## 2026-04-27
+
+Audited Go backend static embed/public API path and expanded production ship tasks into concrete implementation phases.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/03-backend-static-embed-production-audit.md — backend static embed audit
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md — expanded phased production task list
+
+
+## 2026-04-27
+
+Uploaded updated backend audit and task plan bundle to reMarkable.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — updated upload record
+

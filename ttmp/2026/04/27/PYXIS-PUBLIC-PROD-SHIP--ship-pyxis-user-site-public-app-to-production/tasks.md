@@ -9,185 +9,280 @@ Topics:
   - release-readiness
 DocType: tasks
 Intent: implementation
-Summary: Detailed task list for shipping pyxis-user-site to production.
-LastUpdated: 2026-04-27T18:45:00-04:00
+Summary: Detailed phased task list for shipping pyxis-user-site and the same-origin Go backend/static embed path to production.
+LastUpdated: 2026-04-27T19:10:00-04:00
 ---
 
 # Public Site Production Ship Tasks
 
-## Phase 0: Ticket setup and handoff docs
+## Current launch assumptions
+
+These assumptions were confirmed through `plz-confirm` and backend audit:
+
+- Production domain: `https://pyxis.xyz`.
+- Launch scope: public website + backend; focus on the public website.
+- Deployment target: Go backend static embed, built through Dagger/local fallback.
+- API topology: same-origin API from the same Go binary.
+- Production `VITE_API_URL`: blank/same-origin unless a later deployment decision overrides it.
+- Booking spam mitigation: none for now; accepted v1 risk.
+- Booking notification/content owners: undecided.
+- SEO strategy: unresolved; existing `Seo.tsx` needs inspection before use.
+
+## Phase 0: Ticket setup, operator decisions, and backend audit
 
 - [x] **T00 — Create production-readiness ticket workspace**
   - Create `PYXIS-PUBLIC-PROD-SHIP`.
   - Create design doc, diary, tasks, and changelog.
   - Store the public-site production analysis in the ticket.
-  - Upload the handoff bundle to reMarkable.
+  - Upload the initial handoff bundle to reMarkable.
 
 - [x] **T01 — Map current public-site architecture**
   - Inspect route tree, API layer, page state handling, SEO helper, Vite config, and proto schema.
   - Record file-backed evidence in the design doc.
 
-## Phase 1: Environment and deployment topology
+- [x] **T02 — Collect operator launch decisions with plz-confirm**
+  - Ask production domain, API topology, deployment target, booking spam posture, SEO posture, launch scope, and content owner questions.
+  - Store schemas and answers in `sources/`.
+  - Record interpreted decisions in `reference/02-operator-production-decisions.md`.
 
-- [ ] **T02 — Decide production domain and API topology**
-  - Decide whether the public frontend and API are same-origin or cross-origin.
-  - Record production domain, API origin, and CDN/static host behavior.
-  - Decide whether `VITE_API_URL` is empty or set to a production API origin.
+- [x] **T03 — Audit Go backend, Dagger build, and static embed path**
+  - Inspect `cmd/build-web/main.go`, `Makefile`, `internal/web/*`, `pkg/server/*`, public handlers, and DB queries.
+  - Confirm same-origin/static embed architecture exists.
+  - Run `go test ./... -count=1`.
+  - Record findings in `reference/03-backend-static-embed-production-audit.md`.
 
-- [ ] **T03 — Remove or classify production runtime dev assumptions**
-  - Run:
-    - `rg "localhost|127\\.0\\.0\\.1|6007|6008|7070|8097|placehold\\.co|mockServiceWorker" web/packages/pyxis-user-site web/packages/pyxis-components/src -S`
-  - Classify findings as dev-only, story-only, mock-only, or production-risk.
-  - Fix any production-risk references.
+## Phase 1: Build and embed validation
 
-- [ ] **T04 — Configure SPA route fallback**
-  - Ensure direct refresh returns `index.html` for:
-    - `/`
-    - `/shows`
-    - `/shows/:id`
-    - `/archive`
-    - `/book`
-    - `/book/success`
-    - `/about`
-  - Ensure `/api/*` routes are not swallowed by the SPA fallback.
-  - Document host-specific config.
+- [ ] **T04 — Verify Dagger build-web path in the release environment**
+  - Run `go run ./cmd/build-web` without `BUILD_WEB_LOCAL=1`.
+  - Confirm Dagger engine availability or expected local fallback behavior.
+  - Confirm `internal/web/embed/public/index.html` is recreated.
+  - Confirm generated assets are copied under `internal/web/embed/public/assets/`.
+  - Record command output and timing in the diary.
 
-## Phase 2: API contract and real data
+- [ ] **T05 — Verify local build-web fallback path**
+  - Run `BUILD_WEB_LOCAL=1 go run ./cmd/build-web`.
+  - Confirm it builds `pyxis-types`, `pyxis-components`, and `pyxis-user-site`.
+  - Confirm it copies `web/packages/pyxis-user-site/dist` into `internal/web/embed/public`.
+  - Record any environment prerequisites: node version, pnpm version, corepack.
 
-- [ ] **T05 — Verify public read endpoints against production-like API**
-  - Verify:
-    - `GET /api/public/shows`
-    - `GET /api/public/shows/:id`
-    - `GET /api/public/archive?search=...`
-    - `GET /api/public/archive/stats`
-  - Confirm JSON decodes with `pyxis-types` schemas.
-  - Confirm dates/times/flyer URLs are production-valid.
+- [ ] **T06 — Verify production binary build command**
+  - Run `make build-embed`.
+  - Confirm it produces `bin/pyxis` built with `-tags embed`.
+  - Confirm a bare `make build` is documented as insufficient for production static embed unless `internal/web/embed/public` is present on disk.
 
-- [ ] **T06 — Verify public error contracts**
-  - Confirm missing show returns expected 404 behavior.
-  - Confirm API failure renders friendly frontend error states.
-  - Confirm archive stats failure does not break archive list.
-  - Confirm invalid route IDs behave as not-found, not broken loading.
+- [ ] **T07 — Decide whether embedded frontend artifacts are committed or generated only**
+  - Inspect `.gitignore` and current `internal/web/embed/public` state.
+  - Decide whether production release expects generated embed files in source control or generated during CI/release.
+  - Document the decision in the production guide.
 
-- [ ] **T07 — Align data shapes and fixtures**
-  - Ensure Storybook/MSW fixtures match production schema.
-  - Remove production reliance on `placehold.co` placeholders.
-  - Decide whether richer lineup display fields are required before launch.
+## Phase 2: SPA fallback and route behavior tests
 
-## Phase 3: Booking form hardening
+- [ ] **T08 — Add unit tests for `internal/web.NewSPAHandler`**
+  - Test `GET /` returns `index.html`.
+  - Test `GET /shows`, `/shows/123`, `/archive`, `/book`, `/book/success`, `/about` fall back to `index.html`.
+  - Test `GET /assets/<existing>` returns the static asset.
+  - Test `POST /shows` returns 404.
+  - Test `/api`, `/api/foo`, `/auth`, `/auth/foo`, `/health`, `/flyers`, `/flyers/foo` are reserved and do not return HTML.
 
-- [ ] **T08 — Confirm booking form field contract**
-  - Confirm required fields and optional fields.
-  - Align frontend `BookingForm` fields with `BookingFormData` schema.
-  - Confirm visible fields on `/book` match the desired public launch form.
+- [ ] **T09 — Add unit tests for `spaFallbackHandler`**
+  - Test primary non-404 responses are preserved.
+  - Test primary 404 delegates to fallback for browser routes.
+  - Test reserved fallback paths remain 404.
+  - Test response headers/status/body flush correctly.
 
-- [ ] **T09 — Implement/verify server-side validation**
-  - Validate artist name, preferred date, expected draw, links, message, and any contact fields server-side.
-  - Return structured 400 validation errors.
-  - Ensure frontend displays useful validation messages.
+- [ ] **T10 — Add integration smoke script for embedded server routes**
+  - Create a ticket script or repo script that:
+    - builds embedded binary,
+    - starts server on an ephemeral/local port with test DB config,
+    - curls `/health`, `/`, `/shows`, `/shows/1`, `/archive`, `/book`, `/book/success`, `/about`, and `/api/public/*`.
+  - Validate SPA routes return HTML.
+  - Validate API routes return JSON or documented errors.
 
-- [ ] **T10 — Add spam and duplicate-submission mitigation**
-  - Choose at least one launch mitigation:
-    - honeypot field,
-    - IP rate limit,
-    - captcha,
-    - moderation-only queue,
-    - duplicate detection.
-  - Verify rapid double submits do not create duplicate actionable submissions.
+## Phase 3: Public API contract hardening
 
-- [ ] **T11 — Verify booking notification/review workflow**
-  - Confirm where submissions go after creation.
-  - Confirm operators receive notifications or can review pending submissions.
-  - Confirm failed notifications are logged and retryable if applicable.
+- [ ] **T11 — Contract-test `GET /api/public/shows`**
+  - Seed or create confirmed future shows.
+  - Verify only `status='confirmed'` and `date >= CURRENT_DATE` are returned.
+  - Verify sort order is ascending by date.
+  - Verify response decodes as `ShowListSchema` in frontend/TS or proto JSON in Go.
 
-- [ ] **T12 — Test booking success and failure paths**
-  - Valid submit navigates to `/book/success`.
-  - Invalid submit shows validation.
-  - Server failure shows friendly error.
-  - Rate limit/spam rejection shows friendly error.
+- [ ] **T12 — Fix/test public show detail visibility**
+  - Audit `handleGetPublicShow` and `showService.GetByID` behavior for draft/hold/blocked/archived shows.
+  - Decide public rule:
+    - confirmed upcoming only,
+    - confirmed plus archived,
+    - or any show with public flag/status.
+  - Implement `GetPublicShowByID` or equivalent if non-public statuses currently leak.
+  - Add tests for confirmed, draft, hold, blocked, archived, missing, and invalid IDs.
 
-## Phase 4: SEO, content, and social metadata
+- [ ] **T13 — Contract-test archive endpoints**
+  - Verify `GET /api/public/archive` returns only archived shows.
+  - Verify search filters by artist/genre.
+  - Verify sort order is newest first.
+  - Verify `GET /api/public/archive/stats` aggregates archived shows only.
+  - Verify responses decode as `ArchivedShowListSchema` and `ArchiveStatsSchema`.
 
-- [ ] **T13 — Mount route-level SEO metadata**
-  - Use or update `web/packages/pyxis-user-site/src/components/Seo.tsx`.
-  - Add title/description to Shows, Show Detail, Archive, Book, Book Success, About, and Not Found.
+- [ ] **T14 — Standardize public API error shape/status codes**
+  - Inspect `respondError` behavior.
+  - Ensure invalid IDs return 400 or a consistent client error.
+  - Ensure not found returns 404.
+  - Ensure validation errors return 400 with useful messages.
+  - Ensure frontend `getApiErrorMessage` displays useful text.
 
-- [ ] **T14 — Decide show-detail social preview strategy**
-  - Decide whether generic SPA metadata is acceptable for v1.
-  - If not, implement prerendering or server-side metadata injection for show detail routes.
+## Phase 4: Booking submission v1 hardening
 
-- [ ] **T15 — Verify static SEO assets**
-  - Confirm `robots.txt` domain.
-  - Confirm `sitemap.xml` domain and route list.
-  - Confirm `og-default.png` exists or update `Seo.DEFAULT_IMAGE`.
-  - Confirm favicon/apple touch icon behavior.
+- [ ] **T15 — Document accepted no-spam-mitigation risk**
+  - Record that Manuel accepted `none for now` for booking spam mitigation.
+  - Add a post-launch follow-up task for honeypot/rate-limit.
+  - Make sure UI/docs do not claim spam protection exists.
 
-- [ ] **T16 — Final public content review**
-  - Review page copy.
-  - Review dates/times/prices/age restrictions.
-  - Review address/contact/booking expectations.
-  - Remove prototype-only copy or placeholders.
+- [ ] **T16 — Strengthen minimum booking validation**
+  - Current service validates only artist name and links.
+  - Decide launch required fields for the visible `/book` form.
+  - Add validation for preferred date, message, expected draw bounds, and link length/format if required.
+  - Return structured 400s or at least consistent error messages.
+  - Add tests for missing artist, missing links, malformed date, excessive message length, and valid submission.
 
-## Phase 5: Mobile, accessibility, and browser smoke
+- [ ] **T17 — Verify submission persistence and review path**
+  - Confirm `POST /api/public/submissions` creates `status='pending'` rows.
+  - Confirm staff endpoint `GET /api/app/bookings` can list created submissions.
+  - Confirm review/approve/decline endpoints work with auth in a dev/staging setup.
+  - Record that notification owner remains undecided.
 
-- [ ] **T17 — Manual responsive smoke pass**
-  - Test 375px, 768px, 920px, and 1440px widths.
-  - Cover Shows, Show Detail, Archive, Book, About, Book Success, and Not Found.
-  - Verify cards, forms, lightbox, and navigation remain usable.
+- [ ] **T18 — Prevent duplicate frontend submits**
+  - Confirm `BookingForm` disables submit or otherwise prevents double-click while `isSubmitting` is true.
+  - Add frontend test/story if missing.
+  - If the shared component does not enforce this, update it or add page-level guard.
 
-- [ ] **T18 — Accessibility smoke pass**
-  - Keyboard through navigation and booking form.
-  - Verify visible focus states.
-  - Verify form labels and button accessible names.
-  - Run Storybook a11y checks or equivalent axe smoke if available.
+## Phase 5: Production auth/cookie exposure check
 
-- [ ] **T19 — Browser smoke pass**
+- [ ] **T19 — Ensure dev auth is disabled in production**
+  - Confirm `PYXIS_DEV_AUTH` is unset/false in production.
+  - Add a deployment checklist item.
+  - Optionally add startup logging that warns if `PYXIS_DEV_AUTH=1`.
+
+- [ ] **T20 — Fix or gate secure cookie behavior for HTTPS production**
+  - `pkg/server/auth.go` currently sets `Secure: false` with a TODO.
+  - Add config for secure cookies, or infer from production mode/HTTPS proxy headers.
+  - Ensure Discord callback and dev-login cookies cannot be insecure in production.
+  - Add tests or a focused code review note.
+
+- [ ] **T21 — Decide whether staff `/api/app/*` and `/auth/*` are exposed at launch**
+  - If exposed, verify Discord OAuth config and roles.
+  - If not intended for public launch, restrict at proxy/router/deployment layer.
+  - Document the decision.
+
+## Phase 6: SEO and public metadata
+
+- [ ] **T22 — Decide SPA metadata strategy**
+  - Explain current `Seo.tsx` behavior to Manuel.
+  - Test whether rendering it actually updates `document.head` correctly.
+  - Choose one:
+    - accept generic `index.html` metadata for v1,
+    - implement `react-helmet-async` or equivalent,
+    - manually manage `document.title` and meta tags in route effects,
+    - server-inject metadata for show detail.
+
+- [ ] **T23 — Wire basic route metadata if chosen**
+  - Add title/description for Shows, Show Detail, Archive, Book, Book Success, About, and Not Found.
+  - Set `noindex` for Not Found if supported.
+  - Verify with browser devtools.
+
+- [ ] **T24 — Verify static SEO assets**
+  - Confirm `web/packages/pyxis-user-site/public/robots.txt` domain is `https://pyxis.xyz`.
+  - Confirm `sitemap.xml` exists and points to launch routes/domain.
+  - Confirm referenced `og-default.png` exists or update the default image reference.
+
+## Phase 7: Frontend production runtime polish
+
+- [ ] **T25 — Remove production ambiguity around `VITE_API_URL`**
+  - Document that production same-origin builds use blank `VITE_API_URL`.
+  - Optionally add an `.env.production.example` with `VITE_API_URL=` and explanatory comments.
+  - Ensure Vite dev proxy remains documented as dev-only.
+
+- [ ] **T26 — Fix ShowDetail ticket/reserve data hardcoding**
+  - `ShowDetailPage` currently passes hardcoded `ReserveTicketCard price="$10 – $15"`.
+  - Decide launch behavior:
+    - use `show.price`,
+    - link to real ticket URL if available,
+    - or hide/replace card when ticketing is not real.
+  - Implement and test the chosen behavior.
+
+- [ ] **T27 — Confirm production flyer URL behavior**
+  - Verify uploaded flyers are served from `/flyers/*` or a future object-storage URL.
+  - Verify missing/placeholder flyers use poster fallback.
+  - Verify flyer lightbox works on mobile and desktop.
+
+## Phase 8: Mobile, accessibility, and browser smoke
+
+- [ ] **T28 — Manual responsive smoke pass**
+  - Test widths: 375px, 768px, 920px, 1440px.
+  - Pages: Shows, Show Detail, Archive, Book, Book Success, About, Not Found.
+  - Verify forms, navigation, lightbox, and card grids.
+  - Record screenshots or notes in the diary.
+
+- [ ] **T29 — Accessibility smoke pass**
+  - Keyboard through nav and booking form.
+  - Verify focus states.
+  - Verify labels/button names.
+  - Run Storybook a11y build/check if available.
+  - Fix launch-blocking issues.
+
+- [ ] **T30 — Browser smoke pass**
   - Test Chrome.
-  - Test Safari, including iOS Safari if available.
+  - Test Safari/iOS Safari if available.
   - Test Firefox.
-  - Record any browser-specific layout or form issues.
+  - Record browser-specific issues.
 
-## Phase 6: Build, visual, and release validation
+## Phase 9: Release candidate validation
 
-- [ ] **T20 — Run static build validation**
+- [ ] **T31 — Run complete static validation**
   - Run:
+    - `go test ./... -count=1`
     - `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`
     - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit`
     - `cd web/packages/pyxis-user-site && pnpm exec vite build`
     - `cd web/packages/pyxis-user-site && pnpm exec storybook build`
+    - `make build-embed`
 
-- [ ] **T21 — Run production-intent visual smoke**
+- [ ] **T32 — Run production-intent visual smoke**
   - Run public pages visual spec against production-intent data.
-  - Keep Shows broad rows accepted unless new human feedback appears.
+  - Keep broad Shows rows accepted unless new human feedback appears.
   - Record any launch-blocking visual regressions.
 
-- [ ] **T22 — Deploy staging/release candidate**
-  - Deploy frontend with production-like env vars.
-  - Connect to production-like API.
-  - Verify route refresh, API calls, booking form, and assets.
+- [ ] **T33 — Deploy staging/release candidate**
+  - Deploy the embedded Go binary with production-like DB and env.
+  - Verify `https://pyxis.xyz` equivalent staging URL if available.
+  - Verify same-origin API calls.
+  - Verify route refresh.
+  - Verify booking submission path.
 
-- [ ] **T23 — Record rollback procedure**
-  - Document how to rollback frontend deployment.
-  - Document how to disable booking submission if abuse or backend failure occurs.
+- [ ] **T34 — Record rollback and disable-booking procedure**
+  - Document how to roll back the binary/deployment.
+  - Document how to disable booking submissions if spam or backend issues occur.
   - Document who owns production incident response.
 
-- [ ] **T24 — Release owner sign-off**
-  - Confirm ship/no-ship checklist.
-  - Record accepted risks.
-  - Record final production URL and commit SHA.
+- [ ] **T35 — Release owner sign-off**
+  - Confirm production URL.
+  - Confirm commit SHA/build artifact.
+  - Confirm accepted risks.
+  - Confirm content owner or temporary sign-off.
+  - Mark ship/no-ship checklist complete.
 
-## Phase 7: Post-launch follow-up
+## Phase 10: Post-launch follow-up
 
-- [ ] **T25 — Monitor first production usage**
-  - Check API error rates.
+- [ ] **T36 — Monitor first production usage**
+  - Check `/health`.
+  - Check API errors/logs.
   - Check booking submissions.
-  - Check frontend console/error reporting if available.
-  - Check mobile feedback.
+  - Check frontend errors if instrumentation exists.
+  - Check mobile/user feedback.
 
-- [ ] **T26 — Convert accepted launch risks into follow-up tickets**
-  - Examples:
-    - richer show-detail metadata,
-    - mobile visual-diff specs,
-    - stronger spam mitigation,
-    - CMS-backed About page,
-    - richer lineup schema.
+- [ ] **T37 — Create follow-up tickets for deferred risks**
+  - Booking spam mitigation.
+  - Booking notification owner/workflow.
+  - Proper route/show-detail SEO if skipped.
+  - Mobile visual-diff specs.
+  - Richer lineup display schema.
+  - Asset cache-control improvements.
