@@ -1,9 +1,10 @@
 -- name: UpsertUser :one
 INSERT INTO users (discord_id, discord_username, avatar_url, role, last_login_at)
-VALUES ($1, $2, $3, 'staff', NOW())
+VALUES ($1, $2, $3, $4, NOW())
 ON CONFLICT (discord_id) DO UPDATE SET
     discord_username = EXCLUDED.discord_username,
     avatar_url = EXCLUDED.avatar_url,
+    role = EXCLUDED.role,
     last_login_at = NOW()
 RETURNING *;
 

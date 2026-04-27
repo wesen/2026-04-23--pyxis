@@ -10,7 +10,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Phased task list for completing production-ready Discord OAuth staff authentication in Pyxis.
-LastUpdated: 2026-04-27T20:45:00-04:00
+LastUpdated: 2026-04-27T21:25:00-04:00
 ---
 
 # Discord OAuth Staff Authentication Tasks
@@ -32,25 +32,25 @@ LastUpdated: 2026-04-27T20:45:00-04:00
 
 ## Phase 1: Decisions
 
-- [ ] **T02 — Decide Discord OAuth as production identity path**
+- [x] **T02 — Decide Discord OAuth as production identity path**
   - Confirm this ticket replaces the recently closed Keycloak path for now.
   - Decide whether Keycloak remains archived/future-only.
   - Decide whether Discord OAuth must be complete before public launch or only before staff routes are exposed.
 
-- [ ] **T03 — Decide role policy**
+- [x] **T03 — Decide role policy**
   - Option A: local DB roles remain authoritative.
   - Option B: Discord guild/role membership maps to Pyxis roles.
   - Option C: hybrid.
   - Record how unknown Discord users are handled.
 
-- [ ] **T04 — Decide production/staging URLs**
+- [x] **T04 — Decide production/staging URLs**
   - Confirm production callback URL, likely `https://pyxis.xyz/auth/discord/callback`.
   - Confirm local callback URL, likely `http://127.0.0.1:8080/auth/discord/callback`.
   - Confirm staff app entry path after login.
 
 ## Phase 2: Config wiring
 
-- [ ] **T05 — Add Discord OAuth serve flags/env vars**
+- [x] **T05 — Add Discord OAuth serve flags/env vars**
   - Add `--discord-client-id`.
   - Add `--discord-client-secret`.
   - Add `--discord-redirect-url`.
@@ -58,12 +58,12 @@ LastUpdated: 2026-04-27T20:45:00-04:00
   - Decode in `cmd/pyxis/cmds/serve.go`.
   - Populate `pkg/config.Config`.
 
-- [ ] **T06 — Add config validation**
+- [x] **T06 — Add config validation**
   - Require client ID, secret, and redirect URL when Discord OAuth is enabled.
   - Validate redirect URL is absolute.
   - Ensure secrets are not logged.
 
-- [ ] **T07 — Add production env documentation**
+- [x] **T07 — Add production env documentation**
   - Document `PYXIS_DISCORD_CLIENT_ID` or final chosen env name.
   - Document `PYXIS_DISCORD_CLIENT_SECRET`.
   - Document `PYXIS_DISCORD_REDIRECT_URL`.
@@ -71,17 +71,17 @@ LastUpdated: 2026-04-27T20:45:00-04:00
 
 ## Phase 3: OAuth login route and state
 
-- [ ] **T08 — Add auth URL helper**
+- [x] **T08 — Add auth URL helper**
   - Add `AuthCodeURL(state string)` or equivalent to `AuthService`.
   - Ensure URL uses `response_type=code`, configured redirect URI, `identify` scope, and state.
 
-- [ ] **T09 — Add `/auth/discord/login` handler**
+- [x] **T09 — Add `/auth/discord/login` handler**
   - Generate random state.
   - Store state in short-lived HTTP-only cookie.
   - Accept only safe `return_to` values.
   - Redirect browser to Discord authorize URL.
 
-- [ ] **T10 — Add state encode/decode helpers**
+- [x] **T10 — Add state encode/decode helpers**
   - Include state ID.
   - Optionally include safe return path.
   - Use base64url JSON or another simple signed/validated representation.
@@ -89,34 +89,34 @@ LastUpdated: 2026-04-27T20:45:00-04:00
 
 ## Phase 4: Callback hardening
 
-- [ ] **T11 — Validate state in callback**
+- [x] **T11 — Validate state in callback**
   - Require `code` and `state`.
   - Decode state.
   - Compare state payload with state cookie.
   - Clear state cookie after use.
   - Return 400 on mismatch/missing state.
 
-- [ ] **T12 — Improve Discord token/profile error handling**
+- [x] **T12 — Improve Discord token/profile error handling**
   - Treat token exchange failures as upstream/auth failures, not generic internal errors.
   - Check Discord `/users/@me` response status before decoding.
   - Avoid leaking token/profile details into logs or responses.
 
-- [ ] **T13 — Redirect after callback**
+- [x] **T13 — Redirect after callback**
   - Redirect to safe `return_to` or staff app root after successful login.
   - Keep JSON response only if a test/debug mode explicitly needs it.
 
 ## Phase 5: Cookies and sessions
 
-- [ ] **T14 — Add shared cookie helper**
+- [x] **T14 — Add shared cookie helper**
   - Centralize session cookie writing/clearing.
   - Set `HttpOnly`, `SameSite=Lax`, `Path=/`, and correct `MaxAge`.
 
-- [ ] **T15 — Implement secure-cookie inference**
+- [x] **T15 — Implement secure-cookie inference**
   - Use request TLS, `X-Forwarded-Proto: https`, or HTTPS redirect URL.
   - Replace hardcoded `Secure: false` in `handleDiscordCallback` and dev login if needed.
   - Ensure logout clearing matches cookie attributes.
 
-- [ ] **T16 — Make logout robust**
+- [x] **T16 — Make logout robust**
   - Consider making `POST /auth/logout` idempotent without requiring valid auth.
   - Always clear cookie.
   - Delete server-side session if present.

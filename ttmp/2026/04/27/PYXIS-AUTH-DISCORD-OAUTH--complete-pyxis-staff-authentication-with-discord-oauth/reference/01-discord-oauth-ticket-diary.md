@@ -17,7 +17,7 @@ ExternalSources:
   - https://docs.discord.com/developers/topics/oauth2
   - https://docs.discord.com/developers/platform/oauth2-and-permissions
 Summary: Chronological diary for the Discord OAuth staff authentication ticket.
-LastUpdated: 2026-04-27T20:55:00-04:00
+LastUpdated: 2026-04-27T21:25:00-04:00
 WhatFor: Use this diary to understand what was inspected, documented, uploaded, and committed for the Discord OAuth auth track.
 WhenToUse: Update this after each Discord OAuth implementation or validation step.
 ---
@@ -140,3 +140,112 @@ OK: uploaded PYXIS-AUTH-DISCORD-OAUTH implementation guide.pdf -> /ai/2026/04/27
 ```
 
 The upload emitted a non-blocking remote-tree refresh warning, but the file listing confirms the PDF exists on-device/cloud.
+
+## Step 3: Implement phases 1-5 through secure sessions
+
+The user clarified two implementation decisions:
+
+- map Discord roles to local Pyxis roles;
+- make the website name/URL configurable, initially `https://pyxis.yolo.scapegoat.dev`.
+
+They asked to implement all the way through Phase 5, commit at appropriate intervals, keep a diary, and call out when Discord-side operator work is needed.
+
+### What changed
+
+Implemented Phase 1 through Phase 5 tasks T02-T16.
+
+Config and serve command:
+
+- Added `Config.WebsiteURL`, defaulting to `https://pyxis.yolo.scapegoat.dev`.
+- Added `Config.SessionCookieName`, defaulting to `session`.
+- Added Discord OAuth and role-mapping config fields:
+  - client ID,
+  - client secret,
+  - redirect URL,
+  - bot token,
+  - guild ID,
+  - admin role ID,
+  - booker role ID,
+  - door role ID.
+- Added serve flags/env-backed defaults:
+  - `--website-url` / `PYXIS_WEBSITE_URL`
+  - `--session-cookie-name` / `PYXIS_SESSION_COOKIE_NAME`
+  - `--discord-client-id` / `PYXIS_DISCORD_CLIENT_ID`
+  - `--discord-client-secret` / `PYXIS_DISCORD_CLIENT_SECRET`
+  - `--discord-redirect-url` / `PYXIS_DISCORD_REDIRECT_URL`
+  - `--discord-bot-token` / `DISCORD_BOT_TOKEN`
+  - `--discord-guild-id` / `DISCORD_GUILD_ID`
+  - `--discord-admin-role-id` / `DISCORD_ADMIN_ROLE_ID`
+  - `--discord-booker-role-id` / `DISCORD_BOOKER_ROLE_ID`
+  - `--discord-door-role-id` / `DISCORD_DOOR_ROLE_ID`
+- Added validation for partial Discord OAuth config and absolute URLs.
+
+OAuth flow:
+
+- Added `GET /auth/discord/login`.
+- Added OAuth state generation, state cookie, and state encode/decode helpers.
+- Hardened `GET /auth/discord/callback` to require and validate state.
+- Changed successful callback behavior to set the app session cookie and redirect to the safe return path or `/`.
+- Added safe `return_to` validation to reject external/open redirects.
+
+Role mapping:
+
+- Changed `UpsertUser` to accept and update a local role.
+- Added Discord guild-member role lookup through the bot token:
+  - `GET https://discord.com/api/v10/guilds/{guildID}/members/{userID}`
+  - `Authorization: Bot <token>`
+- Mapped Discord role IDs to local Pyxis roles with priority:
+  - admin > booker > door > staff
+- If no role IDs are configured, Discord OAuth users default to `staff`.
+- If role mapping is configured, `discord-bot-token` and `discord-guild-id` are required.
+
+Cookies/logout:
+
+- Added shared session cookie helpers.
+- Added secure-cookie inference from request TLS, `X-Forwarded-Proto: https`, or HTTPS Discord redirect URL.
+- Removed hardcoded `Secure: false` from production OAuth session writing.
+- Made logout idempotent at the route level: it now clears the cookie and deletes a server-side session if one exists, without requiring `requireAuth` first.
+
+Tests:
+
+- Added `pkg/server/auth_test.go` for state roundtrip, secure-cookie inference, safe return targets, login redirects, and missing OAuth config.
+- Added `pkg/service/auth_service_test.go` for Discord role mapping priority, staff default, and required bot/guild config.
+
+### Commands run
+
+```bash
+sqlc generate
+gofmt -w cmd/pyxis/cmds/serve.go pkg/config/config.go pkg/service/auth_service.go pkg/service/auth_service_test.go pkg/server/auth.go pkg/server/auth_test.go pkg/server/server.go pkg/db/auth.sql.go
+go test ./... -count=1
+go test ./cmd/pyxis/cmds ./pkg/server ./pkg/service -count=1
+```
+
+The full `go test ./... -count=1` passed.
+
+### What worked
+
+The existing DB-backed session model made this straightforward. Discord OAuth now creates the same local session type that `requireAuth` already understands, so the staff API boundary did not need a rewrite.
+
+Role mapping is now explicit and deterministic: Discord role IDs map to local roles, but unknown or unmapped users do not become privileged.
+
+### What still needs operator work on Discord
+
+I need Manuel/operator input before a real hosted OAuth smoke can succeed:
+
+1. Create or confirm a Discord OAuth application/client.
+2. Add redirect URI:
+   - `https://pyxis.yolo.scapegoat.dev/auth/discord/callback`
+   - and any local callback URI needed for manual testing, e.g. `http://127.0.0.1:8080/auth/discord/callback`.
+3. Provide/set deployment secrets:
+   - `PYXIS_DISCORD_CLIENT_ID`
+   - `PYXIS_DISCORD_CLIENT_SECRET`
+   - `DISCORD_BOT_TOKEN` if role mapping should be active
+   - `DISCORD_GUILD_ID`
+   - `DISCORD_ADMIN_ROLE_ID`
+   - `DISCORD_BOOKER_ROLE_ID`
+   - `DISCORD_DOOR_ROLE_ID` if a door role exists
+4. Confirm whether unmapped users should remain `staff` or be denied login entirely in a later phase.
+
+### Next steps
+
+Continue with Phase 6 role/authorization polish and Phase 8 smoke scripts after the Discord-side IDs/secrets are available.

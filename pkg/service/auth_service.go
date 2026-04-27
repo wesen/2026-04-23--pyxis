@@ -6,6 +6,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"strings"
 	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
@@ -13,23 +15,36 @@ import (
 	"golang.org/x/oauth2"
 )
 
+const discordAPIBaseURL = "https://discord.com/api/v10"
+
 // DiscordOAuthConfig holds OAuth2 settings.
 type DiscordOAuthConfig struct {
 	ClientID     string
 	ClientSecret string
 	RedirectURL  string
+	BotToken     string
+	GuildID      string
+	AdminRoleID  string
+	BookerRoleID string
+	DoorRoleID   string
 }
 
 // AuthService handles Discord OAuth and sessions.
 type AuthService struct {
 	queries *db.Queries
 	oauth   *oauth2.Config
+	cfg     DiscordOAuthConfig
+	client  *http.Client
+	apiBase string
 }
 
 // NewAuthService creates a new AuthService.
 func NewAuthService(queries *db.Queries, cfg DiscordOAuthConfig) *AuthService {
 	return &AuthService{
 		queries: queries,
+		cfg:     cfg,
+		client:  &http.Client{Timeout: 10 * time.Second},
+		apiBase: discordAPIBaseURL,
 		oauth: &oauth2.Config{
 			ClientID:     cfg.ClientID,
 			ClientSecret: cfg.ClientSecret,
@@ -43,12 +58,21 @@ func NewAuthService(queries *db.Queries, cfg DiscordOAuthConfig) *AuthService {
 	}
 }
 
+// AuthCodeURL returns the Discord OAuth authorization URL for a browser login.
+func (s *AuthService) AuthCodeURL(state string) string {
+	return s.oauth.AuthCodeURL(state)
+}
+
 // DiscordUser represents the user profile from Discord API.
 type DiscordUser struct {
 	ID            string `json:"id"`
 	Username      string `json:"username"`
 	Avatar        string `json:"avatar"`
 	Discriminator string `json:"discriminator"`
+}
+
+type discordGuildMember struct {
+	Roles []string `json:"roles"`
 }
 
 // ExchangeCode exchanges an OAuth code for a user and creates a session.
@@ -59,22 +83,34 @@ func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionTok
 	}
 
 	client := s.oauth.Client(ctx, token)
-	resp, err := client.Get("https://discord.com/api/users/@me")
+	resp, err := client.Get(s.apiBase + "/users/@me")
 	if err != nil {
 		return "", nil, fmt.Errorf("fetch user: %w", err)
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", nil, fmt.Errorf("fetch user: discord status %d", resp.StatusCode)
+	}
 
 	var du DiscordUser
 	if err := json.NewDecoder(resp.Body).Decode(&du); err != nil {
 		return "", nil, fmt.Errorf("decode user: %w", err)
 	}
+	if strings.TrimSpace(du.ID) == "" {
+		return "", nil, fmt.Errorf("decode user: missing discord id")
+	}
 
-	// Upsert user
+	role, err := s.mapDiscordRole(ctx, du.ID)
+	if err != nil {
+		return "", nil, err
+	}
+
+	// Upsert user, mapping configured Discord role IDs to local Pyxis roles.
 	row, err := s.queries.UpsertUser(ctx, db.UpsertUserParams{
 		DiscordID:       du.ID,
 		DiscordUsername: du.Username,
 		AvatarUrl:       pgtype.Text{String: du.Avatar, Valid: du.Avatar != ""},
+		Role:            role,
 	})
 	if err != nil {
 		return "", nil, fmt.Errorf("upsert user: %w", err)
@@ -87,6 +123,85 @@ func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionTok
 	}
 
 	return sessionToken, &row, nil
+}
+
+func (s *AuthService) mapDiscordRole(ctx context.Context, discordUserID string) (string, error) {
+	if !s.hasRoleMappingConfig() {
+		return "staff", nil
+	}
+	if strings.TrimSpace(s.cfg.BotToken) == "" {
+		return "", fmt.Errorf("discord role mapping requires discord-bot-token")
+	}
+	if strings.TrimSpace(s.cfg.GuildID) == "" {
+		return "", fmt.Errorf("discord role mapping requires discord-guild-id")
+	}
+
+	roles, err := s.fetchGuildMemberRoles(ctx, discordUserID)
+	if err != nil {
+		return "", err
+	}
+	roleSet := map[string]struct{}{}
+	for _, role := range roles {
+		role = strings.TrimSpace(role)
+		if role != "" {
+			roleSet[role] = struct{}{}
+		}
+	}
+
+	// Most privileged matching role wins.
+	if hasRole(roleSet, s.cfg.AdminRoleID) {
+		return "admin", nil
+	}
+	if hasRole(roleSet, s.cfg.BookerRoleID) {
+		return "booker", nil
+	}
+	if hasRole(roleSet, s.cfg.DoorRoleID) {
+		return "door", nil
+	}
+	return "staff", nil
+}
+
+func (s *AuthService) hasRoleMappingConfig() bool {
+	return strings.TrimSpace(s.cfg.AdminRoleID) != "" ||
+		strings.TrimSpace(s.cfg.BookerRoleID) != "" ||
+		strings.TrimSpace(s.cfg.DoorRoleID) != ""
+}
+
+func (s *AuthService) fetchGuildMemberRoles(ctx context.Context, discordUserID string) ([]string, error) {
+	url := fmt.Sprintf("%s/guilds/%s/members/%s", s.apiBase, strings.TrimSpace(s.cfg.GuildID), strings.TrimSpace(discordUserID))
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", "Bot "+strings.TrimSpace(s.cfg.BotToken))
+	req.Header.Set("Accept", "application/json")
+
+	resp, err := s.client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("fetch guild member roles: %w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, fmt.Errorf("discord user is not a member of configured guild")
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("fetch guild member roles: discord status %d", resp.StatusCode)
+	}
+
+	var member discordGuildMember
+	if err := json.NewDecoder(resp.Body).Decode(&member); err != nil {
+		return nil, fmt.Errorf("decode guild member roles: %w", err)
+	}
+	return member.Roles, nil
+}
+
+func hasRole(roleSet map[string]struct{}, roleID string) bool {
+	roleID = strings.TrimSpace(roleID)
+	if roleID == "" {
+		return false
+	}
+	_, ok := roleSet[roleID]
+	return ok
 }
 
 // ValidateSession checks a session token and returns the user.

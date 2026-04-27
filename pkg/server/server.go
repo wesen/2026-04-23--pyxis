@@ -64,6 +64,11 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 		ClientID:     cfg.DiscordClientID,
 		ClientSecret: cfg.DiscordClientSecret,
 		RedirectURL:  cfg.DiscordRedirectURL,
+		BotToken:     cfg.DiscordBotToken,
+		GuildID:      cfg.DiscordGuildID,
+		AdminRoleID:  cfg.DiscordAdminRoleID,
+		BookerRoleID: cfg.DiscordBookerRoleID,
+		DoorRoleID:   cfg.DiscordDoorRoleID,
 	})
 
 	// Router
@@ -83,9 +88,10 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// Auth
 	mux.HandleFunc("POST /auth/dev-login", s.handleDevLogin)
 	mux.HandleFunc("GET /auth/dev-login", s.handleDevLogin)
+	mux.HandleFunc("GET /auth/discord/login", s.handleDiscordLogin)
 	mux.HandleFunc("GET /auth/discord/callback", s.handleDiscordCallback)
 	mux.Handle("GET /auth/me", s.requireAuth(http.HandlerFunc(s.handleGetMe)))
-	mux.Handle("POST /auth/logout", s.requireAuth(http.HandlerFunc(s.handleLogout)))
+	mux.HandleFunc("POST /auth/logout", s.handleLogout)
 
 	mux.HandleFunc("GET /api/app/session", s.handleGetSession)
 
