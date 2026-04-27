@@ -97,3 +97,98 @@ Current planned first implementation tasks:
 1. T02: fix baseline Storybook typing so `tsc` can be trusted.
 2. T03: add `components/organisms/index.ts` and migrate page imports away from legacy barrels.
 3. T04: add/check relative import resolver that sees CSS imports.
+
+## Step 2: Restore a useful validation baseline
+
+The rollback restored the intended visual baseline, but it also restored a TypeScript issue in `AppTopBar.stories.tsx`: Storybook's typed `StoryObj` required `args.title` because `AppTopBarProps.title` is required. This made `tsc --noEmit` fail before any new refactor work began.
+
+This step intentionally fixed only that baseline validation issue. It does not reorganize folders or change runtime component behavior. The purpose is to make the validation commands trustworthy before touching import surfaces or moving files.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Work through the ticket tasks one by one; after committing the task/diary scaffold, start with the first implementation task that restores a meaningful validation baseline.
+
+**Inferred user intent:** Avoid building new refactor work on top of a baseline where TypeScript already fails.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Edited `web/packages/pyxis-app/src/components/shell/AppTopBar.stories.tsx`.
+- Added default story meta args:
+  - `title: 'Welcome back, Ada'`
+- Marked T01 and T02 complete in `tasks.md`.
+- Ran validation from `web/packages/pyxis-app`:
+  - `pnpm exec tsc --noEmit`
+  - `pnpm exec vite build`
+  - `pnpm exec storybook build`
+
+### Why
+
+The component organization work needs a stable test harness. If `tsc` fails before we start, then later failures are ambiguous. Fixing the baseline story typing means future refactor commits can use `tsc`, Vite, and Storybook build as real gates.
+
+### What worked
+
+All validation commands passed after the story meta args were added.
+
+### What didn't work
+
+Storybook build emitted known warnings from dependencies:
+
+```text
+Use of eval in @storybook/core/dist/preview/runtime.js is strongly discouraged
+Some chunks are larger than 500 kB after minification
+```
+
+These are warnings, not build failures, and are unrelated to the component organization work.
+
+### What I learned
+
+The rollback baseline was visually useful but not validation-clean. We need to distinguish between a visual baseline and a type/build baseline.
+
+### What was tricky to build
+
+The important constraint was not to “improve” the story or refactor it yet. The only safe change was to satisfy Storybook's required args typing while preserving the rendered story bodies.
+
+### What warrants a second pair of eyes
+
+- Confirm that adding a meta-level default `title` arg does not affect visual output of the custom render stories. It should not, because each story render still passes its own `title` directly to `AppTopBar`.
+
+### What should be done in the future
+
+- Continue with T03: add public barrels and migrate page imports away from legacy barrels before moving files.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/shell/AppTopBar.stories.tsx`
+- `ttmp/.../tasks.md`
+- this diary entry
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+The issue was:
+
+```text
+Property 'args' is missing in type '{ render: () => JSX.Element; }' but required in type '{ args: { title: string; ... } }'.
+```
+
+The fix was:
+
+```ts
+args: {
+  title: 'Welcome back, Ada',
+},
+```

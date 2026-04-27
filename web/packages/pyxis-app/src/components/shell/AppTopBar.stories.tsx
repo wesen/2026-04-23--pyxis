@@ -7,6 +7,9 @@ const meta = {
   title: 'Pyxis App/Components/Shell/AppTopBar',
   component: AppTopBar,
   parameters: { layout: 'fullscreen' },
+  args: {
+    title: 'Welcome back, Ada',
+  },
 } satisfies Meta<typeof AppTopBar>;
 export default meta;
 

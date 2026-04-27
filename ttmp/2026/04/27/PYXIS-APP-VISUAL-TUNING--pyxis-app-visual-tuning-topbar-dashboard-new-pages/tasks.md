@@ -18,13 +18,13 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 
 ## Phase 0: Bookkeeping and baseline
 
-- [ ] **T01 — Commit ticket guide, task list, and diary scaffold**
+- [x] **T01 — Commit ticket guide, task list, and diary scaffold**
   - Store the detailed component organization implementation guide in the ticket.
   - Add this ordered task list.
   - Create/update the diary so future work is recoverable.
   - Commit docs/bookkeeping separately.
 
-- [ ] **T02 — Restore a useful validation baseline**
+- [x] **T02 — Restore a useful validation baseline**
   - Fix the restored baseline's `AppTopBar.stories.tsx` Storybook typing issue by adding required default args or otherwise making the story type-correct.
   - Run `pnpm exec tsc --noEmit`.
   - Run `pnpm exec vite build`.
