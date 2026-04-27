@@ -179,3 +179,116 @@ web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.tsx
 web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
 web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
 ```
+
+## Step 2: Validate and upload design bundle to reMarkable
+
+I validated the ticket documentation and uploaded the design package to reMarkable as a bundled PDF. The dry-run succeeded first, then the real upload completed and the remote listing confirmed the file exists.
+
+This makes the design reviewable away from the terminal and preserves the implementation guide, diary, tasks, and changelog as one ToC-enabled document.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Deliver the completed ticket design package to reMarkable after doc validation.
+
+**Inferred user intent:** The user wants the long-form implementation plan available for reading/review on the reMarkable device.
+
+**Commit (code):** 7e064b9 — "Design staff operations fundamentals"
+
+### What I did
+
+- Ran doc validation:
+
+```bash
+docmgr doctor --ticket PYXIS-STAFF-OPS-FUNDAMENTALS --stale-after 30
+```
+
+- Added the missing `staff-app` vocabulary entry required by docmgr validation.
+- Ran reMarkable status/account checks:
+
+```bash
+remarquee status
+remarquee cloud account --non-interactive
+```
+
+- Ran dry-run upload:
+
+```bash
+remarquee upload bundle --dry-run ... \
+  --name "PYXIS-STAFF-OPS-FUNDAMENTALS design bundle" \
+  --remote-dir "/ai/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS" \
+  --toc-depth 2
+```
+
+- Ran real upload and verified remote listing:
+
+```bash
+remarquee upload bundle ...
+remarquee cloud ls /ai/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS --long --non-interactive
+```
+
+### Why
+
+The user explicitly requested upload to reMarkable. The dry-run first follows the reMarkable delivery workflow and catches pandoc/upload shape issues before writing to the remote folder.
+
+### What worked
+
+The upload succeeded:
+
+```text
+OK: uploaded PYXIS-STAFF-OPS-FUNDAMENTALS design bundle.pdf -> /ai/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS
+```
+
+The remote listing confirmed:
+
+```text
+[f] PYXIS-STAFF-OPS-FUNDAMENTALS design bundle
+```
+
+### What didn't work
+
+`docmgr doctor` initially warned about an unknown `staff-app` topic and reported missing frontmatter for generated source files. I fixed this by adding the vocabulary entry and prepending frontmatter to the two generated source Markdown files.
+
+### What I learned
+
+Generated evidence/source Markdown still needs frontmatter if it lives inside the ticket workspace and should pass `docmgr doctor`.
+
+### What was tricky to build
+
+The only tricky part was validation hygiene: the design content was ready, but generated source files without frontmatter failed docmgr validation. The fix was documentation metadata, not content changes.
+
+### What warrants a second pair of eyes
+
+- Whether the bundle should include the full evidence source file. I left the reMarkable bundle focused on index/design/diary/tasks/changelog to keep it readable.
+- Whether the uncommitted vocabulary changes from another ticket should be separated before final cleanup.
+
+### What should be done in the future
+
+If implementation changes the proposed API/schema materially, refresh the reMarkable bundle after updating the design guide.
+
+### Code review instructions
+
+Review the uploaded bundle path:
+
+```text
+/ai/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS/PYXIS-STAFF-OPS-FUNDAMENTALS design bundle
+```
+
+Local validation:
+
+```bash
+docmgr doctor --ticket PYXIS-STAFF-OPS-FUNDAMENTALS --stale-after 30
+```
+
+### Technical details
+
+The uploaded bundle included:
+
+```text
+index.md
+design-doc/01-staff-operations-workflows-design-and-implementation-guide.md
+reference/01-investigation-diary.md
+tasks.md
+changelog.md
+```

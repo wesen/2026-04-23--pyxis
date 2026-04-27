@@ -18,3 +18,12 @@ Completed Phase 0 research/design package for staff operations fundamentals, inc
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS--complete-fundamental-staff-operations-workflows/reference/01-investigation-diary.md — Chronological diary for the research/design phase.
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS--complete-fundamental-staff-operations-workflows/scripts/01-audit-staff-ops-gaps.sh — Ticket-local audit helper.
 
+
+## 2026-04-26
+
+Uploaded the staff operations fundamentals design bundle to reMarkable at /ai/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS and verified the remote listing.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS--complete-fundamental-staff-operations-workflows/reference/01-investigation-diary.md — Records doc validation and reMarkable upload evidence.
+
