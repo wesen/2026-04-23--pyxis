@@ -629,3 +629,109 @@ import './ArtistRosterRow.css';
 ```
 
 This keeps the component's visual dependencies explicit.
+
+## Step 7: Split BookingCard and BookingQueueRow
+
+This step split the second multi-export molecule. `BookingCard` now owns the booking card UI and card CSS, while `BookingQueueRow` owns the processed/bookings table row UI and table-row CSS.
+
+The split also moved the processed table styling out of `BookingCard.css` into `BookingQueueRow.css`, which makes the table-row visual dependency explicit and keeps `BookingCard.css` focused on card selectors.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue the ordered component organization tasks after splitting `ArtistRosterRow`.
+
+**Inferred user intent:** Keep separating multi-export components into clear one-component folders with owned CSS and stories.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Removed `BookingQueueRow` from `molecules/BookingCard/BookingCard.tsx`.
+- Created `molecules/BookingQueueRow/` with:
+  - `BookingQueueRow.tsx`
+  - `BookingQueueRow.css`
+  - `BookingQueueRow.stories.tsx`
+  - `index.ts`
+- Moved processed table row selectors from `BookingCard.css` into `BookingQueueRow.css`.
+- Updated `BookingCard.stories.tsx` so it only demonstrates `BookingCard`.
+- Added separate `BookingQueueRow` stories.
+- Updated imports in:
+  - `organisms/BookingQueue/BookingQueue.tsx`
+  - `organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx`
+  - `src/index.ts`
+- Marked T07 complete in `tasks.md`.
+
+### Why
+
+`BookingCard.tsx` exported both a card component and a table-row component. These components have different layout contexts and CSS ownership. Splitting them lowers coupling and prevents the row/table styles from hiding inside a card stylesheet.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The import resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No build failures. Storybook emitted the same known dependency/build-size warnings.
+
+### What I learned
+
+The row component still needs shared `Table.css`, but it should import that dependency itself. That way organisms using `BookingQueueRow` do not need to know which shared CSS file makes rows render correctly.
+
+### What was tricky to build
+
+The processed table selectors were originally in `BookingCard.css` even though they described the table-row/table context. Moving them to `BookingQueueRow.css` was the key ownership fix. I avoided changing the class names used by existing organisms so visual output should remain stable.
+
+### What warrants a second pair of eyes
+
+- `AttendancePanel` still imports `BookingCard.css` because its edit cards reuse the `app-booking-card` class. That is existing coupling and should be reviewed later as shared card styling or a dedicated attendance edit card component.
+- Confirm visually that `BookingQueueRow` tables still match previous output.
+
+### What should be done in the future
+
+- T08: split `DashboardAttentionContent` and `DashboardAttentionCount`.
+- Later task: audit private CSS imports such as `AttendancePanel` importing `BookingCard.css`.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx`
+- `web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.css`
+- `web/packages/pyxis-app/src/components/molecules/BookingQueueRow/`
+- `web/packages/pyxis-app/src/components/organisms/BookingQueue/BookingQueue.tsx`
+- `web/packages/pyxis-app/src/components/organisms/BookingsProcessedPanel/BookingsProcessedPanel.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+`BookingQueueRow` imports shared table CSS and its owned row CSS:
+
+```ts
+import '../Table/Table.css';
+import './BookingQueueRow.css';
+```

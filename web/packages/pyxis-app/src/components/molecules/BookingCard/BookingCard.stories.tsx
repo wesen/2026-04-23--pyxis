@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmissionStatus } from 'pyxis-types';
 import { bookings } from '../../../api/mockData';
-import { BookingCard, BookingQueueRow } from './BookingCard';
+import { BookingCard } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Molecules/BookingCard',
@@ -61,18 +61,6 @@ export const BookingList: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 12, width: 520, padding: 24 }}>
       {bookings.slice(0, 3).map((booking) => <BookingCard key={booking.id} booking={booking} />)}
-    </div>
-  ),
-};
-
-export const QueueRows: Story = {
-  render: () => (
-    <div style={{ width: 760, padding: 24 }}>
-      <table className="app-table app-bookings-processed-table">
-        <tbody>
-          {bookings.map((booking) => <BookingQueueRow key={booking.id} booking={booking} />)}
-        </tbody>
-      </table>
     </div>
   ),
 };

@@ -2,7 +2,6 @@ import { Submission, SubmissionStatus } from 'pyxis-types';
 import { Button, Icon } from 'pyxis-components';
 import { StatusPill } from '../../atoms/StatusPill';
 import { appPart } from '../../parts';
-import '../Table/Table.css';
 import './BookingCard.css';
 
 function formatBookingDate(date: string, format: 'full' | 'short' = 'full') {
@@ -19,10 +18,6 @@ export type BookingCardProps = {
   onHold?: BookingActionHandler;
   onDecline?: BookingActionHandler;
   onApprove?: BookingActionHandler;
-};
-
-export type BookingQueueRowProps = {
-  booking: Submission;
 };
 
 export function BookingCard({ booking, onHold, onDecline, onApprove }: BookingCardProps) {
@@ -46,8 +41,4 @@ export function BookingCard({ booking, onHold, onDecline, onApprove }: BookingCa
       </div>
     </article>
   );
-}
-
-export function BookingQueueRow({ booking }: BookingQueueRowProps) {
-  return <tr className="app-table-row app-booking-queue-row" {...appPart('booking-queue-row')}><td><strong>{booking.artistName}</strong></td><td>{formatBookingDate(booking.preferredDate, 'short')}</td><td>{booking.genre}</td><td>{booking.createdAt}</td><td><StatusPill status={booking.status} /></td></tr>;
 }

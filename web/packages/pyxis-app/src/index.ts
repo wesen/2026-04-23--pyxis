@@ -9,6 +9,7 @@ export * from './components/molecules/ActivityFeedItem';
 export * from './components/molecules/TodayShowCard';
 export * from './components/molecules/ShowTableRow';
 export * from './components/molecules/BookingCard';
+export * from './components/molecules/BookingQueueRow';
 export * from './components/molecules/ArtistCard';
 export * from './components/molecules/ArtistRosterRow';
 export * from './components/molecules/CalendarEventChip';

@@ -1,6 +1,6 @@
 import type { Submission } from 'pyxis-types';
 import { SubmissionStatus } from 'pyxis-types';
-import { BookingQueueRow } from '../../molecules/BookingCard';
+import { BookingQueueRow } from '../../molecules/BookingQueueRow';
 import { Panel } from '../Panels';
 import './BookingsProcessedPanel.css';
 import { AppEmptyState } from '../../molecules/AppEmptyState';

@@ -1,0 +1,5 @@
+.app-bookings-processed-table { --bookings-table-heading-size: 10.5px; --bookings-table-heading-weight: 600; --bookings-table-muted: #8a857b; --bookings-table-body-size: 13px; --bookings-table-body-line: 1.5; }
+.app-bookings-processed-table th { color: var(--bookings-table-muted); font-size: var(--bookings-table-heading-size); font-weight: var(--bookings-table-heading-weight); line-height: 1.5; letter-spacing: .08em; white-space: nowrap; padding: 0 12px 11px 0; }
+.app-bookings-processed-table td { color: #1a1a18; font-size: var(--bookings-table-body-size); line-height: var(--bookings-table-body-line); padding: 13px 12px 13px 0; }
+.app-bookings-processed-table tbody tr:first-child td { border-top: 0; }
+.app-booking-queue-row strong { font-size: var(--bookings-table-body-size); font-weight: 600; line-height: var(--bookings-table-body-line); }

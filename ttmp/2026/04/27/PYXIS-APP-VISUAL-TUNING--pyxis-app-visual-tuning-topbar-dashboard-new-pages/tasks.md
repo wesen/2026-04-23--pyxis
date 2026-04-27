@@ -78,7 +78,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Update imports.
   - Validate and commit.
 
-- [ ] **T07 — Split `BookingCard` and `BookingQueueRow`**
+- [x] **T07 — Split `BookingCard` and `BookingQueueRow`**
   - Create `molecules/BookingQueueRow/`.
   - Move row-specific code and CSS out of `BookingCard`.
   - Add/adjust stories.
