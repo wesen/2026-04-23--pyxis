@@ -10,7 +10,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed phased task list for shipping pyxis-user-site and the same-origin Go backend/static embed path to production.
-LastUpdated: 2026-04-27T19:10:00-04:00
+LastUpdated: 2026-04-27T19:35:00-04:00
 ---
 
 # Public Site Production Ship Tasks
@@ -53,45 +53,45 @@ These assumptions were confirmed through `plz-confirm` and backend audit:
 
 ## Phase 1: Build and embed validation
 
-- [ ] **T04 — Verify Dagger build-web path in the release environment**
+- [x] **T04 — Verify Dagger build-web path in the release environment**
   - Run `go run ./cmd/build-web` without `BUILD_WEB_LOCAL=1`.
   - Confirm Dagger engine availability or expected local fallback behavior.
   - Confirm `internal/web/embed/public/index.html` is recreated.
   - Confirm generated assets are copied under `internal/web/embed/public/assets/`.
   - Record command output and timing in the diary.
 
-- [ ] **T05 — Verify local build-web fallback path**
+- [x] **T05 — Verify local build-web fallback path**
   - Run `BUILD_WEB_LOCAL=1 go run ./cmd/build-web`.
   - Confirm it builds `pyxis-types`, `pyxis-components`, and `pyxis-user-site`.
   - Confirm it copies `web/packages/pyxis-user-site/dist` into `internal/web/embed/public`.
   - Record any environment prerequisites: node version, pnpm version, corepack.
 
-- [ ] **T06 — Verify production binary build command**
+- [x] **T06 — Verify production binary build command**
   - Run `make build-embed`.
   - Confirm it produces `bin/pyxis` built with `-tags embed`.
   - Confirm a bare `make build` is documented as insufficient for production static embed unless `internal/web/embed/public` is present on disk.
 
-- [ ] **T07 — Decide whether embedded frontend artifacts are committed or generated only**
+- [x] **T07 — Decide whether embedded frontend artifacts are committed or generated only**
   - Inspect `.gitignore` and current `internal/web/embed/public` state.
   - Decide whether production release expects generated embed files in source control or generated during CI/release.
   - Document the decision in the production guide.
 
 ## Phase 2: SPA fallback and route behavior tests
 
-- [ ] **T08 — Add unit tests for `internal/web.NewSPAHandler`**
+- [x] **T08 — Add unit tests for `internal/web.NewSPAHandler`**
   - Test `GET /` returns `index.html`.
   - Test `GET /shows`, `/shows/123`, `/archive`, `/book`, `/book/success`, `/about` fall back to `index.html`.
   - Test `GET /assets/<existing>` returns the static asset.
   - Test `POST /shows` returns 404.
   - Test `/api`, `/api/foo`, `/auth`, `/auth/foo`, `/health`, `/flyers`, `/flyers/foo` are reserved and do not return HTML.
 
-- [ ] **T09 — Add unit tests for `spaFallbackHandler`**
+- [x] **T09 — Add unit tests for `spaFallbackHandler`**
   - Test primary non-404 responses are preserved.
   - Test primary 404 delegates to fallback for browser routes.
   - Test reserved fallback paths remain 404.
   - Test response headers/status/body flush correctly.
 
-- [ ] **T10 — Add integration smoke script for embedded server routes**
+- [x] **T10 — Add integration smoke script for embedded server routes**
   - Create a ticket script or repo script that:
     - builds embedded binary,
     - starts server on an ephemeral/local port with test DB config,
@@ -101,13 +101,13 @@ These assumptions were confirmed through `plz-confirm` and backend audit:
 
 ## Phase 3: Public API contract hardening
 
-- [ ] **T11 — Contract-test `GET /api/public/shows`**
+- [x] **T11 — Contract-test `GET /api/public/shows`**
   - Seed or create confirmed future shows.
   - Verify only `status='confirmed'` and `date >= CURRENT_DATE` are returned.
   - Verify sort order is ascending by date.
   - Verify response decodes as `ShowListSchema` in frontend/TS or proto JSON in Go.
 
-- [ ] **T12 — Fix/test public show detail visibility**
+- [x] **T12 — Fix/test public show detail visibility**
   - Audit `handleGetPublicShow` and `showService.GetByID` behavior for draft/hold/blocked/archived shows.
   - Decide public rule:
     - confirmed upcoming only,
@@ -116,14 +116,14 @@ These assumptions were confirmed through `plz-confirm` and backend audit:
   - Implement `GetPublicShowByID` or equivalent if non-public statuses currently leak.
   - Add tests for confirmed, draft, hold, blocked, archived, missing, and invalid IDs.
 
-- [ ] **T13 — Contract-test archive endpoints**
+- [x] **T13 — Contract-test archive endpoints**
   - Verify `GET /api/public/archive` returns only archived shows.
   - Verify search filters by artist/genre.
   - Verify sort order is newest first.
   - Verify `GET /api/public/archive/stats` aggregates archived shows only.
   - Verify responses decode as `ArchivedShowListSchema` and `ArchiveStatsSchema`.
 
-- [ ] **T14 — Standardize public API error shape/status codes**
+- [x] **T14 — Standardize public API error shape/status codes**
   - Inspect `respondError` behavior.
   - Ensure invalid IDs return 400 or a consistent client error.
   - Ensure not found returns 404.
@@ -132,25 +132,25 @@ These assumptions were confirmed through `plz-confirm` and backend audit:
 
 ## Phase 4: Booking submission v1 hardening
 
-- [ ] **T15 — Document accepted no-spam-mitigation risk**
+- [x] **T15 — Document accepted no-spam-mitigation risk**
   - Record that Manuel accepted `none for now` for booking spam mitigation.
   - Add a post-launch follow-up task for honeypot/rate-limit.
   - Make sure UI/docs do not claim spam protection exists.
 
-- [ ] **T16 — Strengthen minimum booking validation**
+- [x] **T16 — Strengthen minimum booking validation**
   - Current service validates only artist name and links.
   - Decide launch required fields for the visible `/book` form.
   - Add validation for preferred date, message, expected draw bounds, and link length/format if required.
   - Return structured 400s or at least consistent error messages.
   - Add tests for missing artist, missing links, malformed date, excessive message length, and valid submission.
 
-- [ ] **T17 — Verify submission persistence and review path**
+- [x] **T17 — Verify submission persistence and review path**
   - Confirm `POST /api/public/submissions` creates `status='pending'` rows.
   - Confirm staff endpoint `GET /api/app/bookings` can list created submissions.
   - Confirm review/approve/decline endpoints work with auth in a dev/staging setup.
   - Record that notification owner remains undecided.
 
-- [ ] **T18 — Prevent duplicate frontend submits**
+- [x] **T18 — Prevent duplicate frontend submits**
   - Confirm `BookingForm` disables submit or otherwise prevents double-click while `isSubmitting` is true.
   - Add frontend test/story if missing.
   - If the shared component does not enforce this, update it or add page-level guard.

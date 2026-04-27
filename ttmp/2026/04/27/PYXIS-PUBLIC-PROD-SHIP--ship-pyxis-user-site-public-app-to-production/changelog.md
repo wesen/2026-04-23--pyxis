@@ -54,3 +54,17 @@ Uploaded updated backend audit and task plan bundle to reMarkable.
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — updated upload record
 
+
+## 2026-04-27
+
+Completed production ship phases 1-4: build/embed validation, SPA fallback tests, public API visibility hardening, archive/show smoke checks, and booking v1 validation.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/internal/web/static_test.go — SPA/static handler tests
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/spa_fallback_test.go — server SPA fallback wrapper tests
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — public show-detail visibility rule
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/submission_service.go — booking submission validation baseline
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/scripts/01-smoke-embedded-public-site.sh — embedded public-site smoke script
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md — checked off T04-T18
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — phase 1-4 diary entry

@@ -37,13 +37,31 @@ func NewSubmissionService(
 	}
 }
 
+// ErrValidation is returned when a user-supplied request fails validation.
+var ErrValidation = fmt.Errorf("validation error")
+
 // Create validates and stores a new booking submission.
 func (s *SubmissionService) Create(ctx context.Context, req *domain.Submission) (*domain.Submission, error) {
 	if req.ArtistName == "" {
-		return nil, fmt.Errorf("artist name is required")
+		return nil, fmt.Errorf("%w: artist name is required", ErrValidation)
+	}
+	if len(req.ArtistName) > 200 {
+		return nil, fmt.Errorf("%w: artist name is too long", ErrValidation)
 	}
 	if req.Links == "" {
-		return nil, fmt.Errorf("links are required")
+		return nil, fmt.Errorf("%w: links are required", ErrValidation)
+	}
+	if len(req.Links) > 2000 {
+		return nil, fmt.Errorf("%w: links are too long", ErrValidation)
+	}
+	if req.Message != "" && len(req.Message) > 5000 {
+		return nil, fmt.Errorf("%w: message is too long", ErrValidation)
+	}
+	if req.TechRider != "" && len(req.TechRider) > 5000 {
+		return nil, fmt.Errorf("%w: tech rider is too long", ErrValidation)
+	}
+	if req.ExpectedDraw != nil && (*req.ExpectedDraw < 0 || *req.ExpectedDraw > 1000) {
+		return nil, fmt.Errorf("%w: expected draw must be between 0 and 1000", ErrValidation)
 	}
 	return s.submissions.Create(ctx, req)
 }

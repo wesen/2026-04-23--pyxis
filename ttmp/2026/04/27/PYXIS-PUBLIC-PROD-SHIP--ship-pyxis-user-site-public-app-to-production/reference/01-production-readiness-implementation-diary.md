@@ -15,7 +15,7 @@ RelatedFiles:
     - ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md
 ExternalSources: []
 Summary: "Chronological diary for public-site production-readiness planning and implementation."
-LastUpdated: 2026-04-27T18:45:00-04:00
+LastUpdated: 2026-04-27T19:35:00-04:00
 WhatFor: "Use this diary to understand what was investigated, what was created, what commands ran, and what remains before pyxis-user-site ships to production."
 WhenToUse: "Update this after each implementation or validation step in PYXIS-PUBLIC-PROD-SHIP."
 ---
@@ -433,3 +433,111 @@ The updated bundle now includes the initial design guide, the expanded task list
 ### Next steps
 
 Commit the updated ticket docs, then begin implementation with the build/embed validation and fallback tests.
+
+## Step 6: Complete production phases 1-4
+
+The user asked me to complete phases 1-4 of the production shipping task list, check tasks off as they are completed, commit at appropriate intervals, and keep the diary current. This step covers T04 through T18.
+
+### Commands run
+
+```bash
+go run ./cmd/build-web 2>&1 | tee /tmp/pyxis-prod-build-web-dagger.log
+BUILD_WEB_LOCAL=1 go run ./cmd/build-web 2>&1 | tee /tmp/pyxis-prod-build-web-local.log
+make build-embed 2>&1 | tee /tmp/pyxis-prod-make-build-embed.log
+```
+
+The Dagger/default path, local fallback path, and production embedded binary build all succeeded. The build regenerated `internal/web/embed/public/index.html` and hashed asset files under `internal/web/embed/public/assets/`. I restored `web/packages/pyxis-user-site/tsconfig.tsbuildinfo` after build/test runs because it is tracked but behaves like local TypeScript build noise in this workflow.
+
+After adding code and tests, I reran the production-intent build and smoke commands:
+
+```bash
+gofmt -w internal/web/static_test.go pkg/server/spa_fallback_test.go pkg/service/show_service.go pkg/service/show_service_test.go pkg/service/submission_service.go pkg/service/submission_service_test.go pkg/server/public.go
+go test ./... -count=1
+make build-embed >/tmp/pyxis-prod-make-build-embed-final.log 2>&1
+BIND=127.0.0.1:18084 SKIP_BUILD=1 \
+  ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/scripts/01-smoke-embedded-public-site.sh \
+  2>&1 | tee /tmp/pyxis-embedded-public-smoke-final.log
+```
+
+The final smoke script passed:
+
+```text
+[smoke] HTML OK /
+[smoke] HTML OK /shows
+[smoke] HTML OK /shows/1
+[smoke] HTML OK /archive
+[smoke] HTML OK /book
+[smoke] HTML OK /book/success
+[smoke] HTML OK /about
+[smoke] JSON OK /api/public/shows
+[smoke] JSON OK /api/public/archive
+[smoke] JSON OK /api/public/archive/stats
+[smoke] public API visibility OK
+[smoke] booking submission OK
+[smoke] embedded public site smoke passed
+```
+
+I also ran a focused dev-auth review-path smoke for T17: I started the server with `PYXIS_DEV_AUTH=1` on `127.0.0.1:18085`, posted a marker-prefixed public booking, logged in through `/auth/dev-login?username=smoke-admin&role=admin`, confirmed `GET /api/app/bookings?status=pending` listed the marker submission, and then cleaned up the marker row. This verifies persistence and staff listing in a dev/staging setup. Production auth exposure and approve/decline operational review remain Phase 5 concerns because secure-cookie and public route exposure are not settled yet.
+
+I also ran the public frontend validation after the main hardening changes:
+
+```bash
+cd web/packages/pyxis-user-site
+pnpm exec tsc --noEmit
+pnpm exec vite build
+```
+
+Both passed. The Vite build produced the expected public-site chunks and the usual sourcemap output.
+
+### What changed
+
+Static serving and SPA fallback tests were added:
+
+- `internal/web/static_test.go`
+- `pkg/server/spa_fallback_test.go`
+
+Public API and booking hardening were implemented:
+
+- `pkg/service/show_service.go` now has `GetPublicByID`, with v1 public detail visibility set to confirmed-upcoming shows only.
+- `pkg/server/public.go` now uses `GetPublicByID` for `GET /api/public/shows/{id}`.
+- `pkg/server/public.go` maps `service.ErrValidation` to `400 VALIDATION_ERROR`.
+- `pkg/service/submission_service.go` now has a shared `ErrValidation` sentinel and validates artist name, links, field lengths, and expected draw bounds.
+
+Focused service tests were added:
+
+- `pkg/service/show_service_test.go` covers confirmed upcoming shows and hidden draft/hold/blocked/cancelled/archived/past shows.
+- `pkg/service/submission_service_test.go` covers valid submissions and validation failures.
+
+A production smoke script was added:
+
+- `scripts/01-smoke-embedded-public-site.sh`
+
+It validates the same-origin embedded site, seeded public visibility behavior, archive behavior, and booking confirmation creation. It uses temporary marker-prefixed rows and cleans them up.
+
+### What worked
+
+The existing backend/static embed architecture was solid. The Dagger path, local build-web fallback, `make build-embed`, Go tests, frontend typecheck/build, and embedded smoke all passed after the hardening changes.
+
+The smoke script was especially useful because it exercised the exact topology we want for production: one Go binary, embedded public assets, same-origin `/api/public/*` calls, and browser routes falling back to the React app.
+
+### What didn't work
+
+The first smoke attempt used port `18080`, which was already occupied by an older local Pyxis process. I changed the script default to `127.0.0.1:18081` and later ran the validation on `127.0.0.1:18084` to avoid local process collisions.
+
+The first booking smoke attempt also posted a request without `links`, which exposed that the production form and backend launch requirement still expect links. I kept links required, changed validation errors to be structured `400 VALIDATION_ERROR`, and updated the smoke payload to include a temporary link.
+
+### What was tricky to build
+
+The tricky boundary was deciding what counts as “public.” The list endpoint already used SQL that returns confirmed upcoming shows, but detail used generic `GetByID`. The safe v1 rule is now explicit: public detail is confirmed-upcoming only. Archived content remains available through the archive endpoint, not through the upcoming show-detail endpoint.
+
+Another tricky point is the committed embed tree. The repo already tracks `internal/web/embed/public`; for now the release rule is to regenerate during CI/release and commit regenerated assets when production changes alter the frontend bundle, so the fallback tree and embedded tree do not drift.
+
+### Task updates
+
+I checked off T04-T18 in `tasks.md` and added the implementation update to the design guide. Phase 5 remains open and now starts with auth/cookie exposure review.
+
+### Next steps
+
+1. Commit the phase 1-4 hardening changes.
+2. Start Phase 5: production auth/cookie exposure and `/auth/*`/`/api/app/*` launch exposure decision.
+3. Upload an updated production-readiness bundle to reMarkable after commit if the user wants the latest phase 1-4 implementation notes on-device.

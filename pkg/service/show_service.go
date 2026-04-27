@@ -40,6 +40,20 @@ func (s *ShowService) GetByID(ctx context.Context, id int) (*domain.Show, error)
 	return s.shows.GetByID(ctx, id)
 }
 
+// GetPublicByID returns a show only when it is visible on the public site.
+// Public detail pages should not expose draft, hold, blocked, cancelled, or
+// archived shows just because a user guesses an integer ID.
+func (s *ShowService) GetPublicByID(ctx context.Context, id int) (*domain.Show, error) {
+	show, err := s.shows.GetByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	if show.Status != domain.StatusConfirmed || show.Date.Before(time.Now().Truncate(24*time.Hour)) {
+		return nil, ErrNotFound
+	}
+	return show, nil
+}
+
 // Create creates a new show and logs the action.
 func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int, actorName string) (*domain.Show, error) {
 	if show.Status == "" {

@@ -1,0 +1,2 @@
+function n(t){var e;return!t||typeof t!="object"?!1:typeof((e=t.error)==null?void 0:e.message)=="string"}function s(t){return!!(t&&typeof t=="object"&&"status"in t)}function a(t){return!!(t&&typeof t=="object"&&"message"in t)}function f(t){return t?t instanceof Error?t.message:s(t)?n(t.data)?t.data.error.message:typeof t.data=="string"&&t.data.length>0?t.data:`Request failed: ${String(t.status)}`:a(t)&&t.message?t.message:"Unknown error":"Unknown error"}export{f as g};
+//# sourceMappingURL=errors-iWWLIpFW.js.map

@@ -84,11 +84,11 @@ func (s *Server) handleGetPublicShow(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		respondError(w, fmt.Errorf("%w: invalid show ID", service.ErrValidation))
 		return
 	}
 
-	show, err := s.showService.GetByID(ctx, id)
+	show, err := s.showService.GetPublicByID(ctx, id)
 	if err != nil {
 		respondError(w, err)
 		return
@@ -412,6 +412,9 @@ func respondError(w http.ResponseWriter, err error) {
 	message := err.Error()
 
 	switch {
+	case errors.Is(err, service.ErrValidation):
+		status = http.StatusBadRequest
+		code = "VALIDATION_ERROR"
 	case errors.Is(err, service.ErrNotFound):
 		status = http.StatusNotFound
 		code = "NOT_FOUND"

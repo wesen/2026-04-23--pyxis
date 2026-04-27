@@ -33,7 +33,7 @@ RelatedFiles:
       Note: build settings and development proxy evidence
 ExternalSources: []
 Summary: Production readiness analysis and implementation guide for shipping the public pyxis-user-site app.
-LastUpdated: 2026-04-27T18:45:00-04:00
+LastUpdated: 2026-04-27T19:35:00-04:00
 WhatFor: Use this to turn the visually tuned public site into a production launch with real data, routing, form handling, SEO, accessibility, deployment, and validation gates.
 WhenToUse: Use before assigning or implementing public-site launch work, and as the onboarding guide for an intern or developer joining the production-readiness effort.
 ---
@@ -900,17 +900,74 @@ Mitigation:
 - decide deployment topology in Phase 1;
 - test deployed frontend against deployed API before content freeze.
 
-## 11. Open questions
+## 11. Implementation update: phases 1-4 completed
 
-1. What is the production domain: `pyxis.xyz`, `ppxis.xyz`, or another hostname?
-2. Will the API be same-origin with the frontend or hosted separately?
-3. Is show detail social sharing important enough to require server-rendered metadata for v1?
-4. What spam mitigation is acceptable for the booking form at launch?
-5. Should `ReserveTicketCard` link to an external ticketing system, show door-only information, or be hidden until ticketing is real?
-6. Should lineup entries support richer public display fields before launch, or can this wait?
-7. Who is the final content approver for dates, prices, age restrictions, venue copy, and booking copy?
+The first production hardening pass completed the build/embed checks, SPA fallback tests, public API visibility hardening, and booking v1 validation baseline.
 
-## 12. File reference map
+### 11.1 Build and embed decision
+
+The production-intent command is `make build-embed`. It runs the web build pipeline and then compiles `bin/pyxis` with `-tags embed`. The Dagger path was validated with `go run ./cmd/build-web`, the local fallback was validated with `BUILD_WEB_LOCAL=1 go run ./cmd/build-web`, and the final embedded binary was rebuilt with `make build-embed`.
+
+The repository currently tracks `internal/web/embed/public`. For this codebase, the safe release rule is:
+
+- CI/release must generate the embedded public bundle with `make build-embed` or `go run ./cmd/build-web` before building the tagged binary.
+- The tracked copy of `internal/web/embed/public` is useful for local non-embed fallback and review, but it must not be treated as a substitute for a release-time web build.
+- When a production hardening change regenerates the public bundle, commit the regenerated asset set together with the change so the fallback tree and `-tags embed` tree describe the same site.
+
+### 11.2 SPA route tests and smoke script
+
+Static routing now has Go unit coverage:
+
+- `internal/web/static_test.go` verifies browser route fallback, asset serving, non-GET route rejection, reserved backend paths, and missing-bundle behavior.
+- `pkg/server/spa_fallback_test.go` verifies that primary non-404 responses are preserved, primary 404 responses delegate to the fallback handler, and headers/bodies are not leaked from the discarded 404.
+
+The integration smoke script lives at:
+
+```text
+ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/scripts/01-smoke-embedded-public-site.sh
+```
+
+It builds or reuses `bin/pyxis`, runs migrations, starts the embedded server, verifies public SPA routes return HTML, verifies public API routes return JSON, seeds temporary visibility rows, checks public show/detail/archive visibility, posts a booking submission, and cleans up its smoke rows.
+
+### 11.3 Public API hardening
+
+Public show detail no longer calls the generic staff-style `GetByID` path. It calls `GetPublicByID`, which currently exposes confirmed shows whose date is today or later. Draft, hold, blocked, cancelled, archived, missing, and invalid IDs now produce client-safe error behavior. The public rule is therefore explicit for v1: **public show detail is confirmed-upcoming only**.
+
+The list and archive endpoints were checked through the smoke script with temporary rows:
+
+- `GET /api/public/shows` includes the seeded confirmed future show.
+- `GET /api/public/shows` excludes seeded draft and archived shows.
+- `GET /api/public/shows/{draftID}` returns `404`.
+- `GET /api/public/archive?search=<marker>` includes the seeded archived show and excludes the confirmed future show.
+
+`respondError` now maps service validation errors to `400 VALIDATION_ERROR`, not `500 INTERNAL_ERROR`. Invalid public show IDs are validation errors; missing/non-public shows are not-found errors.
+
+### 11.4 Booking v1 hardening
+
+Booking spam mitigation remains intentionally absent for v1 because Manuel accepted `none for now`. This is documented as a risk, and the later post-launch follow-up should add honeypot/rate-limit/duplicate detection once launch urgency or spam volume justifies it.
+
+The server-side booking baseline now rejects:
+
+- missing artist name;
+- missing links;
+- artist names longer than 200 characters;
+- links longer than 2000 characters;
+- messages longer than 5000 characters;
+- tech rider text longer than 5000 characters;
+- expected draw outside `0..1000`.
+
+The shared `BookingForm` already prevents obvious duplicate submits by disabling the submit button when `isSubmitting` is true, and `BookPage` passes RTK Query's `submit.isPending` into that prop. The smoke script verifies that a valid public submission creates a booking confirmation through the embedded same-origin API. Staff review/approve/decline endpoints remain a Phase 5/launch-ops concern because production auth exposure is still unresolved.
+
+## 12. Open questions
+
+1. Is show detail social sharing important enough to require server-rendered metadata for v1, or is generic SPA metadata acceptable?
+2. Should `ReserveTicketCard` link to an external ticketing system, show door-only information, or be hidden until ticketing is real?
+3. Should lineup entries support richer public display fields before launch, or can this wait?
+4. Who is the final content approver for dates, prices, age restrictions, venue copy, and booking copy?
+5. Who is responsible for monitoring new pending booking submissions after launch?
+6. Should staff `/auth/*` and `/api/app/*` routes be exposed in the same public deployment, or restricted at the proxy/deployment layer?
+
+## 13. File reference map
 
 | File | Why it matters |
 |---|---|
@@ -926,7 +983,7 @@ Mitigation:
 | `proto/pyxis/v1/show.proto` | Canonical public API schema for shows, archive, booking submissions, and confirmations. |
 | `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml` | Public visual comparison spec and accepted Shows differences. |
 
-## 13. Ship/no-ship gate
+## 14. Ship/no-ship gate
 
 The public app can be considered ready to ship when all of these are true:
 
