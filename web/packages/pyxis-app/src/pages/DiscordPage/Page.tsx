@@ -1,5 +1,5 @@
 import { discordMappings as seedMappings } from '../../api/mockData';
-import { AppShell } from '../../components/shell';
+import { AppShell } from '../../components/shell/AppShell';
 import { DiscordMappingPanel, Panel } from '../../components/organisms/Panels';
 import './Page.css';
 
