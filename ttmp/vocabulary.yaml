@@ -33,6 +33,16 @@ topics:
       description: Public user-facing Pyxis website pages, components, and route behavior.
     - slug: react
       description: React components, hooks, application structure, and frontend implementation.
+    - slug: pyxis
+      description: Pyxis venue management application
+    - slug: discord-bot
+      description: Discord bot framework and bot integrations
+    - slug: show-management
+      description: Show scheduling, announcement, cancellation, archive, and venue operations workflows
+    - slug: goja
+      description: Goja JavaScript runtime integrations and native modules
+    - slug: staff-app
+      description: Pyxis staff application pages, workflows, and operations UI
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
