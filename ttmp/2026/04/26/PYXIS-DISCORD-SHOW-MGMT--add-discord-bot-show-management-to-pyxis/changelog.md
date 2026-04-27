@@ -67,3 +67,12 @@ Added a Discord bot runner load test and updated Phase 0-7 task status after imp
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary update for test/task checkpoint
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/tasks.md — Updated completed implementation tasks
 
+
+## 2026-04-26
+
+Runtime-tested the embedded Pyxis Discord bot with credentials from ../2026-04-20--js-discord-bot/.envrc; bot connected, ready event ran, and sync-on-start registered commands in the configured guild.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Runtime test evidence and commands
+

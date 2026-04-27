@@ -547,3 +547,106 @@ go test ./pkg/discordbot -run TestNewRunnerLoadsPyxisShowSpaceBot -count=1
 go test ./...
 docmgr doctor --ticket PYXIS-DISCORD-SHOW-MGMT --stale-after 30
 ```
+
+
+## Step 6: Runtime-test the embedded bot with real Discord credentials
+
+I tested the embedded Pyxis Discord bot runtime using the Discord credential environment from `../2026-04-20--js-discord-bot/.envrc`. I did not print or record secret values; I only inspected the variable names and sourced the file inside the test command.
+
+The bot successfully loaded the copied JavaScript implementation, started alongside the Pyxis HTTP server, connected to Discord as `llm-bot`, dispatched the `ready` event, and reported seven Pyxis shows from the database. I also ran a sync-on-start test, which successfully synced the expected slash commands to the configured guild.
+
+### Prompt Context
+
+**User prompt (verbatim):** "can we test the bto? look in ../2026-04-20--js-discord-bot/.envrc for the setting variables."
+
+**Assistant interpretation:** Use the existing Discord bot credentials in the adjacent repository's `.envrc` to run a live runtime test of the embedded Pyxis bot.
+
+**Inferred user intent:** Verify that the bot does more than compile: it should start, connect to Discord, and sync/register commands using the real bot app configuration.
+
+**Commit (code):** pending at the time this diary entry was written; this step only updates ticket documentation.
+
+### What I did
+
+- Inspected `../2026-04-20--js-discord-bot/.envrc` safely by printing only variable names, not values.
+- Confirmed the file exports:
+  - `DISCORD_BOT_TOKEN`
+  - `DISCORD_APPLICATION_ID`
+  - `DISCORD_GUILD_ID`
+  - `DISCORD_PUBLIC_KEY`
+  - `DISCORD_CLIENT_ID`
+  - `DISCORD_CLIENT_SECRET`
+- Confirmed the Pyxis PostgreSQL container was already running and healthy.
+- Ran the embedded bot without command sync on port `:18081` under a timeout.
+- Ran the embedded bot with `--discord-sync-on-start` on port `:18082` under a timeout.
+- Captured logs in `/tmp/pyxis-discord-bot-test.log` and `/tmp/pyxis-discord-bot-sync-test.log`.
+
+### Why
+
+- The prior test only verified local framework load/compile behavior.
+- This test verifies the actual gateway startup path and real Discord credentials.
+- The sync test verifies that the Pyxis bot's slash command descriptors are accepted by Discord for the configured guild.
+
+### What worked
+
+The non-sync runtime test showed:
+
+```text
+loaded javascript bot implementation bot=pyxis-show-space commands=["add-show","announce","archive-expired","archive-show","cancel-show","debug","debug-my-roles","debug-roles","past-shows","show","unpin-old","upcoming"]
+starting embedded Discord bot
+starting pyxis HTTP server bind=:18081
+discord bot connected bot_script=bot/discord/show-space/index.js user=llm-bot user_id=1324847363872784414
+pyxis-show-space bot ready ... shows=7 user=llm-bot
+```
+
+The sync-on-start test showed:
+
+```text
+synced discord application commands commands=["upcoming","debug","debug-roles","debug-my-roles","announce","add-show","show","cancel-show","archive-show","past-shows","unpin-old","archive-expired"] scope=guild:586274407350272042
+discord bot connected bot_script=bot/discord/show-space/index.js user=llm-bot user_id=1324847363872784414
+pyxis-show-space bot ready ... shows=7 user=llm-bot
+```
+
+The timeout exit code was `124` in both runs, which is expected because the bot/server are long-running and were intentionally stopped by `timeout`.
+
+### What didn't work
+
+- I did not run interactive slash commands from a Discord client in this step, so command handler behavior against live Discord interactions is not fully validated yet.
+- The bot was started without channel IDs or role IDs beyond what exists in DB settings/flags. Announcement commands still need an operator smoke test with real configured channel/role IDs.
+
+### What I learned
+
+- The embedded bot can connect to Discord using the existing adjacent repo `.envrc` credentials.
+- `--discord-sync-on-start` works and synced the Pyxis bot's 12 commands to the configured guild.
+- The `ready` handler can call into the Pyxis-backed native module path well enough to count shows from the database.
+
+### What was tricky to build
+
+- Avoiding accidental secret disclosure was the main operational concern. I inspected only environment variable names and redirected runtime logs through a redaction step for any token-related lines.
+- The runtime test needed unique bind ports because other Pyxis dev servers were already running on this machine.
+
+### What warrants a second pair of eyes
+
+- Confirm whether syncing commands to guild `586274407350272042` was the intended development guild.
+- Confirm which Discord channels and roles should be used for `/announce`, `/add-show`, `/cancel-show`, and admin-only commands before interactive command testing.
+
+### What should be done in the future
+
+- Run `/debug-my-roles` in Discord and capture whether the role IDs match expected configuration.
+- Configure `upcomingShowsChannelId`, `adminRoleId`, and `bookerRoleId` either through flags or settings.
+- Run `/upcoming`, `/show`, and then a controlled `/add-show` or `/announce` test in a safe development channel.
+
+### Code review instructions
+
+- Runtime-only validation commands used in this step:
+
+```bash
+timeout 25s bash -lc 'set -a; source ../2026-04-20--js-discord-bot/.envrc; set +a; go run ./cmd/pyxis serve --bind :18081 --discord-bot --discord-debug --log-level debug'
+
+timeout 35s bash -lc 'set -a; source ../2026-04-20--js-discord-bot/.envrc; set +a; go run ./cmd/pyxis serve --bind :18082 --discord-bot --discord-debug --discord-sync-on-start --log-level debug'
+```
+
+- Expected outcome is a timeout exit code (`124`) after logs show bot load, Discord connection, ready event, and command sync for the sync-on-start variant.
+
+### Technical details
+
+No source code changed in this step. Documentation was updated to record the runtime test evidence.
