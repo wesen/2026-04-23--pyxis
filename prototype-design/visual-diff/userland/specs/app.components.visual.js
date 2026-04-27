@@ -205,6 +205,96 @@ module.exports = {
           "react": "[data-pyxis-component=\"new-show-modal\"][data-pyxis-part=\"root\"]"
         }
       ]
+    },
+    {
+      "page": "app-topbar-dashboard",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-components-shell-apptopbar--dashboard",
+      "viewport": {
+        "width": 1020,
+        "height": 120
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "main > div:first-child",
+          "react": "[data-section=\"app-topbar\"]"
+        }
+      ]
+    },
+    {
+      "page": "app-topbar-with-action",
+      "variant": "component",
+      "priority": "normal",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-components-shell-apptopbar--with-action",
+      "viewport": {
+        "width": 1020,
+        "height": 120
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "main > div:first-child",
+          "react": "[data-section=\"app-topbar\"]"
+        }
+      ]
+    },
+    {
+      "page": "app-topbar-long-title",
+      "variant": "component",
+      "priority": "normal",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-components-shell-apptopbar--long-title",
+      "viewport": {
+        "width": 720,
+        "height": 120
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "main > div:first-child",
+          "react": "[data-section=\"app-topbar\"]"
+        }
+      ]
+    },
+    {
+      "page": "app-sidebar",
+      "variant": "component",
+      "priority": "tune-first",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-components-shell-appsidebar--default",
+      "viewport": {
+        "width": 220,
+        "height": 760
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": "aside",
+          "react": "[data-section=\"app-sidebar\"]"
+        }
+      ]
+    },
+    {
+      "page": "app-mobile-bottom-nav",
+      "variant": "component",
+      "priority": "normal",
+      "prototypePath": "/standalone/full-app/dashboard.html",
+      "storyId": "pyxis-app-components-shell-appmobilebottomnav--default",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "sections": [
+        {
+          "name": "component",
+          "original": ".app-bottom-nav",
+          "react": "[data-section=\"app-mobile-bottom-nav\"]"
+        }
+      ]
     }
   ]
 }
