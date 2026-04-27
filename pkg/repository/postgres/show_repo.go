@@ -89,6 +89,9 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 	if show.Notes != "" {
 		params.Notes = pgtype.Text{String: show.Notes, Valid: true}
 	}
+	if show.FlyerURL != "" {
+		params.FlyerUrl = pgtype.Text{String: show.FlyerURL, Valid: true}
+	}
 	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
 	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 	if show.SubmissionID != nil {
@@ -163,6 +166,7 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 	if show.Notes != "" {
 		params.Notes = pgtype.Text{String: show.Notes, Valid: true}
 	}
+	params.FlyerUrl = pgtype.Text{String: show.FlyerURL, Valid: show.FlyerURL != ""}
 	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
 	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 

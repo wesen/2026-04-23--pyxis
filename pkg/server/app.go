@@ -2,9 +2,11 @@ package server
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -618,6 +620,17 @@ func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	show, err := s.showService.GetByID(ctx, showID)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	show.FlyerURL = url
+	if _, err := s.showService.Update(ctx, show, int(user.ID), user.DiscordUsername); err != nil {
+		respondError(w, err)
+		return
+	}
+
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.FlyerUploadResponse{Url: url})
 }
 
@@ -642,7 +655,18 @@ func (s *Server) handleDeleteFlyer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := s.flyerStore.Delete(ctx, showID, filename); err != nil {
+	if err := s.flyerStore.Delete(ctx, showID, filename); err != nil && !errors.Is(err, os.ErrNotExist) {
+		respondError(w, err)
+		return
+	}
+
+	show, err := s.showService.GetByID(ctx, showID)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	show.FlyerURL = ""
+	if _, err := s.showService.Update(ctx, show, int(user.ID), user.DiscordUsername); err != nil {
 		respondError(w, err)
 		return
 	}

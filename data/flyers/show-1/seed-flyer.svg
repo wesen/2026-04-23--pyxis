@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Burial Hex seeded flyer">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#7A0E0E"/>
+      <stop offset="0.62" stop-color="#3D0505"/>
+      <stop offset="1" stop-color="#120101"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <rect x="54" y="54" width="692" height="892" fill="none" stroke="#FFD9C8" stroke-width="8"/>
+  <text x="400" y="155" text-anchor="middle" fill="#FFD9C8" font-family="Georgia,serif" font-size="42" letter-spacing="8">PYXIS PRESENTS</text>
+  <text x="400" y="430" text-anchor="middle" fill="#FFE7DA" font-family="Georgia,serif" font-size="92" font-weight="700">BURIAL HEX</text>
+  <text x="400" y="515" text-anchor="middle" fill="#FFD9C8" font-family="Arial,sans-serif" font-size="34">dark electronics / noise</text>
+  <text x="400" y="710" text-anchor="middle" fill="#FFD9C8" font-family="Arial,sans-serif" font-size="38">SAT MAY 2 · 8PM · 21+</text>
+  <text x="400" y="770" text-anchor="middle" fill="#FFD9C8" font-family="Arial,sans-serif" font-size="32">319 N 11TH ST · PHILADELPHIA</text>
+  <text x="400" y="846" text-anchor="middle" fill="#FFD9C8" font-family="Arial,sans-serif" font-size="30">$12 ADV / $15 DOOR</text>
+</svg>

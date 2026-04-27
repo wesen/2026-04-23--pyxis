@@ -105,6 +105,7 @@ INSERT INTO shows (
   description,
   notes,
   status,
+  flyer_url,
   draw,
   capacity,
   submission_id,
@@ -114,13 +115,13 @@ INSERT INTO shows (
   updated_at
 )
 VALUES
-  (1, 'Burial Hex', '2026-05-02', '8:00 PM', '9:00 PM', '21+', '$12 adv / $15 door', 'Darkwave', 'An evening of dark electronics and noise.', 'Confirm projector needs.', 'confirmed', 70, 150, NULL, 1, 1, NOW(), NOW()),
-  (2, 'Moor Mother', '2026-05-09', '7:00 PM', '8:00 PM', 'All Ages', '$15', 'Experimental', 'Live electronics and spoken word.', '', 'confirmed', 120, 150, NULL, 2, 1, NOW(), NOW()),
-  (3, 'Cygnus + Guests', '2026-05-17', '9:00 PM', '10:00 PM', '18+', '$8', 'Techno', 'Chicago techno in the basement.', 'Late load-in.', 'confirmed', 90, 150, NULL, 3, 2, NOW(), NOW()),
-  (4, 'Open Mic Night', '2026-05-23', '7:00 PM', NULL, 'All Ages', 'Free', 'Various', 'Weekly open mic — all performers welcome.', '', 'confirmed', 40, 150, NULL, 4, 2, NOW(), NOW()),
-  (5, 'Planning for Burial', '2025-03-14', '8:00 PM', '9:00 PM', '18+', '$10', 'Ambient', 'Intimate ambient guitar set.', '', 'archived', 34, 150, NULL, 5, 1, NOW(), NOW()),
-  (6, 'Actress', '2025-02-28', '9:00 PM', '10:00 PM', '21+', '$12', 'Electronic', 'UK electronic legend.', '', 'archived', 61, 150, NULL, 6, 1, NOW(), NOW()),
-  (7, 'Orphx', '2026-07-04', '9:00 PM', '10:00 PM', '21+', '$12', 'EBM', 'Approved booking from the request inbox.', 'Generated from approved submission.', 'confirmed', 60, 150, 3, 10, 1, NOW(), NOW());
+  (1, 'Burial Hex', '2026-05-02', '8:00 PM', '9:00 PM', '21+', '$12 adv / $15 door', 'Darkwave', 'An evening of dark electronics and noise.', 'Confirm projector needs.', 'confirmed', '/flyers/show-1/seed-flyer.svg', 70, 150, NULL, 1, 1, NOW(), NOW()),
+  (2, 'Moor Mother', '2026-05-09', '7:00 PM', '8:00 PM', 'All Ages', '$15', 'Experimental', 'Live electronics and spoken word.', '', 'confirmed', NULL, 120, 150, NULL, 2, 1, NOW(), NOW()),
+  (3, 'Cygnus + Guests', '2026-05-17', '9:00 PM', '10:00 PM', '18+', '$8', 'Techno', 'Chicago techno in the basement.', 'Late load-in.', 'confirmed', NULL, 90, 150, NULL, 3, 2, NOW(), NOW()),
+  (4, 'Open Mic Night', '2026-05-23', '7:00 PM', NULL, 'All Ages', 'Free', 'Various', 'Weekly open mic — all performers welcome.', '', 'confirmed', NULL, 40, 150, NULL, 4, 2, NOW(), NOW()),
+  (5, 'Planning for Burial', '2025-03-14', '8:00 PM', '9:00 PM', '18+', '$10', 'Ambient', 'Intimate ambient guitar set.', '', 'archived', NULL, 34, 150, NULL, 5, 1, NOW(), NOW()),
+  (6, 'Actress', '2025-02-28', '9:00 PM', '10:00 PM', '21+', '$12', 'Electronic', 'UK electronic legend.', '', 'archived', NULL, 61, 150, NULL, 6, 1, NOW(), NOW()),
+  (7, 'Orphx', '2026-07-04', '9:00 PM', '10:00 PM', '21+', '$12', 'EBM', 'Approved booking from the request inbox.', 'Generated from approved submission.', 'confirmed', NULL, 60, 150, 3, 10, 1, NOW(), NOW());
 
 INSERT INTO show_lineup (show_id, artist, role, start_time, end_time, sort_order)
 VALUES

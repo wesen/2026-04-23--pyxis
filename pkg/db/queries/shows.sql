@@ -30,16 +30,16 @@ GROUP BY s.id;
 
 -- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
-                   genre, description, notes, status, draw, capacity,
+                   genre, description, notes, status, flyer_url, draw, capacity,
                    submission_id, artist_id, created_by)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
 RETURNING *;
 
 -- name: UpdateShow :one
 UPDATE shows
 SET artist = $2, date = $3, doors_time = $4, start_time = $5,
     age = $6, price = $7, genre = $8, description = $9, notes = $10,
-    status = $11, draw = $12, capacity = $13,
+    status = $11, flyer_url = $12, draw = $13, capacity = $14,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;

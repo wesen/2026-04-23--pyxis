@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
@@ -16,6 +17,7 @@ export function ShowDetail() {
   const navigate = useNavigate();
   const showId = id ? Number(id) : undefined;
   const { data: show, isLoading, isError } = useShow(Number.isFinite(showId) ? showId : undefined);
+  const [flyerOpen, setFlyerOpen] = useState(false);
 
   if (isLoading) return <ShowDetailSkeleton />;
   if (isError || !show) return <ShowDetailNotFound onBack={() => navigate('/')} />;
@@ -68,12 +70,14 @@ export function ShowDetail() {
           </div>
 
           <aside className="pyxis-show-detail-page__aside" data-section="show-detail-aside">
+            {show.flyerUrl && <button className="pyxis-show-detail-page__flyer-button" type="button" onClick={() => setFlyerOpen(true)}><img src={show.flyerUrl} alt={`${show.artist} flyer`} /><span>View flyer fullscreen</span></button>}
             <ReserveTicketCard price={show.price} note={`${show.age} · ${show.genre}`} />
             <SafetyNote />
             <VenueCard />
           </aside>
         </section>
       </div>
+      {flyerOpen && show.flyerUrl && <div className="pyxis-show-detail-page__lightbox" role="dialog" aria-label="Flyer lightbox" onClick={() => setFlyerOpen(false)}><div onClick={(event) => event.stopPropagation()}><button type="button" onClick={() => setFlyerOpen(false)}>Close</button><img src={show.flyerUrl} alt={`${show.artist} flyer`} /><a href={show.flyerUrl} download>Download flyer</a></div></div>}
     </main>
   );
 }

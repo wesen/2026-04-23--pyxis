@@ -52,7 +52,7 @@ export const ShowTile = ({ show, compact = false, posterKind, onClick, className
       tabIndex={onClick ? 0 : undefined}
       style={style}
     >
-      <Poster kind={posterKind ?? show.poster ?? 'redroom'} />
+      {show.flyerUrl ? <img className="pyxis-show-tile__flyer" src={show.flyerUrl} alt={`${title} flyer`} /> : <Poster kind={posterKind ?? show.poster ?? 'redroom'} />}
       <div className="pyxis-show-tile__info" {...pyxisPart('show-tile', 'info')}>
         <div className="pyxis-show-tile__title" {...pyxisPart('show-tile', 'title')}>
           {title}

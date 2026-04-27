@@ -18,6 +18,15 @@
   outline-offset: 3px;
 }
 
+.pyxis-show-tile__flyer {
+  aspect-ratio: 4 / 5;
+  background: var(--color-surface-muted, #F6F3ED);
+  border-radius: var(--radius-sm);
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
 :where([data-pyxis-component='show-tile'][data-pyxis-part='info']) {
   margin-top: 14px;
 }
