@@ -3301,3 +3301,70 @@ book content        5.982% review
 show-detail page    5.688% review
 book page           4.539% review
 ```
+
+## Step 37: Add compare.json and YAML context to the review page
+
+The review page showed images and linked `compare.json`, but it did not make the comparison metadata easy to inspect inline or copy into a feedback prompt. I updated the review generator so every card now includes an expandable comparison details block.
+
+Each card displays both a compact YAML summary and the raw `compare.json`. The per-card clipboard button now copies the reviewer note plus the YAML summary, so follow-up prompts can include bounds, pixel metrics, style differences, and selection metadata without requiring a separate file lookup.
+
+### Prompt Context
+
+**User prompt (verbatim):** "add a way to see the compare.json in the main comparison page, and a way to add it (as yaml) to the clipboard prompt, to give more info too"
+
+**Assistant interpretation:** The visual review page should expose comparison metadata inline and include a YAML version in copied notes.
+
+**Inferred user intent:** Make review feedback more actionable by pairing human notes with css-visual-diff's numeric and style metadata.
+
+**Commit (code):** pending — this step records the compare/YAML review-page enhancement.
+
+### What I did
+
+- Updated `scripts/05-build-public-pages-review.py` to read each section's `compare.json`.
+- Added a tiny JSON-compatible YAML emitter for review snippets.
+- Added an expandable `compare.json + YAML prompt context` block to every review card.
+- Added two inline panes:
+  - `YAML summary copied with notes`
+  - `Raw compare.json`
+- Updated the card clipboard text to include a `compare_yaml:` block.
+- Regenerated and re-served the review page:
+  - `/tmp/pyxis-public-pages-visual-review-compareyaml-20260427-163807/index.html`
+  - `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The reviewer can now copy a note like "top whitespace is wrong" together with the exact selection bounds and style deltas. That should make the next tuning prompt much less ambiguous.
+
+### What worked
+
+- The generated page contains 13 YAML summaries and 13 raw JSON blocks, one per comparison card.
+- Playwright verified:
+  - `window.copyCard` is still a function.
+  - `.compare-yaml` and `.compare-json` blocks are present.
+  - the card button label is `To clipboard with YAML`.
+- `node --check` passes on the extracted generated script.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The review page is becoming a proper operator tool: images show what changed, while YAML gives the model/tooling enough structured context to reason about why.
+
+### What was tricky to build
+
+I avoided adding a PyYAML dependency in a ticket-local script. The YAML emitter only needs JSON-compatible dictionaries/lists/scalars from css-visual-diff metadata, so a small local emitter is sufficient.
+
+### What warrants a second pair of eyes
+
+- Confirm the YAML summary includes enough metadata without being too noisy for clipboard prompts.
+
+### What should be done in the future
+
+- Consider adding a second clipboard button for "notes only" if the YAML prompt becomes too large for casual review.
+
+### Code review instructions
+
+- Review `compare_yaml_summary()` and `to_yaml()` in `scripts/05-build-public-pages-review.py`.
+- Open `http://127.0.0.1:8097/index.html`, expand a card's comparison details, and try `To clipboard with YAML`.
