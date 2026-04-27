@@ -2,20 +2,24 @@ package postgres
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/go-go-golems/pyxis/pkg/domain"
 	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // ShowRepo implements repository.ShowRepository using sqlc-generated queries.
 type ShowRepo struct {
 	queries *db.Queries
+	pool    *pgxpool.Pool
 }
 
 // NewShowRepo creates a new ShowRepo.
-func NewShowRepo(queries *db.Queries) *ShowRepo {
-	return &ShowRepo{queries: queries}
+func NewShowRepo(queries *db.Queries, pool *pgxpool.Pool) *ShowRepo {
+	return &ShowRepo{queries: queries, pool: pool}
 }
 
 // ListUpcoming returns confirmed shows with date >= today.
@@ -48,11 +52,11 @@ func (r *ShowRepo) ListAll(ctx context.Context) ([]domain.Show, error) {
 
 // GetByID returns a single show by ID.
 func (r *ShowRepo) GetByID(ctx context.Context, id int) (*domain.Show, error) {
-	row, err := r.queries.GetShow(ctx, int32(id))
+	row, err := r.queries.GetShowWithLineup(ctx, int32(id))
 	if err != nil {
 		return nil, err
 	}
-	return rowToShow(row), nil
+	return rowWithLineupToShow(row)
 }
 
 // Create inserts a new show.
@@ -97,11 +101,35 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 		params.CreatedBy = pgtype.Int4{Int32: int32(*show.CreatedBy), Valid: true}
 	}
 
-	row, err := r.queries.CreateShow(ctx, params)
+	if r.pool == nil {
+		row, err := r.queries.CreateShow(ctx, params)
+		if err != nil {
+			return nil, err
+		}
+		if err := replaceShowLineup(ctx, r.queries, int(row.ID), show.Lineup); err != nil {
+			return nil, err
+		}
+		return rowToShow(row), nil
+	}
+
+	tx, err := r.pool.Begin(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("begin create show transaction: %w", err)
+	}
+	defer tx.Rollback(ctx)
+
+	q := r.queries.WithTx(tx)
+	row, err := q.CreateShow(ctx, params)
 	if err != nil {
 		return nil, err
 	}
-	return rowToShow(row), nil
+	if err := replaceShowLineup(ctx, q, int(row.ID), show.Lineup); err != nil {
+		return nil, err
+	}
+	if err := tx.Commit(ctx); err != nil {
+		return nil, fmt.Errorf("commit create show transaction: %w", err)
+	}
+	return r.GetByID(ctx, int(row.ID))
 }
 
 // Update modifies an existing show.
@@ -138,11 +166,35 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
 	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
 
-	row, err := r.queries.UpdateShow(ctx, params)
+	if r.pool == nil {
+		row, err := r.queries.UpdateShow(ctx, params)
+		if err != nil {
+			return nil, err
+		}
+		if err := replaceShowLineup(ctx, r.queries, int(row.ID), show.Lineup); err != nil {
+			return nil, err
+		}
+		return rowToShow(row), nil
+	}
+
+	tx, err := r.pool.Begin(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("begin update show transaction: %w", err)
+	}
+	defer tx.Rollback(ctx)
+
+	q := r.queries.WithTx(tx)
+	row, err := q.UpdateShow(ctx, params)
 	if err != nil {
 		return nil, err
 	}
-	return rowToShow(row), nil
+	if err := replaceShowLineup(ctx, q, int(row.ID), show.Lineup); err != nil {
+		return nil, err
+	}
+	if err := tx.Commit(ctx); err != nil {
+		return nil, fmt.Errorf("commit update show transaction: %w", err)
+	}
+	return r.GetByID(ctx, int(row.ID))
 }
 
 // Archive marks a show as archived.
@@ -226,6 +278,45 @@ func upcomingRowToShow(row db.ListUpcomingShowsRow) domain.Show {
 	return show
 }
 
+func rowWithLineupToShow(row db.GetShowWithLineupRow) (*domain.Show, error) {
+	show := &domain.Show{
+		ID:          int(row.ID),
+		Artist:      row.Artist,
+		Date:        row.Date.Time,
+		DoorsTime:   row.DoorsTime.String,
+		StartTime:   row.StartTime.String,
+		Age:         row.Age.String,
+		Price:       row.Price.String,
+		Genre:       row.Genre.String,
+		Description: row.Description.String,
+		Notes:       row.Notes.String,
+		FlyerURL:    row.FlyerUrl.String,
+		Draw:        int(row.Draw.Int32),
+		Capacity:    int(row.Capacity.Int32),
+		Status:      row.Status,
+		CreatedAt:   row.CreatedAt.Time,
+		UpdatedAt:   row.UpdatedAt.Time,
+	}
+	if row.SubmissionID.Valid {
+		v := int(row.SubmissionID.Int32)
+		show.SubmissionID = &v
+	}
+	if row.ArtistID.Valid {
+		v := int(row.ArtistID.Int32)
+		show.ArtistID = &v
+	}
+	if row.CreatedBy.Valid {
+		v := int(row.CreatedBy.Int32)
+		show.CreatedBy = &v
+	}
+	lineup, err := decodeLineup(row.Lineup)
+	if err != nil {
+		return nil, err
+	}
+	show.Lineup = lineup
+	return show, nil
+}
+
 func rowToShow(row db.Show) *domain.Show {
 	show := &domain.Show{
 		ID:          int(row.ID),
@@ -258,4 +349,71 @@ func rowToShow(row db.Show) *domain.Show {
 		show.CreatedBy = &v
 	}
 	return show
+}
+
+func replaceShowLineup(ctx context.Context, q *db.Queries, showID int, lineup []domain.LineupEntry) error {
+	if err := q.DeleteShowLineup(ctx, int32(showID)); err != nil {
+		return err
+	}
+	for i, entry := range lineup {
+		if entry.Artist == "" {
+			continue
+		}
+		params := db.CreateShowLineupEntryParams{
+			ShowID:    int32(showID),
+			Artist:    entry.Artist,
+			Role:      entry.Role,
+			SortOrder: int32(i),
+		}
+		if params.Role == "" {
+			params.Role = "support"
+		}
+		if entry.StartTime != "" {
+			params.StartTime = pgtype.Text{String: entry.StartTime, Valid: true}
+		}
+		if entry.EndTime != "" {
+			params.EndTime = pgtype.Text{String: entry.EndTime, Valid: true}
+		}
+		if _, err := q.CreateShowLineupEntry(ctx, params); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func decodeLineup(raw interface{}) ([]domain.LineupEntry, error) {
+	if raw == nil {
+		return nil, nil
+	}
+	var data []byte
+	switch v := raw.(type) {
+	case []byte:
+		data = v
+	case string:
+		data = []byte(v)
+	default:
+		data, _ = json.Marshal(v)
+	}
+	if len(data) == 0 {
+		return nil, nil
+	}
+	var rows []struct {
+		Artist    string `json:"artist"`
+		Role      string `json:"role"`
+		StartTime string `json:"startTime"`
+		EndTime   string `json:"endTime"`
+	}
+	if err := json.Unmarshal(data, &rows); err != nil {
+		return nil, fmt.Errorf("decode show lineup: %w", err)
+	}
+	lineup := make([]domain.LineupEntry, 0, len(rows))
+	for _, row := range rows {
+		lineup = append(lineup, domain.LineupEntry{
+			Artist:    row.Artist,
+			Role:      row.Role,
+			StartTime: row.StartTime,
+			EndTime:   row.EndTime,
+		})
+	}
+	return lineup, nil
 }

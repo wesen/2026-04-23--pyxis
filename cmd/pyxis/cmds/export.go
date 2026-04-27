@@ -87,7 +87,7 @@ func (c *ExportCommand) RunIntoGlazeProcessor(
 	defer database.Close()
 
 	queries := db.New(database.Pool)
-	repo := postgres.NewShowRepo(queries)
+	repo := postgres.NewShowRepo(queries, database.Pool)
 
 	outfile := s.OutFile
 	var out *csv.Writer

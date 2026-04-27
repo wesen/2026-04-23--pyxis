@@ -36,7 +36,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Repository layer
 	queries := db.New(database.Pool)
-	showRepo := postgres.NewShowRepo(queries)
+	showRepo := postgres.NewShowRepo(queries, database.Pool)
 	submissionRepo := postgres.NewSubmissionRepo(queries)
 	artistRepo := postgres.NewArtistRepo(queries)
 	auditRepo := postgres.NewAuditRepo(queries)
@@ -91,6 +91,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Staff show endpoints
 	mux.Handle("GET /api/app/shows", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAppShows))))
+	mux.Handle("GET /api/app/shows/{id}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAppShow))))
 	mux.Handle("POST /api/app/shows", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateShow))))
 	mux.Handle("PATCH /api/app/shows/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateShow))))
 	mux.Handle("PATCH /api/app/shows/{id}/cancel", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCancelShow))))

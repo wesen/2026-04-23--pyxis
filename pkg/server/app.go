@@ -35,6 +35,24 @@ func (s *Server) handleListAppShows(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.ShowList{Shows: pbShows2})
 }
 
+func (s *Server) handleGetAppShow(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	show, err := s.showService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, showToProto(show))
+}
+
 func (s *Server) handleCreateShow(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -175,7 +193,15 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 		FlyerURL:    pb.FlyerUrl,
 		Draw:        int(pb.Draw),
 		Capacity:    int(pb.Capacity),
-		Status:      pb.Status.String(),
+		Status:      showStatusToString(pb.Status),
+	}
+	for _, entry := range pb.Lineup {
+		show.Lineup = append(show.Lineup, domain.LineupEntry{
+			Artist:    entry.Artist,
+			Role:      entry.Role,
+			StartTime: entry.StartTime,
+			EndTime:   entry.EndTime,
+		})
 	}
 	if pb.Date != "" {
 		t, _ := time.Parse(time.DateOnly, pb.Date)
@@ -190,6 +216,25 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 		show.ArtistID = &v
 	}
 	return show
+}
+
+func showStatusToString(status pyxisv1.ShowStatus) string {
+	switch status {
+	case pyxisv1.ShowStatus_SHOW_STATUS_CONFIRMED:
+		return domain.StatusConfirmed
+	case pyxisv1.ShowStatus_SHOW_STATUS_CANCELLED:
+		return domain.StatusCancelled
+	case pyxisv1.ShowStatus_SHOW_STATUS_ARCHIVED:
+		return domain.StatusArchived
+	case pyxisv1.ShowStatus_SHOW_STATUS_DRAFT:
+		return domain.StatusDraft
+	case pyxisv1.ShowStatus_SHOW_STATUS_HOLD:
+		return domain.StatusHold
+	case pyxisv1.ShowStatus_SHOW_STATUS_BLOCKED:
+		return domain.StatusBlocked
+	default:
+		return domain.StatusDraft
+	}
 }
 
 func domainShowToAppShow(show *domain.Show) *pyxisv1.AppShow {

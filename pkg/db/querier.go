@@ -17,11 +17,13 @@ type Querier interface {
 	CreateCalendarHold(ctx context.Context, arg CreateCalendarHoldParams) (CalendarHold, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateShow(ctx context.Context, arg CreateShowParams) (Show, error)
+	CreateShowLineupEntry(ctx context.Context, arg CreateShowLineupEntryParams) (ShowLineup, error)
 	CreateSubmission(ctx context.Context, arg CreateSubmissionParams) (Submission, error)
 	DeclineSubmission(ctx context.Context, arg DeclineSubmissionParams) (Submission, error)
 	DeleteCalendarBlocked(ctx context.Context, id int32) error
 	DeleteCalendarHold(ctx context.Context, id int32) error
 	DeleteSession(ctx context.Context, id string) error
+	DeleteShowLineup(ctx context.Context, showID int32) error
 	GetArchiveStats(ctx context.Context) (GetArchiveStatsRow, error)
 	GetArtist(ctx context.Context, id int32) (Artist, error)
 	GetArtistByName(ctx context.Context, name string) (Artist, error)

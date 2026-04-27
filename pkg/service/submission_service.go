@@ -69,7 +69,7 @@ func (s *SubmissionService) Approve(ctx context.Context, id int, actorID int, ac
 	qtx := db.New(tx)
 	subRepoTx := postgres.NewSubmissionRepo(qtx)
 	artistRepoTx := postgres.NewArtistRepo(qtx)
-	showRepoTx := postgres.NewShowRepo(qtx)
+	showRepoTx := postgres.NewShowRepo(qtx, nil)
 
 	// Approve submission
 	sub, err := subRepoTx.Approve(ctx, id, actorID)

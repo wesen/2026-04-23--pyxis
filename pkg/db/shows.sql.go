@@ -115,6 +115,52 @@ func (q *Queries) CreateShow(ctx context.Context, arg CreateShowParams) (Show, e
 	return i, err
 }
 
+const createShowLineupEntry = `-- name: CreateShowLineupEntry :one
+INSERT INTO show_lineup (show_id, artist, role, start_time, end_time, sort_order)
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING id, show_id, artist, role, start_time, end_time, sort_order
+`
+
+type CreateShowLineupEntryParams struct {
+	ShowID    int32       `json:"showId"`
+	Artist    string      `json:"artist"`
+	Role      string      `json:"role"`
+	StartTime pgtype.Text `json:"startTime"`
+	EndTime   pgtype.Text `json:"endTime"`
+	SortOrder int32       `json:"sortOrder"`
+}
+
+func (q *Queries) CreateShowLineupEntry(ctx context.Context, arg CreateShowLineupEntryParams) (ShowLineup, error) {
+	row := q.db.QueryRow(ctx, createShowLineupEntry,
+		arg.ShowID,
+		arg.Artist,
+		arg.Role,
+		arg.StartTime,
+		arg.EndTime,
+		arg.SortOrder,
+	)
+	var i ShowLineup
+	err := row.Scan(
+		&i.ID,
+		&i.ShowID,
+		&i.Artist,
+		&i.Role,
+		&i.StartTime,
+		&i.EndTime,
+		&i.SortOrder,
+	)
+	return i, err
+}
+
+const deleteShowLineup = `-- name: DeleteShowLineup :exec
+DELETE FROM show_lineup WHERE show_id = $1
+`
+
+func (q *Queries) DeleteShowLineup(ctx context.Context, showID int32) error {
+	_, err := q.db.Exec(ctx, deleteShowLineup, showID)
+	return err
+}
+
 const getArchiveStats = `-- name: GetArchiveStats :one
 SELECT
     COUNT(*) as total_shows,

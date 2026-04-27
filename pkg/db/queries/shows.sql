@@ -44,6 +44,14 @@ SET artist = $2, date = $3, doors_time = $4, start_time = $5,
 WHERE id = $1
 RETURNING *;
 
+-- name: DeleteShowLineup :exec
+DELETE FROM show_lineup WHERE show_id = $1;
+
+-- name: CreateShowLineupEntry :one
+INSERT INTO show_lineup (show_id, artist, role, start_time, end_time, sort_order)
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING *;
+
 -- name: ArchiveShow :one
 UPDATE shows AS s SET status = 'archived', updated_at = NOW() WHERE s.id = $1 RETURNING s.*;
 
