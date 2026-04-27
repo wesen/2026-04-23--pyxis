@@ -10,6 +10,7 @@ export const endpoints = {
   booking: (id: number) => `/api/app/bookings/${id}`,
   bookingApprove: (id: number) => `/api/app/bookings/${id}/approve`,
   bookingDecline: (id: number) => `/api/app/bookings/${id}/decline`,
+  bookingReview: (id: number) => `/api/app/bookings/${id}/review`,
   artists: '/api/app/artists',
   artist: (id: number) => `/api/app/artists/${id}`,
   calendar: '/api/app/calendar',

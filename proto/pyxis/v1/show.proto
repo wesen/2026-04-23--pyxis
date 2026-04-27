@@ -126,6 +126,14 @@ message SubmissionList {
   repeated Submission submissions = 1;
 }
 
+message BookingReview {
+  int32  submission_id = 1;
+  string note          = 2;
+  string decision      = 3;
+  int32  updated_by    = 4;
+  string updated_at    = 5;
+}
+
 message User {
   int32  id              = 1;
   string discord_id      = 2;

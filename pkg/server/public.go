@@ -253,6 +253,19 @@ func submissionToProto(sub *domain.Submission) *pyxisv1.Submission {
 	return pb
 }
 
+func bookingReviewToProto(review *domain.BookingReview) *pyxisv1.BookingReview {
+	pb := &pyxisv1.BookingReview{
+		SubmissionId: int32(review.SubmissionID),
+		Note:         review.Note,
+		Decision:     review.Decision,
+		UpdatedAt:    review.UpdatedAt.Format(time.RFC3339),
+	}
+	if review.UpdatedBy != nil {
+		pb.UpdatedBy = int32(*review.UpdatedBy)
+	}
+	return pb
+}
+
 func calendarHoldToProto(h *domain.CalendarHold) *pyxisv1.CalendarHold {
 	return &pyxisv1.CalendarHold{
 		Id:    int32(h.ID),

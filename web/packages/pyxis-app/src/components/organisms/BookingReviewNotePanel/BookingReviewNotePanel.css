@@ -1,1 +1,6 @@
-/* Booking review note panel currently uses pages.css muted-copy styles. */
+.app-booking-review-note-field { display: block; margin-top: 14px; }
+.app-booking-review-note-field span { display: block; margin-bottom: 6px; color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.app-booking-review-note-field textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); background: var(--app-surface-strong); color: var(--app-ink); padding: 10px 12px; font: inherit; font-size: 13px; resize: vertical; }
+.app-booking-review-note-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.app-booking-review-note-actions small { color: var(--app-muted); font-size: 11px; }
+@media (max-width: 760px) { .app-booking-review-note-actions { flex-direction: column; align-items: stretch; } }

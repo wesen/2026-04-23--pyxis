@@ -41,6 +41,14 @@ type AuditLog struct {
 	CreatedAt  pgtype.Timestamptz `json:"createdAt"`
 }
 
+type BookingReview struct {
+	SubmissionID int32              `json:"submissionId"`
+	Note         string             `json:"note"`
+	Decision     string             `json:"decision"`
+	UpdatedBy    pgtype.Int4        `json:"updatedBy"`
+	UpdatedAt    pgtype.Timestamptz `json:"updatedAt"`
+}
+
 type CalendarBlocked struct {
 	ID        int32              `json:"id"`
 	Date      pgtype.Date        `json:"date"`

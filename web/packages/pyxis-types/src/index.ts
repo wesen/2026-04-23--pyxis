@@ -25,6 +25,8 @@ export {
   SubmissionSchema,
   type SubmissionList,
   SubmissionListSchema,
+  type BookingReview,
+  BookingReviewSchema,
   type User,
   UserSchema,
   type AuthSession,

@@ -12,6 +12,7 @@ TRUNCATE TABLE
   shows,
   artists,
   users,
+  booking_reviews,
   settings
 RESTART IDENTITY CASCADE;
 
@@ -143,6 +144,11 @@ INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, log
 VALUES
   (5, 34, 'Good energy, small crowd.', FALSE, '', 3, NOW(), NOW()),
   (6, 61, 'Great turnout for a weeknight.', FALSE, '', 3, NOW(), NOW());
+
+INSERT INTO booking_reviews (submission_id, note, decision, updated_by, updated_at)
+VALUES
+  (1, 'Good fit. Pair with a local harsh-noise opener and confirm curfew.', 'none', 1, NOW()),
+  (2, 'Likely strong draw. Check routing before approving.', 'none', 2, NOW());
 
 INSERT INTO audit_log (actor, actor_id, action, entity_type, entity_id, metadata, created_at)
 VALUES

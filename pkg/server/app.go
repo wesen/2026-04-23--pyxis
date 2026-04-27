@@ -295,6 +295,66 @@ func (s *Server) handleApproveBooking(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, showToProto(created))
 }
 
+func (s *Server) handleGetBookingReview(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid booking ID: %w", err))
+		return
+	}
+
+	review, err := s.submissionService.GetReview(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, bookingReviewToProto(review))
+}
+
+func (s *Server) handleUpdateBookingReview(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid booking ID: %w", err))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req pyxisv1.BookingReview
+	if err := protojson.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	actorID := int(user.ID)
+	updated, err := s.submissionService.UpsertReview(ctx, &domain.BookingReview{
+		SubmissionID: id,
+		Note:         req.Note,
+		Decision:     req.Decision,
+		UpdatedBy:    &actorID,
+	}, actorID, user.DiscordUsername)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, bookingReviewToProto(updated))
+}
+
 func (s *Server) handleDeclineBooking(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)

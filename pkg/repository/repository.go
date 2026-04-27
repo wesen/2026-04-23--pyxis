@@ -25,6 +25,8 @@ type SubmissionRepository interface {
 	List(ctx context.Context, status string) ([]domain.Submission, error)
 	Approve(ctx context.Context, id int, reviewedBy int) (*domain.Submission, error)
 	Decline(ctx context.Context, id int, reviewedBy int) (*domain.Submission, error)
+	GetReview(ctx context.Context, submissionID int) (*domain.BookingReview, error)
+	UpsertReview(ctx context.Context, review *domain.BookingReview) (*domain.BookingReview, error)
 }
 
 // ArtistRepository defines artist storage operations.

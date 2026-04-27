@@ -12,6 +12,8 @@ import {
   AppShowSchema,
   Submission,
   SubmissionListSchema,
+  BookingReview,
+  BookingReviewSchema,
   Artist,
   ArtistListSchema,
   ArtistSchema,
@@ -41,6 +43,7 @@ type CalendarHoldInput = Pick<CalendarHold, 'date' | 'label'>;
 type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
 type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
+type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
 
 export const appApi = createApi({
   reducerPath: 'appApi',
@@ -152,6 +155,18 @@ export const appApi = createApi({
       invalidatesTags: ['Booking', 'AuditLog'],
     }),
 
+    getBookingReview: builder.query<BookingReview, number>({
+      query: endpoints.bookingReview,
+      transformResponse: (response: unknown) => fromJson(BookingReviewSchema, response as any),
+      providesTags: (_r, _e, id) => [{ type: 'Booking', id: `review-${id}` }],
+    }),
+
+    updateBookingReview: builder.mutation<BookingReview, BookingReviewInput>({
+      query: ({ submissionId, ...review }) => ({ url: endpoints.bookingReview(submissionId), method: 'PATCH', body: toJson(BookingReviewSchema, create(BookingReviewSchema, { submissionId, ...review })) }),
+      transformResponse: (response: unknown) => fromJson(BookingReviewSchema, response as any),
+      invalidatesTags: (_r, _e, { submissionId }) => [{ type: 'Booking', id: `review-${submissionId}` }, 'AuditLog'],
+    }),
+
     getArtists: builder.query<Artist[], void>({
       query: () => endpoints.artists,
       transformResponse: (response: unknown) => {
@@ -257,6 +272,7 @@ export const {
   useGetArtistsQuery,
   useGetAttendanceQuery,
   useGetAuditLogQuery,
+  useGetBookingReviewQuery,
   useGetBookingsQuery,
   useGetCalendarQuery,
   useGetSessionQuery,
@@ -266,6 +282,7 @@ export const {
   useAnnounceShowMutation,
   useUpdateArtistMutation,
   useUpdateAttendanceMutation,
+  useUpdateBookingReviewMutation,
   useUpdateSettingsMutation,
   useUpdateShowMutation,
   useUploadShowFlyerMutation,

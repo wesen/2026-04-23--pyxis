@@ -104,6 +104,8 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Staff booking endpoints
 	mux.Handle("GET /api/app/bookings", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleListBookings))))
+	mux.Handle("GET /api/app/bookings/{id}/review", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleGetBookingReview))))
+	mux.Handle("PATCH /api/app/bookings/{id}/review", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateBookingReview))))
 	mux.Handle("PATCH /api/app/bookings/{id}/approve", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleApproveBooking))))
 	mux.Handle("PATCH /api/app/bookings/{id}/decline", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeclineBooking))))
 

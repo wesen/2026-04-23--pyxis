@@ -99,6 +99,32 @@ func (r *SubmissionRepo) Decline(ctx context.Context, id int, reviewedBy int) (*
 	return dbSubmissionToDomain(row), nil
 }
 
+// GetReview returns staff review notes for a submission.
+func (r *SubmissionRepo) GetReview(ctx context.Context, submissionID int) (*domain.BookingReview, error) {
+	row, err := r.queries.GetBookingReview(ctx, int32(submissionID))
+	if err != nil {
+		return nil, err
+	}
+	return dbBookingReviewToDomain(row), nil
+}
+
+// UpsertReview creates or updates staff review notes for a submission.
+func (r *SubmissionRepo) UpsertReview(ctx context.Context, review *domain.BookingReview) (*domain.BookingReview, error) {
+	params := db.UpsertBookingReviewParams{
+		SubmissionID: int32(review.SubmissionID),
+		Note:         review.Note,
+		Decision:     review.Decision,
+	}
+	if review.UpdatedBy != nil {
+		params.UpdatedBy = pgtype.Int4{Int32: int32(*review.UpdatedBy), Valid: true}
+	}
+	row, err := r.queries.UpsertBookingReview(ctx, params)
+	if err != nil {
+		return nil, err
+	}
+	return dbBookingReviewToDomain(row), nil
+}
+
 func dbSubmissionToDomain(row db.Submission) *domain.Submission {
 	sub := &domain.Submission{
 		ID:             int(row.ID),
@@ -132,4 +158,18 @@ func dbSubmissionToDomain(row db.Submission) *domain.Submission {
 		sub.ReviewedAt = &t
 	}
 	return sub
+}
+
+func dbBookingReviewToDomain(row db.BookingReview) *domain.BookingReview {
+	review := &domain.BookingReview{
+		SubmissionID: int(row.SubmissionID),
+		Note:         row.Note,
+		Decision:     row.Decision,
+		UpdatedAt:    row.UpdatedAt.Time,
+	}
+	if row.UpdatedBy.Valid {
+		v := int(row.UpdatedBy.Int32)
+		review.UpdatedBy = &v
+	}
+	return review
 }

@@ -8,6 +8,7 @@ import {
   AttendanceLogListSchema,
   AuditLogEntryListSchema,
   AuthSessionSchema,
+  BookingReviewSchema,
   CalendarBlockedSchema,
   CalendarEventKind,
   CalendarEventListSchema,
@@ -45,6 +46,7 @@ function appShowToShow(show: AppShow) {
 type MockState = {
   shows: ReturnType<typeof appShowToShow>[];
   bookings: Submission[];
+  bookingReviews: Record<number, ReturnType<typeof createBookingReview>>;
   calendarEvents: typeof calendarEvents;
 };
 
@@ -54,6 +56,7 @@ export function resetMockState() {
   state = {
     shows: shows.map(appShowToShow),
     bookings: bookings.map(cloneSubmission),
+    bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
     calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
   };
 }
@@ -62,11 +65,16 @@ function cloneSubmission(booking: Submission) {
   return create(SubmissionSchema, booking as any);
 }
 
+function createBookingReview(submissionId: number, note = '') {
+  return create(BookingReviewSchema, { submissionId, note, decision: 'none', updatedBy: 1, updatedAt: '2026-04-26T00:00:00Z' });
+}
+
 function ensureMockState() {
   if (!state) {
     state = {
       shows: shows.map(appShowToShow),
       bookings: bookings.map(cloneSubmission),
+      bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
       calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
     };
   }
@@ -167,6 +175,22 @@ export const mockHandlers = [
     });
     current.shows = [...current.shows, show];
     return HttpResponse.json(toJson(ShowSchema, show));
+  }),
+
+  http.get('*/api/app/bookings/:id/review', ({ params }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const review = current.bookingReviews[id] ?? createBookingReview(id);
+    return HttpResponse.json(toJson(BookingReviewSchema, review));
+  }),
+
+  http.patch('*/api/app/bookings/:id/review', async ({ params, request }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const body = await request.json() as { note?: string; decision?: string };
+    const review = create(BookingReviewSchema, { submissionId: id, note: body.note ?? '', decision: body.decision ?? 'none', updatedBy: 1, updatedAt: '2026-04-26T00:00:00Z' });
+    current.bookingReviews[id] = review;
+    return HttpResponse.json(toJson(BookingReviewSchema, review));
   }),
 
   http.patch('*/api/app/bookings/:id/decline', ({ params }) => {

@@ -58,6 +58,23 @@ func (s *SubmissionService) GetByID(ctx context.Context, id int) (*domain.Submis
 	return s.submissions.GetByID(ctx, id)
 }
 
+// GetReview returns staff review notes for a submission.
+func (s *SubmissionService) GetReview(ctx context.Context, submissionID int) (*domain.BookingReview, error) {
+	return s.submissions.GetReview(ctx, submissionID)
+}
+
+// UpsertReview stores staff review notes for a submission and logs the action.
+func (s *SubmissionService) UpsertReview(ctx context.Context, review *domain.BookingReview, actorID int, actorName string) (*domain.BookingReview, error) {
+	updated, err := s.submissions.UpsertReview(ctx, review)
+	if err != nil {
+		return nil, err
+	}
+	_ = s.audit.Log(ctx, actorID, actorName, "booking.review.update", "submission", &review.SubmissionID, map[string]interface{}{
+		"decision": review.Decision,
+	})
+	return updated, nil
+}
+
 // Approve marks a submission as approved, creates or links an artist, and creates a draft show.
 func (s *SubmissionService) Approve(ctx context.Context, id int, actorID int, actorName string) (*domain.Show, error) {
 	tx, err := s.pool.Begin(ctx)

@@ -28,6 +28,7 @@ type Querier interface {
 	GetArtist(ctx context.Context, id int32) (Artist, error)
 	GetArtistByName(ctx context.Context, name string) (Artist, error)
 	GetAttendanceLog(ctx context.Context, showID int32) (AttendanceLog, error)
+	GetBookingReview(ctx context.Context, submissionID int32) (BookingReview, error)
 	GetSession(ctx context.Context, id string) (Session, error)
 	GetSettings(ctx context.Context) (Setting, error)
 	GetShow(ctx context.Context, id int32) (Show, error)
@@ -47,6 +48,7 @@ type Querier interface {
 	UpdateSettings(ctx context.Context, arg UpdateSettingsParams) (Setting, error)
 	UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, error)
 	UpsertAttendanceLog(ctx context.Context, arg UpsertAttendanceLogParams) (AttendanceLog, error)
+	UpsertBookingReview(ctx context.Context, arg UpsertBookingReviewParams) (BookingReview, error)
 	UpsertDevUser(ctx context.Context, arg UpsertDevUserParams) (User, error)
 	UpsertUser(ctx context.Context, arg UpsertUserParams) (User, error)
 }
