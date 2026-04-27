@@ -103,7 +103,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Validate with import resolver, `tsc`, `vite build`, `storybook build`.
   - Commit separately.
 
-- [ ] **T11+ — Optional: move remaining page groups one at a time**
+- [x] **T11+ — Optional: move remaining page groups one at a time**
   - [x] Shows group.
   - [x] Bookings group.
   - [x] Calendar group.

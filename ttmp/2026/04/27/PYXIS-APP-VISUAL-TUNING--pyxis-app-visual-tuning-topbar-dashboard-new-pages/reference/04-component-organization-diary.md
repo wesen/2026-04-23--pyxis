@@ -1586,3 +1586,101 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 16: Final page-grouping audit and T11 closeout
+
+After the Settings grouping commit, I did a final audit of the page-grouping phase.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Finish the remaining planned page-group moves and close out the task list once all chosen groups validate.
+
+**Inferred user intent:** Leave the repository in a documented, validated, reviewable state after the grouping series.
+
+**Commit (code):** pending — this is a bookkeeping-only closeout commit.
+
+### What I did
+
+- Verified the working tree after the Settings commit.
+- Listed the remaining top-level organism folders.
+- Confirmed the CSS-aware import resolver still reports `unresolved: 0`.
+- Marked the umbrella T11+ task complete.
+
+Remaining top-level organism folders are now intentionally either page groups or shared/standalone components:
+
+```text
+AuditLogPanel
+Bookings
+Calendar
+Dashboard
+DiscordMappingPanel
+FlyerField
+NewShowModal
+Panel
+Roster
+Settings
+ShowDetail
+Shows
+```
+
+`AuditLogPanel`, `DiscordMappingPanel`, `FlyerField`, `NewShowModal`, and `Panel` were left top-level intentionally because they are standalone/shared or do not yet have enough domain weight to justify a folder group.
+
+### Why
+
+The page-grouping task is complete for the explicit groups we chose to move. Closing the umbrella task avoids leaving the ticket in an ambiguous state.
+
+### What worked
+
+The resolver still passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+```
+
+Output:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No issues in the closeout audit.
+
+### What I learned
+
+The safest grouping rule is: move clear page/domain families, but leave shared or ambiguous components alone until there is a stronger concept for them.
+
+### What warrants a second pair of eyes
+
+- Whether `AuditLogPanel` and `DiscordMappingPanel` should become `AuditLog/` and `Discord/` later.
+- Whether `NewShowModal` and `FlyerField` should remain shared or move into a future `ShowsShared/` or `ShowEditing/` domain.
+
+### What should be done in the future
+
+Visually inspect the Storybook hierarchy after all group moves. Then, if the UI still looks good, proceed to the original visual-tuning task: fix token drift and re-run TopBar/dashboard visual diffs.
+
+### Code review instructions
+
+Review the grouped organism roots:
+
+- `web/packages/pyxis-app/src/components/organisms/Dashboard/`
+- `web/packages/pyxis-app/src/components/organisms/Shows/`
+- `web/packages/pyxis-app/src/components/organisms/Bookings/`
+- `web/packages/pyxis-app/src/components/organisms/Calendar/`
+- `web/packages/pyxis-app/src/components/organisms/ShowDetail/`
+- `web/packages/pyxis-app/src/components/organisms/Roster/`
+- `web/packages/pyxis-app/src/components/organisms/Settings/`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
