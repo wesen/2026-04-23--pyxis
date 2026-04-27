@@ -91,6 +91,11 @@ module.exports = {
           "name": "component",
           "original": "[data-section='shows-list'] > div > div:nth-child(1)",
           "react": "[data-pyxis-component='show-tile'][data-pyxis-part='root']"
+        },
+        {
+          "name": "info",
+          "original": "[data-section='shows-list'] > div > div:nth-child(1) > div:nth-child(2)",
+          "react": "[data-pyxis-component='show-tile'][data-pyxis-part='info']"
         }
       ]
     },
@@ -105,6 +110,11 @@ module.exports = {
           "name": "component",
           "original": "[data-section='shows-list'] > div > div:nth-child(4)",
           "react": "[data-pyxis-component='show-tile'][data-pyxis-part='root']"
+        },
+        {
+          "name": "info",
+          "original": "[data-section='shows-list'] > div > div:nth-child(4) > div:nth-child(2)",
+          "react": "[data-pyxis-component='show-tile'][data-pyxis-part='info']"
         }
       ]
     },
@@ -119,6 +129,11 @@ module.exports = {
           "name": "component",
           "original": "[data-section='shows-list'] > div > div:nth-child(7)",
           "react": "[data-pyxis-component='show-tile'][data-pyxis-part='root']"
+        },
+        {
+          "name": "info",
+          "original": "[data-section='shows-list'] > div > div:nth-child(7) > div:nth-child(2)",
+          "react": "[data-pyxis-component='show-tile'][data-pyxis-part='info']"
         }
       ]
     },

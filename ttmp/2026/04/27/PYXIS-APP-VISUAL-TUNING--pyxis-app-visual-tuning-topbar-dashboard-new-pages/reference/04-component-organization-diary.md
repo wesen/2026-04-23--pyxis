@@ -2671,3 +2671,58 @@ The earlier component-level conclusion was correct: most of the apparent page mi
 
 - Inspect the new review bundle and decide whether 11.17% is acceptable for the full page after the component targets are review-band.
 - If the goal is to push below 10%, focus on the highest-impact poster artwork differences visible in the full page review, not the grid layout.
+
+## Step 29: Add focused ShowTile info visual targets
+
+The review follow-up noted that the under-poster text block should be iterated independently because line spacing appeared off in the review artifact, even though the live Storybook/user-site pages looked less problematic.
+
+### What I did
+
+- Added `info` sections to the component visual spec for representative tile states:
+  - `show-tile-redroom --section info`
+  - `show-tile-learn --section info`
+  - `show-tile-soldout --section info`
+- Regenerated `public.components.visual.js` from the YAML spec.
+- Kept this as visual-spec granularity rather than extracting another React component. React already exposes the info block through `data-pyxis-part='info'`.
+
+### Commands and results
+
+```bash
+python3 prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py \
+  prototype-design/visual-diff/userland/specs/public.components.visual.yml
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-public-component show-tile-redroom \
+  --section info --outDir /tmp/pyxis-public-info-redroom --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-public-component show-tile-learn \
+  --section info --outDir /tmp/pyxis-public-info-learn --output json
+
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-public-component show-tile-soldout \
+  --section info --outDir /tmp/pyxis-public-info-soldout --output json
+```
+
+Results:
+
+```text
+show-tile-redroom info  review 4.554334554334554%
+show-tile-learn   info  review 5.396825396825397%
+show-tile-soldout info  review 3.6752136752136755%
+```
+
+The bounds deltas are small:
+
+```text
+height +1.25px
+width +0.671875px
+```
+
+### Assessment
+
+The text block is already in a reasonable review-band state when isolated. The stronger perceived line-height mismatch in the HTML review page is likely partly due to comparing/scaling larger screenshots rather than a component-level spacing bug. The focused `info` crops should be the next source of truth for under-poster text tuning.
+
+### Custom css-visual-diff assessment
+
+This is a good example where adding spec sub-sections was enough. We did not need new React subcomponents or new css-visual-diff machinery. A future helper could make it easier to generate subpart targets automatically from `data-pyxis-part`, but explicit sections are clear and reviewable for now.
