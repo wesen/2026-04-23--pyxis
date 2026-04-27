@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ShowDetailDiscordPanel } from './ShowDetailDiscordPanel';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ShowDetailDiscordPanel',
+  title: 'Pyxis App/Components/Organisms/ShowDetail/ShowDetailDiscordPanel',
   component: ShowDetailDiscordPanel,
   parameters: { layout: 'fullscreen' },
   args: {},

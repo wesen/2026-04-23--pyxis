@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { ShowDetailInfoPanel } from './ShowDetailInfoPanel';
 
 const show = shows[0];
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ShowDetailInfoPanel',
+  title: 'Pyxis App/Components/Organisms/ShowDetail/ShowDetailInfoPanel',
   component: ShowDetailInfoPanel,
   parameters: { layout: 'fullscreen' },
   args: { show },

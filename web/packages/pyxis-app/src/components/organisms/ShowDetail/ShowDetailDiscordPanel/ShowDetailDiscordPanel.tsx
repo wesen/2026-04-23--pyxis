@@ -1,5 +1,5 @@
 import { Button } from 'pyxis-components';
-import { Panel } from '../Panels';
+import { Panel } from '../../Panels';
 import './ShowDetailDiscordPanel.css';
 
 export type ShowDetailDiscordPanelProps = {

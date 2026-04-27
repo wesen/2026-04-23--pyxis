@@ -9,7 +9,5 @@ export * from './FlyerField';
 export * from './NewShowModal';
 export * from './Panel';
 export * from './SettingsPanel';
-export * from './ShowDetailDiscordPanel';
-export * from './ShowDetailHero';
-export * from './ShowDetailInfoPanel';
+export * from './ShowDetail';
 export * from './Shows';

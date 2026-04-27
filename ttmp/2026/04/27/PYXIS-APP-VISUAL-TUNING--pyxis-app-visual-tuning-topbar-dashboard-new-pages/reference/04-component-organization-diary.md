@@ -1303,3 +1303,92 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 13: Group ShowDetail organisms under organisms/ShowDetail
+
+After Calendar passed validation, I grouped the ShowDetail organism family. This was small and low-risk because the group has only three components and few dependencies.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Continue one group at a time and commit this group independently.
+
+**Inferred user intent:** Keep progressing through page groups without batching too many filesystem moves.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/ShowDetail/`.
+- Used `git mv` to move:
+  - `ShowDetailDiscordPanel`
+  - `ShowDetailHero`
+  - `ShowDetailInfoPanel`
+- Added `components/organisms/ShowDetail/index.ts`.
+- Updated `organisms/index.ts` to export the ShowDetail group.
+- Updated `Phase8Sections.tsx` to export the ShowDetail group.
+- Updated moved imports for the deeper folder path.
+- Updated ShowDetail Storybook titles to `Pyxis App/Components/Organisms/ShowDetail/<Component>`.
+- Marked the ShowDetail subtask complete in `tasks.md`.
+
+### Why
+
+ShowDetail is a compact page-domain group with a clear prefix and no need to mix it with other groups.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No validation failures occurred.
+
+### What I learned
+
+Small groups like ShowDetail are ideal for this migration style: `git mv`, update group barrel, update shims, run resolver, validate, commit.
+
+### What was tricky to build
+
+Nothing was particularly tricky in this group. The only dependency pattern to preserve was `Panel` via the compatibility shim.
+
+### What warrants a second pair of eyes
+
+Visual inspection of the ShowDetail stories under the new hierarchy.
+
+### What should be done in the future
+
+Proceed to Roster next, then Settings/Shared.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/ShowDetail/`
+- `web/packages/pyxis-app/src/components/organisms/ShowDetail/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```

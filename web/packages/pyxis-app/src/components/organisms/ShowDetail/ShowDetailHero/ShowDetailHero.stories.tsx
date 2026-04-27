@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus } from 'pyxis-types';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { ShowDetailHero } from './ShowDetailHero';
 
 const show = shows[0];
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ShowDetailHero',
+  title: 'Pyxis App/Components/Organisms/ShowDetail/ShowDetailHero',
   component: ShowDetailHero,
   parameters: { layout: 'fullscreen' },
   args: { show },
