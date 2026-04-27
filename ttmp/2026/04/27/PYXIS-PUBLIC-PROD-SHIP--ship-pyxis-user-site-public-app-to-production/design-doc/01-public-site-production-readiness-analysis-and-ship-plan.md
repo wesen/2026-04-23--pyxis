@@ -33,7 +33,7 @@ RelatedFiles:
       Note: build settings and development proxy evidence
 ExternalSources: []
 Summary: Production readiness analysis and implementation guide for shipping the public pyxis-user-site app.
-LastUpdated: 2026-04-27T19:35:00-04:00
+LastUpdated: 2026-04-27T20:10:00-04:00
 WhatFor: Use this to turn the visually tuned public site into a production launch with real data, routing, form handling, SEO, accessibility, deployment, and validation gates.
 WhenToUse: Use before assigning or implementing public-site launch work, and as the onboarding guide for an intern or developer joining the production-readiness effort.
 ---
@@ -958,7 +958,271 @@ The server-side booking baseline now rejects:
 
 The shared `BookingForm` already prevents obvious duplicate submits by disabling the submit button when `isSubmitting` is true, and `BookPage` passes RTK Query's `submit.isPending` into that prop. The smoke script verifies that a valid public submission creates a booking confirmation through the embedded same-origin API. Staff review/approve/decline endpoints remain a Phase 5/launch-ops concern because production auth exposure is still unresolved.
 
-## 12. Open questions
+## 12. Keycloak precedent from `hair-booking`
+
+After the Phase 1-4 production pass, I inspected `/home/manuel/code/wesen/hair-booking` as the closest local precedent for a Go app using Keycloak, a same-origin React shell, local Docker Compose, Terraform-managed hosted clients, and operator playbooks. That repo is more than a sketch: it already has a working local Keycloak fixture, OIDC callback code, signed browser sessions, hosted deployment documentation, and a central-infra Terraform path.
+
+The important lesson is not “copy every file.” The important lesson is that `hair-booking` separates the identity system into four clear layers:
+
+1. a local Keycloak fixture for day-to-day development;
+2. app runtime OIDC settings and callback/session handling in Go;
+3. hosted Keycloak realm/client provisioning in the shared Terraform repo;
+4. deployment/runbook documentation that keeps app env vars aligned with Keycloak redirect URLs.
+
+That separation is exactly what `pyxis` needs if it replaces the current Discord/dev-session auth with Keycloak/OIDC.
+
+### 12.1 Local Docker Compose shape
+
+`hair-booking/docker-compose.local.yml` defines a self-contained local development identity stack:
+
+- `app-postgres`
+  - PostgreSQL 16 for app data.
+  - Binds to `127.0.0.1:${HAIR_BOOKING_PG_PORT:-15432}:5432`.
+  - Has a `pg_isready` healthcheck.
+- `keycloak-postgres`
+  - Separate PostgreSQL 16 database for Keycloak.
+  - Not exposed to the host.
+  - Has its own `pg_isready` healthcheck.
+- `keycloak`
+  - `quay.io/keycloak/keycloak:26.5.5`.
+  - Starts with `start-dev --import-realm`.
+  - Depends on healthy `keycloak-postgres`.
+  - Imports `./dev/keycloak/realm-import` into `/opt/keycloak/data/import:ro`.
+  - Binds Keycloak to `127.0.0.1:${HAIR_BOOKING_KEYCLOAK_PORT:-18080}:8080`.
+  - Uses bootstrap admin `admin` / `admin` for the local fixture only.
+
+The design detail worth copying is the port override. The diary for `hair-booking` records that `18080` was already occupied by another Keycloak instance on this workstation, so the compose file supports `HAIR_BOOKING_KEYCLOAK_PORT=18090`. For `pyxis`, a local fixture should use the same pattern, e.g. `PYXIS_KEYCLOAK_PORT=${PYXIS_KEYCLOAK_PORT:-18090}` or another non-conflicting default.
+
+The `hair-booking` realm import is intentionally local and app-specific:
+
+- realm: `hair-booking-dev`
+- client: `hair-booking-web`
+- client secret: `hair-booking-web-secret`
+- test user: `alice` / `secret`
+- redirect URIs for `localhost` and `127.0.0.1` on ports `8080` and `8081`
+- web origins for the same local hosts
+
+For `pyxis`, the analogous fixture would be:
+
+- realm: `pyxis-dev`
+- client: `pyxis-web` or `pyxis-staff-web`
+- local-only client secret such as `pyxis-web-secret`
+- one or more test users whose claims map to the current `admin`, `booker`, and `door` staff roles
+- redirect URIs for the local Go server, likely `http://127.0.0.1:8080/auth/callback` and any alternate smoke ports
+- post-logout redirect URIs if we implement Keycloak end-session logout
+
+### 12.2 Runtime auth contract in Go
+
+`hair-booking` implements OIDC as a server-side browser-login flow, not as a frontend-only token flow. The frontend does not store Keycloak tokens. The browser is redirected to Keycloak, the Go server handles `/auth/callback`, verifies the ID token, and writes an HTTP-only app session cookie.
+
+The core files are:
+
+- `/home/manuel/code/wesen/hair-booking/pkg/auth/config.go`
+- `/home/manuel/code/wesen/hair-booking/pkg/auth/oidc.go`
+- `/home/manuel/code/wesen/hair-booking/pkg/auth/session.go`
+- `/home/manuel/code/wesen/hair-booking/pkg/server/http.go`
+- `/home/manuel/code/wesen/hair-booking/pkg/server/handlers_me.go`
+
+The runtime settings are environment-backed Glazed flags:
+
+```text
+HAIR_BOOKING_AUTH_MODE=oidc
+HAIR_BOOKING_AUTH_SESSION_COOKIE_NAME=hair_booking_session
+HAIR_BOOKING_AUTH_SESSION_SECRET=<long secret>
+HAIR_BOOKING_OIDC_ISSUER_URL=<keycloak realm issuer>
+HAIR_BOOKING_OIDC_CLIENT_ID=hair-booking-web
+HAIR_BOOKING_OIDC_CLIENT_SECRET=<client secret>
+HAIR_BOOKING_OIDC_REDIRECT_URL=<app URL>/auth/callback
+HAIR_BOOKING_OIDC_SCOPES=openid,profile,email
+```
+
+The same shape maps cleanly to Pyxis:
+
+```text
+PYXIS_AUTH_MODE=oidc
+PYXIS_AUTH_SESSION_COOKIE_NAME=pyxis_session
+PYXIS_AUTH_SESSION_SECRET=<long secret>
+PYXIS_OIDC_ISSUER_URL=https://auth.example.com/realms/pyxis
+PYXIS_OIDC_CLIENT_ID=pyxis-staff-web
+PYXIS_OIDC_CLIENT_SECRET=<client secret>
+PYXIS_OIDC_REDIRECT_URL=https://pyxis.xyz/auth/callback
+PYXIS_OIDC_SCOPES=openid,profile,email
+```
+
+The most important implementation choices in `hair-booking` are:
+
+- It performs OIDC discovery from `/.well-known/openid-configuration`.
+- It uses the discovery-provided authorization, token, JWKS, and end-session endpoints.
+- It creates a random `state` and `nonce` per login.
+- It stores state and nonce in short-lived HTTP-only cookies.
+- It exchanges the authorization code server-side.
+- It requires an `id_token` in the token response.
+- It verifies the ID token signature through JWKS.
+- It validates issuer, audience, expiry, and nonce.
+- It writes a signed HTTP-only session cookie containing stable identity claims.
+- It chooses `Secure` cookies when the request is TLS, `X-Forwarded-Proto: https`, or the configured redirect URL is HTTPS.
+- It supports `/auth/logout` and `/auth/logout/callback` through Keycloak's end-session endpoint when available.
+- It restricts `return_to` redirects to same-origin or explicitly matching hosts.
+
+For `pyxis`, this is a strong precedent because the current production task list already calls out secure-cookie behavior. `hair-booking`'s `shouldUseSecureCookies` function is a concrete answer to the current `pkg/server/auth.go` TODO: cookie security should be derived from request TLS/proxy headers and the configured HTTPS redirect URL, not hardcoded to `false`.
+
+### 12.3 Session and app API shape
+
+`hair-booking` exposes `/api/me` as the stable frontend contract. In OIDC mode, `/api/me` reads the signed app session cookie, converts the claims into an app identity, and returns the current user state. In dev mode, it can synthesize a local identity.
+
+That is close to Pyxis' current shape:
+
+- Pyxis already has a `session` cookie.
+- Pyxis staff APIs already use `requireAuth` and `requireRole`.
+- Pyxis already has a local-only `PYXIS_DEV_AUTH=1` path for development.
+
+The main difference is identity source. Pyxis currently creates users/sessions from Discord OAuth or dev login. A Keycloak version can keep the staff API and cookie middleware largely intact if it changes only the login/callback/session-creation layer:
+
+1. Add OIDC settings to config.
+2. Add `/auth/login`, `/auth/callback`, `/auth/logout`, and `/auth/logout/callback` handlers.
+3. On callback, verify the Keycloak ID token.
+4. Upsert or map a local `users` row from OIDC claims.
+5. Create the existing server-side session row or replace the current session token with a signed-cookie/session-manager approach.
+6. Keep `requireAuth` and `requireRole` as the boundary for `/api/app/*`.
+
+For Pyxis, I would keep the existing database-backed session model at first. It already fits `requireAuth`, logout, and role checks. The Keycloak work should first replace the identity provider, not simultaneously replace the whole authorization/session storage model.
+
+### 12.4 Authorization model
+
+`hair-booking` has a deliberately small authorization model. Client/portal identity is any authenticated OIDC user. Stylist access is gated through allowlists in config:
+
+```text
+HAIR_BOOKING_STYLIST_ALLOWED_EMAILS=alice@example.com
+HAIR_BOOKING_STYLIST_ALLOWED_SUBJECTS=<keycloak-subject-id>
+```
+
+The authorizer accepts a user if the normalized email or subject appears in those allowlists. In dev mode, stylist access is allowed.
+
+For Pyxis, a simple allowlist is probably not enough because staff roles already exist:
+
+- `admin`
+- `booker`
+- `door`
+
+The Pyxis Keycloak design should choose one of these role-mapping strategies:
+
+1. **Local DB remains authoritative for roles.** Keycloak only authenticates identity; Pyxis maps by subject/email to an existing or upserted local user and uses `users.role`. This is the least disruptive migration from the current code.
+2. **Keycloak groups/realm roles become authoritative.** Pyxis reads realm roles/groups from ID token or UserInfo claims and maps them to `admin`/`booker`/`door`. This centralizes staff access in Keycloak but requires correct mapper configuration.
+3. **Hybrid.** Keycloak authenticates and provides coarse membership, while Pyxis keeps final app role in its DB.
+
+For v1, I recommend option 1 or 3. It lets us replace Discord OAuth without making Keycloak role mapping a launch blocker. Once login works, we can add Keycloak group/role mapping as a separate hardening pass.
+
+### 12.5 Terraform and hosted provisioning
+
+`hair-booking` moved hosted Keycloak provisioning out of the app repo and into the central infrastructure repo:
+
+```text
+/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/hosted/main.tf
+/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/k3s-parallel/main.tf
+/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/local/main.tf
+```
+
+The hosted and K3s-parallel environments create:
+
+- a dedicated realm, e.g. `hair-booking`;
+- a browser client, e.g. `hair-booking-web`;
+- valid redirect URI `${public_app_url}/auth/callback`;
+- valid post-logout redirect URI `${public_app_url}/auth/logout/callback`;
+- web origin `${public_app_url}`.
+
+The central playbook at `/home/manuel/code/wesen/terraform/keycloak/README.md` and `/home/manuel/code/wesen/terraform/docs/shared-keycloak-platform-playbook.md` says app repos should describe runtime variables, while the shared Terraform repo owns hosted identity resources and remote state.
+
+For Pyxis, the equivalent Terraform target should probably live in:
+
+```text
+/home/manuel/code/wesen/terraform/keycloak/apps/pyxis/envs/local
+/home/manuel/code/wesen/terraform/keycloak/apps/pyxis/envs/hosted
+```
+
+If we are targeting the public domain `https://pyxis.xyz`, the hosted client should include:
+
+```text
+realm: pyxis
+client_id: pyxis-staff-web or pyxis-web
+redirect_uri: https://pyxis.xyz/auth/callback
+post_logout_redirect_uri: https://pyxis.xyz/auth/logout/callback
+web_origin: https://pyxis.xyz
+```
+
+If the staff app later lives on a different hostname than the public site, create a distinct staff client or include the staff hostname explicitly. Do not rely on broad wildcard redirect URIs in production.
+
+### 12.6 Deployment documentation and current hosted state
+
+`hair-booking` has both historical Coolify docs and current K3s notes. The current canonical deployment note says:
+
+- public app: `https://hair-booking.yolo.scapegoat.dev`
+- Keycloak issuer: `https://auth.yolo.scapegoat.dev/realms/hair-booking`
+- client: `hair-booking-web`
+- platform: Hetzner K3s + Argo CD + Vault-backed secrets
+- old Coolify deployment retained only as rollback context
+
+The older Coolify deployment pattern is still useful for Pyxis because it lists the environment variables and verification order. The critical production variables are the same class of values Pyxis needs:
+
+```text
+HAIR_BOOKING_AUTH_MODE=oidc
+HAIR_BOOKING_AUTH_SESSION_SECRET=replace-with-long-random-secret
+HAIR_BOOKING_OIDC_ISSUER_URL=https://auth.example.com/realms/hair-booking
+HAIR_BOOKING_OIDC_CLIENT_ID=hair-booking-web
+HAIR_BOOKING_OIDC_CLIENT_SECRET=replace-with-generated-client-secret
+HAIR_BOOKING_OIDC_REDIRECT_URL=https://hair-booking.example.com/auth/callback
+```
+
+For Pyxis, that becomes:
+
+```text
+PYXIS_AUTH_MODE=oidc
+PYXIS_AUTH_SESSION_SECRET=replace-with-long-random-secret
+PYXIS_OIDC_ISSUER_URL=https://auth.example.com/realms/pyxis
+PYXIS_OIDC_CLIENT_ID=pyxis-staff-web
+PYXIS_OIDC_CLIENT_SECRET=replace-with-generated-client-secret
+PYXIS_OIDC_REDIRECT_URL=https://pyxis.xyz/auth/callback
+```
+
+The `hair-booking` smoke docs also emphasize that an OIDC redirect alone is not enough. A deploy is not healthy until these all work:
+
+- `/healthz` or `/health` returns healthy JSON;
+- `/api/info` exposes the expected issuer/client metadata without secrets;
+- `/auth/login` redirects to the expected Keycloak realm/client/callback;
+- the full login callback creates an app session;
+- `/api/me` or equivalent returns authenticated user data;
+- a protected app endpoint succeeds after login;
+- logout clears the app session and optionally completes Keycloak end-session logout.
+
+### 12.7 Recommended Pyxis Keycloak implementation plan
+
+Based on `hair-booking`, Pyxis should not treat Keycloak as a frontend library problem. It should be a backend-owned OIDC browser-login integration with HTTP-only app sessions.
+
+A safe phased plan is:
+
+1. **Add config only.** Add `PYXIS_AUTH_MODE=discord|dev|oidc` or `dev|oidc`, session cookie name/secret, OIDC issuer/client/secret/redirect/scopes, and secure-cookie behavior.
+2. **Add local compose fixture.** Add `docker-compose.local.yml` services for `pyxis-postgres`, `keycloak-postgres`, and `keycloak`, plus `dev/keycloak/realm-import/pyxis-dev-realm.json`.
+3. **Add OIDC package.** Port the `hair-booking` discovery, state/nonce, JWKS verification, callback, logout, and secure-cookie patterns into Pyxis, adapted to the current `pkg/service/auth_service.go` and `pkg/server/auth.go` structure.
+4. **Keep current staff session middleware.** On successful OIDC callback, upsert/map the user and create the current database session token so `requireAuth` and `requireRole` keep working.
+5. **Map roles deliberately.** Start with local DB roles keyed by OIDC subject/email; then add Keycloak groups/realm roles if needed.
+6. **Add tests.** Unit-test state/nonce verification, secure-cookie inference, return-to validation, ID-token claim validation, and role mapping. Add an optional local Keycloak smoke script for the full browser redirect round-trip.
+7. **Provision hosted client through central Terraform.** Add `apps/pyxis/envs/local` and `apps/pyxis/envs/hosted` in `/home/manuel/code/wesen/terraform/keycloak` instead of putting hosted Terraform state in the Pyxis app repo.
+8. **Update production deployment docs.** Record exact `PYXIS_*` env vars, redirect URLs, logout callback, and smoke order.
+
+### 12.8 Concrete carry-over checklist for Phase 5
+
+When Phase 5 resumes, add these tasks under the auth/cookie production phase:
+
+- Decide whether the staff identity client is named `pyxis-web`, `pyxis-staff-web`, or something else.
+- Decide whether the public site and staff app share one host/client or separate public/staff hosts/clients.
+- Add `PYXIS_AUTH_MODE` with a production-safe default.
+- Replace hardcoded `Secure: false` with a `shouldUseSecureCookies` helper like `hair-booking`.
+- Add `/auth/login` and `/auth/logout` instead of relying only on a callback/dev-login route.
+- Add `/auth/logout/callback` if using Keycloak end-session redirects.
+- Keep `PYXIS_DEV_AUTH=1` local-only and make production startup warn or fail if it is enabled.
+- Decide whether user roles are local DB roles, Keycloak groups, Keycloak realm roles, or hybrid.
+- Add a local Keycloak fixture and a scriptable auth smoke that can be run without a human browser.
+
+## 13. Open questions
 
 1. Is show detail social sharing important enough to require server-rendered metadata for v1, or is generic SPA metadata acceptable?
 2. Should `ReserveTicketCard` link to an external ticketing system, show door-only information, or be hidden until ticketing is real?
@@ -967,7 +1231,7 @@ The shared `BookingForm` already prevents obvious duplicate submits by disabling
 5. Who is responsible for monitoring new pending booking submissions after launch?
 6. Should staff `/auth/*` and `/api/app/*` routes be exposed in the same public deployment, or restricted at the proxy/deployment layer?
 
-## 13. File reference map
+## 14. File reference map
 
 | File | Why it matters |
 |---|---|
@@ -982,8 +1246,14 @@ The shared `BookingForm` already prevents obvious duplicate submits by disabling
 | `web/packages/pyxis-user-site/vite.config.ts` | Build settings and development proxy; informs production API topology decisions. |
 | `proto/pyxis/v1/show.proto` | Canonical public API schema for shows, archive, booking submissions, and confirmations. |
 | `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml` | Public visual comparison spec and accepted Shows differences. |
+| `/home/manuel/code/wesen/hair-booking/docker-compose.local.yml` | Working local Keycloak + Postgres compose fixture pattern. |
+| `/home/manuel/code/wesen/hair-booking/pkg/auth/config.go` | Environment-backed OIDC settings and auth mode precedent. |
+| `/home/manuel/code/wesen/hair-booking/pkg/auth/oidc.go` | Server-side OIDC login/callback/logout implementation precedent. |
+| `/home/manuel/code/wesen/hair-booking/pkg/auth/session.go` | Signed HTTP-only session cookie and secure-cookie inference precedent. |
+| `/home/manuel/code/wesen/hair-booking/dev/keycloak/realm-import/hair-booking-dev-realm.json` | Local Keycloak realm import pattern for app-specific development. |
+| `/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/hosted/main.tf` | Hosted Keycloak realm/client Terraform pattern. |
 
-## 14. Ship/no-ship gate
+## 15. Ship/no-ship gate
 
 The public app can be considered ready to ship when all of these are true:
 

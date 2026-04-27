@@ -15,7 +15,7 @@ RelatedFiles:
     - ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md
 ExternalSources: []
 Summary: "Chronological diary for public-site production-readiness planning and implementation."
-LastUpdated: 2026-04-27T19:35:00-04:00
+LastUpdated: 2026-04-27T20:10:00-04:00
 WhatFor: "Use this diary to understand what was investigated, what was created, what commands ran, and what remains before pyxis-user-site ships to production."
 WhenToUse: "Update this after each implementation or validation step in PYXIS-PUBLIC-PROD-SHIP."
 ---
@@ -541,3 +541,77 @@ I checked off T04-T18 in `tasks.md` and added the implementation update to the d
 1. Commit the phase 1-4 hardening changes.
 2. Start Phase 5: production auth/cookie exposure and `/auth/*`/`/api/app/*` launch exposure decision.
 3. Upload an updated production-readiness bundle to reMarkable after commit if the user wants the latest phase 1-4 implementation notes on-device.
+
+## Step 7: Analyze hair-booking as the Keycloak/OIDC precedent
+
+The user asked whether we already had Keycloak study material, then asked me to analyze `/home/manuel/code/wesen/hair-booking` for Keycloak usage, Docker Compose setup, and related production details, update the production document, and upload a v2 bundle to reMarkable.
+
+### Commands run
+
+```bash
+cd /home/manuel/code/wesen/hair-booking
+find . -maxdepth 3 -iname '*keycloak*' -o -iname 'docker-compose*' -o -iname '*.yml' -o -iname '*.yaml'
+rg -n "keycloak|KEYCLOAK|oidc|OIDC|oauth|OAuth|openid|OpenID|realm|client_id|clientId|issuer|jwt|JWT|auth" . -S --glob '!node_modules' --glob '!dist' --glob '!build' --glob '!vendor'
+```
+
+I then read the relevant implementation and operations files:
+
+- `docker-compose.local.yml`
+- `dev/keycloak/realm-import/hair-booking-dev-realm.json`
+- `pkg/auth/config.go`
+- `pkg/auth/oidc.go`
+- `pkg/auth/session.go`
+- `pkg/server/http.go`
+- `pkg/server/handlers_me.go`
+- `pkg/server/handlers_stylist.go`
+- `pkg/stylist/authorizer.go`
+- `Makefile`
+- `README.md`
+- `docs/operations-playbook.md`
+- `docs/smoke-testing-playbook.md`
+- `docs/deployments/hair-booking-coolify.md`
+- `/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/hosted/main.tf`
+- `/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/local/main.tf`
+- `/home/manuel/code/wesen/terraform/keycloak/apps/hair-booking/envs/k3s-parallel/main.tf`
+- `/home/manuel/code/wesen/terraform/keycloak/README.md`
+- `/home/manuel/code/wesen/terraform/docs/shared-keycloak-platform-playbook.md`
+
+### Findings
+
+`hair-booking` is the best existing local precedent for Pyxis Keycloak work. It has a local Docker Compose fixture with separate app Postgres, Keycloak Postgres, and Keycloak services; a local app-specific realm import; server-side OIDC login/callback/logout handlers; signed HTTP-only app sessions; secure-cookie inference based on TLS/proxy/redirect URL; a stable `/api/me` contract; and hosted Keycloak client provisioning in the central Terraform repo.
+
+The main design lesson is to keep Keycloak backend-owned. The React app should not store Keycloak tokens. The Go server should redirect to Keycloak, verify the ID token on callback, and create an app session cookie that the existing staff API middleware can understand.
+
+For Pyxis, the lowest-risk path is to keep the existing database-backed session and role middleware, then replace only the identity-provider login/callback layer. Roles can remain local DB roles at first, keyed by Keycloak subject/email, before adding Keycloak group/realm-role mapping later.
+
+### Document updates
+
+I updated the production readiness design document with a new section:
+
+- `## 12. Keycloak precedent from hair-booking`
+
+It covers:
+
+- local Docker Compose shape;
+- local realm import defaults;
+- OIDC runtime settings;
+- login/callback/logout/session mechanics;
+- authorization/role-mapping implications for Pyxis;
+- central Terraform hosted-client pattern;
+- production deployment variables and smoke order;
+- a recommended Pyxis implementation plan;
+- a concrete Phase 5 carry-over checklist.
+
+I also updated `tasks.md` Phase 5 with Keycloak-specific follow-ups and added Phase 5A tasks T21A-T21C for a future Pyxis Keycloak/OIDC implementation ticket, local fixture, and hosted Terraform design.
+
+### What worked
+
+The `hair-booking` repo is very reusable as a reference. It already solved the two exact things Pyxis is about to face: local Keycloak ergonomics and production secure-cookie/redirect behavior behind a platform edge.
+
+### What warrants a second pair of eyes
+
+Before implementation, Manuel should decide whether Pyxis staff identity uses one client (`pyxis-web`) or a staff-specific client (`pyxis-staff-web`), and whether staff roles remain local DB roles or move into Keycloak groups/realm roles.
+
+### Next steps
+
+Upload the updated production-readiness bundle as a v2 reMarkable PDF, then commit the documentation updates.

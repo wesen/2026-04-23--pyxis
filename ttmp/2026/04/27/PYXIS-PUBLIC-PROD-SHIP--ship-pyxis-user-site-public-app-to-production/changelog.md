@@ -68,3 +68,13 @@ Completed production ship phases 1-4: build/embed validation, SPA fallback tests
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/scripts/01-smoke-embedded-public-site.sh — embedded public-site smoke script
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md — checked off T04-T18
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — phase 1-4 diary entry
+
+## 2026-04-27
+
+Analyzed `/home/manuel/code/wesen/hair-booking` as the Keycloak/OIDC precedent and updated the production readiness guide with a Pyxis Keycloak implementation plan.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/design-doc/01-public-site-production-readiness-analysis-and-ship-plan.md — added hair-booking Keycloak precedent section
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/tasks.md — added Keycloak/OIDC Phase 5A follow-ups
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — recorded analysis commands and findings

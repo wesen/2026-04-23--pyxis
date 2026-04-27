@@ -10,7 +10,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed phased task list for shipping pyxis-user-site and the same-origin Go backend/static embed path to production.
-LastUpdated: 2026-04-27T19:35:00-04:00
+LastUpdated: 2026-04-27T20:10:00-04:00
 ---
 
 # Public Site Production Ship Tasks
@@ -161,17 +161,38 @@ These assumptions were confirmed through `plz-confirm` and backend audit:
   - Confirm `PYXIS_DEV_AUTH` is unset/false in production.
   - Add a deployment checklist item.
   - Optionally add startup logging that warns if `PYXIS_DEV_AUTH=1`.
+  - Use the `hair-booking` precedent: keep dev auth local-only while `auth-mode=oidc` owns production browser login.
 
 - [ ] **T20 — Fix or gate secure cookie behavior for HTTPS production**
   - `pkg/server/auth.go` currently sets `Secure: false` with a TODO.
   - Add config for secure cookies, or infer from production mode/HTTPS proxy headers.
-  - Ensure Discord callback and dev-login cookies cannot be insecure in production.
+  - Use the `hair-booking` `shouldUseSecureCookies` pattern: request TLS, `X-Forwarded-Proto: https`, or HTTPS redirect URL should force `Secure` cookies.
+  - Ensure Discord/OIDC callback and dev-login cookies cannot be insecure in production.
   - Add tests or a focused code review note.
 
 - [ ] **T21 — Decide whether staff `/api/app/*` and `/auth/*` are exposed at launch**
-  - If exposed, verify Discord OAuth config and roles.
+  - If exposed, verify current Discord OAuth config and roles or replace it with a Keycloak/OIDC plan.
+  - Decide whether Pyxis staff identity should use `pyxis-web`, `pyxis-staff-web`, or separate public/staff clients.
+  - Decide whether roles remain local DB roles, Keycloak groups/realm roles, or a hybrid.
   - If not intended for public launch, restrict at proxy/router/deployment layer.
   - Document the decision.
+
+## Phase 5A: Keycloak/OIDC follow-up from hair-booking precedent
+
+- [ ] **T21A — Create a Pyxis Keycloak/OIDC implementation ticket**
+  - Base the plan on `/home/manuel/code/wesen/hair-booking`.
+  - Include local compose, realm import, OIDC callback/session design, role mapping, Terraform hosted client, and smoke tests.
+  - Decide whether this is required for public launch or can follow after public-site launch if staff routes are hidden.
+
+- [ ] **T21B — Prototype local Pyxis Keycloak fixture**
+  - Add or design `docker-compose.local.yml` with app Postgres, Keycloak Postgres, and Keycloak.
+  - Add `dev/keycloak/realm-import/pyxis-dev-realm.json` with admin/booker/door test users or role claims.
+  - Include a port override analogous to `HAIR_BOOKING_KEYCLOAK_PORT`.
+
+- [ ] **T21C — Design hosted Terraform resources**
+  - Add a future `/home/manuel/code/wesen/terraform/keycloak/apps/pyxis` environment.
+  - Include hosted redirect URI `https://pyxis.xyz/auth/callback` and logout callback if implemented.
+  - Keep hosted Terraform state in the central infra repo, not the Pyxis app repo.
 
 ## Phase 6: SEO and public metadata
 
