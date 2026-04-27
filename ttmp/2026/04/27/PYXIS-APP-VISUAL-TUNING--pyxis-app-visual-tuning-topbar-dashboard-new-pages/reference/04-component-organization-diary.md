@@ -301,3 +301,108 @@ components/organisms/ShowsSections.tsx
 ```
 
 They are not deleted in this step. The goal is to stop page usage first, then retire the legacy files later after component internals are cleaned up.
+
+## Step 4: Add a CSS-aware relative import resolver
+
+This step added a reusable validation script that checks relative imports in pyxis-app source files, including CSS side-effect imports. This is important because the previous failed refactor had a broken CSS import that TypeScript did not catch, but Vite/Storybook did.
+
+The script gives us a cheap guardrail before and after file moves. It is intentionally simple: scan source files for relative import specifiers, emulate project-local resolution for TS/TSX/JS/JSX/CSS files and folder indexes, and report anything unresolved.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue task execution and add the import-safety tooling described by the implementation guide.
+
+**Inferred user intent:** Prevent the same class of CSS import-analysis failure from recurring during future component moves.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `web/packages/pyxis-app/scripts/check-relative-imports.py`.
+- Made it executable.
+- The script checks imports in `.ts`, `.tsx`, `.js`, and `.jsx` files.
+- It resolves:
+  - extensionless imports,
+  - `.ts`, `.tsx`, `.js`, `.jsx`, `.css`,
+  - folder `index.ts`, `index.tsx`, `index.js`, `index.jsx`.
+- Marked T04 complete in `tasks.md`.
+
+### Why
+
+`tsc --noEmit` does not reliably catch CSS side-effect import resolution problems. Vite does. A small resolver script lets us detect those problems before starting Storybook or waiting for a full build.
+
+### What worked
+
+The script reported a clean tree:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+```
+
+Output:
+
+```text
+unresolved: 0
+```
+
+Full validation also passed:
+
+```bash
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### What didn't work
+
+No failures in this step. Storybook emitted the same known dependency/build-size warnings as before.
+
+### What I learned
+
+Having a CSS-aware import check before moving files is mandatory for this repo. It catches a class of errors that TypeScript can miss.
+
+### What was tricky to build
+
+The script is intentionally not a TypeScript compiler or Vite replacement. It only handles project-local relative imports and common extension/index resolution. That is enough for the specific refactor-safety use case.
+
+### What warrants a second pair of eyes
+
+- Whether the script should be wired into `package.json` as `check:imports`.
+- Whether it should ignore generated/test files if future false positives appear.
+
+### What should be done in the future
+
+- Run this script before and after T05 shell splitting.
+- Consider promoting it to a shared tool if other packages have similar CSS import risks.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/scripts/check-relative-imports.py`
+- `tasks.md`
+- this diary entry
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+The script uses a regex over import declarations:
+
+```text
+from './...'
+import './...'
+```
+
+and checks whether the path resolves to a file or folder index using the app source tree.

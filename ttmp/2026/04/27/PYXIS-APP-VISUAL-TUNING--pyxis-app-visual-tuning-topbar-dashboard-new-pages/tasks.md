@@ -47,7 +47,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Do not delete legacy barrels yet.
   - Validate and commit.
 
-- [ ] **T04 — Add/keep a relative import resolver that checks CSS imports**
+- [x] **T04 — Add/keep a relative import resolver that checks CSS imports**
   - Add a repo-local or ticket-local script that checks relative imports including `.css` side-effect imports.
   - Dry-run/check current tree.
   - Ensure it reports `unresolved: 0` before structural moves.
