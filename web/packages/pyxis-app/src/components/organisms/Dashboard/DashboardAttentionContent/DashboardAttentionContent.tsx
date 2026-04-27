@@ -1,4 +1,4 @@
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 import { defaultDashboardAttentionItems, type DashboardAttentionItem } from './dashboardAttentionData';
 import './DashboardAttentionContent.css';
 

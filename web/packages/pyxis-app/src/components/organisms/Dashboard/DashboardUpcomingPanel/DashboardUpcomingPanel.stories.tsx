@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus } from 'pyxis-types';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { DashboardUpcomingPanel } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === ShowStatus.CONFIRMED).sort((a, b) => a.date.localeCompare(b.date));
 
 const meta: Meta<typeof DashboardUpcomingPanel> = {
-  title: 'Pyxis App/Components/Organisms/DashboardUpcomingPanel',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardUpcomingPanel',
   component: DashboardUpcomingPanel,
   parameters: { layout: 'fullscreen' },
   args: { shows: confirmedShows },

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { auditLog } from '../../../api/mockData';
+import { auditLog } from '../../../../api/mockData';
 import { DashboardActivityPanel } from '.';
 
 const meta: Meta<typeof DashboardActivityPanel> = {
-  title: 'Pyxis App/Components/Organisms/DashboardActivityPanel',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardActivityPanel',
   component: DashboardActivityPanel,
   parameters: { layout: 'fullscreen' },
   args: { log: auditLog },

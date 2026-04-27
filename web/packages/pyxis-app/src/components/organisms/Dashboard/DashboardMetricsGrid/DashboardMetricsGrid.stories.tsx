@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus, SubmissionStatus } from 'pyxis-types';
-import { bookings, shows } from '../../../api/mockData';
+import { bookings, shows } from '../../../../api/mockData';
 import { DashboardMetricsGrid } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === ShowStatus.CONFIRMED).sort((a, b) => a.date.localeCompare(b.date));
 const pendingBookings = bookings.filter((booking) => booking.status === SubmissionStatus.PENDING);
 
 const meta: Meta<typeof DashboardMetricsGrid> = {
-  title: 'Pyxis App/Components/Organisms/DashboardMetricsGrid',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardMetricsGrid',
   component: DashboardMetricsGrid,
   parameters: { layout: 'fullscreen' },
   args: {

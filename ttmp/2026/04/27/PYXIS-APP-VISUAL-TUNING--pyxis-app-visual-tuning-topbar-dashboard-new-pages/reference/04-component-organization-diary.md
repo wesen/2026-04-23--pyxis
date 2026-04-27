@@ -846,3 +846,149 @@ The new count component owns its CSS:
 ```ts
 import './DashboardAttentionCount.css';
 ```
+
+## Step 9: Group Dashboard organisms under organisms/Dashboard
+
+After the shell and multi-export component splits validated cleanly, we chose to proceed with the first optional page-group move: Dashboard organisms only. This was intentionally limited to one page group, because the previous failed refactor tried to move many groups at once.
+
+This step moved Dashboard-specific organism folders under `components/organisms/Dashboard/`, added a Dashboard group barrel, updated legacy/root barrels, fixed imports using the CSS-aware resolver as the primary feedback loop, and updated Storybook titles to mirror the new folder hierarchy.
+
+### Prompt Context
+
+**User prompt (verbatim):** "yeah, looks good, do dashboard organism grouping"
+
+**Assistant interpretation:** Proceed with T10, grouping only Dashboard organisms into `organisms/Dashboard/` after the user visually checked the prior state.
+
+**Inferred user intent:** Continue the page-grouped organism organization, but safely and incrementally, starting with Dashboard.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `web/packages/pyxis-app/src/components/organisms/Dashboard/`.
+- Used `git mv` to move Dashboard organism folders:
+  - `DashboardActivityPanel`
+  - `DashboardAttentionContent`
+  - `DashboardAttentionCount`
+  - `DashboardAttentionPanel`
+  - `DashboardHero`
+  - `DashboardMetricsGrid`
+  - `DashboardMobileCopy`
+  - `DashboardMobileHeader`
+  - `DashboardOverview`
+  - `DashboardQuickActionsContent`
+  - `DashboardQuickActionsPanel`
+  - `DashboardUpcomingPanel`
+- Added `organisms/Dashboard/index.ts`.
+- Updated `DashboardSections.tsx` to re-export the Dashboard group.
+- Updated `Panels.tsx` and `organisms/index.ts` to export from `./Dashboard`.
+- Updated moved Dashboard imports:
+  - seed data imports from `../../../api/mockData` to `../../../../api/mockData`
+  - molecule imports from `../../molecules/...` to `../../../molecules/...`
+  - `parts` imports from `../../parts` to `../../../parts`
+  - `Panel` imports from `../Panel` to `../../Panel`
+  - cross-group `ShowsTable` import to `../../ShowsTable`
+- Updated `AttendancePanel`'s cross-group CSS import to the new DashboardMetricsGrid path.
+- Updated Dashboard Storybook titles to `Pyxis App/Components/Organisms/Dashboard/<Component>`.
+- Marked T09 and T10 complete in `tasks.md`.
+
+### Why
+
+Dashboard is the active visual tuning target, so grouping Dashboard organisms first gives us the future desired organization where it matters most, without forcing a repo-wide move.
+
+### What worked
+
+The validation sequence passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The import resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+The first resolver run after the move reported 43 unresolved imports. This was expected because the folder move changed relative depths. The resolver output was useful and concrete, listing every broken path including CSS imports and legacy barrel paths.
+
+Examples included:
+
+```text
+src/components/organisms/Dashboard/DashboardActivityPanel/DashboardActivityPanel.tsx:3: ../Panel
+src/components/organisms/Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.tsx:1: ../../molecules/MetricCard
+src/components/organisms/DashboardSections.tsx:1: ./DashboardMobileHeader
+```
+
+These were fixed with targeted Dashboard-only replacements, not global regex rewrites.
+
+### What I learned
+
+The CSS-aware import resolver is the right guardrail for page grouping. It catches all the important path breakages after a `git mv`, including CSS and legacy barrels, and lets us fix them in a scoped way.
+
+### What was tricky to build
+
+Two paths required special care:
+
+1. `DashboardUpcomingPanel` imports `ShowsTable`, which is not part of the Dashboard group. After the move, this became a cross-group import:
+
+```ts
+import { ShowsTable } from '../../ShowsTable';
+```
+
+2. `AttendancePanel` imports `DashboardMetricsGrid.css`. That is a private CSS dependency that still exists from the older code. After the move, the path had to become:
+
+```ts
+import '../Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.css';
+```
+
+This is valid after the move but still worth revisiting in a later CSS-ownership audit.
+
+### What warrants a second pair of eyes
+
+- Visual inspection of Dashboard organism stories under the new Storybook hierarchy.
+- Whether `AttendancePanel` should keep depending on `DashboardMetricsGrid.css`, or whether `.app-metrics-grid` should become shared layout CSS.
+- Whether `DashboardSections.tsx` should remain as a shim or be retired after more imports move to `organisms/Dashboard`.
+
+### What should be done in the future
+
+- Consider the next page group only after visual inspection.
+- Candidate next groups: Shows or Bookings, one group per commit.
+- Audit shared layout CSS classes before moving more page groups.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Dashboard/`
+- `web/packages/pyxis-app/src/components/organisms/Dashboard/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+Story titles now mirror the grouped filesystem shape, for example:
+
+```ts
+title: 'Pyxis App/Components/Organisms/Dashboard/DashboardHero'
+title: 'Pyxis App/Components/Organisms/Dashboard/DashboardMetricsGrid'
+title: 'Pyxis App/Components/Organisms/Dashboard/DashboardOverview'
+```

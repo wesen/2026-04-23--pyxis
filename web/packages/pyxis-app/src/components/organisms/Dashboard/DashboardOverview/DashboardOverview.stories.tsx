@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus, SubmissionStatus } from 'pyxis-types';
-import { auditLog, bookings, shows } from '../../../api/mockData';
+import { auditLog, bookings, shows } from '../../../../api/mockData';
 import { DashboardActivityPanel } from '../DashboardActivityPanel';
 import { DashboardAttentionPanel } from '../DashboardAttentionPanel';
 import { DashboardHero } from '../DashboardHero';
@@ -10,7 +10,7 @@ import { DashboardMobileHeader } from '../DashboardMobileHeader';
 import { DashboardOverview } from './DashboardOverview';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/DashboardOverview',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardOverview',
   component: DashboardOverview,
   parameters: { layout: 'fullscreen' },
   args: { shows, bookings, log: auditLog },

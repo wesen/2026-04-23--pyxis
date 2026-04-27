@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardMobileCopy } from './DashboardMobileCopy';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/DashboardMobileCopy',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardMobileCopy',
   component: DashboardMobileCopy,
   parameters: { layout: 'fullscreen', viewport: { defaultViewport: 'pyxisAppMobile' } },
   args: {},

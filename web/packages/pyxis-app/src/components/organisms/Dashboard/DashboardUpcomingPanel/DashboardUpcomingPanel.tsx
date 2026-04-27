@@ -1,10 +1,10 @@
 import type { AppShow } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { TodayShowCard } from '../../molecules/TodayShowCard';
-import { Panel } from '../Panel';
-import { ShowsTable } from '../ShowsTable';
+import { TodayShowCard } from '../../../molecules/TodayShowCard';
+import { Panel } from '../../Panel';
+import { ShowsTable } from '../../ShowsTable';
 import './DashboardUpcomingPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type DashboardUpcomingPanelProps = {
   shows: AppShow[];

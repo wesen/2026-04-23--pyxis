@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardAttentionContent, defaultDashboardAttentionItems } from '.';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/DashboardAttentionContent',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardAttentionContent',
   component: DashboardAttentionContent,
   args: {
     items: defaultDashboardAttentionItems,

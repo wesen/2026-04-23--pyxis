@@ -4,7 +4,7 @@ import { Button } from 'pyxis-components';
 import { AttendanceStat } from '../../molecules/AttendanceStat';
 import { appPart } from '../../parts';
 import '../../molecules/BookingCard/BookingCard.css';
-import '../DashboardMetricsGrid/DashboardMetricsGrid.css';
+import '../Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.css';
 import './AttendancePanel.css';
 import { AppEmptyState } from '../../molecules/AppEmptyState';
 

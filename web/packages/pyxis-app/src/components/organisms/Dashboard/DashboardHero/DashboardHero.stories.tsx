@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus } from 'pyxis-types';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { DashboardHero } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === ShowStatus.CONFIRMED).sort((a, b) => a.date.localeCompare(b.date));
 const longArtistShow = { ...confirmedShows[0], artist: 'Moor Mother with Special Guests and Ensemble' };
 
 const meta: Meta<typeof DashboardHero> = {
-  title: 'Pyxis App/Components/Organisms/DashboardHero',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardHero',
   component: DashboardHero,
   parameters: { layout: 'fullscreen' },
   args: { show: confirmedShows[0] },

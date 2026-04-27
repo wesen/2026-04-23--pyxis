@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmissionStatus } from 'pyxis-types';
-import { bookings } from '../../../api/mockData';
+import { bookings } from '../../../../api/mockData';
 import { DashboardQuickActionsPanel } from '.';
 
 const pendingCount = bookings.filter((booking) => booking.status === SubmissionStatus.PENDING).length;
 
 const meta: Meta<typeof DashboardQuickActionsPanel> = {
-  title: 'Pyxis App/Components/Organisms/DashboardQuickActionsPanel',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardQuickActionsPanel',
   component: DashboardQuickActionsPanel,
   parameters: { layout: 'fullscreen' },
   args: { pendingCount },

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardMobileHeader } from './DashboardMobileHeader';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/DashboardMobileHeader',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardMobileHeader',
   component: DashboardMobileHeader,
   parameters: { layout: 'fullscreen', viewport: { defaultViewport: 'pyxisAppMobile' } },
   args: {},

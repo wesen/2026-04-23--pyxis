@@ -8,7 +8,7 @@ import { DashboardAttentionPanel } from '../DashboardAttentionPanel';
 import { DashboardUpcomingPanel } from '../DashboardUpcomingPanel';
 import { DashboardQuickActionsPanel } from '../DashboardQuickActionsPanel';
 import { DashboardActivityPanel } from '../DashboardActivityPanel';
-import { appPart } from '../../parts';
+import { appPart } from '../../../parts';
 import './DashboardOverview.css';
 
 export type DashboardOverviewProps = {

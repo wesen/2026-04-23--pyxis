@@ -9,7 +9,7 @@ const denseItems = [
 ];
 
 const meta: Meta<typeof DashboardAttentionPanel> = {
-  title: 'Pyxis App/Components/Organisms/DashboardAttentionPanel',
+  title: 'Pyxis App/Components/Organisms/Dashboard/DashboardAttentionPanel',
   component: DashboardAttentionPanel,
   parameters: { layout: 'fullscreen' },
 };

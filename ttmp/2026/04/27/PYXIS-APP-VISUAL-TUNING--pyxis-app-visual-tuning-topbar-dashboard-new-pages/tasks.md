@@ -93,11 +93,11 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 
 ## Phase 4: optional page-grouped organisms
 
-- [ ] **T09 — Decide whether to group organisms by page**
+- [x] **T09 — Decide whether to group organisms by page**
   - Only do this after T01-T08 are stable.
   - If yes, move one page group per commit.
 
-- [ ] **T10 — Optional: move Dashboard organisms into `organisms/Dashboard/`**
+- [x] **T10 — Optional: move Dashboard organisms into `organisms/Dashboard/`**
   - Use `git mv`.
   - Update Storybook titles to `Pyxis App/Components/Organisms/Dashboard/<Component>`.
   - Validate with import resolver, `tsc`, `vite build`, `storybook build`.

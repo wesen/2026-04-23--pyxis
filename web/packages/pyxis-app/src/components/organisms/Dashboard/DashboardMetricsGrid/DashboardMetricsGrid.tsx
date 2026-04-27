@@ -1,4 +1,4 @@
-import { MetricCard } from '../../molecules/MetricCard';
+import { MetricCard } from '../../../molecules/MetricCard';
 import './DashboardMetricsGrid.css';
 
 export type DashboardMetricsGridVariant = 'desktop' | 'mobile';
