@@ -732,3 +732,212 @@ synced discord application commands ... scope=guild:586274407350272042
 discord bot connected ... user=llm-bot
 pyxis-show-space bot ready ... shows=7
 ```
+
+
+## Step 8: Fix debug command response shape after Discord interaction errors
+
+The user reported Discord-side failures for `/debug` and `/debug-my-roles`, while `/show 123` correctly reached the Pyxis command handler and returned `No show found`. I inspected the tmux logs and found that `/debug` and `/debug-my-roles` were in fact dispatched to the copied Pyxis bot, but Discord rejected their interaction responses with `Interaction has already been acknowledged` / `Unknown interaction` errors.
+
+The difference was response shape: the debug commands returned a Go-side `ui.message()` normalized response with components, while plain object responses such as `/past-shows` and `/show` were replying successfully. I changed the debug renderer to return a plain object with `content`, `ephemeral`, and a standard `embeds` array, and removed the button-row normalized response path for now. This keeps the useful debug data while avoiding the failing UI DSL response path during interactive testing.
+
+### Prompt Context
+
+**User prompt (verbatim):** "llm-bot
+APP
+ — 9:55 PM
+command failed: GoError: discord bot "discord" has no command named "debug"
+Only you can see this • Dismiss message
+llm-bot
+APP
+ — 9:55 PM
+command failed: GoError: discord bot "discord" has no command named "debug-my-roles"
+Only you can see this • Dismiss message
+llm-bot
+APP
+ — 9:55 PM
+❌ No show found for ID "123"."
+
+**Assistant interpretation:** Investigate why debug commands are failing while the normal `show` command reaches the Pyxis bot.
+
+**Inferred user intent:** Make the debug commands usable so role/access configuration can be verified interactively.
+
+**Commit (code):** pending at the time this diary entry was written.
+
+### What I did
+
+- Inspected `/tmp/pyxis-discord-bot-tmux.log`.
+- Confirmed `/past-shows` and `/show` plain-object responses succeeded.
+- Confirmed `/debug` and `/debug-my-roles` were dispatched and executed role listing, but Discord rejected their normalized UI DSL response.
+- Rewrote `renderDebugMessage` in `bot/discord/show-space/index.js` to return a plain Discord response object instead of `ui.message().embed(...).row(...).build()`.
+- Re-ran the bot load test.
+- Restarted the tmux bot with the same role flags and `--discord-sync-on-start`.
+
+### Why
+
+- The issue was not command registration: the logs showed the commands were synced and dispatched.
+- The issue was the response path for debug commands. The UI DSL normalized response path was failing against Discord for these interactions, while plain object responses were known-good.
+- A plain response is sufficient for `/debug`, `/debug-my-roles`, and `/debug-roles` during the smoke test.
+
+### What worked
+
+- Bot load test passed after the change:
+
+```text
+ok  	github.com/go-go-golems/pyxis/pkg/discordbot	0.007s
+```
+
+- The tmux bot restarted, synced commands, connected, and ran ready successfully.
+
+### What didn't work
+
+- I have not yet seen the user's next Discord-side `/debug` retry after this fix, so the final interactive result is pending user confirmation.
+
+### What I learned
+
+- The current debug UI DSL response path can trigger Discord interaction acknowledgement errors in this integration.
+- Plain response objects are safer for the initial smoke test and match the response style used by commands that already work.
+
+### What was tricky to build
+
+- The user-facing error text (`bot "discord" has no command named "debug"`) did not directly match the server logs. The logs showed dispatch reached `command=debug`; the actual failure was in sending the response to Discord.
+
+### What warrants a second pair of eyes
+
+- The underlying framework/UI DSL interaction acknowledgement issue should be investigated later. This change is a pragmatic smoke-test fix, not a root-cause framework fix.
+- Component buttons for switching debug views are removed from the returned response for now; if interactive debug tabs are desired, they should be reintroduced after the UI DSL/ack path is fixed.
+
+### What should be done in the future
+
+- Retry `/debug`, `/debug-my-roles`, and `/debug-roles` in Discord.
+- If they now work, continue with `/upcoming` and a controlled management command.
+- Add a regression test if the framework can simulate normalized response dispatch failures.
+
+### Code review instructions
+
+- Review `bot/discord/show-space/index.js`, especially `renderDebugMessage`.
+- Validation commands:
+
+```bash
+go test ./pkg/discordbot -run TestNewRunnerLoadsPyxisShowSpaceBot -count=1
+```
+
+- Runtime restart command is the same tmux command with role flags and `--discord-sync-on-start`.
+
+### Technical details
+
+Relevant log evidence before the fix included:
+
+```text
+dispatching javascript interaction ... command=debug
+listed discord guild roles from javascript ...
+sending interaction response to discord ... payloadType=*jsdiscord.normalizedResponse
+ERR discord rejected interaction response error="HTTP 400 Bad Request, {"message": "Interaction has already been acknowledged.", "code": 40060}"
+```
+
+and:
+
+```text
+dispatching javascript interaction ... command=debug-my-roles
+ERR discord rejected interaction response error="HTTP 404 Not Found, {"message": "Unknown interaction", "code": 10062}"
+```
+
+
+## Step 9: Add show IDs to `/upcoming`
+
+The user confirmed `/upcoming` works, but pointed out that `/show` requires an ID and the upcoming list did not show IDs. I updated the upcoming renderer to prefix each show with `#<id>` so operators can copy the ID directly into `/show`.
+
+I chose this small text change over buttons for now because earlier debug button/UI DSL responses hit Discord interaction acknowledgement errors. Plain text IDs are robust and immediately useful; richer detail buttons can be revisited after the component response path is stabilized.
+
+### Prompt Context
+
+**User prompt (verbatim):** "llm-bot
+APP
+ — 9:56 PM
+📅 Upcoming Shows
+
+🎵 Burial Hex — Sat May 2, 2026
+8:00 PM | 21+ | $12 adv / $15 door
+Confirm projector needs.
+
+🎵 Moor Mother — Sat May 9, 2026
+7:00 PM | All Ages | $15
+
+🎵 Cygnus + Guests — Sun May 17, 2026
+9:00 PM | 18+ | $8
+Late load-in.
+
+🎵 Open Mic Night — Sat May 23, 2026
+7:00 PM | All Ages | Free
+
+🎵 Orphx — Sat Jul 4, 2026
+9:00 PM | 21+ | $12
+Generated from approved submission.
+Only you can see this • Dismiss message
+
+that works. We should maybe show a details button or so beecause for /show we don't know the id"
+
+**Assistant interpretation:** Improve `/upcoming` so users can discover the show IDs needed by `/show`; consider buttons but choose a reliable first fix.
+
+**Inferred user intent:** Make Discord show navigation practical during smoke testing and later operations.
+
+**Commit (code):** pending at the time this diary entry was written.
+
+### What I did
+
+- Updated `bot/discord/show-space/lib/render.js` so `upcomingShowsText` prefixes each show line with `#<id>`.
+- Ran the bot load test.
+- Restarted the tmux bot with the same Discord credentials, sync-on-start, and role flags.
+
+### Why
+
+- `/show` needs an ID, and the operator should not have to guess IDs.
+- Text IDs are safer than component/detail buttons until the framework/UI DSL interaction response issue is resolved.
+
+### What worked
+
+- Bot load test passed:
+
+```text
+ok  	github.com/go-go-golems/pyxis/pkg/discordbot	0.007s
+```
+
+- Tmux bot restarted, synced commands, connected, and ran ready.
+
+### What didn't work
+
+- Detail buttons were not implemented yet because the current interaction/component response path needs more investigation.
+
+### What I learned
+
+- The fastest operator usability improvement is to include `#id` directly in list output.
+
+### What was tricky to build
+
+- Avoiding a button implementation was a conscious tradeoff: it would be nicer UX, but the earlier debug response problem suggests we should stabilize plain response behavior first.
+
+### What warrants a second pair of eyes
+
+- Decide whether `/upcoming` should eventually show button components, autocomplete for `/show id`, or both.
+
+### What should be done in the future
+
+- Retest `/upcoming` and verify IDs now appear.
+- Try `/show <id>` using one of the displayed IDs.
+- Add autocomplete for the `/show` ID option as a better long-term UX.
+
+### Code review instructions
+
+- Review `bot/discord/show-space/lib/render.js`.
+- Run:
+
+```bash
+go test ./pkg/discordbot -run TestNewRunnerLoadsPyxisShowSpaceBot -count=1
+```
+
+### Technical details
+
+The upcoming list now emits lines like:
+
+```text
+#1 — 🎵 Burial Hex — Sat May 2, 2026
+```

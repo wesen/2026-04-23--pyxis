@@ -42,7 +42,8 @@ function upcomingShowsText(shows) {
 
   const lines = ["📅 Upcoming Shows", ""]
   list.forEach((show) => {
-    lines.push(`🎵 ${trimText(show.artist) || "Unknown artist"} — ${trimText(show.displayDate) || trimText(show.dateISO) || "TBD"}`)
+    const id = trimText(show.id) || "?"
+    lines.push(`#${id} — 🎵 ${trimText(show.artist) || "Unknown artist"} — ${trimText(show.displayDate) || trimText(show.dateISO) || "TBD"}`)
     lines.push(`${trimText(show.doorsTime) || "TBD"} | ${trimText(show.ageRestriction) || "TBD"} | ${trimText(show.price) || "TBD"}`)
     if (trimText(show.notes)) {
       lines.push(trimText(show.notes))

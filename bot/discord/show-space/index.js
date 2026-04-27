@@ -207,58 +207,62 @@ async function renderDebugMessage(ctx, view) {
   const snapshot = await collectDebugSnapshot(ctx)
   const content = `🔎 Pyxis Show Space debug — ${debugViewTitle(activeView).toLowerCase()} view\nUser ID: ${snapshot.userID || "(unknown)"}\nMember ID: ${snapshot.memberID || "(none)"}\nGuild: ${snapshot.guildName} (${snapshot.guildID || "no guild"})`
 
-  let embed = ui.embed(`Pyxis Show Space Debug — ${debugViewTitle(activeView)}`)
-    .color(0x5865F2)
-    .description(`Use the buttons to switch between the debug views.\n\nUser: ${snapshot.userName} — ${snapshot.userID || "(unknown)"}`)
-
+  const fields = []
   if (activeView === "summary") {
-    embed = embed
-      .field("Permission checks", `canManageShows: ${yesNo(snapshot.canManageShows)}\ncanAdminOnly: ${yesNo(snapshot.canAdminOnly)}`, false)
-      .field("Allowed role IDs", bulletList(snapshot.allowedRoleIds.map((roleID) => `• ${roleID}`), "(not configured)"), false)
-      .field("Member role IDs", bulletList(snapshot.memberRoleIDs.map((roleID) => `• ${roleID}`), "(none)"), false)
+    fields.push(
+      { name: "Permission checks", value: `canManageShows: ${yesNo(snapshot.canManageShows)}\ncanAdminOnly: ${yesNo(snapshot.canAdminOnly)}`, inline: false },
+      { name: "Allowed role IDs", value: bulletList(snapshot.allowedRoleIds.map((roleID) => `• ${roleID}`), "(not configured)"), inline: false },
+      { name: "Member role IDs", value: bulletList(snapshot.memberRoleIDs.map((roleID) => `• ${roleID}`), "(none)"), inline: false },
+    )
   } else if (activeView === "member") {
-    embed = embed
-      .field("Member role IDs", bulletList(snapshot.memberRoleIDs.map((roleID) => `• ${roleID}`), "(none)"), false)
-      .field("Resolved member roles", bulletList(snapshot.memberRoles.map(formatRoleLine), "(none)"), false)
-      .field("Matched configured roles", bulletList(snapshot.memberRoles.filter((role) => role.configured).map(formatRoleLine), "(none)"), false)
+    fields.push(
+      { name: "Member role IDs", value: bulletList(snapshot.memberRoleIDs.map((roleID) => `• ${roleID}`), "(none)"), inline: false },
+      { name: "Resolved member roles", value: bulletList(snapshot.memberRoles.map(formatRoleLine), "(none)"), inline: false },
+      { name: "Matched configured roles", value: bulletList(snapshot.memberRoles.filter((role) => role.configured).map(formatRoleLine), "(none)"), inline: false },
+    )
   } else if (activeView === "guild") {
-    embed = embed
-      .field("Guild roles", truncatedBulletList(snapshot.guildRoles.map(formatRoleLine), snapshot.guildRoleError || "(no guild roles found)", 20), false)
-      .field("Configured roles", bulletList(snapshot.allowedRoleIds.map((roleID) => `• ${roleID}`), "(not configured)"), false)
+    fields.push(
+      { name: "Guild roles", value: truncatedBulletList(snapshot.guildRoles.map(formatRoleLine), snapshot.guildRoleError || "(no guild roles found)", 20), inline: false },
+      { name: "Configured roles", value: bulletList(snapshot.allowedRoleIds.map((roleID) => `• ${roleID}`), "(not configured)"), inline: false },
+    )
   } else if (activeView === "config") {
-    embed = embed
-      .field("Runtime config", [
-        `debug: ${String(snapshot.debugEnabled)}`,
-        `upcomingShowsChannelId: ${snapshot.config.upcomingShowsChannelId ? String(snapshot.config.upcomingShowsChannelId) : "(not configured)"}`,
-        `announcementsChannelId: ${snapshot.config.announcementsChannelId ? String(snapshot.config.announcementsChannelId) : "(not configured)"}`,
-        `staffChannelId: ${snapshot.config.staffChannelId ? String(snapshot.config.staffChannelId) : "(not configured)"}`,
-        `adminRoleId: ${snapshot.config.adminRoleId ? String(snapshot.config.adminRoleId) : "(not configured)"}`,
-        `bookerRoleId: ${snapshot.config.bookerRoleId ? String(snapshot.config.bookerRoleId) : "(not configured)"}`,
-        `timeZone: ${snapshot.config.timeZone ? String(snapshot.config.timeZone) : "(not configured)"}`,
-      ].join("\n"), false)
+    fields.push({ name: "Runtime config", value: [
+      `debug: ${String(snapshot.debugEnabled)}`,
+      `upcomingShowsChannelId: ${snapshot.config.upcomingShowsChannelId ? String(snapshot.config.upcomingShowsChannelId) : "(not configured)"}`,
+      `announcementsChannelId: ${snapshot.config.announcementsChannelId ? String(snapshot.config.announcementsChannelId) : "(not configured)"}`,
+      `staffChannelId: ${snapshot.config.staffChannelId ? String(snapshot.config.staffChannelId) : "(not configured)"}`,
+      `adminRoleId: ${snapshot.config.adminRoleId ? String(snapshot.config.adminRoleId) : "(not configured)"}`,
+      `bookerRoleId: ${snapshot.config.bookerRoleId ? String(snapshot.config.bookerRoleId) : "(not configured)"}`,
+      `timeZone: ${snapshot.config.timeZone ? String(snapshot.config.timeZone) : "(not configured)"}`,
+    ].join("\n"), inline: false })
   } else if (activeView === "checks") {
     const matchingRoleIds = intersectRoleIds(snapshot.allowedRoleIds, snapshot.memberRoleIDs)
     const missingRoleIds = subtractRoleIds(snapshot.allowedRoleIds, snapshot.memberRoleIDs)
-    embed = embed
-      .field("Permission result", `canManageShows: ${yesNo(snapshot.canManageShows)}\ncanAdminOnly: ${yesNo(snapshot.canAdminOnly)}`, false)
-      .field("Exact matching role IDs", bulletList(matchingRoleIds.map((roleId) => `• ${roleId}`), "(none)"), false)
-      .field("Configured role IDs not seen on member", bulletList(missingRoleIds.map((roleId) => `• ${roleId}`), "(none)"), false)
-      .field("Intersection", bulletList(snapshot.memberRoles.filter((role) => role.configured).map(formatRoleLine), "(none)"), false)
-      .field("Why the bot may deny access", matchingRoleIds.length > 0
+    fields.push(
+      { name: "Permission result", value: `canManageShows: ${yesNo(snapshot.canManageShows)}\ncanAdminOnly: ${yesNo(snapshot.canAdminOnly)}`, inline: false },
+      { name: "Exact matching role IDs", value: bulletList(matchingRoleIds.map((roleId) => `• ${roleId}`), "(none)"), inline: false },
+      { name: "Configured role IDs not seen on member", value: bulletList(missingRoleIds.map((roleId) => `• ${roleId}`), "(none)"), inline: false },
+      { name: "Intersection", value: bulletList(snapshot.memberRoles.filter((role) => role.configured).map(formatRoleLine), "(none)"), inline: false },
+      { name: "Why the bot may deny access", value: matchingRoleIds.length > 0
         ? "The bot sees at least one configured role ID on your member object. If access still fails, compare the exact configured IDs, the specific command gate, and the live runtime config."
-        : "The bot does not see any configured role IDs on your member object. Compare the configured admin/booker role IDs against the exact Discord role IDs in the guild.", false)
+        : "The bot does not see any configured role IDs on your member object. Compare the configured admin/booker role IDs against the exact Discord role IDs in the guild.", inline: false },
+    )
   }
 
   if (snapshot.guildRoleError) {
-    embed = embed.field("Guild role lookup", snapshot.guildRoleError, false)
+    fields.push({ name: "Guild role lookup", value: snapshot.guildRoleError, inline: false })
   }
 
-  return ui.message()
-    .ephemeral()
-    .content(content)
-    .embed(embed)
-    .row(...debugButtons(activeView))
-    .build()
+  return {
+    content,
+    ephemeral: true,
+    embeds: [{
+      title: `Pyxis Show Space Debug — ${debugViewTitle(activeView)}`,
+      description: `User: ${snapshot.userName} — ${snapshot.userID || "(unknown)"}`,
+      color: 0x5865F2,
+      fields,
+    }],
+  }
 }
 
 function hasDatabase(ctx) {

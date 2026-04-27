@@ -85,3 +85,23 @@ Restarted tmux-hosted Discord bot with reported member role IDs configured as ad
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Runtime role configuration diary entry
 
+
+## 2026-04-26
+
+Changed Discord bot debug responses from UI DSL normalized responses to plain response objects after live debug commands hit Discord interaction acknowledgement errors.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/bot/discord/show-space/index.js — Debug response shape fix
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary entry for debug command fix
+
+
+## 2026-04-26
+
+Updated /upcoming output to include show IDs so operators can use /show without guessing IDs.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/bot/discord/show-space/lib/render.js — Upcoming show list now prefixes each item with #id
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary entry for /upcoming ID usability fix
+
