@@ -1,7 +1,7 @@
 ---
 Title: Implement Pyxis staff authentication with Keycloak OIDC
 Ticket: PYXIS-AUTH-KEYCLOAK
-Status: active
+Status: archived
 Topics:
     - backend
     - auth
@@ -12,11 +12,13 @@ Intent: long-term
 Owners: []
 RelatedFiles: []
 ExternalSources: []
-Summary: "Dedicated implementation ticket for replacing or supplementing Pyxis staff auth with backend-owned Keycloak OIDC, using hair-booking as the reference implementation."
-LastUpdated: 2026-04-27T20:20:00-04:00
-WhatFor: "Use this ticket when implementing local Keycloak fixtures, OIDC callback/session handling, staff role mapping, and hosted Keycloak Terraform resources for Pyxis."
-WhenToUse: "Use before changing Pyxis auth code or exposing staff routes in production."
+Summary: Dedicated implementation ticket for replacing or supplementing Pyxis staff auth with backend-owned Keycloak OIDC, using hair-booking as the reference implementation.
+LastUpdated: 2026-04-27T19:37:06.694816634-04:00
+WhatFor: Use this ticket when implementing local Keycloak fixtures, OIDC callback/session handling, staff role mapping, and hosted Keycloak Terraform resources for Pyxis.
+WhenToUse: Use before changing Pyxis auth code or exposing staff routes in production.
 ---
+
+
 
 # Implement Pyxis staff authentication with Keycloak OIDC
 
