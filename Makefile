@@ -32,7 +32,7 @@ migrate-down:
 	$(GO) run ./cmd/pyxis migrate down
 
 seed:
-	$(GO) run ./cmd/pyxis seed --fixtures fixtures/dev.yaml
+	$(GO) run ./cmd/pyxis seed --fixtures fixtures/dev.sql
 
 generate:
 	# Generate sqlc code

@@ -14,6 +14,12 @@ DocType: reference
 Intent: long-term
 Owners: []
 RelatedFiles:
+    - Path: Makefile
+      Note: Updates seed target to use fixtures/dev.sql.
+    - Path: cmd/pyxis/cmds/seed.go
+      Note: Implements SQL fixture loading and table count reporting.
+    - Path: fixtures/dev.sql
+      Note: Deterministic reset fixture with complete local demo dataset and stable sequence values.
     - Path: pkg/db/queries/auth.sql
       Note: Adds UpsertDevUser query for local staff API testing.
     - Path: pkg/server/app.go
@@ -91,6 +97,7 @@ LastUpdated: 2026-04-26T12:53:03.830667737-04:00
 WhatFor: Use this diary to understand how the implementation guide was created, what evidence was gathered, and what should happen next.
 WhenToUse: When continuing this ticket or reviewing the recommended RTK Query/MSW integration plan.
 ---
+
 
 
 
@@ -1144,3 +1151,114 @@ The test pass exposed two small issues, both fixed:
 ### Known caveat
 
 Re-applying `fixtures/dev.sql` is not fully idempotent; the dev DB now contains duplicate fixture rows, which is why counts are higher than a fresh fixture load. This reinforces the existing follow-up to make the seed/bootstrap workflow reliable and repeatable.
+
+## Step 11: Make Dev Seeding Idempotent
+
+I fixed the dev fixture repeatability issue found during current-status testing.
+
+### Problem
+
+The previous `fixtures/dev.sql` only appended a small set of rows. Running it more than once created duplicate shows/calendar events and inflated the API smoke counts. This also caused calendar duplicate-key warnings when duplicate show/date/label rows appeared in the UI.
+
+### Fixture rewrite
+
+I rewrote `fixtures/dev.sql` as a deterministic local-development fixture. It now starts with:
+
+```sql
+TRUNCATE TABLE
+  sessions,
+  audit_log,
+  attendance_logs,
+  show_lineup,
+  calendar_holds,
+  calendar_blocked,
+  submissions,
+  shows,
+  artists,
+  users,
+  settings
+RESTART IDENTITY CASCADE;
+```
+
+It then inserts a complete known demo dataset:
+
+```text
+users=4
+artists=11
+submissions=5
+shows=7
+calendar_holds=2
+calendar_blocked=2
+attendance_logs=2
+audit_log=5
+```
+
+Because it uses fixed IDs and resets sequences at the end, repeated fixture loads produce the same counts and stable API shape.
+
+### Seed command implementation
+
+The `seed` command was still a placeholder. I implemented SQL fixture loading in `cmd/pyxis/cmds/seed.go`:
+
+```bash
+go run ./cmd/pyxis seed --fixtures fixtures/dev.sql
+```
+
+The command now:
+
+1. connects to PostgreSQL,
+2. reads a `.sql` fixture file,
+3. executes it,
+4. prints sanity counts for key tables.
+
+I also updated the Makefile target:
+
+```bash
+make seed
+```
+
+so it uses `fixtures/dev.sql` instead of the old nonexistent/default `fixtures/dev.yaml`.
+
+### Idempotency validation
+
+I ran the seed command twice in a row:
+
+```bash
+go run ./cmd/pyxis seed --fixtures fixtures/dev.sql
+go run ./cmd/pyxis seed --fixtures fixtures/dev.sql
+```
+
+Both runs produced identical counts:
+
+```text
+users=4
+artists=11
+submissions=5
+shows=7
+calendar_holds=2
+calendar_blocked=2
+attendance_logs=2
+audit_log=5
+```
+
+Then I verified the real API against the reset dev DB:
+
+```text
+GET /api/app/session  -> authenticated=true
+GET /api/app/shows    -> 7 shows
+GET /api/app/calendar -> { events: [...] }, 9 events
+```
+
+The `9` calendar events are expected: 5 confirmed shows + 2 holds + 2 blocked dates.
+
+### Validation
+
+Passed:
+
+```bash
+go test ./...
+cd web && pnpm build
+make seed
+go test ./...
+```
+
+This makes local smoke testing reproducible again and removes the duplicate-data drift from repeated fixture loads.

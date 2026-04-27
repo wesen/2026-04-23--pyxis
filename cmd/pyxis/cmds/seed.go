@@ -3,6 +3,9 @@ package cmds
 import (
 	"context"
 	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/go-go-golems/glazed/pkg/cmds"
 	"github.com/go-go-golems/glazed/pkg/cmds/fields"
@@ -49,8 +52,8 @@ func NewSeedCommand() (*SeedCommand, error) {
 			fields.New(
 				"fixtures",
 				fields.TypeString,
-				fields.WithDefault("fixtures/dev.yaml"),
-				fields.WithHelp("Path to fixtures file"),
+				fields.WithDefault("fixtures/dev.sql"),
+				fields.WithHelp("Path to SQL fixtures file"),
 			),
 		),
 		cmds.WithSections(glazedSection, loggingSection),
@@ -75,7 +78,40 @@ func (c *SeedCommand) RunIntoGlazeProcessor(
 	}
 	defer database.Close()
 
-	log.Info().Str("fixtures", s.Fixtures).Msg("seed command (not yet implemented)")
-	fmt.Println("Seed would load fixtures from", s.Fixtures)
+	if strings.ToLower(filepath.Ext(s.Fixtures)) != ".sql" {
+		return fmt.Errorf("unsupported fixtures file %q: only .sql fixtures are supported", s.Fixtures)
+	}
+
+	fixtureSQL, err := os.ReadFile(s.Fixtures)
+	if err != nil {
+		return fmt.Errorf("read fixtures %q: %w", s.Fixtures, err)
+	}
+
+	log.Info().Str("fixtures", s.Fixtures).Msg("loading SQL fixtures")
+	if _, err := database.Pool.Exec(ctx, string(fixtureSQL)); err != nil {
+		return fmt.Errorf("execute fixtures %q: %w", s.Fixtures, err)
+	}
+
+	counts, err := seedCounts(ctx, database)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Seeded database from", s.Fixtures)
+	for _, table := range []string{"users", "artists", "submissions", "shows", "calendar_holds", "calendar_blocked", "attendance_logs", "audit_log"} {
+		fmt.Printf("%s=%d\n", table, counts[table])
+	}
 	return nil
+}
+
+func seedCounts(ctx context.Context, database *db.Pool) (map[string]int, error) {
+	counts := map[string]int{}
+	for _, table := range []string{"users", "artists", "submissions", "shows", "calendar_holds", "calendar_blocked", "attendance_logs", "audit_log"} {
+		var count int
+		if err := database.Pool.QueryRow(ctx, fmt.Sprintf("SELECT count(*) FROM %s", table)).Scan(&count); err != nil {
+			return nil, fmt.Errorf("count %s: %w", table, err)
+		}
+		counts[table] = count
+	}
+	return counts, nil
 }

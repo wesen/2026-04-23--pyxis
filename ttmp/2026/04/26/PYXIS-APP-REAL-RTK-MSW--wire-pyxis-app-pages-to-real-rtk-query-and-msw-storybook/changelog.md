@@ -122,3 +122,14 @@ Ran end-to-end current-status test across DB, backend APIs, Vite apps, Storybook
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonth/CalendarMonth.tsx — Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/CalendarMonthPanel/CalendarMonthPanel.tsx — Calendar event keys include kind/id/date/label to avoid duplicate-key warnings.
 
+
+## 2026-04-26
+
+Made dev seeding idempotent: rewrote fixtures/dev.sql as a deterministic reset fixture, implemented SQL loading in the seed command, updated make seed, and validated repeated runs.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/Makefile — Updates seed target to use fixtures/dev.sql.
+- /home/manuel/code/wesen/2026-04-23--pyxis/cmd/pyxis/cmds/seed.go — Implements SQL fixture loading and table count reporting.
+- /home/manuel/code/wesen/2026-04-23--pyxis/fixtures/dev.sql — Deterministic reset fixture with complete local demo dataset and stable sequence values.
+
