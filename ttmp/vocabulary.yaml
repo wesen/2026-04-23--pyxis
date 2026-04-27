@@ -47,6 +47,8 @@ topics:
       description: Production deployment, launch readiness, runtime operations, and release gating.
     - slug: release-readiness
       description: Ship/no-ship validation, launch checklists, and production readiness planning.
+    - slug: auth
+      description: Authentication, authorization, identity providers, sessions, roles, and login flows.
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
