@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { appPart } from '../../parts';
+import '../AppShell/AppShell.css';
 
 const mobileNav = [
   ['/', 'Dashboard'],

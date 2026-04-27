@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Button } from 'pyxis-components';
 import { appPart } from '../../parts';
+import '../AppShell/AppShell.css';
 
 export type AppTopBarProps = {
   title: string;

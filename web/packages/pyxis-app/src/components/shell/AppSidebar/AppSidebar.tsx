@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Avatar, Icon, PyxisLogo, type IconName } from 'pyxis-components';
 import { appPart } from '../../parts';
+import '../AppShell/AppShell.css';
 
 type AppNavItem = readonly [to: string, label: string, icon: IconName, badge?: number];
 type AppNavSection = {
