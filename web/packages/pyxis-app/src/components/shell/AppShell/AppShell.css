@@ -1,0 +1,10 @@
+.app-shell { min-height: 100vh; height: 100vh; display: flex; background: var(--app-canvas); overflow: hidden; border: 0; border-radius: 0; }
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+.app-main-scroll { flex: 1; overflow: auto; padding: 26px; }
+
+@media (max-width: 760px) {
+  .app-shell { display: block; min-height: 100vh; height: auto; border: 0; border-radius: 0; background: var(--app-mobile-canvas); padding-bottom: 72px; }
+  .app-main { display: block; min-height: 100vh; }
+  .app-main-scroll { overflow: visible; padding: 18px 14px; }
+  .app-shell[data-page='dashboard'] .app-topbar { display: none; }
+}

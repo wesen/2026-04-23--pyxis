@@ -55,7 +55,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 
 ## Phase 2: Shell split only
 
-- [ ] **T05 — Split shell components into one component folder each**
+- [x] **T05 — Split shell components into one component folder each**
   - Split `components/shell/AppShell.tsx` into:
     - `AppShell/`
     - `AppTopBar/`

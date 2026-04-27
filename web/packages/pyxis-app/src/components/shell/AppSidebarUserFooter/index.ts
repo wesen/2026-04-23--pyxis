@@ -1,0 +1,1 @@
+export { AppSidebarUserFooter } from './AppSidebarUserFooter';

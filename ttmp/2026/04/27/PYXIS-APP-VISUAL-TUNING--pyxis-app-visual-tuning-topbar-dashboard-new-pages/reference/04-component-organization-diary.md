@@ -406,3 +406,121 @@ import './...'
 ```
 
 and checks whether the path resolves to a file or folder index using the app source tree.
+
+## Step 5: Split shell components into component-owned folders and CSS
+
+This step split the shell layer only. It deliberately did not move organisms, molecules, or atoms. The goal was to fix the biggest multi-component TSX file while preserving behavior and making CSS ownership explicit for every standalone shell component.
+
+The important change from the failed attempt is that `AppShell.css` was not simply moved as one shared stylesheet. Its selectors were divided into component-owned CSS files: `AppTopBar.css`, `AppSidebar.css`, `AppSidebarMenu.css`, `AppSidebarUserFooter.css`, `AppMobileBottomNav.css`, and a smaller `AppShell.css` for the layout shell itself.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue through the task list and implement the shell-only split after public barrels and import validation are in place.
+
+**Inferred user intent:** Achieve one exported shell component per folder without repeating the missing-CSS bug from the previous attempt.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created shell component folders:
+  - `AppShell/`
+  - `AppTopBar/`
+  - `AppSidebar/`
+  - `AppSidebarMenu/`
+  - `AppSidebarUserFooter/`
+  - `AppMobileBottomNav/`
+- Moved existing shell stories into matching folders with `git mv`.
+- Split the previous `AppShell.tsx` exports into separate TSX files.
+- Split `AppShell.css` selectors by component ownership:
+  - shell layout selectors stayed in `AppShell/AppShell.css`
+  - topbar selectors moved to `AppTopBar/AppTopBar.css`
+  - sidebar frame selectors moved to `AppSidebar/AppSidebar.css`
+  - sidebar menu/nav selectors moved to `AppSidebarMenu/AppSidebarMenu.css`
+  - user footer selectors moved to `AppSidebarUserFooter/AppSidebarUserFooter.css`
+  - mobile bottom nav selectors moved to `AppMobileBottomNav/AppMobileBottomNav.css`
+- Updated shell story imports to import from local folder barrels (`'.'`).
+- Updated `components/shell/index.ts` to export from the new component folders.
+- Marked T05 complete in `tasks.md`.
+
+### Why
+
+`AppShell.tsx` exported six React components from one file. That violated the component organization contract and made standalone stories depend on implementation details. Splitting shell first is safer than organism page grouping because the surface area is small and the visual target (`AppTopBar`) lives here.
+
+### What worked
+
+All validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The import resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No build failures. Storybook emitted the same known dependency/build-size warnings.
+
+### What I learned
+
+Splitting CSS by selector ownership avoids the previous hidden dependency where standalone `AppTopBar` only looked correct because `AppShell.tsx` imported a shared stylesheet. The key invariant is: every standalone component imports the CSS for its own selectors.
+
+### What was tricky to build
+
+The media query in the old `AppShell.css` contained selectors for multiple components. I split it by ownership while preserving the page-level dashboard topbar hiding rule in `AppShell/AppShell.css`, because that rule belongs to shell layout behavior rather than to `AppTopBar` itself.
+
+### What warrants a second pair of eyes
+
+- Visual inspection of `AppTopBar`, `AppSidebar`, `AppMobileBottomNav`, and full `AppShell` stories.
+- Confirm that moving CSS into separate chunks does not alter cascade order in Storybook or the app.
+- Confirm that `.app-shell[data-page='dashboard'] .app-topbar { display: none; }` belongs in `AppShell.css` rather than `AppTopBar.css`.
+
+### What should be done in the future
+
+- T06: split `ArtistCard` and `ArtistRosterRow`.
+- Continue running the import resolver before `tsc`/Vite/Storybook on every refactor step.
+
+### Code review instructions
+
+Review shell files under:
+
+```text
+web/packages/pyxis-app/src/components/shell/
+```
+
+Start with:
+
+- `AppShell/AppShell.tsx`
+- `AppTopBar/AppTopBar.tsx`
+- each component CSS file
+- `shell/index.ts`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+The split intentionally keeps page imports stable through the public shell barrel:
+
+```ts
+import { AppShell } from '../../components/shell';
+```
+
+No organism imports were moved in this step.

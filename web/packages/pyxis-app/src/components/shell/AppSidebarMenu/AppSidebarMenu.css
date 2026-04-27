@@ -1,0 +1,9 @@
+.app-sidebar-menu { flex: 1; overflow: auto; padding: 14px 12px; }
+.app-sidebar-section { margin-bottom: 16px; }
+.app-sidebar-section > span { display: block; padding: 4px 10px 7px; color: var(--app-faint); text-transform: uppercase; letter-spacing: .1em; font-size: 9.5px; font-weight: 800; }
+.app-sidebar a { position: relative; display: flex; align-items: center; gap: 11px; width: 100%; box-sizing: border-box; border-radius: var(--app-radius-sm); padding: 8px 10px; color: var(--app-ink); font-size: 13px; font-weight: 500; }
+.app-sidebar a b { flex: 1; font: inherit; }
+.app-sidebar a svg { color: currentColor; flex: 0 0 auto; }
+.app-sidebar a em { min-width: 17px; border-radius: var(--app-radius-pill); padding: 1px 7px; background: var(--app-accent); color: var(--app-on-dark); font-size: 10px; font-style: normal; font-weight: 800; text-align: center; }
+.app-sidebar a.active, .app-sidebar a:hover { background: var(--app-accent-soft); color: var(--app-accent); font-weight: 700; }
+.app-sidebar a.active::before { content: ''; position: absolute; left: -10px; top: 8px; bottom: 8px; width: 2px; border-radius: var(--app-radius-pill); background: var(--app-accent); }

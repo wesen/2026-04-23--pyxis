@@ -1,0 +1,6 @@
+.app-sidebar { width: 220px; flex: 0 0 220px; min-height: 100vh; background: var(--app-surface); color: var(--app-ink); border-right: 1px solid var(--app-rule); display: flex; flex-direction: column; }
+.app-brand { padding: 22px 20px 18px; border-bottom: 1px solid var(--app-rule); }
+
+@media (max-width: 760px) {
+  .app-sidebar { display: none; }
+}

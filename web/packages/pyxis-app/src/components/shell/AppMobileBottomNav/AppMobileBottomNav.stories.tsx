@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AppMobileBottomNav } from './AppShell';
+import { AppMobileBottomNav } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Shell/AppMobileBottomNav',

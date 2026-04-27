@@ -1,0 +1,7 @@
+.app-bottom-nav { display: none; }
+
+@media (max-width: 760px) {
+  .app-bottom-nav { display: grid; grid-template-columns: repeat(5,1fr); gap: 4px; margin: 18px 0 -72px; background: var(--app-surface-strong); border-top: 1px solid var(--app-rule); padding: 8px 8px 10px; box-shadow: none; z-index: 20; }
+  .app-bottom-nav a { color: var(--app-muted); text-align: center; font-size: 11px; padding: 8px 2px; border-radius: var(--app-radius-md); }
+  .app-bottom-nav a.active { background: transparent; color: var(--app-accent); }
+}

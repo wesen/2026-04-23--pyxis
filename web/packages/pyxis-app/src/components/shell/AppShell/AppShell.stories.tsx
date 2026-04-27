@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
 import { Button } from 'pyxis-components';
-import { AppShell } from './AppShell';
+import { AppShell } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Shell/AppShell',
