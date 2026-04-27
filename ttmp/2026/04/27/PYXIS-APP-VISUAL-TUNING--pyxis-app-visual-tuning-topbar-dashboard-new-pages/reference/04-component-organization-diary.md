@@ -3986,3 +3986,50 @@ show-detail page    5.344% review
 book page           4.539% review
 shows mailing-list  0.813% accepted
 ```
+
+## Step 43: Document the public pages visual review HTML site for handoff
+
+The user asked for a detailed analysis, design, and implementation guide for the HTML testing/review site that lets Manuel provide manual feedback on visual-diff output. The intended audience is another developer or intern who will build the concept “for real” as a full-featured app.
+
+### Prompt Context
+
+**User prompt (verbatim excerpt):** "Let's create a full analysis and user guide for the HTML testing site creation we built that allows me to give manual feedback, because we want to pass it off to another developer who is going to be building it 'for real' as a full featured app. Store in the ticket and upload to remarkable."
+
+**Assistant interpretation:** Write a long-form, textbook-style guide that explains the current static review generator, its workflow, its data model, and how to evolve it into a production app.
+
+**Inferred user intent:** Preserve the design knowledge from the prototype so another developer can implement the real application without rediscovering the workflow decisions.
+
+### What I did
+
+- Created the handoff guide:
+  - `reference/05-public-pages-review-site-analysis-and-guide.md`
+- Covered:
+  - the visual review workflow,
+  - the generator script,
+  - the visual spec and userland commands,
+  - generated artifact structure,
+  - current browser behavior,
+  - operator instructions,
+  - production data model,
+  - proposed API,
+  - frontend/backend architecture,
+  - implementation phases,
+  - testing strategy,
+  - operational runbook,
+  - and what should/should not be copied into the real app.
+- Uploaded the guide to reMarkable:
+  - `/ai/2026/04/27/PYXIS-APP-VISUAL-TUNING/05-public-pages-review-site-analysis-and-guide`
+
+### Validation
+
+- Ran `remarquee status` successfully.
+- Ran a dry-run upload successfully.
+- Uploaded the Markdown document as a PDF to reMarkable.
+
+### What worked
+
+The current prototype’s boundaries are now documented clearly: `css-visual-diff` remains the measurement system; the HTML review page is the human feedback interface; the future app should preserve that separation while adding persistence, run history, filtering, and richer review controls.
+
+### What warrants a second pair of eyes
+
+A future developer should review the proposed API and decide whether the first production implementation should use SQLite plus filesystem artifacts or a simpler filesystem-only manifest.
