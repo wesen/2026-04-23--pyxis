@@ -1,6 +1,6 @@
 import { discordMappings as seedMappings } from '../../api/mockData';
-import { AppShell } from '../../components/shell/AppShell';
-import { DiscordMappingPanel, Panel } from '../../components/organisms/Panels';
+import { AppShell } from '../../components/shell';
+import { DiscordMappingPanel, Panel } from '../../components/organisms';
 import './Page.css';
 
 export function DiscordPage() {

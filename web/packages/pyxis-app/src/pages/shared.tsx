@@ -1,6 +1,6 @@
 import { create, AppShowSchema, type Show } from 'pyxis-types';
 import type { ReactNode } from 'react';
-import { Panel } from '../components/organisms/Panels';
+import { Panel } from '../components/organisms';
 import './pages.css';
 
 export type PageStateProps = {

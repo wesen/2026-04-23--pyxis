@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Button } from 'pyxis-components';
 import { useCreateCalendarBlockedMutation, useCreateCalendarHoldMutation, useGetCalendarQuery } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
-import { CalendarBoard } from '../../components/organisms/Phase8Sections';
+import { AppShell } from '../../components/shell';
+import { CalendarBoard } from '../../components/organisms';
 import { ActionMessages, EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 

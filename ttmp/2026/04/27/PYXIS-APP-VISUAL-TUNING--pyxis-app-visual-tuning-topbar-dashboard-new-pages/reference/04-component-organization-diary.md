@@ -192,3 +192,112 @@ args: {
   title: 'Welcome back, Ada',
 },
 ```
+
+## Step 3: Add public organism barrel and migrate page imports away from legacy barrels
+
+This step established a cleaner public import surface before any file movement. Instead of pages importing from legacy implementation barrels such as `Panels`, `Phase8Sections`, or `ShowsSections`, pages now import organisms from a single layer barrel.
+
+This reduces the number of paths that future component moves need to update. It also makes page imports match the organization contract: pages consume the component layer's public API, while component internals can remain direct and local.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue working through the ordered tasks after restoring the validation baseline.
+
+**Inferred user intent:** Normalize imports and retire legacy page-level import paths before moving component files.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `web/packages/pyxis-app/src/components/organisms/index.ts`.
+- Exported current organism component folders from that layer barrel.
+- Updated page imports away from:
+  - `../../components/organisms/Panels`
+  - `../../components/organisms/Phase8Sections`
+  - `../../components/organisms/ShowsSections`
+  - `../../components/shell/AppShell`
+- Pages now import from:
+  - `../../components/organisms`
+  - `../../components/shell`
+- Left legacy barrels in place as compatibility shims.
+- Marked T03 complete in `tasks.md`.
+
+### Why
+
+Before moving files, consumers should have a stable public API. If every page deep-imports implementation files or legacy phase barrels, every filesystem move becomes noisy and risky. A layer barrel lets later refactors update the barrel and component internals without rewriting every page.
+
+### What worked
+
+Validation passed after the import migration:
+
+```bash
+cd web/packages/pyxis-app
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+All three commands completed successfully.
+
+### What didn't work
+
+Storybook build still emits dependency/build-size warnings:
+
+```text
+Use of eval in @storybook/core/dist/preview/runtime.js is strongly discouraged
+Some chunks are larger than 500 kB after minification
+```
+
+These warnings were already present and are not caused by this import migration.
+
+### What I learned
+
+A public layer barrel for `organisms` is enough to remove page dependency on legacy barrels without deleting those legacy barrels. This gives us a safer migration path: first normalize imports, then split/move component files.
+
+### What was tricky to build
+
+The main risk was over-migrating imports. Type-only imports such as `AttendanceDraft`, `BookingDetailsDraft`, and `CoreSettingsDraft` still point to their specific component implementation files because the components currently export those types from the TSX files and the local component barrels already re-export them. A future cleanup can migrate these to component-folder barrels or public layer exports deliberately.
+
+### What warrants a second pair of eyes
+
+- Whether `organisms/index.ts` should export every organism immediately, or only the organisms consumed by pages.
+- Whether type-only deep imports should be migrated in a later task before moving those component files.
+
+### What should be done in the future
+
+- T04: add/check a relative import resolver that sees CSS imports.
+- T05: split shell components only after the import surface and resolver are in place.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- page imports under `web/packages/pyxis-app/src/pages/**/Page.tsx`
+- `web/packages/pyxis-app/src/pages/shared.tsx`
+- `tasks.md`
+- this diary entry
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+Legacy barrels remain present:
+
+```text
+components/organisms/Panels.tsx
+components/organisms/Phase8Sections.tsx
+components/organisms/DashboardSections.tsx
+components/organisms/ShowsSections.tsx
+```
+
+They are not deleted in this step. The goal is to stop page usage first, then retire the legacy files later after component internals are cleaned up.

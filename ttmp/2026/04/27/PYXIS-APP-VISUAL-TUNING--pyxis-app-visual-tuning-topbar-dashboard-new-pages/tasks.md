@@ -33,7 +33,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 
 ## Phase 1: Single import concept before moving files
 
-- [ ] **T03 — Add public component layer barrels and retire page use of legacy barrels**
+- [x] **T03 — Add public component layer barrels and retire page use of legacy barrels**
   - Create `web/packages/pyxis-app/src/components/organisms/index.ts`.
   - Prefer existing `web/packages/pyxis-app/src/components/shell/index.ts` for page shell imports.
   - Update page imports away from:

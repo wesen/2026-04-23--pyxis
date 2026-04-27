@@ -1,4 +1,4 @@
-import { NewShowModal } from '../../components/organisms/Panels';
+import { NewShowModal } from '../../components/organisms';
 import { ShowsPage } from '../ShowsPage/Page';
 import './Page.css';
 

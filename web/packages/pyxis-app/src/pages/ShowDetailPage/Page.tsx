@@ -10,9 +10,9 @@ import {
   useUpdateShowMutation,
   useUploadShowFlyerMutation,
 } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
-import { FlyerField, NewShowModal } from '../../components/organisms/Panels';
-import { ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../../components/organisms/Phase8Sections';
+import { AppShell } from '../../components/shell';
+import { FlyerField, NewShowModal } from '../../components/organisms';
+import { ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../../components/organisms';
 import { appShowFromShow, ErrorState, LoadingState, parseRouteId } from '../shared';
 import './Page.css';
 

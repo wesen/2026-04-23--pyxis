@@ -1,6 +1,6 @@
 import { useGetAuditLogQuery, useGetBookingsQuery, useGetShowsQuery } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
-import { DashboardOverview } from '../../components/organisms/Panels';
+import { AppShell } from '../../components/shell';
+import { DashboardOverview } from '../../components/organisms';
 import { ErrorState, LoadingState } from '../shared';
 import './Page.css';
 

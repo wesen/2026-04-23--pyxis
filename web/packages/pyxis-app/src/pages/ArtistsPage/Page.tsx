@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import type { Artist } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { useCreateArtistMutation, useGetArtistsQuery, useUpdateArtistMutation } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
-import { ArtistRoster, Panel } from '../../components/organisms/Panels';
+import { AppShell } from '../../components/shell';
+import { ArtistRoster, Panel } from '../../components/organisms';
 import { EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
