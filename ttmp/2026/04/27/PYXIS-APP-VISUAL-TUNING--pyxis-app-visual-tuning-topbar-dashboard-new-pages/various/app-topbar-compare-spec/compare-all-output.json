@@ -1,0 +1,242 @@
+[
+  {
+    "variant": "component",
+    "mode": "authoring",
+    "outDir": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec",
+    "pageCount": 1,
+    "sectionCount": 1,
+    "maxChangedPercent": 8.557675322381204,
+    "classificationCounts": {
+      "review": 1
+    },
+    "acceptedDifferenceCount": 0,
+    "policy": {
+      "ok": true,
+      "failures": [],
+      "maxChangedPercent": null,
+      "worstClassification": "review",
+      "maxPolicyBand": ""
+    },
+    "pages": [
+      {
+        "page": "app-topbar-dashboard",
+        "variant": "component",
+        "outDir": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard",
+        "sectionCount": 1,
+        "maxChangedPercent": 8.557675322381204,
+        "classificationCounts": {
+          "review": 1
+        },
+        "acceptedDifferenceCount": 0,
+        "manifestPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/manifest.json",
+        "indexPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/01-catalog-index.md",
+        "catalog": {
+          "targetCount": 1,
+          "preflightCount": 0,
+          "resultCount": 0,
+          "comparisonCount": 1,
+          "failureCount": 0,
+          "artifactCount": 2
+        },
+        "sections": [
+          {
+            "page": "app-topbar-dashboard",
+            "variant": "component",
+            "section": "component",
+            "outDir": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component",
+            "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+            "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-apptopbar--dashboard&viewMode=story",
+            "leftSelector": "main > div:first-child",
+            "rightSelector": "[data-section=\"app-topbar\"]",
+            "threshold": 30,
+            "changedPercent": 8.557675322381204,
+            "changedPixels": 9689,
+            "totalPixels": 113220,
+            "normalizedWidth": 1020,
+            "normalizedHeight": 111,
+            "bounds": {
+              "changed": true,
+              "left": {
+                "x": 221,
+                "y": 1,
+                "width": 1018,
+                "height": 110.390625
+              },
+              "right": {
+                "height": 111.140625,
+                "x": 0,
+                "y": 0,
+                "width": 1020
+              },
+              "delta": {
+                "x": -221,
+                "y": -1,
+                "width": 2,
+                "height": 0.75
+              }
+            },
+            "artifactJson": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.json",
+            "artifactMarkdown": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.md",
+            "leftRegionPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/left_region.png",
+            "rightRegionPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/right_region.png",
+            "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_comparison.png",
+            "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_only.png",
+            "writtenArtifacts": [
+              "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.json",
+              "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.md"
+            ],
+            "acceptedDifferences": [],
+            "source": "cvd.compare.region",
+            "summary": {
+                "attributeChanges": 4,
+                "left": {
+                  "name": "app-topbar-dashboard-component",
+                  "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+                  "selector": "main > div:first-child",
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "y": 1,
+                    "width": 1018,
+                    "height": 110.390625,
+                    "x": 221
+                  }
+                },
+                "name": "app-topbar-dashboard-component",
+                "pixel": {
+                  "changedPixels": 9689,
+                  "changedPercent": 8.557675322381204,
+                  "normalizedWidth": 1020,
+                  "normalizedHeight": 111,
+                  "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_comparison.png",
+                  "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_only.png",
+                  "threshold": 30,
+                  "totalPixels": 113220
+                },
+                "artifactCount": 2,
+                "boundsChanged": true,
+                "right": {
+                  "exists": true,
+                  "visible": true,
+                  "bounds": {
+                    "width": 1020,
+                    "height": 111.140625,
+                    "x": 0,
+                    "y": 0
+                  },
+                  "name": "app-topbar-dashboard-component",
+                  "url": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-apptopbar--dashboard&viewMode=story",
+                  "selector": "[data-section=\"app-topbar\"]"
+                },
+                "schemaVersion": "cssvd.selectionComparison.v1",
+                "styleChanges": 3,
+                "textChanged": false
+              },
+            "classification": "review",
+            "acceptedDifferenceCount": 0,
+            "acceptedDifferenceSummary": ""
+          }
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "page": "app-topbar-dashboard",
+        "variant": "component",
+        "section": "component",
+        "outDir": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component",
+        "leftUrl": "http://localhost:7070/standalone/full-app/dashboard.html",
+        "rightUrl": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-apptopbar--dashboard&viewMode=story",
+        "leftSelector": "main > div:first-child",
+        "rightSelector": "[data-section=\"app-topbar\"]",
+        "threshold": 30,
+        "changedPercent": 8.557675322381204,
+        "changedPixels": 9689,
+        "totalPixels": 113220,
+        "normalizedWidth": 1020,
+        "normalizedHeight": 111,
+        "bounds": {
+          "left": {
+            "x": 221,
+            "y": 1,
+            "width": 1018,
+            "height": 110.390625
+          },
+          "right": {
+            "width": 1020,
+            "height": 111.140625,
+            "x": 0,
+            "y": 0
+          },
+          "delta": {
+            "height": 0.75,
+            "x": -221,
+            "y": -1,
+            "width": 2
+          },
+          "changed": true
+        },
+        "artifactJson": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.json",
+        "artifactMarkdown": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.md",
+        "leftRegionPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/left_region.png",
+        "rightRegionPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/right_region.png",
+        "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_comparison.png",
+        "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_only.png",
+        "writtenArtifacts": [
+          "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.json",
+          "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/compare.md"
+        ],
+        "acceptedDifferences": [],
+        "source": "cvd.compare.region",
+        "summary": {
+            "attributeChanges": 4,
+            "left": {
+              "name": "app-topbar-dashboard-component",
+              "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+              "selector": "main > div:first-child",
+              "exists": true,
+              "visible": true,
+              "bounds": {
+                "x": 221,
+                "y": 1,
+                "width": 1018,
+                "height": 110.390625
+              }
+            },
+            "name": "app-topbar-dashboard-component",
+            "pixel": {
+              "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_comparison.png",
+              "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/app-topbar-compare-spec/app-topbar-dashboard/artifacts/component/diff_only.png",
+              "threshold": 30,
+              "totalPixels": 113220,
+              "changedPixels": 9689,
+              "changedPercent": 8.557675322381204,
+              "normalizedWidth": 1020,
+              "normalizedHeight": 111
+            },
+            "artifactCount": 2,
+            "boundsChanged": true,
+            "right": {
+              "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 1020,
+                "height": 111.140625
+              },
+              "name": "app-topbar-dashboard-component",
+              "url": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-apptopbar--dashboard&viewMode=story",
+              "selector": "[data-section=\"app-topbar\"]",
+              "exists": true,
+              "visible": true
+            },
+            "schemaVersion": "cssvd.selectionComparison.v1",
+            "styleChanges": 3,
+            "textChanged": false
+          },
+        "classification": "review",
+        "acceptedDifferenceCount": 0,
+        "acceptedDifferenceSummary": ""
+      }
+    ]
+  }
+]

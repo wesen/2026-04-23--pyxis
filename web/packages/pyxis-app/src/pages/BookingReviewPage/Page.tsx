@@ -5,7 +5,7 @@ import { SubmissionStatus } from 'pyxis-types';
 import { useApproveBookingMutation, useDeclineBookingMutation, useGetBookingReviewQuery, useGetBookingsQuery, useUpdateBookingMutation, useUpdateBookingReviewMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell/AppShell';
 import { BookingReviewDatePanel, BookingReviewHero, BookingReviewNotePanel, BookingReviewRequestPanel } from '../../components/organisms/Phase8Sections';
-import type { BookingDetailsDraft } from '../../components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel';
+import type { BookingDetailsDraft } from '../../components/organisms/Bookings/BookingReviewRequestPanel/BookingReviewRequestPanel';
 import { EmptyState, ErrorState, LoadingState, parseRouteId } from '../shared';
 import './Page.css';
 

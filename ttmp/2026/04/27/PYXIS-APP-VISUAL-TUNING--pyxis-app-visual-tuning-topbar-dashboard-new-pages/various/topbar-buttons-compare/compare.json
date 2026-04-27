@@ -1,0 +1,134 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-buttons-compare/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-buttons-compare/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "px-btn",
+      "name": "class",
+      "right": "pyxis-icon pyxis-icon--search"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": -16,
+      "width": -16,
+      "x": -223.53125,
+      "y": 7.375
+    },
+    "left": {
+      "height": 30,
+      "width": 30,
+      "x": 1010.265625,
+      "y": 40.6875
+    },
+    "right": {
+      "height": 14,
+      "width": 14,
+      "x": 786.734375,
+      "y": 48.0625
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 30,
+      "width": 30,
+      "x": 1010.265625,
+      "y": 40.6875
+    },
+    "exists": true,
+    "name": "region",
+    "selector": ".px-btn:not([style*='outline'])",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "region",
+  "pixel": {
+    "changedPercent": 20.22222222222222,
+    "changedPixels": 182,
+    "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-buttons-compare/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-buttons-compare/diff_only.png",
+    "normalizedHeight": 30,
+    "normalizedWidth": 30,
+    "threshold": 30,
+    "totalPixels": 900
+  },
+  "right": {
+    "bounds": {
+      "height": 14,
+      "width": 14,
+      "x": 786.734375,
+      "y": 48.0625
+    },
+    "exists": true,
+    "name": "region",
+    "selector": "[data-section='app-topbar'] [data-pyxis-component='button']:not([data-variant='outline'])",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-appshell--top-bar-dashboard\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "border-radius",
+      "right": "0px"
+    },
+    {
+      "changed": true,
+      "left": "13.3333px",
+      "name": "font-size",
+      "right": "12px"
+    },
+    {
+      "changed": true,
+      "left": "400",
+      "name": "font-weight",
+      "right": "500"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "14.4px"
+    },
+    {
+      "changed": true,
+      "left": "1px",
+      "name": "padding-bottom",
+      "right": "0px"
+    },
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "padding-left",
+      "right": "0px"
+    },
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "padding-right",
+      "right": "0px"
+    },
+    {
+      "changed": true,
+      "left": "1px",
+      "name": "padding-top",
+      "right": "0px"
+    }
+  ],
+  "text": {
+    "changed": false
+  }
+}

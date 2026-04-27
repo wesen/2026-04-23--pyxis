@@ -1,0 +1,105 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-compare/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-compare/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "name": "class",
+      "right": "app-topbar"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 0.75,
+      "width": 2,
+      "x": -221,
+      "y": -1
+    },
+    "left": {
+      "height": 110.390625,
+      "width": 1018,
+      "x": 221,
+      "y": 1
+    },
+    "right": {
+      "height": 111.140625,
+      "width": 1020,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 110.390625,
+      "width": 1018,
+      "x": 221,
+      "y": 1
+    },
+    "exists": true,
+    "name": "region",
+    "selector": "main \u003e div:first-child",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "region",
+  "pixel": {
+    "changedPercent": 8.557675322381204,
+    "changedPixels": 9689,
+    "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-compare/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/topbar-compare/diff_only.png",
+    "normalizedHeight": 111,
+    "normalizedWidth": 1020,
+    "threshold": 30,
+    "totalPixels": 113220
+  },
+  "right": {
+    "bounds": {
+      "height": 111.140625,
+      "width": 1020,
+      "x": 0,
+      "y": 0
+    },
+    "exists": true,
+    "name": "region",
+    "selector": "[data-section='app-topbar']",
+    "url": "http://localhost:6008/iframe.html?id=pyxis-app-components-shell-appshell--top-bar-dashboard\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgb(26, 26, 24)",
+      "name": "color",
+      "right": "rgb(31, 30, 28)"
+    },
+    {
+      "changed": true,
+      "left": "13px",
+      "name": "font-size",
+      "right": "14px"
+    },
+    {
+      "changed": true,
+      "left": "19.5px",
+      "name": "line-height",
+      "right": "20.3px"
+    }
+  ],
+  "text": {
+    "changed": false,
+    "left": "Home / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew show",
+    "right": "Home / DashboardWelcome back, AdaWednesday, April 23 · 6 shows booked this monthNew show"
+  }
+}

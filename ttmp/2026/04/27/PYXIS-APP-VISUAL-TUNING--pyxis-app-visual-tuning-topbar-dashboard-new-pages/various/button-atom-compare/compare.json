@@ -1,0 +1,147 @@
+{
+  "artifacts": [
+    {
+      "kind": "png",
+      "name": "diffOnly",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/button-atom-compare/diff_only.png"
+    },
+    {
+      "kind": "png",
+      "name": "diffComparison",
+      "path": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/button-atom-compare/diff_comparison.png"
+    }
+  ],
+  "attributes": [
+    {
+      "changed": true,
+      "left": "px-btn",
+      "name": "class",
+      "right": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+    }
+  ],
+  "bounds": {
+    "changed": true,
+    "delta": {
+      "height": 3.59375,
+      "width": 92.375,
+      "x": -970.265625,
+      "y": -0.6875
+    },
+    "left": {
+      "height": 30,
+      "width": 30,
+      "x": 1010.265625,
+      "y": 40.6875
+    },
+    "right": {
+      "height": 33.59375,
+      "width": 122.375,
+      "x": 40,
+      "y": 40
+    }
+  },
+  "left": {
+    "bounds": {
+      "height": 30,
+      "width": 30,
+      "x": 1010.265625,
+      "y": 40.6875
+    },
+    "exists": true,
+    "name": "region",
+    "selector": ".px-btn",
+    "url": "http://localhost:7070/standalone/full-app/dashboard.html",
+    "visible": true
+  },
+  "name": "region",
+  "pixel": {
+    "changedPercent": 97.49276759884282,
+    "changedPixels": 4044,
+    "diffComparisonPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/button-atom-compare/diff_comparison.png",
+    "diffOnlyPath": "ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/various/button-atom-compare/diff_only.png",
+    "normalizedHeight": 34,
+    "normalizedWidth": 122,
+    "threshold": 30,
+    "totalPixels": 4148
+  },
+  "right": {
+    "bounds": {
+      "height": 33.59375,
+      "width": 122.375,
+      "x": 40,
+      "y": 40
+    },
+    "exists": true,
+    "name": "region",
+    "selector": "[data-pyxis-component='button']",
+    "url": "http://localhost:6006/iframe.html?id=atoms-button--default\u0026viewMode=story",
+    "visible": true
+  },
+  "schemaVersion": "cssvd.selectionComparison.v1",
+  "styles": [
+    {
+      "changed": true,
+      "left": "rgba(0, 0, 0, 0)",
+      "name": "background-color",
+      "right": "rgb(200, 39, 13)"
+    },
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "border-radius",
+      "right": "8px"
+    },
+    {
+      "changed": true,
+      "left": "rgb(85, 80, 72)",
+      "name": "color",
+      "right": "rgb(255, 255, 255)"
+    },
+    {
+      "changed": true,
+      "left": "13.3333px",
+      "name": "font-size",
+      "right": "13px"
+    },
+    {
+      "changed": true,
+      "left": "400",
+      "name": "font-weight",
+      "right": "500"
+    },
+    {
+      "changed": true,
+      "left": "normal",
+      "name": "line-height",
+      "right": "15.6px"
+    },
+    {
+      "changed": true,
+      "left": "1px",
+      "name": "padding-bottom",
+      "right": "8px"
+    },
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "padding-left",
+      "right": "16px"
+    },
+    {
+      "changed": true,
+      "left": "6px",
+      "name": "padding-right",
+      "right": "16px"
+    },
+    {
+      "changed": true,
+      "left": "1px",
+      "name": "padding-top",
+      "right": "8px"
+    }
+  ],
+  "text": {
+    "changed": true,
+    "right": "Get tickets"
+  }
+}
