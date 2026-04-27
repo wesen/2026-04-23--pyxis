@@ -195,3 +195,104 @@ The bundle includes three documents with different roles: design guide, task lis
 ### Next steps
 
 Start Phase 1 of the task list: decide production domain/API topology, classify dev assumptions, and configure SPA route fallback.
+
+## Step 3: Collect operator launch decisions with plz-confirm
+
+The user asked me to ask the questions needed for the production-readiness work and specifically requested that I use `plz-confirm help --all` to learn how to ask feedback questions.
+
+### Commands run
+
+```bash
+plz-confirm help --all
+plz-confirm help how-to-use
+```
+
+The help output showed that `plz-confirm form` accepts a JSON Schema via `--schema @file.json`, and that common flags include `--base-url`, `--wait-timeout`, and `--output json`.
+
+I wrote the first question schema:
+
+```text
+sources/01-prod-readiness-operator-questions.schema.json
+```
+
+My first attempt used the default base URL and failed:
+
+```bash
+plz-confirm form --title "Pyxis public-site production decisions" --schema @... --wait-timeout 0 --output json
+```
+
+Error:
+
+```text
+Error: create form request: create request failed: status=404 body=404 page not found
+```
+
+I checked running processes and found the active server:
+
+```text
+plz-confirm serve --addr :9876
+```
+
+The working command was:
+
+```bash
+plz-confirm form \
+  --base-url http://localhost:9876 \
+  --title "Pyxis public-site production decisions" \
+  --schema @ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/sources/01-prod-readiness-operator-questions.schema.json \
+  --wait-timeout 0 \
+  --output json
+```
+
+I saved parsed answers to:
+
+```text
+sources/02-prod-readiness-operator-answers.json
+```
+
+Then I asked follow-up questions with:
+
+```text
+sources/03-prod-readiness-followup-questions.schema.json
+```
+
+and saved answers to:
+
+```text
+sources/04-prod-readiness-followup-answers.json
+```
+
+### Key answers
+
+- Production domain: `https://pyxis.xyz`.
+- Launch scope: public website + backend; focus on public website.
+- Deployment target: Go backend static embed, likely built with Dagger.
+- API topology: same binary / same-origin API.
+- Production `VITE_API_URL`: interpret as blank/same-origin.
+- Booking spam mitigation: none for now; accepted v1 risk.
+- Booking notification owner: undecided.
+- Content approver: undecided/admin user later.
+- SEO: Manuel asked what the existing `Seo` component is; do not treat SEO as definitively rejected yet.
+- Target launch date: no urgency.
+
+I recorded the interpreted decisions in:
+
+```text
+reference/02-operator-production-decisions.md
+```
+
+### What worked
+
+`plz-confirm form` was the right widget because the questions were structured and multi-field. Saving the schemas and parsed answers gives future developers an audit trail of the operator decisions.
+
+### What didn't work
+
+The first command failed because `plz-confirm` was not running on the documented default `http://localhost:3000`. Passing `--base-url http://localhost:9876` fixed it.
+
+### What was tricky to build
+
+Some schema enum fields accepted free-form operator text rather than only enum values. That is fine for this use case because the human language was more useful than a strict enum, but future scripts should not rely on exact enum values unless the widget enforces them.
+
+### Next steps
+
+Proceed to backend/deployment audit because Manuel explicitly answered `yes` to inspecting the Go backend/Dagger/static embed setup next.

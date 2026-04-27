@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pyxis public-site production readiness decisions",
+  "type": "object",
+  "properties": {
+    "productionDomain": {
+      "type": "string",
+      "title": "Production public-site domain",
+      "description": "Example: https://pyxis.xyz or https://ppxis.xyz"
+    },
+    "apiTopology": {
+      "type": "string",
+      "title": "API topology",
+      "description": "How should the public frontend reach /api/public/* in production?",
+      "enum": ["same-origin", "cross-origin", "undecided"]
+    },
+    "apiBaseUrl": {
+      "type": "string",
+      "title": "VITE_API_URL value",
+      "description": "Use blank for same-origin; otherwise enter full API origin such as https://api.pyxis.xyz",
+      "default": ""
+    },
+    "deploymentTarget": {
+      "type": "string",
+      "title": "Deployment target / host",
+      "description": "Where will the built site run? Example: Go backend static embed, nginx, Netlify, Vercel, Cloudflare Pages, S3/CloudFront, unknown"
+    },
+    "backendReadiness": {
+      "type": "string",
+      "title": "Public backend readiness",
+      "enum": ["ready-now", "partially-ready", "not-ready", "unknown"]
+    },
+    "bookingSpamMitigation": {
+      "type": "string",
+      "title": "Booking form spam mitigation for launch",
+      "enum": ["honeypot-plus-rate-limit", "captcha", "rate-limit-only", "moderation-only", "disable-booking-at-launch", "undecided"]
+    },
+    "bookingNotificationOwner": {
+      "type": "string",
+      "title": "Who receives/reviews booking submissions?",
+      "description": "Name/channel/email or 'undecided'"
+    },
+    "showDetailSeo": {
+      "type": "string",
+      "title": "Show-detail social preview requirement",
+      "enum": ["generic-spa-metadata-ok-for-v1", "must-have-show-specific-prerender-or-server-metadata", "undecided"]
+    },
+    "launchScope": {
+      "type": "string",
+      "title": "Launch scope",
+      "enum": ["public-site-only", "public-site-plus-internal-app", "public-site-first-internal-later", "undecided"]
+    },
+    "stagingUrl": {
+      "type": "string",
+      "title": "Staging / release-candidate URL",
+      "description": "Leave blank if it does not exist yet",
+      "default": ""
+    },
+    "contentApprover": {
+      "type": "string",
+      "title": "Final public content approver",
+      "description": "Who signs off on copy, dates, prices, age restrictions, address, and contact info?"
+    },
+    "targetLaunchDate": {
+      "type": "string",
+      "title": "Target launch date or urgency",
+      "description": "Example: ASAP, this week, before first event, YYYY-MM-DD, unknown"
+    },
+    "acceptedLaunchRisks": {
+      "type": "string",
+      "title": "Known risks you are willing to accept for v1",
+      "description": "Example: generic social previews OK; no CMS; no mobile visual diff; empty archive OK"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Anything else I should know?"
+    }
+  },
+  "required": [
+    "productionDomain",
+    "apiTopology",
+    "deploymentTarget",
+    "backendReadiness",
+    "bookingSpamMitigation",
+    "bookingNotificationOwner",
+    "showDetailSeo",
+    "launchScope",
+    "contentApprover",
+    "targetLaunchDate"
+  ]
+}

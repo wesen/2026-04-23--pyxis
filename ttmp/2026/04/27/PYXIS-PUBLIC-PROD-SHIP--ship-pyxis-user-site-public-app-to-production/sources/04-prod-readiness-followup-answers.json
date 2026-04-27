@@ -1,0 +1,8 @@
+{
+  "apiBaseUrlClarified": "yes",
+  "backendAuditPermission": "yes",
+  "bookingSpamAccepted": "none for now",
+  "definitionOfBackendReadiness": "yeah",
+  "launchScopeClarified": "public website + backend (we probably already bundle the app, but that's ok, we focus on the public website)",
+  "seoAccepted": "what's the existing Seo component?"
+}

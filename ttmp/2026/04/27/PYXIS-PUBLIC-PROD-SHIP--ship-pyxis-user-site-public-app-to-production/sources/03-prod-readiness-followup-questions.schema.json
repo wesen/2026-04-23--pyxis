@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pyxis public-site production follow-up decisions",
+  "type": "object",
+  "properties": {
+    "launchScopeClarified": {
+      "type": "string",
+      "title": "What exactly are we shipping now?",
+      "enum": ["public-site-only", "public-site-plus-internal-app", "public-site-first-internal-later"]
+    },
+    "backendAuditPermission": {
+      "type": "string",
+      "title": "Should I inspect the Go backend/Dagger setup next and turn the ship plan into concrete code tasks?",
+      "enum": ["yes-audit-backend-and-dagger", "no-docs-only-for-now"]
+    },
+    "bookingSpamAccepted": {
+      "type": "string",
+      "title": "Booking spam mitigation for v1",
+      "description": "You answered 'none'. Should we ship with no mitigation as an accepted risk, or add minimal honeypot/rate-limit first?",
+      "enum": ["ship-none-accepted-risk", "add-minimal-honeypot-or-rate-limit-first", "disable-booking-until-ready"]
+    },
+    "seoAccepted": {
+      "type": "string",
+      "title": "SEO/social metadata for v1",
+      "description": "You answered 'none'. Should route SEO be skipped as accepted risk, or should we at least wire the existing Seo component?",
+      "enum": ["skip-seo-accepted-risk", "wire-basic-route-seo-first"]
+    },
+    "apiBaseUrlClarified": {
+      "type": "string",
+      "title": "Production VITE_API_URL",
+      "description": "Same binary usually means this should be blank at build time so /api is same-origin. Confirm or override.",
+      "enum": ["blank-same-origin", "set-explicit-url", "undecided"]
+    },
+    "apiExplicitUrlIfAny": {
+      "type": "string",
+      "title": "If explicit API URL, enter it here",
+      "default": ""
+    },
+    "definitionOfBackendReadiness": {
+      "type": "string",
+      "title": "Backend readiness meaning / what you want checked",
+      "description": "Examples: endpoints exist, DB migrations exist, build embeds SPA, submission creates records, direct refresh works. Add anything you care about."
+    }
+  },
+  "required": [
+    "launchScopeClarified",
+    "backendAuditPermission",
+    "bookingSpamAccepted",
+    "seoAccepted",
+    "apiBaseUrlClarified",
+    "definitionOfBackendReadiness"
+  ]
+}

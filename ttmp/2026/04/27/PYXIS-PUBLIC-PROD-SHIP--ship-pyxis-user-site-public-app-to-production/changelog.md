@@ -24,3 +24,14 @@ Validated docs with docmgr doctor and uploaded the production-readiness bundle t
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/01-production-readiness-implementation-diary.md — delivery and validation record
 
+
+## 2026-04-27
+
+Collected operator production decisions with plz-confirm and recorded interpreted launch assumptions.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/reference/02-operator-production-decisions.md — operator decision record
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/sources/02-prod-readiness-operator-answers.json — first parsed plz-confirm answers
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-PUBLIC-PROD-SHIP--ship-pyxis-user-site-public-app-to-production/sources/04-prod-readiness-followup-answers.json — follow-up parsed plz-confirm answers
+

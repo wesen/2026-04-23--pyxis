@@ -1,0 +1,14 @@
+{
+  "acceptedLaunchRisks": "all good",
+  "apiBaseUrl": "vite only for local dev.",
+  "apiTopology": "they are served by the same binary",
+  "backendReadiness": "i don't know what this means?",
+  "bookingNotificationOwner": "undecided",
+  "bookingSpamMitigation": "none",
+  "contentApprover": "undecided, admin user in the backend later",
+  "deploymentTarget": "go backend static embed (build with dagger, but I think that's already all setup?)",
+  "launchScope": "??",
+  "productionDomain": "https://pyxis.xyz",
+  "showDetailSeo": "none",
+  "targetLaunchDate": "no urgency"
+}
