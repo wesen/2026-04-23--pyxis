@@ -2899,3 +2899,93 @@ shows header       10.624% tune-required
 show-detail page    5.688% review
 archive page        6.684% review
 ```
+
+## Step 32: Final public-page sweep and review bundle
+
+This step closed the current public-page pass by running the desktop public-page visual suite across every page target and generating an HTML review page for human inspection. I did not try to hide the remaining borderline rows: the review page shows every section with prototype, React, and `diff_only` images side-by-side.
+
+The public pages are now all in a narrow visual band. The former Show Detail major mismatch is gone, Archive and Show Detail are review-band, and the remaining tune-required rows are clustered just above the 10% review threshold.
+
+### Prompt Context
+
+**User prompt (verbatim):** "at the end, create a full review page for me to review like /tmp/pyxis-shows-visual-review-20260427-141511
+
+But first do all the pages. continue"
+
+**Assistant interpretation:** Finish the all-page sweep first, then produce a consolidated review HTML bundle similar to the earlier Shows review page.
+
+**Inferred user intent:** Make it easy to inspect the final state manually rather than relying only on JSON summaries or individual artifact paths.
+
+**Commit (code):** pending — this step records the review script commit.
+
+### What I did
+
+- Ran the full public desktop visual suite:
+  - `/tmp/pyxis-public-pages-final-sweep.json`
+  - `/tmp/pyxis-public-pages-final-sweep/`
+- Added ticket-local review generator script:
+  - `scripts/05-build-public-pages-review.py`
+- Generated the review page:
+  - `/tmp/pyxis-public-pages-visual-review-20260427-150816/index.html`
+- Ran final Storybook validation for `pyxis-user-site`:
+  - `pnpm exec storybook build`
+
+### Why
+
+The earlier review bundle pattern was useful because it let a human inspect diff-only artifacts first and then compare prototype/React regions. This script preserves that workflow for all public-page targets and gives each row a textarea for review notes.
+
+### What worked
+
+- The review page was generated successfully and links to left/prototype, right/react, diff_only, and compare JSON artifacts for every public-page section.
+- Storybook production build passed.
+
+### What didn't work
+
+- Storybook build still prints the existing warning: `No story files found for the specified pattern: stories/**/*.stories.@(js|jsx|ts|tsx)` because the old top-level `stories/` folder is gone and stories are now colocated under `src/`. This is harmless but the Storybook config can be cleaned up later.
+- Some rows remain slightly over the 10% review band and should be reviewed visually instead of treated as hidden failures.
+
+### What I learned
+
+- The public-page suite now gives a better prioritization signal: the largest remaining rows are not large layout breaks, but text/poster antialiasing and small integration deltas in Shows, About, and Book.
+
+### What was tricky to build
+
+The review generator needed to avoid replacing css-visual-diff. It therefore only reads the already-generated summary JSON and artifact paths. It does not run comparisons, alter thresholds, or classify rows differently.
+
+### What warrants a second pair of eyes
+
+- Review the generated page’s tune-required rows first, especially Shows content/list/header and Book/About content.
+- Decide whether the 10–12% rows are acceptable review-band-by-inspection, or whether to keep tuning toward sub-10% pixel deltas.
+
+### What should be done in the future
+
+- Remove the obsolete Storybook `stories/**/*.stories.*` glob or recreate a stories folder if desired.
+- Consider adding smaller component-level visual targets for About and Book if page-level crops stay noisy.
+
+### Code review instructions
+
+- Open `/tmp/pyxis-public-pages-visual-review-20260427-150816/index.html`.
+- Start with the `tune-required` filter.
+- Validate from the repo with:
+  - `cd web/packages/pyxis-user-site && pnpm exec storybook build`
+  - rerun the full visual sweep if the Storybook server has been restarted.
+
+### Technical details
+
+Final public-page sweep:
+
+```text
+shows content      11.605% tune-required
+shows shows-list   11.166% tune-required
+book content       10.902% tune-required
+about content      10.833% tune-required
+shows header       10.773% tune-required
+shows page         10.630% tune-required
+about page          9.059% review
+shows mailing-list  8.809% review
+show-detail content 8.203% review
+book page           8.045% review
+archive content     7.251% review
+archive page        6.684% review
+show-detail page    5.688% review
+```
