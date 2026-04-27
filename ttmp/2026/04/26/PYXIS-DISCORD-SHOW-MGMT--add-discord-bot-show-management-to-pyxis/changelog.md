@@ -76,3 +76,12 @@ Runtime-tested the embedded Pyxis Discord bot with credentials from ../2026-04-2
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Runtime test evidence and commands
 
+
+## 2026-04-26
+
+Restarted tmux-hosted Discord bot with reported member role IDs configured as admin/booker access roles for interactive testing.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Runtime role configuration diary entry
+

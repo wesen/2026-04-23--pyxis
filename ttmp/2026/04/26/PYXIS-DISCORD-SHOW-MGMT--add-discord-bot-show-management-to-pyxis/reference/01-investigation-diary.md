@@ -650,3 +650,85 @@ timeout 35s bash -lc 'set -a; source ../2026-04-20--js-discord-bot/.envrc; set +
 ### Technical details
 
 No source code changed in this step. Documentation was updated to record the runtime test evidence.
+
+
+## Step 7: Restart bot with discovered access role IDs
+
+After running `/debug-my-roles`, the user reported two Discord member role IDs visible to the bot. I restarted the tmux-hosted bot and passed those IDs as the runtime admin/booker role IDs so both roles are accepted by the current command gates.
+
+This is an operational seed through runtime flags, not a database migration. The current implementation reads `adminRoleId` and `bookerRoleId` from runtime config, so restarting the bot with those flags is sufficient for the running test instance.
+
+### Prompt Context
+
+**User prompt (verbatim):** "The bot sees your member role IDs: 1496685769421488248, 1496685844948320266.
+
+seed both as having access"
+
+**Assistant interpretation:** Configure the running test bot so the two observed Discord role IDs are treated as allowed roles for management commands.
+
+**Inferred user intent:** Unblock interactive slash-command testing by granting the user access through the roles the bot actually sees.
+
+**Commit (code):** N/A — runtime configuration only; no source code changed.
+
+### What I did
+
+- Stopped the existing `pyxis-discord-bot` tmux session.
+- Restarted the session with the same Discord environment and `--discord-sync-on-start`.
+- Passed the reported role IDs as:
+  - `--discord-admin-role-id 1496685769421488248`
+  - `--discord-booker-role-id 1496685844948320266`
+- Confirmed the bot reloaded, synced commands, connected to Discord, and ran the ready event.
+
+### Why
+
+- The current bot permission gates check `ctx.config.adminRoleId` and `ctx.config.bookerRoleId` against `ctx.member.roles`.
+- The reported role IDs are exactly what the bot sees on the user's member object, so using them as runtime role IDs should allow the user to pass both admin-only and booker/admin command gates.
+
+### What worked
+
+- Tmux session restarted successfully.
+- Command sync succeeded for guild `586274407350272042`.
+- The bot connected as `llm-bot` and reported `shows=7`.
+
+### What didn't work
+
+- N/A.
+
+### What I learned
+
+- For the current implementation, role access can be adjusted without code changes by restarting with role-id flags.
+- Long-term, these role IDs should probably live in settings or a documented operator runbook rather than ad hoc shell flags.
+
+### What was tricky to build
+
+- This was simple operational wiring, but it depends on restarting the bot because runtime config is captured at framework startup.
+
+### What warrants a second pair of eyes
+
+- Decide whether both roles should truly have admin access, or whether one should remain booker-only. I mapped the first observed ID to admin and the second to booker for the current test run.
+
+### What should be done in the future
+
+- Re-run `/debug` or `/debug-my-roles` and verify `canManageShows` and `canAdminOnly` now pass as intended.
+- Move role ID configuration into Pyxis settings or a documented env/runbook path before production use.
+
+### Code review instructions
+
+Runtime command used inside tmux:
+
+```bash
+set -a
+source ../2026-04-20--js-discord-bot/.envrc
+set +a
+go run ./cmd/pyxis serve   --bind :18082   --discord-bot   --discord-debug   --discord-sync-on-start   --discord-admin-role-id 1496685769421488248   --discord-booker-role-id 1496685844948320266   --log-level debug
+```
+
+### Technical details
+
+Logs showed:
+
+```text
+synced discord application commands ... scope=guild:586274407350272042
+discord bot connected ... user=llm-bot
+pyxis-show-space bot ready ... shows=7
+```
