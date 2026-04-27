@@ -1490,3 +1490,99 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 15: Group SettingsPanel under organisms/Settings
+
+After Roster passed validation, I handled the final planned Settings/Shared bucket conservatively. I grouped the clearly Settings-specific component, `SettingsPanel`, and intentionally left standalone/shared organisms at the top level.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Finish the remaining planned grouping while avoiding unclear invented group names for shared components.
+
+**Inferred user intent:** Keep moving page-specific organisms, but do not create unnecessary organization churn.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/Settings/`.
+- Used `git mv` to move:
+  - `SettingsPanel`
+- Added `components/organisms/Settings/index.ts`.
+- Updated `organisms/index.ts` and `Panels.tsx` to export the Settings group.
+- Updated `SettingsPage/Page.tsx`, which had a type-only deep import to the old `SettingsPanel` path.
+- Updated `SettingsPanel` imports for the deeper folder path.
+- Updated the Storybook title to `Pyxis App/Components/Organisms/Settings/SettingsPanel`.
+- Marked the Settings subtask complete in `tasks.md`, with a note that shared standalone organisms were intentionally left top-level.
+
+### Why
+
+`SettingsPanel` has a clear Settings domain. By contrast, `Panel`, `NewShowModal`, `FlyerField`, `AuditLogPanel`, and `DiscordMappingPanel` did not all belong in one obvious Settings/Shared folder. Moving only the clear component avoids making the filesystem worse just to satisfy a checklist.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+The first resolver pass found one remaining type-only deep import in `SettingsPage`:
+
+```text
+src/pages/SettingsPage/Page.tsx:5: ../../components/organisms/SettingsPanel/SettingsPanel
+```
+
+This was updated to the new Settings path.
+
+### What I learned
+
+A page-grouping task should preserve semantic clarity. It is better to leave genuinely shared/standalone organisms at the root than to create an artificial bucket that future developers will not understand.
+
+### What was tricky to build
+
+The code move itself was straightforward. The tricky part was deciding not to move ambiguous components such as `NewShowModal` and `FlyerField`, which are used by both Shows and ShowDetail flows.
+
+### What warrants a second pair of eyes
+
+- Whether `AuditLogPanel` and `DiscordMappingPanel` should later become their own tiny groups (`AuditLog/`, `Discord/`) if those pages grow.
+- Whether `FlyerField` belongs under `ShowDetail`, `Shows`, or a shared media/upload area.
+- Whether `NewShowModal` should remain shared or be renamed to reflect both create and edit usage.
+
+### What should be done in the future
+
+Inspect remaining top-level organisms and decide whether any should become their own domain groups. Do not force them into a single catch-all folder.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Settings/`
+- `web/packages/pyxis-app/src/components/organisms/Settings/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- `web/packages/pyxis-app/src/pages/SettingsPage/Page.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```

@@ -7,6 +7,6 @@ export * from './DiscordMappingPanel';
 export * from './FlyerField';
 export * from './NewShowModal';
 export * from './Panel';
-export * from './SettingsPanel';
+export * from './Settings';
 export * from './ShowDetail';
 export * from './Shows';

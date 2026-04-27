@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { settings } from '../../../api/mockData';
+import { settings } from '../../../../api/mockData';
 import { SettingsPanel } from './SettingsPanel';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/SettingsPanel',
+  title: 'Pyxis App/Components/Organisms/Settings/SettingsPanel',
   component: SettingsPanel,
   parameters: { layout: 'fullscreen' },
   args: { settings },

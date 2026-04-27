@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useGetSettingsQuery, useUpdateSettingsMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { Panel, SettingsPanel } from '../../components/organisms';
-import type { CoreSettingsDraft } from '../../components/organisms/SettingsPanel/SettingsPanel';
+import type { CoreSettingsDraft } from '../../components/organisms/Settings/SettingsPanel/SettingsPanel';
 import { ActionMessages, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 

@@ -6,6 +6,6 @@ export * from './Calendar';
 export * from './Roster';
 export * from './AuditLogPanel';
 export * from './DiscordMappingPanel';
-export * from './SettingsPanel';
+export * from './Settings';
 export * from './NewShowModal';
 export * from './FlyerField';

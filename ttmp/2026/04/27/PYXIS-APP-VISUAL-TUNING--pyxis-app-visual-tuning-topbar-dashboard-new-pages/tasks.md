@@ -109,5 +109,5 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - [x] Calendar group.
   - [x] ShowDetail group.
   - [x] Roster group.
-  - [ ] Settings/Shared group.
+  - [x] Settings group; shared standalone organisms intentionally left top-level.
   - One group per commit.
