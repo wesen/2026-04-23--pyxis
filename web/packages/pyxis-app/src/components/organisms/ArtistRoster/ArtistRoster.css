@@ -1,1 +1,2 @@
-/* ArtistRoster uses ArtistCard and Table-owned styles. */
+.app-artist-roster-button { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.app-table-row.is-selected { outline: 2px solid var(--app-accent); outline-offset: -2px; background: color-mix(in srgb, var(--app-accent) 10%, transparent); }

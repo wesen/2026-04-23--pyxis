@@ -20,3 +20,16 @@ UPDATE submissions
 SET status = 'declined', reviewed_by = $2, reviewed_at = NOW()
 WHERE id = $1
 RETURNING *;
+
+-- name: UpdateSubmissionDetails :one
+UPDATE submissions
+SET artist_name = $2,
+    preferred_date = $3,
+    genre = $4,
+    expected_draw = $5,
+    links = $6,
+    tech_rider = $7,
+    message = $8,
+    contact_discord = $9
+WHERE id = $1
+RETURNING *;

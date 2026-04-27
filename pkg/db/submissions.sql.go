@@ -191,3 +191,61 @@ func (q *Queries) ListSubmissions(ctx context.Context, dollar_1 interface{}) ([]
 	}
 	return items, nil
 }
+
+const updateSubmissionDetails = `-- name: UpdateSubmissionDetails :one
+UPDATE submissions
+SET artist_name = $2,
+    preferred_date = $3,
+    genre = $4,
+    expected_draw = $5,
+    links = $6,
+    tech_rider = $7,
+    message = $8,
+    contact_discord = $9
+WHERE id = $1
+RETURNING id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at
+`
+
+type UpdateSubmissionDetailsParams struct {
+	ID             int32       `json:"id"`
+	ArtistName     string      `json:"artistName"`
+	PreferredDate  pgtype.Date `json:"preferredDate"`
+	Genre          pgtype.Text `json:"genre"`
+	ExpectedDraw   pgtype.Int4 `json:"expectedDraw"`
+	Links          pgtype.Text `json:"links"`
+	TechRider      pgtype.Text `json:"techRider"`
+	Message        pgtype.Text `json:"message"`
+	ContactDiscord pgtype.Text `json:"contactDiscord"`
+}
+
+func (q *Queries) UpdateSubmissionDetails(ctx context.Context, arg UpdateSubmissionDetailsParams) (Submission, error) {
+	row := q.db.QueryRow(ctx, updateSubmissionDetails,
+		arg.ID,
+		arg.ArtistName,
+		arg.PreferredDate,
+		arg.Genre,
+		arg.ExpectedDraw,
+		arg.Links,
+		arg.TechRider,
+		arg.Message,
+		arg.ContactDiscord,
+	)
+	var i Submission
+	err := row.Scan(
+		&i.ID,
+		&i.ArtistID,
+		&i.ArtistName,
+		&i.PreferredDate,
+		&i.Genre,
+		&i.ExpectedDraw,
+		&i.Links,
+		&i.TechRider,
+		&i.Message,
+		&i.ContactDiscord,
+		&i.Status,
+		&i.ReviewedBy,
+		&i.ReviewedAt,
+		&i.CreatedAt,
+	)
+	return i, err
+}

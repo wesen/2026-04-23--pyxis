@@ -104,6 +104,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Staff booking endpoints
 	mux.Handle("GET /api/app/bookings", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleListBookings))))
+	mux.Handle("PATCH /api/app/bookings/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateBooking))))
 	mux.Handle("GET /api/app/bookings/{id}/review", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleGetBookingReview))))
 	mux.Handle("PATCH /api/app/bookings/{id}/review", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateBookingReview))))
 	mux.Handle("PATCH /api/app/bookings/{id}/approve", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleApproveBooking))))
@@ -111,6 +112,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 
 	// Staff artist endpoints
 	mux.Handle("GET /api/app/artists", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListArtists))))
+	mux.Handle("POST /api/app/artists", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateArtist))))
 	mux.Handle("GET /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetArtist))))
 	mux.Handle("PATCH /api/app/artists/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUpdateArtist))))
 

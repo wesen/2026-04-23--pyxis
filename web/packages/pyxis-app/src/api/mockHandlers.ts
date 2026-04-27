@@ -24,7 +24,7 @@ import {
   SubmissionStatus,
   SuccessResponseSchema,
 } from 'pyxis-types';
-import type { AppShow, Submission } from 'pyxis-types';
+import type { AppShow, Artist, Submission } from 'pyxis-types';
 import { artists, attendance, auditLog, bookings, calendarEvents, session, settings, shows } from './mockData';
 
 function appShowToShow(show: AppShow) {
@@ -47,6 +47,7 @@ type MockState = {
   shows: ReturnType<typeof appShowToShow>[];
   bookings: Submission[];
   bookingReviews: Record<number, ReturnType<typeof createBookingReview>>;
+  artists: Artist[];
   calendarEvents: typeof calendarEvents;
 };
 
@@ -57,6 +58,7 @@ export function resetMockState() {
     shows: shows.map(appShowToShow),
     bookings: bookings.map(cloneSubmission),
     bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
+    artists: artists.map((artist) => create(ArtistSchema, artist as any)),
     calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
   };
 }
@@ -75,6 +77,7 @@ function ensureMockState() {
       shows: shows.map(appShowToShow),
       bookings: bookings.map(cloneSubmission),
       bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
+      artists: artists.map((artist) => create(ArtistSchema, artist as any)),
       calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
     };
   }
@@ -154,6 +157,16 @@ export const mockHandlers = [
     return HttpResponse.json(toJson(SubmissionListSchema, create(SubmissionListSchema, { submissions: current.bookings })));
   }),
 
+  http.patch('*/api/app/bookings/:id', async ({ params, request }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const body = await request.json() as Partial<Submission>;
+    const previous = current.bookings.find((candidate) => candidate.id === id) ?? current.bookings[0];
+    const updated = create(SubmissionSchema, { ...previous, ...body, id });
+    current.bookings = current.bookings.map((candidate) => candidate.id === id ? updated : candidate);
+    return HttpResponse.json(toJson(SubmissionSchema, updated));
+  }),
+
   http.patch('*/api/app/bookings/:id/approve', ({ params }) => {
     const current = ensureMockState();
     const id = Number(params.id);
@@ -202,10 +215,39 @@ export const mockHandlers = [
     return HttpResponse.json(successJson());
   }),
 
-  http.get('*/api/app/artists', () => HttpResponse.json(toJson(ArtistListSchema, create(ArtistListSchema, { artists })))),
+  http.get('*/api/app/artists', () => {
+    const current = ensureMockState();
+    return HttpResponse.json(toJson(ArtistListSchema, create(ArtistListSchema, { artists: current.artists })));
+  }),
+  http.post('*/api/app/artists', async ({ request }) => {
+    const current = ensureMockState();
+    const body = await request.json() as Partial<Artist>;
+    const id = Math.max(0, ...current.artists.map((artist) => artist.id)) + 1;
+    const artist = create(ArtistSchema, {
+      id,
+      name: body.name ?? '',
+      genre: body.genre ?? '',
+      links: body.links ?? '',
+      notes: body.notes ?? '',
+      createdAt: '2026-04-26T00:00:00Z',
+      updatedAt: '2026-04-26T00:00:00Z',
+    });
+    current.artists = [...current.artists, artist];
+    return HttpResponse.json(toJson(ArtistSchema, artist), { status: 201 });
+  }),
   http.get('*/api/app/artists/:id', ({ params }) => {
-    const artist = artists.find((candidate) => candidate.id === Number(params.id)) ?? artists[0];
+    const current = ensureMockState();
+    const artist = current.artists.find((candidate) => candidate.id === Number(params.id)) ?? current.artists[0];
     return HttpResponse.json(toJson(ArtistSchema, artist));
+  }),
+  http.patch('*/api/app/artists/:id', async ({ params, request }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const body = await request.json() as Partial<Artist>;
+    const previous = current.artists.find((candidate) => candidate.id === id) ?? current.artists[0];
+    const updated = create(ArtistSchema, { ...previous, ...body, id, updatedAt: '2026-04-26T00:00:00Z' });
+    current.artists = current.artists.map((candidate) => candidate.id === id ? updated : candidate);
+    return HttpResponse.json(toJson(ArtistSchema, updated));
   }),
 
   http.get('*/api/app/calendar', () => {

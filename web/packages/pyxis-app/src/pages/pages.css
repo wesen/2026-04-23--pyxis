@@ -53,6 +53,12 @@
 .app-detail-list span { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-top: 1px solid var(--app-rule); color: var(--app-muted); }
 .app-detail-list span:first-child { border-top: 0; }
 .app-detail-list b { color: var(--app-ink); font-weight: 700; }
+.app-form-grid { display: grid; gap: 10px; }
+.app-form-grid label { display: grid; gap: 5px; }
+.app-form-grid span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.app-form-grid input, .app-form-grid textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); background: var(--app-surface-strong); color: var(--app-ink); padding: 9px 10px; font: inherit; font-size: 13px; }
+.app-form-grid textarea { resize: vertical; }
+.app-artist-detail-meta { margin-top: 14px; }
 .app-detail-actions { display: flex; gap: 10px; margin-top: 18px; }
 .app-booking-review-hero { grid-template-columns: 1fr; }
 .app-success-note { margin: 0 0 4px; color: var(--app-success); font-weight: 700; }

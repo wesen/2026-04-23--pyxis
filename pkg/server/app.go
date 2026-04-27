@@ -268,6 +268,71 @@ func (s *Server) handleListBookings(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.SubmissionList{Submissions: pbSubs})
 }
 
+func protoToDomainSubmission(pb *pyxisv1.Submission) *domain.Submission {
+	sub := &domain.Submission{
+		ID:             int(pb.Id),
+		ArtistName:     pb.ArtistName,
+		Genre:          pb.Genre,
+		Links:          pb.Links,
+		TechRider:      pb.TechRider,
+		Message:        pb.Message,
+		ContactDiscord: pb.ContactDiscord,
+	}
+	if pb.ArtistId > 0 {
+		v := int(pb.ArtistId)
+		sub.ArtistID = &v
+	}
+	if pb.PreferredDate != "" {
+		if t, err := time.Parse(time.DateOnly, pb.PreferredDate); err == nil {
+			sub.PreferredDate = &t
+		}
+	}
+	if pb.ExpectedDraw > 0 {
+		v := int(pb.ExpectedDraw)
+		sub.ExpectedDraw = &v
+	}
+	return sub
+}
+
+func (s *Server) handleUpdateBooking(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid booking ID: %w", err))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req pyxisv1.Submission
+	if err := protojson.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	sub := protoToDomainSubmission(&req)
+	sub.ID = id
+	actorID := int(user.ID)
+	updated, err := s.submissionService.UpdateDetails(ctx, sub, actorID, user.DiscordUsername)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, submissionToProto(updated))
+}
+
 func (s *Server) handleApproveBooking(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -416,6 +481,45 @@ func (s *Server) handleGetArtist(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, artistToProto(artist))
 }
 
+func protoToDomainArtist(pb *pyxisv1.Artist) *domain.Artist {
+	return &domain.Artist{
+		ID:    int(pb.Id),
+		Name:  pb.Name,
+		Genre: pb.Genre,
+		Links: pb.Links,
+		Notes: pb.Notes,
+	}
+}
+
+func (s *Server) handleCreateArtist(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+
+	var req pyxisv1.Artist
+	if err := protojson.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+
+	created, err := s.artistService.Create(ctx, protoToDomainArtist(&req))
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusCreated, artistToProto(created))
+}
+
 func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -437,24 +541,14 @@ func (s *Server) handleUpdateArtist(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req struct {
-		Name  string `json:"name"`
-		Genre string `json:"genre"`
-		Links string `json:"links"`
-		Notes string `json:"notes"`
-	}
-	if err := json.Unmarshal(body, &req); err != nil {
+	var req pyxisv1.Artist
+	if err := protojson.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))
 		return
 	}
 
-	artist := &domain.Artist{
-		ID:    id,
-		Name:  req.Name,
-		Genre: req.Genre,
-		Links: req.Links,
-		Notes: req.Notes,
-	}
+	artist := protoToDomainArtist(&req)
+	artist.ID = id
 
 	updated, err := s.artistService.Update(ctx, artist)
 	if err != nil {

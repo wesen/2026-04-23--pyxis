@@ -99,6 +99,40 @@ func (r *SubmissionRepo) Decline(ctx context.Context, id int, reviewedBy int) (*
 	return dbSubmissionToDomain(row), nil
 }
 
+// UpdateDetails updates editable booking submission fields.
+func (r *SubmissionRepo) UpdateDetails(ctx context.Context, s *domain.Submission) (*domain.Submission, error) {
+	params := db.UpdateSubmissionDetailsParams{
+		ID:         int32(s.ID),
+		ArtistName: s.ArtistName,
+	}
+	if s.PreferredDate != nil {
+		params.PreferredDate = pgtype.Date{Time: *s.PreferredDate, Valid: true}
+	}
+	if s.Genre != "" {
+		params.Genre = pgtype.Text{String: s.Genre, Valid: true}
+	}
+	if s.ExpectedDraw != nil {
+		params.ExpectedDraw = pgtype.Int4{Int32: int32(*s.ExpectedDraw), Valid: true}
+	}
+	if s.Links != "" {
+		params.Links = pgtype.Text{String: s.Links, Valid: true}
+	}
+	if s.TechRider != "" {
+		params.TechRider = pgtype.Text{String: s.TechRider, Valid: true}
+	}
+	if s.Message != "" {
+		params.Message = pgtype.Text{String: s.Message, Valid: true}
+	}
+	if s.ContactDiscord != "" {
+		params.ContactDiscord = pgtype.Text{String: s.ContactDiscord, Valid: true}
+	}
+	row, err := r.queries.UpdateSubmissionDetails(ctx, params)
+	if err != nil {
+		return nil, err
+	}
+	return dbSubmissionToDomain(row), nil
+}
+
 // GetReview returns staff review notes for a submission.
 func (r *SubmissionRepo) GetReview(ctx context.Context, submissionID int) (*domain.BookingReview, error) {
 	row, err := r.queries.GetBookingReview(ctx, int32(submissionID))

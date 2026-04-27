@@ -58,6 +58,18 @@ func (s *SubmissionService) GetByID(ctx context.Context, id int) (*domain.Submis
 	return s.submissions.GetByID(ctx, id)
 }
 
+// UpdateDetails modifies editable booking submission fields and logs the change.
+func (s *SubmissionService) UpdateDetails(ctx context.Context, submission *domain.Submission, actorID int, actorName string) (*domain.Submission, error) {
+	updated, err := s.submissions.UpdateDetails(ctx, submission)
+	if err != nil {
+		return nil, err
+	}
+	_ = s.audit.Log(ctx, actorID, actorName, "booking.update", "submission", &submission.ID, map[string]interface{}{
+		"artist_name": submission.ArtistName,
+	})
+	return updated, nil
+}
+
 // GetReview returns staff review notes for a submission.
 func (s *SubmissionService) GetReview(ctx context.Context, submissionID int) (*domain.BookingReview, error) {
 	return s.submissions.GetReview(ctx, submissionID)

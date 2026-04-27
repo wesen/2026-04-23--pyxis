@@ -11,6 +11,7 @@ import {
   AppShow,
   AppShowSchema,
   Submission,
+  SubmissionSchema,
   SubmissionListSchema,
   BookingReview,
   BookingReviewSchema,
@@ -44,6 +45,8 @@ type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
 type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
 type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
+type BookingUpdateInput = Pick<Submission, 'id' | 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'>;
+type ArtistInput = Pick<Artist, 'name' | 'genre' | 'links' | 'notes'>;
 
 export const appApi = createApi({
   reducerPath: 'appApi',
@@ -143,6 +146,12 @@ export const appApi = createApi({
       providesTags: ['Booking'],
     }),
 
+    updateBooking: builder.mutation<Submission, BookingUpdateInput>({
+      query: (booking) => ({ url: endpoints.booking(booking.id), method: 'PATCH', body: toJson(SubmissionSchema, create(SubmissionSchema, booking)) }),
+      transformResponse: (response: unknown) => fromJson(SubmissionSchema, response as any),
+      invalidatesTags: ['Booking', 'AuditLog'],
+    }),
+
     approveBooking: builder.mutation<Show, number>({
       query: (id) => ({ url: endpoints.bookingApprove(id), method: 'PATCH' }),
       transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
@@ -182,8 +191,14 @@ export const appApi = createApi({
       providesTags: (_r, _e, id) => [{ type: 'Artist', id }],
     }),
 
+    createArtist: builder.mutation<Artist, ArtistInput>({
+      query: (artist) => ({ url: endpoints.artists, method: 'POST', body: toJson(ArtistSchema, create(ArtistSchema, artist)) }),
+      transformResponse: (response: unknown) => fromJson(ArtistSchema, response as any),
+      invalidatesTags: ['Artist', 'AuditLog'],
+    }),
+
     updateArtist: builder.mutation<Artist, Artist>({
-      query: (artist) => ({ url: endpoints.artist(artist.id), method: 'PATCH', body: artist }),
+      query: (artist) => ({ url: endpoints.artist(artist.id), method: 'PATCH', body: toJson(ArtistSchema, artist) }),
       transformResponse: (response: unknown) => fromJson(ArtistSchema, response as any),
       invalidatesTags: (_r, _e, artist) => [{ type: 'Artist', id: artist.id }, 'Artist', 'AuditLog'],
     }),
@@ -264,6 +279,7 @@ export const {
   useCreateCalendarBlockedMutation,
   useCreateCalendarHoldMutation,
   useCreateShowMutation,
+  useCreateArtistMutation,
   useDeclineBookingMutation,
   useDeleteCalendarBlockedMutation,
   useDeleteCalendarHoldMutation,
@@ -282,6 +298,7 @@ export const {
   useAnnounceShowMutation,
   useUpdateArtistMutation,
   useUpdateAttendanceMutation,
+  useUpdateBookingMutation,
   useUpdateBookingReviewMutation,
   useUpdateSettingsMutation,
   useUpdateShowMutation,

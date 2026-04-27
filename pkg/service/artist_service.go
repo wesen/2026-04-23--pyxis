@@ -27,6 +27,11 @@ func (s *ArtistService) GetByID(ctx context.Context, id int) (*domain.Artist, er
 	return s.artists.GetByID(ctx, id)
 }
 
+// Create inserts a new artist.
+func (s *ArtistService) Create(ctx context.Context, artist *domain.Artist) (*domain.Artist, error) {
+	return s.artists.Create(ctx, artist)
+}
+
 // Update modifies an existing artist.
 func (s *ArtistService) Update(ctx context.Context, artist *domain.Artist) (*domain.Artist, error) {
 	return s.artists.Update(ctx, artist)
