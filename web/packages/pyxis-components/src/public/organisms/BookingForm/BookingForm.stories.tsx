@@ -19,6 +19,31 @@ export const Submitting: Story = {
   args: { isSubmitting: true },
 };
 
+export const PrototypeInquiry: Story = {
+  args: {
+    visibleFields: { links: false, genre: false, showType: true, techRider: false, agreement: true },
+  },
+  render: (args) => (
+    <div style={{ width: 548 }}>
+      <BookingForm {...args} />
+    </div>
+  ),
+};
+
+export const MinimalRtkPayload: Story = {
+  args: {
+    intro: 'When a route already knows the show date, keep the form short and pass the known values separately on submit.',
+    visibleFields: { name: false, links: false, preferredDate: false, expectedDraw: false, genre: false, techRider: false, agreement: true },
+    showTypeOptions: ['DJ night', 'Live music'],
+    defaultShowType: 'DJ night',
+  },
+  render: (args) => (
+    <div style={{ width: 420 }}>
+      <BookingForm {...args} />
+    </div>
+  ),
+};
+
 export const Narrow: Story = {
   args: {},
   render: (args) => (

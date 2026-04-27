@@ -1,36 +1,49 @@
 .pyxis-about-page {
-  padding-bottom: 72px;
+  padding-bottom: 0;
+}
+
+.pyxis-about-page [data-pyxis-component='about-intro'] {
+  --pyxis-about-intro-accent: var(--color-text-primary);
+}
+
+.pyxis-about-page [data-pyxis-component='ethos-grid'] {
+  --pyxis-ethos-title: var(--color-text-primary);
+}
+
+.pyxis-about-page [data-pyxis-component='public-page-header'] {
+  --pyxis-public-page-header-accent-color: var(--color-text-primary);
+}
+
+.pyxis-about-page [data-pyxis-component='collective-list'] {
+  --pyxis-collective-accent: var(--color-text-primary);
+}
+
+.pyxis-about-page [data-pyxis-component='find-us-block'] {
+  --pyxis-find-us-accent: var(--color-text-primary);
 }
 
 .pyxis-about-page__hero {
-  padding-block: 44px 28px;
-}
-
-.pyxis-about-page__image {
-  align-items: center;
-  background: var(--color-border);
-  color: var(--color-text-disabled);
-  display: flex;
-  height: 240px;
-  justify-content: center;
-  margin-block: 24px 56px;
+  padding-block: 44px 0;
 }
 
 .pyxis-about-page__sections {
   display: grid;
-  gap: 48px;
+  gap: 56px;
+}
+
+.pyxis-about-page__sections > [data-section='about-intro'] {
+  max-width: 620px;
+}
+
+.pyxis-about-page__split {
+  border-top: 1px solid #EAE7E0;
+  padding-top: 36px;
 }
 
 .pyxis-about-page__split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 40px;
-}
-
-.pyxis-about-page__cta {
-  display: flex;
-  justify-content: center;
-  padding-top: 24px;
 }
 
 @media (max-width: 760px) {

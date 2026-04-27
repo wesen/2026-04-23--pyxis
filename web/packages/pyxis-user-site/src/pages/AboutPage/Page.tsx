@@ -1,10 +1,9 @@
 import {
-  AboutHero,
   AboutIntro,
-  Button,
   CollectiveList,
   EthosGrid,
   FindUsBlock,
+  PublicPageHeader,
 } from 'pyxis-components';
 import './Page.css';
 
@@ -12,13 +11,9 @@ export function About() {
   return (
     <main className="pyxis-public-page pyxis-about-page" data-page="about">
       <div className="pyxis-public-page__inner">
-        <section className="pyxis-about-page__hero" data-section="about-hero">
-          <AboutHero />
-        </section>
-
-        <div className="pyxis-about-page__image" data-section="about-image">
-          [Hero image — venue interior]
-        </div>
+        <header className="pyxis-about-page__hero" data-section="about-hero">
+          <PublicPageHeader kicker="Est. 2023" title="About ppxis" />
+        </header>
 
         <div className="pyxis-about-page__sections" data-section="about-content">
           <section data-section="about-intro">
@@ -32,10 +27,6 @@ export function About() {
           <section className="pyxis-about-page__split" data-section="about-collective-find-us">
             <CollectiveList />
             <FindUsBlock />
-          </section>
-
-          <section className="pyxis-about-page__cta" data-section="about-cta">
-            <Button variant="primary" iconRight="chevron-right">Book the space</Button>
           </section>
         </div>
       </div>

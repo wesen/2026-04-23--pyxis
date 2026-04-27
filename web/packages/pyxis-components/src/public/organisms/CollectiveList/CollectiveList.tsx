@@ -2,22 +2,33 @@ import { clsx } from 'clsx';
 import { pyxisPart } from '../../../utils/parts';
 import './CollectiveList.css';
 
-export type CollectiveListProps = { className?: string };
+export type CollectiveMember = {
+  name: string;
+  role: string;
+};
 
-const people = [
-  ['shae m.', 'bookings, door'],
-  ['mhina j.', 'bookings, door'],
-  ['ro.', 'bookings, door'],
+export type CollectiveListProps = {
+  heading?: string;
+  people?: CollectiveMember[];
+  className?: string;
+};
+
+export const defaultCollectivePeople: CollectiveMember[] = [
+  { name: 'shae m.', role: 'bookings, door' },
+  { name: 'mhina j.', role: 'tech, lights' },
+  { name: 'ro.', role: 'sound, residencies' },
+  { name: 'devon k.', role: 'operations' },
+  { name: 'emi p.', role: 'safer-space lead' },
 ];
 
-export const CollectiveList = ({ className }: CollectiveListProps) => (
+export const CollectiveList = ({ heading = 'The collective', people = defaultCollectivePeople, className }: CollectiveListProps) => (
   <div {...pyxisPart('collective-list')} className={clsx('pyxis-collective-list', className)}>
     <div className="pyxis-collective-list__heading" {...pyxisPart('collective-list', 'heading')}>
-      The collective
+      {heading}
     </div>
     <div className="pyxis-collective-list__list" {...pyxisPart('collective-list', 'list')}>
-      {people.map(([name, role]) => (
-        <div key={name} className="pyxis-collective-list__item" {...pyxisPart('collective-list', 'item')}>
+      {people.map(({ name, role }) => (
+        <div key={`${name}-${role}`} className="pyxis-collective-list__item" {...pyxisPart('collective-list', 'item')}>
           <span {...pyxisPart('collective-list', 'name')}>{name}</span>
           <span {...pyxisPart('collective-list', 'role')}>{role}</span>
         </div>

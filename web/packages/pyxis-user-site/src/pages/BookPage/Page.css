@@ -6,6 +6,15 @@
   padding-block: 44px 28px;
 }
 
+.pyxis-book-page [data-pyxis-component='public-page-header'] {
+  --pyxis-public-page-header-accent-color: var(--color-text-primary);
+}
+
+.pyxis-book-page [data-pyxis-component='booking-form'] {
+  --pyxis-booking-form-value-color: var(--color-text-primary);
+  --pyxis-booking-form-submit-bg: var(--color-accent);
+}
+
 .pyxis-book-page__layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;

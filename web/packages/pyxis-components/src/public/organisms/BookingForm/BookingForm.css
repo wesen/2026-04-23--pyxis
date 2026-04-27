@@ -5,6 +5,8 @@
   --pyxis-booking-form-border-color: #EAE7E0;
   --pyxis-booking-form-muted-color: #8E887E;
   --pyxis-booking-form-surface: var(--color-surface);
+  --pyxis-booking-form-value-color: var(--pyxis-booking-form-accent-color);
+  --pyxis-booking-form-submit-bg: var(--pyxis-booking-form-accent-color);
 
   display: grid;
   gap: 18px;
@@ -49,7 +51,7 @@
   border: none;
   border-bottom: 1.5px solid var(--pyxis-booking-form-border-color);
   box-sizing: border-box;
-  color: var(--pyxis-booking-form-accent-color);
+  color: var(--pyxis-booking-form-value-color);
   font-family: inherit;
   font-size: 14.5px;
   outline: none;
@@ -66,13 +68,56 @@
   border: 1px solid var(--pyxis-booking-form-border-color);
   border-radius: var(--radius-xs);
   box-sizing: border-box;
-  color: var(--pyxis-booking-form-accent-color);
+  color: var(--pyxis-booking-form-value-color);
   font-family: inherit;
   font-size: var(--text-base);
   outline: none;
   padding: var(--space-3);
   resize: vertical;
   width: 100%;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='chips']) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='chip']) {
+  background: #fff;
+  border: 1px solid var(--pyxis-booking-form-border-color);
+  border-radius: 999px;
+  color: var(--pyxis-booking-form-value-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: var(--weight-medium);
+  padding: 7px 14px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='chip'].pyxis-booking-form__chip--selected) {
+  background: #1F1E1C;
+  border-color: #1F1E1C;
+  color: #fff;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='agreement']) {
+  align-items: flex-start;
+  color: var(--pyxis-booking-form-muted-color);
+  display: flex;
+  font-size: 12.5px;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='agreement']) input {
+  accent-color: var(--pyxis-booking-form-accent-color);
+  margin-top: 2px;
+}
+
+:where([data-pyxis-component='booking-form'][data-pyxis-part='agreement']) a {
+  color: #1F1E1C;
+  font-weight: var(--weight-semibold);
 }
 
 :where([data-pyxis-component='booking-form'][data-pyxis-part='input']:focus-visible),
@@ -84,7 +129,7 @@
 }
 
 :where([data-pyxis-component='booking-form'][data-pyxis-part='submit']) {
-  background: var(--pyxis-booking-form-accent-color);
+  background: var(--pyxis-booking-form-submit-bg);
   border: none;
   border-radius: var(--radius-xs);
   color: var(--color-text-inverse);

@@ -6,6 +6,10 @@
   padding-block: 40px 0;
 }
 
+.pyxis-shows-page [data-pyxis-component='public-page-header'] {
+  --pyxis-public-page-header-accent-color: var(--color-text-primary);
+}
+
 .pyxis-shows-page__grid-section {
   margin-top: 0;
 }

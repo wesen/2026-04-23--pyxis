@@ -2807,3 +2807,95 @@ Tune public pages in this order based on the latest sweep:
 1. About page/content.
 2. Book page/content.
 3. Shows page/header/content just above review threshold.
+
+## Step 31: Public page pass with data-friendly widget props
+
+This step continued the public-site page sweep after the page-folder commit. The important architectural correction was to stop treating public widgets as fixed prototype fragments: About and Booking widgets now accept typed props so page code can pass data down from RTK Query, route loaders, CMS responses, or story fixtures.
+
+The visual work focused on the highest remaining public pages: About, Book, and the Shows header. The result is not the final review bundle yet; it is an intermediate pass that moved several large structural mismatches into the narrow review/tune boundary and established the props needed for more page/story variants.
+
+### Prompt Context
+
+**User prompt (verbatim):** "make sure to add proper props to the widgets so that we trickle stuff down from rtk-query or top down / make different stories.
+
+continue"
+
+**Assistant interpretation:** Continue visual tuning all public screens, but whenever a component contains hard-coded page data, convert it to a prop-driven widget with representative stories.
+
+**Inferred user intent:** Keep the public-site widgets reusable and data-fed instead of visual-only one-offs, while preserving the visual-diff tuning workflow.
+
+**Commit (code):** pending — this step is staged for the next commit.
+
+### What I did
+
+- Added prop-driven data APIs and story variants for public About widgets:
+  - `AboutIntro` now accepts `lead` and `paragraphs`.
+  - `EthosGrid` now accepts `heading` and typed `items`.
+  - `CollectiveList` now accepts `heading` and typed `people`.
+  - `FindUsBlock` now accepts `heading`, address lines, email lines, and note text.
+- Added richer stories that demonstrate CMS/RTK/top-down variants instead of only default markup.
+- Converted `BookingForm` to accept a `visibleFields` configuration, show-type chip options, agreement content, submit label, intro content, and submit validation behavior.
+- Updated the Book page to pass a prototype-like form configuration from the page instead of requiring the form to hard-code one shape.
+- Removed extra Book aside cards for the desktop prototype target; agreement now lives inside the form through props.
+- Tuned page-specific CSS variables so pages can override component color roles without changing component internals.
+
+### Why
+
+Visual parity was blocked by two causes: pages had mismatched composition, and several widgets had fixed copy/field sets. A page can only tune safely if it can pass the right data shape down. This also makes Storybook variants cheaper: a route story can render RTK-style data while component stories can render smaller semantic cases.
+
+### What worked
+
+- `pyxis-components` and `pyxis-user-site` TypeScript validation passed after the prop changes.
+- `pyxis-user-site` Vite production build passed.
+- Book page content improved from the earlier long-form mismatch to roughly the review boundary.
+- About page is now structurally much closer to the standalone prototype and no longer includes the non-prototype hero image or CTA.
+
+### What didn't work
+
+- Vite/Storybook briefly served a stale empty transform for `BookingForm.tsx`, producing this runtime error:
+  - `SyntaxError: The requested module ... BookingForm.tsx ... does not provide an export named 'BookingForm'`
+- Touching `BookingForm.tsx` and `index.ts` forced Vite to retransform the module.
+- About, Book, and Shows still have a few sections slightly above the 10% review band in the latest sweep.
+
+### What I learned
+
+- Page-specific CSS variable overrides need to target the rendered component root, not just the ancestor page/header block, because several component roots define their own default custom properties.
+- The Book mismatch was mostly a composition/field-list mismatch, not a low-level typography issue.
+
+### What was tricky to build
+
+The form needed to remain useful for real submissions while matching a shorter prototype state. The solution was not to create a second booking form; it was to add `visibleFields`, `showTypeOptions`, `agreementLabel`, and `disableSubmitWhenInvalid` so the page and stories can choose the correct composition while the form keeps one submission path.
+
+### What warrants a second pair of eyes
+
+- `BookingForm` now supports hidden fields; review the submit payload defaults when fields are hidden, especially `links`, `genre`, and `showType` mapping.
+- `disableSubmitWhenInvalid={false}` makes the button visually enabled while submit still validates; confirm this is acceptable for the public booking page behavior.
+
+### What should be done in the future
+
+- Add dedicated component-level visual targets for About and Booking widgets if the page-level deltas remain noisy.
+- Continue final tuning for sections hovering just above the review band.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-components/src/public/organisms/BookingForm/BookingForm.tsx` to review the new form API.
+- Then review the About widget prop APIs under `web/packages/pyxis-components/src/public/organisms/`.
+- Validate with:
+  - `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`
+  - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build`
+  - `css-visual-diff verbs --repository prototype-design/visual-diff/userland pyxis pages compare-spec prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml --outDir /tmp/pyxis-public-pages-mid-sweep --summary --output json`
+
+### Technical details
+
+Latest intermediate sweep:
+
+```text
+shows content      11.738% tune-required
+shows shows-list   11.166% tune-required
+book content       10.902% tune-required
+about content      10.833% tune-required
+shows page         10.748% tune-required
+shows header       10.624% tune-required
+show-detail page    5.688% review
+archive page        6.684% review
+```

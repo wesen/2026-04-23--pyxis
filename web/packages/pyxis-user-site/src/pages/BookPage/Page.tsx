@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   BookingForm,
-  BookingRules,
   BookingSpaceAside,
   PublicPageHeader,
-  SaferSpaceAgreement,
 } from 'pyxis-components';
 import type { BookingFormData } from 'pyxis-types';
 import { getApiErrorMessage } from '../../api/errors';
@@ -31,7 +29,7 @@ export function Book() {
     <main className="pyxis-public-page pyxis-book-page" data-page="book">
       <div className="pyxis-public-page__inner">
         <header className="pyxis-book-page__header" data-section="book-header">
-          <PublicPageHeader kicker="booking" title="Book us" />
+          <PublicPageHeader kicker="Inquiries" title="Book the space" />
         </header>
 
         <section className="pyxis-book-page__layout" data-section="book-layout">
@@ -42,13 +40,16 @@ export function Book() {
                 <p className="pyxis-public-page__status-detail">{submitError}</p>
               </div>
             )}
-            <BookingForm onSubmit={handleSubmit} isSubmitting={submit.isPending} />
+            <BookingForm
+              onSubmit={handleSubmit}
+              isSubmitting={submit.isPending}
+              visibleFields={{ links: false, genre: false, showType: true, techRider: false, agreement: true }}
+              disableSubmitWhenInvalid={false}
+            />
           </div>
 
           <aside className="pyxis-book-page__aside" data-section="book-aside">
             <BookingSpaceAside />
-            <BookingRules />
-            <SaferSpaceAgreement />
           </aside>
         </section>
       </div>
