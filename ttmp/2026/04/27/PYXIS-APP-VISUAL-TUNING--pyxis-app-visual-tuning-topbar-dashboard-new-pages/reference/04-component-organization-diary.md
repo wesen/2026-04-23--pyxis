@@ -3458,3 +3458,170 @@ Archive focused result after this step:
 archive content 7.034% review
 archive page    6.509% review
 ```
+
+## Step 39: Tune MailingListCTA title rhythm
+
+The Shows mailing-list review note identified extra whitespace under the main title. I treated this as a component-level issue in `MailingListCTA`, not a Shows page spacing issue, because the comparison bounds showed the component itself was about 8.5px taller than the prototype.
+
+The root cause was inherited token line-height: the React title rendered at `24px / 36px`, while the prototype title rendered closer to a normal 24px display line. I set the component title line-height explicitly and aligned the description/input font sizes to the prototype values.
+
+### Prompt Context
+
+**User prompt (verbatim):** "shows/mailing-list
+review · 8.809%
+Notes: whitespace under the main title. 
+
+compare_yaml:
+page: shows
+section: mailing-list
+classification: review
+changedPercent: 8.809216886883661
+bounds:
+  changed: true
+  delta:
+    height: 8.5
+    width: 0
+    x: 0
+    y: 30.25
+  left:
+    height: 136
+    width: 856
+    x: 32
+    y: 1664.109375
+  right:
+    height: 144.5
+    width: 856
+    x: 32
+    y: 1694.359375
+pixel:
+  changedPercent: 8.809216886883661
+  changedPixels: 10934
+  diffComparisonPath: /tmp/pyxis-public-pages-after-archive-props/shows/artifacts/mailing-list/diff_comparison.png
+  diffOnlyPath: /tmp/pyxis-public-pages-after-archive-props/shows/artifacts/mailing-list/diff_only.png
+  normalizedHeight: 145
+  normalizedWidth: 856
+  threshold: 30
+  totalPixels: 124120
+left:
+  bounds:
+    height: 136
+    width: 856
+    x: 32
+    y: 1664.109375
+  exists: true
+  name: shows-mailing-list
+  selector: \"[data-section='mailing-list']\"
+  url: \"http://localhost:7070/standalone/public/shows.html\"
+  visible: true
+right:
+  bounds:
+    height: 144.5
+    width: 856
+    x: 32
+    y: 1694.359375
+  exists: true
+  name: shows-mailing-list
+  selector: \"[data-section='mailing-list']\"
+  url: \"http://localhost:6007/iframe.html?id=public-site-pages-shows--desktop&viewMode=story\"
+  visible: true
+changedStyles:
+  -
+    changed: true
+    left: rgb(31, 30, 28)
+    name: color
+    right: rgb(26, 26, 24)
+  -
+    changed: true
+    left: Inter, sans-serif
+    name: font-family
+    right: \"Inter, -apple-system, BlinkMacSystemFont, \\\"Segoe UI\\\", sans-serif\"
+  -
+    changed: true
+    left: 16px
+    name: font-size
+    right: 14px
+  -
+    changed: true
+    left: normal
+    name: line-height
+    right: 21px
+changedAttributes:
+  -
+    changed: true
+    name: class
+    right: pyxis-shows-page__mailing-list"
+
+**Assistant interpretation:** Fix the extra vertical whitespace below the mailing-list title, preferably at the small component level.
+
+**Inferred user intent:** Continue review-driven tuning with concrete css-visual-diff metadata and keep changes local to the component that owns the mismatch.
+
+**Commit (code):** pending — this step records the MailingListCTA rhythm fix.
+
+### What I did
+
+- Inspected `MailingListCTA` and measured prototype vs React title/description/form bounds.
+- Updated `MailingListCTA.css`:
+  - title now has explicit `line-height: 1.2`
+  - description uses explicit `font-size: 14px` and `line-height: normal`
+  - input uses explicit `font-size: 14px`
+- Touched `MailingListCTA.tsx`/CSS to force Vite to retransform the CSS after a transient stale style render.
+- Reran focused Shows and full public-page sweeps.
+- Regenerated and re-served the bundled review page:
+  - `/tmp/pyxis-public-pages-visual-review-mailing-list-20260427-165056/index.html`
+  - `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The component inherited the app/public base line-height, which made a 24px display title consume 36px of vertical space. The prototype uses a tighter natural display title line, so the description appeared too far below the title in React.
+
+### What worked
+
+- `shows/mailing-list` improved from `8.809% review` to `0.813% accepted`.
+- The full sweep now has one accepted row.
+- TypeScript and Vite build validation passed for pyxis-components and pyxis-user-site.
+
+### What didn't work
+
+- The first focused comparison after editing briefly showed an unstyled React mailing-list block. This matched the earlier Vite stale-transform behavior seen with ShowTile CSS. Touching the component CSS/TSX forced a correct retransform.
+
+### What I learned
+
+Small molecule line-height defaults can dominate page-level visual diffs. Explicit line-height is safer for display text inside reusable public components.
+
+### What was tricky to build
+
+The first comparison result looked like a regression because CSS was not applied, but the raw file was valid. Re-running after touching the files confirmed it was a dev-server transform cache issue rather than bad CSS.
+
+### What warrants a second pair of eyes
+
+- Confirm the accepted mailing-list row in the review page visually matches the prototype.
+- Check that the component-level MailingListCTA stories still look correct with the tighter title line-height.
+
+### What should be done in the future
+
+- If Vite stale CSS transforms recur, consider a documented server restart/touch step in the visual tuning runbook.
+
+### Code review instructions
+
+- Review `web/packages/pyxis-components/src/public/organisms/MailingListCTA/MailingListCTA.css`.
+- Validate with the focused Shows comparison and the full public page sweep.
+
+### Technical details
+
+Latest full sweep after this change:
+
+```text
+shows content        11.620% tune-required
+shows shows-list     11.166% tune-required
+about content        10.833% tune-required
+shows page           10.640% tune-required
+about page            9.059% review
+show-detail content   8.203% review
+shows header          7.472% review
+archive content       7.034% review
+archive page          6.509% review
+book content          5.982% review
+show-detail page      5.688% review
+book page             4.539% review
+shows mailing-list    0.813% accepted
+```
