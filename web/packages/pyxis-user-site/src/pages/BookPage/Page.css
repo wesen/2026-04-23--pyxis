@@ -3,7 +3,7 @@
 }
 
 .pyxis-book-page__header {
-  padding-block: 44px 28px;
+  padding-block: 38px 0;
 }
 
 .pyxis-book-page [data-pyxis-component='public-page-header'] {

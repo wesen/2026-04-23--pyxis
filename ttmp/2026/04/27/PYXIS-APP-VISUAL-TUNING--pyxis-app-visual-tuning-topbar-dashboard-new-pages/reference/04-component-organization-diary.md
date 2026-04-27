@@ -3048,3 +3048,102 @@ The script needed to preserve provenance while making assets local. The fix copi
 
 - Review `scripts/05-build-public-pages-review.py`, especially `bundle_artifact()`.
 - Open `/tmp/pyxis-public-pages-visual-review-bundled-20260427-153551/index.html` and verify local image links.
+
+## Step 34: Tune Book page header spacing from review feedback
+
+The review feedback identified the Book/content mismatch as vertical rhythm rather than content: the whitespace above the title and below the first header line did not line up with the prototype. I measured the prototype and Storybook text positions, then adjusted only the Book page header spacing.
+
+The fix was small but high impact: the Book title and first form intro line now align within roughly half a pixel of the prototype, and the Book page moved comfortably into review-band.
+
+### Prompt Context
+
+**User prompt (verbatim):** "book / content -> the difference is the whitespace above the title, whitespace below the first line."
+
+**Assistant interpretation:** Tune the Book page vertical spacing around the page title/header divider and first intro/form line; do not change the content or component structure.
+
+**Inferred user intent:** Use the visual review feedback to make a targeted spacing correction instead of continuing broad visual guessing.
+
+**Commit (code):** pending — this step records the Book spacing commit.
+
+### What I did
+
+- Measured prototype vs Storybook positions for:
+  - `Book the space` title
+  - first form intro line (`tell us about your show...`)
+  - Book header and layout bounds
+- Updated `web/packages/pyxis-user-site/src/pages/BookPage/Page.css`:
+  - changed `.pyxis-book-page__header` from `padding-block: 44px 28px` to `padding-block: 38px 0`
+- Reran focused and full public-page visual comparisons.
+- Regenerated and re-served the bundled review HTML from the updated sweep:
+  - `/tmp/pyxis-public-pages-visual-review-book-spacing-20260427-160043/index.html`
+  - served at `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The prototype `PageHeader` already includes the divider and bottom spacing. The React page added extra wrapper bottom padding on top of the component margin, pushing the first form line too low. Reducing top padding and removing the wrapper bottom padding aligned the title and intro without modifying shared header internals.
+
+### What worked
+
+Measured positions after the change:
+
+```text
+prototype title y=121.0, intro y=233.09
+React     title y=121.5, intro y=233.59
+```
+
+Focused Book visual result:
+
+```text
+book content 5.982% review
+book page    4.539% review
+```
+
+Full public-page sweep now has Book in review-band.
+
+### What didn't work
+
+N/A — this was a targeted CSS spacing adjustment.
+
+### What I learned
+
+The Book mismatch was not a form widget issue after the previous prop pass. It was double vertical spacing: page wrapper padding plus `PublicPageHeader`'s own bottom margin.
+
+### What was tricky to build
+
+The visual screenshots looked very similar at first glance, so measuring text bounds was more reliable than eyeballing. The key was separating title top alignment from first-line alignment: top padding fixed the title, wrapper bottom padding fixed the intro line.
+
+### What warrants a second pair of eyes
+
+- Confirm the new review page's Book/content card visually matches your feedback.
+- Check mobile Book later, because this spacing change affects the page header wrapper outside the media query.
+
+### What should be done in the future
+
+- Consider using the same no-extra-wrapper-bottom convention for other pages that wrap `PublicPageHeader`.
+
+### Code review instructions
+
+- Review `web/packages/pyxis-user-site/src/pages/BookPage/Page.css`.
+- Validate with:
+  - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build`
+  - focused visual: `css-visual-diff ... --page book`
+
+### Technical details
+
+Full sweep after this change:
+
+```text
+shows content      11.605% tune-required
+shows shows-list   11.166% tune-required
+about content      10.833% tune-required
+shows header       10.773% tune-required
+shows page         10.630% tune-required
+about page          9.059% review
+shows mailing-list  8.809% review
+show-detail content 8.203% review
+archive content     7.251% review
+archive page        6.684% review
+book content        5.982% review
+show-detail page    5.688% review
+book page           4.539% review
+```
