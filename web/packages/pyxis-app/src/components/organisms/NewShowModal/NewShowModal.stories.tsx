@@ -20,9 +20,8 @@ export const WithCallbacks: Story = {
   },
 };
 
-export const CustomCopy: Story = {
+export const EditMode: Story = {
   args: {
-    title: 'Duplicate show',
-    description: 'Create a new date using the current show as a starting point.',
+    mode: 'edit',
   },
 };
