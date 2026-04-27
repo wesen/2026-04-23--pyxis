@@ -12,8 +12,8 @@ export type PosterProps = {
   style?: CSSProperties;
 };
 
-const variants: Record<PosterKind, { bg: string; fg: string; accent: string; title: string; kicker: string; meta: string; mark: string }> = {
-  redroom: { bg: 'radial-gradient(ellipse at 50% 40%, #7A0E0E 0%, #3D0505 60%, #1A0202 100%)', fg: '#FFD9C8', accent: '#E84545', title: 'Redroom Inferno', kicker: 'A Dusknight residency at ppxis', meta: 'Feb. 14th, 2026', mark: '♡' },
+const variants: Record<PosterKind, { bg: string; fg: string; accent: string; title: string; kicker: string; meta: string; mark: string; subtitle?: string }> = {
+  redroom: { bg: 'radial-gradient(ellipse at 50% 40%, #7A0E0E 0%, #3D0505 60%, #1A0202 100%)', fg: '#FFD9C8', accent: '#E84545', title: 'Redroom Inferno', kicker: 'A Dusknight residency at ppxis', subtitle: 'A Kink · Electronica · Queer Music Party', meta: 'Feb. 14th, 2026', mark: '♡' },
   pixel808: { bg: '#0B0B0B', fg: '#fff', accent: '#F39020', title: '808', kicker: 'The heart of the beat', meta: 'Fri Feb 21 · 8PM · 21+', mark: '▮▮▮' },
   petals: { bg: '#F8C9D0', fg: '#7A2233', accent: '#E55770', title: 'Petals of Love', kicker: 'DyvynHER Collective presents', meta: 'Feb 28 · 6:30 PM · All Ages', mark: '♥' },
   meetups: { bg: '#9FD8D4', fg: '#1A1A1A', accent: '#F6A25B', title: 'Monday Meet-ups', kicker: 'Club club', meta: 'Mondays 7p – 10p', mark: '$0–30' },
@@ -34,6 +34,43 @@ export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className, style }: 
     ...style,
   } as CSSProperties;
 
+  if (kind === 'meetups') {
+    return (
+      <div
+        className={clsx('pyxis-poster', className)}
+        {...pyxisPart('poster')}
+        data-poster-kind={kind}
+        style={posterStyle}
+      >
+        <div className="pyxis-poster__meetups-art" {...pyxisPart('poster', 'meetups-art')}>
+          <div className="pyxis-poster__meetups-top">
+            <div className="pyxis-poster__meetups-badge">
+              <span>CLUB</span>
+              <span>CLUB</span>
+            </div>
+            <div className="pyxis-poster__meetups-heading">MONDAY<br />MEET-UPS</div>
+          </div>
+          <div className="pyxis-poster__meetups-copy">
+            Come <mark>explore</mark> DJ gear, instruments, and <mark>make pals</mark>! Just sign up and hop in!
+          </div>
+          <div className="pyxis-poster__meetups-gear-row">
+            <div className="pyxis-poster__meetups-gear">
+              <span />
+              <span />
+            </div>
+            <div className="pyxis-poster__meetups-note">
+              <mark>No experience necessary!</mark> This is a place of learning! :)
+            </div>
+          </div>
+          <div className="pyxis-poster__meetups-footer">
+            Mondays 7p – 10p<br />25 Manton Ave. · Unit #2<br />Providence, RI 02999
+            <div className="pyxis-poster__meetups-sticker">$0 - 30<br />sliding<br />scale!</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={clsx('pyxis-poster', className)}
@@ -49,6 +86,11 @@ export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className, style }: 
           <div className="pyxis-poster__title" {...pyxisPart('poster', 'title')}>
             {v.title}
           </div>
+          {v.subtitle && (
+            <div className="pyxis-poster__subtitle" {...pyxisPart('poster', 'subtitle')}>
+              {v.subtitle}
+            </div>
+          )}
         </div>
         <div className="pyxis-poster__mark" {...pyxisPart('poster', 'mark')}>
           {v.mark}

@@ -2463,3 +2463,121 @@ Storybook story IDs are generated from story export names. The spec now depends 
 ### Custom css-visual-diff functionality assessment
 
 The new `compare-public-component` alias is helpful and probably enough for the immediate workflow. A custom css-visual-diff feature could still be useful later: a "multi-crop story matrix" mode that compares each child inside an `AllVariants` story and returns per-child rows. That would be especially useful for poster variants without adding one story and one spec target per image. For now, explicit representative targets are simpler and easier to review.
+
+## Step 27: Tune public Shows component targets to review-band thresholds
+
+This step works through the new component-level targets and tunes to a reasonable threshold. The goal is not full poster pixel perfection; it is to get smaller component targets into the review band and make the remaining full-page `shows-list` delta easier to explain.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Add detailed tasks for all the subcomponents to test. We don't need that many poster stories since they're mostly just different images. Once all the tasks are added, go through them, tune to a reasonable threshold, write diary (in the diary assess if it would make sense to introduce custom css-visual-diff functionality to be more targeted), then continue"
+
+**Assistant interpretation:** Continue after setup by tuning representative component targets and recording thresholds, rather than chasing every poster image individually.
+
+**Inferred user intent:** Establish a practical visual-quality floor for public Shows components and keep the workflow evidence-based.
+
+**Commit (code):** pending at diary write time.
+
+### What I did
+
+- Tuned Storybook wrappers for component crops:
+  - `PublicPageHeader/Default` now renders at 856px to match the prototype content width.
+  - `MailingListCTA/Default` and `Submitting` now render at 856px.
+- Tuned `Poster`/`ShowTile` representative behavior:
+  - added the missing Redroom subtitle text to `Poster`;
+  - added a bespoke internal Meet-Ups poster rendering path under the existing public `Poster` API;
+  - fixed a CSS collision where the Meet-Ups custom art initially reused `data-pyxis-part='art'` and accidentally inherited generic poster-art layout styles;
+  - preserved the public `<Poster kind='meetups' />` API instead of introducing a public per-poster component.
+- Re-ran component-level visual targets and the full public Shows `shows-list` integration check.
+- Marked T16-T21 complete in `tasks.md`.
+
+### Validation
+
+Package validation passed:
+
+```bash
+cd web/packages/pyxis-components
+pnpm exec tsc --noEmit
+
+cd ../pyxis-user-site
+pnpm exec tsc --noEmit
+pnpm exec vite build
+```
+
+### Visual results
+
+Component suite command:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/public.components.visual.yml \
+  --outDir /tmp/pyxis-public-components-after-tune \
+  --summary --output json
+```
+
+Final component target results:
+
+```text
+show-tile-learn              review 8.602312719959778%
+show-tile-redroom            review 8.09368191721133%
+poster-redroom               review 7.874205566513259%
+public-page-header-shows     review 7.556444896826131%
+show-grid-prototype-desktop  review 7.3215465738830225%
+show-tile-soldout            review 6.5116473940003345%
+mailing-list-cta             review 5.492372182517867%
+```
+
+Full Shows section integration command:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-user-shows-section shows-list \
+  --outDir /tmp/pyxis-user-shows-list-after-date-tune \
+  --output json
+```
+
+Result:
+
+```text
+shows shows-list tune-required 19.823532315387656%
+```
+
+This is only a small improvement over the previous 20.50% page-section number, but the component-level targets are now all review-band and much more explainable.
+
+### What worked
+
+- The `show-tile-learn` target dropped from a major mismatch around 27-28% to review-band 8.60% after the Meet-Ups poster art was made closer to the prototype.
+- The main `show-grid-prototype-desktop` component target is review-band at 7.32%, which is now a better day-to-day integration target than the full page `shows-list` section.
+- No new public subcomponents were needed.
+
+### What didn't work
+
+- The full public-site Shows `shows-list` target is still `tune-required` at 19.82%.
+- A temporary attempt to force `ShowTile` root `line-height: normal` made both grid and page comparisons substantially worse, so it was reverted.
+- Adding the Redroom subtitle improved text parity but slightly increased the redroom poster/tile pixel percentages, likely due to antialiasing and small vertical distribution changes. It was kept because the content now matches the prototype better and still remains review-band.
+
+### What I learned
+
+The component-level visual suite is the right tuning instrument. The page-level `shows-list` result remains valuable, but it is now more of an integration smoke that combines page/story environment, poster artwork approximation, and crop-height sensitivity.
+
+### What was tricky to build
+
+The biggest gotcha was CSS part reuse. The custom Meet-Ups poster first used `pyxisPart('poster', 'art')`, which caused generic poster art CSS to apply to the custom layout. Changing the custom part to `meetups-art` fixed the layout and dropped the Learn tile to review-band.
+
+### What warrants a second pair of eyes
+
+- Whether the full `shows-list` target should be expected to reach review-band, or whether the new `show-grid-prototype-desktop` target should become the accepted integration target for component layout while the page section remains a broader smoke.
+- Whether Redroom subtitle parity is worth the small pixel-percent increase.
+- Whether additional bespoke poster internals should be added for `808`, `Petals`, `Basement`, `Orphx`, `Cygnus`, and `Zola`, or whether that crosses into recreating poster artwork rather than testing the UI component.
+
+### Custom css-visual-diff functionality assessment
+
+A custom feature would be useful, but not mandatory yet. The most valuable addition would be a first-class "component matrix" or "multi-crop within one story" mode: given a story such as `Poster/AllVariants`, css-visual-diff could compare each child with `data-poster-kind` independently and return one compact row per child. That would avoid creating many story/spec targets while still revealing which artwork variant dominates a grid diff.
+
+For now, explicit representative targets plus `compare-public-component` are sufficient. If the team decides to tune all poster variants to near-pixel parity, then adding that multi-crop functionality would be more justified than manually expanding the spec with many poster-image targets.
+
+### What should be done in the future
+
+- Decide whether to pursue more bespoke poster internals or accept the current review-band component suite.
+- Investigate why `show-grid-prototype-desktop` is review-band while the full page `shows-list` remains near 20%; likely causes include page/story environment, crop-height sensitivity, and remaining poster artwork deltas.
+- If continuing, use `show-grid-prototype-desktop` as the primary integration loop and `shows-list` as the final page smoke.

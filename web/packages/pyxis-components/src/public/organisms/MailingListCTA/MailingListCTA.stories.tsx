@@ -1,10 +1,56 @@
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MailingListCTA } from './MailingListCTA';
-const meta: Meta<typeof MailingListCTA> = { title: 'Public Site/Components/Organisms/MailingListCTA', component: MailingListCTA, tags: ['autodocs'] };
+
+const meta: Meta<typeof MailingListCTA> = {
+  title: 'Public Site/Components/Organisms/MailingListCTA',
+  component: MailingListCTA,
+  tags: ['autodocs'],
+};
+
 export default meta;
 type Story = StoryObj<typeof MailingListCTA>;
-export const Default: Story = { args: {} };
-export const Submitting: Story = { args: { isSubmitting: true } };
-export const Narrow: Story = { args: {}, render: (args) => <div style={{ width: 320 }}><MailingListCTA {...args} /></div> };
-export const ThemeOverride: Story = { args: {}, render: (args) => <div style={{ '--pyxis-mailing-accent': 'var(--color-text-primary)', '--pyxis-mailing-border': 'var(--color-accent)', '--pyxis-mailing-muted': 'var(--color-text-secondary)', '--pyxis-mailing-button-bg': 'var(--color-accent)', width: 520 } as CSSProperties}><MailingListCTA {...args} /></div> };
+
+export const Default: Story = {
+  args: {},
+  render: (args) => (
+    <div style={{ width: 856 }}>
+      <MailingListCTA {...args} />
+    </div>
+  ),
+};
+
+export const Submitting: Story = {
+  args: { isSubmitting: true },
+  render: (args) => (
+    <div style={{ width: 856 }}>
+      <MailingListCTA {...args} />
+    </div>
+  ),
+};
+
+export const Narrow: Story = {
+  args: {},
+  render: (args) => (
+    <div style={{ width: 320 }}>
+      <MailingListCTA {...args} />
+    </div>
+  ),
+};
+
+export const ThemeOverride: Story = {
+  args: {},
+  render: (args) => (
+    <div
+      style={{
+        '--pyxis-mailing-accent': 'var(--color-text-primary)',
+        '--pyxis-mailing-border': 'var(--color-accent)',
+        '--pyxis-mailing-muted': 'var(--color-text-secondary)',
+        '--pyxis-mailing-button-bg': 'var(--color-accent)',
+        width: 520,
+      } as CSSProperties}
+    >
+      <MailingListCTA {...args} />
+    </div>
+  ),
+};

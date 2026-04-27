@@ -46,6 +46,12 @@
   margin-top: var(--space-2);
 }
 
+:where([data-pyxis-component='poster'][data-pyxis-part='subtitle']) {
+  font-size: 8px;
+  font-style: italic;
+  opacity: 0.55;
+}
+
 :where([data-pyxis-component='poster'][data-pyxis-part='mark']) {
   color: var(--pyxis-poster-accent);
   font-size: 34px;
@@ -106,4 +112,133 @@
 
 :where([data-pyxis-component='poster'][data-pyxis-part='root'][data-poster-kind='orphx']) [data-pyxis-part='title'] {
   font-size: 44px;
+}
+
+.pyxis-poster__meetups-art {
+  background: #9FD8D4;
+  color: #1A1A1A;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, sans-serif;
+  inset: 0;
+  position: absolute;
+}
+
+.pyxis-poster__meetups-top {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  padding: 14px 14px 10px;
+}
+
+.pyxis-poster__meetups-badge {
+  align-items: center;
+  background: #000;
+  border-radius: 4px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-size: 8px;
+  font-weight: 800;
+  height: 42px;
+  justify-content: center;
+  line-height: 1;
+  width: 42px;
+}
+
+.pyxis-poster__meetups-heading {
+  color: #1A1A1A;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.pyxis-poster__meetups-copy {
+  color: #1A1A1A;
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 0 14px 12px;
+}
+
+.pyxis-poster__meetups-copy mark,
+.pyxis-poster__meetups-note mark {
+  background: #FFEB47;
+  color: #000;
+  padding: 0 2px;
+}
+
+.pyxis-poster__meetups-note mark {
+  font-weight: 700;
+}
+
+.pyxis-poster__meetups-gear-row {
+  align-items: flex-end;
+  display: flex;
+  gap: 10px;
+  padding: 0 14px 12px;
+}
+
+.pyxis-poster__meetups-gear {
+  background: #222;
+  border-radius: 3px;
+  flex-shrink: 0;
+  height: 36px;
+  position: relative;
+  width: 54px;
+}
+
+.pyxis-poster__meetups-gear span {
+  background: #444;
+  border: 2px solid #666;
+  border-radius: 50%;
+  height: 20px;
+  position: absolute;
+  top: 6px;
+  width: 20px;
+}
+
+.pyxis-poster__meetups-gear span:first-child {
+  left: 4px;
+}
+
+.pyxis-poster__meetups-gear span:last-child {
+  right: 4px;
+}
+
+.pyxis-poster__meetups-note {
+  color: #1A1A1A;
+  font-size: 9.5px;
+  line-height: 1.4;
+}
+
+.pyxis-poster__meetups-footer {
+  background: #F6A25B;
+  color: #1A1A1A;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 10px 14px;
+  position: relative;
+}
+
+.pyxis-poster__meetups-sticker {
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #000;
+  border-radius: 50%;
+  display: flex;
+  font-size: 7px;
+  font-weight: 700;
+  height: 46px;
+  justify-content: center;
+  line-height: 1.1;
+  position: absolute;
+  right: 12px;
+  text-align: center;
+  top: -6px;
+  transform: rotate(8deg);
+  width: 46px;
 }

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof PublicPageHeader>;
 export const Default: Story = {
   args: { kicker: 'Providence, RI', title: 'Upcoming shows' },
   render: (args) => (
-    <div style={{ width: 920 }}>
+    <div style={{ width: 856 }}>
       <PublicPageHeader {...args} />
     </div>
   ),

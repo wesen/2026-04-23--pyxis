@@ -153,44 +153,44 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Add `ShowGrid/PrototypeDesktop` with the exact 9-show prototype-style data/order.
   - Do not extract `ShowTileInfo`, `ShowTileMeta`, or per-poster public components unless visual evidence proves the current component boundaries are insufficient.
 
-- [ ] **T16 — Tune `PublicPageHeader` component target to a reasonable threshold**
+- [x] **T16 — Tune `PublicPageHeader` component target to a reasonable threshold**
   - Compare the component-level target first, not the full Shows page.
   - Inspect `diff_only.png`, then `right_region.png`, then `left_region.png`.
   - Tune only header-specific spacing/typography/wrapper issues.
   - Target: review-band or better; accepted is nice but not required if remaining pixels are wrapper/antialiasing noise.
   - Record command, output directory, changed percent, and decision in the diary.
 
-- [ ] **T17 — Tune `MailingListCTA` component target to a reasonable threshold**
+- [x] **T17 — Tune `MailingListCTA` component target to a reasonable threshold**
   - Compare the isolated CTA target.
   - Tune component-local CSS only if the mismatch is component-owned.
   - Target: review-band or better.
   - Record command, output directory, changed percent, and decision in the diary.
 
-- [ ] **T18 — Tune representative `Poster` target(s) to a reasonable threshold**
+- [x] **T18 — Tune representative `Poster` target(s) to a reasonable threshold**
   - Use representative poster targets instead of one task per poster image.
   - First tune `poster-redroom`, because it is the first visible grid poster and currently has a clean isolated probe.
   - Use `AllVariants` or one complex poster target to catch systemic variant-rendering drift without turning every poster artwork into its own task.
   - If a complex variant remains far off because the current generic `Poster` markup cannot express the prototype artwork, record whether private internal poster renderers would be justified later.
 
-- [ ] **T19 — Tune representative `ShowTile` state targets to a reasonable threshold**
+- [x] **T19 — Tune representative `ShowTile` state targets to a reasonable threshold**
   - Tune ticket/default, learn, and sold-out tile states.
   - Focus on metadata formatting, title/meta/price spacing, ticket pill size, and total tile height.
   - Do not split tile internals unless selectors/parts are insufficient for diagnosis.
   - Record whether custom css-visual-diff subpart comparison helpers would make this easier.
 
-- [ ] **T20 — Tune `ShowGrid/PrototypeDesktop` as the main Shows integration target**
+- [x] **T20 — Tune `ShowGrid/PrototypeDesktop` as the main Shows integration target**
   - Use exact prototype-style nine-show data.
   - Validate grid width, column gap, row gap, and total height.
   - Tune grid-level CSS only after Poster and ShowTile targets are reasonable.
   - Target: substantially below the current full `shows-list` 20.50%, ideally review-band or close enough with documented reasons.
 
-- [ ] **T21 — Re-run public Shows page `shows-list` and decide whether to continue or accept**
+- [x] **T21 — Re-run public Shows page `shows-list` and decide whether to continue or accept**
   - Run the compact `compare-user-shows-section shows-list` alias.
   - Compare against the latest 20.50% baseline.
   - Inspect artifacts and record remaining mismatch causes.
   - If the section is still too high, decide whether the next work is component CSS, fixture/data alignment, or custom css-visual-diff functionality.
 
-- [ ] **T22 — Final validation, diary, and commit**
+- [x] **T22 — Final validation, diary, and commit**
   - Run relevant package validation:
     - `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`
     - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build`

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { http, HttpResponse } from 'msw';
+import { create, ShowListSchema, ShowSchema, ShowStatus, toJson } from 'pyxis-types';
 import { handlers } from 'pyxis-components/mocks/handlers';
 import { Layout } from '../src/components/layout/Layout';
 import { Shows } from '../src/pages/Shows';
@@ -11,12 +13,132 @@ import { BookSuccess } from '../src/pages/BookSuccess';
 import { About } from '../src/pages/About';
 import { makeStore } from '../src/store';
 
+const prototypeShows = [
+  create(ShowSchema, {
+    id: 1,
+    artist: 'Redroom Inferno',
+    date: 'Fri, Feb 14',
+    doorsTime: '9:00 PM',
+    age: '25+',
+    price: '$10 adv / $15 door',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 2,
+    artist: '808 Collective',
+    date: 'Fri, Feb 21',
+    doorsTime: '8:00 PM',
+    age: '21+',
+    price: '$12',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 3,
+    artist: 'Petals of Love',
+    date: 'Sat, Feb 28',
+    doorsTime: '6:30 PM',
+    age: 'All Ages',
+    price: '$15',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 4,
+    artist: 'Monday Meet-Ups',
+    date: 'Every Monday',
+    doorsTime: '7:00 PM',
+    age: 'All Ages',
+    price: 'Free — Sliding Scale',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 5,
+    artist: 'Basement Frequencies',
+    date: 'Fri, Feb 28',
+    doorsTime: '9:30 PM',
+    age: '21+',
+    price: '$12',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 6,
+    artist: 'Orphx',
+    date: 'Fri, Jul 4',
+    doorsTime: '9:00 PM',
+    age: '18+',
+    price: '$12',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 7,
+    artist: 'Moor Mother',
+    date: 'Fri, May 9',
+    doorsTime: '7:00 PM',
+    age: 'All Ages',
+    price: '$15',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 8,
+    artist: 'Cygnus + Guests',
+    date: 'Sat, May 17',
+    doorsTime: '9:00 PM',
+    age: '18+',
+    price: '$8',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+  create(ShowSchema, {
+    id: 9,
+    artist: 'Zola Jesus',
+    date: 'Fri, Jun 6',
+    doorsTime: '8:00 PM',
+    age: '21+',
+    price: '$20',
+    genre: '',
+    status: ShowStatus.CONFIRMED,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+  }),
+];
+
+const prototypePublicHandlers = [
+  http.get('*/api/public/shows', () => HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows: prototypeShows })))),
+  http.get('*/api/public/shows/:id', ({ params }) => {
+    const id = Number(params.id);
+    const show = prototypeShows.find((candidate) => candidate.id === id) ?? prototypeShows[0];
+    return HttpResponse.json(toJson(ShowSchema, show));
+  }),
+];
+
 const meta: Meta<typeof PublicPageRoute> = {
   title: 'Public Site/Pages',
   component: PublicPageRoute,
   parameters: {
     layout: 'fullscreen',
-    msw: { handlers },
+    msw: { handlers: [...prototypePublicHandlers, ...handlers] },
   },
 };
 
