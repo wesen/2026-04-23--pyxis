@@ -3215,3 +3215,89 @@ The visible browser error pointed at `onclick`, but the real cause was earlier: 
 
 - Review the final `<script>` template in `scripts/05-build-public-pages-review.py`.
 - Open `http://127.0.0.1:8097/index.html` and test a `To clipboard` button.
+
+## Step 36: Fix Shows header visual target selector
+
+The review feedback for `shows/header` was correct: the React comparison was including top whitespace that the prototype header target did not include. Measuring the DOM showed that the React page section had `padding-top: 40px`, while the actual `PublicPageHeader` content started at the same vertical position as the prototype header.
+
+I first tested moving the spacing from padding to margin, but that caused margin collapse and shifted the whole `[data-page='shows']` content down, making the content comparison much worse. The correct fix was to keep the production layout unchanged and narrow the visual target's React selector to the actual `PublicPageHeader` inside the header section.
+
+### Prompt Context
+
+**User prompt (verbatim):** "shows/header
+tune-required · 10.773%
+Notes: whitespace at the top of the react version (either wrong selector or padding/margin)"
+
+**Assistant interpretation:** Investigate whether the Shows header mismatch is a real page spacing bug or a visual-diff selector that includes wrapper padding.
+
+**Inferred user intent:** Remove misleading whitespace from the Shows header comparison without destabilizing the page layout.
+
+**Commit (code):** pending — this step records the selector fix.
+
+### What I did
+
+- Measured prototype and React header/page/list bounds with Playwright.
+- Tried changing `.pyxis-shows-page__header` from top padding to margin; rejected it because it moved the whole page content via margin collapse and raised `shows/content` to `22.41%`.
+- Reverted the CSS experiment.
+- Updated `public-pages.desktop.visual.yml` for the `shows/header` section:
+  - original remains `[data-section='shows-header']`
+  - React selector is now `[data-section='shows-header'] [data-pyxis-component='public-page-header']`
+- Regenerated the JS spec mirror.
+- Reran the Shows page and full public-page sweeps.
+- Regenerated/re-served the review bundle:
+  - `/tmp/pyxis-public-pages-visual-review-shows-header-selector-20260427-163640/index.html`
+  - served at `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The visual target should compare the semantic header component, not the page wrapper spacing around it. The wrapper padding is part of content/page layout and already appears in those broader sections.
+
+### What worked
+
+- `shows/header` moved from `tune-required 10.773%` to `review 7.472%`.
+- The broader Shows content/page results returned to the previous values instead of the failed margin-collapse experiment.
+
+### What didn't work
+
+- Moving padding to margin looked plausible but caused the page root to shift down because of margin collapse; this made the content target worse and was reverted.
+
+### What I learned
+
+For page section visual targets, wrapper spacing can be meaningful at the `page`/`content` level but misleading for a focused component-level section. The selector should match the thing being reviewed.
+
+### What was tricky to build
+
+The title itself was already aligned. The mismatch came from selecting an element whose bounding box included top padding in React but not in the prototype. Measuring both the wrapper and inner component made that clear.
+
+### What warrants a second pair of eyes
+
+- Confirm that `shows/header` in the new review bundle now focuses on the header component rather than the page spacing.
+
+### What should be done in the future
+
+- Audit other focused section selectors for the same wrapper-vs-component mismatch.
+
+### Code review instructions
+
+- Review `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml` and its generated JS mirror.
+- Open `http://127.0.0.1:8097/index.html` and check `shows/header`.
+
+### Technical details
+
+Full sweep after the selector fix:
+
+```text
+shows content      11.605% tune-required
+shows shows-list   11.166% tune-required
+about content      10.833% tune-required
+shows page         10.630% tune-required
+about page          9.059% review
+shows mailing-list  8.809% review
+show-detail content 8.203% review
+shows header        7.472% review
+archive content     7.251% review
+archive page        6.684% review
+book content        5.982% review
+show-detail page    5.688% review
+book page           4.539% review
+```

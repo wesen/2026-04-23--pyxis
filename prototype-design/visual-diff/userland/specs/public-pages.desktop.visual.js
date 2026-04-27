@@ -65,7 +65,7 @@ module.exports = {
         {
           "name": "header",
           "original": "[data-section='shows-header']",
-          "react": "[data-section='shows-header']"
+          "react": "[data-section='shows-header'] [data-pyxis-component='public-page-header']"
         },
         {
           "name": "shows-list",
