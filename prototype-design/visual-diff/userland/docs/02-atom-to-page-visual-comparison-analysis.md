@@ -278,10 +278,10 @@ The key artifacts produced:
 |---|---|
 | `compare.json` | Full structured result from `cvd.compare.region` |
 | `compare.md` | Markdown summary with pixel diff + style changes |
-| `left_region.png` | Screenshot of left (prototype) selector |
-| `right_region.png` | Screenshot of right (Storybook) selector |
-| `diff_comparison.png` | Side-by-side diff visualization |
-| `diff_only.png` | Changed pixels only |
+| `diff_only.png` | Single compact diff image; inspect this first for visual triage |
+| `right_region.png` | Screenshot of right (Storybook) selector; inspect second |
+| `left_region.png` | Screenshot of left (prototype) selector; inspect third |
+| `diff_comparison.png` | Wide side-by-side triptych; use only when extra context is needed |
 
 ### 3.5 The Policy Classification System
 

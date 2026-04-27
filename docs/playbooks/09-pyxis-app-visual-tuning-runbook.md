@@ -225,7 +225,30 @@ css-visual-diff verbs \
   --output json
 ```
 
-### 4.4 Compare All App Components
+### 4.4 Inspect Image Artifacts
+
+After each `compare-spec` run, inspect the generated image artifacts with `read`. Prefer the single diff image first; the side-by-side triptych is very wide and should be used only when extra context is needed.
+
+Recommended inspection order:
+
+```text
+<outDir>/<page>/artifacts/<section>/diff_only.png       # first: compact remaining mismatch map
+<outDir>/<page>/artifacts/<section>/right_region.png    # second: React/Storybook result
+<outDir>/<page>/artifacts/<section>/left_region.png     # third: prototype reference
+<outDir>/<page>/artifacts/<section>/diff_comparison.png # optional: wide triptych context
+```
+
+For example:
+
+```text
+/tmp/app-topbar-compare/app-topbar-dashboard/artifacts/component/diff_only.png
+/tmp/app-topbar-compare/app-topbar-dashboard/artifacts/component/right_region.png
+/tmp/app-topbar-compare/app-topbar-dashboard/artifacts/component/left_region.png
+```
+
+Use `compare.json` for the numeric/style summary, but use `diff_only.png` as the first visual triage artifact.
+
+### 4.5 Compare All App Components
 
 ```bash
 css-visual-diff verbs \

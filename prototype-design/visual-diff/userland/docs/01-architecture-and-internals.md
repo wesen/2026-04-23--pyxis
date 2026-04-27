@@ -241,8 +241,8 @@ compare.json          — Full JSON result from cvd.compare.region
 compare.md           — Markdown summary
 left_region.png      — Screenshot of left selector region
 right_region.png     — Screenshot of right selector region
-diff_comparison.png — Side-by-side diff
-diff_only.png        — Diff pixels only (changed regions)
+diff_only.png        — Single compact diff image; inspect this first for visual triage
+diff_comparison.png — Wide side-by-side triptych; use only when extra context is needed
 ```
 
 ### `lib/inspect.js` — Element Inspection
