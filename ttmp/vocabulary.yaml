@@ -43,6 +43,10 @@ topics:
       description: Goja JavaScript runtime integrations and native modules
     - slug: staff-app
       description: Pyxis staff application pages, workflows, and operations UI
+    - slug: production
+      description: Production deployment, launch readiness, runtime operations, and release gating.
+    - slug: release-readiness
+      description: Ship/no-ship validation, launch checklists, and production readiness planning.
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
