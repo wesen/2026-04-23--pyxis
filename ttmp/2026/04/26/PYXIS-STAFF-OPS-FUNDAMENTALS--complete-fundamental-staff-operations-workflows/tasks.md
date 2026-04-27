@@ -13,20 +13,21 @@
 
 ## Phase 1: Schema and protobuf
 
-- [ ] Add `booking_reviews` migration.
+- [x] Add `booking_reviews` migration.
 - [x] Add show lineup replace SQL queries.
 - [ ] Add submission detail update SQL query.
 - [ ] Add artist stats/detail SQL queries.
-- [ ] Add protobuf messages for booking reviews, artist detail, and core settings update.
-- [ ] Regenerate sqlc and protobuf code.
-- [ ] Update deterministic fixture with review notes.
+- [x] Add protobuf message for booking reviews.
+- [ ] Add protobuf messages for artist detail and core settings update.
+- [x] Regenerate sqlc and protobuf code for booking reviews.
+- [x] Update deterministic fixture with review notes.
 
 ## Phase 2: Backend services and API
 
 - [x] Persist `Show.lineup` in create/update flows.
 - [x] Return lineup from show detail.
 - [ ] Add booking details update endpoint.
-- [ ] Add booking review get/update endpoints.
+- [x] Add booking review get/update endpoints.
 - [ ] Add create artist endpoint.
 - [ ] Add artist detail endpoint.
 - [ ] Add core settings update endpoint limited to space name/address/capacity.
@@ -34,7 +35,8 @@
 
 ## Phase 3: RTK Query and MSW
 
-- [ ] Add RTK endpoints/mutations for new backend APIs.
+- [x] Add RTK endpoints/mutations for booking review notes.
+- [ ] Add remaining RTK endpoints/mutations for artist detail and core settings APIs.
 - [x] Update MSW mutable state and handlers for show create/update and flyer upload/delete.
 - [x] Ensure show/flyer protobuf-backed MSW responses use `toJson(...)`.
 - [x] Add mutation interaction stories for show create/edit workflows.
@@ -55,7 +57,8 @@
 - [x] Wire show create flow from Shows page.
 - [x] Wire show edit and lineup edit from Show Detail page.
 - [x] Wire standalone flyer upload/delete from Show Detail page.
-- [ ] Wire booking detail edit and review-note persistence from Booking Review page.
+- [x] Wire booking review-note persistence from Booking Review page.
+- [ ] Wire booking detail edit from Booking Review page.
 - [ ] Wire artist create/edit/detail functionality from Artists page.
 - [ ] Wire attendance edit modal from Attendance page.
 - [ ] Replace settings toggles with core settings form for space name/address/capacity.
@@ -63,11 +66,12 @@
 ## Phase 6: Validation and handoff
 
 - [x] `go test ./...` passes.
-- [ ] `cd web/packages/pyxis-types && pnpm build` passes.
+- [x] `cd web/packages/pyxis-types && pnpm build` passes.
 - [x] `cd web/packages/pyxis-app && pnpm build` passes.
 - [x] `cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook` passes.
 - [ ] `cd web && pnpm build` passes.
 - [x] Manual backend smoke for workflow A/B show create/update lineups passes.
+- [x] Manual backend smoke for booking review notes passes.
 - [ ] Manual Vite staff workflow smoke passes.
 - [ ] Diary and changelog are updated.
 - [ ] reMarkable bundle is refreshed if implementation materially changes the design.

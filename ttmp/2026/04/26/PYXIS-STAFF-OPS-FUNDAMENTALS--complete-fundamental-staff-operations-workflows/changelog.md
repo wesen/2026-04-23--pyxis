@@ -58,3 +58,16 @@ Added MSW handlers and page interaction stories for show create/edit plus standa
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx — Wires flyer upload/delete actions and edit workflow.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx — Adds create-show page interaction story.
 
+
+## 2026-04-26
+
+Implemented persistent booking review notes with booking_reviews migration, protobuf BookingReview, backend endpoints, RTK/MSW wiring, Booking Review page UI, fixture data, and backend smoke validation.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/migrations/000003_add_booking_reviews.up.sql — Adds booking review note persistence table.
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Adds booking review get/update handlers.
+- /home/manuel/code/wesen/2026-04-23--pyxis/proto/pyxis/v1/show.proto — Adds BookingReview protobuf message.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx — Adds editable internal review note UI.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx — Wires review note fetch/save mutations.
+

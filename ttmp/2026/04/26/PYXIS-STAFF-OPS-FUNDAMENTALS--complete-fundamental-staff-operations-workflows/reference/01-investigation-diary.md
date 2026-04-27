@@ -537,3 +537,125 @@ cd web/packages/pyxis-app && pnpm build
 cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
 go test ./...
 ```
+
+## Step 5: Persist booking review notes
+
+I implemented the first “notes” slice: persistent staff-only booking review notes. Booking review notes now have their own database table and protobuf-backed API instead of being mixed with the artist-submitted booking message.
+
+This intentionally does not implement editable booking request details yet. It only persists internal review notes from the Booking Review page.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 4)
+
+**Assistant interpretation:** After MSW/story/flyer work, implement persistent notes for booking review.
+
+**Inferred user intent:** The user wants staff review comments to survive reloads and become a real backend-backed workflow.
+
+**Commit (code):** pending at time of diary entry.
+
+### What I did
+
+- Added migration:
+  - `pkg/db/migrations/000003_add_booking_reviews.up.sql`
+  - `pkg/db/migrations/000003_add_booking_reviews.down.sql`
+- Added sqlc queries:
+  - `pkg/db/queries/booking_reviews.sql`
+- Added domain type:
+  - `pkg/domain/booking_review.go`
+- Added protobuf message:
+  - `BookingReview`
+- Regenerated sqlc and protobuf code with `make generate`.
+- Added repository/service support:
+  - `SubmissionRepo.GetReview`
+  - `SubmissionRepo.UpsertReview`
+  - `SubmissionService.GetReview`
+  - `SubmissionService.UpsertReview`
+- Added staff endpoints:
+  - `GET /api/app/bookings/{id}/review`
+  - `PATCH /api/app/bookings/{id}/review`
+- Added TS exports and RTK endpoints:
+  - `useGetBookingReviewQuery`
+  - `useUpdateBookingReviewMutation`
+- Added MSW handlers for booking review notes.
+- Reworked `BookingReviewNotePanel` to show the artist message and edit/save an internal note.
+- Wired `BookingReviewPage` to fetch and save the review note.
+- Updated `fixtures/dev.sql` with sample review notes.
+
+### Why
+
+The artist-submitted `Submission.message` and staff-internal review notes are different concepts. Storing review notes in a separate table avoids overwriting artist-provided data and gives the staff workflow a durable audit-friendly place to keep internal context.
+
+### What worked
+
+Validation passed:
+
+```bash
+go test ./...
+cd web/packages/pyxis-types && pnpm build
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+Real backend smoke passed:
+
+```text
+GET   /api/app/bookings/1/review  -> existing fixture note
+PATCH /api/app/bookings/1/review  -> note updated
+```
+
+PATCH response:
+
+```json
+{
+  "submissionId": 1,
+  "note": "Smoke saved review note",
+  "decision": "none",
+  "updatedBy": 4,
+  "updatedAt": "2026-04-26T20:54:16-04:00"
+}
+```
+
+### What didn't work
+
+No blocking implementation failures. The main ordering requirement was to run migrations before `make seed`, because the deterministic fixture now truncates and inserts into `booking_reviews`.
+
+### What I learned
+
+The existing proto-everywhere pattern made this straightforward: add proto message, regenerate, export schema/type, use `fromJson`/`toJson` in RTK/MSW.
+
+### What was tricky to build
+
+The tricky part was naming and scope. The design proposed both editable booking details and review notes, but this step only implements review notes. The tasks now separate “booking review-note persistence” from “booking detail edit” so progress is accurate.
+
+### What warrants a second pair of eyes
+
+- Whether `decision` should remain a string or become a protobuf enum later.
+- Whether missing review rows should return an empty review instead of an error. The fixture creates review rows for sample bookings, and MSW creates defaults, but the backend currently expects a row for GET.
+
+### What should be done in the future
+
+- Add `GET` fallback behavior or create review rows lazily when missing.
+- Add a Storybook interaction story for saving a review note.
+- Implement editable booking details as the next booking workflow slice.
+
+### Code review instructions
+
+Review backend first:
+
+```text
+pkg/db/migrations/000003_add_booking_reviews.up.sql
+pkg/db/queries/booking_reviews.sql
+pkg/repository/postgres/submission_repo.go
+pkg/service/submission_service.go
+pkg/server/app.go
+```
+
+Then review frontend:
+
+```text
+web/packages/pyxis-app/src/api/appApi.ts
+web/packages/pyxis-app/src/api/mockHandlers.ts
+web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
+```
