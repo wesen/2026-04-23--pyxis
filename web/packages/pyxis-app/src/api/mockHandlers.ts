@@ -13,6 +13,7 @@ import {
   CalendarEventListSchema,
   CalendarEventSchema,
   CalendarHoldSchema,
+  FlyerUploadResponseSchema,
   SettingsSchema,
   ShowSchema,
   ShowListSchema,
@@ -90,6 +91,43 @@ export const mockHandlers = [
     const current = ensureMockState();
     const show = current.shows.find((candidate) => candidate.id === Number(params.id)) ?? current.shows[0];
     return HttpResponse.json(toJson(ShowSchema, show));
+  }),
+
+  http.post('*/api/app/shows', async ({ request }) => {
+    const current = ensureMockState();
+    const body = await request.json();
+    const nextId = Math.max(0, ...current.shows.map((show) => show.id)) + 1;
+    const show = create(ShowSchema, { ...(body as any), id: nextId });
+    current.shows = [show, ...current.shows];
+    return HttpResponse.json(toJson(ShowSchema, show), { status: 201 });
+  }),
+
+  http.patch('*/api/app/shows/:id', async ({ params, request }) => {
+    const current = ensureMockState();
+    const body = await request.json();
+    const id = Number(params.id);
+    const previous = current.shows.find((candidate) => candidate.id === id) ?? current.shows[0];
+    const updated = create(ShowSchema, { ...previous, ...(body as any), id });
+    current.shows = current.shows.map((candidate) => (candidate.id === id ? updated : candidate));
+    return HttpResponse.json(toJson(ShowSchema, updated));
+  }),
+
+  http.post('*/api/app/shows/:id/flyer', async ({ params, request }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    const form = await request.formData();
+    const file = form.get('flyer') as File | null;
+    const filename = file?.name ?? 'flyer.png';
+    const url = `/flyers/${id}/${filename}`;
+    current.shows = current.shows.map((candidate) => candidate.id === id ? create(ShowSchema, { ...candidate, flyerUrl: url }) : candidate);
+    return HttpResponse.json(toJson(FlyerUploadResponseSchema, create(FlyerUploadResponseSchema, { url })));
+  }),
+
+  http.delete('*/api/app/shows/:id/flyer', ({ params }) => {
+    const current = ensureMockState();
+    const id = Number(params.id);
+    current.shows = current.shows.map((candidate) => candidate.id === id ? create(ShowSchema, { ...candidate, flyerUrl: '' }) : candidate);
+    return new HttpResponse(null, { status: 204 });
   }),
 
   http.patch('*/api/app/shows/:id/cancel', ({ params }) => {

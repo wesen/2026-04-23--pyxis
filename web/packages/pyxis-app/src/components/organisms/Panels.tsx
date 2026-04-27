@@ -13,3 +13,4 @@ export * from './AuditLogPanel';
 export * from './DiscordMappingPanel';
 export * from './SettingsPanel';
 export * from './NewShowModal';
+export * from './FlyerField';

@@ -6,11 +6,12 @@ import {
   useArchiveShowMutation,
   useCancelShowMutation,
   useGetShowQuery,
+  useDeleteShowFlyerMutation,
   useUpdateShowMutation,
   useUploadShowFlyerMutation,
 } from '../../api/appApi';
 import { AppShell } from '../../components/shell/AppShell';
-import { NewShowModal } from '../../components/organisms/Panels';
+import { FlyerField, NewShowModal } from '../../components/organisms/Panels';
 import { ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../../components/organisms/Phase8Sections';
 import { appShowFromShow, ErrorState, LoadingState, parseRouteId } from '../shared';
 import './Page.css';
@@ -23,6 +24,7 @@ export function ShowDetailPage() {
   const [announceShow, announceState] = useAnnounceShowMutation();
   const [updateShow, updateState] = useUpdateShowMutation();
   const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
+  const [deleteFlyer, deleteFlyerState] = useDeleteShowFlyerMutation();
   const [isEditorOpen, setEditorOpen] = useState(false);
   const [actionError, setActionError] = useState<string | undefined>();
   const [actionSuccess, setActionSuccess] = useState<string | undefined>();
@@ -40,6 +42,31 @@ export function ShowDetailPage() {
       setActionSuccess('Show updated.');
     } catch {
       setActionError('Could not update this show. Check required fields, session, and backend logs.');
+    }
+  };
+
+  const handleUploadFlyer = async (file: File) => {
+    if (!show) return;
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      await uploadFlyer({ showId: show.id, file }).unwrap();
+      setActionSuccess('Flyer uploaded.');
+    } catch {
+      setActionError('Could not upload this flyer. Check file type, session, and backend logs.');
+    }
+  };
+
+  const handleDeleteFlyer = async () => {
+    if (!show?.flyerUrl) return;
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    try {
+      const filename = show.flyerUrl.split('/').pop() ?? show.flyerUrl;
+      await deleteFlyer({ showId: show.id, filename }).unwrap();
+      setActionSuccess('Flyer deleted.');
+    } catch {
+      setActionError('Could not delete this flyer. Check your session and backend logs.');
     }
   };
 
@@ -92,6 +119,7 @@ export function ShowDetailPage() {
           <NewShowModal isOpen={isEditorOpen} mode="edit" initialShow={show} isSaving={updateState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleUpdateShow} />
           <ShowDetailHero show={appShowFromShow(show)} />
           <div className="app-detail-grid"><ShowDetailInfoPanel show={appShowFromShow(show)} /><ShowDetailDiscordPanel /></div>
+          <FlyerField flyerUrl={show.flyerUrl} isUploading={uploadState.isLoading} isDeleting={deleteFlyerState.isLoading} onUpload={handleUploadFlyer} onDelete={handleDeleteFlyer} />
           {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
           {actionSuccess && <div className="app-action-success" role="status">{actionSuccess}</div>}
           <div className="app-detail-actions">

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from '@storybook/test';
 import { http, HttpResponse, delay } from 'msw';
 import { create, toJson, ShowListSchema } from 'pyxis-types';
 import { ShowsPage } from '../Pages';
@@ -62,5 +63,20 @@ export const Empty: Story = {
         ),
       ],
     },
+  },
+};
+
+export const CreateShowMutation: Story = {
+  render: () => renderWithFreshMockState(<ShowsPage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole('button', { name: /new show/i }));
+    await userEvent.type(await canvas.findByLabelText(/artist \/ act name/i), 'Story Smoke Show');
+    await userEvent.type(await canvas.findByLabelText(/^date$/i), '2026-09-03');
+    await userEvent.type(await canvas.findByLabelText(/^genre$/i), 'Noise');
+    await userEvent.type((await canvas.findAllByLabelText(/^artist$/i))[0], 'Story Smoke Show');
+    await userEvent.click(await canvas.findByRole('button', { name: /^save show$/i }));
+    await expect(await canvas.findByText(/Story Smoke Show/i)).toBeInTheDocument();
   },
 };
