@@ -3625,3 +3625,178 @@ show-detail page      5.688% review
 book page             4.539% review
 shows mailing-list    0.813% accepted
 ```
+
+## Step 40: Tune Archive metric/list rhythm and avoid mixing ShowDetail WIP
+
+The next review feedback covered Archive page rhythm and Book page accumulated vertical whitespace. Before editing, I found that the ShowDetail lineup extraction was still in progress in the working tree, so I stashed that WIP to avoid mixing unrelated ShowDetail changes into an Archive/Book commit.
+
+For Archive, the review note identified two concrete issues: too much whitespace under the top metric cards and a double separator under each year heading. The double separator was a molecule issue: `YearGroup` has a bottom border and the first `ArchiveShowRow` also had a top border. The metric gap was a page-composition rhythm issue between `ArchiveStats` and `ArchiveSearchFilters`.
+
+### Prompt Context
+
+**User prompt (verbatim):** "archive/page
+review · 6.509%
+Notes: whitespace under the 4 toplevel metric cards is too big.
+
+There's two separates under the year.
+
+compare_yaml:
+page: archive
+section: page
+classification: review
+changedPercent: 6.508962513531885
+bounds:
+  changed: true
+  delta:
+    height: 169
+    width: 0
+    x: 0
+    y: 0
+  left:
+    height: 1558.03125
+    width: 920
+    x: 0
+    y: 0
+  right:
+    height: 1727.03125
+    width: 920
+    x: 0
+    y: 0
+pixel:
+  changedPercent: 6.508962513531885
+  changedPixels: 103417
+  diffComparisonPath: /tmp/pyxis-public-pages-after-archive-props/archive/artifacts/page/diff_comparison.png
+  diffOnlyPath: /tmp/pyxis-public-pages-after-archive-props/archive/artifacts/page/diff_only.png
+  normalizedHeight: 1727
+  normalizedWidth: 920
+  threshold: 30
+  totalPixels: 1588840
+left:
+  bounds:
+    height: 1558.03125
+    width: 920
+    x: 0
+    y: 0
+  exists: true
+  name: archive-page
+  selector: \"#root\"
+  url: \"http://localhost:7070/standalone/public/archive.html\"
+  visible: true
+right:
+  bounds:
+    height: 1727.03125
+    width: 920
+    x: 0
+    y: 0
+  exists: true
+  name: archive-page
+  selector: \"[data-story-frame='pyxis-page-shell']\"
+  url: \"http://localhost:6007/iframe.html?id=public-site-pages-archive--desktop&viewMode=story\"
+  visible: true
+changedStyles:
+  -
+    changed: true
+    left: rgb(0, 0, 0)
+    name: color
+    right: rgb(26, 26, 24)
+  -
+    changed: true
+    left: 16px
+    name: font-size
+    right: 14px
+  -
+    changed: true
+    left: normal
+    name: line-height
+    right: 21px
+changedAttributes:
+  -
+    changed: true
+    left: root
+    name: id
+
+book/content
+review · 5.982%
+Notes: vertical whitespace seems to always be a little bit too much below separators or saw in the react version, and it adds up as the page goes further down.
+
+compare_yaml:
+page: book
+section: content
+classification: review
+changedPercent: 5.9817526469925655
+..."
+
+**Assistant interpretation:** Fix Archive page vertical rhythm and double separators; also investigate whether Book has a general extra whitespace source.
+
+**Inferred user intent:** Continue using review notes plus YAML metadata to guide focused spacing fixes, preferably at molecule boundaries.
+
+**Commit (code):** pending — this step records the Archive rhythm commit.
+
+### What I did
+
+- Stashed unrelated in-progress ShowDetail lineup extraction:
+  - `stash@{0}: wip show-detail lineup extraction before archive-book rhythm`
+- Added an `ArchiveShowList` molecule rule that removes the top border from the first archive row.
+- Reduced Archive stats-to-search spacing:
+  - `.pyxis-archive-page__stats { margin-bottom: 40px; }`
+  - to `.pyxis-archive-page__stats { margin-bottom: 28px; }`
+- Tested removing Book/Archive page bottom padding, but it worsened pixel results; reverted those experiments.
+- Reran the full public page visual sweep.
+- Regenerated and re-served the review page:
+  - `/tmp/pyxis-public-pages-visual-review-archive-rhythm-20260427-170546/index.html`
+  - `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The double separator was not a page-level problem: the year group and first row both owned adjacent borders. Removing only the first row border preserves row separators while matching the prototype structure.
+
+The metric-card gap was page composition, not an `ArchiveStats` internals issue. Reducing the page gap addressed the reviewer note without compressing the metric card itself.
+
+### What worked
+
+Archive improved:
+
+```text
+archive content: 7.034% -> 6.399% review
+archive page:    6.509% -> 5.964% review
+```
+
+The first-row double separator is removed.
+
+### What didn't work
+
+Removing page bottom padding for Book/Archive looked like it should address the YAML height delta, but it made pixel results worse. The blank trailing area is part of how the page/viewport normalizes, not the main visible issue.
+
+### What I learned
+
+Not every height delta should be fixed by trimming page bottom padding. In this suite, visible separator rhythm and row borders are more reliable targets than the full selection height delta.
+
+### What was tricky to build
+
+There was active ShowDetail WIP in the working tree. Stashing it first kept this Archive/Book rhythm pass focused and reviewable.
+
+### What warrants a second pair of eyes
+
+- Confirm in the served review page that the Archive year heading now has only one separator before the first row.
+- Review whether Book still needs a smaller component-level rhythm pass, likely in `BookingForm`, rather than page padding changes.
+
+### What should be done in the future
+
+- Re-apply `stash@{0}` when resuming ShowDetail lineup extraction.
+- Add component visual targets for `ArchiveShowList`/`YearGroup` if more separator tuning is needed.
+
+### Code review instructions
+
+- Review `ArchiveShowList.css` for the first-row border rule.
+- Review `ArchivePage/Page.css` for the stats gap.
+- Validate with the full public-page sweep and served review bundle.
+
+### Technical details
+
+Latest sweep:
+
+```text
+archive content 6.399% review
+archive page    5.964% review
+book content    5.982% review (unchanged after reverting padding experiment)
+```

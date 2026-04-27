@@ -3,3 +3,7 @@
 :where([data-pyxis-component='archive-show-list'][data-pyxis-part='root']) {
   display: block;
 }
+
+:where([data-pyxis-component='archive-show-list'][data-pyxis-part='root']) > :where([data-pyxis-component='archive-show-row'][data-pyxis-part='root']):first-child {
+  border-top: none;
+}
