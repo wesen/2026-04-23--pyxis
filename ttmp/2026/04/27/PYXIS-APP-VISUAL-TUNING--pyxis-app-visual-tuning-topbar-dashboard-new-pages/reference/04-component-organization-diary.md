@@ -1952,3 +1952,127 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
   --outDir /tmp/pyxis-topbar-after-tokens \
   --output json
 ```
+
+## Step 19: Tune AppTopBar typography and bounds
+
+After selector scoping and neutral token alignment, the TopBar comparison still reported root style changes for `font-size` and `line-height`. I compared the prototype TopBar implementation in `prototype-design/lib/components.jsx` with the app CSS and tuned the app TopBar typography to match the prototype's root and text rules.
+
+### Prompt Context
+
+**User prompt (verbatim):** "tune"
+
+**Assistant interpretation:** Continue the visual-diff tuning loop on `app-topbar-dashboard`, one focused class of mismatch at a time.
+
+**Inferred user intent:** Reduce the TopBar visual diff further using css-visual-diff artifacts, not broad manual guessing.
+
+**Commit (code):** pending — this step will be committed after diary update.
+
+### What I did
+
+Updated `AppTopBar.css` to match prototype typography more closely:
+
+- Added root `font-size: 13px` and `line-height: 1.5`.
+- Changed eyebrow from margin-on-title to explicit `display: block; margin-bottom: 4px`.
+- Matched title style to prototype `DisplayH`:
+  - `margin: 0`
+  - `color: var(--app-ink)`
+  - `letter-spacing: -0.02em`
+  - `line-height: 1.1`
+- Matched subtitle style to prototype `Muted`:
+  - `font-size: 12.5px`
+  - `color: var(--color-text-secondary, #555048)`
+
+### Why
+
+The previous `compare.json` still reported style mismatches at the TopBar root:
+
+```text
+font-size:   left 13px    right 14px
+line-height: left 19.5px  right 20.3px
+```
+
+The prototype root uses the `.px-root` base typography:
+
+```text
+font-size: 13px
+line-height: 1.5
+```
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual diff improved substantially:
+
+```text
+Before typography tuning: 8.462285815226991%
+After typography tuning:  1.9750445632798572%
+```
+
+The `compare.json` style summary improved to:
+
+```text
+styleChanges: 0
+```
+
+Bounds height now matches exactly:
+
+```text
+left height:  110.390625
+right height: 110.390625
+```
+
+### What didn't work
+
+The diff is still around 1.98%. The remaining visible mismatch is concentrated around the TopBar action buttons, especially the icon-only buttons and the primary button width/position.
+
+### What I learned
+
+The large residual diff was not mostly color anymore; it was base typography inheritance. Matching the prototype's root `13px / 1.5` base brought the comparison much closer and eliminated style changes from the root comparison.
+
+### What was tricky to build
+
+The top-level comparison reports root styles only, so the remaining button mismatch is not visible as a style change in `compare.json`. The `diff_only.png` artifact is the better next diagnostic tool.
+
+### What warrants a second pair of eyes
+
+- Whether using `var(--color-text-secondary, #555048)` inside app CSS is acceptable, or whether `--app-secondary` should be introduced as an app alias.
+- Whether the subtitle color change affects other AppTopBar stories as expected.
+
+### What should be done in the future
+
+Next step: tune TopBar action buttons. The prototype uses 30px icon buttons, while the shared `Button` icon-only rendering currently produces wider 47px controls because the empty label span still participates in layout.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.css`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual check:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-type \
+  --output json
+```

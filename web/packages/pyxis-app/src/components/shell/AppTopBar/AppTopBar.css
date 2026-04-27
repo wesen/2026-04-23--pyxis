@@ -1,8 +1,8 @@
-.app-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--app-rule); background: var(--app-surface); padding: 20px 28px; }
+.app-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--app-rule); background: var(--app-surface); padding: 20px 28px; font-size: 13px; line-height: 1.5; }
 .app-topbar-heading { min-width: 0; }
-.app-topbar-eyebrow { color: var(--app-muted); font-size: 11.5px; }
-.app-topbar h1 { margin: 4px 0 0; font-family: var(--font-display, Georgia, serif); font-size: 24px; font-weight: 500; line-height: 1; }
-.app-topbar p { margin: 3px 0 0; color: var(--app-muted); font-size: 13px; }
+.app-topbar-eyebrow { display: block; margin-bottom: 4px; color: var(--app-muted); font-size: 11.5px; }
+.app-topbar h1 { margin: 0; color: var(--app-ink); font-family: var(--font-display, Georgia, serif); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+.app-topbar p { margin: 3px 0 0; color: var(--color-text-secondary, #555048); font-size: 12.5px; }
 .app-topbar-actions { display: flex; align-items: center; gap: 10px; }
 
 @media (max-width: 760px) {
