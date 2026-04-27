@@ -450,6 +450,18 @@ Named verbs (`compare-section`, `compare-page`) with registry-backed selectors a
 
 ---
 
+## Operator Guide
+
+For day-to-day command selection, targeted section runs, compact `--summary` output, and artifact-first inspection, see:
+
+```text
+docs/playbooks/10-css-visual-diff-verb-operator-guide.md
+```
+
+Use that guide before copying a broad `compare-spec` command into an iterative tuning loop.
+
+---
+
 ## Reference: Verbs Available
 
 | Verb | Description |
@@ -461,6 +473,7 @@ Named verbs (`compare-section`, `compare-page`) with registry-backed selectors a
 | `pyxis pages compare-all` | Compare all pages + summary |
 | `pyxis pages inspect-spec` | Inspect targets from a YAML spec |
 | `pyxis pages compare-spec` | Run from a YAML spec |
+| `pyxis pages compare-user-shows-section` | Alias for compact pyxis-user-site Shows desktop section comparisons |
 | `pyxis pages snapshot-section` | Semantic snapshot one section |
 | `pyxis pages diff-snapshots` | Diff two snapshot files |
 

@@ -2211,3 +2211,135 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
   --outDir /tmp/pyxis-topbar-after-primary-md \
   --output json
 ```
+
+## Step 24: Plan user-site Shows component-level visual tuning
+
+The Shows desktop page had become difficult to tune through the broad `shows-list` page section alone. The full section comparison mixes poster artwork, tile metadata formatting, grid gaps, page padding, and story fixture data. We therefore shifted the workflow to smaller component targets before continuing visual tuning.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Add detailed tasks for all the subcomponents to test. We don't need that many poster stories since they're mostly just different images. Once all the tasks are added, go through them, tune to a reasonable threshold, write diary (in the diary assess if it would make sense to introduce custom css-visual-diff functionality to be more targeted), then continue"
+
+**Assistant interpretation:** Extend the ticket task list with a concrete Shows component-tuning sequence, avoid excessive per-poster story proliferation, then work through the tasks with diary updates and commits at appropriate boundaries.
+
+**Inferred user intent:** Make the visual-tuning work repeatable and reviewable. Use component-level comparisons for better signal, but avoid over-engineering the React component tree or Storybook catalog.
+
+**Commit (code):** pending — this step should be committed with css-visual-diff operator docs/tooling, before deeper component/story tuning.
+
+### What I did
+
+- Added Phase 5 tasks T12-T22 to `tasks.md`.
+- The new task plan focuses on existing component boundaries:
+  - `PublicPageHeader`
+  - `MailingListCTA`
+  - representative `Poster` targets
+  - representative `ShowTile` states
+  - `ShowGrid/PrototypeDesktop`
+  - full public Shows `shows-list` as a final integration check.
+- Explicitly avoided tasks for `ShowTileInfo`, `ShowTileMeta`, `ShowTileTicketPill`, or one public component per poster variant.
+- Required diary entries for each tuning task, including an assessment of whether custom css-visual-diff functionality would make the workflow more targeted.
+
+### Why
+
+The latest focused full-section comparison was still around 20.50% changed pixels, while quick isolated probes against component-system Storybook showed smaller review-band targets around 6.5-9%. That means component-level visual targets are better tuning instruments than the whole `shows-list` section.
+
+### What worked
+
+The existing component system already has useful boundaries and Storybook stories. The likely missing pieces are better fixture stories and a component-level visual spec, not more React subcomponents.
+
+### What didn't work
+
+The broad `shows-list` command was too noisy as a primary tuning loop. It should remain an integration check after smaller components are reasonable.
+
+### What I learned
+
+Granularity for diagnosis is not the same as granularity for React components. Stable stories, spec sections, and `data-pyxis-part` selectors can provide smaller visual targets without splitting every DOM subpart into its own component.
+
+### What was tricky to build
+
+The main tension is poster coverage. One story per poster image would produce many targets, but most poster variants are image/artwork differences rather than different component states. The task plan therefore keeps `AllVariants` plus one or two representative focused poster targets, while putting more emphasis on semantic `ShowTile` states.
+
+### What warrants a second pair of eyes
+
+- Whether `poster-all-variants` can be compared with a stable crop or whether only focused representative poster crops should be used.
+- Whether `ShowGrid/PrototypeDesktop` should live in existing `ShowGrid.stories.tsx` or a separate fixture story if the data becomes lengthy.
+- Whether the component-level spec should use selectors from the current full prototype page or a new prototype catalog HTML page.
+
+### What should be done in the future
+
+- Commit the operator guide and alias verb separately from component visual tuning.
+- Add `public.components.visual.yml` and a compact component comparison alias.
+- Add representative stories and tune component targets before re-running the full Shows `shows-list` integration comparison.
+
+### Custom css-visual-diff functionality assessment
+
+At this planning stage, a small alias verb is already useful and probably enough for the next iteration. A larger custom feature may be warranted if we repeatedly need to compare nested subparts inside a single Storybook story, such as all poster variants in `Poster/AllVariants`, and summarize each child crop independently. For now, YAML spec targets plus compact alias verbs are the safer path because they keep the source of truth explicit and reviewable.
+
+## Step 25: Commit css-visual-diff operator guide and Shows alias verb
+
+This step closes the workflow/tooling part of the user-site Shows tuning work before changing more component stories or CSS. The goal is to make the shorter command available and documented so future tuning steps use the same focused loop.
+
+### Prompt Context
+
+**User prompt (verbatim):** "commit at appropriate intervals"
+
+**Assistant interpretation:** Commit the completed operator docs, alias verb, task plan, and diary update separately from upcoming component visual tuning changes.
+
+**Inferred user intent:** Keep workflow/tooling changes reviewable and do not mix them with poster/tile CSS tuning.
+
+**Commit (code):** pending at diary write time.
+
+### What I did
+
+- Validated the userland verb file syntax:
+
+```bash
+node -c prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+```
+
+- Smoke-tested the new alias verb:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-user-shows-section shows-list \
+  --outDir /tmp/pyxis-user-shows-alias-commit-smoke \
+  --output json
+```
+
+- The smoke output was compact and reported:
+
+```text
+shows shows-list tune-required 20.50184283269712
+/tmp/pyxis-user-shows-alias-commit-smoke/shows/artifacts/shows-list/diff_only.png
+```
+
+- Marked T12 and T13 complete in `tasks.md`.
+
+### Why
+
+The alias and guide reduce operator error and terminal noise. They are useful regardless of the eventual visual CSS changes, so they deserve their own commit boundary.
+
+### What worked
+
+The alias produced exactly one compact row for `shows-list`, with the useful artifact paths exposed directly.
+
+### What didn't work
+
+No implementation failure in this step. The visual state itself is still `tune-required`; this commit is not meant to solve the visual mismatch.
+
+### What I learned
+
+A tiny alias verb is enough to make the common workflow safer. It keeps the visual spec explicit in code while sparing operators from repeatedly passing the same spec/page/summary flags.
+
+### What was tricky to build
+
+The tricky part was choosing the commit boundary. Existing visual tuning edits are still uncommitted, but the docs/alias/task update can be staged separately and reviewed independently.
+
+### What warrants a second pair of eyes
+
+- Whether the alias name `compare-user-shows-section` is the right long-term naming convention.
+- Whether the compact row includes too many or too few fields for operators.
+
+### What should be done in the future
+
+Add a sibling component-target alias if `public.components.visual.yml` proves useful during the next tasks.

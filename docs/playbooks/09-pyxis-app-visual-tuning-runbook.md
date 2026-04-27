@@ -31,6 +31,8 @@ RelatedFiles:
     Note: Detailed userland architecture reference
   - Path: prototype-design/visual-diff/userland/docs/02-atom-to-page-visual-comparison-analysis.md
     Note: Textbook-style atom-to-page comparison analysis
+  - Path: docs/playbooks/10-css-visual-diff-verb-operator-guide.md
+    Note: Focused command/verb guide for targeted css-visual-diff runs and compact output.
 ExternalSources: []
 Summary: Operational runbook for tuning pyxis-app components and pages using css-visual-diff. Covers atom-to-page debugging, token analysis, visual diff workflow, and component reorganization.
 LastUpdated: 2026-04-27T09:30:00-04:00
@@ -41,6 +43,8 @@ WhenToUse: Read before starting visual tuning work on pyxis-app.
 # Pyxis App Visual Tuning Runbook
 
 This runbook documents the workflow for visual tuning pyxis-app components using `css-visual-diff`. It covers the complete loop from pixel diff → atom inspection → token analysis → CSS fix.
+
+For the command-level operating guide — choosing `compare-spec` flags, targeting only one section, using `--summary`, and avoiding terminal floods — read `docs/playbooks/10-css-visual-diff-verb-operator-guide.md` first.
 
 ---
 

@@ -7,6 +7,7 @@ __package__({
 var lib = require('../lib/index.js')
 var cvd = require('css-visual-diff')
 var fs = require('fs')
+var publicPagesDesktopSpec = require('../specs/public-pages.desktop.visual.js')
 
 function listTargets(values) {
   return lib.registry.flattenTargets({
@@ -399,6 +400,80 @@ __verb__('compareSpec', {
     inspect: { type: 'string', default: '', help: 'Collection profile; defaults to spec.inspect or rich' },
     mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail the command after writing reports when policy thresholds are exceeded' },
     maxChangedPercent: { type: 'float', default: 0, help: 'Optional policy threshold for changed percent; 0 uses spec value or disables it' },
+    maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band' },
+  },
+})
+
+function safePathSegment(value) {
+  return String(value || '').replace(/[^a-zA-Z0-9_.-]+/g, '-').replace(/^-+|-+$/g, '') || 'section'
+}
+
+function compactOperatorRows(result) {
+  var summarized = summarizeCompareSpec(result)
+  var rows = []
+  for (var i = 0; i < summarized.length; i++) {
+    var suite = summarized[i]
+    var suiteRows = suite.rows || []
+    for (var j = 0; j < suiteRows.length; j++) {
+      var row = suiteRows[j]
+      rows.push({
+        page: row.page,
+        variant: row.variant,
+        section: row.section,
+        classification: row.classification,
+        changedPercent: row.changedPercent,
+        changedPixels: row.changedPixels,
+        threshold: row.threshold,
+        boundsChanged: row.bounds ? row.bounds.changed : undefined,
+        bounds: row.bounds,
+        textChanged: row.text ? row.text.changed : undefined,
+        styleChangeCount: row.styleChangeCount,
+        attributeChangeCount: row.attributeChangeCount,
+        diffOnlyPath: row.diffOnlyPath,
+        rightRegionPath: row.rightRegionPath,
+        leftRegionPath: row.leftRegionPath,
+        compareJsonPath: row.artifactJson,
+        compareMarkdownPath: row.artifactMarkdown,
+        suiteJsonPath: suite.jsonPath,
+        suiteMarkdownPath: suite.markdownPath,
+      })
+    }
+  }
+  return rows
+}
+
+async function compareUserShowsSection(section, values) {
+  var sectionName = section || values.section || 'shows-list'
+  var outDir = values.outDir || ('/tmp/pyxis-user-shows-' + safePathSegment(sectionName) + '-tune')
+  var result = await compareSpec(publicPagesDesktopSpec, {
+    page: 'shows',
+    section: sectionName,
+    variant: values.variant || 'desktop',
+    priority: '',
+    outDir: outDir,
+    threshold: values.threshold || 0,
+    inspect: values.inspect || '',
+    mode: values.mode || 'authoring',
+    maxChangedPercent: values.maxChangedPercent || 0,
+    maxPolicyBand: values.maxPolicyBand || '',
+    summary: false,
+  })
+  return compactOperatorRows(result)
+}
+
+__verb__('compareUserShowsSection', {
+  parents: ['pyxis', 'pages'],
+  short: 'Alias: compare one pyxis-user-site Shows desktop section with compact operator output',
+  output: 'structured',
+  fields: {
+    section: { argument: true, type: 'string', default: 'shows-list', help: 'Shows page section to compare, e.g. shows-list, header, mailing-list' },
+    values: { bind: 'all' },
+    outDir: { type: 'string', default: '', help: 'Output directory; defaults to /tmp/pyxis-user-shows-<section>-tune' },
+    variant: { type: 'string', default: 'desktop', help: 'Spec variant; defaults to desktop' },
+    threshold: { type: 'int', default: 0, help: 'Pixel threshold 0-255; 0 uses spec/default 30' },
+    inspect: { type: 'string', default: '', help: 'Collection profile; defaults to spec.inspect or rich' },
+    mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail after writing reports when policy thresholds are exceeded' },
+    maxChangedPercent: { type: 'float', default: 0, help: 'Optional policy threshold; 0 uses spec value or disables it' },
     maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band' },
   },
 })
