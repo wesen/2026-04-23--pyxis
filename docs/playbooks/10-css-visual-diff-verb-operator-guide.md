@@ -392,7 +392,38 @@ Those images showed the actual cause: the React side rendered uploaded-style pla
 
 ---
 
-## 8. App Component Example
+## 8. Public Component Alias
+
+For component-system targets in `public.components.visual.yml`, use:
+
+```bash
+cd /home/manuel/code/wesen/2026-04-23--pyxis
+
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-public-component \
+  show-tile-redroom \
+  --outDir /tmp/pyxis-public-component-show-tile-redroom \
+  --output json
+```
+
+Useful Shows-related targets include:
+
+```text
+public-page-header-shows
+mailing-list-cta
+poster-redroom
+show-tile-redroom
+show-tile-learn
+show-tile-soldout
+show-grid-prototype-desktop
+```
+
+Use these targets before returning to the broader `compare-user-shows-section shows-list` integration check.
+
+---
+
+## 9. App Component Example
 
 For an app component target such as the Dashboard TopBar, do not use the default public-page registry. Pass the app component spec explicitly.
 
@@ -423,7 +454,7 @@ Inspect:
 
 ---
 
-## 9. When to Use Full Output
+## 10. When to Use Full Output
 
 Use full output only when you need implementation detail, for example:
 
@@ -450,7 +481,7 @@ But for ordinary tuning, prefer `--summary`.
 
 ---
 
-## 10. Optional Wrapper Script Pattern
+## 11. Optional Wrapper Script Pattern
 
 For ticket work, a small wrapper can make the workflow harder to misuse.
 
@@ -484,7 +515,7 @@ This is the right amount of terminal output for an operator.
 
 ---
 
-## 11. Checklist Before Running a Visual Command
+## 12. Checklist Before Running a Visual Command
 
 Ask these questions:
 

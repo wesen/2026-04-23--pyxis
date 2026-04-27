@@ -474,6 +474,7 @@ Use that guide before copying a broad `compare-spec` command into an iterative t
 | `pyxis pages inspect-spec` | Inspect targets from a YAML spec |
 | `pyxis pages compare-spec` | Run from a YAML spec |
 | `pyxis pages compare-user-shows-section` | Alias for compact pyxis-user-site Shows desktop section comparisons |
+| `pyxis pages compare-public-component` | Alias for compact public component-system comparisons from `public.components.visual.yml` |
 | `pyxis pages snapshot-section` | Semantic snapshot one section |
 | `pyxis pages diff-snapshots` | Diff two snapshot files |
 

@@ -8,6 +8,7 @@ var lib = require('../lib/index.js')
 var cvd = require('css-visual-diff')
 var fs = require('fs')
 var publicPagesDesktopSpec = require('../specs/public-pages.desktop.visual.js')
+var publicComponentsSpec = require('../specs/public.components.visual.js')
 
 function listTargets(values) {
   return lib.registry.flattenTargets({
@@ -470,6 +471,44 @@ __verb__('compareUserShowsSection', {
     values: { bind: 'all' },
     outDir: { type: 'string', default: '', help: 'Output directory; defaults to /tmp/pyxis-user-shows-<section>-tune' },
     variant: { type: 'string', default: 'desktop', help: 'Spec variant; defaults to desktop' },
+    threshold: { type: 'int', default: 0, help: 'Pixel threshold 0-255; 0 uses spec/default 30' },
+    inspect: { type: 'string', default: '', help: 'Collection profile; defaults to spec.inspect or rich' },
+    mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail after writing reports when policy thresholds are exceeded' },
+    maxChangedPercent: { type: 'float', default: 0, help: 'Optional policy threshold; 0 uses spec value or disables it' },
+    maxPolicyBand: { type: 'string', default: '', help: 'Optional maximum allowed classification band' },
+  },
+})
+
+async function comparePublicComponent(page, values) {
+  var target = page || values.page || ''
+  if (!target) throw new Error('component target is required')
+  var outDir = values.outDir || ('/tmp/pyxis-public-component-' + safePathSegment(target) + '-tune')
+  var result = await compareSpec(publicComponentsSpec, {
+    page: target,
+    section: values.section || 'component',
+    variant: values.variant || 'component',
+    priority: '',
+    outDir: outDir,
+    threshold: values.threshold || 0,
+    inspect: values.inspect || '',
+    mode: values.mode || 'authoring',
+    maxChangedPercent: values.maxChangedPercent || 0,
+    maxPolicyBand: values.maxPolicyBand || '',
+    summary: false,
+  })
+  return compactOperatorRows(result)
+}
+
+__verb__('comparePublicComponent', {
+  parents: ['pyxis', 'pages'],
+  short: 'Alias: compare one public component-system visual target with compact operator output',
+  output: 'structured',
+  fields: {
+    page: { argument: true, type: 'string', required: true, help: 'Component target from public.components.visual.yml, e.g. show-tile-redroom' },
+    values: { bind: 'all' },
+    section: { type: 'string', default: 'component', help: 'Section name inside the target; defaults to component' },
+    outDir: { type: 'string', default: '', help: 'Output directory; defaults to /tmp/pyxis-public-component-<page>-tune' },
+    variant: { type: 'string', default: 'component', help: 'Spec variant; defaults to component' },
     threshold: { type: 'int', default: 0, help: 'Pixel threshold 0-255; 0 uses spec/default 30' },
     inspect: { type: 'string', default: '', help: 'Collection profile; defaults to spec.inspect or rich' },
     mode: { type: 'choice', choices: ['authoring', 'ci'], default: 'authoring', help: 'In ci mode, fail after writing reports when policy thresholds are exceeded' },

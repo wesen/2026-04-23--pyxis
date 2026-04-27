@@ -125,7 +125,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Smoke test the alias against `shows-list`.
   - Commit docs/tooling separately.
 
-- [ ] **T14 — Add a component-level public visual spec and ergonomic component alias**
+- [x] **T14 — Add a component-level public visual spec and ergonomic component alias**
   - Create `prototype-design/visual-diff/userland/specs/public.components.visual.yml` for component-system Storybook targets on `localhost:6006`.
   - Include component targets for:
     - `public-page-header-shows`
@@ -141,7 +141,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Regenerate JS mirrors with `prototype-design/visual-diff/userland/scripts/refresh-spec-mirrors.py`.
   - Add a compact alias verb for component targets if it reduces repeated flags enough to be useful.
 
-- [ ] **T15 — Add focused Storybook fixture data without over-splitting components**
+- [x] **T15 — Add focused Storybook fixture data without over-splitting components**
   - Add representative `Poster` stories only where useful:
     - keep `AllVariants` as the artwork overview;
     - add at most one or two focused single-poster stories if needed for stable crops (`Redroom`, optionally one complex artwork variant).

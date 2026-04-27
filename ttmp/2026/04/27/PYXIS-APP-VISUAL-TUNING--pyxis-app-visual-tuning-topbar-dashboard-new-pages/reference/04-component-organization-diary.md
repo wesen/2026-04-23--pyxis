@@ -2343,3 +2343,123 @@ The tricky part was choosing the commit boundary. Existing visual tuning edits a
 ### What should be done in the future
 
 Add a sibling component-target alias if `public.components.visual.yml` proves useful during the next tasks.
+
+## Step 26: Add public component visual spec, alias, and representative Shows stories
+
+This step adds the component-level tuning harness for public Shows work. It intentionally keeps the React component granularity unchanged and adds better visual targets instead.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Add detailed tasks for all the subcomponents to test. We don't need that many poster stories since they're mostly just different images. Once all the tasks are added, go through them, tune to a reasonable threshold, write diary (in the diary assess if it would make sense to introduce custom css-visual-diff functionality to be more targeted), then continue"
+
+**Assistant interpretation:** After adding tasks, create the component-level visual spec and representative stories needed to work through the tasks.
+
+**Inferred user intent:** Get better pixel-diff numbers by comparing existing molecules/organisms directly, not by splitting the React tree into tiny pieces.
+
+**Commit (code):** pending — this should be a setup commit before deeper CSS tuning.
+
+### What I did
+
+- Added `prototype-design/visual-diff/userland/specs/public.components.visual.yml`.
+- Regenerated `prototype-design/visual-diff/userland/specs/public.components.visual.js`.
+- Added `compare-public-component` to `prototype-design/visual-diff/userland/verbs/pyxis-pages.js`.
+- Updated the operator guide and userland README to mention the new alias.
+- Reworked `ShowTile.stories.tsx` around representative semantic states:
+  - `Default` / Redroom tickets
+  - `Learn` / Monday Meet-Ups
+  - `SoldOut` / Moor Mother
+  - `PlaceholderFlyerFallback`
+  - existing compact/theme coverage
+- Added `ShowGrid/PrototypeDesktop` with the exact nine-show prototype-style data/order.
+- Adjusted `ShowTile` metadata formatting so empty genres are omitted instead of rendering an extra separator.
+
+### Why
+
+The broad `shows-list` section remained useful as an integration check, but it was too coarse for tuning. Component targets now isolate:
+
+- page header
+- mailing-list CTA
+- representative poster
+- representative tile states
+- prototype desktop grid
+
+This gives better visual evidence without creating many poster stories.
+
+### Validation and visual smoke
+
+Syntax validation passed:
+
+```bash
+node -c prototype-design/visual-diff/userland/verbs/pyxis-pages.js
+```
+
+TypeScript validation passed:
+
+```bash
+cd web/packages/pyxis-components
+pnpm exec tsc --noEmit
+```
+
+The component alias smoke passed:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-public-component show-tile-redroom \
+  --outDir /tmp/pyxis-public-component-redroom-smoke \
+  --output json
+```
+
+Result:
+
+```text
+show-tile-redroom component review 7.75599128540305%
+```
+
+The component suite baseline was:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/public.components.visual.yml \
+  --outDir /tmp/pyxis-public-components-baseline \
+  --summary --output json
+```
+
+Key results:
+
+```text
+public-page-header-shows      review          7.099655617735687%
+mailing-list-cta              review          6.557517866959868%
+poster-redroom                review          7.432610124917817%
+show-tile-redroom             review          7.75599128540305%
+show-tile-learn               major-mismatch 27.363834422657952%
+show-tile-soldout             review          6.5116473940003345%
+show-grid-prototype-desktop   review          9.552467262747637%
+```
+
+### What worked
+
+- The new `show-grid-prototype-desktop` component target is already much more useful than the full page `shows-list`: it isolates the grid and lands at 9.55% instead of 20.50%.
+- Redroom, sold-out, header, CTA, and poster representative targets are all already in review band.
+- The learn/Meet-Ups tile correctly exposes the main outlier: the React generic `Poster` approximation for Meet-Ups does not include the prototype's dense flyer artwork.
+
+### What didn't work
+
+- `show-tile-learn` is still a major mismatch at 27.36%. This appears to be genuine poster artwork mismatch, not a grid or tile spacing bug.
+- The component spec currently uses selectors inside `/standalone/public/shows.html` for the prototype side. This is acceptable for now, but a dedicated prototype catalog HTML page would be cleaner.
+
+### What I learned
+
+The existing component granularity is good. The better tuning unit is not a new `ShowTileMeta` component; it is a component-level visual target with representative fixture data.
+
+### What was tricky to build
+
+Storybook story IDs are generated from story export names. The spec now depends on representative story names such as `show-tile-learn` and `show-grid-prototype-desktop`, so story renames must update the visual spec in the same commit.
+
+### What warrants a second pair of eyes
+
+- Whether `show-tile-learn` should be tuned by making the generic `Poster` component more prototype-like, or whether that level of artwork mismatch is acceptable.
+- Whether to add a prototype catalog page so component targets do not depend on nth-child selectors inside the full Shows page.
+
+### Custom css-visual-diff functionality assessment
+
+The new `compare-public-component` alias is helpful and probably enough for the immediate workflow. A custom css-visual-diff feature could still be useful later: a "multi-crop story matrix" mode that compares each child inside an `AllVariants` story and returns per-child rows. That would be especially useful for poster variants without adding one story and one spec target per image. For now, explicit representative targets are simpler and easier to review.
