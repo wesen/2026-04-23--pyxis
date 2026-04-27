@@ -455,3 +455,95 @@ go get github.com/go-go-golems/discord-bot@v0.0.0 github.com/go-go-golems/go-go-
 go mod tidy
 go test ./...
 ```
+
+
+## Step 5: Add bot load test and update task status
+
+After committing the Phase 0-7 foundation, I added a focused test that loads the copied Pyxis show-space bot through the embedded framework path with fake credentials. This catches JavaScript syntax errors, missing `require("pyxis")` registration, and basic runner construction regressions without opening a Discord gateway connection.
+
+I also updated the ticket task checklist to mark the completed Phase 0-7 work and leave open the follow-up items that still need deeper testing, frontend polish, Phase 8 web announce alignment, and Discord smoke validation.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 4)
+
+**Assistant interpretation:** Continue implementation, add validation where practical, and keep the ticket bookkeeping current.
+
+**Inferred user intent:** Maintain a trustworthy implementation record and avoid leaving the task list stale after code changes.
+
+**Commit (code):** pending at the time this diary entry was written.
+
+### What I did
+
+- Added `pkg/discordbot/runner_test.go`.
+- The test calls `discordbot.NewRunner(...)` with fake Discord credentials and the copied `bot/discord/show-space/index.js` script.
+- The test verifies that the framework can load and compile the bot with the Pyxis native module registrar available.
+- Ran the targeted test and the full Go test suite.
+- Updated `tasks.md` to mark completed Phase 0-7 checklist items.
+
+### Why
+
+- The copied bot is JavaScript loaded at runtime, so `go test ./...` without a load test would not necessarily catch syntax/module errors in the bot script.
+- A framework-level runner construction test gives a cheap local validation path before a real Discord dev-guild smoke test.
+- Updating task status keeps the docmgr ticket useful for the next implementation session.
+
+### What worked
+
+- Targeted runner load test passed:
+
+```text
+ok  	github.com/go-go-golems/pyxis/pkg/discordbot	0.012s
+```
+
+- Full Go test suite passed:
+
+```text
+ok  	github.com/go-go-golems/pyxis/pkg/discordbot	0.018s
+```
+
+with all other packages reporting no test files.
+
+### What didn't work
+
+- N/A in this step.
+
+### What I learned
+
+- The framework can compile the copied bot with fake credentials as long as `BotToken` and `ApplicationID` are non-empty; it does not open Discord until `Run` is called.
+- This makes bot load testing cheap and safe for CI-style validation.
+
+### What was tricky to build
+
+- The test path to the bot script is relative to the `pkg/discordbot` package test working directory, so it uses `../../bot/discord/show-space/index.js` via `filepath.Join`.
+
+### What warrants a second pair of eyes
+
+- The load test proves compile/load only. It does not dispatch slash commands, mock Discord operations, or validate database-backed native module methods.
+
+### What should be done in the future
+
+- Add deeper native module tests with fake services or a test database.
+- Add command dispatch tests for `/upcoming`, `/add-show`, `/cancel-show`, and `/archive-expired` if framework APIs allow easy fake Discord ops.
+- Run the real Discord smoke checklist from Phase 12.
+
+### Code review instructions
+
+- Review `pkg/discordbot/runner_test.go` with `pkg/discordbot/runner.go`.
+- Re-run:
+
+```bash
+go test ./pkg/discordbot -run TestNewRunnerLoadsPyxisShowSpaceBot -count=1
+go test ./...
+docmgr doctor --ticket PYXIS-DISCORD-SHOW-MGMT --stale-after 30
+```
+
+### Technical details
+
+Commands run:
+
+```bash
+gofmt -w pkg/discordbot/runner_test.go
+go test ./pkg/discordbot -run TestNewRunnerLoadsPyxisShowSpaceBot -count=1
+go test ./...
+docmgr doctor --ticket PYXIS-DISCORD-SHOW-MGMT --stale-after 30
+```

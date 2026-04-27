@@ -56,3 +56,14 @@ Implemented the Phase 0-7 foundation: framework dependency, copied Pyxis bot, Di
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/discordbot/pyxis_module.go — Goja native Pyxis module
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/discordbot/runner.go — Embedded framework runner
 
+
+## 2026-04-26
+
+Added a Discord bot runner load test and updated Phase 0-7 task status after implementation.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/discordbot/runner_test.go — Framework-level bot load test
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary update for test/task checkpoint
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/tasks.md — Updated completed implementation tasks
+

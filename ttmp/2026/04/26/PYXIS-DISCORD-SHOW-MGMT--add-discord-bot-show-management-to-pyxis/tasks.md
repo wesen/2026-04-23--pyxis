@@ -4,116 +4,116 @@
 
 ### Phase 0 — Preparation and guardrails
 
-- [ ] Read the design guide before touching code: `design-doc/01-discord-bot-show-management-design-and-implementation-guide.md`.
-- [ ] Read the implementation diary before continuing work: `reference/01-investigation-diary.md`.
+- [x] Read the design guide before touching code: `design-doc/01-discord-bot-show-management-design-and-implementation-guide.md`.
+- [x] Read the implementation diary before continuing work: `reference/01-investigation-diary.md`.
 - [ ] Re-run the evidence script if source files have drifted: `scripts/01-collect-discord-show-management-evidence.sh`.
-- [ ] Confirm the current working tree and avoid mixing unrelated changes into the Discord bot implementation.
-- [ ] Create a dedicated implementation branch, for example `feature/pyxis-discord-show-bot`.
-- [ ] Decide whether local development should use Go module `replace` directives for `../corporate-headquarters/discord-bot` and `../corporate-headquarters/go-go-goja`.
-- [ ] Record any implementation start notes in the diary before code changes begin.
+- [x] Confirm the current working tree and avoid mixing unrelated changes into the Discord bot implementation.
+- [x] Create a dedicated implementation branch, for example `feature/pyxis-discord-show-bot`.
+- [x] Decide whether local development should use Go module `replace` directives for `../corporate-headquarters/discord-bot` and `../corporate-headquarters/go-go-goja`.
+- [x] Record any implementation start notes in the diary before code changes begin.
 
 ### Phase 1 — Add framework dependency and verify build plumbing
 
-- [ ] Add `github.com/go-go-golems/discord-bot` to `go.mod`.
-- [ ] Ensure `github.com/go-go-golems/go-go-goja` resolves through the framework dependency or an explicit local `replace` when developing across checkouts.
-- [ ] Confirm Pyxis imports only public framework packages such as `github.com/go-go-golems/discord-bot/pkg/framework` and does not import `discord-bot/internal/...`.
-- [ ] Run `go mod tidy`.
-- [ ] Run `go test ./...` and capture failures in the diary.
-- [ ] If dependency conflicts appear, document exact module versions and resolution decisions in the diary.
+- [x] Add `github.com/go-go-golems/discord-bot` to `go.mod`.
+- [x] Ensure `github.com/go-go-golems/go-go-goja` resolves through the framework dependency or an explicit local `replace` when developing across checkouts.
+- [x] Confirm Pyxis imports only public framework packages such as `github.com/go-go-golems/discord-bot/pkg/framework` and does not import `discord-bot/internal/...`.
+- [x] Run `go mod tidy`.
+- [x] Run `go test ./...` and capture failures in the diary.
+- [x] If dependency conflicts appear, document exact module versions and resolution decisions in the diary.
 
 ### Phase 2 — Copy, rename, and baseline the show-space bot
 
-- [ ] Create a Pyxis-owned bot folder, for example `bot/discord/show-space/`.
-- [ ] Copy `../corporate-headquarters/discord-bot/examples/discord-bots/show-space/index.js` into the Pyxis bot folder.
-- [ ] Copy reusable helper files: `lib/dates.js`, `lib/render.js`, and `lib/permissions.js`.
-- [ ] Decide whether to copy `shows.json` only for tests/demos or omit it from production runtime.
-- [ ] Rename bot metadata from `show-space` to `pyxis-show-space` or `pyxis-shows` in `configure({ name: ... })`.
-- [ ] Update description/category text so Discord help clearly says this bot manages Pyxis shows.
-- [ ] Update custom component IDs from `show-space:*` to a Pyxis-specific prefix if command/component collisions are possible.
-- [ ] Remove or isolate the old SQLite `lib/store.js` path so production code cannot accidentally use a separate show database.
-- [ ] Add a temporary README in `bot/discord/show-space/` explaining which upstream files were copied and what changed.
+- [x] Create a Pyxis-owned bot folder, for example `bot/discord/show-space/`.
+- [x] Copy `../corporate-headquarters/discord-bot/examples/discord-bots/show-space/index.js` into the Pyxis bot folder.
+- [x] Copy reusable helper files: `lib/dates.js`, `lib/render.js`, and `lib/permissions.js`.
+- [x] Decide whether to copy `shows.json` only for tests/demos or omit it from production runtime.
+- [x] Rename bot metadata from `show-space` to `pyxis-show-space` or `pyxis-shows` in `configure({ name: ... })`.
+- [x] Update description/category text so Discord help clearly says this bot manages Pyxis shows.
+- [x] Update custom component IDs from `show-space:*` to a Pyxis-specific prefix if command/component collisions are possible.
+- [x] Remove or isolate the old SQLite `lib/store.js` path so production code cannot accidentally use a separate show database.
+- [x] Add a temporary README in `bot/discord/show-space/` explaining which upstream files were copied and what changed.
 
 ### Phase 3 — Expose Discord message metadata in the Pyxis data model
 
-- [ ] Add `DiscordMessageID string` and `DiscordChannelID string` to `pkg/domain/show.go`.
-- [ ] Add `discord_message_id` and `discord_channel_id` fields to `proto/pyxis/v1/show.proto` using new, non-conflicting tag numbers.
-- [ ] Regenerate Go protobuf code.
-- [ ] Regenerate TypeScript protobuf/types package output.
-- [ ] Update `pkg/db/queries/shows.sql` so list/get/create/update queries preserve Discord metadata.
-- [ ] Run SQLC generation for updated queries.
-- [ ] Update `pkg/repository/postgres/show_repo.go` mappings between SQLC rows and `domain.Show`.
-- [ ] Add repository methods or queries for `AttachDiscordMessage`, `FindByDiscordMessage`, and expired confirmed shows if the service layer needs them.
-- [ ] Update `showToProto`, `protoToDomainShow`, and `domainShowToAppShow` in server conversion code.
+- [x] Add `DiscordMessageID string` and `DiscordChannelID string` to `pkg/domain/show.go`.
+- [x] Add `discord_message_id` and `discord_channel_id` fields to `proto/pyxis/v1/show.proto` using new, non-conflicting tag numbers.
+- [x] Regenerate Go protobuf code.
+- [x] Regenerate TypeScript protobuf/types package output.
+- [x] Update `pkg/db/queries/shows.sql` so list/get/create/update queries preserve Discord metadata.
+- [x] Run SQLC generation for updated queries.
+- [x] Update `pkg/repository/postgres/show_repo.go` mappings between SQLC rows and `domain.Show`.
+- [x] Add repository methods or queries for `AttachDiscordMessage`, `FindByDiscordMessage`, and expired confirmed shows if the service layer needs them.
+- [x] Update `showToProto`, `protoToDomainShow`, and `domainShowToAppShow` in server conversion code.
 - [ ] Update frontend code so pinned/Discord status can use real `discordMessageId` / `discordChannelId` instead of static placeholders.
 - [ ] Update MSW/mock data for Discord metadata.
 - [ ] Add tests or snapshots that prove a show can round-trip Discord message/channel IDs through API responses.
 
 ### Phase 4 — Add a Pyxis Discord bot runner package
 
-- [ ] Create `pkg/discordbot/runner.go`.
-- [ ] Define a `discordbot.Config` with script path, sync-on-start, debug flag, runtime config, and Discord credentials.
-- [ ] Define a dependency struct with `ShowService`, `SettingsService`, `AuditService`, and any required repositories/queries.
-- [ ] Implement `NewRunner(ctx, cfg, deps)` using `framework.New(...)`.
-- [ ] Pass `framework.WithCredentials(...)` or `framework.WithCredentialsFromEnv()` depending on final config design.
-- [ ] Pass `framework.WithScript(...)` pointing at the copied Pyxis bot script.
-- [ ] Pass `framework.WithRuntimeConfig(...)` with channel IDs, role IDs, timezone, and debug values.
-- [ ] Pass `framework.WithRuntimeModuleRegistrars(...)` with the future Pyxis native module registrar.
-- [ ] Pass `framework.WithSyncOnStart(...)` from config.
-- [ ] Implement `Run(ctx)` and `Close()` wrappers.
-- [ ] Add logging around bot creation, command sync, gateway open, shutdown, and failures.
-- [ ] Add unit tests for config validation and script path resolution.
+- [x] Create `pkg/discordbot/runner.go`.
+- [x] Define a `discordbot.Config` with script path, sync-on-start, debug flag, runtime config, and Discord credentials.
+- [x] Define a dependency struct with `ShowService`, `SettingsService`, `AuditService`, and any required repositories/queries.
+- [x] Implement `NewRunner(ctx, cfg, deps)` using `framework.New(...)`.
+- [x] Pass `framework.WithCredentials(...)` or `framework.WithCredentialsFromEnv()` depending on final config design.
+- [x] Pass `framework.WithScript(...)` pointing at the copied Pyxis bot script.
+- [x] Pass `framework.WithRuntimeConfig(...)` with channel IDs, role IDs, timezone, and debug values.
+- [x] Pass `framework.WithRuntimeModuleRegistrars(...)` with the future Pyxis native module registrar.
+- [x] Pass `framework.WithSyncOnStart(...)` from config.
+- [x] Implement `Run(ctx)` and `Close()` wrappers.
+- [x] Add logging around bot creation, command sync, gateway open, shutdown, and failures.
+- [x] Add unit tests for config validation and script path resolution.
 
 ### Phase 5 — Implement the Goja native `require("pyxis")` module
 
-- [ ] Create `pkg/discordbot/pyxis_module.go` implementing `engine.RuntimeModuleRegistrar`.
-- [ ] Register a native module named `pyxis`.
-- [ ] Expose `pyxis.shows.listUpcoming({ limit })`.
-- [ ] Expose `pyxis.shows.listPast({ limit })`.
-- [ ] Expose `pyxis.shows.get(id)`.
-- [ ] Expose `pyxis.shows.create(input, actor)`.
-- [ ] Expose `pyxis.shows.attachDiscordMessage(id, channelId, messageId)`.
-- [ ] Expose `pyxis.shows.cancel(id, actor)`.
-- [ ] Expose `pyxis.shows.archive(id, actor)`.
-- [ ] Expose `pyxis.shows.archiveExpired({ referenceDate, actor })` if auto-archive should be bot-driven.
-- [ ] Expose `pyxis.settings.get()` with normalized runtime settings.
+- [x] Create `pkg/discordbot/pyxis_module.go` implementing `engine.RuntimeModuleRegistrar`.
+- [x] Register a native module named `pyxis`.
+- [x] Expose `pyxis.shows.listUpcoming({ limit })`.
+- [x] Expose `pyxis.shows.listPast({ limit })`.
+- [x] Expose `pyxis.shows.get(id)`.
+- [x] Expose `pyxis.shows.create(input, actor)`.
+- [x] Expose `pyxis.shows.attachDiscordMessage(id, channelId, messageId)`.
+- [x] Expose `pyxis.shows.cancel(id, actor)`.
+- [x] Expose `pyxis.shows.archive(id, actor)`.
+- [x] Expose `pyxis.shows.archiveExpired({ referenceDate, actor })` if auto-archive should be bot-driven.
+- [x] Expose `pyxis.settings.get()` with normalized runtime settings.
 - [ ] Expose `pyxis.audit.log(...)` only if direct audit calls from JavaScript are necessary.
-- [ ] Add DTO conversion helpers from `domain.Show` to the JavaScript shape expected by the copied bot.
-- [ ] Add robust ID coercion for JS strings/numbers.
-- [ ] Return `{ ok: false, error: string }` for user-facing failures instead of raw Go exceptions where appropriate.
-- [ ] Ensure native module methods use safe contexts and do not leak database handles into JavaScript.
+- [x] Add DTO conversion helpers from `domain.Show` to the JavaScript shape expected by the copied bot.
+- [x] Add robust ID coercion for JS strings/numbers.
+- [x] Return `{ ok: false, error: string }` for user-facing failures instead of raw Go exceptions where appropriate.
+- [x] Ensure native module methods use safe contexts and do not leak database handles into JavaScript.
 - [ ] Add Go tests for each native module method with fake services or a test database.
 
 ### Phase 6 — Port bot store calls from SQLite to Pyxis services
 
-- [ ] Replace `require("database")` usage with `require("pyxis")`.
-- [ ] Replace `hasDatabase(ctx)` and SQLite initialization logic with Pyxis service availability checks or remove it entirely.
-- [ ] Replace `repoListUpcoming` with `pyxis.shows.listUpcoming`.
-- [ ] Replace `repoListPast` with `pyxis.shows.listPast`.
-- [ ] Replace `repoGetShow` with `pyxis.shows.get`.
-- [ ] Replace `repoCreateShow` with `pyxis.shows.create`.
-- [ ] Replace `repoAttachDiscordMessage` with `pyxis.shows.attachDiscordMessage`.
-- [ ] Replace `repoCancelShow` with `pyxis.shows.cancel`.
-- [ ] Replace `repoArchiveShow` with `pyxis.shows.archive`.
-- [ ] Replace `repoArchiveByDiscordMessage` with a Pyxis-backed lookup/update path.
-- [ ] Replace `repoArchiveExpiredShows` with a Pyxis-backed query/update path.
-- [ ] Ensure actor information from `ctx.user` / `ctx.member` is passed into mutating service calls.
-- [ ] Keep `lib/render.js`, `lib/dates.js`, and `lib/permissions.js` small and framework-compatible.
-- [ ] Run bot runtime tests or a local compile/load check after the port.
+- [x] Replace `require("database")` usage with `require("pyxis")`.
+- [x] Replace `hasDatabase(ctx)` and SQLite initialization logic with Pyxis service availability checks or remove it entirely.
+- [x] Replace `repoListUpcoming` with `pyxis.shows.listUpcoming`.
+- [x] Replace `repoListPast` with `pyxis.shows.listPast`.
+- [x] Replace `repoGetShow` with `pyxis.shows.get`.
+- [x] Replace `repoCreateShow` with `pyxis.shows.create`.
+- [x] Replace `repoAttachDiscordMessage` with `pyxis.shows.attachDiscordMessage`.
+- [x] Replace `repoCancelShow` with `pyxis.shows.cancel`.
+- [x] Replace `repoArchiveShow` with `pyxis.shows.archive`.
+- [x] Replace `repoArchiveByDiscordMessage` with a Pyxis-backed lookup/update path.
+- [x] Replace `repoArchiveExpiredShows` with a Pyxis-backed query/update path.
+- [x] Ensure actor information from `ctx.user` / `ctx.member` is passed into mutating service calls.
+- [x] Keep `lib/render.js`, `lib/dates.js`, and `lib/permissions.js` small and framework-compatible.
+- [x] Run bot runtime tests or a local compile/load check after the port.
 
 ### Phase 7 — Wire bot lifecycle into `pyxis serve`
 
-- [ ] Extend `ServeSettings` in `cmd/pyxis/cmds/serve.go` with Discord bot flags.
-- [ ] Add `--discord-bot` / `--discord-bot-enabled` to enable the bot explicitly.
-- [ ] Add `--discord-bot-script` with a default pointing to the copied bot script.
-- [ ] Add `--discord-sync-on-start` for development command sync.
-- [ ] Add `--discord-debug` to enable debug-only Discord commands.
-- [ ] Add `--discord-admin-role-id` and `--discord-booker-role-id` unless these are moved entirely into settings.
-- [ ] Add corresponding fields to `pkg/config.Config`.
-- [ ] Decide whether the HTTP server and bot should run under `errgroup.WithContext` so one failure cancels the other.
-- [ ] Build shared service dependencies once and pass equivalent services to both HTTP server and bot runner, or refactor server construction so dependency creation is not duplicated.
-- [ ] Ensure graceful shutdown closes both HTTP server and bot runtime.
-- [ ] Log a clear startup message when the bot is disabled.
-- [ ] Log a clear startup error if bot credentials are missing while the bot is enabled.
+- [x] Extend `ServeSettings` in `cmd/pyxis/cmds/serve.go` with Discord bot flags.
+- [x] Add `--discord-bot` / `--discord-bot-enabled` to enable the bot explicitly.
+- [x] Add `--discord-bot-script` with a default pointing to the copied bot script.
+- [x] Add `--discord-sync-on-start` for development command sync.
+- [x] Add `--discord-debug` to enable debug-only Discord commands.
+- [x] Add `--discord-admin-role-id` and `--discord-booker-role-id` unless these are moved entirely into settings.
+- [x] Add corresponding fields to `pkg/config.Config`.
+- [x] Decide whether the HTTP server and bot should run under `errgroup.WithContext` so one failure cancels the other.
+- [x] Build shared service dependencies once and pass equivalent services to both HTTP server and bot runner, or refactor server construction so dependency creation is not duplicated.
+- [x] Ensure graceful shutdown closes both HTTP server and bot runtime.
+- [x] Log a clear startup message when the bot is disabled.
+- [x] Log a clear startup error if bot credentials are missing while the bot is enabled.
 
 ### Phase 8 — Align HTTP announce with Discord bot behavior
 
