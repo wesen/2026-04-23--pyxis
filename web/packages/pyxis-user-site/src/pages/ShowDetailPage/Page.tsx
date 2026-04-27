@@ -3,14 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
   LineupRow,
+  Poster,
   ReserveTicketCard,
   SafetyNote,
   ShowDetailHeader,
   ShowMetaStrip,
-  VenueCard,
 } from 'pyxis-components';
-import { useShow } from '../api/hooks';
-import './ShowDetail.css';
+import { useShow } from '../../api/hooks';
+import './Page.css';
 
 export function ShowDetail() {
   const { id } = useParams<{ id: string }>();
@@ -24,38 +24,45 @@ export function ShowDetail() {
 
   const dateLabel = formatLongDate(show.date);
   const timeLabel = show.startTime ? `${show.doorsTime} doors · ${show.startTime} show` : `${show.doorsTime} doors`;
+  const flyerUrl = isMockPlaceholderFlyer(show.flyerUrl) ? undefined : show.flyerUrl;
 
   return (
     <main className="pyxis-public-page pyxis-show-detail-page" data-page="show-detail">
       <div className="pyxis-public-page__inner">
-        <section className="pyxis-show-detail-page__hero" data-section="show-detail-hero">
-          <button className="pyxis-show-detail-page__back" onClick={() => navigate('/')} type="button">
-            ← All shows
-          </button>
-          <ShowDetailHeader
-            meta={`${dateLabel} · ${timeLabel}`}
-            title={show.artist}
-            description={show.description ?? show.genre}
-          />
-          <div className="pyxis-show-detail-page__meta" data-section="show-detail-meta">
-            <ShowMetaStrip
-              items={[
-                { label: 'Doors', value: show.doorsTime },
-                { label: 'Age', value: show.age },
-                { label: 'Door', value: show.price },
-              ]}
-            />
-          </div>
-        </section>
+        <button className="pyxis-show-detail-page__back" onClick={() => navigate('/')} type="button">
+          ← All shows
+        </button>
 
         <section className="pyxis-show-detail-page__content" data-section="show-detail-content">
-          <div className="pyxis-show-detail-page__main">
-            {show.description && (
-              <section data-section="show-detail-description">
-                <h2 className="pyxis-show-detail-page__section-title">About the show</h2>
-                <p className="pyxis-show-detail-page__description">{show.description}</p>
-              </section>
+          <aside className="pyxis-show-detail-page__aside" data-section="show-detail-aside">
+            {flyerUrl ? (
+              <button className="pyxis-show-detail-page__flyer-button" type="button" onClick={() => setFlyerOpen(true)}>
+                <img src={flyerUrl} alt={`${show.artist} flyer`} />
+                <span>View flyer fullscreen</span>
+              </button>
+            ) : (
+              <Poster kind="redroom" />
             )}
+            <ReserveTicketCard price="$10 – $15" note="sliding. cash or card at door." />
+          </aside>
+
+          <div className="pyxis-show-detail-page__main">
+            <section className="pyxis-show-detail-page__hero" data-section="show-detail-hero">
+              <ShowDetailHeader
+                meta={`${dateLabel} · ${timeLabel}`}
+                title={show.artist}
+                description={show.description ?? show.genre}
+              />
+              <div className="pyxis-show-detail-page__meta" data-section="show-detail-meta">
+                <ShowMetaStrip
+                  items={[
+                    { label: 'Doors', value: show.doorsTime },
+                    { label: 'Age', value: show.age },
+                    { label: 'Door', value: show.price },
+                  ]}
+                />
+              </div>
+            </section>
 
             {show.lineup && show.lineup.length > 0 && (
               <section data-section="show-detail-lineup">
@@ -67,17 +74,12 @@ export function ShowDetail() {
                 </div>
               </section>
             )}
-          </div>
 
-          <aside className="pyxis-show-detail-page__aside" data-section="show-detail-aside">
-            {show.flyerUrl && <button className="pyxis-show-detail-page__flyer-button" type="button" onClick={() => setFlyerOpen(true)}><img src={show.flyerUrl} alt={`${show.artist} flyer`} /><span>View flyer fullscreen</span></button>}
-            <ReserveTicketCard price={show.price} note={`${show.age} · ${show.genre}`} />
             <SafetyNote />
-            <VenueCard />
-          </aside>
+          </div>
         </section>
       </div>
-      {flyerOpen && show.flyerUrl && <div className="pyxis-show-detail-page__lightbox" role="dialog" aria-label="Flyer lightbox" onClick={() => setFlyerOpen(false)}><div onClick={(event) => event.stopPropagation()}><button type="button" onClick={() => setFlyerOpen(false)}>Close</button><img src={show.flyerUrl} alt={`${show.artist} flyer`} /><a href={show.flyerUrl} download>Download flyer</a></div></div>}
+      {flyerOpen && flyerUrl && <div className="pyxis-show-detail-page__lightbox" role="dialog" aria-label="Flyer lightbox" onClick={() => setFlyerOpen(false)}><div onClick={(event) => event.stopPropagation()}><button type="button" onClick={() => setFlyerOpen(false)}>Close</button><img src={flyerUrl} alt={`${show.artist} flyer`} /><a href={flyerUrl} download>Download flyer</a></div></div>}
     </main>
   );
 }
@@ -105,6 +107,8 @@ function ShowDetailSkeleton() {
 }
 
 function formatLongDate(date: string) {
+  if (!date.includes('-')) return date.replace(',', ' ·').replace(',', ' ·') + ' · 2026';
+
   return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
     weekday: 'short',
     month: 'short',
@@ -112,3 +116,5 @@ function formatLongDate(date: string) {
     year: 'numeric',
   });
 }
+
+const isMockPlaceholderFlyer = (url?: string) => Boolean(url?.includes('placehold.co/'));

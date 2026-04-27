@@ -43,7 +43,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "tune-first",
       "prototypePath": "/standalone/public/shows.html",
-      "storyId": "public-site-pages--shows-desktop",
+      "storyId": "public-site-pages-shows--desktop",
       "baselineDiffs": {
         "shows-list": 66.0368,
         "content": 52.4196,
@@ -84,7 +84,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "second-pass",
       "prototypePath": "/standalone/public/detail.html",
-      "storyId": "public-site-pages--show-detail-desktop",
+      "storyId": "public-site-pages-show-detail--desktop",
       "baselineDiffs": {
         "content": 30.0792,
         "page": 18.5282
@@ -107,7 +107,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "closest-to-acceptance",
       "prototypePath": "/standalone/public/archive.html",
-      "storyId": "public-site-pages--archive-desktop",
+      "storyId": "public-site-pages-archive--desktop",
       "baselineDiffs": {
         "content": 7.2126,
         "page": 6.6511
@@ -130,7 +130,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "second-pass",
       "prototypePath": "/standalone/public/book.html",
-      "storyId": "public-site-pages--book-desktop",
+      "storyId": "public-site-pages-book--desktop",
       "baselineDiffs": {
         "content": 16.9306,
         "page": 12.1006
@@ -153,7 +153,7 @@ module.exports = {
       "variant": "desktop",
       "priority": "second-pass",
       "prototypePath": "/standalone/public/about.html",
-      "storyId": "public-site-pages--about-desktop",
+      "storyId": "public-site-pages-about--desktop",
       "baselineDiffs": {
         "content": 20.5467,
         "page": 18.2795

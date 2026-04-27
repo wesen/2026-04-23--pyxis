@@ -7,9 +7,9 @@ import {
   YearGroup,
 } from 'pyxis-components';
 import type { ArchivedShow } from 'pyxis-types';
-import { getApiErrorMessage } from '../api/errors';
-import { useArchive, useArchiveStats } from '../api/hooks';
-import './Archive.css';
+import { getApiErrorMessage } from '../../api/errors';
+import { useArchive, useArchiveStats } from '../../api/hooks';
+import './Page.css';
 
 type ArchiveGroup = {
   year: number;

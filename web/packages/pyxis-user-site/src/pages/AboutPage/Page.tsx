@@ -6,7 +6,7 @@ import {
   EthosGrid,
   FindUsBlock,
 } from 'pyxis-components';
-import './About.css';
+import './Page.css';
 
 export function About() {
   return (

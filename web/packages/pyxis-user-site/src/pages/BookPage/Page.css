@@ -22,15 +22,6 @@
   gap: 16px;
 }
 
-.pyxis-book-success-page {
-  padding-block: 64px 96px;
-}
-
-.pyxis-book-success-page__inner {
-  max-width: 520px;
-  margin-inline: auto;
-}
-
 @media (max-width: 760px) {
   .pyxis-book-page__layout {
     grid-template-columns: 1fr;

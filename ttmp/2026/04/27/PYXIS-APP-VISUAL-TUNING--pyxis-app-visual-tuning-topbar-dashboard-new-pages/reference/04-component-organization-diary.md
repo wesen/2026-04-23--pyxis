@@ -2726,3 +2726,84 @@ The text block is already in a reasonable review-band state when isolated. The s
 ### Custom css-visual-diff assessment
 
 This is a good example where adding spec sub-sections was enough. We did not need new React subcomponents or new css-visual-diff machinery. A future helper could make it easier to generate subpart targets automatically from `data-pyxis-part`, but explicit sections are clear and reviewable for now.
+
+## Step 30: Reorganize pyxis-user-site pages into page folders and split page stories
+
+The public-site pages were still organized as flat `src/pages/*.tsx` files plus one central `stories/PublicPages.stories.tsx`. This made it harder to add page-specific story variants the way pyxis-app pages do. Before continuing broad public-page tuning, the page structure was aligned with the app pattern.
+
+### What I did
+
+- Moved public-site pages into page folders:
+  - `ShowsPage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `ShowDetailPage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `ArchivePage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `BookPage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `BookSuccessPage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `AboutPage/Page.tsx` + `Page.css` + `Page.stories.tsx` + `index.ts`
+  - `NotFoundPage/Page.tsx` + `index.ts`
+- Added `src/pages/Pages.tsx` and `src/pages/index.ts` barrels.
+- Added `src/pages/storybook.tsx` with shared route rendering and prototype-like MSW fixtures.
+- Removed the central `web/packages/pyxis-user-site/stories/PublicPages.stories.tsx` file.
+- Updated `public-pages.desktop.visual.yml` story IDs to the new per-page story titles and regenerated the JS mirror.
+- While touching `ShowDetailPage`, aligned the page closer to the prototype detail layout by placing the poster/ticket card in the left column and the header/lineup/safety content in the right column.
+
+### Why
+
+This structure matches the pyxis-app convention and makes it easy to add multiple page-specific stories without growing one central story file. It also keeps each page's CSS local to that page folder.
+
+### Validation
+
+Storybook index on port 6007 now exposes per-page story IDs such as:
+
+```text
+public-site-pages-shows--desktop
+public-site-pages-show-detail--desktop
+public-site-pages-archive--desktop
+public-site-pages-book--desktop
+public-site-pages-about--desktop
+```
+
+Type/build validation passed:
+
+```bash
+cd web/packages/pyxis-user-site
+pnpm exec tsc --noEmit
+pnpm exec vite build
+```
+
+Public desktop visual sweep passed as an authoring run:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml \
+  --outDir /tmp/pyxis-public-pages-after-page-folders \
+  --summary --output json
+```
+
+The major show-detail mismatch was eliminated:
+
+```text
+before: show-detail content major-mismatch 32.27%
+after:  show-detail content review          8.20%
+after:  show-detail page    review          5.69%
+```
+
+Current worst public-page targets are now About and Book, not Show Detail.
+
+### What worked
+
+- The new per-page story IDs were picked up by Storybook on port 6007.
+- Updating visual specs to the new IDs kept css-visual-diff working.
+- Show Detail moved from the worst public page to review-band.
+
+### What didn't work
+
+- The commit mixes structural page organization with a Show Detail visual improvement because the page had already been in progress when the structure request came in. The next commits should return to one concern at a time.
+
+### What should be done next
+
+Tune public pages in this order based on the latest sweep:
+
+1. About page/content.
+2. Book page/content.
+3. Shows page/header/content just above review threshold.

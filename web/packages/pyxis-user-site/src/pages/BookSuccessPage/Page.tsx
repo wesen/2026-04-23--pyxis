@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { BookingSuccess } from 'pyxis-components';
-import './Book.css';
+import './Page.css';
 
 export function BookSuccess() {
   const navigate = useNavigate();

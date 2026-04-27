@@ -3,16 +3,16 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Layout } from './components/layout/Layout';
-import { NotFound } from './pages/NotFound';
+import { NotFound } from './pages';
 import { store } from './store';
 
 // Lazy-loaded pages — each route is a separate JS chunk
-const Shows       = lazy(() => import('./pages/Shows').then(m => ({ default: m.Shows })));
-const ShowDetail  = lazy(() => import('./pages/ShowDetail').then(m => ({ default: m.ShowDetail })));
-const Archive     = lazy(() => import('./pages/Archive').then(m => ({ default: m.Archive })));
-const Book        = lazy(() => import('./pages/Book').then(m => ({ default: m.Book })));
-const BookSuccess = lazy(() => import('./pages/BookSuccess').then(m => ({ default: m.BookSuccess })));
-const About       = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const Shows       = lazy(() => import('./pages/ShowsPage').then(m => ({ default: m.Shows })));
+const ShowDetail  = lazy(() => import('./pages/ShowDetailPage').then(m => ({ default: m.ShowDetail })));
+const Archive     = lazy(() => import('./pages/ArchivePage').then(m => ({ default: m.Archive })));
+const Book        = lazy(() => import('./pages/BookPage').then(m => ({ default: m.Book })));
+const BookSuccess = lazy(() => import('./pages/BookSuccessPage').then(m => ({ default: m.BookSuccess })));
+const About       = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.About })));
 
 export function App() {
   return (

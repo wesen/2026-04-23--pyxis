@@ -8,9 +8,9 @@ import {
   SaferSpaceAgreement,
 } from 'pyxis-components';
 import type { BookingFormData } from 'pyxis-types';
-import { getApiErrorMessage } from '../api/errors';
-import { useSubmitBooking } from '../api/hooks';
-import './Book.css';
+import { getApiErrorMessage } from '../../api/errors';
+import { useSubmitBooking } from '../../api/hooks';
+import './Page.css';
 
 export function Book() {
   const navigate = useNavigate();

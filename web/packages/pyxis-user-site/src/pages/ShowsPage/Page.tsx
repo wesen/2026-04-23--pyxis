@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Empty, MailingListCTA, PublicPageHeader, ShowGrid } from 'pyxis-components';
-import { getApiErrorMessage } from '../api/errors';
-import { useUpcomingShows } from '../api/hooks';
-import './Shows.css';
+import { getApiErrorMessage } from '../../api/errors';
+import { useUpcomingShows } from '../../api/hooks';
+import './Page.css';
 
 export function Shows() {
   const navigate = useNavigate();
