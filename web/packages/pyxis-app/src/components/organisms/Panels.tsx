@@ -2,7 +2,7 @@ export * from './Panel';
 export * from './Dashboard';
 export * from './Shows';
 export * from './Bookings';
-export * from './CalendarMonth';
+export * from './Calendar';
 export * from './ArtistRoster';
 export * from './AttendancePanel';
 export * from './AuditLogPanel';

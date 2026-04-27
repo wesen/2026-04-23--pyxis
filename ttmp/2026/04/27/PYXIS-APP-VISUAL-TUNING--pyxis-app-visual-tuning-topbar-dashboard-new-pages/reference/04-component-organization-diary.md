@@ -1201,3 +1201,105 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 12: Group Calendar organisms under organisms/Calendar
+
+After Bookings passed validation, I grouped the Calendar organism family. This was again limited to one domain group and committed independently.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Continue with the next group after Bookings, preserving full validation and diary records.
+
+**Inferred user intent:** Finish page-group organization safely while keeping each move isolated.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/Calendar/`.
+- Used `git mv` to move:
+  - `CalendarAgenda`
+  - `CalendarBoard`
+  - `CalendarLegend`
+  - `CalendarMonth`
+  - `CalendarMonthPanel`
+- Added `components/organisms/Calendar/index.ts`.
+- Updated `organisms/index.ts` to export the Calendar group.
+- Updated compatibility shims:
+  - `Panels.tsx`
+  - `Phase8Sections.tsx`
+- Updated moved Calendar imports for the deeper folder path.
+- Updated Calendar Storybook titles to `Pyxis App/Components/Organisms/Calendar/<Component>`.
+- Marked the Calendar subtask complete in `tasks.md`.
+
+### Why
+
+Calendar has a clear prefix boundary and several components that depend on each other. Grouping them keeps those local dependencies inside one page-domain folder.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+The first resolver pass found old Calendar exports in compatibility shims:
+
+```text
+src/components/organisms/Panels.tsx:5: ./CalendarMonth
+src/components/organisms/Phase8Sections.tsx:4: ./CalendarLegend
+```
+
+Those were fixed by re-exporting `./Calendar` from the shims.
+
+### What I learned
+
+Calendar's internal dependencies (`CalendarBoard` -> `CalendarMonthPanel` / `CalendarAgenda`, and `CalendarMonthPanel` -> `CalendarLegend`) remained simple after the move because the component folders moved together under the same parent.
+
+### What was tricky to build
+
+The only real trick was keeping the old shims valid. The component-local imports were straightforward because the Calendar components mostly refer to each other as siblings.
+
+### What warrants a second pair of eyes
+
+- Visual inspection of Calendar board/month/agenda stories after the Storybook hierarchy change.
+- Whether `CalendarMonth` and `CalendarMonthPanel` naming is sufficiently distinct now that they sit next to each other in the same group.
+
+### What should be done in the future
+
+Proceed to ShowDetail, then Roster, then Settings/Shared.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Calendar/`
+- `web/packages/pyxis-app/src/components/organisms/Calendar/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Phase8Sections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```

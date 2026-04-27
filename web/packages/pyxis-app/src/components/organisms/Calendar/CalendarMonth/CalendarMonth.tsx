@@ -1,6 +1,6 @@
 import type { CalendarEvent } from 'pyxis-types';
-import { CalendarEventChip } from '../../molecules/CalendarEventChip';
-import { appPart } from '../../parts';
+import { CalendarEventChip } from '../../../molecules/CalendarEventChip';
+import { appPart } from '../../../parts';
 import './CalendarMonth.css';
 
 export type CalendarMonthProps = {

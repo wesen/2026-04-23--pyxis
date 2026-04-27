@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
-import { calendarEvents } from '../../../api/mockData';
+import { calendarEvents } from '../../../../api/mockData';
 import { CalendarMonthPanel } from './CalendarMonthPanel';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/CalendarMonthPanel',
+  title: 'Pyxis App/Components/Organisms/Calendar/CalendarMonthPanel',
   component: CalendarMonthPanel,
   parameters: { layout: 'fullscreen' },
   args: {

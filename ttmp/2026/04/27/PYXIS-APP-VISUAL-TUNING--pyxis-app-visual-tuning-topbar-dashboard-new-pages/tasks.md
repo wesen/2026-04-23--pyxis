@@ -106,7 +106,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 - [ ] **T11+ — Optional: move remaining page groups one at a time**
   - [x] Shows group.
   - [x] Bookings group.
-  - [ ] Calendar group.
+  - [x] Calendar group.
   - [ ] ShowDetail group.
   - [ ] Roster group.
   - [ ] Settings/Shared group.
