@@ -659,3 +659,98 @@ web/packages/pyxis-app/src/api/mockHandlers.ts
 web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx
 web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
 ```
+
+## Step 6: Implement booking detail edit and artist create/edit/detail, then add page stories
+
+I continued the staff operations workflow after review-note persistence and implemented both remaining workflow slices the user asked to continue with: editable booking request details and artist create/edit/detail functionality. I also added MSW-backed page interaction stories for the affected pages after checking that only the base Desktop/Mobile stories existed for them.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue, implement both"
+
+**Follow-up user prompt (verbatim):** "did you add stories for each of the pages?"
+
+**Assistant interpretation:** Implement both booking detail editing and artist create/edit/detail, and ensure the changed pages have MSW-backed Storybook page stories.
+
+**Inferred user intent:** The user wants not only backend/frontend functionality, but demonstrable route-page stories for each changed workflow page.
+
+### What I did
+
+- Added `UpdateSubmissionDetails` sqlc query for booking request edits.
+- Added repository/service support for `SubmissionRepo.UpdateDetails` and `SubmissionService.UpdateDetails`.
+- Added staff endpoint:
+  - `PATCH /api/app/bookings/{id}`
+- Converted booking update payloads to protobuf-backed `Submission` JSON via `protojson`/`toJson`.
+- Added `ArtistService.Create` and staff endpoint:
+  - `POST /api/app/artists`
+- Converted artist create/update to protobuf-backed `Artist` JSON.
+- Reworked `BookingReviewRequestPanel` into an editable request details form.
+- Reworked `ArtistsPage` into a roster plus create/edit/detail form.
+- Added stateful MSW handlers for booking detail update and artist create/update.
+- Added page interaction stories:
+  - `Booking Review / SaveBookingDetailsMutation`
+  - `Booking Review / SaveReviewNoteMutation`
+  - `Artists / CreateArtistMutation`
+  - `Artists / EditArtistMutation`
+
+### Why
+
+Booking requests often need staff cleanup before approval, and artist records need direct maintenance without relying on booking approval side effects. Page-level Storybook stories make these workflows reviewable without the live backend.
+
+### What worked
+
+Validation passed:
+
+```bash
+go test ./...
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+### What didn't work
+
+The first app build caught a TypeScript issue in the MSW artist create handler: spreading `Partial<Artist>` carried an optional `$typeName`, which does not satisfy `MessageInit<Artist>`. I fixed it by explicitly mapping artist fields into `create(ArtistSchema, { ... })`.
+
+### What I learned
+
+Using explicit field mapping for protobuf messages is safer than spreading generated Buf message types, especially in MSW handlers that accept `Partial<T>` JSON payloads.
+
+### What was tricky to build
+
+The Booking Review page now has two independent edits: booking request details and internal review notes. Keeping those separate in RTK (`updateBooking` versus `updateBookingReview`) makes the UI and future audit semantics clearer.
+
+### What warrants a second pair of eyes
+
+- Artist UI is implemented inline as a page detail/editor panel, not a drawer. This satisfies create/edit/detail functionality but differs from the earlier “ArtistEditorDrawer” wording.
+- Booking detail edit currently updates the submission fields directly and does not include a separate success toast beyond retaining the edited form state.
+
+### What should be done in the future
+
+- Add explicit success messaging for booking detail save.
+- Add route-level artist detail URLs if desired; current implementation is a selected detail panel within the Artists page.
+- Add runtime browser smoke through the Vite app for the two workflows.
+
+### Code review instructions
+
+Review backend changes first:
+
+```text
+pkg/db/queries/submissions.sql
+pkg/repository/postgres/submission_repo.go
+pkg/service/submission_service.go
+pkg/service/artist_service.go
+pkg/server/app.go
+pkg/server/server.go
+```
+
+Then review frontend/MSW/stories:
+
+```text
+web/packages/pyxis-app/src/api/appApi.ts
+web/packages/pyxis-app/src/api/mockHandlers.ts
+web/packages/pyxis-app/src/components/organisms/BookingReviewRequestPanel/BookingReviewRequestPanel.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.tsx
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
+```

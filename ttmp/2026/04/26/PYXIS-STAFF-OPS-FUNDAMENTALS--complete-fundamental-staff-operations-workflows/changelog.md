@@ -71,3 +71,15 @@ Implemented persistent booking review notes with booking_reviews migration, prot
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/BookingReviewNotePanel/BookingReviewNotePanel.tsx — Adds editable internal review note UI.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx — Wires review note fetch/save mutations.
 
+
+## 2026-04-26
+
+Implemented booking detail edit plus artist create/edit/detail workflows and added MSW-backed page interaction stories for Booking Review and Artists pages.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/submissions.sql — Adds booking request detail update query.
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/app.go — Adds booking detail update and artist create handlers.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx — Adds artist create/edit mutation page stories.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx — Adds booking detail and note mutation page stories.
+

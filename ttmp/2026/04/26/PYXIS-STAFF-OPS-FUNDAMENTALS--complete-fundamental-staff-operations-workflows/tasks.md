@@ -15,7 +15,7 @@
 
 - [x] Add `booking_reviews` migration.
 - [x] Add show lineup replace SQL queries.
-- [ ] Add submission detail update SQL query.
+- [x] Add submission detail update SQL query.
 - [ ] Add artist stats/detail SQL queries.
 - [x] Add protobuf message for booking reviews.
 - [ ] Add protobuf messages for artist detail and core settings update.
@@ -28,15 +28,16 @@
 - [x] Return lineup from show detail.
 - [ ] Add booking details update endpoint.
 - [x] Add booking review get/update endpoints.
-- [ ] Add create artist endpoint.
-- [ ] Add artist detail endpoint.
+- [x] Add create artist endpoint.
+- [x] Keep artist detail endpoint wired to page detail/editor UI.
 - [ ] Add core settings update endpoint limited to space name/address/capacity.
 - [ ] Add validation and audit log entries for new mutations.
 
 ## Phase 3: RTK Query and MSW
 
 - [x] Add RTK endpoints/mutations for booking review notes.
-- [ ] Add remaining RTK endpoints/mutations for artist detail and core settings APIs.
+- [x] Add RTK endpoints/mutations for booking detail edit and artist create/edit.
+- [ ] Add remaining RTK endpoints/mutations for core settings APIs.
 - [x] Update MSW mutable state and handlers for show create/update and flyer upload/delete.
 - [x] Ensure show/flyer protobuf-backed MSW responses use `toJson(...)`.
 - [x] Add mutation interaction stories for show create/edit workflows.
@@ -46,9 +47,8 @@
 - [x] Build `ShowEditorModal`.
 - [x] Build `LineupEditor` behavior inside `ShowEditorModal`.
 - [x] Build standalone `FlyerField`.
-- [ ] Build `BookingReviewEditor`.
-- [ ] Build `ArtistEditorDrawer`.
-- [ ] Build `ArtistDetailPanel`.
+- [x] Build booking request/detail editor inside Booking Review page.
+- [x] Build artist create/edit/detail form inside Artists page.
 - [ ] Build `AttendanceEditorModal`.
 - [ ] Build `CoreSettingsForm`.
 
@@ -58,8 +58,8 @@
 - [x] Wire show edit and lineup edit from Show Detail page.
 - [x] Wire standalone flyer upload/delete from Show Detail page.
 - [x] Wire booking review-note persistence from Booking Review page.
-- [ ] Wire booking detail edit from Booking Review page.
-- [ ] Wire artist create/edit/detail functionality from Artists page.
+- [x] Wire booking detail edit from Booking Review page.
+- [x] Wire artist create/edit/detail functionality from Artists page.
 - [ ] Wire attendance edit modal from Attendance page.
 - [ ] Replace settings toggles with core settings form for space name/address/capacity.
 
