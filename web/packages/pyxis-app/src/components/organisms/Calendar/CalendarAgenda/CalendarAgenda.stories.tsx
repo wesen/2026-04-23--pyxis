@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { calendarEvents, shows } from '../../../api/mockData';
+import { calendarEvents, shows } from '../../../../api/mockData';
 import { CalendarAgenda } from './CalendarAgenda';
 
 const meta = {

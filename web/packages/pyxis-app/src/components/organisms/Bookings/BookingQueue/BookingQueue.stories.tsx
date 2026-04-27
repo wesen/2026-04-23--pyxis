@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { bookings } from '../../../api/mockData';
+import { bookings } from '../../../../api/mockData';
 import { BookingQueue } from './BookingQueue';
 
 const meta = {

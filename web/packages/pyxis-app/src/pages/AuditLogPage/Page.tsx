@@ -1,5 +1,5 @@
 import { useGetAuditLogQuery } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
+import { AppShell } from '../../components/shell';
 import { AuditLogPanel, Panel } from '../../components/organisms/Panels';
 import { EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';

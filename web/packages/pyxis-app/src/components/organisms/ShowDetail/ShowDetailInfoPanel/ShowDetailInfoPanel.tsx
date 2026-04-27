@@ -1,5 +1,5 @@
 import type { AppShow } from 'pyxis-types';
-import { Panel } from '../Panels';
+import { Panel } from '../../Panels';
 import './ShowDetailInfoPanel.css';
 
 export type ShowDetailInfoPanelProps = {

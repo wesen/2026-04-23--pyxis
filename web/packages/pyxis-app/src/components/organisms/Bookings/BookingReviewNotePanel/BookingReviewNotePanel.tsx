@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { BookingReview, Submission } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { Panel } from '../Panels';
+import { Panel } from '../../Panels';
 import './BookingReviewNotePanel.css';
 
 export type BookingReviewNotePanelProps = {

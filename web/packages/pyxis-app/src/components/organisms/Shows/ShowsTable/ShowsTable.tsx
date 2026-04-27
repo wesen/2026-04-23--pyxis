@@ -1,7 +1,7 @@
 import type { AppShow } from 'pyxis-types';
-import { ShowTableRow, type ShowTableRowVariant } from '../../molecules/ShowTableRow';
-import { appPart } from '../../parts';
-import '../../molecules/Table/Table.css';
+import { ShowTableRow, type ShowTableRowVariant } from '../../../molecules/ShowTableRow';
+import { appPart } from '../../../parts';
+import '../../../molecules/Table/Table.css';
 import './ShowsTable.css';
 
 export type ShowsTableProps = {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'pyxis-components';
 import { useApproveBookingMutation, useDeclineBookingMutation, useGetBookingsQuery } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
+import { AppShell } from '../../components/shell';
 import { BookingsInboxPanel, BookingsInsightsPanel, BookingsProcessedPanel } from '../../components/organisms/Phase8Sections';
 import { EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';

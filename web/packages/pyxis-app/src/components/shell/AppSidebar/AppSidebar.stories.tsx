@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AppSidebar } from './AppShell';
+import { AppSidebar } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Shell/AppSidebar',

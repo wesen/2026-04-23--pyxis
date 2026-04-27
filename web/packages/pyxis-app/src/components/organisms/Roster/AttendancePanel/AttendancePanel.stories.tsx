@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { attendance } from '../../../api/mockData';
+import { attendance } from '../../../../api/mockData';
 import { AttendancePanel } from './AttendancePanel';
 
 const meta = {

@@ -1,7 +1,7 @@
 import type { AppShow } from 'pyxis-types';
-import { Panel, ShowsTable } from '../Panels';
+import { Panel, ShowsTable } from '../../Panels';
 import './ShowsConfirmedPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type ShowsConfirmedPanelProps = {
   shows: AppShow[];

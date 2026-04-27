@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
-import { calendarEvents } from '../../../api/mockData';
+import { calendarEvents } from '../../../../api/mockData';
 import { CalendarBoard } from './CalendarBoard';
 
 const meta = {

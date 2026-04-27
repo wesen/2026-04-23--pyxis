@@ -1,9 +1,9 @@
 import { ShowStatus } from 'pyxis-types';
 import type { AppShow, CalendarEvent } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { shows as seedShows } from '../../../api/mockData';
-import { StatusPill } from '../../atoms/StatusPill';
-import { Panel } from '../Panels';
+import { shows as seedShows } from '../../../../api/mockData';
+import { StatusPill } from '../../../atoms/StatusPill';
+import { Panel } from '../../Panels';
 import './CalendarAgenda.css';
 
 export type CalendarAgendaProps = {

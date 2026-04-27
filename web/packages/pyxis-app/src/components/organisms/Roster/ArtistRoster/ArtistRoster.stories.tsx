@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { artists } from '../../../api/mockData';
+import { artists } from '../../../../api/mockData';
 import { ArtistRoster } from './ArtistRoster';
 
 const meta = {

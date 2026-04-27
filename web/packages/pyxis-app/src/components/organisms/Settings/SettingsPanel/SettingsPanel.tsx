@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Settings } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { appPart } from '../../parts';
+import { appPart } from '../../../parts';
 import './SettingsPanel.css';
 
 export type CoreSettingsDraft = Pick<Settings, 'spaceName' | 'address' | 'capacity'>;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { auditLog } from '../../../api/mockData';
+import { auditLog } from '../../../../api/mockData';
 import { DashboardActivityPanel } from '.';
 
 const meta: Meta<typeof DashboardActivityPanel> = {

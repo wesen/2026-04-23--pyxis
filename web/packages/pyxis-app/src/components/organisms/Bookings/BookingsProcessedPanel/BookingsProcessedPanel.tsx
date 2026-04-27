@@ -1,9 +1,9 @@
 import type { Submission } from 'pyxis-types';
 import { SubmissionStatus } from 'pyxis-types';
-import { BookingQueueRow } from '../../molecules/BookingCard';
-import { Panel } from '../Panels';
+import { BookingQueueRow } from '../../../molecules/BookingCard';
+import { Panel } from '../../Panels';
 import './BookingsProcessedPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type BookingsProcessedPanelProps = {
   bookings: Submission[];

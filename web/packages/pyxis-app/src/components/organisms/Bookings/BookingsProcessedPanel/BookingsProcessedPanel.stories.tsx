@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmissionStatus } from 'pyxis-types';
-import { bookings } from '../../../api/mockData';
+import { bookings } from '../../../../api/mockData';
 import { BookingsProcessedPanel } from './BookingsProcessedPanel';
 
 const meta = {

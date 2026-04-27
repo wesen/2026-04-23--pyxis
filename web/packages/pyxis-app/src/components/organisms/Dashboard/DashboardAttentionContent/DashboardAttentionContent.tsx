@@ -1,5 +1,5 @@
 import './DashboardAttentionContent.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type DashboardAttentionTone = 'warning' | 'info' | 'danger';
 export type DashboardAttentionItem = { tone: DashboardAttentionTone; title: string; caption: string; };

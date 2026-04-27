@@ -1,8 +1,8 @@
 import type { AppShow } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { Panel, ShowsTable } from '../Panels';
+import { Panel, ShowsTable } from '../../Panels';
 import './ShowsArchivedPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type ShowsArchivedPanelProps = {
   shows: AppShow[];

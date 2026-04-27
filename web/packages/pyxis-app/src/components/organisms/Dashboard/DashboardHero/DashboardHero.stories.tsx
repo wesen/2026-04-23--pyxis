@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus } from 'pyxis-types';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { DashboardHero } from '.';
 
 const confirmedShows = shows.filter((show) => show.status === ShowStatus.CONFIRMED).sort((a, b) => a.date.localeCompare(b.date));

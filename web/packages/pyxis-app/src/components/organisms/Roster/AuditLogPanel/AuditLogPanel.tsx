@@ -1,8 +1,8 @@
 import type { AuditLogEntry } from 'pyxis-types';
-import { ActivityFeedItem } from '../../molecules/ActivityFeedItem';
-import { appPart } from '../../parts';
+import { ActivityFeedItem } from '../../../molecules/ActivityFeedItem';
+import { appPart } from '../../../parts';
 import './AuditLogPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type AuditLogPanelProps = {
   log: AuditLogEntry[];

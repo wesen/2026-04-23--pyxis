@@ -1,6 +1,6 @@
 import type { CalendarEvent } from 'pyxis-types';
 import { Button, Icon } from 'pyxis-components';
-import { CalendarEventChip } from '../../molecules/CalendarEventChip';
+import { CalendarEventChip } from '../../../molecules/CalendarEventChip';
 import { CalendarLegend } from '../CalendarLegend';
 import './CalendarMonthPanel.css';
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShowStatus } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { useCreateShowMutation, useGetShowsQuery, useUploadShowFlyerMutation } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
+import { AppShell } from '../../components/shell';
 import { NewShowModal } from '../../components/organisms/Panels';
 import { ShowsArchivedPanel, ShowsConfirmedPanel, ShowsFilterBar } from '../../components/organisms/ShowsSections';
 import { EmptyState, ErrorState, LoadingState } from '../shared';

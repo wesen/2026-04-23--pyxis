@@ -1,4 +1,4 @@
-import { Panel } from '../Panel';
+import { Panel } from '../../Panel';
 import { DashboardAttentionContent, DashboardAttentionCount, defaultDashboardAttentionItems, type DashboardAttentionItem } from '../DashboardAttentionContent';
 import './DashboardAttentionPanel.css';
 

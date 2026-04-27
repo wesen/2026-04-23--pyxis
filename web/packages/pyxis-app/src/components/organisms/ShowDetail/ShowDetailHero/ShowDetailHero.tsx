@@ -1,5 +1,5 @@
 import { AppShow } from 'pyxis-types';
-import { StatusDot, statusToLabel } from '../../atoms/StatusDot';
+import { StatusDot, statusToLabel } from '../../../atoms/StatusDot';
 import './ShowDetailHero.css';
 
 export type ShowDetailHeroProps = {

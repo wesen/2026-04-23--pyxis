@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetAttendanceQuery, useUpdateAttendanceMutation } from '../../api/appApi';
-import { AppShell } from '../../components/shell/AppShell';
+import { AppShell } from '../../components/shell';
 import { AttendancePanel, Panel } from '../../components/organisms/Panels';
 import type { AttendanceDraft } from '../../components/organisms/Roster/AttendancePanel/AttendancePanel';
 import { ActionMessages, EmptyState, ErrorState, LoadingState } from '../shared';

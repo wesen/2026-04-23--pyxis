@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus, SubmissionStatus } from 'pyxis-types';
-import { auditLog, bookings, shows } from '../../../api/mockData';
+import { auditLog, bookings, shows } from '../../../../api/mockData';
 import { DashboardActivityPanel } from '../DashboardActivityPanel';
 import { DashboardAttentionPanel } from '../DashboardAttentionPanel';
 import { DashboardHero } from '../DashboardHero';

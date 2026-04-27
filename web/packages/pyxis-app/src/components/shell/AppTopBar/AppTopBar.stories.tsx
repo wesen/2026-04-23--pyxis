@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
 import { Button } from 'pyxis-components';
-import { AppTopBar } from './AppShell';
+import { AppTopBar } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Shell/AppTopBar',
   component: AppTopBar,
   parameters: { layout: 'fullscreen' },
+  args: {
+    title: 'Welcome back, Ada',
+  },
 } satisfies Meta<typeof AppTopBar>;
 export default meta;
 

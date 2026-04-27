@@ -1,8 +1,8 @@
 import type { AuditLogEntry } from 'pyxis-types';
-import { ActivityFeedItem } from '../../molecules/ActivityFeedItem';
-import { Panel } from '../Panel';
+import { ActivityFeedItem } from '../../../molecules/ActivityFeedItem';
+import { Panel } from '../../Panel';
 import './DashboardActivityPanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type DashboardActivityPanelProps = {
   log: AuditLogEntry[];
