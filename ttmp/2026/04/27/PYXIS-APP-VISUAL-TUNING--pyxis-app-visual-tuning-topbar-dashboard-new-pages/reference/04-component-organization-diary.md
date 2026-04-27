@@ -4033,3 +4033,54 @@ The current prototype’s boundaries are now documented clearly: `css-visual-dif
 ### What warrants a second pair of eyes
 
 A future developer should review the proposed API and decide whether the first production implementation should use SQLite plus filesystem artifacts or a simpler filesystem-only manifest.
+
+## Step 44: Close out public visual review follow-ups
+
+After the handoff guide was written, the remaining useful cleanup was small and operational: remove the stale Storybook glob warning, record the user's acceptance of the remaining broad Shows visual deltas, and run a final validation pass.
+
+### Prompt Context
+
+**User prompt (verbatim):** "alright go"
+
+**Assistant interpretation:** Proceed with the recommended next steps: clean up the Storybook warning, document Shows as accepted, validate, and update ticket closeout records.
+
+**Inferred user intent:** Finish the loose ends so this visual-tuning/handoff phase is clean for the next developer.
+
+### What I changed
+
+- Removed the obsolete user-site Storybook stories glob:
+  - `web/packages/pyxis-user-site/.storybook/main.ts`
+  - Before: `../stories/**/*.stories.@(js|jsx|ts|tsx)` plus `../src/**/*.stories.@(js|jsx|ts|tsx)`.
+  - After: only `../src/**/*.stories.@(js|jsx|ts|tsx)`.
+- Recorded the accepted broad Shows differences in:
+  - `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.yml`
+  - regenerated mirror `prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js`.
+- Updated `tasks.md` with Phase 6 closeout tasks T23-T25.
+
+### Why
+
+The old central `web/packages/pyxis-user-site/stories/PublicPages.stories.tsx` file was removed when public pages moved into page-owned folders. Leaving the `../stories/**/*.stories...` glob caused a harmless but noisy Storybook warning. Removing it makes validation output easier to trust.
+
+The Shows rows still report high broad integration changed-percent values, but Manuel reviewed them and said they are fine. Capturing that judgment prevents future work from repeatedly treating those rows as the top priority. Component-level Shows targets remain available if a more specific Shows regression appears.
+
+### Validation
+
+Commands run successfully:
+
+```bash
+node -c prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec vite build
+cd web/packages/pyxis-user-site && pnpm exec storybook build
+```
+
+`pnpm exec storybook build` no longer emitted the old `No story files found for the specified pattern: stories/**/*.stories.@(js|jsx|ts|tsx)` warning. It still emitted normal Storybook/Vite warnings about Storybook runtime `eval` and large chunks; those are unrelated to the removed stale glob.
+
+### What worked
+
+The cleanup was low-risk and validation passed. The visual-diff spec now records the human acceptance decision for Shows in a structured `acceptedDifferences` section.
+
+### What warrants a second pair of eyes
+
+A future developer building the full review app should decide whether `acceptedDifferences` should remain inside visual spec YAML or move into the review app's persisted status model.

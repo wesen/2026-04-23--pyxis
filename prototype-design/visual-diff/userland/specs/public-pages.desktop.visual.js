@@ -36,7 +36,28 @@ module.exports = {
       }
     ]
   },
-  "acceptedDifferences": {},
+  "acceptedDifferences": {
+    "shows": {
+      "page": {
+        "status": "accepted-by-reviewer",
+        "acceptedAt": "2026-04-27",
+        "reason": "Manuel reviewed the remaining Shows full-page integration deltas and said the Shows page is visually fine. Keep component-level Shows targets and mailing-list/header rows as the primary regression signals; do not chase broad poster/list integration pixels unless new visual feedback appears.",
+        "maxObservedChangedPercent": 11.62
+      },
+      "content": {
+        "status": "accepted-by-reviewer",
+        "acceptedAt": "2026-04-27",
+        "reason": "Same reviewer decision as shows/page; remaining difference is accepted for the current public-page parity pass.",
+        "maxObservedChangedPercent": 11.62
+      },
+      "shows-list": {
+        "status": "accepted-by-reviewer",
+        "acceptedAt": "2026-04-27",
+        "reason": "Same reviewer decision as shows/page; representative component targets remain available for future focused tuning.",
+        "maxObservedChangedPercent": 11.166
+      }
+    }
+  },
   "targets": [
     {
       "page": "shows",

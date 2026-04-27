@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Ordered tasks for restarting pyxis-app component organization safely after rollback.
-LastUpdated: 2026-04-27T11:45:00-04:00
+LastUpdated: 2026-04-27T17:45:00-04:00
 ---
 
 # Tasks
@@ -197,3 +197,20 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Run visual target aliases/specs used during tuning.
   - Update diary with commands, outputs, threshold decisions, and an assessment of whether custom css-visual-diff functionality should be introduced.
   - Commit the component stories/spec/tuning changes separately from the earlier tooling/docs commit.
+
+## Phase 6: closeout and handoff
+
+- [x] **T23 — Record accepted Shows visual differences**
+  - Record the user's decision that the remaining broad Shows rows are visually fine.
+  - Keep component-level Shows targets available for future focused regression checks.
+  - Regenerate the public pages JS spec mirror.
+
+- [x] **T24 — Remove obsolete user-site Storybook glob warning**
+  - Remove the deleted `../stories/**/*.stories.@(js|jsx|ts|tsx)` glob from `web/packages/pyxis-user-site/.storybook/main.ts`.
+  - Confirm `pnpm exec storybook build` no longer prints the old no-story-files warning.
+
+- [x] **T25 — Final public-site validation pass**
+  - Run `node -c prototype-design/visual-diff/userland/specs/public-pages.desktop.visual.js`.
+  - Run `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`.
+  - Run `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build && pnpm exec storybook build`.
+  - Record results in the diary and commit closeout changes.
