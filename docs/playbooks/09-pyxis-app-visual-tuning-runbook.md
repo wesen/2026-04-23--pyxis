@@ -248,7 +248,35 @@ For example:
 
 Use `compare.json` for the numeric/style summary, but use `diff_only.png` as the first visual triage artifact.
 
-### 4.5 Compare All App Components
+### 4.5 Keep Diagnostic Scripts Traceable
+
+If you write any helper script while diagnosing a visual mismatch, store it in the active ticket workspace before or when you run it. Do not leave one-off scripts only in `/tmp`, shell history, or an assistant transcript.
+
+Use this location pattern:
+
+```text
+ttmp/YYYY/MM/DD/<TICKET--slug>/scripts/NN-purpose.py
+ttmp/YYYY/MM/DD/<TICKET--slug>/scripts/NN-purpose.sh
+```
+
+Rules:
+
+- Give scripts numbered names so the workflow can be reconstructed later.
+- Add a short docstring/header explaining what the script measures and what it does not prove.
+- Prefer dry-run/report-only behavior for scripts that modify files.
+- For diagnostic scripts, record the exact invocation and key output in the diary.
+- Keep css-visual-diff as the source of truth; helper scripts may summarize existing artifacts but should not replace visual-diff comparison.
+
+Example from TopBar tuning:
+
+```bash
+ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/04-measure-red-button-bounds.py \
+  /tmp/pyxis-topbar-after-primary-md/app-topbar-dashboard/artifacts/component/left_region.png \
+  /tmp/pyxis-topbar-after-primary-md/app-topbar-dashboard/artifacts/component/right_region.png \
+  --min-area 80
+```
+
+### 4.6 Compare All App Components
 
 ```bash
 css-visual-diff verbs \
@@ -259,7 +287,7 @@ css-visual-diff verbs \
   --output json
 ```
 
-### 4.5 Snapshot-Based Tuning
+### 4.7 Snapshot-Based Tuning
 
 Capture a baseline, make CSS changes, capture again, then diff:
 
