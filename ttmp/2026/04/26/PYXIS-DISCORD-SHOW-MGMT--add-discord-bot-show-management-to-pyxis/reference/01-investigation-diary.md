@@ -941,3 +941,68 @@ The upcoming list now emits lines like:
 ```text
 #1 — 🎵 Burial Hex — Sat May 2, 2026
 ```
+
+
+## Step 10: Write Obsidian textbook-style project report
+
+I created a durable Obsidian article/playbook note about adding Discord support to an existing Go web application. The note generalizes from the Pyxis implementation rather than reading as a narrow changelog. It explains the mental model, architecture, bridge design, lifecycle wiring, persistence concerns, permission model, testing sequence, response timing lessons, failure modes, and open questions.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, write a detailed project report for the obsidian vault on adding discord support to an existing webserver / application. It's for the obsidian vault. Write in a detailed textbook style. (Look up skills for both)."
+
+**Assistant interpretation:** Use the Obsidian vault writing workflow and textbook-authoring style to create a reusable, durable article/playbook note in the vault.
+
+**Inferred user intent:** Preserve the engineering pattern learned from this Pyxis Discord integration in a form that can guide future projects, not just this ticket.
+
+**Commit (code):** N/A — the note was written in the Obsidian vault outside the Pyxis repository.
+
+### What I did
+
+- Loaded the Obsidian vault writing skill and textbook-authoring skill.
+- Read the vault's article/playbook exemplar style.
+- Used the Pyxis design guide, diary, and current implementation files as evidence.
+- Created the vault note:
+  - `/home/manuel/code/wesen/obsidian-vault/Projects/2026/04/26/ARTICLE - Playbook - Adding Discord Support to Existing Go Web Applications.md`
+
+### Why
+
+- The implementation produced reusable architectural knowledge: embedding a bot, treating Discord as a frontend, bridging JavaScript to Go services, preserving one source of truth, and testing Discord integrations in layers.
+- A textbook-style article is a better long-term vault artifact than a project-only status note because the pattern applies beyond Pyxis.
+
+### What worked
+
+- The note was written with YAML frontmatter, summary callout, prose-first textbook structure, Mermaid diagrams, pseudocode, tables, concrete paths, and failure-mode analysis.
+
+### What didn't work
+
+- N/A.
+
+### What I learned
+
+- The durable lesson from this work is that Discord support should usually be framed as adding another application interface, not as adding a sidecar bot with its own persistence.
+
+### What was tricky to build
+
+- The note needed to be general enough to teach the pattern while still being grounded in concrete Pyxis files and runtime lessons.
+
+### What warrants a second pair of eyes
+
+- Review whether the note should be linked from any existing project note or index in the vault.
+
+### What should be done in the future
+
+- Add a follow-up note or section after Phase 8 and interactive mutating command tests are complete.
+
+### Code review instructions
+
+- Read the new vault note and verify it captures the intended reusable pattern.
+- Check whether any Obsidian wikilinks should be added to related existing vault notes.
+
+### Technical details
+
+Created file:
+
+```text
+/home/manuel/code/wesen/obsidian-vault/Projects/2026/04/26/ARTICLE - Playbook - Adding Discord Support to Existing Go Web Applications.md
+```

@@ -105,3 +105,13 @@ Updated /upcoming output to include show IDs so operators can use /show without 
 - /home/manuel/code/wesen/2026-04-23--pyxis/bot/discord/show-space/lib/render.js — Upcoming show list now prefixes each item with #id
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary entry for /upcoming ID usability fix
 
+
+## 2026-04-26
+
+Created a textbook-style Obsidian vault article/playbook about adding Discord support to existing Go web applications.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-DISCORD-SHOW-MGMT--add-discord-bot-show-management-to-pyxis/reference/01-investigation-diary.md — Diary entry for vault note creation
+- /home/manuel/code/wesen/obsidian-vault/Projects/2026/04/26/ARTICLE - Playbook - Adding Discord Support to Existing Go Web Applications.md — Durable Obsidian article/playbook
+
