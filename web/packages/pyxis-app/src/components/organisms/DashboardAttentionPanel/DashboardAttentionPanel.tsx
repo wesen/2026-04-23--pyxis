@@ -1,5 +1,6 @@
 import { Panel } from '../Panel';
-import { DashboardAttentionContent, DashboardAttentionCount, defaultDashboardAttentionItems, type DashboardAttentionItem } from '../DashboardAttentionContent';
+import { DashboardAttentionContent, defaultDashboardAttentionItems, type DashboardAttentionItem } from '../DashboardAttentionContent';
+import { DashboardAttentionCount } from '../DashboardAttentionCount';
 import './DashboardAttentionPanel.css';
 
 export type DashboardAttentionPanelVariant = 'desktop' | 'mobile';

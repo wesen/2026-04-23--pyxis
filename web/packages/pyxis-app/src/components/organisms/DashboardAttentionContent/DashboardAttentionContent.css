@@ -1,4 +1,4 @@
-.app-live-label, .app-attention-count { color: var(--app-accent); font-size: 12px; font-weight: 700; }
+.app-live-label { color: var(--app-accent); font-size: 12px; font-weight: 700; }
 .app-attention-list { display: grid; overflow: hidden; border: 1px solid var(--app-rule); border-radius: var(--app-radius-lg); background: var(--app-surface-strong); }
 .app-attention-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--app-rule); }
 .app-attention-item:last-child { border-bottom: 0; }

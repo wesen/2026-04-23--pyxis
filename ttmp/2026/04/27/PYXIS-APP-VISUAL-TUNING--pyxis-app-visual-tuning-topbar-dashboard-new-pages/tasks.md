@@ -85,7 +85,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Update imports.
   - Validate and commit.
 
-- [ ] **T08 — Split `DashboardAttentionContent` and `DashboardAttentionCount`**
+- [x] **T08 — Split `DashboardAttentionContent` and `DashboardAttentionCount`**
   - Create `organisms/DashboardAttentionCount/`.
   - Add missing `DashboardAttentionContent.stories.tsx` if needed.
   - Keep shared defaults/types colocated in an explicit helper/data file.

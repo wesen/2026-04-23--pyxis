@@ -16,6 +16,7 @@ export * from './CalendarMonth';
 export * from './CalendarMonthPanel';
 export * from './DashboardActivityPanel';
 export * from './DashboardAttentionContent';
+export * from './DashboardAttentionCount';
 export * from './DashboardAttentionPanel';
 export * from './DashboardHero';
 export * from './DashboardMetricsGrid';

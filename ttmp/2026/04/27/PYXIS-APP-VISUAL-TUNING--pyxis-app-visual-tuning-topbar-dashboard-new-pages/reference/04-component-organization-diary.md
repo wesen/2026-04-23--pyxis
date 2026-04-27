@@ -735,3 +735,114 @@ pnpm exec storybook build
 import '../Table/Table.css';
 import './BookingQueueRow.css';
 ```
+
+## Step 8: Split DashboardAttentionContent and DashboardAttentionCount
+
+This step split the last planned multi-export organism in Phase 3. `DashboardAttentionContent` now owns the attention list, while `DashboardAttentionCount` owns the compact count badge used by the mobile panel action.
+
+The shared defaults and item types moved into an explicit `dashboardAttentionData.ts` file. This keeps both components from importing each other for shared data and makes the data dependency visible.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue the ordered component organization tasks after splitting `BookingQueueRow`.
+
+**Inferred user intent:** Finish the multi-export component cleanup before considering optional page-grouped organism movement.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Removed `DashboardAttentionCount` from `DashboardAttentionContent.tsx`.
+- Created `organisms/DashboardAttentionCount/` with:
+  - `DashboardAttentionCount.tsx`
+  - `DashboardAttentionCount.css`
+  - `DashboardAttentionCount.stories.tsx`
+  - `index.ts`
+- Created `organisms/DashboardAttentionContent/dashboardAttentionData.ts` for:
+  - `DashboardAttentionTone`
+  - `DashboardAttentionItem`
+  - `defaultDashboardAttentionItems`
+- Added `DashboardAttentionContent.stories.tsx`, which was previously missing.
+- Updated `DashboardAttentionPanel.tsx` to import the count component from `DashboardAttentionCount`.
+- Updated `DashboardSections.tsx` and `organisms/index.ts` to export the new component.
+- Marked T08 complete in `tasks.md`.
+
+### Why
+
+`DashboardAttentionContent.tsx` exported both list content and a separate count badge. Those are different components with different CSS selectors. Splitting them completes the initial one-exported-component-per-folder cleanup before any optional page-grouped organism moves.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The import resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No build failures. Storybook emitted the same known dependency/build-size warnings.
+
+### What I learned
+
+Small shared data files are a better dependency boundary than importing sibling components for defaults/types. This is especially useful before future folder moves.
+
+### What was tricky to build
+
+The existing CSS combined `.app-live-label` and `.app-attention-count` in one rule. I moved `.app-attention-count` into `DashboardAttentionCount.css` and left `.app-live-label` in `DashboardAttentionContent.css` for now because it already existed there and there is also a more specific DashboardActivityPanel rule. This should be reviewed later as part of shared panel action styling.
+
+### What warrants a second pair of eyes
+
+- Whether `.app-live-label` belongs in `DashboardAttentionContent.css`, `DashboardActivityPanel.css`, or shared panel action CSS.
+- Whether the new `dashboardAttentionData.ts` should live in a small shared `DashboardAttention/` folder if more attention components are added later.
+
+### What should be done in the future
+
+- T09: decide whether to proceed with optional page-grouped organism movement.
+- Before any page grouping, visually inspect shell and changed molecule/organism stories.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/DashboardAttentionContent/`
+- `web/packages/pyxis-app/src/components/organisms/DashboardAttentionCount/`
+- `web/packages/pyxis-app/src/components/organisms/DashboardAttentionPanel/DashboardAttentionPanel.tsx`
+- `web/packages/pyxis-app/src/components/organisms/DashboardSections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+Shared data now lives here:
+
+```text
+DashboardAttentionContent/dashboardAttentionData.ts
+```
+
+The new count component owns its CSS:
+
+```ts
+import './DashboardAttentionCount.css';
+```
