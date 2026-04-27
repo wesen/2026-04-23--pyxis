@@ -1807,3 +1807,148 @@ css-visual-diff verbs --repository prototype-design/visual-diff/userland \
   --outDir /tmp/pyxis-topbar-after-selector \
   --output json
 ```
+
+## Step 18: Align app ink/muted/faint tokens with prototype tokens
+
+After fixing the TopBar selector leakage, I aligned the app's primary neutral text tokens with the prototype/shared canonical values.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead"
+
+**Assistant interpretation:** Proceed with the next planned visual-tuning step after the scoped TopBar selector fix: token drift alignment.
+
+**Inferred user intent:** Apply the systematic workflow: fix one class of issue, validate with css-visual-diff, then commit separately.
+
+**Commit (code):** pending — this step will be committed after diary update.
+
+### What I did
+
+Updated `web/packages/pyxis-app/src/styles/app-tokens.css`:
+
+```css
+--app-ink: #1A1A18;
+--app-ink-rgb: 26, 26, 24;
+--app-muted: #8A857B;
+--app-faint: #B8B2A5;
+--app-faint-rgb: 184, 178, 165;
+```
+
+These replace the drifted app values:
+
+```css
+--app-ink: #1f1e1c;
+--app-ink-rgb: 31, 30, 28;
+--app-muted: #6f685e;
+--app-faint: #9b9488;
+--app-faint-rgb: 155, 148, 136;
+```
+
+### Why
+
+The prototype uses:
+
+```text
+C.ink  = #1A1A18
+C.ink3 = #8A857B
+C.ink4 = #B8B2A5
+```
+
+The shared component package also uses `#1A1A18` for primary text/ink. Aligning app tokens removes one known source of visual drift.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual diff was rerun:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-tokens \
+  --output json
+```
+
+Before selector fix:
+
+```text
+changedPercent: 8.557675322381204
+changedPixels: 9689
+styleChanges: 3
+```
+
+After selector fix:
+
+```text
+changedPercent: 8.502031443207914
+changedPixels: 9626
+styleChanges: 3
+```
+
+After token alignment:
+
+```text
+changedPercent: 8.462285815226991
+changedPixels: 9581
+styleChanges: 2
+```
+
+The important semantic result is that the root `color` mismatch disappeared from `compare.json`; remaining style differences are root `font-size` and `line-height`.
+
+### What didn't work
+
+The total pixel diff only decreased slightly. This means token drift was real, but it was not the dominant source of the TopBar diff. Remaining differences are likely typography/spacing/bounds.
+
+### What I learned
+
+Token alignment is still worthwhile even when the diff percentage does not drop dramatically: it removes one class of mismatch and simplifies the next diagnosis. The css-visual-diff `compare.json` confirmed the root color mismatch was eliminated.
+
+### What was tricky to build
+
+`--app-muted` and `--app-faint` affect many app components, not just TopBar. This is why the change is isolated in its own commit and validated with Storybook build.
+
+### What warrants a second pair of eyes
+
+- Visual scan of pages using `--app-muted` and `--app-faint`, especially dense tables and calendar views.
+- Decide whether app tokens should become aliases to shared `--color-*` tokens rather than duplicated hex values.
+
+### What should be done in the future
+
+Next TopBar tuning step: address root font-size/line-height and bounds differences, then inspect button widths/spacing.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/styles/app-tokens.css`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual check:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-tokens \
+  --output json
+```

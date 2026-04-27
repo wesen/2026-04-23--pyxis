@@ -9,11 +9,11 @@
   --app-surface-muted: #f0ede6;
   --app-surface-success: #e8f2e9;
 
-  --app-ink: #1f1e1c;
-  --app-ink-rgb: 31, 30, 28;
-  --app-muted: #6f685e;
-  --app-faint: #9b9488;
-  --app-faint-rgb: 155, 148, 136;
+  --app-ink: #1A1A18;
+  --app-ink-rgb: 26, 26, 24;
+  --app-muted: #8A857B;
+  --app-faint: #B8B2A5;
+  --app-faint-rgb: 184, 178, 165;
   --app-rule: #e1ddd2;
   --app-on-dark: #ffffff;
   --app-on-dark-muted: rgba(255, 255, 255, 0.72);
