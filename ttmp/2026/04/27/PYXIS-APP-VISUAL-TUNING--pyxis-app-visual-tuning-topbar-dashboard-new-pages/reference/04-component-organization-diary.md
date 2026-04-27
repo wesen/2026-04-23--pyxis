@@ -3896,3 +3896,93 @@ Latest full sweep after this step:
 show-detail content 8.503% review
 show-detail page    5.344% review
 ```
+
+## Step 42: Stop Shows tuning and close About content into review band
+
+The user confirmed the remaining Shows rows are acceptable, so I stopped chasing the Shows list/content/page pixel deltas. I reverted the uncommitted Shows experiments (`ShowTile` title color and Shows header padding) and kept the smaller About spacing correction, which moved About out of tune-required.
+
+The About issue was the same header-wrapper rhythm problem seen on Book: the page wrapper added enough top padding to put the title and lead slightly below the prototype. Reducing the About header top padding aligns the title/lead more closely without touching shared component internals.
+
+### Prompt Context
+
+**User prompt (verbatim):** "i think the shows are fine."
+
+**Assistant interpretation:** Treat the remaining Shows tune-required rows as acceptable and stop modifying Shows for now.
+
+**Inferred user intent:** Avoid overfitting low-value pixel diffs and focus/commit only useful remaining changes.
+
+**Commit (code):** pending — this step records the About spacing commit.
+
+### What I did
+
+- Reverted uncommitted Shows-specific experiments:
+  - `ShowTile.css` title color change.
+  - `ShowsPage/Page.css` header padding tweak.
+- Kept and validated the About header spacing change:
+  - `.pyxis-about-page__hero { padding-block: 38px 0; }`
+- Reran the About focused visual comparison.
+- Reran the full public-page sweep.
+- Regenerated/re-served the review page:
+  - `/tmp/pyxis-public-pages-visual-review-about-spacing-20260427-172932/index.html`
+  - `http://127.0.0.1:8097/index.html`
+
+### Why
+
+The remaining Shows deltas are mostly integration/noise around poster art and list rendering. The user explicitly accepted them. About, however, still had a simple and measurable spacing issue that moved cleanly into review band.
+
+### What worked
+
+About improved substantially:
+
+```text
+about content: 10.833% tune-required -> 7.697% review
+about page:     9.059% review        -> 6.574% review
+```
+
+The full suite now has no non-Shows tune-required rows.
+
+### What didn't work
+
+N/A.
+
+### What I learned
+
+The review process needs a human stop condition. Not every remaining tune-required row is worth changing if the user accepts it visually.
+
+### What was tricky to build
+
+The main risk was accidentally committing Shows tweaks after the user accepted Shows. I explicitly restored the Shows files before validating/committing About.
+
+### What warrants a second pair of eyes
+
+- Confirm the latest review page's About section looks acceptable.
+- Decide whether remaining Shows rows should be documented as accepted differences in the visual spec.
+
+### What should be done in the future
+
+- If Shows is accepted, consider adding accepted-difference notes to the spec or playbook so future sweeps do not keep prioritizing it.
+
+### Code review instructions
+
+- Review `web/packages/pyxis-user-site/src/pages/AboutPage/Page.css`.
+- Validate with the full public-pages sweep.
+
+### Technical details
+
+Latest full sweep:
+
+```text
+shows content      11.620% tune-required (accepted by user for now)
+shows shows-list   11.166% tune-required (accepted by user for now)
+shows page         10.640% tune-required (accepted by user for now)
+show-detail content 8.503% review
+about content       7.697% review
+shows header        7.472% review
+about page          6.574% review
+archive content     6.399% review
+book content        5.982% review
+archive page        5.964% review
+show-detail page    5.344% review
+book page           4.539% review
+shows mailing-list  0.813% accepted
+```
