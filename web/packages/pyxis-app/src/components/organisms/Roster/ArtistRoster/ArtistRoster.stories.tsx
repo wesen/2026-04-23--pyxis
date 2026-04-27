@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { artists } from '../../../api/mockData';
+import { artists } from '../../../../api/mockData';
 import { ArtistRoster } from './ArtistRoster';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ArtistRoster',
+  title: 'Pyxis App/Components/Organisms/Roster/ArtistRoster',
   component: ArtistRoster,
   parameters: { layout: 'fullscreen' },
   args: { artists },

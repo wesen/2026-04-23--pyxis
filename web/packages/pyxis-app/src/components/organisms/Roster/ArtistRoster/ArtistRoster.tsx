@@ -1,10 +1,10 @@
 import type { Artist } from 'pyxis-types';
-import { ArtistCard } from '../../molecules/ArtistCard';
-import { ArtistRosterRow } from '../../molecules/ArtistRosterRow';
-import { appPart } from '../../parts';
-import '../../molecules/Table/Table.css';
+import { ArtistCard } from '../../../molecules/ArtistCard';
+import { ArtistRosterRow } from '../../../molecules/ArtistRosterRow';
+import { appPart } from '../../../parts';
+import '../../../molecules/Table/Table.css';
 import './ArtistRoster.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type ArtistRosterProps = {
   artists: Artist[];

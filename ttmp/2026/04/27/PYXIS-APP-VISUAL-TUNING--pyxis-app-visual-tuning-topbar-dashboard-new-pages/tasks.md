@@ -108,6 +108,6 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - [x] Bookings group.
   - [x] Calendar group.
   - [x] ShowDetail group.
-  - [ ] Roster group.
+  - [x] Roster group.
   - [ ] Settings/Shared group.
   - One group per commit.

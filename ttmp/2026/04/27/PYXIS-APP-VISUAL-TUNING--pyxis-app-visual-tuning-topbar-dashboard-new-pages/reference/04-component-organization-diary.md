@@ -1392,3 +1392,101 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 14: Group Roster organisms under organisms/Roster
+
+After ShowDetail passed validation, I grouped the Roster-related organisms. This group includes the artist roster and attendance panel, which are both roster/attendance domain components.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Continue to the next page/domain group and commit it independently.
+
+**Inferred user intent:** Complete remaining group moves while preserving reviewable checkpoints.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/Roster/`.
+- Used `git mv` to move:
+  - `ArtistRoster`
+  - `AttendancePanel`
+- Added `components/organisms/Roster/index.ts`.
+- Updated `organisms/index.ts` and `Panels.tsx` to export the Roster group.
+- Updated moved imports for the deeper folder path.
+- Updated `AttendancePage/Page.tsx`, which still had a deep import to the old `AttendancePanel` location.
+- Updated Roster Storybook titles to:
+  - `Pyxis App/Components/Organisms/Roster/ArtistRoster`
+  - `Pyxis App/Components/Organisms/Roster/AttendancePanel`
+- Marked the Roster subtask complete in `tasks.md`.
+
+### Why
+
+Roster was the next clear domain group after ShowDetail. Keeping `ArtistRoster` and `AttendancePanel` together makes the page/domain structure easier to scan.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+The first resolver pass found one old page deep import:
+
+```text
+src/pages/AttendancePage/Page.tsx:5: ../../components/organisms/AttendancePanel/AttendancePanel
+```
+
+This was fixed to the new Roster path.
+
+### What I learned
+
+Even after earlier page import cleanup, a few page-specific deep imports can remain. The resolver is useful as a migration audit, not just a build guardrail.
+
+### What was tricky to build
+
+`AttendancePanel` still imports CSS from Dashboard and BookingCard-related styles. The paths were updated and valid, but these dependencies remain design-system cleanup candidates.
+
+### What warrants a second pair of eyes
+
+- Whether `AttendancePanel` should live in `Roster` or a separate Attendance group if that page grows.
+- CSS ownership of `AttendancePanel` dependencies on `DashboardMetricsGrid.css` and `BookingCard.css`.
+
+### What should be done in the future
+
+Proceed to Settings/Shared as the last planned group, then inspect remaining top-level organisms and decide whether they should stay shared.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Roster/`
+- `web/packages/pyxis-app/src/components/organisms/Roster/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- `web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```

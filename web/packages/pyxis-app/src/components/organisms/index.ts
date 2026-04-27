@@ -1,5 +1,4 @@
-export * from './ArtistRoster';
-export * from './AttendancePanel';
+export * from './Roster';
 export * from './AuditLogPanel';
 export * from './Bookings';
 export * from './Calendar';

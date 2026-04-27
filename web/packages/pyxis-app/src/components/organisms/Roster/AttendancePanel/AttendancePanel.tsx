@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { AttendanceLog } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { AttendanceStat } from '../../molecules/AttendanceStat';
-import { appPart } from '../../parts';
-import '../../molecules/BookingCard/BookingCard.css';
-import '../Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.css';
+import { AttendanceStat } from '../../../molecules/AttendanceStat';
+import { appPart } from '../../../parts';
+import '../../../molecules/BookingCard/BookingCard.css';
+import '../../Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.css';
 import './AttendancePanel.css';
-import { AppEmptyState } from '../../molecules/AppEmptyState';
+import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type AttendanceDraft = Pick<AttendanceLog, 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 
