@@ -27,3 +27,16 @@ Uploaded the staff operations fundamentals design bundle to reMarkable at /ai/20
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/26/PYXIS-STAFF-OPS-FUNDAMENTALS--complete-fundamental-staff-operations-workflows/reference/01-investigation-diary.md — Records doc validation and reMarkable upload evidence.
 
+
+## 2026-04-26
+
+Implemented workflows A/B foundation: show create/edit modal, lineup persistence, staff show detail route, and split staff pages into per-folder Page.tsx modules.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/queries/shows.sql — Adds lineup replacement queries.
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/repository/postgres/show_repo.go — Persists and reads show lineups during create/update/get.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx — Real controlled show editor for create/edit and lineup rows.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx — Wires workflow B edit show.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx — Wires workflow A create show.
+

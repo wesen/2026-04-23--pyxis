@@ -292,3 +292,156 @@ reference/01-investigation-diary.md
 tasks.md
 changelog.md
 ```
+
+## Step 3: Build workflows A/B and split page modules
+
+I started implementation for workflows A and B: show creation and show editing with lineup persistence. I also split the monolithic `Pages.tsx` into per-route page modules so future workflow wiring can happen inside focused folders instead of one very large file.
+
+This step intentionally focused on the show workflow path first. Backend show create/update now persists submitted lineup rows transactionally. The staff Shows page opens a real show editor modal for create, and Show Detail opens the same editor in edit mode.
+
+### Prompt Context
+
+**User prompt (verbatim):** "alright, add tasks to the ticket in phases, then work on them task by task, committing at appropriate intervals, keeping a diary.
+
+build workflow A and B"
+
+**Assistant interpretation:** Update the new ticket task plan as needed, then begin implementing the first workflows: new show and edit show, including lineup editing. Keep diary entries and commit at phase boundaries.
+
+**Inferred user intent:** The user wants implementation to proceed from the design ticket, starting with concrete staff show workflows rather than more planning.
+
+**Commit (code):** 1adc78d — "Persist show lineups"
+
+### What I did
+
+- Added SQL queries for replacing show lineup rows:
+  - `DeleteShowLineup`
+  - `CreateShowLineupEntry`
+- Regenerated sqlc output.
+- Updated `ShowRepo` so create/update persists lineup rows and `GetByID` reads `GetShowWithLineup`.
+- Added `GET /api/app/shows/{id}` so the staff app detail route can fetch the real staff show detail instead of falling through to SPA handling.
+- Fixed proto status conversion in `protoToDomainShow`; it now maps enum values to DB status strings instead of storing raw enum names like `SHOW_STATUS_CONFIRMED`.
+- Reworked `NewShowModal` into a real controlled show editor with:
+  - create/edit mode,
+  - show fields,
+  - status selection,
+  - lineup rows add/remove/edit,
+  - optional flyer file selection.
+- Wired `ShowsPage` to `createShow` and optional `uploadShowFlyer`, then navigate to `/shows/:id`.
+- Wired `ShowDetailPage` to `updateShow` and optional `uploadShowFlyer`.
+- Split route pages into per-folder `Page.tsx` modules and converted `Pages.tsx` into a barrel export:
+  - `pages/ShowsPage/Page.tsx`
+  - `pages/ShowDetailPage/Page.tsx`
+  - `pages/CalendarPage/Page.tsx`
+  - `pages/BookingsPage/Page.tsx`
+  - `pages/BookingReviewPage/Page.tsx`
+  - `pages/ArtistsPage/Page.tsx`
+  - `pages/AttendancePage/Page.tsx`
+  - `pages/AuditLogPage/Page.tsx`
+  - `pages/DiscordPage/Page.tsx`
+  - `pages/SettingsPage/Page.tsx`
+  - `pages/LoginPage/Page.tsx`
+  - `pages/SetupPage/Page.tsx`
+  - `pages/ModalShowcasePage/Page.tsx`
+- Added per-folder `Page.css` files that import shared `pages.css` for now.
+- Added `pages/shared.tsx` for common page state helpers.
+
+### Why
+
+Workflows A/B need focused page modules and reusable form components. Keeping all page code in `Pages.tsx` would make each additional workflow harder to wire and review. The split also matches the existing story folder layout.
+
+### What worked
+
+Backend smoke worked for create/update with lineups:
+
+```text
+POST /api/app/shows -> created id 8, SHOW_STATUS_CONFIRMED, lineup 2
+GET  /api/app/shows/8 -> lineup 2
+PATCH /api/app/shows/8 -> edited title/status, lineup replaced to 1
+GET  /api/app/shows/8 -> SHOW_STATUS_HOLD, lineup 1
+```
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+### What didn't work
+
+- The first backend smoke hit a stale server process and returned `405` for the current route shape. Restarting the backend on `:8080` fixed that.
+- `go test ./...` initially failed because `NewShowRepo` now needed the DB pool for transactions and two callsites still used the old constructor signature. I updated `pkg/server/server.go`, `pkg/service/submission_service.go`, and `cmd/pyxis/cmds/export.go`.
+- `NewShowModal.stories.tsx` still passed old `title`/`description` args after the component API changed. I replaced that story with an edit-mode story.
+
+### What I learned
+
+Show lineups were already represented in the domain/protobuf model and read SQL, so the smallest backend change was to add replace-lineup write queries and make create/update transactional. No protobuf schema change was required for workflows A/B.
+
+### What was tricky to build
+
+The tricky part was transaction boundaries. `SubmissionService.Approve` already opens a transaction and creates a transaction-scoped `ShowRepo`, so `ShowRepo` now supports both pool-backed transactions for normal create/update and query-backed operation inside an existing transaction. When `pool` is nil, it uses the existing transaction-bound queries and still replaces lineup rows.
+
+### What warrants a second pair of eyes
+
+- `ShowRepo` transaction behavior, especially the `pool == nil` path used inside submission approval.
+- Whether `NewShowModal` should require validation before submit rather than relying on backend/database errors.
+- Whether flyer upload should be split into a separate detail-panel UI instead of sharing the show editor modal.
+
+### What should be done in the future
+
+- Add explicit validation messages to `NewShowModal`.
+- Add MSW mutation stories specifically for create/edit show with lineup.
+- Replace the CSS bridge `Page.css -> ../pages.css` with page-local CSS as page-specific styling emerges.
+
+### Code review instructions
+
+Start with backend persistence:
+
+```text
+pkg/db/queries/shows.sql
+pkg/repository/postgres/show_repo.go
+pkg/server/app.go
+pkg/server/server.go
+```
+
+Then review frontend wiring:
+
+```text
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx
+web/packages/pyxis-app/src/pages/Pages.tsx
+```
+
+Validate with:
+
+```bash
+go test ./...
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+### Technical details
+
+Backend smoke payload used:
+
+```json
+{
+  "artist": "Workflow A Smoke",
+  "date": "2026-09-01",
+  "doorsTime": "8:00 PM",
+  "startTime": "9:00 PM",
+  "age": "21+",
+  "price": "$10",
+  "genre": "Noise",
+  "description": "Created from smoke",
+  "notes": "staff note",
+  "capacity": 150,
+  "status": "SHOW_STATUS_CONFIRMED",
+  "lineup": [
+    { "artist": "Workflow A Smoke", "role": "headline", "startTime": "9:00 PM", "endTime": "10:00 PM" },
+    { "artist": "Support Smoke", "role": "support", "startTime": "8:30 PM", "endTime": "9:00 PM" }
+  ]
+}
+```
