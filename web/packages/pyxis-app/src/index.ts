@@ -10,6 +10,7 @@ export * from './components/molecules/TodayShowCard';
 export * from './components/molecules/ShowTableRow';
 export * from './components/molecules/BookingCard';
 export * from './components/molecules/ArtistCard';
+export * from './components/molecules/ArtistRosterRow';
 export * from './components/molecules/CalendarEventChip';
 export * from './components/molecules/AttendanceStat';
 export * from './components/molecules/DiscordChannelRow';

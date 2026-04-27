@@ -1,5 +1,6 @@
 import type { Artist } from 'pyxis-types';
-import { ArtistCard, ArtistRosterRow } from '../../molecules/ArtistCard';
+import { ArtistCard } from '../../molecules/ArtistCard';
+import { ArtistRosterRow } from '../../molecules/ArtistRosterRow';
 import { appPart } from '../../parts';
 import '../../molecules/Table/Table.css';
 import './ArtistRoster.css';

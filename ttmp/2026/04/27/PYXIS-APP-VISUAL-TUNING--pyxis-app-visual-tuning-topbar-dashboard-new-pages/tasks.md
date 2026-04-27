@@ -71,7 +71,7 @@ LastUpdated: 2026-04-27T11:45:00-04:00
 
 ## Phase 3: multi-export component splits
 
-- [ ] **T06 — Split `ArtistCard` and `ArtistRosterRow`**
+- [x] **T06 — Split `ArtistCard` and `ArtistRosterRow`**
   - Create `molecules/ArtistRosterRow/`.
   - Move row-specific code and CSS out of `ArtistCard`.
   - Add/adjust stories.

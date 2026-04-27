@@ -524,3 +524,108 @@ import { AppShell } from '../../components/shell';
 ```
 
 No organism imports were moved in this step.
+
+## Step 6: Split ArtistCard and ArtistRosterRow
+
+This step split the first multi-export molecule into one component per folder. `ArtistCard` remains the card molecule, while `ArtistRosterRow` is now its own molecule with its own TSX, CSS, story, and local barrel.
+
+The split deliberately avoided page or organism folder movement. It only changed the component boundary and imports that depended on the previous combined file.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 1)
+
+**Assistant interpretation:** Continue the ordered component organization tasks after the shell split.
+
+**Inferred user intent:** Keep moving toward one exported component per directory while committing each safe, validated step.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Removed `ArtistRosterRow` from `molecules/ArtistCard/ArtistCard.tsx`.
+- Created `molecules/ArtistRosterRow/` with:
+  - `ArtistRosterRow.tsx`
+  - `ArtistRosterRow.css`
+  - `ArtistRosterRow.stories.tsx`
+  - `index.ts`
+- Updated `ArtistCard.stories.tsx` so it only demonstrates `ArtistCard`.
+- Added separate `ArtistRosterRow` stories.
+- Updated `organisms/ArtistRoster/ArtistRoster.tsx` to import:
+  - `ArtistCard` from `../../molecules/ArtistCard`
+  - `ArtistRosterRow` from `../../molecules/ArtistRosterRow`
+- Updated `src/index.ts` to export `ArtistRosterRow`.
+- Marked T06 complete in `tasks.md`.
+
+### Why
+
+`ArtistCard.tsx` exported two React components. That violated the organization contract and mixed card styling with table-row behavior. Splitting the row into its own molecule makes ownership clearer and makes Storybook hierarchy match the filesystem.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The import resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No build failures. Storybook emitted the same known dependency/build-size warnings.
+
+### What I learned
+
+Some split components may not have much private CSS. `ArtistRosterRow` currently relies on shared table row styling from `molecules/Table/Table.css`, so its own CSS file is intentionally minimal and documents that dependency.
+
+### What was tricky to build
+
+The tricky part was avoiding a visual change. `ArtistRosterRow` uses the shared `.app-table-row` class, so the important CSS dependency is `../Table/Table.css`, now imported by `ArtistRosterRow.tsx` itself instead of piggybacking through `ArtistCard.tsx`.
+
+### What warrants a second pair of eyes
+
+- Whether `ArtistRosterRow.css` should remain a documentation-only CSS file or whether row-specific selectors should be moved into it later.
+- Whether `src/index.ts` should keep exporting app internals like these molecules, or whether that public API should be reduced later.
+
+### What should be done in the future
+
+- T07: split `BookingCard` and `BookingQueueRow` using the same pattern.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.tsx`
+- `web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.stories.tsx`
+- `web/packages/pyxis-app/src/components/molecules/ArtistRosterRow/`
+- `web/packages/pyxis-app/src/components/organisms/ArtistRoster/ArtistRoster.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+### Technical details
+
+`ArtistRosterRow` imports shared table CSS directly:
+
+```ts
+import '../Table/Table.css';
+import './ArtistRosterRow.css';
+```
+
+This keeps the component's visual dependencies explicit.

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { artists } from '../../../api/mockData';
-import { ArtistCard, ArtistRosterRow } from './ArtistCard';
+import { ArtistCard } from '.';
 
 const meta = {
   title: 'Pyxis App/Components/Molecules/ArtistCard',
@@ -40,18 +40,6 @@ export const CardList: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 12, width: 420, padding: 24 }}>
       {artists.slice(0, 4).map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
-    </div>
-  ),
-};
-
-export const RosterRows: Story = {
-  render: () => (
-    <div style={{ width: 980, padding: 24 }}>
-      <table className="app-table">
-        <tbody>
-          {artists.slice(0, 5).map((artist) => <ArtistRosterRow key={artist.id} artist={artist} />)}
-        </tbody>
-      </table>
     </div>
   ),
 };
