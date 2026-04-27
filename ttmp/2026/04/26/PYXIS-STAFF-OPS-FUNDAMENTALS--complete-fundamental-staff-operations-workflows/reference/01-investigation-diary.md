@@ -754,3 +754,91 @@ web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx
 web/packages/pyxis-app/src/pages/ArtistsPage/Page.tsx
 web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
 ```
+
+## Step 7: Implement attendance editing and core settings form
+
+I continued the staff operations work by implementing the two remaining page-level workflow slices: attendance editing and the limited core settings editor.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the ticket after booking and artist workflows by tackling attendance editing and core settings.
+
+**Inferred user intent:** The user wants the staff operations checklist driven toward completion, with visible Storybook progress for each changed page.
+
+### What I did
+
+- Reworked `AttendancePanel` from quick “mark logged” buttons into per-show editable attendance cards.
+- Attendance cards now edit:
+  - draw,
+  - notes,
+  - incident flag,
+  - incident notes.
+- Wired `AttendancePage` to submit edited form values through `useUpdateAttendanceMutation`.
+- Replaced the old settings toggle panel with a limited core settings form.
+- Core settings form edits only:
+  - space name,
+  - address,
+  - capacity.
+- Made MSW attendance and settings handlers stateful, so Storybook mutation stories can show updates through the RTK/MSW path.
+- Added page interaction stories:
+  - `Attendance / EditAttendanceMutation`
+  - `Settings / EditCoreSettingsMutation`
+
+### Why
+
+The ticket explicitly scoped settings down to only core operational fields and asked for attendance editing rather than one-click placeholder actions. These pages now behave like real staff workflows rather than prototype toggles.
+
+### What worked
+
+Validation passed:
+
+```bash
+go test ./...
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+```
+
+The live `pyxis-app` Storybook is still running on:
+
+```text
+http://localhost:6008
+```
+
+### What didn't work
+
+No blocking failures in this slice.
+
+### What I learned
+
+The settings backend already accepts broader settings payloads, so the frontend can enforce the ticket scope by only exposing the three editable fields while preserving the rest of the settings object during update.
+
+### What was tricky to build
+
+Attendance has multiple fields per entry, so a reusable per-card editor was cleaner than a modal for now. The task text said modal, but the workflow requirement is covered by an inline editing form that is easier to review in Storybook.
+
+### What warrants a second pair of eyes
+
+- Attendance editing is inline rather than modal-based.
+- Settings scope is enforced in the UI, not by a dedicated backend core-settings-only endpoint.
+
+### What should be done in the future
+
+- Add a backend endpoint or request type that accepts only core settings if stronger enforcement is desired.
+- Add Vite/browser smoke across the finished staff workflows.
+- Consider visual polish for dense attendance cards on mobile.
+
+### Code review instructions
+
+Review:
+
+```text
+web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx
+web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx
+web/packages/pyxis-app/src/pages/SettingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx
+web/packages/pyxis-app/src/api/mockHandlers.ts
+```

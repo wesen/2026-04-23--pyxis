@@ -49,8 +49,8 @@
 - [x] Build standalone `FlyerField`.
 - [x] Build booking request/detail editor inside Booking Review page.
 - [x] Build artist create/edit/detail form inside Artists page.
-- [ ] Build `AttendanceEditorModal`.
-- [ ] Build `CoreSettingsForm`.
+- [x] Build attendance editing form inside Attendance page.
+- [x] Build core settings form for space name/address/capacity.
 
 ## Phase 5: Page wiring
 
@@ -60,8 +60,8 @@
 - [x] Wire booking review-note persistence from Booking Review page.
 - [x] Wire booking detail edit from Booking Review page.
 - [x] Wire artist create/edit/detail functionality from Artists page.
-- [ ] Wire attendance edit modal from Attendance page.
-- [ ] Replace settings toggles with core settings form for space name/address/capacity.
+- [x] Wire attendance editing from Attendance page.
+- [x] Replace settings toggles with core settings form for space name/address/capacity.
 
 ## Phase 6: Validation and handoff
 

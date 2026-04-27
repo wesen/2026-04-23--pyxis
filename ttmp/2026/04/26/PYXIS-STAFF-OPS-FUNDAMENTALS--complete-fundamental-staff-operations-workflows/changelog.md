@@ -83,3 +83,15 @@ Implemented booking detail edit plus artist create/edit/detail workflows and add
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx — Adds artist create/edit mutation page stories.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx — Adds booking detail and note mutation page stories.
 
+
+## 2026-04-26
+
+Implemented attendance editing and core settings form, with stateful MSW handlers and page interaction stories for Attendance and Settings.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/AttendancePanel/AttendancePanel.tsx — Adds inline attendance editor for draw
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/SettingsPanel/SettingsPanel.tsx — Replaces settings toggles with core settings form.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx — Adds attendance mutation page story.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx — Adds core settings mutation page story.
+
