@@ -40,3 +40,8 @@ Implemented workflows A/B foundation: show create/edit modal, lineup persistence
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx — Wires workflow B edit show.
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx — Wires workflow A create show.
 
+
+## 2026-04-26
+
+Updated tasks after workflow A/B implementation: marked show lineup SQL, backend lineup persistence, show editor, page wiring, backend smoke, app build, Storybook build, and go test as complete.
+

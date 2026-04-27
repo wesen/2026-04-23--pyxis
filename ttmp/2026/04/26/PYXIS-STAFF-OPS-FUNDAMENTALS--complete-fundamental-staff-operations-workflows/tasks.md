@@ -14,7 +14,7 @@
 ## Phase 1: Schema and protobuf
 
 - [ ] Add `booking_reviews` migration.
-- [ ] Add show lineup replace SQL queries.
+- [x] Add show lineup replace SQL queries.
 - [ ] Add submission detail update SQL query.
 - [ ] Add artist stats/detail SQL queries.
 - [ ] Add protobuf messages for booking reviews, artist detail, and core settings update.
@@ -23,8 +23,8 @@
 
 ## Phase 2: Backend services and API
 
-- [ ] Persist `Show.lineup` in create/update flows.
-- [ ] Return lineup from show detail.
+- [x] Persist `Show.lineup` in create/update flows.
+- [x] Return lineup from show detail.
 - [ ] Add booking details update endpoint.
 - [ ] Add booking review get/update endpoints.
 - [ ] Add create artist endpoint.
@@ -41,9 +41,9 @@
 
 ## Phase 4: UI components
 
-- [ ] Build `ShowEditorModal`.
-- [ ] Build `LineupEditor`.
-- [ ] Build `FlyerField`.
+- [x] Build `ShowEditorModal`.
+- [x] Build `LineupEditor` behavior inside `ShowEditorModal`.
+- [ ] Build standalone `FlyerField`.
 - [ ] Build `BookingReviewEditor`.
 - [ ] Build `ArtistEditorDrawer`.
 - [ ] Build `ArtistDetailPanel`.
@@ -52,8 +52,9 @@
 
 ## Phase 5: Page wiring
 
-- [ ] Wire show create flow from Shows page.
-- [ ] Wire show edit, lineup edit, flyer upload/delete from Show Detail page.
+- [x] Wire show create flow from Shows page.
+- [x] Wire show edit and lineup edit from Show Detail page.
+- [ ] Wire standalone flyer upload/delete from Show Detail page.
 - [ ] Wire booking detail edit and review-note persistence from Booking Review page.
 - [ ] Wire artist create/edit/detail functionality from Artists page.
 - [ ] Wire attendance edit modal from Attendance page.
@@ -61,12 +62,12 @@
 
 ## Phase 6: Validation and handoff
 
-- [ ] `go test ./...` passes.
+- [x] `go test ./...` passes.
 - [ ] `cd web/packages/pyxis-types && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-app && pnpm build` passes.
-- [ ] `cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook` passes.
+- [x] `cd web/packages/pyxis-app && pnpm build` passes.
+- [x] `cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook` passes.
 - [ ] `cd web && pnpm build` passes.
-- [ ] Manual backend smoke for new APIs passes.
+- [x] Manual backend smoke for workflow A/B show create/update lineups passes.
 - [ ] Manual Vite staff workflow smoke passes.
 - [ ] Diary and changelog are updated.
 - [ ] reMarkable bundle is refreshed if implementation materially changes the design.
