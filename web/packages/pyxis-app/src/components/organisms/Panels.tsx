@@ -1,6 +1,6 @@
 export * from './Panel';
 export * from './Dashboard';
-export * from './ShowsTable';
+export * from './Shows';
 export * from './BookingQueue';
 export * from './CalendarMonth';
 export * from './ArtistRoster';

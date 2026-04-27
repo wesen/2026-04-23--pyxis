@@ -104,5 +104,10 @@ LastUpdated: 2026-04-27T11:45:00-04:00
   - Commit separately.
 
 - [ ] **T11+ — Optional: move remaining page groups one at a time**
-  - Shows, Bookings, Calendar, ShowDetail, Roster, Settings/Shared.
+  - [x] Shows group.
+  - [ ] Bookings group.
+  - [ ] Calendar group.
+  - [ ] ShowDetail group.
+  - [ ] Roster group.
+  - [ ] Settings/Shared group.
   - One group per commit.

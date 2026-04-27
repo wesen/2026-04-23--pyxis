@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ShowsFilterBar } from './ShowsFilterBar';
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ShowsFilterBar',
+  title: 'Pyxis App/Components/Organisms/Shows/ShowsFilterBar',
   component: ShowsFilterBar,
   parameters: { layout: 'fullscreen' },
   args: { confirmedCount: 6 },

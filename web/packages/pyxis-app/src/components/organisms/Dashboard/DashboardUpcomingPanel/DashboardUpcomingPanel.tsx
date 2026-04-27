@@ -2,7 +2,7 @@ import type { AppShow } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { TodayShowCard } from '../../../molecules/TodayShowCard';
 import { Panel } from '../../Panel';
-import { ShowsTable } from '../../ShowsTable';
+import { ShowsTable } from '../../Shows/ShowsTable';
 import './DashboardUpcomingPanel.css';
 import { AppEmptyState } from '../../../molecules/AppEmptyState';
 

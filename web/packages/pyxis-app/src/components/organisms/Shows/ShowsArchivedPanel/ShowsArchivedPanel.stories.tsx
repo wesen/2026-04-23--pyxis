@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ShowStatus } from 'pyxis-types';
-import { shows } from '../../../api/mockData';
+import { shows } from '../../../../api/mockData';
 import { ShowsArchivedPanel } from './ShowsArchivedPanel';
 
 const archived = shows.filter((show) => show.status === ShowStatus.ARCHIVED);
 
 const meta = {
-  title: 'Pyxis App/Components/Organisms/ShowsArchivedPanel',
+  title: 'Pyxis App/Components/Organisms/Shows/ShowsArchivedPanel',
   component: ShowsArchivedPanel,
   parameters: { layout: 'fullscreen' },
   args: {

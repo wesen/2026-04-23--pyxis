@@ -992,3 +992,105 @@ title: 'Pyxis App/Components/Organisms/Dashboard/DashboardHero'
 title: 'Pyxis App/Components/Organisms/Dashboard/DashboardMetricsGrid'
 title: 'Pyxis App/Components/Organisms/Dashboard/DashboardOverview'
 ```
+
+## Step 10: Group Shows organisms under organisms/Shows
+
+With Dashboard grouping validated and visually accepted, the next page-group move was Shows. This was still scoped to one page group and committed separately.
+
+### Prompt Context
+
+**User prompt (verbatim):** "looking good, go with next groups. DOn't forget to write a diary, keep committing at intermediate intervals."
+
+**Assistant interpretation:** Continue page grouping one group at a time, keeping the established diary and validation discipline.
+
+**Inferred user intent:** Move beyond Dashboard, but preserve the safety model: small commits, diary entries, and validation after each group.
+
+**Commit (code):** pending — this step will be committed after diary/task updates.
+
+### What I did
+
+- Created `components/organisms/Shows/`.
+- Used `git mv` to move:
+  - `ShowsArchivedPanel`
+  - `ShowsConfirmedPanel`
+  - `ShowsFilterBar`
+  - `ShowsTable`
+- Added `components/organisms/Shows/index.ts`.
+- Updated shims/barrels:
+  - `ShowsSections.tsx`
+  - `Panels.tsx`
+  - `organisms/index.ts`
+- Updated moved Shows imports for the deeper folder path.
+- Updated `DashboardUpcomingPanel` to import `ShowsTable` from the new Shows group.
+- Updated Shows Storybook titles to `Pyxis App/Components/Organisms/Shows/<Component>`.
+- Marked the Shows subtask complete in `tasks.md`.
+
+### Why
+
+Shows had an existing shim (`ShowsSections.tsx`) and a clear set of `Shows*` organisms, making it a good next page group after Dashboard.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+The resolver reported:
+
+```text
+unresolved: 0
+```
+
+### What didn't work
+
+No build failures. The same known Storybook chunk-size warnings appeared.
+
+### What I learned
+
+The existing `ShowsSections.tsx` shim made the page group boundary clear. Keeping shims as re-export compatibility layers lets the filesystem evolve without forcing every consumer to change at once.
+
+### What was tricky to build
+
+`DashboardUpcomingPanel` depends on `ShowsTable`, so grouping Shows created a cross-page-group import from Dashboard to Shows:
+
+```ts
+import { ShowsTable } from '../../Shows/ShowsTable';
+```
+
+This is a legitimate dependency for now, but it is a signal that `ShowsTable` may be more shared than purely page-local.
+
+### What warrants a second pair of eyes
+
+- Whether `ShowsTable` should remain in `organisms/Shows` or eventually move to a shared/table area if Dashboard continues to use it.
+- Visual inspection of Shows stories under the new Storybook hierarchy.
+
+### What should be done in the future
+
+Proceed to the next group, likely Bookings, as its components have a similarly clear page boundary.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/organisms/Shows/`
+- `web/packages/pyxis-app/src/components/organisms/Shows/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/ShowsSections.tsx`
+- `web/packages/pyxis-app/src/components/organisms/Panels.tsx`
+- `web/packages/pyxis-app/src/components/organisms/index.ts`
+- `web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
