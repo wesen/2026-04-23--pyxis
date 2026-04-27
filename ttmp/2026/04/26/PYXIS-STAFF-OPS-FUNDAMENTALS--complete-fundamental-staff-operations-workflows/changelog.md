@@ -45,3 +45,16 @@ Implemented workflows A/B foundation: show create/edit modal, lineup persistence
 
 Updated tasks after workflow A/B implementation: marked show lineup SQL, backend lineup persistence, show editor, page wiring, backend smoke, app build, Storybook build, and go test as complete.
 
+
+## 2026-04-26
+
+Added MSW handlers and page interaction stories for show create/edit plus standalone show-detail flyer upload/delete UI.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/mockHandlers.ts — Adds mutable MSW handlers for show create/update and flyer upload/delete.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx — Standalone show detail flyer management UI.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx — Adds edit-show page interaction story.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx — Wires flyer upload/delete actions and edit workflow.
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx — Adds create-show page interaction story.
+

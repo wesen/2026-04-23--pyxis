@@ -445,3 +445,95 @@ Backend smoke payload used:
   ]
 }
 ```
+
+## Step 4: Add MSW stories and standalone flyer UI
+
+I added deterministic MSW support and Storybook interaction stories for the show create/edit workflows, then added a standalone flyer upload/delete panel to the show detail page. This keeps flyer management visible after a show already exists, instead of only allowing optional upload during the show editor save path.
+
+This step finishes the requested “MSW/page stories + flyer upload/delete UI” slice before moving to booking notes.
+
+### Prompt Context
+
+**User prompt (verbatim):** "msw/page stories, flyer upload/delete UI, then notes"
+
+**Assistant interpretation:** Before moving to booking notes, add MSW/page story coverage for the show create/edit workflows and expose a standalone flyer upload/delete UI on show detail.
+
+**Inferred user intent:** The user wants the new show workflows to be demonstrable and testable in Storybook, and wants flyer management to be a first-class show detail affordance.
+
+**Commit (code):** pending at time of diary entry.
+
+### What I did
+
+- Added `FlyerField`:
+  - `web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx`
+  - `web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.css`
+  - `web/packages/pyxis-app/src/components/organisms/FlyerField/index.ts`
+- Exported it from `Panels.tsx`.
+- Wired `ShowDetailPage` to:
+  - `useUploadShowFlyerMutation`,
+  - `useDeleteShowFlyerMutation`,
+  - standalone `FlyerField` below the show detail panels.
+- Expanded staff MSW handlers for:
+  - `POST /api/app/shows`,
+  - `PATCH /api/app/shows/:id`,
+  - `POST /api/app/shows/:id/flyer`,
+  - `DELETE /api/app/shows/:id/flyer`.
+- Added page interaction stories:
+  - `ShowsPage/CreateShowMutation`,
+  - `ShowDetailPage/EditShowMutation`.
+
+### Why
+
+Storybook should prove that page-level RTK flows work through MSW and that the UI updates after mutations. Flyer upload/delete is operationally separate from editing show metadata, so staff need a visible detail-page panel after a show has already been created.
+
+### What worked
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```
+
+### What didn't work
+
+No blocking failures in this slice. The MSW file upload handler required using `await request.formData()` rather than JSON parsing, which matches the real RTK `FormData` path.
+
+### What I learned
+
+The previous removal of blanket JSON `Content-Type` on `fetchBaseQuery` continues to matter: flyer upload works because the browser can set multipart boundaries for `FormData`.
+
+### What was tricky to build
+
+The only subtle part was keeping MSW state coherent. The upload handler now updates the in-memory show's `flyerUrl`, and delete clears it, so a refetch after tag invalidation has the same semantics as the real backend.
+
+### What warrants a second pair of eyes
+
+- The filename extraction for delete currently uses the last URL segment. This matches the current backend API but may need adjustment if flyer URLs later include signed URLs or query strings.
+- The Storybook interactions cover create/edit metadata. File upload interaction stories are still not added because browser file input testing needs explicit `File` objects and can be added separately.
+
+### What should be done in the future
+
+- Add a dedicated `FlyerField` component story with uploaded/no-flyer states.
+- Add a page interaction story for flyer upload/delete if we want full coverage of the file input path.
+
+### Code review instructions
+
+Start with:
+
+```text
+web/packages/pyxis-app/src/api/mockHandlers.ts
+web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx
+web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx
+```
+
+Validate with:
+
+```bash
+cd web/packages/pyxis-app && pnpm build
+cd web/packages/pyxis-app && STORYBOOK_DISABLE_TELEMETRY=1 pnpm build-storybook
+go test ./...
+```

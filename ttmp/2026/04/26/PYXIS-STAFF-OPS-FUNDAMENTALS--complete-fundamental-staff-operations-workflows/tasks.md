@@ -35,15 +35,15 @@
 ## Phase 3: RTK Query and MSW
 
 - [ ] Add RTK endpoints/mutations for new backend APIs.
-- [ ] Update MSW mutable state and handlers.
-- [ ] Ensure every protobuf-backed MSW response uses `toJson(...)`.
-- [ ] Add mutation interaction stories for new workflows.
+- [x] Update MSW mutable state and handlers for show create/update and flyer upload/delete.
+- [x] Ensure show/flyer protobuf-backed MSW responses use `toJson(...)`.
+- [x] Add mutation interaction stories for show create/edit workflows.
 
 ## Phase 4: UI components
 
 - [x] Build `ShowEditorModal`.
 - [x] Build `LineupEditor` behavior inside `ShowEditorModal`.
-- [ ] Build standalone `FlyerField`.
+- [x] Build standalone `FlyerField`.
 - [ ] Build `BookingReviewEditor`.
 - [ ] Build `ArtistEditorDrawer`.
 - [ ] Build `ArtistDetailPanel`.
@@ -54,7 +54,7 @@
 
 - [x] Wire show create flow from Shows page.
 - [x] Wire show edit and lineup edit from Show Detail page.
-- [ ] Wire standalone flyer upload/delete from Show Detail page.
+- [x] Wire standalone flyer upload/delete from Show Detail page.
 - [ ] Wire booking detail edit and review-note persistence from Booking Review page.
 - [ ] Wire artist create/edit/detail functionality from Artists page.
 - [ ] Wire attendance edit modal from Attendance page.
