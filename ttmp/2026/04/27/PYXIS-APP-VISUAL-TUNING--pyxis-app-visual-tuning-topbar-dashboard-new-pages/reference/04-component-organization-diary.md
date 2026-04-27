@@ -1684,3 +1684,126 @@ pnpm exec tsc --noEmit
 pnpm exec vite build
 pnpm exec storybook build
 ```
+
+## Step 17: Fix AppTopBar selector leakage into Button labels
+
+After the page-grouping work, we returned to visual tuning and inspected the captured TopBar comparison images. The primary TopBar button looked wrong: its icon was white, but the `New show` label was muted gray.
+
+### Prompt Context
+
+**User prompt (verbatim):** "ok, let's put our workflow to use. Use read to look at captured images, not understand image. There's something weird with the topnavbar button look as well"
+
+**Assistant interpretation:** Use css-visual-diff artifacts and image reads to diagnose the TopBar button issue before broader token alignment.
+
+**Inferred user intent:** Prefer the visual-diff workflow and inspect actual captured artifacts; fix obvious visual defects before tuning subtle token drift.
+
+**Commit (code):** pending — this step will be committed after diary update.
+
+### What I did
+
+- Ran `css-visual-diff compare-spec` for `app-topbar-dashboard`.
+- Used `read` on the captured images:
+  - `left_region.png`
+  - `right_region.png`
+  - `diff_comparison.png`
+- Identified that the app's `New show` label appeared muted while the prototype label was white.
+- Fixed the broad CSS selector in `AppTopBar.css`:
+  - from `.app-topbar span`
+  - to `.app-topbar-eyebrow`
+- Added explicit markup classes in `AppTopBar.tsx`:
+  - `app-topbar-heading`
+  - `app-topbar-eyebrow`
+
+### Why
+
+The broad `.app-topbar span` selector styled every span inside the TopBar, including the internal label span rendered by the shared `Button` primitive. This violated the primitive boundary: a shell container was accidentally styling inside a reused atom.
+
+### What worked
+
+The captured images confirmed the fix. After the change, the `New show` label is white again in the app region.
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual diff was rerun:
+
+```bash
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec \
+  prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-selector \
+  --output json
+```
+
+Before:
+
+```text
+changedPercent: 8.557675322381204
+changedPixels: 9689
+```
+
+After:
+
+```text
+changedPercent: 8.502031443207914
+changedPixels: 9626
+```
+
+The numeric change is small because this fix affects a small text label region, but the visual correctness improvement is clear.
+
+### What didn't work
+
+The overall TopBar diff remains around 8.5%, so selector leakage was not the main source of the total diff. Token drift and spacing/bounds still need tuning.
+
+### What I learned
+
+Visual-diff artifacts are good at showing the symptom, but selector leakage often requires reading the component CSS contract. Broad element selectors inside component CSS are risky when children include shared primitives.
+
+### What was tricky to build
+
+The root cause was subtle because the `Button` root had the correct color, while its internal label inherited the wrong color from parent CSS. The fix was to name the eyebrow explicitly rather than styling every span.
+
+### What warrants a second pair of eyes
+
+- Check other Shell CSS files for broad element selectors that may affect primitive internals.
+- Check whether app CSS contains other `.component span`, `.component svg`, or `.component button` rules that cross primitive boundaries.
+
+### What should be done in the future
+
+Next visual-tuning step: align app tokens with canonical prototype/shared-component values, then rerun the TopBar diff.
+
+### Code review instructions
+
+Review:
+
+- `web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.tsx`
+- `web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.css`
+
+Validate:
+
+```bash
+cd web/packages/pyxis-app
+python3 scripts/check-relative-imports.py
+pnpm exec tsc --noEmit
+pnpm exec vite build
+pnpm exec storybook build
+```
+
+Visual check:
+
+```bash
+css-visual-diff verbs --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec prototype-design/visual-diff/userland/specs/app.components.visual.yml \
+  --page app-topbar-dashboard \
+  --outDir /tmp/pyxis-topbar-after-selector \
+  --output json
+```
