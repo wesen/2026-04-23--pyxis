@@ -2581,3 +2581,93 @@ For now, explicit representative targets plus `compare-public-component` are suf
 - Decide whether to pursue more bespoke poster internals or accept the current review-band component suite.
 - Investigate why `show-grid-prototype-desktop` is review-band while the full page `shows-list` remains near 20%; likely causes include page/story environment, crop-height sensitivity, and remaining poster artwork deltas.
 - If continuing, use `show-grid-prototype-desktop` as the primary integration loop and `shows-list` as the final page smoke.
+
+## Step 28: Apply review feedback for Shows whitespace and poster art
+
+The review feedback for the full `shows / shows-list` target called out two issues: the React side had too much whitespace in the text area under posters, and the poster artwork needed to match the prototype more closely or the page would never converge.
+
+### Prompt Context
+
+**User feedback (verbatim):**
+
+```text
+## shows / shows-list
+page · section shows-list · tune-required · 19.824%
+
+Needs tuning: twoo much witespace for the react version in the text under the poster (probably some css leaking through?). 
+
+Use same background images, otherwise they will never match.
+```
+
+**Assistant interpretation:** First fix the tile text block whitespace with an explicit line-height, then replace simplified poster artwork with prototype-matching CSS/SVG internals while preserving the public `Poster` API.
+
+### What I did
+
+- Added an explicit `line-height: 1.25` to the `ShowTile` root. This reduced the full page `shows-list` section height delta from about +34.5px to +3.75px.
+- Added prototype-like internal artwork renderers for poster variants:
+  - `pixel808`
+  - `petals`
+  - `basement`
+  - `orphx`
+  - `moor`
+  - `cygnus`
+  - `zola`
+- Kept the public API unchanged: consumers still use `<Poster kind="..." />`.
+- Generated a new HTML review bundle with the improved form styling and per-card clipboard buttons:
+
+```text
+/tmp/pyxis-shows-visual-review-feedback-tune-20260427-142812/index.html
+```
+
+### Validation
+
+TypeScript validation passed after the poster changes:
+
+```bash
+cd web/packages/pyxis-components
+pnpm exec tsc --noEmit
+```
+
+### Visual results
+
+Component suite after the feedback pass:
+
+```text
+components {'review': 7} max 8.618844578212524%
+show-tile-learn              review 8.619%
+poster-redroom               review 7.874%
+show-tile-redroom            review 7.787%
+public-page-header-shows     review 7.556%
+show-grid-prototype-desktop  review 6.510%
+mailing-list-cta             review 5.492%
+show-tile-soldout            review 4.078%
+```
+
+Full page `shows-list` after feedback pass:
+
+```text
+shows / shows-list tune-required 11.166088021369506%
+bounds delta: height +3.75px, width 0px, x 0px, y +2.5px
+```
+
+Previous full page result was about 19.824%, so this pass removed a large portion of the whitespace/artwork mismatch. It is still just above the review-band threshold of 10%.
+
+### What worked
+
+- The explicit `ShowTile` line-height addressed the review comment about excessive text-block whitespace.
+- Matching the prototype poster internals brought the full section from about 19.82% to about 11.17%.
+- The isolated grid target improved to 6.51% review-band.
+
+### What didn't work
+
+- The full page section is still `tune-required`, narrowly above the 10% review threshold.
+- The new poster internals are much closer, but not a perfect image copy. Remaining differences are mostly typography, small SVG/detail differences, and antialiasing.
+
+### What I learned
+
+The earlier component-level conclusion was correct: most of the apparent page mismatch was not grid structure but poster-art fidelity plus inherited typography/line-height in the tile text block.
+
+### What should be done next
+
+- Inspect the new review bundle and decide whether 11.17% is acceptable for the full page after the component targets are review-band.
+- If the goal is to push below 10%, focus on the highest-impact poster artwork differences visible in the full page review, not the grid layout.

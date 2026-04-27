@@ -34,6 +34,82 @@ export const Poster = ({ kind = 'redroom', ratio = '4 / 5', className, style }: 
     ...style,
   } as CSSProperties;
 
+  if (kind === 'pixel808') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__pixel808-art" {...pyxisPart('poster', 'pixel808-art')}>
+          <div className="pyxis-poster__pixel808-bars">{['#E24A2E', '#F26B1F', '#F39020', '#F1B51D', '#FDD835', '#fff'].map((color) => <span key={color} style={{ background: color }} />)}</div>
+          <div className="pyxis-poster__pixel808-rule" />
+          <div className="pyxis-poster__pixel808-spacer" />
+          <div className="pyxis-poster__pixel808-title">808</div>
+          <div className="pyxis-poster__pixel808-copy">The heart of the beat<br />that changed music</div>
+          <div className="pyxis-poster__pixel808-accent" />
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'petals') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__petals-art" {...pyxisPart('poster', 'petals-art')}>
+          <div className="pyxis-poster__petals-intro">DyvynHER Collective · Delightful Intentions</div>
+          <div className="pyxis-poster__petals-presents">Presents</div>
+          <div className="pyxis-poster__petals-title">Petals of Love</div>
+          <div className="pyxis-poster__petals-heart">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"><path d="M50 85 C20 60, 10 35, 28 22 C40 14, 50 28, 50 28 C50 28, 60 14, 72 22 C90 35, 80 60, 50 85Z" fill="#E55770" /></svg>
+            <div className="pyxis-poster__petals-heart-text">Join us for an evening of community, connection, crafts and making floral bouquets honoring love in all its forms.<strong>ALL SUPPLIES PROVIDED</strong><small>MOCKTAILS AND LIGHT FARE PROVIDED<br />(WHILE SUPPLIES LAST)</small><b>13<sup>th</sup></b><em>6:30 PM<br />EVENTBRITE LINK IN BIO</em></div>
+          </div>
+          <div className="pyxis-poster__petals-bottom"><span>ATTIRE<br />SPECIAL OCCASION<br />DRESS-TO-IMPRESS</span><span>LOCATION<br />ppxis<br />25 MANTON AVE,<br />PROVIDENCE, RI 02909</span></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'basement') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__basement-art" {...pyxisPart('poster', 'basement-art')}>
+          <div><div className="pyxis-poster__basement-title">Basement<br />Frequencies</div><div className="pyxis-poster__basement-sub">an underground electronic night<br />heavy bass · dark vibes.</div></div>
+          <div className="pyxis-poster__basement-skull"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="#5A0707" strokeWidth=".6" />{Array.from({ length: 48 }).map((_, i) => { const a = (i / 48) * Math.PI * 2; return <line key={i} x1={50 + Math.cos(a) * 28} y1={50 + Math.sin(a) * 28} x2={50 + Math.cos(a) * 46} y2={50 + Math.sin(a) * 46} stroke="#7A1010" strokeWidth=".5" />; })}<ellipse cx="50" cy="45" rx="18" ry="22" fill="#2A2A28" /><circle cx="42" cy="46" r="5" fill="#E84545" /><circle cx="58" cy="46" r="5" fill="#E84545" /></svg></div>
+          <div className="pyxis-poster__basement-meta"><b>Feb 28th, 2026</b><br />Doors 9:30pm · ppxis<br />25 Manton Ave, Providence RI<br />21+ · $12</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'orphx') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__orphx-art" {...pyxisPart('poster', 'orphx-art')}><div><div className="pyxis-poster__orphx-title">ORPHX</div><div className="pyxis-poster__orphx-sub">industrial / ebm<br />live performance</div></div><svg className="pyxis-poster__orphx-figure" viewBox="0 0 100 120"><path d="M30 120 L25 60 Q25 35 50 30 Q75 35 75 60 L70 120 Z" fill="#0A0A0A" stroke="#2A2A28" strokeWidth=".5"/><ellipse cx="50" cy="54" rx="14" ry="18" fill="#1A1A18"/><path d="M38 50 Q50 44 62 50 L62 66 Q50 72 38 66 Z" fill="#0A0A0A"/></svg><div className="pyxis-poster__orphx-meta">JULY 4TH, 2026<br /><span>PPXIS · 9PM · 18+ · $12</span></div></div>
+      </div>
+    );
+  }
+
+  if (kind === 'cygnus') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__cygnus-art" {...pyxisPart('poster', 'cygnus-art')}><div className="pyxis-poster__cygnus-lines" /><div className="pyxis-poster__cygnus-content"><div className="pyxis-poster__cygnus-kicker">//TECHNO</div><div><div className="pyxis-poster__cygnus-title">CYGNUS</div><div className="pyxis-poster__cygnus-guests">+ guests TBA</div></div><div className="pyxis-poster__cygnus-meta">MAY.17 · 9PM<br /><span>PPXIS · 18+ · $8</span></div></div></div>
+      </div>
+    );
+  }
+
+  if (kind === 'zola') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__zola-art" {...pyxisPart('poster', 'zola-art')}><div className="pyxis-poster__zola-frame" /><div className="pyxis-poster__zola-kicker">an evening with</div><div><div className="pyxis-poster__zola-title">Zola<br />Jesus</div><div className="pyxis-poster__zola-sub">· art pop / darkwave ·</div></div><div className="pyxis-poster__zola-meta">JUNE 6 · 2025<br /><span>PPXIS · 8PM · 21+ · $20</span></div></div>
+      </div>
+    );
+  }
+
+  if (kind === 'moor') {
+    return (
+      <div className={clsx('pyxis-poster', className)} {...pyxisPart('poster')} data-poster-kind={kind} style={posterStyle}>
+        <div className="pyxis-poster__moor-art" {...pyxisPart('poster', 'moor-art')}><div className="pyxis-poster__moor-kicker">ppxis presents</div><div><div className="pyxis-poster__moor-title">Moor<br />Mother</div><div className="pyxis-poster__moor-sub">— noise poetry —</div></div><div className="pyxis-poster__moor-meta">MAY 9 · 2025<br /><span>DOORS 7PM · ALL AGES · $15</span></div></div>
+      </div>
+    );
+  }
+
   if (kind === 'meetups') {
     return (
       <div
