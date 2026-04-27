@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { publicDesktopArgs, publicMobileArgs, publicPageParameters, renderPublicPageRoute } from '../storybook';
+import { publicDesktopArgs, publicMobileArgs, publicPageParameters, prototypeArchiveShows, prototypeArchiveStats, renderPublicPageRoute } from '../storybook';
+import { ArchivePageView } from './Page';
 
 const meta: Meta = {
   title: 'Public Site/Pages/Archive',
@@ -11,6 +13,27 @@ type Story = StoryObj;
 
 export const Desktop: Story = {
   render: () => renderPublicPageRoute({ ...publicDesktopArgs, route: '/archive', storyName: 'archive-desktop' }),
+  parameters: { viewport: { defaultViewport: 'pyxisDesktop' } },
+};
+
+export const FromProps: Story = {
+  render: () => {
+    const [search, setSearch] = useState('');
+    const shows = search
+      ? prototypeArchiveShows.filter((show) => `${show.artist} ${show.genre}`.toLowerCase().includes(search.toLowerCase()))
+      : prototypeArchiveShows;
+
+    return (
+      <div data-story="pyxis-public-page" data-story-name="archive-from-props" style={{ width: publicDesktopArgs.width, minHeight: publicDesktopArgs.minHeight, background: '#fff' }}>
+        <ArchivePageView
+          shows={shows}
+          stats={prototypeArchiveStats}
+          search={search}
+          onSearchChange={setSearch}
+        />
+      </div>
+    );
+  },
   parameters: { viewport: { defaultViewport: 'pyxisDesktop' } },
 };
 

@@ -3,7 +3,7 @@
 :where([data-pyxis-component='archive-stats'][data-pyxis-part='root']) {
   --pyxis-archive-stats-color: #1F1E1C;
   --pyxis-archive-stats-border-color: #EAE7E0;
-  --pyxis-archive-stats-value-color: var(--color-accent);
+  --pyxis-archive-stats-value-color: var(--color-text-primary);
   --pyxis-archive-stats-label-color: #8E887E;
 
   border-bottom: 1px solid var(--pyxis-archive-stats-border-color);
@@ -23,7 +23,7 @@
 
 :where([data-pyxis-component='archive-stats'][data-pyxis-part='value']) {
   color: var(--pyxis-archive-stats-value-color);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-display);
   font-size: 34px;
   font-variant-numeric: tabular-nums;
   font-weight: var(--weight-semibold);

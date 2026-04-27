@@ -3,7 +3,23 @@
 }
 
 .pyxis-archive-page__header {
-  padding-block: 44px 28px;
+  padding-block: 38px 0;
+}
+
+.pyxis-archive-page [data-pyxis-component='public-page-header'],
+.pyxis-archive-page [data-pyxis-component='year-group'],
+.pyxis-archive-page [data-pyxis-component='archive-show-row'] {
+  --pyxis-public-page-header-accent-color: var(--color-text-primary);
+  --pyxis-year-group-accent-color: var(--color-text-primary);
+  --pyxis-archive-show-row-title-color: var(--color-text-primary);
+}
+
+.pyxis-archive-page [data-pyxis-component='archive-stats'] {
+  --pyxis-archive-stats-value-color: var(--color-text-primary);
+}
+
+.pyxis-archive-page [data-pyxis-component='archive-search-filters'] {
+  --pyxis-archive-search-color: var(--color-text-primary);
 }
 
 .pyxis-archive-page__stats {
@@ -12,7 +28,7 @@
 
 .pyxis-archive-page__years {
   display: grid;
-  gap: 32px;
+  gap: 40px;
 }
 
 .pyxis-archive-page__empty {

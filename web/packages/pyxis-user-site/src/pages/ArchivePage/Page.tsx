@@ -6,7 +6,7 @@ import {
   PublicPageHeader,
   YearGroup,
 } from 'pyxis-components';
-import type { ArchivedShow } from 'pyxis-types';
+import type { ArchiveStats as ArchiveStatsData, ArchivedShow } from 'pyxis-types';
 import { getApiErrorMessage } from '../../api/errors';
 import { useArchive, useArchiveStats } from '../../api/hooks';
 import './Page.css';
@@ -16,27 +16,55 @@ type ArchiveGroup = {
   shows: ArchivedShow[];
 };
 
+export type ArchivePageViewProps = {
+  shows: ArchivedShow[];
+  stats?: ArchiveStatsData;
+  search: string;
+  onSearchChange: (value: string) => void;
+  isLoading?: boolean;
+  archiveError?: string | null;
+  statsError?: string | null;
+  headerKicker?: string;
+  headerTitle?: string;
+};
+
 export function Archive() {
   const [search, setSearch] = useState('');
   const { data: list, isLoading, isError: isArchiveError, error: archiveError } = useArchive(search || undefined);
-  const shows = list?.shows ?? [];
   const { data: stats, isError: isStatsError } = useArchiveStats();
+
+  return (
+    <ArchivePageView
+      shows={list?.shows ?? []}
+      stats={stats}
+      search={search}
+      onSearchChange={setSearch}
+      isLoading={isLoading}
+      archiveError={isArchiveError ? getApiErrorMessage(archiveError) : null}
+      statsError={isStatsError ? 'Archive totals are temporarily unavailable.' : null}
+    />
+  );
+}
+
+export function ArchivePageView({
+  shows,
+  stats,
+  search,
+  onSearchChange,
+  isLoading = false,
+  archiveError = null,
+  statsError = null,
+  headerKicker = 'Since 2023',
+  headerTitle = 'The archive',
+}: ArchivePageViewProps) {
   const groups = groupShowsByYear(shows);
 
   return (
     <main className="pyxis-public-page pyxis-archive-page" data-page="archive">
       <div className="pyxis-public-page__inner">
         <header className="pyxis-archive-page__header" data-section="archive-header">
-          <PublicPageHeader kicker="Every show since day one" title="Archive" />
+          <PublicPageHeader kicker={headerKicker} title={headerTitle} />
         </header>
-
-        <section data-section="archive-filters">
-          <ArchiveSearchFilters
-            value={search}
-            onSearchChange={setSearch}
-            resultLabel={isLoading ? '…' : `${shows.length} of ${stats?.totalShows ?? '—'} shows`}
-          />
-        </section>
 
         {stats && (
           <section className="pyxis-archive-page__stats" data-section="archive-stats">
@@ -44,19 +72,26 @@ export function Archive() {
           </section>
         )}
 
-        {isStatsError && (
+        <section data-section="archive-filters">
+          <ArchiveSearchFilters
+            value={search}
+            onSearchChange={onSearchChange}
+          />
+        </section>
+
+        {statsError && (
           <p className="pyxis-public-page__status-detail" role="status" data-section="archive-stats-error">
-            Archive totals are temporarily unavailable.
+            {statsError}
           </p>
         )}
 
-        {isArchiveError ? (
+        {archiveError ? (
           <section className="pyxis-public-page__status" role="alert" data-section="archive-error">
             <p className="pyxis-public-page__status-message">Failed to load archive.</p>
-            <p className="pyxis-public-page__status-detail">{getApiErrorMessage(archiveError)}</p>
+            <p className="pyxis-public-page__status-detail">{archiveError}</p>
           </section>
         ) : groups.length > 0 ? (
-          <section className="pyxis-archive-page__years" data-section="archive-years">
+          <section className="pyxis-archive-page__years" data-section="archive-years" aria-busy={isLoading || undefined}>
             {groups.map((group) => (
               <YearGroup key={group.year} year={group.year} showCount={group.shows.length}>
                 <ArchiveShowList shows={group.shows.map(toArchiveListShow)} />

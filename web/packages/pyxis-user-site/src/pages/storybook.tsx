@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
-import { create, Show_LineupEntrySchema, ShowListSchema, ShowSchema, ShowStatus, toJson } from 'pyxis-types';
+import { create, ArchiveStatsSchema, ArchivedShowListSchema, ArchivedShowSchema, Show_LineupEntrySchema, ShowListSchema, ShowSchema, ShowStatus, toJson } from 'pyxis-types';
 import { handlers } from 'pyxis-components/mocks/handlers';
 import { Layout } from '../components/layout/Layout';
 import { makeStore } from '../store';
@@ -42,8 +42,35 @@ export const prototypeShows = [
   create(ShowSchema, { id: 9, artist: 'Zola Jesus', date: 'Fri, Jun 6', doorsTime: '8:00 PM', age: '21+', price: '$20', genre: '', status: ShowStatus.CONFIRMED, createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z' }),
 ];
 
+export const prototypeArchiveShows = [
+  create(ArchivedShowSchema, { id: 101, artist: 'Winter Solstice Rave', date: '2025-12-12', genre: 'Electronic', draw: 118 }),
+  create(ArchivedShowSchema, { id: 102, artist: 'Jake Meginsky · live', date: '2025-11-29', genre: 'Noise', draw: 76 }),
+  create(ArchivedShowSchema, { id: 103, artist: 'Bottom Feeders', date: '2025-11-15', genre: 'Hardcore', draw: 104 }),
+  create(ArchivedShowSchema, { id: 104, artist: 'The Halloween Drone', date: '2025-10-31', genre: 'Drone', draw: 92 }),
+  create(ArchivedShowSchema, { id: 105, artist: 'Cecile Believe', date: '2025-10-18', genre: 'Pop', draw: 125 }),
+  create(ArchivedShowSchema, { id: 106, artist: 'Moor Mother', date: '2025-09-27', genre: 'Noise poetry', draw: 140 }),
+  create(ArchivedShowSchema, { id: 107, artist: '808 Collective vol. 4', date: '2025-09-06', genre: 'House', draw: 99 }),
+  create(ArchivedShowSchema, { id: 108, artist: 'Petals of Love', date: '2025-08-23', genre: 'Community', draw: 150 }),
+  create(ArchivedShowSchema, { id: 201, artist: 'Year-end all-nighter', date: '2024-12-20', genre: 'Mixed', draw: 150 }),
+  create(ArchivedShowSchema, { id: 202, artist: 'Basement Frequencies', date: '2024-11-08', genre: 'Techno', draw: 88 }),
+  create(ArchivedShowSchema, { id: 203, artist: 'Lolina', date: '2024-10-26', genre: 'Experimental', draw: 67 }),
+  create(ArchivedShowSchema, { id: 204, artist: "Working Men's Club", date: '2024-09-14', genre: 'Post-punk', draw: 126 }),
+  create(ArchivedShowSchema, { id: 205, artist: 'Wet Tennis', date: '2024-08-02', genre: 'Indie', draw: 74 }),
+  create(ArchivedShowSchema, { id: 206, artist: 'Fire Toolz', date: '2024-07-13', genre: 'Vaporwave', draw: 62 }),
+  create(ArchivedShowSchema, { id: 207, artist: 'Redroom Inferno I', date: '2024-06-22', genre: 'Electronic', draw: 150 }),
+];
+
+export const prototypeArchiveStats = create(ArchiveStatsSchema, {
+  totalShows: 194,
+  totalAttendance: 312,
+  yearsRunning: 31,
+  uniqueArtists: 0,
+});
+
 export const prototypePublicHandlers = [
   http.get('*/api/public/shows', () => HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows: prototypeShows })))),
+  http.get('*/api/public/archive', () => HttpResponse.json(toJson(ArchivedShowListSchema, create(ArchivedShowListSchema, { shows: prototypeArchiveShows })))),
+  http.get('*/api/public/archive/stats', () => HttpResponse.json(toJson(ArchiveStatsSchema, prototypeArchiveStats))),
   http.get('*/api/public/shows/:id', ({ params }) => {
     const id = Number(params.id);
     const show = prototypeShows.find((candidate) => candidate.id === id) ?? prototypeShows[0];

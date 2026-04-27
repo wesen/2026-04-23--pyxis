@@ -3,7 +3,7 @@
 :where([data-pyxis-component='archive-show-row'][data-pyxis-part='root']) {
   --pyxis-archive-show-row-border-color: #EAE7E0;
   --pyxis-archive-show-row-muted-color: #8E887E;
-  --pyxis-archive-show-row-title-color: var(--color-accent);
+  --pyxis-archive-show-row-title-color: var(--color-text-primary);
 
   align-items: baseline;
   border-top: 1px solid var(--pyxis-archive-show-row-border-color);

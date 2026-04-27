@@ -1,7 +1,7 @@
 /* YearGroup — archive year heading and count. */
 
 :where([data-pyxis-component='year-group'][data-pyxis-part='root']) {
-  --pyxis-year-group-accent-color: var(--color-accent);
+  --pyxis-year-group-accent-color: var(--color-text-primary);
   --pyxis-year-group-border-color: #EAE7E0;
   --pyxis-year-group-muted-color: #8E887E;
 }

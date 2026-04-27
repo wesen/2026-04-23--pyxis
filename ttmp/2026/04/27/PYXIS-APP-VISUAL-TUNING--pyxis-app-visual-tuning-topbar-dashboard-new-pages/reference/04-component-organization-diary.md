@@ -3368,3 +3368,93 @@ I avoided adding a PyYAML dependency in a ticket-local script. The YAML emitter 
 
 - Review `compare_yaml_summary()` and `to_yaml()` in `scripts/05-build-public-pages-review.py`.
 - Open `http://127.0.0.1:8097/index.html`, expand a card's comparison details, and try `To clipboard with YAML`.
+
+## Step 38: Make Archive page data-fed and tune archive molecules
+
+The Archive review feedback pointed to both data and molecule-level differences: the header copy/color differed, stats were below the search instead of above it, the archive list content differed, and title/text colors did not match the prototype. Rather than solving this with broad page CSS, I focused on the smaller Archive molecules and the data path feeding them.
+
+The route still uses RTK Query today, but rendering now flows through a prop-driven `ArchivePageView`. That gives us a clean seam for future DB/loader/CMS data: the container fetches data, and the view renders the same molecules from props.
+
+### Prompt Context
+
+**User prompt (verbatim):** "pass in the data as props so we can in the future maybe pass it in from the DB"
+
+**Assistant interpretation:** Refactor Archive so fetched data is passed down to a presentational page view and molecules, instead of embedding the whole data path in the render logic.
+
+**Inferred user intent:** Keep public pages ready for top-down data from DB-backed loaders while preserving RTK Query as the current route integration.
+
+**Commit (code):** pending — this step records the Archive props/data commit.
+
+### What I did
+
+- Added `ArchivePageView` with explicit props:
+  - `shows`
+  - `stats`
+  - `search`
+  - `onSearchChange`
+  - loading/error state
+  - header copy
+- Kept `Archive` as the RTK Query container that passes data into `ArchivePageView`.
+- Added `ArchivePage/FromProps` story to demonstrate DB/top-down data rendering without RTK Query.
+- Updated public Storybook MSW fixtures with prototype-like Archive data and stats.
+- Tuned Archive molecules toward prototype defaults:
+  - `ArchiveStats` value color/default font now matches the prototype direction.
+  - `YearGroup` default accent color now uses primary text.
+  - `ArchiveShowRow` default title color now uses primary text.
+- Updated Archive page composition:
+  - header copy: `Since 2023` / `The archive`
+  - stats before search filters
+  - no result count between search input and year buttons
+
+### Why
+
+The Archive mismatch was not only page spacing. The data set and component defaults differed from the prototype. By making the page view prop-driven, the same structure can render RTK results, DB-loaded props, or story fixture props.
+
+### What worked
+
+- TypeScript and Vite validation passed.
+- Archive content now uses the prototype-like data set in Storybook.
+- Archive visual result improved slightly and, more importantly, the visible review notes are addressed:
+  - title/copy colors match prototype direction
+  - stats/cards are above search
+  - content is prototype-like
+  - header spacing follows the same pattern as the Book fix
+
+### What didn't work
+
+- The raw pixel percent only moved from `7.251%` to `7.034%`, because it was already in review-band and remaining deltas are mostly rendering/font/height differences.
+
+### What I learned
+
+Molecule-level default tokens matter: page overrides can fix one route, but Archive rows/year groups/stats should have sane public-site defaults because they are standalone reviewed components.
+
+### What was tricky to build
+
+The page needed to remain a working route with RTK Query while also supporting story/direct data. Splitting `Archive` and `ArchivePageView` keeps that separation clear without duplicating markup.
+
+### What warrants a second pair of eyes
+
+- Review whether `ArchiveStats` should semantically rename `totalAttendance` if it is displayed as artists in the prototype-style public site.
+- Confirm the Archive molecule default color change is acceptable anywhere else those molecules are used.
+
+### What should be done in the future
+
+- Add component-level visual targets for `ArchiveStats`, `ArchiveSearchFilters`, `YearGroup`, and `ArchiveShowRow` if further tuning is needed.
+- Consider making archive stats display items fully prop-driven rather than mapping from the current API shape.
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-user-site/src/pages/ArchivePage/Page.tsx` and the new `ArchivePageView` props.
+- Then review Archive molecule CSS defaults under `web/packages/pyxis-components/src/public/molecules/`.
+- Validate with:
+  - `cd web/packages/pyxis-components && pnpm exec tsc --noEmit`
+  - `cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit && pnpm exec vite build`
+
+### Technical details
+
+Archive focused result after this step:
+
+```text
+archive content 7.034% review
+archive page    6.509% review
+```
