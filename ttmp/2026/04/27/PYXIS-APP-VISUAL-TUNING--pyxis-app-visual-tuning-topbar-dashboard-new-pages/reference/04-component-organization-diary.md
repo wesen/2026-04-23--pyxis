@@ -3147,3 +3147,71 @@ book content        5.982% review
 show-detail page    5.688% review
 book page           4.539% review
 ```
+
+## Step 35: Fix review-page clipboard JavaScript
+
+The bundled review page rendered images correctly, but the clipboard buttons failed with `copyCard is not defined`. The underlying cause was a JavaScript syntax error in the generated inline script: the Python template emitted raw newlines inside a single-quoted JavaScript string for `copyAll()`, so the whole script failed to parse and none of the functions became global.
+
+I updated the generator to emit parse-safe JavaScript and explicitly attach the handlers to `window`. The regenerated review page now exposes `window.copyCard`, `window.copyAll`, and `window.filterCards` as functions.
+
+### Prompt Context
+
+**User prompt (verbatim):** "I get Uncaught ReferenceError: copyCard is not defined
+    onclick http://127.0.0.1:8097/index.html:1
+
+
+Whenc opying to clipboard in the comparison site"
+
+**Assistant interpretation:** The review site clipboard controls are broken and need a generator/runtime fix.
+
+**Inferred user intent:** Make the review page usable for collecting per-section notes from the browser.
+
+**Commit (code):** pending — this step records the clipboard fix.
+
+### What I did
+
+- Fixed `scripts/05-build-public-pages-review.py` so generated clipboard JS uses escaped newline strings.
+- Wrapped the handlers in an IIFE and assigned them to `window` for inline button compatibility.
+- Regenerated the review bundle at:
+  - `/tmp/pyxis-public-pages-visual-review-copyfix-20260427-163202/index.html`
+- Restarted the HTTP server on the same URL:
+  - `http://127.0.0.1:8097/index.html`
+- Verified in Playwright that:
+  - `typeof window.copyCard === 'function'`
+  - `typeof window.copyAll === 'function'`
+  - `typeof window.filterCards === 'function'`
+
+### Why
+
+The HTML used inline `onclick` handlers, so the named functions must exist on `window`. A parse error in the script made the browser report the symptom as `copyCard is not defined`.
+
+### What worked
+
+- `node --check` passes on the extracted generated script.
+- The served page now has the clipboard/filter functions available globally.
+
+### What didn't work
+
+- The first attempt to run `node --check` through process substitution failed because Node tried to read a transient `/proc/.../pipe` path. I reran it via a temp file instead.
+
+### What I learned
+
+Generated HTML/JS needs a syntax check, especially when Python f-strings emit JavaScript string escapes.
+
+### What was tricky to build
+
+The visible browser error pointed at `onclick`, but the real cause was earlier: the script never parsed. Checking the generated `<script>` body made the raw-newline single-quoted string obvious.
+
+### What warrants a second pair of eyes
+
+- Try copying one card and all notes in the served page to confirm browser clipboard permissions behave as expected in your environment.
+
+### What should be done in the future
+
+- Prefer non-inline event listeners for future review pages.
+- Keep `node --check` in the generator smoke-test path.
+
+### Code review instructions
+
+- Review the final `<script>` template in `scripts/05-build-public-pages-review.py`.
+- Open `http://127.0.0.1:8097/index.html` and test a `To clipboard` button.

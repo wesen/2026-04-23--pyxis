@@ -141,14 +141,23 @@ textarea {{ width: 100%; min-height: 70px; margin: 12px 0; box-sizing: border-bo
 </div>
 {''.join(cards)}
 <script>
-function filterCards(cls) {{
-  document.querySelectorAll('.card').forEach(card => {{ card.style.display = !cls || card.classList.contains(cls) ? '' : 'none'; }});
-}}
-function cardText(card) {{
-  return `${{card.dataset.page}}/${{card.dataset.section}}\n${{card.querySelector('.pill').textContent}}\nNotes: ${{card.querySelector('textarea').value}}`;
-}}
-function copyCard(button) {{ navigator.clipboard.writeText(cardText(button.closest('.card'))); }}
-function copyAll() {{ navigator.clipboard.writeText([...document.querySelectorAll('.card')].map(cardText).join('\n\n---\n\n')); }}
+(function () {{
+  function filterCards(cls) {{
+    document.querySelectorAll('.card').forEach(card => {{ card.style.display = !cls || card.classList.contains(cls) ? '' : 'none'; }});
+  }}
+  function cardText(card) {{
+    return [
+      `${{card.dataset.page}}/${{card.dataset.section}}`,
+      card.querySelector('.pill').textContent,
+      `Notes: ${{card.querySelector('textarea').value}}`,
+    ].join('\\n');
+  }}
+  function copyCard(button) {{ navigator.clipboard.writeText(cardText(button.closest('.card'))); }}
+  function copyAll() {{ navigator.clipboard.writeText([...document.querySelectorAll('.card')].map(cardText).join('\\n\\n---\\n\\n')); }}
+  window.filterCards = filterCards;
+  window.copyCard = copyCard;
+  window.copyAll = copyAll;
+}}());
 </script>
 </body>
 </html>
