@@ -27,6 +27,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.pyxis-booking-form__error {
+  color: #B42318;
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  margin: 6px 0 0;
+}
+
 :where([data-pyxis-component='booking-form'][data-pyxis-part='label']) {
   color: var(--pyxis-booking-form-muted-color);
   font-size: 11px;

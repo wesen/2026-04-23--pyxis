@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   fromJson,
+  toJson,
   ShowListSchema,
   Show,
   ShowSchema,
@@ -11,6 +12,7 @@ import {
   BookingConfirmation,
   BookingConfirmationSchema,
   BookingFormData,
+  BookingFormDataSchema,
 } from 'pyxis-types';
 import { endpoints } from './endpoints';
 
@@ -68,7 +70,7 @@ export const publicApi = createApi({
       query: (body) => ({
         url: endpoints.submissions,
         method: 'POST',
-        body,
+        body: toJson(BookingFormDataSchema, body),
       }),
       transformResponse: (response: unknown) => fromJson(BookingConfirmationSchema, response as any),
       invalidatesTags: [{ type: 'Submission', id: 'LIST' }],

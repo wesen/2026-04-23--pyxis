@@ -58,7 +58,7 @@ export const ShowTile = ({ show, compact = false, posterKind, onClick, className
           {title}
         </div>
         <div className="pyxis-show-tile__meta" {...pyxisPart('show-tile', 'meta')}>
-          {formatDate(show.date)} · {time} · {show.age}
+          {formatDate(show.date)} · {show.genre} · {time} · {show.age}
         </div>
         <div className="pyxis-show-tile__price" {...pyxisPart('show-tile', 'price')}>
           {show.price}
