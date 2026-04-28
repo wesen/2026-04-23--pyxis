@@ -38,6 +38,7 @@
 .app-setup-card footer div { display: flex; gap: 10px; }
 .app-setup-footnote { margin-top: 22px; font-size: 11.5px; }
 .app-topbar-actions { display: flex; align-items: center; gap: 8px; }
+.app-page-search { margin-bottom: 14px; max-width: 420px; }
 .app-shows-filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
 .app-shows-filter-bar button { border: 1px solid var(--app-rule); border-radius: var(--app-radius-pill); padding: 6px 12px; background: var(--app-surface); color: var(--app-muted); font: inherit; font-size: 12px; font-weight: 700; }
 .app-shows-filter-bar button[data-active='true'] { background: var(--app-ink); border-color: var(--app-ink); color: var(--app-on-dark); }

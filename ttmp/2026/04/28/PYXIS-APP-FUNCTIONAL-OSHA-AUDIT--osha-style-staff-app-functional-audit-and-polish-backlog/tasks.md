@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T13:45:00-04:00
+LastUpdated: 2026-04-28T14:05:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -39,7 +39,7 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 1: Cross-cutting safety/polish
 
-- [ ] **T05 — Fix AppTopBar default action hazard**
+- [x] **T05 — Fix AppTopBar default action hazard**
   - File: `web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.tsx`.
   - Problem: pages with no explicit action receive visible Search, Notifications, and New show controls that may be inert.
   - Acceptance:
@@ -47,7 +47,7 @@ LastUpdated: 2026-04-28T13:45:00-04:00
     - Every page explicitly opts into topbar controls.
     - Storybook covers default/no-action and action states.
 
-- [ ] **T06 — Add shared confirmation dialog component**
+- [x] **T06 — Add shared confirmation dialog component**
   - Needed for show cancel/archive, flyer delete, booking decline/approve, calendar delete.
   - Acceptance:
     - Accessible modal dialog.
@@ -69,13 +69,13 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 2: Dashboard
 
-- [ ] **T09 — Wire Dashboard navigation actions**
+- [x] **T09 — Wire Dashboard navigation actions**
   - `View all ›` → `/shows`.
   - `Review bookings` → `/bookings`.
   - `Open audit log` → `/log`.
   - Acceptance: browser smoke proves URL changes without reload.
 
-- [ ] **T10 — Wire Dashboard show actions**
+- [x] **T10 — Wire Dashboard show actions**
   - `Edit show` → `/shows/:id` or edit modal.
   - `View on Discord` → actual Discord post URL or disabled state with reason.
   - Acceptance: no inert dashboard buttons remain.
@@ -88,16 +88,16 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 3: Shows
 
-- [ ] **T12 — Wire Shows search button and search UI**
+- [x] **T12 — Wire Shows search button and search UI**
   - Add search input/panel or inline field.
   - Filter table by artist/genre/date/status.
   - Acceptance: smoke can search and see row counts change.
 
-- [ ] **T13 — Wire Shows filter chips**
+- [x] **T13 — Wire Shows filter chips**
   - `All`, `Confirmed`, `Hold`, `Cancelled`, `Archived` update visible data.
   - Acceptance: selected state and empty state work.
 
-- [ ] **T14 — Wire Shows row edit/navigation buttons**
+- [x] **T14 — Wire Shows row edit/navigation buttons**
   - File: `ShowTableRow.tsx` and caller panels.
   - Expected: `Edit <artist>` navigates to `/shows/:id` or opens edit modal.
   - Acceptance: no row edit button stays on `/shows` silently.
@@ -117,17 +117,17 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 4: Show Detail
 
-- [ ] **T17 — Implement Duplicate show flow**
+- [x] **T17 — Implement Duplicate show flow**
   - Either frontend clone + create mutation or backend `POST /api/app/shows/{id}/duplicate`.
   - Acceptance: Duplicate creates a new editable draft/show and navigates to it or opens modal.
 
-- [ ] **T18 — Add confirmation for Archive show**
+- [x] **T18 — Add confirmation for Archive show**
   - Acceptance: mutation fires only after confirmation.
 
-- [ ] **T19 — Add confirmation for Cancel show**
+- [x] **T19 — Add confirmation for Cancel show**
   - Acceptance: mutation fires only after confirmation and status refreshes.
 
-- [ ] **T20 — Add confirmation for Delete flyer**
+- [x] **T20 — Add confirmation for Delete flyer**
   - Acceptance: deletion requires confirmation.
 
 - [ ] **T21 — Wire ShowDetail Open post**
@@ -165,11 +165,11 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 6: Bookings
 
-- [ ] **T29 — Wire Open form button**
+- [x] **T29 — Wire Open form button**
   - Open public booking form using configured website/public URL.
   - Acceptance: opens `/book` in same/new tab by product decision.
 
-- [ ] **T30 — Decide Auto-review product status**
+- [x] **T30 — Decide Auto-review product status**
   - If no backend, disable/hide with “coming soon”.
   - If real, define endpoint and response schema.
 
@@ -194,7 +194,7 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 
 ## Phase 7: Booking Review
 
-- [ ] **T36 — Wire Open link**
+- [x] **T36 — Wire Open link**
   - Open booking/artist links from submission.
   - Disable if no links.
 
@@ -202,13 +202,13 @@ LastUpdated: 2026-04-28T13:45:00-04:00
   - Make `BookingReviewDatePanel` functional.
   - Check calendar availability if possible.
 
-- [ ] **T38 — Improve Save booking details feedback**
+- [x] **T38 — Improve Save booking details feedback**
   - Show success, validation errors, saving state.
 
-- [ ] **T39 — Improve Save review note feedback**
+- [x] **T39 — Improve Save review note feedback**
   - Show success, validation errors, saving state.
 
-- [ ] **T40 — Share approve/decline confirmation flows with Bookings page**
+- [x] **T40 — Share approve/decline confirmation flows with Bookings page**
 
 ## Phase 8: Artists
 

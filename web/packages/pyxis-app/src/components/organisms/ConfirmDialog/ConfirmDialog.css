@@ -1,0 +1,73 @@
+.app-confirm-dialog-backdrop {
+  align-items: center;
+  background: rgba(26, 26, 24, 0.34);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 120;
+}
+
+.app-confirm-dialog {
+  background: var(--app-surface-strong);
+  border: 1px solid var(--app-rule);
+  border-radius: 18px;
+  box-shadow: 0 26px 70px rgba(26, 26, 24, 0.2);
+  color: var(--app-ink);
+  display: grid;
+  gap: 24px;
+  max-width: 460px;
+  padding: 24px;
+  width: min(100%, 460px);
+}
+
+.app-confirm-dialog[data-variant='danger'] {
+  border-color: rgba(200, 39, 13, 0.34);
+}
+
+.app-confirm-dialog__eyebrow {
+  color: var(--app-muted);
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.app-confirm-dialog h2 {
+  font-family: var(--app-display);
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.app-confirm-dialog p {
+  color: var(--app-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+
+.app-confirm-dialog__actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .app-confirm-dialog-backdrop {
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .app-confirm-dialog {
+    border-radius: 16px;
+  }
+
+  .app-confirm-dialog__actions {
+    flex-direction: column-reverse;
+  }
+}

@@ -189,3 +189,141 @@ Result:
 ```text
 [f] PYXIS-APP-FUNCTIONAL-OSHA-AUDIT staff app functionality report
 ```
+
+## Step 7: Phase 1–4 safety and wiring pass
+
+I started working through the OSHA task list in order, prioritizing controls that were visible and inert or destructive-without-confirmation.
+
+### AppTopBar default action hazard
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.tsx
+```
+
+`AppTopBar` no longer injects default Search / Notifications / New show controls when a page does not explicitly provide `action`. This removes fake global controls from Attendance, Audit Log, Discord, and Settings. Pages now opt into topbar actions intentionally.
+
+### Shared ConfirmDialog
+
+Added component directory:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ConfirmDialog/
+```
+
+Files:
+
+```text
+ConfirmDialog.tsx
+ConfirmDialog.css
+ConfirmDialog.stories.tsx
+index.ts
+```
+
+The component supports default, danger, success, and loading states. It is exported from `components/organisms/index.ts`.
+
+### Dashboard wiring
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/DashboardPage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardOverview/DashboardOverview.tsx
+```
+
+Dashboard now passes callbacks for:
+
+- Add show → opens `NewShowModal`;
+- Review bookings → `/bookings`;
+- Open audit log → `/log`;
+- View all → `/shows`;
+- Edit show → `/shows/:id`;
+- View Discord → opens Discord URL when IDs exist, otherwise shows a status error.
+
+### Shows wiring
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsFilterBar/ShowsFilterBar.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsFilterBar/ShowsFilterBar.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsArchivedPanel/ShowsArchivedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsTable/ShowsTable.tsx
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
+web/packages/pyxis-app/src/pages/pages.css
+```
+
+Implemented:
+
+- Search button toggles a real search input.
+- Filter button toggles All/Confirmed as a shortcut.
+- Filter chips are controlled and filter data by status.
+- Search filters artist/genre/date.
+- Row edit buttons navigate to `/shows/:id`.
+- `ShowsFilterBar` has updated Storybook coverage including an interactive story.
+
+### Show Detail destructive actions and duplicate
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx
+```
+
+Implemented:
+
+- Duplicate creates a cloned show through the existing create-show mutation, clears Discord/flyer fields, appends `copy`, and navigates to the new show.
+- Archive uses `ConfirmDialog`.
+- Cancel uses `ConfirmDialog`.
+- Delete flyer uses `ConfirmDialog`.
+
+Note: the dynamic smoke created a real duplicated local development show (`Show duplicated.` and navigation to `/shows/19`). This is acceptable dev evidence but should be considered local test data.
+
+### Bookings and Booking Review
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
+```
+
+Implemented:
+
+- Bookings Open form opens the local public booking page on port 3007.
+- Auto-review is disabled with a title explaining backend support is needed.
+- Bookings approve/decline now use `ConfirmDialog`.
+- Booking Hold now shows an explicit not-implemented message instead of silently doing nothing. Full hold support remains open because the update DTO does not include `status`.
+- Booking Review Open link opens the booking `links` URL.
+- Booking Review save details and save review note now show success messages.
+- Booking Review approve/decline now use `ConfirmDialog`.
+
+### Validation
+
+Commands passed:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+I restarted the staff Vite server because an older devctl-owned Vite process was still serving a stale transform for `ShowTableRow`. After killing the old process and restarting the `pyxis-app-vite` tmux session, the app rendered correctly again.
+
+Re-ran smoke scripts:
+
+```text
+sources/04-staff-app-functional-smoke-after-phase1.json
+sources/05-staff-app-dynamic-route-smoke-after-phase1.json
+```
+
+Key smoke improvements:
+
+- Attendance, Audit Log, Discord, and Settings no longer show fake Search/Notifications/New show topbar actions.
+- Shows search/filter controls are now stateful.
+- Shows row edit navigates to `/shows/1`.
+- Bookings Auto-review is disabled instead of inert.
+- Booking Review save actions show success messages.
+- Show Detail Duplicate produces a new show and navigates to it.

@@ -13,6 +13,7 @@ export type ShowTableRowVariant = 'full' | 'dashboard' | 'archived';
 export type ShowTableRowProps = {
   show: AppShow;
   variant?: ShowTableRowVariant;
+  onEdit?: (show: AppShow) => void;
 };
 
 function formatShowDate(date: string) {
@@ -24,7 +25,7 @@ function formatShowDate(date: string) {
   };
 }
 
-export function ShowTableRow({ show, variant = 'full' }: ShowTableRowProps) {
+export function ShowTableRow({ show, variant = 'full', onEdit }: ShowTableRowProps) {
   const status = <span className="app-row-status"><StatusPill status={show.status} /></span>;
   const date = formatShowDate(show.date);
 
@@ -44,5 +45,5 @@ export function ShowTableRow({ show, variant = 'full' }: ShowTableRowProps) {
     );
   }
 
-  return <tr className="app-table-row app-show-table-row" {...appPart('show-table-row')}><td data-cell="id"><span className="app-show-id">#{show.id}</span></td><td data-cell="date"><div className="app-show-date"><strong>{date.short}</strong><span>{date.day}</span></div></td><td data-cell="artist"><strong>{show.artist}</strong><span>{show.genre}</span></td><td data-cell="doors">{show.doors}</td><td data-cell="age"><AgeBadge>{show.age}</AgeBadge></td><td data-cell="price"><span className="app-show-price">{show.price}</span></td><td data-cell="draw"><DrawProgress value={show.draw} max={show.capacity}/></td><td data-cell="status"><span className="app-row-status-wrap">{status}{show.pinned && <Icon className="app-row-pin" name="pin" size={12} aria-label="Pinned to Discord"/>}</span></td><td data-cell="edit"><button className="app-row-edit" aria-label={`Edit ${show.artist}`}><Icon name="edit" size={14}/></button></td></tr>;
+  return <tr className="app-table-row app-show-table-row" {...appPart('show-table-row')}><td data-cell="id"><span className="app-show-id">#{show.id}</span></td><td data-cell="date"><div className="app-show-date"><strong>{date.short}</strong><span>{date.day}</span></div></td><td data-cell="artist"><strong>{show.artist}</strong><span>{show.genre}</span></td><td data-cell="doors">{show.doors}</td><td data-cell="age"><AgeBadge>{show.age}</AgeBadge></td><td data-cell="price"><span className="app-show-price">{show.price}</span></td><td data-cell="draw"><DrawProgress value={show.draw} max={show.capacity}/></td><td data-cell="status"><span className="app-row-status-wrap">{status}{show.pinned && <Icon className="app-row-pin" name="pin" size={12} aria-label="Pinned to Discord"/>}</span></td><td data-cell="edit"><button className="app-row-edit" aria-label={`Edit ${show.artist}`} onClick={() => onEdit?.(show)}><Icon name="edit" size={14}/></button></td></tr>;
 }
