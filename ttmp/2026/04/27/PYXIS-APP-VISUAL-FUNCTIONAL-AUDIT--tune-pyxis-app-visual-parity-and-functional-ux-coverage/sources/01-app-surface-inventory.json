@@ -1,0 +1,1047 @@
+{
+  "routes": [
+    {
+      "path": "/login",
+      "pageComponent": "LoginPage",
+      "auth": "PublicOnlyLogin"
+    },
+    {
+      "path": "/setup",
+      "pageComponent": "SetupPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/",
+      "pageComponent": "DashboardPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/shows",
+      "pageComponent": "ShowsPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/shows/:id",
+      "pageComponent": "ShowDetailPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/calendar",
+      "pageComponent": "CalendarPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/bookings",
+      "pageComponent": "BookingsPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/bookings/review/:id",
+      "pageComponent": "BookingReviewPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/artists",
+      "pageComponent": "ArtistsPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/attendance",
+      "pageComponent": "AttendancePage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/log",
+      "pageComponent": "AuditLogPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/discord",
+      "pageComponent": "DiscordPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/settings",
+      "pageComponent": "SettingsPage",
+      "auth": "RequireSession"
+    },
+    {
+      "path": "/modal",
+      "pageComponent": "ModalShowcasePage",
+      "auth": "RequireSession"
+    }
+  ],
+  "pageStories": [
+    {
+      "file": "web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Artists"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Attendance"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/AuditLogPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Audit Log"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Booking Review"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Bookings"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/CalendarPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Calendar"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/DashboardPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Dashboard"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/DiscordPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Discord"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Login"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ModalShowcasePage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Modal Showcase"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Settings"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/SetupPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Setup"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Show Detail"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx",
+      "title": "Pyxis App/Pages/Shows"
+    }
+  ],
+  "visualSpecs": {
+    "pages": [
+      {
+        "page": "dashboard",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"dashboard\"]",
+            "react": "[data-page=\"dashboard\"]"
+          },
+          {
+            "name": "sidebar",
+            "original": "aside",
+            "react": "[data-section=\"app-sidebar\"]"
+          },
+          {
+            "name": "topbar",
+            "original": "main > div:first-child",
+            "react": "[data-section=\"app-topbar\"]"
+          },
+          {
+            "name": "summary",
+            "original": "[data-page=\"dashboard\"]",
+            "react": "[data-section=\"dashboard-summary\"]"
+          },
+          {
+            "name": "hero",
+            "original": "[data-section=\"dashboard-hero\"]",
+            "react": "[data-section=\"dashboard-hero\"]"
+          },
+          {
+            "name": "metrics",
+            "original": "[data-section=\"dashboard-metrics\"]",
+            "react": "[data-section=\"dashboard-metrics\"]"
+          },
+          {
+            "name": "upcoming",
+            "original": "[data-section=\"dashboard-upcoming\"]",
+            "react": "[data-section=\"dashboard-upcoming\"]"
+          },
+          {
+            "name": "quick-actions",
+            "original": "[data-section=\"dashboard-quick-actions\"]",
+            "react": "[data-section=\"dashboard-quick-actions\"]"
+          },
+          {
+            "name": "activity",
+            "original": "[data-section=\"dashboard-activity\"]",
+            "react": "[data-section=\"dashboard-activity\"]"
+          },
+          {
+            "name": "attention",
+            "original": "[data-section=\"dashboard-attention\"]",
+            "react": "[data-section=\"dashboard-attention\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-pages-pages--dashboard-desktop"
+      },
+      {
+        "page": "login",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"login\"]",
+            "react": "[data-page=\"login\"]"
+          },
+          {
+            "name": "marquee",
+            "original": ".px-root > div:first-child",
+            "react": "[data-section=\"login-marquee\"]"
+          },
+          {
+            "name": "panel",
+            "original": ".px-root > div:last-child",
+            "react": "[data-section=\"login-panel\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/login.html",
+        "storyId": "pyxis-app-pages-pages--login-desktop"
+      },
+      {
+        "page": "setup",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"setup\"]",
+            "react": "[data-page=\"setup\"]"
+          },
+          {
+            "name": "header",
+            "original": ".px-root > div:nth-child(1), .px-root > div:nth-child(2), .px-root > div:nth-child(3)",
+            "react": "[data-section=\"setup-header\"]"
+          },
+          {
+            "name": "progress",
+            "original": ".px-root > div:nth-child(4)",
+            "react": "[data-section=\"setup-progress\"]"
+          },
+          {
+            "name": "channels",
+            "original": ".px-root > div:nth-child(5)",
+            "react": "[data-section=\"setup-channels\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/setup.html",
+        "storyId": "pyxis-app-pages-pages--setup-desktop"
+      },
+      {
+        "page": "shows",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"shows\"]",
+            "react": "[data-page=\"shows\"]"
+          },
+          {
+            "name": "filters",
+            "original": "[data-section=\"shows-filters\"]",
+            "react": "[data-section=\"shows-filters\"]"
+          },
+          {
+            "name": "confirmed",
+            "original": "[data-section=\"shows-confirmed\"]",
+            "react": "[data-section=\"shows-confirmed\"]"
+          },
+          {
+            "name": "archived",
+            "original": "[data-section=\"shows-archived\"]",
+            "react": "[data-section=\"shows-archived\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/shows.html",
+        "storyId": "pyxis-app-pages-pages--shows-desktop"
+      },
+      {
+        "page": "calendar",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"calendar\"]",
+            "react": "[data-page=\"calendar\"]"
+          },
+          {
+            "name": "month",
+            "original": "[data-section=\"calendar-month\"]",
+            "react": "[data-section=\"calendar-month\"]"
+          },
+          {
+            "name": "agenda",
+            "original": "[data-section=\"calendar-agenda\"]",
+            "react": "[data-section=\"calendar-agenda\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/calendar.html",
+        "storyId": "pyxis-app-pages-pages--calendar-desktop"
+      },
+      {
+        "page": "bookings",
+        "sections": [
+          {
+            "name": "page",
+            "original": "[data-page=\"bookings\"]",
+            "react": "[data-page=\"bookings\"]"
+          },
+          {
+            "name": "queue",
+            "original": "[data-section=\"bookings-queue\"]",
+            "react": "[data-section=\"bookings-queue\"]"
+          },
+          {
+            "name": "processed",
+            "original": "[data-section=\"bookings-processed\"]",
+            "react": "[data-section=\"bookings-processed\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/bookings.html",
+        "storyId": "pyxis-app-pages-pages--bookings-desktop"
+      }
+    ],
+    "components": [
+      {
+        "page": "metric-card",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-pyxis-component=\"metric-card\"][data-metric-card=\"upcoming\"]",
+            "react": "[data-pyxis-component=\"metric-card\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-molecules-metriccard--metric-card-default"
+      },
+      {
+        "page": "activity-feed-item",
+        "sections": [
+          {
+            "name": "component",
+            "original": "#root",
+            "react": "[data-pyxis-component=\"activity-feed-item\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-molecules-activityfeeditem--activity-item-default"
+      },
+      {
+        "page": "today-show-card",
+        "sections": [
+          {
+            "name": "component",
+            "original": "#root",
+            "react": "[data-pyxis-component=\"today-show-card\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-molecules-todayshowcard--today-show-default"
+      },
+      {
+        "page": "shows-confirmed-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"shows-confirmed\"]",
+            "react": "[data-section=\"shows-confirmed\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/shows.html",
+        "storyId": "pyxis-app-components-organisms-showsconfirmedpanel--confirmed-panel"
+      },
+      {
+        "page": "shows-archived-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"shows-archived\"]",
+            "react": "[data-section=\"shows-archived\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/shows.html",
+        "storyId": "pyxis-app-components-organisms-showsarchivedpanel--archived-panel"
+      },
+      {
+        "page": "bookings-queue-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"bookings-queue\"]",
+            "react": "[data-section=\"bookings-queue\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/bookings.html",
+        "storyId": "pyxis-app-components-organisms-bookingsinboxpanel--inbox-panel"
+      },
+      {
+        "page": "bookings-processed-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"bookings-processed\"]",
+            "react": "[data-section=\"bookings-processed\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/bookings.html",
+        "storyId": "pyxis-app-components-organisms-bookingsprocessedpanel--processed-panel"
+      },
+      {
+        "page": "calendar-month-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"calendar-month\"]",
+            "react": "[data-section=\"calendar-month\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/calendar.html",
+        "storyId": "pyxis-app-components-organisms-calendarmonthpanel--month-panel"
+      },
+      {
+        "page": "calendar-agenda-panel",
+        "sections": [
+          {
+            "name": "component",
+            "original": "[data-section=\"calendar-agenda\"]",
+            "react": "[data-section=\"calendar-agenda\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/calendar.html",
+        "storyId": "pyxis-app-components-organisms-calendaragenda--agenda"
+      },
+      {
+        "page": "new-show-modal",
+        "sections": [
+          {
+            "name": "component",
+            "original": "#root > div > div > div:nth-of-type(2) > div",
+            "react": "[data-pyxis-component=\"new-show-modal\"][data-pyxis-part=\"root\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/modal.html",
+        "storyId": "pyxis-app-components-organisms-newshowmodal--default"
+      },
+      {
+        "page": "app-topbar-dashboard",
+        "sections": [
+          {
+            "name": "component",
+            "original": "main > div:first-child",
+            "react": "[data-section=\"app-topbar\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-shell-apptopbar--dashboard"
+      },
+      {
+        "page": "app-topbar-with-action",
+        "sections": [
+          {
+            "name": "component",
+            "original": "main > div:first-child",
+            "react": "[data-section=\"app-topbar\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-shell-apptopbar--with-action"
+      },
+      {
+        "page": "app-topbar-long-title",
+        "sections": [
+          {
+            "name": "component",
+            "original": "main > div:first-child",
+            "react": "[data-section=\"app-topbar\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-shell-apptopbar--long-title"
+      },
+      {
+        "page": "app-sidebar",
+        "sections": [
+          {
+            "name": "component",
+            "original": "aside",
+            "react": "[data-section=\"app-sidebar\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-shell-appsidebar--default"
+      },
+      {
+        "page": "app-mobile-bottom-nav",
+        "sections": [
+          {
+            "name": "component",
+            "original": ".app-bottom-nav",
+            "react": "[data-section=\"app-mobile-bottom-nav\"]"
+          }
+        ],
+        "prototypePath": "/standalone/full-app/dashboard.html",
+        "storyId": "pyxis-app-components-shell-appmobilebottomnav--default"
+      }
+    ]
+  },
+  "frontendEndpoints": {
+    "discordLogin": "/auth/discord/login",
+    "logout": "/auth/logout",
+    "session": "/api/app/session",
+    "shows": "/api/app/shows",
+    "show": "/api/app/shows/${id}",
+    "showCancel": "/api/app/shows/${id}/cancel",
+    "showArchive": "/api/app/shows/${id}/archive",
+    "showAnnounce": "/api/app/shows/${id}/announce",
+    "showFlyer": "/api/app/shows/${id}/flyer",
+    "bookings": "/api/app/bookings",
+    "booking": "/api/app/bookings/${id}",
+    "bookingApprove": "/api/app/bookings/${id}/approve",
+    "bookingDecline": "/api/app/bookings/${id}/decline",
+    "bookingReview": "/api/app/bookings/${id}/review",
+    "artists": "/api/app/artists",
+    "artist": "/api/app/artists/${id}",
+    "calendar": "/api/app/calendar",
+    "calendarHolds": "/api/app/calendar/holds",
+    "calendarHold": "/api/app/calendar/holds/${id}",
+    "calendarBlocked": "/api/app/calendar/blocked",
+    "calendarBlockedDay": "/api/app/calendar/blocked/${id}",
+    "attendance": "/api/app/attendance",
+    "attendanceShow": "/api/app/attendance/${showId}",
+    "auditLog": "/api/app/audit-log",
+    "discord": "/api/app/discord",
+    "settings": "/api/app/settings"
+  },
+  "serverRoutes": [
+    {
+      "method": "GET",
+      "path": "/api/public/shows",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/shows/{id}",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/archive",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/archive/stats",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/public/submissions",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/auth/dev-login",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/auth/dev-login",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/auth/discord/login",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/auth/discord/callback",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/session",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/shows",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/shows/{id}",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/shows",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/shows/{id}",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/shows/{id}/cancel",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/shows/{id}/archive",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/shows/{id}/announce",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/shows/{id}/flyer",
+      "roles": ""
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/app/shows/{id}/flyer",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/bookings",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/bookings/{id}",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/bookings/{id}/review",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/bookings/{id}/review",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/bookings/{id}/approve",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/bookings/{id}/decline",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/artists",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/artists",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/artists/{id}",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/artists/{id}",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/calendar",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/calendar/holds",
+      "roles": ""
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/app/calendar/holds/{id}",
+      "roles": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/app/calendar/blocked",
+      "roles": ""
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/app/calendar/blocked/{id}",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/attendance",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/attendance/{showId}",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/attendance/{showId}",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/settings",
+      "roles": ""
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/app/settings",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/app/audit-log",
+      "roles": ""
+    },
+    {
+      "method": "GET",
+      "path": "/flyers/",
+      "roles": ""
+    }
+  ],
+  "actionLines": [
+    {
+      "file": "web/packages/pyxis-app/src/pages/ArtistsPage/Page.tsx",
+      "line": 48,
+      "text": "<AppShell page=\"artists\" title=\"Artists\" eyebrow=\"Home / Artists\" action={<Button size=\"sm\" variant=\"outline\" onClick={handleNew}>New artist</Button>}>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ArtistsPage/Page.tsx",
+      "line": 61,
+      "text": "<div className=\"app-detail-actions\"><Button variant=\"outline\" onClick={handleNew}>Clear</Button><Button onClick={handleSave} disabled={!draft.name.trim()} isLoading={createState.isLoading || updateState.isLoading}>{selected ? 'Save artist' "
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx",
+      "line": 29,
+      "text": "<AppShell page=\"booking-review\" title={booking?.artistName ?? 'Booking review'} eyebrow=\"Bookings / Review\" action={<Button variant=\"outline\" size=\"sm\" iconLeft=\"external\" disabled={!booking}>Open link</Button>}>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx",
+      "line": 30,
+      "text": "{id === undefined ? <ErrorState label=\"Invalid booking id in the route.\" /> : isLoading ? <LoadingState label=\"Loading booking submission from the backend\u2026\" /> : isError || !bookings ? <ErrorState /> : !booking ? <EmptyState label=\"No booki"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/CalendarPage/Page.tsx",
+      "line": 29,
+      "text": "<AppShell page=\"calendar\" title=\"Calendar\" eyebrow=\"Home / Calendar\" subtitle=\"Plan the room \u00b7 holds, confirms, and off-nights\" action={<div className=\"app-topbar-actions\"><Button variant=\"outline\" size=\"sm\" iconLeft=\"plus\" onClick={handleC"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.tsx",
+      "line": 26,
+      "text": "<Button type=\"button\" className=\"app-auth-mobile-cta\" variant=\"discord\" size=\"lg\" iconLeft=\"discord\" fullWidth onClick={handleDiscordLogin}>Continue with Discord</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.tsx",
+      "line": 34,
+      "text": "<Button type=\"button\" variant=\"discord\" size=\"lg\" iconLeft=\"discord\" fullWidth onClick={handleDiscordLogin}>Continue with Discord</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.tsx",
+      "line": 36,
+      "text": "<Field label=\"Email\"><Input placeholder=\"you@venue.xyz\" icon=\"mail\" disabled /></Field>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.tsx",
+      "line": 37,
+      "text": "<Field label=\"Magic link\" hint=\"Discord login is active for this staff portal.\"><Input placeholder=\"Magic links are disabled\" disabled /></Field>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/LoginPage/Page.tsx",
+      "line": 38,
+      "text": "<Button type=\"button\" variant=\"outline\" size=\"lg\" fullWidth disabled>Email me a link</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx",
+      "line": 110,
+      "text": "<AppShell page=\"show-detail\" title={show?.artist ?? 'Show detail'} eyebrow=\"Shows / Detail\" action={<Button size=\"sm\" iconLeft=\"edit\" disabled={!show} onClick={() => setEditorOpen(true)}>Edit</Button>}>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx",
+      "line": 119,
+      "text": "<NewShowModal isOpen={isEditorOpen} mode=\"edit\" initialShow={show} isSaving={updateState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleUpdateShow} />"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx",
+      "line": 127,
+      "text": "<Button variant=\"outline\" iconLeft=\"archive\" onClick={handleArchiveShow} disabled={archiveState.isLoading}>Archive</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx",
+      "line": 128,
+      "text": "<Button variant=\"outline\" iconLeft=\"external\" onClick={handleAnnounceShow} disabled={announceState.isLoading}>Announce</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx",
+      "line": 129,
+      "text": "<Button variant=\"danger\" iconLeft=\"trash\" onClick={handleCancelShow} disabled={cancelState.isLoading}>Cancel show</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx",
+      "line": 43,
+      "text": "action={<div className=\"app-topbar-actions\"><Button variant=\"outline\" size=\"sm\" iconLeft=\"filter\" aria-label=\"Filter shows\" /><Button variant=\"outline\" size=\"sm\" iconLeft=\"search\" aria-label=\"Search shows\" /><Button size=\"sm\" iconLeft=\"plus"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx",
+      "line": 46,
+      "text": "<NewShowModal isOpen={isEditorOpen} mode=\"create\" isSaving={createState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/ArtistRosterRow/ArtistRosterRow.tsx",
+      "line": 12,
+      "text": "export function ArtistRosterRow({ artist, selected, onSelect }: ArtistRosterRowProps) { return <tr className={`app-table-row app-artist-roster-row ${selected ? 'is-selected' : ''}`} {...appPart('artist-roster-row')} onClick={onSelect} tabIn"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx",
+      "line": 23,
+      "text": "onHold: (booking) => console.log('hold', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx",
+      "line": 24,
+      "text": "onDecline: (booking) => console.log('decline', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx",
+      "line": 25,
+      "text": "onApprove: (booking) => console.log('approve', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.tsx",
+      "line": 40,
+      "text": "{booking.status === SubmissionStatus.PENDING && <div className=\"app-booking-card-actions\"><Button variant=\"ghost\" size=\"sm\" onClick={() => onHold?.(booking)}>Hold</Button><Button variant=\"danger\" size=\"sm\" iconLeft=\"x\" onClick={() => onDecl"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx",
+      "line": 9,
+      "text": "disabled?: boolean;"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx",
+      "line": 12,
+      "text": "export function SettingsToggleRow({ label, description, enabled, onToggle, disabled }: SettingsToggleRowProps) {"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.tsx",
+      "line": 14,
+      "text": "<button className=\"app-settings-row\" type=\"button\" onClick={onToggle} disabled={disabled || !onToggle} {...appPart('settings-toggle-row')}>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingQueue/BookingQueue.stories.tsx",
+      "line": 26,
+      "text": "onHold: (booking) => console.log('hold', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingQueue/BookingQueue.stories.tsx",
+      "line": 27,
+      "text": "onDecline: (booking) => console.log('decline', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingQueue/BookingQueue.stories.tsx",
+      "line": 28,
+      "text": "onApprove: (booking) => console.log('approve', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewNotePanel/BookingReviewNotePanel.tsx",
+      "line": 32,
+      "text": "<Button size=\"sm\" variant=\"outline\" onClick={() => onSaveReview?.(note)} isLoading={isSaving}>Save review note</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewRequestPanel/BookingReviewRequestPanel.tsx",
+      "line": 56,
+      "text": "<Button size=\"sm\" variant=\"outline\" onClick={() => onSaveDetails?.(draft)} isLoading={isSaving}>Save booking details</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.stories.tsx",
+      "line": 24,
+      "text": "onHold: (booking) => console.log('hold', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.stories.tsx",
+      "line": 25,
+      "text": "onDecline: (booking) => console.log('decline', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.stories.tsx",
+      "line": 26,
+      "text": "onApprove: (booking) => console.log('approve', booking.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.stories.tsx",
+      "line": 23,
+      "text": "onOpenShow: (show) => console.log('open show', show.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.stories.tsx",
+      "line": 24,
+      "text": "onAddToday: () => console.log('add to today'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.tsx",
+      "line": 37,
+      "text": "<Button size=\"sm\" fullWidth onClick={() => onOpenShow?.(todayShow)}>Open show</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.tsx",
+      "line": 39,
+      "text": "<Button variant=\"outline\" iconLeft=\"plus\" fullWidth onClick={onAddToday}>Add to today</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardHero/DashboardHero.stories.tsx",
+      "line": 30,
+      "text": "onViewDiscord: (show) => console.log('view discord', show.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardHero/DashboardHero.stories.tsx",
+      "line": 31,
+      "text": "onEditShow: (show) => console.log('edit show', show.id),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardHero/DashboardHero.tsx",
+      "line": 21,
+      "text": "<div className=\"app-dashboard-hero-actions\" data-element=\"hero-actions\"><Button data-element=\"hero-discord-action\" className=\"app-dashboard-hero-discord\" variant=\"outline\" iconLeft=\"external\" onClick={() => onViewDiscord?.(show)}>View on Di"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsContent/DashboardQuickActionsContent.tsx",
+      "line": 12,
+      "text": "return <div className=\"app-quick-actions\"><Button fullWidth iconLeft=\"plus\" onClick={onAddShow}>Add a show</Button><Button fullWidth variant=\"outline\" iconLeft=\"mail\" onClick={onReviewBookings}>Review bookings \u00b7 {pendingCount}</Button><Butt"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.stories.tsx",
+      "line": 24,
+      "text": "onAddShow: () => console.log('add show'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.stories.tsx",
+      "line": 25,
+      "text": "onReviewBookings: () => console.log('review bookings'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.stories.tsx",
+      "line": 26,
+      "text": "onOpenAuditLog: () => console.log('open audit log'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.stories.tsx",
+      "line": 23,
+      "text": "args: { onViewAll: () => console.log('view all shows') },"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx",
+      "line": 16,
+      "text": "return <Panel title=\"Upcoming shows\" kicker=\"Pinned to #upcoming-shows\" action={<Button variant=\"outline\" size=\"sm\" onClick={onViewAll}>View all \u203a</Button>} section=\"dashboard-upcoming\"><div className=\"app-desktop-only\"><ShowsTable shows={v"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx",
+      "line": 33,
+      "text": "{flyerUrl && <div className=\"app-flyer-field-preview\"><span>{flyerUrl}</span><Button variant=\"ghost\" size=\"sm\" iconLeft=\"trash\" onClick={onDelete} isLoading={isDeleting}>Delete flyer</Button></div>}"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx",
+      "line": 36,
+      "text": "<Button variant=\"outline\" size=\"sm\" onClick={submit} disabled={!selectedFile} isLoading={isUploading}>Upload flyer</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx",
+      "line": 18,
+      "text": "onCancel: () => console.log('cancel new show'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx",
+      "line": 19,
+      "text": "onSubmit: () => console.log('submit new show'),"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx",
+      "line": 140,
+      "text": "<Button variant=\"ghost\" onClick={onCancel} disabled={isSaving}>Cancel</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx",
+      "line": 141,
+      "text": "<Button variant=\"outline\" onClick={() => submit(ShowStatus.DRAFT)} isLoading={isSaving}>Save draft</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx",
+      "line": 142,
+      "text": "<Button onClick={() => submit(draft.status)} isLoading={isSaving}>Save show</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx",
+      "line": 209,
+      "text": "<Button type=\"button\" variant=\"outline\" size=\"sm\" iconLeft=\"plus\" onClick={addLineup}>Add row</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx",
+      "line": 217,
+      "text": "<Button type=\"button\" variant=\"ghost\" size=\"sm\" iconLeft=\"trash\" onClick={() => removeLineup(index)} aria-label=\"Remove lineup row\">Remove</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Roster/ArtistRoster/ArtistRoster.tsx",
+      "line": 20,
+      "text": "{artists.map((artist)=><button className=\"app-artist-roster-button\" key={artist.id} onClick={() => onSelectArtist?.(artist)}><ArtistCard artist={artist}/></button>)}"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx",
+      "line": 36,
+      "text": "{onUpdateEntry && <Button size=\"sm\" variant=\"outline\" isLoading={isUpdating} onClick={() => onUpdateEntry(entry, draft)}>Save attendance</Button>}"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.tsx",
+      "line": 30,
+      "text": "<div className=\"app-detail-actions\"><Button onClick={() => onSaveCoreSettings?.(draft)} isLoading={isUpdating} disabled={!draft.spaceName.trim()}>Save core settings</Button></div>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.stories.tsx",
+      "line": 19,
+      "text": "args: { onOpenPost: () => console.log('open discord post') },"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.tsx",
+      "line": 16,
+      "text": "<Button variant=\"outline\" iconLeft=\"external\" onClick={onOpenPost}>Open post</Button>"
+    },
+    {
+      "file": "web/packages/pyxis-app/src/components/shell/AppSidebarUserFooter/AppSidebarUserFooter.tsx",
+      "line": 27,
+      "text": "<button type=\"button\" className=\"app-sidebar-user__logout\" onClick={handleLogout} disabled={isLoading} aria-label=\"Log out\">"
+    }
+  ]
+}
