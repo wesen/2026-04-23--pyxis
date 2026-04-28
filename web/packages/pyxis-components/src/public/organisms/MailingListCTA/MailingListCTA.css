@@ -5,3 +5,10 @@
 :where([data-pyxis-component='mailing-list-cta'][data-pyxis-part='form']) { display: flex; gap: var(--space-2); }
 :where([data-pyxis-component='mailing-list-cta'][data-pyxis-part='input']) { border: 1px solid var(--pyxis-mailing-border); flex: 1; font-family: inherit; font-size: 14px; padding: 9px 12px; }
 :where([data-pyxis-component='mailing-list-cta'][data-pyxis-part='button']) { background: var(--pyxis-mailing-button-bg); border: none; border-radius: var(--radius-xs); color: var(--color-text-inverse); font-family: inherit; padding: 9px 14px; }
+
+@media (max-width: 640px) {
+  :where([data-pyxis-component='mailing-list-cta'][data-pyxis-part='title']) {
+    font-size: 22px;
+    line-height: normal;
+  }
+}

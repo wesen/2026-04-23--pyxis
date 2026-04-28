@@ -9,7 +9,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Task list for public-site CSS and visual parity tuning across Vite, Storybook, prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T20:35:00-04:00
+LastUpdated: 2026-04-27T20:55:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Tasks
@@ -28,17 +28,17 @@ LastUpdated: 2026-04-27T20:35:00-04:00
 
 ## Phase 1: Make comparison targets explicit
 
-- [ ] **T03 — Start/verify all visual servers**
+- [x] **T03 — Start/verify all visual servers**
   - `make dev` for backend + public Vite + staff Vite.
   - `pyxis-user-site` Storybook on `6007`.
   - prototype static server on `7070`.
 
-- [ ] **T04 — Add ticket-local Vite-vs-Storybook comparison wrapper**
+- [x] **T04 — Add ticket-local Vite-vs-Storybook comparison wrapper**
   - Compare `http://localhost:3007/` to Storybook iframe for Shows desktop.
   - Include at least `page`, `content`, and `mailing-list` selectors.
   - Store script in `scripts/01-compare-vite-storybook.sh` or equivalent.
 
-- [ ] **T05 — Add ticket-local Vite-vs-prototype comparison wrapper**
+- [x] **T05 — Add ticket-local Vite-vs-prototype comparison wrapper**
   - Compare `http://localhost:7070/standalone/public/shows.html` to `http://localhost:3007/`.
   - Include at least the mailing-list/stay-in-loop section.
 
@@ -48,17 +48,17 @@ LastUpdated: 2026-04-27T20:35:00-04:00
 
 ## Phase 2: Diagnose Shows desktop mismatch
 
-- [ ] **T07 — Compare Shows mailing-list / Stay in the loop**
+- [x] **T07 — Compare Shows mailing-list / Stay in the loop**
   - Compare prototype vs Storybook.
   - Compare Storybook vs Vite.
   - Compare prototype vs Vite.
   - Record changed percentages and artifact paths in diary.
 
-- [ ] **T08 — Inspect typography and spacing for mailing-list elements**
+- [x] **T08 — Inspect typography and spacing for mailing-list elements**
   - Inspect title, copy, input, and button computed styles.
   - Identify whether drift is from global CSS, component CSS, Storybook wrapper, data/fixture, or app route shell.
 
-- [ ] **T09 — Tune mailing-list CSS/data intentionally**
+- [x] **T09 — Tune mailing-list CSS/data intentionally**
   - Make one change at a time.
   - Re-run the same three comparisons.
 

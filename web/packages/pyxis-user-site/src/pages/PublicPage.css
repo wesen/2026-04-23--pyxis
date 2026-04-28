@@ -41,10 +41,10 @@
 
 @media (max-width: 640px) {
   .pyxis-public-page__inner {
-    padding-inline: 24px;
+    padding-inline: 18px;
   }
 
   .pyxis-public-page__status {
-    padding-inline: 24px;
+    padding-inline: 18px;
   }
 }
