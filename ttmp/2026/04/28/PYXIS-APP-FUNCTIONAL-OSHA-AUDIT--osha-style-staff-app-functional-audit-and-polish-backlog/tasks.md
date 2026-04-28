@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T14:20:00-04:00
+LastUpdated: 2026-04-28T14:30:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -252,7 +252,7 @@ LastUpdated: 2026-04-28T14:20:00-04:00
   - Resolve mismatch: endpoint constant exists but route appears missing.
   - Include guild ID, channel mappings, bot visibility, role mapping status.
 
-- [ ] **T52 — Replace DiscordPage mock data with backend data**
+- [x] **T52 — Replace DiscordPage mock data with backend data**
   - Remove production dependency on `mockData.ts`.
 
 - [ ] **T53 — Add Discord channel mapping edit UX**

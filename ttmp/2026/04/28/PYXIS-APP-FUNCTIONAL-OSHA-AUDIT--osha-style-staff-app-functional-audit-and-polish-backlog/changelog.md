@@ -32,3 +32,4 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Added post-change smoke evidence: `sources/04-staff-app-functional-smoke-after-phase1.json` and `sources/05-staff-app-dynamic-route-smoke-after-phase1.json`.
 - Replaced Calendar hardcoded Add Hold / Block Date actions with modal forms and wired agenda Open show/Add to today callbacks.
 - Added smoke evidence: `sources/06-staff-app-functional-smoke-after-calendar.json`.
+- Replaced DiscordPage mock channel data with backend settings-derived bot status and channel mappings.

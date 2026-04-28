@@ -366,3 +366,40 @@ sources/06-staff-app-functional-smoke-after-calendar.json
 ```
 
 Smoke note: the generic smoke script clicked `Add hold`, which opened the modal. Its subsequent `Block date` click timed out because the modal overlay correctly blocked background controls. That is expected evidence that the hardcoded immediate mutation was replaced by modal interaction.
+
+## Step 9: Replace Discord page mock data with backend settings
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/DiscordPage/Page.tsx
+web/packages/pyxis-app/src/pages/pages.css
+```
+
+Before, `DiscordPage` imported `discordMappings` from `api/mockData.ts`, so a live staff route showed fixture channel IDs.
+
+After, `DiscordPage` uses:
+
+```text
+useGetSettingsQuery()
+```
+
+and derives `DiscordChannelMapping[]` from backend settings fields:
+
+```text
+discordGuildId
+discordChUpcoming
+discordChAnnouncements
+discordChStaff
+discordChBookings
+discordPosting
+setupComplete
+```
+
+The page now displays a backend-backed bot status panel plus backend-derived channel mapping rows. Editing/test-post actions remain open tasks because they need product decisions and/or a dedicated Discord status endpoint.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

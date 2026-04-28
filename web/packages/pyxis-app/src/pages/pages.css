@@ -49,7 +49,7 @@
 .app-detail-hero h1 { margin: 10px 0 6px; font-family: var(--font-display, Georgia, serif); font-size: 42px; font-weight: 500; letter-spacing: -.025em; line-height: 1.02; }
 .app-detail-hero p, .app-muted-copy { color: var(--app-muted); line-height: 1.55; }
 .app-poster-placeholder { min-height: 180px; border: 1px solid var(--app-rule); border-radius: var(--app-radius-md); display: grid; place-items: center; color: var(--app-muted); background: repeating-linear-gradient(135deg, var(--app-surface-muted) 0 10px, var(--app-surface-strong) 10px 20px); font-family: var(--font-mono, monospace); font-size: 11px; }
-.app-detail-grid, .app-calendar-layout, .app-bookings-layout { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 18px; }
+.app-detail-grid, .app-calendar-layout, .app-bookings-layout, .app-discord-layout { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 18px; }
 .app-detail-list { display: grid; gap: 0; }
 .app-detail-list span { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-top: 1px solid var(--app-rule); color: var(--app-muted); }
 .app-detail-list span:first-child { border-top: 0; }
