@@ -327,3 +327,42 @@ Key smoke improvements:
 - Bookings Auto-review is disabled instead of inert.
 - Booking Review save actions show success messages.
 - Show Detail Duplicate produces a new show and navigates to it.
+
+## Step 8: Calendar hardcoded action replacement
+
+I replaced the Calendar page's hardcoded write actions with operator-chosen modal forms.
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/CalendarPage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarBoard/CalendarBoard.tsx
+web/packages/pyxis-app/src/pages/pages.css
+```
+
+Before:
+
+- `Add hold` immediately wrote `2026-06-01` with label `Hold — TBD`.
+- `Block date` immediately wrote `2026-06-02` with reason `Closed`.
+
+After:
+
+- `Add hold` opens a modal with date and label fields.
+- `Block date` opens a modal with date and reason fields.
+- `Add to today` now opens the Add Hold modal instead of being undefined.
+- Calendar agenda `Open show` navigates to `/shows/:id` through `CalendarBoard` callbacks.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+Re-ran top-level smoke after restarting staff Vite:
+
+```text
+sources/06-staff-app-functional-smoke-after-calendar.json
+```
+
+Smoke note: the generic smoke script clicked `Add hold`, which opened the modal. Its subsequent `Block date` click timed out because the modal overlay correctly blocked background controls. That is expected evidence that the hardcoded immediate mutation was replaced by modal interaction.

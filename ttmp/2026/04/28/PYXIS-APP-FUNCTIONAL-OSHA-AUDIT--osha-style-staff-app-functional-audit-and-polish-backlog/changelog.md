@@ -30,3 +30,5 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Uploaded the report/task/diary bundle to reMarkable under `/ai/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT`.
 - Implemented the first staff-app safety/wiring pass: explicit topbar actions, shared ConfirmDialog, Dashboard callbacks, Shows search/filter/edit navigation, Show Detail duplicate/destructive confirmations, Bookings/Booking Review confirmations and feedback.
 - Added post-change smoke evidence: `sources/04-staff-app-functional-smoke-after-phase1.json` and `sources/05-staff-app-dynamic-route-smoke-after-phase1.json`.
+- Replaced Calendar hardcoded Add Hold / Block Date actions with modal forms and wired agenda Open show/Add to today callbacks.
+- Added smoke evidence: `sources/06-staff-app-functional-smoke-after-calendar.json`.

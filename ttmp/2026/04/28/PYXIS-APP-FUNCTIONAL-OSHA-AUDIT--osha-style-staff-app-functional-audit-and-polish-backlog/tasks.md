@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T14:05:00-04:00
+LastUpdated: 2026-04-28T14:20:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -140,12 +140,12 @@ LastUpdated: 2026-04-28T14:05:00-04:00
 
 ## Phase 5: Calendar
 
-- [ ] **T23 — Replace Add Hold hardcoded mutation with modal**
+- [x] **T23 — Replace Add Hold hardcoded mutation with modal**
   - Current hardcoded date: `2026-06-01`.
   - Modal fields: date, label, notes optional.
   - Acceptance: operator chooses date/label.
 
-- [ ] **T24 — Replace Block Date hardcoded mutation with modal**
+- [x] **T24 — Replace Block Date hardcoded mutation with modal**
   - Current hardcoded date: `2026-06-02`.
   - Modal fields: date, reason.
   - Acceptance: operator chooses date/reason.
@@ -153,10 +153,10 @@ LastUpdated: 2026-04-28T14:05:00-04:00
 - [ ] **T25 — Verify/wire month navigation**
   - Previous, Today, Next should update visible month.
 
-- [ ] **T26 — Wire Calendar agenda Open show**
+- [x] **T26 — Wire Calendar agenda Open show**
   - Expected: navigate to `/shows/:id`.
 
-- [ ] **T27 — Define or remove Add to today**
+- [x] **T27 — Define or remove Add to today**
   - Product decision needed.
 
 - [ ] **T28 — Add delete hold/blocked-date UX**
