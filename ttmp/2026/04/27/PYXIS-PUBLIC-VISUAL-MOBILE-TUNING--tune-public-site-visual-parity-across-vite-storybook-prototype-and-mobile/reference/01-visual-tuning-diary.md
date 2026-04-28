@@ -8,7 +8,7 @@ Topics:
 DocType: reference
 Intent: diary
 Summary: Chronological diary for public-site visual tuning across Vite, Storybook, standalone prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T20:55:00-04:00
+LastUpdated: 2026-04-27T21:05:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Diary
@@ -221,3 +221,83 @@ Remaining broad `mailing-list` container diffs are still higher in mobile becaus
 ```
 
 Note: the exact `/tmp` run folders are ephemeral; rerun the script to regenerate them.
+
+## Step 3: Fix the mobile Shows Storybook baseline before comparing Vite
+
+The user pointed out that mobile Shows was not just off in Vite; the Storybook mobile story itself was completely off. I switched back to the Storybook-first mobile workflow.
+
+### Initial Storybook-first mobile evidence
+
+Command pattern:
+
+```bash
+PAGE=shows scripts/01-compare-public-render-targets.sh prototype-storybook shows-list /tmp/pyxis-proto-storybook-shows-shows-list-mobile-off mobile
+```
+
+Initial results:
+
+```text
+prototype-storybook mobile page        63.31%
+prototype-storybook mobile content     67.33%
+prototype-storybook mobile header      24.77%
+prototype-storybook mobile shows-list  77.46%
+```
+
+The screenshots made the problem obvious: the prototype mobile page was a single-column poster list, but the Storybook mobile story still rendered the Shows grid as a three-column desktop grid. It also rendered nine shows, while the standalone mobile prototype renders `P_SHOWS.slice(0, 6)`.
+
+### Changes
+
+1. Added mobile responsive grid CSS in:
+
+```text
+web/packages/pyxis-components/src/public/organisms/ShowGrid/ShowGrid.css
+```
+
+`ShowGrid` now switches to one column at `max-width: 640px`.
+
+2. Added mobile-specific Storybook handlers in:
+
+```text
+web/packages/pyxis-user-site/src/pages/storybook.tsx
+web/packages/pyxis-user-site/src/pages/ShowsPage/Page.stories.tsx
+```
+
+The Shows mobile story now uses `prototypeShows.slice(0, 6)`, matching the standalone mobile prototype.
+
+3. Added mobile `PublicPageHeader` sizing in:
+
+```text
+web/packages/pyxis-components/src/public/molecules/PublicPageHeader/PublicPageHeader.css
+```
+
+4. Aligned Shows mobile top spacing and mailing-list gap in:
+
+```text
+web/packages/pyxis-user-site/src/pages/ShowsPage/Page.css
+```
+
+### Results after Storybook mobile baseline fix
+
+Focused prototype-vs-Storybook mobile comparisons:
+
+```text
+prototype-storybook mobile shows-list  16.71%  (down from 77.46%)
+prototype-storybook mobile content     14.83%  (down from 67.33%)
+prototype-storybook mobile page        17.21%  (down from 63.31%)
+prototype-storybook mobile mailing-list 16.93%
+prototype-storybook mobile mailing-title/form/input/button remain aligned from Step 2
+```
+
+The remaining broad `shows-list` delta is no longer a structural failure. The Storybook screenshot is now the correct single-column six-show mobile composition. The remaining delta is mostly poster/text rendering and global text metadata differences. We should continue to compare deeper tiles or poster subparts rather than treating the whole mobile Shows list as a precise target.
+
+Representative artifact paths:
+
+```text
+/tmp/pyxis-proto-storybook-shows-shows-list-mobile-after-spacing/url1_screenshot.png
+/tmp/pyxis-proto-storybook-shows-shows-list-mobile-after-spacing/url2_screenshot.png
+/tmp/pyxis-proto-storybook-shows-shows-list-mobile-after-spacing/diff_only.png
+```
+
+### Vite note
+
+After fixing the Storybook mobile baseline, `vite-storybook mobile shows-list` is still high because Vite is using live backend data while Storybook is using prototype fixture data. That is a different question from whether the mobile story matches the original. For visual tuning, use Storybook-first to tune the component/page fixture, then use Vite-vs-Storybook only after the Vite data is intentionally aligned or when comparing deep subparts that are data-insensitive.

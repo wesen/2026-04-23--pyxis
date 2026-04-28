@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { publicDesktopArgs, publicMobileArgs, publicPageParameters, renderPublicPageRoute } from '../storybook';
+import { publicDesktopArgs, publicMobileArgs, publicMobilePageParameters, publicPageParameters, renderPublicPageRoute } from '../storybook';
 
 const meta: Meta = {
   title: 'Public Site/Pages/Shows',
@@ -16,5 +16,5 @@ export const Desktop: Story = {
 
 export const Mobile: Story = {
   render: () => renderPublicPageRoute({ ...publicMobileArgs, route: '/', storyName: 'shows-mobile' }),
-  parameters: { viewport: { defaultViewport: 'pyxisMobile' } },
+  parameters: { ...publicMobilePageParameters, viewport: { defaultViewport: 'pyxisMobile' } },
 };

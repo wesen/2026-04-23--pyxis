@@ -11,3 +11,10 @@
   gap: 24px;
   grid-template-columns: 1fr;
 }
+
+@media (max-width: 640px) {
+  :where([data-pyxis-component='show-grid'][data-pyxis-part='root']) {
+    gap: 28px;
+    grid-template-columns: 1fr;
+  }
+}

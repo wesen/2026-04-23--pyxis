@@ -32,3 +32,22 @@
   height: 1px;
   margin-top: 28px;
 }
+
+@media (max-width: 640px) {
+  :where([data-pyxis-component='public-page-header'][data-pyxis-part='root']) {
+    margin-bottom: 20px;
+  }
+
+  :where([data-pyxis-component='public-page-header'][data-pyxis-part='kicker']) {
+    font-size: 10.5px;
+    margin-bottom: 8px;
+  }
+
+  :where([data-pyxis-component='public-page-header'][data-pyxis-part='title']) {
+    font-size: 30px;
+  }
+
+  :where([data-pyxis-component='public-page-header'][data-pyxis-part='divider']) {
+    margin-top: 22px;
+  }
+}

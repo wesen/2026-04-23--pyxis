@@ -9,7 +9,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Task list for public-site CSS and visual parity tuning across Vite, Storybook, prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T20:55:00-04:00
+LastUpdated: 2026-04-27T21:05:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Tasks
@@ -74,7 +74,7 @@ LastUpdated: 2026-04-27T20:55:00-04:00
 - [ ] **T14 — Establish mobile viewport and routes**
   - Use the same mobile viewport as Storybook `pyxisMobile` or define a canonical one if needed.
 
-- [ ] **T15 — Compare mobile Shows page**
+- [x] **T15 — Compare mobile Shows page**
 - [ ] **T16 — Compare mobile Show Detail page**
 - [ ] **T17 — Compare mobile Archive page**
 - [ ] **T18 — Compare mobile Book page**

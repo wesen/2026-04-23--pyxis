@@ -80,20 +80,28 @@ export const prototypeArchiveStats = create(ArchiveStatsSchema, {
   uniqueArtists: 0,
 });
 
-export const prototypePublicHandlers = [
-  http.get('*/api/public/shows', () => HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows: prototypeShows })))),
+const publicHandlersForShows = (shows = prototypeShows) => [
+  http.get('*/api/public/shows', () => HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows })))),
   http.get('*/api/public/archive', () => HttpResponse.json(toJson(ArchivedShowListSchema, create(ArchivedShowListSchema, { shows: prototypeArchiveShows })))),
   http.get('*/api/public/archive/stats', () => HttpResponse.json(toJson(ArchiveStatsSchema, prototypeArchiveStats))),
   http.get('*/api/public/shows/:id', ({ params }) => {
     const id = Number(params.id);
-    const show = id === prototypeShowDetail.id ? prototypeShowDetail : (prototypeShows.find((candidate) => candidate.id === id) ?? prototypeShows[0]);
+    const show = id === prototypeShowDetail.id ? prototypeShowDetail : (shows.find((candidate) => candidate.id === id) ?? shows[0] ?? prototypeShows[0]);
     return HttpResponse.json(toJson(ShowSchema, show));
   }),
 ];
 
+export const prototypePublicHandlers = publicHandlersForShows(prototypeShows);
+export const prototypeMobilePublicHandlers = publicHandlersForShows(prototypeShows.slice(0, 6));
+
 export const publicPageParameters = {
   layout: 'fullscreen',
   msw: { handlers: [...prototypePublicHandlers, ...handlers] },
+};
+
+export const publicMobilePageParameters = {
+  layout: 'fullscreen',
+  msw: { handlers: [...prototypeMobilePublicHandlers, ...handlers] },
 };
 
 export type PublicPageRouteProps = {

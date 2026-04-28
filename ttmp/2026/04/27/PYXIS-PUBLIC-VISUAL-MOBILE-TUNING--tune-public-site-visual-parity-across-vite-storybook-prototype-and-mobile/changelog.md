@@ -19,3 +19,7 @@ Added focused render-target comparison script, diagnosed Vite-vs-Storybook token
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/src/main.tsx — component token CSS import for Vite parity with Storybook
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-user-site/src/pages/PublicPage.css — mobile page padding alignment
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-components/src/public/organisms/MailingListCTA/MailingListCTA.css — mobile title size/line-height alignment
+
+## 2026-04-27
+
+Fixed the Shows mobile Storybook baseline: mobile ShowGrid now renders one column, the Shows mobile story uses the six-show prototype fixture, PublicPageHeader has mobile sizing, and Shows mobile spacing is closer to the standalone mobile prototype.
