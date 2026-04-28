@@ -1,0 +1,6 @@
+plugins:
+  - id: pyxis
+    path: python3
+    args:
+      - ./devctl-plugin.py
+    priority: 10
