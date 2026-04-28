@@ -904,3 +904,87 @@ go test ./... -count=1
 ```
 
 Operational note: these smokes intentionally create local dev records and local flyer files. The `data/flyers/...` files are evidence/runtime artifacts and should not be committed.
+
+## Step 16: Booking date selection and calendar navigation/actions
+
+Implemented booking date selection plus a more interactive calendar workflow. I kept page coordination state local with `useState` because this state is route-local UI state (selected month/date/dialog). RTK Query remains the shared/server state layer; no cross-route Redux slice was necessary.
+
+### Component breakdown
+
+Added/refactored components instead of keeping all behavior inside the page:
+
+```text
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewDatePanel/BookingReviewDatePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarDayInspector/CalendarDayInspector.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarItemDialog/CalendarItemDialog.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarMonthPanel/CalendarMonthPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarBoard/CalendarBoard.tsx
+```
+
+Added stories:
+
+```text
+BookingReviewDatePanel.stories.tsx
+CalendarDayInspector.stories.tsx
+CalendarItemDialog.stories.tsx
+CalendarMonthPanel.stories.tsx
+CalendarBoard.stories.tsx
+```
+
+Story states include available/conflict/blocked/saving booking dates, selected/empty calendar days, hold/block dialogs, dense month calendars, mobile/narrow calendars, and current-month today selection.
+
+### Booking date selection
+
+`BookingReviewDatePanel` now:
+
+- displays the current preferred date in an editable date input;
+- checks the selected date against calendar events;
+- distinguishes open nights, show conflicts, holds, and blocked dates;
+- exposes `onSaveDate(date)`.
+
+`BookingReviewPage` now fetches calendar events and wires date saving through the existing booking details update mutation.
+
+Visible Chromium evidence:
+
+```text
+bookingReviewInitial: Date check ... 2026-10-10 is an open night.
+bookingDateSaved: Booking details saved.
+```
+
+### Calendar navigation/actions
+
+`CalendarMonthPanel` now:
+
+- uses real month lengths instead of a hard-coded 31-day May;
+- supports previous/today/next callbacks;
+- supports selecting a day;
+- supports clicking events.
+
+`CalendarPage` now:
+
+- tracks visible month and selected day;
+- previous/next/today change the visible month;
+- selected days show a `CalendarDayInspector`;
+- selected open days can create shows, holds, or blocked dates;
+- show events navigate to `/shows/:id` for editing;
+- hold/blocked events open a confirmation dialog and delete through existing backend endpoints.
+
+Visible Chromium evidence:
+
+```text
+calendarInitialHeading: April 2026
+calendarNextHeading: May 2026
+calendarPreviousHeading: April 2026
+calendarTodayHeading: April 2026
+selectedDayPanel: Selected · 2026-04-01 ... Create show on this day ...
+newShowModalTitle: Add new show
+```
+
+Validation:
+
+```bash
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/06-calendar-booking-date-visible-smoke.js
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+go test ./... -count=1
+```

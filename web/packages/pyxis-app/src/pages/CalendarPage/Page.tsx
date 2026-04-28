@@ -1,42 +1,42 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'pyxis-components';
-import { useCreateCalendarBlockedMutation, useCreateCalendarHoldMutation, useGetCalendarQuery } from '../../api/appApi';
+import { CalendarEventKind, create, ShowSchema, ShowStatus, type CalendarEvent } from 'pyxis-types';
+import { useCreateCalendarBlockedMutation, useCreateCalendarHoldMutation, useCreateShowMutation, useDeleteCalendarBlockedMutation, useDeleteCalendarHoldMutation, useGetCalendarQuery } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
-import { CalendarBoard } from '../../components/organisms';
-import { ActionMessages, EmptyState, ErrorState, LoadingState } from '../shared';
+import { CalendarBoard, CalendarDayInspector, CalendarItemDialog, ConfirmDialog, NewShowModal } from '../../components/organisms';
+import { ActionMessages, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
-type CalendarDialog = 'hold' | 'blocked' | null;
+type CalendarDialog = 'hold' | 'blocked' | 'show' | null;
+type DeleteTarget = CalendarEvent | null;
 
-type CalendarDraft = {
-  date: string;
-  label: string;
-  reason: string;
-};
-
-const defaultDraft: CalendarDraft = {
-  date: new Date().toISOString().slice(0, 10),
-  label: 'Hold — TBD',
-  reason: 'Closed',
-};
+type CalendarDraft = { date: string; label: string; reason: string; };
+const todayISO = () => new Date().toISOString().slice(0, 10);
+const defaultDraft = (date = todayISO()): CalendarDraft => ({ date, label: 'Hold — TBD', reason: 'Closed' });
+const monthLabel = (year: number, monthIndex: number) => new Date(year, monthIndex, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
 export function CalendarPage() {
   const navigate = useNavigate();
   const { data: events, isLoading, isError } = useGetCalendarQuery();
   const [createHold, holdState] = useCreateCalendarHoldMutation();
   const [createBlocked, blockedState] = useCreateCalendarBlockedMutation();
+  const [deleteHold, deleteHoldState] = useDeleteCalendarHoldMutation();
+  const [deleteBlocked, deleteBlockedState] = useDeleteCalendarBlockedMutation();
+  const [createShow, createShowState] = useCreateShowMutation();
+  const [visibleMonth, setVisibleMonth] = useState(() => { const now = new Date(); return { year: now.getFullYear(), monthIndex: now.getMonth() }; });
+  const [selectedDate, setSelectedDate] = useState(todayISO());
   const [dialog, setDialog] = useState<CalendarDialog>(null);
-  const [draft, setDraft] = useState<CalendarDraft>(defaultDraft);
+  const [deleteTarget, setDeleteTarget] = useState<DeleteTarget>(null);
+  const [draft, setDraft] = useState<CalendarDraft>(defaultDraft());
   const [actionError, setActionError] = useState<string | undefined>();
   const [actionSuccess, setActionSuccess] = useState<string | undefined>();
 
-  const openDialog = (next: CalendarDialog) => {
-    setDraft(defaultDraft);
-    setActionError(undefined);
-    setActionSuccess(undefined);
-    setDialog(next);
-  };
+  const openDialog = (next: CalendarDialog, date = selectedDate) => { setDraft(defaultDraft(date)); setActionError(undefined); setActionSuccess(undefined); setDialog(next); };
+  const jumpMonth = (delta: number) => setVisibleMonth((current) => { const next = new Date(current.year, current.monthIndex + delta, 1); return { year: next.getFullYear(), monthIndex: next.getMonth() }; });
+  const jumpToday = () => { const now = new Date(); const date = todayISO(); setVisibleMonth({ year: now.getFullYear(), monthIndex: now.getMonth() }); setSelectedDate(date); };
+
+  const selectedEvents = useMemo(() => (events ?? []).filter((event) => event.date === selectedDate), [events, selectedDate]);
 
   const submitCalendarDialog = async () => {
     setActionError(undefined); setActionSuccess(undefined);
@@ -52,30 +52,44 @@ export function CalendarPage() {
         setActionSuccess(`Blocked date created for ${draft.date}.`);
       }
       setDialog(null);
-    } catch {
-      setActionError('Could not save this calendar change. Check your session and backend logs.');
-    }
+    } catch { setActionError('Could not save this calendar change. Check your session and backend logs.'); }
   };
 
+  const handleCreateShow = async (show: Parameters<typeof createShow>[0], flyerFile?: File) => {
+    setActionError(undefined); setActionSuccess(undefined);
+    try {
+      const created = await createShow(show).unwrap();
+      setDialog(null);
+      setActionSuccess(`Show #${created.id} created for ${show.date}.`);
+      if (flyerFile) setActionSuccess(`Show #${created.id} created. Add flyer from the show detail page if upload did not attach.`);
+      navigate(`/shows/${created.id}`);
+    } catch { setActionError('Could not create this show. Check required fields, session, and backend logs.'); }
+  };
+
+  const handleEventClick = (event: CalendarEvent) => {
+    setSelectedDate(event.date);
+    if (event.kind === CalendarEventKind.SHOW) navigate(`/shows/${event.id}`);
+    else setDeleteTarget(event);
+  };
+
+  const confirmDeleteCalendarEvent = async () => {
+    if (!deleteTarget) return;
+    setActionError(undefined); setActionSuccess(undefined);
+    try {
+      if (deleteTarget.kind === CalendarEventKind.HOLD) { await deleteHold(deleteTarget.id).unwrap(); setActionSuccess('Hold removed.'); }
+      else if (deleteTarget.kind === CalendarEventKind.BLOCKED) { await deleteBlocked(deleteTarget.id).unwrap(); setActionSuccess('Blocked date removed.'); }
+      setDeleteTarget(null);
+    } catch { setActionError('Could not remove this calendar item. Check your session and backend logs.'); }
+  };
+
+  const initialCalendarShow = create(ShowSchema, { id: 0, artist: '', date: selectedDate, doorsTime: '8:00 PM', startTime: '9:00 PM', age: '21+', price: '$10', genre: '', status: ShowStatus.CONFIRMED, capacity: 150, lineup: [] });
+
   return (
-    <AppShell page="calendar" title="Calendar" eyebrow="Home / Calendar" subtitle="Plan the room · holds, confirms, and off-nights" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('hold')} disabled={holdState.isLoading}>Add hold</Button><Button size="sm" iconLeft="warning" onClick={() => openDialog('blocked')} disabled={blockedState.isLoading}>Block date</Button></div>}>
-      {dialog && (
-        <section className="app-form-dialog-backdrop" role="dialog" aria-modal="true" aria-labelledby="calendar-dialog-title">
-          <div className="app-form-dialog">
-            <header>
-              <span className="app-confirm-dialog__eyebrow">Calendar</span>
-              <h2 id="calendar-dialog-title">{dialog === 'hold' ? 'Add hold' : 'Block date'}</h2>
-              <p>{dialog === 'hold' ? 'Reserve a tentative night while details are still moving.' : 'Mark a night as unavailable for shows.'}</p>
-            </header>
-            <div className="app-form-grid">
-              <label><span>Date</span><input type="date" value={draft.date} onChange={(event) => setDraft((current) => ({ ...current, date: event.target.value }))} /></label>
-              {dialog === 'hold' ? <label><span>Label</span><input value={draft.label} onChange={(event) => setDraft((current) => ({ ...current, label: event.target.value }))} /></label> : <label><span>Reason</span><input value={draft.reason} onChange={(event) => setDraft((current) => ({ ...current, reason: event.target.value }))} /></label>}
-            </div>
-            <footer className="app-detail-actions"><Button variant="ghost" onClick={() => setDialog(null)}>Cancel</Button><Button onClick={submitCalendarDialog} isLoading={holdState.isLoading || blockedState.isLoading}>{dialog === 'hold' ? 'Create hold' : 'Block date'}</Button></footer>
-          </div>
-        </section>
-      )}
-      {isLoading ? <LoadingState /> : isError || !events ? <ErrorState /> : events.length === 0 ? <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No holds or blocked dates returned yet." /></> : <><ActionMessages error={actionError} success={actionSuccess} /><CalendarBoard events={events} onOpenShow={(showId) => navigate(`/shows/${showId}`)} onAddToday={() => openDialog('hold')} /></>}
+    <AppShell page="calendar" title="Calendar" eyebrow="Home / Calendar" subtitle="Plan the room · holds, confirms, and off-nights" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('hold')} disabled={holdState.isLoading}>Add hold</Button><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('show')}>New show</Button><Button size="sm" iconLeft="warning" onClick={() => openDialog('blocked')} disabled={blockedState.isLoading}>Block date</Button></div>}>
+      <NewShowModal isOpen={dialog === 'show'} mode="create" initialShow={initialCalendarShow} isSaving={createShowState.isLoading} error={actionError} onCancel={() => setDialog(null)} onSubmit={handleCreateShow} />
+      <ConfirmDialog isOpen={Boolean(deleteTarget)} title={`Remove ${deleteTarget?.kind === CalendarEventKind.HOLD ? 'hold' : 'blocked date'}?`} description={deleteTarget ? `${deleteTarget.label} on ${deleteTarget.date}` : ''} confirmLabel="Remove" variant="danger" isLoading={deleteHoldState.isLoading || deleteBlockedState.isLoading} onCancel={() => setDeleteTarget(null)} onConfirm={confirmDeleteCalendarEvent} />
+      {dialog && dialog !== 'show' && <CalendarItemDialog mode={dialog} draft={draft} isSaving={holdState.isLoading || blockedState.isLoading} onChange={setDraft} onCancel={() => setDialog(null)} onSubmit={submitCalendarDialog} />}
+      {isLoading ? <LoadingState /> : isError || !events ? <ErrorState /> : <><ActionMessages error={actionError} success={actionSuccess} /><CalendarBoard events={events} monthLabel={monthLabel(visibleMonth.year, visibleMonth.monthIndex)} year={visibleMonth.year} monthIndex={visibleMonth.monthIndex} selectedDate={selectedDate} onPreviousMonth={() => jumpMonth(-1)} onToday={jumpToday} onNextMonth={() => jumpMonth(1)} onSelectDate={setSelectedDate} onEventClick={handleEventClick} onOpenShow={(showId) => navigate(`/shows/${showId}`)} onAddToday={() => openDialog('hold')} /><CalendarDayInspector selectedDate={selectedDate} events={selectedEvents} onCreateShow={(date) => openDialog('show', date)} onAddHold={(date) => openDialog('hold', date)} onBlockDay={(date) => openDialog('blocked', date)} onOpenShow={handleEventClick} onRemoveItem={setDeleteTarget} /></>}
     </AppShell>
   );
 }

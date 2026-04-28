@@ -1,0 +1,21 @@
+{
+  "method": "Visible Chromium booking-date/calendar smoke.",
+  "backendBaseURL": "http://127.0.0.1:8080",
+  "staffBaseURL": "http://localhost:3008",
+  "errors": [],
+  "seed": {
+    "status": 201,
+    "body": {
+      "success": true,
+      "submissionId": 31
+    }
+  },
+  "bookingReviewInitial": "Date check\nPREFERRED DATE\n\n✓ Date is available\n\n2026-10-10 is an open night.",
+  "bookingDateSaved": "Booking details saved.",
+  "calendarInitialHeading": "April 2026",
+  "calendarNextHeading": "May 2026",
+  "calendarPreviousHeading": "April 2026",
+  "calendarTodayHeading": "April 2026",
+  "selectedDayPanel": "Selected · 2026-04-01\nCreate show on this day\nAdd hold\nBlock day\nNothing here yet\n\nNo calendar items on the selected day.",
+  "newShowModalTitle": "Add new show"
+}

@@ -1,1 +1,5 @@
-/* Booking review date panel currently uses pages.css for success-note and muted-copy. */
+.app-booking-date-check { display: grid; gap: 10px; }
+.app-booking-date-check label { display: grid; gap: 5px; }
+.app-booking-date-check label span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.app-booking-date-check input { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); color: var(--app-ink); font: inherit; padding: 9px 10px; }
+.app-warning-note { background: rgba(var(--app-warning-rgb), .12); border-radius: var(--app-radius-sm); color: var(--app-warning); font-weight: 800; margin: 0; padding: 8px 10px; }

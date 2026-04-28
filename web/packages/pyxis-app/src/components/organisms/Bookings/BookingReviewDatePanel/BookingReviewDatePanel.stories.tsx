@@ -1,24 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
+import { bookings, calendarEvents } from '../../../../api/mockData';
 import { BookingReviewDatePanel } from './BookingReviewDatePanel';
-
-const meta = {
-  title: 'Pyxis App/Components/Organisms/Bookings/BookingReviewDatePanel',
-  component: BookingReviewDatePanel,
-  parameters: { layout: 'fullscreen' },
-  args: {},
-} satisfies Meta<typeof BookingReviewDatePanel>;
-
+const meta = { title: 'Pyxis App/Components/Organisms/Bookings/BookingReviewDatePanel', component: BookingReviewDatePanel, parameters: { layout: 'fullscreen' }, args: { booking: bookings[0], events: calendarEvents, onSaveDate: fn() } } satisfies Meta<typeof BookingReviewDatePanel>;
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-export const ReviewDatePanel: Story = {
-  render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div>,
-};
-
-export const Conflict: Story = {
-  args: {
-    statusLabel: '△ Possible date conflict',
-    detail: 'Jul 18 has a hold. Check whether that hold is still active before approving.',
-  },
-  render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div>,
-};
+export const Available: Story = { render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div> };
+export const ShowConflict: Story = { args: { booking: { ...bookings[0], preferredDate: '2025-05-17' }, events: calendarEvents }, render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div> };
+export const HoldConflict: Story = { args: { booking: { ...bookings[0], preferredDate: '2025-05-14' }, events: calendarEvents }, render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div> };
+export const BlockedConflict: Story = { args: { booking: { ...bookings[0], preferredDate: '2025-06-01' }, events: [create(CalendarEventSchema, { id: 9, date: '2025-06-01', label: 'Closed for repairs', status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED })] }, render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div> };
+export const Saving: Story = { args: { booking: { ...bookings[0], preferredDate: '2025-05-14' }, isSaving: true }, render: (args) => <div style={{ width: 390, padding: 14, background: 'var(--app-canvas)' }}><BookingReviewDatePanel {...args}/></div> };

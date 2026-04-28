@@ -1,0 +1,11 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { CalendarEventKind, CalendarEventSchema, create, ShowStatus } from 'pyxis-types';
+import { calendarEvents } from '../../../../api/mockData';
+import { CalendarDayInspector } from './CalendarDayInspector';
+const meta = { title: 'Pyxis App/Components/Organisms/Calendar/CalendarDayInspector', component: CalendarDayInspector, parameters: { layout: 'fullscreen' }, args: { selectedDate: '2025-05-14', events: calendarEvents.filter((event) => event.date === '2025-05-14'), onCreateShow: fn(), onAddHold: fn(), onBlockDay: fn(), onOpenShow: fn(), onRemoveItem: fn() } } satisfies Meta<typeof CalendarDayInspector>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const HoldSelected: Story = { render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><CalendarDayInspector {...args} /></div> };
+export const ShowAndBlocked: Story = { args: { selectedDate: '2025-05-17', events: [create(CalendarEventSchema, { id: 44, date: '2025-05-17', label: 'Cygnus + Guests', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }), create(CalendarEventSchema, { id: 204, date: '2025-05-17', label: 'No late load-in', status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED })] }, render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><CalendarDayInspector {...args} /></div> };
+export const EmptyDay: Story = { args: { selectedDate: '2025-05-18', events: [] }, render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><CalendarDayInspector {...args} /></div> };

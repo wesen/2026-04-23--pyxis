@@ -1,0 +1,5 @@
+.app-calendar-day-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.app-calendar-day-list { display: grid; gap: 8px; }
+.app-calendar-day-item { align-items: center; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); display: flex; gap: 12px; justify-content: space-between; padding: 10px 12px; }
+.app-calendar-day-item strong { display: block; }
+.app-calendar-day-item span { color: var(--app-muted); font-size: 12px; }

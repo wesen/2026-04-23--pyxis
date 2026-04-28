@@ -45,3 +45,4 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Added ticket-local visible Chromium smoke script `scripts/04-booking-refinements-visible-smoke.js` and evidence `sources/10-booking-refinements-visible-chromium.json`.
 - Fixed booking Hold to create a linked held show and made Shows → Hold/Cancelled render operational tables.
 - Added visible Chromium flyer upload/storage smoke script and evidence for local filesystem + `/flyers/...` serving.
+- Added booking date selection against calendar events, calendar month navigation, day selection, event open/remove actions, and component/story coverage for the new calendar/date surfaces.

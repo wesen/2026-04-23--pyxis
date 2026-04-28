@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T16:05:00-04:00
+LastUpdated: 2026-04-28T16:45:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -150,7 +150,7 @@ LastUpdated: 2026-04-28T16:05:00-04:00
   - Modal fields: date, reason.
   - Acceptance: operator chooses date/reason.
 
-- [ ] **T25 — Verify/wire month navigation**
+- [x] **T25 — Verify/wire month navigation**
   - Previous, Today, Next should update visible month.
 
 - [x] **T26 — Wire Calendar agenda Open show**
@@ -159,7 +159,7 @@ LastUpdated: 2026-04-28T16:05:00-04:00
 - [x] **T27 — Define or remove Add to today**
   - Product decision needed.
 
-- [ ] **T28 — Add delete hold/blocked-date UX**
+- [x] **T28 — Add delete hold/blocked-date UX**
   - Backend delete endpoints exist.
   - Add confirmation.
 
@@ -198,7 +198,7 @@ LastUpdated: 2026-04-28T16:05:00-04:00
   - Open booking/artist links from submission.
   - Disable if no links.
 
-- [ ] **T37 — Add booking date selection UX**
+- [x] **T37 — Add booking date selection UX**
   - Make `BookingReviewDatePanel` functional.
   - Check calendar availability if possible.
 
