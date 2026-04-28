@@ -15,13 +15,15 @@ export function SettingsPage() {
   const saveCoreSettings = async (draft: CoreSettingsDraft) => {
     if (!settings) return;
     setActionError(undefined); setActionSuccess(undefined);
-    try { await updateSettings({ ...settings, ...draft }).unwrap(); setActionSuccess('Core settings updated.'); }
+    if (!draft.spaceName.trim()) { setActionError('Space name is required.'); return; }
+    if (draft.capacity < 0) { setActionError('Capacity cannot be negative.'); return; }
+    try { await updateSettings({ ...settings, ...draft }).unwrap(); setActionSuccess('Settings updated.'); }
     catch { setActionError('Could not update settings. Check your session and backend logs.'); }
   }; 
 
   return (
     <AppShell page="settings" title="Settings" eyebrow="Home / Settings">
-      {isLoading ? <LoadingState /> : isError || !settings ? <ErrorState /> : <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Core space settings" section="settings-space-info"><SettingsPanel settings={settings} isUpdating={updateState.isLoading} onSaveCoreSettings={saveCoreSettings} /></Panel></>}
+      {isLoading ? <LoadingState /> : isError || !settings ? <ErrorState /> : <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Settings" section="settings-space-info"><SettingsPanel settings={settings} isUpdating={updateState.isLoading} onSaveCoreSettings={saveCoreSettings} /></Panel></>}
     </AppShell>
   );
 }

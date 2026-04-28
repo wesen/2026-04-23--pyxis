@@ -37,3 +37,5 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Implemented Artists accessibility/search/duplicate-name validation and Storybook states.
 - Implemented Attendance search, per-row saving state, draw/incident validation, and Storybook validation states.
 - Added visible Chromium Playwright JS evidence: `sources/07-artists-attendance-visible-chromium.json`.
+- Added Audit Log client-side filters and visible Chromium validation evidence.
+- Expanded Settings UI sections and fixed backend PATCH handling for newly exposed settings fields.

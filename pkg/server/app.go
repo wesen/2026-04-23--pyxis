@@ -968,13 +968,18 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		Address                string `json:"address"`
 		Capacity               *int   `json:"capacity"`
 		ContactEmail           string `json:"contactEmail"`
+		BookingEmail           string `json:"bookingEmail"`
 		Website                string `json:"website"`
+		Timezone               string `json:"timezone"`
 		DiscordGuildID         string `json:"discordGuildId"`
 		DiscordChUpcoming      string `json:"discordChUpcoming"`
 		DiscordChAnnouncements string `json:"discordChAnnouncements"`
 		DiscordChStaff         string `json:"discordChStaff"`
 		DiscordChBookings      string `json:"discordChBookings"`
 		SetupComplete          bool   `json:"setupComplete"`
+		AutoArchive            bool   `json:"autoArchive"`
+		DiscordPosting         bool   `json:"discordPosting"`
+		SafeSpaceRequired      bool   `json:"safeSpaceRequired"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))
@@ -987,13 +992,18 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		Address:                req.Address,
 		Capacity:               req.Capacity,
 		ContactEmail:           req.ContactEmail,
+		BookingEmail:           req.BookingEmail,
 		Website:                req.Website,
+		Timezone:               req.Timezone,
 		DiscordGuildID:         req.DiscordGuildID,
 		DiscordChUpcoming:      req.DiscordChUpcoming,
 		DiscordChAnnouncements: req.DiscordChAnnouncements,
 		DiscordChStaff:         req.DiscordChStaff,
 		DiscordChBookings:      req.DiscordChBookings,
 		SetupComplete:          req.SetupComplete,
+		AutoArchive:            req.AutoArchive,
+		DiscordPosting:         req.DiscordPosting,
+		SafeSpaceRequired:      req.SafeSpaceRequired,
 	})
 	if err != nil {
 		respondError(w, err)

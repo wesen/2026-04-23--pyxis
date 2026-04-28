@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T15:05:00-04:00
+LastUpdated: 2026-04-28T15:35:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -238,7 +238,7 @@ LastUpdated: 2026-04-28T15:05:00-04:00
 
 ## Phase 10: Audit Log
 
-- [ ] **T48 — Replace generic topbar actions with audit-log filters**
+- [x] **T48 — Replace generic topbar actions with audit-log filters**
   - Actor, action, date range.
 
 - [ ] **T49 — Add audit log pagination/limit API if needed**
@@ -264,7 +264,7 @@ LastUpdated: 2026-04-28T15:05:00-04:00
 
 ## Phase 12: Settings
 
-- [ ] **T55 — Expand Settings sections**
+- [x] **T55 — Expand Settings sections**
   - Website URL.
   - Public booking settings.
   - Discord settings.

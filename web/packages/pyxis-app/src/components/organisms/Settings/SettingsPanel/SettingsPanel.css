@@ -1,3 +1,9 @@
 .app-settings-summary { display: grid; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--app-rule); padding-bottom: 14px; }
 .app-settings-summary strong { font-family: var(--font-display, Georgia, serif); font-size: 24px; font-weight: 500; }
 .app-settings-summary span { color: var(--app-muted); font-size: 12.5px; }
+.app-settings-sections { display: grid; gap: 18px; }
+.app-settings-sections section { border: 1px solid var(--app-rule); border-radius: var(--app-radius); padding: 16px; background: color-mix(in srgb, var(--app-surface-strong) 74%, transparent); }
+.app-settings-sections h3 { font-size: 13px; letter-spacing: .08em; margin: 0 0 12px; text-transform: uppercase; }
+.app-settings-checkbox { align-items: center; display: flex !important; gap: 10px !important; }
+.app-settings-checkbox input { height: 16px; width: 16px; }
+.app-settings-checkbox span { color: var(--app-ink) !important; font-size: 13px !important; letter-spacing: 0 !important; text-transform: none !important; }

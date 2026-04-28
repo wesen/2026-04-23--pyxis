@@ -510,3 +510,82 @@ Validation:
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 ```
+
+## Step 12: Audit Log and Settings pass with visible Chromium validation
+
+I continued using plain Playwright JS with visible Chromium:
+
+```js
+chromium.launch({ headless: false, slowMo: 250 })
+```
+
+Evidence:
+
+```text
+sources/08-audit-log-settings-visible-chromium.json
+```
+
+### Audit Log
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/AuditLogPage/Page.tsx
+web/packages/pyxis-app/src/pages/pages.css
+```
+
+Implemented client-side filters over the currently loaded audit-log page:
+
+- Actor text filter.
+- Action/metadata text filter.
+- Entity type dropdown generated from loaded entries.
+- From/To date filters.
+- Clear filters button.
+- Loaded/filtered count copy.
+- Empty state when filters match nothing.
+
+Visible Chromium evidence:
+
+- Initial: `Showing 19 of 19 loaded entries...`
+- After action filter: `Showing 0 of 19 loaded entries...`
+- After clear: `Showing 19 of 19 loaded entries...`
+
+The backend still returns a capped page of log entries; true server-side pagination/filters remain open under T49.
+
+### Settings
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/SettingsPage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.css
+pkg/server/app.go
+```
+
+Expanded Settings into sections:
+
+- Space and public site: space name, public tagline, website, timezone, address, capacity.
+- Booking and contact: contact email, booking email, safer-space required, auto-archive, setup complete.
+- Discord: guild ID, channel IDs, Discord posting toggle.
+
+Also fixed the backend settings PATCH handler so it now accepts/persists fields the UI exposes:
+
+- `bookingEmail`
+- `timezone`
+- `autoArchive`
+- `discordPosting`
+- `safeSpaceRequired`
+
+Visible Chromium evidence:
+
+- Updated public tagline, website, and booking email.
+- Save produced `Settings updated.`
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+go test ./... -count=1
+```
