@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   ArchiveSearchFilters,
   ArchiveShowList,
@@ -48,6 +49,53 @@ export function Archive() {
       archiveError={isArchiveError ? getApiErrorMessage(archiveError) : null}
       statsError={isStatsError ? 'Archive totals are temporarily unavailable.' : null}
     />
+  );
+}
+
+export function ArchiveRecap() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const showId = id ? Number(id) : NaN;
+  const { data: list, isLoading, isError, error } = useArchive();
+  const show = list?.shows.find((candidate) => candidate.id === showId);
+
+  if (isLoading) {
+    return (
+      <main className="pyxis-public-page pyxis-archive-page" data-page="archive-recap">
+        <div className="pyxis-public-page__inner">
+          <p className="pyxis-public-page__status-detail" role="status">Loading recap…</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (isError || !show) {
+    return (
+      <main className="pyxis-public-page pyxis-archive-page" data-page="archive-recap">
+        <div className="pyxis-public-page__inner">
+          <section className="pyxis-public-page__status" role="alert">
+            <p className="pyxis-public-page__status-message">Archive recap not found.</p>
+            <p className="pyxis-public-page__status-detail">{isError ? getApiErrorMessage(error) : 'This archived show may not have a public recap yet.'}</p>
+            <button type="button" className="pyxis-archive-page__back" onClick={() => navigate('/archive')}>← Back to archive</button>
+          </section>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="pyxis-public-page pyxis-archive-page" data-page="archive-recap">
+      <div className="pyxis-public-page__inner">
+        <button type="button" className="pyxis-archive-page__back" onClick={() => navigate('/archive')}>← Back to archive</button>
+        <article className="pyxis-archive-page__recap" data-section="archive-recap">
+          <PublicPageHeader kicker={formatArchiveDate(show.date)} title={show.artist} />
+          <p className="pyxis-public-page__status-detail">{show.genre}</p>
+          <p className="pyxis-public-page__status-detail">
+            {show.draw > 0 ? `${show.draw.toLocaleString()} total draw recorded for this night.` : 'Attendance recap is not available yet.'}
+          </p>
+        </article>
+      </div>
+    </main>
   );
 }
 
@@ -151,6 +199,7 @@ function toArchiveListShow(show: ArchivedShow) {
     date: formatArchiveDate(show.date),
     name: show.artist,
     tag: show.genre,
+    href: `/archive/${show.id}`,
   };
 }
 

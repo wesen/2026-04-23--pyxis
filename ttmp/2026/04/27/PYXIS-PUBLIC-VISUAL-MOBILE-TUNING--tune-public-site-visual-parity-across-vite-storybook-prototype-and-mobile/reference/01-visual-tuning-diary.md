@@ -796,3 +796,60 @@ cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
 cd web/packages/pyxis-user-site && pnpm exec vite build
 go test ./... -count=1
 ```
+
+## Step 10: Archive recap click-through fix
+
+The operator clarified that clicking `recap →` on archive rows still did not work. The answer was yes: the public app had an Archive index page, but no route/page for an individual archived show recap. `ArchiveShowRow` also defaulted to `href="#"`, and `ArchiveShowList` did not carry a link through its row type.
+
+Implemented a lightweight public recap route:
+
+```text
+/archive/:id
+```
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ArchiveShowList/ArchiveShowList.tsx
+web/packages/pyxis-user-site/src/App.tsx
+web/packages/pyxis-user-site/src/pages/ArchivePage/Page.tsx
+web/packages/pyxis-user-site/src/pages/ArchivePage/Page.css
+```
+
+The first version uses the existing archive list payload to find the archived show by ID, because the backend does not yet expose a dedicated public archived-show-detail endpoint. It renders artist, date, genre, and draw recap if available. This is enough to make `recap →` live without expanding the API contract yet.
+
+Smoke command:
+
+```bash
+cd web/packages/pyxis-user-site && node - <<'NODE'
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.goto('http://localhost:3007/archive', { waitUntil: 'networkidle' });
+  const href = await page.locator('[data-pyxis-component="archive-show-row"]').first().getAttribute('href');
+  await page.locator('[data-pyxis-component="archive-show-row"]').first().click();
+  await page.waitForURL(/\/archive\/\d+/);
+  const title = await page.locator('[data-pyxis-component="public-page-header"][data-pyxis-part="title"]').innerText();
+  console.log(JSON.stringify({ href, url: page.url(), title }, null, 2));
+  await browser.close();
+})();
+NODE
+```
+
+Result:
+
+```json
+{
+  "href": "/archive/5",
+  "url": "http://localhost:3007/archive/5",
+  "title": "Planning for Burial"
+}
+```
+
+Validation:
+
+```bash
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+```

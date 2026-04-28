@@ -37,6 +37,28 @@
   text-align: center;
 }
 
+.pyxis-archive-page__back {
+  background: none;
+  border: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  margin: 32px 0 24px;
+  padding: 0;
+}
+
+.pyxis-archive-page__back:hover {
+  color: var(--color-text-primary);
+}
+
+.pyxis-archive-page__recap {
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 16px;
+  padding-top: 32px;
+}
+
 @media (max-width: 640px) {
   .pyxis-archive-page {
     padding-bottom: 48px;

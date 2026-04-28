@@ -7,6 +7,7 @@ export type ArchiveShow = {
   date: string;
   name: string;
   tag: string;
+  href?: string;
 };
 
 export type ArchiveShowListProps = {
