@@ -4,19 +4,19 @@
   "staffBaseURL": "http://localhost:3008",
   "seeded": [
     {
-      "artistName": "Smoke 1777406328221 Hold",
+      "artistName": "Smoke 1777408806268 Hold",
       "status": 201,
-      "body": "{\"success\":true,\"submissionId\":22}"
+      "body": "{\"success\":true,\"submissionId\":28}"
     },
     {
-      "artistName": "Smoke 1777406328221 Decline",
+      "artistName": "Smoke 1777408806268 Decline",
       "status": 201,
-      "body": "{\"success\":true,\"submissionId\":23}"
+      "body": "{\"success\":true,\"submissionId\":29}"
     },
     {
-      "artistName": "Smoke 1777406328221 Approve",
+      "artistName": "Smoke 1777408806268 Approve",
       "status": 201,
-      "body": "{\"success\":true,\"submissionId\":24}"
+      "body": "{\"success\":true,\"submissionId\":30}"
     }
   ],
   "bookings": {
@@ -33,18 +33,6 @@
       {
         "text": "Auto-review",
         "disabled": true
-      },
-      {
-        "text": "Hold",
-        "disabled": false
-      },
-      {
-        "text": "Decline",
-        "disabled": false
-      },
-      {
-        "text": "Approve",
-        "disabled": false
       },
       {
         "text": "Hold",
@@ -187,13 +175,15 @@
         "disabled": false
       }
     ],
-    "holdMessage": "Smoke 1777406328221 Hold moved to hold.",
+    "holdMessage": "Smoke 1777408806268 Hold moved to hold and show #25 created.",
+    "holdShowsView": "Home / Shows\nShows\nNew show\nAll 16\nConfirmed 6\nHold 2\nCancelled\nArchived 2\nSort: Date ascending\nHold · 2\nHeld shows are not public until confirmed.\n#\tDATE\tARTIST\tDOORS\tAGE\tPRICE\tDRAW\tSTATUS\t\n\n#22\n\t\nAug 1\nSaturday\n\t\nSmoke 1777408741063 Hold\nnoise\n\t\t\t\n\t\n42/0\n\t\nHold\n\t\n\n\n#25\n\t\nAug 1\nSaturday\n\t\nSmoke 1777408806268 Hold\nnoise\n\t\t\t\n\t\n42/0\n\t\nHold\n\t",
+    "holdShowVisible": true,
     "declineReason": "Need more info",
-    "declineMessage": "Smoke 1777406328221 Decline declined.",
-    "approveDialog": "PLEASE CONFIRM\nApprove Smoke 1777406328221 Approve?\n\nThis will approve the submission and create a draft show for 2026-08-03. You will be taken to the new show.\n\nCancel\nApprove and open show",
-    "approveNavigationUrl": "http://localhost:3008/shows/21",
+    "declineMessage": "Smoke 1777408806268 Decline declined.",
+    "approveDialog": "PLEASE CONFIRM\nApprove Smoke 1777408806268 Approve?\n\nThis will approve the submission and create a draft show for 2026-08-03. You will be taken to the new show.\n\nCancel\nApprove and open show",
+    "approveNavigationUrl": "http://localhost:3008/shows/26",
     "archiveUrl": "http://localhost:3008/log?entity=submission&action=submission",
-    "archiveFilterCopy": "Showing 7 of 26 loaded entries. Backend pagination is still capped by the current API response."
+    "archiveFilterCopy": "Showing 11 of 42 loaded entries. Backend pagination is still capped by the current API response."
   },
   "errors": []
 }

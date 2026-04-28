@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'pyxis-components';
 import type { Submission } from 'pyxis-types';
-import { SubmissionStatus } from 'pyxis-types';
-import { useApproveBookingMutation, useDeclineBookingMutation, useGetBookingsQuery, useUpdateBookingMutation, useUpdateBookingReviewMutation } from '../../api/appApi';
+import { create, ShowSchema, ShowStatus, SubmissionStatus } from 'pyxis-types';
+import { useApproveBookingMutation, useCreateShowMutation, useDeclineBookingMutation, useGetBookingsQuery, useUpdateBookingMutation, useUpdateBookingReviewMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { BookingsInboxPanel, BookingsInsightsPanel, BookingsProcessedPanel, ConfirmDialog } from '../../components/organisms';
 import { EmptyState, ErrorState, LoadingState } from '../shared';
@@ -18,6 +18,7 @@ export function BookingsPage() {
   const { data: bookings, isLoading, isError } = useGetBookingsQuery();
   const [approveBooking, approveState] = useApproveBookingMutation();
   const [declineBooking, declineState] = useDeclineBookingMutation();
+  const [createShow] = useCreateShowMutation();
   const [updateBooking] = useUpdateBookingMutation();
   const [updateReview, updateReviewState] = useUpdateBookingReviewMutation();
   const [pendingAction, setPendingAction] = useState<PendingBookingAction>(null);
@@ -32,7 +33,30 @@ export function BookingsPage() {
     try {
       await updateBooking({ id: booking.id, artistName: booking.artistName, preferredDate: booking.preferredDate, genre: booking.genre, expectedDraw: booking.expectedDraw, links: booking.links, techRider: booking.techRider, message: booking.message, contactDiscord: booking.contactDiscord, status: SubmissionStatus.HOLD }).unwrap();
       await updateReview({ submissionId: booking.id, note: 'Placed on hold for follow-up.', decision: 'hold' }).unwrap();
-      setActionSuccess(`${booking.artistName} moved to hold.`);
+      const holdShow = await createShow(create(ShowSchema, {
+        id: 0,
+        artist: booking.artistName,
+        artistId: booking.artistId,
+        date: booking.preferredDate,
+        doorsTime: '',
+        startTime: '',
+        age: '',
+        price: '',
+        genre: booking.genre,
+        description: booking.message,
+        notes: `Held from booking #${booking.id}. ${booking.techRider ? `Tech rider: ${booking.techRider}` : ''}`.trim(),
+        status: ShowStatus.HOLD,
+        flyerUrl: '',
+        discordMessageId: '',
+        discordChannelId: '',
+        submissionId: booking.id,
+        draw: booking.expectedDraw,
+        capacity: 0,
+        lineup: [],
+        createdAt: '',
+        updatedAt: '',
+      })).unwrap();
+      setActionSuccess(`${booking.artistName} moved to hold and show #${holdShow.id} created.`);
     } catch {
       setActionError(`Could not move ${booking.artistName} to hold. Check your session and backend logs.`);
     }

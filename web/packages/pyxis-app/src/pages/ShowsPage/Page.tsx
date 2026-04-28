@@ -33,6 +33,8 @@ export function ShowsPage() {
     .filter((show) => !searchNeedle || `${show.artist} ${show.genre} ${show.date}`.toLowerCase().includes(searchNeedle))
     .sort((a, b) => a.date.localeCompare(b.date));
   const confirmed = filtered.filter((show) => show.status === ShowStatus.CONFIRMED);
+  const hold = filtered.filter((show) => show.status === ShowStatus.HOLD);
+  const cancelled = filtered.filter((show) => show.status === ShowStatus.CANCELLED);
   const archived = filtered.filter((show) => show.status === ShowStatus.ARCHIVED);
 
   const handleCreateShow = async (show: Parameters<typeof createShow>[0], flyerFile?: File) => {
@@ -69,6 +71,8 @@ export function ShowsPage() {
           {searchOpen && <div className="app-page-search" role="search"><Input placeholder="Search artist, genre, or date…" value={search} onChange={(event) => setSearch(event.target.value)} autoFocus /></div>}
           <ShowsFilterBar counts={counts} activeFilter={activeFilter} onFilterChange={setActiveFilter} />
           {activeFilter === 'all' || activeFilter === ShowStatus.CONFIRMED ? <ShowsConfirmedPanel shows={confirmed} onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
+          {activeFilter === ShowStatus.HOLD ? <ShowsConfirmedPanel shows={hold} title={`Hold · ${hold.length}`} emptyTitle="No shows on hold." note="Held shows are not public until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
+          {activeFilter === ShowStatus.CANCELLED ? <ShowsConfirmedPanel shows={cancelled} title={`Cancelled · ${cancelled.length}`} emptyTitle="No cancelled shows." note="Cancelled shows stay visible for operational history." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
           {filtered.length === 0 && <EmptyState label="No shows match the current filters." />}
           <div style={{ height: 20 }} />
           {activeFilter === 'all' || activeFilter === ShowStatus.ARCHIVED ? <ShowsArchivedPanel shows={archived} onViewArchive={() => setActiveFilter(ShowStatus.ARCHIVED)} /> : null}

@@ -92,6 +92,11 @@ async function clickCardButton(page, artistName, buttonName) {
 
   await clickCardButton(page, seed.hold, 'Hold');
   evidence.bookings.holdMessage = await page.getByRole('status').filter({ hasText: /moved to hold/i }).innerText({ timeout: 10000 });
+  await page.goto(`${staffBaseURL}/shows`, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: /Hold/i }).click();
+  evidence.bookings.holdShowsView = await page.locator('main').innerText();
+  evidence.bookings.holdShowVisible = evidence.bookings.holdShowsView.includes(seed.hold);
+  await page.goto(`${staffBaseURL}/bookings`, { waitUntil: 'networkidle' });
 
   await clickCardButton(page, seed.decline, 'Decline');
   let dialog = page.locator('section[role="dialog"]');

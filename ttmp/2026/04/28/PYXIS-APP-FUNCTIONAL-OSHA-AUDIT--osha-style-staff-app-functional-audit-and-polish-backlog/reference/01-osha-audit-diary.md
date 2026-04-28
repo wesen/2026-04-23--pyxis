@@ -805,3 +805,102 @@ go test ./... -count=1
 ```
 
 Operational note: the smoke script creates local dev submissions and an approved draft show as evidence. It also required restarting the backend with `PYXIS_DEV_AUTH=1` after the earlier restart dropped that dev-auth setting.
+
+## Step 15: Flyer upload/storage smoke and booking-hold shows visibility fix
+
+The operator requested two follow-ups:
+
+1. Test poster/flyer upload and storage.
+2. Fix the fact that putting a booking on hold did not make it appear in Shows → Hold.
+
+### Script storage rule
+
+Per operator instruction, the browser automation lives in the ticket-local scripts directory:
+
+```text
+scripts/04-booking-refinements-visible-smoke.js
+scripts/05-flyer-upload-storage-visible-smoke.js
+```
+
+### Booking hold now creates a held show
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/ShowsPage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+```
+
+Before:
+
+- Holding a booking only changed the submission status to hold.
+- Shows → Hold did not display anything because no show record existed, and the Shows page did not render a hold table.
+
+After:
+
+- Holding a booking updates the submission status to `SubmissionStatus.HOLD`.
+- It also creates a staff show with `ShowStatus.HOLD`, linked to the submission ID.
+- Shows → Hold now renders a table titled `Hold · N`, with copy explaining that held shows are not public until confirmed.
+- Shows → Cancelled now also renders a table instead of falling into a blank filtered state.
+
+Visible Chromium evidence in:
+
+```text
+sources/10-booking-refinements-visible-chromium.json
+```
+
+Key evidence:
+
+```text
+holdMessage: Smoke ... Hold moved to hold and show #25 created.
+holdShowVisible: true
+```
+
+### Flyer upload/storage smoke
+
+Added script:
+
+```text
+scripts/05-flyer-upload-storage-visible-smoke.js
+```
+
+The script:
+
+- logs into the staff app using dev-login;
+- creates a throwaway draft show through the staff API;
+- writes a tiny PNG under ticket `sources/tmp/`;
+- uploads that file through the Show Detail UI `FlyerField`;
+- reloads the show through the staff API;
+- verifies `flyerUrl` is set;
+- verifies `GET /flyers/show-<id>/smoke-flyer.png` returns `200` with `image/png`;
+- verifies the file exists on disk under `data/flyers/show-<id>/smoke-flyer.png`.
+
+Evidence in:
+
+```text
+sources/11-flyer-upload-storage-visible-chromium.json
+```
+
+Key evidence:
+
+```text
+uploadMessage: Flyer uploaded.
+flyerUrl: /flyers/show-24/smoke-flyer.png
+servedStatus: 200
+servedContentType: image/png
+storageExists: true
+storageSize: 70
+```
+
+Validation:
+
+```bash
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/04-booking-refinements-visible-smoke.js
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/05-flyer-upload-storage-visible-smoke.js
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+go test ./... -count=1
+```
+
+Operational note: these smokes intentionally create local dev records and local flyer files. The `data/flyers/...` files are evidence/runtime artifacts and should not be committed.

@@ -1,0 +1,35 @@
+{
+  "method": "Visible Chromium flyer upload/storage smoke.",
+  "staffBaseURL": "http://localhost:3008",
+  "flyerPath": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/sources/tmp/smoke-flyer.png",
+  "errors": [],
+  "createStatus": 201,
+  "createdShow": {
+    "id": 24,
+    "artist": "Flyer Smoke 1777408756992",
+    "date": "2026-09-09",
+    "genre": "poster-test",
+    "capacity": 150,
+    "status": "SHOW_STATUS_DRAFT",
+    "createdAt": "2026-04-28T16:39:17-04:00",
+    "updatedAt": "2026-04-28T16:39:17-04:00"
+  },
+  "uploadMessage": "Flyer uploaded.",
+  "showAfterUpload": {
+    "id": 24,
+    "artist": "Flyer Smoke 1777408756992",
+    "date": "2026-09-09",
+    "genre": "poster-test",
+    "flyerUrl": "/flyers/show-24/smoke-flyer.png",
+    "capacity": 150,
+    "status": "SHOW_STATUS_DRAFT",
+    "createdAt": "2026-04-28T16:39:17-04:00",
+    "updatedAt": "2026-04-28T16:39:20-04:00"
+  },
+  "flyerUrl": "/flyers/show-24/smoke-flyer.png",
+  "servedStatus": 200,
+  "servedContentType": "image/png",
+  "storagePath": "/home/manuel/code/wesen/2026-04-23--pyxis/data/flyers/show-24/smoke-flyer.png",
+  "storageExists": true,
+  "storageSize": 70
+}

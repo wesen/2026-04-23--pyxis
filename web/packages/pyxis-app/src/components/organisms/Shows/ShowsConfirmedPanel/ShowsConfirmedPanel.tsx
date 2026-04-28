@@ -5,9 +5,12 @@ import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type ShowsConfirmedPanelProps = {
   shows: AppShow[];
+  title?: string;
+  emptyTitle?: string;
+  note?: string;
   onEditShow?: (show: AppShow) => void;
 };
 
-export function ShowsConfirmedPanel({ shows, onEditShow }: ShowsConfirmedPanelProps) {
-  return <Panel title={`Confirmed · ${shows.length}`} action={<span className="app-panel-note">Pinned shows appear in #upcoming-shows</span>} section="shows-confirmed">{shows.length > 0 ? <ShowsTable shows={shows} onEditShow={onEditShow}/> : <AppEmptyState title="No confirmed shows yet." />}</Panel>;
+export function ShowsConfirmedPanel({ shows, title = `Confirmed · ${shows.length}`, emptyTitle = 'No confirmed shows yet.', note = 'Pinned shows appear in #upcoming-shows', onEditShow }: ShowsConfirmedPanelProps) {
+  return <Panel title={title} action={<span className="app-panel-note">{note}</span>} section="shows-confirmed">{shows.length > 0 ? <ShowsTable shows={shows} onEditShow={onEditShow}/> : <AppEmptyState title={emptyTitle} />}</Panel>;
 }
