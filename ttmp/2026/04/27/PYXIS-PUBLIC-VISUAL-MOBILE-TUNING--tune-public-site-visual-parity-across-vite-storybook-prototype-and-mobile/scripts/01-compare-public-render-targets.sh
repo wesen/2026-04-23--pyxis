@@ -47,15 +47,15 @@ PAGE=${PAGE:-shows}
 
 case "$PAGE" in
   shows)
-    PROTOTYPE_STEM=shows; STORY_PAGE=shows; VITE_PATH=/ ;;
+    PROTOTYPE_STEM=shows; STORY_PAGE=shows; VITE_PATH=/; DATA_PAGE=shows; HEADER_SECTION=shows-header ;;
   show-detail)
-    PROTOTYPE_STEM=detail; STORY_PAGE=show-detail; VITE_PATH=/shows/1 ;;
+    PROTOTYPE_STEM=detail; STORY_PAGE=show-detail; VITE_PATH=/shows/1; DATA_PAGE=show-detail; HEADER_SECTION=show-detail-hero ;;
   archive)
-    PROTOTYPE_STEM=archive; STORY_PAGE=archive; VITE_PATH=/archive ;;
+    PROTOTYPE_STEM=archive; STORY_PAGE=archive; VITE_PATH=/archive; DATA_PAGE=archive; HEADER_SECTION=archive-header ;;
   book)
-    PROTOTYPE_STEM=book; STORY_PAGE=book; VITE_PATH=/book ;;
+    PROTOTYPE_STEM=book; STORY_PAGE=book; VITE_PATH=/book; DATA_PAGE=book; HEADER_SECTION=book-header ;;
   about)
-    PROTOTYPE_STEM=about; STORY_PAGE=about; VITE_PATH=/about ;;
+    PROTOTYPE_STEM=about; STORY_PAGE=about; VITE_PATH=/about; DATA_PAGE=about; HEADER_SECTION=about-hero ;;
   *) echo "unknown PAGE: $PAGE" >&2; exit 2 ;;
 esac
 
@@ -80,14 +80,14 @@ case "$SECTION" in
     STORYBOOK_SELECTOR="[data-story-frame='pyxis-page-shell']"
     ;;
   content)
-    PROTOTYPE_SELECTOR="[data-page='shows']"
-    VITE_SELECTOR="[data-page='shows']"
-    STORYBOOK_SELECTOR="[data-page='shows']"
+    PROTOTYPE_SELECTOR="[data-page='$DATA_PAGE']"
+    VITE_SELECTOR="[data-page='$DATA_PAGE']"
+    STORYBOOK_SELECTOR="[data-page='$DATA_PAGE']"
     ;;
   header)
-    PROTOTYPE_SELECTOR="[data-section='shows-header']"
-    VITE_SELECTOR="[data-section='shows-header']"
-    STORYBOOK_SELECTOR="[data-section='shows-header'] [data-pyxis-component='public-page-header']"
+    PROTOTYPE_SELECTOR="[data-section='$HEADER_SECTION']"
+    VITE_SELECTOR="[data-section='$HEADER_SECTION']"
+    STORYBOOK_SELECTOR="[data-section='$HEADER_SECTION'] [data-pyxis-component='public-page-header'], [data-section='$HEADER_SECTION']"
     ;;
   shows-list)
     PROTOTYPE_SELECTOR="[data-section='shows-list']"

@@ -8,7 +8,7 @@ Topics:
 DocType: reference
 Intent: diary
 Summary: Chronological diary for public-site visual tuning across Vite, Storybook, standalone prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:10:00-04:00
+LastUpdated: 2026-04-27T21:20:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Diary
@@ -354,3 +354,38 @@ docmgr doctor --ticket PYXIS-PUBLIC-VISUAL-MOBILE-TUNING --stale-after 30
 ### Note
 
 When first checking this in the live Vite server, the `PubNav.css` module had been transformed as an empty CSS module due to stale Vite state. Restarting the `pyxis-user-site-vite` tmux session fixed it. This matches the earlier known nuisance that Vite/Storybook stale CSS transforms can produce misleading screenshots.
+
+## Step 5: Continue mobile pass and fix comparison wrapper page scoping
+
+I continued the Storybook-first mobile pass after the hamburger menu work. The first attempt to compare `archive`, `book`, `about`, and `show-detail` content exposed a tooling bug in the ticket-local comparison wrapper: its generic `content` selector was still hardcoded to `[data-page='shows']`.
+
+### Fix
+
+Updated:
+
+```text
+scripts/01-compare-public-render-targets.sh
+```
+
+The script now maps each `PAGE` to:
+
+- the correct standalone prototype file stem;
+- the correct Storybook page ID;
+- the correct Vite route;
+- the correct `data-page` selector;
+- the most likely page header section selector.
+
+This matters because missing selectors in broad visual commands can look like browser hangs or empty artifact folders. The fix keeps the wrapper useful for the rest of the mobile pass.
+
+### Follow-up scan after wrapper fix
+
+Storybook-first mobile `content` scans now run for all remaining public pages:
+
+```text
+prototype-storybook archive mobile content      10.30%
+prototype-storybook book mobile content         19.33%
+prototype-storybook about mobile content        16.41%
+prototype-storybook show-detail mobile content  15.47%
+```
+
+These broad content numbers are still too coarse for tuning decisions. The screenshots show that some prototype selectors include shell/nav area differently from the React page body, so the next iteration should select page-specific internal sections: archive filters/year rows, book form/sidebar, about intro/ethos/find-us, and show-detail ticket/meta/lineup.

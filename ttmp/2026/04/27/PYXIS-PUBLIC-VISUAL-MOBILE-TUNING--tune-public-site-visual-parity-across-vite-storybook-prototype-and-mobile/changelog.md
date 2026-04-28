@@ -27,3 +27,7 @@ Fixed the Shows mobile Storybook baseline: mobile ShowGrid now renders one colum
 ## 2026-04-27
 
 Implemented a functional accessible public-site mobile hamburger menu in `PubNav`, keeping the closed state aligned to the prototype and adding a conservative tokenized drop-down for the undefined open state.
+
+## 2026-04-27
+
+Fixed the ticket-local visual comparison wrapper so non-Shows pages use their own `data-page`, route, prototype file, and Storybook target instead of the hardcoded Shows selector.
