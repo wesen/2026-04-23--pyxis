@@ -751,10 +751,12 @@ function PPXShell({ page = "shows", compact = false }) {
   })();
 
   const W = compact ? 390 : 920;
+  const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+  const hideNav = params?.get("hideNav") === "1";
 
   return (
     <div style={{ width: W, minHeight: compact ? 844 : 1100, background: "#fff", fontFamily: "'Inter', sans-serif", color: PINK }}>
-      <PPXNav page={cur} onNav={setCur} compact={compact} />
+      {!hideNav && <PPXNav page={cur} onNav={setCur} compact={compact} />}
       <main data-page={cur === "detail" ? "show-detail" : cur} style={{ maxWidth: W, margin: "0 auto", padding: compact ? "26px 18px 0" : "40px 32px 0" }}>
         {content}
       </main>

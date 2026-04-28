@@ -43,3 +43,7 @@ Corrected the coverage rundown publisher to emit previous-review-compatible summ
 ## 2026-04-27
 
 Published an actual mobile screenshot sweep at `/tmp/pyxis-public-mobile-actual-sweep.json` plus `/tmp/pyxis-public-mobile-actual-review/index.html`, replacing the earlier coverage-card-only output with real css-visual-diff screenshots.
+
+## 2026-04-27
+
+Fixed mobile content/section captures so prototype screenshots hide the sticky navbar using `?hideNav=1`, then regenerated the actual mobile screenshot sweep and review bundle.

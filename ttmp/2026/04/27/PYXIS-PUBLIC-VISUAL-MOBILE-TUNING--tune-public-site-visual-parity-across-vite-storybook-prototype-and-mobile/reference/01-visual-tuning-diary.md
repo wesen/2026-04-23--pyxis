@@ -577,3 +577,31 @@ accepted: 2
 ```
 
 The failures were deeper selectors that are not present with the same attributes on the standalone prototype side. I excluded failed rows from the review JSON so the review bundle shows real screenshots only, not placeholder/error cards.
+
+### Correction: hide prototype nav for content/section captures
+
+The user noticed that the prototype `content` captures included the mobile `ppxis` navbar/hamburger, while the React content captures did not. That made the review screenshots misleading.
+
+Root cause: the standalone prototype nav is `position: sticky`; when css-visual-diff captured the `main[data-page=...]` element, the sticky header could still overlap the clipped region.
+
+Fix:
+
+- Added `?hideNav=1` support to `prototype-design/screens/ppxis.jsx`.
+- Updated `scripts/01-compare-public-render-targets.sh` and `scripts/04-run-actual-mobile-visual-sweep.py` so non-`page` captures append `?hideNav=1` to prototype URLs.
+- Left `page` captures unchanged, because whole-page comparisons should still include nav.
+
+Regenerated actual mobile artifacts:
+
+```text
+/tmp/pyxis-public-mobile-actual-sweep.json
+/tmp/pyxis-public-mobile-actual-sweep
+/tmp/pyxis-public-mobile-actual-review/index.html
+```
+
+Served review bundle:
+
+```text
+http://localhost:8101/
+```
+
+Verified manually that `book/content` prototype screenshot no longer includes the top nav.

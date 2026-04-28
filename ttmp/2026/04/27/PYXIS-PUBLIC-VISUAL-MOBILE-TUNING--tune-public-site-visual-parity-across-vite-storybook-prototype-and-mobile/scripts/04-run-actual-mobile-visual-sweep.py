@@ -77,6 +77,8 @@ def run_target(target: dict[str, Any], out_root: Path, prototype_base: str, stor
     artifact_dir.mkdir(parents=True, exist_ok=True)
 
     url1 = prototype_base.rstrip("/") + target["proto"]
+    if target["section"] != "page":
+        url1 += "?hideNav=1"
     url2 = f"{storybook_base.rstrip('/')}/iframe.html?id={target['story']}&viewMode=story&globals=viewport:pyxisMobile"
     cmd = [
         "css-visual-diff", "compare",

@@ -70,6 +70,9 @@ else
 fi
 
 PROTOTYPE_URL=${PROTOTYPE_URL:-http://localhost:7070/standalone/public/$PROTOTYPE_FILE}
+if [[ "$SECTION" != "page" && "$PROTOTYPE_URL" != *\?* ]]; then
+  PROTOTYPE_URL="${PROTOTYPE_URL}?hideNav=1"
+fi
 VITE_URL=${VITE_URL:-http://localhost:3007$VITE_PATH}
 STORYBOOK_URL=${STORYBOOK_URL:-http://localhost:6007/iframe.html?id=public-site-pages-${STORY_PAGE}--${STORY_VARIANT}\&viewMode=story\&globals=viewport:${STORY_VIEWPORT}}
 
