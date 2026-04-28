@@ -7,6 +7,7 @@ export type ReserveTicketCardProps = {
   price?: string;
   note?: string;
   cta?: string;
+  onReserve?: () => void;
   className?: string;
 };
 
@@ -15,6 +16,7 @@ export const ReserveTicketCard = ({
   price = '$10 – $15',
   note = 'sliding. cash or card at door.',
   cta = 'Reserve ticket →',
+  onReserve,
   className,
 }: ReserveTicketCardProps) => (
   <div {...pyxisPart('reserve-ticket-card')} className={clsx('pyxis-reserve-ticket-card', className)}>
@@ -32,7 +34,7 @@ export const ReserveTicketCard = ({
     <div className="pyxis-reserve-ticket-card__note" {...pyxisPart('reserve-ticket-card', 'note')}>
       {note}
     </div>
-    <button className="pyxis-reserve-ticket-card__cta" {...pyxisPart('reserve-ticket-card', 'cta')}>
+    <button type="button" className="pyxis-reserve-ticket-card__cta" onClick={onReserve} {...pyxisPart('reserve-ticket-card', 'cta')}>
       {cta}
     </button>
   </div>

@@ -43,7 +43,13 @@ export function ShowDetail() {
             ) : (
               <Poster kind="redroom" />
             )}
-            <ReserveTicketCard price="$10 – $15" note="sliding. cash or card at door." />
+            <ReserveTicketCard
+              price="$10 – $15"
+              note="sliding. cash or card at door."
+              onReserve={() => {
+                window.location.href = `mailto:book@ppxis.space?subject=${encodeURIComponent(`Ticket reservation: ${show.artist}`)}`;
+              }}
+            />
           </aside>
 
           <div className="pyxis-show-detail-page__main">
