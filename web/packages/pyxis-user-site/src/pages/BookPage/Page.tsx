@@ -7,12 +7,13 @@ import {
 } from 'pyxis-components';
 import type { BookingFormData } from 'pyxis-types';
 import { getApiErrorMessage } from '../../api/errors';
-import { useSubmitBooking } from '../../api/hooks';
+import { usePublicSettings, useSubmitBooking } from '../../api/hooks';
 import './Page.css';
 
 export function Book() {
   const navigate = useNavigate();
   const submit = useSubmitBooking();
+  const { data: settings } = usePublicSettings();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (data: BookingFormData) => {
@@ -29,7 +30,7 @@ export function Book() {
     <main className="pyxis-public-page pyxis-book-page" data-page="book">
       <div className="pyxis-public-page__inner">
         <header className="pyxis-book-page__header" data-section="book-header">
-          <PublicPageHeader kicker="Inquiries" title="Book the space" />
+          <PublicPageHeader kicker={settings?.bookingEmail || 'Inquiries'} title={`Book ${settings?.spaceName || 'the space'}`} />
         </header>
 
         <section className="pyxis-book-page__layout" data-section="book-layout">
@@ -48,7 +49,7 @@ export function Book() {
           </div>
 
           <aside className="pyxis-book-page__aside" data-section="book-aside">
-            <BookingSpaceAside />
+            <BookingSpaceAside capacity={settings?.capacity || undefined} address={settings?.address || undefined} bookingEmail={settings?.bookingEmail || settings?.contactEmail || undefined} />
           </aside>
         </section>
       </div>

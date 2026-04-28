@@ -4,6 +4,9 @@ import './BookingSpaceAside.css';
 
 export type BookingSpaceAsideProps = {
   className?: string;
+  capacity?: number;
+  address?: string;
+  bookingEmail?: string;
 };
 
 const specs = [
@@ -14,13 +17,14 @@ const specs = [
   ['Hours', 'close by 2 AM (3 on Sat)'],
 ];
 
-export const BookingSpaceAside = ({ className }: BookingSpaceAsideProps) => (
-  <aside {...pyxisPart('booking-space-aside')} className={clsx('pyxis-booking-space-aside', className)}>
+export const BookingSpaceAside = ({ className, capacity = 150, address = '25 Manton Ave · Providence RI 02909', bookingEmail = 'book@ppxis.space' }: BookingSpaceAsideProps) => {
+  const displaySpecs = specs.map(([label, value]) => label === 'Capacity' ? [label, `${capacity} standing · 80 seated`] : [label, value]);
+  return <aside {...pyxisPart('booking-space-aside')} className={clsx('pyxis-booking-space-aside', className)}>
     <div className="pyxis-booking-space-aside__title" {...pyxisPart('booking-space-aside', 'title')}>
       the space
     </div>
     <div className="pyxis-booking-space-aside__spec-list" {...pyxisPart('booking-space-aside', 'spec-list')}>
-      {specs.map(([label, value]) => (
+      {displaySpecs.map(([label, value]) => (
         <div key={label} className="pyxis-booking-space-aside__spec" {...pyxisPart('booking-space-aside', 'spec')}>
           <div className="pyxis-booking-space-aside__spec-label" {...pyxisPart('booking-space-aside', 'spec-label')}>
             {label}
@@ -32,11 +36,11 @@ export const BookingSpaceAside = ({ className }: BookingSpaceAsideProps) => (
       ))}
     </div>
     <div className="pyxis-booking-space-aside__footer" {...pyxisPart('booking-space-aside', 'footer')}>
-      25 Manton Ave · Providence RI 02909
+      {address}
       <br />
       <span className="pyxis-booking-space-aside__email" {...pyxisPart('booking-space-aside', 'email')}>
-        book@ppxis.space
+        {bookingEmail}
       </span>
     </div>
-  </aside>
-);
+  </aside>;
+};

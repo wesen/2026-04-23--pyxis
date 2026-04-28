@@ -1,5 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { PubNav, PubFooter } from 'pyxis-components';
+import { usePublicSettings } from '../../api/hooks';
 import '../../pages/PublicPage.css';
 
 export function Layout() {
@@ -21,7 +22,8 @@ export function Layout() {
   };
 
   const currentPage = pageMap[location.pathname] ?? (location.pathname.startsWith('/shows/') ? 'shows' : 'shows');
-  const discordUrl = import.meta.env.VITE_DISCORD_URL || 'https://discord.com/channels/586274407350272042';
+  const { data: settings } = usePublicSettings();
+  const discordUrl = import.meta.env.VITE_DISCORD_URL || (settings?.discordGuildId ? `https://discord.com/channels/${settings.discordGuildId}` : 'https://discord.com/channels/586274407350272042');
   const instagramUrl = import.meta.env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/ppxis.space/';
 
   return (
@@ -30,7 +32,7 @@ export function Layout() {
       <div className="pyxis-public-page-shell__main" data-region="main">
         <Outlet />
       </div>
-      <div data-region="footer"><PubFooter discordUrl={discordUrl} instagramUrl={instagramUrl} /></div>
+      <div data-region="footer"><PubFooter brand={settings?.spaceName || 'ppxis'} tagline={settings?.tagline || 'a music artist space'} address={settings?.address || '25 Manton Ave, Providence RI 02909'} discordUrl={discordUrl} instagramUrl={instagramUrl} /></div>
     </div>
   );
 }

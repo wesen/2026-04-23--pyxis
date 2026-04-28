@@ -13,6 +13,8 @@ import {
   BookingConfirmationSchema,
   BookingFormData,
   BookingFormDataSchema,
+  Settings,
+  SettingsSchema,
 } from 'pyxis-types';
 import { endpoints } from './endpoints';
 
@@ -27,7 +29,7 @@ export const publicApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Archive', 'Show', 'Submission'],
+  tagTypes: ['Archive', 'Show', 'Settings', 'Submission'],
   endpoints: (builder) => ({
     getUpcomingShows: builder.query<Show[], void>({
       query: () => endpoints.shows,
@@ -66,6 +68,13 @@ export const publicApi = createApi({
       providesTags: [{ type: 'Archive', id: 'STATS' }],
     }),
 
+    getPublicSettings: builder.query<Settings, void>({
+      query: () => endpoints.settings,
+      transformResponse: (response: unknown) => fromJson(SettingsSchema, response as any),
+      keepUnusedDataFor: 60 * 10,
+      providesTags: ['Settings'],
+    }),
+
     submitBooking: builder.mutation<BookingConfirmation, BookingFormData>({
       query: (body) => ({
         url: endpoints.submissions,
@@ -82,6 +91,7 @@ export const {
   useGetArchiveQuery,
   useGetArchiveStatsQuery,
   useGetShowQuery,
+  useGetPublicSettingsQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,
 } = publicApi;

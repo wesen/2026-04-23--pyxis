@@ -2,6 +2,7 @@ import type { BookingFormData } from 'pyxis-types';
 import {
   useGetArchiveQuery,
   useGetArchiveStatsQuery,
+  useGetPublicSettingsQuery,
   useGetShowQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,
@@ -31,6 +32,10 @@ export function useArchiveStats() {
   return useGetArchiveStatsQuery();
 }
 
+export function usePublicSettings() {
+  return useGetPublicSettingsQuery();
+}
+
 export function useSubmitBooking() {
   const [submitBooking, result] = useSubmitBookingMutation();
 
@@ -44,6 +49,7 @@ export function useSubmitBooking() {
 export {
   useGetArchiveQuery,
   useGetArchiveStatsQuery,
+  useGetPublicSettingsQuery,
   useGetShowQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,

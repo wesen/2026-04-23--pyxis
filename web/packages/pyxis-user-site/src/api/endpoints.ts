@@ -9,6 +9,7 @@ export const endpoints = {
   showFlyer:    (id: number) => `/api/public/shows/${id}/flyer`,
   archive:      '/api/public/archive',
   archiveStats: '/api/public/archive/stats',
+  settings:     '/api/public/settings',
   submissions:  '/api/public/submissions',
 } as const;
 

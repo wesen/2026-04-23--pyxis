@@ -83,6 +83,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.HandleFunc("GET /api/public/shows/{id}", s.handleGetPublicShow)
 	mux.HandleFunc("GET /api/public/archive", s.handleGetArchive)
 	mux.HandleFunc("GET /api/public/archive/stats", s.handleGetArchiveStats)
+	mux.HandleFunc("GET /api/public/settings", s.handleGetPublicSettings)
 	mux.HandleFunc("POST /api/public/submissions", s.handleCreateSubmission)
 
 	// Auth

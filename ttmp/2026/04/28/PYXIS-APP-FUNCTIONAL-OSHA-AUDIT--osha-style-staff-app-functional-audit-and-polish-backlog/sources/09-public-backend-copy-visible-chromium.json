@@ -1,0 +1,26 @@
+{
+  "method": "Visible Chromium Playwright JS script launched with chromium.launch({ headless: false, slowMo: 250 }) from web/packages/pyxis-user-site.",
+  "baseUrl": "http://localhost:3007",
+  "backendEndpoint": "http://127.0.0.1:8080/api/public/settings",
+  "settingsResponseExcerpt": {
+    "spaceName": "Pyxis",
+    "tagline": "Visible Chromium configurable tagline",
+    "address": "319 N 11th St, Philadelphia, PA",
+    "bookingEmail": "booking@pyxis.test"
+  },
+  "showsHeader": "319 N 11TH ST, PHILADELPHIA, PA\nPyxis shows",
+  "footer": "Pyxis\nVisible Chromium configurable tagline\n319 N 11th St, Philadelphia, PA\nInstagram\nDiscord\nMailing list",
+  "aboutHeader": "VISIBLE CHROMIUM CONFIGURABLE TAGLINE\nAbout Pyxis",
+  "aboutLeadExcerpt": "Visible Chromium configurable tagline",
+  "bookHeader": "BOOKING@PYXIS.TEST\nBook Pyxis",
+  "bookAsideIncludes": [
+    "319 N 11th St, Philadelphia, PA",
+    "booking@pyxis.test"
+  ],
+  "validation": [
+    "go test ./... -count=1",
+    "cd web/packages/pyxis-components && pnpm exec tsc --noEmit",
+    "cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit",
+    "cd web/packages/pyxis-user-site && pnpm exec vite build"
+  ]
+}

@@ -62,6 +62,18 @@ func (s *Server) handleCreateSubmission(w http.ResponseWriter, r *http.Request) 
 	})
 }
 
+func (s *Server) handleGetPublicSettings(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	settings, err := s.settingsService.Get(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, settingsToProto(settings))
+}
+
 func (s *Server) handleListPublicShows(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 

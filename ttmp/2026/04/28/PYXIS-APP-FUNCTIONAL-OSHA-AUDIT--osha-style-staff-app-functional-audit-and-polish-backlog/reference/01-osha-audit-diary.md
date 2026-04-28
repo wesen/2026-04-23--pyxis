@@ -589,3 +589,93 @@ cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 go test ./... -count=1
 ```
+
+## Step 13: Public frontend copy now reads backend settings
+
+The operator also requested that public-site frontend copy become configurable in the backend. I implemented a first backend-backed copy pass using the existing settings row rather than adding a new content-management table.
+
+Changed backend:
+
+```text
+pkg/server/server.go
+pkg/server/public.go
+```
+
+Added public unauthenticated endpoint:
+
+```text
+GET /api/public/settings
+```
+
+It returns the existing settings proto as JSON. The route exposes safe public venue copy/configuration such as:
+
+- `spaceName`
+- `tagline`
+- `address`
+- `capacity`
+- `contactEmail`
+- `bookingEmail`
+- `website`
+- `timezone`
+- Discord guild/channel identifiers already present in settings
+
+Changed public frontend API:
+
+```text
+web/packages/pyxis-user-site/src/api/endpoints.ts
+web/packages/pyxis-user-site/src/api/publicApi.ts
+web/packages/pyxis-user-site/src/api/hooks.ts
+```
+
+Added RTK Query hook:
+
+```ts
+usePublicSettings()
+```
+
+Changed public frontend copy consumers:
+
+```text
+web/packages/pyxis-user-site/src/components/layout/Layout.tsx
+web/packages/pyxis-user-site/src/pages/ShowsPage/Page.tsx
+web/packages/pyxis-user-site/src/pages/AboutPage/Page.tsx
+web/packages/pyxis-user-site/src/pages/BookPage/Page.tsx
+web/packages/pyxis-components/src/public/organisms/PubFooter/PubFooter.tsx
+web/packages/pyxis-components/src/public/organisms/BookingSpaceAside/BookingSpaceAside.tsx
+```
+
+The public site now uses backend settings for visible copy/configuration:
+
+- Footer brand, tagline, and address.
+- Shows page kicker/title and empty-state copy.
+- About page title/kicker and intro lead.
+- Book page title/kicker.
+- Booking space aside capacity, address, and booking email.
+- Discord footer link can derive from configured guild ID when no env override is present.
+
+Visible Chromium validation:
+
+```text
+sources/09-public-backend-copy-visible-chromium.json
+```
+
+I restarted the backend so the new `/api/public/settings` route was active, then restarted the public Vite server on port 3007 with `--force` to clear stale transforms.
+
+Evidence from the live public site showed backend-configured values:
+
+- Shows header: `319 N 11TH ST, PHILADELPHIA, PA / Pyxis shows`
+- Footer: `Pyxis / Visible Chromium configurable tagline / 319 N 11th St, Philadelphia, PA`
+- About header: `VISIBLE CHROMIUM CONFIGURABLE TAGLINE / About Pyxis`
+- Book header: `BOOKING@PYXIS.TEST / Book Pyxis`
+- Booking aside includes `319 N 11th St, Philadelphia, PA` and `booking@pyxis.test`
+
+Validation:
+
+```bash
+go test ./... -count=1
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec vite build
+```
+
+Note: this is a first settings-backed copy pass. Rich per-page CMS-style copy (full paragraphs, rules, CTA text, nav labels) would be a follow-up schema/content-model task.

@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { Empty, MailingListCTA, PublicPageHeader, ShowGrid } from 'pyxis-components';
 import { getApiErrorMessage } from '../../api/errors';
-import { useUpcomingShows } from '../../api/hooks';
+import { usePublicSettings, useUpcomingShows } from '../../api/hooks';
 import './Page.css';
 
 export function Shows() {
   const navigate = useNavigate();
   const { data: shows, isLoading, isError, error } = useUpcomingShows();
+  const { data: settings } = usePublicSettings();
 
   if (isLoading) return <ShowsSkeleton />;
   if (isError || !shows) return <ShowsError error={error} />;
@@ -15,12 +16,12 @@ export function Shows() {
     <main className="pyxis-public-page pyxis-shows-page" data-page="shows">
       <div className="pyxis-public-page__inner">
         <header className="pyxis-shows-page__header" data-section="shows-header">
-          <PublicPageHeader kicker="Providence, RI" title="Upcoming shows" />
+          <PublicPageHeader kicker={settings?.address || 'Providence, RI'} title={`${settings?.spaceName || 'ppxis'} shows`} />
         </header>
 
         {shows.length === 0 ? (
           <section className="pyxis-shows-page__empty" data-section="shows-empty">
-            <Empty title="No upcoming shows" description="Check back soon for announcements." />
+            <Empty title="No upcoming shows" description={settings?.tagline || 'Check back soon for announcements.'} />
           </section>
         ) : (
           <section className="pyxis-shows-page__grid-section" data-section="shows-list">
