@@ -47,3 +47,7 @@ Published an actual mobile screenshot sweep at `/tmp/pyxis-public-mobile-actual-
 ## 2026-04-27
 
 Fixed mobile content/section captures so prototype screenshots hide the sticky navbar using `?hideNav=1`, then regenerated the actual mobile screenshot sweep and review bundle.
+
+## 2026-04-27
+
+Captured end-of-day public functional polish issues in a new implementation guide and Phase 6 task list: archive controls, booking links validation, archive metrics, Discord link, and hamburger overlay behavior.

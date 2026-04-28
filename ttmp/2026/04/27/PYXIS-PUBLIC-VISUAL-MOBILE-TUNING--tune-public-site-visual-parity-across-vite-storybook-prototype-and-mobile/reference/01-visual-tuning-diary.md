@@ -8,7 +8,7 @@ Topics:
 DocType: reference
 Intent: diary
 Summary: Chronological diary for public-site visual tuning across Vite, Storybook, standalone prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:40:00-04:00
+LastUpdated: 2026-04-27T21:55:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Diary
@@ -605,3 +605,42 @@ http://localhost:8101/
 ```
 
 Verified manually that `book/content` prototype screenshot no longer includes the top nav.
+
+## Step 8: End-of-day issue capture and shutdown plan
+
+The operator reported a final set of concrete production/public-site issues to carry into the next session:
+
+1. Archive page date selector and recap controls do not work.
+2. Booking page returns `links are required` when filling out/submitting the form.
+3. Archive metrics show `95 artists`, which seems implausibly high.
+4. Discord link should be live.
+5. Mobile hamburger menu should overlay content instead of pushing content down.
+
+I captured these in a dedicated implementation guide:
+
+```text
+design/01-public-mobile-functional-polish-implementation-guide.md
+```
+
+I also added Phase 6 tasks T24–T29 to `tasks.md` so the next session can start with a clear functional polish checklist.
+
+### State at stop
+
+Useful published review artifacts for next time:
+
+```text
+http://localhost:8101/
+/tmp/pyxis-public-mobile-actual-review/index.html
+/tmp/pyxis-public-mobile-actual-sweep.json
+/tmp/pyxis-public-mobile-actual-sweep/failures.json
+```
+
+Latest relevant commits before shutdown:
+
+```text
+d0a5d94 PYXIS-PUBLIC-VISUAL-MOBILE-TUNING: hide prototype nav for section captures
+5e65659 PYXIS-PUBLIC-VISUAL-MOBILE-TUNING: publish actual mobile screenshot sweep
+ad0bda7 PYXIS-PUBLIC-VISUAL-MOBILE-TUNING: add mobile hamburger menu
+```
+
+Next session should start with T24 (hamburger overlay) and T25 (Discord link), then handle the booking form validation blocker.

@@ -9,7 +9,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Task list for public-site CSS and visual parity tuning across Vite, Storybook, prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:40:00-04:00
+LastUpdated: 2026-04-27T21:55:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Tasks
@@ -93,3 +93,37 @@ LastUpdated: 2026-04-27T21:40:00-04:00
 - [ ] **T22 — Update diary and changelog with final decisions**
 
 - [ ] **T23 — Commit visual tuning changes at logical milestones**
+
+## Phase 6: Functional polish found during mobile/public review
+
+- [ ] **T24 — Make mobile hamburger menu overlay content**
+  - Change the open menu from layout-flow block to overlay/dropdown.
+  - Verify opening the menu does not push page content down.
+  - Verify mobile navigation still closes after route changes.
+
+- [ ] **T25 — Make public Discord link live**
+  - Replace `href="#"` with a real configurable Discord URL or intentionally hide/disable the link.
+  - Prefer `VITE_DISCORD_URL` if the invite URL may change.
+  - Verify footer links on desktop and mobile.
+
+- [ ] **T26 — Fix booking form links validation mismatch**
+  - Add/verify required links field in public booking form UI.
+  - Include links in the submission payload.
+  - Add friendly inline validation for missing links.
+  - Verify successful submission with links.
+
+- [ ] **T27 — Fix Archive date selector / recap controls**
+  - Reproduce non-working controls on `http://localhost:3007/archive`.
+  - Wire controls to archive state or render them as non-interactive.
+  - Add Storybook states for filtered/no-match archive views.
+
+- [ ] **T28 — Audit Archive metrics value, especially `95 artists`**
+  - Determine whether the value comes from fixture data, seed data, or backend aggregation.
+  - Make the number credible or hide/rename the metric.
+  - Update Storybook/mock values if needed.
+
+- [ ] **T29 — Run functional polish validation**
+  - Typecheck components and user site.
+  - Build user site.
+  - Run Go tests if backend/API behavior changed.
+  - Record manual smoke results in the diary.
