@@ -175,7 +175,7 @@ targets:
     prototypePath: /standalone/full-app/dashboard.html
     storyId: pyxis-app-components-shell-appsidebar--default
     viewport:
-      width: 220
+      width: 800
       height: 760
     sections:
       - name: component
@@ -184,12 +184,12 @@ targets:
   - page: app-mobile-bottom-nav
     variant: component
     priority: normal
-    prototypePath: /standalone/full-app/dashboard.html
+    prototypePath: /standalone/mobile/home.html
     storyId: pyxis-app-components-shell-appmobilebottomnav--default
     viewport:
       width: 390
       height: 844
     sections:
       - name: component
-        original: '.app-bottom-nav'
+        original: '[data-section="app-mobile-bottom-nav"]'
         react: '[data-section="app-mobile-bottom-nav"]'

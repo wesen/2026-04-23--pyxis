@@ -10,7 +10,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Task plan for staff-app visual parity tuning and functional UX coverage audit.
-LastUpdated: 2026-04-27T23:45:00-04:00
+LastUpdated: 2026-04-28T00:15:00-04:00
 ---
 
 # pyxis-app Visual and Functional UX Audit Tasks
@@ -61,7 +61,7 @@ LastUpdated: 2026-04-27T23:45:00-04:00
 
 ## Phase 3: Next implementation work
 
-- [ ] **T09 — Start visual servers and run shell baseline comparisons**
+- [x] **T09 — Start visual servers and run shell baseline comparisons**
   - Run prototype server on `7070`.
   - Run pyxis-app Storybook on `6008`.
   - Compare `app-sidebar`, `app-topbar-dashboard`, and `app-mobile-bottom-nav`.

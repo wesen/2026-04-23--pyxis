@@ -142,3 +142,122 @@ Verified remote listing:
 ```text
 /ai/2026/04/27/PYXIS-APP-VISUAL-FUNCTIONAL-AUDIT/PYXIS-APP-VISUAL-FUNCTIONAL-AUDIT implementation guide
 ```
+
+## Step 6: Run shell baseline comparisons
+
+Started/verified the required visual servers:
+
+```text
+prototype static: http://localhost:7070
+pyxis-app Storybook: http://localhost:6008
+staff Vite/backend via make dev
+```
+
+Commands used:
+
+```bash
+make dev
+python3 -m http.server 7070 --directory prototype-design
+cd web && pnpm --filter pyxis-app storybook --host 0.0.0.0 --port 6008
+```
+
+### Initial shell comparison problem
+
+The first attempt found stale component-spec assumptions:
+
+1. `app-sidebar` used a `220px` viewport. At that width the React sidebar is hidden by the mobile media query, so the selector did not become visible.
+2. `app-mobile-bottom-nav` pointed at `/standalone/full-app/dashboard.html` and selected `.app-bottom-nav`, but the prototype mobile tab bar lives in the mobile prototype, not the full desktop app prototype.
+
+Fixes:
+
+```text
+prototype-design/visual-diff/userland/specs/app.components.visual.yml
+prototype-design/screens/mobile.jsx
+```
+
+Changes:
+
+- `app-sidebar` component target now uses an `800x760` viewport while still cropping the sidebar element itself.
+- `app-mobile-bottom-nav` now points to `/standalone/mobile/home.html`.
+- The prototype `MTabBar` root now has `data-section="app-mobile-bottom-nav"` so css-visual-diff can select it without brittle structural selectors.
+
+### Baseline results
+
+Sidebar:
+
+```bash
+SPEC=components PAGE=app-sidebar OUT=/tmp/pyxis-app-audit-app-sidebar \
+  scripts/02-compare-app-target.sh
+```
+
+Result:
+
+```text
+app-sidebar / component: review 6.412679425837322%
+```
+
+Artifacts:
+
+```text
+/tmp/pyxis-app-audit-app-sidebar/app-sidebar/artifacts/component/diff_only.png
+/tmp/pyxis-app-audit-app-sidebar/app-sidebar/artifacts/component/right_region.png
+/tmp/pyxis-app-audit-app-sidebar/app-sidebar/artifacts/component/left_region.png
+/tmp/pyxis-app-audit-app-sidebar/app-sidebar/artifacts/component/compare.json
+```
+
+Observation: the React sidebar is broadly close. Remaining diffs are mostly icon glyphs/weights, active row color/bounds, duplicated text-antialias pixels, and footer/avatar details.
+
+Topbar:
+
+```bash
+SPEC=components PAGE=app-topbar-dashboard OUT=/tmp/pyxis-app-audit-app-topbar-dashboard \
+  scripts/02-compare-app-target.sh
+```
+
+Result:
+
+```text
+app-topbar-dashboard / component: accepted 0.9135472370766489%
+```
+
+Artifacts:
+
+```text
+/tmp/pyxis-app-audit-app-topbar-dashboard/app-topbar-dashboard/artifacts/component/diff_only.png
+/tmp/pyxis-app-audit-app-topbar-dashboard/app-topbar-dashboard/artifacts/component/right_region.png
+/tmp/pyxis-app-audit-app-topbar-dashboard/app-topbar-dashboard/artifacts/component/left_region.png
+/tmp/pyxis-app-audit-app-topbar-dashboard/app-topbar-dashboard/artifacts/component/compare.json
+```
+
+Observation: this remains accepted from the earlier app tuning work.
+
+Mobile bottom nav:
+
+```bash
+SPEC=components PAGE=app-mobile-bottom-nav OUT=/tmp/pyxis-app-audit-app-mobile-bottom-nav \
+  scripts/02-compare-app-target.sh
+```
+
+Result:
+
+```text
+app-mobile-bottom-nav / component: review 8.397435897435896%
+```
+
+Artifacts:
+
+```text
+/tmp/pyxis-app-audit-app-mobile-bottom-nav/app-mobile-bottom-nav/artifacts/component/diff_only.png
+/tmp/pyxis-app-audit-app-mobile-bottom-nav/app-mobile-bottom-nav/artifacts/component/right_region.png
+/tmp/pyxis-app-audit-app-mobile-bottom-nav/app-mobile-bottom-nav/artifacts/component/left_region.png
+/tmp/pyxis-app-audit-app-mobile-bottom-nav/app-mobile-bottom-nav/artifacts/component/compare.json
+```
+
+Observation: the React mobile bottom nav is text-only, while the prototype tab bar includes icons and a Bookings badge. This is a real design gap, not just spacing drift.
+
+### Next visual priority
+
+The topbar can be treated as stable. Next work should either:
+
+1. tune sidebar details while it is still a small isolated component, or
+2. decide/design whether the React mobile bottom nav should include prototype-style icons and the booking count badge.

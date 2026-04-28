@@ -26,3 +26,9 @@ LastUpdated: 2026-04-27T23:55:00-04:00
 - Updated task plan for visual coverage, functional action audit, and UX design gaps.
 - Related key app, API, backend, visual spec, and playbook files via docmgr.
 - Uploaded the guide/task/diary bundle to reMarkable under `/ai/2026/04/27/PYXIS-APP-VISUAL-FUNCTIONAL-AUDIT`.
+
+## 2026-04-28
+
+- Started/verified prototype and pyxis-app Storybook servers.
+- Repaired shell component visual targets for sidebar and mobile bottom nav.
+- Ran shell baseline comparisons: topbar accepted at `0.9135%`, sidebar review at `6.4127%`, mobile bottom nav review at `8.3974%`.

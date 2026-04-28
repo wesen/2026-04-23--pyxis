@@ -65,7 +65,7 @@ function MTabBar({ active }) {
     { id: "more",     icon: "cog",      label: "More" },
   ];
   return (
-    <div style={{ borderTop: `1px solid ${MC.line}`, background: "rgba(255,255,255,.92)", backdropFilter: "blur(10px)", padding: "8px 8px 26px", display: "flex", justifyContent: "space-around" }}>
+    <div data-section="app-mobile-bottom-nav" style={{ borderTop: `1px solid ${MC.line}`, background: "rgba(255,255,255,.92)", backdropFilter: "blur(10px)", padding: "8px 8px 26px", display: "flex", justifyContent: "space-around" }}>
       {tabs.map(t => (
         <div key={t.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: active === t.id ? MC.accent : MC.ink3, flex: 1, position: "relative" }}>
           <div style={{ position: "relative" }}>
