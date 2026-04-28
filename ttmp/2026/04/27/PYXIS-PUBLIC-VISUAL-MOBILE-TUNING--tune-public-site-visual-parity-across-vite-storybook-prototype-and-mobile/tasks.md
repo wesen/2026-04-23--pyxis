@@ -9,7 +9,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Task list for public-site CSS and visual parity tuning across Vite, Storybook, prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:20:00-04:00
+LastUpdated: 2026-04-27T21:40:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Tasks

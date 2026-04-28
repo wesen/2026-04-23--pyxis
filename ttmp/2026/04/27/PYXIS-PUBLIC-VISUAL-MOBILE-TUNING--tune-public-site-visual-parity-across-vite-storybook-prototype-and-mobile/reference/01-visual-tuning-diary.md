@@ -8,7 +8,7 @@ Topics:
 DocType: reference
 Intent: diary
 Summary: Chronological diary for public-site visual tuning across Vite, Storybook, standalone prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:20:00-04:00
+LastUpdated: 2026-04-27T21:40:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Diary
@@ -389,3 +389,133 @@ prototype-storybook show-detail mobile content  15.47%
 ```
 
 These broad content numbers are still too coarse for tuning decisions. The screenshots show that some prototype selectors include shell/nav area differently from the React page body, so the next iteration should select page-specific internal sections: archive filters/year rows, book form/sidebar, about intro/ethos/find-us, and show-detail ticket/meta/lineup.
+
+## Step 6: Publish visual coverage rundown for operator inspection
+
+The user asked for a published rundown similar to the earlier final sweep artifacts at:
+
+```text
+/tmp/pyxis-public-pages-final-sweep
+/tmp/pyxis-public-pages-final-sweep.json
+```
+
+I added a ticket-local publisher script:
+
+```text
+scripts/02-build-public-visual-coverage-rundown.py
+```
+
+This does not run screenshots. It publishes a coverage map that lists pages, elements, selectors, render pairs, viewport coverage, priority, and current status. The goal is to make it easy to inspect what still needs targeted css-visual-diff coverage before running more expensive or noisy comparisons.
+
+### Published artifacts
+
+```text
+/tmp/pyxis-public-visual-coverage-rundown/index.html
+/tmp/pyxis-public-visual-coverage-rundown.json
+```
+
+Served locally at:
+
+```text
+http://localhost:8099/
+```
+
+Port `8098` was already occupied by an unrelated review app, so I used `8099`.
+
+### Coverage summary
+
+The generated JSON currently covers:
+
+```text
+shows          8 elements
+show-detail    7 elements
+archive        5 elements
+book           6 elements
+book-success   1 element
+about          5 elements
+global-footer  1 element
+```
+
+Status counts:
+
+```text
+covered-partial: 1
+needs-design-review: 1
+needs-focused-review: 1
+covered-broad-noisy: 1
+needs-deep-coverage: 4
+covered: 2
+needs-coverage: 22
+needs-story-coverage: 1
+```
+
+This rundown is intentionally not a replacement for `css-visual-diff`; it is the review map for deciding the next focused comparisons.
+
+### Compatibility correction for coverage rundown
+
+The first coverage rundown used a custom JSON shape and did not export image artifacts. That was not compatible with the previous `/tmp/pyxis-public-pages-final-sweep.json` format or the review-site generator.
+
+I added a compatibility publisher:
+
+```text
+scripts/03-build-compatible-coverage-sweep.py
+```
+
+It emits the same top-level shape as the previous css-visual-diff summary:
+
+```text
+[
+  {
+    classificationCounts,
+    jsonPath,
+    markdownPath,
+    maxChangedPercent,
+    pageCount,
+    sectionCount,
+    policy,
+    rows: [...]
+  }
+]
+```
+
+Each row includes the expected artifact paths:
+
+```text
+leftRegionPath
+rightRegionPath
+diffOnlyPath
+diffComparisonPath
+artifactJson
+artifactMarkdown
+```
+
+Because this is a coverage rundown rather than a screenshot diff run, the generated PNGs are labeled coverage cards. They are intentionally image artifacts so the previous HTML review generator can consume and display them.
+
+Published compatibility artifacts:
+
+```text
+/tmp/pyxis-public-visual-coverage-rundown/index.html
+/tmp/pyxis-public-visual-coverage-rundown.json
+/tmp/pyxis-public-visual-coverage-rundown/summary.json
+/tmp/pyxis-public-visual-coverage-rundown/*/artifacts/*/{left_region,right_region,diff_only,diff_comparison}.png
+```
+
+I verified compatibility by running the previous review-site generator:
+
+```bash
+python3 ttmp/2026/04/27/PYXIS-APP-VISUAL-TUNING--pyxis-app-visual-tuning-topbar-dashboard-new-pages/scripts/05-build-public-pages-review.py \
+  --summary-json /tmp/pyxis-public-visual-coverage-rundown.json \
+  --output-dir /tmp/pyxis-public-visual-coverage-review-compatible
+```
+
+It succeeded and produced:
+
+```text
+/tmp/pyxis-public-visual-coverage-review-compatible/index.html
+```
+
+Served at:
+
+```text
+http://localhost:8100/
+```

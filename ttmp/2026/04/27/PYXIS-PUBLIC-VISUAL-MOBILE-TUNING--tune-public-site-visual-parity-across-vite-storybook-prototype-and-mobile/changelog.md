@@ -31,3 +31,11 @@ Implemented a functional accessible public-site mobile hamburger menu in `PubNav
 ## 2026-04-27
 
 Fixed the ticket-local visual comparison wrapper so non-Shows pages use their own `data-page`, route, prototype file, and Storybook target instead of the hardcoded Shows selector.
+
+## 2026-04-27
+
+Published `/tmp/pyxis-public-visual-coverage-rundown/index.html` and `/tmp/pyxis-public-visual-coverage-rundown.json`, a reviewable coverage map of public pages/elements still needing focused desktop/mobile visual checks.
+
+## 2026-04-27
+
+Corrected the coverage rundown publisher to emit previous-review-compatible summary JSON plus image artifacts, and verified it works with the existing public pages review-site generator.
