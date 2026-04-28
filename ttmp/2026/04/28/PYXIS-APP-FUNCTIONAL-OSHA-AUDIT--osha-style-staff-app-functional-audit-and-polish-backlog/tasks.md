@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T14:30:00-04:00
+LastUpdated: 2026-04-28T14:40:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -279,13 +279,13 @@ LastUpdated: 2026-04-28T14:30:00-04:00
 
 ## Phase 13: Setup and dev-only pages
 
-- [ ] **T58 — Decide production status of `/setup`**
+- [x] **T58 — Decide production status of `/setup`**
   - If production: implement wizard.
   - If not: hide/remove from production routes.
 
-- [ ] **T59 — Wire Setup Back/Skip/Continue if kept**
+- [x] **T59 — Wire Setup Back/Skip/Continue if kept**
 
-- [ ] **T60 — Decide production status of `/modal`**
+- [x] **T60 — Decide production status of `/modal`**
   - Likely dev-only.
   - Gate behind feature flag or remove from route table.
 

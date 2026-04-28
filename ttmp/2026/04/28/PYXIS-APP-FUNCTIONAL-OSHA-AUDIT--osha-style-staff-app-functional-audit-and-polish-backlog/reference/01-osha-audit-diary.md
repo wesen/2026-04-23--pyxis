@@ -403,3 +403,35 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 10: Setup and dev-only route decisions
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/SetupPage/Page.tsx
+web/packages/pyxis-app/src/App.tsx
+```
+
+Setup was kept as a production-accessible helper page for now, but its buttons are no longer inert:
+
+- Back → `/settings`
+- Skip for now → `/`
+- Continue → `/discord`
+
+This does not make setup a full persisted wizard yet; that remains a future product/backend task. It does remove the OSHA finding of visible buttons that do nothing.
+
+`/modal` is now a dev-only route:
+
+```ts
+const enableDevRoutes = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEV_ROUTES === '1';
+```
+
+The route is only mounted when dev routes are enabled. This prevents the modal showcase from being accidentally exposed in a production build while keeping it useful during local development and Storybook-oriented UI work.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```

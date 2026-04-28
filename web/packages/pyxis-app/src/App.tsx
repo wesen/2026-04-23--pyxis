@@ -27,6 +27,8 @@ function PublicOnlyLogin() {
   return <LoginPage />;
 }
 
+const enableDevRoutes = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEV_ROUTES === '1';
+
 export function App() {
   return (
     <Routes>
@@ -43,7 +45,7 @@ export function App() {
       <Route path="/log" element={<RequireSession><AuditLogPage /></RequireSession>} />
       <Route path="/discord" element={<RequireSession><DiscordPage /></RequireSession>} />
       <Route path="/settings" element={<RequireSession><SettingsPage /></RequireSession>} />
-      <Route path="/modal" element={<RequireSession><ModalShowcasePage /></RequireSession>} />
+      {enableDevRoutes && <Route path="/modal" element={<RequireSession><ModalShowcasePage /></RequireSession>} />}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
