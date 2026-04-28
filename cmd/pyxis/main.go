@@ -8,6 +8,7 @@ import (
 	"github.com/go-go-golems/glazed/pkg/help"
 	help_cmd "github.com/go-go-golems/glazed/pkg/help/cmd"
 	"github.com/go-go-golems/pyxis/pkg/cmdtools"
+	"github.com/go-go-golems/pyxis/pkg/doc"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 )
@@ -38,6 +39,9 @@ from a single Go binary with PostgreSQL persistence.`,
 	}
 
 	helpSystem := help.NewHelpSystem()
+	if err := doc.AddDocToHelpSystem(helpSystem); err != nil {
+		return err
+	}
 	help_cmd.SetupCobraRootCommand(helpSystem, rootCmd)
 
 	commands, err := cmdtools.NewCommandGroup()

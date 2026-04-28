@@ -6,12 +6,14 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 )
 
@@ -77,33 +79,43 @@ type discordGuildMember struct {
 
 // ExchangeCode exchanges an OAuth code for a user and creates a session.
 func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionToken string, user *db.User, err error) {
+	log.Debug().Bool("role_mapping_configured", s.hasRoleMappingConfig()).Msg("discord oauth: exchanging callback code")
 	token, err := s.oauth.Exchange(ctx, code)
 	if err != nil {
+		log.Warn().Err(err).Msg("discord oauth: token exchange failed")
 		return "", nil, fmt.Errorf("exchange code: %w", err)
 	}
 
 	client := s.oauth.Client(ctx, token)
 	resp, err := client.Get(s.apiBase + "/users/@me")
 	if err != nil {
+		log.Warn().Err(err).Msg("discord oauth: fetch user request failed")
 		return "", nil, fmt.Errorf("fetch user: %w", err)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
+		body := readDiscordErrorBody(resp.Body)
+		log.Warn().Int("status", resp.StatusCode).Str("body", body).Msg("discord oauth: fetch user returned non-OK status")
 		return "", nil, fmt.Errorf("fetch user: discord status %d", resp.StatusCode)
 	}
 
 	var du DiscordUser
 	if err := json.NewDecoder(resp.Body).Decode(&du); err != nil {
+		log.Warn().Err(err).Msg("discord oauth: decode user failed")
 		return "", nil, fmt.Errorf("decode user: %w", err)
 	}
 	if strings.TrimSpace(du.ID) == "" {
+		log.Warn().Msg("discord oauth: decoded user without discord id")
 		return "", nil, fmt.Errorf("decode user: missing discord id")
 	}
+	log.Info().Str("discord_user_id", du.ID).Str("discord_username", du.Username).Bool("role_mapping_configured", s.hasRoleMappingConfig()).Msg("discord oauth: fetched user")
 
 	role, err := s.mapDiscordRole(ctx, du.ID)
 	if err != nil {
+		log.Warn().Err(err).Str("discord_user_id", du.ID).Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).Msg("discord oauth: map discord role failed")
 		return "", nil, err
 	}
+	log.Info().Str("discord_user_id", du.ID).Str("mapped_role", role).Msg("discord oauth: mapped user role")
 
 	// Upsert user, mapping configured Discord role IDs to local Pyxis roles.
 	row, err := s.queries.UpsertUser(ctx, db.UpsertUserParams{
@@ -113,20 +125,24 @@ func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionTok
 		Role:            role,
 	})
 	if err != nil {
+		log.Warn().Err(err).Str("discord_user_id", du.ID).Str("mapped_role", role).Msg("discord oauth: upsert user failed")
 		return "", nil, fmt.Errorf("upsert user: %w", err)
 	}
 
 	// Create session
 	sessionToken, err = s.createSession(ctx, row.ID)
 	if err != nil {
+		log.Warn().Err(err).Int32("user_id", row.ID).Msg("discord oauth: create session failed")
 		return "", nil, fmt.Errorf("create session: %w", err)
 	}
+	log.Info().Int32("user_id", row.ID).Str("discord_user_id", du.ID).Str("mapped_role", row.Role).Msg("discord oauth: login succeeded")
 
 	return sessionToken, &row, nil
 }
 
 func (s *AuthService) mapDiscordRole(ctx context.Context, discordUserID string) (string, error) {
 	if !s.hasRoleMappingConfig() {
+		log.Info().Str("discord_user_id", discordUserID).Msg("discord oauth: no role mapping configured, defaulting to staff")
 		return "staff", nil
 	}
 	if strings.TrimSpace(s.cfg.BotToken) == "" {
@@ -136,6 +152,13 @@ func (s *AuthService) mapDiscordRole(ctx context.Context, discordUserID string) 
 		return "", fmt.Errorf("discord role mapping requires discord-guild-id")
 	}
 
+	log.Info().
+		Str("discord_user_id", discordUserID).
+		Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).
+		Bool("admin_role_configured", strings.TrimSpace(s.cfg.AdminRoleID) != "").
+		Bool("booker_role_configured", strings.TrimSpace(s.cfg.BookerRoleID) != "").
+		Bool("door_role_configured", strings.TrimSpace(s.cfg.DoorRoleID) != "").
+		Msg("discord oauth: fetching guild member roles")
 	roles, err := s.fetchGuildMemberRoles(ctx, discordUserID)
 	if err != nil {
 		return "", err
@@ -147,6 +170,7 @@ func (s *AuthService) mapDiscordRole(ctx context.Context, discordUserID string) 
 			roleSet[role] = struct{}{}
 		}
 	}
+	log.Info().Str("discord_user_id", discordUserID).Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).Strs("discord_role_ids", roles).Msg("discord oauth: fetched guild member roles")
 
 	// Most privileged matching role wins.
 	if hasRole(roleSet, s.cfg.AdminRoleID) {
@@ -178,21 +202,42 @@ func (s *AuthService) fetchGuildMemberRoles(ctx context.Context, discordUserID s
 
 	resp, err := s.client.Do(req)
 	if err != nil {
+		log.Warn().Err(err).Str("discord_user_id", discordUserID).Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).Msg("discord oauth: guild member request failed")
 		return nil, fmt.Errorf("fetch guild member roles: %w", err)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusNotFound {
+		body := readDiscordErrorBody(resp.Body)
+		log.Warn().
+			Int("status", resp.StatusCode).
+			Str("discord_user_id", discordUserID).
+			Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).
+			Str("body", body).
+			Msg("discord oauth: user is not a member of configured guild or guild is not visible to bot")
 		return nil, fmt.Errorf("discord user is not a member of configured guild")
 	}
 	if resp.StatusCode != http.StatusOK {
+		body := readDiscordErrorBody(resp.Body)
+		log.Warn().
+			Int("status", resp.StatusCode).
+			Str("discord_user_id", discordUserID).
+			Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).
+			Str("body", body).
+			Msg("discord oauth: guild member roles returned non-OK status")
 		return nil, fmt.Errorf("fetch guild member roles: discord status %d", resp.StatusCode)
 	}
 
 	var member discordGuildMember
 	if err := json.NewDecoder(resp.Body).Decode(&member); err != nil {
+		log.Warn().Err(err).Str("discord_user_id", discordUserID).Str("discord_guild_id", strings.TrimSpace(s.cfg.GuildID)).Msg("discord oauth: decode guild member roles failed")
 		return nil, fmt.Errorf("decode guild member roles: %w", err)
 	}
 	return member.Roles, nil
+}
+
+func readDiscordErrorBody(r io.Reader) string {
+	body, _ := io.ReadAll(io.LimitReader(r, 4096))
+	return strings.TrimSpace(string(body))
 }
 
 func hasRole(roleSet map[string]struct{}, roleID string) bool {

@@ -15,6 +15,7 @@ import (
 
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
 	"github.com/go-go-golems/pyxis/pkg/db"
+	"github.com/rs/zerolog/log"
 )
 
 type contextKey int
@@ -30,12 +31,14 @@ type discordOAuthState struct {
 
 func (s *Server) handleDiscordLogin(w http.ResponseWriter, r *http.Request) {
 	if !s.discordOAuthConfigured() {
+		log.Warn().Msg("discord oauth: login requested but oauth is not configured")
 		http.Error(w, "Discord OAuth is not configured", http.StatusServiceUnavailable)
 		return
 	}
 
 	returnTo, err := s.resolveReturnTo(r, r.URL.Query().Get("return_to"))
 	if err != nil {
+		log.Warn().Err(err).Str("return_to", r.URL.Query().Get("return_to")).Msg("discord oauth: invalid return_to parameter")
 		http.Error(w, "invalid return_to parameter", http.StatusBadRequest)
 		return
 	}
@@ -53,6 +56,7 @@ func (s *Server) handleDiscordLogin(w http.ResponseWriter, r *http.Request) {
 
 	secure := s.shouldUseSecureCookies(r)
 	setShortLivedCookie(w, discordOAuthStateCookieName, stateID, secure)
+	log.Info().Str("return_to", returnTo).Bool("secure_cookie", secure).Msg("discord oauth: redirecting to discord authorization")
 	http.Redirect(w, r, s.authService.AuthCodeURL(state), http.StatusFound)
 }
 
@@ -60,35 +64,44 @@ func (s *Server) handleDiscordCallback(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	code := strings.TrimSpace(r.URL.Query().Get("code"))
 	if code == "" {
+		log.Warn().Msg("discord oauth: callback missing code")
 		http.Error(w, "missing code", http.StatusBadRequest)
 		return
 	}
 
 	stateValue := strings.TrimSpace(r.URL.Query().Get("state"))
 	if stateValue == "" {
+		log.Warn().Msg("discord oauth: callback missing state")
 		http.Error(w, "missing state", http.StatusBadRequest)
 		return
 	}
 	state, err := decodeDiscordOAuthState(stateValue)
 	if err != nil {
+		log.Warn().Err(err).Msg("discord oauth: callback state decode failed")
 		http.Error(w, "invalid state", http.StatusBadRequest)
 		return
 	}
 	stateCookie, err := r.Cookie(discordOAuthStateCookieName)
 	if err != nil || strings.TrimSpace(stateCookie.Value) == "" || subtle.ConstantTimeCompare([]byte(stateCookie.Value), []byte(state.ID)) != 1 {
+		log.Warn().Err(err).Bool("state_cookie_present", err == nil).Msg("discord oauth: callback state cookie mismatch")
 		http.Error(w, "invalid state", http.StatusBadRequest)
 		return
 	}
 
 	secure := s.shouldUseSecureCookies(r)
 	clearCookie(w, discordOAuthStateCookieName, secure)
-	token, _, err := s.authService.ExchangeCode(ctx, code)
+	log.Info().Str("return_to", state.ReturnTo).Bool("secure_cookie", secure).Msg("discord oauth: callback state validated")
+	token, user, err := s.authService.ExchangeCode(ctx, code)
 	if err != nil {
+		log.Warn().Err(err).Str("return_to", state.ReturnTo).Msg("discord oauth: callback exchange failed")
 		respondError(w, err)
 		return
 	}
 
 	s.setSessionCookie(w, r, token)
+	if user != nil {
+		log.Info().Int32("user_id", user.ID).Str("discord_user_id", user.DiscordID).Str("role", user.Role).Msg("discord oauth: callback set session cookie")
+	}
 	redirectTarget := "/"
 	if strings.TrimSpace(state.ReturnTo) != "" {
 		redirectTarget = state.ReturnTo

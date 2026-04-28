@@ -13,6 +13,23 @@ web/
 
 ## Getting started
 
+### Full-stack development (recommended)
+
+Use [devctl](https://github.com/go-go-golems/devctl) to start the entire Pyxis dev environment — PostgreSQL, Go backend, and both frontend apps — with a single command:
+
+```bash
+# From the repo root (not web/)
+devctl up      # Start everything
+devctl status  # Check what's running
+devctl down    # Stop everything
+```
+
+See `pyxis help pyxis-devctl-setup` for the complete devctl guide.
+
+### Frontend-only development
+
+If you already have the backend running separately:
+
 ```bash
 # Install all packages
 pnpm install

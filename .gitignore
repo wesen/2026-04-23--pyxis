@@ -38,3 +38,6 @@ postgres-data/
 .DS_Store
 Thumbs.db
 .envrc
+
+# devctl state
+.devctl/
