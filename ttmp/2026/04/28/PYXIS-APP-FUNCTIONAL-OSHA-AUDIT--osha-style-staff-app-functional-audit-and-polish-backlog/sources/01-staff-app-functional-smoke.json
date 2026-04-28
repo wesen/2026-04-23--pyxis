@@ -1,0 +1,6105 @@
+{
+  "baseURL": "http://localhost:3008",
+  "startedAt": "2026-04-28T17:10:25.000Z",
+  "login": {
+    "url": "http://localhost:3008/auth/dev-login?username=osha-auditor&role=admin",
+    "status": 200,
+    "body": "{\"authenticated\":true, \"user\":{\"id\":8, \"discordId\":\"dev:osha-auditor\", \"discordUsername\":\"osha-auditor\", \"role\":\"admin\", \"createdAt\":\"2026-04-28T13:10:25-04:00\", \"lastLoginAt\":\"2026-04-28T13:10:25-04:00\"}, \"spaceName\":\"Pyxis\"}"
+  },
+  "pages": [
+    {
+      "name": "dashboard",
+      "route": "/",
+      "interactions": [],
+      "before": {
+        "name": "dashboard",
+        "route": "/",
+        "url": "http://localhost:3008/",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "View on Discord",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md app-dashboard-hero-discord"
+          },
+          {
+            "index": 5,
+            "text": "Edit show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md app-dashboard-hero-edit"
+          },
+          {
+            "index": 6,
+            "text": "View all ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 7,
+            "text": "Add a show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 8,
+            "text": "Review bookings · 1",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 9,
+            "text": "Open audit log",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / DashboardWelcome back, AdaWednesday, April 23 · live operations dataNew show"
+          },
+          {
+            "section": "dashboard-summary",
+            "text": "pyxisWed, Apr 23⌕ADWelcome backGood morning, Ada.6 shows booked · 3 need your eye.Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on Discord"
+          },
+          {
+            "section": "dashboard-mobile-header",
+            "text": "pyxisWed, Apr 23⌕AD"
+          },
+          {
+            "section": "dashboard-hero",
+            "text": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on DiscordEdit show"
+          },
+          {
+            "section": "dashboard-metrics",
+            "text": "Upcoming5Next 60 daysPending bookings1Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025"
+          },
+          {
+            "section": "dashboard-attention",
+            "text": "Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›"
+          },
+          {
+            "section": "dashboard-upcoming",
+            "text": "Upcoming showsPinned to #upcoming-showsView all ›DateArtistDoorsAgeStatusSaturdayMay 2Burial HexDarkwave8:00 PM21+ConfirmedSaturdayMay 9Moor MotherExperimental7:00 PMAll AgesConfirmedSundayMay 17Cygnus + GuestsTechno9:00"
+          },
+          {
+            "section": "dashboard-quick-actions",
+            "text": "Quick actionsAdd a showReview bookings · 1Open audit log"
+          },
+          {
+            "section": "dashboard-activity",
+            "text": "Recent activitylive2026-04-28T13:07:02-04:00slono submission.approve2026-04-27T23:24:29-04:00slono submission.approve2026-04-27T23:24:27-04:00slono submission.decline2026-04-26T21:37:31-04:00dev-admin show.update2026-04-"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "dashboard",
+        "route": "/",
+        "url": "http://localhost:3008/",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "View on Discord",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md app-dashboard-hero-discord"
+          },
+          {
+            "index": 5,
+            "text": "Edit show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md app-dashboard-hero-edit"
+          },
+          {
+            "index": 6,
+            "text": "View all ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 7,
+            "text": "Add a show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 8,
+            "text": "Review bookings · 1",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 9,
+            "text": "Open audit log",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / DashboardWelcome back, AdaWednesday, April 23 · live operations dataNew show"
+          },
+          {
+            "section": "dashboard-summary",
+            "text": "pyxisWed, Apr 23⌕ADWelcome backGood morning, Ada.6 shows booked · 3 need your eye.Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on Discord"
+          },
+          {
+            "section": "dashboard-mobile-header",
+            "text": "pyxisWed, Apr 23⌕AD"
+          },
+          {
+            "section": "dashboard-hero",
+            "text": "Next on stage · in 9 daysBurial HexFri, May 2, 2025Doors 8:00 PM21+$12 adv / $15 doorFri, May 2, 2025 · Doors 8:00 PM · 21+View on DiscordEdit show"
+          },
+          {
+            "section": "dashboard-metrics",
+            "text": "Upcoming5Next 60 daysPending bookings1Awaiting review2 new todayAvg draw84Last 6 shows↑ 12 vs. prior 6Capacity use56%May 2025"
+          },
+          {
+            "section": "dashboard-attention",
+            "text": "Needs your attention3△2 past shows need loggingPlanning for Burial · Actress›✺Zola Jesus · Jun 6Check price for a 160-draw headliner›△Discord token expires in 14dReconnect to keep pinning working›"
+          },
+          {
+            "section": "dashboard-upcoming",
+            "text": "Upcoming showsPinned to #upcoming-showsView all ›DateArtistDoorsAgeStatusSaturdayMay 2Burial HexDarkwave8:00 PM21+ConfirmedSaturdayMay 9Moor MotherExperimental7:00 PMAll AgesConfirmedSundayMay 17Cygnus + GuestsTechno9:00"
+          },
+          {
+            "section": "dashboard-quick-actions",
+            "text": "Quick actionsAdd a showReview bookings · 1Open audit log"
+          },
+          {
+            "section": "dashboard-activity",
+            "text": "Recent activitylive2026-04-28T13:07:02-04:00slono submission.approve2026-04-27T23:24:29-04:00slono submission.approve2026-04-27T23:24:27-04:00slono submission.decline2026-04-26T21:37:31-04:00dev-admin show.update2026-04-"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "shows",
+      "route": "/shows",
+      "interactions": [
+        {
+          "note": "shows: click filter icon",
+          "ok": true,
+          "url": "http://localhost:3008/shows",
+          "statusText": []
+        },
+        {
+          "note": "shows: click search icon",
+          "ok": true,
+          "url": "http://localhost:3008/shows",
+          "statusText": []
+        },
+        {
+          "note": "shows: open new show modal",
+          "ok": true,
+          "url": "http://localhost:3008/shows",
+          "statusText": []
+        },
+        {
+          "note": "shows: cancel new show modal",
+          "ok": true,
+          "url": "http://localhost:3008/shows",
+          "statusText": []
+        }
+      ],
+      "before": {
+        "name": "shows",
+        "route": "/shows",
+        "url": "http://localhost:3008/shows",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 5,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 7,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 10,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 11,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 12,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 13,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 14,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "afterNewShowModal": {
+        "name": "shows-modal-open",
+        "route": "/shows",
+        "url": "http://localhost:3008/shows",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "",
+            "ariaLabel": "Close",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 5,
+            "text": "Add row",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 6,
+            "text": "Remove",
+            "ariaLabel": "Remove lineup row",
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 7,
+            "text": "Cancel",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          },
+          {
+            "index": 8,
+            "text": "Save draft",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 9,
+            "text": "Save show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 10,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 11,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 12,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 13,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 14,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 15,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 16,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 17,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 18,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 19,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 20,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST / ACT NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": "date",
+            "label": "DATE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": "DOORS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "8:00 PM"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 4,
+            "tag": "select",
+            "type": null,
+            "label": "STATUS",
+            "placeholder": null,
+            "disabled": false,
+            "value": "1"
+          },
+          {
+            "index": 5,
+            "tag": "select",
+            "type": null,
+            "label": "AGE",
+            "placeholder": null,
+            "disabled": false,
+            "value": "21+"
+          },
+          {
+            "index": 6,
+            "tag": "input",
+            "type": null,
+            "label": "PRICE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "$10"
+          },
+          {
+            "index": 7,
+            "tag": "input",
+            "type": null,
+            "label": "GENRE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 8,
+            "tag": "input",
+            "type": "number",
+            "label": "CAPACITY",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "150"
+          },
+          {
+            "index": 9,
+            "tag": "textarea",
+            "type": null,
+            "label": "PUBLIC DESCRIPTION",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 10,
+            "tag": "textarea",
+            "type": null,
+            "label": "STAFF NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 11,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 12,
+            "tag": "input",
+            "type": null,
+            "label": "ROLE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "headline"
+          },
+          {
+            "index": 13,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 14,
+            "tag": "input",
+            "type": null,
+            "label": "END",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 15,
+            "tag": "input",
+            "type": "file",
+            "label": "FLYER",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "shows",
+        "route": "/shows",
+        "url": "http://localhost:3008/shows",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 5,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 7,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 10,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 11,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 12,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 13,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 14,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "calendar",
+      "route": "/calendar",
+      "interactions": [
+        {
+          "note": "calendar: click Add hold",
+          "ok": true,
+          "url": "http://localhost:3008/calendar",
+          "statusText": [
+            "Hold created for 2026-06-01."
+          ]
+        },
+        {
+          "note": "calendar: click Block date",
+          "ok": true,
+          "url": "http://localhost:3008/calendar",
+          "statusText": [
+            "Blocked date created for 2026-06-02."
+          ]
+        }
+      ],
+      "before": {
+        "name": "calendar",
+        "route": "/calendar",
+        "url": "http://localhost:3008/calendar",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "Add hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "Block date",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "",
+            "ariaLabel": "Previous month",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 4,
+            "text": "Today",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "",
+            "ariaLabel": "Next month",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Open show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 7,
+            "text": "Add to today",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / CalendarCalendarPlan the room · holds, confirms, and off-nightsAdd holdBlock date"
+          },
+          {
+            "section": "calendar-board",
+            "text": "May 2025TodaySunMonTueWedThuFriSat1Hold — TBD2Burial HexClosed34Orphx56789Moor Mother1011121314Pharmakon request15Venue maintenance1617Cygnus + Guests181920212223Open Mic Night242526Closed2728293031ConfirmedHoldBlockedMa"
+          },
+          {
+            "section": "calendar-month",
+            "text": "May 2025TodaySunMonTueWedThuFriSat1Hold — TBD2Burial HexClosed34Orphx56789Moor Mother1011121314Pharmakon request15Venue maintenance1617Cygnus + Guests181920212223Open Mic Night242526Closed2728293031ConfirmedHoldBlocked"
+          },
+          {
+            "section": "calendar-agenda",
+            "text": "May at a glanceConfirmed5Hold2Blocked3Open nights21Today · May 2Burial HexConfirmedDoors 8:00 PM · 21+ · $12 advExpected draw: ~70 / 150Open showAdd to today"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "calendar",
+        "route": "/calendar",
+        "url": "http://localhost:3008/calendar",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "Add hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "Block date",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "",
+            "ariaLabel": "Previous month",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 4,
+            "text": "Today",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "",
+            "ariaLabel": "Next month",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Open show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 7,
+            "text": "Add to today",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / CalendarCalendarPlan the room · holds, confirms, and off-nightsAdd holdBlock date"
+          },
+          {
+            "section": "calendar-board",
+            "text": "May 2025TodaySunMonTueWedThuFriSat1Hold — TBDHold — TBD2Burial HexClosedClosed34Orphx56789Moor Mother1011121314Pharmakon request15Venue maintenance1617Cygnus + Guests181920212223Open Mic Night242526Closed2728293031Confir"
+          },
+          {
+            "section": "calendar-month",
+            "text": "May 2025TodaySunMonTueWedThuFriSat1Hold — TBDHold — TBD2Burial HexClosedClosed34Orphx56789Moor Mother1011121314Pharmakon request15Venue maintenance1617Cygnus + Guests181920212223Open Mic Night242526Closed2728293031Confir"
+          },
+          {
+            "section": "calendar-agenda",
+            "text": "May at a glanceConfirmed5Hold3Blocked4Open nights19Today · May 2Burial HexConfirmedDoors 8:00 PM · 21+ · $12 advExpected draw: ~70 / 150Open showAdd to today"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": [
+          "Blocked date created for 2026-06-02."
+        ]
+      }
+    },
+    {
+      "name": "bookings",
+      "route": "/bookings",
+      "interactions": [
+        {
+          "note": "bookings: click Open form",
+          "ok": true,
+          "url": "http://localhost:3008/bookings",
+          "statusText": []
+        },
+        {
+          "note": "bookings: click Auto-review",
+          "ok": true,
+          "url": "http://localhost:3008/bookings",
+          "statusText": []
+        }
+      ],
+      "before": {
+        "name": "bookings",
+        "route": "/bookings",
+        "url": "http://localhost:3008/bookings",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "Open form",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "Auto-review",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "Decline",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--danger pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "Approve",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--success pyxis-btn--sm"
+          },
+          {
+            "index": 6,
+            "text": "View archive",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-panel-link-action"
+          },
+          {
+            "index": 7,
+            "text": "Not a fit right now ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Double-booked that night ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "Too soon — try next season ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 10,
+            "text": "Need more info ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "pharmakon.example",
+            "href": null,
+            "ariaCurrent": null,
+            "classes": null
+          },
+          {
+            "index": 10,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 14,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-review"
+          },
+          {
+            "section": "bookings-queue",
+            "text": "Awaiting review · 1Review each request, then approve to add the show or decline with a reason.PharmakonConfirmedSun, Jun 14, 2026Industrial~80 est. drawpharmakon.exampleSubmitted 2026-04-19T21:37:05-04:00·Date is availab"
+          },
+          {
+            "section": "bookings-processed",
+            "text": "Recently processedView archiveArtistRequestedGenreSubmittedStatussdfsdInvalid DateLive music2026-04-27T22:47:30-04:00ArchivedContainerJul 19Noise2026-04-22T21:37:05-04:00CancelledLust for YouthJun 21Darkwave2026-04-20T21"
+          },
+          {
+            "section": "bookings-insights",
+            "text": "Inbox rhythmSubmissions, last 12 weeks · avg response 2.1 days.Decline templatesNot a fit right now ›Double-booked that night ›Too soon — try next season ›Need more info ›"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "bookings",
+        "route": "/bookings",
+        "url": "http://localhost:3008/bookings",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "Open form",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "Auto-review",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "Decline",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--danger pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "Approve",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--success pyxis-btn--sm"
+          },
+          {
+            "index": 6,
+            "text": "View archive",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-panel-link-action"
+          },
+          {
+            "index": 7,
+            "text": "Not a fit right now ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Double-booked that night ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "Too soon — try next season ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 10,
+            "text": "Need more info ›",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "pharmakon.example",
+            "href": null,
+            "ariaCurrent": null,
+            "classes": null
+          },
+          {
+            "index": 10,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 14,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / BookingsBookingsSubmissions from #booking-requestsOpen formAuto-review"
+          },
+          {
+            "section": "bookings-queue",
+            "text": "Awaiting review · 1Review each request, then approve to add the show or decline with a reason.PharmakonConfirmedSun, Jun 14, 2026Industrial~80 est. drawpharmakon.exampleSubmitted 2026-04-19T21:37:05-04:00·Date is availab"
+          },
+          {
+            "section": "bookings-processed",
+            "text": "Recently processedView archiveArtistRequestedGenreSubmittedStatussdfsdInvalid DateLive music2026-04-27T22:47:30-04:00ArchivedContainerJul 19Noise2026-04-22T21:37:05-04:00CancelledLust for YouthJun 21Darkwave2026-04-20T21"
+          },
+          {
+            "section": "bookings-insights",
+            "text": "Inbox rhythmSubmissions, last 12 weeks · avg response 2.1 days.Decline templatesNot a fit right now ›Double-booked that night ›Too soon — try next season ›Need more info ›"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "artists",
+      "route": "/artists",
+      "interactions": [
+        {
+          "note": "artists: click New artist",
+          "ok": true,
+          "url": "http://localhost:3008/artists",
+          "statusText": []
+        },
+        {
+          "note": "artists: fill draft artist name",
+          "ok": true
+        },
+        {
+          "note": "artists: click Clear",
+          "ok": true,
+          "url": "http://localhost:3008/artists",
+          "statusText": []
+        }
+      ],
+      "before": {
+        "name": "artists",
+        "route": "/artists",
+        "url": "http://localhost:3008/artists",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "New artist",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "ACActressElectronic · https://actress.examplehttps://actress.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 3,
+            "text": "ARArcaExperimental · https://arca.examplehttps://arca.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 4,
+            "text": "BHBurial HexDarkwave · https://burialhex.examplehttps://burialhex.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 5,
+            "text": "COContainerNoise · https://container.examplehttps://container.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 6,
+            "text": "CYCygnusTechno · https://cygnus.examplehttps://cygnus.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 7,
+            "text": "LYLust for YouthDarkwave · https://lustforyouth.examplehttps://lustforyouth.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 8,
+            "text": "MMMoor MotherExperimental · https://moormother.examplehttps://moormother.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 9,
+            "text": "OCOpen Mic CollectiveVarious ·",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 10,
+            "text": "OROrphxEBM · https://orphx.examplehttps://orphx.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 11,
+            "text": "PHPharmakonIndustrial · https://pharmakon.examplehttps://pharmakon.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 12,
+            "text": "PBPlanning for BurialAmbient · https://planningforburial.examplehttps://planningforburial.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 13,
+            "text": "Clear",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 14,
+            "text": "Create artist",
+            "ariaLabel": null,
+            "disabled": true,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": null,
+            "label": "GENRE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": "LINKS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 3,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ArtistsArtistsNew artist"
+          },
+          {
+            "section": "artists-roster",
+            "text": "All artistsACActressElectronic · https://actress.examplehttps://actress.exampleARArcaExperimental · https://arca.examplehttps://arca.exampleBHBurial HexDarkwave · https://burialhex.examplehttps://burialhex.exampleCOConta"
+          },
+          {
+            "section": "artist-editor",
+            "text": "New artistNameGenreLinksNotesClearCreate artist"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "artists",
+        "route": "/artists",
+        "url": "http://localhost:3008/artists",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "New artist",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "ACActressElectronic · https://actress.examplehttps://actress.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 3,
+            "text": "ARArcaExperimental · https://arca.examplehttps://arca.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 4,
+            "text": "BHBurial HexDarkwave · https://burialhex.examplehttps://burialhex.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 5,
+            "text": "COContainerNoise · https://container.examplehttps://container.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 6,
+            "text": "CYCygnusTechno · https://cygnus.examplehttps://cygnus.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 7,
+            "text": "LYLust for YouthDarkwave · https://lustforyouth.examplehttps://lustforyouth.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 8,
+            "text": "MMMoor MotherExperimental · https://moormother.examplehttps://moormother.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 9,
+            "text": "OCOpen Mic CollectiveVarious ·",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 10,
+            "text": "OROrphxEBM · https://orphx.examplehttps://orphx.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 11,
+            "text": "PHPharmakonIndustrial · https://pharmakon.examplehttps://pharmakon.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 12,
+            "text": "PBPlanning for BurialAmbient · https://planningforburial.examplehttps://planningforburial.example",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "app-artist-roster-button"
+          },
+          {
+            "index": 13,
+            "text": "Clear",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 14,
+            "text": "Create artist",
+            "ariaLabel": null,
+            "disabled": true,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": null,
+            "label": "GENRE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": "LINKS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 3,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ArtistsArtistsNew artist"
+          },
+          {
+            "section": "artists-roster",
+            "text": "All artistsACActressElectronic · https://actress.examplehttps://actress.exampleARArcaExperimental · https://arca.examplehttps://arca.exampleBHBurial HexDarkwave · https://burialhex.examplehttps://burialhex.exampleCOConta"
+          },
+          {
+            "section": "artist-editor",
+            "text": "New artistNameGenreLinksNotesClearCreate artist"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "attendance",
+      "route": "/attendance",
+      "interactions": [],
+      "before": {
+        "name": "attendance",
+        "route": "/attendance",
+        "url": "http://localhost:3008/attendance",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "Save attendance",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "Save attendance",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": "number",
+            "label": "DRAW",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "34"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": "checkbox",
+            "label": "INCIDENT",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "on"
+          },
+          {
+            "index": 2,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Good energy, small crowd."
+          },
+          {
+            "index": 3,
+            "tag": "textarea",
+            "type": null,
+            "label": "INCIDENT NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 4,
+            "tag": "input",
+            "type": "number",
+            "label": "DRAW",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "61"
+          },
+          {
+            "index": 5,
+            "tag": "input",
+            "type": "checkbox",
+            "label": "INCIDENT",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "on"
+          },
+          {
+            "index": 6,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Great turnout for a weeknight."
+          },
+          {
+            "index": 7,
+            "tag": "textarea",
+            "type": null,
+            "label": "INCIDENT NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / Post-show logPost-show logNew show"
+          },
+          {
+            "section": "attendance-past-shows",
+            "text": "Past shows2Logged0Needs log48Average drawPlanning for Burial2025-03-14 · 34 attendeesDrawIncidentNotesGood energy, small crowd.Incident notesSave attendanceActress2025-02-28 · 61 attendeesDrawIncidentNotesGreat turnout f"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "attendance",
+        "route": "/attendance",
+        "url": "http://localhost:3008/attendance",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "Save attendance",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 5,
+            "text": "Save attendance",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": "number",
+            "label": "DRAW",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "34"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": "checkbox",
+            "label": "INCIDENT",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "on"
+          },
+          {
+            "index": 2,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Good energy, small crowd."
+          },
+          {
+            "index": 3,
+            "tag": "textarea",
+            "type": null,
+            "label": "INCIDENT NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 4,
+            "tag": "input",
+            "type": "number",
+            "label": "DRAW",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "61"
+          },
+          {
+            "index": 5,
+            "tag": "input",
+            "type": "checkbox",
+            "label": "INCIDENT",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "on"
+          },
+          {
+            "index": 6,
+            "tag": "textarea",
+            "type": null,
+            "label": "NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Great turnout for a weeknight."
+          },
+          {
+            "index": 7,
+            "tag": "textarea",
+            "type": null,
+            "label": "INCIDENT NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / Post-show logPost-show logNew show"
+          },
+          {
+            "section": "attendance-past-shows",
+            "text": "Past shows2Logged0Needs log48Average drawPlanning for Burial2025-03-14 · 34 attendeesDrawIncidentNotesGood energy, small crowd.Incident notesSave attendanceActress2025-02-28 · 61 attendeesDrawIncidentNotesGreat turnout f"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "audit-log",
+      "route": "/log",
+      "interactions": [],
+      "before": {
+        "name": "audit-log",
+        "route": "/log",
+        "url": "http://localhost:3008/log",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / Audit logAudit logNew show"
+          },
+          {
+            "section": "audit-log-activity",
+            "text": "Activitysubmission.approve2026-04-28T13:07:02-04:00 · slonosubmission.approve2026-04-27T23:24:29-04:00 · slonosubmission.decline2026-04-27T23:24:27-04:00 · slonoshow.update2026-04-26T21:37:31-04:00 · dev-adminshow.update"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "audit-log",
+        "route": "/log",
+        "url": "http://localhost:3008/log",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / Audit logAudit logNew show"
+          },
+          {
+            "section": "audit-log-activity",
+            "text": "Activitysubmission.approve2026-04-28T13:07:02-04:00 · slonosubmission.approve2026-04-27T23:24:29-04:00 · slonosubmission.decline2026-04-27T23:24:27-04:00 · slonoshow.update2026-04-26T21:37:31-04:00 · dev-adminshow.update"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "discord",
+      "route": "/discord",
+      "interactions": [],
+      "before": {
+        "name": "discord",
+        "route": "/discord",
+        "url": "http://localhost:3008/discord",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / DiscordDiscordNew show"
+          },
+          {
+            "section": "discord-channel-mapping",
+            "text": "Channel mappingBooking requests#booking-requests · 847392017483620358EnabledUpcoming shows#upcoming-shows · 847392017483620359EnabledStaff log#staff-log · 847392017483620360EnabledPost-show log#post-show-log · 8473920174"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "discord",
+        "route": "/discord",
+        "url": "http://localhost:3008/discord",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / DiscordDiscordNew show"
+          },
+          {
+            "section": "discord-channel-mapping",
+            "text": "Channel mappingBooking requests#booking-requests · 847392017483620358EnabledUpcoming shows#upcoming-shows · 847392017483620359EnabledStaff log#staff-log · 847392017483620360EnabledPost-show log#post-show-log · 8473920174"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "settings",
+      "route": "/settings",
+      "interactions": [],
+      "before": {
+        "name": "settings",
+        "route": "/settings",
+        "url": "http://localhost:3008/settings",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "Save core settings",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "SPACE NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Pyxis"
+          },
+          {
+            "index": 1,
+            "tag": "textarea",
+            "type": null,
+            "label": "ADDRESS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "319 N 11th St, Philadelphia, PA"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": "number",
+            "label": "CAPACITY",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "150"
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / SettingsSettingsNew show"
+          },
+          {
+            "section": "settings-space-info",
+            "text": "Core space settingsPyxis319 N 11th St, Philadelphia, PA · 150 cap · America/New_YorkSpace nameAddress319 N 11th St, Philadelphia, PACapacitySave core settings"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "settingsFirstInputValue": "Pyxis",
+      "after": {
+        "name": "settings",
+        "route": "/settings",
+        "url": "http://localhost:3008/settings",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Search",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Notifications",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-icon-btn"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          },
+          {
+            "index": 4,
+            "text": "Save core settings",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": "page",
+            "classes": "active"
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "SPACE NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "Pyxis"
+          },
+          {
+            "index": 1,
+            "tag": "textarea",
+            "type": null,
+            "label": "ADDRESS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "319 N 11th St, Philadelphia, PA"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": "number",
+            "label": "CAPACITY",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "150"
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / SettingsSettingsNew show"
+          },
+          {
+            "section": "settings-space-info",
+            "text": "Core space settingsPyxis319 N 11th St, Philadelphia, PA · 150 cap · America/New_YorkSpace nameAddress319 N 11th St, Philadelphia, PACapacitySave core settings"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "setup",
+      "route": "/setup",
+      "interactions": [
+        {
+          "note": "setup: click Back",
+          "ok": true,
+          "url": "http://localhost:3008/setup",
+          "statusText": []
+        },
+        {
+          "note": "setup: click Skip for now",
+          "ok": true,
+          "url": "http://localhost:3008/setup",
+          "statusText": []
+        },
+        {
+          "note": "setup: click Continue",
+          "ok": true,
+          "url": "http://localhost:3008/setup",
+          "statusText": []
+        }
+      ],
+      "before": {
+        "name": "setup",
+        "route": "/setup",
+        "url": "http://localhost:3008/setup",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "Back",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          },
+          {
+            "index": 1,
+            "text": "Skip for now",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 2,
+            "text": "Continue",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620355"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620356"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620357"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620358"
+          }
+        ],
+        "sections": [
+          {
+            "section": "setup-header",
+            "text": "pyxisSetup · 3 of 4Map your Discord channelsTell the bot where to post. Right-click any channel in Discord and choose Copy Channel ID (requires Developer Mode)."
+          },
+          {
+            "section": "setup-progress",
+            "text": "✓Space✓Server3Channels4Ready"
+          },
+          {
+            "section": "setup-channels",
+            "text": "#upcoming-showsPublic · bot posts + pins confirmed show announcements#announcementsPublic · broader space announcements and cancellations#staffPrivate · auto-archive notices, reminders, bot status#booking-requestsPrivate"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "setup",
+        "route": "/setup",
+        "url": "http://localhost:3008/setup",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "Back",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          },
+          {
+            "index": 1,
+            "text": "Skip for now",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 2,
+            "text": "Continue",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620355"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620356"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620357"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "type": null,
+            "label": null,
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": true,
+            "value": "847392017483620358"
+          }
+        ],
+        "sections": [
+          {
+            "section": "setup-header",
+            "text": "pyxisSetup · 3 of 4Map your Discord channelsTell the bot where to post. Right-click any channel in Discord and choose Copy Channel ID (requires Developer Mode)."
+          },
+          {
+            "section": "setup-progress",
+            "text": "✓Space✓Server3Channels4Ready"
+          },
+          {
+            "section": "setup-channels",
+            "text": "#upcoming-showsPublic · bot posts + pins confirmed show announcements#announcementsPublic · broader space announcements and cancellations#staffPrivate · auto-archive notices, reminders, bot status#booking-requestsPrivate"
+          }
+        ],
+        "statusText": []
+      }
+    },
+    {
+      "name": "modal-showcase",
+      "route": "/modal",
+      "interactions": [],
+      "before": {
+        "name": "modal-showcase",
+        "route": "/modal",
+        "url": "http://localhost:3008/modal",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 5,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 7,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 10,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 11,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 12,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 13,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 14,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 15,
+            "text": "",
+            "ariaLabel": "Close",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 16,
+            "text": "Add row",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 17,
+            "text": "Remove",
+            "ariaLabel": "Remove lineup row",
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 18,
+            "text": "Cancel",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          },
+          {
+            "index": 19,
+            "text": "Save draft",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 20,
+            "text": "Save show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST / ACT NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": "date",
+            "label": "DATE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": "DOORS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "8:00 PM"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 4,
+            "tag": "select",
+            "type": null,
+            "label": "STATUS",
+            "placeholder": null,
+            "disabled": false,
+            "value": "1"
+          },
+          {
+            "index": 5,
+            "tag": "select",
+            "type": null,
+            "label": "AGE",
+            "placeholder": null,
+            "disabled": false,
+            "value": "21+"
+          },
+          {
+            "index": 6,
+            "tag": "input",
+            "type": null,
+            "label": "PRICE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "$10"
+          },
+          {
+            "index": 7,
+            "tag": "input",
+            "type": null,
+            "label": "GENRE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 8,
+            "tag": "input",
+            "type": "number",
+            "label": "CAPACITY",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "150"
+          },
+          {
+            "index": 9,
+            "tag": "textarea",
+            "type": null,
+            "label": "PUBLIC DESCRIPTION",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 10,
+            "tag": "textarea",
+            "type": null,
+            "label": "STAFF NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 11,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 12,
+            "tag": "input",
+            "type": null,
+            "label": "ROLE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "headline"
+          },
+          {
+            "index": 13,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 14,
+            "tag": "input",
+            "type": null,
+            "label": "END",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 15,
+            "tag": "input",
+            "type": "file",
+            "label": "FLYER",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      },
+      "after": {
+        "name": "modal-showcase",
+        "route": "/modal",
+        "url": "http://localhost:3008/modal",
+        "title": "Pyxis App",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false,
+            "type": "button",
+            "classes": "app-sidebar-user__logout"
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--sm"
+          },
+          {
+            "index": 4,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 5,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 6,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 7,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 8,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 9,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 10,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 11,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 12,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 13,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false,
+            "type": null,
+            "classes": "app-row-edit"
+          },
+          {
+            "index": 14,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 15,
+            "text": "",
+            "ariaLabel": "Close",
+            "disabled": false,
+            "type": null,
+            "classes": null
+          },
+          {
+            "index": 16,
+            "text": "Add row",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--sm"
+          },
+          {
+            "index": 17,
+            "text": "Remove",
+            "ariaLabel": "Remove lineup row",
+            "disabled": false,
+            "type": "button",
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--sm"
+          },
+          {
+            "index": 18,
+            "text": "Cancel",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--ghost pyxis-btn--md"
+          },
+          {
+            "index": 19,
+            "text": "Save draft",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--outline pyxis-btn--md"
+          },
+          {
+            "index": 20,
+            "text": "Save show",
+            "ariaLabel": null,
+            "disabled": false,
+            "type": null,
+            "classes": "pyxis-btn pyxis-btn--primary pyxis-btn--md"
+          }
+        ],
+        "links": [
+          {
+            "index": 0,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 1,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 2,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 3,
+            "text": "Bookings3",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 4,
+            "text": "Artists",
+            "href": "/artists",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 5,
+            "text": "Post-show log",
+            "href": "/attendance",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 6,
+            "text": "Audit log",
+            "href": "/log",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 7,
+            "text": "Discord",
+            "href": "/discord",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 8,
+            "text": "Settings",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 9,
+            "text": "Dashboard",
+            "href": "/",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 10,
+            "text": "Shows",
+            "href": "/shows",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 11,
+            "text": "Calendar",
+            "href": "/calendar",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 12,
+            "text": "Bookings",
+            "href": "/bookings",
+            "ariaCurrent": null,
+            "classes": ""
+          },
+          {
+            "index": 13,
+            "text": "More",
+            "href": "/settings",
+            "ariaCurrent": null,
+            "classes": ""
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST / ACT NAME",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "type": "date",
+            "label": "DATE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "type": null,
+            "label": "DOORS",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "8:00 PM"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 4,
+            "tag": "select",
+            "type": null,
+            "label": "STATUS",
+            "placeholder": null,
+            "disabled": false,
+            "value": "1"
+          },
+          {
+            "index": 5,
+            "tag": "select",
+            "type": null,
+            "label": "AGE",
+            "placeholder": null,
+            "disabled": false,
+            "value": "21+"
+          },
+          {
+            "index": 6,
+            "tag": "input",
+            "type": null,
+            "label": "PRICE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "$10"
+          },
+          {
+            "index": 7,
+            "tag": "input",
+            "type": null,
+            "label": "GENRE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 8,
+            "tag": "input",
+            "type": "number",
+            "label": "CAPACITY",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "150"
+          },
+          {
+            "index": 9,
+            "tag": "textarea",
+            "type": null,
+            "label": "PUBLIC DESCRIPTION",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 10,
+            "tag": "textarea",
+            "type": null,
+            "label": "STAFF NOTES",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 11,
+            "tag": "input",
+            "type": null,
+            "label": "ARTIST",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 12,
+            "tag": "input",
+            "type": null,
+            "label": "ROLE",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "headline"
+          },
+          {
+            "index": 13,
+            "tag": "input",
+            "type": null,
+            "label": "START",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": "9:00 PM"
+          },
+          {
+            "index": 14,
+            "tag": "input",
+            "type": null,
+            "label": "END",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          },
+          {
+            "index": 15,
+            "tag": "input",
+            "type": "file",
+            "label": "FLYER",
+            "placeholder": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statusText": []
+      }
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+    }
+  ],
+  "requests": [],
+  "endedAt": "2026-04-28T17:10:49.058Z"
+}

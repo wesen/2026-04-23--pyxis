@@ -1,0 +1,732 @@
+{
+  "baseURL": "http://localhost:3008",
+  "pages": [
+    {
+      "kind": "shows-edit-button-click",
+      "firstEditLabel": "Edit Burial Hex",
+      "afterClickURL": "http://localhost:3008/shows",
+      "afterClick": {
+        "route": "/shows",
+        "url": "http://localhost:3008/shows",
+        "heading": "Shows",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false
+          },
+          {
+            "index": 1,
+            "text": "",
+            "ariaLabel": "Filter shows",
+            "disabled": false
+          },
+          {
+            "index": 2,
+            "text": "",
+            "ariaLabel": "Search shows",
+            "disabled": false
+          },
+          {
+            "index": 3,
+            "text": "New show",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 4,
+            "text": "All",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 5,
+            "text": "Confirmed 5",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 6,
+            "text": "Hold",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 7,
+            "text": "Cancelled",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 8,
+            "text": "Archived",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 9,
+            "text": "",
+            "ariaLabel": "Edit Burial Hex",
+            "disabled": false
+          },
+          {
+            "index": 10,
+            "text": "",
+            "ariaLabel": "Edit Moor Mother",
+            "disabled": false
+          },
+          {
+            "index": 11,
+            "text": "",
+            "ariaLabel": "Edit Cygnus + Guests",
+            "disabled": false
+          },
+          {
+            "index": 12,
+            "text": "",
+            "ariaLabel": "Edit Open Mic Night",
+            "disabled": false
+          },
+          {
+            "index": 13,
+            "text": "",
+            "ariaLabel": "Edit Orphx",
+            "disabled": false
+          },
+          {
+            "index": 14,
+            "text": "See all past shows",
+            "ariaLabel": null,
+            "disabled": false
+          }
+        ],
+        "inputs": [],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Home / ShowsShowsNew show"
+          },
+          {
+            "section": "shows-filters",
+            "text": "AllConfirmed 5HoldCancelledArchivedSort: Date ascending"
+          },
+          {
+            "section": "shows-confirmed",
+            "text": "Confirmed · 5Pinned shows appear in #upcoming-shows#DateArtistDoorsAgePriceDrawStatus#1May 2SaturdayBurial HexDarkwave8:00 PM21+$12 adv / $15 door70/150Confirmed#2May 9SaturdayMoor MotherExperimental7:00 PMAll Ages$15120/150Confirmed#3May 1"
+          },
+          {
+            "section": "shows-archived",
+            "text": "Archived · 2See all past showsDateArtistGenreDrawStatusFri, Mar 14, 2025Planning for BurialAmbient34 attendedArchivedFri, Feb 28, 2025ActressElectronic61 attendedArchived"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statuses": []
+      }
+    },
+    {
+      "kind": "show-detail",
+      "id": "1",
+      "before": {
+        "route": "/shows/1",
+        "url": "http://localhost:3008/shows/1",
+        "heading": "Burial Hex",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false
+          },
+          {
+            "index": 1,
+            "text": "Edit",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 2,
+            "text": "Open post",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 3,
+            "text": "Delete flyer",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 4,
+            "text": "Upload flyer",
+            "ariaLabel": null,
+            "disabled": true
+          },
+          {
+            "index": 5,
+            "text": "Duplicate",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 6,
+            "text": "Archive",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 7,
+            "text": "Announce",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 8,
+            "text": "Cancel show",
+            "ariaLabel": null,
+            "disabled": false
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "label": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Shows / DetailBurial HexEdit"
+          },
+          {
+            "section": "show-detail-hero",
+            "text": "ConfirmedBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+poster · 1080×1080"
+          },
+          {
+            "section": "show-detail-info",
+            "text": "DetailsDoors 8:00 PMPrice $12 adv / $15 doorExpected draw 70 / 150Genre Darkwave"
+          },
+          {
+            "section": "show-detail-discord",
+            "text": "Posted to Discord#upcoming-shows · Pinned · 4 days ago · 12 reactionsOpen post"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statuses": []
+      },
+      "interactions": [
+        {
+          "name": "Edit",
+          "ok": true,
+          "url": "http://localhost:3008/shows/1",
+          "statuses": []
+        },
+        {
+          "name": "Duplicate",
+          "ok": true,
+          "url": "http://localhost:3008/shows/1",
+          "statuses": []
+        },
+        {
+          "name": "Announce",
+          "ok": true,
+          "url": "http://localhost:3008/shows/1",
+          "statuses": [
+            "Announcement requested."
+          ]
+        }
+      ],
+      "after": {
+        "route": "/shows/1",
+        "url": "http://localhost:3008/shows/1",
+        "heading": "Burial Hex",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false
+          },
+          {
+            "index": 1,
+            "text": "Edit",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 2,
+            "text": "Open post",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 3,
+            "text": "Delete flyer",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 4,
+            "text": "Upload flyer",
+            "ariaLabel": null,
+            "disabled": true
+          },
+          {
+            "index": 5,
+            "text": "Duplicate",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 6,
+            "text": "Archive",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 7,
+            "text": "Announce",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 8,
+            "text": "Cancel show",
+            "ariaLabel": null,
+            "disabled": false
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "label": null,
+            "disabled": false,
+            "readOnly": false,
+            "value": ""
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Shows / DetailBurial HexEdit"
+          },
+          {
+            "section": "show-detail-hero",
+            "text": "ConfirmedBurial HexFri, May 2, 2025 · Doors 8:00 PM · 21+poster · 1080×1080"
+          },
+          {
+            "section": "show-detail-info",
+            "text": "DetailsDoors 8:00 PMPrice $12 adv / $15 doorExpected draw 70 / 150Genre Darkwave"
+          },
+          {
+            "section": "show-detail-discord",
+            "text": "Posted to Discord#upcoming-shows · Pinned · 4 days ago · 12 reactionsOpen post"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statuses": [
+          "Announcement requested."
+        ]
+      }
+    },
+    {
+      "kind": "booking-review",
+      "route": "http://localhost:3008/bookings/review/1",
+      "before": {
+        "route": "http://localhost:3008/bookings/review/1",
+        "url": "http://localhost:3008/bookings/review/1",
+        "heading": "Pharmakon",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false
+          },
+          {
+            "index": 1,
+            "text": "Open link",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 2,
+            "text": "Save booking details",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 3,
+            "text": "Save review note",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 4,
+            "text": "Decline",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 5,
+            "text": "Approve",
+            "ariaLabel": null,
+            "disabled": false
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "label": "ARTIST / ACT",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Pharmakon"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "label": "REQUESTED DATE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "2026-06-14"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "label": "GENRE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Industrial"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "label": "EXPECTED DRAW",
+            "disabled": false,
+            "readOnly": false,
+            "value": "80"
+          },
+          {
+            "index": 4,
+            "tag": "input",
+            "label": "DISCORD/CONTACT",
+            "disabled": false,
+            "readOnly": false,
+            "value": "@pharmakon"
+          },
+          {
+            "index": 5,
+            "tag": "input",
+            "label": "LINKS",
+            "disabled": false,
+            "readOnly": false,
+            "value": "pharmakon.example"
+          },
+          {
+            "index": 6,
+            "tag": "textarea",
+            "label": "TECH RIDER",
+            "disabled": false,
+            "readOnly": false,
+            "value": "DI + vocal mic"
+          },
+          {
+            "index": 7,
+            "tag": "textarea",
+            "label": "ARTIST MESSAGE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Touring in June, looking for a basement date."
+          },
+          {
+            "index": 8,
+            "tag": "textarea",
+            "label": "INTERNAL REVIEW NOTE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Good fit. Pair with a local harsh-noise opener and confirm curfew."
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Bookings / ReviewPharmakonOpen link"
+          },
+          {
+            "section": "booking-review-hero",
+            "text": "ConfirmedPharmakonSubmitted 2026-04-19T21:37:05-04:00 · Industrial"
+          },
+          {
+            "section": "booking-review-request",
+            "text": "RequestArtist / actRequested dateGenreExpected drawDiscord/contactLinksTech riderDI + vocal micArtist messageTouring in June, looking for a basement date.Save booking details"
+          },
+          {
+            "section": "booking-review-date",
+            "text": "Date check✓ Date is availableJun 14 is an open night. Nearest show: Zola Jesus on Jun 6."
+          },
+          {
+            "section": "booking-review-note",
+            "text": "Artist note & staff reviewTouring in June, looking for a basement date.Internal review noteGood fit. Pair with a local harsh-noise opener and confirm curfew.Last saved 2026-04-26T21:37:05-04:00Save review note"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statuses": []
+      },
+      "interactions": [
+        {
+          "name": "Open link",
+          "disabledBefore": false
+        },
+        {
+          "name": "Open link",
+          "ok": true,
+          "url": "http://localhost:3008/bookings/review/1",
+          "statuses": []
+        },
+        {
+          "name": "Save booking details",
+          "disabledBefore": false
+        },
+        {
+          "name": "Save booking details",
+          "ok": true,
+          "url": "http://localhost:3008/bookings/review/1",
+          "statuses": []
+        },
+        {
+          "name": "Save review note",
+          "disabledBefore": false
+        },
+        {
+          "name": "Save review note",
+          "ok": true,
+          "url": "http://localhost:3008/bookings/review/1",
+          "statuses": []
+        }
+      ],
+      "after": {
+        "route": "http://localhost:3008/bookings/review/1",
+        "url": "http://localhost:3008/bookings/review/1",
+        "heading": "Pharmakon",
+        "buttons": [
+          {
+            "index": 0,
+            "text": "",
+            "ariaLabel": "Log out",
+            "disabled": false
+          },
+          {
+            "index": 1,
+            "text": "Open link",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 2,
+            "text": "Save booking details",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 3,
+            "text": "Save review note",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 4,
+            "text": "Decline",
+            "ariaLabel": null,
+            "disabled": false
+          },
+          {
+            "index": 5,
+            "text": "Approve",
+            "ariaLabel": null,
+            "disabled": false
+          }
+        ],
+        "inputs": [
+          {
+            "index": 0,
+            "tag": "input",
+            "label": "ARTIST / ACT",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Pharmakon"
+          },
+          {
+            "index": 1,
+            "tag": "input",
+            "label": "REQUESTED DATE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "2026-06-14"
+          },
+          {
+            "index": 2,
+            "tag": "input",
+            "label": "GENRE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Industrial"
+          },
+          {
+            "index": 3,
+            "tag": "input",
+            "label": "EXPECTED DRAW",
+            "disabled": false,
+            "readOnly": false,
+            "value": "80"
+          },
+          {
+            "index": 4,
+            "tag": "input",
+            "label": "DISCORD/CONTACT",
+            "disabled": false,
+            "readOnly": false,
+            "value": "@pharmakon"
+          },
+          {
+            "index": 5,
+            "tag": "input",
+            "label": "LINKS",
+            "disabled": false,
+            "readOnly": false,
+            "value": "pharmakon.example"
+          },
+          {
+            "index": 6,
+            "tag": "textarea",
+            "label": "TECH RIDER",
+            "disabled": false,
+            "readOnly": false,
+            "value": "DI + vocal mic"
+          },
+          {
+            "index": 7,
+            "tag": "textarea",
+            "label": "ARTIST MESSAGE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Touring in June, looking for a basement date."
+          },
+          {
+            "index": 8,
+            "tag": "textarea",
+            "label": "INTERNAL REVIEW NOTE",
+            "disabled": false,
+            "readOnly": false,
+            "value": "Good fit. Pair with a local harsh-noise opener and confirm curfew."
+          }
+        ],
+        "sections": [
+          {
+            "section": "app-sidebar",
+            "text": "pyxisstaff portalProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettingsOSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-sidebar-menu",
+            "text": "ProgramDashboardShowsCalendarBookings3RosterArtistsPost-show logOperateAudit logDiscordSettings"
+          },
+          {
+            "section": "app-sidebar-user",
+            "text": "OSosha-auditoradmin · online"
+          },
+          {
+            "section": "app-topbar",
+            "text": "Bookings / ReviewPharmakonOpen link"
+          },
+          {
+            "section": "booking-review-hero",
+            "text": "ConfirmedPharmakonSubmitted 2026-04-19T21:37:05-04:00 · Industrial"
+          },
+          {
+            "section": "booking-review-request",
+            "text": "RequestArtist / actRequested dateGenreExpected drawDiscord/contactLinksTech riderDI + vocal micArtist messageTouring in June, looking for a basement date.Save booking details"
+          },
+          {
+            "section": "booking-review-date",
+            "text": "Date check✓ Date is availableJun 14 is an open night. Nearest show: Zola Jesus on Jun 6."
+          },
+          {
+            "section": "booking-review-note",
+            "text": "Artist note & staff reviewTouring in June, looking for a basement date.Internal review noteGood fit. Pair with a local harsh-noise opener and confirm curfew.Last saved 2026-04-28T13:12:44-04:00Save review note"
+          },
+          {
+            "section": "app-mobile-bottom-nav",
+            "text": "DashboardShowsCalendarBookingsMore"
+          }
+        ],
+        "statuses": []
+      }
+    }
+  ],
+  "requests": []
+}
