@@ -23,3 +23,7 @@ Added focused render-target comparison script, diagnosed Vite-vs-Storybook token
 ## 2026-04-27
 
 Fixed the Shows mobile Storybook baseline: mobile ShowGrid now renders one column, the Shows mobile story uses the six-show prototype fixture, PublicPageHeader has mobile sizing, and Shows mobile spacing is closer to the standalone mobile prototype.
+
+## 2026-04-27
+
+Implemented a functional accessible public-site mobile hamburger menu in `PubNav`, keeping the closed state aligned to the prototype and adding a conservative tokenized drop-down for the undefined open state.

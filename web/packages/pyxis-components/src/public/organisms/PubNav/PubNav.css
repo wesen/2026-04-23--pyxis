@@ -36,7 +36,8 @@
   gap: 2px;
 }
 
-.pyxis-pub-nav__link {
+.pyxis-pub-nav__link,
+.pyxis-pub-nav__mobile-link {
   background: none;
   border: none;
   border-radius: var(--radius-sm);
@@ -49,19 +50,85 @@
   transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
 }
 
-.pyxis-pub-nav__link:hover {
+.pyxis-pub-nav__link:hover,
+.pyxis-pub-nav__mobile-link:hover {
   color: var(--color-text-primary);
 }
 
-.pyxis-pub-nav__link--active {
+.pyxis-pub-nav__link--active,
+.pyxis-pub-nav__mobile-link--active {
   background: var(--color-canvas);
   color: var(--color-text-primary);
   font-weight: var(--weight-semibold);
 }
 
+.pyxis-pub-nav__menu-button {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  padding: 6px;
+}
+
+.pyxis-pub-nav__menu-button span {
+  background: currentColor;
+  display: block;
+  height: 1.5px;
+  width: 18px;
+}
+
+.pyxis-pub-nav__mobile-menu {
+  display: none;
+}
+
 .pyxis-pub-nav__link:focus-visible,
+.pyxis-pub-nav__mobile-link:focus-visible,
+.pyxis-pub-nav__menu-button:focus-visible,
 .pyxis-pub-nav__logo:focus-visible {
   border-radius: var(--radius-sm);
   outline: var(--ring-width) solid var(--ring-color);
   outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .pyxis-pub-nav__inner {
+    height: 52px;
+    padding: 0 18px;
+  }
+
+  .pyxis-pub-nav__logo {
+    font-size: 22px;
+  }
+
+  .pyxis-pub-nav__links {
+    display: none;
+  }
+
+  .pyxis-pub-nav__menu-button {
+    display: flex;
+  }
+
+  [data-pyxis-component='pub-nav'][data-pyxis-part='root'][data-mobile-menu-open='true'] .pyxis-pub-nav__mobile-menu {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-subtle);
+    box-shadow: 0 16px 28px rgba(26, 26, 24, 0.08);
+    display: grid;
+    gap: 4px;
+    padding: 8px 18px 14px;
+  }
+
+  .pyxis-pub-nav__mobile-link {
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    padding: 10px 12px;
+    text-align: left;
+    width: 100%;
+  }
 }

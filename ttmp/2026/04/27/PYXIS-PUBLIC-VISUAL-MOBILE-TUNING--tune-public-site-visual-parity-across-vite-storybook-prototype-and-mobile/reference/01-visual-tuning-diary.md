@@ -8,7 +8,7 @@ Topics:
 DocType: reference
 Intent: diary
 Summary: Chronological diary for public-site visual tuning across Vite, Storybook, standalone prototype, desktop, and mobile.
-LastUpdated: 2026-04-27T21:05:00-04:00
+LastUpdated: 2026-04-27T21:10:00-04:00
 ---
 
 # Public Site Visual + Mobile Tuning Diary
@@ -301,3 +301,56 @@ Representative artifact paths:
 ### Vite note
 
 After fixing the Storybook mobile baseline, `vite-storybook mobile shows-list` is still high because Vite is using live backend data while Storybook is using prototype fixture data. That is a different question from whether the mobile story matches the original. For visual tuning, use Storybook-first to tune the component/page fixture, then use Vite-vs-Storybook only after the Vite data is intentionally aligned or when comparing deep subparts that are data-insensitive.
+
+## Step 4: Implement functional mobile hamburger menu
+
+The standalone mobile prototype has a hamburger icon only; it does not define an opened-menu design. The real Vite public site needed this handled because the public top-level nav must be usable on mobile.
+
+### Design interpretation
+
+I kept the closed state aligned with the prototype:
+
+- nav height: `52px`
+- horizontal padding: `18px`
+- logo size: `22px`
+- three-line hamburger icon on the right
+
+For the open state, I added a minimal accessible drop-down panel using existing nav styling and tokens. This is intentionally conservative because no full mobile menu visual spec exists yet.
+
+### Changes
+
+Updated:
+
+```text
+web/packages/pyxis-components/src/public/organisms/PubNav/PubNav.tsx
+web/packages/pyxis-components/src/public/organisms/PubNav/PubNav.css
+```
+
+Behavior:
+
+- desktop nav links remain visible above `640px`;
+- mobile hides desktop links and shows the hamburger button;
+- hamburger toggles a mobile nav panel;
+- button uses `aria-expanded` and `aria-controls`;
+- selecting a mobile link calls the existing `onNavigate` callback and closes the panel.
+
+### Validation
+
+Manual browser check on `http://localhost:3007/` at `390x844`:
+
+- closed mobile nav shows logo + hamburger only;
+- opening the hamburger shows `Shows`, `Archive`, `Book us`, `About`;
+- clicking `Archive` navigates to `/archive` and closes via route change/remount.
+
+Build/type/doc validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec vite build
+docmgr doctor --ticket PYXIS-PUBLIC-VISUAL-MOBILE-TUNING --stale-after 30
+```
+
+### Note
+
+When first checking this in the live Vite server, the `PubNav.css` module had been transformed as an empty CSS module due to stale Vite state. Restarting the `pyxis-user-site-vite` tmux session fixed it. This matches the earlier known nuisance that Vite/Storybook stale CSS transforms can produce misleading screenshots.
