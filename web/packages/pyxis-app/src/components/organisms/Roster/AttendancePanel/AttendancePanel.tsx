@@ -12,6 +12,7 @@ export type AttendanceDraft = Pick<AttendanceLog, 'draw' | 'notes' | 'incident' 
 
 export type AttendancePanelProps = {
   entries: AttendanceLog[];
+  showNotesById?: Record<number, string>;
   onUpdateEntry?: (entry: AttendanceLog, draft: AttendanceDraft) => void;
   savingEntryId?: number;
 };
@@ -20,7 +21,7 @@ function attendanceEntryKey(entry: AttendanceLog) {
   return entry.id || entry.showId;
 }
 
-function AttendanceEditorCard({ entry, onUpdateEntry, isUpdating }: { entry: AttendanceLog; onUpdateEntry?: AttendancePanelProps['onUpdateEntry']; isUpdating?: boolean }) {
+function AttendanceEditorCard({ entry, showNotes, onUpdateEntry, isUpdating }: { entry: AttendanceLog; showNotes?: string; onUpdateEntry?: AttendancePanelProps['onUpdateEntry']; isUpdating?: boolean }) {
   const [draft, setDraft] = useState<AttendanceDraft>({ draw: entry.draw, notes: entry.notes, incident: entry.incident, incidentNotes: entry.incidentNotes });
 
   useEffect(() => {
@@ -39,6 +40,7 @@ function AttendanceEditorCard({ entry, onUpdateEntry, isUpdating }: { entry: Att
     <article className="app-booking-card app-attendance-edit-card">
       <h3>{entry.artist}</h3>
       <p>{entry.date} · {entry.draw !== undefined && entry.draw > 0 ? `${entry.draw} attendees` : 'needs report'}</p>
+      {showNotes && <div className="app-attendance-show-notes"><span>Show notes</span><p>{showNotes}</p></div>}
       <div className="app-attendance-edit-grid">
         <label><span>Draw</span><input aria-invalid={draft.draw < 0 || draft.draw > 10000} aria-label={`Draw for ${entry.artist}`} type="number" min={0} max={10000} value={draft.draw || 0} onChange={(event) => setDraft((current) => ({ ...current, draw: Number(event.target.value) }))} /></label>
         <label className="app-attendance-checkbox"><input aria-label={`Incident for ${entry.artist}`} type="checkbox" checked={draft.incident} onChange={(event) => setDraft((current) => ({ ...current, incident: event.target.checked, incidentNotes: event.target.checked ? current.incidentNotes : '' }))} /><span>Incident</span></label>
@@ -51,8 +53,8 @@ function AttendanceEditorCard({ entry, onUpdateEntry, isUpdating }: { entry: Att
   );
 }
 
-export function AttendancePanel({ entries, onUpdateEntry, savingEntryId }: AttendancePanelProps) {
+export function AttendancePanel({ entries, showNotesById = {}, onUpdateEntry, savingEntryId }: AttendancePanelProps) {
   const logged = entries.filter((entry) => entry.draw !== undefined && entry.draw > 0);
   const avg = Math.round(logged.reduce((total, entry) => total + (entry.draw ?? 0), 0) / Math.max(logged.length, 1));
-  return <div {...appPart('attendance-panel')}><div className="app-metrics-grid compact"><AttendanceStat label="Logged" value={logged.length}/><AttendanceStat label="Needs log" value={entries.length-logged.length}/><AttendanceStat label="Average draw" value={avg}/></div>{entries.length > 0 ? <div className="app-card-list">{entries.map((entry)=><AttendanceEditorCard key={attendanceEntryKey(entry)} entry={entry} onUpdateEntry={onUpdateEntry} isUpdating={savingEntryId === attendanceEntryKey(entry)} />)}</div> : <AppEmptyState title="No attendance reports yet." />}</div>;
+  return <div {...appPart('attendance-panel')}><div className="app-metrics-grid compact"><AttendanceStat label="Logged" value={logged.length}/><AttendanceStat label="Needs log" value={entries.length-logged.length}/><AttendanceStat label="Average draw" value={avg}/></div>{entries.length > 0 ? <div className="app-card-list">{entries.map((entry)=><AttendanceEditorCard key={attendanceEntryKey(entry)} entry={entry} showNotes={showNotesById[entry.showId]} onUpdateEntry={onUpdateEntry} isUpdating={savingEntryId === attendanceEntryKey(entry)} />)}</div> : <AppEmptyState title="No attendance reports yet." />}</div>;
 }

@@ -26,6 +26,11 @@ export const AllLogged: Story = {
   render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
 };
 
+export const WithShowNotes: Story = {
+  args: { showNotesById: { [attendance[0]?.showId ?? 0]: 'Staff show note: settle door split before payout and ask about load-out noise.' } },
+  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+};
+
 export const SavingFirstRow: Story = {
   args: { savingEntryId: attendance[0]?.id || attendance[0]?.showId },
   render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,

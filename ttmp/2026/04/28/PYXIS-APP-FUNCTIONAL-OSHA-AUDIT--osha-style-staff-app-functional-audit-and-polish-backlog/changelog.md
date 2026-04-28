@@ -47,3 +47,4 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Added visible Chromium flyer upload/storage smoke script and evidence for local filesystem + `/flyers/...` serving.
 - Added booking date selection against calendar events, calendar month navigation, day selection, event open/remove actions, and component/story coverage for the new calendar/date surfaces.
 - Added NewShowModal validation and stories, Shows filter/search stories, and Show Detail Discord Open post/announce feedback wiring with visible Chromium evidence.
+- Confirmed the post-show log route/stories and added visible staff show notes to attendance cards with Storybook and Chromium evidence.

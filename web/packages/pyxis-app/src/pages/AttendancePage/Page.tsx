@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useGetAttendanceQuery, useUpdateAttendanceMutation } from '../../api/appApi';
+import { useGetAttendanceQuery, useGetShowsQuery, useUpdateAttendanceMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { AttendancePanel, Panel } from '../../components/organisms';
 import type { AttendanceDraft } from '../../components/organisms/Roster/AttendancePanel/AttendancePanel';
@@ -8,11 +8,14 @@ import './Page.css';
 
 export function AttendancePage() {
   const { data: entries, isLoading, isError } = useGetAttendanceQuery();
+  const { data: shows } = useGetShowsQuery();
   const [updateAttendance] = useUpdateAttendanceMutation();
   const [actionError, setActionError] = useState<string | undefined>();
   const [actionSuccess, setActionSuccess] = useState<string | undefined>();
   const [savingEntryId, setSavingEntryId] = useState<number | undefined>();
   const [query, setQuery] = useState('');
+
+  const showNotesById = useMemo(() => Object.fromEntries((shows ?? []).map((show) => [show.id, show.notes]).filter(([, notes]) => Boolean(notes))), [shows]);
 
   const visibleEntries = useMemo(() => {
     if (!entries) return [];
@@ -37,7 +40,7 @@ export function AttendancePage() {
 
   return (
     <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
-      {isLoading ? <LoadingState /> : isError || !entries ? <ErrorState /> : entries.length === 0 ? <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No attendance logs returned from the backend." /></> : <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Past shows" section="attendance-past-shows"><label className="app-page-search"><span>Search attendance</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Artist, date, notes, incident" /></label>{visibleEntries.length > 0 ? <AttendancePanel entries={visibleEntries} onUpdateEntry={handleUpdateEntry} savingEntryId={savingEntryId} /> : <EmptyState label="No attendance entries match that search." />}</Panel></>}
+      {isLoading ? <LoadingState /> : isError || !entries ? <ErrorState /> : entries.length === 0 ? <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No attendance logs returned from the backend." /></> : <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Past shows" section="attendance-past-shows"><label className="app-page-search"><span>Search attendance</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Artist, date, notes, incident" /></label>{visibleEntries.length > 0 ? <AttendancePanel entries={visibleEntries} showNotesById={showNotesById} onUpdateEntry={handleUpdateEntry} savingEntryId={savingEntryId} /> : <EmptyState label="No attendance entries match that search." />}</Panel></>}
     </AppShell>
   );
 }

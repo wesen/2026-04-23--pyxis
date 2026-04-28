@@ -1,5 +1,8 @@
 .app-attendance-edit-card { display: grid; gap: 10px; }
 .app-attendance-edit-grid { display: grid; grid-template-columns: 120px 1fr; gap: 10px 12px; }
+.app-attendance-show-notes { background: var(--app-surface); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 9px 10px; }
+.app-attendance-show-notes span { color: var(--app-muted); display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; margin-bottom: 4px; text-transform: uppercase; }
+.app-attendance-show-notes p { color: var(--app-ink); font-size: 13px; line-height: 1.45; margin: 0; }
 .app-attendance-edit-grid label { display: grid; gap: 5px; }
 .app-attendance-edit-grid label:not(.app-attendance-checkbox):nth-of-type(n+3) { grid-column: 1 / -1; }
 .app-attendance-edit-grid span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }

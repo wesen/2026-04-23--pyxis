@@ -1068,3 +1068,80 @@ cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 go test ./... -count=1
 ```
+
+## Step 18: Post-show log page/story confirmation and show notes visibility
+
+The operator asked where show notes appear in the post-show log and whether a page/story exists.
+
+### Answer discovered
+
+There is a staff post-show log route:
+
+```text
+/attendance
+```
+
+Page/story files already exist:
+
+```text
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx
+```
+
+But the page previously displayed attendance-log notes only; it did not surface the staff show notes from the Show record.
+
+### Change made
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.css
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx
+```
+
+`AttendancePage` now fetches shows through RTK Query, builds a `showNotesById` map, and passes it to `AttendancePanel`. `AttendancePanel` renders a read-only `Show notes` block above the editable post-show attendance notes when staff notes exist for that show.
+
+Added Storybook story:
+
+```text
+AttendancePanel / WithShowNotes
+```
+
+### Visible Chromium evidence
+
+Script:
+
+```text
+scripts/08-post-show-log-show-notes-visible-smoke.js
+```
+
+Evidence:
+
+```text
+sources/14-post-show-log-show-notes-visible-chromium.json
+```
+
+The script creates a throwaway show with staff notes, upserts attendance, opens `/attendance`, and verifies the show note is visible.
+
+Key evidence:
+
+```text
+pageHeading: Post-show log
+showNotesVisible: true
+attendanceNotesVisible: true
+pageExcerpt includes:
+SHOW NOTES
+Smoke show note visible in post-show log.
+```
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/08-post-show-log-show-notes-visible-smoke.js
+```
