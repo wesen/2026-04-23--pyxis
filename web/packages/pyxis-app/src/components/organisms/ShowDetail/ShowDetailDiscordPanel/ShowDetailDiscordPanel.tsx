@@ -6,14 +6,15 @@ export type ShowDetailDiscordPanelProps = {
   channelLabel?: string;
   statusLabel?: string;
   reactionCount?: number;
+  isPosted?: boolean;
   onOpenPost?: () => void;
 };
 
-export function ShowDetailDiscordPanel({ channelLabel = '#upcoming-shows', statusLabel = 'Pinned · 4 days ago', reactionCount = 12, onOpenPost }: ShowDetailDiscordPanelProps) {
+export function ShowDetailDiscordPanel({ channelLabel = '#upcoming-shows', statusLabel = 'Not posted yet', reactionCount = 0, isPosted = false, onOpenPost }: ShowDetailDiscordPanelProps) {
   return (
     <Panel title="Posted to Discord" section="show-detail-discord">
-      <p className="app-muted-copy">{channelLabel} · {statusLabel} · {reactionCount} reactions</p>
-      <Button variant="outline" iconLeft="external" onClick={onOpenPost}>Open post</Button>
+      <p className="app-muted-copy">{channelLabel} · {statusLabel}{isPosted ? ` · ${reactionCount} reactions` : ''}</p>
+      <Button variant="outline" iconLeft="external" onClick={onOpenPost} disabled={!isPosted} title={isPosted ? 'Open the Discord message' : 'Announce this show before opening a Discord post'}>Open post</Button>
     </Panel>
   );
 }

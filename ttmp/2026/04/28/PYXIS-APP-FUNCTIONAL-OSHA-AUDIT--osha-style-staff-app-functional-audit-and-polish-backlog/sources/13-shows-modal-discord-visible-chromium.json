@@ -1,0 +1,11 @@
+{
+  "method": "Visible Chromium Shows/NewShowModal/Discord smoke.",
+  "staffBaseURL": "http://localhost:3008",
+  "errors": [],
+  "newShowValidation": "Artist / act name is required.",
+  "searchNoResults": "No shows match the current filters.",
+  "showDetailUrl": "http://localhost:3008/shows/1",
+  "discordPanel": "Posted to Discord\n\n#upcoming-shows · Not posted yet\n\nOpen post",
+  "openPostDisabled": true,
+  "announceFeedback": "Announcement requested. The bot will attach Discord post details when posting is available."
+}

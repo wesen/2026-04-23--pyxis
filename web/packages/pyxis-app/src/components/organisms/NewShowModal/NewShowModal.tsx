@@ -83,11 +83,13 @@ export function NewShowModal({
 }: NewShowModalProps) {
   const [draft, setDraft] = useState<ShowDraft>(() => draftFromShow(initialShow));
   const [flyerFile, setFlyerFile] = useState<File | undefined>();
+  const [validationError, setValidationError] = useState<string | undefined>();
 
   useEffect(() => {
     if (isOpen) {
       setDraft(draftFromShow(initialShow));
       setFlyerFile(undefined);
+      setValidationError(undefined);
     }
   }, [initialShow, isOpen]);
 
@@ -103,6 +105,10 @@ export function NewShowModal({
   const removeLineup = (index: number) => setDraft((current) => ({ ...current, lineup: current.lineup.filter((_entry, i) => i !== index) }));
 
   const submit = (status = draft.status) => {
+    setValidationError(undefined);
+    if (!draft.artist.trim()) { setValidationError('Artist / act name is required.'); return; }
+    if (status !== ShowStatus.DRAFT && !draft.date) { setValidationError('Date is required before saving a non-draft show.'); return; }
+    if (draft.capacity < 0) { setValidationError('Capacity cannot be negative.'); return; }
     const show = create(ShowSchema, {
       id: initialShow?.id ?? 0,
       artist: draft.artist.trim(),
@@ -144,7 +150,7 @@ export function NewShowModal({
       }
     >
       <div className="app-new-show-modal-form">
-        {error && <div className="app-new-show-modal-error" role="alert">{error}</div>}
+        {(error || validationError) && <div className="app-new-show-modal-error" role="alert">{error || validationError}</div>}
         <label className="app-new-show-modal-field">
           <span>Artist / act name</span>
           <input value={draft.artist} onChange={(event) => update('artist', event.target.value)} />

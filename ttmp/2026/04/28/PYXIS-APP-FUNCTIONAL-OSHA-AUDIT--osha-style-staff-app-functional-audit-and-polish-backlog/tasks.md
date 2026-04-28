@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T16:45:00-04:00
+LastUpdated: 2026-04-28T17:10:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -102,14 +102,14 @@ LastUpdated: 2026-04-28T16:45:00-04:00
   - Expected: `Edit <artist>` navigates to `/shows/:id` or opens edit modal.
   - Acceptance: no row edit button stays on `/shows` silently.
 
-- [ ] **T15 — Audit NewShowModal validation**
+- [x] **T15 — Audit NewShowModal validation**
   - Required fields.
   - Draft vs confirmed.
   - Lineup row add/remove.
   - Flyer upload errors.
   - Acceptance: client-side and backend validation surfaces are clear.
 
-- [ ] **T16 — Add Storybook states for Shows filters/search**
+- [x] **T16 — Add Storybook states for Shows filters/search**
   - Filtered results.
   - No results.
   - Long table.
@@ -130,12 +130,12 @@ LastUpdated: 2026-04-28T16:45:00-04:00
 - [x] **T20 — Add confirmation for Delete flyer**
   - Acceptance: deletion requires confirmation.
 
-- [ ] **T21 — Wire ShowDetail Open post**
+- [x] **T21 — Wire ShowDetail Open post**
   - Use `discordMessageId` / `discordChannelId` if present.
   - Disable with explanation if not posted.
   - Acceptance: Open post opens real Discord URL or explains unavailable state.
 
-- [ ] **T22 — Improve Announce feedback**
+- [x] **T22 — Improve Announce feedback**
   - Show posting state, posted state, failure state, and Discord link after success.
 
 ## Phase 5: Calendar

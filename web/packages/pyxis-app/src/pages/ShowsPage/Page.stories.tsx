@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
 import { http, HttpResponse, delay } from 'msw';
-import { create, toJson, ShowListSchema } from 'pyxis-types';
+import { create, toJson, ShowListSchema, ShowSchema, ShowStatus } from 'pyxis-types';
 import { ShowsPage } from '../Pages';
 import { renderWithFreshMockState } from '../storybook';
 
@@ -64,6 +64,18 @@ export const Empty: Story = {
       ],
     },
   },
+};
+
+export const FilterHold: Story = {
+  render: () => renderWithFreshMockState(<ShowsPage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' }, msw: { handlers: [http.get('*/api/app/shows', () => HttpResponse.json(toJson(ShowListSchema, create(ShowListSchema, { shows: [create(ShowSchema, { id: 77, artist: 'Held Story Artist', date: '2026-08-01', genre: 'Ambient', status: ShowStatus.HOLD, capacity: 120 }), create(ShowSchema, { id: 78, artist: 'Confirmed Story Artist', date: '2026-08-02', genre: 'Noise', status: ShowStatus.CONFIRMED, capacity: 120 })] }))))] } },
+  play: async ({ canvasElement }) => { const canvas = within(canvasElement); await userEvent.click(await canvas.findByRole('button', { name: /hold/i })); await expect(await canvas.findByText(/Held Story Artist/i)).toBeInTheDocument(); },
+};
+
+export const SearchNoResults: Story = {
+  render: () => renderWithFreshMockState(<ShowsPage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => { const canvas = within(canvasElement); await userEvent.click(await canvas.findByLabelText(/search shows/i)); await userEvent.type(await canvas.findByPlaceholderText(/Search artist/i), 'zz-no-show'); await expect(await canvas.findByText(/No shows match/i)).toBeInTheDocument(); },
 };
 
 export const CreateShowMutation: Story = {

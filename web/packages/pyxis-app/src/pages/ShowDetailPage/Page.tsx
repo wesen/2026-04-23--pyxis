@@ -122,13 +122,21 @@ export function ShowDetailPage() {
     }
   };
 
+  const openDiscordPost = () => {
+    if (!show?.discordChannelId || !show?.discordMessageId) {
+      setActionError('This show has not been posted to Discord yet. Use Announce first.');
+      return;
+    }
+    window.open(`https://discord.com/channels/@me/${show.discordChannelId}/${show.discordMessageId}`, '_blank', 'noopener,noreferrer');
+  };
+
   const handleAnnounceShow = async () => {
     if (!id) return;
     setActionError(undefined);
     setActionSuccess(undefined);
     try {
       await announceShow(id).unwrap();
-      setActionSuccess('Announcement requested.');
+      setActionSuccess(show?.discordMessageId ? 'Announcement requested. Discord post is already linked below.' : 'Announcement requested. The bot will attach Discord post details when posting is available.');
     } catch {
       setActionError('Could not announce this show. Check your session and backend logs.');
     }
@@ -149,7 +157,7 @@ export function ShowDetailPage() {
           <ConfirmDialog isOpen={confirmAction === 'cancel'} title="Cancel show?" description="This marks the show as cancelled and records the action for staff review." confirmLabel="Cancel show" variant="danger" isLoading={cancelState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleCancelShow} />
           <ConfirmDialog isOpen={confirmAction === 'delete-flyer'} title="Delete flyer?" description="This removes the uploaded flyer from this show. You can upload a replacement afterwards." confirmLabel="Delete flyer" variant="danger" isLoading={deleteFlyerState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleDeleteFlyer} />
           <ShowDetailHero show={appShowFromShow(show)} />
-          <div className="app-detail-grid"><ShowDetailInfoPanel show={appShowFromShow(show)} /><ShowDetailDiscordPanel /></div>
+          <div className="app-detail-grid"><ShowDetailInfoPanel show={appShowFromShow(show)} /><ShowDetailDiscordPanel channelLabel={show.discordChannelId ? `#${show.discordChannelId}` : '#upcoming-shows'} statusLabel={show.discordMessageId ? 'Posted' : 'Not posted yet'} isPosted={Boolean(show.discordChannelId && show.discordMessageId)} onOpenPost={openDiscordPost} /></div>
           <FlyerField flyerUrl={show.flyerUrl} isUploading={uploadState.isLoading} isDeleting={deleteFlyerState.isLoading} onUpload={handleUploadFlyer} onDelete={() => setConfirmAction('delete-flyer')} />
           {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
           {actionSuccess && <div className="app-action-success" role="status">{actionSuccess}</div>}

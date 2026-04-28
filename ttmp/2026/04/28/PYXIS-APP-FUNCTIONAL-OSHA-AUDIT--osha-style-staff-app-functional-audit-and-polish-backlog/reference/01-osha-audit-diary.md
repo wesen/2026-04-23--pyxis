@@ -988,3 +988,83 @@ cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 go test ./... -count=1
 ```
+
+## Step 17: Shows validation/search stories and Show Detail Discord actions
+
+Continued the backlog with Shows and Show Detail tasks.
+
+### T15 — NewShowModal validation
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx
+```
+
+Added client-side validation:
+
+- artist / act name is required;
+- date is required before saving a non-draft show;
+- capacity cannot be negative;
+- draft without date is allowed.
+
+Storybook coverage now includes default, saving, backend error, edit mode, hold draft, missing-required validation, and draft-without-date behavior.
+
+### T16 — Shows filters/search Storybook states
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+```
+
+Added stories/play coverage for:
+
+- Hold filter with a held show visible;
+- search no-results state;
+- existing loading/error/empty/create mutation stories remain.
+
+### T21/T22 — Show Detail Discord Open post and Announce feedback
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx
+```
+
+Open post is now disabled with explanatory title when the show has no Discord channel/message IDs. If IDs exist, it opens a Discord message URL. Announce feedback now explains whether the post is already linked or whether the bot will attach details when posting is available.
+
+Storybook coverage includes:
+
+- not-posted disabled Open post state;
+- posted Discord state;
+- announce feedback play story;
+- existing edit mutation story.
+
+Visible Chromium smoke:
+
+```text
+scripts/07-shows-modal-discord-visible-smoke.js
+sources/13-shows-modal-discord-visible-chromium.json
+```
+
+Key evidence:
+
+```text
+newShowValidation: Artist / act name is required.
+searchNoResults: No shows match the current filters.
+openPostDisabled: true
+announceFeedback: Announcement requested. The bot will attach Discord post details when posting is available.
+```
+
+Validation:
+
+```bash
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/07-shows-modal-discord-visible-smoke.js
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+go test ./... -count=1
+```
