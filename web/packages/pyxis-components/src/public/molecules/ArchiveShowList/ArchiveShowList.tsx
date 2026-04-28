@@ -12,6 +12,7 @@ export type ArchiveShow = {
 
 export type ArchiveShowListProps = {
   shows?: ArchiveShow[];
+  onNavigate?: (href: string) => void;
   className?: string;
 };
 
@@ -21,10 +22,10 @@ const defaultShows: ArchiveShow[] = [
   { date: 'Nov 15', name: 'Bottom Feeders', tag: 'Hardcore' },
 ];
 
-export const ArchiveShowList = ({ shows = defaultShows, className }: ArchiveShowListProps) => (
+export const ArchiveShowList = ({ shows = defaultShows, onNavigate, className }: ArchiveShowListProps) => (
   <div {...pyxisPart('archive-show-list')} className={clsx('pyxis-archive-show-list', className)}>
     {shows.map((show) => (
-      <ArchiveShowRow key={`${show.date}-${show.name}`} {...show} />
+      <ArchiveShowRow key={`${show.date}-${show.name}`} {...show} onNavigate={onNavigate} />
     ))}
   </div>
 );

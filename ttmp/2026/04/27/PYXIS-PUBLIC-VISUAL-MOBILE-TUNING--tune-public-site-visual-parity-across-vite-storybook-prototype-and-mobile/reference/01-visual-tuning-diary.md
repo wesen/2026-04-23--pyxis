@@ -853,3 +853,38 @@ Validation:
 cd web/packages/pyxis-components && pnpm exec tsc --noEmit
 cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
 ```
+
+### Correction: archive recap links should use React Router navigation
+
+The operator noticed that `recap →` appeared to reload the full page. The route existed, but `ArchiveShowRow` rendered a normal anchor, so same-origin navigation still went through browser document navigation instead of React Router.
+
+Fix:
+
+- `ArchiveShowRow` now accepts `onNavigate` and intercepts unmodified left-clicks.
+- `ArchiveShowList` forwards `onNavigate` to each row.
+- `ArchivePageView` passes React Router `navigate` into `ArchiveShowList`.
+- Modified clicks such as cmd/ctrl-click still fall through to normal anchor behavior.
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ArchiveShowRow/ArchiveShowRow.tsx
+web/packages/pyxis-components/src/public/molecules/ArchiveShowList/ArchiveShowList.tsx
+web/packages/pyxis-user-site/src/pages/ArchivePage/Page.tsx
+```
+
+Validation:
+
+```bash
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+```
+
+Browser smoke confirmed no document request after clicking the first archive row:
+
+```json
+{
+  "url": "http://localhost:3007/archive/5",
+  "documentRequestsAfterClick": []
+}
+```

@@ -7,6 +7,7 @@ export type ArchiveShowRowProps = {
   name: string;
   tag: string;
   href?: string;
+  onNavigate?: (href: string) => void;
   className?: string;
 };
 
@@ -15,12 +16,18 @@ export const ArchiveShowRow = ({
   name,
   tag,
   href = '#',
+  onNavigate,
   className,
 }: ArchiveShowRowProps) => (
   <a
     href={href}
     {...pyxisPart('archive-show-row')}
     className={clsx('pyxis-archive-show-row', className)}
+    onClick={(event) => {
+      if (!onNavigate || href === '#' || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      onNavigate(href);
+    }}
   >
     <div className="pyxis-archive-show-row__date" {...pyxisPart('archive-show-row', 'date')}>
       {date}

@@ -112,6 +112,7 @@ export function ArchivePageView({
   headerKicker = 'Since 2023',
   headerTitle = 'The archive',
 }: ArchivePageViewProps) {
+  const navigate = useNavigate();
   const years = getArchiveYears(shows);
   const filteredShows = selectedYear === 'All'
     ? shows
@@ -158,7 +159,7 @@ export function ArchivePageView({
           <section className="pyxis-archive-page__years" data-section="archive-years" aria-busy={isLoading || undefined}>
             {groups.map((group) => (
               <YearGroup key={group.year} year={group.year} showCount={group.shows.length}>
-                <ArchiveShowList shows={group.shows.map(toArchiveListShow)} />
+                <ArchiveShowList shows={group.shows.map(toArchiveListShow)} onNavigate={navigate} />
               </YearGroup>
             ))}
           </section>
