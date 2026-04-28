@@ -51,3 +51,7 @@ Fixed mobile content/section captures so prototype screenshots hide the sticky n
 ## 2026-04-27
 
 Captured end-of-day public functional polish issues in a new implementation guide and Phase 6 task list: archive controls, booking links validation, archive metrics, Discord link, and hamburger overlay behavior.
+
+## 2026-04-27
+
+Implemented Phase 6 functional polish: hamburger overlay behavior, live footer Discord/Instagram links, booking links field validation, working Archive year selector/recap, and corrected Archive metric labels.

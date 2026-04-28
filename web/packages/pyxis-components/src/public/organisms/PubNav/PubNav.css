@@ -116,10 +116,15 @@
   [data-pyxis-component='pub-nav'][data-pyxis-part='root'][data-mobile-menu-open='true'] .pyxis-pub-nav__mobile-menu {
     background: var(--color-surface);
     border-top: 1px solid var(--color-border-subtle);
-    box-shadow: 0 16px 28px rgba(26, 26, 24, 0.08);
+    box-shadow: 0 16px 28px rgba(26, 26, 24, 0.12);
     display: grid;
     gap: 4px;
+    left: 0;
     padding: 8px 18px 14px;
+    position: absolute;
+    right: 0;
+    top: 52px;
+    z-index: 60;
   }
 
   .pyxis-pub-nav__mobile-link {

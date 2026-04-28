@@ -4,9 +4,18 @@ import './PubFooter.css';
 
 export type PubFooterProps = {
   className?: string;
+  instagramUrl?: string;
+  discordUrl?: string;
+  mailingListUrl?: string;
 };
 
-export const PubFooter = ({ className }: PubFooterProps) => (
+const defaultLinks = {
+  instagramUrl: 'https://www.instagram.com/ppxis.space/',
+  discordUrl: 'https://discord.com/channels/586274407350272042',
+  mailingListUrl: '#mailing-list',
+};
+
+export const PubFooter = ({ className, instagramUrl = defaultLinks.instagramUrl, discordUrl = defaultLinks.discordUrl, mailingListUrl = defaultLinks.mailingListUrl }: PubFooterProps) => (
   <footer className={clsx('pyxis-footer', className)} {...pyxisPart('pub-footer')}>
     <div className="pyxis-footer__inner" {...pyxisPart('pub-footer', 'inner')}>
       <div className="pyxis-footer__brand" {...pyxisPart('pub-footer', 'brand')}>
@@ -16,9 +25,9 @@ export const PubFooter = ({ className }: PubFooterProps) => (
         </div>
       </div>
       <div className="pyxis-footer__links" {...pyxisPart('pub-footer', 'links')}>
-        {['Instagram', 'Discord', 'Mailing list'].map((label) => (
-          <a key={label} href="#" {...pyxisPart('pub-footer', 'link')}>{label}</a>
-        ))}
+        <a href={instagramUrl} target="_blank" rel="noreferrer" {...pyxisPart('pub-footer', 'link')}>Instagram</a>
+        <a href={discordUrl} target="_blank" rel="noreferrer" {...pyxisPart('pub-footer', 'link')}>Discord</a>
+        <a href={mailingListUrl} {...pyxisPart('pub-footer', 'link')}>Mailing list</a>
       </div>
     </div>
   </footer>

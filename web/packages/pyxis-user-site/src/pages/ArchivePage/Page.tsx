@@ -20,7 +20,9 @@ export type ArchivePageViewProps = {
   shows: ArchivedShow[];
   stats?: ArchiveStatsData;
   search: string;
+  selectedYear: string;
   onSearchChange: (value: string) => void;
+  onYearChange: (value: string) => void;
   isLoading?: boolean;
   archiveError?: string | null;
   statsError?: string | null;
@@ -30,6 +32,7 @@ export type ArchivePageViewProps = {
 
 export function Archive() {
   const [search, setSearch] = useState('');
+  const [selectedYear, setSelectedYear] = useState('All');
   const { data: list, isLoading, isError: isArchiveError, error: archiveError } = useArchive(search || undefined);
   const { data: stats, isError: isStatsError } = useArchiveStats();
 
@@ -38,7 +41,9 @@ export function Archive() {
       shows={list?.shows ?? []}
       stats={stats}
       search={search}
+      selectedYear={selectedYear}
       onSearchChange={setSearch}
+      onYearChange={setSelectedYear}
       isLoading={isLoading}
       archiveError={isArchiveError ? getApiErrorMessage(archiveError) : null}
       statsError={isStatsError ? 'Archive totals are temporarily unavailable.' : null}
@@ -50,14 +55,21 @@ export function ArchivePageView({
   shows,
   stats,
   search,
+  selectedYear,
   onSearchChange,
+  onYearChange,
   isLoading = false,
   archiveError = null,
   statsError = null,
   headerKicker = 'Since 2023',
   headerTitle = 'The archive',
 }: ArchivePageViewProps) {
-  const groups = groupShowsByYear(shows);
+  const years = getArchiveYears(shows);
+  const filteredShows = selectedYear === 'All'
+    ? shows
+    : shows.filter((show) => String(getShowYear(show)) === selectedYear);
+  const groups = groupShowsByYear(filteredShows);
+  const resultLabel = `${filteredShows.length} ${filteredShows.length === 1 ? 'show' : 'shows'}${selectedYear !== 'All' ? ` in ${selectedYear}` : ''}`;
 
   return (
     <main className="pyxis-public-page pyxis-archive-page" data-page="archive">
@@ -74,8 +86,12 @@ export function ArchivePageView({
 
         <section data-section="archive-filters">
           <ArchiveSearchFilters
+            years={years}
+            active={selectedYear}
             value={search}
+            resultLabel={resultLabel}
             onSearchChange={onSearchChange}
+            onYearChange={onYearChange}
           />
         </section>
 
@@ -100,7 +116,7 @@ export function ArchivePageView({
           </section>
         ) : (
           <p className="pyxis-archive-page__empty" data-section="archive-empty">
-            No shows found{search ? ` for "${search}"` : ''}.
+            No shows found{search ? ` for "${search}"` : ''}{selectedYear !== 'All' ? ` in ${selectedYear}` : ''}.
           </p>
         )}
       </div>
@@ -110,7 +126,7 @@ export function ArchivePageView({
 
 function groupShowsByYear(shows: ArchivedShow[]): ArchiveGroup[] {
   const groups = shows.reduce<Record<number, ArchivedShow[]>>((acc, show) => {
-    const year = new Date(`${show.date}T00:00:00`).getFullYear();
+    const year = getShowYear(show);
     acc[year] ??= [];
     acc[year].push(show);
     return acc;
@@ -119,6 +135,15 @@ function groupShowsByYear(shows: ArchivedShow[]): ArchiveGroup[] {
   return Object.entries(groups)
     .map(([year, groupShows]) => ({ year: Number(year), shows: groupShows }))
     .sort((a, b) => b.year - a.year);
+}
+
+function getArchiveYears(shows: ArchivedShow[]) {
+  const years = Array.from(new Set(shows.map((show) => String(getShowYear(show))))).sort((a, b) => Number(b) - Number(a));
+  return ['All', ...years];
+}
+
+function getShowYear(show: ArchivedShow) {
+  return new Date(`${show.date}T00:00:00`).getFullYear();
 }
 
 function toArchiveListShow(show: ArchivedShow) {

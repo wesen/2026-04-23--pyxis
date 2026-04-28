@@ -644,3 +644,155 @@ ad0bda7 PYXIS-PUBLIC-VISUAL-MOBILE-TUNING: add mobile hamburger menu
 ```
 
 Next session should start with T24 (hamburger overlay) and T25 (Discord link), then handle the booking form validation blocker.
+
+## Step 9: Functional polish implementation pass
+
+I resumed with the Phase 6 public-site issues from the operator review.
+
+### Hamburger overlay
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/organisms/PubNav/PubNav.css
+```
+
+The mobile menu is now absolutely positioned below the sticky nav instead of participating in normal document flow. This keeps the content underneath stationary while the menu opens as an overlay.
+
+Smoke command:
+
+```bash
+cd web/packages/pyxis-user-site && node - <<'NODE'
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.goto('http://localhost:3007/', { waitUntil: 'networkidle' });
+  const before = await page.locator('[data-region="main"]').boundingBox();
+  await page.getByRole('button', { name: /open navigation menu/i }).click();
+  const after = await page.locator('[data-region="main"]').boundingBox();
+  const menu = await page.locator('#pyxis-pub-nav-mobile-menu').boundingBox();
+  console.log(JSON.stringify({ beforeY: before.y, afterY: after.y, menuY: menu.y, menuH: menu.height }, null, 2));
+  await browser.close();
+})();
+NODE
+```
+
+Result:
+
+```json
+{
+  "beforeY": 53,
+  "afterY": 53,
+  "menuY": 52,
+  "menuH": 183
+}
+```
+
+### Live footer links
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/organisms/PubFooter/PubFooter.tsx
+web/packages/pyxis-user-site/src/components/layout/Layout.tsx
+```
+
+The footer no longer renders `href="#"` for Discord. `PubFooter` now accepts link props, and the public app passes environment-configurable URLs:
+
+```text
+VITE_DISCORD_URL
+VITE_INSTAGRAM_URL
+```
+
+Fallbacks are provided so local Vite still renders live links.
+
+Smoke result on `http://localhost:3007/about`:
+
+```json
+[
+  { "text": "Instagram", "href": "https://www.instagram.com/ppxis.space/" },
+  { "text": "Discord", "href": "https://discord.com/channels/586274407350272042" },
+  { "text": "Mailing list", "href": "http://localhost:3007/about#mailing-list" }
+]
+```
+
+### Booking links validation
+
+Changed:
+
+```text
+web/packages/pyxis-user-site/src/pages/BookPage/Page.tsx
+```
+
+The production public booking page no longer hides the required `links` field. It now uses the default BookingForm client-side validation, so a user cannot submit a server-bound request without artist/project links.
+
+Smoke result on `http://localhost:3007/book`:
+
+```json
+{
+  "linksVisible": true,
+  "submitDisabledBefore": true,
+  "submitDisabledNoLinks": true,
+  "submitDisabledWithLinks": false
+}
+```
+
+### Archive selector and recap
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ArchiveSearchFilters/ArchiveSearchFilters.tsx
+web/packages/pyxis-user-site/src/pages/ArchivePage/Page.tsx
+web/packages/pyxis-user-site/src/pages/ArchivePage/Page.stories.tsx
+```
+
+Year buttons now have `type="button"`, `aria-pressed`, and an `onYearChange` callback. The Archive page owns `selectedYear` state, computes available years from the loaded archive rows, filters the visible groups, and renders a recap label such as `2 shows in 2025`.
+
+Smoke result on `http://localhost:3007/archive`:
+
+```json
+{
+  "buttons": ["All", "2025"],
+  "before": "2 shows",
+  "after": "2 shows in 2025"
+}
+```
+
+### Archive metrics labels
+
+Changed:
+
+```text
+web/packages/pyxis-components/src/public/molecules/ArchiveStats/ArchiveStats.tsx
+```
+
+The `95 artists` issue was caused by rendering `totalAttendance` under the label `artists`. The metrics now render:
+
+- `totalShows` → `shows`
+- `uniqueArtists` → `artists`
+- `yearsRunning` → `years running`
+- `totalAttendance` → `total draw`
+
+Smoke result on the local archive page:
+
+```json
+[
+  "2 SHOWS",
+  "2 ARTISTS",
+  "1 YEARS RUNNING",
+  "95 TOTAL DRAW"
+]
+```
+
+### Validation
+
+Commands passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec tsc --noEmit
+cd web/packages/pyxis-user-site && pnpm exec vite build
+go test ./... -count=1
+```

@@ -19,6 +19,7 @@ export const Desktop: Story = {
 export const FromProps: Story = {
   render: () => {
     const [search, setSearch] = useState('');
+    const [selectedYear, setSelectedYear] = useState('All');
     const shows = search
       ? prototypeArchiveShows.filter((show) => `${show.artist} ${show.genre}`.toLowerCase().includes(search.toLowerCase()))
       : prototypeArchiveShows;
@@ -29,7 +30,9 @@ export const FromProps: Story = {
           shows={shows}
           stats={prototypeArchiveStats}
           search={search}
+          selectedYear={selectedYear}
           onSearchChange={setSearch}
+          onYearChange={setSelectedYear}
         />
       </div>
     );

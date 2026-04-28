@@ -8,6 +8,7 @@ export type ArchiveSearchFiltersProps = {
   value?: string;
   resultLabel?: string;
   onSearchChange?: (value: string) => void;
+  onYearChange?: (value: string) => void;
   className?: string;
 };
 
@@ -17,6 +18,7 @@ export const ArchiveSearchFilters = ({
   value,
   resultLabel,
   onSearchChange,
+  onYearChange,
   className,
 }: ArchiveSearchFiltersProps) => (
   <div
@@ -41,9 +43,12 @@ export const ArchiveSearchFilters = ({
         return (
           <button
             key={year}
+            type="button"
             className="pyxis-archive-search-filters__year-button"
             {...pyxisPart('archive-search-filters', 'year-button')}
             data-state={isActive ? 'active' : undefined}
+            onClick={() => onYearChange?.(year)}
+            aria-pressed={isActive}
           >
             {year}
           </button>

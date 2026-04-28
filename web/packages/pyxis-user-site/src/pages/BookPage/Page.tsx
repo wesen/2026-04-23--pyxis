@@ -43,8 +43,7 @@ export function Book() {
             <BookingForm
               onSubmit={handleSubmit}
               isSubmitting={submit.isPending}
-              visibleFields={{ links: false, genre: false, showType: true, techRider: false, agreement: true }}
-              disableSubmitWhenInvalid={false}
+              visibleFields={{ genre: false, showType: true, techRider: false, agreement: true }}
             />
           </div>
 

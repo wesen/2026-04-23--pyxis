@@ -21,6 +21,8 @@ export function Layout() {
   };
 
   const currentPage = pageMap[location.pathname] ?? (location.pathname.startsWith('/shows/') ? 'shows' : 'shows');
+  const discordUrl = import.meta.env.VITE_DISCORD_URL || 'https://discord.com/channels/586274407350272042';
+  const instagramUrl = import.meta.env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/ppxis.space/';
 
   return (
     <div className="pyxis-public-page-shell" data-page-shell="public">
@@ -28,7 +30,7 @@ export function Layout() {
       <div className="pyxis-public-page-shell__main" data-region="main">
         <Outlet />
       </div>
-      <div data-region="footer"><PubFooter /></div>
+      <div data-region="footer"><PubFooter discordUrl={discordUrl} instagramUrl={instagramUrl} /></div>
     </div>
   );
 }
