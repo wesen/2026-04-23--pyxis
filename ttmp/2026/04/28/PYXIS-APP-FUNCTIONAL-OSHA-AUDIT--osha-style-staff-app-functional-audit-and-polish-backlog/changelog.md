@@ -41,3 +41,5 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Expanded Settings UI sections and fixed backend PATCH handling for newly exposed settings fields.
 - Added `GET /api/public/settings` and wired public-site copy/configuration to backend settings for footer, shows, about, and booking surfaces.
 - Added visible Chromium public-site evidence: `sources/09-public-backend-copy-visible-chromium.json`.
+- Implemented booking refinements T31-T35: Hold status transition, decline reason modal/templates, approve navigation, template callbacks, and View archive routing.
+- Added ticket-local visible Chromium smoke script `scripts/04-booking-refinements-visible-smoke.js` and evidence `sources/10-booking-refinements-visible-chromium.json`.

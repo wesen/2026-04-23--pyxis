@@ -222,6 +222,23 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 	return show
 }
 
+func submissionStatusToString(status pyxisv1.SubmissionStatus) string {
+	switch status {
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_PENDING:
+		return "pending"
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_APPROVED:
+		return "approved"
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_DECLINED:
+		return "declined"
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_HOLD:
+		return "hold"
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_CANCELLED:
+		return "cancelled"
+	default:
+		return ""
+	}
+}
+
 func showStatusToString(status pyxisv1.ShowStatus) string {
 	switch status {
 	case pyxisv1.ShowStatus_SHOW_STATUS_CONFIRMED:
@@ -285,6 +302,7 @@ func protoToDomainSubmission(pb *pyxisv1.Submission) *domain.Submission {
 		TechRider:      pb.TechRider,
 		Message:        pb.Message,
 		ContactDiscord: pb.ContactDiscord,
+		Status:         submissionStatusToString(pb.Status),
 	}
 	if pb.ArtistId > 0 {
 		v := int(pb.ArtistId)

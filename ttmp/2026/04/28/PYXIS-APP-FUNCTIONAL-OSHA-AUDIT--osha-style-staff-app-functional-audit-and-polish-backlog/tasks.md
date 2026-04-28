@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T15:35:00-04:00
+LastUpdated: 2026-04-28T16:05:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -173,23 +173,23 @@ LastUpdated: 2026-04-28T15:35:00-04:00
   - If no backend, disable/hide with “coming soon”.
   - If real, define endpoint and response schema.
 
-- [ ] **T31 — Implement booking Hold action**
+- [x] **T31 — Implement booking Hold action**
   - Determine if `SubmissionStatus.HOLD` is supported end-to-end.
   - Wire `onHold` from page to card.
   - Acceptance: pending booking can be moved to hold with status feedback.
 
-- [ ] **T32 — Add Decline reason modal**
+- [x] **T32 — Add Decline reason modal**
   - Use templates or custom reason.
   - Acceptance: decline is not a one-click destructive action.
 
-- [ ] **T33 — Add Approve confirmation and post-approve navigation**
+- [x] **T33 — Add Approve confirmation and post-approve navigation**
   - Confirm resulting show details.
   - Navigate to created show or display link.
 
-- [ ] **T34 — Wire booking insight template buttons**
+- [x] **T34 — Wire booking insight template buttons**
   - Template buttons should fill decline/review note or be non-clickable text.
 
-- [ ] **T35 — Wire View archive**
+- [x] **T35 — Wire View archive**
   - Decide destination: processed list, public archive, or audit log.
 
 ## Phase 7: Booking Review

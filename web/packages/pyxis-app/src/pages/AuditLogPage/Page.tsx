@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useGetAuditLogQuery } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { AuditLogPanel, Panel } from '../../components/organisms';
@@ -6,10 +7,11 @@ import { EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
 export function AuditLogPage() {
+  const [searchParams] = useSearchParams();
   const { data: log, isLoading, isError } = useGetAuditLogQuery();
-  const [actorFilter, setActorFilter] = useState('');
-  const [actionFilter, setActionFilter] = useState('');
-  const [entityFilter, setEntityFilter] = useState('all');
+  const [actorFilter, setActorFilter] = useState(searchParams.get('actor') ?? '');
+  const [actionFilter, setActionFilter] = useState(searchParams.get('action') ?? '');
+  const [entityFilter, setEntityFilter] = useState(searchParams.get('entity') ?? 'all');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 

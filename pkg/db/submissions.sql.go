@@ -201,7 +201,8 @@ SET artist_name = $2,
     links = $6,
     tech_rider = $7,
     message = $8,
-    contact_discord = $9
+    contact_discord = $9,
+    status = COALESCE($10, status)
 WHERE id = $1
 RETURNING id, artist_id, artist_name, preferred_date, genre, expected_draw, links, tech_rider, message, contact_discord, status, reviewed_by, reviewed_at, created_at
 `
@@ -216,6 +217,7 @@ type UpdateSubmissionDetailsParams struct {
 	TechRider      pgtype.Text `json:"techRider"`
 	Message        pgtype.Text `json:"message"`
 	ContactDiscord pgtype.Text `json:"contactDiscord"`
+	Status         pgtype.Text `json:"status"`
 }
 
 func (q *Queries) UpdateSubmissionDetails(ctx context.Context, arg UpdateSubmissionDetailsParams) (Submission, error) {
@@ -229,6 +231,7 @@ func (q *Queries) UpdateSubmissionDetails(ctx context.Context, arg UpdateSubmiss
 		arg.TechRider,
 		arg.Message,
 		arg.ContactDiscord,
+		arg.Status,
 	)
 	var i Submission
 	err := row.Scan(

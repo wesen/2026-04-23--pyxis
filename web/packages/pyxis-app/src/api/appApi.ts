@@ -45,7 +45,7 @@ type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
 type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
 type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
-type BookingUpdateInput = Pick<Submission, 'id' | 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'>;
+type BookingUpdateInput = Pick<Submission, 'id' | 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'> & Partial<Pick<Submission, 'status'>>;
 type ArtistInput = Pick<Artist, 'name' | 'genre' | 'links' | 'notes'>;
 
 export const appApi = createApi({

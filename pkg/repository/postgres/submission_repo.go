@@ -126,6 +126,9 @@ func (r *SubmissionRepo) UpdateDetails(ctx context.Context, s *domain.Submission
 	if s.ContactDiscord != "" {
 		params.ContactDiscord = pgtype.Text{String: s.ContactDiscord, Valid: true}
 	}
+	if s.Status != "" {
+		params.Status = pgtype.Text{String: s.Status, Valid: true}
+	}
 	row, err := r.queries.UpdateSubmissionDetails(ctx, params)
 	if err != nil {
 		return nil, err

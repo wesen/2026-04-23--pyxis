@@ -679,3 +679,129 @@ cd web/packages/pyxis-user-site && pnpm exec vite build
 ```
 
 Note: this is a first settings-backed copy pass. Rich per-page CMS-style copy (full paragraphs, rules, CTA text, nav labels) would be a follow-up schema/content-model task.
+
+## Step 14: Booking refinements T31-T35
+
+Implemented the requested booking refinement batch and saved the visible Chromium smoke as a ticket-local script, per operator request.
+
+Script:
+
+```text
+scripts/04-booking-refinements-visible-smoke.js
+```
+
+Evidence:
+
+```text
+sources/10-booking-refinements-visible-chromium.json
+```
+
+The script seeds three public submissions, logs into the staff app with dev auth, and exercises:
+
+- Hold transition.
+- Decline reason modal with template button.
+- Approve confirmation and navigation to the created show.
+- View archive routing to filtered audit log.
+
+### T31 — Booking Hold action
+
+Changed:
+
+```text
+pkg/db/queries/submissions.sql
+pkg/db/submissions.sql.go
+pkg/repository/postgres/submission_repo.go
+pkg/server/app.go
+web/packages/pyxis-app/src/api/appApi.ts
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+```
+
+The existing booking PATCH now accepts `status` from the protobuf request and persists it through `UpdateSubmissionDetails`. The frontend Hold button now sends `SubmissionStatus.HOLD` and records a review note/decision of `hold`.
+
+Visible Chromium evidence:
+
+```text
+Smoke ... Hold moved to hold.
+```
+
+### T32 — Decline reason modal
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
+```
+
+Decline now opens a modal with required reason text. The reason is saved as the booking review note before the decline status mutation fires.
+
+Visible Chromium evidence:
+
+```text
+declineReason: Need more info
+declineMessage: Smoke ... Decline declined.
+```
+
+### T33 — Approve confirmation and post-approve navigation
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.tsx
+```
+
+Approve confirmation now summarizes the requested date and says the operator will be taken to the created show. After approval, the page navigates to `/shows/:id`.
+
+Visible Chromium evidence:
+
+```text
+approveNavigationUrl: http://localhost:3008/shows/21
+```
+
+### T34 — Booking insight template buttons
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInsightsPanel/BookingsInsightsPanel.tsx
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+```
+
+Template buttons now have callbacks. If a decline modal is open, selecting a template fills the decline reason. If not, the page explains that the operator should open Decline first.
+
+### T35 — View archive
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsProcessedPanel/BookingsProcessedPanel.tsx
+web/packages/pyxis-app/src/pages/BookingsPage/Page.tsx
+web/packages/pyxis-app/src/pages/AuditLogPage/Page.tsx
+```
+
+View archive now routes to:
+
+```text
+/log?entity=submission&action=submission
+```
+
+`AuditLogPage` now seeds its filters from URL query params so the destination is meaningful.
+
+Visible Chromium evidence:
+
+```text
+archiveUrl: http://localhost:3008/log?entity=submission&action=submission
+archiveFilterCopy: Showing 7 of 26 loaded entries...
+```
+
+Validation:
+
+```bash
+node ttmp/2026/04/28/PYXIS-APP-FUNCTIONAL-OSHA-AUDIT--osha-style-staff-app-functional-audit-and-polish-backlog/scripts/04-booking-refinements-visible-smoke.js
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+go test ./... -count=1
+```
+
+Operational note: the smoke script creates local dev submissions and an approved draft show as evidence. It also required restarting the backend with `PYXIS_DEV_AUTH=1` after the earlier restart dropped that dev-auth setting.

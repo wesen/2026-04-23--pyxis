@@ -30,6 +30,7 @@ SET artist_name = $2,
     links = $6,
     tech_rider = $7,
     message = $8,
-    contact_discord = $9
+    contact_discord = $9,
+    status = COALESCE($10, status)
 WHERE id = $1
 RETURNING *;

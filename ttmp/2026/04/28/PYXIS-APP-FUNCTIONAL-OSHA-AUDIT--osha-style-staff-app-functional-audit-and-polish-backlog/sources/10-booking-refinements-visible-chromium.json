@@ -1,0 +1,199 @@
+{
+  "method": "Visible Chromium Playwright JS script launched with chromium.launch({ headless: false, slowMo: 250 }).",
+  "backendBaseURL": "http://127.0.0.1:8080",
+  "staffBaseURL": "http://localhost:3008",
+  "seeded": [
+    {
+      "artistName": "Smoke 1777406328221 Hold",
+      "status": 201,
+      "body": "{\"success\":true,\"submissionId\":22}"
+    },
+    {
+      "artistName": "Smoke 1777406328221 Decline",
+      "status": 201,
+      "body": "{\"success\":true,\"submissionId\":23}"
+    },
+    {
+      "artistName": "Smoke 1777406328221 Approve",
+      "status": 201,
+      "body": "{\"success\":true,\"submissionId\":24}"
+    }
+  ],
+  "bookings": {
+    "url": "http://localhost:3008/bookings",
+    "buttonsBefore": [
+      {
+        "text": "",
+        "disabled": false
+      },
+      {
+        "text": "Open form",
+        "disabled": false
+      },
+      {
+        "text": "Auto-review",
+        "disabled": true
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "Hold",
+        "disabled": false
+      },
+      {
+        "text": "Decline",
+        "disabled": false
+      },
+      {
+        "text": "Approve",
+        "disabled": false
+      },
+      {
+        "text": "View archive",
+        "disabled": false
+      },
+      {
+        "text": "Not a fit right now ›",
+        "disabled": false
+      },
+      {
+        "text": "Double-booked that night ›",
+        "disabled": false
+      },
+      {
+        "text": "Too soon — try next season ›",
+        "disabled": false
+      },
+      {
+        "text": "Need more info ›",
+        "disabled": false
+      }
+    ],
+    "holdMessage": "Smoke 1777406328221 Hold moved to hold.",
+    "declineReason": "Need more info",
+    "declineMessage": "Smoke 1777406328221 Decline declined.",
+    "approveDialog": "PLEASE CONFIRM\nApprove Smoke 1777406328221 Approve?\n\nThis will approve the submission and create a draft show for 2026-08-03. You will be taken to the new show.\n\nCancel\nApprove and open show",
+    "approveNavigationUrl": "http://localhost:3008/shows/21",
+    "archiveUrl": "http://localhost:3008/log?entity=submission&action=submission",
+    "archiveFilterCopy": "Showing 7 of 26 loaded entries. Backend pagination is still capped by the current API response."
+  },
+  "errors": []
+}

@@ -7,9 +7,10 @@ import { AppEmptyState } from '../../../molecules/AppEmptyState';
 
 export type BookingsProcessedPanelProps = {
   bookings: Submission[];
+  onViewArchive?: () => void;
 };
 
-export function BookingsProcessedPanel({ bookings }: BookingsProcessedPanelProps) {
+export function BookingsProcessedPanel({ bookings, onViewArchive }: BookingsProcessedPanelProps) {
   const processed = bookings.filter((booking) => booking.status !== SubmissionStatus.PENDING);
-  return <Panel title="Recently processed" action={<button className="app-panel-link-action">View archive</button>} section="bookings-processed">{processed.length > 0 ? <div className="app-table-wrap"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{processed.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div> : <AppEmptyState title="No processed booking requests yet." />}</Panel>;
+  return <Panel title="Recently processed" action={<button className="app-panel-link-action" type="button" onClick={onViewArchive}>View archive</button>} section="bookings-processed">{processed.length > 0 ? <div className="app-table-wrap"><table className="app-table app-bookings-processed-table"><thead><tr><th>Artist</th><th>Requested</th><th>Genre</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{processed.map((booking)=><BookingQueueRow key={booking.id} booking={booking}/>)}</tbody></table></div> : <AppEmptyState title="No processed booking requests yet." />}</Panel>;
 }
