@@ -48,3 +48,14 @@ Added staff frontend session gating, Discord login buttons, logout mutation/UI, 
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts — logout mutation
 - /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppSidebarUserFooter/AppSidebarUserFooter.tsx — session user and logout UI
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/scripts/01-discord-oauth-login-smoke.sh — pre-callback smoke script
+
+## 2026-04-27
+
+Added focused Discord OAuth callback and guild-role logging, then restarted the pyxis-backend-dev tmux server so another login attempt will show Discord user/guild/status/body details.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/auth.go — Logs login redirect
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/auth_service.go — Logs Discord user fetch
+- /tmp/pyxis-backend-dev.log — Runtime log sink for the restarted tmux backend server
+

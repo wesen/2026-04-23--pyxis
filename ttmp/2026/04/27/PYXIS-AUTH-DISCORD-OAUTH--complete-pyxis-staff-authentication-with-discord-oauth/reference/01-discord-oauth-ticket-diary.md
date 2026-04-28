@@ -3,24 +3,29 @@ Title: Discord OAuth Ticket Diary
 Ticket: PYXIS-AUTH-DISCORD-OAUTH
 Status: active
 Topics:
-  - backend
-  - auth
-  - production
-  - release-readiness
+    - backend
+    - auth
+    - production
+    - release-readiness
 DocType: reference
 Intent: long-term
 Owners: []
 RelatedFiles:
-  - ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/design/01-discord-oauth-staff-auth-implementation-guide.md
-  - ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/tasks.md
+    - Path: pkg/server/auth.go
+      Note: Discord OAuth login/callback diagnostics and session-cookie success/failure logging
+    - Path: pkg/service/auth_service.go
+      Note: Discord OAuth callback role-mapping diagnostics for guild member lookup failures
+    - Path: ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/design/01-discord-oauth-staff-auth-implementation-guide.md
+    - Path: ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/tasks.md
 ExternalSources:
-  - https://docs.discord.com/developers/topics/oauth2
-  - https://docs.discord.com/developers/platform/oauth2-and-permissions
+    - https://docs.discord.com/developers/topics/oauth2
+    - https://docs.discord.com/developers/platform/oauth2-and-permissions
 Summary: Chronological diary for the Discord OAuth staff authentication ticket.
 LastUpdated: 2026-04-27T21:45:00-04:00
 WhatFor: Use this diary to understand what was inspected, documented, uploaded, and committed for the Discord OAuth auth track.
 WhenToUse: Update this after each Discord OAuth implementation or validation step.
 ---
+
 
 # Discord OAuth Ticket Diary
 
@@ -328,3 +333,62 @@ or test through the hosted `https://pyxis.yolo.scapegoat.dev` URL once deployed.
 ### Remaining blocker
 
 T19, role-protected staff route testing with a real Discord-authenticated session, is blocked until we run an actual Discord callback with a user in the configured guild roles. The environment now provides the needed IDs/secrets, but Discord's application redirect URI must match the URL we test.
+
+## Step 5: Add diagnostic logging for guild membership failure
+
+The live OAuth callback reached the role-mapping path but returned:
+
+```json
+{
+  "error": {
+    "code": "INTERNAL_ERROR",
+    "message": "discord user is not a member of configured guild"
+  }
+}
+```
+
+That error comes from `fetchGuildMemberRoles` when Discord returns `404` for:
+
+```text
+GET /guilds/{configuredGuildID}/members/{discordUserID}
+```
+
+Discord can return that if the authenticated user is actually not in the configured guild, if the configured guild ID is wrong, if the bot token belongs to a different application/guild installation, or if the bot cannot see that guild/member.
+
+### What changed
+
+Added focused zerolog instrumentation around the real callback path:
+
+- login redirect emits `discord oauth: redirecting to discord authorization` with `return_to` and whether the state cookie is secure;
+- callback emits state-validation, exchange-failure, and session-cookie-success messages;
+- user fetch logs Discord user ID and username after `/users/@me` succeeds;
+- guild-member lookup logs Discord user ID, configured guild ID, which role mappings are configured, returned role IDs on success, and Discord status/body on 404/non-OK responses;
+- role mapping logs the chosen local Pyxis role.
+
+The logging intentionally does not print the OAuth code, access token, bot token, client secret, or session token.
+
+### Commands run
+
+```bash
+gofmt -w pkg/service/auth_service.go pkg/server/auth.go
+go test ./pkg/service ./pkg/server -count=1
+go test ./... -count=1
+tmux kill-session -t pyxis-backend-dev
+tmux new-session -d -s pyxis-backend-dev -c /home/manuel/code/wesen/2026-04-23--pyxis \
+  'direnv exec . env PYXIS_WEBSITE_URL=http://localhost:3008 PYXIS_DISCORD_REDIRECT_URL=http://localhost:3008/auth/discord/callback go run ./cmd/pyxis serve --bind 127.0.0.1:8080 2>&1 | tee /tmp/pyxis-backend-dev.log'
+```
+
+### Result
+
+The backend tmux session is restarted and now runs the instrumented code. The next browser OAuth attempt should write the relevant lines to both the tmux pane and `/tmp/pyxis-backend-dev.log`.
+
+### Next debugging step
+
+Repeat the Discord login once. Then inspect:
+
+```bash
+tmux capture-pane -t pyxis-backend-dev:0.0 -p -S -200
+rg "discord oauth" /tmp/pyxis-backend-dev.log
+```
+
+The most important evidence will be the `discord_user_id`, `discord_guild_id`, Discord HTTP status, and Discord error body from the guild-member lookup.
