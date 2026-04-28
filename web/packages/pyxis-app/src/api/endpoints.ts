@@ -1,4 +1,6 @@
 export const endpoints = {
+  discordLogin: '/auth/discord/login',
+  logout: '/auth/logout',
   session: '/api/app/session',
   shows: '/api/app/shows',
   show: (id: number) => `/api/app/shows/${id}`,

@@ -36,3 +36,15 @@ Implemented Discord OAuth phases 1-5: configurable website URL, OAuth config fla
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/auth_test.go — auth route/helper tests
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/auth_service_test.go — role mapping tests
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/tasks.md — checked off T02-T16
+
+## 2026-04-27
+
+Added staff frontend session gating, Discord login buttons, logout mutation/UI, callback error tests, and a ticket-local Discord OAuth login initiation smoke script.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/App.tsx — session-gated staff routes
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/pages/LoginPage/Page.tsx — Discord login integration
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/api/appApi.ts — logout mutation
+- /home/manuel/code/wesen/2026-04-23--pyxis/web/packages/pyxis-app/src/components/shell/AppSidebarUserFooter/AppSidebarUserFooter.tsx — session user and logout UI
+- /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/scripts/01-discord-oauth-login-smoke.sh — pre-callback smoke script

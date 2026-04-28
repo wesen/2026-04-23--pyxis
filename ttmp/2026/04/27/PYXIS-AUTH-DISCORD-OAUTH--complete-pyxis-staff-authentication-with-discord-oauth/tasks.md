@@ -10,7 +10,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Phased task list for completing production-ready Discord OAuth staff authentication in Pyxis.
-LastUpdated: 2026-04-27T21:25:00-04:00
+LastUpdated: 2026-04-27T21:45:00-04:00
 ---
 
 # Discord OAuth Staff Authentication Tasks
@@ -123,16 +123,16 @@ LastUpdated: 2026-04-27T21:25:00-04:00
 
 ## Phase 6: Role and authorization policy
 
-- [ ] **T17 — Preserve safe unknown-user behavior**
+- [x] **T17 — Preserve safe unknown-user behavior**
   - Unknown Discord users should not become `admin`/`booker`/`door` automatically.
   - Confirm default `staff` role is intentionally unprivileged or rename to `pending`.
 
-- [ ] **T18 — Implement chosen role mapping**
+- [x] **T18 — Implement chosen role mapping**
   - Local DB role mode: document/admin seed path.
   - Discord role mode: implement guild/member role lookup with explicit role ID config.
   - Hybrid mode: implement coarse Discord allowlist plus local final role.
 
-- [ ] **T19 — Test protected staff routes by role**
+- [ ] **T19 — Test protected staff routes by role** *(blocked on live Discord login / role IDs in a real guild session)*
   - Admin can access admin endpoints.
   - Booker can access booking/show mutation endpoints.
   - Door can access allowed read/attendance endpoints.
@@ -140,42 +140,42 @@ LastUpdated: 2026-04-27T21:25:00-04:00
 
 ## Phase 7: Frontend integration
 
-- [ ] **T20 — Add/update staff login UI**
+- [x] **T20 — Add/update staff login UI**
   - Unauthenticated staff app should link to `/auth/discord/login?return_to=<path>`.
   - Avoid storing Discord OAuth tokens in frontend state.
 
-- [ ] **T21 — Verify session bootstrap**
+- [x] **T21 — Verify session bootstrap**
   - Staff app calls `/api/app/session` on startup.
   - Authenticated session renders staff app.
   - Unauthenticated session renders login screen.
 
-- [ ] **T22 — Verify logout UX**
+- [x] **T22 — Verify logout UX**
   - Logout calls `POST /auth/logout`.
   - Client clears local auth/cache state.
   - User returns to login/public page.
 
 ## Phase 8: Tests and smoke
 
-- [ ] **T23 — Unit-test OAuth helpers**
+- [x] **T23 — Unit-test OAuth helpers**
   - Auth URL generation.
   - State encode/decode.
   - Return-to validation.
   - Secure-cookie inference.
 
-- [ ] **T24 — Unit-test callback errors**
+- [x] **T24 — Unit-test callback errors**
   - Missing code.
   - Missing state.
   - Bad state cookie.
   - Discord token exchange failure.
   - Discord user fetch failure.
 
-- [ ] **T25 — Add ticket-local smoke script**
+- [x] **T25 — Add ticket-local smoke script**
   - Verify `/auth/discord/login` returns 302 to Discord.
   - Verify state cookie is set.
   - Verify Location includes expected client ID, redirect URI, scope, and state.
   - Verify `/api/app/session` unauthenticated before login.
 
-- [ ] **T26 — Run full validation**
+- [x] **T26 — Run full validation**
   - `go test ./... -count=1`
   - frontend typecheck/build if auth UI changes
   - production embed smoke if auth changes touch routing/session behavior

@@ -59,6 +59,12 @@ export const appApi = createApi({
       providesTags: ['Session'],
     }),
 
+    logout: builder.mutation<SuccessResponse, void>({
+      query: () => ({ url: endpoints.logout, method: 'POST' }),
+      transformResponse: (response: unknown) => fromJson(SuccessResponseSchema, response as any),
+      invalidatesTags: ['Session'],
+    }),
+
     getShows: builder.query<AppShow[], void>({
       query: () => endpoints.shows,
       transformResponse: (response: unknown) => {
@@ -292,6 +298,7 @@ export const {
   useGetBookingsQuery,
   useGetCalendarQuery,
   useGetSessionQuery,
+  useLogoutMutation,
   useGetSettingsQuery,
   useGetShowQuery,
   useGetShowsQuery,

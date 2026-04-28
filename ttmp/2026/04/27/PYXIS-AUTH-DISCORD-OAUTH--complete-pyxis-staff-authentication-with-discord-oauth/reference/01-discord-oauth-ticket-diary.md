@@ -17,7 +17,7 @@ ExternalSources:
   - https://docs.discord.com/developers/topics/oauth2
   - https://docs.discord.com/developers/platform/oauth2-and-permissions
 Summary: Chronological diary for the Discord OAuth staff authentication ticket.
-LastUpdated: 2026-04-27T21:25:00-04:00
+LastUpdated: 2026-04-27T21:45:00-04:00
 WhatFor: Use this diary to understand what was inspected, documented, uploaded, and committed for the Discord OAuth auth track.
 WhenToUse: Update this after each Discord OAuth implementation or validation step.
 ---
@@ -249,3 +249,82 @@ I need Manuel/operator input before a real hosted OAuth smoke can succeed:
 ### Next steps
 
 Continue with Phase 6 role/authorization polish and Phase 8 smoke scripts after the Discord-side IDs/secrets are available.
+
+## Step 4: Add staff frontend auth bootstrap and login smoke script
+
+After the backend OAuth phases were in place, I continued with the staff frontend surfaces and a repeatable pre-callback smoke script.
+
+### What changed
+
+Frontend auth bootstrap:
+
+- Updated `web/packages/pyxis-app/src/App.tsx` with a `RequireSession` wrapper.
+- Protected staff routes now check `/api/app/session` before rendering.
+- Unauthenticated users are redirected to `/login?return_to=<current-path>`.
+- Authenticated users visiting `/login` are redirected back to `/`.
+
+Login page:
+
+- Updated `web/packages/pyxis-app/src/pages/LoginPage/Page.tsx` so both Discord buttons navigate to `/auth/discord/login?return_to=...`.
+- Kept the old email/magic-link form visible but disabled, with copy saying Discord login is active.
+- Updated the LoginPage story so Storybook starts with a `return_to=/shows` query.
+
+Logout/session UI:
+
+- Added a `logout` RTK Query mutation.
+- Added `/auth/logout` and `/auth/discord/login` endpoint constants.
+- Updated `AppSidebarUserFooter` to show the current session user/role and call logout before returning to `/login`.
+
+Smoke script:
+
+- Added `scripts/01-discord-oauth-login-smoke.sh` under the ticket.
+- The script starts Pyxis on `127.0.0.1:18086`, checks `/api/app/session` is unauthenticated, checks `/auth/discord/login` returns a Discord authorize redirect, validates `client_id`, `redirect_uri`, `response_type=code`, `scope=identify`, and confirms the OAuth state cookie is set.
+
+### Commands run
+
+```bash
+ttmp/2026/04/27/PYXIS-AUTH-DISCORD-OAUTH--complete-pyxis-staff-authentication-with-discord-oauth/scripts/01-discord-oauth-login-smoke.sh
+go test ./... -count=1
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+Results:
+
+- Discord OAuth login initiation smoke passed.
+- Go tests passed.
+- pyxis-app TypeScript passed.
+- pyxis-app Vite build passed.
+
+### What is ready to test manually
+
+The pre-callback side is ready. A human can now test the live Discord browser login flow with:
+
+```bash
+go run ./cmd/pyxis serve --bind 127.0.0.1:18086
+```
+
+Then open:
+
+```text
+http://127.0.0.1:18086/auth/discord/login?return_to=/
+```
+
+However, Discord must have the matching callback URL registered. Because `.envrc` currently does not set `PYXIS_DISCORD_REDIRECT_URL`, the server defaults to:
+
+```text
+https://pyxis.yolo.scapegoat.dev/auth/discord/callback
+```
+
+For a local browser callback test, either add this local redirect URI in Discord and run with:
+
+```bash
+PYXIS_DISCORD_REDIRECT_URL=http://127.0.0.1:18086/auth/discord/callback \
+  go run ./cmd/pyxis serve --bind 127.0.0.1:18086
+```
+
+or test through the hosted `https://pyxis.yolo.scapegoat.dev` URL once deployed.
+
+### Remaining blocker
+
+T19, role-protected staff route testing with a real Discord-authenticated session, is blocked until we run an actual Discord callback with a user in the configured guild roles. The environment now provides the needed IDs/secrets, but Discord's application redirect URI must match the URL we test.

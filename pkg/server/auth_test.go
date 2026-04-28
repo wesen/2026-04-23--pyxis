@@ -139,3 +139,36 @@ func TestDiscordLoginUnavailableWithoutOAuthConfig(t *testing.T) {
 		t.Fatalf("status = %d, want 503", rr.Code)
 	}
 }
+
+func TestDiscordCallbackRejectsMissingCode(t *testing.T) {
+	s := &Server{cfg: &config.Config{DiscordRedirectURL: "https://pyxis.yolo.scapegoat.dev/auth/discord/callback"}}
+	rr := httptest.NewRecorder()
+	s.handleDiscordCallback(rr, httptest.NewRequest(http.MethodGet, "/auth/discord/callback?state=abc", nil))
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rr.Code)
+	}
+}
+
+func TestDiscordCallbackRejectsMissingState(t *testing.T) {
+	s := &Server{cfg: &config.Config{DiscordRedirectURL: "https://pyxis.yolo.scapegoat.dev/auth/discord/callback"}}
+	rr := httptest.NewRecorder()
+	s.handleDiscordCallback(rr, httptest.NewRequest(http.MethodGet, "/auth/discord/callback?code=abc", nil))
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rr.Code)
+	}
+}
+
+func TestDiscordCallbackRejectsStateCookieMismatch(t *testing.T) {
+	state, err := encodeDiscordOAuthState(discordOAuthState{ID: "state-from-query"})
+	if err != nil {
+		t.Fatalf("encode state: %v", err)
+	}
+	s := &Server{cfg: &config.Config{DiscordRedirectURL: "https://pyxis.yolo.scapegoat.dev/auth/discord/callback"}}
+	req := httptest.NewRequest(http.MethodGet, "/auth/discord/callback?code=abc&state="+state, nil)
+	req.AddCookie(&http.Cookie{Name: discordOAuthStateCookieName, Value: "different-state"})
+	rr := httptest.NewRecorder()
+	s.handleDiscordCallback(rr, req)
+	if rr.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rr.Code)
+	}
+}

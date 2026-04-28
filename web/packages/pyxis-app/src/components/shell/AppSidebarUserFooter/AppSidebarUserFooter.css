@@ -3,3 +3,6 @@
 .app-sidebar-user strong { display: block; overflow: hidden; color: var(--app-ink); font-size: 12px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .app-sidebar-user span { color: var(--app-muted); font-size: 10.5px; }
 .app-sidebar-user svg { color: var(--app-muted); }
+.app-sidebar-user__logout { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 0; border-radius: 999px; background: transparent; color: var(--app-muted); cursor: pointer; }
+.app-sidebar-user__logout:hover { background: rgba(var(--app-ink-rgb), .06); color: var(--app-ink); }
+.app-sidebar-user__logout:disabled { cursor: wait; opacity: .5; }

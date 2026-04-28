@@ -3,7 +3,10 @@ import { LoginPage } from '../Pages';
 
 const meta: Meta = {
   title: 'Pyxis App/Pages/Login',
-  parameters: { layout: 'fullscreen' },
+  parameters: {
+    layout: 'fullscreen',
+    router: { initialEntries: ['/login?return_to=%2Fshows'] },
+  },
 };
 export default meta;
 
@@ -18,4 +21,3 @@ export const Mobile: Story = {
   render: () => <LoginPage />,
   parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
 };
-
