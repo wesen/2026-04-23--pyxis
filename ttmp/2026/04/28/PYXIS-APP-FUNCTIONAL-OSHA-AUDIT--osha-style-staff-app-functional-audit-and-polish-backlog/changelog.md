@@ -34,3 +34,6 @@ LastUpdated: 2026-04-28T13:45:00-04:00
 - Added smoke evidence: `sources/06-staff-app-functional-smoke-after-calendar.json`.
 - Replaced DiscordPage mock channel data with backend settings-derived bot status and channel mappings.
 - Wired Setup Back/Skip/Continue navigation and gated `/modal` as a dev-only route.
+- Implemented Artists accessibility/search/duplicate-name validation and Storybook states.
+- Implemented Attendance search, per-row saving state, draw/incident validation, and Storybook validation states.
+- Added visible Chromium Playwright JS evidence: `sources/07-artists-attendance-visible-chromium.json`.

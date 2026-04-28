@@ -11,7 +11,7 @@ Topics:
 DocType: tasks
 Intent: implementation
 Summary: Detailed task backlog for missing staff-app backend functionality, inert controls, destructive confirmations, Storybook coverage, and production polish.
-LastUpdated: 2026-04-28T14:40:00-04:00
+LastUpdated: 2026-04-28T15:05:00-04:00
 ---
 
 # Staff App Functional OSHA Audit Task Backlog
@@ -212,29 +212,29 @@ LastUpdated: 2026-04-28T14:40:00-04:00
 
 ## Phase 8: Artists
 
-- [ ] **T41 — Audit ArtistRoster accessibility/text duplication**
+- [x] **T41 — Audit ArtistRoster accessibility/text duplication**
   - Smoke captured duplicated link text in row button accessible text.
   - Acceptance: screen-reader text is understandable and not duplicated.
 
-- [ ] **T42 — Add duplicate artist validation UX**
+- [x] **T42 — Add duplicate artist validation UX**
   - Backend/DB may reject duplicates; frontend should show useful message.
 
 - [ ] **T43 — Decide delete/merge artist support**
   - If needed, design backend and confirmation UX.
 
-- [ ] **T44 — Add Storybook states for create/update failures**
+- [x] **T44 — Add Storybook states for create/update failures**
 
 ## Phase 9: Attendance
 
-- [ ] **T45 — Add per-row saving state**
+- [x] **T45 — Add per-row saving state**
   - Avoid making all rows look saving when one row updates.
 
-- [ ] **T46 — Validate draw and incident inputs**
+- [x] **T46 — Validate draw and incident inputs**
   - No negative draw.
   - Reasonable max draw handling.
   - Incident notes tied to incident flag.
 
-- [ ] **T47 — Add attendance filter/search if needed**
+- [x] **T47 — Add attendance filter/search if needed**
 
 ## Phase 10: Audit Log
 

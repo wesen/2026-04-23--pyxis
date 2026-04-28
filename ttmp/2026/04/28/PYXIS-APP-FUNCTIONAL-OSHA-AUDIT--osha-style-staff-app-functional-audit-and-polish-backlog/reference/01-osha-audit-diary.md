@@ -435,3 +435,78 @@ Validation:
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 ```
+
+## Step 11: Artists and Attendance pass with visible Chromium validation
+
+Per operator request, I used a plain Playwright JS script with visible Chromium instead of the Playwright tool wrapper for browser validation:
+
+```js
+chromium.launch({ headless: false, slowMo: 250 })
+```
+
+Evidence was recorded in:
+
+```text
+sources/07-artists-attendance-visible-chromium.json
+```
+
+### Artists
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.tsx
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/ArtistRoster/ArtistRoster.tsx
+web/packages/pyxis-app/src/components/molecules/ArtistRosterRow/ArtistRosterRow.tsx
+```
+
+Implemented:
+
+- Added roster search across name, genre, links, and notes.
+- Added frontend duplicate-name validation before create/update.
+- Split artist save feedback into shared `ActionMessages` success/error states.
+- Improved desktop row accessibility with `role="button"`, `aria-label="Select …"`, `aria-pressed`, and keyboard Enter/Space activation.
+- Improved mobile roster button labels with `aria-label="Select …"`.
+- Added Storybook play coverage for duplicate-name validation and no-results search.
+
+Visible Chromium evidence:
+
+- Search for `burial` produced 2 rows.
+- Creating `Burial Hex` as a duplicate showed: `An artist named “Burial Hex” already exists. Select that artist or choose a different name.`
+
+### Attendance
+
+Changed:
+
+```text
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.css
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx
+```
+
+Implemented:
+
+- Added attendance search across artist, date, notes, and incident notes.
+- Replaced page-wide `isUpdating` with per-row `savingEntryId`.
+- Added draw validation: no negative values and warning/error guard for values above 10,000.
+- Added incident validation: incident notes are required when Incident is checked.
+- Disabled incident notes textarea until Incident is enabled.
+- Added invalid field styling and row-level validation messages.
+- Added Storybook states for per-row saving and incident validation.
+- Added page Storybook play coverage for incident validation and no-results search.
+
+Visible Chromium evidence:
+
+- Search for `zz-no-log` showed `No attendance entries match that search.`
+- Checking Incident without notes showed `Incident notes are required when Incident is checked.`
+- Entering `-1` draw showed `Draw cannot be negative.`
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```

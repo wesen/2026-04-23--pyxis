@@ -1,0 +1,18 @@
+{
+  "method": "Visible Chromium Playwright JS script launched with chromium.launch({ headless: false, slowMo: 250 }) from web/packages/pyxis-app.",
+  "baseUrl": "http://localhost:3008",
+  "auth": "http://localhost:3008/auth/dev-login?username=manuel&role=admin",
+  "artists": {
+    "afterSearchRows": 2,
+    "duplicateMessage": "An artist named “Burial Hex” already exists. Select that artist or choose a different name."
+  },
+  "attendance": {
+    "noResults": "No attendance entries match that search.",
+    "incidentValidation": "Incident notes are required when Incident is checked.",
+    "drawValidation": "Draw cannot be negative."
+  },
+  "validation": [
+    "cd web/packages/pyxis-app && pnpm exec tsc --noEmit",
+    "cd web/packages/pyxis-app && pnpm exec vite build"
+  ]
+}

@@ -32,3 +32,23 @@ export const EditAttendanceMutation: Story = {
   },
 };
 
+export const IncidentRequiresNotes: Story = {
+  render: () => renderWithFreshMockState(<AttendancePage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click((await canvas.findAllByLabelText(/incident for/i))[0]);
+    await expect(await canvas.findByText(/Incident notes are required/i)).toBeInTheDocument();
+  },
+};
+
+export const SearchNoResults: Story = {
+  render: () => renderWithFreshMockState(<AttendancePage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.type(await canvas.findByLabelText(/search attendance/i), 'zz-no-log');
+    await expect(await canvas.findByText(/No attendance entries match/i)).toBeInTheDocument();
+  },
+};
+

@@ -37,13 +37,35 @@ export const EditArtistMutation: Story = {
   parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click((await canvas.findAllByText(/Burial Hex/i))[0]);
+    await userEvent.click(await canvas.findByRole('button', { name: /select burial hex/i }));
     const notes = await canvas.findByLabelText(/^notes$/i);
     await userEvent.clear(notes);
     await userEvent.type(notes, 'Updated artist note from Storybook.');
     await userEvent.click(await canvas.findByRole('button', { name: /save artist/i }));
     await expect(await canvas.findByText(/Artist updated/i)).toBeInTheDocument();
     await expect(await canvas.findByText(/Updated artist note from Storybook/i)).toBeInTheDocument();
+  },
+};
+
+export const DuplicateNameValidation: Story = {
+  render: () => renderWithFreshMockState(<ArtistsPage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole('button', { name: /new artist/i }));
+    await userEvent.type(await canvas.findByLabelText(/^name$/i), 'Burial Hex');
+    await userEvent.click(await canvas.findByRole('button', { name: /create artist/i }));
+    await expect(await canvas.findByText(/already exists/i)).toBeInTheDocument();
+  },
+};
+
+export const SearchNoResults: Story = {
+  render: () => renderWithFreshMockState(<ArtistsPage />),
+  parameters: { viewport: { defaultViewport: 'pyxisAppDesktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.type(await canvas.findByLabelText(/search artists/i), 'zz-no-artist');
+    await expect(await canvas.findByText(/No artists match/i)).toBeInTheDocument();
   },
 };
 

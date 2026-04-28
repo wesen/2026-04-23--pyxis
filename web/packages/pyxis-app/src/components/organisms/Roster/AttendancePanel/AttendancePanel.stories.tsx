@@ -22,6 +22,16 @@ export const Empty: Story = {
 };
 
 export const AllLogged: Story = {
-  args: { entries: attendance.map((entry) => ({ ...entry, logged: true, draw: entry.draw ?? 42 })) },
+  args: { entries: attendance.map((entry) => ({ ...entry, draw: entry.draw ?? 42 })) },
+  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+};
+
+export const SavingFirstRow: Story = {
+  args: { savingEntryId: attendance[0]?.id || attendance[0]?.showId },
+  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+};
+
+export const IncidentValidation: Story = {
+  args: { entries: attendance.map((entry, index) => index === 0 ? { ...entry, incident: true, incidentNotes: '' } : entry) },
   render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
 };
