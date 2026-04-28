@@ -519,3 +519,61 @@ Served at:
 ```text
 http://localhost:8100/
 ```
+
+## Step 7: Replace coverage cards with actual mobile screenshots
+
+The user clarified that the compatibility coverage cards were not the desired output. They wanted actual screenshots of the mobile pages/elements in the same previous sweep/review format.
+
+I added:
+
+```text
+scripts/04-run-actual-mobile-visual-sweep.py
+```
+
+This script runs real `css-visual-diff compare` captures against mobile standalone prototype pages and mobile Storybook stories. It emits the same previous summary JSON shape and writes real screenshot artifacts.
+
+### Published actual mobile sweep
+
+```text
+/tmp/pyxis-public-mobile-actual-sweep
+/tmp/pyxis-public-mobile-actual-sweep.json
+/tmp/pyxis-public-mobile-actual-sweep/summary.json
+/tmp/pyxis-public-mobile-actual-sweep/failures.json
+```
+
+The successful rows include real image artifacts:
+
+```text
+left_region.png       # prototype screenshot
+right_region.png      # Storybook screenshot
+diff_only.png         # real pixel diff
+diff_comparison.png   # real triptych from css-visual-diff
+compare.json
+compare.md
+```
+
+I also verified it with the previous review-site generator and published:
+
+```text
+/tmp/pyxis-public-mobile-actual-review/index.html
+```
+
+Served at:
+
+```text
+http://localhost:8101/
+```
+
+### Result summary
+
+The actual mobile sweep attempted 23 targets. It published 15 successful actual screenshot rows and recorded 8 selector failures in `failures.json`.
+
+Successful row classes:
+
+```text
+tune-required: 12
+review: 1
+accepted: 2
+```
+
+The failures were deeper selectors that are not present with the same attributes on the standalone prototype side. I excluded failed rows from the review JSON so the review bundle shows real screenshots only, not placeholder/error cards.

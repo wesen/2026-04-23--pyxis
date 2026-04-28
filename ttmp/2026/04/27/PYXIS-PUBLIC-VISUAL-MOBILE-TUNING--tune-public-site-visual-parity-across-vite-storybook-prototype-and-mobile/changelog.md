@@ -39,3 +39,7 @@ Published `/tmp/pyxis-public-visual-coverage-rundown/index.html` and `/tmp/pyxis
 ## 2026-04-27
 
 Corrected the coverage rundown publisher to emit previous-review-compatible summary JSON plus image artifacts, and verified it works with the existing public pages review-site generator.
+
+## 2026-04-27
+
+Published an actual mobile screenshot sweep at `/tmp/pyxis-public-mobile-actual-sweep.json` plus `/tmp/pyxis-public-mobile-actual-review/index.html`, replacing the earlier coverage-card-only output with real css-visual-diff screenshots.
