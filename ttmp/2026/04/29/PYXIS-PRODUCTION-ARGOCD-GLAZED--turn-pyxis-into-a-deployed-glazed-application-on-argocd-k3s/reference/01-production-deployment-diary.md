@@ -1163,3 +1163,81 @@ Health: HTTP 200 {"status":"ok"}
 DB: show_logs exists
 Flyers: /flyers/smoke/pvc.txt returned ok
 ```
+
+## Step 23: Reconciled after documentation image churn
+
+Pushing the rollout diary commit triggered another `publish-image` run because the image workflow currently runs on every push to `main`, including documentation-only commits. The workflow itself succeeded and opened a new pair of GitOps PRs for `sha-edf2dcb`; I merged them so production would match the latest published image rather than leaving open drift PRs.
+
+After merging, Argo CD reran the DB bootstrap and migration hooks successfully, rolled the Deployment, and returned to `Synced Healthy`.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 21)
+
+**Assistant interpretation:** Keep following the production rollout through the CI/GitOps/Argo chain until the cluster is healthy.
+
+**Inferred user intent:** Avoid leaving half-finished automation artifacts or open Pyxis deployment PRs.
+
+**Commit (code):** edf2dcb — "PYXIS-PRODUCTION-ARGOCD-GLAZED: record production rollout"
+
+### What I did
+
+- Waited for `publish-image` run `25127055509`; it succeeded.
+- Merged generated GitOps PRs:
+  - `#52 pyxis-prod-app: deploy ghcr.io/wesen/pyxis:sha-edf2dcb`
+  - `#53 pyxis-prod-migrate: deploy ghcr.io/wesen/pyxis:sha-edf2dcb`
+- Pulled k3s repo to `b5b608c`.
+- Refreshed Argo CD.
+- Confirmed final state:
+
+```text
+Synced Healthy Succeeded successfully synced (all tasks run)
+deployment.apps/pyxis 1/1 image ghcr.io/wesen/pyxis:sha-edf2dcb
+/health -> {"status":"ok"}
+```
+
+### Why
+
+- Leaving generated Pyxis GitOps PRs open immediately after first rollout would make the production state ambiguous.
+
+### What worked
+
+- The short-SHA workflow fix continued to work.
+- DB bootstrap and migration hooks completed again.
+- The app rolled to `sha-edf2dcb` and remained healthy.
+
+### What didn't work
+
+- Documentation-only commits currently trigger image publication and GitOps PR automation.
+
+### What I learned
+
+- The publish-image workflow should probably get `paths-ignore` or split app-source image publishing from docs/ticket diary pushes.
+
+### What was tricky to build
+
+- The automation is now working enough that even documentation commits create real deployment PRs. That is useful for proving the path but noisy for ongoing diary maintenance.
+
+### What warrants a second pair of eyes
+
+- Decide whether `publish-image.yml` should ignore `ttmp/**`, `docs/**`, and other non-runtime paths.
+
+### What should be done in the future
+
+- Add path filters to prevent doc-only image churn.
+- Continue Phase 6 only for Discord OAuth/bot validation once the bot is installed in the guild.
+
+### Code review instructions
+
+- Verify the latest k3s manifests point to `ghcr.io/wesen/pyxis:sha-edf2dcb`.
+- Verify `kubectl -n argocd get app pyxis` reports `Synced Healthy`.
+
+### Technical details
+
+Final checked command output:
+
+```text
+Synced Healthy Succeeded successfully synced (all tasks run)
+deployment.apps/pyxis 1/1 ghcr.io/wesen/pyxis:sha-edf2dcb
+{"status":"ok"}
+```
