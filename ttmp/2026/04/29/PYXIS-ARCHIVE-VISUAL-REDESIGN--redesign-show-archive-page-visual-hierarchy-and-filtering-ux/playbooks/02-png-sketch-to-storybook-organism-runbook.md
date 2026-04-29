@@ -21,7 +21,7 @@ RelatedFiles:
       Note: Example organism built from PNG sketches
 ExternalSources: []
 Summary: Operational runbook for turning designer PNG sketches into finished Pyxis organisms/pages using ticket evidence, Storybook, css-visual-diff screenshots, and iterative visual review.
-LastUpdated: 2026-04-29T10:25:00-04:00
+LastUpdated: 2026-04-29T10:58:00-04:00
 WhatFor: Use this when a designer hands over one or more PNG sketches and we need to convert them into production-ready React organisms or pages without blindly copying off-token colors/sizes.
 WhenToUse: Read before starting visual implementation from screenshots, mobile sketches, or design-system PNGs.
 ---
@@ -198,7 +198,37 @@ Example:
 
 Mark tasks complete as they are validated, not merely when code is typed.
 
-## Step 6: Build from Storybook stories
+## Step 6: Design the component API and stable selectors before polishing CSS
+
+A design-system organism needs a small contract before it needs detailed styling. Decide what data comes in, what local draft state the component owns, and what events it emits. For a modal, the component should usually receive an entity and callbacks rather than fetching data itself.
+
+Example from the ShowLog modal:
+
+```ts
+export type PostShowLogEditorModalProps = {
+  entry?: ShowLogEntry;
+  isOpen: boolean;
+  isSaving?: boolean;
+  onCancel: () => void;
+  onSave?: (update: ShowLogUpdateInput) => void;
+};
+```
+
+Then add stable selectors for visual tooling. Use `appPart()` for screenshot targets instead of relying only on incidental class names:
+
+```tsx
+panelProps={{ ...appPart('post-show-log-editor-modal') }}
+```
+
+This gives a durable selector:
+
+```css
+[data-pyxis-component="post-show-log-editor-modal"]
+```
+
+That selector can be reused for desktop captures, mobile captures, route-level smoke tests, and later regression checks.
+
+## Step 7: Build from Storybook stories
 
 Stories should represent both visible PNG states and important production states.
 
@@ -226,7 +256,7 @@ export const MobileIncidentChecked = {}
 
 If a story appears visually broken after code changes, restart Storybook before assuming the CSS is broken. Vite can occasionally serve stale/empty CSS modules.
 
-## Step 7: Use a single-target screenshot verb for Storybook-only baselines
+## Step 8: Use a single-target screenshot verb for Storybook-only baselines
 
 If there is no real prototype/reference URL, do not make a YAML file where `original` and `react` both point to the same story. That hides the intent of the artifact.
 
@@ -262,7 +292,7 @@ css-visual-diff verbs pyxis app capture-story \
   --output json
 ```
 
-## Step 8: Capture before and after screenshots
+## Step 9: Capture before and after screenshots
 
 Use descriptive names:
 
@@ -283,7 +313,7 @@ read sources/.../current-mobile-incident-after-refine.png
 
 Then ask targeted image-understanding questions if useful.
 
-## Step 9: Watch for stale Storybook/Vite CSS
+## Step 10: Watch for stale Storybook/Vite CSS
 
 A failure mode observed during the ShowLog modal iteration:
 
@@ -323,7 +353,7 @@ cd web && nohup pnpm --filter pyxis-app storybook --host 0.0.0.0 --port 6008 \
   > /tmp/pyxis-app-storybook-6008.log 2>&1 &
 ```
 
-## Step 10: Implement layout first, then tune spacing
+## Step 11: Implement layout first, then tune spacing
 
 For a modal/page derived from a PNG, implement in this order:
 
@@ -337,7 +367,7 @@ For a modal/page derived from a PNG, implement in this order:
 
 Do not start with exact colors or shadows. First make the structure correct.
 
-## Step 11: Use Pyxis styling, not copied PNG styling
+## Step 12: Use Pyxis styling, not copied PNG styling
 
 When a designer PNG includes design-system colors, map roles to Pyxis tokens:
 
@@ -354,7 +384,7 @@ Only hard-code local semantic tints if no existing token exists and the tint is 
 
 Even then, keep them muted enough to fit the app.
 
-## Step 12: Mobile-specific checks
+## Step 13: Mobile-specific checks
 
 For mobile sketches, verify:
 
@@ -371,7 +401,7 @@ For mobile sketches, verify:
 
 If a screenshot looks like “all CSS disappeared,” confirm CSS loading before tuning.
 
-## Step 13: Record product/data decisions separately
+## Step 14: Record product/data decisions separately
 
 PNGs often include fields that do not exist in backend schema yet.
 
@@ -388,7 +418,48 @@ Do not silently add fake inputs to production if the values are lost. Choose one
 
 Document the decision in the ticket.
 
-## Step 14: Validate before commit
+## Step 15: Remove or archive obsolete components after a rename
+
+A design-system iteration is not complete if it leaves multiple components that appear to solve the same problem. This is especially common when a screen is renamed. In Pyxis, the Post-show log screen used to be called Attendance. That left old components such as:
+
+```text
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/
+```
+
+while the new implementation lived under:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowLog/
+```
+
+After the new organism is accepted, remove stale exports and stale stories, or explicitly archive them. Storybook should not show two competing canonical components unless both are deliberately supported. A future developer should not have to guess whether `AttendancePanel` or `PostShowLogPanel` is the right component.
+
+Checklist:
+
+- Rename page folders/classes when the product name changes (`AttendancePage` → `ShowLogPage`) even if the public route remains stable for compatibility.
+- Remove obsolete organism folders after the replacement is wired.
+- Remove obsolete molecule helpers if they are only used by the old organism.
+- Remove package/barrel exports for deleted components.
+- Re-run Storybook inventory or grep to ensure stale stories are gone.
+
+## Step 16: Check layout mechanics, not just colors
+
+Some visual bugs come from layout defaults rather than obvious styling errors. CSS grid stretches items by default, which can make a small card fill a tall column. In the ShowLog modal, this made the `Incident logs are private` gray box extend toward the bottom of the desktop side column.
+
+The fix was to align the side-column content to the start:
+
+```css
+.app-post-show-log-modal__side-column {
+  align-content: start;
+  display: grid;
+  gap: 22px;
+}
+```
+
+This kind of issue is why screenshots matter. TypeScript will pass, the CSS will be syntactically valid, and the component will still feel wrong. When a card, banner, or panel is visually too tall, check grid/flex stretching before changing padding or colors.
+
+## Step 17: Validate before commit
 
 Minimum validation for React component work:
 
@@ -409,7 +480,7 @@ For ticket hygiene:
 docmgr doctor --ticket TICKET-ID --stale-after 30
 ```
 
-## Step 15: Commit rhythm
+## Step 18: Commit rhythm
 
 Recommended commits:
 
@@ -422,7 +493,7 @@ Recommended commits:
 
 Do not commit unrelated runtime artifacts, such as local uploaded flyers or binaries.
 
-## Step 16: Final review package
+## Step 19: Final review package
 
 A finished visual iteration should leave behind:
 
@@ -443,3 +514,17 @@ A finished visual iteration should leave behind:
 3. Desktop and mobile should be captured separately. Desktop can look correct while mobile overflows or loses hierarchy.
 4. CSS disappearing in Storybook can be a dev-server issue, not necessarily a bad edit.
 5. A reusable `css-visual-diff verbs pyxis app capture-story` command is better than fake same-source YAML for Storybook-only baselines.
+6. Component API and stable selectors should come before micro-tuning. Without them, screenshots and route integration become fragile.
+7. Data model mismatches must be explicit. If a PNG introduces `quickHighlight` or `totalDoor`, either persist those fields or document the temporary behavior.
+8. Rename cleanup matters. Old `Attendance` components should not linger as apparently-valid alternatives after the screen becomes `ShowLog`.
+9. Grid/flex stretching can create visual bugs that look like bad sizing. Check layout mechanics before changing tokens.
+
+## Related durable note
+
+A longer textbook-style version of this process was added to the Obsidian vault:
+
+```text
+/home/manuel/code/wesen/obsidian-vault/Projects/2026/04/29/ARTICLE - Playbook - Adding Pyxis Design System Components from PNG Feedback.md
+```
+
+Use the Obsidian article for onboarding and conceptual explanation. Use this ticket runbook for the operational checklist and exact commands.

@@ -415,3 +415,20 @@ playbooks/02-png-sketch-to-storybook-organism-runbook.md
 ```
 
 The runbook captures the workflow for copying designer PNGs into ticket evidence, analyzing them with `read` and image-understanding, mapping design intent to existing Pyxis tokens, building Storybook states, using a single-target `css-visual-diff verbs pyxis app capture-story` command instead of fake same-source comparisons, debugging stale Storybook CSS, capturing desktop/mobile evidence, and committing in logical slices.
+
+## Step 18: Updated the PNG sketch runbook from the Obsidian tutorial
+
+Updated the ticket-local PNG sketch runbook with the additional lessons captured in the Obsidian article:
+
+```text
+playbooks/02-png-sketch-to-storybook-organism-runbook.md
+```
+
+Added guidance on designing the component API before CSS micro-tuning, using stable `appPart()` selectors, removing obsolete components after a screen rename, explicitly recording data-model mismatches introduced by PNG sketches, and checking grid/flex layout mechanics when a card stretches unexpectedly.
+
+Validated the runbook frontmatter and ticket health:
+
+```bash
+docmgr validate frontmatter --doc /abs/path/to/playbooks/02-png-sketch-to-storybook-organism-runbook.md --suggest-fixes
+docmgr doctor --ticket PYXIS-ARCHIVE-VISUAL-REDESIGN --stale-after 30
+```
