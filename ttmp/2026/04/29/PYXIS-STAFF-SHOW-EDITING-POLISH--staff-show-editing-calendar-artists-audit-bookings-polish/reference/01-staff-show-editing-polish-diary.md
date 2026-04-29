@@ -346,3 +346,27 @@ go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1
 ```
 
 All passed after fixing a missing JSX brace in `ShowDetailPage` and rebuilding `pyxis-types` so workspace consumers saw the new generated field.
+
+
+## 2026-04-30: Confirmed flyer validation surfaced as internal error
+
+A local edit on `/shows/4` reported:
+
+```json
+{ "code": "INTERNAL_ERROR", "message": "confirmed shows require an uploaded flyer" }
+```
+
+There were two problems. First, the service validation returned a plain `fmt.Errorf`, so `respondError` could not classify it as `service.ErrValidation` and fell through to the default 500/internal bucket. I changed `validateShowStatus` to wrap the sentinel:
+
+```go
+fmt.Errorf("%w: confirmed shows require an uploaded flyer", ErrValidation)
+```
+
+Second, the show detail page can have a freshly uploaded rail flyer in `localFlyerUrl` while `show.flyerUrl` from RTK Query is still stale. Saving the edit modal without selecting a new modal flyer could send the stale empty `flyerUrl`, causing the confirmed-show validation to reject the update even though the user had just uploaded a flyer. I changed `handleUpdateShow` to preserve `nextShow.flyerUrl || visibleFlyerUrl || ''` before PATCHing.
+
+Validation passed:
+
+```text
+go test ./pkg/service ./pkg/server -count=1
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+```

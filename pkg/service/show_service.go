@@ -71,7 +71,7 @@ func hasPublicFlyer(flyerURL string) bool {
 
 func validateShowStatus(show *domain.Show) error {
 	if show.Status == domain.StatusConfirmed && !hasPublicFlyer(show.FlyerURL) {
-		return fmt.Errorf("confirmed shows require an uploaded flyer")
+		return fmt.Errorf("%w: confirmed shows require an uploaded flyer", ErrValidation)
 	}
 	return nil
 }

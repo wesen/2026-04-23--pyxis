@@ -63,3 +63,9 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Added `reserveTicketEnabled` to Show/AppShow protobuf contracts and repository/server mappings.
 - Changed staff modal semantics so `price` is optional display text and public Reserve ticket CTA is controlled by an explicit checkbox.
 - Public show detail and show tiles now show reserve-ticket affordances only when the flag is true.
+
+## 2026-04-30 — Confirmed flyer validation fix
+
+- Fixed show detail saves after rail flyer upload by preserving the locally visible flyer URL when the refetched `show.flyerUrl` has not caught up yet.
+- Changed the confirmed-without-flyer backend error to wrap `service.ErrValidation`, so API responses classify it as `VALIDATION_ERROR`/400 instead of `INTERNAL_ERROR`/500.
+- Validation: `go test ./pkg/service ./pkg/server -count=1`; `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.

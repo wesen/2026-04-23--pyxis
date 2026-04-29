@@ -43,7 +43,7 @@ export function ShowDetailPage() {
     setActionError(undefined);
     setActionSuccess(undefined);
     try {
-      let showToSave = nextShow;
+      let showToSave = { ...nextShow, flyerUrl: nextShow.flyerUrl || visibleFlyerUrl || '' };
       if (flyerFile) {
         const uploaded = await uploadFlyer({ showId: show.id, file: flyerFile }).unwrap();
         setLocalFlyerUrl(uploaded.url);
