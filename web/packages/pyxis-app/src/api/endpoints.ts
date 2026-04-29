@@ -20,8 +20,6 @@ export const endpoints = {
   calendarHold: (id: number) => `/api/app/calendar/holds/${id}`,
   calendarBlocked: '/api/app/calendar/blocked',
   calendarBlockedDay: (id: number) => `/api/app/calendar/blocked/${id}`,
-  attendance: '/api/app/attendance',
-  attendanceShow: (showId: number) => `/api/app/attendance/${showId}`,
   showLog: '/api/app/show-log',
   showLogShow: (showId: number) => `/api/app/show-log/${showId}`,
   auditLog: '/api/app/audit-log',

@@ -41,7 +41,6 @@ export function App() {
       <Route path="/bookings" element={<RequireSession><BookingsPage /></RequireSession>} />
       <Route path="/bookings/review/:id" element={<RequireSession><BookingReviewPage /></RequireSession>} />
       <Route path="/artists" element={<RequireSession><ArtistsPage /></RequireSession>} />
-      <Route path="/attendance" element={<RequireSession><ShowLogPage /></RequireSession>} />
       <Route path="/show-log" element={<RequireSession><ShowLogPage /></RequireSession>} />
       <Route path="/log" element={<RequireSession><AuditLogPage /></RequireSession>} />
       <Route path="/discord" element={<RequireSession><DiscordPage /></RequireSession>} />

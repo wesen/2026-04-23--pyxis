@@ -114,3 +114,31 @@ All passed.
 Updated the ShowLog editor modal draft/save path so `quickHighlight` and `totalDoorCents` are no longer folded into `postShowNotes`. The modal now hydrates `quickHighlight` from the entry, formats `totalDoorCents` as dollars for the field, parses dollars back to cents on save, and sends all fields through `ShowLogUpdateInput`.
 
 This keeps the visual modal aligned with the backend migration from Step 3.
+
+## Step 5: Switched from compatibility policy to hard cutover
+
+The operator clarified that we should not keep deprecation/compatibility paths. I changed the plan from “keep `/attendance` and `/api/app/attendance` for now” to a hard ShowLog cutover.
+
+Implementation changes:
+
+- Removed the `/attendance` staff route from `web/packages/pyxis-app/src/App.tsx`.
+- Updated staff navigation to point at `/show-log` only.
+- Removed frontend `attendance` endpoint constants and RTK attendance query/mutation hooks.
+- Removed MSW `/api/app/attendance` handlers.
+- Removed backend `/api/app/attendance` route registrations and handler functions.
+- Renamed backend/domain layers from Attendance names to ShowLog names:
+  - `domain.AttendanceLog` -> `domain.ShowLog`
+  - `AttendanceService` -> `ShowLogService`
+  - `AttendanceRepository` -> `ShowLogRepository`
+  - `postgres.AttendanceRepo` -> `postgres.ShowLogRepo`
+  - `pkg/db/queries/attendance.sql` -> `pkg/db/queries/show_log.sql`
+- Added migration `000005_rename_attendance_logs_to_show_logs` to rename the physical table.
+- Updated sqlc query names to `GetShowLog`, `ListShowLogs`, and `UpsertShowLog`.
+- Changed API payload ID from `attendanceLogId` to `showLogId`.
+
+Validation so far:
+
+```bash
+go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

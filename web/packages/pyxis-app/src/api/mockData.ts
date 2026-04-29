@@ -4,7 +4,6 @@ import {
   ArtistSchema,
   CalendarEventKind,
   CalendarEventSchema,
-  AttendanceLogSchema,
   AuditLogEntrySchema,
   AuthSessionSchema,
   SubmissionSchema,
@@ -64,11 +63,11 @@ export const calendarEvents: CalendarEvent[] = [
   create(CalendarEventSchema, { id: 47, date: '2025-05-30', label: 'Basement Freq.', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
 ];
 
-export const attendance = [
-  create(AttendanceLogSchema, { id: 40, showId: 40, artist: 'Planning for Burial', date: '2025-03-14', draw: 0, notes: '', incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' }),
-  create(AttendanceLogSchema, { id: 41, showId: 41, artist: 'Actress', date: '2025-02-28', draw: 61, notes: 'Good energy, no issues.', incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' }),
-  create(AttendanceLogSchema, { id: 38, showId: 38, artist: 'Burial Hex', date: '2024-11-15', draw: 55, notes: '', incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' }),
-  create(AttendanceLogSchema, { id: 39, showId: 39, artist: 'Cygnus', date: '2024-08-01', draw: 74, notes: '', incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' }),
+export const showLogs = [
+  { id: 40, showId: 40, artist: 'Planning for Burial', date: '2025-03-14', draw: 0, notes: '', quickHighlight: '', totalDoorCents: undefined as number | undefined, incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' },
+  { id: 41, showId: 41, artist: 'Actress', date: '2025-02-28', draw: 61, notes: 'Good energy, no issues.', quickHighlight: 'Smooth load-out', totalDoorCents: 91500, incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' },
+  { id: 38, showId: 38, artist: 'Burial Hex', date: '2024-11-15', draw: 55, notes: '', quickHighlight: '', totalDoorCents: undefined as number | undefined, incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' },
+  { id: 39, showId: 39, artist: 'Cygnus', date: '2024-08-01', draw: 74, notes: '', quickHighlight: '', totalDoorCents: undefined as number | undefined, incident: false, incidentNotes: '', loggedBy: 0, createdAt: '', updatedAt: '' },
 ];
 
 export const discordMappings: DiscordChannelMapping[] = [

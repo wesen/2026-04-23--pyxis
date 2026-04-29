@@ -15,8 +15,8 @@ type Story = StoryObj<typeof PostShowLogPanel>;
 
 const entries: ShowLogEntry[] = [
   { showId: 1, artist: 'Planning for Burial', date: '2026-04-26', genre: 'Noise / ambient', showStatus: ShowStatus.ARCHIVED, showNotes: 'Ask about merch table placement before doors.', incident: false, logStatus: 'needs-log' },
-  { showId: 2, attendanceLogId: 2, artist: 'Actress', date: '2026-04-18', genre: 'Experimental / club', showStatus: ShowStatus.ARCHIVED, draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', incident: false, loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' },
-  { showId: 3, attendanceLogId: 3, artist: 'Example Artist', date: '2026-04-12', genre: 'Hardcore / punk', showStatus: ShowStatus.ARCHIVED, draw: 48, postShowNotes: 'Good draw, rough load-out.', incident: true, incidentNotes: 'Neighbor complaint after load-out.', loggedByName: 'Sam', updatedAt: '2026-04-13T01:00:00Z', logStatus: 'incident' },
+  { showId: 2, showLogId: 2, artist: 'Actress', date: '2026-04-18', genre: 'Experimental / club', showStatus: ShowStatus.ARCHIVED, draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', incident: false, loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' },
+  { showId: 3, showLogId: 3, artist: 'Example Artist', date: '2026-04-12', genre: 'Hardcore / punk', showStatus: ShowStatus.ARCHIVED, draw: 48, postShowNotes: 'Good draw, rough load-out.', incident: true, incidentNotes: 'Neighbor complaint after load-out.', loggedByName: 'Sam', updatedAt: '2026-04-13T01:00:00Z', logStatus: 'incident' },
 ];
 
 function StatefulPanel(args: Partial<React.ComponentProps<typeof PostShowLogPanel>>) {

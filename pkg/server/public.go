@@ -327,27 +327,6 @@ func calendarBlockedToEvent(b *domain.CalendarBlocked) *pyxisv1.CalendarEvent {
 	}
 }
 
-func attendanceLogToProto(log *domain.AttendanceLog) *pyxisv1.AttendanceLog {
-	pb := &pyxisv1.AttendanceLog{
-		Id:            int32(log.ID),
-		ShowId:        int32(log.ShowID),
-		Artist:        log.Artist,
-		Date:          log.Date.Format(time.DateOnly),
-		Notes:         log.Notes,
-		Incident:      log.Incident,
-		IncidentNotes: log.IncidentNotes,
-		CreatedAt:     log.CreatedAt.Format(time.RFC3339),
-		UpdatedAt:     log.UpdatedAt.Format(time.RFC3339),
-	}
-	if log.Draw != nil {
-		pb.Draw = int32(*log.Draw)
-	}
-	if log.LoggedBy != nil {
-		pb.LoggedBy = int32(*log.LoggedBy)
-	}
-	return pb
-}
-
 func auditLogEntryToProto(entry *domain.AuditLogEntry) *pyxisv1.AuditLogEntry {
 	pb := &pyxisv1.AuditLogEntry{
 		Id:         int32(entry.ID),

@@ -860,129 +860,32 @@ func (s *Server) handleDeleteCalendarBlocked(w http.ResponseWriter, r *http.Requ
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (s *Server) handleListAttendance(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	limit := 50
-	offset := 0
-	if l := r.URL.Query().Get("limit"); l != "" {
-		if v, err := strconv.Atoi(l); err == nil && v > 0 {
-			limit = v
-		}
-	}
-	if o := r.URL.Query().Get("offset"); o != "" {
-		if v, err := strconv.Atoi(o); err == nil && v >= 0 {
-			offset = v
-		}
-	}
-
-	logs, err := s.attendanceService.List(ctx, limit, offset)
-	if err != nil {
-		respondError(w, err)
-		return
-	}
-
-	pbLogs := make([]*pyxisv1.AttendanceLog, len(logs))
-	for i, log := range logs {
-		pbLogs[i] = attendanceLogToProto(&log)
-	}
-
-	respondProtoJSON(w, http.StatusOK, &pyxisv1.AttendanceLogList{Logs: pbLogs})
-}
-
-func (s *Server) handleGetAttendance(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	showIDStr := r.PathValue("showId")
-	showID, err := strconv.Atoi(showIDStr)
-	if err != nil {
-		respondError(w, fmt.Errorf("invalid show ID: %w", err))
-		return
-	}
-
-	log, err := s.attendanceService.GetByShowID(ctx, showID)
-	if err != nil {
-		respondError(w, err)
-		return
-	}
-
-	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(log))
-}
-
-func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	user := s.userFromContext(ctx)
-	if user == nil {
-		respondError(w, fmt.Errorf("unauthenticated"))
-		return
-	}
-
-	showIDStr := r.PathValue("showId")
-	showID, err := strconv.Atoi(showIDStr)
-	if err != nil {
-		respondError(w, fmt.Errorf("invalid show ID: %w", err))
-		return
-	}
-
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		respondError(w, fmt.Errorf("read body: %w", err))
-		return
-	}
-
-	var req struct {
-		Draw          *int   `json:"draw"`
-		Notes         string `json:"notes"`
-		Incident      bool   `json:"incident"`
-		IncidentNotes string `json:"incidentNotes"`
-	}
-	if err := json.Unmarshal(body, &req); err != nil {
-		respondError(w, fmt.Errorf("invalid request body: %w", err))
-		return
-	}
-
-	actorID := int(user.ID)
-	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{
-		ShowID:        showID,
-		Draw:          req.Draw,
-		Notes:         req.Notes,
-		Incident:      req.Incident,
-		IncidentNotes: req.IncidentNotes,
-		LoggedBy:      &actorID,
-	})
-	if err != nil {
-		respondError(w, err)
-		return
-	}
-
-	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(updated))
-}
-
 type showLogEntryResponse struct {
-	ShowID          int    `json:"showId"`
-	AttendanceLogID *int   `json:"attendanceLogId,omitempty"`
-	Artist          string `json:"artist"`
-	Date            string `json:"date"`
-	Genre           string `json:"genre,omitempty"`
-	ShowStatus      string `json:"showStatus"`
-	ShowNotes       string `json:"showNotes,omitempty"`
-	Draw            *int   `json:"draw,omitempty"`
-	PostShowNotes   string `json:"postShowNotes,omitempty"`
-	QuickHighlight  string `json:"quickHighlight,omitempty"`
-	TotalDoorCents  *int   `json:"totalDoorCents,omitempty"`
-	Incident        bool   `json:"incident"`
-	IncidentNotes   string `json:"incidentNotes,omitempty"`
-	LoggedBy        *int   `json:"loggedBy,omitempty"`
-	LoggedByName    string `json:"loggedByName,omitempty"`
-	LoggedAt        string `json:"loggedAt,omitempty"`
-	UpdatedAt       string `json:"updatedAt,omitempty"`
-	LogStatus       string `json:"logStatus"`
+	ShowID         int    `json:"showId"`
+	ShowLogID      *int   `json:"showLogId,omitempty"`
+	Artist         string `json:"artist"`
+	Date           string `json:"date"`
+	Genre          string `json:"genre,omitempty"`
+	ShowStatus     string `json:"showStatus"`
+	ShowNotes      string `json:"showNotes,omitempty"`
+	Draw           *int   `json:"draw,omitempty"`
+	PostShowNotes  string `json:"postShowNotes,omitempty"`
+	QuickHighlight string `json:"quickHighlight,omitempty"`
+	TotalDoorCents *int   `json:"totalDoorCents,omitempty"`
+	Incident       bool   `json:"incident"`
+	IncidentNotes  string `json:"incidentNotes,omitempty"`
+	LoggedBy       *int   `json:"loggedBy,omitempty"`
+	LoggedByName   string `json:"loggedByName,omitempty"`
+	LoggedAt       string `json:"loggedAt,omitempty"`
+	UpdatedAt      string `json:"updatedAt,omitempty"`
+	LogStatus      string `json:"logStatus"`
 }
 
 type showLogListResponse struct {
 	Entries []showLogEntryResponse `json:"entries"`
 }
 
-func buildShowLogEntry(show *domain.Show, log *domain.AttendanceLog) showLogEntryResponse {
+func buildShowLogEntry(show *domain.Show, log *domain.ShowLog) showLogEntryResponse {
 	entry := showLogEntryResponse{
 		ShowID:     show.ID,
 		Artist:     show.Artist,
@@ -996,7 +899,7 @@ func buildShowLogEntry(show *domain.Show, log *domain.AttendanceLog) showLogEntr
 	if log == nil {
 		return entry
 	}
-	entry.AttendanceLogID = &log.ID
+	entry.ShowLogID = &log.ID
 	entry.Draw = log.Draw
 	entry.PostShowNotes = log.Notes
 	entry.QuickHighlight = log.QuickHighlight
@@ -1031,11 +934,11 @@ func (s *Server) showLogEntries(ctx context.Context, status, search string, limi
 	if err != nil {
 		return nil, err
 	}
-	logs, err := s.attendanceService.List(ctx, 10000, 0)
+	logs, err := s.showLogService.List(ctx, 10000, 0)
 	if err != nil {
 		return nil, err
 	}
-	logsByShow := make(map[int]domain.AttendanceLog, len(logs))
+	logsByShow := make(map[int]domain.ShowLog, len(logs))
 	for _, log := range logs {
 		logsByShow[log.ShowID] = log
 	}
@@ -1050,7 +953,7 @@ func (s *Server) showLogEntries(ctx context.Context, status, search string, limi
 		if show.Status != domain.StatusConfirmed && show.Status != domain.StatusArchived && show.Status != domain.StatusCancelled {
 			continue
 		}
-		var log *domain.AttendanceLog
+		var log *domain.ShowLog
 		if found, ok := logsByShow[show.ID]; ok {
 			log = &found
 		}
@@ -1107,8 +1010,8 @@ func (s *Server) handleGetShowLog(w http.ResponseWriter, r *http.Request) {
 		respondError(w, err)
 		return
 	}
-	var log *domain.AttendanceLog
-	if found, err := s.attendanceService.GetByShowID(ctx, showID); err == nil {
+	var log *domain.ShowLog
+	if found, err := s.showLogService.GetByShowID(ctx, showID); err == nil {
 		log = found
 	} else if !strings.Contains(err.Error(), "no rows") && !strings.Contains(err.Error(), "not found") {
 		respondError(w, err)
@@ -1163,7 +1066,7 @@ func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	actorID := int(user.ID)
-	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, QuickHighlight: req.QuickHighlight, TotalDoorCents: req.TotalDoorCents, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
+	updated, err := s.showLogService.Upsert(ctx, &domain.ShowLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, QuickHighlight: req.QuickHighlight, TotalDoorCents: req.TotalDoorCents, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
 	if err != nil {
 		respondError(w, err)
 		return

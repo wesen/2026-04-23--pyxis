@@ -24,7 +24,7 @@ const baseEntry: ShowLogEntry = {
 };
 
 export const NeedsLogCollapsed: Story = { args: { entry: baseEntry } };
-export const LoggedCollapsed: Story = { args: { entry: { ...baseEntry, attendanceLogId: 10, artist: 'Actress', date: '2026-04-18', draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' } } };
+export const LoggedCollapsed: Story = { args: { entry: { ...baseEntry, showLogId: 10, artist: 'Actress', date: '2026-04-18', draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' } } };
 export const IncidentCollapsed: Story = { args: { entry: { ...baseEntry, artist: 'Example Artist', date: '2026-04-12', genre: 'Hardcore / punk', draw: 48, incident: true, incidentNotes: 'Neighbor complaint after load-out.', loggedByName: 'Sam', updatedAt: '2026-04-13T01:00:00Z', logStatus: 'incident' } } };
 export const ExpandedEditor: Story = { args: { entry: baseEntry, expanded: true } };
 export const ValidationError: Story = { args: { entry: { ...baseEntry, incident: true, logStatus: 'incident' }, expanded: true } };

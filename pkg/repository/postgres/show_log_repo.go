@@ -8,28 +8,28 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-// AttendanceRepo implements repository.AttendanceRepository using sqlc-generated queries.
-type AttendanceRepo struct {
+// ShowLogRepo implements repository.ShowLogRepository using sqlc-generated queries.
+type ShowLogRepo struct {
 	queries *db.Queries
 }
 
-// NewAttendanceRepo creates a new AttendanceRepo.
-func NewAttendanceRepo(queries *db.Queries) *AttendanceRepo {
-	return &AttendanceRepo{queries: queries}
+// NewShowLogRepo creates a new ShowLogRepo.
+func NewShowLogRepo(queries *db.Queries) *ShowLogRepo {
+	return &ShowLogRepo{queries: queries}
 }
 
-// GetByShowID returns an attendance log by show ID.
-func (r *AttendanceRepo) GetByShowID(ctx context.Context, showID int) (*domain.AttendanceLog, error) {
-	row, err := r.queries.GetAttendanceLog(ctx, int32(showID))
+// GetByShowID returns an show log by show ID.
+func (r *ShowLogRepo) GetByShowID(ctx context.Context, showID int) (*domain.ShowLog, error) {
+	row, err := r.queries.GetShowLog(ctx, int32(showID))
 	if err != nil {
 		return nil, err
 	}
-	return dbAttendanceToDomain(row), nil
+	return dbShowLogToDomain(row), nil
 }
 
-// Upsert creates or updates an attendance log.
-func (r *AttendanceRepo) Upsert(ctx context.Context, log *domain.AttendanceLog) (*domain.AttendanceLog, error) {
-	params := db.UpsertAttendanceLogParams{
+// Upsert creates or updates an show log.
+func (r *ShowLogRepo) Upsert(ctx context.Context, log *domain.ShowLog) (*domain.ShowLog, error) {
+	params := db.UpsertShowLogParams{
 		ShowID: int32(log.ShowID),
 	}
 	if log.Draw != nil {
@@ -52,16 +52,16 @@ func (r *AttendanceRepo) Upsert(ctx context.Context, log *domain.AttendanceLog) 
 		params.TotalDoorCents = pgtype.Int4{Int32: int32(*log.TotalDoorCents), Valid: true}
 	}
 
-	row, err := r.queries.UpsertAttendanceLog(ctx, params)
+	row, err := r.queries.UpsertShowLog(ctx, params)
 	if err != nil {
 		return nil, err
 	}
-	return dbAttendanceToDomain(row), nil
+	return dbShowLogToDomain(row), nil
 }
 
-// List returns attendance logs with pagination.
-func (r *AttendanceRepo) List(ctx context.Context, limit, offset int) ([]domain.AttendanceLog, error) {
-	rows, err := r.queries.ListAttendanceLogs(ctx, db.ListAttendanceLogsParams{
+// List returns show logs with pagination.
+func (r *ShowLogRepo) List(ctx context.Context, limit, offset int) ([]domain.ShowLog, error) {
+	rows, err := r.queries.ListShowLogs(ctx, db.ListShowLogsParams{
 		Limit:  int32(limit),
 		Offset: int32(offset),
 	})
@@ -69,15 +69,15 @@ func (r *AttendanceRepo) List(ctx context.Context, limit, offset int) ([]domain.
 		return nil, err
 	}
 
-	logs := make([]domain.AttendanceLog, len(rows))
+	logs := make([]domain.ShowLog, len(rows))
 	for i, row := range rows {
-		logs[i] = *dbAttendanceListRowToDomain(row)
+		logs[i] = *dbShowLogListRowToDomain(row)
 	}
 	return logs, nil
 }
 
-func dbAttendanceToDomain(row db.AttendanceLog) *domain.AttendanceLog {
-	log := &domain.AttendanceLog{
+func dbShowLogToDomain(row db.ShowLog) *domain.ShowLog {
+	log := &domain.ShowLog{
 		ID:             int(row.ID),
 		ShowID:         int(row.ShowID),
 		Notes:          row.Notes.String,
@@ -102,8 +102,8 @@ func dbAttendanceToDomain(row db.AttendanceLog) *domain.AttendanceLog {
 	return log
 }
 
-func dbAttendanceListRowToDomain(row db.ListAttendanceLogsRow) *domain.AttendanceLog {
-	log := &domain.AttendanceLog{
+func dbShowLogListRowToDomain(row db.ListShowLogsRow) *domain.ShowLog {
+	log := &domain.ShowLog{
 		ID:             int(row.ID),
 		ShowID:         int(row.ShowID),
 		Artist:         row.Artist,

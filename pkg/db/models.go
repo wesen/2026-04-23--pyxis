@@ -18,20 +18,6 @@ type Artist struct {
 	UpdatedAt pgtype.Timestamptz `json:"updatedAt"`
 }
 
-type AttendanceLog struct {
-	ID             int32              `json:"id"`
-	ShowID         int32              `json:"showId"`
-	Draw           pgtype.Int4        `json:"draw"`
-	Notes          pgtype.Text        `json:"notes"`
-	Incident       pgtype.Bool        `json:"incident"`
-	IncidentNotes  pgtype.Text        `json:"incidentNotes"`
-	LoggedBy       pgtype.Int4        `json:"loggedBy"`
-	CreatedAt      pgtype.Timestamptz `json:"createdAt"`
-	UpdatedAt      pgtype.Timestamptz `json:"updatedAt"`
-	QuickHighlight pgtype.Text        `json:"quickHighlight"`
-	TotalDoorCents pgtype.Int4        `json:"totalDoorCents"`
-}
-
 type AuditLog struct {
 	ID         int32              `json:"id"`
 	Actor      string             `json:"actor"`
@@ -128,6 +114,20 @@ type ShowLineup struct {
 	StartTime pgtype.Text `json:"startTime"`
 	EndTime   pgtype.Text `json:"endTime"`
 	SortOrder int32       `json:"sortOrder"`
+}
+
+type ShowLog struct {
+	ID             int32              `json:"id"`
+	ShowID         int32              `json:"showId"`
+	Draw           pgtype.Int4        `json:"draw"`
+	Notes          pgtype.Text        `json:"notes"`
+	Incident       pgtype.Bool        `json:"incident"`
+	IncidentNotes  pgtype.Text        `json:"incidentNotes"`
+	LoggedBy       pgtype.Int4        `json:"loggedBy"`
+	CreatedAt      pgtype.Timestamptz `json:"createdAt"`
+	UpdatedAt      pgtype.Timestamptz `json:"updatedAt"`
+	QuickHighlight pgtype.Text        `json:"quickHighlight"`
+	TotalDoorCents pgtype.Int4        `json:"totalDoorCents"`
 }
 
 type Submission struct {

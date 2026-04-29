@@ -1,0 +1,5 @@
+# Hard cutover legacy-attendance search
+
+Command:
+rg -n "AttendanceLog|AttendanceService|AttendanceRepository|AttendanceRepo|attendanceService|attendanceRepo|GetAttendanceLog|ListAttendanceLogs|UpsertAttendanceLog|/api/app/attendance|attendanceShow|getAttendance|updateAttendance|useGetAttendance|useUpdateAttendance|attendanceLogId|/attendance" pkg web/packages/pyxis-app/src
+

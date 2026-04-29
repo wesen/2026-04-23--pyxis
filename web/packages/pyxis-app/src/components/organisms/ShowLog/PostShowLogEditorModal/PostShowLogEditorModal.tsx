@@ -131,7 +131,7 @@ export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSa
           </FieldShell>
 
           <div className="app-post-show-log-modal__metrics-grid">
-            <FieldShell label="Draw (attendance)" help="Number of people in attendance">
+            <FieldShell label="Draw" help="Number of people at the show">
               <input className="app-post-show-log-modal__input" type="number" min={0} max={10000} value={draft.draw ?? 0} placeholder="e.g. 312" aria-invalid={(draft.draw ?? 0) < 0 || (draft.draw ?? 0) > 10000} onChange={(event) => setDraft((current) => ({ ...current, draw: Number(event.target.value) }))} />
             </FieldShell>
             <FieldShell label="Total door" help="Total dollars collected at the door">

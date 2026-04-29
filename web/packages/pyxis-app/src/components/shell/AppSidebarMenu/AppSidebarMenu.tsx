@@ -10,7 +10,7 @@ type AppNavSection = {
 
 const navSections = [
   { heading: 'Program', items: [ ['/', 'Dashboard', 'home'], ['/shows', 'Shows', 'music'], ['/calendar', 'Calendar', 'calendar'], ['/bookings', 'Bookings', 'mail', 3] ] },
-  { heading: 'Roster', items: [ ['/artists', 'Artists', 'users'], ['/attendance', 'Post-show log', 'check'] ] },
+  { heading: 'Roster', items: [ ['/artists', 'Artists', 'users'], ['/show-log', 'Post-show log', 'check'] ] },
   { heading: 'Operate', items: [ ['/log', 'Audit log', 'log'], ['/discord', 'Discord', 'discord'], ['/settings', 'Settings', 'cog'] ] },
 ] as const satisfies readonly AppNavSection[];
 

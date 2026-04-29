@@ -21,7 +21,7 @@ export const SettingsToggleDefault: Story = {
 export const Disabled: Story = {
   args: {
     label: 'Post-show reminders',
-    description: 'Remind staff to add attendance notes after completed shows.',
+    description: 'Remind staff to add post-show logs after completed shows.',
     enabled: false,
   },
   render: (args) => <div style={{ width: 520, padding: 24 }}><SettingsToggleRow {...args} /></div>,

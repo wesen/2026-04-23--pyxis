@@ -216,7 +216,7 @@ SELECT
     COUNT(DISTINCT date_part('year', date)) as years_running,
     COUNT(DISTINCT artist_id) as unique_artists
 FROM shows s
-LEFT JOIN attendance_logs al ON al.show_id = s.id
+LEFT JOIN show_logs al ON al.show_id = s.id
 WHERE s.status = 'archived'
 `
 
@@ -557,7 +557,7 @@ func (q *Queries) ListUpcomingShows(ctx context.Context) ([]ListUpcomingShowsRow
 const searchArchive = `-- name: SearchArchive :many
 SELECT s.id, s.artist, s.date, s.genre, COALESCE(al.draw, 0) as draw
 FROM shows s
-LEFT JOIN attendance_logs al ON al.show_id = s.id
+LEFT JOIN show_logs al ON al.show_id = s.id
 WHERE s.status = 'archived'
   AND ($1::text = '' OR s.artist ILIKE '%' || $1 || '%' OR s.genre ILIKE '%' || $1 || '%')
 ORDER BY s.date DESC

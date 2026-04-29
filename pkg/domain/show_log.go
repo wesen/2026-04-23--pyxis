@@ -2,8 +2,8 @@ package domain
 
 import "time"
 
-// AttendanceLog records post-show metrics for a single show.
-type AttendanceLog struct {
+// ShowLog records post-show metrics for a single show.
+type ShowLog struct {
 	ID             int
 	ShowID         int
 	Artist         string

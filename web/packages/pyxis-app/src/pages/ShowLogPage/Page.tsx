@@ -30,7 +30,7 @@ export function ShowLogPage() {
   };
 
   return (
-    <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
+    <AppShell page="show-log" title="Post-show log" eyebrow="Home / Post-show log">
       <ActionMessages error={actionError} success={actionSuccess} />
       {isLoading ? <LoadingState /> : isError || !entries ? <ErrorState /> : entries.length === 0 ? <EmptyState label="No past shows need post-show logs yet." /> : <PostShowLogPanel entries={entries} savingShowId={savingShowId} onSaveEntry={handleSaveEntry} />}
     </AppShell>

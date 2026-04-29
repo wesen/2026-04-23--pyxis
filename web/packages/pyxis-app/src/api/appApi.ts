@@ -25,9 +25,6 @@ import {
   CalendarHoldSchema,
   CalendarBlocked,
   CalendarBlockedSchema,
-  AttendanceLog,
-  AttendanceLogSchema,
-  AttendanceLogListSchema,
   AuditLogEntry,
   AuditLogEntryListSchema,
   Settings,
@@ -46,7 +43,7 @@ type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
 export type ShowLogStatus = 'needs-log' | 'logged' | 'incident';
 export type ShowLogEntry = {
   showId: number;
-  attendanceLogId?: number;
+  showLogId?: number;
   artist: string;
   date: string;
   genre?: string;
@@ -67,7 +64,6 @@ export type ShowLogEntry = {
 export type ShowLogList = { entries: ShowLogEntry[] };
 export type ShowLogQuery = { status?: ShowLogStatus | 'all'; search?: string; limit?: number; offset?: number };
 export type ShowLogUpdateInput = Pick<ShowLogEntry, 'showId' | 'draw' | 'postShowNotes' | 'quickHighlight' | 'totalDoorCents' | 'incident' | 'incidentNotes'>;
-type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
 type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
 type BookingUpdateInput = Pick<Submission, 'id' | 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'> & Partial<Pick<Submission, 'status'>>;
@@ -76,7 +72,7 @@ type ArtistInput = Pick<Artist, 'name' | 'genre' | 'links' | 'notes'>;
 export const appApi = createApi({
   reducerPath: 'appApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
-  tagTypes: ['Session', 'Show', 'Booking', 'Artist', 'Calendar', 'Attendance', 'AuditLog', 'Settings'],
+  tagTypes: ['Session', 'Show', 'Booking', 'Artist', 'Calendar', 'ShowLog', 'AuditLog', 'Settings'],
   endpoints: (builder) => ({
     getSession: builder.query<AuthSession, void>({
       query: () => endpoints.session,
@@ -265,35 +261,20 @@ export const appApi = createApi({
       invalidatesTags: ['Calendar', 'AuditLog'],
     }),
 
-    getAttendance: builder.query<AttendanceLog[], void>({
-      query: () => endpoints.attendance,
-      transformResponse: (response: unknown) => {
-        const list = fromJson(AttendanceLogListSchema, response as any);
-        return list.logs;
-      },
-      providesTags: ['Attendance'],
-    }),
-
-    updateAttendance: builder.mutation<AttendanceLog, AttendanceUpdateInput>({
-      query: ({ showId, ...body }) => ({ url: endpoints.attendanceShow(showId), method: 'PATCH', body }),
-      transformResponse: (response: unknown) => fromJson(AttendanceLogSchema, response as any),
-      invalidatesTags: ['Attendance', 'AuditLog'],
-    }),
-
     getShowLog: builder.query<ShowLogEntry[], ShowLogQuery | void>({
       query: (params) => ({ url: endpoints.showLog, params: params ? Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== '' && value !== 'all')) : undefined }),
       transformResponse: (response: ShowLogList) => response.entries,
-      providesTags: ['Attendance'],
+      providesTags: ['ShowLog'],
     }),
 
     getShowLogEntry: builder.query<ShowLogEntry, number>({
       query: (showId) => endpoints.showLogShow(showId),
-      providesTags: (_r, _e, showId) => [{ type: 'Attendance', id: showId }],
+      providesTags: (_r, _e, showId) => [{ type: 'ShowLog', id: showId }],
     }),
 
     updateShowLog: builder.mutation<ShowLogEntry, ShowLogUpdateInput>({
       query: ({ showId, ...body }) => ({ url: endpoints.showLogShow(showId), method: 'PATCH', body }),
-      invalidatesTags: ['Attendance', 'AuditLog'],
+      invalidatesTags: ['ShowLog', 'AuditLog'],
     }),
 
     getAuditLog: builder.query<AuditLogEntry[], void>({
@@ -333,7 +314,6 @@ export const {
   useDeleteShowFlyerMutation,
   useGetArtistQuery,
   useGetArtistsQuery,
-  useGetAttendanceQuery,
   useGetAuditLogQuery,
   useGetBookingReviewQuery,
   useGetBookingsQuery,
@@ -347,7 +327,6 @@ export const {
   useGetShowsQuery,
   useAnnounceShowMutation,
   useUpdateArtistMutation,
-  useUpdateAttendanceMutation,
   useUpdateBookingMutation,
   useUpdateBookingReviewMutation,
   useUpdateSettingsMutation,

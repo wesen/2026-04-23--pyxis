@@ -65,9 +65,9 @@ type CalendarRepository interface {
 	DeleteBlocked(ctx context.Context, id int) error
 }
 
-// AttendanceRepository defines attendance log storage operations.
-type AttendanceRepository interface {
-	GetByShowID(ctx context.Context, showID int) (*domain.AttendanceLog, error)
-	Upsert(ctx context.Context, log *domain.AttendanceLog) (*domain.AttendanceLog, error)
-	List(ctx context.Context, limit, offset int) ([]domain.AttendanceLog, error)
+// ShowLogRepository defines show log storage operations.
+type ShowLogRepository interface {
+	GetByShowID(ctx context.Context, showID int) (*domain.ShowLog, error)
+	Upsert(ctx context.Context, log *domain.ShowLog) (*domain.ShowLog, error)
+	List(ctx context.Context, limit, offset int) ([]domain.ShowLog, error)
 }

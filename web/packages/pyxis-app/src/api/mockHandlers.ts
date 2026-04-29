@@ -4,8 +4,6 @@ import {
   toJson,
   ArtistListSchema,
   ArtistSchema,
-  AttendanceLogSchema,
-  AttendanceLogListSchema,
   AuditLogEntryListSchema,
   AuthSessionSchema,
   BookingReviewSchema,
@@ -25,7 +23,7 @@ import {
   SuccessResponseSchema,
 } from 'pyxis-types';
 import type { AppShow, Artist, Submission } from 'pyxis-types';
-import { artists, attendance, auditLog, bookings, calendarEvents, session, settings, shows } from './mockData';
+import { artists, auditLog, bookings, calendarEvents, session, settings, showLogs, shows } from './mockData';
 
 function appShowToShow(show: AppShow) {
   return create(ShowSchema, {
@@ -48,7 +46,7 @@ type MockState = {
   bookings: Submission[];
   bookingReviews: Record<number, ReturnType<typeof createBookingReview>>;
   artists: Artist[];
-  attendance: typeof attendance;
+  showLogs: typeof showLogs;
   settings: typeof settings;
   calendarEvents: typeof calendarEvents;
 };
@@ -61,7 +59,7 @@ export function resetMockState() {
     bookings: bookings.map(cloneSubmission),
     bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
     artists: artists.map((artist) => create(ArtistSchema, artist as any)),
-    attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+    showLogs: showLogs.map((entry) => ({ ...entry })),
     settings: create(SettingsSchema, settings as any),
     calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
   };
@@ -82,7 +80,7 @@ function ensureMockState() {
       bookings: bookings.map(cloneSubmission),
       bookingReviews: Object.fromEntries(bookings.map((booking) => [booking.id, createBookingReview(booking.id, booking.id === 1 ? 'Good fit. Pair with local opener.' : '')])),
       artists: artists.map((artist) => create(ArtistSchema, artist as any)),
-      attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+      showLogs: showLogs.map((entry) => ({ ...entry })),
       settings: create(SettingsSchema, settings as any),
       calendarEvents: calendarEvents.map((event) => create(CalendarEventSchema, event as any)),
     };
@@ -104,10 +102,10 @@ function buildShowLogEntries(current: MockState) {
   return current.shows
     .filter((show) => [ShowStatus.CONFIRMED, ShowStatus.ARCHIVED, ShowStatus.CANCELLED].includes(show.status))
     .map((show) => {
-      const log = current.attendance.find((entry) => entry.showId === show.id);
+      const log = current.showLogs.find((entry) => entry.showId === show.id);
       return {
         showId: show.id,
-        attendanceLogId: log?.id,
+        showLogId: log?.id,
         artist: show.artist,
         date: show.date,
         genre: show.genre,
@@ -320,19 +318,6 @@ export const mockHandlers = [
     return new HttpResponse(null, { status: 204 });
   }),
 
-  http.get('*/api/app/attendance', () => {
-    const current = ensureMockState();
-    return HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: current.attendance })));
-  }),
-  http.patch('*/api/app/attendance/:showId', async ({ params, request }) => {
-    const current = ensureMockState();
-    const showId = Number(params.showId);
-    const body = await request.json() as Partial<typeof attendance[number]>;
-    const previous = current.attendance.find((entry) => entry.showId === showId) ?? current.attendance[0];
-    const updated = create(AttendanceLogSchema, { ...previous, ...body, showId, updatedAt: '2026-04-26T00:00:00Z' });
-    current.attendance = current.attendance.map((entry) => entry.showId === showId ? updated : entry);
-    return HttpResponse.json(toJson(AttendanceLogSchema, updated));
-  }),
   http.get('*/api/app/show-log', ({ request }) => {
     const current = ensureMockState();
     const url = new URL(request.url);
@@ -344,11 +329,17 @@ export const mockHandlers = [
     );
     return HttpResponse.json({ entries });
   }),
+  http.get('*/api/app/show-log/:showId', ({ params }) => {
+    const current = ensureMockState();
+    const showId = Number(params.showId);
+    const entry = buildShowLogEntries(current).find((candidate) => candidate.showId === showId);
+    return entry ? HttpResponse.json(entry) : new HttpResponse(null, { status: 404 });
+  }),
   http.patch('*/api/app/show-log/:showId', async ({ params, request }) => {
     const current = ensureMockState();
     const showId = Number(params.showId);
     const body = await request.json() as { draw?: number; postShowNotes?: string; quickHighlight?: string; totalDoorCents?: number; incident?: boolean; incidentNotes?: string };
-    const previous = current.attendance.find((entry) => entry.showId === showId);
+    const previous = current.showLogs.find((entry) => entry.showId === showId);
     const show = current.shows.find((candidate) => candidate.id === showId) ?? current.shows[0];
     const updated = {
       ...(previous ?? {}),
@@ -365,8 +356,8 @@ export const mockHandlers = [
       loggedBy: 1,
       createdAt: previous?.createdAt || '2026-04-26T00:00:00Z',
       updatedAt: '2026-04-26T00:00:00Z',
-    } as typeof current.attendance[number] & { quickHighlight?: string; totalDoorCents?: number };
-    current.attendance = previous ? current.attendance.map((entry) => entry.showId === showId ? updated : entry) : [updated, ...current.attendance];
+    } as typeof current.showLogs[number] & { quickHighlight?: string; totalDoorCents?: number };
+    current.showLogs = previous ? current.showLogs.map((entry) => entry.showId === showId ? updated : entry) : [updated, ...current.showLogs];
     const entry = buildShowLogEntries(current).find((candidate) => candidate.showId === showId);
     return HttpResponse.json(entry);
   }),
