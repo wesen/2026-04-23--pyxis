@@ -852,3 +852,86 @@ Failed workflow:
 ```text
 https://github.com/wesen/2026-04-23--pyxis/actions/runs/25123190533
 ```
+
+## Step 20: URL-encoded GitOps token in HTTPS Git remote
+
+The next real `publish-image` run passed the Git author step and failed at `git push`. The runner was using the token-bearing HTTPS remote, but GitHub rejected it as an invalid username or token. Since the secret exists and is masked in logs, the safest script-side fix is to URL-encode the token before embedding it in the remote URL; otherwise any token character with URL authority meaning can corrupt the clone/push URL.
+
+This does not prove the token has the right permissions. If the next run still fails, the remaining likely cause is token scope/repository access rather than script formatting.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue debugging the real GitHub Actions GitOps PR handoff after the user pasted the push-authentication failure.
+
+**Inferred user intent:** Get the CI-created GitOps PR flow working end-to-end now that the token exists.
+
+**Commit (code):** pending — URL-encoding fix implemented before commit.
+
+### What I did
+
+- Updated `scripts/open_gitops_pr.py` to import `urllib.parse.quote`.
+- Changed `repo_url()` so `GITOPS_PR_TOKEN` is URL-encoded before being inserted as the HTTPS basic-auth password.
+- Revalidated syntax and local dry-run:
+
+```bash
+python3 -m py_compile scripts/open_gitops_pr.py
+python3 -m json.tool deploy/gitops-targets.json >/dev/null
+GITOPS_PR_TOKEN='secret/token@with:chars' python3 scripts/open_gitops_pr.py \
+  --image ghcr.io/wesen/pyxis:sha-testphase5 \
+  --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s \
+  --dry-run
+```
+
+### Why
+
+- A Git token embedded in a URL must be URL-escaped.
+- The GitHub Actions log only shows a redacted remote, so the actual token shape cannot be inspected from CI logs.
+
+### What worked
+
+- The script still compiles.
+- Dry-run mode still patches both expected manifests and restores them afterward.
+- Redaction still protects the fake token in command output.
+
+### What didn't work
+
+The real workflow failure pasted by the user was:
+
+```text
++ git push --set-upstream origin deploy/pyxis-prod-app/sha-96ce1bf7fa27ef423905f44616f2b3d1d3ecab51
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/wesen/2026-03-27--hetzner-k3s.git/'
+error: Command '['git', 'push', '--set-upstream', 'origin', 'deploy/pyxis-prod-app/sha-96ce1bf7fa27ef423905f44616f2b3d1d3ecab51']' returned non-zero exit status 128.
+```
+
+### What I learned
+
+- The workflow has now progressed through build, image push, clone, patch, commit, and is failing specifically on authenticated push to the GitOps repo.
+
+### What was tricky to build
+
+- The logged remote is redacted by both our script and GitHub, which is correct for safety but means debugging has to proceed by hardening the URL construction and then, if needed, checking token scopes out-of-band.
+
+### What warrants a second pair of eyes
+
+- If the next workflow still fails, verify the secret value is a PAT or GitHub App token with write access to `wesen/2026-03-27--hetzner-k3s` contents and pull requests.
+- Confirm the token was set on repo `wesen/2026-04-23--pyxis`, not only in an environment or another repo.
+
+### What should be done in the future
+
+- Prefer a GitHub App installation token with narrowly scoped access to the GitOps repo once this flow stabilizes.
+
+### Code review instructions
+
+- Review `repo_url()` in `scripts/open_gitops_pr.py`.
+- Confirm the token is escaped with `quote(token, safe='')` and still redacted before printing.
+
+### Technical details
+
+The URL construction now uses:
+
+```python
+quote(token, safe='')
+```

@@ -22,6 +22,7 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
+from urllib.parse import quote
 
 
 @dataclass(frozen=True)
@@ -105,7 +106,11 @@ def patch_container_image(manifest: Path, container_name: str, image: str) -> bo
 
 def repo_url(repo: str, token: str | None) -> str:
     if token:
-        return f"https://x-access-token:{token}@github.com/{repo}.git"
+        # GitHub accepts HTTPS Git auth as basic auth with username
+        # `x-access-token` and the token as the password. URL-encode the token
+        # because fine-grained token formats or copied secrets can contain
+        # characters that are meaningful inside a URL authority component.
+        return f"https://x-access-token:{quote(token, safe='')}@github.com/{repo}.git"
     return f"https://github.com/{repo}.git"
 
 
