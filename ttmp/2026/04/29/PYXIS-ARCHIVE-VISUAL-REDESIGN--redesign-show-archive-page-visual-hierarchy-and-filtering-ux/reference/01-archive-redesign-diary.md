@@ -152,3 +152,37 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 9: Built first PostShowLog components
+
+Built the first organism components on top of the molecule primitives:
+
+```text
+web/packages/pyxis-app/src/components/organisms/PostShowLog/PostShowLogEntryCard/
+web/packages/pyxis-app/src/components/organisms/PostShowLog/PostShowLogPanel/
+```
+
+`PostShowLogEntryCard` now supports:
+
+- needs-log, logged, and incident tones;
+- collapsed scan-first state;
+- expanded editor state;
+- draw validation;
+- incident-notes validation;
+- show notes vs post-show notes separation;
+- Storybook stories for collapsed, expanded, validation, and saving states.
+
+`PostShowLogPanel` now supports:
+
+- summary metrics;
+- search;
+- status chips;
+- filtered list;
+- empty state;
+- Storybook stories for mixed, needs-log, empty, search no-results, and mobile states.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

@@ -1,0 +1,19 @@
+.app-post-show-log-card { gap: 13px; }
+.app-post-show-log-card__header { align-items: center; display: flex; justify-content: space-between; gap: 12px; }
+.app-post-show-log-card__header time { color: var(--app-muted); font-size: 12px; font-weight: 700; }
+.app-post-show-log-card__identity { display: grid; gap: 3px; }
+.app-post-show-log-card__identity h3 { color: var(--app-ink); font-family: var(--font-display, Georgia, serif); font-size: 22px; font-weight: 500; letter-spacing: -.02em; margin: 0; }
+.app-post-show-log-card__identity p { color: var(--app-muted); font-size: 13px; margin: 0; }
+.app-post-show-log-card__editor { border-top: 1px solid var(--app-rule); display: grid; gap: 14px; padding-top: 14px; }
+.app-post-show-log-card__form-grid { display: grid; gap: 12px; grid-template-columns: minmax(140px, 180px) minmax(0, 1fr); }
+.app-post-show-log-card__form-grid label { color: var(--app-muted); display: grid; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: .06em; text-transform: uppercase; }
+.app-post-show-log-card__form-grid input[type='number'], .app-post-show-log-card__form-grid textarea { background: var(--app-surface); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); color: var(--app-ink); font: inherit; font-size: 13px; padding: 9px 10px; text-transform: none; }
+.app-post-show-log-card__form-grid textarea { line-height: 1.45; resize: vertical; }
+.app-post-show-log-card__form-grid input:focus-visible, .app-post-show-log-card__form-grid textarea:focus-visible { outline: 2px solid var(--app-focus, var(--app-accent)); outline-offset: 2px; }
+.app-post-show-log-card__form-grid textarea:disabled { color: var(--app-muted); opacity: .72; }
+.app-post-show-log-card__checkbox { align-content: center; align-items: center; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); display: flex !important; gap: 9px !important; padding: 9px 10px; text-transform: none !important; }
+.app-post-show-log-card__checkbox input { accent-color: var(--app-accent); }
+.app-post-show-log-card__checkbox span { color: var(--app-ink); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+.app-post-show-log-card__wide { grid-column: 1 / -1; }
+.app-post-show-log-card__actions { display: flex; gap: 8px; justify-content: flex-end; }
+@media (max-width: 680px) { .app-post-show-log-card__header { align-items: flex-start; flex-direction: column; } .app-post-show-log-card__form-grid { grid-template-columns: 1fr; } .app-post-show-log-card__actions { flex-direction: column-reverse; } }
