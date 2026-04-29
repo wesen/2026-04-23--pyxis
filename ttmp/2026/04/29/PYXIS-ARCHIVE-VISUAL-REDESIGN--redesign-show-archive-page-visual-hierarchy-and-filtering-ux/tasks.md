@@ -14,3 +14,4 @@
 - [x] Analyze current archive page, shared components, API flow, Storybook coverage, CSS tokens, and visual-diff targets.
 - [x] Write intern-ready design and implementation guide.
 - [x] Upload guide bundle to reMarkable.
+- [x] Add backend-first staff post-show log guide and document Storybook-baseline workflow for the new component.

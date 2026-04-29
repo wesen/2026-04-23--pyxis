@@ -90,3 +90,15 @@ The guide proposes:
 ## Step 5: Uploaded to reMarkable
 
 Uploaded the design guide bundle to the ticket folder on reMarkable after a dry run.
+
+## Step 6: Added backend-first post-show log guide and corrected visual workflow
+
+The operator clarified that the staff post-show log page/backend is the right starting point before the public archive visual redesign, and that this is a new component with no standalone prototype HTML to compare against.
+
+Created:
+
+```text
+design-doc/02-staff-post-show-log-backend-and-page-redesign-guide.md
+```
+
+The second guide now explicitly says not to force the new PostShowLog component family into the prototype-to-Storybook visual-diff workflow. Instead, Storybook states define the intended design, and approved Storybook screenshots become the baseline evidence for future regression checks.
