@@ -217,7 +217,7 @@ type UpdateSubmissionDetailsParams struct {
 	TechRider      pgtype.Text `json:"techRider"`
 	Message        pgtype.Text `json:"message"`
 	ContactDiscord pgtype.Text `json:"contactDiscord"`
-	Status         pgtype.Text `json:"status"`
+	Status         string      `json:"status"`
 }
 
 func (q *Queries) UpdateSubmissionDetails(ctx context.Context, arg UpdateSubmissionDetailsParams) (Submission, error) {

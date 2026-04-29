@@ -19,15 +19,17 @@ type Artist struct {
 }
 
 type AttendanceLog struct {
-	ID            int32              `json:"id"`
-	ShowID        int32              `json:"showId"`
-	Draw          pgtype.Int4        `json:"draw"`
-	Notes         pgtype.Text        `json:"notes"`
-	Incident      pgtype.Bool        `json:"incident"`
-	IncidentNotes pgtype.Text        `json:"incidentNotes"`
-	LoggedBy      pgtype.Int4        `json:"loggedBy"`
-	CreatedAt     pgtype.Timestamptz `json:"createdAt"`
-	UpdatedAt     pgtype.Timestamptz `json:"updatedAt"`
+	ID             int32              `json:"id"`
+	ShowID         int32              `json:"showId"`
+	Draw           pgtype.Int4        `json:"draw"`
+	Notes          pgtype.Text        `json:"notes"`
+	Incident       pgtype.Bool        `json:"incident"`
+	IncidentNotes  pgtype.Text        `json:"incidentNotes"`
+	LoggedBy       pgtype.Int4        `json:"loggedBy"`
+	CreatedAt      pgtype.Timestamptz `json:"createdAt"`
+	UpdatedAt      pgtype.Timestamptz `json:"updatedAt"`
+	QuickHighlight pgtype.Text        `json:"quickHighlight"`
+	TotalDoorCents pgtype.Int4        `json:"totalDoorCents"`
 }
 
 type AuditLog struct {

@@ -54,6 +54,8 @@ export type ShowLogEntry = {
   showNotes?: string;
   draw?: number;
   postShowNotes?: string;
+  quickHighlight?: string;
+  totalDoorCents?: number;
   incident: boolean;
   incidentNotes?: string;
   loggedBy?: number;
@@ -64,7 +66,7 @@ export type ShowLogEntry = {
 };
 export type ShowLogList = { entries: ShowLogEntry[] };
 export type ShowLogQuery = { status?: ShowLogStatus | 'all'; search?: string; limit?: number; offset?: number };
-export type ShowLogUpdateInput = Pick<ShowLogEntry, 'showId' | 'draw' | 'postShowNotes' | 'incident' | 'incidentNotes'>;
+export type ShowLogUpdateInput = Pick<ShowLogEntry, 'showId' | 'draw' | 'postShowNotes' | 'quickHighlight' | 'totalDoorCents' | 'incident' | 'incidentNotes'>;
 type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
 type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
@@ -284,6 +286,11 @@ export const appApi = createApi({
       providesTags: ['Attendance'],
     }),
 
+    getShowLogEntry: builder.query<ShowLogEntry, number>({
+      query: (showId) => endpoints.showLogShow(showId),
+      providesTags: (_r, _e, showId) => [{ type: 'Attendance', id: showId }],
+    }),
+
     updateShowLog: builder.mutation<ShowLogEntry, ShowLogUpdateInput>({
       query: ({ showId, ...body }) => ({ url: endpoints.showLogShow(showId), method: 'PATCH', body }),
       invalidatesTags: ['Attendance', 'AuditLog'],
@@ -335,6 +342,7 @@ export const {
   useLogoutMutation,
   useGetSettingsQuery,
   useGetShowLogQuery,
+  useGetShowLogEntryQuery,
   useGetShowQuery,
   useGetShowsQuery,
   useAnnounceShowMutation,

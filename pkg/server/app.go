@@ -967,6 +967,8 @@ type showLogEntryResponse struct {
 	ShowNotes       string `json:"showNotes,omitempty"`
 	Draw            *int   `json:"draw,omitempty"`
 	PostShowNotes   string `json:"postShowNotes,omitempty"`
+	QuickHighlight  string `json:"quickHighlight,omitempty"`
+	TotalDoorCents  *int   `json:"totalDoorCents,omitempty"`
 	Incident        bool   `json:"incident"`
 	IncidentNotes   string `json:"incidentNotes,omitempty"`
 	LoggedBy        *int   `json:"loggedBy,omitempty"`
@@ -997,6 +999,8 @@ func buildShowLogEntry(show *domain.Show, log *domain.AttendanceLog) showLogEntr
 	entry.AttendanceLogID = &log.ID
 	entry.Draw = log.Draw
 	entry.PostShowNotes = log.Notes
+	entry.QuickHighlight = log.QuickHighlight
+	entry.TotalDoorCents = log.TotalDoorCents
 	entry.Incident = log.Incident
 	entry.IncidentNotes = log.IncidentNotes
 	entry.LoggedBy = log.LoggedBy
@@ -1091,6 +1095,28 @@ func (s *Server) handleListShowLog(w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusOK, showLogListResponse{Entries: entries})
 }
 
+func (s *Server) handleGetShowLog(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	showID, err := strconv.Atoi(r.PathValue("showId"))
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+	show, err := s.showService.GetByID(ctx, showID)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	var log *domain.AttendanceLog
+	if found, err := s.attendanceService.GetByShowID(ctx, showID); err == nil {
+		log = found
+	} else if !strings.Contains(err.Error(), "no rows") && !strings.Contains(err.Error(), "not found") {
+		respondError(w, err)
+		return
+	}
+	respondJSON(w, http.StatusOK, buildShowLogEntry(show, log))
+}
+
 func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -1109,10 +1135,12 @@ func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req struct {
-		Draw          *int   `json:"draw"`
-		PostShowNotes string `json:"postShowNotes"`
-		Incident      bool   `json:"incident"`
-		IncidentNotes string `json:"incidentNotes"`
+		Draw           *int   `json:"draw"`
+		PostShowNotes  string `json:"postShowNotes"`
+		QuickHighlight string `json:"quickHighlight"`
+		TotalDoorCents *int   `json:"totalDoorCents"`
+		Incident       bool   `json:"incident"`
+		IncidentNotes  string `json:"incidentNotes"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))
@@ -1126,12 +1154,16 @@ func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
 		respondError(w, fmt.Errorf("%w: draw looks too high", service.ErrValidation))
 		return
 	}
+	if req.TotalDoorCents != nil && *req.TotalDoorCents < 0 {
+		respondError(w, fmt.Errorf("%w: total door cannot be negative", service.ErrValidation))
+		return
+	}
 	if req.Incident && strings.TrimSpace(req.IncidentNotes) == "" {
 		respondError(w, fmt.Errorf("%w: incident notes are required", service.ErrValidation))
 		return
 	}
 	actorID := int(user.ID)
-	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
+	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, QuickHighlight: req.QuickHighlight, TotalDoorCents: req.TotalDoorCents, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
 	if err != nil {
 		respondError(w, err)
 		return

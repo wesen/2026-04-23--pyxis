@@ -45,6 +45,12 @@ func (r *AttendanceRepo) Upsert(ctx context.Context, log *domain.AttendanceLog) 
 	if log.LoggedBy != nil {
 		params.LoggedBy = pgtype.Int4{Int32: int32(*log.LoggedBy), Valid: true}
 	}
+	if log.QuickHighlight != "" {
+		params.QuickHighlight = pgtype.Text{String: log.QuickHighlight, Valid: true}
+	}
+	if log.TotalDoorCents != nil {
+		params.TotalDoorCents = pgtype.Int4{Int32: int32(*log.TotalDoorCents), Valid: true}
+	}
 
 	row, err := r.queries.UpsertAttendanceLog(ctx, params)
 	if err != nil {
@@ -72,13 +78,14 @@ func (r *AttendanceRepo) List(ctx context.Context, limit, offset int) ([]domain.
 
 func dbAttendanceToDomain(row db.AttendanceLog) *domain.AttendanceLog {
 	log := &domain.AttendanceLog{
-		ID:            int(row.ID),
-		ShowID:        int(row.ShowID),
-		Notes:         row.Notes.String,
-		Incident:      row.Incident.Bool,
-		IncidentNotes: row.IncidentNotes.String,
-		CreatedAt:     row.CreatedAt.Time,
-		UpdatedAt:     row.UpdatedAt.Time,
+		ID:             int(row.ID),
+		ShowID:         int(row.ShowID),
+		Notes:          row.Notes.String,
+		QuickHighlight: row.QuickHighlight.String,
+		Incident:       row.Incident.Bool,
+		IncidentNotes:  row.IncidentNotes.String,
+		CreatedAt:      row.CreatedAt.Time,
+		UpdatedAt:      row.UpdatedAt.Time,
 	}
 	if row.Draw.Valid {
 		v := int(row.Draw.Int32)
@@ -87,21 +94,26 @@ func dbAttendanceToDomain(row db.AttendanceLog) *domain.AttendanceLog {
 	if row.LoggedBy.Valid {
 		v := int(row.LoggedBy.Int32)
 		log.LoggedBy = &v
+	}
+	if row.TotalDoorCents.Valid {
+		v := int(row.TotalDoorCents.Int32)
+		log.TotalDoorCents = &v
 	}
 	return log
 }
 
 func dbAttendanceListRowToDomain(row db.ListAttendanceLogsRow) *domain.AttendanceLog {
 	log := &domain.AttendanceLog{
-		ID:            int(row.ID),
-		ShowID:        int(row.ShowID),
-		Artist:        row.Artist,
-		Date:          row.Date.Time,
-		Notes:         row.Notes.String,
-		Incident:      row.Incident.Bool,
-		IncidentNotes: row.IncidentNotes.String,
-		CreatedAt:     row.CreatedAt.Time,
-		UpdatedAt:     row.UpdatedAt.Time,
+		ID:             int(row.ID),
+		ShowID:         int(row.ShowID),
+		Artist:         row.Artist,
+		Date:           row.Date.Time,
+		Notes:          row.Notes.String,
+		QuickHighlight: row.QuickHighlight.String,
+		Incident:       row.Incident.Bool,
+		IncidentNotes:  row.IncidentNotes.String,
+		CreatedAt:      row.CreatedAt.Time,
+		UpdatedAt:      row.UpdatedAt.Time,
 	}
 	if row.Draw.Valid {
 		v := int(row.Draw.Int32)
@@ -110,6 +122,10 @@ func dbAttendanceListRowToDomain(row db.ListAttendanceLogsRow) *domain.Attendanc
 	if row.LoggedBy.Valid {
 		v := int(row.LoggedBy.Int32)
 		log.LoggedBy = &v
+	}
+	if row.TotalDoorCents.Valid {
+		v := int(row.TotalDoorCents.Int32)
+		log.TotalDoorCents = &v
 	}
 	return log
 }

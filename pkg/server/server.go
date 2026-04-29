@@ -135,6 +135,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("GET /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAttendance))))
 	mux.Handle("PATCH /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertAttendance))))
 	mux.Handle("GET /api/app/show-log", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListShowLog))))
+	mux.Handle("GET /api/app/show-log/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetShowLog))))
 	mux.Handle("PATCH /api/app/show-log/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertShowLog))))
 
 	// Staff settings endpoints

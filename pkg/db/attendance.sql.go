@@ -12,7 +12,7 @@ import (
 )
 
 const getAttendanceLog = `-- name: GetAttendanceLog :one
-SELECT id, show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at FROM attendance_logs WHERE show_id = $1
+SELECT id, show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at, quick_highlight, total_door_cents FROM attendance_logs WHERE show_id = $1
 `
 
 func (q *Queries) GetAttendanceLog(ctx context.Context, showID int32) (AttendanceLog, error) {
@@ -28,12 +28,14 @@ func (q *Queries) GetAttendanceLog(ctx context.Context, showID int32) (Attendanc
 		&i.LoggedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.QuickHighlight,
+		&i.TotalDoorCents,
 	)
 	return i, err
 }
 
 const listAttendanceLogs = `-- name: ListAttendanceLogs :many
-SELECT al.id, al.show_id, al.draw, al.notes, al.incident, al.incident_notes, al.logged_by, al.created_at, al.updated_at, s.artist, s.date
+SELECT al.id, al.show_id, al.draw, al.notes, al.incident, al.incident_notes, al.logged_by, al.created_at, al.updated_at, al.quick_highlight, al.total_door_cents, s.artist, s.date
 FROM attendance_logs al
 JOIN shows s ON s.id = al.show_id
 ORDER BY s.date DESC
@@ -46,17 +48,19 @@ type ListAttendanceLogsParams struct {
 }
 
 type ListAttendanceLogsRow struct {
-	ID            int32              `json:"id"`
-	ShowID        int32              `json:"showId"`
-	Draw          pgtype.Int4        `json:"draw"`
-	Notes         pgtype.Text        `json:"notes"`
-	Incident      pgtype.Bool        `json:"incident"`
-	IncidentNotes pgtype.Text        `json:"incidentNotes"`
-	LoggedBy      pgtype.Int4        `json:"loggedBy"`
-	CreatedAt     pgtype.Timestamptz `json:"createdAt"`
-	UpdatedAt     pgtype.Timestamptz `json:"updatedAt"`
-	Artist        string             `json:"artist"`
-	Date          pgtype.Date        `json:"date"`
+	ID             int32              `json:"id"`
+	ShowID         int32              `json:"showId"`
+	Draw           pgtype.Int4        `json:"draw"`
+	Notes          pgtype.Text        `json:"notes"`
+	Incident       pgtype.Bool        `json:"incident"`
+	IncidentNotes  pgtype.Text        `json:"incidentNotes"`
+	LoggedBy       pgtype.Int4        `json:"loggedBy"`
+	CreatedAt      pgtype.Timestamptz `json:"createdAt"`
+	UpdatedAt      pgtype.Timestamptz `json:"updatedAt"`
+	QuickHighlight pgtype.Text        `json:"quickHighlight"`
+	TotalDoorCents pgtype.Int4        `json:"totalDoorCents"`
+	Artist         string             `json:"artist"`
+	Date           pgtype.Date        `json:"date"`
 }
 
 func (q *Queries) ListAttendanceLogs(ctx context.Context, arg ListAttendanceLogsParams) ([]ListAttendanceLogsRow, error) {
@@ -78,6 +82,8 @@ func (q *Queries) ListAttendanceLogs(ctx context.Context, arg ListAttendanceLogs
 			&i.LoggedBy,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.QuickHighlight,
+			&i.TotalDoorCents,
 			&i.Artist,
 			&i.Date,
 		); err != nil {
@@ -92,25 +98,29 @@ func (q *Queries) ListAttendanceLogs(ctx context.Context, arg ListAttendanceLogs
 }
 
 const upsertAttendanceLog = `-- name: UpsertAttendanceLog :one
-INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, logged_by)
-VALUES ($1, $2, $3, $4, $5, $6)
+INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, logged_by, quick_highlight, total_door_cents)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 ON CONFLICT (show_id) DO UPDATE SET
     draw = EXCLUDED.draw,
     notes = EXCLUDED.notes,
     incident = EXCLUDED.incident,
     incident_notes = EXCLUDED.incident_notes,
     logged_by = EXCLUDED.logged_by,
+    quick_highlight = EXCLUDED.quick_highlight,
+    total_door_cents = EXCLUDED.total_door_cents,
     updated_at = NOW()
-RETURNING id, show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at
+RETURNING id, show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at, quick_highlight, total_door_cents
 `
 
 type UpsertAttendanceLogParams struct {
-	ShowID        int32       `json:"showId"`
-	Draw          pgtype.Int4 `json:"draw"`
-	Notes         pgtype.Text `json:"notes"`
-	Incident      pgtype.Bool `json:"incident"`
-	IncidentNotes pgtype.Text `json:"incidentNotes"`
-	LoggedBy      pgtype.Int4 `json:"loggedBy"`
+	ShowID         int32       `json:"showId"`
+	Draw           pgtype.Int4 `json:"draw"`
+	Notes          pgtype.Text `json:"notes"`
+	Incident       pgtype.Bool `json:"incident"`
+	IncidentNotes  pgtype.Text `json:"incidentNotes"`
+	LoggedBy       pgtype.Int4 `json:"loggedBy"`
+	QuickHighlight pgtype.Text `json:"quickHighlight"`
+	TotalDoorCents pgtype.Int4 `json:"totalDoorCents"`
 }
 
 func (q *Queries) UpsertAttendanceLog(ctx context.Context, arg UpsertAttendanceLogParams) (AttendanceLog, error) {
@@ -121,6 +131,8 @@ func (q *Queries) UpsertAttendanceLog(ctx context.Context, arg UpsertAttendanceL
 		arg.Incident,
 		arg.IncidentNotes,
 		arg.LoggedBy,
+		arg.QuickHighlight,
+		arg.TotalDoorCents,
 	)
 	var i AttendanceLog
 	err := row.Scan(
@@ -133,6 +145,8 @@ func (q *Queries) UpsertAttendanceLog(ctx context.Context, arg UpsertAttendanceL
 		&i.LoggedBy,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.QuickHighlight,
+		&i.TotalDoorCents,
 	)
 	return i, err
 }

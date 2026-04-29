@@ -115,6 +115,8 @@ function buildShowLogEntries(current: MockState) {
         showNotes: show.notes,
         draw: log?.draw,
         postShowNotes: log?.notes ?? '',
+        quickHighlight: (log as any)?.quickHighlight ?? '',
+        totalDoorCents: (log as any)?.totalDoorCents,
         incident: log?.incident ?? false,
         incidentNotes: log?.incidentNotes ?? '',
         loggedBy: log?.loggedBy,
@@ -345,10 +347,10 @@ export const mockHandlers = [
   http.patch('*/api/app/show-log/:showId', async ({ params, request }) => {
     const current = ensureMockState();
     const showId = Number(params.showId);
-    const body = await request.json() as { draw?: number; postShowNotes?: string; incident?: boolean; incidentNotes?: string };
+    const body = await request.json() as { draw?: number; postShowNotes?: string; quickHighlight?: string; totalDoorCents?: number; incident?: boolean; incidentNotes?: string };
     const previous = current.attendance.find((entry) => entry.showId === showId);
     const show = current.shows.find((candidate) => candidate.id === showId) ?? current.shows[0];
-    const updated = create(AttendanceLogSchema, {
+    const updated = {
       ...(previous ?? {}),
       id: previous?.id ?? showId,
       showId,
@@ -356,12 +358,14 @@ export const mockHandlers = [
       date: show.date,
       draw: body.draw ?? previous?.draw ?? 0,
       notes: body.postShowNotes ?? previous?.notes ?? '',
+      quickHighlight: body.quickHighlight ?? (previous as any)?.quickHighlight ?? '',
+      totalDoorCents: body.totalDoorCents ?? (previous as any)?.totalDoorCents,
       incident: body.incident ?? previous?.incident ?? false,
       incidentNotes: body.incidentNotes ?? previous?.incidentNotes ?? '',
       loggedBy: 1,
       createdAt: previous?.createdAt || '2026-04-26T00:00:00Z',
       updatedAt: '2026-04-26T00:00:00Z',
-    });
+    } as typeof current.attendance[number] & { quickHighlight?: string; totalDoorCents?: number };
     current.attendance = previous ? current.attendance.map((entry) => entry.showId === showId ? updated : entry) : [updated, ...current.attendance];
     const entry = buildShowLogEntries(current).find((candidate) => candidate.showId === showId);
     return HttpResponse.json(entry);

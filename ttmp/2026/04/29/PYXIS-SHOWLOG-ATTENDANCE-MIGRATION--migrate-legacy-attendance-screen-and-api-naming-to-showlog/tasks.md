@@ -29,10 +29,10 @@ Topics:
 
 ## Phase 3 — API/schema alignment
 
-- [ ] T10. Document current API/DB fit against the new ShowLog modal fields.
-- [ ] T11. Add real persistence fields for `quickHighlight` and `totalDoor` if approved.
-- [ ] T12. Add `GET /api/app/show-log/{showId}` for the single-entry API planned by the ShowLog design guide.
-- [ ] T13. Decide whether legacy `/api/app/attendance` remains, becomes compatibility-only, or is removed.
+- [x] T10. Document current API/DB fit against the new ShowLog modal fields.
+- [x] T11. Add real persistence fields for `quickHighlight` and `totalDoor` if approved.
+- [x] T12. Add `GET /api/app/show-log/{showId}` for the single-entry API planned by the ShowLog design guide.
+- [x] T13. Decide whether legacy `/api/app/attendance` remains, becomes compatibility-only, or is removed: keep as compatibility-only for now.
 - [ ] T14. Update RTK types/hooks and MSW handlers to stop folding new fields into notes once persistence exists.
 
 ## Phase 4 — Evidence and cleanup

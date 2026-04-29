@@ -70,3 +70,40 @@ sources/02-post-frontend-rename-inventory.txt
 ```
 
 The remaining lowercase `attendance` references are backend/API/domain compatibility names (`/api/app/attendance`, `attendance_logs`, `AttendanceLog`) and should be handled in the API/schema phase rather than mixed into this UI cleanup commit.
+
+
+## Step 3: Added first ShowLog schema/API alignment
+
+Added first-class persistence for fields that the new ShowLog modal sketches introduced:
+
+```text
+quick_highlight TEXT
+total_door_cents INT
+```
+
+Migration files:
+
+```text
+pkg/db/migrations/000004_add_show_log_fields.up.sql
+pkg/db/migrations/000004_add_show_log_fields.down.sql
+```
+
+Updated `attendance_logs` sqlc queries and regenerated `pkg/db/*` code. The physical table name remains `attendance_logs` for now, but the ShowLog API now exposes these values as ShowLog fields. This follows the compatibility policy from the plan: clean frontend/product naming first, then evolve the schema without doing a risky table rename in the same slice.
+
+Added:
+
+```text
+GET /api/app/show-log/{showId}
+```
+
+so the backend now matches the design-guide API shape for list, single entry, and patch. The legacy `/api/app/attendance` endpoints remain compatibility-only for now.
+
+Validation:
+
+```bash
+go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+All passed.
