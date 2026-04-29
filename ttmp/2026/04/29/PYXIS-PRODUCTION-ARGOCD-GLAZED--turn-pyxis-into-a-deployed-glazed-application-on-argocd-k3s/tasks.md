@@ -104,7 +104,7 @@ Goal: safely bring Pyxis live under Argo CD.
 - [x] T605. Validate `/health`, public pages, public APIs, and embedded static assets.
 - [x] T606. Validate DB bootstrap and migrations; confirm `show_logs` exists.
 - [x] T607. Validate flyer upload persistence on PVC.
-- [ ] T608. Validate Discord OAuth after bot is installed in guild and role mapping secrets are present.
+- [x] T608. Validate Discord OAuth after bot is installed in guild and role mapping secrets are present.
 - [ ] T609. Validate optional embedded Discord bot only after web/auth rollout is stable.
 - [ ] T610. Record production smoke evidence and rollback instructions.
 

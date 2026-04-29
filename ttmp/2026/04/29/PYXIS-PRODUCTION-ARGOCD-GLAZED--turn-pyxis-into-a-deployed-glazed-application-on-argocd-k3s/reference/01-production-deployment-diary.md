@@ -1425,3 +1425,7 @@ sources/09-admin-app-local-http-smoke.txt
 sources/10-admin-app-docker-build.log
 sources/11-seed-showlog-drift-fix.txt
 ```
+
+## Discord OAuth production validation confirmed
+
+The operator confirmed that production Discord login works. This closes the earlier production rollout caveat where the app had returned Discord `Unknown Guild` / bot guild count issues before guild/bot/secrets were corrected. Marked production task `T608` complete.
