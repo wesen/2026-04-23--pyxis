@@ -1055,3 +1055,111 @@ Expected published tag shape:
 ```text
 ghcr.io/wesen/pyxis:sha-e485670
 ```
+
+## Step 22: First production rollout smoke
+
+After fixing the short-SHA handoff, the next `publish-image` workflow succeeded and opened fresh GitOps PRs with a real published tag. I merged those PRs, refreshed Argo CD, cleared the stale failed hook operation from the previous full-SHA attempt, and watched Pyxis roll out successfully.
+
+The first production smoke passed for health, embedded public HTML, public API access, database bootstrap/migration, and PVC-backed flyer static serving. Discord OAuth remains separately blocked by the known guild installation issue.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 21)
+
+**Assistant interpretation:** Continue comparing against the working setup and complete the rollout after correcting the token/tag issues.
+
+**Inferred user intent:** Get Pyxis running in production and record the exact rollout state.
+
+**Commit (code):** bf7e8d4 — "PYXIS-PRODUCTION-ARGOCD-GLAZED: use published short sha image tag"
+
+### What I did
+
+- Pushed the short-SHA workflow fix.
+- Watched `publish-image` run `25126892485`; it succeeded.
+- Reviewed and merged GitOps PRs:
+  - `#50 pyxis-prod-app: deploy ghcr.io/wesen/pyxis:sha-bf7e8d4`
+  - `#51 pyxis-prod-migrate: deploy ghcr.io/wesen/pyxis:sha-bf7e8d4`
+- Pulled the k3s repo to `2bba71b`.
+- Refreshed Argo CD.
+- Cleared the stale operation from the earlier failed full-SHA hook and deleted the stale `pyxis-migrate` job so Argo could resync at the new revision:
+
+```bash
+kubectl -n argocd patch application pyxis --type merge -p '{"operation": null}'
+kubectl -n pyxis delete job pyxis-migrate --ignore-not-found
+kubectl -n argocd annotate application pyxis argocd.argoproj.io/refresh=hard --overwrite
+```
+
+- Confirmed:
+  - `pyxis-db-bootstrap` completed.
+  - `pyxis-migrate` completed.
+  - app pod is running and ready.
+  - Argo reports `Synced Healthy Succeeded`.
+- Ran HTTP, DB, and flyer/PVC smoke checks.
+
+### Why
+
+- The previous Argo operation was waiting on a hook job with an immutable failed image. Clearing the operation and deleting the failed hook let Argo run the corrected migration hook from the new Git revision.
+
+### What worked
+
+- VSO synced all three expected Kubernetes secrets.
+- DB bootstrap and migration completed.
+- App container pulled and ran `ghcr.io/wesen/pyxis:sha-bf7e8d4`.
+- `/health` returned HTTP 200 with `{"status":"ok"}`.
+- `/` returned embedded public HTML.
+- `/api/public/shows` returned HTTP 200 with `{}`.
+- DB check confirmed `public.show_logs` exists.
+- PVC flyer smoke returned the file written under `/data/flyers` through `/flyers/...`.
+
+### What didn't work
+
+- The previous full-SHA migration hook remained stuck until I explicitly cleared the Argo operation and deleted the stale hook job.
+- Discord OAuth was not fully validated because the known bot/guild installation blocker still applies.
+
+### What I learned
+
+- Argo hook jobs can hold an operation at an older revision; when the hook itself is stuck on a bad immutable image, a manual operation clear plus hook deletion may be needed to move to the fixed revision.
+
+### What was tricky to build
+
+- The rollout crossed three asynchronous systems at once: GitHub Actions image publish, GitOps PR merge, and Argo hook execution. The failure moved from token auth to image tag mismatch to stale hook operation, so each fix needed a fresh observation point.
+
+### What warrants a second pair of eyes
+
+- Review whether clearing Argo operations manually is acceptable as first-rollout recovery guidance and add it to the playbook if so.
+- Review the production secret key names and whether `PYXIS_DISCORD_BOT_ENABLED=false` is still the desired initial rollout default.
+
+### What should be done in the future
+
+- Install/invite the Discord app into the target guild and rerun real OAuth smoke.
+- Consider adding an app-level production smoke script that captures the HTTP/DB/PVC checks in one repeatable command.
+- Consider grouping the two GitOps image target changes into one PR.
+
+### Code review instructions
+
+- In the k3s repo, inspect `gitops/kustomize/pyxis/deployment.yaml` and `migration-job.yaml`; both should use `ghcr.io/wesen/pyxis:sha-bf7e8d4`.
+- Validate cluster state with:
+
+```bash
+kubectl -n argocd get app pyxis
+kubectl -n pyxis get pods,jobs,pvc,svc,ingress
+curl -k https://pyxis.yolo.scapegoat.dev/health
+```
+
+### Technical details
+
+Evidence saved in:
+
+```text
+sources/08-production-rollout-smoke.txt
+```
+
+Key final state:
+
+```text
+Argo: Synced Healthy Succeeded
+Image: ghcr.io/wesen/pyxis:sha-bf7e8d4
+Health: HTTP 200 {"status":"ok"}
+DB: show_logs exists
+Flyers: /flyers/smoke/pvc.txt returned ok
+```

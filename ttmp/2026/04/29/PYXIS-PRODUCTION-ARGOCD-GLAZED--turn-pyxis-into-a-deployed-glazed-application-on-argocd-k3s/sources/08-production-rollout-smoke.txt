@@ -1,0 +1,30 @@
+Production rollout smoke evidence, 2026-04-29
+
+GitHub/GitOps:
+- Refreshed GITOPS_PR_TOKEN in wesen/2026-04-23--pyxis.
+- publish-image run 25123650888 succeeded but used full SHA tag before the short-SHA fix.
+- publish-image run 25126892485 succeeded after short-SHA fix.
+- GitOps PRs merged:
+  - #50 pyxis-prod-app: deploy ghcr.io/wesen/pyxis:sha-bf7e8d4
+  - #51 pyxis-prod-migrate: deploy ghcr.io/wesen/pyxis:sha-bf7e8d4
+
+Argo/Kubernetes:
+- Applied gitops/applications/pyxis.yaml.
+- App reached: Synced Healthy Succeeded successfully synced (all tasks run).
+- pyxis pod running and ready with image ghcr.io/wesen/pyxis:sha-bf7e8d4.
+- pyxis-db-bootstrap job completed.
+- pyxis-migrate job completed.
+- pyxis-data PVC bound.
+
+HTTP smoke:
+- https://pyxis.yolo.scapegoat.dev/health returned HTTP 200 and {"status":"ok"}.
+- https://pyxis.yolo.scapegoat.dev/ returned HTTP 200 and embedded index HTML.
+- https://pyxis.yolo.scapegoat.dev/api/public/shows returned HTTP 200 and {}.
+
+DB smoke:
+- Temporary postgres client returned: t|1
+- Query checked that public.show_logs exists and schema_migrations has one row.
+
+Flyer/PVC smoke:
+- Wrote /data/flyers/smoke/pvc.txt from the running app pod.
+- https://pyxis.yolo.scapegoat.dev/flyers/smoke/pvc.txt returned HTTP 200 and body ok.

@@ -97,13 +97,13 @@ Goal: connect successful app image publication to reviewed GitOps image bumps.
 
 Goal: safely bring Pyxis live under Argo CD.
 
-- [ ] T601. Write/verify Vault secrets for Pyxis runtime and DB bootstrap.
-- [ ] T602. Merge GitOps package PR.
-- [ ] T603. One-time apply `gitops/applications/pyxis.yaml` if app-of-apps does not materialize it automatically.
-- [ ] T604. Watch Argo CD sync and Kubernetes rollout.
-- [ ] T605. Validate `/health`, public pages, public APIs, and embedded static assets.
-- [ ] T606. Validate DB bootstrap and migrations; confirm `show_logs` exists.
-- [ ] T607. Validate flyer upload persistence on PVC.
+- [x] T601. Write/verify Vault secrets for Pyxis runtime and DB bootstrap.
+- [x] T602. Merge GitOps package PR.
+- [x] T603. One-time apply `gitops/applications/pyxis.yaml` if app-of-apps does not materialize it automatically.
+- [x] T604. Watch Argo CD sync and Kubernetes rollout.
+- [x] T605. Validate `/health`, public pages, public APIs, and embedded static assets.
+- [x] T606. Validate DB bootstrap and migrations; confirm `show_logs` exists.
+- [x] T607. Validate flyer upload persistence on PVC.
 - [ ] T608. Validate Discord OAuth after bot is installed in guild and role mapping secrets are present.
 - [ ] T609. Validate optional embedded Discord bot only after web/auth rollout is stable.
 - [ ] T610. Record production smoke evidence and rollback instructions.
