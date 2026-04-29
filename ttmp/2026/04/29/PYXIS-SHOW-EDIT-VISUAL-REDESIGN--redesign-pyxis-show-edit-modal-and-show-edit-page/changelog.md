@@ -29,3 +29,10 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Added `sources/06-widget-reuse-and-deprecation-audit.md`.
 - Clarified which existing shared primitives, app atoms, molecules, and organisms should be reused or evolved.
 - Identified likely deprecation candidates after redesign: `ShowDetailHero`, `ShowDetailInfoPanel`, portions of broad CSS buckets, and page-owned show detail styles.
+
+## 2026-04-29 — Modal storybook-first decomposition
+
+- Added `ShowFormSection`, `ShowLineupRowEditor`, and `FlyerDropzone` molecules with local CSS, stories, and folder-level exports.
+- Refactored `NewShowModal` to compose the new molecules while preserving its external props and existing submit semantics.
+- Expanded `NewShowModal` stories for create, edit with flyer, confirmed-needs-flyer, long lineup, backend error, saving, mobile, and interaction validation states.
+- Validated `pnpm --dir web --filter pyxis-app exec tsc --noEmit` and `pnpm --dir web --filter pyxis-app build`.

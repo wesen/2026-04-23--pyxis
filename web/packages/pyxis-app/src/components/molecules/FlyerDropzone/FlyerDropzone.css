@@ -1,0 +1,99 @@
+.app-flyer-dropzone {
+  display: grid;
+  gap: 8px;
+}
+
+.app-flyer-dropzone__target {
+  align-items: center;
+  background: color-mix(in srgb, var(--app-surface-strong) 70%, transparent);
+  border: 1.5px dashed color-mix(in srgb, var(--app-muted) 42%, var(--app-rule));
+  border-radius: var(--app-radius-md);
+  box-sizing: border-box;
+  color: var(--app-muted);
+  cursor: pointer;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  min-height: 142px;
+  padding: 18px;
+  text-align: center;
+  transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+
+.app-flyer-dropzone__target:hover {
+  background: color-mix(in srgb, var(--app-accent, #c8270d) 4%, var(--app-surface-strong));
+  border-color: color-mix(in srgb, var(--app-accent, #c8270d) 50%, var(--app-rule));
+}
+
+.app-flyer-dropzone__target[data-has-preview='true'] {
+  align-items: start;
+  grid-template-columns: minmax(90px, 128px) minmax(0, 1fr);
+  justify-items: start;
+  min-height: 0;
+  text-align: left;
+}
+
+.app-flyer-dropzone__target img {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--app-radius-sm);
+  box-shadow: var(--app-shadow-sm, 0 10px 24px rgb(0 0 0 / 10%));
+  object-fit: cover;
+  width: 100%;
+}
+
+.app-flyer-dropzone__icon {
+  align-items: center;
+  background: color-mix(in srgb, var(--app-accent, #c8270d) 10%, var(--app-surface));
+  border-radius: 999px;
+  color: var(--app-accent, #c8270d);
+  display: inline-flex;
+  font-size: 22px;
+  font-weight: 800;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
+}
+
+.app-flyer-dropzone__copy {
+  display: grid;
+  gap: 5px;
+}
+
+.app-flyer-dropzone__copy strong {
+  color: var(--app-ink);
+  font-size: 13px;
+}
+
+.app-flyer-dropzone__copy em,
+.app-flyer-dropzone__status {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.app-flyer-dropzone__input {
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  pointer-events: none;
+}
+
+.app-flyer-dropzone__input:focus-visible + .app-flyer-dropzone__status,
+.app-flyer-dropzone:focus-within .app-flyer-dropzone__target {
+  border-color: color-mix(in srgb, var(--app-accent, #c8270d) 60%, var(--app-rule));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent, #c8270d) 12%, transparent);
+}
+
+.app-flyer-dropzone__status {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .app-flyer-dropzone__target[data-has-preview='true'] {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

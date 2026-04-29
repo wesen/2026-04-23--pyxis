@@ -2,15 +2,13 @@ import type { HTMLAttributes } from 'react';
 import { useEffect, useState } from 'react';
 import { Button, Modal } from 'pyxis-components';
 import { create, ShowSchema, ShowStatus, type Show } from 'pyxis-types';
+import { FlyerDropzone } from '../../molecules/FlyerDropzone';
+import { ShowFormSection } from '../../molecules/ShowFormSection';
+import { ShowLineupRowEditor, type ShowLineupRowDraft } from '../../molecules/ShowLineupRowEditor';
 import { appPart } from '../../parts';
 import './NewShowModal.css';
 
-type LineupDraft = {
-  artist: string;
-  role: string;
-  startTime: string;
-  endTime: string;
-};
+type LineupDraft = ShowLineupRowDraft;
 
 type ShowDraft = {
   artist: string;
@@ -96,8 +94,10 @@ export function NewShowModal({
     }
   }, [initialShow, isOpen]);
 
-  const title = mode === 'create' ? 'Add new show' : 'Edit show';
-  const description = mode === 'create' ? 'Create a show record and lineup. Fields marked * are required for confirmed shows.' : 'Update show details and replace the lineup. Fields marked * are required for confirmed shows.';
+  const title = mode === 'create' ? 'Create show' : 'Edit show';
+  const description = mode === 'create'
+    ? 'Add the details for your show and share it with your audience.'
+    : 'Update show details, lineup, staff notes, and assets.';
   const hasFlyerForConfirmation = Boolean(initialShow?.flyerUrl || flyerFile);
 
   const update = <K extends keyof ShowDraft>(key: K, value: ShowDraft[K]) => setDraft((current) => ({ ...current, [key]: value }));
@@ -106,7 +106,7 @@ export function NewShowModal({
     lineup: current.lineup.map((entry, i) => (i === index ? { ...entry, ...patch } : entry)),
   }));
   const addLineup = () => setDraft((current) => ({ ...current, lineup: [...current.lineup, { artist: '', role: 'support', startTime: '', endTime: '' }] }));
-  const removeLineup = (index: number) => setDraft((current) => ({ ...current, lineup: current.lineup.filter((_entry, i) => i !== index) }));
+  const removeLineup = (index: number) => setDraft((current) => ({ ...current, lineup: current.lineup.length > 1 ? current.lineup.filter((_entry, i) => i !== index) : current.lineup }));
 
   const submit = (status = draft.status) => {
     setValidationError(undefined);
@@ -151,29 +151,64 @@ export function NewShowModal({
         <>
           <Button variant="ghost" onClick={onCancel} disabled={isSaving}>Cancel</Button>
           <Button variant="outline" onClick={() => submit(ShowStatus.DRAFT)} isLoading={isSaving} title="Drafts stay staff-only and appear under Shows → Drafts.">Save draft</Button>
-          <Button onClick={() => submit(draft.status)} isLoading={isSaving}>Save show</Button>
+          <Button onClick={() => submit(draft.status)} isLoading={isSaving}>{mode === 'create' ? 'Create show' : 'Save show'}</Button>
         </>
       }
     >
-      <div className="app-new-show-modal-form">
+      <div className="app-new-show-modal-form" {...appPart('new-show-modal', 'form')}>
         {(error || validationError) && <div className="app-new-show-modal-error" role="alert">{error || validationError}</div>}
-        <label className="app-new-show-modal-field">
-          <span>Artist / act name *</span>
-          <input required value={draft.artist} onChange={(event) => update('artist', event.target.value)} />
-        </label>
-        <div className="app-new-show-modal-grid cols-4">
-          <label className="app-new-show-modal-field">
-            <span>Date *</span>
-            <input type="date" required={draft.status !== ShowStatus.DRAFT} value={draft.date} onChange={(event) => update('date', event.target.value)} />
+
+        <ShowFormSection title="Basics" description="Core public information. Fields marked * are required for confirmed shows.">
+          <label className="app-new-show-modal-field app-new-show-modal-field--full">
+            <span>Artist / act name <b aria-hidden="true">*</b></span>
+            <input required value={draft.artist} onChange={(event) => update('artist', event.target.value)} placeholder="e.g. Foobar" />
           </label>
-          <label className="app-new-show-modal-field">
-            <span>Doors</span>
-            <input value={draft.doorsTime} onChange={(event) => update('doorsTime', event.target.value)} />
+          <label className="app-new-show-modal-field app-new-show-modal-field--full">
+            <span>Public description</span>
+            <textarea rows={3} value={draft.description} onChange={(event) => update('description', event.target.value)} placeholder="Tell people about the show..." />
           </label>
-          <label className="app-new-show-modal-field">
-            <span>Start</span>
-            <input value={draft.startTime} onChange={(event) => update('startTime', event.target.value)} />
-          </label>
+        </ShowFormSection>
+
+        <ShowFormSection title="Date & time">
+          <div className="app-new-show-modal-grid cols-3">
+            <label className="app-new-show-modal-field">
+              <span>Date <b aria-hidden="true">*</b></span>
+              <input type="date" required={draft.status !== ShowStatus.DRAFT} value={draft.date} onChange={(event) => update('date', event.target.value)} />
+            </label>
+            <label className="app-new-show-modal-field">
+              <span>Doors</span>
+              <input value={draft.doorsTime} onChange={(event) => update('doorsTime', event.target.value)} placeholder="8:00 PM" />
+            </label>
+            <label className="app-new-show-modal-field">
+              <span>Show starts</span>
+              <input value={draft.startTime} onChange={(event) => update('startTime', event.target.value)} placeholder="9:00 PM" />
+            </label>
+          </div>
+        </ShowFormSection>
+
+        <ShowFormSection title="Details" description="Price is optional display text. The public reserve CTA is controlled by the checkbox.">
+          <div className="app-new-show-modal-grid cols-4">
+            <label className="app-new-show-modal-field">
+              <span>Age restriction</span>
+              <select value={draft.age} onChange={(event) => update('age', event.target.value)}>
+                <option>All Ages</option>
+                <option>18+</option>
+                <option>21+</option>
+              </select>
+            </label>
+            <label className="app-new-show-modal-field">
+              <span>Price</span>
+              <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional display text" />
+            </label>
+            <label className="app-new-show-modal-field">
+              <span>Capacity</span>
+              <input type="number" min="0" value={draft.capacity} onChange={(event) => update('capacity', Number(event.target.value))} />
+            </label>
+            <label className="app-new-show-modal-field">
+              <span>Genre</span>
+              <input value={draft.genre} onChange={(event) => update('genre', event.target.value)} placeholder="e.g. Electronic" />
+            </label>
+          </div>
           <label className="app-new-show-modal-field">
             <span>Status</span>
             <select value={draft.status} onChange={(event) => update('status', Number(event.target.value) as ShowStatus)}>
@@ -183,65 +218,40 @@ export function NewShowModal({
               <option value={ShowStatus.ARCHIVED}>Archived</option>
             </select>
           </label>
-        </div>
-        <div className="app-new-show-modal-grid cols-4">
-          <label className="app-new-show-modal-field">
-            <span>Age</span>
-            <select value={draft.age} onChange={(event) => update('age', event.target.value)}>
-              <option>All Ages</option>
-              <option>18+</option>
-              <option>21+</option>
-            </select>
+          <label className="app-new-show-modal-toggle">
+            <input type="checkbox" checked={draft.reserveTicketEnabled} onChange={(event) => update('reserveTicketEnabled', event.target.checked)} />
+            <span>Show “Reserve ticket” call-to-action publicly</span>
           </label>
-          <label className="app-new-show-modal-field">
-            <span>Price</span>
-            <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional display text" />
-          </label>
-          <label className="app-new-show-modal-field">
-            <span>Genre</span>
-            <input value={draft.genre} onChange={(event) => update('genre', event.target.value)} />
-          </label>
-          <label className="app-new-show-modal-field">
-            <span>Capacity</span>
-            <input type="number" min="0" value={draft.capacity} onChange={(event) => update('capacity', Number(event.target.value))} />
-          </label>
-        </div>
-        <label className="app-new-show-modal-field">
-          <span>Public description</span>
-          <textarea rows={3} value={draft.description} onChange={(event) => update('description', event.target.value)} />
-        </label>
-        <label className="app-new-show-modal-field">
-          <span>Staff notes</span>
-          <textarea rows={2} value={draft.notes} onChange={(event) => update('notes', event.target.value)} />
-          <small>Visible to staff only</small>
-        </label>
-        <label className="app-new-show-modal-toggle">
-          <input type="checkbox" checked={draft.reserveTicketEnabled} onChange={(event) => update('reserveTicketEnabled', event.target.checked)} />
-          <span>Show “Reserve ticket” call-to-action publicly</span>
-        </label>
-        <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Price is optional display text. The public “Reserve ticket” CTA is behind the flag above and is off by default.</p>
-        {!hasFlyerForConfirmation && <p className="app-new-show-modal-warning">Confirmed shows need a flyer/poster before they can appear publicly. Attach a flyer here or save as Draft/Hold until artwork is ready.</p>}
-        <div className="app-new-show-modal-lineup">
-          <div className="app-new-show-modal-section-header">
-            <span>Lineup</span>
-            <Button type="button" variant="outline" size="sm" iconLeft="plus" onClick={addLineup}>Add row</Button>
+          <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Blank price means no public price/reserve copy yet.</p>
+          {!hasFlyerForConfirmation && <p className="app-new-show-modal-warning">Confirmed shows need a flyer/poster before they can appear publicly. Attach a flyer here or save as Draft/Hold until artwork is ready.</p>}
+        </ShowFormSection>
+
+        <ShowFormSection title="Lineup" description="Add artists, roles, and rough set times." action={<Button type="button" variant="outline" size="sm" iconLeft="plus" onClick={addLineup}>Add time slot</Button>}>
+          <div className="app-new-show-modal-lineup-list">
+            {draft.lineup.map((entry, index) => (
+              <ShowLineupRowEditor
+                key={index}
+                index={index}
+                slot={entry}
+                canRemove={draft.lineup.length > 1}
+                onChange={updateLineup}
+                onRemove={removeLineup}
+              />
+            ))}
           </div>
-          {draft.lineup.map((entry, index) => (
-            <div className="app-new-show-modal-lineup-row" key={index}>
-              <label className="app-new-show-modal-field"><span>Artist</span><input value={entry.artist} onChange={(event) => updateLineup(index, { artist: event.target.value })} /></label>
-              <label className="app-new-show-modal-field"><span>Role</span><input value={entry.role} onChange={(event) => updateLineup(index, { role: event.target.value })} /></label>
-              <label className="app-new-show-modal-field"><span>Start</span><input value={entry.startTime} onChange={(event) => updateLineup(index, { startTime: event.target.value })} /></label>
-              <label className="app-new-show-modal-field"><span>End</span><input value={entry.endTime} onChange={(event) => updateLineup(index, { endTime: event.target.value })} /></label>
-              <Button type="button" variant="ghost" size="sm" iconLeft="trash" onClick={() => removeLineup(index)} aria-label="Remove lineup row">Remove</Button>
-            </div>
-          ))}
-        </div>
-        <label className="app-new-show-modal-field">
-          <span>Flyer</span>
-          <input type="file" accept="image/*,.pdf" onChange={(event) => setFlyerFile(event.target.files?.[0])} />
-          {initialShow?.flyerUrl && <small>Current flyer: {initialShow.flyerUrl}</small>}
-          {flyerFile && <small>Selected: {flyerFile.name}</small>}
-        </label>
+        </ShowFormSection>
+
+        <ShowFormSection title="Additional info">
+          <label className="app-new-show-modal-field app-new-show-modal-field--full">
+            <span>Staff notes</span>
+            <textarea rows={3} value={draft.notes} onChange={(event) => update('notes', event.target.value)} placeholder="Visible to staff only..." />
+            <small>Visible to staff only</small>
+          </label>
+        </ShowFormSection>
+
+        <ShowFormSection title="Flyer" description="Upload a flyer for the show. Recommended 1080×1080 or 1080×1350.">
+          <FlyerDropzone currentUrl={initialShow?.flyerUrl} file={flyerFile} disabled={isSaving} onFileChange={setFlyerFile} />
+        </ShowFormSection>
       </div>
     </Modal>
   );

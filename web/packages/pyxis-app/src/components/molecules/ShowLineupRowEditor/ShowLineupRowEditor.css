@@ -1,0 +1,62 @@
+.app-show-lineup-row-editor {
+  align-items: end;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(180px, 2fr) minmax(112px, 1fr) minmax(112px, 1fr) minmax(112px, 1fr) auto;
+}
+
+.app-show-lineup-row-editor__field {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.app-show-lineup-row-editor__field span {
+  color: var(--app-muted);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.app-show-lineup-row-editor__field b {
+  color: var(--app-danger, #b42318);
+  font-weight: 900;
+}
+
+.app-show-lineup-row-editor__field input {
+  background: var(--app-surface-strong);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-sm);
+  box-sizing: border-box;
+  color: var(--app-ink);
+  font: inherit;
+  font-size: 13px;
+  height: 38px;
+  outline: none;
+  padding: 8px 11px;
+  width: 100%;
+}
+
+.app-show-lineup-row-editor__field input:focus {
+  border-color: color-mix(in srgb, var(--app-accent, #c8270d) 55%, var(--app-rule));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent, #c8270d) 12%, transparent);
+}
+
+@media (max-width: 820px) {
+  .app-show-lineup-row-editor {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-show-lineup-row-editor__field--artist {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-show-lineup-row-editor {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+}

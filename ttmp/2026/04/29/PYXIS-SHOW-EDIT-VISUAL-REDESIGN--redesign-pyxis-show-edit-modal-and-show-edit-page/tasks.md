@@ -44,12 +44,12 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 ## Phase 3 — Storybook-first modal component decomposition
 
-- [ ] T301 Create `ShowFormSection` molecule folder with TSX/CSS/story/index and stable `appPart` selectors.
-- [ ] T302 Create `ShowLineupRowEditor` molecule folder with TSX/CSS/story/index and no route/API coupling.
-- [ ] T303 Create or adapt a dropzone-style flyer input component while preserving keyboard-accessible file input behavior.
-- [ ] T304 Refactor `NewShowModal` to compose the new molecules without changing its external props contract.
-- [ ] T305 Add modal stories for create default, edit existing with flyer, confirmed-needs-flyer, long lineup, backend error, and mobile/narrow.
-- [ ] T306 Validate `pyxis-app` TypeScript/build after modal decomposition.
+- [x] T301 Create `ShowFormSection` molecule folder with TSX/CSS/story/index and stable `appPart` selectors.
+- [x] T302 Create `ShowLineupRowEditor` molecule folder with TSX/CSS/story/index and no route/API coupling.
+- [x] T303 Create or adapt a dropzone-style flyer input component while preserving keyboard-accessible file input behavior.
+- [x] T304 Refactor `NewShowModal` to compose the new molecules without changing its external props contract.
+- [x] T305 Add modal stories for create default, edit existing with flyer, confirmed-needs-flyer, long lineup, backend error, and mobile/narrow.
+- [x] T306 Validate `pyxis-app` TypeScript/build after modal decomposition.
 - [ ] T307 Commit modal decomposition separately from later route/page redesign.
 
 ## Phase 4 — Modal visual polish and evidence

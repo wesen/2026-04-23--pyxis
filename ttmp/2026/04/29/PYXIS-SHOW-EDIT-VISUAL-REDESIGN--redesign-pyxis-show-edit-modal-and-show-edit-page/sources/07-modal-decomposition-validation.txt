@@ -1,0 +1,8 @@
+# Modal decomposition validation
+
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
+
+Notes:
+- Added ShowFormSection, ShowLineupRowEditor, and FlyerDropzone molecules with local CSS/stories/index files.
+- Refactored NewShowModal to compose these molecules while preserving its props and submit semantics.

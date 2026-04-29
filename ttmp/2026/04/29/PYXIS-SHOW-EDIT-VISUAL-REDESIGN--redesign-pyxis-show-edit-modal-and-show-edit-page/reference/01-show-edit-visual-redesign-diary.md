@@ -287,3 +287,49 @@ I expanded the task plan so the coding work is split into reviewable phases:
 4. Show edit page visual polish and evidence.
 
 This deliberately separates component extraction from visual retuning so regressions are easier to isolate.
+
+
+## Step 10: Implement Phase 3 modal decomposition
+
+I started implementation with the Storybook-first modal component decomposition phase, following the runbook's widget-folder pattern.
+
+Created new molecule folders:
+
+```text
+web/packages/pyxis-app/src/components/molecules/ShowFormSection/
+web/packages/pyxis-app/src/components/molecules/ShowLineupRowEditor/
+web/packages/pyxis-app/src/components/molecules/FlyerDropzone/
+```
+
+Each folder contains:
+
+```text
+Component.tsx
+Component.css
+Component.stories.tsx
+index.ts
+```
+
+Implementation details:
+
+- `ShowFormSection` owns modal section rhythm: uppercase heading, optional description, optional action, body slot, and stable `appPart()` selectors.
+- `ShowLineupRowEditor` owns a single editable lineup row with artist, role, start time, end time, and remove action. It has desktop, two-column, and single-column responsive behavior.
+- `FlyerDropzone` owns the visual dropzone treatment while keeping a real file input for keyboard/browser accessibility.
+- `NewShowModal` now composes those molecules instead of owning all row/section markup directly. Its external props contract remains unchanged.
+
+Validation commands:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+```
+
+Both passed.
+
+What was tricky:
+
+- Story fixtures using `create(ShowSchema, { ...confirmedShow, lineup: [...] })` failed because spreading an existing protobuf message into a new `create()` call turned nested lineup entries into already-created message values while the replacement literals were checked against full `Show_LineupEntry` message types. I fixed this by splitting the shared plain fixture data into `confirmedShowData` and passing plain objects to each `create()` call.
+
+Next step:
+
+- Commit Phase 3 modal decomposition, then proceed to Phase 4 visual evidence/capture and interaction smoke.
