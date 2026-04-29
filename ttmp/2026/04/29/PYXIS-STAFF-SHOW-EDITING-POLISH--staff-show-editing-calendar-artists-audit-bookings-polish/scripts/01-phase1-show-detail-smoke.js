@@ -12,6 +12,8 @@ Environment:
 */
 
 const { createRequire } = require('module');
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const workspaceRequire = createRequire(path.join(process.cwd(), 'web', 'package.json'));
 const { chromium } = workspaceRequire('playwright');
@@ -37,6 +39,9 @@ async function main() {
   await page.getByLabel(/staff notes/i).fill('Phase 1 staff notes are visible.');
   await page.getByLabel(/^artist$/i).first().fill('Phase 1 Headliner');
   await page.getByLabel(/^role$/i).first().fill('headline');
+  const flyerPath = path.join(os.tmpdir(), `pyxis-phase1-smoke-${Date.now()}.svg`);
+  fs.writeFileSync(flyerPath, '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#fff" font-size="42" text-anchor="middle">Phase 1 Smoke</text></svg>');
+  await page.locator('input[type="file"][accept="image/*,.pdf"]').setInputFiles(flyerPath);
   await page.getByRole('button', { name: /^save show$/i }).click();
   await page.waitForURL(/\/shows\/\d+/, { timeout: 15000 });
 
@@ -44,6 +49,7 @@ async function main() {
   await page.getByText('Phase 1 Headliner').waitFor({ timeout: 10000 });
   await page.getByText('Staff notes', { exact: true }).waitFor({ timeout: 10000 });
   await page.getByText('Phase 1 staff notes are visible.').waitFor({ timeout: 10000 });
+  await page.getByAltText(/current show flyer/i).waitFor({ timeout: 10000 });
 
   if (errors.length) {
     throw new Error(`browser console errors:\n${errors.join('\n')}`);

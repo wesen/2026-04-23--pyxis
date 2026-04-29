@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'pyxis-components';
 import { CalendarEventKind, create, ShowSchema, ShowStatus, type CalendarEvent } from 'pyxis-types';
-import { useCreateCalendarBlockedMutation, useCreateCalendarHoldMutation, useCreateShowMutation, useDeleteCalendarBlockedMutation, useDeleteCalendarHoldMutation, useGetCalendarQuery } from '../../api/appApi';
+import { useCreateCalendarBlockedMutation, useCreateCalendarHoldMutation, useCreateShowMutation, useDeleteCalendarBlockedMutation, useDeleteCalendarHoldMutation, useGetCalendarQuery, useUpdateShowMutation, useUploadShowFlyerMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { CalendarBoard, CalendarDayInspector, CalendarItemDialog, ConfirmDialog, NewShowModal } from '../../components/organisms';
 import { ActionMessages, ErrorState, LoadingState } from '../shared';
@@ -24,6 +24,8 @@ export function CalendarPage() {
   const [deleteHold, deleteHoldState] = useDeleteCalendarHoldMutation();
   const [deleteBlocked, deleteBlockedState] = useDeleteCalendarBlockedMutation();
   const [createShow, createShowState] = useCreateShowMutation();
+  const [updateShow, updateShowState] = useUpdateShowMutation();
+  const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
   const [visibleMonth, setVisibleMonth] = useState(() => { const now = new Date(); return { year: now.getFullYear(), monthIndex: now.getMonth() }; });
   const [selectedDate, setSelectedDate] = useState(todayISO());
   const [dialog, setDialog] = useState<CalendarDialog>(null);
@@ -58,10 +60,14 @@ export function CalendarPage() {
   const handleCreateShow = async (show: Parameters<typeof createShow>[0], flyerFile?: File) => {
     setActionError(undefined); setActionSuccess(undefined);
     try {
-      const created = await createShow(show).unwrap();
+      const shouldConfirmAfterUpload = show.status === ShowStatus.CONFIRMED && flyerFile;
+      const created = await createShow(shouldConfirmAfterUpload ? { ...show, status: ShowStatus.DRAFT } : show).unwrap();
+      if (flyerFile) {
+        const uploaded = await uploadFlyer({ showId: created.id, file: flyerFile }).unwrap();
+        if (shouldConfirmAfterUpload) await updateShow({ ...show, id: created.id, flyerUrl: uploaded.url, status: ShowStatus.CONFIRMED }).unwrap();
+      }
       setDialog(null);
       setActionSuccess(`Show #${created.id} created for ${show.date}.`);
-      if (flyerFile) setActionSuccess(`Show #${created.id} created. Add flyer from the show detail page if upload did not attach.`);
       navigate(`/shows/${created.id}`);
     } catch { setActionError('Could not create this show. Check required fields, session, and backend logs.'); }
   };
@@ -86,7 +92,7 @@ export function CalendarPage() {
 
   return (
     <AppShell page="calendar" title="Calendar" eyebrow="Home / Calendar" subtitle="Plan the room · holds, confirms, and off-nights" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('hold')} disabled={holdState.isLoading}>Add hold</Button><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('show')}>New show</Button><Button size="sm" iconLeft="warning" onClick={() => openDialog('blocked')} disabled={blockedState.isLoading}>Block date</Button></div>}>
-      <NewShowModal isOpen={dialog === 'show'} mode="create" initialShow={initialCalendarShow} isSaving={createShowState.isLoading} error={actionError} onCancel={() => setDialog(null)} onSubmit={handleCreateShow} />
+      <NewShowModal isOpen={dialog === 'show'} mode="create" initialShow={initialCalendarShow} isSaving={createShowState.isLoading || uploadState.isLoading || updateShowState.isLoading} error={actionError} onCancel={() => setDialog(null)} onSubmit={handleCreateShow} />
       <ConfirmDialog isOpen={Boolean(deleteTarget)} title={`Remove ${deleteTarget?.kind === CalendarEventKind.HOLD ? 'hold' : 'blocked date'}?`} description={deleteTarget ? `${deleteTarget.label} on ${deleteTarget.date}` : ''} confirmLabel="Remove" variant="danger" isLoading={deleteHoldState.isLoading || deleteBlockedState.isLoading} onCancel={() => setDeleteTarget(null)} onConfirm={confirmDeleteCalendarEvent} />
       {dialog && dialog !== 'show' && <CalendarItemDialog mode={dialog} draft={draft} isSaving={holdState.isLoading || blockedState.isLoading} onChange={setDraft} onCancel={() => setDialog(null)} onSubmit={submitCalendarDialog} />}
       {isLoading ? <LoadingState /> : isError || !events ? <ErrorState /> : <><ActionMessages error={actionError} success={actionSuccess} /><CalendarBoard events={events} monthLabel={monthLabel(visibleMonth.year, visibleMonth.monthIndex)} year={visibleMonth.year} monthIndex={visibleMonth.monthIndex} selectedDate={selectedDate} onPreviousMonth={() => jumpMonth(-1)} onToday={jumpToday} onNextMonth={() => jumpMonth(1)} onSelectDate={setSelectedDate} onEventClick={handleEventClick} onOpenShow={(showId) => navigate(`/shows/${showId}`)} onAddToday={() => openDialog('hold')} /><CalendarDayInspector selectedDate={selectedDate} events={selectedEvents} onCreateShow={(date) => openDialog('show', date)} onAddHold={(date) => openDialog('hold', date)} onBlockDay={(date) => openDialog('blocked', date)} onOpenShow={handleEventClick} onRemoveItem={setDeleteTarget} /></>}

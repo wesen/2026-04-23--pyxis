@@ -95,6 +95,7 @@ export function NewShowModal({
 
   const title = mode === 'create' ? 'Add new show' : 'Edit show';
   const description = mode === 'create' ? 'Create a show record and lineup. Fields marked * are required for confirmed shows.' : 'Update show details and replace the lineup. Fields marked * are required for confirmed shows.';
+  const hasFlyerForConfirmation = Boolean(initialShow?.flyerUrl || flyerFile);
 
   const update = <K extends keyof ShowDraft>(key: K, value: ShowDraft[K]) => setDraft((current) => ({ ...current, [key]: value }));
   const updateLineup = (index: number, patch: Partial<LineupDraft>) => setDraft((current) => ({
@@ -108,6 +109,7 @@ export function NewShowModal({
     setValidationError(undefined);
     if (!draft.artist.trim()) { setValidationError('Artist / act name is required.'); return; }
     if (status !== ShowStatus.DRAFT && !draft.date) { setValidationError('Date is required before saving a non-draft show.'); return; }
+    if (status === ShowStatus.CONFIRMED && !hasFlyerForConfirmation) { setValidationError('Confirmed shows require an uploaded flyer. Save as draft/hold until poster artwork is attached.'); return; }
     if (draft.capacity < 0) { setValidationError('Capacity cannot be negative.'); return; }
     const show = create(ShowSchema, {
       id: initialShow?.id ?? 0,
@@ -171,7 +173,7 @@ export function NewShowModal({
           <label className="app-new-show-modal-field">
             <span>Status</span>
             <select value={draft.status} onChange={(event) => update('status', Number(event.target.value) as ShowStatus)}>
-              <option value={ShowStatus.CONFIRMED}>Confirmed</option>
+              <option value={ShowStatus.CONFIRMED} disabled={!hasFlyerForConfirmation}>Confirmed{hasFlyerForConfirmation ? '' : ' — needs flyer'}</option>
               <option value={ShowStatus.HOLD}>Hold</option>
               <option value={ShowStatus.DRAFT}>Draft</option>
               <option value={ShowStatus.ARCHIVED}>Archived</option>
@@ -210,6 +212,7 @@ export function NewShowModal({
           <small>Visible to staff only</small>
         </label>
         <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Reserve ticket / price is optional; leave it blank when there is no advance/reservation copy yet.</p>
+        {!hasFlyerForConfirmation && <p className="app-new-show-modal-warning">Confirmed shows need a flyer/poster before they can appear publicly. Attach a flyer here or save as Draft/Hold until artwork is ready.</p>}
         <div className="app-new-show-modal-lineup">
           <div className="app-new-show-modal-section-header">
             <span>Lineup</span>

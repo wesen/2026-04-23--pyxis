@@ -45,11 +45,13 @@ export function ShowDetailPage() {
     setActionError(undefined);
     setActionSuccess(undefined);
     try {
-      const updated = await updateShow(nextShow).unwrap();
+      let showToSave = nextShow;
       if (flyerFile) {
-        const uploaded = await uploadFlyer({ showId: updated.id, file: flyerFile }).unwrap();
+        const uploaded = await uploadFlyer({ showId: show.id, file: flyerFile }).unwrap();
         setLocalFlyerUrl(uploaded.url);
+        showToSave = { ...nextShow, flyerUrl: uploaded.url };
       }
+      await updateShow(showToSave).unwrap();
       setEditorOpen(false);
       setActionSuccess('Show updated.');
     } catch {

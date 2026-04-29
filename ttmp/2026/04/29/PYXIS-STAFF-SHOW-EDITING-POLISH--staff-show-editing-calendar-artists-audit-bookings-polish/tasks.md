@@ -47,6 +47,7 @@ Phase 1 makes the existing staff show detail page trustworthy: uploaded posters 
 - [x] T306 Ensure lineup appears in staff show detail.
 - [ ] T307 Ensure lineup appears in staff show overview or another agreed staff summary surface.
 - [x] T308 Hide flyer-less shows from public list/detail APIs.
+- [x] T309 Prevent confirmed status unless flyer artwork is attached or selected, and show staff-facing explanation.
 
 ## Phase 2 — Staff overview data contract
 

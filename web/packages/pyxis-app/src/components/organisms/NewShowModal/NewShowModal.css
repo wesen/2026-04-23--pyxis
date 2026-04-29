@@ -60,11 +60,20 @@
   margin-top: 5px;
 }
 
-.app-new-show-modal-help {
+.app-new-show-modal-help,
+.app-new-show-modal-warning {
   margin: 0 0 14px;
   color: var(--color-text-secondary, var(--app-muted));
   font-size: 12px;
   line-height: 1.5;
+}
+
+.app-new-show-modal-warning {
+  border: 1px solid color-mix(in srgb, var(--app-warning, #b7791f) 35%, transparent);
+  border-radius: var(--app-radius-sm);
+  background: color-mix(in srgb, var(--app-warning, #b7791f) 10%, var(--app-surface));
+  color: var(--app-ink);
+  padding: 10px 12px;
 }
 
 .app-new-show-modal-error {

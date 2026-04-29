@@ -39,3 +39,10 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 - Added a public visibility rule: confirmed upcoming shows without a flyer/poster URL are excluded from public list and detail APIs.
 - Added service tests for flyer-required public detail and public upcoming list filtering.
+
+## 2026-04-29 — Confirmed status requires flyer
+
+- Made `confirmed` status invalid without a flyer at the service layer for create/update.
+- Updated the staff show modal to disable/explain Confirmed until flyer artwork is present or selected.
+- Updated create/edit flows to support attaching a flyer and confirming in one staff action despite the two-step file upload API.
+- Updated the Phase 1 browser smoke to attach a temporary flyer and verify detail preview, lineup, and staff notes.

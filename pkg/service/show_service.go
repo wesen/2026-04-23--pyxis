@@ -69,10 +69,20 @@ func hasPublicFlyer(flyerURL string) bool {
 	return strings.TrimSpace(flyerURL) != ""
 }
 
+func validateShowStatus(show *domain.Show) error {
+	if show.Status == domain.StatusConfirmed && !hasPublicFlyer(show.FlyerURL) {
+		return fmt.Errorf("confirmed shows require an uploaded flyer")
+	}
+	return nil
+}
+
 // Create creates a new show and logs the action.
 func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int, actorName string) (*domain.Show, error) {
 	if show.Status == "" {
 		show.Status = "draft"
+	}
+	if err := validateShowStatus(show); err != nil {
+		return nil, err
 	}
 	created, err := s.shows.Create(ctx, show)
 	if err != nil {
@@ -90,6 +100,9 @@ func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int
 
 // Update modifies an existing show and logs the action.
 func (s *ShowService) Update(ctx context.Context, show *domain.Show, actorID int, actorName string) (*domain.Show, error) {
+	if err := validateShowStatus(show); err != nil {
+		return nil, err
+	}
 	updated, err := s.shows.Update(ctx, show)
 	if err != nil {
 		return nil, err

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Show } from 'pyxis-types';
+import { ShowStatus, type Show } from 'pyxis-types';
 import { Button } from 'pyxis-components';
-import { useCreateShowMutation, useGetAuditLogQuery, useGetBookingsQuery, useGetShowsQuery, useUploadShowFlyerMutation } from '../../api/appApi';
+import { useCreateShowMutation, useGetAuditLogQuery, useGetBookingsQuery, useGetShowsQuery, useUpdateShowMutation, useUploadShowFlyerMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { DashboardOverview, NewShowModal } from '../../components/organisms';
 import { ErrorState, LoadingState } from '../shared';
@@ -14,6 +14,7 @@ export function DashboardPage() {
   const bookingsQuery = useGetBookingsQuery();
   const logQuery = useGetAuditLogQuery();
   const [createShow, createState] = useCreateShowMutation();
+  const [updateShow, updateState] = useUpdateShowMutation();
   const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
   const [isEditorOpen, setEditorOpen] = useState(false);
   const [actionError, setActionError] = useState<string | undefined>();
@@ -21,8 +22,12 @@ export function DashboardPage() {
   const handleCreateShow = async (show: Show, flyerFile?: File) => {
     setActionError(undefined);
     try {
-      const created = await createShow(show).unwrap();
-      if (flyerFile) await uploadFlyer({ showId: created.id, file: flyerFile }).unwrap();
+      const shouldConfirmAfterUpload = show.status === ShowStatus.CONFIRMED && flyerFile;
+      const created = await createShow(shouldConfirmAfterUpload ? { ...show, status: ShowStatus.DRAFT } : show).unwrap();
+      if (flyerFile) {
+        const uploaded = await uploadFlyer({ showId: created.id, file: flyerFile }).unwrap();
+        if (shouldConfirmAfterUpload) await updateShow({ ...show, id: created.id, flyerUrl: uploaded.url, status: ShowStatus.CONFIRMED }).unwrap();
+      }
       setEditorOpen(false);
       navigate(`/shows/${created.id}`);
     } catch {
@@ -35,7 +40,7 @@ export function DashboardPage() {
 
   return (
     <AppShell page="dashboard" title="Welcome back, Ada" eyebrow="Home / Dashboard" subtitle="Wednesday, April 23 · live operations data" action={<Button size="sm" iconLeft="plus" onClick={() => setEditorOpen(true)}>New show</Button>}>
-      <NewShowModal isOpen={isEditorOpen} mode="create" isSaving={createState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />
+      <NewShowModal isOpen={isEditorOpen} mode="create" isSaving={createState.isLoading || uploadState.isLoading || updateState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />
       {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
       {isLoading ? (
         <LoadingState />

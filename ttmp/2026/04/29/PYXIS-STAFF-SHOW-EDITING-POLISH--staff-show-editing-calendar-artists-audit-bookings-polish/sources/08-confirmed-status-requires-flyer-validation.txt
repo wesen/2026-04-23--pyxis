@@ -1,0 +1,39 @@
+## confirmed status requires flyer validation
+2026-04-29T17:13:10-04:00
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
+go test ./pkg/service -count=1: PASS
+
+### browser smoke
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/32"
+}
+
+### devctl status
+{
+  "exists": true,
+  "services": [
+    {
+      "name": "backend",
+      "pid": 2456569,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-171236.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-171236.stderr.log"
+    },
+    {
+      "name": "app-vite",
+      "pid": 2456592,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-171236.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-171236.stderr.log"
+    },
+    {
+      "name": "site-vite",
+      "pid": 2456646,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-171236.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-171236.stderr.log"
+    }
+  ]
+}

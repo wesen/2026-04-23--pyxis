@@ -215,3 +215,52 @@ The public list now only returned shows with flyer URLs in the local DB. Evidenc
 ```text
 sources/06-public-flyer-visibility-devctl-restart.txt
 ```
+
+## Step 6: Make flyer-less confirmed status impossible and visible to staff
+
+The user clarified that the backend/staff UI should also communicate the flyer rule: if poster equals flyer, then a show without a flyer should not be confirmable, so staff can understand why it is not public.
+
+Backend/service changes:
+
+- Added `validateShowStatus` in `pkg/service/show_service.go`.
+- `Create` and `Update` now reject `confirmed` shows unless `FlyerURL` is non-blank.
+- Public list/detail filtering from Step 5 remains in place.
+- Added service tests proving create/update reject confirmed shows without flyers and allow confirmed shows with flyers.
+
+Frontend/staff changes:
+
+- `NewShowModal` now treats Confirmed as unavailable until the current show has a flyer or the staff member selected a flyer file in the modal.
+- The status option reads `Confirmed — needs flyer` while blocked.
+- The modal shows warning copy: confirmed shows need a flyer/poster before they can appear publicly.
+- Save validation now says: `Confirmed shows require an uploaded flyer. Save as draft/hold until poster artwork is attached.`
+- Create flows in Shows, Dashboard, and Calendar now handle confirmed-with-selected-flyer safely by creating a draft first, uploading the flyer, then updating the show to confirmed with the uploaded URL. This avoids violating the backend rule during the two-step upload flow.
+- Show detail edit uploads a newly selected flyer before saving a confirmed update, so an edit can attach artwork and confirm in one modal submission.
+
+Validation:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+go test ./pkg/service -count=1
+node ttmp/2026/04/29/PYXIS-STAFF-SHOW-EDITING-POLISH--staff-show-editing-calendar-artists-audit-bookings-polish/scripts/01-phase1-show-detail-smoke.js
+```
+
+The first smoke rerun failed because `getByLabel(/flyer/i)` also matched the Status select text `Confirmed — needs flyer`. I fixed the smoke to target the file input directly:
+
+```js
+page.locator('input[type="file"][accept="image/*,.pdf"]').setInputFiles(flyerPath)
+```
+
+The smoke then passed and created/opened:
+
+```json
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/32"
+}
+```
+
+Evidence:
+
+- `sources/07-confirmed-show-requires-flyer-smoke.txt`
+- `sources/08-confirmed-status-requires-flyer-validation.txt`

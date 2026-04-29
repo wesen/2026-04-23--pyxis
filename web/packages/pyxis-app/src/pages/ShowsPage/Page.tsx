@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShowStatus } from 'pyxis-types';
 import { Button, Input } from 'pyxis-components';
-import { useCreateShowMutation, useGetShowsQuery, useUploadShowFlyerMutation } from '../../api/appApi';
+import { useCreateShowMutation, useGetShowsQuery, useUpdateShowMutation, useUploadShowFlyerMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { NewShowModal } from '../../components/organisms';
 import { ShowsArchivedPanel, ShowsConfirmedPanel, ShowsFilterBar, type ShowsFilterValue } from '../../components/organisms';
@@ -13,6 +13,7 @@ export function ShowsPage() {
   const navigate = useNavigate();
   const { data: shows, isLoading, isError } = useGetShowsQuery();
   const [createShow, createState] = useCreateShowMutation();
+  const [updateShow, updateState] = useUpdateShowMutation();
   const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
   const [isEditorOpen, setEditorOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -42,9 +43,13 @@ export function ShowsPage() {
   const handleCreateShow = async (show: Parameters<typeof createShow>[0], flyerFile?: File) => {
     setActionError(undefined);
     try {
-      const created = await createShow(show).unwrap();
+      const shouldConfirmAfterUpload = show.status === ShowStatus.CONFIRMED && flyerFile;
+      const created = await createShow(shouldConfirmAfterUpload ? { ...show, status: ShowStatus.DRAFT } : show).unwrap();
       if (flyerFile) {
-        await uploadFlyer({ showId: created.id, file: flyerFile }).unwrap();
+        const uploaded = await uploadFlyer({ showId: created.id, file: flyerFile }).unwrap();
+        if (shouldConfirmAfterUpload) {
+          await updateShow({ ...show, id: created.id, flyerUrl: uploaded.url, status: ShowStatus.CONFIRMED }).unwrap();
+        }
       }
       setEditorOpen(false);
       navigate(`/shows/${created.id}`);
@@ -61,7 +66,7 @@ export function ShowsPage() {
       action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="filter" aria-label="Filter shows" onClick={() => setActiveFilter((current) => current === 'all' ? ShowStatus.CONFIRMED : 'all')}/><Button variant="outline" size="sm" iconLeft="search" aria-label="Search shows" onClick={() => setSearchOpen((open) => !open)} /><Button size="sm" iconLeft="plus" onClick={() => setEditorOpen(true)}>New show</Button></div>}
     >
       {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
-      <NewShowModal isOpen={isEditorOpen} mode="create" isSaving={createState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />
+      <NewShowModal isOpen={isEditorOpen} mode="create" isSaving={createState.isLoading || uploadState.isLoading || updateState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />
       {isLoading ? (
         <LoadingState />
       ) : isError || !shows ? (

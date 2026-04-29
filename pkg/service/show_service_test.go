@@ -47,6 +47,22 @@ func TestGetPublicByIDOnlyReturnsConfirmedUpcomingShowsWithFlyers(t *testing.T) 
 	}
 }
 
+func TestCreateAndUpdateRejectConfirmedShowsWithoutFlyers(t *testing.T) {
+	today := time.Now().Truncate(24 * time.Hour)
+	svc := NewShowService(&fakeShowRepo{}, noopAudit{}, nil)
+	confirmedNoFlyer := &domain.Show{ID: 1, Artist: "No Flyer", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, 1)}
+	if _, err := svc.Create(context.Background(), confirmedNoFlyer, 1, "tester"); err == nil {
+		t.Fatalf("Create confirmed show without flyer succeeded, want error")
+	}
+	if _, err := svc.Update(context.Background(), confirmedNoFlyer, 1, "tester"); err == nil {
+		t.Fatalf("Update confirmed show without flyer succeeded, want error")
+	}
+	confirmedWithFlyer := &domain.Show{ID: 1, Artist: "With Flyer", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}
+	if _, err := svc.Create(context.Background(), confirmedWithFlyer, 1, "tester"); err != nil {
+		t.Fatalf("Create confirmed show with flyer err = %v, want nil", err)
+	}
+}
+
 func TestListUpcomingOnlyReturnsShowsWithFlyers(t *testing.T) {
 	today := time.Now().Truncate(24 * time.Hour)
 	repo := &fakeShowRepo{shows: []domain.Show{
@@ -101,5 +117,15 @@ func (r *fakeShowRepo) SearchArchive(ctx context.Context, query string) ([]domai
 	return nil, nil
 }
 func (r *fakeShowRepo) GetArchiveStats(ctx context.Context) (*domain.ArchiveStats, error) {
+	return nil, nil
+}
+
+type noopAudit struct{}
+
+func (noopAudit) Log(ctx context.Context, actorID int, actorName, action, entityType string, entityID *int, metadata map[string]interface{}) error {
+	return nil
+}
+
+func (noopAudit) List(ctx context.Context, limit, offset int) ([]domain.AuditLogEntry, error) {
 	return nil, nil
 }
