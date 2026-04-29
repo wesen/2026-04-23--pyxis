@@ -46,6 +46,7 @@ Phase 1 makes the existing staff show detail page trustworthy: uploaded posters 
 - [x] T305 Ensure uploaded flyer/poster appears in the staff poster view after create/upload and on detail reload.
 - [x] T306 Ensure lineup appears in staff show detail.
 - [ ] T307 Ensure lineup appears in staff show overview or another agreed staff summary surface.
+- [x] T308 Hide flyer-less shows from public list/detail APIs.
 
 ## Phase 2 — Staff overview data contract
 
@@ -64,7 +65,7 @@ Phase 3 validates the frontend and any backend/API changes locally, records evid
 ## T5 — Validation and release
 
 - [x] T501 Run TypeScript check/build for `pyxis-app`.
-- [ ] T502 Run targeted Go tests if API/backend code changes.
+- [x] T502 Run targeted Go tests if API/backend code changes.
 - [x] T503 Run local browser smoke against `devctl up` services.
 - [x] T504 Update diary, changelog, and evidence.
 - [x] T505 Commit logical milestones.

@@ -9,21 +9,22 @@ import (
 	"github.com/go-go-golems/pyxis/pkg/domain"
 )
 
-func TestGetPublicByIDOnlyReturnsConfirmedUpcomingShows(t *testing.T) {
+func TestGetPublicByIDOnlyReturnsConfirmedUpcomingShowsWithFlyers(t *testing.T) {
 	today := time.Now().Truncate(24 * time.Hour)
 	tests := []struct {
 		name    string
 		show    *domain.Show
 		wantErr bool
 	}{
-		{name: "confirmed today", show: &domain.Show{ID: 1, Artist: "Today", Status: domain.StatusConfirmed, Date: today}},
-		{name: "confirmed future", show: &domain.Show{ID: 1, Artist: "Future", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, 1)}},
-		{name: "confirmed past hidden", show: &domain.Show{ID: 1, Artist: "Past", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, -1)}, wantErr: true},
-		{name: "draft hidden", show: &domain.Show{ID: 1, Artist: "Draft", Status: domain.StatusDraft, Date: today.AddDate(0, 0, 1)}, wantErr: true},
-		{name: "hold hidden", show: &domain.Show{ID: 1, Artist: "Hold", Status: domain.StatusHold, Date: today.AddDate(0, 0, 1)}, wantErr: true},
-		{name: "blocked hidden", show: &domain.Show{ID: 1, Artist: "Blocked", Status: domain.StatusBlocked, Date: today.AddDate(0, 0, 1)}, wantErr: true},
-		{name: "archived hidden", show: &domain.Show{ID: 1, Artist: "Archived", Status: domain.StatusArchived, Date: today.AddDate(0, 0, -30)}, wantErr: true},
-		{name: "cancelled hidden", show: &domain.Show{ID: 1, Artist: "Cancelled", Status: domain.StatusCancelled, Date: today.AddDate(0, 0, 1)}, wantErr: true},
+		{name: "confirmed today with flyer", show: &domain.Show{ID: 1, Artist: "Today", Status: domain.StatusConfirmed, Date: today, FlyerURL: "/flyers/show-1/flyer.svg"}},
+		{name: "confirmed future with flyer", show: &domain.Show{ID: 1, Artist: "Future", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}},
+		{name: "confirmed future without flyer hidden", show: &domain.Show{ID: 1, Artist: "No Flyer", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, 1)}, wantErr: true},
+		{name: "confirmed past hidden", show: &domain.Show{ID: 1, Artist: "Past", Status: domain.StatusConfirmed, Date: today.AddDate(0, 0, -1), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
+		{name: "draft hidden", show: &domain.Show{ID: 1, Artist: "Draft", Status: domain.StatusDraft, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
+		{name: "hold hidden", show: &domain.Show{ID: 1, Artist: "Hold", Status: domain.StatusHold, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
+		{name: "blocked hidden", show: &domain.Show{ID: 1, Artist: "Blocked", Status: domain.StatusBlocked, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
+		{name: "archived hidden", show: &domain.Show{ID: 1, Artist: "Archived", Status: domain.StatusArchived, Date: today.AddDate(0, 0, -30), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
+		{name: "cancelled hidden", show: &domain.Show{ID: 1, Artist: "Cancelled", Status: domain.StatusCancelled, Date: today.AddDate(0, 0, 1), FlyerURL: "/flyers/show-1/flyer.svg"}, wantErr: true},
 	}
 
 	for _, tc := range tests {
@@ -46,12 +47,30 @@ func TestGetPublicByIDOnlyReturnsConfirmedUpcomingShows(t *testing.T) {
 	}
 }
 
-type fakeShowRepo struct {
-	show *domain.Show
-	err  error
+func TestListUpcomingOnlyReturnsShowsWithFlyers(t *testing.T) {
+	today := time.Now().Truncate(24 * time.Hour)
+	repo := &fakeShowRepo{shows: []domain.Show{
+		{ID: 1, Artist: "With Flyer", Status: domain.StatusConfirmed, Date: today, FlyerURL: "/flyers/show-1/flyer.svg"},
+		{ID: 2, Artist: "No Flyer", Status: domain.StatusConfirmed, Date: today},
+		{ID: 3, Artist: "Blank Flyer", Status: domain.StatusConfirmed, Date: today, FlyerURL: "   "},
+	}}
+	svc := NewShowService(repo, nil, nil)
+	shows, err := svc.ListUpcoming(context.Background())
+	if err != nil {
+		t.Fatalf("unexpected err: %v", err)
+	}
+	if len(shows) != 1 || shows[0].ID != 1 {
+		t.Fatalf("shows = %#v, want only show 1", shows)
+	}
 }
 
-func (r *fakeShowRepo) ListUpcoming(ctx context.Context) ([]domain.Show, error) { return nil, nil }
+type fakeShowRepo struct {
+	show  *domain.Show
+	shows []domain.Show
+	err   error
+}
+
+func (r *fakeShowRepo) ListUpcoming(ctx context.Context) ([]domain.Show, error) { return r.shows, nil }
 func (r *fakeShowRepo) ListAll(ctx context.Context) ([]domain.Show, error)      { return nil, nil }
 func (r *fakeShowRepo) GetByID(ctx context.Context, id int) (*domain.Show, error) {
 	if r.err != nil {

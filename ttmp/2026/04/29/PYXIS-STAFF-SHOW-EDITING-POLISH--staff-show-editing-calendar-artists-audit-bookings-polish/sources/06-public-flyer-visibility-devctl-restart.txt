@@ -1,0 +1,46 @@
+## devctl restart after public flyer visibility rule
+2026-04-29T17:08:34-04:00
+
+### public shows after restart
+[
+  {
+    "id": 1,
+    "flyerUrl": "/flyers/show-1/seed-flyer.svg"
+  },
+  {
+    "id": 19,
+    "flyerUrl": "/flyers/show-19/image (42).png"
+  },
+  {
+    "id": 31,
+    "flyerUrl": "/flyers/show-31/flyer.svg"
+  }
+]
+
+### devctl status
+{
+  "exists": true,
+  "services": [
+    {
+      "name": "backend",
+      "pid": 2448085,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-170823.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-170823.stderr.log"
+    },
+    {
+      "name": "app-vite",
+      "pid": 2448108,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-170823.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-170823.stderr.log"
+    },
+    {
+      "name": "site-vite",
+      "pid": 2448162,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-170823.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-170823.stderr.log"
+    }
+  ]
+}

@@ -34,3 +34,8 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Added visible show-detail panels for lineup, staff notes, and public description.
 - Updated flyer handling so uploaded image flyers render as previews and recent uploads display immediately on detail.
 - Added a Playwright-based local smoke script under `scripts/` and saved passing evidence under `sources/`.
+
+## 2026-04-29 — Public flyer visibility rule
+
+- Added a public visibility rule: confirmed upcoming shows without a flyer/poster URL are excluded from public list and detail APIs.
+- Added service tests for flyer-required public detail and public upcoming list filtering.

@@ -178,3 +178,40 @@ Evidence:
 
 - `sources/03-phase1-show-detail-smoke.txt`
 - `sources/04-phase1-validation-summary.txt`
+
+## Step 5: Public visibility requires flyer/poster
+
+The user clarified the product rule after verifying the local flyer confusion: poster equals flyer, and a show without a flyer should not be publicly viewable.
+
+I implemented this as a service-level public visibility rule in `pkg/service/show_service.go`:
+
+- `ListUpcoming` now filters repository upcoming shows to only those with a non-blank `FlyerURL`.
+- `GetPublicByID` now returns `ErrNotFound` for confirmed/upcoming shows without a non-blank `FlyerURL`.
+- Draft/hold/blocked/cancelled/archived/past shows remain hidden as before.
+
+I chose the service layer instead of SQL as the first cut so the public business rule is centralized and covered by focused service tests. A later data-contract phase can push the predicate down into SQL if list sizes grow.
+
+Validation:
+
+```bash
+gofmt -w pkg/service/show_service.go pkg/service/show_service_test.go
+go test ./pkg/service -count=1
+```
+
+Result:
+
+```text
+ok github.com/go-go-golems/pyxis/pkg/service
+```
+
+After committing the service rule, I restarted the local dev stack so the backend process picked up the new code:
+
+```bash
+devctl down && devctl up && sleep 3 && curl -s http://localhost:8080/api/public/shows | jq '[.shows[]? | {id, flyerUrl}]' && devctl status
+```
+
+The public list now only returned shows with flyer URLs in the local DB. Evidence was saved to:
+
+```text
+sources/06-public-flyer-visibility-devctl-restart.txt
+```
