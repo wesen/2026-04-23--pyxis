@@ -36,3 +36,10 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Refactored `NewShowModal` to compose the new molecules while preserving its external props and existing submit semantics.
 - Expanded `NewShowModal` stories for create, edit with flyer, confirmed-needs-flyer, long lineup, backend error, saving, mobile, and interaction validation states.
 - Validated `pnpm --dir web --filter pyxis-app exec tsc --noEmit` and `pnpm --dir web --filter pyxis-app build`.
+
+## 2026-04-29 — Modal visual evidence and smoke
+
+- Captured Storybook screenshots for create default, edit existing with flyer, confirmed-needs-flyer, and mobile modal states.
+- Added `scripts/01-capture-new-show-modal-stories.js` and stored capture outputs under `sources/08-modal-storybook-captures/`.
+- Added `scripts/02-smoke-new-show-modal-story.js` to verify required-field validation and save-draft interaction in Storybook.
+- Stored smoke output in `sources/09-modal-storybook-smoke.txt`.

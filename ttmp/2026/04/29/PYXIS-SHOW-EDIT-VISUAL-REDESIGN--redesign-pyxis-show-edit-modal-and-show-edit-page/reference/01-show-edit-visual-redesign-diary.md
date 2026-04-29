@@ -333,3 +333,60 @@ What was tricky:
 Next step:
 
 - Commit Phase 3 modal decomposition, then proceed to Phase 4 visual evidence/capture and interaction smoke.
+
+
+## Step 11: Capture Phase 4 modal visual evidence and smoke
+
+I restarted Storybook on port 6008 after an existing stale Storybook process returned an indexing error for old paths:
+
+```text
+Unable to index files:
+- ./src/components/organisms/ShowDetailDiscordPanel/ShowDetailDiscordPanel.stories.tsx: ENOENT
+- ./src/components/shell/AppShell.stories.tsx: ENOENT
+```
+
+A fresh Storybook process successfully indexed 310 stories and included the new story IDs for:
+
+- `FlyerDropzone`
+- `ShowFormSection`
+- `ShowLineupRowEditor`
+- `NewShowModal`
+
+I added capture script:
+
+```text
+scripts/01-capture-new-show-modal-stories.js
+```
+
+First run failed because `[data-pyxis-component="new-show-modal"]` matched both the modal root and the form part. I fixed the selector to target:
+
+```text
+[data-pyxis-component="new-show-modal"][data-pyxis-part="root"]
+```
+
+Then the capture passed and wrote screenshots to:
+
+```text
+sources/08-modal-storybook-captures/
+```
+
+Captured states:
+
+- `new-show-modal-create-default.png`
+- `new-show-modal-edit-existing-with-flyer.png`
+- `new-show-modal-confirmed-needs-flyer.png`
+- `new-show-modal-mobile.png`
+
+I inspected `new-show-modal-create-default.png` with the image-capable read tool. It shows the intended sectioned structure: Basics, Date & Time, Details, Lineup, Additional Info, Flyer, and footer actions.
+
+I also added interaction smoke script:
+
+```text
+scripts/02-smoke-new-show-modal-story.js
+```
+
+It verifies that clicking `Create show` on the empty modal shows the required artist validation, then fills an artist and clicks `Save draft`. Smoke output was saved to:
+
+```text
+sources/09-modal-storybook-smoke.txt
+```

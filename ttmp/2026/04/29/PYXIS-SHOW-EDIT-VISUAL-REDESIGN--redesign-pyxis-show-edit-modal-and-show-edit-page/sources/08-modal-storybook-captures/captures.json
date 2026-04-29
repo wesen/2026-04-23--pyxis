@@ -1,0 +1,61 @@
+{
+  "baseUrl": "http://127.0.0.1:6008",
+  "stories": [
+    {
+      "id": "pyxis-app-components-organisms-newshowmodal--create-default",
+      "file": "new-show-modal-create-default.png",
+      "width": 1120,
+      "height": 1720,
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-newshowmodal--create-default&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/08-modal-storybook-captures/new-show-modal-create-default.png",
+      "bounds": {
+        "x": 199,
+        "y": 86,
+        "width": 722,
+        "height": 1548
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-newshowmodal--edit-existing-with-flyer",
+      "file": "new-show-modal-edit-existing-with-flyer.png",
+      "width": 1120,
+      "height": 1840,
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-newshowmodal--edit-existing-with-flyer&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/08-modal-storybook-captures/new-show-modal-edit-existing-with-flyer.png",
+      "bounds": {
+        "x": 199,
+        "y": 98.875,
+        "width": 722,
+        "height": 1642.25
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-newshowmodal--confirmed-needs-flyer",
+      "file": "new-show-modal-confirmed-needs-flyer.png",
+      "width": 1120,
+      "height": 1720,
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-newshowmodal--confirmed-needs-flyer&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/08-modal-storybook-captures/new-show-modal-confirmed-needs-flyer.png",
+      "bounds": {
+        "x": 199,
+        "y": 86,
+        "width": 722,
+        "height": 1548
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-newshowmodal--mobile",
+      "file": "new-show-modal-mobile.png",
+      "width": 390,
+      "height": 1840,
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-newshowmodal--mobile&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/08-modal-storybook-captures/new-show-modal-mobile.png",
+      "bounds": {
+        "x": 24,
+        "y": 92,
+        "width": 342,
+        "height": 1656
+      }
+    }
+  ]
+}

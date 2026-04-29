@@ -54,11 +54,11 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 ## Phase 4 — Modal visual polish and evidence
 
-- [ ] T401 Tune modal CSS toward `show-modal-reference.png`: section rhythm, uppercase section headings, field grids, lineup rows, and footer clarity.
-- [ ] T402 Preserve required-field, draft, confirmed-with-flyer, price, and reserve-ticket semantics.
-- [ ] T403 Capture Storybook screenshots for the redesigned modal states and store evidence under `sources/`.
-- [ ] T404 Run local interaction smoke for modal validation and submit behavior.
-- [ ] T405 Commit modal visual polish and evidence.
+- [x] T401 Tune modal CSS toward `show-modal-reference.png`: section rhythm, uppercase section headings, field grids, lineup rows, and footer clarity.
+- [x] T402 Preserve required-field, draft, confirmed-with-flyer, price, and reserve-ticket semantics.
+- [x] T403 Capture Storybook screenshots for the redesigned modal states and store evidence under `sources/`.
+- [x] T404 Run local interaction smoke for modal validation and submit behavior.
+- [x] T405 Commit modal visual polish and evidence.
 
 ## Phase 5 — Storybook-first show edit page decomposition
 

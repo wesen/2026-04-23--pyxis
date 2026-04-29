@@ -1,0 +1,4 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-newshowmodal--create-default&viewMode=story"
+}
