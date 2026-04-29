@@ -46,3 +46,9 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Updated the staff show modal to disable/explain Confirmed until flyer artwork is present or selected.
 - Updated create/edit flows to support attaching a flyer and confirming in one staff action despite the two-step file upload API.
 - Updated the Phase 1 browser smoke to attach a temporary flyer and verify detail preview, lineup, and staff notes.
+
+## 2026-04-29 — Staff flyer column
+
+- Added a Flyer column to the staff Shows overview.
+- Rows now show a small flyer thumbnail and `Ready`, or a `Needs flyer` warning pill.
+- Skipped lineup overview by request.

@@ -104,7 +104,10 @@ export const appApi = createApi({
             capacity: show.capacity,
             pinned: false,
             notes: show.notes,
-          })
+            // Staff list rows need flyer readiness even though the generated
+            // AppShow view model does not yet carry it in protobuf.
+            flyerUrl: show.flyerUrl,
+          } as AppShow & { flyerUrl: string })
         );
       },
       providesTags: (result) =>

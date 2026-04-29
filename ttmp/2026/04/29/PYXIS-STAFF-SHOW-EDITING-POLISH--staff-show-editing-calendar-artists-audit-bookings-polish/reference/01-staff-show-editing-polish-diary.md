@@ -264,3 +264,29 @@ Evidence:
 
 - `sources/07-confirmed-show-requires-flyer-smoke.txt`
 - `sources/08-confirmed-status-requires-flyer-validation.txt`
+
+## Step 7: Add flyer column to staff Shows overview
+
+The user clarified that we do not need lineup information in the overview; staff mainly need flyer readiness. I implemented a Flyer column in the staff Shows table.
+
+Implementation:
+
+- `appApi.getShows` already receives full `Show` records from `/api/app/shows`; it now preserves `show.flyerUrl` as an extra staff-list field while still using the generated `AppShow` shape for the rest of the row.
+- `ShowsTable` adds a `Flyer` header in the full table variant.
+- `ShowTableRow` renders:
+  - a small flyer thumbnail plus `Ready` when `flyerUrl` is present;
+  - a warning pill `Needs flyer` when missing.
+- No lineup summary was added by request.
+
+Validation:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+```
+
+Both passed. Evidence:
+
+```text
+sources/09-staff-flyer-column-validation.txt
+```

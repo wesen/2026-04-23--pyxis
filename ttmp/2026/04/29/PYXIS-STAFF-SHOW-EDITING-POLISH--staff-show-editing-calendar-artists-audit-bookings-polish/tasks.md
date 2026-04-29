@@ -45,7 +45,7 @@ Phase 1 makes the existing staff show detail page trustworthy: uploaded posters 
 - [x] T304 Ensure staff notes are visible on staff show detail.
 - [x] T305 Ensure uploaded flyer/poster appears in the staff poster view after create/upload and on detail reload.
 - [x] T306 Ensure lineup appears in staff show detail.
-- [ ] T307 Ensure lineup appears in staff show overview or another agreed staff summary surface.
+- [x] T307 Add flyer readiness column to staff show overview; lineup overview intentionally skipped by request.
 - [x] T308 Hide flyer-less shows from public list/detail APIs.
 - [x] T309 Prevent confirmed status unless flyer artwork is attached or selected, and show staff-facing explanation.
 
@@ -55,7 +55,7 @@ Phase 2 decides and implements how the Shows overview should display richer show
 
 ## T4 — Backend/API/model follow-up
 
-- [ ] T401 Determine whether staff show list should return full `Show` records or extend `AppShow` with `flyer_url` and lineup summary.
+- [x] T401 Preserve `flyerUrl` in the staff list view model for overview readiness display; no lineup summary needed.
 - [ ] T402 Determine whether reserve-ticket optionality needs schema/API changes or can be represented by blank price fields today.
 - [ ] T403 Add tests for any backend/API contract changes.
 

@@ -1,0 +1,4 @@
+## flyer column validation
+2026-04-29T17:21:45-04:00
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
