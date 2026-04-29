@@ -1,0 +1,40 @@
+## Phase 1 validation
+2026-04-29T16:55:36-04:00
+
+### devctl status
+{
+  "exists": true,
+  "services": [
+    {
+      "name": "backend",
+      "pid": 2419164,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-164555.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/backend-20260429-164555.stderr.log"
+    },
+    {
+      "name": "app-vite",
+      "pid": 2419188,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-164555.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/app-vite-20260429-164555.stderr.log"
+    },
+    {
+      "name": "site-vite",
+      "pid": 2419246,
+      "alive": true,
+      "stdout_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-164555.stdout.log",
+      "stderr_log": "/home/manuel/code/wesen/2026-04-23--pyxis/.devctl/logs/site-vite-20260429-164555.stderr.log"
+    }
+  ]
+}
+
+### TypeScript/build
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
+
+### Browser smoke
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/31"
+}

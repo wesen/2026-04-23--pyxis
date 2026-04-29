@@ -27,3 +27,10 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Marked required show modal fields and explained that date is required for non-drafts.
 - Made reserve ticket / price optional by defaulting it to blank and adding helper copy.
 - Validated TypeScript and production build for `pyxis-app`.
+
+## 2026-04-29 — Phase 1 show detail fidelity
+
+- Split remaining work into Phase 1 show-detail fidelity, Phase 2 staff overview data contract, and Phase 3 validation/release.
+- Added visible show-detail panels for lineup, staff notes, and public description.
+- Updated flyer handling so uploaded image flyers render as previews and recent uploads display immediately on detail.
+- Added a Playwright-based local smoke script under `scripts/` and saved passing evidence under `sources/`.

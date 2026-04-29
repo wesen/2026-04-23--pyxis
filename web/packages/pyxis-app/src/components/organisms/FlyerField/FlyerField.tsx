@@ -11,6 +11,11 @@ export type FlyerFieldProps = {
   onDelete?: () => void;
 };
 
+function isPreviewableImage(url: string) {
+  const clean = url.split('?')[0]?.toLowerCase() ?? url.toLowerCase();
+  return /\.(avif|gif|jpe?g|png|svg|webp)$/.test(clean);
+}
+
 export function FlyerField({ flyerUrl, isUploading, isDeleting, onUpload, onDelete }: FlyerFieldProps) {
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
 
@@ -30,7 +35,10 @@ export function FlyerField({ flyerUrl, isUploading, isDeleting, onUpload, onDele
         </div>
         {flyerUrl && <a href={flyerUrl} target="_blank" rel="noreferrer">Open</a>}
       </header>
-      {flyerUrl && <div className="app-flyer-field-preview"><span>{flyerUrl}</span><Button variant="ghost" size="sm" iconLeft="trash" onClick={onDelete} isLoading={isDeleting}>Delete flyer</Button></div>}
+      {flyerUrl && <div className="app-flyer-field-preview">
+        {isPreviewableImage(flyerUrl) ? <img src={flyerUrl} alt="Current show flyer" /> : <div className="app-flyer-field-file-preview"><span>Attached file</span></div>}
+        <div className="app-flyer-field-preview-meta"><span>{flyerUrl}</span><Button variant="ghost" size="sm" iconLeft="trash" onClick={onDelete} isLoading={isDeleting}>Delete flyer</Button></div>
+      </div>}
       <div className="app-flyer-field-upload">
         <input type="file" accept="image/*,.pdf" onChange={(event) => setSelectedFile(event.target.files?.[0])} aria-label="Choose flyer file" />
         <Button variant="outline" size="sm" onClick={submit} disabled={!selectedFile} isLoading={isUploading}>Upload flyer</Button>

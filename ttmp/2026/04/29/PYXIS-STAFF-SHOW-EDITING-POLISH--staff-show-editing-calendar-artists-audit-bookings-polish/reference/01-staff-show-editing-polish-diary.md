@@ -131,3 +131,50 @@ sources/02-show-modal-draft-required-validation.txt
 ```
 
 Remaining show-editing work is now focused on data display fidelity: staff notes, flyer/poster visibility, and lineup visibility. Those likely need detail-page work and/or an `AppShow` list contract extension because `AppShow` currently lacks `flyerUrl` and `lineup`.
+
+## Step 4: Split remaining work into phases and implement Phase 1
+
+The user asked to split the remaining work into phases and implement Phase 1. I updated `tasks.md` with:
+
+- Phase 0: completed baseline and safe UI polish.
+- Phase 1: show detail fidelity without API/protobuf changes.
+- Phase 2: staff overview data contract for richer list data.
+- Phase 3: validation and release.
+
+Phase 1 implementation focused on making the existing show detail page trustworthy before changing the staff list API:
+
+- Added immediate local flyer URL state in `ShowDetailPage` so an uploaded poster/flyer appears without waiting for a refetch/render race.
+- Kept RTK invalidation intact so the canonical show detail still reloads from the backend.
+- Added flyer preview rendering in `FlyerField`; image URLs now render as an actual image instead of only a text path. Non-image/PDF attachments still show an attached-file preview and open link.
+- Added a Lineup panel on show detail using the full `Show.lineup` data.
+- Added a Staff notes panel on show detail using `Show.notes`.
+- Added a Public description panel when `Show.description` is non-empty.
+- Added small route CSS for lineup and pre-wrapped notes text.
+
+Validation:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+node ttmp/2026/04/29/PYXIS-STAFF-SHOW-EDITING-POLISH--staff-show-editing-calendar-artists-audit-bookings-polish/scripts/01-phase1-show-detail-smoke.js
+```
+
+The first attempt at the browser smoke script failed because `playwright` is installed under the `web` workspace, not root `node_modules`:
+
+```text
+Error: Cannot find module 'playwright'
+```
+
+I fixed the script by using `createRequire(path.join(process.cwd(), 'web', 'package.json'))` so it resolves the workspace dependency. The smoke then passed and created/opened a local show detail page:
+
+```json
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/31"
+}
+```
+
+Evidence:
+
+- `sources/03-phase1-show-detail-smoke.txt`
+- `sources/04-phase1-validation-summary.txt`
