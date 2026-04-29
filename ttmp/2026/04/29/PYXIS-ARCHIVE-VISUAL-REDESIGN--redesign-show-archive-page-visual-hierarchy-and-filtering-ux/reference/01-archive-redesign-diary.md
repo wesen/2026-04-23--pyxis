@@ -212,3 +212,34 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 11: Captured ShowsConfirmedPanel reference and simplified ShowLog panel
+
+The operator asked to use `ShowsConfirmedPanel` as the visual reference because the current ShowLog panel was doing too much and felt like a full page.
+
+Captured the reference screenshot using `css-visual-diff` against the Storybook story:
+
+```text
+sources/15-shows-confirmed-reference/shows-confirmed-panel.story.css-visual-diff.yml
+sources/15-shows-confirmed-reference/shows-confirmed-panel.png
+```
+
+Also captured a before/after for the ShowLog story:
+
+```text
+sources/15-shows-confirmed-reference/show-log-panel-before-simplify.png
+sources/15-shows-confirmed-reference/show-log-panel-after-simplify.png
+```
+
+Implementation change:
+
+- Removed the large metric grid and heavy search/filter toolbar from the default `PostShowLogPanel` rendering.
+- Wrapped the table in the standard `Panel` component, with the same overall rhythm as `ShowsConfirmedPanel`.
+- Kept the right-side panel note concise: `Needs log N · Incidents N`.
+- Kept row details and modal editing, but made the default state a compact ledger table.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

@@ -1,0 +1,33 @@
+metadata:
+  slug: pyxis-app-show-log-panel-story-current
+  title: ShowLogPanel current Storybook screenshot
+
+original:
+  name: storybook-reference-copy
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogpanel--mixed&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1080, height: 720 }
+  root_selector: '#storybook-root'
+
+react:
+  name: storybook-current
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogpanel--mixed&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1080, height: 720 }
+  root_selector: '#storybook-root'
+
+sections:
+  - name: component
+    selector_original: '[data-pyxis-component="post-show-log-panel"]'
+    selector_react: '[data-pyxis-component="post-show-log-panel"]'
+
+output:
+  dir: ttmp/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN--redesign-show-archive-page-visual-hierarchy-and-filtering-ux/sources/15-shows-confirmed-reference/show-log-css-visual-diff
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture]

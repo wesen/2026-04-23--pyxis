@@ -22,7 +22,7 @@ const entries: ShowLogEntry[] = [
 function StatefulPanel(args: Partial<React.ComponentProps<typeof PostShowLogPanel>>) {
   const [filter, setFilter] = useState<PostShowLogFilter>(args.activeFilter ?? 'all');
   const [search, setSearch] = useState(args.search ?? '');
-  return <PostShowLogPanel entries={entries} {...args} activeFilter={filter} search={search} onFilterChange={setFilter} onSearchChange={setSearch} />;
+  return <div style={{ width: 1018, padding: 26, background: 'var(--app-canvas)' }}><PostShowLogPanel entries={entries} {...args} activeFilter={filter} search={search} onFilterChange={setFilter} onSearchChange={setSearch} /></div>;
 }
 
 export const Mixed: Story = { render: (args) => <StatefulPanel {...args} /> };

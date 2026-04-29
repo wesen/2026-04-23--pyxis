@@ -826,6 +826,14 @@ web/packages/pyxis-app/src/components/organisms/Shows/ShowsTable/ShowsTable.tsx
 web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
 ```
 
+A reference screenshot was captured with `css-visual-diff` from the Storybook `ShowsConfirmedPanel` story and stored here:
+
+```text
+sources/15-shows-confirmed-reference/shows-confirmed-panel.png
+```
+
+This screenshot should be used as the visual north star for the ShowLog table. The goal is not pixel parity, because ShowLog has different fields and no standalone prototype, but the density and feel should match: one panel, light header, compact table rows, minimal decoration, and actions tucked into the rightmost column.
+
 ### Why row expansion plus modal editing matters
 
 The current page shows every input for every show at once. That makes the page hard to scan. The card prototype improved validation and state modeling, but it still made the page feel heavier than the Shows table. The better progression is:

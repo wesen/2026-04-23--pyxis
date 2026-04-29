@@ -6,7 +6,9 @@
 - [ ] Add MSW handlers that derive show-log entries from mock shows plus attendance logs, including needs-log rows with no attendance log.
 - [ ] Build reusable small primitives needed by the first slice: `AppCard`, `StatusBadge`, `MetadataStrip`, `NoteBlock`, and `FieldError`.
 - [x] Build initial `PostShowLogEntryCard` card prototype with collapsed and expanded states.
+- [x] Capture `ShowsConfirmedPanel` Storybook reference PNG with `css-visual-diff`.
 - [x] Migrate first-pass `PostShowLogPanel` toward a ShowsConfirmedPanel-like table with expandable detail rows.
+- [x] Simplify `PostShowLogPanel` so the default story is one concise panel/table, not a full-page metrics/search surface.
 - [x] Add edit modal for focused post-show log entry editing from each table row.
 - [x] Add Storybook stories for mixed, needs-log, logged, incident, expanded/details, edit modal, empty, validation, and mobile states.
 - [ ] Decide whether to keep `PostShowLogEntryCard` as a reference/prototype story or archive it after the table/modal path is approved.
