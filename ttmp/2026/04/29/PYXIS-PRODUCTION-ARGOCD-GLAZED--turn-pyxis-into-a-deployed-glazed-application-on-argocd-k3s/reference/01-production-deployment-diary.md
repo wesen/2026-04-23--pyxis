@@ -496,7 +496,7 @@ The implementation updates both runtime image sites: the normal `Deployment` con
 
 **Inferred user intent:** Finish the remaining CI-to-GitOps automation work so published Pyxis images can be promoted through reviewed GitOps PRs.
 
-**Commit (code):** pending — changes implemented before commit.
+**Commit (code):** 9a768db — "PYXIS-PRODUCTION-ARGOCD-GLAZED: add gitops pr automation"
 
 ### What I did
 
@@ -603,7 +603,7 @@ I changed the command runner so it redacts `GITOPS_PR_TOKEN` before printing com
 
 **Inferred user intent:** Ensure the CI automation is robust enough for production use and the work is auditable.
 
-**Commit (code):** pending — included with the Phase 5 implementation commit.
+**Commit (code):** 9a768db — "PYXIS-PRODUCTION-ARGOCD-GLAZED: add gitops pr automation"
 
 ### What I did
 
