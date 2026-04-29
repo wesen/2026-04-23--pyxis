@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Artist } from 'pyxis-types';
 import { Button } from 'pyxis-components';
 import { useCreateArtistMutation, useGetArtistsQuery, useUpdateArtistMutation } from '../../api/appApi';
@@ -24,6 +24,8 @@ export function ArtistsPage() {
   const [actionError, setActionError] = useState<string | undefined>();
   const [actionSuccess, setActionSuccess] = useState<string | undefined>();
   const [query, setQuery] = useState('');
+  const editorRef = useRef<HTMLDivElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!selected) return;
@@ -41,7 +43,16 @@ export function ArtistsPage() {
 
   const set = <K extends keyof ArtistDraft>(key: K, value: ArtistDraft[K]) => setDraft((current) => ({ ...current, [key]: value }));
 
-  const handleNew = () => { setSelected(undefined); setDraft(emptyDraft); setActionError(undefined); setActionSuccess(undefined); };
+  const handleNew = () => {
+    setSelected(undefined);
+    setDraft(emptyDraft);
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    window.setTimeout(() => {
+      editorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      nameInputRef.current?.focus({ preventScroll: true });
+    }, 0);
+  };
   const handleSave = async () => {
     setActionError(undefined);
     setActionSuccess(undefined);
@@ -72,17 +83,19 @@ export function ArtistsPage() {
             <label className="app-page-search"><span>Search artists</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name, genre, link, or notes" /></label>
             {visibleArtists.length > 0 ? <ArtistRoster artists={visibleArtists} selectedArtistId={selected?.id} onSelectArtist={setSelected} /> : <EmptyState label="No artists match that search." />}
           </Panel>
-          <Panel title={selected ? 'Artist detail' : 'New artist'} section="artist-editor">
-            <div className="app-form-grid">
-              <label><span>Name</span><input value={draft.name} onChange={(event) => set('name', event.target.value)} /></label>
-              <label><span>Genre</span><input value={draft.genre} onChange={(event) => set('genre', event.target.value)} /></label>
-              <label><span>Links</span><input value={draft.links} onChange={(event) => set('links', event.target.value)} placeholder="https://…" /></label>
-              <label><span>Notes</span><textarea rows={5} value={draft.notes} onChange={(event) => set('notes', event.target.value)} /></label>
-            </div>
-            {selected && <div className="app-detail-list app-artist-detail-meta"><span>Created <b>{selected.createdAt || '—'}</b></span><span>Updated <b>{selected.updatedAt || '—'}</b></span></div>}
-            <ActionMessages error={actionError} success={actionSuccess} />
-            <div className="app-detail-actions"><Button variant="outline" onClick={handleNew}>Clear</Button><Button onClick={handleSave} disabled={!draft.name.trim()} isLoading={createState.isLoading || updateState.isLoading}>{selected ? 'Save artist' : 'Create artist'}</Button></div>
-          </Panel>
+          <div ref={editorRef}>
+            <Panel title={selected ? 'Artist detail' : 'New artist'} section="artist-editor">
+              <div className="app-form-grid">
+                <label><span>Name</span><input ref={nameInputRef} value={draft.name} onChange={(event) => set('name', event.target.value)} /></label>
+                <label><span>Genre</span><input value={draft.genre} onChange={(event) => set('genre', event.target.value)} /></label>
+                <label><span>Links</span><input value={draft.links} onChange={(event) => set('links', event.target.value)} placeholder="https://…" /></label>
+                <label><span>Notes</span><textarea rows={5} value={draft.notes} onChange={(event) => set('notes', event.target.value)} /></label>
+              </div>
+              {selected && <div className="app-detail-list app-artist-detail-meta"><span>Created <b>{selected.createdAt || '—'}</b></span><span>Updated <b>{selected.updatedAt || '—'}</b></span></div>}
+              <ActionMessages error={actionError} success={actionSuccess} />
+              <div className="app-detail-actions"><Button variant="outline" onClick={handleNew}>Clear</Button><Button onClick={handleSave} disabled={!draft.name.trim()} isLoading={createState.isLoading || updateState.isLoading}>{selected ? 'Save artist' : 'Create artist'}</Button></div>
+            </Panel>
+          </div>
         </div>
       )}
     </AppShell>

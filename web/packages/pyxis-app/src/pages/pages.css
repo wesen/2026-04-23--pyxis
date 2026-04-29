@@ -42,9 +42,9 @@
 .app-page-search span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .app-page-search input { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); color: var(--app-ink); font: inherit; padding: 9px 10px; }
 .app-filter-grid { align-items: end; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 12px; }
-.app-filter-grid label { display: grid; gap: 5px; }
+.app-filter-grid label { display: grid; gap: 5px; min-width: 0; }
 .app-filter-grid span { color: var(--app-muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-.app-filter-grid input, .app-filter-grid select { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); color: var(--app-ink); font: inherit; padding: 8px 9px; }
+.app-filter-grid input, .app-filter-grid select { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); box-sizing: border-box; color: var(--app-ink); font: inherit; min-width: 0; padding: 8px 9px; width: 100%; }
 .app-filter-clear { background: var(--app-surface); border: 1px solid var(--app-rule); border-radius: 999px; color: var(--app-ink); cursor: pointer; font-weight: 800; padding: 9px 12px; }
 .app-shows-filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
 .app-shows-filter-bar button { border: 1px solid var(--app-rule); border-radius: var(--app-radius-pill); padding: 6px 12px; background: var(--app-surface); color: var(--app-muted); font: inherit; font-size: 12px; font-weight: 700; }

@@ -100,7 +100,7 @@ export function BookingsPage() {
   };
 
   return (
-    <AppShell page="bookings" title="Bookings" eyebrow="Home / Bookings" subtitle="Submissions from #booking-requests" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="external" onClick={() => window.open(publicBookUrl, '_blank', 'noopener,noreferrer')}>Open form</Button><Button size="sm" iconLeft="sparkle" disabled title="Auto-review needs backend support">Auto-review</Button></div>}>
+    <AppShell page="bookings" title="Bookings" eyebrow="Home / Bookings" subtitle="Submissions from #booking-requests" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="external" onClick={() => window.open(publicBookUrl, '_blank', 'noopener,noreferrer')}>Open form</Button></div>}>
       <ConfirmDialog
         isOpen={pendingAction?.type === 'approve'}
         title={`Approve ${pendingAction?.booking.artistName ?? 'booking'}?`}
