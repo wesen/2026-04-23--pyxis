@@ -1,0 +1,89 @@
+.app-show-edit-main {
+  display: grid;
+  gap: 16px;
+}
+
+.app-show-edit-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm, 0 10px 24px rgb(0 0 0 / 8%));
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.app-show-edit-card h2 {
+  color: var(--app-ink);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.app-show-edit-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.app-show-edit-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.app-show-edit-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.app-show-edit-field {
+  background: color-mix(in srgb, var(--app-surface-strong) 55%, transparent);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-sm);
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px 12px;
+}
+
+.app-show-edit-field--full { grid-column: 1 / -1; }
+
+.app-show-edit-field span {
+  color: var(--app-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.app-show-edit-field b,
+.app-show-edit-field p {
+  color: var(--app-ink);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.app-show-edit-lineup {
+  display: grid;
+  gap: 10px;
+}
+
+.app-show-edit-lineup-row {
+  align-items: center;
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-sm);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(100px, .75fr) minmax(120px, .75fr);
+  padding: 11px 12px;
+}
+
+.app-show-edit-lineup-row b { color: var(--app-ink); }
+.app-show-edit-lineup-row span,
+.app-show-edit-muted,
+.app-show-edit-notes { color: var(--app-muted); font-size: 13px; line-height: 1.5; margin: 0; }
+.app-show-edit-notes { color: var(--app-ink); white-space: pre-wrap; }
+
+@media (max-width: 840px) {
+  .app-show-edit-grid--3,
+  .app-show-edit-grid--4,
+  .app-show-edit-lineup-row {
+    grid-template-columns: 1fr;
+  }
+}

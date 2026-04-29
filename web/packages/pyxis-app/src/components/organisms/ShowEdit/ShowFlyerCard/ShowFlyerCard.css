@@ -1,0 +1,85 @@
+.app-show-flyer-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm, 0 10px 24px rgb(0 0 0 / 8%));
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.app-show-flyer-card header h2,
+.app-show-status-card h2,
+.app-show-discord-card h2 {
+  color: var(--app-ink);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.app-show-flyer-card header p,
+.app-show-status-card p,
+.app-show-discord-card p {
+  color: var(--app-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 5px 0 0;
+}
+
+.app-show-flyer-card__preview {
+  align-items: center;
+  aspect-ratio: 4 / 5;
+  background: color-mix(in srgb, var(--app-surface-strong) 72%, transparent);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-md);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.app-show-flyer-card__preview img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.app-show-flyer-card__preview span {
+  color: var(--app-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.app-show-flyer-card__actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.app-show-flyer-card__replace {
+  align-items: center;
+  background: var(--app-accent, #c8270d);
+  border-radius: var(--app-radius-sm);
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  min-height: 34px;
+  padding: 0 12px;
+}
+
+.app-show-flyer-card__replace input {
+  block-size: 1px;
+  inline-size: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+}
+
+.app-show-flyer-card__replace:focus-within {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent, #c8270d) 20%, transparent);
+}

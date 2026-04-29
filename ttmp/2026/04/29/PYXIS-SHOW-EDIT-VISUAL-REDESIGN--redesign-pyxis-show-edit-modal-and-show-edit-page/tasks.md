@@ -62,12 +62,12 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 ## Phase 5 — Storybook-first show edit page decomposition
 
-- [ ] T501 Create `ShowEditHeader` organism with story states for normal, saving, and disabled future actions.
-- [ ] T502 Create `ShowFlyerCard` molecule/organism with stories for ready flyer, missing flyer, uploading, and selected replacement.
-- [ ] T503 Create `ShowEditRail` organism that composes flyer, status/readiness, and Discord cards.
-- [ ] T504 Create `ShowEditMain`/section organisms for Basics, Date & Time, Details, Lineup, and Staff Notes.
-- [ ] T505 Refactor `ShowDetailPage` to compose show edit organisms while preserving page-level RTK Query/mutations.
-- [ ] T506 Validate TypeScript/build after page decomposition.
+- [x] T501 Create `ShowEditHeader` organism with story states for normal, saving, and disabled future actions.
+- [x] T502 Create `ShowFlyerCard` molecule/organism with stories for ready flyer, missing flyer, uploading, and selected replacement.
+- [x] T503 Create `ShowEditRail` organism that composes flyer, status/readiness, and Discord cards.
+- [x] T504 Create `ShowEditMain`/section organisms for Basics, Date & Time, Details, Lineup, and Staff Notes.
+- [x] T505 Refactor `ShowDetailPage` to compose show edit organisms while preserving page-level RTK Query/mutations.
+- [x] T506 Validate TypeScript/build after page decomposition.
 - [ ] T507 Commit page decomposition separately from final visual tuning.
 
 ## Phase 6 — Show edit page visual polish and evidence

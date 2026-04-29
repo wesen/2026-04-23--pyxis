@@ -1,0 +1,48 @@
+.app-show-edit-rail {
+  align-content: start;
+  display: grid;
+  gap: 16px;
+}
+
+.app-show-status-card,
+.app-show-discord-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm, 0 10px 24px rgb(0 0 0 / 8%));
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.app-show-status-card__row {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.app-show-status-card__row span {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.app-show-status-card__row b {
+  color: var(--app-ink);
+  font-size: 13px;
+}
+
+.app-show-status-card__warning {
+  background: color-mix(in srgb, var(--app-warning, #b7791f) 10%, var(--app-surface));
+  border: 1px solid color-mix(in srgb, var(--app-warning, #b7791f) 35%, transparent);
+  border-radius: var(--app-radius-sm);
+  color: var(--app-ink) !important;
+  padding: 9px 10px;
+}
+
+.app-show-discord-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

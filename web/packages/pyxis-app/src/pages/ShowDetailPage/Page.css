@@ -1,1 +1,48 @@
 @import "../pages.css";
+
+.app-show-edit-workspace {
+  align-items: start;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+}
+
+.app-detail-actions {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: flex-start;
+  margin-top: 18px;
+}
+
+.app-detail-danger-link,
+.app-detail-muted-link {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 0;
+}
+
+.app-detail-danger-link {
+  color: var(--app-danger, #b42318);
+}
+
+.app-detail-muted-link {
+  color: var(--app-muted);
+}
+
+.app-detail-danger-link:disabled,
+.app-detail-muted-link:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+@media (max-width: 980px) {
+  .app-show-edit-workspace {
+    grid-template-columns: 1fr;
+  }
+}

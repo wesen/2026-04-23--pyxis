@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from 'pyxis-components';
 import {
   useAnnounceShowMutation,
   useArchiveShowMutation,
@@ -12,9 +11,8 @@ import {
   useUploadShowFlyerMutation,
 } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
-import { ConfirmDialog, FlyerField, NewShowModal, Panel } from '../../components/organisms';
-import { ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../../components/organisms';
-import { appShowFromShow, ErrorState, LoadingState, parseRouteId } from '../shared';
+import { ConfirmDialog, NewShowModal, ShowEditHeader, ShowEditMain, ShowEditRail } from '../../components/organisms';
+import { ErrorState, LoadingState, parseRouteId } from '../shared';
 import './Page.css';
 
 export function ShowDetailPage() {
@@ -23,8 +21,8 @@ export function ShowDetailPage() {
   const { data: show, isLoading, isError } = useGetShowQuery(id ?? 0, { skip: id === undefined });
   const [cancelShow, cancelState] = useCancelShowMutation();
   const [archiveShow, archiveState] = useArchiveShowMutation();
-  const [announceShow, announceState] = useAnnounceShowMutation();
-  const [createShow, createState] = useCreateShowMutation();
+  const [announceShow] = useAnnounceShowMutation();
+  const [createShow] = useCreateShowMutation();
   const [updateShow, updateState] = useUpdateShowMutation();
   const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
   const [deleteFlyer, deleteFlyerState] = useDeleteShowFlyerMutation();
@@ -154,8 +152,13 @@ export function ShowDetailPage() {
     }
   };
 
+  const handlePreview = () => {
+    if (!show) return;
+    window.open(`/shows/${show.id}`, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <AppShell page="show-detail" title={show?.artist ?? 'Show detail'} eyebrow="Shows / Detail" action={<Button size="sm" iconLeft="edit" disabled={!show} onClick={() => setEditorOpen(true)}>Edit</Button>}>
+    <AppShell page="show-detail" title={show?.artist ?? 'Show detail'} eyebrow="Shows / Detail">
       {id === undefined ? (
         <ErrorState label="Invalid show id in the route." />
       ) : isLoading ? (
@@ -168,25 +171,37 @@ export function ShowDetailPage() {
           <ConfirmDialog isOpen={confirmAction === 'archive'} title="Archive show?" description="This moves the show into the archive and removes it from active operations views." confirmLabel="Archive show" isLoading={archiveState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleArchiveShow} />
           <ConfirmDialog isOpen={confirmAction === 'cancel'} title="Cancel show?" description="This marks the show as cancelled and records the action for staff review." confirmLabel="Cancel show" variant="danger" isLoading={cancelState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleCancelShow} />
           <ConfirmDialog isOpen={confirmAction === 'delete-flyer'} title="Delete flyer?" description="This removes the uploaded flyer from this show. You can upload a replacement afterwards." confirmLabel="Delete flyer" variant="danger" isLoading={deleteFlyerState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleDeleteFlyer} />
-          <ShowDetailHero show={appShowFromShow(show)} />
-          <div className="app-detail-grid"><ShowDetailInfoPanel show={appShowFromShow(show)} /><ShowDetailDiscordPanel channelLabel={show.discordChannelId ? `#${show.discordChannelId}` : '#upcoming-shows'} statusLabel={show.discordMessageId ? 'Posted' : 'Not posted yet'} isPosted={Boolean(show.discordChannelId && show.discordMessageId)} onOpenPost={openDiscordPost} /></div>
-          <FlyerField flyerUrl={visibleFlyerUrl} isUploading={uploadState.isLoading} isDeleting={deleteFlyerState.isLoading} onUpload={handleUploadFlyer} onDelete={() => setConfirmAction('delete-flyer')} />
-          <div className="app-detail-grid">
-            <Panel title="Lineup" section="show-detail-lineup">
-              {show.lineup.length > 0 ? <div className="app-detail-list app-show-lineup-list">{show.lineup.map((entry, index) => <span key={`${entry.artist}-${entry.startTime}-${index}`}><b>{entry.artist}</b><small>{[entry.role, entry.startTime, entry.endTime && `– ${entry.endTime}`].filter(Boolean).join(' ') || 'Lineup entry'}</small></span>)}</div> : <p className="app-muted-copy">No lineup rows have been added yet.</p>}
-            </Panel>
-            <Panel title="Staff notes" section="show-detail-staff-notes">
-              {show.notes.trim() ? <p className="app-staff-notes-copy">{show.notes}</p> : <p className="app-muted-copy">No staff notes recorded.</p>}
-            </Panel>
-          </div>
-          {show.description.trim() && <Panel title="Public description" section="show-detail-public-description"><p className="app-staff-notes-copy">{show.description}</p></Panel>}
+
+          <ShowEditHeader
+            title="Edit show"
+            isSaving={updateState.isLoading || uploadState.isLoading}
+            canPreview={Boolean(show.flyerUrl)}
+            onBack={() => navigate('/shows')}
+            onPreview={handlePreview}
+            onDuplicate={handleDuplicateShow}
+            onSave={() => setEditorOpen(true)}
+          />
+
           {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
           {actionSuccess && <div className="app-action-success" role="status">{actionSuccess}</div>}
+
+          <div className="app-show-edit-workspace" data-section="show-edit-workspace">
+            <ShowEditRail
+              show={show}
+              flyerUrl={visibleFlyerUrl}
+              isUploading={uploadState.isLoading}
+              isDeleting={deleteFlyerState.isLoading}
+              onUploadFlyer={handleUploadFlyer}
+              onDeleteFlyer={() => setConfirmAction('delete-flyer')}
+              onAnnounce={handleAnnounceShow}
+              onOpenPost={openDiscordPost}
+            />
+            <ShowEditMain show={show} />
+          </div>
+
           <div className="app-detail-actions">
-            <Button variant="outline" onClick={handleDuplicateShow} disabled={createState.isLoading}>Duplicate</Button>
-            <Button variant="outline" iconLeft="archive" onClick={() => setConfirmAction('archive')} disabled={archiveState.isLoading}>Archive</Button>
-            <Button variant="outline" iconLeft="external" onClick={handleAnnounceShow} disabled={announceState.isLoading}>Announce</Button>
-            <Button variant="danger" iconLeft="trash" onClick={() => setConfirmAction('cancel')} disabled={cancelState.isLoading}>Cancel show</Button>
+            <button type="button" className="app-detail-danger-link" onClick={() => setConfirmAction('cancel')} disabled={cancelState.isLoading}>Cancel show</button>
+            <button type="button" className="app-detail-muted-link" onClick={() => setConfirmAction('archive')} disabled={archiveState.isLoading}>Archive show</button>
           </div>
         </>
       )}

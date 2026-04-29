@@ -1,0 +1,10 @@
+# Show edit page decomposition validation
+
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
+
+Storybook index included:
+- pyxis-app-components-organisms-showedit-showeditheader--default
+- pyxis-app-components-organisms-showedit-showflyercard--ready
+- pyxis-app-components-organisms-showedit-showeditrail--ready
+- pyxis-app-components-organisms-showedit-showeditmain--full-show

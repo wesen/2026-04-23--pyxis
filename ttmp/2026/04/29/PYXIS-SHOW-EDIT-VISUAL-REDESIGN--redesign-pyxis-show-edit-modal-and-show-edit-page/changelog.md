@@ -48,3 +48,10 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 - Added `playbooks/01-next-session-show-edit-redesign-runbook.md`.
 - Captured lessons learned: start from ticket docs, preserve decomposition layering, reuse modal molecules, avoid stale Storybook index traps, use precise screenshot selectors, avoid protobuf fixture spread pitfalls, and validate before committing.
+
+## 2026-04-30 — Show edit page decomposition
+
+- Added `ShowEditHeader`, `ShowFlyerCard`, `ShowEditRail`, and `ShowEditMain` organisms with local CSS, stories, and folder-level exports.
+- Refactored `ShowDetailPage` to compose the new show-edit organisms while keeping RTK Query hooks/mutations in the page.
+- Preserved existing actions for edit modal, duplicate, announce/open Discord post, flyer upload/delete, cancel, and archive.
+- Validated `pnpm --dir web --filter pyxis-app exec tsc --noEmit` and `pnpm --dir web --filter pyxis-app build`.

@@ -11,4 +11,5 @@ export * from './Panel';
 export * from './ShowLog';
 export * from './Settings';
 export * from './ShowDetail';
+export * from './ShowEdit';
 export * from './Shows';

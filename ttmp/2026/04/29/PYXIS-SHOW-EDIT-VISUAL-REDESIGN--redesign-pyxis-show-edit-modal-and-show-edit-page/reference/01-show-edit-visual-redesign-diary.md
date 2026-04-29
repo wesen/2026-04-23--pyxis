@@ -415,3 +415,56 @@ It documents:
 - product semantics that must not regress;
 - likely next page-decomposition files;
 - what to commit and what to avoid committing.
+
+
+## Step 13: Continue with Phase 5 show edit page decomposition
+
+I resumed from the end-of-day runbook and first checked the working tree plus TypeScript. The uncommitted page decomposition had type errors because new stories used `AppShow` mock data where the new organisms expected full generated `Show` messages. `ShowDetailPage` also had unused RTK Query mutation state variables.
+
+Initial validation command:
+
+```bash
+git status --short
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+```
+
+Initial errors included:
+
+```text
+Type 'AppShow' is not assignable to type 'Show | undefined'.
+Type '"pyxis.v1.AppShow"' is not assignable to type '"pyxis.v1.Show"'.
+'announceState' is declared but its value is never read.
+'createState' is declared but its value is never read.
+```
+
+Fixes:
+
+- Rewrote `ShowEditMain.stories.tsx` and `ShowEditRail.stories.tsx` to use `create(ShowSchema, ...)` full `Show` fixtures instead of `mockData.shows` `AppShow` values.
+- Removed unused mutation state bindings from `ShowDetailPage`.
+- Added the `ShowEdit` organism group and exported it from `components/organisms/index.ts`.
+- Refactored `ShowDetailPage` to compose `ShowEditHeader`, `ShowEditRail`, and `ShowEditMain` while keeping all route data/mutation logic in the page.
+
+New component folders:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowEdit/ShowEditHeader/
+web/packages/pyxis-app/src/components/organisms/ShowEdit/ShowFlyerCard/
+web/packages/pyxis-app/src/components/organisms/ShowEdit/ShowEditRail/
+web/packages/pyxis-app/src/components/organisms/ShowEdit/ShowEditMain/
+```
+
+Validation commands:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+```
+
+Both passed. Storybook index also listed the new ShowEdit stories:
+
+```text
+pyxis-app-components-organisms-showedit-showeditheader--default
+pyxis-app-components-organisms-showedit-showflyercard--ready
+pyxis-app-components-organisms-showedit-showeditrail--ready
+pyxis-app-components-organisms-showedit-showeditmain--full-show
+```
