@@ -373,3 +373,13 @@ Uploaded the report to reMarkable after a dry run:
 ```text
 /ai/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN/PYXIS-ARCHIVE-VISUAL-REDESIGN ShowLog modal redesign report
 ```
+
+## Step 16: Started reference-inspired ShowLog modal implementation
+
+Created an implementation task set before changing code. The first slice will keep the backend contract conservative: only `draw`, `postShowNotes`, `incident`, and `incidentNotes` are persisted. The reference-only `quick highlight` and `total door` fields will be represented in the form and folded into the notes payload for this visual pass rather than adding database columns midstream.
+
+Planned commit rhythm:
+
+1. Commit task/diary setup.
+2. Commit shared modal width support if typecheck passes.
+3. Commit ShowLog modal TSX/CSS/stories implementation after screenshot validation.
