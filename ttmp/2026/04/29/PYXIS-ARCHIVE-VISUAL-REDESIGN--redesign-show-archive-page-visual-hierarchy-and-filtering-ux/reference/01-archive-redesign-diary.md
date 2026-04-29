@@ -385,3 +385,23 @@ Planned commit rhythm:
 3. Commit ShowLog modal TSX/CSS/stories implementation after screenshot validation.
 
 Implemented T17.1 by adding an `xl` width token to the shared `Modal` organism (`1120px`). Validated `web/packages/pyxis-components` with `pnpm exec tsc --noEmit`.
+
+Implemented T17.2-T17.6 in the ShowLog editor modal. The modal now uses `width="xl"`, a two-column body, warm pre-show note callout, quick highlight, draw and total door fields, incident checkbox, post-show notes with counter, incident sidebar, and privacy banner. The save action still persists the existing backend fields; quick highlight and total door are folded into the saved `postShowNotes` text for this visual pass.
+
+Captured screenshots:
+
+```text
+sources/17-show-log-modal-redesign-reference/current-after-redesign.png
+sources/17-show-log-modal-redesign-reference/current-after-redesign-tall.png
+sources/17-show-log-modal-redesign-reference/post-show-log-editor-modal-redesign.css-visual-diff.yml
+```
+
+Image critique of the after screenshot found the redesign now matches the reference structure well: wide two-column layout, pre-show note callout, numeric field grouping, side incident panel, privacy copy, counters, and red save action. Remaining possible tuning: slightly more footer bottom padding, stronger visual linking between the incident checkbox and sidebar, and richer disabled incident-sidebar empty state.
+
+Validation passed:
+
+```bash
+cd web/packages/pyxis-components && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```

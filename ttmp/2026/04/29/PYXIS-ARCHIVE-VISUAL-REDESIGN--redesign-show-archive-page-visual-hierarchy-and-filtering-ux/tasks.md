@@ -46,10 +46,10 @@
 - [x] Analyze reference and current screenshots with direct image reading and image-understanding critique.
 - [x] Write visual/CSS/TSX implementation report for the next modal redesign pass.
 - [x] T17.1 Add shared `Modal` wide/xl sizing for the reference dialog footprint.
-- [ ] T17.2 Refactor `PostShowLogEditorModal.tsx` into reference-style two-column layout with local field helpers.
-- [ ] T17.3 Restyle `PostShowLogEditorModal.css` for warm pre-show callout, metrics grid, incident side panel, privacy banner, counters, and responsive stacking.
-- [ ] T17.4 Update Storybook states for default, logged, incident, saving, and mobile/wide capture coverage.
-- [ ] T17.5 Capture an after screenshot into `sources/17-show-log-modal-redesign-reference/` and compare against the reference.
-- [ ] T17.6 Run TypeScript/build validation and record results.
+- [x] T17.2 Refactor `PostShowLogEditorModal.tsx` into reference-style two-column layout with local field helpers.
+- [x] T17.3 Restyle `PostShowLogEditorModal.css` for warm pre-show callout, metrics grid, incident side panel, privacy banner, counters, and responsive stacking.
+- [x] T17.4 Update Storybook states for default, logged, incident, saving, and mobile/wide capture coverage.
+- [x] T17.5 Capture an after screenshot into `sources/17-show-log-modal-redesign-reference/` and compare against the reference.
+- [x] T17.6 Run TypeScript/build validation and record results.
 - [x] T17.7 Add persistence decision for quick highlight and total door fields before route shipment: visual pass folds them into `postShowNotes`; separate schema columns remain a future backend task.
 

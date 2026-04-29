@@ -10,9 +10,27 @@ const baseEntry: ShowLogEntry = {
   date: '2026-04-26',
   genre: 'Noise / ambient',
   showStatus: ShowStatus.ARCHIVED,
-  showNotes: 'Ask about merch table placement before doors. Confirm door split before payout.',
+  showNotes: 'Ask about merch table placement before doors.',
   incident: false,
   logStatus: 'needs-log',
+};
+
+const loggedEntry: ShowLogEntry = {
+  ...baseEntry,
+  draw: 61,
+  postShowNotes: 'Strong turnout, smooth load-out, no issues. Artist asked to be routed through again in late summer.',
+  loggedByName: 'Manuel',
+  updatedAt: '2026-04-27T01:00:00Z',
+  logStatus: 'logged',
+};
+
+const incidentEntry: ShowLogEntry = {
+  ...baseEntry,
+  draw: 48,
+  postShowNotes: 'Good early crowd, but load-out ran long and needed extra staff attention.',
+  incident: true,
+  incidentNotes: 'Neighbor complaint after load-out. Door person documented timing and follow-up was assigned to staff chat.',
+  logStatus: 'incident',
 };
 
 const meta: Meta<typeof PostShowLogEditorModal> = {
@@ -25,6 +43,7 @@ export default meta;
 type Story = StoryObj<typeof PostShowLogEditorModal>;
 
 export const NeedsLog: Story = {};
-export const Logged: Story = { args: { entry: { ...baseEntry, draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', loggedByName: 'Manuel', updatedAt: '2026-04-27T01:00:00Z', logStatus: 'logged' } } };
-export const Incident: Story = { args: { entry: { ...baseEntry, draw: 48, incident: true, incidentNotes: 'Neighbor complaint after load-out.', logStatus: 'incident' } } };
-export const Saving: Story = { args: { isSaving: true } };
+export const Logged: Story = { args: { entry: loggedEntry } };
+export const Incident: Story = { args: { entry: incidentEntry } };
+export const Saving: Story = { args: { entry: loggedEntry, isSaving: true } };
+export const Mobile: Story = { parameters: { viewport: { defaultViewport: 'mobile1' } } };

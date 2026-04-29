@@ -1,0 +1,33 @@
+metadata:
+  slug: pyxis-app-post-show-log-editor-modal-reference-redesign
+  title: PostShowLogEditorModal reference redesign screenshot
+
+original:
+  name: storybook-reference-redesign
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogeditormodal--needs-log&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 980 }
+  root_selector: 'body'
+
+react:
+  name: storybook-current-redesign
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogeditormodal--needs-log&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 980 }
+  root_selector: 'body'
+
+sections:
+  - name: modal
+    selector_original: '[data-pyxis-component="post-show-log-editor-modal"]'
+    selector_react: '[data-pyxis-component="post-show-log-editor-modal"]'
+
+output:
+  dir: ttmp/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN--redesign-show-archive-page-visual-hierarchy-and-filtering-ux/sources/17-show-log-modal-redesign-reference/css-visual-diff
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture]
