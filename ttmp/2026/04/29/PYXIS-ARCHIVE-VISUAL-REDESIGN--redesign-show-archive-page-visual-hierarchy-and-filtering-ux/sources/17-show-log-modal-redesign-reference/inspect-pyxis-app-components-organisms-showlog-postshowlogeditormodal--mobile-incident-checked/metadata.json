@@ -1,0 +1,14 @@
+{
+  "side": "script",
+  "target_name": "pyxis-app-story",
+  "url": "http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogeditormodal--mobile-incident-checked\u0026viewMode=story",
+  "viewport": {
+    "Width": 375,
+    "Height": 980
+  },
+  "name": "story-region",
+  "selector": "[data-pyxis-component=\"post-show-log-editor-modal\"]",
+  "selector_source": "",
+  "format": "png",
+  "created_at": "2026-04-29T14:10:43.505171489Z"
+}
