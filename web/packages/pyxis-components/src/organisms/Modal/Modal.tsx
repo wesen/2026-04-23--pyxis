@@ -5,7 +5,7 @@ export type ModalProps = {
   onClose: () => void;
   title: string;
   subtitle?: string;
-  width?: 'sm' | 'md' | 'lg';
+  width?: 'sm' | 'md' | 'lg' | 'xl';
   children: React.ReactNode;
   footer?: React.ReactNode;
   className?: string;
@@ -14,7 +14,7 @@ export type ModalProps = {
   footerClassName?: string;
   panelProps?: React.HTMLAttributes<HTMLDivElement>;
 };
-const widths = { sm: 402, md: 522, lg: 722 };
+const widths = { sm: 402, md: 522, lg: 722, xl: 1120 };
 export const Modal = ({ isOpen, onClose, title, subtitle, width = 'md', children, footer, className, panelClassName, bodyClassName, footerClassName, panelProps }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {

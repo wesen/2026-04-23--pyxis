@@ -45,7 +45,7 @@
 - [x] Capture current ShowLog editor modal screenshot for comparison.
 - [x] Analyze reference and current screenshots with direct image reading and image-understanding critique.
 - [x] Write visual/CSS/TSX implementation report for the next modal redesign pass.
-- [ ] T17.1 Add shared `Modal` wide/xl sizing for the reference dialog footprint.
+- [x] T17.1 Add shared `Modal` wide/xl sizing for the reference dialog footprint.
 - [ ] T17.2 Refactor `PostShowLogEditorModal.tsx` into reference-style two-column layout with local field helpers.
 - [ ] T17.3 Restyle `PostShowLogEditorModal.css` for warm pre-show callout, metrics grid, incident side panel, privacy banner, counters, and responsive stacking.
 - [ ] T17.4 Update Storybook states for default, logged, incident, saving, and mobile/wide capture coverage.

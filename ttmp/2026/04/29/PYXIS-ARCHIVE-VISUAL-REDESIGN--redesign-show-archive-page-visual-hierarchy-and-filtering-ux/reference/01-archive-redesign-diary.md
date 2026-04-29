@@ -383,3 +383,5 @@ Planned commit rhythm:
 1. Commit task/diary setup.
 2. Commit shared modal width support if typecheck passes.
 3. Commit ShowLog modal TSX/CSS/stories implementation after screenshot validation.
+
+Implemented T17.1 by adding an `xl` width token to the shared `Modal` organism (`1120px`). Validated `web/packages/pyxis-components` with `pnpm exec tsc --noEmit`.
