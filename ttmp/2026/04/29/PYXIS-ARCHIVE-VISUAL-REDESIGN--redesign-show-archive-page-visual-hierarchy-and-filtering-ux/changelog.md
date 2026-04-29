@@ -13,3 +13,4 @@
 - 2026-04-29: Added ShowLog modal reference redesign report with copied screenshot evidence, current Storybook capture, image analysis, and concrete CSS/TSX implementation plan.
 - 2026-04-29: Uploaded the ShowLog modal redesign report to reMarkable under `/ai/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN/`.
 - 2026-04-29: Implemented the reference-inspired ShowLog editor modal: xl width, two-column layout, pre-show callout, quick highlight, draw/door fields, incident sidebar, privacy banner, counters, and updated Storybook states.
+- 2026-04-29: Added a reusable PNG-sketch-to-Storybook-organism runbook documenting the visual iteration process and Storybook/css-visual-diff evidence workflow.

@@ -405,3 +405,13 @@ cd web/packages/pyxis-components && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 cd web/packages/pyxis-app && pnpm exec vite build
 ```
+
+## Step 17: Wrote PNG sketch to Storybook organism runbook
+
+Wrote a reusable playbook based on the ShowLog modal iteration:
+
+```text
+playbooks/02-png-sketch-to-storybook-organism-runbook.md
+```
+
+The runbook captures the workflow for copying designer PNGs into ticket evidence, analyzing them with `read` and image-understanding, mapping design intent to existing Pyxis tokens, building Storybook states, using a single-target `css-visual-diff verbs pyxis app capture-story` command instead of fake same-source comparisons, debugging stale Storybook CSS, capturing desktop/mobile evidence, and committing in logical slices.

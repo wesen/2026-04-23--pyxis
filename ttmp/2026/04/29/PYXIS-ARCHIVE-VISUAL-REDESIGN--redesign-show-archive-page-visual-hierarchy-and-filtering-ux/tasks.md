@@ -52,4 +52,5 @@
 - [x] T17.5 Capture an after screenshot into `sources/17-show-log-modal-redesign-reference/` and compare against the reference.
 - [x] T17.6 Run TypeScript/build validation and record results.
 - [x] T17.7 Add persistence decision for quick highlight and total door fields before route shipment: visual pass folds them into `postShowNotes`; separate schema columns remain a future backend task.
+- [x] T17.8 Write reusable PNG sketch to Storybook organism runbook.
 
