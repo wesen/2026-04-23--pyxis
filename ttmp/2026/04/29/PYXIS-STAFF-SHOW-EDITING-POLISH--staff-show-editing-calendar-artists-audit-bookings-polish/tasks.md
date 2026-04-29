@@ -31,9 +31,9 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 ## T3 — Show create/edit correctness
 
-- [ ] T301 Mark required show fields explicitly in the create/edit modal.
-- [ ] T302 Explain where drafts appear when saving a draft.
-- [ ] T303 Make reserve ticket price/copy optional instead of implicitly required/defaulted.
+- [x] T301 Mark required show fields explicitly in the create/edit modal.
+- [x] T302 Explain where drafts appear when saving a draft.
+- [x] T303 Make reserve ticket price/copy optional instead of implicitly required/defaulted.
 - [ ] T304 Ensure staff notes are visible on staff show detail and/or overview where appropriate.
 - [ ] T305 Ensure uploaded flyer/poster appears in the staff poster view after create/upload and on detail reload.
 - [ ] T306 Ensure lineup appears in staff show overview or another agreed staff summary surface.

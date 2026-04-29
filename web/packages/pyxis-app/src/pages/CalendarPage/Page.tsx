@@ -82,7 +82,7 @@ export function CalendarPage() {
     } catch { setActionError('Could not remove this calendar item. Check your session and backend logs.'); }
   };
 
-  const initialCalendarShow = create(ShowSchema, { id: 0, artist: '', date: selectedDate, doorsTime: '8:00 PM', startTime: '9:00 PM', age: '21+', price: '$10', genre: '', status: ShowStatus.CONFIRMED, capacity: 150, lineup: [] });
+  const initialCalendarShow = create(ShowSchema, { id: 0, artist: '', date: selectedDate, doorsTime: '8:00 PM', startTime: '9:00 PM', age: '21+', price: '', genre: '', status: ShowStatus.CONFIRMED, capacity: 150, lineup: [] });
 
   return (
     <AppShell page="calendar" title="Calendar" eyebrow="Home / Calendar" subtitle="Plan the room · holds, confirms, and off-nights" action={<div className="app-topbar-actions"><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('hold')} disabled={holdState.isLoading}>Add hold</Button><Button variant="outline" size="sm" iconLeft="plus" onClick={() => openDialog('show')}>New show</Button><Button size="sm" iconLeft="warning" onClick={() => openDialog('blocked')} disabled={blockedState.isLoading}>Block date</Button></div>}>

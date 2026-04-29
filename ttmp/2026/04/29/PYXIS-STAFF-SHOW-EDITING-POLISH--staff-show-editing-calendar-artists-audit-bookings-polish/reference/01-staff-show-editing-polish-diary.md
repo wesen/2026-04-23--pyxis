@@ -104,3 +104,30 @@ sources/01-low-risk-ui-fixes-validation.txt
 ```
 
 One TypeScript issue came up after removing the hardcoded badge: the tuple inference in `AppSidebarMenu.tsx` no longer exposed an optional fourth tuple element during destructuring. I fixed this by typing `navSections` as `readonly AppNavSection[]` instead of relying on the narrow `as const satisfies` tuple union.
+
+## Step 3: Draft discoverability and show-modal clarity
+
+I implemented the first show-modal clarity fixes:
+
+- Added a `Drafts` filter to `ShowsFilterBar` and `ShowsPage` so draft shows have an obvious staff location.
+- Updated the create/edit modal subtitle to say fields marked `*` are required for confirmed shows.
+- Marked Artist / act name and Date with `*`; Date remains optional when saving an explicit draft.
+- Changed the default price/reserve-ticket field from `$10` to blank and renamed it `Reserve ticket / price` with an `Optional` placeholder.
+- Added helper copy explaining that drafts stay staff-only under Shows → Drafts, and that reserve ticket / price can be left blank.
+- Updated the calendar-created show default price to blank as well.
+- Updated `ShowsFilterBar` stories for the new Drafts filter.
+
+Validation:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+```
+
+Both passed. Evidence was saved to:
+
+```text
+sources/02-show-modal-draft-required-validation.txt
+```
+
+Remaining show-editing work is now focused on data display fidelity: staff notes, flyer/poster visibility, and lineup visibility. Those likely need detail-page work and/or an `AppShow` list contract extension because `AppShow` currently lacks `flyerUrl` and `lineup`.

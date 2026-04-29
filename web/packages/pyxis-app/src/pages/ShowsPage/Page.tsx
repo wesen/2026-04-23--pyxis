@@ -25,6 +25,7 @@ export function ShowsPage() {
     [ShowStatus.CONFIRMED]: allShows.filter((show) => show.status === ShowStatus.CONFIRMED).length,
     [ShowStatus.HOLD]: allShows.filter((show) => show.status === ShowStatus.HOLD).length,
     [ShowStatus.CANCELLED]: allShows.filter((show) => show.status === ShowStatus.CANCELLED).length,
+    [ShowStatus.DRAFT]: allShows.filter((show) => show.status === ShowStatus.DRAFT).length,
     [ShowStatus.ARCHIVED]: allShows.filter((show) => show.status === ShowStatus.ARCHIVED).length,
   };
   const searchNeedle = search.trim().toLowerCase();
@@ -35,6 +36,7 @@ export function ShowsPage() {
   const confirmed = filtered.filter((show) => show.status === ShowStatus.CONFIRMED);
   const hold = filtered.filter((show) => show.status === ShowStatus.HOLD);
   const cancelled = filtered.filter((show) => show.status === ShowStatus.CANCELLED);
+  const drafts = filtered.filter((show) => show.status === ShowStatus.DRAFT);
   const archived = filtered.filter((show) => show.status === ShowStatus.ARCHIVED);
 
   const handleCreateShow = async (show: Parameters<typeof createShow>[0], flyerFile?: File) => {
@@ -73,6 +75,7 @@ export function ShowsPage() {
           {activeFilter === 'all' || activeFilter === ShowStatus.CONFIRMED ? <ShowsConfirmedPanel shows={confirmed} onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
           {activeFilter === ShowStatus.HOLD ? <ShowsConfirmedPanel shows={hold} title={`Hold · ${hold.length}`} emptyTitle="No shows on hold." note="Held shows are not public until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
           {activeFilter === ShowStatus.CANCELLED ? <ShowsConfirmedPanel shows={cancelled} title={`Cancelled · ${cancelled.length}`} emptyTitle="No cancelled shows." note="Cancelled shows stay visible for operational history." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
+          {activeFilter === ShowStatus.DRAFT ? <ShowsConfirmedPanel shows={drafts} title={`Drafts · ${drafts.length}`} emptyTitle="No draft shows." note="Drafts are staff-only until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
           {filtered.length === 0 && <EmptyState label="No shows match the current filters." />}
           <div style={{ height: 20 }} />
           {activeFilter === 'all' || activeFilter === ShowStatus.ARCHIVED ? <ShowsArchivedPanel shows={archived} onViewArchive={() => setActiveFilter(ShowStatus.ARCHIVED)} /> : null}

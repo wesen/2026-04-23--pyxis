@@ -1,0 +1,4 @@
+## validation after draft/required/optional-price fixes
+2026-04-29T16:50:23-04:00
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS

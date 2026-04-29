@@ -1,7 +1,7 @@
 import { ShowStatus } from 'pyxis-types';
 import './ShowsFilterBar.css';
 
-export type ShowsFilterValue = 'all' | ShowStatus.CONFIRMED | ShowStatus.HOLD | ShowStatus.CANCELLED | ShowStatus.ARCHIVED;
+export type ShowsFilterValue = 'all' | ShowStatus.CONFIRMED | ShowStatus.HOLD | ShowStatus.CANCELLED | ShowStatus.DRAFT | ShowStatus.ARCHIVED;
 
 export type ShowsFilterBarProps = {
   counts: Record<ShowsFilterValue, number>;
@@ -14,6 +14,7 @@ const filters: Array<{ label: string; value: ShowsFilterValue }> = [
   { label: 'Confirmed', value: ShowStatus.CONFIRMED },
   { label: 'Hold', value: ShowStatus.HOLD },
   { label: 'Cancelled', value: ShowStatus.CANCELLED },
+  { label: 'Drafts', value: ShowStatus.DRAFT },
   { label: 'Archived', value: ShowStatus.ARCHIVED },
 ];
 

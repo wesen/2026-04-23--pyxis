@@ -60,6 +60,13 @@
   margin-top: 5px;
 }
 
+.app-new-show-modal-help {
+  margin: 0 0 14px;
+  color: var(--color-text-secondary, var(--app-muted));
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .app-new-show-modal-error {
   margin-bottom: 14px;
   border: 1px solid color-mix(in srgb, var(--app-danger, #b42318) 35%, transparent);

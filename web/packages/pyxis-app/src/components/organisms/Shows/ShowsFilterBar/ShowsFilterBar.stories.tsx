@@ -8,6 +8,7 @@ const counts: Record<ShowsFilterValue, number> = {
   [ShowStatus.CONFIRMED]: 6,
   [ShowStatus.HOLD]: 2,
   [ShowStatus.CANCELLED]: 1,
+  [ShowStatus.DRAFT]: 1,
   [ShowStatus.ARCHIVED]: 3,
 };
 
@@ -33,6 +34,6 @@ export const Interactive: Story = {
 };
 
 export const Empty: Story = {
-  args: { counts: { all: 0, [ShowStatus.CONFIRMED]: 0, [ShowStatus.HOLD]: 0, [ShowStatus.CANCELLED]: 0, [ShowStatus.ARCHIVED]: 0 }, activeFilter: 'all' },
+  args: { counts: { all: 0, [ShowStatus.CONFIRMED]: 0, [ShowStatus.HOLD]: 0, [ShowStatus.CANCELLED]: 0, [ShowStatus.DRAFT]: 0, [ShowStatus.ARCHIVED]: 0 }, activeFilter: 'all' },
   render: (args) => <div style={{ width: 980, padding: 24, background: 'var(--app-canvas)' }}><ShowsFilterBar {...args} /></div>,
 };

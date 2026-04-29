@@ -43,7 +43,7 @@ const emptyDraft: ShowDraft = {
   doorsTime: '8:00 PM',
   startTime: '9:00 PM',
   age: '21+',
-  price: '$10',
+  price: '',
   genre: '',
   description: '',
   notes: '',
@@ -94,7 +94,7 @@ export function NewShowModal({
   }, [initialShow, isOpen]);
 
   const title = mode === 'create' ? 'Add new show' : 'Edit show';
-  const description = mode === 'create' ? 'Create a show record and lineup.' : 'Update show details and replace the lineup.';
+  const description = mode === 'create' ? 'Create a show record and lineup. Fields marked * are required for confirmed shows.' : 'Update show details and replace the lineup. Fields marked * are required for confirmed shows.';
 
   const update = <K extends keyof ShowDraft>(key: K, value: ShowDraft[K]) => setDraft((current) => ({ ...current, [key]: value }));
   const updateLineup = (index: number, patch: Partial<LineupDraft>) => setDraft((current) => ({
@@ -144,7 +144,7 @@ export function NewShowModal({
       footer={
         <>
           <Button variant="ghost" onClick={onCancel} disabled={isSaving}>Cancel</Button>
-          <Button variant="outline" onClick={() => submit(ShowStatus.DRAFT)} isLoading={isSaving}>Save draft</Button>
+          <Button variant="outline" onClick={() => submit(ShowStatus.DRAFT)} isLoading={isSaving} title="Drafts stay staff-only and appear under Shows → Drafts.">Save draft</Button>
           <Button onClick={() => submit(draft.status)} isLoading={isSaving}>Save show</Button>
         </>
       }
@@ -152,13 +152,13 @@ export function NewShowModal({
       <div className="app-new-show-modal-form">
         {(error || validationError) && <div className="app-new-show-modal-error" role="alert">{error || validationError}</div>}
         <label className="app-new-show-modal-field">
-          <span>Artist / act name</span>
-          <input value={draft.artist} onChange={(event) => update('artist', event.target.value)} />
+          <span>Artist / act name *</span>
+          <input required value={draft.artist} onChange={(event) => update('artist', event.target.value)} />
         </label>
         <div className="app-new-show-modal-grid cols-4">
           <label className="app-new-show-modal-field">
-            <span>Date</span>
-            <input type="date" value={draft.date} onChange={(event) => update('date', event.target.value)} />
+            <span>Date *</span>
+            <input type="date" required={draft.status !== ShowStatus.DRAFT} value={draft.date} onChange={(event) => update('date', event.target.value)} />
           </label>
           <label className="app-new-show-modal-field">
             <span>Doors</span>
@@ -188,8 +188,8 @@ export function NewShowModal({
             </select>
           </label>
           <label className="app-new-show-modal-field">
-            <span>Price</span>
-            <input value={draft.price} onChange={(event) => update('price', event.target.value)} />
+            <span>Reserve ticket / price</span>
+            <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional" />
           </label>
           <label className="app-new-show-modal-field">
             <span>Genre</span>
@@ -209,6 +209,7 @@ export function NewShowModal({
           <textarea rows={2} value={draft.notes} onChange={(event) => update('notes', event.target.value)} />
           <small>Visible to staff only</small>
         </label>
+        <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Reserve ticket / price is optional; leave it blank when there is no advance/reservation copy yet.</p>
         <div className="app-new-show-modal-lineup">
           <div className="app-new-show-modal-section-header">
             <span>Lineup</span>
