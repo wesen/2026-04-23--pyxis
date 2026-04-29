@@ -664,3 +664,69 @@ The local dry-run command used a fake token value:
 ```bash
 GITOPS_PR_TOKEN=secret-token python3 scripts/open_gitops_pr.py --image ghcr.io/wesen/pyxis:sha-testphase5 --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s --dry-run
 ```
+
+## Step 18: Uploaded updated Phase 5 bundle
+
+Uploaded the updated production guide bundle after finishing and documenting Phase 5 GitOps PR automation.
+
+Upload path:
+
+```text
+/ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v6
+```
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 16)
+
+**Assistant interpretation:** Continue keeping the reMarkable handoff current after implementation work.
+
+**Inferred user intent:** Keep the production guide and diary available on-device for review.
+
+**Commit (code):** N/A — documentation publication step.
+
+### What I did
+
+- Ran `remarquee upload bundle --dry-run` for the v6 bundle.
+- Ran the actual `remarquee upload bundle` command.
+
+### Why
+
+- The reMarkable copy should include the latest Phase 5 diary entries and tasks.
+
+### What worked
+
+- Dry-run showed the expected bundle inputs.
+- Upload completed successfully.
+
+### What didn't work
+
+- N/A.
+
+### What I learned
+
+- N/A.
+
+### What was tricky to build
+
+- N/A.
+
+### What warrants a second pair of eyes
+
+- N/A.
+
+### What should be done in the future
+
+- Upload a new bundle after Phase 6 rollout notes are added.
+
+### Code review instructions
+
+- N/A.
+
+### Technical details
+
+Bundle name:
+
+```text
+PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v6
+```
