@@ -300,3 +300,46 @@ The runbook documents the workflow used for the ShowLog panel/modal work:
 - inspect screenshots with either `understand_image` or the `read` tool directly on PNG files;
 - save evidence under ticket `sources/`;
 - update diary/tasks and commit at logical boundaries.
+
+## Step 14: Wired first backend ShowLog API and route integration
+
+Added first backend handlers for the planned ShowLog API:
+
+```text
+GET /api/app/show-log
+PATCH /api/app/show-log/{showId}
+```
+
+Implementation notes:
+
+- The list endpoint combines `showService.ListAll()` with existing `attendanceService.List()` data.
+- It starts from shows, so past shows without an attendance log can appear as `needs-log` work items.
+- It filters to past confirmed/archived/cancelled shows.
+- It supports `status`, `search`, `limit`, and `offset` query parameters.
+- The patch endpoint validates draw bounds and incident-note requirements, then writes through the existing attendance upsert path.
+
+Updated the staff Post-show log route:
+
+```text
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx
+```
+
+The page now uses:
+
+```text
+useGetShowLogQuery()
+useUpdateShowLogMutation()
+PostShowLogPanel
+```
+
+This removes the previous frontend stitching of attendance rows plus `useGetShowsQuery()` just to display show notes.
+
+Validation:
+
+```bash
+go test ./pkg/server ./pkg/service ./internal/web -count=1
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+cd web/packages/pyxis-app && pnpm exec vite build
+```
+
+Note: `go test ./...` still requests `go mod tidy` because of unrelated/untracked repo state outside this focused change; targeted backend packages passed.

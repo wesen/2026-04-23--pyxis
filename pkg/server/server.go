@@ -130,10 +130,12 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("POST /api/app/calendar/blocked", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleCreateCalendarBlocked))))
 	mux.Handle("DELETE /api/app/calendar/blocked/{id}", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeleteCalendarBlocked))))
 
-	// Staff attendance endpoints
+	// Staff attendance / post-show log endpoints
 	mux.Handle("GET /api/app/attendance", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAttendance))))
 	mux.Handle("GET /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAttendance))))
 	mux.Handle("PATCH /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertAttendance))))
+	mux.Handle("GET /api/app/show-log", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListShowLog))))
+	mux.Handle("PATCH /api/app/show-log/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertShowLog))))
 
 	// Staff settings endpoints
 	mux.Handle("GET /api/app/settings", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetSettings))))

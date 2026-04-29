@@ -2,8 +2,8 @@
 
 ## Post-show log first implementation slice
 
-- [ ] Add temporary frontend `ShowLogEntry`/query types and RTK Query endpoints for `GET/PATCH /api/app/show-log`.
-- [ ] Add MSW handlers that derive show-log entries from mock shows plus attendance logs, including needs-log rows with no attendance log.
+- [x] Add temporary frontend `ShowLogEntry`/query types and RTK Query endpoints for `GET/PATCH /api/app/show-log`.
+- [x] Add MSW handlers that derive show-log entries from mock shows plus attendance logs, including needs-log rows with no attendance log.
 - [ ] Build reusable small primitives needed by the first slice: `AppCard`, `StatusBadge`, `MetadataStrip`, `NoteBlock`, and `FieldError`.
 - [x] Build initial `PostShowLogEntryCard` card prototype with collapsed and expanded states.
 - [x] Capture `ShowsConfirmedPanel` Storybook reference PNG with `css-visual-diff`.
@@ -13,7 +13,8 @@
 - [x] Add Storybook stories for mixed, needs-log, logged, incident, expanded/details, edit modal, empty, validation, and mobile states.
 - [ ] Decide whether to keep `PostShowLogEntryCard` as a reference/prototype story or archive it after the table/modal path is approved.
 - [ ] Extract `PostShowLogSummary` and `PostShowLogToolbar` into dedicated files if the first-pass panel shape is approved.
-- [ ] Switch `/attendance` page to `useGetShowLogQuery()` and remove show-note stitching via `useGetShowsQuery()`.
+- [x] Add first backend `GET/PATCH /api/app/show-log` handlers backed by shows plus attendance logs.
+- [x] Switch `/attendance` page to `useGetShowLogQuery()` and remove show-note stitching via `useGetShowsQuery()`.
 - [ ] Add visible Chromium smoke for post-show log create/update/validation flow.
 - [ ] Add Storybook screenshot baseline capture script for the new component family.
 

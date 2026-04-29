@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -8,10 +9,12 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
 	"github.com/go-go-golems/pyxis/pkg/domain"
+	"github.com/go-go-golems/pyxis/pkg/service"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -952,6 +955,195 @@ func (s *Server) handleUpsertAttendance(w http.ResponseWriter, r *http.Request) 
 	}
 
 	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(updated))
+}
+
+type showLogEntryResponse struct {
+	ShowID          int    `json:"showId"`
+	AttendanceLogID *int   `json:"attendanceLogId,omitempty"`
+	Artist          string `json:"artist"`
+	Date            string `json:"date"`
+	Genre           string `json:"genre,omitempty"`
+	ShowStatus      string `json:"showStatus"`
+	ShowNotes       string `json:"showNotes,omitempty"`
+	Draw            *int   `json:"draw,omitempty"`
+	PostShowNotes   string `json:"postShowNotes,omitempty"`
+	Incident        bool   `json:"incident"`
+	IncidentNotes   string `json:"incidentNotes,omitempty"`
+	LoggedBy        *int   `json:"loggedBy,omitempty"`
+	LoggedByName    string `json:"loggedByName,omitempty"`
+	LoggedAt        string `json:"loggedAt,omitempty"`
+	UpdatedAt       string `json:"updatedAt,omitempty"`
+	LogStatus       string `json:"logStatus"`
+}
+
+type showLogListResponse struct {
+	Entries []showLogEntryResponse `json:"entries"`
+}
+
+func buildShowLogEntry(show *domain.Show, log *domain.AttendanceLog) showLogEntryResponse {
+	entry := showLogEntryResponse{
+		ShowID:     show.ID,
+		Artist:     show.Artist,
+		Date:       show.Date.Format(time.DateOnly),
+		Genre:      show.Genre,
+		ShowStatus: show.Status,
+		ShowNotes:  show.Notes,
+		Incident:   false,
+		LogStatus:  "needs-log",
+	}
+	if log == nil {
+		return entry
+	}
+	entry.AttendanceLogID = &log.ID
+	entry.Draw = log.Draw
+	entry.PostShowNotes = log.Notes
+	entry.Incident = log.Incident
+	entry.IncidentNotes = log.IncidentNotes
+	entry.LoggedBy = log.LoggedBy
+	if log.CreatedAt.IsZero() == false {
+		entry.LoggedAt = log.CreatedAt.Format(time.RFC3339)
+	}
+	if log.UpdatedAt.IsZero() == false {
+		entry.UpdatedAt = log.UpdatedAt.Format(time.RFC3339)
+	}
+	if log.Incident {
+		entry.LogStatus = "incident"
+	} else if log.Draw != nil && *log.Draw > 0 {
+		entry.LogStatus = "logged"
+	}
+	return entry
+}
+
+func showLogMatchesSearch(entry showLogEntryResponse, search string) bool {
+	if search == "" {
+		return true
+	}
+	haystack := strings.ToLower(strings.Join([]string{entry.Artist, entry.Date, entry.Genre, entry.ShowNotes, entry.PostShowNotes, entry.IncidentNotes}, " "))
+	return strings.Contains(haystack, strings.ToLower(search))
+}
+
+func (s *Server) showLogEntries(ctx context.Context, status, search string, limit, offset int) ([]showLogEntryResponse, error) {
+	shows, err := s.showService.ListAll(ctx)
+	if err != nil {
+		return nil, err
+	}
+	logs, err := s.attendanceService.List(ctx, 10000, 0)
+	if err != nil {
+		return nil, err
+	}
+	logsByShow := make(map[int]domain.AttendanceLog, len(logs))
+	for _, log := range logs {
+		logsByShow[log.ShowID] = log
+	}
+
+	today := time.Now().Truncate(24 * time.Hour)
+	entries := make([]showLogEntryResponse, 0, len(shows))
+	for i := range shows {
+		show := &shows[i]
+		if show.Date.After(today) {
+			continue
+		}
+		if show.Status != domain.StatusConfirmed && show.Status != domain.StatusArchived && show.Status != domain.StatusCancelled {
+			continue
+		}
+		var log *domain.AttendanceLog
+		if found, ok := logsByShow[show.ID]; ok {
+			log = &found
+		}
+		entry := buildShowLogEntry(show, log)
+		if status != "" && status != "all" && entry.LogStatus != status {
+			continue
+		}
+		if !showLogMatchesSearch(entry, search) {
+			continue
+		}
+		entries = append(entries, entry)
+	}
+	if offset > len(entries) {
+		return []showLogEntryResponse{}, nil
+	}
+	end := len(entries)
+	if limit > 0 && offset+limit < end {
+		end = offset + limit
+	}
+	return entries[offset:end], nil
+}
+
+func (s *Server) handleListShowLog(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	limit := 50
+	offset := 0
+	if l := r.URL.Query().Get("limit"); l != "" {
+		if v, err := strconv.Atoi(l); err == nil && v > 0 {
+			limit = v
+		}
+	}
+	if o := r.URL.Query().Get("offset"); o != "" {
+		if v, err := strconv.Atoi(o); err == nil && v >= 0 {
+			offset = v
+		}
+	}
+	entries, err := s.showLogEntries(ctx, strings.TrimSpace(r.URL.Query().Get("status")), strings.TrimSpace(r.URL.Query().Get("search")), limit, offset)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	respondJSON(w, http.StatusOK, showLogListResponse{Entries: entries})
+}
+
+func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	user := s.userFromContext(ctx)
+	if user == nil {
+		respondError(w, fmt.Errorf("unauthenticated"))
+		return
+	}
+	showID, err := strconv.Atoi(r.PathValue("showId"))
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		respondError(w, fmt.Errorf("read body: %w", err))
+		return
+	}
+	var req struct {
+		Draw          *int   `json:"draw"`
+		PostShowNotes string `json:"postShowNotes"`
+		Incident      bool   `json:"incident"`
+		IncidentNotes string `json:"incidentNotes"`
+	}
+	if err := json.Unmarshal(body, &req); err != nil {
+		respondError(w, fmt.Errorf("invalid request body: %w", err))
+		return
+	}
+	if req.Draw != nil && *req.Draw < 0 {
+		respondError(w, fmt.Errorf("%w: draw cannot be negative", service.ErrValidation))
+		return
+	}
+	if req.Draw != nil && *req.Draw > 10000 {
+		respondError(w, fmt.Errorf("%w: draw looks too high", service.ErrValidation))
+		return
+	}
+	if req.Incident && strings.TrimSpace(req.IncidentNotes) == "" {
+		respondError(w, fmt.Errorf("%w: incident notes are required", service.ErrValidation))
+		return
+	}
+	actorID := int(user.ID)
+	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	show, err := s.showService.GetByID(ctx, showID)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+	entry := buildShowLogEntry(show, updated)
+	entry.LoggedByName = user.DiscordUsername
+	respondJSON(w, http.StatusOK, entry)
 }
 
 func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {

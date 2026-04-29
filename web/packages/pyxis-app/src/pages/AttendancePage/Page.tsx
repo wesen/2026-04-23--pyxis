@@ -1,46 +1,38 @@
-import { useMemo, useState } from 'react';
-import { useGetAttendanceQuery, useGetShowsQuery, useUpdateAttendanceMutation } from '../../api/appApi';
+import { useState } from 'react';
+import { useGetShowLogQuery, useUpdateShowLogMutation, type ShowLogUpdateInput } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
-import { AttendancePanel, Panel } from '../../components/organisms';
-import type { AttendanceDraft } from '../../components/organisms/Roster/AttendancePanel/AttendancePanel';
+import { PostShowLogPanel } from '../../components/organisms';
 import { ActionMessages, EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
 export function AttendancePage() {
-  const { data: entries, isLoading, isError } = useGetAttendanceQuery();
-  const { data: shows } = useGetShowsQuery();
-  const [updateAttendance] = useUpdateAttendanceMutation();
+  const { data: entries, isLoading, isError } = useGetShowLogQuery();
+  const [updateShowLog] = useUpdateShowLogMutation();
   const [actionError, setActionError] = useState<string | undefined>();
   const [actionSuccess, setActionSuccess] = useState<string | undefined>();
-  const [savingEntryId, setSavingEntryId] = useState<number | undefined>();
-  const [query, setQuery] = useState('');
+  const [savingShowId, setSavingShowId] = useState<number | undefined>();
 
-  const showNotesById = useMemo(() => Object.fromEntries((shows ?? []).map((show) => [show.id, show.notes]).filter(([, notes]) => Boolean(notes))), [shows]);
-
-  const visibleEntries = useMemo(() => {
-    if (!entries) return [];
-    const needle = query.trim().toLowerCase();
-    if (!needle) return entries;
-    return entries.filter((entry) => [entry.artist, entry.date, entry.notes, entry.incidentNotes].some((value) => value.toLowerCase().includes(needle)));
-  }, [entries, query]);
-
-  const handleUpdateEntry = async (entry: NonNullable<typeof entries>[number], draft: AttendanceDraft) => {
-    setActionError(undefined); setActionSuccess(undefined);
-    if (draft.draw < 0) { setActionError('Draw cannot be negative.'); return; }
-    if (draft.draw > 10000) { setActionError('Draw looks too high. Double-check the number before saving.'); return; }
-    if (draft.incident && !draft.incidentNotes.trim()) { setActionError('Incident notes are required when Incident is checked.'); return; }
-    const entryKey = entry.id || entry.showId;
-    setSavingEntryId(entryKey);
+  const handleSaveEntry = async (update: ShowLogUpdateInput) => {
+    setActionError(undefined);
+    setActionSuccess(undefined);
+    if ((update.draw ?? 0) < 0) { setActionError('Draw cannot be negative.'); return; }
+    if ((update.draw ?? 0) > 10000) { setActionError('Draw looks too high. Double-check the number before saving.'); return; }
+    if (update.incident && !update.incidentNotes?.trim()) { setActionError('Incident notes are required when Incident is checked.'); return; }
+    setSavingShowId(update.showId);
     try {
-      await updateAttendance({ showId: entry.showId, draw: draft.draw, notes: draft.notes, incident: draft.incident, incidentNotes: draft.incident ? draft.incidentNotes : '' }).unwrap();
-      setActionSuccess(`Attendance updated for ${entry.artist}.`);
-    } catch { setActionError('Could not update attendance. Check your session and backend logs.'); }
-    finally { setSavingEntryId(undefined); }
+      const saved = await updateShowLog(update).unwrap();
+      setActionSuccess(`Post-show report saved for ${saved.artist}.`);
+    } catch {
+      setActionError('Could not update post-show log. Check your session and backend logs.');
+    } finally {
+      setSavingShowId(undefined);
+    }
   };
 
   return (
     <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
-      {isLoading ? <LoadingState /> : isError || !entries ? <ErrorState /> : entries.length === 0 ? <><ActionMessages error={actionError} success={actionSuccess} /><EmptyState label="No attendance logs returned from the backend." /></> : <><ActionMessages error={actionError} success={actionSuccess} /><Panel title="Past shows" section="attendance-past-shows"><label className="app-page-search"><span>Search attendance</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Artist, date, notes, incident" /></label>{visibleEntries.length > 0 ? <AttendancePanel entries={visibleEntries} showNotesById={showNotesById} onUpdateEntry={handleUpdateEntry} savingEntryId={savingEntryId} /> : <EmptyState label="No attendance entries match that search." />}</Panel></>}
+      <ActionMessages error={actionError} success={actionSuccess} />
+      {isLoading ? <LoadingState /> : isError || !entries ? <ErrorState /> : entries.length === 0 ? <EmptyState label="No past shows need post-show logs yet." /> : <PostShowLogPanel entries={entries} savingShowId={savingShowId} onSaveEntry={handleSaveEntry} />}
     </AppShell>
   );
 }
