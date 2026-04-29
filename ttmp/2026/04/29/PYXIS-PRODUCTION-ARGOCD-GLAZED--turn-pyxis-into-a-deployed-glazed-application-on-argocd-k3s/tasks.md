@@ -67,21 +67,21 @@ Goal: make GitHub the source of tested images and optional CLI release artifacts
 
 Goal: define desired cluster state for Pyxis in the GitOps repo.
 
-- [ ] T401. Create `gitops/kustomize/pyxis/namespace.yaml`.
-- [ ] T402. Create app and DB-bootstrap service accounts.
-- [ ] T403. Create Vault connection/auth manifests for Pyxis runtime and DB bootstrap.
-- [ ] T404. Create VaultStaticSecret for `apps/pyxis/prod/runtime`.
-- [ ] T405. Create VaultStaticSecret for shared PostgreSQL admin credentials.
-- [ ] T406. Create idempotent DB bootstrap ConfigMap script for database `pyxis` and role `pyxis_app`.
-- [ ] T407. Create DB bootstrap Job with Argo hook/sync-wave annotations.
-- [ ] T408. Create migration Job using the same Pyxis image and `pyxis migrate up`.
-- [ ] T409. Create PVC for `/data` flyer storage.
-- [ ] T410. Create Deployment using GHCR image, runtime secrets, `/data` mount, probes, and resource requests/limits.
-- [ ] T411. Create Service.
-- [ ] T412. Create Ingress for `pyxis.yolo.scapegoat.dev` with cert-manager/Traefik annotations.
-- [ ] T413. Create `kustomization.yaml` with correct resource ordering.
-- [ ] T414. Create `gitops/applications/pyxis.yaml` Argo CD Application.
-- [ ] T415. Run `kubectl kustomize` and server-side dry-run.
+- [x] T401. Create `gitops/kustomize/pyxis/namespace.yaml`.
+- [x] T402. Create app and DB-bootstrap service accounts.
+- [x] T403. Create Vault connection/auth manifests for Pyxis runtime and DB bootstrap.
+- [x] T404. Create VaultStaticSecret for `apps/pyxis/prod/runtime`.
+- [x] T405. Create VaultStaticSecret for shared PostgreSQL admin credentials.
+- [x] T406. Create idempotent DB bootstrap ConfigMap script for database `pyxis` and role `pyxis_app`.
+- [x] T407. Create DB bootstrap Job with Argo hook/sync-wave annotations.
+- [x] T408. Create migration Job using the same Pyxis image and `pyxis migrate up`.
+- [x] T409. Create PVC for `/data` flyer storage.
+- [x] T410. Create Deployment using GHCR image, runtime secrets, `/data` mount, probes, and resource requests/limits.
+- [x] T411. Create Service.
+- [x] T412. Create Ingress for `pyxis.yolo.scapegoat.dev` with cert-manager/Traefik annotations.
+- [x] T413. Create `kustomization.yaml` with correct resource ordering.
+- [x] T414. Create `gitops/applications/pyxis.yaml` Argo CD Application.
+- [x] T415. Run `kubectl kustomize` and server-side dry-run.
 
 ## Phase 5 — GitOps PR automation
 

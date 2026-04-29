@@ -1,0 +1,461 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pyxis
+---
+apiVersion: v1
+imagePullSecrets:
+- name: pyxis-ghcr-pull
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: pyxis
+  namespace: pyxis
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: pyxis-db-bootstrap
+  namespace: pyxis
+---
+apiVersion: v1
+data:
+  bootstrap.sh: |
+    #!/bin/sh
+    set -eu
+
+    export PGHOST="${POSTGRES_SERVICE_HOST}"
+    export PGPORT="${POSTGRES_SERVICE_PORT}"
+    export PGUSER="${POSTGRES_ADMIN_USER}"
+    export PGPASSWORD="${POSTGRES_ADMIN_PASSWORD}"
+
+    psql -d postgres -v ON_ERROR_STOP=1 <<SQL
+    DO \$\$
+    BEGIN
+      IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = '${PYXIS_DB_USER}') THEN
+        EXECUTE format('CREATE ROLE %I LOGIN PASSWORD %L', '${PYXIS_DB_USER}', '${PYXIS_DB_PASSWORD}');
+      ELSE
+        EXECUTE format('ALTER ROLE %I WITH LOGIN PASSWORD %L', '${PYXIS_DB_USER}', '${PYXIS_DB_PASSWORD}');
+      END IF;
+    END
+    \$\$;
+    SQL
+
+    database_exists="$(psql -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname = '${PYXIS_DB_NAME}'")"
+
+    if [ "${database_exists}" != "1" ]; then
+      psql -d postgres -v ON_ERROR_STOP=1 -c "CREATE DATABASE \"${PYXIS_DB_NAME}\" OWNER \"${PYXIS_DB_USER}\""
+    fi
+
+    psql -d postgres -v ON_ERROR_STOP=1 -c "ALTER DATABASE \"${PYXIS_DB_NAME}\" OWNER TO \"${PYXIS_DB_USER}\""
+    psql -d postgres -v ON_ERROR_STOP=1 -c "GRANT ALL PRIVILEGES ON DATABASE \"${PYXIS_DB_NAME}\" TO \"${PYXIS_DB_USER}\""
+
+    echo "pyxis database bootstrap complete"
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: pyxis-db-bootstrap-script
+  namespace: pyxis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/name: pyxis
+  name: pyxis
+  namespace: pyxis
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  selector:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/name: pyxis
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: pyxis-data
+  namespace: pyxis
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: local-path
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/name: pyxis
+  name: pyxis
+  namespace: pyxis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: app
+      app.kubernetes.io/name: pyxis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: app
+        app.kubernetes.io/name: pyxis
+    spec:
+      containers:
+      - env:
+        - name: PYXIS_BIND
+          value: 0.0.0.0:8080
+        - name: PYXIS_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: dsn
+              name: pyxis-runtime
+        - name: PYXIS_WEBSITE_URL
+          valueFrom:
+            secretKeyRef:
+              key: website_url
+              name: pyxis-runtime
+        - name: PYXIS_SESSION_COOKIE_NAME
+          value: pyxis_session
+        - name: PYXIS_FLYER_STORAGE_PATH
+          value: /data/flyers
+        - name: PYXIS_FLYER_BASE_URL
+          value: /flyers
+        - name: PYXIS_DISCORD_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: discord_client_id
+              name: pyxis-runtime
+        - name: PYXIS_DISCORD_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: discord_client_secret
+              name: pyxis-runtime
+        - name: PYXIS_DISCORD_REDIRECT_URL
+          valueFrom:
+            secretKeyRef:
+              key: discord_redirect_url
+              name: pyxis-runtime
+        - name: DISCORD_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: discord_bot_token
+              name: pyxis-runtime
+        - name: DISCORD_GUILD_ID
+          valueFrom:
+            secretKeyRef:
+              key: discord_guild_id
+              name: pyxis-runtime
+        - name: DISCORD_ADMIN_ROLE_ID
+          valueFrom:
+            secretKeyRef:
+              key: discord_admin_role_id
+              name: pyxis-runtime
+        - name: DISCORD_BOOKER_ROLE_ID
+          valueFrom:
+            secretKeyRef:
+              key: discord_booker_role_id
+              name: pyxis-runtime
+        - name: DISCORD_DOOR_ROLE_ID
+          valueFrom:
+            secretKeyRef:
+              key: discord_door_role_id
+              name: pyxis-runtime
+        - name: PYXIS_DISCORD_BOT_ENABLED
+          value: "false"
+        - name: PYXIS_DISCORD_SYNC_ON_START
+          value: "false"
+        - name: PYXIS_DISCORD_DEBUG
+          value: "false"
+        image: ghcr.io/wesen/pyxis:sha-REPLACE_ME
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 20
+        name: pyxis
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      enableServiceLinks: false
+      serviceAccountName: pyxis
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: pyxis-data
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+  name: pyxis-db-bootstrap
+  namespace: pyxis
+spec:
+  backoffLimit: 6
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: bootstrap
+        app.kubernetes.io/name: pyxis-db-bootstrap
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - /bootstrap/bootstrap.sh
+        env:
+        - name: POSTGRES_SERVICE_HOST
+          valueFrom:
+            secretKeyRef:
+              key: service-host
+              name: pyxis-postgres-admin
+        - name: POSTGRES_SERVICE_PORT
+          valueFrom:
+            secretKeyRef:
+              key: service-port
+              name: pyxis-postgres-admin
+        - name: POSTGRES_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              key: postgres-user
+              name: pyxis-postgres-admin
+        - name: POSTGRES_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: postgres-password
+              name: pyxis-postgres-admin
+        - name: PYXIS_DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: pyxis-runtime
+        - name: PYXIS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: pyxis-runtime
+        - name: PYXIS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: pyxis-runtime
+        image: postgres:16-alpine
+        imagePullPolicy: IfNotPresent
+        name: bootstrap
+        volumeMounts:
+        - mountPath: /bootstrap
+          name: bootstrap-script
+          readOnly: true
+      enableServiceLinks: false
+      restartPolicy: OnFailure
+      serviceAccountName: pyxis-db-bootstrap
+      volumes:
+      - configMap:
+          defaultMode: 365
+          name: pyxis-db-bootstrap-script
+        name: bootstrap-script
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+  name: pyxis-migrate
+  namespace: pyxis
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: migration
+        app.kubernetes.io/name: pyxis-migrate
+    spec:
+      containers:
+      - args:
+        - migrate
+        - --db-url
+        - $(PYXIS_DATABASE_URL)
+        - up
+        command:
+        - pyxis
+        env:
+        - name: PYXIS_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: dsn
+              name: pyxis-runtime
+        image: ghcr.io/wesen/pyxis:sha-REPLACE_ME
+        imagePullPolicy: IfNotPresent
+        name: migrate
+      enableServiceLinks: false
+      restartPolicy: OnFailure
+      serviceAccountName: pyxis
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/name: pyxis
+  name: pyxis
+  namespace: pyxis
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: pyxis.yolo.scapegoat.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: pyxis
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - pyxis.yolo.scapegoat.dev
+    secretName: pyxis-tls
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: pyxis
+  namespace: pyxis
+spec:
+  kubernetes:
+    role: pyxis-prod
+    serviceAccount: pyxis
+  method: kubernetes
+  mount: kubernetes
+  vaultConnectionRef: vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: pyxis-db-bootstrap
+  namespace: pyxis
+spec:
+  kubernetes:
+    role: pyxis-db-bootstrap
+    serviceAccount: pyxis-db-bootstrap
+  method: kubernetes
+  mount: kubernetes
+  vaultConnectionRef: vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: vault
+  namespace: pyxis
+spec:
+  address: http://vault.vault.svc.cluster.local:8200
+  skipTLSVerify: true
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: pyxis-ghcr-pull
+  namespace: pyxis
+spec:
+  destination:
+    create: true
+    name: pyxis-ghcr-pull
+    overwrite: true
+    transformation:
+      excludes:
+      - .*
+      templates:
+        .dockerconfigjson:
+          text: |
+            {"auths":{"{{ .Secrets.server }}":{"username":"{{ .Secrets.username }}","password":"{{ .Secrets.password }}","auth":"{{ .Secrets.auth }}"}}}
+    type: kubernetes.io/dockerconfigjson
+  mount: kv
+  path: apps/pyxis/prod/image-pull
+  refreshAfter: 30s
+  type: kv-v2
+  vaultAuthRef: pyxis
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: pyxis-postgres-admin
+  namespace: pyxis
+spec:
+  destination:
+    create: true
+    name: pyxis-postgres-admin
+    overwrite: true
+  mount: kv
+  path: infra/postgres/cluster
+  refreshAfter: 30s
+  type: kv-v2
+  vaultAuthRef: pyxis-db-bootstrap
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: pyxis-runtime
+  namespace: pyxis
+spec:
+  destination:
+    create: true
+    name: pyxis-runtime
+    overwrite: true
+  mount: kv
+  path: apps/pyxis/prod/runtime
+  refreshAfter: 30s
+  type: kv-v2
+  vaultAuthRef: pyxis

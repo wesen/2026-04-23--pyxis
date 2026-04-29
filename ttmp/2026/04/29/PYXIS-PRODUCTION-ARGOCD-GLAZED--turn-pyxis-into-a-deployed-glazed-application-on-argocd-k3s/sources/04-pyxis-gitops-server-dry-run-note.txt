@@ -1,0 +1,7 @@
+# Server-side dry-run
+
+Command:
+KUBECONFIG=$PWD/.cache/kubeconfig-tailnet.yaml kubectl apply --dry-run=server -k gitops/kustomize/pyxis
+
+Result:
+namespace/pyxis created (server dry run)

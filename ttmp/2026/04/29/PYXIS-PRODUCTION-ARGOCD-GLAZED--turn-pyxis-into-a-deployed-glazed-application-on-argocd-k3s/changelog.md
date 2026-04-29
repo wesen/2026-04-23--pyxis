@@ -17,3 +17,5 @@
 - 2026-04-29: Completed Phase 3 CI/CD baseline: push validation, image publishing, lint/security workflows, Dependabot, GoReleaser config, CI/CD docs, and validation.
 - 2026-04-29: Revalidated Phase 3 with `make generate` and `go test ./... -count=1`.
 - 2026-04-29: Uploaded v4 reMarkable bundle after Phase 3 CI/CD completion.
+- 2026-04-29: Completed Phase 4 GitOps package in the k3s repo and committed `816a0f9 PYXIS: add argocd gitops package`; saved Kustomize/client-dry-run evidence and server-side dry-run caveat.
+- 2026-04-29: Uploaded v5 reMarkable bundle after Phase 4 GitOps package completion.

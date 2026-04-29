@@ -385,3 +385,99 @@ Upload path:
 ```text
 /ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v4
 ```
+
+## Step 14: Phase 4 GitOps package in the Hetzner k3s repo
+
+Implemented the first Pyxis GitOps package in `/home/manuel/code/wesen/2026-03-27--hetzner-k3s`.
+
+Created Argo CD application:
+
+```text
+gitops/applications/pyxis.yaml
+```
+
+Created Kustomize package:
+
+```text
+gitops/kustomize/pyxis/namespace.yaml
+gitops/kustomize/pyxis/serviceaccount.yaml
+gitops/kustomize/pyxis/db-bootstrap-serviceaccount.yaml
+gitops/kustomize/pyxis/vault-connection.yaml
+gitops/kustomize/pyxis/vault-auth.yaml
+gitops/kustomize/pyxis/db-bootstrap-vault-auth.yaml
+gitops/kustomize/pyxis/runtime-secret.yaml
+gitops/kustomize/pyxis/image-pull-secret.yaml
+gitops/kustomize/pyxis/postgres-admin-secret.yaml
+gitops/kustomize/pyxis/db-bootstrap-script-configmap.yaml
+gitops/kustomize/pyxis/db-bootstrap-job.yaml
+gitops/kustomize/pyxis/migration-job.yaml
+gitops/kustomize/pyxis/persistentvolumeclaim.yaml
+gitops/kustomize/pyxis/deployment.yaml
+gitops/kustomize/pyxis/service.yaml
+gitops/kustomize/pyxis/ingress.yaml
+gitops/kustomize/pyxis/kustomization.yaml
+```
+
+### Design notes
+
+The package follows the existing `hair-booking` shape:
+
+- namespace-scoped app resources under namespace `pyxis`;
+- app service account `pyxis`;
+- separate bootstrap service account `pyxis-db-bootstrap`;
+- Vault Secrets Operator for runtime, image pull, and PostgreSQL admin secrets;
+- idempotent PostgreSQL bootstrap Job using `postgres:16-alpine`;
+- migration Job using the Pyxis image and `pyxis migrate --db-url $(PYXIS_DATABASE_URL) up`;
+- PVC `pyxis-data` mounted at `/data` for flyer storage;
+- Deployment with `PYXIS_FLYER_STORAGE_PATH=/data/flyers` and `PYXIS_FLYER_BASE_URL=/flyers`;
+- Service on port 80 targeting container port 8080;
+- Traefik/cert-manager Ingress for `pyxis.yolo.scapegoat.dev`.
+
+The initial image is a placeholder:
+
+```text
+ghcr.io/wesen/pyxis:sha-REPLACE_ME
+```
+
+Phase 5 should replace this with CI/GitOps PR automation that writes a real `sha-<commit>` tag.
+
+### Validation
+
+Rendered Kustomize output:
+
+```bash
+cd /home/manuel/code/wesen/2026-03-27--hetzner-k3s
+kubectl kustomize gitops/kustomize/pyxis >/tmp/pyxis-kustomize.yaml
+```
+
+Client dry-run passed:
+
+```bash
+kubectl apply --dry-run=client -k gitops/kustomize/pyxis
+```
+
+Saved evidence:
+
+```text
+sources/02-pyxis-gitops-client-dry-run.txt
+sources/03-pyxis-gitops-kustomize-render.yaml
+sources/04-pyxis-gitops-server-dry-run-note.txt
+```
+
+Server-side dry-run currently reports namespace-not-found for namespaced resources because the namespace is new and server-side dry-run does not persist the dry-run namespace object for subsequent resources in the same request. This is a validation caveat rather than a Kustomize render error. Argo CD sync has `CreateNamespace=true`, and the package includes `namespace.yaml`.
+
+Committed the k3s repo change:
+
+```text
+816a0f9 PYXIS: add argocd gitops package
+```
+
+## Step 15: Uploaded updated Phase 4 bundle
+
+Uploaded the updated guide/tasks/playbooks/diary after completing the k3s GitOps package.
+
+Upload path:
+
+```text
+/ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v5
+```
