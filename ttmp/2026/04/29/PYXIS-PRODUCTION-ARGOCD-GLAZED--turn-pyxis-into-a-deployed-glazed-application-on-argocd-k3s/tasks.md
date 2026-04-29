@@ -107,3 +107,43 @@ Goal: safely bring Pyxis live under Argo CD.
 - [ ] T608. Validate Discord OAuth after bot is installed in guild and role mapping secrets are present.
 - [ ] T609. Validate optional embedded Discord bot only after web/auth rollout is stable.
 - [ ] T610. Record production smoke evidence and rollback instructions.
+
+## Phase 7 — Bundle and deploy the staff/admin app
+
+Goal: make the React staff app (`web/packages/pyxis-app`) available in production without breaking the public site at `/`.
+
+- [x] T701. Decide and document the production staff-app route prefix; default proposal: serve `pyxis-app` under `/app/` while keeping the public site under `/`.
+- [x] T702. Update `pyxis-app` router/build configuration for the chosen basename/base path (`/app`) so refreshes and static assets work behind the Go server.
+- [x] T703. Extend the web build pipeline to build `pyxis-types`, `pyxis-components`, `pyxis-user-site`, and `pyxis-app` in the correct dependency order.
+- [x] T704. Extend `cmd/build-web` and/or add a sibling build step so the staff app dist is copied into a separate embed tree, for example `internal/web/embed/app`.
+- [x] T705. Add Go embed/static handler support for two SPAs: public site fallback for `/` routes and staff app fallback for `/app/*` routes.
+- [x] T706. Ensure reserved backend paths (`/api/*`, `/auth/*`, `/health`, `/flyers/*`) never fall through to either SPA incorrectly.
+- [x] T707. Update the Dockerfile to copy/build the staff app dist into the production binary image.
+- [x] T708. Add tests for staff app static serving, `/app/*` refresh fallback, and public-site fallback coexistence.
+- [x] T709. Update login/return-to handling so unauthenticated staff routes redirect to `/app/login?return_to=...` and Discord callback returns to `/app/...` safely.
+- [x] T710. Rebuild and smoke the embedded binary locally (`BUILD_WEB_LOCAL=1 make build-embed`) with both SPAs present.
+- [x] T711. Build and smoke the Docker image locally with both public and staff app routes.
+- [ ] T712. Update production documentation and the Discord setup guide to use `/app` staff URLs where appropriate.
+- [ ] T713. Publish a new image, let GitOps PR automation update the deployment/migration job image, merge, and confirm Argo CD rolls out the new image.
+- [ ] T714. Production-smoke `/app/login`, a protected `/app/*` route redirect, `GET /api/app/session`, and a real Discord login once guild/bot prerequisites are satisfied.
+
+## Phase 8 — Seed production database content and flyer graphics
+
+Goal: seed initial Pyxis content and flyer assets in a repeatable, non-destructive, GitOps-friendly way.
+
+- [ ] T801. Define the production seed scope: which shows, artists, submissions, settings, show logs, and flyer graphics should exist initially.
+- [x] T802. Inventory existing seed inputs (`fixtures/dev.sql`, `data/flyers/show-1/seed-flyer.svg`, local flyer artifacts under `data/flyers/show-19/` and `data/flyers/show-24/`) and decide which are production-safe.
+- [x] T803. Fix the current seed command/fixture drift from the ShowLog migration: replace `attendance_logs` references with `show_logs` and update seed count reporting.
+- [ ] T804. Split destructive local development fixtures from production seed data; production seeding must be idempotent and must not `TRUNCATE` live tables.
+- [ ] T805. Add a production seed fixture format, preferably declarative JSON/YAML plus Go import logic, or a carefully reviewed SQL file using `INSERT ... ON CONFLICT`.
+- [ ] T806. Add `pyxis seed` options for production-safe mode, dry-run/report mode, and explicit fixture path; refuse destructive fixtures unless an explicit local/dev flag is present.
+- [ ] T807. Package seed flyer graphics in a predictable source directory, for example `fixtures/flyers/`, with stable filenames that match seeded `shows.flyer_url` values.
+- [ ] T808. Add a seed-assets command or Kubernetes Job step that copies bundled flyer graphics into the PVC at `/data/flyers` without overwriting existing uploaded files unless explicitly requested.
+- [ ] T809. Add a GitOps seed Job manifest, gated as a manual/sync hook or one-shot job, that runs after migrations and before production smoke.
+- [ ] T810. Ensure the seed Job uses the same image tag as the app Deployment and mounts the same `pyxis-data` PVC.
+- [ ] T811. Add seed verification queries: count seeded shows/artists, verify `show_logs` rows, verify expected `flyer_url` values, and verify files exist under `/data/flyers`.
+- [ ] T812. Add HTTP smoke for seeded content: public show list/detail pages and direct `/flyers/...` URLs.
+- [ ] T813. Define rollback behavior for seed mistakes: restore DB snapshot, delete seeded rows by stable seed IDs/markers, and remove seeded flyer files from PVC.
+- [ ] T814. Document operator workflow for running seed in production, including required approvals and how to avoid running destructive dev fixtures.
+- [ ] T815. Run seed once in production after backup/snapshot confirmation and record evidence in the ticket.
+- [ ] T816. Decide whether future seeds should be GitOps-managed one-shot Jobs, application CLI commands run manually, or an admin-app import workflow.

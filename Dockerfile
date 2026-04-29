@@ -11,7 +11,8 @@ RUN corepack enable \
   && pnpm install --frozen-lockfile \
   && pnpm --filter pyxis-types build \
   && pnpm --filter pyxis-components build \
-  && pnpm --filter pyxis-user-site build
+  && pnpm --filter pyxis-user-site build \
+  && pnpm --filter pyxis-app build
 
 FROM golang:1.26-bookworm AS build
 WORKDIR /src
@@ -21,6 +22,7 @@ RUN go mod download
 
 COPY . .
 COPY --from=web /src/web/packages/pyxis-user-site/dist ./internal/web/embed/public
+COPY --from=web /src/web/packages/pyxis-app/dist ./internal/web/embed/app
 
 RUN CGO_ENABLED=1 go build -tags embed -trimpath -o /out/pyxis ./cmd/pyxis
 

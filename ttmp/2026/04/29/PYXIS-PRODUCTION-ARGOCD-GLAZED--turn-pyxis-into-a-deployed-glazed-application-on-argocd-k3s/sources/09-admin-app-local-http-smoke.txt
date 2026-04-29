@@ -1,0 +1,6 @@
+health={"status":"ok"}
+app_index=HTTP/1.1 200 OK
+app_route=HTTP/1.1 200 OK
+session=HTTP/1.1 200 OK {"spaceName":"Pyxis"}
+asset=HTTP/1.1 200 OK
+asset_path=/app/assets/index-Bsp98drN.js

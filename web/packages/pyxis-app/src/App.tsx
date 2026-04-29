@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useGetSessionQuery } from './api/appApi';
 import { ArtistsPage, AuditLogPage, BookingReviewPage, BookingsPage, CalendarPage, DashboardPage, DiscordPage, LoginPage, ModalShowcasePage, SettingsPage, SetupPage, ShowDetailPage, ShowLogPage, ShowsPage } from './pages/Pages';
+import { appExternalPath } from './routing';
 
 function RequireSession({ children }: { children: ReactElement }) {
   const location = useLocation();
@@ -12,7 +13,7 @@ function RequireSession({ children }: { children: ReactElement }) {
   }
 
   if (!session?.authenticated) {
-    const returnTo = `${location.pathname}${location.search}${location.hash}`;
+    const returnTo = appExternalPath(`${location.pathname}${location.search}${location.hash}`);
     return <Navigate to={`/login?return_to=${encodeURIComponent(returnTo)}`} replace />;
   }
 

@@ -4,7 +4,7 @@
 TRUNCATE TABLE
   sessions,
   audit_log,
-  attendance_logs,
+  show_logs,
   show_lineup,
   calendar_holds,
   calendar_blocked,
@@ -141,10 +141,10 @@ VALUES
   (1, '2026-05-26', 'Closed', 1, NOW()),
   (2, '2026-10-15', 'Venue maintenance', 1, NOW());
 
-INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at)
+INSERT INTO show_logs (show_id, draw, notes, incident, incident_notes, logged_by, quick_highlight, total_door_cents, created_at, updated_at)
 VALUES
-  (5, 34, 'Good energy, small crowd.', FALSE, '', 3, NOW(), NOW()),
-  (6, 61, 'Great turnout for a weeknight.', FALSE, '', 3, NOW(), NOW());
+  (5, 34, 'Good energy, small crowd.', FALSE, '', 3, 'Small crowd, good energy', 34000, NOW(), NOW()),
+  (6, 61, 'Great turnout for a weeknight.', FALSE, '', 3, 'Strong weeknight turnout', 61000, NOW(), NOW());
 
 INSERT INTO booking_reviews (submission_id, note, decision, updated_by, updated_at)
 VALUES
@@ -166,5 +166,5 @@ SELECT setval('shows_id_seq', (SELECT MAX(id) FROM shows));
 SELECT setval('show_lineup_id_seq', (SELECT MAX(id) FROM show_lineup));
 SELECT setval('calendar_holds_id_seq', (SELECT MAX(id) FROM calendar_holds));
 SELECT setval('calendar_blocked_id_seq', (SELECT MAX(id) FROM calendar_blocked));
-SELECT setval('attendance_logs_id_seq', (SELECT MAX(id) FROM attendance_logs));
+SELECT setval(pg_get_serial_sequence('show_logs', 'id'), (SELECT MAX(id) FROM show_logs));
 SELECT setval('audit_log_id_seq', (SELECT MAX(id) FROM audit_log));

@@ -1,0 +1,6 @@
+Seed drift fix evidence:
+- cmd/pyxis/cmds/seed.go now counts show_logs instead of attendance_logs.
+- fixtures/dev.sql now truncates/inserts show_logs instead of attendance_logs.
+- show_logs seed rows include quick_highlight and total_door_cents.
+- fixture sequence reset uses pg_get_serial_sequence('show_logs', 'id') so it does not depend on the historical sequence name.
+- rg -n "attendance_logs" cmd/pyxis/cmds/seed.go fixtures/dev.sql returned no matches.

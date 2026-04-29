@@ -1,10 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
 import { Button, Field, Input, PyxisMark } from 'pyxis-components';
 import { endpoints } from '../../api/endpoints';
+import { appExternalPath } from '../../routing';
 import './Page.css';
 
 function buildDiscordLoginURL(returnTo: string | null) {
-  const safeReturnTo = returnTo && returnTo.startsWith('/') && !returnTo.startsWith('//') ? returnTo : '/';
+  const safeReturnTo = returnTo && returnTo.startsWith('/') && !returnTo.startsWith('//') ? returnTo : appExternalPath('/');
   const params = new URLSearchParams({ return_to: safeReturnTo });
   return `${endpoints.discordLogin}?${params.toString()}`;
 }

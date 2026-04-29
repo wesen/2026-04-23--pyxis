@@ -157,6 +157,14 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// deployments. Future S3/R2 storage can replace this route.
 	mux.Handle("GET /flyers/", http.StripPrefix("/flyers/", http.FileServer(http.Dir(flyerStoragePath))))
 
+	// Staff/admin SPA. The staff React app is built with Vite base /app/ and is
+	// served from a separate embedded bundle so the public site can continue to
+	// own / while the staff app owns /app/* browser routes.
+	mux.HandleFunc("GET /app", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/app/", http.StatusPermanentRedirect)
+	})
+	mux.Handle("GET /app/", http.StripPrefix("/app", web.NewAppSPAHandler()))
+
 	// Public user-site SPA. The Go 1.22 ServeMux rejects a root catch-all mixed
 	// with method-specific API patterns, so wrap the API mux and delegate only
 	// unmatched 404s to the SPA fallback. React Router browser routes such as

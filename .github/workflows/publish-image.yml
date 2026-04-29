@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
+      - 'ttmp/**'
+      - '*.md'
 
 permissions:
   contents: read

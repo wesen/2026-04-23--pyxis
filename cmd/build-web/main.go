@@ -1,13 +1,15 @@
-// build-web builds the public user-site bundle and copies it into the Go embed tree.
+// build-web builds the public user-site and staff app bundles and copies them into the Go embed tree.
 //
 // Usage:
 //
 //	go run ./cmd/build-web                    # Dagger path, with local fallback when Dagger is unavailable
 //	BUILD_WEB_LOCAL=1 go run ./cmd/build-web  # force local pnpm build
 //
-// The Pyxis web workspace is rooted at web/, while the public Vite app writes to
-// web/packages/pyxis-user-site/dist. This command copies that package dist into
-// internal/web/embed/public so go:embed can package it into the pyxis binary.
+// The Pyxis web workspace is rooted at web/. The public Vite app writes to
+// web/packages/pyxis-user-site/dist and the staff/admin app writes to
+// web/packages/pyxis-app/dist. This command copies those package dists into
+// internal/web/embed/public and internal/web/embed/app so go:embed can package
+// both SPAs into the pyxis binary.
 package main
 
 import (
@@ -94,22 +96,36 @@ func runDagger(ctx context.Context, repoRoot string) error {
 		WithExec([]string{"pnpm", "install", "--frozen-lockfile"}).
 		WithExec([]string{"pnpm", "--filter", "pyxis-types", "build"}).
 		WithExec([]string{"pnpm", "--filter", "pyxis-components", "build"}).
-		WithExec([]string{"pnpm", "--filter", "pyxis-user-site", "build"})
+		WithExec([]string{"pnpm", "--filter", "pyxis-user-site", "build"}).
+		WithExec([]string{"pnpm", "--filter", "pyxis-app", "build"})
 
-	tmpDir, err := os.MkdirTemp("", "pyxis-user-site-dist-")
+	publicTmpDir, err := os.MkdirTemp("", "pyxis-user-site-dist-")
 	if err != nil {
-		return fmt.Errorf("create temp dist dir: %w", err)
+		return fmt.Errorf("create public temp dist dir: %w", err)
 	}
-	defer os.RemoveAll(tmpDir)
+	defer os.RemoveAll(publicTmpDir)
 
-	if _, err := container.Directory("/src/packages/pyxis-user-site/dist").Export(ctx, tmpDir); err != nil {
+	appTmpDir, err := os.MkdirTemp("", "pyxis-app-dist-")
+	if err != nil {
+		return fmt.Errorf("create staff app temp dist dir: %w", err)
+	}
+	defer os.RemoveAll(appTmpDir)
+
+	if _, err := container.Directory("/src/packages/pyxis-user-site/dist").Export(ctx, publicTmpDir); err != nil {
 		return fmt.Errorf("export public site dist from Dagger: %w", err)
 	}
+	if _, err := container.Directory("/src/packages/pyxis-app/dist").Export(ctx, appTmpDir); err != nil {
+		return fmt.Errorf("export staff app dist from Dagger: %w", err)
+	}
 
-	if err := copyDistToEmbed(repoRoot, tmpDir); err != nil {
+	if err := copyDistToEmbed(repoRoot, publicTmpDir, embedPublicDir(repoRoot), "public site"); err != nil {
+		return err
+	}
+	if err := copyDistToEmbed(repoRoot, appTmpDir, embedAppDir(repoRoot), "staff app"); err != nil {
 		return err
 	}
 	log.Printf("Successfully exported public user-site dist to %s via Dagger", embedPublicDir(repoRoot))
+	log.Printf("Successfully exported staff app dist to %s via Dagger", embedAppDir(repoRoot))
 	return nil
 }
 
@@ -123,31 +139,42 @@ func runLocal(repoRoot string) error {
 	if err := runCmd(repoRoot, "pnpm", "--dir", "web", "--filter", "pyxis-user-site", "build"); err != nil {
 		return fmt.Errorf("build public user site with local pnpm: %w", err)
 	}
+	if err := runCmd(repoRoot, "pnpm", "--dir", "web", "--filter", "pyxis-app", "build"); err != nil {
+		return fmt.Errorf("build staff app with local pnpm: %w", err)
+	}
 
-	src := filepath.Join(repoRoot, "web", "packages", "pyxis-user-site", "dist")
-	if err := copyDistToEmbed(repoRoot, src); err != nil {
+	publicSrc := filepath.Join(repoRoot, "web", "packages", "pyxis-user-site", "dist")
+	if err := copyDistToEmbed(repoRoot, publicSrc, embedPublicDir(repoRoot), "public site"); err != nil {
+		return err
+	}
+	appSrc := filepath.Join(repoRoot, "web", "packages", "pyxis-app", "dist")
+	if err := copyDistToEmbed(repoRoot, appSrc, embedAppDir(repoRoot), "staff app"); err != nil {
 		return err
 	}
 	log.Printf("Successfully exported public user-site dist to %s via local pnpm", embedPublicDir(repoRoot))
+	log.Printf("Successfully exported staff app dist to %s via local pnpm", embedAppDir(repoRoot))
 	return nil
 }
 
-func copyDistToEmbed(repoRoot, src string) error {
+func copyDistToEmbed(repoRoot, src, dst, label string) error {
 	if _, err := os.Stat(filepath.Join(src, "index.html")); err != nil {
-		return fmt.Errorf("public site dist is missing index.html at %s: %w", src, err)
+		return fmt.Errorf("%s dist is missing index.html at %s: %w", label, src, err)
 	}
-	dst := embedPublicDir(repoRoot)
 	if err := recreate(dst); err != nil {
-		return fmt.Errorf("recreate embed public dir: %w", err)
+		return fmt.Errorf("recreate %s embed dir: %w", label, err)
 	}
 	if err := copyTree(src, dst); err != nil {
-		return fmt.Errorf("copy public site dist to embed dir: %w", err)
+		return fmt.Errorf("copy %s dist to embed dir: %w", label, err)
 	}
 	return nil
 }
 
 func embedPublicDir(repoRoot string) string {
 	return filepath.Join(repoRoot, "internal", "web", "embed", "public")
+}
+
+func embedAppDir(repoRoot string) string {
+	return filepath.Join(repoRoot, "internal", "web", "embed", "app")
 }
 
 func readPNPMVersion(webDir string) string {

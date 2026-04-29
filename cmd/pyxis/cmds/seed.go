@@ -98,7 +98,7 @@ func (c *SeedCommand) RunIntoGlazeProcessor(
 	}
 
 	fmt.Println("Seeded database from", s.Fixtures)
-	for _, table := range []string{"users", "artists", "submissions", "shows", "calendar_holds", "calendar_blocked", "attendance_logs", "audit_log"} {
+	for _, table := range seedCountTables() {
 		fmt.Printf("%s=%d\n", table, counts[table])
 	}
 	return nil
@@ -106,7 +106,7 @@ func (c *SeedCommand) RunIntoGlazeProcessor(
 
 func seedCounts(ctx context.Context, database *db.Pool) (map[string]int, error) {
 	counts := map[string]int{}
-	for _, table := range []string{"users", "artists", "submissions", "shows", "calendar_holds", "calendar_blocked", "attendance_logs", "audit_log"} {
+	for _, table := range seedCountTables() {
 		var count int
 		if err := database.Pool.QueryRow(ctx, fmt.Sprintf("SELECT count(*) FROM %s", table)).Scan(&count); err != nil {
 			return nil, fmt.Errorf("count %s: %w", table, err)
@@ -114,4 +114,8 @@ func seedCounts(ctx context.Context, database *db.Pool) (map[string]int, error) 
 		counts[table] = count
 	}
 	return counts, nil
+}
+
+func seedCountTables() []string {
+	return []string{"users", "artists", "submissions", "shows", "calendar_holds", "calendar_blocked", "show_logs", "audit_log"}
 }

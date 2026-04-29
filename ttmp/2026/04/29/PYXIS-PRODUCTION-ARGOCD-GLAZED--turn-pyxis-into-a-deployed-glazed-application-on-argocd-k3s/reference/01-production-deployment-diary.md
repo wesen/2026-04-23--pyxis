@@ -1241,3 +1241,187 @@ Synced Healthy Succeeded successfully synced (all tasks run)
 deployment.apps/pyxis 1/1 ghcr.io/wesen/pyxis:sha-edf2dcb
 {"status":"ok"}
 ```
+
+## Step 24: Added admin app deployment and production seed planning tasks
+
+The next production boundary is the staff/admin UI. The backend already has `/api/app/*` and `/auth/*`, and the React staff app exists under `web/packages/pyxis-app`, but the production image currently builds and embeds only the public `pyxis-user-site`. I added a new task phase that treats `/app/` as the likely production route for the staff app while preserving `/` for the public site.
+
+I also added a seed phase. Seeding is feasible, but it should not use the existing local development fixture directly against production. The current `fixtures/dev.sql` is intentionally destructive and still references the old `attendance_logs` table name, so production seeding needs an idempotent fixture/import path and a flyer asset copy strategy that writes to the PVC without destroying user uploads.
+
+### Prompt Context
+
+**User prompt (verbatim):** "Now add tasks to bundle and deploy the admin app. Also, can we seed the DB and the flyers graphics?"
+
+**Assistant interpretation:** Extend the production ticket with concrete future work for serving the staff React app and for safely seeding production content/assets.
+
+**Inferred user intent:** Move from public-site production readiness to full staff/admin usability and initial production content population.
+
+**Commit (code):** N/A — task planning/documentation update.
+
+### What I did
+
+- Added `Phase 7 — Bundle and deploy the staff/admin app` to `tasks.md`.
+- Added `Phase 8 — Seed production database content and flyer graphics` to `tasks.md`.
+- Inspected existing seed surfaces:
+  - `cmd/pyxis/cmds/seed.go`
+  - `fixtures/dev.sql`
+  - `data/flyers/show-1/seed-flyer.svg`
+  - local untracked flyer artifacts under `data/flyers/show-19/` and `data/flyers/show-24/`.
+
+### Why
+
+- The current production binary serves the public site, not the staff app.
+- A safe production seed needs to be repeatable, idempotent, and recoverable; the existing dev fixture is destructive and out of date after the ShowLog table rename.
+
+### What worked
+
+- The task breakdown now captures both the serving architecture work for `/app/` and the operational seed workflow for DB rows plus PVC flyer assets.
+
+### What didn't work
+
+- N/A; this was planning work.
+
+### What I learned
+
+- `pyxis seed` already exists, but it reports/counts `attendance_logs`, and `fixtures/dev.sql` truncates/inserts `attendance_logs`. That must be updated to `show_logs` before seed work can be trusted after the ShowLog hard cutover.
+
+### What was tricky to build
+
+- The staff app and public app are both browser SPAs, but they need different fallback routes. The Go server must reserve backend paths first, then route `/app/*` to the staff SPA and public browser routes to the public SPA.
+- Flyer seeding crosses DB and filesystem state: seeded `shows.flyer_url` values must correspond to files that exist on the PVC under `/data/flyers` and are served through `/flyers/...`.
+
+### What warrants a second pair of eyes
+
+- Confirm `/app/` is the desired staff-app production prefix before implementing.
+- Confirm whether production seed data should be based on existing local dev fixtures or a curated real launch dataset.
+- Confirm whether seed flyer assets can be committed to the repo, stored in object storage, or copied from a private/operator source.
+
+### What should be done in the future
+
+- Implement Phase 7 before relying on Discord OAuth for production staff UI access.
+- Implement Phase 8 only after deciding the seed dataset and taking/confirming a database backup.
+
+### Code review instructions
+
+- Review the new Phase 7 and Phase 8 task lists in `tasks.md`.
+- Review `cmd/pyxis/cmds/seed.go` and `fixtures/dev.sql` before implementing any production seed job.
+
+### Technical details
+
+Existing seed command and fixture drift found:
+
+```text
+cmd/pyxis/cmds/seed.go counts attendance_logs
+fixtures/dev.sql truncates/inserts attendance_logs
+current canonical table is show_logs
+```
+
+## Step 25: Bundled the staff app under `/app` and fixed seed ShowLog drift
+
+I implemented the first half of the new admin-app phase. The production build now produces two browser bundles: the public user site remains at `/`, and the staff/admin React app is built with Vite base `/app/` and served from a separate embedded bundle under `/app/*`. This keeps public browser routes and staff browser routes from competing for the same SPA fallback.
+
+I also fixed the immediate seed drift caused by the ShowLog migration. The existing development seed command and fixture still referred to `attendance_logs`; they now use `show_logs`, and the fixture fills the first-class ShowLog fields added during the migration.
+
+### Prompt Context
+
+**User prompt (verbatim):** "go ahead"
+
+**Assistant interpretation:** Proceed from the newly added tasks into implementation: start bundling/deploying the admin app and make seed work safer by fixing the known ShowLog drift.
+
+**Inferred user intent:** Move beyond planning and make the production image capable of serving the staff app, while preparing seed commands for later production-safe seeding.
+
+**Commit (code):** pending — implementation completed before commit.
+
+### What I did
+
+- Added `paths-ignore` to `.github/workflows/publish-image.yml` so `docs/**`, `ttmp/**`, and root `*.md` changes do not publish images or open GitOps PRs.
+- Updated `web/packages/pyxis-app/vite.config.ts` so production builds use base `/app/` while dev keeps `/`.
+- Added `web/packages/pyxis-app/src/routing.ts` for basename/external-path helpers.
+- Updated the staff app router to use `BrowserRouter basename={routerBasename()}`.
+- Updated unauthenticated staff route handling so OAuth `return_to` values include the external `/app` prefix.
+- Updated login fallback return-to behavior so direct `/app/login` logins return to `/app/` instead of public `/`.
+- Extended `cmd/build-web` to build and copy both:
+  - `web/packages/pyxis-user-site/dist` -> `internal/web/embed/public`
+  - `web/packages/pyxis-app/dist` -> `internal/web/embed/app`
+- Extended embed support with `appContentFS()`.
+- Added `web.NewAppSPAHandler()` and server routes:
+  - `GET /app` redirects to `/app/`
+  - `GET /app/` serves the staff SPA with `/app` stripped.
+- Updated the Dockerfile to build `pyxis-app` and copy its dist into `internal/web/embed/app`.
+- Added static handler tests for staff app fallback/assets.
+- Fixed `cmd/pyxis/cmds/seed.go` and `fixtures/dev.sql` to use `show_logs` instead of `attendance_logs`.
+
+### Why
+
+- The public site and staff app are two different SPAs. They need separate fallback roots.
+- Vite asset URLs must agree with the production serving prefix; otherwise `/app/index.html` would point at the wrong asset paths.
+- OAuth return paths must include `/app`, because the server callback redirects at origin level, outside the React Router basename context.
+- The seed command cannot remain tied to a removed table name after the hard ShowLog cutover.
+
+### What worked
+
+Validation passed:
+
+```bash
+pnpm --dir web --filter pyxis-app build
+BUILD_WEB_LOCAL=1 make build-embed
+go test ./cmd/pyxis/... ./pkg/server ./pkg/service ./pkg/repository/postgres ./internal/web -count=1
+make docker-build IMAGE_REPOSITORY=pyxis IMAGE_TAG=admin-app-local-final
+docker run --rm pyxis:admin-app-local-final --help
+docker run --rm pyxis:admin-app-local-final serve --help
+```
+
+Local embedded HTTP smoke passed through a PostgreSQL port-forward:
+
+```text
+health={"status":"ok"}
+app_index=HTTP/1.1 200 OK
+app_route=HTTP/1.1 200 OK
+session=HTTP/1.1 200 OK {"spaceName":"Pyxis"}
+asset=HTTP/1.1 200 OK
+asset_path=/app/assets/index-Bsp98drN.js
+```
+
+### What didn't work
+
+- A first attempt to smoke the Docker container directly against the production DSN failed because the DSN uses the in-cluster PostgreSQL service DNS name (`postgres.postgres.svc.cluster.local`), which is not resolvable from a local Docker container.
+- I switched to a Kubernetes port-forward and the local embedded binary for HTTP route validation.
+
+### What I learned
+
+- Serving the staff app under `/app` is not just a Go route change. Vite base, React Router basename, and OAuth return paths all need to agree on the same external prefix.
+- The historical PostgreSQL sequence name can remain `attendance_logs_id_seq` after a table rename. The fixture now avoids relying on that name by using `pg_get_serial_sequence('show_logs', 'id')`.
+
+### What was tricky to build
+
+- The Go server uses a primary mux plus SPA fallback. The staff app has to be registered before the public fallback; otherwise `/app/*` would be swallowed by the public SPA.
+- The staff handler expects `/app` to be stripped so Vite's `/app/assets/...` URLs map to `assets/...` inside the embedded staff bundle.
+- React Router's basename affects internal routing, but the server OAuth callback still needs an absolute origin-relative path like `/app/shows`.
+
+### What warrants a second pair of eyes
+
+- Review the OAuth `return_to` behavior in `web/packages/pyxis-app/src/App.tsx` and `LoginPage/Page.tsx`; this is the most likely place for a subtle `/app` prefix bug.
+- Review whether `paths-ignore` should include more generated/documentation-only paths.
+- Review whether committed embedded build assets are still desired, or whether CI should rely entirely on fresh Docker/web-stage builds.
+
+### What should be done in the future
+
+- Publish the new image, merge the generated GitOps PRs, and production-smoke `/app/login`.
+- Finish production-safe seed implementation: idempotent seed data, flyer asset packaging, and an explicit seed job/operator flow.
+
+### Code review instructions
+
+- Start with `pkg/server/server.go` and `internal/web/static.go` for the two-SPA serving model.
+- Then review `web/packages/pyxis-app/vite.config.ts`, `src/main.tsx`, `src/routing.ts`, `src/App.tsx`, and `src/pages/LoginPage/Page.tsx` for `/app` path handling.
+- Then review `cmd/build-web/main.go` and `Dockerfile` for bundle packaging.
+- Finally review `cmd/pyxis/cmds/seed.go` and `fixtures/dev.sql` for the `show_logs` seed fix.
+
+### Technical details
+
+Evidence saved:
+
+```text
+sources/09-admin-app-local-http-smoke.txt
+sources/10-admin-app-docker-build.log
+sources/11-seed-showlog-drift-fix.txt
+```

@@ -11,6 +11,8 @@ import (
 
 func TestSPAHandlerServesFilesAndFallsBackToIndex(t *testing.T) {
 	h := &spaHandler{
+		reserveBackendPaths: true,
+		label:               "public site",
 		content: fstest.MapFS{
 			"index.html":         &fstest.MapFile{Data: []byte("<!doctype html><div id=\"root\"></div>")},
 			"assets/app-abc.js":  &fstest.MapFile{Data: []byte("console.log('ok')")},
@@ -57,6 +59,8 @@ func TestSPAHandlerServesFilesAndFallsBackToIndex(t *testing.T) {
 
 func TestSPAHandlerReservedPathsDoNotReturnIndex(t *testing.T) {
 	h := &spaHandler{
+		reserveBackendPaths: true,
+		label:               "public site",
 		content: fstest.MapFS{
 			"index.html": &fstest.MapFile{Data: []byte("<!doctype html><div id=\"root\"></div>")},
 		},
@@ -79,7 +83,7 @@ func TestSPAHandlerReservedPathsDoNotReturnIndex(t *testing.T) {
 }
 
 func TestMissingBundleHandlerPreservesReserved404(t *testing.T) {
-	h := missingBundleHandler(fs.ErrNotExist)
+	h := missingBundleHandler("public site", true, fs.ErrNotExist)
 
 	t.Run("browser route gets service unavailable", func(t *testing.T) {
 		rr := httptest.NewRecorder()
@@ -96,4 +100,41 @@ func TestMissingBundleHandlerPreservesReserved404(t *testing.T) {
 			t.Fatalf("status = %d, want 404", rr.Code)
 		}
 	})
+}
+
+func TestAppSPAHandlerWithStrippedPrefix(t *testing.T) {
+	h := &spaHandler{
+		reserveBackendPaths: true,
+		label:               "staff app",
+		content: fstest.MapFS{
+			"index.html":        &fstest.MapFile{Data: []byte("<!doctype html><div id=\"admin-root\"></div>")},
+			"assets/app-abc.js": &fstest.MapFile{Data: []byte("console.log('admin')")},
+		},
+	}
+	h.fileServer = http.FileServer(http.FS(h.content))
+
+	tests := []struct {
+		name       string
+		path       string
+		wantStatus int
+		wantBody   string
+	}{
+		{name: "staff root", path: "/", wantStatus: http.StatusOK, wantBody: "admin-root"},
+		{name: "staff browser route", path: "/shows/123", wantStatus: http.StatusOK, wantBody: "admin-root"},
+		{name: "staff asset", path: "/assets/app-abc.js", wantStatus: http.StatusOK, wantBody: "console.log('admin')"},
+		{name: "reserved backend after strip", path: "/api/app/session", wantStatus: http.StatusNotFound, wantBody: "404 page not found"},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			rr := httptest.NewRecorder()
+			h.ServeHTTP(rr, httptest.NewRequest(http.MethodGet, tc.path, nil))
+			if rr.Code != tc.wantStatus {
+				t.Fatalf("status = %d, want %d; body=%q", rr.Code, tc.wantStatus, rr.Body.String())
+			}
+			if !strings.Contains(rr.Body.String(), tc.wantBody) {
+				t.Fatalf("body %q does not contain %q", rr.Body.String(), tc.wantBody)
+			}
+		})
+	}
 }

@@ -1,0 +1,2 @@
+import{j as e,p as a,c}from"./index-CXYw4yLm.js";const d=({kicker:i,title:s,className:p})=>e.jsxs("div",{...a("public-page-header"),className:c("pyxis-public-page-header",p),children:[e.jsx("div",{className:"pyxis-public-page-header__kicker",...a("public-page-header","kicker"),children:i}),e.jsx("h1",{className:"pyxis-public-page-header__title",...a("public-page-header","title"),children:s}),e.jsx("div",{className:"pyxis-public-page-header__divider",...a("public-page-header","divider")})]});export{d as P};
+//# sourceMappingURL=PublicPageHeader-DKU1jaeo.js.map
