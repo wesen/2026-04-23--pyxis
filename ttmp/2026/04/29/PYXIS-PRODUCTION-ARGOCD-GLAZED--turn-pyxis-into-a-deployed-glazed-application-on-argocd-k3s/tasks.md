@@ -41,13 +41,13 @@ Goal: make Pyxis buildable as a production container from the app repo without t
 
 Goal: make the Glazed `serve` command consume production env vars cleanly.
 
-- [ ] T201. Add env-backed default for `--db-url` using `PYXIS_DATABASE_URL`.
-- [ ] T202. Add env-backed defaults for `--bind`, Discord bot enablement, and Discord sync/debug flags if missing.
-- [ ] T203. Add configurable flyer storage root/public prefix (`PYXIS_FLYER_STORAGE_LOCAL_DIR`, `PYXIS_FLYER_PUBLIC_PREFIX`) and wire `storage.NewLocalFlyerStore` from config.
-- [ ] T204. Audit session cookie/session secret production readiness; add `PYXIS_SESSION_SECRET` support if required by current auth implementation.
-- [ ] T205. Add/adjust health/readiness endpoint behavior if `/health` should include DB readiness versus shallow process liveness.
-- [ ] T206. Add production config documentation and example env file without secrets.
-- [ ] T207. Validate local `pyxis serve` using env-only configuration.
+- [x] T201. Add env-backed default for `--db-url` using `PYXIS_DATABASE_URL`.
+- [x] T202. Add env-backed defaults for `--bind`, Discord bot enablement, and Discord sync/debug flags if missing.
+- [x] T203. Add configurable flyer storage root/public prefix (`PYXIS_FLYER_STORAGE_LOCAL_DIR`, `PYXIS_FLYER_PUBLIC_PREFIX`) and wire `storage.NewLocalFlyerStore` from config.
+- [x] T204. Audit session cookie/session secret production readiness; add `PYXIS_SESSION_SECRET` support if required by current auth implementation.
+- [x] T205. Add/adjust health/readiness endpoint behavior if `/health` should include DB readiness versus shallow process liveness.
+- [x] T206. Add production config documentation and example env file without secrets.
+- [x] T207. Validate local `pyxis serve` using env-only configuration.
 
 ## Phase 3 — GitHub CI/CD and release automation
 

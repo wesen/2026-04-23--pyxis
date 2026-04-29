@@ -7,6 +7,8 @@ type Config struct {
 	AllowedOrigins      []string
 	WebsiteURL          string
 	SessionCookieName   string
+	FlyerStoragePath    string
+	FlyerBaseURL        string
 	DiscordClientID     string
 	DiscordClientSecret string
 	DiscordRedirectURL  string
@@ -29,6 +31,8 @@ func DefaultConfig() *Config {
 		AllowedOrigins:    []string{"http://localhost:3000", "http://localhost:5173"},
 		WebsiteURL:        "https://pyxis.yolo.scapegoat.dev",
 		SessionCookieName: "session",
+		FlyerStoragePath:  "./data/flyers",
+		FlyerBaseURL:      "/flyers",
 		DiscordBotScript:  "bot/discord/show-space/index.js",
 	}
 }

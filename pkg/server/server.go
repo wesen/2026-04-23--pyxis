@@ -45,7 +45,17 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	settingsRepo := postgres.NewSettingsRepo(queries)
 
 	// Storage layer
-	s.flyerStore = storage.NewLocalFlyerStore("./data/flyers", "/flyers")
+	flyerStoragePath := "./data/flyers"
+	flyerBaseURL := "/flyers"
+	if cfg != nil {
+		if cfg.FlyerStoragePath != "" {
+			flyerStoragePath = cfg.FlyerStoragePath
+		}
+		if cfg.FlyerBaseURL != "" {
+			flyerBaseURL = cfg.FlyerBaseURL
+		}
+	}
+	s.flyerStore = storage.NewLocalFlyerStore(flyerStoragePath, flyerBaseURL)
 
 	// Service layer
 	discordClient := discord.Client(&discord.NoOpClient{})
@@ -145,7 +155,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// Public flyer assets. Keep this before the SPA fallback so flyer URLs emitted
 	// by the API resolve to uploaded local files during development/single-binary
 	// deployments. Future S3/R2 storage can replace this route.
-	mux.Handle("GET /flyers/", http.StripPrefix("/flyers/", http.FileServer(http.Dir("./data/flyers"))))
+	mux.Handle("GET /flyers/", http.StripPrefix("/flyers/", http.FileServer(http.Dir(flyerStoragePath))))
 
 	// Public user-site SPA. The Go 1.22 ServeMux rejects a root catch-all mixed
 	// with method-specific API patterns, so wrap the API mux and delegate only

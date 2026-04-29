@@ -31,6 +31,8 @@ type ServeSettings struct {
 	DBURL               string `glazed:"db-url"`
 	WebsiteURL          string `glazed:"website-url"`
 	SessionCookieName   string `glazed:"session-cookie-name"`
+	FlyerStoragePath    string `glazed:"flyer-storage-path"`
+	FlyerBaseURL        string `glazed:"flyer-base-url"`
 	DiscordClientID     string `glazed:"discord-client-id"`
 	DiscordClientSecret string `glazed:"discord-client-secret"`
 	DiscordRedirectURL  string `glazed:"discord-redirect-url"`
@@ -64,13 +66,13 @@ func NewServeCommand() (*ServeCommand, error) {
 			fields.New(
 				"bind",
 				fields.TypeString,
-				fields.WithDefault("0.0.0.0:8080"),
+				fields.WithDefault(envOr("PYXIS_BIND", "0.0.0.0:8080")),
 				fields.WithHelp("Address to bind the HTTP server"),
 			),
 			fields.New(
 				"db-url",
 				fields.TypeString,
-				fields.WithDefault("postgres://pyxis:pyxis@localhost:5433/pyxis?sslmode=disable"),
+				fields.WithDefault(envOr("PYXIS_DATABASE_URL", "postgres://pyxis:pyxis@localhost:5433/pyxis?sslmode=disable")),
 				fields.WithHelp("PostgreSQL connection string"),
 			),
 			fields.New(
@@ -84,6 +86,18 @@ func NewServeCommand() (*ServeCommand, error) {
 				fields.TypeString,
 				fields.WithDefault(envOr("PYXIS_SESSION_COOKIE_NAME", "session")),
 				fields.WithHelp("Cookie name used for Pyxis browser sessions"),
+			),
+			fields.New(
+				"flyer-storage-path",
+				fields.TypeString,
+				fields.WithDefault(envOr("PYXIS_FLYER_STORAGE_PATH", "./data/flyers")),
+				fields.WithHelp("Local filesystem directory used to store uploaded flyer files"),
+			),
+			fields.New(
+				"flyer-base-url",
+				fields.TypeString,
+				fields.WithDefault(envOr("PYXIS_FLYER_BASE_URL", "/flyers")),
+				fields.WithHelp("Public URL prefix used when returning uploaded flyer URLs"),
 			),
 			fields.New(
 				"discord-client-id",
@@ -118,7 +132,7 @@ func NewServeCommand() (*ServeCommand, error) {
 			fields.New(
 				"discord-bot",
 				fields.TypeBool,
-				fields.WithDefault(false),
+				fields.WithDefault(envOrBool("PYXIS_DISCORD_BOT_ENABLED", false)),
 				fields.WithHelp("Start the embedded Discord show-management bot"),
 			),
 			fields.New(
@@ -130,13 +144,13 @@ func NewServeCommand() (*ServeCommand, error) {
 			fields.New(
 				"discord-sync-on-start",
 				fields.TypeBool,
-				fields.WithDefault(false),
+				fields.WithDefault(envOrBool("PYXIS_DISCORD_SYNC_ON_START", false)),
 				fields.WithHelp("Sync Discord slash commands before opening the bot gateway"),
 			),
 			fields.New(
 				"discord-debug",
 				fields.TypeBool,
-				fields.WithDefault(false),
+				fields.WithDefault(envOrBool("PYXIS_DISCORD_DEBUG", false)),
 				fields.WithHelp("Enable debug-only Discord bot commands"),
 			),
 			fields.New(
@@ -185,6 +199,11 @@ func (c *ServeCommand) RunIntoGlazeProcessor(
 	cfg.DBURL = s.DBURL
 	cfg.WebsiteURL = strings.TrimRight(strings.TrimSpace(s.WebsiteURL), "/")
 	cfg.SessionCookieName = strings.TrimSpace(s.SessionCookieName)
+	cfg.FlyerStoragePath = strings.TrimSpace(s.FlyerStoragePath)
+	cfg.FlyerBaseURL = strings.TrimRight(strings.TrimSpace(s.FlyerBaseURL), "/")
+	if cfg.FlyerBaseURL == "" {
+		cfg.FlyerBaseURL = "/flyers"
+	}
 	cfg.DiscordClientID = strings.TrimSpace(s.DiscordClientID)
 	cfg.DiscordClientSecret = strings.TrimSpace(s.DiscordClientSecret)
 	cfg.DiscordRedirectURL = strings.TrimSpace(s.DiscordRedirectURL)
@@ -256,6 +275,21 @@ func envOr(key, fallback string) string {
 		return fallback
 	}
 	return value
+}
+
+func envOrBool(key string, fallback bool) bool {
+	value := strings.TrimSpace(os.Getenv(key))
+	if value == "" {
+		return fallback
+	}
+	switch strings.ToLower(value) {
+	case "1", "true", "yes", "y", "on":
+		return true
+	case "0", "false", "no", "n", "off":
+		return false
+	default:
+		return fallback
+	}
 }
 
 func validateDiscordOAuthConfig(cfg *config.Config) error {

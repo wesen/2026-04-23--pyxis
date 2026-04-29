@@ -191,3 +191,89 @@ Upload path:
 ```text
 /ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v3
 ```
+
+## Step 9: Phase 2 production configuration hardening
+
+Implemented the second productionization phase: make `pyxis serve` configurable from production environment variables instead of relying on local defaults or hard-coded flyer storage paths.
+
+### Runtime configuration changes
+
+Updated `cmd/pyxis/cmds/serve.go`:
+
+- `--bind` now defaults from `PYXIS_BIND`, falling back to `0.0.0.0:8080`.
+- `--db-url` now defaults from `PYXIS_DATABASE_URL`, falling back to the local Docker Compose DSN.
+- Added `--flyer-storage-path`, defaulting from `PYXIS_FLYER_STORAGE_PATH` and falling back to `./data/flyers`.
+- Added `--flyer-base-url`, defaulting from `PYXIS_FLYER_BASE_URL` and falling back to `/flyers`.
+- `--discord-bot` now defaults from `PYXIS_DISCORD_BOT_ENABLED`.
+- `--discord-sync-on-start` now defaults from `PYXIS_DISCORD_SYNC_ON_START`.
+- `--discord-debug` now defaults from `PYXIS_DISCORD_DEBUG`.
+- Added `envOrBool` parsing for `1/true/yes/y/on` and `0/false/no/n/off`.
+
+Updated `pkg/config/config.go`:
+
+- added `FlyerStoragePath`;
+- added `FlyerBaseURL`;
+- set local defaults in `DefaultConfig()`.
+
+Updated `pkg/server/server.go`:
+
+- creates `storage.NewLocalFlyerStore` from config instead of hard-coded `./data/flyers`;
+- serves `/flyers/` from the configured storage path.
+
+Added example production environment file:
+
+```text
+docs/deployment/pyxis-production-env.example
+```
+
+### Session secret audit
+
+I inspected `pkg/server/auth.go` and `pkg/service/auth_service.go`. Current browser sessions are opaque random session IDs stored server-side in the PostgreSQL `sessions` table. The cookie stores only the session token. Because there is no signed/encrypted client-side session payload, a `PYXIS_SESSION_SECRET` is not required for the current implementation.
+
+Production-relevant session settings today are:
+
+- `PYXIS_SESSION_COOKIE_NAME`, now already supported;
+- `Secure` cookie behavior, derived from TLS, `X-Forwarded-Proto: https`, or HTTPS Discord redirect URL;
+- PostgreSQL persistence for session records.
+
+If the session model changes later to signed client-side cookies, add `PYXIS_SESSION_SECRET` then. For the current server-side-session model, adding an unused secret would create false confidence.
+
+### Validation
+
+Passed:
+
+```bash
+go test ./cmd/pyxis/... ./pkg/server ./pkg/service ./pkg/repository/postgres ./internal/web -count=1
+```
+
+Validated env-backed defaults with a clean environment so local `.envrc` secrets were not included:
+
+```bash
+env -i PATH="$PATH" HOME="$HOME" \
+  PYXIS_BIND=127.0.0.1:19090 \
+  PYXIS_DATABASE_URL=postgres://example:secret@db.example/pyxis \
+  PYXIS_FLYER_STORAGE_PATH=/data/flyers \
+  PYXIS_FLYER_BASE_URL=/flyers \
+  PYXIS_DISCORD_BOT_ENABLED=true \
+  PYXIS_DISCORD_SYNC_ON_START=true \
+  PYXIS_DISCORD_DEBUG=true \
+  ./bin/pyxis serve --help
+```
+
+The help output showed the expected env-derived defaults for bind, DB URL, flyer storage path, flyer base URL, and Discord bool flags.
+
+## Step 10: Revalidated embedded build and Docker smoke after Phase 2
+
+After wiring env-backed production config, re-ran the packaging checks from Phase 1 to ensure the Docker/runtime surface still works:
+
+```bash
+BUILD_WEB_LOCAL=1 make build-embed
+make docker-smoke IMAGE_REPOSITORY=pyxis IMAGE_TAG=phase2-local
+```
+
+Both passed. Logs were written to temporary files:
+
+```text
+/tmp/pyxis-phase2-build-embed.log
+/tmp/pyxis-phase2-docker-smoke.log
+```

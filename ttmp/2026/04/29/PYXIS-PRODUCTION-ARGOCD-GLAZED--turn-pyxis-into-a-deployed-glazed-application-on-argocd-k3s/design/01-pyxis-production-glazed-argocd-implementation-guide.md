@@ -612,7 +612,7 @@ discord_door_role_id
 discord_bot_enabled         # "false" initially, then "true" after bot install is confirmed
 ```
 
-Current code may need a `SessionSecret` config field before `session_secret` is useful. Add it before production if sessions are currently unsigned or dev-only.
+Session secret audit: current Pyxis browser sessions are opaque random tokens stored server-side in PostgreSQL, and the browser cookie stores only that session token. There is no signed client-side session payload today, so `session_secret` is not required for the current implementation. Keep `PYXIS_SESSION_COOKIE_NAME` as the production cookie naming control. Add `PYXIS_SESSION_SECRET` only if Pyxis later moves to signed/encrypted client-side session cookies.
 
 ### 9.4 PostgreSQL bootstrap
 
@@ -701,6 +701,10 @@ spec:
                   key: dsn
             - name: PYXIS_WEBSITE_URL
               value: https://pyxis.yolo.scapegoat.dev
+            - name: PYXIS_FLYER_STORAGE_PATH
+              value: /data/flyers
+            - name: PYXIS_FLYER_BASE_URL
+              value: /flyers
             - name: PYXIS_DISCORD_CLIENT_ID
               valueFrom:
                 secretKeyRef:

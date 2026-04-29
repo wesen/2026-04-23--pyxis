@@ -12,3 +12,5 @@
 - 2026-04-29: Expanded tasks into detailed implementation phases from packaging baseline through first production rollout.
 - 2026-04-29: Completed Phase 1 packaging baseline: Dockerfile, .dockerignore, Makefile CI/image targets, golangci config, published module dependencies instead of local replace directives, and Docker smoke validation.
 - 2026-04-29: Uploaded v3 reMarkable bundle including PostgreSQL clarification, expanded tasks, Phase 1 packaging implementation notes, and CGO/local-replace findings.
+- 2026-04-29: Completed Phase 2 production config hardening: env-backed bind/DB/flyer/Discord-bot settings, configurable flyer storage, production env example, and session-secret audit.
+- 2026-04-29: Revalidated `BUILD_WEB_LOCAL=1 make build-embed` and `make docker-smoke IMAGE_REPOSITORY=pyxis IMAGE_TAG=phase2-local` after Phase 2 config changes.

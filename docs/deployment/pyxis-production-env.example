@@ -1,0 +1,25 @@
+# Pyxis production environment contract (example only; do not commit real secrets).
+
+PYXIS_BIND=0.0.0.0:8080
+PYXIS_DATABASE_URL=postgres://pyxis_app:REPLACE_ME@postgres.postgres.svc.cluster.local:5432/pyxis?sslmode=disable
+PYXIS_WEBSITE_URL=https://pyxis.yolo.scapegoat.dev
+PYXIS_SESSION_COOKIE_NAME=pyxis_session
+
+# Uploaded flyers. In Kubernetes this path should be backed by a PVC mounted at /data.
+PYXIS_FLYER_STORAGE_PATH=/data/flyers
+PYXIS_FLYER_BASE_URL=/flyers
+
+# Discord OAuth staff login.
+PYXIS_DISCORD_CLIENT_ID=REPLACE_ME
+PYXIS_DISCORD_CLIENT_SECRET=REPLACE_ME
+PYXIS_DISCORD_REDIRECT_URL=https://pyxis.yolo.scapegoat.dev/auth/discord/callback
+DISCORD_BOT_TOKEN=REPLACE_ME
+DISCORD_GUILD_ID=586274407350272042
+DISCORD_ADMIN_ROLE_ID=REPLACE_ME
+DISCORD_BOOKER_ROLE_ID=REPLACE_ME
+DISCORD_DOOR_ROLE_ID=REPLACE_ME
+
+# Optional embedded Discord bot. Keep false for first web rollout.
+PYXIS_DISCORD_BOT_ENABLED=false
+PYXIS_DISCORD_SYNC_ON_START=false
+PYXIS_DISCORD_DEBUG=false
