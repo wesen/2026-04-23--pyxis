@@ -19,6 +19,7 @@ type ShowDraft = {
   startTime: string;
   age: string;
   price: string;
+  reserveTicketEnabled: boolean;
   genre: string;
   description: string;
   notes: string;
@@ -44,6 +45,7 @@ const emptyDraft: ShowDraft = {
   startTime: '9:00 PM',
   age: '21+',
   price: '',
+  reserveTicketEnabled: false,
   genre: '',
   description: '',
   notes: '',
@@ -61,6 +63,7 @@ function draftFromShow(show?: Show): ShowDraft {
     startTime: show.startTime,
     age: show.age,
     price: show.price,
+    reserveTicketEnabled: show.reserveTicketEnabled,
     genre: show.genre,
     description: show.description,
     notes: show.notes,
@@ -119,6 +122,7 @@ export function NewShowModal({
       startTime: draft.startTime,
       age: draft.age,
       price: draft.price,
+      reserveTicketEnabled: draft.reserveTicketEnabled,
       genre: draft.genre,
       description: draft.description,
       notes: draft.notes,
@@ -190,8 +194,8 @@ export function NewShowModal({
             </select>
           </label>
           <label className="app-new-show-modal-field">
-            <span>Reserve ticket / price</span>
-            <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional" />
+            <span>Price</span>
+            <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional display text" />
           </label>
           <label className="app-new-show-modal-field">
             <span>Genre</span>
@@ -211,7 +215,11 @@ export function NewShowModal({
           <textarea rows={2} value={draft.notes} onChange={(event) => update('notes', event.target.value)} />
           <small>Visible to staff only</small>
         </label>
-        <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Reserve ticket / price is optional; leave it blank when there is no advance/reservation copy yet.</p>
+        <label className="app-new-show-modal-toggle">
+          <input type="checkbox" checked={draft.reserveTicketEnabled} onChange={(event) => update('reserveTicketEnabled', event.target.checked)} />
+          <span>Show “Reserve ticket” call-to-action publicly</span>
+        </label>
+        <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Price is optional display text. The public “Reserve ticket” CTA is behind the flag above and is off by default.</p>
         {!hasFlyerForConfirmation && <p className="app-new-show-modal-warning">Confirmed shows need a flyer/poster before they can appear publicly. Attach a flyer here or save as Draft/Hold until artwork is ready.</p>}
         <div className="app-new-show-modal-lineup">
           <div className="app-new-show-modal-section-header">

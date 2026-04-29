@@ -1,0 +1,9 @@
+## reserve ticket flag validation
+2026-04-29T17:49:20-04:00
+make generate: PASS
+pnpm --dir web --filter pyxis-types build: PASS
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-user-site exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
+pnpm --dir web --filter pyxis-user-site build: PASS
+go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1: PASS

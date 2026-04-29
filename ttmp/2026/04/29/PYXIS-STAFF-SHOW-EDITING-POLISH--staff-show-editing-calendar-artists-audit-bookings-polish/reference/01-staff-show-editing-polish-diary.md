@@ -315,3 +315,34 @@ Both passed. Evidence:
 ```text
 sources/10-resizable-date-column-validation.txt
 ```
+
+## Step 9: Put Reserve ticket behind an explicit flag
+
+The user clarified the desired semantics: `price` should remain price display text, while the public “Reserve ticket” affordance should be behind a dedicated flag that defaults to false.
+
+Implementation:
+
+- Added database migration `000006_add_show_reserve_ticket_enabled` with `reserve_ticket_enabled BOOLEAN NOT NULL DEFAULT false` on `shows`.
+- Added `reserve_ticket_enabled` to `Show` and `AppShow` protobuf messages and regenerated Go/TypeScript code with `make generate`.
+- Added `ReserveTicketEnabled` to `domain.Show`, repository create/update params, and row mapping.
+- Mapped the flag through `protoToDomainShow` and `showToProto`.
+- Updated the staff show modal:
+  - `Price` is now explicitly optional display text.
+  - Added an unchecked-by-default checkbox: `Show “Reserve ticket” call-to-action publicly`.
+  - Helper copy explains that the public CTA is behind the flag and off by default.
+- Updated public show detail to render `ReserveTicketCard` only when `show.reserveTicketEnabled` is true.
+- Updated public show tiles so the pill says `Reserve ticket →` only when the flag is true; otherwise it says `Learn more →`.
+
+Validation:
+
+```bash
+make generate
+pnpm --dir web --filter pyxis-types build
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-user-site exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+pnpm --dir web --filter pyxis-user-site build
+go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1
+```
+
+All passed after fixing a missing JSX brace in `ShowDetailPage` and rebuilding `pyxis-types` so workspace consumers saw the new generated field.

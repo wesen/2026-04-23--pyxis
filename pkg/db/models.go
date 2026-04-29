@@ -83,27 +83,28 @@ type Setting struct {
 }
 
 type Show struct {
-	ID               int32              `json:"id"`
-	Artist           string             `json:"artist"`
-	Date             pgtype.Date        `json:"date"`
-	DoorsTime        pgtype.Text        `json:"doorsTime"`
-	StartTime        pgtype.Text        `json:"startTime"`
-	Age              pgtype.Text        `json:"age"`
-	Price            pgtype.Text        `json:"price"`
-	Genre            pgtype.Text        `json:"genre"`
-	Description      pgtype.Text        `json:"description"`
-	Notes            pgtype.Text        `json:"notes"`
-	Status           string             `json:"status"`
-	FlyerUrl         pgtype.Text        `json:"flyerUrl"`
-	DiscordMessageID pgtype.Text        `json:"discordMessageId"`
-	DiscordChannelID pgtype.Text        `json:"discordChannelId"`
-	SubmissionID     pgtype.Int4        `json:"submissionId"`
-	ArtistID         pgtype.Int4        `json:"artistId"`
-	CreatedBy        pgtype.Int4        `json:"createdBy"`
-	CreatedAt        pgtype.Timestamptz `json:"createdAt"`
-	UpdatedAt        pgtype.Timestamptz `json:"updatedAt"`
-	Draw             pgtype.Int4        `json:"draw"`
-	Capacity         pgtype.Int4        `json:"capacity"`
+	ID                   int32              `json:"id"`
+	Artist               string             `json:"artist"`
+	Date                 pgtype.Date        `json:"date"`
+	DoorsTime            pgtype.Text        `json:"doorsTime"`
+	StartTime            pgtype.Text        `json:"startTime"`
+	Age                  pgtype.Text        `json:"age"`
+	Price                pgtype.Text        `json:"price"`
+	Genre                pgtype.Text        `json:"genre"`
+	Description          pgtype.Text        `json:"description"`
+	Notes                pgtype.Text        `json:"notes"`
+	Status               string             `json:"status"`
+	FlyerUrl             pgtype.Text        `json:"flyerUrl"`
+	DiscordMessageID     pgtype.Text        `json:"discordMessageId"`
+	DiscordChannelID     pgtype.Text        `json:"discordChannelId"`
+	SubmissionID         pgtype.Int4        `json:"submissionId"`
+	ArtistID             pgtype.Int4        `json:"artistId"`
+	CreatedBy            pgtype.Int4        `json:"createdBy"`
+	CreatedAt            pgtype.Timestamptz `json:"createdAt"`
+	UpdatedAt            pgtype.Timestamptz `json:"updatedAt"`
+	Draw                 pgtype.Int4        `json:"draw"`
+	Capacity             pgtype.Int4        `json:"capacity"`
+	ReserveTicketEnabled bool               `json:"reserveTicketEnabled"`
 }
 
 type ShowLineup struct {

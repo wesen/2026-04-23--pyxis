@@ -22,11 +22,11 @@ export type ShowTileProps = {
   className?: string;
 };
 
-const pillFor = (kind?: ShowTileAction) => kind === 'soldout'
+const pillFor = (kind?: ShowTileAction, reserveTicketEnabled = false) => kind === 'soldout'
   ? { label: 'Sold out', bg: '#F0EFEC', color: '#8E887E' }
-  : kind === 'learn'
+  : kind === 'learn' || !reserveTicketEnabled
     ? { label: 'Learn more →', bg: '#FFF2EF', color: '#C8270D' }
-    : { label: 'Tickets →', bg: '#FFF2EF', color: '#C8270D' };
+    : { label: 'Reserve ticket →', bg: '#FFF2EF', color: '#C8270D' };
 
 const formatDate = (date: string) => date.includes('-')
   ? new Date(`${date}T00:00:00`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
@@ -65,7 +65,7 @@ const kindFor = (show: ShowTileShow): ShowTileShow['kind'] => {
 const isMockPlaceholderFlyer = (url?: string) => Boolean(url?.includes('placehold.co/'));
 
 export const ShowTile = ({ show, compact = false, posterKind, onClick, className }: ShowTileProps) => {
-  const pill = pillFor(show.kind ?? kindFor(show));
+  const pill = pillFor(show.kind ?? kindFor(show), show.reserveTicketEnabled);
   const title = show.title ?? show.artist;
   const time = show.time ?? show.doorsTime;
   const flyerUrl = isMockPlaceholderFlyer(show.flyerUrl) ? undefined : show.flyerUrl;
@@ -93,9 +93,9 @@ export const ShowTile = ({ show, compact = false, posterKind, onClick, className
         <div className="pyxis-show-tile__meta" {...pyxisPart('show-tile', 'meta')}>
           {formatMeta(show, time)}
         </div>
-        <div className="pyxis-show-tile__price" {...pyxisPart('show-tile', 'price')}>
+        {show.price && <div className="pyxis-show-tile__price" {...pyxisPart('show-tile', 'price')}>
           {show.price}
-        </div>
+        </div>}
         <button className="pyxis-show-tile__ticket-pill" {...pyxisPart('show-tile', 'ticket-pill')}>
           {pill.label}
         </button>

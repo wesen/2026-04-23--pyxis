@@ -40,6 +40,7 @@ message Show {
   int32  capacity      = 19;
   string discord_message_id = 20;
   string discord_channel_id = 21;
+  bool   reserve_ticket_enabled = 22;
   ShowStatus status    = 12;
   int32  submission_id = 13;
   int32  artist_id     = 14;
@@ -69,6 +70,7 @@ message AppShow {
   string notes    = 12;
   string discord_message_id = 13;
   string discord_channel_id = 14;
+  bool   reserve_ticket_enabled = 15;
 }
 
 message ArchivedShow {

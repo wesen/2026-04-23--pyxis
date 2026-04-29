@@ -57,8 +57,8 @@ Phase 2 decides and implements how the Shows overview should display richer show
 ## T4 — Backend/API/model follow-up
 
 - [x] T401 Preserve `flyerUrl` in the staff list view model for overview readiness display; no lineup summary needed.
-- [ ] T402 Determine whether reserve-ticket optionality needs schema/API changes or can be represented by blank price fields today.
-- [ ] T403 Add tests for any backend/API contract changes.
+- [x] T402 Add explicit `reserve_ticket_enabled` flag; keep `price` as optional display text and default reserve CTA to off.
+- [x] T403 Validate generated SQL/protobuf mappings and targeted backend/frontend builds after schema/API contract change.
 
 ## Phase 3 — Validation and release
 

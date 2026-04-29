@@ -56,3 +56,10 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 ## 2026-04-29 — Flexible date column
 
 - Changed the staff Shows table date column from fixed `130px` to `min-width: 96px; width: auto` so it can resize alongside the new Flyer column.
+
+## 2026-04-29 — Reserve ticket flag
+
+- Added `shows.reserve_ticket_enabled` with default `false`.
+- Added `reserveTicketEnabled` to Show/AppShow protobuf contracts and repository/server mappings.
+- Changed staff modal semantics so `price` is optional display text and public Reserve ticket CTA is controlled by an explicit checkbox.
+- Public show detail and show tiles now show reserve-ticket affordances only when the flag is true.

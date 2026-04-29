@@ -187,20 +187,21 @@ func (s *Server) handleArchiveShow(w http.ResponseWriter, r *http.Request) {
 
 func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 	show := &domain.Show{
-		Artist:           pb.Artist,
-		DoorsTime:        pb.DoorsTime,
-		StartTime:        pb.StartTime,
-		Age:              pb.Age,
-		Price:            pb.Price,
-		Genre:            pb.Genre,
-		Description:      pb.Description,
-		Notes:            pb.Notes,
-		FlyerURL:         pb.FlyerUrl,
-		DiscordMessageID: pb.DiscordMessageId,
-		DiscordChannelID: pb.DiscordChannelId,
-		Draw:             int(pb.Draw),
-		Capacity:         int(pb.Capacity),
-		Status:           showStatusToString(pb.Status),
+		Artist:               pb.Artist,
+		DoorsTime:            pb.DoorsTime,
+		StartTime:            pb.StartTime,
+		Age:                  pb.Age,
+		Price:                pb.Price,
+		Genre:                pb.Genre,
+		Description:          pb.Description,
+		Notes:                pb.Notes,
+		FlyerURL:             pb.FlyerUrl,
+		DiscordMessageID:     pb.DiscordMessageId,
+		DiscordChannelID:     pb.DiscordChannelId,
+		ReserveTicketEnabled: pb.ReserveTicketEnabled,
+		Draw:                 int(pb.Draw),
+		Capacity:             int(pb.Capacity),
+		Status:               showStatusToString(pb.Status),
 	}
 	for _, entry := range pb.Lineup {
 		show.Lineup = append(show.Lineup, domain.LineupEntry{

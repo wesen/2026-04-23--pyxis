@@ -1,6 +1,6 @@
 -- name: ListUpcomingShows :many
 SELECT id, artist, date, doors_time, start_time, age, price, genre,
-       description, notes, status, flyer_url, discord_message_id, discord_channel_id, draw, capacity,
+       description, notes, status, flyer_url, discord_message_id, discord_channel_id, reserve_ticket_enabled, draw, capacity,
        submission_id, artist_id, created_at, updated_at
 FROM shows
 WHERE status = 'confirmed' AND date >= CURRENT_DATE
@@ -30,9 +30,9 @@ GROUP BY s.id;
 
 -- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
-                   genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, draw, capacity,
+                   genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, reserve_ticket_enabled, draw, capacity,
                    submission_id, artist_id, created_by)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
 RETURNING *;
 
 -- name: UpdateShow :one
@@ -40,7 +40,7 @@ UPDATE shows
 SET artist = $2, date = $3, doors_time = $4, start_time = $5,
     age = $6, price = $7, genre = $8, description = $9, notes = $10,
     status = $11, flyer_url = $12, discord_message_id = $13, discord_channel_id = $14,
-    draw = $15, capacity = $16,
+    reserve_ticket_enabled = $15, draw = $16, capacity = $17,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;

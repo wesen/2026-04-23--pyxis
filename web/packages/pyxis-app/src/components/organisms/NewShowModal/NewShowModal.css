@@ -60,6 +60,18 @@
   margin-top: 5px;
 }
 
+.app-new-show-modal-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0 10px;
+  color: var(--app-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.app-new-show-modal-toggle input { width: auto; }
+
 .app-new-show-modal-help,
 .app-new-show-modal-warning {
   margin: 0 0 14px;
