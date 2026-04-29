@@ -7,3 +7,4 @@
 - 2026-04-29: Added first PostShowLogEntryCard and PostShowLogPanel organisms with Storybook stories and TypeScript validation.
 - 2026-04-29: Pivoted PostShowLogPanel to a ShowsConfirmedPanel-like table with expandable detail rows and an edit modal, then moved the family under `organisms/ShowLog/`.
 - 2026-04-29: Captured ShowsConfirmedPanel with css-visual-diff as a visual reference and simplified ShowLogPanel to a compact Panel/table default state.
+- 2026-04-29: Split PostShowLogEditorModal into its own ShowLog organism and tuned its form layout using css-visual-diff screenshots plus image review feedback.

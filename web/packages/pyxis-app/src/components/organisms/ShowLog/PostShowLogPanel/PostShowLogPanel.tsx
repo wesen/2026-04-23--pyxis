@@ -9,7 +9,7 @@ import { Panel } from '../../Panel';
 import { appPart } from '../../../parts';
 import '../../../molecules/Table/Table.css';
 import './PostShowLogPanel.css';
-import { PostShowLogEditorModal } from './PostShowLogEditorModal';
+import { PostShowLogEditorModal } from '../PostShowLogEditorModal';
 
 export type PostShowLogFilter = ShowLogStatus | 'all';
 

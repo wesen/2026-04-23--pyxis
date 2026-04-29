@@ -243,3 +243,42 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 12: Split ShowLog editor modal and tuned form with screenshot feedback
+
+Separated the editor modal out of `PostShowLogPanel` into its own organism folder:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEditorModal/
+```
+
+Added a dedicated Storybook story at:
+
+```text
+Pyxis App/Components/Organisms/ShowLog/PostShowLogEditorModal
+```
+
+Used `css-visual-diff screenshot` to capture the modal from Storybook and reviewed the PNG with image understanding feedback. Artifacts:
+
+```text
+sources/16-show-log-modal-form/post-show-log-editor-modal.png
+sources/16-show-log-modal-form/post-show-log-editor-modal-after-tune.png
+sources/16-show-log-modal-form/post-show-log-editor-modal-final.png
+sources/16-show-log-modal-form/post-show-log-editor-modal.css-visual-diff.yml
+```
+
+Tuning performed from screenshot feedback:
+
+- clarified context vs form sections;
+- removed the nested box feeling for show notes inside the context area;
+- made the incident control more compact;
+- hid incident notes unless Incident is checked;
+- shortened the action copy to `Save report`;
+- tightened draw input width and vertical alignment;
+- normalized field label spacing.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

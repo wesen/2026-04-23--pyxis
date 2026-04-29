@@ -1,0 +1,33 @@
+metadata:
+  slug: pyxis-app-post-show-log-editor-modal
+  title: PostShowLogEditorModal Storybook screenshot
+
+original:
+  name: storybook-reference-copy
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogeditormodal--needs-log&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 820 }
+  root_selector: 'body'
+
+react:
+  name: storybook-current
+  url: http://localhost:6008/iframe.html?id=pyxis-app-components-organisms-showlog-postshowlogeditormodal--needs-log&viewMode=story
+  wait_ms: 1000
+  viewport: { width: 1200, height: 820 }
+  root_selector: 'body'
+
+sections:
+  - name: modal
+    selector_original: '[data-pyxis-component="post-show-log-editor-modal"]'
+    selector_react: '[data-pyxis-component="post-show-log-editor-modal"]'
+
+output:
+  dir: ttmp/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN--redesign-show-archive-page-visual-hierarchy-and-filtering-ux/sources/16-show-log-modal-form/css-visual-diff
+  write_json: true
+  write_markdown: true
+  write_pngs: true
+  write_prepared_html: true
+  write_inspect_json: true
+  validate_pngs: true
+
+modes: [capture]
