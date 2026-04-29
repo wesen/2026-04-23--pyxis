@@ -599,6 +599,27 @@ If a shared primitive is close but not perfect, use this decision order:
 2. Wrap it locally if the app needs domain props.
 3. Create a new local component only if visual parity or semantics require it.
 
+## Widget reuse and deprecation audit
+
+A dedicated reuse/deprecation audit now lives at:
+
+```text
+sources/06-widget-reuse-and-deprecation-audit.md
+```
+
+The short version is:
+
+- Reuse shared primitives such as `Button`, `Modal`, `Input`, `Select`, `Textarea`, `Field`, and icon primitives where their APIs fit.
+- Reuse app atoms such as `StatusDot`, `StatusPill`, `AgeBadge`, `DateChip`, and `DrawProgress` rather than inventing duplicate indicators.
+- Reuse or adapt app molecules such as `NoteBlock`, `MetadataStrip`, `StatusBadge`, `AppEmptyState`, and `FieldError` for display and validation states.
+- Evolve `NewShowModal` rather than replacing its public contract.
+- Reuse or wrap `FlyerField` for input/preview behavior, while likely adding a `ShowFlyerCard` for edit-page asset/readiness presentation.
+- Reuse or evolve `ShowDetailDiscordPanel` into the new Discord rail card.
+- Replace/deprecate older compact detail components such as `ShowDetailHero` and `ShowDetailInfoPanel` after the new `ShowEditHeader`, `ShowEditRail`, and explicit section organisms take over route/story usage.
+- Reduce broad legacy style buckets like `Panels.css`, `ShowsSections.css`, `Rows.css`, and page-owned show-detail rules only when a touched widget gets local ownership.
+
+Deprecation should not be mixed into the first visual tuning step unless route imports are already migrated. The safe sequence is: add replacement component, move route usage, migrate stories/evidence, run typecheck/build, then delete old widgets in a cleanup commit.
+
 ## Proposed visual architecture
 
 ### Modal spatial model

@@ -259,3 +259,31 @@ Result:
 ```text
 [f]	PYXIS-SHOW-EDIT-VISUAL-REDESIGN guide
 ```
+
+
+## Step 8: Add widget reuse/deprecation audit
+
+The user asked whether the planning work had actually studied which widgets already exist for reuse and which should be deprecated after the redesign. The first guide contained an initial reuse map, but it did not yet have a dedicated deprecation audit.
+
+I added:
+
+```text
+sources/06-widget-reuse-and-deprecation-audit.md
+```
+
+The audit identifies direct reuse candidates (`Button`, `Modal`, `StatusPill`, `NoteBlock`, `Panel`, `FlyerField`, etc.), likely new show-edit-specific widgets (`ShowEditHeader`, `ShowEditRail`, `ShowFlyerCard`, `ShowFormSection`, `ShowLineupRowEditor`), and likely deprecation/replacement candidates (`ShowDetailHero`, `ShowDetailInfoPanel`, older page-owned show detail styles, and some broad legacy CSS buckets).
+
+I also updated the primary design guide to reference this audit and marked task `T203` complete.
+
+## Step 9: Expand implementation tasks into storybook-first phases
+
+The user asked to continue from documentation into implementation, following the runbooks: storybook first, component folders that match the existing structure, good widget-owned CSS, and a detailed diary.
+
+I expanded the task plan so the coding work is split into reviewable phases:
+
+1. Storybook-first modal component decomposition.
+2. Modal visual polish and evidence.
+3. Storybook-first show edit page decomposition.
+4. Show edit page visual polish and evidence.
+
+This deliberately separates component extraction from visual retuning so regressions are easier to isolate.

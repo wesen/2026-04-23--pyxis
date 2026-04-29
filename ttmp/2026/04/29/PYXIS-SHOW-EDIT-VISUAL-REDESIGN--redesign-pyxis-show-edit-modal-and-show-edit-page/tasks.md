@@ -38,30 +38,45 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 - [ ] T201 Capture current modal screenshot evidence before implementation.
 - [ ] T202 Capture current show edit/detail page screenshot evidence before implementation.
-- [ ] T203 Audit existing atoms/molecules/organisms and record explicit reuse/new-component decisions.
+- [x] T203 Audit existing atoms/molecules/organisms and record explicit reuse/new-component decisions.
 - [ ] T204 Decide whether show edit page remains read-only-with-modal or moves toward inline editing.
 - [ ] T205 Decide scope of `Preview`, `Duplicate`, `Open post`, flyer delete, and cancel-show controls.
 
-## Phase 3 — Future implementation: component decomposition
+## Phase 3 — Storybook-first modal component decomposition
 
-- [ ] T301 Extract only justified show edit organisms/molecules with local CSS/stories.
-- [ ] T302 Keep page-level RTK Query hooks in pages and pass typed props down.
-- [ ] T303 Add Storybook stories for modal, rail, main sections, lineup rows, flyer states, and mobile/narrow states.
-- [ ] T304 Validate TypeScript/build after decomposition before visual retuning.
+- [ ] T301 Create `ShowFormSection` molecule folder with TSX/CSS/story/index and stable `appPart` selectors.
+- [ ] T302 Create `ShowLineupRowEditor` molecule folder with TSX/CSS/story/index and no route/API coupling.
+- [ ] T303 Create or adapt a dropzone-style flyer input component while preserving keyboard-accessible file input behavior.
+- [ ] T304 Refactor `NewShowModal` to compose the new molecules without changing its external props contract.
+- [ ] T305 Add modal stories for create default, edit existing with flyer, confirmed-needs-flyer, long lineup, backend error, and mobile/narrow.
+- [ ] T306 Validate `pyxis-app` TypeScript/build after modal decomposition.
+- [ ] T307 Commit modal decomposition separately from later route/page redesign.
 
-## Phase 4 — Future implementation: modal visual redesign
+## Phase 4 — Modal visual polish and evidence
 
-- [ ] T401 Redesign `NewShowModal` into sectioned form layout.
+- [ ] T401 Tune modal CSS toward `show-modal-reference.png`: section rhythm, uppercase section headings, field grids, lineup rows, and footer clarity.
 - [ ] T402 Preserve required-field, draft, confirmed-with-flyer, price, and reserve-ticket semantics.
-- [ ] T403 Add dropzone-style flyer presentation without breaking file input accessibility.
-- [ ] T404 Capture final modal screenshots and compare against reference intent.
+- [ ] T403 Capture Storybook screenshots for the redesigned modal states and store evidence under `sources/`.
+- [ ] T404 Run local interaction smoke for modal validation and submit behavior.
+- [ ] T405 Commit modal visual polish and evidence.
 
-## Phase 5 — Future implementation: show edit page visual redesign
+## Phase 5 — Storybook-first show edit page decomposition
 
-- [ ] T501 Redesign `ShowDetailPage` around header, left rail, and right content sections.
-- [ ] T502 Keep inactive/future actions honest: disable, omit, or implement before showing as active.
-- [ ] T503 Capture final page screenshots and compare against reference intent.
-- [ ] T504 Run browser smoke for create/edit/show detail flows.
+- [ ] T501 Create `ShowEditHeader` organism with story states for normal, saving, and disabled future actions.
+- [ ] T502 Create `ShowFlyerCard` molecule/organism with stories for ready flyer, missing flyer, uploading, and selected replacement.
+- [ ] T503 Create `ShowEditRail` organism that composes flyer, status/readiness, and Discord cards.
+- [ ] T504 Create `ShowEditMain`/section organisms for Basics, Date & Time, Details, Lineup, and Staff Notes.
+- [ ] T505 Refactor `ShowDetailPage` to compose show edit organisms while preserving page-level RTK Query/mutations.
+- [ ] T506 Validate TypeScript/build after page decomposition.
+- [ ] T507 Commit page decomposition separately from final visual tuning.
+
+## Phase 6 — Show edit page visual polish and evidence
+
+- [ ] T601 Tune the show edit page toward `show-admin-reference.png`: header, two-column rail/main layout, cards, spacing, mobile stacking.
+- [ ] T602 Keep inactive/future actions honest: disable, omit, or implement before showing as active.
+- [ ] T603 Capture current/final page screenshots and store evidence under `sources/`.
+- [ ] T604 Run browser smoke for create/edit/show detail flows.
+- [ ] T605 Commit page visual polish and evidence.
 
 ## Phase 6 — Documentation delivery
 

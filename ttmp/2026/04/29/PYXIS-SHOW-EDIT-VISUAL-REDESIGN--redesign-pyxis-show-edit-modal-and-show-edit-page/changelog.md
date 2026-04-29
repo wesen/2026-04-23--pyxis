@@ -23,3 +23,9 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Added reference PNG analysis, code evidence inventory, and line-anchored excerpts.
 - Wrote detailed intern-oriented implementation guide for redesigning the show create/edit modal and show edit page through component decomposition.
 - Added task plan covering documentation, future screenshot baseline, component decomposition, modal redesign, page redesign, validation, and delivery.
+
+## 2026-04-29 — Widget reuse/deprecation audit
+
+- Added `sources/06-widget-reuse-and-deprecation-audit.md`.
+- Clarified which existing shared primitives, app atoms, molecules, and organisms should be reused or evolved.
+- Identified likely deprecation candidates after redesign: `ShowDetailHero`, `ShowDetailInfoPanel`, portions of broad CSS buckets, and page-owned show detail styles.
