@@ -1,7 +1,7 @@
 {
   "ok": true,
   "url": "http://localhost:3008/shows/31",
-  "loggedInRoute": false,
-  "loginRoute": true,
+  "loggedInRoute": true,
+  "loginRoute": false,
   "screenshot": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/12-show-edit-route-smoke/show-31-page.png"
 }

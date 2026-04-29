@@ -508,3 +508,45 @@ Result:
 ```
 
 This confirms the local route is auth-gated in the current dev session. It does not yet validate the authenticated edit view. Task T604 remains open for a future authenticated smoke.
+
+
+## Step 15: Authenticated show edit route smoke
+
+I updated `scripts/04-smoke-show-edit-page.js` to visit:
+
+```text
+/auth/dev-login?username=show-edit-smoke&role=admin
+```
+
+before opening:
+
+```text
+/shows/31
+```
+
+The first authenticated attempt found the edit page and opened the save-confirm dialog, but failed when closing the dialog because the selector was too broad:
+
+```text
+locator.click: Error: strict mode violation: getByRole('button', { name: /cancel/i }) resolved to 2 elements
+1) Cancel
+2) Cancel show
+```
+
+I fixed this by changing the selector to an exact regular expression:
+
+```text
+getByRole('button', { name: /^cancel$/i })
+```
+
+Final smoke result:
+
+```json
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/31",
+  "loggedInRoute": true,
+  "loginRoute": false
+}
+```
+
+The route smoke now validates that the decomposed show edit page renders behind dev auth, includes `Edit show`, `Basics`, and `Flyer`, and that the save-confirm dialog opens and can be closed without accidentally clicking `Cancel show`.

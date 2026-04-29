@@ -61,3 +61,9 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Added `scripts/03-capture-show-edit-stories.js` and captured Storybook evidence for `ShowEditHeader`, `ShowFlyerCard`, `ShowEditRail`, and `ShowEditMain`.
 - Added `scripts/04-smoke-show-edit-page.js`; local unauthenticated route smoke reached the login route, confirming auth gating but not the authenticated edit view.
 - Stored outputs under `sources/11-show-edit-storybook-captures/` and `sources/12-show-edit-route-smoke/`.
+
+## 2026-04-30 — Authenticated show edit route smoke
+
+- Updated `scripts/04-smoke-show-edit-page.js` to use the local `PYXIS_DEV_AUTH=1` `/auth/dev-login` flow before visiting `/shows/31`.
+- Smoke now verifies the authenticated show edit route renders `Edit show`, `Basics`, and `Flyer`, opens the save-confirm dialog, and closes it with the exact `Cancel` button.
+- Replaced the earlier unauthenticated login-gating smoke output with authenticated evidence in `sources/12-show-edit-route-smoke/`.

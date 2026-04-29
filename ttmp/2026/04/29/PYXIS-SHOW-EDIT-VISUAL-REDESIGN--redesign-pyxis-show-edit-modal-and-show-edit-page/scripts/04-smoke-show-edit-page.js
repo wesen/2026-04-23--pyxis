@@ -14,6 +14,8 @@ await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1200 }, deviceScaleFactor: 1 });
+  const loginUrl = `${baseUrl}/auth/dev-login?username=show-edit-smoke&role=admin`;
+  await page.goto(loginUrl, { waitUntil: 'networkidle' });
   const url = `${baseUrl}/shows/${showId}`;
   await page.goto(url, { waitUntil: 'networkidle' });
   const title = await page.title();
@@ -27,6 +29,9 @@ try {
     await page.getByText('Edit show').first().waitFor({ timeout: 15000 });
     await page.getByText('Basics').first().waitFor({ timeout: 15000 });
     await page.getByText('Flyer').first().waitFor({ timeout: 15000 });
+    await page.getByRole('button', { name: /save changes/i }).click();
+    await page.getByRole('dialog').waitFor({ timeout: 15000 });
+    await page.getByRole('button', { name: /^cancel$/i }).click();
   }
   const screenshot = path.join(outDir, `show-${showId}-page.png`);
   await page.screenshot({ path: screenshot, fullPage: true });
