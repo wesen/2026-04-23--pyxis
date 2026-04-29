@@ -49,10 +49,10 @@ jobs:
         env:
           GITOPS_PR_TOKEN: ${{ secrets.GITOPS_PR_TOKEN }}
           GH_TOKEN: ${{ secrets.GITOPS_PR_TOKEN }}
-          IMAGE: ghcr.io/${{ github.repository_owner }}/pyxis:sha-${{ github.sha }}
         run: |
           if [ -z "${GITOPS_PR_TOKEN}" ]; then
             echo "GITOPS_PR_TOKEN is required to open GitOps deployment PRs" >&2
             exit 1
           fi
+          IMAGE="ghcr.io/${{ github.repository_owner }}/pyxis:sha-${GITHUB_SHA::7}"
           python3 scripts/open_gitops_pr.py --image "${IMAGE}"

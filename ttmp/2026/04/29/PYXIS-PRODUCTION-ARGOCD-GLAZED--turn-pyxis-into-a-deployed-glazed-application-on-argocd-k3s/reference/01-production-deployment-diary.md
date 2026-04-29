@@ -935,3 +935,123 @@ The URL construction now uses:
 ```python
 quote(token, safe='')
 ```
+
+## Step 21: Fixed GitOps image tag length mismatch
+
+After refreshing the GitOps token and rerunning the workflow, the GitOps PR handoff succeeded and opened PRs. I merged the two generated PRs, applied the Argo CD Application, and watched the first sync. Vault secret synchronization and the database bootstrap job worked, but the migration Job could not pull the image.
+
+The problem was a tag contract mismatch: `docker/metadata-action` publishes `sha-<short-sha>` by default, but the GitOps PR step was writing `sha-<full-sha>`. Kubernetes was trying to pull a tag that did not exist in GHCR.
+
+### Prompt Context
+
+**User prompt (verbatim):** "look at things like ../hair-booking for setup (it could also be that the token is expired?)"
+
+**Assistant interpretation:** Compare Pyxis with the working hair-booking setup, consider token staleness, and continue fixing the CI/GitOps rollout path.
+
+**Inferred user intent:** Make the Pyxis GitOps PR automation behave like the proven app packaging flow and get past the real rollout failures.
+
+**Commit (code):** pending — short-SHA image handoff fix implemented before commit.
+
+### What I did
+
+- Inspected `../hair-booking/.github/workflows/publish-image.yaml` and `../hair-booking/scripts/open_gitops_pr.py`.
+- Confirmed hair-booking publishes and deploys `sha-${GITHUB_SHA::7}`.
+- Refreshed the Pyxis `GITOPS_PR_TOKEN` using the current `gh auth token` because the previous token could have been stale/expired:
+
+```bash
+gh auth token | gh secret set GITOPS_PR_TOKEN --repo wesen/2026-04-23--pyxis
+```
+
+- Re-ran the publish workflow; it succeeded and opened:
+  - PR 48 for `deployment.yaml`.
+  - PR 49 for `migration-job.yaml`.
+- Reviewed both diffs and merged them.
+- Applied the Argo CD Application:
+
+```bash
+kubectl apply -f gitops/applications/pyxis.yaml
+kubectl -n argocd annotate application pyxis argocd.argoproj.io/refresh=hard --overwrite
+```
+
+- Wrote Vault runtime/image-pull secrets and Vault policies/roles for:
+  - `kv/apps/pyxis/prod/runtime`
+  - `kv/apps/pyxis/prod/image-pull`
+  - `pyxis-prod`
+  - `pyxis-db-bootstrap`
+- Observed successful VSO sync and successful DB bootstrap Job.
+- Observed migration Job `ImagePullBackOff` because the full SHA image tag did not exist.
+- Updated `.github/workflows/publish-image.yml` to compute:
+
+```bash
+IMAGE="ghcr.io/${{ github.repository_owner }}/pyxis:sha-${GITHUB_SHA::7}"
+```
+
+instead of using the full `${{ github.sha }}`.
+
+### Why
+
+- The GitOps image reference must exactly match a tag that the image publishing step creates.
+- Hair-booking already uses the short-SHA convention, so Pyxis should follow the same standard unless Docker metadata is changed to publish full-SHA tags.
+
+### What worked
+
+- Refreshing `GITOPS_PR_TOKEN` resolved the Git push authentication failure.
+- The Git author fix from the previous step worked.
+- The GitOps PR automation successfully opened and merged PRs.
+- Argo CD applied the Pyxis Application.
+- Vault Secrets Operator successfully synced `pyxis-runtime`, `pyxis-postgres-admin`, and `pyxis-ghcr-pull`.
+- `pyxis-db-bootstrap` completed successfully.
+
+### What didn't work
+
+The migration Job failed to pull the image:
+
+```text
+Failed to pull image "ghcr.io/wesen/pyxis:sha-e4856701629e48fd114747f8c4ae3363d4f1ed95":
+failed to resolve reference "ghcr.io/wesen/pyxis:sha-e4856701629e48fd114747f8c4ae3363d4f1ed95":
+ghcr.io/wesen/pyxis:sha-e4856701629e48fd114747f8c4ae3363d4f1ed95: not found
+```
+
+The published Docker metadata showed:
+
+```text
+ghcr.io/wesen/pyxis:sha-e485670
+```
+
+### What I learned
+
+- The issue was no longer token authentication; it became a release artifact naming mismatch.
+- The working hair-booking setup is a useful reference because it explicitly computes `sha-${GITHUB_SHA::7}` for GitOps handoff.
+
+### What was tricky to build
+
+- `docker/metadata-action` exposes `type=sha,prefix=sha-`, which defaults to a short SHA tag. The workflow step used the full GitHub SHA independently, so both lines looked plausible until Kubernetes tried to pull the image.
+
+### What warrants a second pair of eyes
+
+- Confirm we want short SHA tags everywhere. The alternative is configuring Docker metadata to publish full SHA tags, but the cluster/app standard currently points toward short SHA tags.
+- Review whether the two generated PRs should be collapsed into one PR per image in a future script improvement.
+
+### What should be done in the future
+
+- Push this workflow fix and verify the next generated GitOps PRs update both manifests to a real short-SHA tag.
+- After merging those PRs, refresh Argo CD and confirm the migration Job can pull and run.
+
+### Code review instructions
+
+- Review `.github/workflows/publish-image.yml`, especially the `IMAGE="...sha-${GITHUB_SHA::7}"` line.
+- Compare with `../hair-booking/.github/workflows/publish-image.yaml`.
+
+### Technical details
+
+Current failed image reference in cluster before this fix:
+
+```text
+ghcr.io/wesen/pyxis:sha-e4856701629e48fd114747f8c4ae3363d4f1ed95
+```
+
+Expected published tag shape:
+
+```text
+ghcr.io/wesen/pyxis:sha-e485670
+```

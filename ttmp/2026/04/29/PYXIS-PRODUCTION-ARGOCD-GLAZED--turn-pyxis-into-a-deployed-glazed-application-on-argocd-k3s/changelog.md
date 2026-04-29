@@ -25,3 +25,4 @@
 - 2026-04-29: Uploaded v6 reMarkable bundle after Phase 5 GitOps PR automation.
 - 2026-04-29: Real `publish-image` run reached GitOps PR handoff but failed at `git commit` due to missing Git author identity; fixed script to configure local author identity for CI clones.
 - 2026-04-29: Real `publish-image` run passed commit creation but failed at GitOps repo push authentication; URL-encoded token in HTTPS remote construction and revalidated dry-run.
+- 2026-04-29: Compared with hair-booking, refreshed `GITOPS_PR_TOKEN`, confirmed GitOps PR automation works, applied Argo CD Application, observed image pull failure due to full-vs-short SHA tag mismatch, and fixed the workflow to hand off `sha-${GITHUB_SHA::7}`.
