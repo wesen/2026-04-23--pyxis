@@ -49,3 +49,43 @@ goreleaser release --skip=sign --snapshot --clean --single-target
 ```
 
 Full signed releases will require the same kind of release secrets used by other go-go-golems projects if/when Pyxis is published as an installable CLI.
+
+## GitOps PR automation
+
+`publish-image.yml` also performs the app-to-GitOps handoff on pushes to `main`.
+
+After the GHCR image is pushed, the workflow computes the immutable image reference:
+
+```text
+ghcr.io/${{ github.repository_owner }}/pyxis:sha-${{ github.sha }}
+```
+
+It then runs:
+
+```bash
+python3 scripts/open_gitops_pr.py --image "${IMAGE}"
+```
+
+The target metadata lives in:
+
+```text
+deploy/gitops-targets.json
+```
+
+Current targets:
+
+- `pyxis-prod-app` updates `gitops/kustomize/pyxis/deployment.yaml` container `pyxis`.
+- `pyxis-prod-migrate` updates `gitops/kustomize/pyxis/migration-job.yaml` container `migrate`.
+
+The workflow requires repository secret `GITOPS_PR_TOKEN`. The token must be able to push branches to `wesen/2026-03-27--hetzner-k3s` and open pull requests against that repository. The workflow intentionally fails if the secret is missing, because a published image without a GitOps handoff is an incomplete production release.
+
+Local validation example:
+
+```bash
+python3 scripts/open_gitops_pr.py \
+  --image ghcr.io/wesen/pyxis:sha-testphase5 \
+  --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s \
+  --dry-run
+```
+
+Dry-run mode prints the manifest diffs and restores the checked-out GitOps files before exiting.

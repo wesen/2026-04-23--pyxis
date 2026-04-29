@@ -1,0 +1,18 @@
+{
+  "targets": [
+    {
+      "name": "pyxis-prod-app",
+      "gitops_repo": "wesen/2026-03-27--hetzner-k3s",
+      "gitops_branch": "main",
+      "manifest_path": "gitops/kustomize/pyxis/deployment.yaml",
+      "container_name": "pyxis"
+    },
+    {
+      "name": "pyxis-prod-migrate",
+      "gitops_repo": "wesen/2026-03-27--hetzner-k3s",
+      "gitops_branch": "main",
+      "manifest_path": "gitops/kustomize/pyxis/migration-job.yaml",
+      "container_name": "migrate"
+    }
+  ]
+}

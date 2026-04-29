@@ -19,3 +19,5 @@
 - 2026-04-29: Uploaded v4 reMarkable bundle after Phase 3 CI/CD completion.
 - 2026-04-29: Completed Phase 4 GitOps package in the k3s repo and committed `816a0f9 PYXIS: add argocd gitops package`; saved Kustomize/client-dry-run evidence and server-side dry-run caveat.
 - 2026-04-29: Uploaded v5 reMarkable bundle after Phase 4 GitOps package completion.
+- 2026-04-29: Completed Phase 5 GitOps PR automation with target metadata, dry-run-capable updater script, publish-image workflow handoff, docs, and local dry-run evidence.
+- 2026-04-29: Hardened GitOps PR script logging to redact `GITOPS_PR_TOKEN` and revalidated dry-run behavior.

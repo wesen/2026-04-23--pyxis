@@ -87,11 +87,11 @@ Goal: define desired cluster state for Pyxis in the GitOps repo.
 
 Goal: connect successful app image publication to reviewed GitOps image bumps.
 
-- [ ] T501. Add `deploy/gitops-targets.json` describing the Pyxis deployment target manifest/container.
-- [ ] T502. Add `scripts/open_gitops_pr.py` with dry-run support.
-- [ ] T503. Add CI job/step that opens a GitOps PR after image publish.
-- [ ] T504. Add `GITOPS_PR_TOKEN` setup documentation.
-- [ ] T505. Validate script against a temporary branch or dry-run checkout.
+- [x] T501. Add `deploy/gitops-targets.json` describing the Pyxis deployment target manifest/container.
+- [x] T502. Add `scripts/open_gitops_pr.py` with dry-run support.
+- [x] T503. Add CI job/step that opens a GitOps PR after image publish.
+- [x] T504. Add `GITOPS_PR_TOKEN` setup documentation.
+- [x] T505. Validate script against a temporary branch or dry-run checkout.
 
 ## Phase 6 — First production rollout
 

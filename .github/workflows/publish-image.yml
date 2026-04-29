@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   packages: write
+  pull-requests: read
 
 jobs:
   image:
@@ -43,3 +44,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Open GitOps image bump PRs
+        if: github.event_name == 'push'
+        env:
+          GITOPS_PR_TOKEN: ${{ secrets.GITOPS_PR_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITOPS_PR_TOKEN }}
+          IMAGE: ghcr.io/${{ github.repository_owner }}/pyxis:sha-${{ github.sha }}
+        run: |
+          if [ -z "${GITOPS_PR_TOKEN}" ]; then
+            echo "GITOPS_PR_TOKEN is required to open GitOps deployment PRs" >&2
+            exit 1
+          fi
+          python3 scripts/open_gitops_pr.py --image "${IMAGE}"

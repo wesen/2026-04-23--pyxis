@@ -481,3 +481,186 @@ Upload path:
 ```text
 /ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v5
 ```
+
+## Step 16: Phase 5 GitOps PR automation
+
+This step connected the image publishing workflow from Phase 3 to the GitOps manifests from Phase 4. The intent is to make every successful `main` image publish propose an explicit GitOps pull request instead of relying on a human to remember which manifests need image bumps.
+
+The implementation updates both runtime image sites: the normal `Deployment` container and the migration `Job` container. That keeps the rollout and schema migration image in lockstep for each source commit.
+
+### Prompt Context
+
+**User prompt (verbatim):** "continue"
+
+**Assistant interpretation:** Continue the next phase of the Pyxis productionization plan after completing Phase 4.
+
+**Inferred user intent:** Finish the remaining CI-to-GitOps automation work so published Pyxis images can be promoted through reviewed GitOps PRs.
+
+**Commit (code):** pending — changes implemented before commit.
+
+### What I did
+
+- Added `deploy/gitops-targets.json` with two targets:
+  - `pyxis-prod-app` for `gitops/kustomize/pyxis/deployment.yaml`, container `pyxis`.
+  - `pyxis-prod-migrate` for `gitops/kustomize/pyxis/migration-job.yaml`, container `migrate`.
+- Added `scripts/open_gitops_pr.py`.
+- Updated `.github/workflows/publish-image.yml` so a push to `main` opens GitOps image-bump PRs after publishing the GHCR image.
+- Documented the workflow and required secret in `docs/deployment/pyxis-ci-cd.md`.
+- Saved dry-run evidence in `sources/05-gitops-pr-script-dry-run.txt`.
+
+### Why
+
+- The app repo should own image publishing and the handoff into GitOps.
+- The k3s GitOps repo should remain the source of truth for runtime manifests.
+- A normal PR is easier to review and roll back than an automatic in-cluster image updater.
+
+### What worked
+
+- The script successfully found and patched both target image fields in dry-run mode.
+- The dry-run diff showed only the expected image-line changes.
+- `python3 -m py_compile scripts/open_gitops_pr.py` passed.
+- `python3 -m json.tool deploy/gitops-targets.json` passed.
+- YAML parsing for all GitHub workflows passed after editing `publish-image.yml`.
+
+### What didn't work
+
+- The first local dry-run mutated files in the existing GitOps checkout because the script patched files before returning in `--dry-run` mode.
+- Exact recovery command:
+
+```bash
+cd /home/manuel/code/wesen/2026-03-27--hetzner-k3s
+git checkout -- gitops/kustomize/pyxis/deployment.yaml gitops/kustomize/pyxis/migration-job.yaml
+```
+
+- Fixed by storing the original manifest text before patching and restoring it before returning from dry-run mode.
+
+### What I learned
+
+- Dry-run support must be non-mutating even when it operates against an existing checkout rather than a disposable clone.
+- Pyxis has two image-bearing GitOps manifests that must stay aligned: app deployment and migration job.
+
+### What was tricky to build
+
+- The updater intentionally avoids a full YAML rewrite because that would reorder or reformat GitOps manifests and make PRs harder to review.
+- Instead it performs a narrow text patch: find `- name: <container>` and replace the following `image:` line.
+- The sharp edge is making that narrow patch safe enough to fail if the container/image shape is not found, while still keeping dry-run non-mutating.
+
+### What warrants a second pair of eyes
+
+- Review `scripts/open_gitops_pr.py` parsing logic to confirm it handles the manifest style we expect and fails safely on future structure changes.
+- Review `.github/workflows/publish-image.yml` secret handling and whether `GITOPS_PR_TOKEN` should be required immediately or temporarily disabled until the repository secret is installed.
+- Review target repo owner/image owner assumptions: the current image is `ghcr.io/${{ github.repository_owner }}/pyxis`, while GitOps placeholder currently uses `ghcr.io/wesen/pyxis`.
+
+### What should be done in the future
+
+- Add the repository secret with `gh secret set GITOPS_PR_TOKEN --repo wesen/pyxis` or the actual Pyxis repo slug.
+- Run the workflow once on `main` and verify that it opens two clean GitOps PRs or one PR per target as expected.
+- Consider grouping multiple targets in the same GitOps repo into one PR if PR volume becomes noisy.
+
+### Code review instructions
+
+- Start with `deploy/gitops-targets.json` to verify target paths and container names.
+- Then inspect `scripts/open_gitops_pr.py`, especially `patch_container_image()` and `process_target()`.
+- Then inspect `.github/workflows/publish-image.yml` to confirm the workflow passes `GITOPS_PR_TOKEN`, `GH_TOKEN`, and the immutable `sha-${{ github.sha }}` image.
+- Validate locally with:
+
+```bash
+python3 -m py_compile scripts/open_gitops_pr.py
+python3 -m json.tool deploy/gitops-targets.json
+python3 scripts/open_gitops_pr.py \
+  --image ghcr.io/wesen/pyxis:sha-testphase5 \
+  --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s \
+  --dry-run
+```
+
+### Technical details
+
+Dry-run evidence showed the expected changes:
+
+```diff
+-          image: ghcr.io/wesen/pyxis:sha-REPLACE_ME
++          image: ghcr.io/wesen/pyxis:sha-testphase5
+```
+
+for both:
+
+```text
+gitops/kustomize/pyxis/deployment.yaml
+gitops/kustomize/pyxis/migration-job.yaml
+```
+
+## Step 17: Hardened GitOps PR script logging
+
+After writing the updater, I noticed a credential-safety issue before committing: clone commands can include the GitOps token when a private target repository needs authenticated clone/push access. Even though Pyxis' current GitOps repo may be readable, scripts should not rely on that staying true.
+
+I changed the command runner so it redacts `GITOPS_PR_TOKEN` before printing commands or command failure output. Then I reran py_compile and the local dry-run with a fake `GITOPS_PR_TOKEN` value to make sure the normal dry-run path still worked and left the GitOps checkout clean.
+
+### Prompt Context
+
+**User prompt (verbatim):** (same as Step 16)
+
+**Assistant interpretation:** Continue implementing Phase 5 while keeping the implementation diary current.
+
+**Inferred user intent:** Ensure the CI automation is robust enough for production use and the work is auditable.
+
+**Commit (code):** pending — included with the Phase 5 implementation commit.
+
+### What I did
+
+- Added `redact()` to `scripts/open_gitops_pr.py`.
+- Updated `run()` to print redacted commands and redacted failure output.
+- Re-ran:
+
+```bash
+python3 -m py_compile scripts/open_gitops_pr.py
+GITOPS_PR_TOKEN=secret-token python3 scripts/open_gitops_pr.py \
+  --image ghcr.io/wesen/pyxis:sha-testphase5 \
+  --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s \
+  --dry-run
+```
+
+### Why
+
+- CI logs must not expose credentials.
+- The GitOps PR token is powerful enough to push branches and open PRs, so it must be treated as secret in every log path.
+
+### What worked
+
+- The script still compiled.
+- The dry-run still produced only the two expected image diffs.
+- The k3s checkout remained clean except for unrelated local `.codex` and `.playwright-mcp/` artifacts.
+
+### What didn't work
+
+- N/A after the redaction change; this was a pre-commit hardening step.
+
+### What I learned
+
+- Even helper scripts that are primarily run in CI should assume command echoing can become an accidental secret leak.
+
+### What was tricky to build
+
+- The script uses a central `run()` helper, so redaction could be handled in one place rather than at every call site.
+- The remaining risk is command output from external tools; the failure path now redacts captured stdout before printing it.
+
+### What warrants a second pair of eyes
+
+- Confirm that using token-authenticated HTTPS clone/push is acceptable, or switch to GitHub App credentials later.
+- Confirm GitHub Actions' own secret masking also masks `GITOPS_PR_TOKEN` in any downstream tool output.
+
+### What should be done in the future
+
+- Consider replacing a PAT with a least-privilege GitHub App installation token if this pattern expands to many app repos.
+
+### Code review instructions
+
+- Review `redact()` and `run()` in `scripts/open_gitops_pr.py`.
+- Validate by running the script with a fake `GITOPS_PR_TOKEN` and verifying the token never appears in logs.
+
+### Technical details
+
+The local dry-run command used a fake token value:
+
+```bash
+GITOPS_PR_TOKEN=secret-token python3 scripts/open_gitops_pr.py --image ghcr.io/wesen/pyxis:sha-testphase5 --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s --dry-run
+```
