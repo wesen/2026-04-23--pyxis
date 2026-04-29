@@ -13,7 +13,6 @@ export * from './components/molecules/BookingQueueRow';
 export * from './components/molecules/ArtistCard';
 export * from './components/molecules/ArtistRosterRow';
 export * from './components/molecules/CalendarEventChip';
-export * from './components/molecules/AttendanceStat';
 export * from './components/molecules/DiscordChannelRow';
 export * from './components/molecules/SettingsToggleRow';
 export * from './components/organisms/Panels';

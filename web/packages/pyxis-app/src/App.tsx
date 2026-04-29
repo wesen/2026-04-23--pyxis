@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useGetSessionQuery } from './api/appApi';
-import { ArtistsPage, AttendancePage, AuditLogPage, BookingReviewPage, BookingsPage, CalendarPage, DashboardPage, DiscordPage, LoginPage, ModalShowcasePage, SettingsPage, SetupPage, ShowDetailPage, ShowsPage } from './pages/Pages';
+import { ArtistsPage, AuditLogPage, BookingReviewPage, BookingsPage, CalendarPage, DashboardPage, DiscordPage, LoginPage, ModalShowcasePage, SettingsPage, SetupPage, ShowDetailPage, ShowLogPage, ShowsPage } from './pages/Pages';
 
 function RequireSession({ children }: { children: ReactElement }) {
   const location = useLocation();
@@ -41,7 +41,8 @@ export function App() {
       <Route path="/bookings" element={<RequireSession><BookingsPage /></RequireSession>} />
       <Route path="/bookings/review/:id" element={<RequireSession><BookingReviewPage /></RequireSession>} />
       <Route path="/artists" element={<RequireSession><ArtistsPage /></RequireSession>} />
-      <Route path="/attendance" element={<RequireSession><AttendancePage /></RequireSession>} />
+      <Route path="/attendance" element={<RequireSession><ShowLogPage /></RequireSession>} />
+      <Route path="/show-log" element={<RequireSession><ShowLogPage /></RequireSession>} />
       <Route path="/log" element={<RequireSession><AuditLogPage /></RequireSession>} />
       <Route path="/discord" element={<RequireSession><DiscordPage /></RequireSession>} />
       <Route path="/settings" element={<RequireSession><SettingsPage /></RequireSession>} />

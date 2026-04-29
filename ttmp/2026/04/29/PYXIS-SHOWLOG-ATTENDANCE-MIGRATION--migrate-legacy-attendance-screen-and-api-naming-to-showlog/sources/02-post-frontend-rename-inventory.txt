@@ -1,0 +1,79 @@
+# Remaining legacy Attendance references after frontend rename
+
+# Intentional lowercase attendance API/domain references
+pkg/server/public.go:330:func attendanceLogToProto(log *domain.AttendanceLog) *pyxisv1.AttendanceLog {
+pkg/repository/repository.go:68:// AttendanceRepository defines attendance log storage operations.
+pkg/server/server.go:26:	attendanceService *service.AttendanceService
+pkg/server/server.go:44:	attendanceRepo := postgres.NewAttendanceRepo(queries)
+pkg/server/server.go:56:	s.attendanceService = service.NewAttendanceService(attendanceRepo)
+pkg/server/server.go:133:	// Staff attendance / post-show log endpoints
+pkg/server/server.go:134:	mux.Handle("GET /api/app/attendance", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleListAttendance))))
+pkg/server/server.go:135:	mux.Handle("GET /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleGetAttendance))))
+pkg/server/server.go:136:	mux.Handle("PATCH /api/app/attendance/{showId}", s.requireAuth(s.requireRole("admin", "booker", "door")(http.HandlerFunc(s.handleUpsertAttendance))))
+pkg/db/attendance.sql.go:4:// source: attendance.sql
+pkg/db/attendance.sql.go:15:SELECT id, show_id, draw, notes, incident, incident_notes, logged_by, created_at, updated_at FROM attendance_logs WHERE show_id = $1
+pkg/db/attendance.sql.go:37:FROM attendance_logs al
+pkg/db/attendance.sql.go:95:INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, logged_by)
+pkg/service/attendance_service.go:10:// AttendanceService provides business logic for attendance logs.
+pkg/service/attendance_service.go:12:	attendance repository.AttendanceRepository
+pkg/service/attendance_service.go:16:func NewAttendanceService(attendance repository.AttendanceRepository) *AttendanceService {
+pkg/service/attendance_service.go:17:	return &AttendanceService{attendance: attendance}
+pkg/service/attendance_service.go:20:// GetByShowID returns attendance for a specific show.
+pkg/service/attendance_service.go:22:	return s.attendance.GetByShowID(ctx, showID)
+pkg/service/attendance_service.go:25:// Upsert creates or updates an attendance log.
+pkg/service/attendance_service.go:27:	return s.attendance.Upsert(ctx, log)
+pkg/service/attendance_service.go:30:// List returns attendance logs with pagination.
+pkg/service/attendance_service.go:32:	return s.attendance.List(ctx, limit, offset)
+web/packages/pyxis-app/src/api/mockData.ts:67:export const attendance = [
+web/packages/pyxis-app/src/api/endpoints.ts:23:  attendance: '/api/app/attendance',
+web/packages/pyxis-app/src/api/endpoints.ts:24:  attendanceShow: (showId: number) => `/api/app/attendance/${showId}`,
+pkg/repository/postgres/attendance_repo.go:21:// GetByShowID returns an attendance log by show ID.
+pkg/repository/postgres/attendance_repo.go:30:// Upsert creates or updates an attendance log.
+pkg/repository/postgres/attendance_repo.go:56:// List returns attendance logs with pagination.
+web/packages/pyxis-app/src/api/appApi.ts:49:  attendanceLogId?: number;
+web/packages/pyxis-app/src/api/appApi.ts:267:      query: () => endpoints.attendance,
+web/packages/pyxis-app/src/api/appApi.ts:276:      query: ({ showId, ...body }) => ({ url: endpoints.attendanceShow(showId), method: 'PATCH', body }),
+web/packages/pyxis-app/src/api/mockHandlers.ts:28:import { artists, attendance, auditLog, bookings, calendarEvents, session, settings, shows } from './mockData';
+web/packages/pyxis-app/src/api/mockHandlers.ts:51:  attendance: typeof attendance;
+web/packages/pyxis-app/src/api/mockHandlers.ts:64:    attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+web/packages/pyxis-app/src/api/mockHandlers.ts:85:      attendance: attendance.map((entry) => create(AttendanceLogSchema, entry as any)),
+web/packages/pyxis-app/src/api/mockHandlers.ts:107:      const log = current.attendance.find((entry) => entry.showId === show.id);
+web/packages/pyxis-app/src/api/mockHandlers.ts:110:        attendanceLogId: log?.id,
+web/packages/pyxis-app/src/api/mockHandlers.ts:321:  http.get('*/api/app/attendance', () => {
+web/packages/pyxis-app/src/api/mockHandlers.ts:323:    return HttpResponse.json(toJson(AttendanceLogListSchema, create(AttendanceLogListSchema, { logs: current.attendance })));
+web/packages/pyxis-app/src/api/mockHandlers.ts:325:  http.patch('*/api/app/attendance/:showId', async ({ params, request }) => {
+web/packages/pyxis-app/src/api/mockHandlers.ts:328:    const body = await request.json() as Partial<typeof attendance[number]>;
+web/packages/pyxis-app/src/api/mockHandlers.ts:329:    const previous = current.attendance.find((entry) => entry.showId === showId) ?? current.attendance[0];
+web/packages/pyxis-app/src/api/mockHandlers.ts:331:    current.attendance = current.attendance.map((entry) => entry.showId === showId ? updated : entry);
+web/packages/pyxis-app/src/api/mockHandlers.ts:349:    const previous = current.attendance.find((entry) => entry.showId === showId);
+web/packages/pyxis-app/src/api/mockHandlers.ts:365:    current.attendance = previous ? current.attendance.map((entry) => entry.showId === showId ? updated : entry) : [updated, ...current.attendance];
+pkg/server/app.go:879:	logs, err := s.attendanceService.List(ctx, limit, offset)
+pkg/server/app.go:887:		pbLogs[i] = attendanceLogToProto(&log)
+pkg/server/app.go:902:	log, err := s.attendanceService.GetByShowID(ctx, showID)
+pkg/server/app.go:908:	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(log))
+pkg/server/app.go:944:	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{
+pkg/server/app.go:957:	respondProtoJSON(w, http.StatusOK, attendanceLogToProto(updated))
+pkg/server/app.go:962:	AttendanceLogID *int   `json:"attendanceLogId,omitempty"`
+pkg/server/app.go:1030:	logs, err := s.attendanceService.List(ctx, 10000, 0)
+pkg/server/app.go:1134:	updated, err := s.attendanceService.Upsert(ctx, &domain.AttendanceLog{ShowID: showID, Draw: req.Draw, Notes: req.PostShowNotes, Incident: req.Incident, IncidentNotes: req.IncidentNotes, LoggedBy: &actorID})
+pkg/db/shows.sql.go:215:    COALESCE(SUM(al.draw), 0) as total_attendance,
+pkg/db/shows.sql.go:219:LEFT JOIN attendance_logs al ON al.show_id = s.id
+pkg/db/shows.sql.go:560:LEFT JOIN attendance_logs al ON al.show_id = s.id
+web/packages/pyxis-app/src/components/shell/AppSidebarMenu/AppSidebarMenu.tsx:13:  { heading: 'Roster', items: [ ['/artists', 'Artists', 'users'], ['/attendance', 'Post-show log', 'check'] ] },
+pkg/db/queries/shows.sql:78:LEFT JOIN attendance_logs al ON al.show_id = s.id
+pkg/db/queries/shows.sql:86:    COALESCE(SUM(al.draw), 0) as total_attendance,
+pkg/db/queries/shows.sql:90:LEFT JOIN attendance_logs al ON al.show_id = s.id
+pkg/db/queries/attendance.sql:2:SELECT * FROM attendance_logs WHERE show_id = $1;
+pkg/db/queries/attendance.sql:5:INSERT INTO attendance_logs (show_id, draw, notes, incident, incident_notes, logged_by)
+pkg/db/queries/attendance.sql:18:FROM attendance_logs al
+web/packages/pyxis-app/src/pages/ShowLogPage/Page.tsx:33:    <AppShell page="attendance" title="Post-show log" eyebrow="Home / Post-show log">
+web/packages/pyxis-app/src/App.tsx:44:      <Route path="/attendance" element={<RequireSession><ShowLogPage /></RequireSession>} />
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEditorModal/PostShowLogEditorModal.tsx:125:            <FieldShell label="Draw (attendance)" help="Number of people in attendance">
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEntryCard/PostShowLogEntryCard.stories.tsx:27:export const LoggedCollapsed: Story = { args: { entry: { ...baseEntry, attendanceLogId: 10, artist: 'Actress', date: '2026-04-18', draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' } } };
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/PostShowLogPanel.stories.tsx:18:  { showId: 2, attendanceLogId: 2, artist: 'Actress', date: '2026-04-18', genre: 'Experimental / club', showStatus: ShowStatus.ARCHIVED, draw: 61, postShowNotes: 'Strong turnout, smooth load-out, no issues.', incident: false, loggedByName: 'Manuel', updatedAt: '2026-04-19T01:00:00Z', logStatus: 'logged' },
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/PostShowLogPanel.stories.tsx:19:  { showId: 3, attendanceLogId: 3, artist: 'Example Artist', date: '2026-04-12', genre: 'Hardcore / punk', showStatus: ShowStatus.ARCHIVED, draw: 48, postShowNotes: 'Good draw, rough load-out.', incident: true, incidentNotes: 'Neighbor complaint after load-out.', loggedByName: 'Sam', updatedAt: '2026-04-13T01:00:00Z', logStatus: 'incident' },
+web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.stories.tsx:24:    description: 'Remind staff to add attendance notes after completed shows.',
+pkg/db/migrations/000001_init.up.sql:89:CREATE TABLE attendance_logs (
+pkg/db/migrations/000001_init.up.sql:159:CREATE TRIGGER update_attendance_logs_updated_at
+pkg/db/migrations/000001_init.up.sql:160:    BEFORE UPDATE ON attendance_logs
+pkg/db/migrations/000001_init.down.sql:2:DROP TABLE IF EXISTS attendance_logs CASCADE;

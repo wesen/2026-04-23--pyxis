@@ -15,17 +15,17 @@ Topics:
 ## Phase 1 — Inventory and planning
 
 - [x] T1. Create migration ticket and task list.
-- [ ] T2. Inventory remaining legacy Attendance names, components, stories, routes, API endpoints, and DB objects.
-- [ ] T3. Decide compatibility policy for `/attendance` route and `/api/app/attendance` API.
+- [x] T2. Inventory remaining legacy Attendance names, components, stories, routes, API endpoints, and DB objects.
+- [x] T3. Decide compatibility policy for `/attendance` route and `/api/app/attendance` API: keep both for now, add `/show-log` route alias, and phase backend compatibility later.
 
 ## Phase 2 — Frontend clean rename
 
-- [ ] T4. Rename `AttendancePage` to `ShowLogPage` while keeping `/attendance` as a compatibility route.
-- [ ] T5. Add optional `/show-log` route alias to the same page.
-- [ ] T6. Rename/update page stories from Attendance language to ShowLog/Post-show log language.
-- [ ] T7. Remove old `Roster/AttendancePanel` organism and its Storybook stories.
-- [ ] T8. Remove old `AttendanceStat` molecule and package/barrel exports if unused.
-- [ ] T9. Run frontend TypeScript/build validation.
+- [x] T4. Rename `AttendancePage` to `ShowLogPage` while keeping `/attendance` as a compatibility route.
+- [x] T5. Add optional `/show-log` route alias to the same page.
+- [x] T6. Rename/update page stories from Attendance language to ShowLog/Post-show log language.
+- [x] T7. Remove old `Roster/AttendancePanel` organism and its Storybook stories.
+- [x] T8. Remove old `AttendanceStat` molecule and package/barrel exports if unused.
+- [x] T9. Run frontend TypeScript/build validation.
 
 ## Phase 3 — API/schema alignment
 

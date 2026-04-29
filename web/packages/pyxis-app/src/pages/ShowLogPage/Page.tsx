@@ -5,7 +5,7 @@ import { PostShowLogPanel } from '../../components/organisms';
 import { ActionMessages, EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
-export function AttendancePage() {
+export function ShowLogPage() {
   const { data: entries, isLoading, isError } = useGetShowLogQuery();
   const [updateShowLog] = useUpdateShowLogMutation();
   const [actionError, setActionError] = useState<string | undefined>();

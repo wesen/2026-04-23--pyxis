@@ -1,5 +1,5 @@
 export { ArtistsPage } from './ArtistsPage/Page';
-export { AttendancePage } from './AttendancePage/Page';
+export { ShowLogPage } from './ShowLogPage/Page';
 export { AuditLogPage } from './AuditLogPage/Page';
 export { BookingReviewPage } from './BookingReviewPage/Page';
 export { BookingsPage } from './BookingsPage/Page';
