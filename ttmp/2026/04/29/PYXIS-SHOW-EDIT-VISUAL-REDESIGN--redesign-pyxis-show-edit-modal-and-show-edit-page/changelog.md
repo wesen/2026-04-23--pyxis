@@ -55,3 +55,9 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Refactored `ShowDetailPage` to compose the new show-edit organisms while keeping RTK Query hooks/mutations in the page.
 - Preserved existing actions for edit modal, duplicate, announce/open Discord post, flyer upload/delete, cancel, and archive.
 - Validated `pnpm --dir web --filter pyxis-app exec tsc --noEmit` and `pnpm --dir web --filter pyxis-app build`.
+
+## 2026-04-30 — Show edit page visual evidence
+
+- Added `scripts/03-capture-show-edit-stories.js` and captured Storybook evidence for `ShowEditHeader`, `ShowFlyerCard`, `ShowEditRail`, and `ShowEditMain`.
+- Added `scripts/04-smoke-show-edit-page.js`; local unauthenticated route smoke reached the login route, confirming auth gating but not the authenticated edit view.
+- Stored outputs under `sources/11-show-edit-storybook-captures/` and `sources/12-show-edit-route-smoke/`.

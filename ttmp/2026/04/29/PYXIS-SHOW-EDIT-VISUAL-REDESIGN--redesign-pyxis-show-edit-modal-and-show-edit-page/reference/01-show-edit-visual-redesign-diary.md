@@ -468,3 +468,43 @@ pyxis-app-components-organisms-showedit-showflyercard--ready
 pyxis-app-components-organisms-showedit-showeditrail--ready
 pyxis-app-components-organisms-showedit-showeditmain--full-show
 ```
+
+
+## Step 14: Capture ShowEdit story evidence and route smoke
+
+I added Storybook capture script:
+
+```text
+scripts/03-capture-show-edit-stories.js
+```
+
+It captured these story states under `sources/11-show-edit-storybook-captures/`:
+
+- `show-edit-header-default.png`
+- `show-flyer-card-ready.png`
+- `show-edit-rail-ready.png`
+- `show-edit-main-full-show.png`
+- `show-edit-main-narrow.png`
+
+I inspected `show-edit-main-full-show.png`; it shows the intended card-based sections for Basics, Date & Time, Details, Lineup, and Staff Notes.
+
+I added route smoke script:
+
+```text
+scripts/04-smoke-show-edit-page.js
+```
+
+The first run piped output through `tee` before the script-created output directory existed, so `tee` failed even though the node script completed. I reran after creating the directory.
+
+Result:
+
+```json
+{
+  "ok": true,
+  "url": "http://localhost:3008/shows/31",
+  "loggedInRoute": false,
+  "loginRoute": true
+}
+```
+
+This confirms the local route is auth-gated in the current dev session. It does not yet validate the authenticated edit view. Task T604 remains open for a future authenticated smoke.

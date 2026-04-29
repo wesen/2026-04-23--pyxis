@@ -1,0 +1,80 @@
+{
+  "baseUrl": "http://127.0.0.1:6008",
+  "stories": [
+    {
+      "id": "pyxis-app-components-organisms-showedit-showeditheader--default",
+      "file": "show-edit-header-default.png",
+      "width": 1180,
+      "height": 360,
+      "selector": "[data-pyxis-component=\"show-edit-header\"]",
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-showedit-showeditheader--default&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/11-show-edit-storybook-captures/show-edit-header-default.png",
+      "bounds": {
+        "x": 32,
+        "y": 32,
+        "width": 1116,
+        "height": 85.578125
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-showedit-showflyercard--ready",
+      "file": "show-flyer-card-ready.png",
+      "width": 430,
+      "height": 700,
+      "selector": "[data-pyxis-component=\"show-flyer-card\"]",
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-showedit-showflyercard--ready&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/11-show-edit-storybook-captures/show-flyer-card-ready.png",
+      "bounds": {
+        "x": 24,
+        "y": 24,
+        "width": 282,
+        "height": 445.78125
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-showedit-showeditrail--ready",
+      "file": "show-edit-rail-ready.png",
+      "width": 470,
+      "height": 1120,
+      "selector": "[data-pyxis-component=\"show-edit-rail\"]",
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-showedit-showeditrail--ready&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/11-show-edit-storybook-captures/show-edit-rail-ready.png",
+      "bounds": {
+        "x": 24,
+        "y": 24,
+        "width": 302,
+        "height": 798.15625
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-showedit-showeditmain--full-show",
+      "file": "show-edit-main-full-show.png",
+      "width": 860,
+      "height": 1120,
+      "selector": "[data-pyxis-component=\"show-edit-main\"]",
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-showedit-showeditmain--full-show&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/11-show-edit-storybook-captures/show-edit-main-full-show.png",
+      "bounds": {
+        "x": 24,
+        "y": 24,
+        "width": 712,
+        "height": 873.21875
+      }
+    },
+    {
+      "id": "pyxis-app-components-organisms-showedit-showeditmain--narrow",
+      "file": "show-edit-main-narrow.png",
+      "width": 420,
+      "height": 1320,
+      "selector": "[data-pyxis-component=\"show-edit-main\"]",
+      "url": "http://127.0.0.1:6008/iframe.html?id=pyxis-app-components-organisms-showedit-showeditmain--narrow&viewMode=story",
+      "output": "/home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN--redesign-pyxis-show-edit-modal-and-show-edit-page/sources/11-show-edit-storybook-captures/show-edit-main-narrow.png",
+      "bounds": {
+        "x": 16,
+        "y": 16,
+        "width": 328,
+        "height": 1387.6875
+      }
+    }
+  ]
+}

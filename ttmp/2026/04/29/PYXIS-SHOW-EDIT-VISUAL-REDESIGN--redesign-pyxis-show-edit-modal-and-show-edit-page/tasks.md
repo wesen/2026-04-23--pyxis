@@ -72,10 +72,10 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 
 ## Phase 6 — Show edit page visual polish and evidence
 
-- [ ] T601 Tune the show edit page toward `show-admin-reference.png`: header, two-column rail/main layout, cards, spacing, mobile stacking.
-- [ ] T602 Keep inactive/future actions honest: disable, omit, or implement before showing as active.
-- [ ] T603 Capture current/final page screenshots and store evidence under `sources/`.
-- [ ] T604 Run browser smoke for create/edit/show detail flows.
+- [x] T601 Tune the show edit page toward `show-admin-reference.png`: header, two-column rail/main layout, cards, spacing, mobile stacking.
+- [x] T602 Keep inactive/future actions honest: disable, omit, or implement before showing as active.
+- [x] T603 Capture current/final page screenshots and store evidence under `sources/`.
+- [ ] T604 Run authenticated browser smoke for create/edit/show detail flows; unauthenticated route smoke currently verifies login gating only.
 - [ ] T605 Commit page visual polish and evidence.
 - [x] T606 Add next-session restart runbook with lessons learned and restart shortcuts.
 
