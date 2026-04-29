@@ -46,6 +46,7 @@ Phase 1 makes the existing staff show detail page trustworthy: uploaded posters 
 - [x] T305 Ensure uploaded flyer/poster appears in the staff poster view after create/upload and on detail reload.
 - [x] T306 Ensure lineup appears in staff show detail.
 - [x] T307 Add flyer readiness column to staff show overview; lineup overview intentionally skipped by request.
+- [x] T310 Make staff Shows table date column flexible after adding Flyer column.
 - [x] T308 Hide flyer-less shows from public list/detail APIs.
 - [x] T309 Prevent confirmed status unless flyer artwork is attached or selected, and show staff-facing explanation.
 

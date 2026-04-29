@@ -52,3 +52,7 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Added a Flyer column to the staff Shows overview.
 - Rows now show a small flyer thumbnail and `Ready`, or a `Needs flyer` warning pill.
 - Skipped lineup overview by request.
+
+## 2026-04-29 — Flexible date column
+
+- Changed the staff Shows table date column from fixed `130px` to `min-width: 96px; width: auto` so it can resize alongside the new Flyer column.

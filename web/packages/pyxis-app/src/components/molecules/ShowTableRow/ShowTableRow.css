@@ -1,5 +1,5 @@
 .app-shows-table th:nth-child(1), .app-shows-table td[data-cell='id'] { width: 50px; }
-.app-shows-table th:nth-child(2), .app-shows-table td[data-cell='date'] { width: 130px; }
+.app-shows-table th:nth-child(2), .app-shows-table td[data-cell='date'] { min-width: 96px; width: auto; }
 .app-shows-table th:nth-child(3), .app-shows-table td[data-cell='flyer'] { width: 94px; }
 .app-shows-table th:nth-child(5), .app-shows-table td[data-cell='doors'] { width: 90px; }
 .app-shows-table th:nth-child(6), .app-shows-table td[data-cell='age'] { width: 100px; }

@@ -290,3 +290,28 @@ Both passed. Evidence:
 ```text
 sources/09-staff-flyer-column-validation.txt
 ```
+
+## Step 8: Make Shows table date column flexible
+
+The user noticed that the staff Shows table date column was still fixed at `130px`, which made the new Flyer column squeeze the table. I changed the date column CSS from a fixed width to a minimum width plus automatic table sizing:
+
+```css
+.app-shows-table th:nth-child(2),
+.app-shows-table td[data-cell='date'] {
+  min-width: 96px;
+  width: auto;
+}
+```
+
+Validation:
+
+```bash
+pnpm --dir web --filter pyxis-app exec tsc --noEmit
+pnpm --dir web --filter pyxis-app build
+```
+
+Both passed. Evidence:
+
+```text
+sources/10-resizable-date-column-validation.txt
+```

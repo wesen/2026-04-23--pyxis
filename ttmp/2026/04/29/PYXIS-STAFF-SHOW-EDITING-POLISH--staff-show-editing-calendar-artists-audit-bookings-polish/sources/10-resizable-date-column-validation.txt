@@ -1,0 +1,4 @@
+## resizable date column validation
+2026-04-29T17:26:32-04:00
+pnpm --dir web --filter pyxis-app exec tsc --noEmit: PASS
+pnpm --dir web --filter pyxis-app build: PASS
