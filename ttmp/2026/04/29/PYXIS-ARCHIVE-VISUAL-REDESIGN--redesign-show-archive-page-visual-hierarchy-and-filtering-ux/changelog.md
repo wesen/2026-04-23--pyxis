@@ -8,3 +8,4 @@
 - 2026-04-29: Pivoted PostShowLogPanel to a ShowsConfirmedPanel-like table with expandable detail rows and an edit modal, then moved the family under `organisms/ShowLog/`.
 - 2026-04-29: Captured ShowsConfirmedPanel with css-visual-diff as a visual reference and simplified ShowLogPanel to a compact Panel/table default state.
 - 2026-04-29: Split PostShowLogEditorModal into its own ShowLog organism and tuned its form layout using css-visual-diff screenshots plus image review feedback.
+- 2026-04-29: Added reusable Storybook-first component runbook covering css-visual-diff screenshot capture, image inspection with `read` or `understand_image`, evidence storage, diary updates, and commit rhythm.

@@ -282,3 +282,21 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 13: Wrote reusable Storybook-first component runbook
+
+Created a reusable runbook for future component work:
+
+```text
+playbooks/01-storybook-first-component-runbook.md
+```
+
+The runbook documents the workflow used for the ShowLog panel/modal work:
+
+- create component folders with `.tsx`, `.css`, `.stories.tsx`, and `index.ts`;
+- use `Pyxis App/Components/...` Storybook title conventions;
+- add stable `data-pyxis-component` selectors with `appPart()`;
+- capture screenshots with `css-visual-diff` from Storybook;
+- inspect screenshots with either `understand_image` or the `read` tool directly on PNG files;
+- save evidence under ticket `sources/`;
+- update diary/tasks and commit at logical boundaries.
