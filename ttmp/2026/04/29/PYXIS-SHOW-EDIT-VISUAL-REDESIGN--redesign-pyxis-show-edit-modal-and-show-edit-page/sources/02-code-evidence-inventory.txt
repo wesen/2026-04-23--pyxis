@@ -1,0 +1,330 @@
+# Evidence inventory for show edit visual redesign
+
+## Relevant app files
+web/packages/pyxis-app/src/api/appApi.ts
+web/packages/pyxis-app/src/api/mockData.ts
+web/packages/pyxis-app/src/components/atoms/AgeBadge/AgeBadge.stories.tsx
+web/packages/pyxis-app/src/components/atoms/DateChip/DateChip.stories.tsx
+web/packages/pyxis-app/src/components/atoms/DrawProgress/DrawProgress.stories.tsx
+web/packages/pyxis-app/src/components/atoms/StatusDot/StatusDot.stories.tsx
+web/packages/pyxis-app/src/components/atoms/StatusPill/index.ts
+web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.css
+web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.stories.tsx
+web/packages/pyxis-app/src/components/atoms/StatusPill/StatusPill.tsx
+web/packages/pyxis-app/src/components/molecules/ActivityFeedItem/ActivityFeedItem.stories.tsx
+web/packages/pyxis-app/src/components/molecules/AppCard/AppCard.stories.tsx
+web/packages/pyxis-app/src/components/molecules/AppEmptyState/AppEmptyState.stories.tsx
+web/packages/pyxis-app/src/components/molecules/ArtistCard/ArtistCard.stories.tsx
+web/packages/pyxis-app/src/components/molecules/ArtistRosterRow/ArtistRosterRow.stories.tsx
+web/packages/pyxis-app/src/components/molecules/BookingCard/BookingCard.stories.tsx
+web/packages/pyxis-app/src/components/molecules/BookingQueueRow/BookingQueueRow.stories.tsx
+web/packages/pyxis-app/src/components/molecules/CalendarEventChip/CalendarEventChip.stories.tsx
+web/packages/pyxis-app/src/components/molecules/DiscordChannelRow/DiscordChannelRow.stories.tsx
+web/packages/pyxis-app/src/components/molecules/FieldError/FieldError.stories.tsx
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/index.ts
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/MetadataStrip.css
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/MetadataStrip.stories.tsx
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/MetadataStrip.tsx
+web/packages/pyxis-app/src/components/molecules/MetricCard/MetricCard.stories.tsx
+web/packages/pyxis-app/src/components/molecules/NoteBlock/index.ts
+web/packages/pyxis-app/src/components/molecules/NoteBlock/NoteBlock.css
+web/packages/pyxis-app/src/components/molecules/NoteBlock/NoteBlock.stories.tsx
+web/packages/pyxis-app/src/components/molecules/NoteBlock/NoteBlock.tsx
+web/packages/pyxis-app/src/components/molecules/SettingsToggleRow/SettingsToggleRow.stories.tsx
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/index.ts
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.css
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.stories.tsx
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
+web/packages/pyxis-app/src/components/molecules/StatusBadge/index.ts
+web/packages/pyxis-app/src/components/molecules/StatusBadge/StatusBadge.css
+web/packages/pyxis-app/src/components/molecules/StatusBadge/StatusBadge.stories.tsx
+web/packages/pyxis-app/src/components/molecules/StatusBadge/StatusBadge.tsx
+web/packages/pyxis-app/src/components/molecules/TodayShowCard/TodayShowCard.stories.tsx
+web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.css
+web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/AuditLogPanel/AuditLogPanel.tsx
+web/packages/pyxis-app/src/components/organisms/AuditLogPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingQueue/BookingQueue.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewDatePanel/BookingReviewDatePanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewDatePanel/BookingReviewDatePanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewDatePanel/BookingReviewDatePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewDatePanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewHero/BookingReviewHero.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewNotePanel/BookingReviewNotePanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewNotePanel/BookingReviewNotePanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewNotePanel/BookingReviewNotePanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewNotePanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewRequestPanel/BookingReviewRequestPanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewRequestPanel/BookingReviewRequestPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewRequestPanel/BookingReviewRequestPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingReviewRequestPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/BookingsInboxPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInboxPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInsightsPanel/BookingsInsightsPanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInsightsPanel/BookingsInsightsPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInsightsPanel/BookingsInsightsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsInsightsPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsProcessedPanel/BookingsProcessedPanel.css
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsProcessedPanel/BookingsProcessedPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsProcessedPanel/BookingsProcessedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Bookings/BookingsProcessedPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.css
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/CalendarAgenda.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarAgenda/index.ts
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarBoard/CalendarBoard.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarDayInspector/CalendarDayInspector.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarItemDialog/CalendarItemDialog.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarMonthPanel/CalendarMonthPanel.css
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarMonthPanel/CalendarMonthPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarMonthPanel/CalendarMonthPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Calendar/CalendarMonthPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/ConfirmDialog/ConfirmDialog.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardActivityPanel/DashboardActivityPanel.css
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardActivityPanel/DashboardActivityPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardActivityPanel/DashboardActivityPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardActivityPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionContent/DashboardAttentionContent.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionCount/DashboardAttentionCount.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionPanel/DashboardAttentionPanel.css
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionPanel/DashboardAttentionPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionPanel/DashboardAttentionPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardAttentionPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardHero/DashboardHero.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardMetricsGrid/DashboardMetricsGrid.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardMobileCopy/DashboardMobileCopy.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardMobileHeader/DashboardMobileHeader.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardOverview/DashboardOverview.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.css
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/DashboardQuickActionsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardQuickActionsPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.css
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/DashboardUpcomingPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Dashboard/DashboardUpcomingPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.css
+web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/DiscordMappingPanel.tsx
+web/packages/pyxis-app/src/components/organisms/DiscordMappingPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.css
+web/packages/pyxis-app/src/components/organisms/FlyerField/FlyerField.tsx
+web/packages/pyxis-app/src/components/organisms/FlyerField/index.ts
+web/packages/pyxis-app/src/components/organisms/NewShowModal/index.ts
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.css
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.stories.tsx
+web/packages/pyxis-app/src/components/organisms/NewShowModal/NewShowModal.tsx
+web/packages/pyxis-app/src/components/organisms/Panel/index.ts
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.css
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Panel/Panel.tsx
+web/packages/pyxis-app/src/components/organisms/Panels.css
+web/packages/pyxis-app/src/components/organisms/Panels.tsx
+web/packages/pyxis-app/src/components/organisms/Roster/ArtistRoster/ArtistRoster.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.css
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Settings/SettingsPanel/SettingsPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/index.ts
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.css
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailDiscordPanel/ShowDetailDiscordPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailHero/index.ts
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailHero/ShowDetailHero.css
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailHero/ShowDetailHero.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailHero/ShowDetailHero.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailInfoPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailInfoPanel/ShowDetailInfoPanel.css
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailInfoPanel/ShowDetailInfoPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowDetail/ShowDetailInfoPanel/ShowDetailInfoPanel.tsx
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEditorModal/PostShowLogEditorModal.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEntryCard/PostShowLogEntryCard.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/PostShowLogPanel.css
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/PostShowLogPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/PostShowLogPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsArchivedPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsArchivedPanel/ShowsArchivedPanel.css
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsArchivedPanel/ShowsArchivedPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsArchivedPanel/ShowsArchivedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/index.ts
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.css
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsFilterBar/ShowsFilterBar.stories.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsTable/ShowsTable.stories.tsx
+web/packages/pyxis-app/src/components/parts.ts
+web/packages/pyxis-app/src/components/shell/AppMobileBottomNav/AppMobileBottomNav.stories.tsx
+web/packages/pyxis-app/src/components/shell/AppShell/AppShell.stories.tsx
+web/packages/pyxis-app/src/components/shell/AppSidebar/AppSidebar.stories.tsx
+web/packages/pyxis-app/src/components/shell/AppTopBar/AppTopBar.stories.tsx
+web/packages/pyxis-app/src/pages/ArtistsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/AuditLogPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/BookingReviewPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/BookingsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/CalendarPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/DashboardPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/DiscordPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/LoginPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ModalShowcasePage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/SettingsPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/SetupPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.css
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowDetailPage/Page.tsx
+web/packages/pyxis-app/src/pages/ShowLogPage/Page.stories.tsx
+web/packages/pyxis-app/src/pages/ShowsPage/Page.stories.tsx
+
+## Shared components exports
+web/packages/pyxis-components/src/index.ts:4:export { Icon, PyxisMark, PyxisLogo, IconButton } from './atoms/Icon';
+web/packages/pyxis-components/src/index.ts:6:export { Button } from './atoms/Button';
+web/packages/pyxis-components/src/index.ts:7:export type { ButtonProps } from './atoms/Button';
+web/packages/pyxis-components/src/index.ts:8:export { Badge } from './atoms/Badge';
+web/packages/pyxis-components/src/index.ts:9:export type { BadgeProps } from './atoms/Badge';
+web/packages/pyxis-components/src/index.ts:10:export { Tag } from './atoms/Tag';
+web/packages/pyxis-components/src/index.ts:11:export type { TagProps } from './atoms/Tag';
+web/packages/pyxis-components/src/index.ts:12:export { Input } from './atoms/Input';
+web/packages/pyxis-components/src/index.ts:13:export type { InputProps } from './atoms/Input';
+web/packages/pyxis-components/src/index.ts:14:export { Select } from './atoms/Select';
+web/packages/pyxis-components/src/index.ts:15:export type { SelectProps } from './atoms/Select';
+web/packages/pyxis-components/src/index.ts:16:export { Textarea } from './atoms/Textarea';
+web/packages/pyxis-components/src/index.ts:17:export type { TextareaProps } from './atoms/Textarea';
+web/packages/pyxis-components/src/index.ts:18:export { Avatar } from './atoms/Avatar';
+web/packages/pyxis-components/src/index.ts:22:export { Card } from './molecules/Card';
+web/packages/pyxis-components/src/index.ts:23:export type { CardProps } from './molecules/Card';
+web/packages/pyxis-components/src/index.ts:24:export { CardHead } from './molecules/CardHead';
+web/packages/pyxis-components/src/index.ts:25:export type { CardHeadProps } from './molecules/CardHead';
+web/packages/pyxis-components/src/index.ts:26:export { Stat } from './molecules/Stat';
+web/packages/pyxis-components/src/index.ts:28:export { Field } from './molecules/Field';
+web/packages/pyxis-components/src/index.ts:29:export type { FieldProps } from './molecules/Field';
+web/packages/pyxis-components/src/index.ts:30:export { Table } from './molecules/Table';
+web/packages/pyxis-components/src/index.ts:32:export { Empty } from './molecules/Empty';
+web/packages/pyxis-components/src/index.ts:36:export { TopBar } from './organisms/TopBar';
+web/packages/pyxis-components/src/index.ts:38:export { Modal } from './organisms/Modal';
+web/packages/pyxis-components/src/index.ts:39:export type { ModalProps } from './organisms/Modal';
+web/packages/pyxis-components/src/index.ts:42:export { PubNav } from './public/organisms/PubNav';
+web/packages/pyxis-components/src/index.ts:44:export { PubFooter } from './public/organisms/PubFooter';
+web/packages/pyxis-components/src/index.ts:46:export { PubHero } from './public/organisms/PubHero';
+web/packages/pyxis-components/src/index.ts:48:export { PubShowRow } from './public/molecules/PubShowRow';
+web/packages/pyxis-components/src/index.ts:50:export { Poster } from './public/molecules/Poster';
+web/packages/pyxis-components/src/index.ts:52:export { ShowTile } from './public/molecules/ShowTile';
+web/packages/pyxis-components/src/index.ts:54:export { ShowGrid } from './public/organisms/ShowGrid';
+web/packages/pyxis-components/src/index.ts:56:export { ShowLineup } from './public/organisms/ShowLineup';
+web/packages/pyxis-components/src/index.ts:58:export { LineupRow } from './public/molecules/LineupRow';
+web/packages/pyxis-components/src/index.ts:60:export { TicketStub } from './public/molecules/TicketStub';
+web/packages/pyxis-components/src/index.ts:62:export { VenueCard } from './public/organisms/VenueCard';
+web/packages/pyxis-components/src/index.ts:63:export type { VenueCardProps } from './public/organisms/VenueCard';
+web/packages/pyxis-components/src/index.ts:64:export { BookingForm } from './public/organisms/BookingForm';
+web/packages/pyxis-components/src/index.ts:66:export { BookingSuccess } from './public/organisms/BookingSuccess';
+web/packages/pyxis-components/src/index.ts:68:export { MailingListCTA } from './public/organisms/MailingListCTA';
+web/packages/pyxis-components/src/index.ts:70:export { ArchiveStats } from './public/molecules/ArchiveStats';
+web/packages/pyxis-components/src/index.ts:72:export { YearGroup } from './public/molecules/YearGroup';
+web/packages/pyxis-components/src/index.ts:74:export { SpaceInfo } from './public/organisms/SpaceInfo';
+web/packages/pyxis-components/src/index.ts:76:export { BookingRules } from './public/organisms/BookingRules';
+web/packages/pyxis-components/src/index.ts:78:export { AboutHero } from './public/organisms/AboutHero';
+web/packages/pyxis-components/src/index.ts:80:export { EthosStrip } from './public/organisms/EthosStrip';
+web/packages/pyxis-components/src/index.ts:83:export { PublicPageHeader } from './public/molecules/PublicPageHeader';
+web/packages/pyxis-components/src/index.ts:84:export { ReserveTicketCard } from './public/molecules/ReserveTicketCard';
+web/packages/pyxis-components/src/index.ts:85:export { ShowDetailHeader } from './public/molecules/ShowDetailHeader';
+web/packages/pyxis-components/src/index.ts:86:export { ShowMetaStrip } from './public/molecules/ShowMetaStrip';
+web/packages/pyxis-components/src/index.ts:87:export { SafetyNote } from './public/molecules/SafetyNote';
+web/packages/pyxis-components/src/index.ts:88:export { ArchiveSearchFilters } from './public/molecules/ArchiveSearchFilters';
+web/packages/pyxis-components/src/index.ts:89:export { ArchiveShowRow } from './public/molecules/ArchiveShowRow';
+web/packages/pyxis-components/src/index.ts:90:export { ArchiveShowList } from './public/molecules/ArchiveShowList';
+web/packages/pyxis-components/src/index.ts:91:export { ShowTypeChips } from './public/atoms/ShowTypeChips';
+web/packages/pyxis-components/src/index.ts:92:export { BookingSpaceAside } from './public/organisms/BookingSpaceAside';
+web/packages/pyxis-components/src/index.ts:94:export { SaferSpaceAgreement } from './public/organisms/SaferSpaceAgreement';
+web/packages/pyxis-components/src/index.ts:96:export { AboutIntro } from './public/organisms/AboutIntro';
+web/packages/pyxis-components/src/index.ts:98:export { EthosGrid } from './public/organisms/EthosGrid';
+web/packages/pyxis-components/src/index.ts:100:export { CollectiveList } from './public/organisms/CollectiveList';
+web/packages/pyxis-components/src/index.ts:102:export { FindUsBlock } from './public/organisms/FindUsBlock';
+web/packages/pyxis-components/src/index.ts:106:export {
+web/packages/pyxis-components/src/index.ts:111:  BadgeStatus,
+web/packages/pyxis-components/src/index.ts:112:  ButtonVariant,
+web/packages/pyxis-components/src/index.ts:113:  ButtonSize,
+web/packages/pyxis-components/src/organisms/TopBar/index.ts:1:export { TopBar } from './TopBar';
+web/packages/pyxis-components/src/organisms/Modal/index.ts:1:export { Modal } from './Modal';
+web/packages/pyxis-components/src/organisms/Modal/index.ts:2:export type { ModalProps } from './Modal';
+web/packages/pyxis-components/src/index.ts:4:export { Icon, PyxisMark, PyxisLogo, IconButton } from './atoms/Icon';
+web/packages/pyxis-components/src/index.ts:6:export { Button } from './atoms/Button';
+web/packages/pyxis-components/src/index.ts:7:export type { ButtonProps } from './atoms/Button';
+web/packages/pyxis-components/src/index.ts:8:export { Badge } from './atoms/Badge';
+web/packages/pyxis-components/src/index.ts:9:export type { BadgeProps } from './atoms/Badge';
+web/packages/pyxis-components/src/index.ts:10:export { Tag } from './atoms/Tag';
+web/packages/pyxis-components/src/index.ts:11:export type { TagProps } from './atoms/Tag';
+web/packages/pyxis-components/src/index.ts:12:export { Input } from './atoms/Input';
+web/packages/pyxis-components/src/index.ts:13:export type { InputProps } from './atoms/Input';
+web/packages/pyxis-components/src/index.ts:14:export { Select } from './atoms/Select';
+web/packages/pyxis-components/src/index.ts:15:export type { SelectProps } from './atoms/Select';
+web/packages/pyxis-components/src/index.ts:16:export { Textarea } from './atoms/Textarea';
+web/packages/pyxis-components/src/index.ts:17:export type { TextareaProps } from './atoms/Textarea';
+web/packages/pyxis-components/src/index.ts:18:export { Avatar } from './atoms/Avatar';
+web/packages/pyxis-components/src/index.ts:22:export { Card } from './molecules/Card';
+web/packages/pyxis-components/src/index.ts:23:export type { CardProps } from './molecules/Card';
+web/packages/pyxis-components/src/index.ts:24:export { CardHead } from './molecules/CardHead';
+web/packages/pyxis-components/src/index.ts:25:export type { CardHeadProps } from './molecules/CardHead';
+web/packages/pyxis-components/src/index.ts:26:export { Stat } from './molecules/Stat';
+web/packages/pyxis-components/src/index.ts:28:export { Field } from './molecules/Field';
+web/packages/pyxis-components/src/index.ts:29:export type { FieldProps } from './molecules/Field';
+web/packages/pyxis-components/src/index.ts:30:export { Table } from './molecules/Table';
+web/packages/pyxis-components/src/index.ts:32:export { Empty } from './molecules/Empty';
+web/packages/pyxis-components/src/index.ts:36:export { TopBar } from './organisms/TopBar';
+web/packages/pyxis-components/src/index.ts:38:export { Modal } from './organisms/Modal';
+web/packages/pyxis-components/src/index.ts:39:export type { ModalProps } from './organisms/Modal';
+web/packages/pyxis-components/src/index.ts:42:export { PubNav } from './public/organisms/PubNav';
+web/packages/pyxis-components/src/index.ts:44:export { PubFooter } from './public/organisms/PubFooter';
+web/packages/pyxis-components/src/index.ts:46:export { PubHero } from './public/organisms/PubHero';
+web/packages/pyxis-components/src/index.ts:48:export { PubShowRow } from './public/molecules/PubShowRow';
+web/packages/pyxis-components/src/index.ts:50:export { Poster } from './public/molecules/Poster';
+web/packages/pyxis-components/src/index.ts:52:export { ShowTile } from './public/molecules/ShowTile';
+web/packages/pyxis-components/src/index.ts:54:export { ShowGrid } from './public/organisms/ShowGrid';
+web/packages/pyxis-components/src/index.ts:56:export { ShowLineup } from './public/organisms/ShowLineup';
+web/packages/pyxis-components/src/index.ts:58:export { LineupRow } from './public/molecules/LineupRow';
+web/packages/pyxis-components/src/index.ts:60:export { TicketStub } from './public/molecules/TicketStub';
+web/packages/pyxis-components/src/index.ts:62:export { VenueCard } from './public/organisms/VenueCard';
+web/packages/pyxis-components/src/index.ts:63:export type { VenueCardProps } from './public/organisms/VenueCard';
+web/packages/pyxis-components/src/index.ts:64:export { BookingForm } from './public/organisms/BookingForm';
+web/packages/pyxis-components/src/index.ts:66:export { BookingSuccess } from './public/organisms/BookingSuccess';
+web/packages/pyxis-components/src/index.ts:68:export { MailingListCTA } from './public/organisms/MailingListCTA';
+web/packages/pyxis-components/src/index.ts:70:export { ArchiveStats } from './public/molecules/ArchiveStats';
+web/packages/pyxis-components/src/index.ts:72:export { YearGroup } from './public/molecules/YearGroup';
+web/packages/pyxis-components/src/index.ts:74:export { SpaceInfo } from './public/organisms/SpaceInfo';
+web/packages/pyxis-components/src/index.ts:76:export { BookingRules } from './public/organisms/BookingRules';
+web/packages/pyxis-components/src/index.ts:78:export { AboutHero } from './public/organisms/AboutHero';
+web/packages/pyxis-components/src/index.ts:80:export { EthosStrip } from './public/organisms/EthosStrip';
+web/packages/pyxis-components/src/index.ts:83:export { PublicPageHeader } from './public/molecules/PublicPageHeader';
+web/packages/pyxis-components/src/index.ts:84:export { ReserveTicketCard } from './public/molecules/ReserveTicketCard';
+web/packages/pyxis-components/src/index.ts:85:export { ShowDetailHeader } from './public/molecules/ShowDetailHeader';
+web/packages/pyxis-components/src/index.ts:86:export { ShowMetaStrip } from './public/molecules/ShowMetaStrip';
+
+## API hooks and show mutations
+web/packages/pyxis-app/src/api/appApi.ts:107:            reserveTicketEnabled: show.reserveTicketEnabled,
+web/packages/pyxis-app/src/api/appApi.ts:313:  useCreateShowMutation,
+web/packages/pyxis-app/src/api/appApi.ts:328:  useGetShowLogQuery,
+web/packages/pyxis-app/src/api/appApi.ts:329:  useGetShowLogEntryQuery,
+web/packages/pyxis-app/src/api/appApi.ts:330:  useGetShowQuery,
+web/packages/pyxis-app/src/api/appApi.ts:331:  useGetShowsQuery,
+web/packages/pyxis-app/src/api/appApi.ts:337:  useUpdateShowLogMutation,
+web/packages/pyxis-app/src/api/appApi.ts:338:  useUpdateShowMutation,
+web/packages/pyxis-app/src/api/appApi.ts:339:  useUploadShowFlyerMutation,
+pkg/server/public.go:88:		pbShows[i] = showToProto(&show)
+pkg/server/public.go:109:	respondProtoJSON(w, http.StatusOK, showToProto(show))
+pkg/server/public.go:181:func showToProto(show *domain.Show) *pyxisv1.Show {
+pkg/server/public.go:209:	for _, entry := range show.Lineup {
+pkg/server/public.go:210:		pb.Lineup = append(pb.Lineup, &pyxisv1.Show_LineupEntry{
+pkg/server/app.go:38:		pbShows2[i] = showToProto(&show)
+pkg/server/app.go:58:	respondProtoJSON(w, http.StatusOK, showToProto(show))
+pkg/server/app.go:81:	show := protoToDomainShow(&req)
+pkg/server/app.go:91:	respondProtoJSON(w, http.StatusCreated, showToProto(created))
+pkg/server/app.go:121:	show := protoToDomainShow(&req)
+pkg/server/app.go:132:	respondProtoJSON(w, http.StatusOK, showToProto(updated))
+pkg/server/app.go:159:	respondProtoJSON(w, http.StatusOK, showToProto(updated))
+pkg/server/app.go:188:func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
+pkg/server/app.go:206:	for _, entry := range pb.Lineup {
+pkg/server/app.go:207:		show.Lineup = append(show.Lineup, domain.LineupEntry{
+pkg/server/app.go:390:	respondProtoJSON(w, http.StatusOK, showToProto(created))
+proto/pyxis/v1/show.proto:37:  repeated LineupEntry lineup = 10;
+proto/pyxis/v1/show.proto:50:  message LineupEntry {

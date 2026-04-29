@@ -1,0 +1,833 @@
+# Line-anchored code excerpts
+
+## NewShowModal props/draft and current layout
+     1	import type { HTMLAttributes } from 'react';
+     2	import { useEffect, useState } from 'react';
+     3	import { Button, Modal } from 'pyxis-components';
+     4	import { create, ShowSchema, ShowStatus, type Show } from 'pyxis-types';
+     5	import { appPart } from '../../parts';
+     6	import './NewShowModal.css';
+     7	
+     8	type LineupDraft = {
+     9	  artist: string;
+    10	  role: string;
+    11	  startTime: string;
+    12	  endTime: string;
+    13	};
+    14	
+    15	type ShowDraft = {
+    16	  artist: string;
+    17	  date: string;
+    18	  doorsTime: string;
+    19	  startTime: string;
+    20	  age: string;
+    21	  price: string;
+    22	  reserveTicketEnabled: boolean;
+    23	  genre: string;
+    24	  description: string;
+    25	  notes: string;
+    26	  capacity: number;
+    27	  status: ShowStatus;
+    28	  lineup: LineupDraft[];
+    29	};
+    30	
+    31	export type NewShowModalProps = {
+    32	  isOpen?: boolean;
+    33	  mode?: 'create' | 'edit';
+    34	  initialShow?: Show;
+    35	  isSaving?: boolean;
+    36	  error?: string;
+    37	  onCancel?: () => void;
+    38	  onSubmit?: (show: Show, flyerFile?: File) => void;
+    39	};
+    40	
+    41	const emptyDraft: ShowDraft = {
+    42	  artist: '',
+    43	  date: '',
+    44	  doorsTime: '8:00 PM',
+    45	  startTime: '9:00 PM',
+    46	  age: '21+',
+    47	  price: '',
+    48	  reserveTicketEnabled: false,
+    49	  genre: '',
+    50	  description: '',
+    51	  notes: '',
+    52	  capacity: 150,
+    53	  status: ShowStatus.CONFIRMED,
+    54	  lineup: [{ artist: '', role: 'headline', startTime: '9:00 PM', endTime: '' }],
+    55	};
+    56	
+    57	function draftFromShow(show?: Show): ShowDraft {
+    58	  if (!show) return emptyDraft;
+    59	  return {
+    60	    artist: show.artist,
+    61	    date: show.date,
+    62	    doorsTime: show.doorsTime,
+    63	    startTime: show.startTime,
+    64	    age: show.age,
+    65	    price: show.price,
+    66	    reserveTicketEnabled: show.reserveTicketEnabled,
+    67	    genre: show.genre,
+    68	    description: show.description,
+    69	    notes: show.notes,
+    70	    capacity: show.capacity || 150,
+    71	    status: show.status || ShowStatus.CONFIRMED,
+    72	    lineup: show.lineup.length > 0
+    73	      ? show.lineup.map((entry) => ({ artist: entry.artist, role: entry.role, startTime: entry.startTime, endTime: entry.endTime }))
+    74	      : [{ artist: show.artist, role: 'headline', startTime: show.startTime, endTime: '' }],
+    75	  };
+    76	}
+    77	
+    78	export function NewShowModal({
+    79	  isOpen = true,
+    80	  mode = 'create',
+    81	  initialShow,
+    82	  isSaving,
+    83	  error,
+    84	  onCancel,
+    85	  onSubmit,
+    86	}: NewShowModalProps) {
+    87	  const [draft, setDraft] = useState<ShowDraft>(() => draftFromShow(initialShow));
+    88	  const [flyerFile, setFlyerFile] = useState<File | undefined>();
+    89	  const [validationError, setValidationError] = useState<string | undefined>();
+    90	
+    91	  useEffect(() => {
+    92	    if (isOpen) {
+    93	      setDraft(draftFromShow(initialShow));
+    94	      setFlyerFile(undefined);
+    95	      setValidationError(undefined);
+    96	    }
+    97	  }, [initialShow, isOpen]);
+    98	
+    99	  const title = mode === 'create' ? 'Add new show' : 'Edit show';
+   100	  const description = mode === 'create' ? 'Create a show record and lineup. Fields marked * are required for confirmed shows.' : 'Update show details and replace the lineup. Fields marked * are required for confirmed shows.';
+   101	  const hasFlyerForConfirmation = Boolean(initialShow?.flyerUrl || flyerFile);
+   102	
+   103	  const update = <K extends keyof ShowDraft>(key: K, value: ShowDraft[K]) => setDraft((current) => ({ ...current, [key]: value }));
+   104	  const updateLineup = (index: number, patch: Partial<LineupDraft>) => setDraft((current) => ({
+   105	    ...current,
+   106	    lineup: current.lineup.map((entry, i) => (i === index ? { ...entry, ...patch } : entry)),
+   107	  }));
+   108	  const addLineup = () => setDraft((current) => ({ ...current, lineup: [...current.lineup, { artist: '', role: 'support', startTime: '', endTime: '' }] }));
+   109	  const removeLineup = (index: number) => setDraft((current) => ({ ...current, lineup: current.lineup.filter((_entry, i) => i !== index) }));
+   110	
+   111	  const submit = (status = draft.status) => {
+   112	    setValidationError(undefined);
+   113	    if (!draft.artist.trim()) { setValidationError('Artist / act name is required.'); return; }
+   114	    if (status !== ShowStatus.DRAFT && !draft.date) { setValidationError('Date is required before saving a non-draft show.'); return; }
+   115	    if (status === ShowStatus.CONFIRMED && !hasFlyerForConfirmation) { setValidationError('Confirmed shows require an uploaded flyer. Save as draft/hold until poster artwork is attached.'); return; }
+   116	    if (draft.capacity < 0) { setValidationError('Capacity cannot be negative.'); return; }
+   117	    const show = create(ShowSchema, {
+   118	      id: initialShow?.id ?? 0,
+   119	      artist: draft.artist.trim(),
+   120	      date: draft.date,
+   121	      doorsTime: draft.doorsTime,
+   122	      startTime: draft.startTime,
+   123	      age: draft.age,
+   124	      price: draft.price,
+   125	      reserveTicketEnabled: draft.reserveTicketEnabled,
+   126	      genre: draft.genre,
+   127	      description: draft.description,
+   128	      notes: draft.notes,
+   129	      capacity: Number(draft.capacity) || 0,
+   130	      status,
+   131	      lineup: draft.lineup
+   132	        .filter((entry) => entry.artist.trim())
+   133	        .map((entry) => ({ artist: entry.artist.trim(), role: entry.role || 'support', startTime: entry.startTime, endTime: entry.endTime })),
+   134	    });
+   135	    onSubmit?.(show, flyerFile);
+   136	  };
+   137	
+   138	  return (
+   139	    <Modal
+   140	      isOpen={isOpen}
+   141	      onClose={() => onCancel?.()}
+   142	      title={title}
+   143	      subtitle={description}
+   144	      width="lg"
+   145	      className="app-new-show-modal-shell"
+   146	      panelClassName="app-new-show-modal"
+   147	      bodyClassName="app-new-show-modal-body"
+   148	      footerClassName="app-new-show-modal-footer"
+   149	      panelProps={appPart('new-show-modal') as HTMLAttributes<HTMLDivElement>}
+   150	      footer={
+   151	        <>
+   152	          <Button variant="ghost" onClick={onCancel} disabled={isSaving}>Cancel</Button>
+   153	          <Button variant="outline" onClick={() => submit(ShowStatus.DRAFT)} isLoading={isSaving} title="Drafts stay staff-only and appear under Shows → Drafts.">Save draft</Button>
+   154	          <Button onClick={() => submit(draft.status)} isLoading={isSaving}>Save show</Button>
+   155	        </>
+   156	      }
+   157	    >
+   158	      <div className="app-new-show-modal-form">
+   159	        {(error || validationError) && <div className="app-new-show-modal-error" role="alert">{error || validationError}</div>}
+   160	        <label className="app-new-show-modal-field">
+   161	          <span>Artist / act name *</span>
+   162	          <input required value={draft.artist} onChange={(event) => update('artist', event.target.value)} />
+   163	        </label>
+   164	        <div className="app-new-show-modal-grid cols-4">
+   165	          <label className="app-new-show-modal-field">
+   166	            <span>Date *</span>
+   167	            <input type="date" required={draft.status !== ShowStatus.DRAFT} value={draft.date} onChange={(event) => update('date', event.target.value)} />
+   168	          </label>
+   169	          <label className="app-new-show-modal-field">
+   170	            <span>Doors</span>
+   171	            <input value={draft.doorsTime} onChange={(event) => update('doorsTime', event.target.value)} />
+   172	          </label>
+   173	          <label className="app-new-show-modal-field">
+   174	            <span>Start</span>
+   175	            <input value={draft.startTime} onChange={(event) => update('startTime', event.target.value)} />
+   176	          </label>
+   177	          <label className="app-new-show-modal-field">
+   178	            <span>Status</span>
+   179	            <select value={draft.status} onChange={(event) => update('status', Number(event.target.value) as ShowStatus)}>
+   180	              <option value={ShowStatus.CONFIRMED} disabled={!hasFlyerForConfirmation}>Confirmed{hasFlyerForConfirmation ? '' : ' — needs flyer'}</option>
+   181	              <option value={ShowStatus.HOLD}>Hold</option>
+   182	              <option value={ShowStatus.DRAFT}>Draft</option>
+   183	              <option value={ShowStatus.ARCHIVED}>Archived</option>
+   184	            </select>
+   185	          </label>
+   186	        </div>
+   187	        <div className="app-new-show-modal-grid cols-4">
+   188	          <label className="app-new-show-modal-field">
+   189	            <span>Age</span>
+   190	            <select value={draft.age} onChange={(event) => update('age', event.target.value)}>
+   191	              <option>All Ages</option>
+   192	              <option>18+</option>
+   193	              <option>21+</option>
+   194	            </select>
+   195	          </label>
+   196	          <label className="app-new-show-modal-field">
+   197	            <span>Price</span>
+   198	            <input value={draft.price} onChange={(event) => update('price', event.target.value)} placeholder="Optional display text" />
+   199	          </label>
+   200	          <label className="app-new-show-modal-field">
+   201	            <span>Genre</span>
+   202	            <input value={draft.genre} onChange={(event) => update('genre', event.target.value)} />
+   203	          </label>
+   204	          <label className="app-new-show-modal-field">
+   205	            <span>Capacity</span>
+   206	            <input type="number" min="0" value={draft.capacity} onChange={(event) => update('capacity', Number(event.target.value))} />
+   207	          </label>
+   208	        </div>
+   209	        <label className="app-new-show-modal-field">
+   210	          <span>Public description</span>
+   211	          <textarea rows={3} value={draft.description} onChange={(event) => update('description', event.target.value)} />
+   212	        </label>
+   213	        <label className="app-new-show-modal-field">
+   214	          <span>Staff notes</span>
+   215	          <textarea rows={2} value={draft.notes} onChange={(event) => update('notes', event.target.value)} />
+   216	          <small>Visible to staff only</small>
+   217	        </label>
+   218	        <label className="app-new-show-modal-toggle">
+   219	          <input type="checkbox" checked={draft.reserveTicketEnabled} onChange={(event) => update('reserveTicketEnabled', event.target.checked)} />
+   220	          <span>Show “Reserve ticket” call-to-action publicly</span>
+   221	        </label>
+   222	        <p className="app-new-show-modal-help">Save draft keeps the show staff-only and lists it under Shows → Drafts. Price is optional display text. The public “Reserve ticket” CTA is behind the flag above and is off by default.</p>
+   223	        {!hasFlyerForConfirmation && <p className="app-new-show-modal-warning">Confirmed shows need a flyer/poster before they can appear publicly. Attach a flyer here or save as Draft/Hold until artwork is ready.</p>}
+   224	        <div className="app-new-show-modal-lineup">
+   225	          <div className="app-new-show-modal-section-header">
+   226	            <span>Lineup</span>
+   227	            <Button type="button" variant="outline" size="sm" iconLeft="plus" onClick={addLineup}>Add row</Button>
+   228	          </div>
+   229	          {draft.lineup.map((entry, index) => (
+   230	            <div className="app-new-show-modal-lineup-row" key={index}>
+   231	              <label className="app-new-show-modal-field"><span>Artist</span><input value={entry.artist} onChange={(event) => updateLineup(index, { artist: event.target.value })} /></label>
+   232	              <label className="app-new-show-modal-field"><span>Role</span><input value={entry.role} onChange={(event) => updateLineup(index, { role: event.target.value })} /></label>
+   233	              <label className="app-new-show-modal-field"><span>Start</span><input value={entry.startTime} onChange={(event) => updateLineup(index, { startTime: event.target.value })} /></label>
+   234	              <label className="app-new-show-modal-field"><span>End</span><input value={entry.endTime} onChange={(event) => updateLineup(index, { endTime: event.target.value })} /></label>
+   235	              <Button type="button" variant="ghost" size="sm" iconLeft="trash" onClick={() => removeLineup(index)} aria-label="Remove lineup row">Remove</Button>
+   236	            </div>
+   237	          ))}
+   238	        </div>
+   239	        <label className="app-new-show-modal-field">
+   240	          <span>Flyer</span>
+   241	          <input type="file" accept="image/*,.pdf" onChange={(event) => setFlyerFile(event.target.files?.[0])} />
+   242	          {initialShow?.flyerUrl && <small>Current flyer: {initialShow.flyerUrl}</small>}
+   243	          {flyerFile && <small>Selected: {flyerFile.name}</small>}
+   244	        </label>
+   245	      </div>
+   246	    </Modal>
+   247	  );
+   248	}
+
+## ShowDetailPage data flow and current layout
+     1	import { useEffect, useState } from 'react';
+     2	import { useNavigate, useParams } from 'react-router-dom';
+     3	import { Button } from 'pyxis-components';
+     4	import {
+     5	  useAnnounceShowMutation,
+     6	  useArchiveShowMutation,
+     7	  useCancelShowMutation,
+     8	  useGetShowQuery,
+     9	  useCreateShowMutation,
+    10	  useDeleteShowFlyerMutation,
+    11	  useUpdateShowMutation,
+    12	  useUploadShowFlyerMutation,
+    13	} from '../../api/appApi';
+    14	import { AppShell } from '../../components/shell';
+    15	import { ConfirmDialog, FlyerField, NewShowModal, Panel } from '../../components/organisms';
+    16	import { ShowDetailDiscordPanel, ShowDetailHero, ShowDetailInfoPanel } from '../../components/organisms';
+    17	import { appShowFromShow, ErrorState, LoadingState, parseRouteId } from '../shared';
+    18	import './Page.css';
+    19	
+    20	export function ShowDetailPage() {
+    21	  const navigate = useNavigate();
+    22	  const id = parseRouteId(useParams().id);
+    23	  const { data: show, isLoading, isError } = useGetShowQuery(id ?? 0, { skip: id === undefined });
+    24	  const [cancelShow, cancelState] = useCancelShowMutation();
+    25	  const [archiveShow, archiveState] = useArchiveShowMutation();
+    26	  const [announceShow, announceState] = useAnnounceShowMutation();
+    27	  const [createShow, createState] = useCreateShowMutation();
+    28	  const [updateShow, updateState] = useUpdateShowMutation();
+    29	  const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
+    30	  const [deleteFlyer, deleteFlyerState] = useDeleteShowFlyerMutation();
+    31	  const [isEditorOpen, setEditorOpen] = useState(false);
+    32	  const [confirmAction, setConfirmAction] = useState<'archive' | 'cancel' | 'delete-flyer' | null>(null);
+    33	  const [actionError, setActionError] = useState<string | undefined>();
+    34	  const [actionSuccess, setActionSuccess] = useState<string | undefined>();
+    35	  const [localFlyerUrl, setLocalFlyerUrl] = useState<string | undefined>();
+    36	
+    37	  useEffect(() => {
+    38	    setLocalFlyerUrl(undefined);
+    39	  }, [show?.id, show?.flyerUrl]);
+    40	
+    41	  const visibleFlyerUrl = localFlyerUrl ?? show?.flyerUrl;
+    42	
+    43	  const handleUpdateShow = async (nextShow: Parameters<typeof updateShow>[0], flyerFile?: File) => {
+    44	    if (!show) return;
+    45	    setActionError(undefined);
+    46	    setActionSuccess(undefined);
+    47	    try {
+    48	      let showToSave = nextShow;
+    49	      if (flyerFile) {
+    50	        const uploaded = await uploadFlyer({ showId: show.id, file: flyerFile }).unwrap();
+    51	        setLocalFlyerUrl(uploaded.url);
+    52	        showToSave = { ...nextShow, flyerUrl: uploaded.url };
+    53	      }
+    54	      await updateShow(showToSave).unwrap();
+    55	      setEditorOpen(false);
+    56	      setActionSuccess('Show updated.');
+    57	    } catch {
+    58	      setActionError('Could not update this show. Check required fields, session, and backend logs.');
+    59	    }
+    60	  };
+    61	
+    62	  const handleUploadFlyer = async (file: File) => {
+    63	    if (!show) return;
+    64	    setActionError(undefined);
+    65	    setActionSuccess(undefined);
+    66	    try {
+    67	      const uploaded = await uploadFlyer({ showId: show.id, file }).unwrap();
+    68	      setLocalFlyerUrl(uploaded.url);
+    69	      setActionSuccess('Flyer uploaded.');
+    70	    } catch {
+    71	      setActionError('Could not upload this flyer. Check file type, session, and backend logs.');
+    72	    }
+    73	  };
+    74	
+    75	  const handleDuplicateShow = async () => {
+    76	    if (!show) return;
+    77	    setActionError(undefined);
+    78	    setActionSuccess(undefined);
+    79	    try {
+    80	      const duplicate = await createShow({
+    81	        ...show,
+    82	        id: 0,
+    83	        artist: `${show.artist} copy`,
+    84	        status: show.status,
+    85	        discordMessageId: '',
+    86	        discordChannelId: '',
+    87	        flyerUrl: '',
+    88	      }).unwrap();
+    89	      setActionSuccess('Show duplicated.');
+    90	      navigate(`/shows/${duplicate.id}`);
+    91	    } catch {
+    92	      setActionError('Could not duplicate this show. Check required fields, session, and backend logs.');
+    93	    }
+    94	  };
+    95	
+    96	  const handleDeleteFlyer = async () => {
+    97	    if (!visibleFlyerUrl || !show) return;
+    98	    setActionError(undefined);
+    99	    setActionSuccess(undefined);
+   100	    try {
+   101	      const filename = visibleFlyerUrl.split('/').pop() ?? visibleFlyerUrl;
+   102	      await deleteFlyer({ showId: show.id, filename }).unwrap();
+   103	      setConfirmAction(null);
+   104	      setLocalFlyerUrl('');
+   105	      setActionSuccess('Flyer deleted.');
+   106	    } catch {
+   107	      setActionError('Could not delete this flyer. Check your session and backend logs.');
+   108	    }
+   109	  };
+   110	
+   111	  const handleCancelShow = async () => {
+   112	    if (!id) return;
+   113	    setActionError(undefined);
+   114	    setActionSuccess(undefined);
+   115	    try {
+   116	      await cancelShow(id).unwrap();
+   117	      setConfirmAction(null);
+   118	      setActionSuccess('Show cancelled.');
+   119	    } catch {
+   120	      setActionError('Could not cancel this show. Check your session and backend logs.');
+   121	    }
+   122	  };
+   123	
+   124	  const handleArchiveShow = async () => {
+   125	    if (!id) return;
+   126	    setActionError(undefined);
+   127	    setActionSuccess(undefined);
+   128	    try {
+   129	      await archiveShow(id).unwrap();
+   130	      setConfirmAction(null);
+   131	      setActionSuccess('Show archived.');
+   132	    } catch {
+   133	      setActionError('Could not archive this show. Check your session and backend logs.');
+   134	    }
+   135	  };
+   136	
+   137	  const openDiscordPost = () => {
+   138	    if (!show?.discordChannelId || !show?.discordMessageId) {
+   139	      setActionError('This show has not been posted to Discord yet. Use Announce first.');
+   140	      return;
+   141	    }
+   142	    window.open(`https://discord.com/channels/@me/${show.discordChannelId}/${show.discordMessageId}`, '_blank', 'noopener,noreferrer');
+   143	  };
+   144	
+   145	  const handleAnnounceShow = async () => {
+   146	    if (!id) return;
+   147	    setActionError(undefined);
+   148	    setActionSuccess(undefined);
+   149	    try {
+   150	      await announceShow(id).unwrap();
+   151	      setActionSuccess(show?.discordMessageId ? 'Announcement requested. Discord post is already linked below.' : 'Announcement requested. The bot will attach Discord post details when posting is available.');
+   152	    } catch {
+   153	      setActionError('Could not announce this show. Check your session and backend logs.');
+   154	    }
+   155	  };
+   156	
+   157	  return (
+   158	    <AppShell page="show-detail" title={show?.artist ?? 'Show detail'} eyebrow="Shows / Detail" action={<Button size="sm" iconLeft="edit" disabled={!show} onClick={() => setEditorOpen(true)}>Edit</Button>}>
+   159	      {id === undefined ? (
+   160	        <ErrorState label="Invalid show id in the route." />
+   161	      ) : isLoading ? (
+   162	        <LoadingState label="Loading show detail from the backend…" />
+   163	      ) : isError || !show ? (
+   164	        <ErrorState label="Show not found or unavailable." />
+   165	      ) : (
+   166	        <>
+   167	          <NewShowModal isOpen={isEditorOpen} mode="edit" initialShow={show} isSaving={updateState.isLoading || uploadState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleUpdateShow} />
+   168	          <ConfirmDialog isOpen={confirmAction === 'archive'} title="Archive show?" description="This moves the show into the archive and removes it from active operations views." confirmLabel="Archive show" isLoading={archiveState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleArchiveShow} />
+   169	          <ConfirmDialog isOpen={confirmAction === 'cancel'} title="Cancel show?" description="This marks the show as cancelled and records the action for staff review." confirmLabel="Cancel show" variant="danger" isLoading={cancelState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleCancelShow} />
+   170	          <ConfirmDialog isOpen={confirmAction === 'delete-flyer'} title="Delete flyer?" description="This removes the uploaded flyer from this show. You can upload a replacement afterwards." confirmLabel="Delete flyer" variant="danger" isLoading={deleteFlyerState.isLoading} onCancel={() => setConfirmAction(null)} onConfirm={handleDeleteFlyer} />
+   171	          <ShowDetailHero show={appShowFromShow(show)} />
+   172	          <div className="app-detail-grid"><ShowDetailInfoPanel show={appShowFromShow(show)} /><ShowDetailDiscordPanel channelLabel={show.discordChannelId ? `#${show.discordChannelId}` : '#upcoming-shows'} statusLabel={show.discordMessageId ? 'Posted' : 'Not posted yet'} isPosted={Boolean(show.discordChannelId && show.discordMessageId)} onOpenPost={openDiscordPost} /></div>
+   173	          <FlyerField flyerUrl={visibleFlyerUrl} isUploading={uploadState.isLoading} isDeleting={deleteFlyerState.isLoading} onUpload={handleUploadFlyer} onDelete={() => setConfirmAction('delete-flyer')} />
+   174	          <div className="app-detail-grid">
+   175	            <Panel title="Lineup" section="show-detail-lineup">
+   176	              {show.lineup.length > 0 ? <div className="app-detail-list app-show-lineup-list">{show.lineup.map((entry, index) => <span key={`${entry.artist}-${entry.startTime}-${index}`}><b>{entry.artist}</b><small>{[entry.role, entry.startTime, entry.endTime && `– ${entry.endTime}`].filter(Boolean).join(' ') || 'Lineup entry'}</small></span>)}</div> : <p className="app-muted-copy">No lineup rows have been added yet.</p>}
+   177	            </Panel>
+   178	            <Panel title="Staff notes" section="show-detail-staff-notes">
+   179	              {show.notes.trim() ? <p className="app-staff-notes-copy">{show.notes}</p> : <p className="app-muted-copy">No staff notes recorded.</p>}
+   180	            </Panel>
+   181	          </div>
+   182	          {show.description.trim() && <Panel title="Public description" section="show-detail-public-description"><p className="app-staff-notes-copy">{show.description}</p></Panel>}
+   183	          {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
+   184	          {actionSuccess && <div className="app-action-success" role="status">{actionSuccess}</div>}
+   185	          <div className="app-detail-actions">
+   186	            <Button variant="outline" onClick={handleDuplicateShow} disabled={createState.isLoading}>Duplicate</Button>
+   187	            <Button variant="outline" iconLeft="archive" onClick={() => setConfirmAction('archive')} disabled={archiveState.isLoading}>Archive</Button>
+   188	            <Button variant="outline" iconLeft="external" onClick={handleAnnounceShow} disabled={announceState.isLoading}>Announce</Button>
+   189	            <Button variant="danger" iconLeft="trash" onClick={() => setConfirmAction('cancel')} disabled={cancelState.isLoading}>Cancel show</Button>
+   190	          </div>
+   191	        </>
+   192	      )}
+   193	    </AppShell>
+   194	  );
+   195	}
+
+## FlyerField current preview/upload contract
+     1	import { useState } from 'react';
+     2	import { Button } from 'pyxis-components';
+     3	import { appPart } from '../../parts';
+     4	import './FlyerField.css';
+     5	
+     6	export type FlyerFieldProps = {
+     7	  flyerUrl?: string;
+     8	  isUploading?: boolean;
+     9	  isDeleting?: boolean;
+    10	  onUpload?: (file: File) => void;
+    11	  onDelete?: () => void;
+    12	};
+    13	
+    14	function isPreviewableImage(url: string) {
+    15	  const clean = url.split('?')[0]?.toLowerCase() ?? url.toLowerCase();
+    16	  return /\.(avif|gif|jpe?g|png|svg|webp)$/.test(clean);
+    17	}
+    18	
+    19	export function FlyerField({ flyerUrl, isUploading, isDeleting, onUpload, onDelete }: FlyerFieldProps) {
+    20	  const [selectedFile, setSelectedFile] = useState<File | undefined>();
+    21	
+    22	  const submit = () => {
+    23	    if (selectedFile) {
+    24	      onUpload?.(selectedFile);
+    25	      setSelectedFile(undefined);
+    26	    }
+    27	  };
+    28	
+    29	  return (
+    30	    <section className="app-flyer-field" {...appPart('flyer-field')}>
+    31	      <header>
+    32	        <div>
+    33	          <strong>Flyer</strong>
+    34	          <span>{flyerUrl ? 'Public artwork attached to this show.' : 'No flyer uploaded yet.'}</span>
+    35	        </div>
+    36	        {flyerUrl && <a href={flyerUrl} target="_blank" rel="noreferrer">Open</a>}
+    37	      </header>
+    38	      {flyerUrl && <div className="app-flyer-field-preview">
+    39	        {isPreviewableImage(flyerUrl) ? <img src={flyerUrl} alt="Current show flyer" /> : <div className="app-flyer-field-file-preview"><span>Attached file</span></div>}
+    40	        <div className="app-flyer-field-preview-meta"><span>{flyerUrl}</span><Button variant="ghost" size="sm" iconLeft="trash" onClick={onDelete} isLoading={isDeleting}>Delete flyer</Button></div>
+    41	      </div>}
+    42	      <div className="app-flyer-field-upload">
+    43	        <input type="file" accept="image/*,.pdf" onChange={(event) => setSelectedFile(event.target.files?.[0])} aria-label="Choose flyer file" />
+    44	        <Button variant="outline" size="sm" onClick={submit} disabled={!selectedFile} isLoading={isUploading}>Upload flyer</Button>
+    45	      </div>
+    46	      {selectedFile && <small>Selected: {selectedFile.name}</small>}
+    47	    </section>
+    48	  );
+    49	}
+
+## appApi show endpoints
+     1	import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+     2	import {
+     3	  fromJson,
+     4	  toJson,
+     5	  create,
+     6	  AuthSession,
+     7	  AuthSessionSchema,
+     8	  ShowListSchema,
+     9	  Show,
+    10	  ShowSchema,
+    11	  ShowStatus,
+    12	  AppShow,
+    13	  AppShowSchema,
+    14	  Submission,
+    15	  SubmissionSchema,
+    16	  SubmissionListSchema,
+    17	  BookingReview,
+    18	  BookingReviewSchema,
+    19	  Artist,
+    20	  ArtistListSchema,
+    21	  ArtistSchema,
+    22	  CalendarEvent,
+    23	  CalendarEventListSchema,
+    24	  CalendarHold,
+    25	  CalendarHoldSchema,
+    26	  CalendarBlocked,
+    27	  CalendarBlockedSchema,
+    28	  AuditLogEntry,
+    29	  AuditLogEntryListSchema,
+    30	  Settings,
+    31	  SettingsSchema,
+    32	  SuccessResponse,
+    33	  SuccessResponseSchema,
+    34	  FlyerUploadResponse,
+    35	  FlyerUploadResponseSchema,
+    36	} from 'pyxis-types';
+    37	import { endpoints } from './endpoints';
+    38	
+    39	const API_BASE_URL = import.meta.env.VITE_API_URL ?? '';
+    40	
+    41	type CalendarHoldInput = Pick<CalendarHold, 'date' | 'label'>;
+    42	type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
+    43	export type ShowLogStatus = 'needs-log' | 'logged' | 'incident';
+    44	export type ShowLogEntry = {
+    45	  showId: number;
+    46	  showLogId?: number;
+    47	  artist: string;
+    48	  date: string;
+    49	  genre?: string;
+    50	  showStatus: ShowStatus;
+    51	  showNotes?: string;
+    52	  draw?: number;
+    53	  postShowNotes?: string;
+    54	  quickHighlight?: string;
+    55	  totalDoorCents?: number;
+    56	  incident: boolean;
+    57	  incidentNotes?: string;
+    58	  loggedBy?: number;
+    59	  loggedByName?: string;
+    60	  loggedAt?: string;
+    61	  updatedAt?: string;
+    62	  logStatus: ShowLogStatus;
+    63	};
+    64	export type ShowLogList = { entries: ShowLogEntry[] };
+    65	export type ShowLogQuery = { status?: ShowLogStatus | 'all'; search?: string; limit?: number; offset?: number };
+    66	export type ShowLogUpdateInput = Pick<ShowLogEntry, 'showId' | 'draw' | 'postShowNotes' | 'quickHighlight' | 'totalDoorCents' | 'incident' | 'incidentNotes'>;
+    67	type FlyerUploadInput = { showId: number; file: File };
+    68	type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
+    69	type BookingUpdateInput = Pick<Submission, 'id' | 'artistName' | 'preferredDate' | 'genre' | 'expectedDraw' | 'links' | 'techRider' | 'message' | 'contactDiscord'> & Partial<Pick<Submission, 'status'>>;
+    70	type ArtistInput = Pick<Artist, 'name' | 'genre' | 'links' | 'notes'>;
+    71	
+    72	export const appApi = createApi({
+    73	  reducerPath: 'appApi',
+    74	  baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
+    75	  tagTypes: ['Session', 'Show', 'Booking', 'Artist', 'Calendar', 'ShowLog', 'AuditLog', 'Settings'],
+    76	  endpoints: (builder) => ({
+    77	    getSession: builder.query<AuthSession, void>({
+    78	      query: () => endpoints.session,
+    79	      transformResponse: (response: unknown) => fromJson(AuthSessionSchema, response as any),
+    80	      providesTags: ['Session'],
+    81	    }),
+    82	
+    83	    logout: builder.mutation<SuccessResponse, void>({
+    84	      query: () => ({ url: endpoints.logout, method: 'POST' }),
+    85	      transformResponse: (response: unknown) => fromJson(SuccessResponseSchema, response as any),
+    86	      invalidatesTags: ['Session'],
+    87	    }),
+    88	
+    89	    getShows: builder.query<AppShow[], void>({
+    90	      query: () => endpoints.shows,
+    91	      transformResponse: (response: unknown) => {
+    92	        const list = fromJson(ShowListSchema, response as any);
+    93	        return list.shows.map((show) =>
+    94	          create(AppShowSchema, {
+    95	            id: show.id,
+    96	            artist: show.artist,
+    97	            date: show.date,
+    98	            doors: show.doorsTime,
+    99	            age: show.age,
+   100	            price: show.price,
+   101	            status: show.status,
+   102	            genre: show.genre,
+   103	            draw: show.draw,
+   104	            capacity: show.capacity,
+   105	            pinned: false,
+   106	            notes: show.notes,
+   107	            reserveTicketEnabled: show.reserveTicketEnabled,
+   108	            // Staff list rows need flyer readiness even though the generated
+   109	            // AppShow view model does not yet carry it in protobuf.
+   110	            flyerUrl: show.flyerUrl,
+   111	          } as AppShow & { flyerUrl: string })
+   112	        );
+   113	      },
+   114	      providesTags: (result) =>
+   115	        result
+   116	          ? [...result.map((s) => ({ type: 'Show' as const, id: s.id })), { type: 'Show' as const, id: 'LIST' }]
+   117	          : [{ type: 'Show' as const, id: 'LIST' }],
+   118	    }),
+   119	
+   120	    getShow: builder.query<Show, number>({
+   121	      query: (id) => endpoints.show(id),
+   122	      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+   123	      providesTags: (_r, _e, id) => [{ type: 'Show', id }],
+   124	    }),
+   125	
+   126	    createShow: builder.mutation<Show, Show>({
+   127	      query: (show) => ({ url: endpoints.shows, method: 'POST', body: toJson(ShowSchema, show) }),
+   128	      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+   129	      invalidatesTags: [{ type: 'Show', id: 'LIST' }, 'AuditLog'],
+   130	    }),
+   131	
+   132	    updateShow: builder.mutation<Show, Show>({
+   133	      query: (show) => ({ url: endpoints.show(show.id), method: 'PATCH', body: toJson(ShowSchema, show) }),
+   134	      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+   135	      invalidatesTags: (_r, _e, show) => [{ type: 'Show', id: show.id }, { type: 'Show', id: 'LIST' }, 'AuditLog'],
+   136	    }),
+   137	
+   138	    cancelShow: builder.mutation<Show, number>({
+   139	      query: (id) => ({ url: endpoints.showCancel(id), method: 'PATCH' }),
+   140	      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+   141	      invalidatesTags: (_r, _e, id) => [{ type: 'Show', id }, { type: 'Show', id: 'LIST' }, 'AuditLog'],
+   142	    }),
+   143	
+   144	    archiveShow: builder.mutation<SuccessResponse, number>({
+   145	      query: (id) => ({ url: endpoints.showArchive(id), method: 'PATCH' }),
+   146	      transformResponse: (response: unknown) => fromJson(SuccessResponseSchema, response as any),
+   147	      invalidatesTags: (_r, _e, id) => [{ type: 'Show', id }, { type: 'Show', id: 'LIST' }, 'AuditLog'],
+   148	    }),
+   149	
+   150	    announceShow: builder.mutation<SuccessResponse, number>({
+   151	      query: (id) => ({ url: endpoints.showAnnounce(id), method: 'POST' }),
+   152	      transformResponse: (response: unknown) => fromJson(SuccessResponseSchema, response as any),
+   153	      invalidatesTags: ['AuditLog'],
+   154	    }),
+   155	
+   156	    uploadShowFlyer: builder.mutation<FlyerUploadResponse, FlyerUploadInput>({
+   157	      query: ({ showId, file }) => {
+   158	        const body = new FormData();
+   159	        body.append('flyer', file);
+   160	        return { url: endpoints.showFlyer(showId), method: 'POST', body };
+   161	      },
+   162	      transformResponse: (response: unknown) => fromJson(FlyerUploadResponseSchema, response as any),
+   163	      invalidatesTags: (_r, _e, { showId }) => [{ type: 'Show', id: showId }, { type: 'Show', id: 'LIST' }],
+   164	    }),
+   165	
+   166	    deleteShowFlyer: builder.mutation<void, { showId: number; filename: string }>({
+   167	      query: ({ showId, filename }) => ({ url: `${endpoints.showFlyer(showId)}?filename=${encodeURIComponent(filename)}`, method: 'DELETE' }),
+   168	      invalidatesTags: (_r, _e, { showId }) => [{ type: 'Show', id: showId }, { type: 'Show', id: 'LIST' }],
+   169	    }),
+   170	
+   171	    getBookings: builder.query<Submission[], void>({
+   172	      query: () => endpoints.bookings,
+   173	      transformResponse: (response: unknown) => {
+   174	        const list = fromJson(SubmissionListSchema, response as any);
+   175	        return list.submissions;
+   176	      },
+   177	      providesTags: ['Booking'],
+   178	    }),
+   179	
+   180	    updateBooking: builder.mutation<Submission, BookingUpdateInput>({
+   181	      query: (booking) => ({ url: endpoints.booking(booking.id), method: 'PATCH', body: toJson(SubmissionSchema, create(SubmissionSchema, booking)) }),
+   182	      transformResponse: (response: unknown) => fromJson(SubmissionSchema, response as any),
+   183	      invalidatesTags: ['Booking', 'AuditLog'],
+   184	    }),
+   185	
+   186	    approveBooking: builder.mutation<Show, number>({
+   187	      query: (id) => ({ url: endpoints.bookingApprove(id), method: 'PATCH' }),
+   188	      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+   189	      invalidatesTags: ['Booking', { type: 'Show', id: 'LIST' }, 'Artist', 'AuditLog'],
+   190	    }),
+   191	
+   192	    declineBooking: builder.mutation<SuccessResponse, number>({
+   193	      query: (id) => ({ url: endpoints.bookingDecline(id), method: 'PATCH' }),
+   194	      transformResponse: (response: unknown) => fromJson(SuccessResponseSchema, response as any),
+   195	      invalidatesTags: ['Booking', 'AuditLog'],
+   196	    }),
+   197	
+   198	    getBookingReview: builder.query<BookingReview, number>({
+   199	      query: endpoints.bookingReview,
+   200	      transformResponse: (response: unknown) => fromJson(BookingReviewSchema, response as any),
+   201	      providesTags: (_r, _e, id) => [{ type: 'Booking', id: `review-${id}` }],
+   202	    }),
+   203	
+   204	    updateBookingReview: builder.mutation<BookingReview, BookingReviewInput>({
+   205	      query: ({ submissionId, ...review }) => ({ url: endpoints.bookingReview(submissionId), method: 'PATCH', body: toJson(BookingReviewSchema, create(BookingReviewSchema, { submissionId, ...review })) }),
+   206	      transformResponse: (response: unknown) => fromJson(BookingReviewSchema, response as any),
+   207	      invalidatesTags: (_r, _e, { submissionId }) => [{ type: 'Booking', id: `review-${submissionId}` }, 'AuditLog'],
+   208	    }),
+   209	
+   210	    getArtists: builder.query<Artist[], void>({
+
+## show proto contract
+     1	syntax = "proto3";
+     2	
+     3	package pyxis.v1;
+     4	
+     5	option go_package = "github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1";
+     6	
+     7	enum ShowStatus {
+     8	  SHOW_STATUS_UNSPECIFIED = 0;
+     9	  SHOW_STATUS_CONFIRMED   = 1;
+    10	  SHOW_STATUS_CANCELLED   = 2;
+    11	  SHOW_STATUS_ARCHIVED    = 3;
+    12	  SHOW_STATUS_DRAFT       = 4;
+    13	  SHOW_STATUS_HOLD        = 5;
+    14	  SHOW_STATUS_BLOCKED     = 6;
+    15	}
+    16	
+    17	enum SubmissionStatus {
+    18	  SUBMISSION_STATUS_UNSPECIFIED = 0;
+    19	  SUBMISSION_STATUS_PENDING     = 1;
+    20	  SUBMISSION_STATUS_APPROVED    = 2;
+    21	  SUBMISSION_STATUS_DECLINED    = 3;
+    22	  SUBMISSION_STATUS_HOLD        = 4;
+    23	  SUBMISSION_STATUS_CANCELLED   = 5;
+    24	}
+    25	
+    26	message Show {
+    27	  int32  id            = 1;
+    28	  string artist        = 2;
+    29	  string date          = 3;
+    30	  string doors_time    = 4;
+    31	  string start_time    = 5;
+    32	  string age           = 6;
+    33	  string price         = 7;
+    34	  string genre         = 8;
+    35	  string description   = 9;
+    36	  string notes         = 17;
+    37	  repeated LineupEntry lineup = 10;
+    38	  string flyer_url     = 11;
+    39	  int32  draw          = 18;
+    40	  int32  capacity      = 19;
+    41	  string discord_message_id = 20;
+    42	  string discord_channel_id = 21;
+    43	  bool   reserve_ticket_enabled = 22;
+    44	  ShowStatus status    = 12;
+    45	  int32  submission_id = 13;
+    46	  int32  artist_id     = 14;
+    47	  string created_at    = 15;
+    48	  string updated_at    = 16;
+    49	
+    50	  message LineupEntry {
+    51	    string artist     = 1;
+    52	    string role       = 2;
+    53	    string start_time = 3;
+    54	    string end_time   = 4;
+    55	  }
+    56	}
+    57	
+    58	message AppShow {
+    59	  int32  id       = 1;
+    60	  string artist   = 2;
+    61	  string date     = 3;
+    62	  string doors    = 4;
+    63	  string age      = 5;
+    64	  string price    = 6;
+    65	  ShowStatus status = 7;
+    66	  string genre    = 8;
+    67	  int32  draw     = 9;
+    68	  int32  capacity = 10;
+    69	  bool   pinned   = 11;
+    70	  string notes    = 12;
+    71	  string discord_message_id = 13;
+    72	  string discord_channel_id = 14;
+    73	  bool   reserve_ticket_enabled = 15;
+    74	}
+    75	
+    76	message ArchivedShow {
+    77	  int32  id     = 1;
+    78	  string artist = 2;
+    79	  string date   = 3;
+    80	  string genre  = 4;
+    81	  int32  draw   = 5;
+    82	}
+    83	
+    84	message ArchiveStats {
+    85	  int32 total_shows      = 1;
+    86	  int32 total_attendance = 2;
+    87	  int32 years_running    = 3;
+    88	  int32 unique_artists   = 4;
+    89	}
+    90	
+    91	message BookingFormData {
+    92	  string artist_name     = 1;
+    93	  string genre           = 2;
+    94	  string preferred_date  = 3;
+    95	  int32  expected_draw   = 4;
+    96	  string links           = 5;
+    97	  string tech_rider      = 6;
+    98	  string message         = 7;
+    99	}
+   100	
+   101	message ShowList {
+   102	  repeated Show shows = 1;
+   103	}
+   104	
+   105	message ArchivedShowList {
+   106	  repeated ArchivedShow shows = 1;
+   107	}
+   108	
+   109	message BookingConfirmation {
+   110	  bool  success       = 1;
+   111	  int32 submission_id = 2;
+   112	}
+   113	
+   114	message Submission {
+   115	  int32  id             = 1;
+   116	  int32  artist_id      = 2;
+   117	  string artist_name    = 3;
+   118	  string preferred_date = 4;
+   119	  string genre          = 5;
+   120	  int32  expected_draw  = 6;

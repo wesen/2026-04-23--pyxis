@@ -1,0 +1,8 @@
+# reMarkable upload evidence
+
+remarquee status: ok
+remarquee cloud account --non-interactive: user=wesen@ruinwesen.com sync_version=1.5
+
+dry-run bundle upload: PASS
+real bundle upload: OK: uploaded PYXIS-SHOW-EDIT-VISUAL-REDESIGN guide.pdf -> /ai/2026/04/29/PYXIS-SHOW-EDIT-VISUAL-REDESIGN
+verification listing: [f] PYXIS-SHOW-EDIT-VISUAL-REDESIGN guide
