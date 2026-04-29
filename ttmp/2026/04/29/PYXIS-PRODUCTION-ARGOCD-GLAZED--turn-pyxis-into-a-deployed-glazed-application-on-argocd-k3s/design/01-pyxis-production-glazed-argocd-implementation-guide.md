@@ -311,7 +311,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 COPY --from=web /src/internal/web/embed/public ./internal/web/embed/public
-RUN CGO_ENABLED=0 go build -tags embed -trimpath -o /out/pyxis ./cmd/pyxis
+RUN CGO_ENABLED=1 go build -tags embed -trimpath -o /out/pyxis ./cmd/pyxis
 
 FROM debian:bookworm-slim
 RUN apt-get update \
@@ -332,6 +332,8 @@ CMD ["serve"]
 
 There are details to refine:
 
+- Pyxis currently needs `CGO_ENABLED=1` because the Glazed help system initializes an in-memory SQLite store through `go-sqlite3`; a `CGO_ENABLED=0` binary can compile but fail when running `pyxis --help` or `pyxis serve --help`.
+- Production Docker builds cannot rely on local Go `replace` directives pointing at sibling workstation directories such as `../corporate-headquarters/discord-bot`; dependencies used in the image must resolve from published module versions or be vendored/copied intentionally.
 - If Go must run `cmd/build-web` in the web stage, the web stage also needs Go. Alternatively use one `golang` stage with Node installed, or build web assets in CI and copy them into the image.
 - If the staff app is also embedded, `cmd/build-web` must learn how to build/copy both public and staff bundles and `internal/web` must serve both. Today it primarily supports the public bundle.
 - If the Discord bot script is optional, copying `bot/` into the runtime image is harmless and keeps `--discord-bot` usable.
@@ -615,6 +617,27 @@ Current code may need a `SessionSecret` config field before `session_secret` is 
 ### 9.4 PostgreSQL bootstrap
 
 The shared PostgreSQL server already exists in the platform. Pyxis needs its own database and role. Use the bootstrap Job pattern from `docs/vault-backed-postgres-bootstrap-job-pattern.md` and `gitops/kustomize/hair-booking/db-bootstrap-job.yaml`.
+
+The explicit v1 decision is:
+
+- **Reuse the existing shared in-cluster PostgreSQL server.** Do not create a new PostgreSQL server just for Pyxis during the first rollout.
+- **Create the Pyxis database and role with an Argo CD synced Kubernetes Job.** The Job reads a short-lived working copy of secrets from Kubernetes Secrets that are synchronized by Vault Secrets Operator.
+- **Do not use Terraform for the Pyxis database/user.** Terraform is better for cloud/server/DNS/platform bootstrap. This database is an in-cluster application concern, and the rest of the app rollout is already driven by Argo CD.
+- **Do not introduce a Postgres operator for Pyxis v1.** A Postgres operator may be a good future platform decision if the cluster wants per-app clusters, database CRDs, managed backups, or HA/failover. It is unnecessary for this first Pyxis deployment because the platform already has a shared Postgres service and a proven bootstrap-Job pattern.
+
+The mental model is:
+
+```text
+Existing GitOps-managed PostgreSQL StatefulSet
+  -> shared cluster admin credential in Vault
+  -> Pyxis runtime DB credential in Vault
+  -> Vault Secrets Operator syncs both into namespace pyxis
+  -> pyxis-db-bootstrap Job creates/updates role and database
+  -> pyxis migration Job applies schema migrations
+  -> pyxis Deployment connects with least-privilege runtime DSN
+```
+
+This keeps responsibilities aligned. Vault owns secret values, Argo CD owns Kubernetes desired state, the bootstrap Job owns idempotent SQL side effects, and the long-running Pyxis pod only gets the least-privilege application DSN.
 
 Pseudocode:
 

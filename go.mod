@@ -6,8 +6,8 @@ require (
 	dagger.io/dagger v0.20.6
 	github.com/dop251/goja v0.0.0-20260311135729-065cd970411c
 	github.com/dop251/goja_nodejs v0.0.0-20260212111938-1f56ff5bcf14
-	github.com/go-go-golems/discord-bot v0.0.0
-	github.com/go-go-golems/glazed v1.2.3
+	github.com/go-go-golems/discord-bot v0.1.1
+	github.com/go-go-golems/glazed v1.2.5
 	github.com/go-go-golems/go-go-goja v0.4.12
 	github.com/golang-migrate/migrate/v4 v4.19.1
 	github.com/jackc/pgx/v5 v5.9.2
@@ -136,7 +136,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/go-go-golems/discord-bot => ../corporate-headquarters/discord-bot
-
-replace github.com/go-go-golems/go-go-goja => ../corporate-headquarters/go-go-goja

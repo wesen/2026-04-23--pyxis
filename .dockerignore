@@ -1,0 +1,44 @@
+.git
+.github
+.direnv
+.env
+.env.*
+!.env.example
+.envrc
+
+# Local build/test artifacts
+bin/
+dist/
+coverage/
+*.test
+*.out
+pyxis
+
+# Runtime data and local databases
+data/flyers/
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / frontend artifacts
+web/node_modules/
+web/packages/*/node_modules/
+web/packages/*/dist/
+web/packages/*/storybook-static/
+web/.turbo/
+web/.vite/
+
+# Storybook / Playwright / visual-diff scratch output
+.playwright-mcp/
+playwright-report/
+test-results/
+prototype-design/visual-diff/userland/.cache/
+
+# Ticket scratch and large review artifacts should not enter Docker context
+ttmp/
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp

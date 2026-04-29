@@ -8,3 +8,7 @@
 - 2026-04-29: Added intern-oriented production Glazed/Argo CD implementation guide covering architecture, CI, Docker, GitOps, Vault, PostgreSQL, Discord OAuth, migrations, validation, and rollout risks.
 - 2026-04-29: Added focused playbooks for packaging/CI, Argo CD GitOps rollout, and production smoke testing.
 - 2026-04-29: Validated doc frontmatter/docmgr hygiene and uploaded the production guide/playbook bundle to reMarkable at `/ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks`.
+- 2026-04-29: Clarified the PostgreSQL v1 decision: reuse existing shared in-cluster Postgres, create Pyxis DB/user via Argo-synced bootstrap Job, and defer Terraform/operator approaches.
+- 2026-04-29: Expanded tasks into detailed implementation phases from packaging baseline through first production rollout.
+- 2026-04-29: Completed Phase 1 packaging baseline: Dockerfile, .dockerignore, Makefile CI/image targets, golangci config, published module dependencies instead of local replace directives, and Docker smoke validation.
+- 2026-04-29: Uploaded v3 reMarkable bundle including PostgreSQL clarification, expanded tasks, Phase 1 packaging implementation notes, and CGO/local-replace findings.
