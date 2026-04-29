@@ -77,6 +77,7 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - [ ] T603 Capture current/final page screenshots and store evidence under `sources/`.
 - [ ] T604 Run browser smoke for create/edit/show detail flows.
 - [ ] T605 Commit page visual polish and evidence.
+- [x] T606 Add next-session restart runbook with lessons learned and restart shortcuts.
 
 ## Phase 6 — Documentation delivery
 

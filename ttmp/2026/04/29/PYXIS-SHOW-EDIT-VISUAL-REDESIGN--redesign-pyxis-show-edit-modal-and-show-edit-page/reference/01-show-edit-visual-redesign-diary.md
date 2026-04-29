@@ -390,3 +390,28 @@ It verifies that clicking `Create show` on the empty modal shows the required ar
 ```text
 sources/09-modal-storybook-smoke.txt
 ```
+
+
+## Step 12: Add end-of-day restart runbook
+
+At the user's request, I wrote a next-session runbook capturing what I wish I had known before getting to the current state. The goal is to make tomorrow's restart faster and safer.
+
+Created:
+
+```text
+playbooks/01-next-session-show-edit-redesign-runbook.md
+```
+
+It documents:
+
+- which ticket docs to read first;
+- the important commits so far;
+- the decomposition-first rule;
+- the modal molecules already created;
+- validation/evidence already available;
+- the stale Storybook index failure and fresh-start command;
+- the precise screenshot selector for modal captures;
+- the protobuf story fixture spread pitfall;
+- product semantics that must not regress;
+- likely next page-decomposition files;
+- what to commit and what to avoid committing.

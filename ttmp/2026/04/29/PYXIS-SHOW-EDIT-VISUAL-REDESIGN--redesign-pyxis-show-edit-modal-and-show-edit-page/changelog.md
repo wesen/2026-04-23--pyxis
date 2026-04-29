@@ -43,3 +43,8 @@ LastUpdated: 2026-04-29T18:40:00-04:00
 - Added `scripts/01-capture-new-show-modal-stories.js` and stored capture outputs under `sources/08-modal-storybook-captures/`.
 - Added `scripts/02-smoke-new-show-modal-story.js` to verify required-field validation and save-draft interaction in Storybook.
 - Stored smoke output in `sources/09-modal-storybook-smoke.txt`.
+
+## 2026-04-29 — Next-session restart runbook
+
+- Added `playbooks/01-next-session-show-edit-redesign-runbook.md`.
+- Captured lessons learned: start from ticket docs, preserve decomposition layering, reuse modal molecules, avoid stale Storybook index traps, use precise screenshot selectors, avoid protobuf fixture spread pitfalls, and validate before committing.
