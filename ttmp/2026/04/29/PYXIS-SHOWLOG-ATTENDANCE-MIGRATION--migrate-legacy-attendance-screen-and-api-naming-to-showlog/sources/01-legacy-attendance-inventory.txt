@@ -1,0 +1,42 @@
+web/packages/pyxis-app/src/index.ts:16:export * from './components/molecules/AttendanceStat';
+web/packages/pyxis-app/src/pages/Pages.tsx:2:export { AttendancePage } from './AttendancePage/Page';
+web/packages/pyxis-app/src/pages/AttendancePage/Page.tsx:8:export function AttendancePage() {
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:3:import { AttendancePage } from '../Pages';
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:15:  render: () => renderWithFreshMockState(<AttendancePage />),
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:20:  render: () => renderWithFreshMockState(<AttendancePage />),
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:30:    await userEvent.click((await canvas.findAllByRole('button', { name: /save attendance/i }))[0]);
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:36:  render: () => renderWithFreshMockState(<AttendancePage />),
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:46:  render: () => renderWithFreshMockState(<AttendancePage />),
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:50:    await userEvent.type(await canvas.findByLabelText(/search attendance/i), 'zz-no-log');
+web/packages/pyxis-app/src/pages/AttendancePage/Page.stories.tsx:51:    await expect(await canvas.findByText(/No attendance entries match/i)).toBeInTheDocument();
+web/packages/pyxis-app/src/App.tsx:4:import { ArtistsPage, AttendancePage, AuditLogPage, BookingReviewPage, BookingsPage, CalendarPage, DashboardPage, DiscordPage, LoginPage, ModalShowcasePage, SettingsPage, SetupPage, ShowDetailPage, ShowsPage } from './pages/Pages';
+web/packages/pyxis-app/src/App.tsx:44:      <Route path="/attendance" element={<RequireSession><AttendancePage /></RequireSession>} />
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx:2:import './AttendanceStat.css';
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx:4:export type AttendanceStatProps = {
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.tsx:9:export function AttendanceStat({ label, value }: AttendanceStatProps) { return <div className="app-attendance-stat" {...appPart('attendance-stat')}><strong>{value}</strong><span>{label}</span></div>; }
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/index.ts:1:export * from './AttendanceStat';
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:2:import { AttendanceStat } from './AttendanceStat';
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:5:  title: 'Pyxis App/Components/Molecules/AttendanceStat',
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:6:  component: AttendanceStat,
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:11:} satisfies Meta<typeof AttendanceStat>;
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:29:      <AttendanceStat label="Logged" value={3}/>
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:30:      <AttendanceStat label="Needs log" value={1}/>
+web/packages/pyxis-app/src/components/molecules/AttendanceStat/AttendanceStat.stories.tsx:31:      <AttendanceStat label="Average draw" value={84}/>
+web/packages/pyxis-app/src/components/organisms/Roster/index.ts:2:export * from './AttendancePanel';
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:3:import { AttendancePanel } from './AttendancePanel';
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:6:  title: 'Pyxis App/Components/Organisms/Roster/AttendancePanel',
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:7:  component: AttendancePanel,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:10:} satisfies Meta<typeof AttendancePanel>;
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:16:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:21:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:26:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:31:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:36:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.stories.tsx:41:  render: (args) => <div style={{ width: 760, padding: 24, background: 'var(--app-canvas)' }}><AttendancePanel {...args} /></div>,
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:4:import { AttendanceStat } from '../../../molecules/AttendanceStat';
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:8:import './AttendancePanel.css';
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:13:export type AttendancePanelProps = {
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:24:function AttendanceEditorCard({ entry, showNotes, onUpdateEntry, isUpdating }: { entry: AttendanceLog; showNotes?: string; onUpdateEntry?: AttendancePanelProps['onUpdateEntry']; isUpdating?: boolean }) {
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:56:export function AttendancePanel({ entries, showNotesById = {}, onUpdateEntry, savingEntryId }: AttendancePanelProps) {
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/AttendancePanel.tsx:59:  return <div {...appPart('attendance-panel')}><div className="app-metrics-grid compact"><AttendanceStat label="Logged" value={logged.length}/><AttendanceStat label="Needs log" value={entries.length-logged.length}/><AttendanceStat label="Average draw" value={avg}/></div>{entries.length > 0 ? <div className="app-card-list">{entries.map((entry)=><AttendanceEditorCard key={attendanceEntryKey(entry)} entry={entry} showNotes={showNotesById[entry.showId]} onUpdateEntry={onUpdateEntry} isUpdating={savingEntryId === attendanceEntryKey(entry)} />)}</div> : <AppEmptyState title="No attendance reports yet." />}</div>;
+web/packages/pyxis-app/src/components/organisms/Roster/AttendancePanel/index.ts:1:export * from './AttendancePanel';
