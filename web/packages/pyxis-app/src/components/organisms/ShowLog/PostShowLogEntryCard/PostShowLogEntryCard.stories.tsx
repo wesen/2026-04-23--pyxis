@@ -5,7 +5,7 @@ import type { ShowLogEntry } from '../../../../api/appApi';
 import { PostShowLogEntryCard } from './PostShowLogEntryCard';
 
 const meta: Meta<typeof PostShowLogEntryCard> = {
-  title: 'Pyxis App/Components/Organisms/PostShowLogEntryCard',
+  title: 'Pyxis App/Components/Organisms/ShowLog/PostShowLogEntryCard',
   component: PostShowLogEntryCard,
   args: { onToggleExpanded: fn(), onCancel: fn(), onSave: fn() },
 };

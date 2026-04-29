@@ -186,3 +186,29 @@ Validation:
 ```bash
 cd web/packages/pyxis-app && pnpm exec tsc --noEmit
 ```
+
+## Step 10: Pivoted PostShowLog panel to table/modal and moved under ShowLog
+
+The operator clarified that the Post-show log should visually follow the `ShowsConfirmedPanel` model: an elegant concise table in a panel, with rows that expand for read-only details and an edit/log button that opens a modal. Updated the design guide accordingly.
+
+Implementation changes:
+
+- Reworked `PostShowLogPanel` from a card list to a table-first view.
+- Added expandable detail rows for show notes, post-show notes, incident notes, and metadata.
+- Added `PostShowLogEditorModal` for focused editing.
+- Kept the first `PostShowLogEntryCard` as a reference/prototype story for now.
+- Moved the component family under a `ShowLog/` folder to mirror the existing `Shows/` organism folder structure.
+
+Current structure:
+
+```text
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogPanel/
+web/packages/pyxis-app/src/components/organisms/ShowLog/PostShowLogEntryCard/
+web/packages/pyxis-app/src/components/organisms/ShowLog/index.ts
+```
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

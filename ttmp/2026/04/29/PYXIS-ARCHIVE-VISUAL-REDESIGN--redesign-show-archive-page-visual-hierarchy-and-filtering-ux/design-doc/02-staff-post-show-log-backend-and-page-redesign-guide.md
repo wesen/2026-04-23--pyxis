@@ -771,63 +771,70 @@ PostShowLogPanel
        └─ FieldError
 ```
 
-### Card visual model
+### Table-first visual model
 
-Default collapsed card:
+After reviewing the first card-based component pass, the preferred direction is closer to `ShowsConfirmedPanel`: an elegant, concise table inside a `Panel`. The default view should be a ledger, not a stack of large cards. Each row should scan quickly, expand for read-only detail, and use an edit button to open a modal for writing the log.
 
-```text
-┌──────────────────────────────────────────────────────────────┐
-│ NEEDS LOG                                      Apr 26, 2026  │
-│ Planning for Burial                                           │
-│ Noise / ambient · staff note attached                         │
-│ Draw: —        Incident: no        Last updated: —            │
-│                                                [Log show]     │
-└──────────────────────────────────────────────────────────────┘
-```
-
-Logged card:
+Default table:
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│ LOGGED                                         Apr 20, 2026  │
-│ Actress                                                        │
-│ Draw: 61       Incident: no        Updated by Manuel           │
-│ Post-show note preview: Strong crowd, smooth load out...       │
-│                                                [Edit log]      │
-└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Past shows                                      Needs log 3 · Incidents 2    │
+├────────────┬────────────────────┬──────────────┬──────┬──────────┬─────────┤
+│ Date       │ Artist             │ Status       │ Draw │ Incident │         │
+├────────────┼────────────────────┼──────────────┼──────┼──────────┼─────────┤
+│ Apr 26     │ Planning for Burial│ NEEDS LOG    │ —    │ No       │ Edit ▾  │
+│ Apr 18     │ Actress            │ LOGGED       │ 61   │ No       │ Edit ▾  │
+│ Apr 12     │ Example Artist     │ INCIDENT     │ 48   │ Yes      │ Edit ▾  │
+└────────────┴────────────────────┴──────────────┴──────┴──────────┴─────────┘
 ```
 
-Incident card:
+Expanded row detail:
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│ INCIDENT                                      Apr 18, 2026   │
-│ Example Artist                                                │
-│ Draw: 48       Incident notes required / present              │
-│                                                [Review log]    │
-└──────────────────────────────────────────────────────────────┘
+Apr 26  Planning for Burial  NEEDS LOG  —  No  [Edit log] [⌃]
+└─ Show notes: Ask about merch table placement before doors.
+   Post-show notes: No post-show notes yet.
+   Incident notes: No incident notes.
 ```
 
-Expanded editor:
+Edit modal:
 
 ```text
-Show notes
-  Read-only staff notes from show setup.
-
-Post-show report
-  Draw [____]
-  [ ] Incident
-  Notes [textarea]
-  Incident notes [textarea]
-
-[Cancel] [Save post-show log]
+┌──────────────────────────────────────────────────────┐
+│ Log show — Planning for Burial                       │
+│ Sat Apr 26, 2026 · Noise / ambient                   │
+├──────────────────────────────────────────────────────┤
+│ Show notes                                           │
+│ Ask about merch table placement before doors.        │
+│                                                      │
+│ Draw [ 84 ]        [ ] Mark incident                 │
+│ Notes                                                │
+│ [ textarea                                        ]  │
+│ Incident notes                                       │
+│ [ textarea, disabled unless incident              ]  │
+├──────────────────────────────────────────────────────┤
+│                              [Cancel] [Save log]     │
+└──────────────────────────────────────────────────────┘
 ```
 
-### Why progressive disclosure matters
+This table-first approach keeps the log page visually aligned with:
 
-The current page shows every input for every show at once. That makes the page hard to scan. Progressive disclosure lets the operator scan status first, then edit one show at a time.
+```text
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsConfirmedPanel/ShowsConfirmedPanel.tsx
+web/packages/pyxis-app/src/components/organisms/Shows/ShowsTable/ShowsTable.tsx
+web/packages/pyxis-app/src/components/molecules/ShowTableRow/ShowTableRow.tsx
+```
 
-This is the same conceptual fix as the public archive redesign: group controls into a meaningful surface and make the content hierarchy clear.
+### Why row expansion plus modal editing matters
+
+The current page shows every input for every show at once. That makes the page hard to scan. The card prototype improved validation and state modeling, but it still made the page feel heavier than the Shows table. The better progression is:
+
+- table row for scan-first operational status;
+- expanded row for read-only log details;
+- modal for focused editing.
+
+This preserves progressive disclosure while keeping the page compact.
 
 ## Storybook and visual review plan
 

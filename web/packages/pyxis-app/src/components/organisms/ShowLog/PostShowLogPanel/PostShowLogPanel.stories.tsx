@@ -6,7 +6,7 @@ import type { ShowLogEntry } from '../../../../api/appApi';
 import { PostShowLogPanel, type PostShowLogFilter } from './PostShowLogPanel';
 
 const meta: Meta<typeof PostShowLogPanel> = {
-  title: 'Pyxis App/Components/Organisms/PostShowLogPanel',
+  title: 'Pyxis App/Components/Organisms/ShowLog/PostShowLogPanel',
   component: PostShowLogPanel,
   args: { onSaveEntry: fn() },
 };
@@ -30,3 +30,5 @@ export const NeedsLogOnly: Story = { render: (args) => <StatefulPanel {...args} 
 export const Empty: Story = { args: { entries: [] } };
 export const SearchNoResults: Story = { render: (args) => <StatefulPanel {...args} search="zz-no-log" /> };
 export const MobileMixed: Story = { render: (args) => <StatefulPanel {...args} />, parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } } };
+export const EditModalOpen: Story = { render: (args) => <StatefulPanel {...args} />, play: async ({ canvasElement }) => { const { within, userEvent } = await import('@storybook/test'); const canvas = within(canvasElement); await userEvent.click((await canvas.findAllByRole('button', { name: /^Log$/i }))[0]); } };
+export const ExpandedDetails: Story = { render: (args) => <StatefulPanel {...args} />, play: async ({ canvasElement }) => { const { within, userEvent, expect } = await import('@storybook/test'); const canvas = within(canvasElement); await userEvent.click((await canvas.findAllByRole('button', { name: /^Details$/i }))[0]); await expect(await canvas.findByText(/No post-show notes yet/i)).toBeInTheDocument(); } };

@@ -5,3 +5,4 @@
 - 2026-04-29: Updated the Post-show log guide for first-slice componentization, added MSW/RTK Query tasks, and created a deferred staff UI unification guide.
 - 2026-04-29: Started Post-show log implementation with molecule primitives, Pyxis App/Components/Molecules Storybook entries, and temporary RTK Query/MSW show-log scaffolding.
 - 2026-04-29: Added first PostShowLogEntryCard and PostShowLogPanel organisms with Storybook stories and TypeScript validation.
+- 2026-04-29: Pivoted PostShowLogPanel to a ShowsConfirmedPanel-like table with expandable detail rows and an edit modal, then moved the family under `organisms/ShowLog/`.

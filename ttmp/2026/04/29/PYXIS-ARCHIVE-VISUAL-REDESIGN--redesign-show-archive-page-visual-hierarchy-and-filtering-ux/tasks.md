@@ -5,9 +5,11 @@
 - [ ] Add temporary frontend `ShowLogEntry`/query types and RTK Query endpoints for `GET/PATCH /api/app/show-log`.
 - [ ] Add MSW handlers that derive show-log entries from mock shows plus attendance logs, including needs-log rows with no attendance log.
 - [ ] Build reusable small primitives needed by the first slice: `AppCard`, `StatusBadge`, `MetadataStrip`, `NoteBlock`, and `FieldError`.
-- [x] Build `PostShowLogEntryCard` with collapsed and expanded states.
-- [x] Build first-pass `PostShowLogPanel` with summary metrics and toolbar inline.
-- [x] Add Storybook stories for mixed, needs-log, logged, incident, expanded, validation, empty, and mobile states.
+- [x] Build initial `PostShowLogEntryCard` card prototype with collapsed and expanded states.
+- [x] Migrate first-pass `PostShowLogPanel` toward a ShowsConfirmedPanel-like table with expandable detail rows.
+- [x] Add edit modal for focused post-show log entry editing from each table row.
+- [x] Add Storybook stories for mixed, needs-log, logged, incident, expanded/details, edit modal, empty, validation, and mobile states.
+- [ ] Decide whether to keep `PostShowLogEntryCard` as a reference/prototype story or archive it after the table/modal path is approved.
 - [ ] Extract `PostShowLogSummary` and `PostShowLogToolbar` into dedicated files if the first-pass panel shape is approved.
 - [ ] Switch `/attendance` page to `useGetShowLogQuery()` and remove show-note stitching via `useGetShowsQuery()`.
 - [ ] Add visible Chromium smoke for post-show log create/update/validation flow.
