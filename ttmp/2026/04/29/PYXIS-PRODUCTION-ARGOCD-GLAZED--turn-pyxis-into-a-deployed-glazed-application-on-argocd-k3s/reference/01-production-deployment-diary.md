@@ -730,3 +730,125 @@ Bundle name:
 ```text
 PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v6
 ```
+
+## Step 19: Fixed CI Git author identity for GitOps PR commits
+
+After confirming `GITOPS_PR_TOKEN` exists and pushing the Phase 5 work, the first `publish-image` workflow successfully built/pushed the image and reached the GitOps PR handoff. The handoff failed at `git commit` because the fresh GitHub runner clone had no author identity configured.
+
+I fixed the updater script to configure a local Git author name and email inside each cloned GitOps checkout before creating the deployment branch. This keeps the fix self-contained in the script instead of relying on every workflow caller to remember Git config setup.
+
+### Prompt Context
+
+**User prompt (verbatim):** "GITOPS_PR_TOKEN is set"
+
+**Assistant interpretation:** Proceed with the release handoff now that the required GitHub secret exists.
+
+**Inferred user intent:** Push the CI/GitOps automation through a real GitHub Actions run and fix any remaining workflow issues.
+
+**Commit (code):** pending — Git author fix implemented before commit.
+
+### What I did
+
+- Verified the secret exists with:
+
+```bash
+gh secret list --repo wesen/2026-04-23--pyxis | rg '^GITOPS_PR_TOKEN\b'
+```
+
+- Pushed both repos:
+
+```bash
+cd /home/manuel/code/wesen/2026-03-27--hetzner-k3s && git push origin main
+cd /home/manuel/code/wesen/2026-04-23--pyxis && git push origin main
+```
+
+- Watched `publish-image` run `25123190533`.
+- Inspected failed logs with:
+
+```bash
+gh run view 25123190533 --log-failed
+```
+
+- Updated `scripts/open_gitops_pr.py` to run:
+
+```bash
+git config user.name pyxis-ci
+git config user.email pyxis-ci@users.noreply.github.com
+```
+
+inside the cloned GitOps repo before `git checkout -b` and `git commit`.
+
+### Why
+
+- GitHub-hosted runners do not necessarily have a useful Git commit identity for arbitrary cloned repositories.
+- The GitOps PR script owns branch/commit creation, so it should own the commit identity too.
+
+### What worked
+
+- The workflow got past token validation, clone, image patching, and diff generation.
+- Token redaction worked in CI logs: the authenticated clone URL was shown as redacted.
+- The image tag being proposed was the immutable full SHA tag:
+
+```text
+ghcr.io/wesen/pyxis:sha-39e5062a4d6d88c8ca3389b1a6974f3c425843f0
+```
+
+### What didn't work
+
+The first real `publish-image` handoff failed with:
+
+```text
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <runner@...>) not allowed
+error: Command '['git', 'commit', '-m', 'pyxis-prod-app: deploy ghcr.io/wesen/pyxis:sha-39e5062a4d6d88c8ca3389b1a6974f3c425843f0']' returned non-zero exit status 128.
+```
+
+### What I learned
+
+- The remaining CI/CD bug was not credentials or GitHub permissions; it was local Git author identity inside the temporary GitOps clone.
+
+### What was tricky to build
+
+- The script supports both CI clones and local `--gitops-root` validation. The author config should only be forced for CI-managed clones so local dry-run/checkouts do not unexpectedly alter developer repo configuration.
+
+### What warrants a second pair of eyes
+
+- Confirm the chosen author identity `pyxis-ci <pyxis-ci@users.noreply.github.com>` is acceptable for GitOps repo history.
+- Confirm whether the script should eventually create one combined PR for both image targets instead of one PR per target.
+
+### What should be done in the future
+
+- Re-run the image publishing workflow after this fix is pushed.
+- Verify that GitOps PRs are created and point to the new full SHA image.
+
+### Code review instructions
+
+- Review `scripts/open_gitops_pr.py` around `process_target()` and argument defaults for `--git-user-name` / `--git-user-email`.
+- Validate with:
+
+```bash
+python3 -m py_compile scripts/open_gitops_pr.py
+GITOPS_PR_TOKEN=secret-token python3 scripts/open_gitops_pr.py \
+  --image ghcr.io/wesen/pyxis:sha-testphase5 \
+  --gitops-root /home/manuel/code/wesen/2026-03-27--hetzner-k3s \
+  --dry-run
+```
+
+### Technical details
+
+Failed workflow:
+
+```text
+https://github.com/wesen/2026-04-23--pyxis/actions/runs/25123190533
+```

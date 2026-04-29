@@ -1,0 +1,30 @@
+diff --git a/gitops/kustomize/pyxis/deployment.yaml b/gitops/kustomize/pyxis/deployment.yaml
+index 80336da..ad5d386 100644
+--- a/gitops/kustomize/pyxis/deployment.yaml
++++ b/gitops/kustomize/pyxis/deployment.yaml
+@@ -23,7 +23,7 @@ spec:
+       serviceAccountName: pyxis
+       containers:
+         - name: pyxis
+-          image: ghcr.io/wesen/pyxis:sha-REPLACE_ME
++          image: ghcr.io/wesen/pyxis:sha-testphase5
+           imagePullPolicy: IfNotPresent
+           ports:
+             - containerPort: 8080
+
+pyxis-prod-app: dry-run only; not committing or opening PR
+diff --git a/gitops/kustomize/pyxis/migration-job.yaml b/gitops/kustomize/pyxis/migration-job.yaml
+index 7f10fe1..c38ecab 100644
+--- a/gitops/kustomize/pyxis/migration-job.yaml
++++ b/gitops/kustomize/pyxis/migration-job.yaml
+@@ -19,7 +19,7 @@ spec:
+       serviceAccountName: pyxis
+       containers:
+         - name: migrate
+-          image: ghcr.io/wesen/pyxis:sha-REPLACE_ME
++          image: ghcr.io/wesen/pyxis:sha-testphase5
+           imagePullPolicy: IfNotPresent
+           command:
+             - pyxis
+
+pyxis-prod-migrate: dry-run only; not committing or opening PR

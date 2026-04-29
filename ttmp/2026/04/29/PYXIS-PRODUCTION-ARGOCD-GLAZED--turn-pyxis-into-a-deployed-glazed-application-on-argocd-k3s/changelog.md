@@ -23,3 +23,4 @@
 - 2026-04-29: Hardened GitOps PR script logging to redact `GITOPS_PR_TOKEN` and revalidated dry-run behavior.
 - 2026-04-29: Committed Phase 5 GitOps PR automation as `9a768db PYXIS-PRODUCTION-ARGOCD-GLAZED: add gitops pr automation`.
 - 2026-04-29: Uploaded v6 reMarkable bundle after Phase 5 GitOps PR automation.
+- 2026-04-29: Real `publish-image` run reached GitOps PR handoff but failed at `git commit` due to missing Git author identity; fixed script to configure local author identity for CI clones.

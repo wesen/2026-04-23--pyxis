@@ -139,6 +139,8 @@ def process_target(target: Target, image: str, args: argparse.Namespace, token: 
 
         if not args.dry_run and not args.gitops_root:
             ensure_clean(gitops_root)
+            run(["git", "config", "user.name", args.git_user_name], cwd=gitops_root)
+            run(["git", "config", "user.email", args.git_user_email], cwd=gitops_root)
             run(["git", "checkout", "-b", branch_name(target, image)], cwd=gitops_root)
 
         original_manifest = manifest.read_text() if args.dry_run else None
@@ -194,6 +196,8 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true", help="patch and print diff without committing/pushing/opening PR")
     parser.add_argument("--source-sha", default=os.getenv("GITHUB_SHA", ""), help="source commit for PR body")
     parser.add_argument("--workflow-url", default=os.getenv("GITHUB_SERVER_URL", "") and f"{os.getenv('GITHUB_SERVER_URL')}/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}", help="workflow URL for PR body")
+    parser.add_argument("--git-user-name", default=os.getenv("GIT_AUTHOR_NAME", "pyxis-ci"), help="git commit author name for CI-created GitOps PR commits")
+    parser.add_argument("--git-user-email", default=os.getenv("GIT_AUTHOR_EMAIL", "pyxis-ci@users.noreply.github.com"), help="git commit author email for CI-created GitOps PR commits")
     return parser.parse_args(list(argv))
 
 
