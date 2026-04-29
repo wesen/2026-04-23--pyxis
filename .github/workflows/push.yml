@@ -1,0 +1,45 @@
+name: pyxis-pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - name: Install web dependencies
+        run: pnpm --dir web install --frozen-lockfile
+      - name: Generate sqlc and protobuf code
+        run: make generate
+      - name: Check generated code is committed
+        run: git diff --exit-code
+      - name: Run Go tests
+        run: go test ./...
+      - name: Run web checks
+        run: make web-check
+      - name: Build embedded binary
+        env:
+          BUILD_WEB_LOCAL: "1"
+        run: make build-embed

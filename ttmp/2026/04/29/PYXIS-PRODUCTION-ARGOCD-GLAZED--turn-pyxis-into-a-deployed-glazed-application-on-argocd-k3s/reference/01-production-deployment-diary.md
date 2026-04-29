@@ -277,3 +277,111 @@ Both passed. Logs were written to temporary files:
 /tmp/pyxis-phase2-build-embed.log
 /tmp/pyxis-phase2-docker-smoke.log
 ```
+
+## Step 11: Phase 3 GitHub CI/CD and release automation
+
+Implemented the third productionization phase: GitHub workflows for validation, image publishing, linting/security, Dependabot, and optional GoReleaser CLI artifacts.
+
+### Files added
+
+```text
+.github/workflows/push.yml
+.github/workflows/publish-image.yml
+.github/workflows/lint.yml
+.github/workflows/dependency-scanning.yml
+.github/workflows/codeql-analysis.yml
+.github/dependabot.yml
+.goreleaser.yaml
+docs/deployment/pyxis-ci-cd.md
+```
+
+### Makefile update
+
+Added GoReleaser helper targets:
+
+```text
+goreleaser
+release
+tag-major
+tag-minor
+tag-patch
+```
+
+`goreleaser` defaults to snapshot/single-target mode for local validation:
+
+```bash
+make goreleaser
+```
+
+### Workflow summary
+
+`push.yml` runs on PRs and main pushes. It sets up Go, pnpm/Node, installs web dependencies, runs `make generate`, checks generated diffs, runs `go test ./...`, runs `make web-check`, and builds the embedded binary with `BUILD_WEB_LOCAL=1 make build-embed`.
+
+`publish-image.yml` builds the Docker image on PRs and pushes GHCR images on `main`. It tags with `sha-<commit>` plus branch/ref convenience tags. The GitOps repo should pin the `sha-...` tag.
+
+`lint.yml` runs golangci-lint using `.golangci-lint-version`.
+
+`dependency-scanning.yml` adds dependency review, `govulncheck`, and `gosec`.
+
+`codeql-analysis.yml` adds CodeQL Go analysis.
+
+`dependabot.yml` covers Go modules, GitHub Actions, and web npm dependencies under `/web`.
+
+### Validation
+
+Passed:
+
+```bash
+go test ./cmd/pyxis/... ./pkg/server ./pkg/service ./pkg/repository/postgres ./internal/web -count=1
+goreleaser check
+python3 - <<'PY'
+from pathlib import Path
+import yaml
+for p in list(Path('.github/workflows').glob('*.yml')) + [Path('.github/dependabot.yml'), Path('.goreleaser.yaml'), Path('.golangci.yml')]:
+    yaml.safe_load(p.read_text())
+    print(f'ok {p}')
+PY
+```
+
+`actionlint` is not installed on this machine, so workflow semantic linting with actionlint was recorded as unavailable:
+
+```text
+actionlint not installed
+```
+
+### GoReleaser config issue fixed
+
+First `goreleaser check` failed because `snapshot.name_template` is deprecated in GoReleaser v2. Fixed by using:
+
+```yaml
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+```
+
+After that, `goreleaser check` passed.
+
+## Step 12: Rechecked generated code and full Go tests
+
+Because the new `push.yml` workflow includes `make generate` followed by a generated-code diff check, I ran the generation step locally:
+
+```bash
+make generate
+```
+
+It completed without introducing generated-code diffs. Then I ran the same broad Go test shape intended for CI:
+
+```bash
+go test ./... -count=1
+```
+
+This passed across command, generated proto, internal web, repository, server, service, Discord bot, and storage packages.
+
+## Step 13: Uploaded updated Phase 3 bundle
+
+Uploaded the updated guide/tasks/playbooks/diary after completing Phase 3 CI/CD work.
+
+Upload path:
+
+```text
+/ai/2026/04/29/PYXIS-PRODUCTION-ARGOCD-GLAZED/PYXIS-PRODUCTION-ARGOCD-GLAZED production guide and playbooks v4
+```

@@ -53,15 +53,15 @@ Goal: make the Glazed `serve` command consume production env vars cleanly.
 
 Goal: make GitHub the source of tested images and optional CLI release artifacts.
 
-- [ ] T301. Add `.github/workflows/push.yml` for Go tests, web TypeScript/build checks, generation checks, and embedded binary build.
-- [ ] T302. Add `.github/workflows/publish-image.yml` to build and push `ghcr.io/.../pyxis:sha-<commit>` on `main`.
-- [ ] T303. Add `.github/workflows/lint.yml` using golangci-lint.
-- [ ] T304. Add `.github/workflows/dependency-scanning.yml` with dependency review, govulncheck, and gosec.
-- [ ] T305. Add `.github/workflows/codeql-analysis.yml` for Go.
-- [ ] T306. Add Dependabot config for Go modules and GitHub Actions; decide pnpm policy.
-- [ ] T307. Add `.goreleaser.yaml` for Pyxis CLI artifacts if approved.
-- [ ] T308. Add local/CI documentation for required GitHub secrets and package visibility.
-- [ ] T309. Verify CI workflow syntax and run locally where possible.
+- [x] T301. Add `.github/workflows/push.yml` for Go tests, web TypeScript/build checks, generation checks, and embedded binary build.
+- [x] T302. Add `.github/workflows/publish-image.yml` to build and push `ghcr.io/.../pyxis:sha-<commit>` on `main`.
+- [x] T303. Add `.github/workflows/lint.yml` using golangci-lint.
+- [x] T304. Add `.github/workflows/dependency-scanning.yml` with dependency review, govulncheck, and gosec.
+- [x] T305. Add `.github/workflows/codeql-analysis.yml` for Go.
+- [x] T306. Add Dependabot config for Go modules and GitHub Actions; decide pnpm policy.
+- [x] T307. Add `.goreleaser.yaml` for Pyxis CLI artifacts if approved.
+- [x] T308. Add local/CI documentation for required GitHub secrets and package visibility.
+- [x] T309. Verify CI workflow syntax and run locally where possible.
 
 ## Phase 4 — GitOps package in `../2026-03-27--hetzner-k3s`
 

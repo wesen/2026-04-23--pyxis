@@ -1,0 +1,64 @@
+version: 2
+project_name: pyxis
+
+before:
+  hooks:
+    - go mod tidy
+    - BUILD_WEB_LOCAL=1 go run ./cmd/build-web
+
+builds:
+  - id: pyxis-linux
+    env:
+      - CGO_ENABLED=1
+      - CC_linux_amd64=gcc
+      - CXX_linux_amd64=g++
+      - CC_linux_arm64=aarch64-linux-gnu-gcc
+      - CXX_linux_arm64=aarch64-linux-gnu-g++
+      - 'CC={{ index .Env (print "CC_" .Os "_" .Arch) }}'
+      - 'CXX={{ index .Env (print "CXX_" .Os "_" .Arch) }}'
+    main: ./cmd/pyxis
+    binary: pyxis
+    tags:
+      - embed
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -X main.version={{.Version}}
+  - id: pyxis-darwin
+    env:
+      - CGO_ENABLED=1
+    main: ./cmd/pyxis
+    binary: pyxis
+    tags:
+      - embed
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -X main.version={{.Version}}
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+archives:
+  - id: default
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"

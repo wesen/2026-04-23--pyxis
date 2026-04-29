@@ -1,6 +1,6 @@
 .PHONY: all ci build build-web generate-web build-embed serve-embed test web-check lint lintmax \
         golangci-lint-install gosec govulncheck docker-build docker-run docker-smoke \
-        migrate migrate-down seed generate clean
+        goreleaser release tag-major tag-minor tag-patch migrate migrate-down seed generate clean
 
 # Development environment: use `devctl up` instead of `make dev`.
 # See: pyxis help pyxis-devctl-setup
@@ -18,6 +18,8 @@ IMAGE ?= $(IMAGE_REPOSITORY):$(IMAGE_TAG)
 GOLANGCI_LINT_VERSION ?= $(shell cat .golangci-lint-version 2>/dev/null || echo v2.5.0)
 GOLANGCI_LINT_BIN ?= $(CURDIR)/.bin/golangci-lint
 GOLANGCI_LINT_ARGS ?= --timeout=5m ./cmd/... ./pkg/... ./internal/...
+GORELEASER_ARGS ?= --skip=sign --snapshot --clean
+GORELEASER_TARGET ?= --single-target
 
 all: test build
 
@@ -79,6 +81,21 @@ docker-run:
 docker-smoke: docker-build
 	$(DOCKER) run --rm $(IMAGE) --help
 	$(DOCKER) run --rm $(IMAGE) serve --help
+
+goreleaser:
+	goreleaser release $(GORELEASER_ARGS) $(GORELEASER_TARGET)
+
+release:
+	git push origin --tags
+
+tag-major:
+	git tag $$(svu major)
+
+tag-minor:
+	git tag $$(svu minor)
+
+tag-patch:
+	git tag $$(svu patch)
 
 migrate:
 	$(GO) run ./cmd/pyxis migrate up
