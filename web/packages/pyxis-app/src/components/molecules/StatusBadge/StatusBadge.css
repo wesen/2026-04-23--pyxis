@@ -1,0 +1,7 @@
+.app-status-badge { align-items: center; border: 1px solid var(--app-rule); border-radius: var(--app-radius-pill); color: var(--app-muted); display: inline-flex; font-size: 11px; font-weight: 800; letter-spacing: .08em; line-height: 1; padding: 6px 9px; text-transform: uppercase; width: fit-content; }
+.app-status-badge[data-size='md'] { font-size: 12px; padding: 7px 11px; }
+.app-status-badge[data-tone='success'] { background: color-mix(in srgb, var(--app-success) 10%, transparent); border-color: color-mix(in srgb, var(--app-success) 30%, var(--app-rule)); color: var(--app-success); }
+.app-status-badge[data-tone='warning'] { background: color-mix(in srgb, var(--app-warning) 10%, transparent); border-color: color-mix(in srgb, var(--app-warning) 30%, var(--app-rule)); color: var(--app-warning); }
+.app-status-badge[data-tone='danger'] { background: #fff1f0; border-color: #ffd0cc; color: #b42318; }
+.app-status-badge[data-tone='info'] { background: color-mix(in srgb, var(--app-info) 10%, transparent); border-color: color-mix(in srgb, var(--app-info) 30%, var(--app-rule)); color: var(--app-info); }
+.app-status-badge[data-tone='discord'] { background: rgba(88,101,242,.10); border-color: rgba(88,101,242,.25); color: #5865f2; }

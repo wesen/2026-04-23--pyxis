@@ -94,6 +94,39 @@ function successJson() {
   return toJson(SuccessResponseSchema, create(SuccessResponseSchema, { success: true }));
 }
 
+function showLogStatus(entry: { draw?: number; incident?: boolean }) {
+  if (entry.incident) return 'incident';
+  if (!entry.draw || entry.draw <= 0) return 'needs-log';
+  return 'logged';
+}
+
+function buildShowLogEntries(current: MockState) {
+  return current.shows
+    .filter((show) => [ShowStatus.CONFIRMED, ShowStatus.ARCHIVED, ShowStatus.CANCELLED].includes(show.status))
+    .map((show) => {
+      const log = current.attendance.find((entry) => entry.showId === show.id);
+      return {
+        showId: show.id,
+        attendanceLogId: log?.id,
+        artist: show.artist,
+        date: show.date,
+        genre: show.genre,
+        showStatus: show.status,
+        showNotes: show.notes,
+        draw: log?.draw,
+        postShowNotes: log?.notes ?? '',
+        incident: log?.incident ?? false,
+        incidentNotes: log?.incidentNotes ?? '',
+        loggedBy: log?.loggedBy,
+        loggedByName: log?.loggedBy ? 'Ada Dove' : '',
+        loggedAt: log?.createdAt,
+        updatedAt: log?.updatedAt,
+        logStatus: showLogStatus({ draw: log?.draw, incident: log?.incident }),
+      };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
 resetMockState();
 
 export const mockHandlers = [
@@ -297,6 +330,41 @@ export const mockHandlers = [
     const updated = create(AttendanceLogSchema, { ...previous, ...body, showId, updatedAt: '2026-04-26T00:00:00Z' });
     current.attendance = current.attendance.map((entry) => entry.showId === showId ? updated : entry);
     return HttpResponse.json(toJson(AttendanceLogSchema, updated));
+  }),
+  http.get('*/api/app/show-log', ({ request }) => {
+    const current = ensureMockState();
+    const url = new URL(request.url);
+    const status = url.searchParams.get('status') || 'all';
+    const search = (url.searchParams.get('search') || '').toLowerCase();
+    const entries = buildShowLogEntries(current).filter((entry) =>
+      (status === 'all' || entry.logStatus === status) &&
+      (!search || [entry.artist, entry.date, entry.genre, entry.showNotes, entry.postShowNotes, entry.incidentNotes].some((value) => String(value || '').toLowerCase().includes(search)))
+    );
+    return HttpResponse.json({ entries });
+  }),
+  http.patch('*/api/app/show-log/:showId', async ({ params, request }) => {
+    const current = ensureMockState();
+    const showId = Number(params.showId);
+    const body = await request.json() as { draw?: number; postShowNotes?: string; incident?: boolean; incidentNotes?: string };
+    const previous = current.attendance.find((entry) => entry.showId === showId);
+    const show = current.shows.find((candidate) => candidate.id === showId) ?? current.shows[0];
+    const updated = create(AttendanceLogSchema, {
+      ...(previous ?? {}),
+      id: previous?.id ?? showId,
+      showId,
+      artist: show.artist,
+      date: show.date,
+      draw: body.draw ?? previous?.draw ?? 0,
+      notes: body.postShowNotes ?? previous?.notes ?? '',
+      incident: body.incident ?? previous?.incident ?? false,
+      incidentNotes: body.incidentNotes ?? previous?.incidentNotes ?? '',
+      loggedBy: 1,
+      createdAt: previous?.createdAt || '2026-04-26T00:00:00Z',
+      updatedAt: '2026-04-26T00:00:00Z',
+    });
+    current.attendance = previous ? current.attendance.map((entry) => entry.showId === showId ? updated : entry) : [updated, ...current.attendance];
+    const entry = buildShowLogEntries(current).find((candidate) => candidate.showId === showId);
+    return HttpResponse.json(entry);
   }),
   http.get('*/api/app/audit-log', () => HttpResponse.json(toJson(AuditLogEntryListSchema, create(AuditLogEntryListSchema, { entries: auditLog })))),
   http.get('*/api/app/settings', () => {

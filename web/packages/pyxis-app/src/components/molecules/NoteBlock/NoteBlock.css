@@ -1,0 +1,8 @@
+.app-note-block { background: var(--app-surface); border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); padding: 10px 11px; }
+.app-note-block span { color: var(--app-muted); display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; margin-bottom: 5px; text-transform: uppercase; }
+.app-note-block p { color: var(--app-ink); font-size: 13px; line-height: 1.45; margin: 0; white-space: pre-wrap; }
+.app-note-block[data-empty='true'] p { color: var(--app-muted); font-style: italic; }
+.app-note-block[data-tone='warning'] { background: color-mix(in srgb, var(--app-warning) 8%, var(--app-surface)); border-color: color-mix(in srgb, var(--app-warning) 25%, var(--app-rule)); }
+.app-note-block[data-tone='danger'] { background: #fff7f6; border-color: #ffd0cc; }
+.app-note-block[data-tone='danger'] span { color: #b42318; }
+.app-note-block[data-tone='muted'] { background: transparent; }

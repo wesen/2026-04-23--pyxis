@@ -8,6 +8,7 @@ import {
   ShowListSchema,
   Show,
   ShowSchema,
+  ShowStatus,
   AppShow,
   AppShowSchema,
   Submission,
@@ -42,6 +43,28 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? '';
 
 type CalendarHoldInput = Pick<CalendarHold, 'date' | 'label'>;
 type CalendarBlockedInput = Pick<CalendarBlocked, 'date' | 'reason'>;
+export type ShowLogStatus = 'needs-log' | 'logged' | 'incident';
+export type ShowLogEntry = {
+  showId: number;
+  attendanceLogId?: number;
+  artist: string;
+  date: string;
+  genre?: string;
+  showStatus: ShowStatus;
+  showNotes?: string;
+  draw?: number;
+  postShowNotes?: string;
+  incident: boolean;
+  incidentNotes?: string;
+  loggedBy?: number;
+  loggedByName?: string;
+  loggedAt?: string;
+  updatedAt?: string;
+  logStatus: ShowLogStatus;
+};
+export type ShowLogList = { entries: ShowLogEntry[] };
+export type ShowLogQuery = { status?: ShowLogStatus | 'all'; search?: string; limit?: number; offset?: number };
+export type ShowLogUpdateInput = Pick<ShowLogEntry, 'showId' | 'draw' | 'postShowNotes' | 'incident' | 'incidentNotes'>;
 type AttendanceUpdateInput = Pick<AttendanceLog, 'showId' | 'draw' | 'notes' | 'incident' | 'incidentNotes'>;
 type FlyerUploadInput = { showId: number; file: File };
 type BookingReviewInput = Pick<BookingReview, 'note' | 'decision'> & { submissionId: number };
@@ -255,6 +278,17 @@ export const appApi = createApi({
       invalidatesTags: ['Attendance', 'AuditLog'],
     }),
 
+    getShowLog: builder.query<ShowLogEntry[], ShowLogQuery | void>({
+      query: (params) => ({ url: endpoints.showLog, params: params ? Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== '' && value !== 'all')) : undefined }),
+      transformResponse: (response: ShowLogList) => response.entries,
+      providesTags: ['Attendance'],
+    }),
+
+    updateShowLog: builder.mutation<ShowLogEntry, ShowLogUpdateInput>({
+      query: ({ showId, ...body }) => ({ url: endpoints.showLogShow(showId), method: 'PATCH', body }),
+      invalidatesTags: ['Attendance', 'AuditLog'],
+    }),
+
     getAuditLog: builder.query<AuditLogEntry[], void>({
       query: () => endpoints.auditLog,
       transformResponse: (response: unknown) => {
@@ -300,6 +334,7 @@ export const {
   useGetSessionQuery,
   useLogoutMutation,
   useGetSettingsQuery,
+  useGetShowLogQuery,
   useGetShowQuery,
   useGetShowsQuery,
   useAnnounceShowMutation,
@@ -308,6 +343,7 @@ export const {
   useUpdateBookingMutation,
   useUpdateBookingReviewMutation,
   useUpdateSettingsMutation,
+  useUpdateShowLogMutation,
   useUpdateShowMutation,
   useUploadShowFlyerMutation,
 } = appApi;

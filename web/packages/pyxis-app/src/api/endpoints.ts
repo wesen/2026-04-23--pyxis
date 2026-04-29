@@ -22,6 +22,8 @@ export const endpoints = {
   calendarBlockedDay: (id: number) => `/api/app/calendar/blocked/${id}`,
   attendance: '/api/app/attendance',
   attendanceShow: (showId: number) => `/api/app/attendance/${showId}`,
+  showLog: '/api/app/show-log',
+  showLogShow: (showId: number) => `/api/app/show-log/${showId}`,
   auditLog: '/api/app/audit-log',
   discord: '/api/app/discord',
   settings: '/api/app/settings',

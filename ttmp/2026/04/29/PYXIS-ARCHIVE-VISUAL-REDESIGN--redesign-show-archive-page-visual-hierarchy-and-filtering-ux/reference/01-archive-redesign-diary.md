@@ -119,3 +119,36 @@ design-doc/03-staff-ui-unification-plan.md
 ```
 
 That document captures the later migration plan for shared staff primitives such as `RouteListToolbar`, `MetricsGrid`, status badges, metadata rows, cards, and note blocks across Shows, Bookings, Audit Log, Settings, Discord, and Post-show log.
+
+## Step 8: Started first component slice and RTK/MSW scaffolding
+
+Began implementation after planning. Created the first low-risk molecule primitives for the Post-show log component family:
+
+```text
+web/packages/pyxis-app/src/components/molecules/AppCard/
+web/packages/pyxis-app/src/components/molecules/StatusBadge/
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/
+web/packages/pyxis-app/src/components/molecules/NoteBlock/
+web/packages/pyxis-app/src/components/molecules/FieldError/
+```
+
+Storybook titles were corrected to live under the existing pyxis-app hierarchy:
+
+```text
+Pyxis App/Components/Molecules/...
+```
+
+Also added temporary frontend `ShowLogEntry` types and RTK Query endpoints for the planned backend API:
+
+```text
+GET /api/app/show-log
+PATCH /api/app/show-log/{showId}
+```
+
+Added MSW handlers that derive show-log entries from mock shows plus attendance logs. This is intentionally frontend/MSW scaffolding before the real backend endpoint exists.
+
+Validation:
+
+```bash
+cd web/packages/pyxis-app && pnpm exec tsc --noEmit
+```

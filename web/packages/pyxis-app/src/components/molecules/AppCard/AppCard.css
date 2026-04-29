@@ -1,0 +1,9 @@
+.app-card { background: var(--app-surface-strong); border: 1px solid var(--app-rule); border-radius: var(--app-radius-md); box-shadow: var(--app-shadow-card); color: var(--app-ink); display: grid; gap: 14px; padding: 18px; position: relative; }
+.app-card::before { background: transparent; border-radius: var(--app-radius-pill); bottom: 14px; content: ''; left: 0; position: absolute; top: 14px; width: 3px; }
+.app-card[data-density='compact'] { gap: 10px; padding: 14px; }
+.app-card[data-tone='warning']::before { background: var(--app-warning); }
+.app-card[data-tone='success']::before { background: var(--app-success); }
+.app-card[data-tone='danger']::before { background: var(--app-danger, #b42318); }
+.app-card[data-tone='muted'] { background: var(--app-surface); box-shadow: none; }
+.app-card[data-interactive='true'] { cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; }
+.app-card[data-interactive='true']:hover { border-color: var(--app-muted); transform: translateY(-1px); }
