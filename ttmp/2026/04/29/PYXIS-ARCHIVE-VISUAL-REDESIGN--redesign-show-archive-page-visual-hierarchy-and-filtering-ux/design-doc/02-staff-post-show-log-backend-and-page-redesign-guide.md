@@ -710,9 +710,9 @@ message ShowLogEntryList { repeated ShowLogEntry entries = 1; }
 
 The frontend should import generated schemas from `pyxis-types` just like `AttendanceLogSchema` today.
 
-## Frontend redesign plan
+## Frontend redesign and componentization plan
 
-Once the API returns `ShowLogEntry[]`, the page should become simpler and more expressive.
+Once the API returns `ShowLogEntry[]`, the page should become simpler and more expressive. The first implementation slice should build the Post-show log as a small component family, while only extracting the tiny primitives that are immediately needed. Broader staff UI unification is documented separately in [03 Staff UI unification plan](./03-staff-ui-unification-plan.md) and should be tackled later.
 
 ### New page flow
 
@@ -742,6 +742,34 @@ web/packages/pyxis-app/src/components/organisms/PostShowLog/PostShowLogSummary/P
 ```
 
 This naming is important. “Attendance” is a metric. “Post-show log” is the workflow.
+
+For the first slice, introduce these small reusable primitives because the Post-show log needs them immediately:
+
+```text
+web/packages/pyxis-app/src/components/molecules/AppCard/
+web/packages/pyxis-app/src/components/molecules/StatusBadge/
+web/packages/pyxis-app/src/components/molecules/MetadataStrip/
+web/packages/pyxis-app/src/components/molecules/NoteBlock/
+web/packages/pyxis-app/src/components/molecules/FieldError/
+```
+
+Do **not** introduce the broader `RouteListToolbar` abstraction yet. Build `PostShowLogToolbar` first, prove the shape in Storybook, then extract a generic toolbar later if Shows, Audit Log, Artists, and Bookings can all share it cleanly.
+
+### First slice component dependency diagram
+
+```text
+PostShowLogPanel
+  ├─ PostShowLogSummary
+  │    └─ existing MetricCard or compact metric styling
+  ├─ PostShowLogToolbar
+  │    └─ Button/Input primitives
+  └─ PostShowLogEntryCard
+       ├─ AppCard
+       ├─ StatusBadge
+       ├─ MetadataStrip
+       ├─ NoteBlock
+       └─ FieldError
+```
 
 ### Card visual model
 

@@ -102,3 +102,20 @@ design-doc/02-staff-post-show-log-backend-and-page-redesign-guide.md
 ```
 
 The second guide now explicitly says not to force the new PostShowLog component family into the prototype-to-Storybook visual-diff workflow. Instead, Storybook states define the intended design, and approved Storybook screenshots become the baseline evidence for future regression checks.
+
+## Step 7: Split componentization and deferred unification plans
+
+Updated the Post-show log backend/page guide to make the first implementation slice explicit:
+
+- add frontend `ShowLogEntry` RTK Query/MSW support;
+- build only the small primitives needed immediately (`AppCard`, `StatusBadge`, `MetadataStrip`, `NoteBlock`, `FieldError`);
+- build the PostShowLog component family in Storybook;
+- defer broader staff UI unification until after the page is approved.
+
+Created a third document:
+
+```text
+design-doc/03-staff-ui-unification-plan.md
+```
+
+That document captures the later migration plan for shared staff primitives such as `RouteListToolbar`, `MetricsGrid`, status badges, metadata rows, cards, and note blocks across Shows, Bookings, Audit Log, Settings, Discord, and Post-show log.
