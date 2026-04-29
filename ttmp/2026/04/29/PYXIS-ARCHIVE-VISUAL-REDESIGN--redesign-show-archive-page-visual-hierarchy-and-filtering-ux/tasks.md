@@ -38,3 +38,13 @@
 - [x] Upload guide bundle to reMarkable.
 - [x] Add backend-first staff post-show log guide and document Storybook-baseline workflow for the new component.
 - [x] Add deferred staff UI unification guide.
+
+### Modal reference redesign planning
+
+- [x] Copy supplied ShowLog modal reference screenshot into ticket sources.
+- [x] Capture current ShowLog editor modal screenshot for comparison.
+- [x] Analyze reference and current screenshots with direct image reading and image-understanding critique.
+- [x] Write visual/CSS/TSX implementation report for the next modal redesign pass.
+- [ ] Implement the two-column reference-inspired ShowLog editor modal.
+- [ ] Add persistence decision for quick highlight and total door fields before route shipment.
+

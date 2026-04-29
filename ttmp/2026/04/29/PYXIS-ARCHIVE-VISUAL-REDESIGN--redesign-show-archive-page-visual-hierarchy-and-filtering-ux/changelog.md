@@ -10,3 +10,5 @@
 - 2026-04-29: Split PostShowLogEditorModal into its own ShowLog organism and tuned its form layout using css-visual-diff screenshots plus image review feedback.
 - 2026-04-29: Added reusable Storybook-first component runbook covering css-visual-diff screenshot capture, image inspection with `read` or `understand_image`, evidence storage, diary updates, and commit rhythm.
 - 2026-04-29: Added first backend ShowLog API handlers and switched the staff `/attendance` route to `useGetShowLogQuery()` plus `PostShowLogPanel`.
+- 2026-04-29: Added ShowLog modal reference redesign report with copied screenshot evidence, current Storybook capture, image analysis, and concrete CSS/TSX implementation plan.
+- 2026-04-29: Uploaded the ShowLog modal redesign report to reMarkable under `/ai/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN/`.

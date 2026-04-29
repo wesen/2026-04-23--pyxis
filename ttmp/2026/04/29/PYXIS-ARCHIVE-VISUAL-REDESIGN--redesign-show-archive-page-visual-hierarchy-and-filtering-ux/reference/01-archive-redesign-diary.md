@@ -343,3 +343,33 @@ cd web/packages/pyxis-app && pnpm exec vite build
 ```
 
 Note: `go test ./...` still requests `go mod tidy` because of unrelated/untracked repo state outside this focused change; targeted backend packages passed.
+
+## Step 15: Analyzed supplied ShowLog modal reference screenshot
+
+Copied the supplied modal screenshot into ticket evidence:
+
+```text
+sources/17-show-log-modal-redesign-reference/reference-modal.png
+```
+
+Captured the current Storybook modal for direct comparison:
+
+```text
+sources/17-show-log-modal-redesign-reference/current-modal.png
+```
+
+Reviewed both images directly with `read` and used `understand_image` for visual hierarchy/layout analysis. Also inspected the current modal TSX/CSS and shared `Modal` sizing implementation.
+
+Wrote the implementation report:
+
+```text
+design-doc/04-show-log-modal-reference-redesign-report.md
+```
+
+Main finding: the current modal is polished but compact and one-column (`lg` modal width is `722px`), while the reference is a much wider two-column production form with pre-show note callout, quick highlight, draw/door fields, incident details side panel, privacy banner, textarea counters, and clearer save copy.
+
+Uploaded the report to reMarkable after a dry run:
+
+```text
+/ai/2026/04/29/PYXIS-ARCHIVE-VISUAL-REDESIGN/PYXIS-ARCHIVE-VISUAL-REDESIGN ShowLog modal redesign report
+```
