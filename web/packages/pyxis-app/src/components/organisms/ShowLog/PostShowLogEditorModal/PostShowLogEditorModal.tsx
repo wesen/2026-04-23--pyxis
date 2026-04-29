@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Modal } from 'pyxis-components';
 import type { ShowLogEntry, ShowLogUpdateInput } from '../../../../api/appApi';
 import { FieldError } from '../../../molecules/FieldError';
@@ -22,29 +22,33 @@ export type PostShowLogEditorModalProps = {
   onSave?: (update: ShowLogUpdateInput) => void;
 };
 
+function formatDoorCents(cents?: number) {
+  if (cents == null) return '';
+  return (cents / 100).toFixed(2);
+}
+
+function parseDoorCents(value: string) {
+  const trimmed = value.trim().replace(/^\$/, '');
+  if (!trimmed) return undefined;
+  const parsed = Number(trimmed);
+  if (!Number.isFinite(parsed)) return undefined;
+  return Math.round(parsed * 100);
+}
+
 function draftFromEntry(entry?: ShowLogEntry): Draft {
   return {
     draw: entry?.draw ?? 0,
     postShowNotes: entry?.postShowNotes ?? '',
     incident: entry?.incident ?? false,
     incidentNotes: entry?.incidentNotes ?? '',
-    quickHighlight: '',
-    totalDoor: '',
+    quickHighlight: entry?.quickHighlight ?? '',
+    totalDoor: formatDoorCents(entry?.totalDoorCents),
   };
 }
 
 function formatDate(date?: string) {
   if (!date) return 'Unscheduled';
   return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function composePostShowNotes(draft: Draft) {
-  const additions = [
-    draft.quickHighlight.trim() ? `Quick highlight: ${draft.quickHighlight.trim()}` : '',
-    draft.totalDoor.trim() ? `Total door: $${draft.totalDoor.trim().replace(/^\$/, '')}` : '',
-  ].filter(Boolean);
-  const mainNotes = draft.postShowNotes?.trim() ?? '';
-  return [...additions, mainNotes].filter(Boolean).join('\n\n');
 }
 
 function InfoIcon() {
@@ -59,8 +63,17 @@ function FieldShell({ label, help, children, className }: { label: string; help?
   return <label className={['app-post-show-log-modal__field', className].filter(Boolean).join(' ')}><span className="app-post-show-log-modal__label">{label}</span>{help && <span className="app-post-show-log-modal__help">{help}</span>}{children}</label>;
 }
 
-function TextAreaWithCount({ value, onChange, placeholder, rows = 5, disabled, invalid }: { value: string; onChange: (value: string) => void; placeholder: string; rows?: number; disabled?: boolean; invalid?: boolean }) {
-  return <div className="app-post-show-log-modal__textarea-wrap"><textarea className="app-post-show-log-modal__textarea" rows={rows} maxLength={MAX_NOTE_LENGTH} value={value} disabled={disabled} aria-invalid={invalid} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} /><span className="app-post-show-log-modal__counter">{value.length} / {MAX_NOTE_LENGTH}</span></div>;
+function TextAreaWithCount({ value, onChange, placeholder, rows = 3, invalid }: { value: string; onChange: (value: string) => void; placeholder: string; rows?: number; invalid?: boolean }) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const textarea = ref.current;
+    if (!textarea) return;
+    textarea.style.height = 'auto';
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 260)}px`;
+  }, [value]);
+
+  return <div className="app-post-show-log-modal__textarea-wrap"><textarea ref={ref} className="app-post-show-log-modal__textarea" rows={rows} maxLength={MAX_NOTE_LENGTH} value={value} aria-invalid={invalid} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} /><span className="app-post-show-log-modal__counter">{value.length} / {MAX_NOTE_LENGTH}</span></div>;
 }
 
 export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSave }: PostShowLogEditorModalProps) {
@@ -73,6 +86,9 @@ export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSa
   const validationError = useMemo(() => {
     if ((draft.draw ?? 0) < 0) return 'Draw cannot be negative.';
     if ((draft.draw ?? 0) > 10000) return 'Draw looks too high. Double-check before saving.';
+    const totalDoorCents = parseDoorCents(draft.totalDoor);
+    if (draft.totalDoor.trim() && totalDoorCents == null) return 'Total door must be a valid dollar amount.';
+    if (totalDoorCents != null && totalDoorCents < 0) return 'Total door cannot be negative.';
     if (draft.incident && !draft.incidentNotes?.trim()) return 'Incident notes are required when Incident is checked.';
     return undefined;
   }, [draft]);
@@ -82,7 +98,9 @@ export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSa
     onSave?.({
       showId: entry.showId,
       draw: draft.draw,
-      postShowNotes: composePostShowNotes(draft),
+      postShowNotes: draft.postShowNotes,
+      quickHighlight: draft.quickHighlight,
+      totalDoorCents: parseDoorCents(draft.totalDoor),
       incident: draft.incident,
       incidentNotes: draft.incidentNotes,
     });
@@ -92,16 +110,16 @@ export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSa
     <Modal
       isOpen={isOpen && Boolean(entry)}
       onClose={onCancel}
-      title={entry ? `${entry.logStatus === 'needs-log' ? 'Log show' : 'Edit post-show log'} — ${entry.artist}` : 'Post-show log'}
+      title={entry ? `Log show — ${entry.artist}` : 'Post-show log'}
       subtitle={entry ? `${formatDate(entry.date)} · ${entry.genre || 'Genre not set'}` : undefined}
-      width="xl"
+      width={draft.incident ? 'xl' : 'lg'}
       bodyClassName="app-post-show-log-modal__body"
       panelClassName="app-post-show-log-modal__panel"
       footerClassName="app-post-show-log-modal__footer"
       panelProps={{ ...appPart('post-show-log-editor-modal') } as HTMLAttributes<HTMLDivElement>}
       footer={<><Button variant="outline" size="sm" onClick={onCancel}>Cancel</Button><Button variant="danger" size="sm" isLoading={isSaving} disabled={Boolean(validationError) || !entry} onClick={save}>Save post-show log</Button></>}
     >
-      {entry && <div className="app-post-show-log-modal__layout">
+      {entry && <div className="app-post-show-log-modal__layout" data-incident={draft.incident ? 'true' : 'false'}>
         <main className="app-post-show-log-modal__main-column" aria-label="Post-show report fields">
           <section className="app-post-show-log-modal__pre-show-note" aria-label="Pre-show note">
             <span className="app-post-show-log-modal__callout-icon"><InfoIcon /></span>
@@ -129,22 +147,22 @@ export function PostShowLogEditorModal({ entry, isOpen, isSaving, onCancel, onSa
           <div className="app-post-show-log-modal__rule" />
 
           <FieldShell label="Post-show notes" help="What happened before, during, and after the show?">
-            <TextAreaWithCount rows={5} value={draft.postShowNotes ?? ''} placeholder="Add details..." onChange={(value) => setDraft((current) => ({ ...current, postShowNotes: value }))} />
+            <TextAreaWithCount value={draft.postShowNotes ?? ''} placeholder="Add details..." onChange={(value) => setDraft((current) => ({ ...current, postShowNotes: value }))} />
           </FieldShell>
           <FieldError>{validationError}</FieldError>
         </main>
 
-        <aside className="app-post-show-log-modal__side-column" aria-label="Incident details and privacy">
-          <section className="app-post-show-log-modal__incident-panel" data-enabled={draft.incident ? 'true' : 'false'}>
+        {draft.incident && <aside className="app-post-show-log-modal__side-column" aria-label="Incident details and privacy">
+          <section className="app-post-show-log-modal__incident-panel">
             <h3>Incident details</h3>
-            <p>{draft.incident ? 'Provide details about what occurred.' : 'Check “Mark this show as having an incident” to add details.'}</p>
-            <TextAreaWithCount rows={8} disabled={!draft.incident} invalid={Boolean(draft.incident && !draft.incidentNotes?.trim())} value={draft.incidentNotes ?? ''} placeholder="Describe the incident..." onChange={(value) => setDraft((current) => ({ ...current, incidentNotes: value }))} />
+            <p>Provide details about what occurred.</p>
+            <TextAreaWithCount invalid={Boolean(!draft.incidentNotes?.trim())} value={draft.incidentNotes ?? ''} placeholder="Describe the incident..." onChange={(value) => setDraft((current) => ({ ...current, incidentNotes: value }))} />
           </section>
           <section className="app-post-show-log-modal__privacy-banner" aria-label="Incident privacy note">
             <span className="app-post-show-log-modal__privacy-icon"><ShieldIcon /></span>
             <p><strong>Incident logs are private and staff-only.</strong><span>They are not visible on the public show page.</span></p>
           </section>
-        </aside>
+        </aside>}
       </div>}
     </Modal>
   );

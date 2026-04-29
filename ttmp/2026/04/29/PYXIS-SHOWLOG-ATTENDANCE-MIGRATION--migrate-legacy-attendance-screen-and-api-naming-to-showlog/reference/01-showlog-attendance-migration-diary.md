@@ -107,3 +107,10 @@ cd web/packages/pyxis-app && pnpm exec vite build
 ```
 
 All passed.
+
+
+## Step 4: Wired modal draft fields to real ShowLog fields
+
+Updated the ShowLog editor modal draft/save path so `quickHighlight` and `totalDoorCents` are no longer folded into `postShowNotes`. The modal now hydrates `quickHighlight` from the entry, formats `totalDoorCents` as dollars for the field, parses dollars back to cents on save, and sends all fields through `ShowLogUpdateInput`.
+
+This keeps the visual modal aligned with the backend migration from Step 3.

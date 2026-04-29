@@ -5,6 +5,11 @@
   box-shadow: var(--show-log-modal-soft-shadow) !important;
 }
 
+.app-post-show-log-modal__panel,
+.app-post-show-log-modal__panel * {
+  box-sizing: border-box;
+}
+
 .app-post-show-log-modal__body {
   background: #fff;
   padding: 28px 32px !important;
@@ -12,18 +17,23 @@
 
 .app-post-show-log-modal__footer {
   background: #fffdfa !important;
-  padding: 18px 28px !important;
+  padding: 18px 28px 22px !important;
 }
 
 .app-post-show-log-modal__layout {
   align-items: start;
   display: grid;
   gap: var(--show-log-modal-gap);
+  grid-template-columns: minmax(0, 640px);
+}
+
+.app-post-show-log-modal__layout[data-incident='true'] {
   grid-template-columns: minmax(0, 1.65fr) minmax(320px, .95fr);
 }
 
 .app-post-show-log-modal__main-column,
 .app-post-show-log-modal__side-column {
+  align-content: start;
   display: grid;
   gap: 22px;
 }
@@ -213,15 +223,11 @@
 
 .app-post-show-log-modal__textarea {
   line-height: 1.45;
-  min-height: 122px;
+  max-height: 260px;
+  min-height: 88px;
+  overflow-y: auto;
   padding: 13px 14px;
   resize: vertical;
-}
-
-.app-post-show-log-modal__textarea:disabled {
-  background: color-mix(in srgb, var(--app-surface) 76%, #fff);
-  color: var(--app-muted);
-  cursor: not-allowed;
 }
 
 .app-post-show-log-modal__counter {
@@ -248,16 +254,7 @@
 }
 
 .app-post-show-log-modal__incident-panel .app-post-show-log-modal__textarea {
-  min-height: 190px;
-}
-
-.app-post-show-log-modal__incident-panel[data-enabled='false'] {
-  background: #fbfaf8;
-  border-color: var(--app-rule);
-}
-
-.app-post-show-log-modal__incident-panel[data-enabled='false'] .app-post-show-log-modal__textarea-wrap {
-  opacity: .76;
+  min-height: 148px;
 }
 
 .app-post-show-log-modal__privacy-banner {
@@ -291,12 +288,48 @@
 
 @media (max-width: 900px) {
   .app-post-show-log-modal__body { padding: 22px !important; }
-  .app-post-show-log-modal__layout { grid-template-columns: 1fr; }
+  .app-post-show-log-modal__layout,
+  .app-post-show-log-modal__layout[data-incident='true'] { grid-template-columns: minmax(0, 1fr); }
   .app-post-show-log-modal__side-column {
     border-left: 0;
     border-top: 1px solid var(--app-rule);
+    min-width: 0;
     padding-left: 0;
     padding-top: 22px;
+    width: 100%;
   }
-  .app-post-show-log-modal__metrics-grid { grid-template-columns: 1fr; gap: 18px; }
+  .app-post-show-log-modal__metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .app-post-show-log-modal__pre-show-note,
+  .app-post-show-log-modal__incident-panel,
+  .app-post-show-log-modal__privacy-banner { width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .app-post-show-log-modal__body { padding: 16px 20px !important; }
+  .app-post-show-log-modal__main-column,
+  .app-post-show-log-modal__side-column { gap: 15px; }
+  .app-post-show-log-modal__side-column { padding-top: 16px; }
+  .app-post-show-log-modal__pre-show-note { gap: 10px; padding: 14px 12px; }
+  .app-post-show-log-modal__pre-show-note p,
+  .app-post-show-log-modal__incident-panel p { font-size: 12.5px; margin-top: 6px; }
+  .app-post-show-log-modal__pre-show-note h3,
+  .app-post-show-log-modal__incident-panel h3 { font-size: 12.5px; }
+  .app-post-show-log-modal__field { gap: 6px; }
+  .app-post-show-log-modal__label { font-size: 12.5px; }
+  .app-post-show-log-modal__help { font-size: 11.5px; line-height: 1.25; }
+  .app-post-show-log-modal__input,
+  .app-post-show-log-modal__currency-input { min-height: 39px; }
+  .app-post-show-log-modal__input,
+  .app-post-show-log-modal__currency-input input { font-size: 13px; padding-block: 9px; }
+  .app-post-show-log-modal__checkbox { gap: 10px; }
+  .app-post-show-log-modal__checkbox strong { font-size: 12.5px; }
+  .app-post-show-log-modal__checkbox small { font-size: 11.5px; }
+  .app-post-show-log-modal__rule { margin-top: -2px; }
+  .app-post-show-log-modal__textarea { min-height: 78px; padding: 11px 12px; }
+  .app-post-show-log-modal__incident-panel { gap: 11px; padding: 14px 12px; }
+  .app-post-show-log-modal__incident-panel .app-post-show-log-modal__textarea { min-height: 104px; }
+  .app-post-show-log-modal__privacy-banner { gap: 10px; padding: 12px; }
+  .app-post-show-log-modal__privacy-banner p,
+  .app-post-show-log-modal__privacy-banner strong { font-size: 11.5px; }
+  .app-post-show-log-modal__footer { padding: 12px 20px 15px !important; }
 }

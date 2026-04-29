@@ -45,5 +45,7 @@ type Story = StoryObj<typeof PostShowLogEditorModal>;
 export const NeedsLog: Story = {};
 export const Logged: Story = { args: { entry: loggedEntry } };
 export const Incident: Story = { args: { entry: incidentEntry } };
+export const IncidentChecked: Story = { args: { entry: { ...baseEntry, incident: true, incidentNotes: '' } } };
 export const Saving: Story = { args: { entry: loggedEntry, isSaving: true } };
 export const Mobile: Story = { parameters: { viewport: { defaultViewport: 'mobile1' } } };
+export const MobileIncidentChecked: Story = { args: { entry: { ...baseEntry, incident: true, incidentNotes: '' } }, parameters: { viewport: { defaultViewport: 'mobile1' } } };
