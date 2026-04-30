@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { publicDesktopArgs, publicMobileArgs, publicPageParameters, prototypeArchiveShows, prototypeArchiveStats, renderPublicPageRoute } from '../storybook';
+import { publicDesktopArgs, publicMobileArgs, publicPageParameters, prototypeArchiveShows, renderPublicPageRoute } from '../storybook';
 import { ArchivePageView } from './Page';
 
 const meta: Meta = {
@@ -28,7 +28,6 @@ export const FromProps: Story = {
       <div data-story="pyxis-public-page" data-story-name="archive-from-props" style={{ width: publicDesktopArgs.width, minHeight: publicDesktopArgs.minHeight, background: '#fff' }}>
         <ArchivePageView
           shows={shows}
-          stats={prototypeArchiveStats}
           search={search}
           selectedYear={selectedYear}
           onSearchChange={setSearch}

@@ -3,13 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   ArchiveSearchFilters,
   ArchiveShowList,
-  ArchiveStats,
   PublicPageHeader,
   YearGroup,
 } from 'pyxis-components';
-import type { ArchiveStats as ArchiveStatsData, ArchivedShow } from 'pyxis-types';
+import type { ArchivedShow } from 'pyxis-types';
 import { getApiErrorMessage } from '../../api/errors';
-import { useArchive, useArchiveStats } from '../../api/hooks';
+import { useArchive } from '../../api/hooks';
 import './Page.css';
 
 type ArchiveGroup = {
@@ -19,14 +18,12 @@ type ArchiveGroup = {
 
 export type ArchivePageViewProps = {
   shows: ArchivedShow[];
-  stats?: ArchiveStatsData;
   search: string;
   selectedYear: string;
   onSearchChange: (value: string) => void;
   onYearChange: (value: string) => void;
   isLoading?: boolean;
   archiveError?: string | null;
-  statsError?: string | null;
   headerKicker?: string;
   headerTitle?: string;
 };
@@ -35,19 +32,15 @@ export function Archive() {
   const [search, setSearch] = useState('');
   const [selectedYear, setSelectedYear] = useState('All');
   const { data: list, isLoading, isError: isArchiveError, error: archiveError } = useArchive(search || undefined);
-  const { data: stats, isError: isStatsError } = useArchiveStats();
-
   return (
     <ArchivePageView
       shows={list?.shows ?? []}
-      stats={stats}
       search={search}
       selectedYear={selectedYear}
       onSearchChange={setSearch}
       onYearChange={setSelectedYear}
       isLoading={isLoading}
       archiveError={isArchiveError ? getApiErrorMessage(archiveError) : null}
-      statsError={isStatsError ? 'Archive totals are temporarily unavailable.' : null}
     />
   );
 }
@@ -101,14 +94,12 @@ export function ArchiveRecap() {
 
 export function ArchivePageView({
   shows,
-  stats,
   search,
   selectedYear,
   onSearchChange,
   onYearChange,
   isLoading = false,
   archiveError = null,
-  statsError = null,
   headerKicker = 'Since 2023',
   headerTitle = 'The archive',
 }: ArchivePageViewProps) {
@@ -127,12 +118,6 @@ export function ArchivePageView({
           <PublicPageHeader kicker={headerKicker} title={headerTitle} />
         </header>
 
-        {stats && (
-          <section className="pyxis-archive-page__stats" data-section="archive-stats">
-            <ArchiveStats stats={stats} />
-          </section>
-        )}
-
         <section data-section="archive-filters">
           <ArchiveSearchFilters
             years={years}
@@ -143,12 +128,6 @@ export function ArchivePageView({
             onYearChange={onYearChange}
           />
         </section>
-
-        {statsError && (
-          <p className="pyxis-public-page__status-detail" role="status" data-section="archive-stats-error">
-            {statsError}
-          </p>
-        )}
 
         {archiveError ? (
           <section className="pyxis-public-page__status" role="alert" data-section="archive-error">

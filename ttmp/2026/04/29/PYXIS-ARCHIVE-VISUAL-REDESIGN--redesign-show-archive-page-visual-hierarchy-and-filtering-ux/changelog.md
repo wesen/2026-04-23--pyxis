@@ -15,3 +15,9 @@
 - 2026-04-29: Implemented the reference-inspired ShowLog editor modal: xl width, two-column layout, pre-show callout, quick highlight, draw/door fields, incident sidebar, privacy banner, counters, and updated Storybook states.
 - 2026-04-29: Added a reusable PNG-sketch-to-Storybook-organism runbook documenting the visual iteration process and Storybook/css-visual-diff evidence workflow.
 - 2026-04-29: Updated the PNG sketch runbook with API/selector-first guidance, rename cleanup, data-model mismatch checks, and grid/flex stretching diagnostics from the Obsidian tutorial.
+
+## 2026-04-30 — Remove public archive metric cards
+
+- Removed the four top archive metric/stat cards from the public archive page.
+- The archive page no longer fetches `/api/public/archive/stats`; it now goes straight from the page header to the archive filters and year groups.
+- Validation: `pnpm --dir web --filter pyxis-user-site exec tsc --noEmit`; `pnpm --dir web --filter pyxis-user-site build`.

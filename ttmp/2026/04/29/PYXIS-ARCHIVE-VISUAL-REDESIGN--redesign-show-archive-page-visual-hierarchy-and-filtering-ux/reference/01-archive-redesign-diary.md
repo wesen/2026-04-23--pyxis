@@ -432,3 +432,15 @@ Validated the runbook frontmatter and ticket health:
 docmgr validate frontmatter --doc /abs/path/to/playbooks/02-png-sketch-to-storybook-organism-runbook.md --suggest-fixes
 docmgr doctor --ticket PYXIS-ARCHIVE-VISUAL-REDESIGN --stale-after 30
 ```
+
+
+## 2026-04-30: Removed public archive top metrics
+
+User requested removing the four top cards/metrics on the public archive site. I removed `ArchiveStats` from `ArchivePageView`, stopped calling `useArchiveStats()` in the route, removed the stats/error props from the view, updated the Archive story props, and deleted the now-unused archive stats page CSS hooks.
+
+Validation passed:
+
+```text
+pnpm --dir web --filter pyxis-user-site exec tsc --noEmit
+pnpm --dir web --filter pyxis-user-site build
+```

@@ -14,16 +14,8 @@
   --pyxis-archive-show-row-title-color: var(--color-text-primary);
 }
 
-.pyxis-archive-page [data-pyxis-component='archive-stats'] {
-  --pyxis-archive-stats-value-color: var(--color-text-primary);
-}
-
 .pyxis-archive-page [data-pyxis-component='archive-search-filters'] {
   --pyxis-archive-search-color: var(--color-text-primary);
-}
-
-.pyxis-archive-page__stats {
-  margin-bottom: 28px;
 }
 
 .pyxis-archive-page__years {
