@@ -1,1 +1,18 @@
 @import "../pages.css";
+
+.app-flyer-preview-modal__body {
+  display: flex;
+  justify-content: center;
+  background: var(--app-canvas);
+}
+
+.app-flyer-preview-modal__image {
+  display: block;
+  width: min(100%, 520px);
+  max-height: 70vh;
+  object-fit: contain;
+  border: 1px solid var(--app-rule);
+  border-radius: var(--app-radius-card);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow);
+}

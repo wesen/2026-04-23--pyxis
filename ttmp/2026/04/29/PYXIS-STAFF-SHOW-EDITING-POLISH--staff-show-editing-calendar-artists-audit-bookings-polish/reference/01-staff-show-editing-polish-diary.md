@@ -384,3 +384,16 @@ appShow.flyerUrl = show.flyerUrl;
 ```
 
 This keeps the current lightweight UI model while allowing `ShowTableRow` to render `Ready` and the thumbnail. A cleaner future schema change would add `flyer_url` to `AppShow` and regenerate types.
+
+
+## 2026-04-30: Shows overview flyer preview polish
+
+After flyer readiness was fixed, the overview still had two UX issues: flyer-ready rows said `Ready`, and `Needs flyer` used a one-off pill style rather than the same widget family as the `Confirmed` status. I changed the full show table row so:
+
+- flyer-ready rows show only a compact thumbnail button;
+- clicking the thumbnail calls `onPreviewFlyer`;
+- flyer-missing rows render `<StatusPill tone="draft">Needs flyer</StatusPill>`.
+
+I threaded `onPreviewFlyer` through `ShowsConfirmedPanel` and `ShowsTable`, then added a preview in `ShowsPage` using the shared `Modal` component from `pyxis-components` and the existing `Button` for the footer close action.
+
+Validation passed with TypeScript, then a Playwright smoke logged in through dev auth, opened `/shows`, clicked `Preview flyer for Open Mic Night`, waited for the dialog, confirmed there are no literal `Ready` labels, and captured `sources/10-shows-flyer-preview.png`.

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShowStatus } from 'pyxis-types';
-import { Button, Input } from 'pyxis-components';
+import { Button, Input, Modal } from 'pyxis-components';
 import { useCreateShowMutation, useGetShowsQuery, useUpdateShowMutation, useUploadShowFlyerMutation } from '../../api/appApi';
 import { AppShell } from '../../components/shell';
 import { NewShowModal } from '../../components/organisms';
-import { ShowsArchivedPanel, ShowsConfirmedPanel, ShowsFilterBar, type ShowsFilterValue } from '../../components/organisms';
+import { ShowsArchivedPanel, ShowsConfirmedPanel, ShowsFilterBar, type ShowsFilterValue, type ShowsTableShow } from '../../components/organisms';
 import { EmptyState, ErrorState, LoadingState } from '../shared';
 import './Page.css';
 
@@ -20,6 +20,7 @@ export function ShowsPage() {
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState<ShowsFilterValue>(ShowStatus.CONFIRMED);
   const [actionError, setActionError] = useState<string | undefined>();
+  const [previewShow, setPreviewShow] = useState<ShowsTableShow | null>(null);
   const allShows = shows ?? [];
   const counts: Record<ShowsFilterValue, number> = {
     all: allShows.length,
@@ -67,6 +68,17 @@ export function ShowsPage() {
     >
       {actionError && <div className="app-action-error" role="alert">{actionError}</div>}
       <NewShowModal isOpen={isEditorOpen} mode="create" isSaving={createState.isLoading || uploadState.isLoading || updateState.isLoading} error={actionError} onCancel={() => setEditorOpen(false)} onSubmit={handleCreateShow} />
+      <Modal
+        isOpen={Boolean(previewShow?.flyerUrl)}
+        onClose={() => setPreviewShow(null)}
+        title={previewShow ? `${previewShow.artist} flyer` : 'Flyer preview'}
+        subtitle={previewShow ? `${previewShow.date} · ${previewShow.doors || 'doors TBA'}` : undefined}
+        width="lg"
+        bodyClassName="app-flyer-preview-modal__body"
+        footer={<Button type="button" variant="outline" size="sm" onClick={() => setPreviewShow(null)}>Close</Button>}
+      >
+        {previewShow?.flyerUrl && <img className="app-flyer-preview-modal__image" src={previewShow.flyerUrl} alt={`Flyer for ${previewShow.artist}`} />}
+      </Modal>
       {isLoading ? (
         <LoadingState />
       ) : isError || !shows ? (
@@ -77,10 +89,10 @@ export function ShowsPage() {
         <>
           {searchOpen && <div className="app-page-search" role="search"><Input placeholder="Search artist, genre, or date…" value={search} onChange={(event) => setSearch(event.target.value)} autoFocus /></div>}
           <ShowsFilterBar counts={counts} activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-          {activeFilter === 'all' || activeFilter === ShowStatus.CONFIRMED ? <ShowsConfirmedPanel shows={confirmed} onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
-          {activeFilter === ShowStatus.HOLD ? <ShowsConfirmedPanel shows={hold} title={`Hold · ${hold.length}`} emptyTitle="No shows on hold." note="Held shows are not public until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
-          {activeFilter === ShowStatus.CANCELLED ? <ShowsConfirmedPanel shows={cancelled} title={`Cancelled · ${cancelled.length}`} emptyTitle="No cancelled shows." note="Cancelled shows stay visible for operational history." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
-          {activeFilter === ShowStatus.DRAFT ? <ShowsConfirmedPanel shows={drafts} title={`Drafts · ${drafts.length}`} emptyTitle="No draft shows." note="Drafts are staff-only until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} /> : null}
+          {activeFilter === 'all' || activeFilter === ShowStatus.CONFIRMED ? <ShowsConfirmedPanel shows={confirmed} onEditShow={(show) => navigate(`/shows/${show.id}`)} onPreviewFlyer={setPreviewShow} /> : null}
+          {activeFilter === ShowStatus.HOLD ? <ShowsConfirmedPanel shows={hold} title={`Hold · ${hold.length}`} emptyTitle="No shows on hold." note="Held shows are not public until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} onPreviewFlyer={setPreviewShow} /> : null}
+          {activeFilter === ShowStatus.CANCELLED ? <ShowsConfirmedPanel shows={cancelled} title={`Cancelled · ${cancelled.length}`} emptyTitle="No cancelled shows." note="Cancelled shows stay visible for operational history." onEditShow={(show) => navigate(`/shows/${show.id}`)} onPreviewFlyer={setPreviewShow} /> : null}
+          {activeFilter === ShowStatus.DRAFT ? <ShowsConfirmedPanel shows={drafts} title={`Drafts · ${drafts.length}`} emptyTitle="No draft shows." note="Drafts are staff-only until confirmed." onEditShow={(show) => navigate(`/shows/${show.id}`)} onPreviewFlyer={setPreviewShow} /> : null}
           {filtered.length === 0 && <EmptyState label="No shows match the current filters." />}
           <div style={{ height: 20 }} />
           {activeFilter === 'all' || activeFilter === ShowStatus.ARCHIVED ? <ShowsArchivedPanel shows={archived} onViewArchive={() => setActiveFilter(ShowStatus.ARCHIVED)} /> : null}

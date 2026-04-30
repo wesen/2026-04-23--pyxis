@@ -1,0 +1,35 @@
+# Shows flyer preview validation
+
+Command:
+
+```bash
+node --input-type=module <<'NODE'
+# Playwright smoke logged in via /auth/dev-login, visited /shows,
+# clicked "Preview flyer for Open Mic Night", waited for the reused Modal,
+# checked that literal Ready labels are absent, and inspected Needs flyer text.
+NODE
+```
+
+Result:
+
+```json
+{
+  "ok": true,
+  "hasReady": 0,
+  "needs": {
+    "tag": "SPAN",
+    "cls": "",
+    "text": "Needs flyer"
+  }
+}
+```
+
+Screenshot:
+
+- `sources/10-shows-flyer-preview.png`
+
+Notes:
+
+- Flyer thumbnail click opens a shared `Modal` preview.
+- Flyer-ready rows no longer render the text `Ready`.
+- Flyer-missing rows render through the shared `StatusPill`/`Badge` path, matching the status-pill widget family used by `Confirmed`.

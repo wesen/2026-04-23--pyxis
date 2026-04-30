@@ -16,6 +16,7 @@ export type ShowTableRowProps = {
   show: StaffShow;
   variant?: ShowTableRowVariant;
   onEdit?: (show: AppShow) => void;
+  onPreviewFlyer?: (show: StaffShow) => void;
 };
 
 function formatShowDate(date: string) {
@@ -27,7 +28,7 @@ function formatShowDate(date: string) {
   };
 }
 
-export function ShowTableRow({ show, variant = 'full', onEdit }: ShowTableRowProps) {
+export function ShowTableRow({ show, variant = 'full', onEdit, onPreviewFlyer }: ShowTableRowProps) {
   const status = <span className="app-row-status"><StatusPill status={show.status} /></span>;
   const date = formatShowDate(show.date);
   const flyerUrl = show.flyerUrl?.trim();
@@ -48,5 +49,5 @@ export function ShowTableRow({ show, variant = 'full', onEdit }: ShowTableRowPro
     );
   }
 
-  return <tr className="app-table-row app-show-table-row" {...appPart('show-table-row')}><td data-cell="id"><span className="app-show-id">#{show.id}</span></td><td data-cell="date"><div className="app-show-date"><strong>{date.short}</strong><span>{date.day}</span></div></td><td data-cell="flyer">{flyerUrl ? <span className="app-show-flyer-ready" title="Flyer attached"><img src={flyerUrl} alt="" aria-hidden="true" /><b>Ready</b></span> : <span className="app-show-flyer-missing" title="Confirmed shows need a flyer before they can appear publicly.">Needs flyer</span>}</td><td data-cell="artist"><strong>{show.artist}</strong><span>{show.genre}</span></td><td data-cell="doors">{show.doors}</td><td data-cell="age"><AgeBadge>{show.age}</AgeBadge></td><td data-cell="price"><span className="app-show-price">{show.price || '—'}</span></td><td data-cell="draw"><DrawProgress value={show.draw} max={show.capacity}/></td><td data-cell="status"><span className="app-row-status-wrap">{status}{show.pinned && <Icon className="app-row-pin" name="pin" size={12} aria-label="Pinned to Discord"/>}</span></td><td data-cell="edit"><button className="app-row-edit" aria-label={`Edit ${show.artist}`} onClick={() => onEdit?.(show)}><Icon name="edit" size={14}/></button></td></tr>;
+  return <tr className="app-table-row app-show-table-row" {...appPart('show-table-row')}><td data-cell="id"><span className="app-show-id">#{show.id}</span></td><td data-cell="date"><div className="app-show-date"><strong>{date.short}</strong><span>{date.day}</span></div></td><td data-cell="flyer">{flyerUrl ? <button type="button" className="app-show-flyer-thumb" title="Preview flyer" aria-label={`Preview flyer for ${show.artist}`} onClick={() => onPreviewFlyer?.(show)}><img src={flyerUrl} alt="" aria-hidden="true" /></button> : <StatusPill tone="draft">Needs flyer</StatusPill>}</td><td data-cell="artist"><strong>{show.artist}</strong><span>{show.genre}</span></td><td data-cell="doors">{show.doors}</td><td data-cell="age"><AgeBadge>{show.age}</AgeBadge></td><td data-cell="price"><span className="app-show-price">{show.price || '—'}</span></td><td data-cell="draw"><DrawProgress value={show.draw} max={show.capacity}/></td><td data-cell="status"><span className="app-row-status-wrap">{status}{show.pinned && <Icon className="app-row-pin" name="pin" size={12} aria-label="Pinned to Discord"/>}</span></td><td data-cell="edit"><button className="app-row-edit" aria-label={`Edit ${show.artist}`} onClick={() => onEdit?.(show)}><Icon name="edit" size={14}/></button></td></tr>;
 }

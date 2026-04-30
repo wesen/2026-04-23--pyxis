@@ -74,3 +74,10 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 - Fixed staff `/shows` list flyer readiness by assigning `flyerUrl` after protobuf `create(AppShowSchema, ...)`; generated protobuf construction drops unknown fields, so the previous inline `flyerUrl` addition never reached `ShowTableRow`.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
+
+## 2026-04-30 — Shows overview flyer preview polish
+
+- Removed the `Ready` label from flyer-ready rows; attached flyers now render as clickable thumbnails only.
+- Changed `Needs flyer` to reuse the shared `StatusPill`/`Badge` widget family so it visually matches the `Confirmed` status pill style.
+- Added a flyer preview modal on the Shows overview using the shared `Modal` component and existing `Button`.
+- Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`; Playwright smoke captured `sources/10-shows-flyer-preview.png` and `sources/11-shows-flyer-preview-validation.txt`.
