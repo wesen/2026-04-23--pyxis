@@ -1082,6 +1082,15 @@ func (s *Server) handleUpsertShowLog(w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusOK, entry)
 }
 
+func (s *Server) settingsWithRuntimeConfig(settings *domain.Settings) *domain.Settings {
+	if settings == nil || s.cfg == nil || s.cfg.DiscordGuildID == "" {
+		return settings
+	}
+	copy := *settings
+	copy.DiscordGuildID = s.cfg.DiscordGuildID
+	return &copy
+}
+
 func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
@@ -1091,7 +1100,7 @@ func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondProtoJSON(w, http.StatusOK, settingsToProto(settings))
+	respondProtoJSON(w, http.StatusOK, settingsToProto(s.settingsWithRuntimeConfig(settings)))
 }
 
 func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
@@ -1132,6 +1141,11 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	discordGuildID := req.DiscordGuildID
+	if s.cfg != nil && s.cfg.DiscordGuildID != "" {
+		discordGuildID = ""
+	}
+
 	updated, err := s.settingsService.Update(ctx, &domain.Settings{
 		SpaceName:              req.SpaceName,
 		Tagline:                req.Tagline,
@@ -1141,7 +1155,7 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		BookingEmail:           req.BookingEmail,
 		Website:                req.Website,
 		Timezone:               req.Timezone,
-		DiscordGuildID:         req.DiscordGuildID,
+		DiscordGuildID:         discordGuildID,
 		DiscordChUpcoming:      req.DiscordChUpcoming,
 		DiscordChAnnouncements: req.DiscordChAnnouncements,
 		DiscordChStaff:         req.DiscordChStaff,
@@ -1156,7 +1170,7 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondProtoJSON(w, http.StatusOK, settingsToProto(updated))
+	respondProtoJSON(w, http.StatusOK, settingsToProto(s.settingsWithRuntimeConfig(updated)))
 }
 
 func (s *Server) handleListAuditLog(w http.ResponseWriter, r *http.Request) {

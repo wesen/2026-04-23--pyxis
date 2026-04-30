@@ -426,3 +426,14 @@ I wrote `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` to capture
 ## 2026-04-30: Show log detail table border refinement
 
 User feedback: the compact detail table should not have an enclosing border; it should feel like the other list/table layouts. I removed the outer border from `.app-post-show-log-detail-table` and adjusted padding so only subtle row separators remain. TypeScript validation passed.
+
+
+## 2026-04-30: Discord settings modal and runtime guild ID
+
+User feedback: Discord guild ID should come from environment configuration, and Discord settings should not be inline on the page. I updated the backend so settings responses overlay `cfg.DiscordGuildID` when present; settings updates also ignore submitted guild IDs when runtime config provides one. This keeps the current DB column for fallback/dev compatibility but makes runtime env authoritative.
+
+On the frontend I moved channel mappings and the posting toggle behind an `Edit settings` button on `/discord`. The dialog reuses shared UI per the new staff UI guidelines: `Modal`, `Button`, `Field`, `Input`, and `ShowFormSection`, with the guild ID shown as disabled runtime-managed context.
+
+I also added an explicit schema note on the Discord page: the current settings table can support channel IDs and the posting toggle, but it does not yet model test-post status, role mappings, webhook IDs, sync timestamps, or bot health checks.
+
+Validation passed with Go tests, TypeScript, production app build, and a Playwright smoke that opened the modal and confirmed the guild ID input is disabled. Evidence: `sources/14-discord-settings-modal.png` and `sources/14-discord-settings-modal-smoke.txt`.

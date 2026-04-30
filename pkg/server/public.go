@@ -71,7 +71,7 @@ func (s *Server) handleGetPublicSettings(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	respondProtoJSON(w, http.StatusOK, settingsToProto(settings))
+	respondProtoJSON(w, http.StatusOK, settingsToProto(s.settingsWithRuntimeConfig(settings)))
 }
 
 func (s *Server) handleListPublicShows(w http.ResponseWriter, r *http.Request) {

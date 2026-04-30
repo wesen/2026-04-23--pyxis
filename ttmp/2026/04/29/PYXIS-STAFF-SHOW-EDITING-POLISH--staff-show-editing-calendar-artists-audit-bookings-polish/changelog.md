@@ -106,3 +106,10 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 - Removed the outer border from expanded `/show-log` detail tables and aligned cell padding with the lighter list-table style used elsewhere.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
+
+## 2026-04-30 — Discord settings modal and runtime guild ID
+
+- Moved Discord channel/posting settings behind an `Edit settings` button on the Discord page using the shared `Modal`, `Button`, `Field`, `Input`, and `ShowFormSection` components.
+- Made Discord guild ID environment/runtime-managed in API responses: when server config has `DiscordGuildID`, settings responses show that value and updates do not persist a submitted guild ID over it.
+- Added a Discord schema note: the current DB supports channel IDs and posting toggle, but not per-channel test-post status, role mappings, webhook IDs, sync timestamps, or bot health checks.
+- Validation: `go test ./pkg/server ./pkg/service ./pkg/repository/postgres -count=1`; `pnpm --dir web --filter pyxis-app exec tsc --noEmit`; `pnpm --dir web --filter pyxis-app build`; Playwright smoke captured `sources/14-discord-settings-modal.png`.
