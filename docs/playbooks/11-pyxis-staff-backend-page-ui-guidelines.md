@@ -217,6 +217,7 @@ Rules:
 - Stories are required before the component is wired into a route.
 - Stories cover default, empty/error, saving/loading, dense, and mobile/narrow states when relevant.
 - Modals must have at least default/open, saving, empty/edge-data, and mobile stories.
+- Staff app mobile stories must activate the staff mobile viewport profile with `parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } }`, not generic `mobile1` or public-site viewport names.
 - Route pages should not contain substantial modal/form/table markup inline; extract it to an organism/molecule first.
 - Export from the nearest barrel only if other components/pages need it.
 - Keep props data-focused and callbacks explicit.
@@ -234,4 +235,66 @@ Before merging a staff backend page change, verify:
 - [ ] UI-only fields are not lost through protobuf `create()` calls.
 - [ ] Component CSS lives with the component.
 - [ ] Storybook exists for new reusable widgets.
+- [ ] Mobile stories use the correct staff mobile viewport profile (`pyxisAppMobile`).
+- [ ] New Storybook surfaces have at least one css-visual-diff capture of the whole widget and, when layout is uncertain, a narrowed selector for the questionable field/row/section.
 - [ ] TypeScript and relevant smoke/storybook checks pass.
+
+## Storybook visual capture with css-visual-diff
+
+For every new modal/page-level organism, capture Storybook evidence with `css-visual-diff` before considering the layout done.
+
+Use a tiny temporary spec when there is no existing visual spec target yet. Compare Storybook to itself to get stable screenshots and selector bounds, then inspect `right_region.png` manually:
+
+```bash
+cat > /tmp/my-widget.visual.yml <<'YAML'
+schemaVersion: pyxis.visual-suite.v1
+name: my-widget-storybook-smoke
+defaults:
+  prototypeBase: http://localhost:6008
+  storybookBase: http://localhost:6008
+  viewport: { width: 1240, height: 760 }
+  waitMs: 1000
+  threshold: 30
+  inspect: rich
+  variant: component
+targets:
+  - page: my-widget
+    variant: component
+    prototypePath: /iframe.html?id=pyxis-app-components-organisms-mywidget--default&viewMode=story
+    storyId: pyxis-app-components-organisms-mywidget--default
+    sections:
+      - name: component
+        original: '[data-pyxis-component="my-widget"]'
+        react: '[data-pyxis-component="my-widget"]'
+      - name: suspicious-field
+        original: '[data-pyxis-field="important-field"]'
+        react: '[data-pyxis-field="important-field"]'
+YAML
+
+OUT=/tmp/my-widget-visual
+rm -rf "$OUT"
+css-visual-diff verbs \
+  --repository prototype-design/visual-diff/userland \
+  pyxis pages compare-spec /tmp/my-widget.visual.yml \
+  --page my-widget \
+  --outDir "$OUT" \
+  --summary \
+  --output json > "$OUT-summary.json"
+```
+
+Inspect these first:
+
+```text
+$OUT/my-widget/artifacts/component/right_region.png
+$OUT/my-widget/artifacts/suspicious-field/right_region.png
+```
+
+When a layout issue is likely localized, add stable `data-pyxis-field` or `data-pyxis-part` selectors and capture that narrow region too. Example from `DiscordSettingsModal`:
+
+```tsx
+<div data-pyxis-field="discord-bookings-channel-id">
+  <Field label="Bookings channel ID"><Input ... /></Field>
+</div>
+```
+
+Then include a matching section in the temporary spec so the screenshot only contains that field. Use this to catch oversized inputs, bad alignment, missing mobile stacking, or cramped labels before route-level testing.

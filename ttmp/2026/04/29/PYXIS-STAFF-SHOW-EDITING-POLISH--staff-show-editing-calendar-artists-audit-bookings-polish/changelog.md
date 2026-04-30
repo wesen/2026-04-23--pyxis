@@ -120,3 +120,11 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Tightened modal field sizing: channel inputs use a two-column grid with min widths, full-width inputs, and single-column mobile stacking.
 - Updated staff backend UI guidelines to require every new modal/page-level organism/component to have its own folder and stories before route wiring.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`; `pnpm --dir web --filter pyxis-app build`.
+
+## 2026-04-30 — Discord settings modal visual capture guidance
+
+- Captured the Discord settings modal Storybook surface with `css-visual-diff` using a temporary Storybook-to-Storybook spec.
+- Added stable `data-pyxis-field` selectors for Discord channel fields, including a narrowed `discord-bookings-channel-id` capture.
+- Further tightened channel input sizing to 250px columns with monospace IDs and fixed input height.
+- Corrected the modal mobile story to use the staff app `pyxisAppMobile` viewport profile.
+- Expanded staff UI guidelines with css-visual-diff capture instructions and the mobile viewport requirement.

@@ -1,0 +1,38 @@
+schemaVersion: pyxis.visual-suite.v1
+name: discord-settings-modal-storybook-smoke
+defaults:
+  prototypeBase: http://localhost:6008
+  storybookBase: http://localhost:6008
+  viewport:
+    width: 1240
+    height: 760
+  waitMs: 1000
+  threshold: 30
+  inspect: rich
+  variant: component
+policy:
+  bands:
+    - name: accepted
+      maxChangedPercent: 0.5
+    - name: review
+      maxChangedPercent: 10
+    - name: tune-required
+      maxChangedPercent: 30
+    - name: major-mismatch
+      maxChangedPercent: 100
+targets:
+  - page: discord-settings-modal
+    variant: component
+    priority: smoke
+    prototypePath: /iframe.html?id=pyxis-app-components-organisms-discordsettingsmodal--default&viewMode=story
+    storyId: pyxis-app-components-organisms-discordsettingsmodal--default
+    viewport:
+      width: 1240
+      height: 760
+    sections:
+      - name: modal
+        original: '[data-pyxis-component="discord-settings-modal"]'
+        react: '[data-pyxis-component="discord-settings-modal"]'
+      - name: bookings-channel-id
+        original: '[data-pyxis-field="discord-bookings-channel-id"]'
+        react: '[data-pyxis-field="discord-bookings-channel-id"]'

@@ -448,3 +448,14 @@ The modal now owns its grid sizing: channel fields use `repeat(2, minmax(240px, 
 I also updated `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` to make this rule explicit: every new modal, page-level organism, atom, molecule, or reusable component must get its own folder and required stories before route wiring.
 
 Validation passed with TypeScript and production app build.
+
+
+## 2026-04-30: Discord settings Storybook css-visual-diff capture
+
+I started Storybook on port 6008, confirmed the new `DiscordSettingsModal` stories were indexed, and created a temporary css-visual-diff spec comparing Storybook to itself. This is useful when there is no prototype baseline yet: it produces reliable screenshots and selector bounds for manual layout inspection.
+
+The spec captured both the full modal and a narrowed `discord-bookings-channel-id` field selector. I added stable `data-pyxis-field` hooks to make those narrow captures possible. The first narrowed field image showed the input was still too wide; I reduced the channel columns to 250px, made ID inputs monospace, and kept a fixed 36px input height.
+
+I also fixed the mobile story to use `pyxisAppMobile` instead of the public/nonexistent `pyxisMobile` viewport name, and updated the staff UI guidelines with this requirement plus the css-visual-diff temporary-spec workflow.
+
+Evidence is stored under `sources/15-discord-settings-modal-visual/`.

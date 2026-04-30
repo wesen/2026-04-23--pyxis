@@ -1,0 +1,115 @@
+[
+{
+  "classificationCounts": {
+    "accepted": 2
+  },
+  "jsonPath": "/tmp/pyxis-discord-settings-modal-visual-final2/compare-all-output.json",
+  "markdownPath": "/tmp/pyxis-discord-settings-modal-visual-final2/01-suite-summary.md",
+  "maxChangedPercent": 0,
+  "pageCount": 1,
+  "policy": {
+    "failureCount": 0,
+    "ok": true,
+    "worstClassification": "accepted"
+  },
+  "rows": [
+    {
+      "artifactJson": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/compare.json",
+      "artifactMarkdown": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/compare.md",
+      "attributeChangeCount": 0,
+      "attributeDiffs": [],
+      "bounds": {
+        "changed": false,
+        "delta": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 684,
+          "width": 722,
+          "x": 259,
+          "y": 38
+        },
+        "normalizedHeight": 684,
+        "normalizedWidth": 722,
+        "right": {
+          "height": 684,
+          "width": 722,
+          "x": 259,
+          "y": 38
+        }
+      },
+      "changedPercent": 0,
+      "changedPixels": 0,
+      "classification": "accepted",
+      "diffComparisonPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/diff_comparison.png",
+      "diffOnlyPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/diff_only.png",
+      "leftRegionPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/left_region.png",
+      "leftSelector": "[data-pyxis-component=\"discord-settings-modal\"]",
+      "page": "discord-settings-modal",
+      "rightRegionPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/modal/right_region.png",
+      "rightSelector": "[data-pyxis-component=\"discord-settings-modal\"]",
+      "section": "modal",
+      "styleChangeCount": 0,
+      "styleDiffs": [],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 493848,
+      "variant": "component"
+    },
+    {
+      "artifactJson": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/compare.json",
+      "artifactMarkdown": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/compare.md",
+      "attributeChangeCount": 0,
+      "attributeDiffs": [],
+      "bounds": {
+        "changed": false,
+        "delta": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "left": {
+          "height": 71.9375,
+          "width": 250,
+          "x": 282,
+          "y": 407.359375
+        },
+        "normalizedHeight": 72,
+        "normalizedWidth": 250,
+        "right": {
+          "height": 71.9375,
+          "width": 250,
+          "x": 282,
+          "y": 407.359375
+        }
+      },
+      "changedPercent": 0,
+      "changedPixels": 0,
+      "classification": "accepted",
+      "diffComparisonPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/diff_comparison.png",
+      "diffOnlyPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/diff_only.png",
+      "leftRegionPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/left_region.png",
+      "leftSelector": "[data-pyxis-field=\"discord-bookings-channel-id\"]",
+      "page": "discord-settings-modal",
+      "rightRegionPath": "/tmp/pyxis-discord-settings-modal-visual-final2/discord-settings-modal/artifacts/bookings-channel-id/right_region.png",
+      "rightSelector": "[data-pyxis-field=\"discord-bookings-channel-id\"]",
+      "section": "bookings-channel-id",
+      "styleChangeCount": 0,
+      "styleDiffs": [],
+      "text": {
+        "changed": false
+      },
+      "threshold": 30,
+      "totalPixels": 18000,
+      "variant": "component"
+    }
+  ],
+  "sectionCount": 2
+}
+]

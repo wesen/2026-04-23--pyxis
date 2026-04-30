@@ -49,6 +49,6 @@ export const Saving: Story = {
 };
 
 export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: 'pyxisMobile' } },
+  parameters: { viewport: { defaultViewport: 'pyxisAppMobile' } },
   args: { settings },
 };

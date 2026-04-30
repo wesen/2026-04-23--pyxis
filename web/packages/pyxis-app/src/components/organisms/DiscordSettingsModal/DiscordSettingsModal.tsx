@@ -55,7 +55,7 @@ export function DiscordSettingsModal({ isOpen, settings, isSaving, onCancel, onS
     >
       <div className="app-discord-settings-modal">
         <ShowFormSection title="Runtime guild" description="Set DISCORD_GUILD_ID in the server environment. It is shown here for visibility, not edited in the database.">
-          <div className="app-discord-settings-modal__single-field">
+          <div className="app-discord-settings-modal__single-field" data-pyxis-field="discord-guild-id">
             <Field label="Guild ID" hint="Environment-managed">
               <Input value={settings.discordGuildId || 'Not configured'} disabled />
             </Field>
@@ -63,10 +63,10 @@ export function DiscordSettingsModal({ isOpen, settings, isSaving, onCancel, onS
         </ShowFormSection>
         <ShowFormSection title="Channel mappings" description="Use Discord channel IDs. The friendly names are display hints only until channel discovery is implemented.">
           <div className="app-discord-settings-modal__grid">
-            <Field label="Bookings channel ID"><Input value={draft.discordChBookings} onChange={(event) => set('discordChBookings', event.target.value)} placeholder="1234567890" /></Field>
-            <Field label="Upcoming channel ID"><Input value={draft.discordChUpcoming} onChange={(event) => set('discordChUpcoming', event.target.value)} placeholder="1234567890" /></Field>
-            <Field label="Announcements channel ID"><Input value={draft.discordChAnnouncements} onChange={(event) => set('discordChAnnouncements', event.target.value)} placeholder="1234567890" /></Field>
-            <Field label="Staff channel ID"><Input value={draft.discordChStaff} onChange={(event) => set('discordChStaff', event.target.value)} placeholder="1234567890" /></Field>
+            <div data-pyxis-field="discord-bookings-channel-id"><Field label="Bookings channel ID"><Input value={draft.discordChBookings} onChange={(event) => set('discordChBookings', event.target.value)} placeholder="1234567890" /></Field></div>
+            <div data-pyxis-field="discord-upcoming-channel-id"><Field label="Upcoming channel ID"><Input value={draft.discordChUpcoming} onChange={(event) => set('discordChUpcoming', event.target.value)} placeholder="1234567890" /></Field></div>
+            <div data-pyxis-field="discord-announcements-channel-id"><Field label="Announcements channel ID"><Input value={draft.discordChAnnouncements} onChange={(event) => set('discordChAnnouncements', event.target.value)} placeholder="1234567890" /></Field></div>
+            <div data-pyxis-field="discord-staff-channel-id"><Field label="Staff channel ID"><Input value={draft.discordChStaff} onChange={(event) => set('discordChStaff', event.target.value)} placeholder="1234567890" /></Field></div>
           </div>
         </ShowFormSection>
         <ShowFormSection title="Posting">
