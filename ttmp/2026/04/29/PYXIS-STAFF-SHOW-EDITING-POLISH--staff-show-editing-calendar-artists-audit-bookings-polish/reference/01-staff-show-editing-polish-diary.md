@@ -421,3 +421,8 @@ User feedback: the cream background added to the compact show-log note details m
 ## 2026-04-30: Staff backend UI guidelines
 
 I wrote `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` to capture the consistency lessons from recent staff page polish. It records which shared components to reuse for shell, panels, tables, modals, badges, row edit buttons, forms, flyer previews, missing data fallbacks, and when a compact detail table is preferable to stacked cards. The document also includes a pre-merge review checklist for staff backend page changes.
+
+
+## 2026-04-30: Show log detail table border refinement
+
+User feedback: the compact detail table should not have an enclosing border; it should feel like the other list/table layouts. I removed the outer border from `.app-post-show-log-detail-table` and adjusted padding so only subtle row separators remain. TypeScript validation passed.

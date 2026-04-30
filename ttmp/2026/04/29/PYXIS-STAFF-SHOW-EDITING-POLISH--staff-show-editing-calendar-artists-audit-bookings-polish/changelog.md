@@ -101,3 +101,8 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 ## 2026-04-30 — Staff backend UI guidelines
 
 - Added `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` with concise conventions for staff/admin pages, modals, tables, badges, buttons, forms, flyer UI, component reuse, folder structure, and review checks.
+
+## 2026-04-30 — Show log detail table border refinement
+
+- Removed the outer border from expanded `/show-log` detail tables and aligned cell padding with the lighter list-table style used elsewhere.
+- Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
