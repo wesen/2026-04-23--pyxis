@@ -9,7 +9,7 @@ These guidelines keep Pyxis staff/admin pages visually consistent. Use them when
 3. **Prefer tables for row data.** If users scan multiple records, use `Table.css` + row components, not a stack of whitespace-heavy cards.
 4. **One widget, one look.** If two things mean the same kind of action/status, they should use the same component and shape.
 5. **Component-owned CSS.** Each reusable widget imports its own CSS. Do not hide large styling in page CSS unless the style is truly page layout.
-6. **Storybook first for reusable UI.** New atoms/molecules/organisms should include a story before route-level tuning.
+6. **Storybook first for every new UI surface.** Every new modal, page-level organism, atom, molecule, or reusable component must live in its own folder with CSS, Storybook stories, and an `index.ts` before route-level tuning.
 
 ## Page structure
 
@@ -199,9 +199,9 @@ Before adding a new component, check these first:
 
 ## New component folder pattern
 
-Create new reusable components only when composition of existing pieces is not enough.
+Create new reusable components only when composition of existing pieces is not enough. If a modal grows beyond a tiny one-off preview, it is a component and must be extracted out of the route page.
 
-Use:
+Every new modal, page-level organism, atom, molecule, and reusable component must use:
 
 ```text
 ComponentName/
@@ -214,7 +214,10 @@ ComponentName/
 Rules:
 
 - TSX imports its CSS.
-- Stories cover default, empty/error, dense, and mobile/narrow states when relevant.
+- Stories are required before the component is wired into a route.
+- Stories cover default, empty/error, saving/loading, dense, and mobile/narrow states when relevant.
+- Modals must have at least default/open, saving, empty/edge-data, and mobile stories.
+- Route pages should not contain substantial modal/form/table markup inline; extract it to an organism/molecule first.
 - Export from the nearest barrel only if other components/pages need it.
 - Keep props data-focused and callbacks explicit.
 

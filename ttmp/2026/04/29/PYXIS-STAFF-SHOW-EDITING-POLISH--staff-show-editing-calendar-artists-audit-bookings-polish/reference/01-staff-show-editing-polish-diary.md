@@ -437,3 +437,14 @@ On the frontend I moved channel mappings and the posting toggle behind an `Edit 
 I also added an explicit schema note on the Discord page: the current settings table can support channel IDs and the posting toggle, but it does not yet model test-post status, role mappings, webhook IDs, sync timestamps, or bot health checks.
 
 Validation passed with Go tests, TypeScript, production app build, and a Playwright smoke that opened the modal and confirmed the guild ID input is disabled. Evidence: `sources/14-discord-settings-modal.png` and `sources/14-discord-settings-modal-smoke.txt`.
+
+
+## 2026-04-30: Discord settings modal decomposition
+
+User feedback: the Discord settings modal input sizing needed cleanup, and new modals/pages/components should not be implemented inline without Storybook stories. I extracted the inline Discord settings form from `DiscordPage` into `components/organisms/DiscordSettingsModal/` with the standard folder shape: TSX, CSS, stories, and index export.
+
+The modal now owns its grid sizing: channel fields use `repeat(2, minmax(240px, 1fr))`, inputs are full-width with `box-sizing: border-box`, guild ID is constrained to a readable single-field width, and mobile stacks to one column.
+
+I also updated `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` to make this rule explicit: every new modal, page-level organism, atom, molecule, or reusable component must get its own folder and required stories before route wiring.
+
+Validation passed with TypeScript and production app build.

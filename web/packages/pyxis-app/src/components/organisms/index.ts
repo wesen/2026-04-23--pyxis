@@ -5,6 +5,7 @@ export * from './Calendar';
 export * from './ConfirmDialog';
 export * from './Dashboard';
 export * from './DiscordMappingPanel';
+export * from './DiscordSettingsModal';
 export * from './FlyerField';
 export * from './NewShowModal';
 export * from './Panel';

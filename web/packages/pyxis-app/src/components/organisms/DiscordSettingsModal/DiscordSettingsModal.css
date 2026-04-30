@@ -1,0 +1,45 @@
+.app-discord-settings-modal {
+  display: grid;
+  gap: 16px;
+}
+
+.app-discord-settings-modal__body {
+  background: var(--app-surface);
+}
+
+.app-discord-settings-modal__single-field {
+  max-width: 420px;
+}
+
+.app-discord-settings-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 14px 16px;
+  align-items: start;
+}
+
+.app-discord-settings-modal__grid input,
+.app-discord-settings-modal__single-field input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.app-discord-settings-modal__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--app-ink);
+  font-size: 13px;
+}
+
+.app-discord-settings-modal__toggle input {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 760px) {
+  .app-discord-settings-modal__grid {
+    grid-template-columns: 1fr;
+  }
+}
