@@ -86,3 +86,9 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 - Updated `AgeBadge` so blank string children render as an em dash (`—`) instead of an empty badge.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
+
+## 2026-04-30 — Show log table details and edit icon polish
+
+- Updated `/show-log` row actions so Log/Edit/Review all use the same square pencil icon button as the Shows table while preserving action-specific accessible labels.
+- Replaced the expanded details stack of note cards with a compact table-like detail layout for updated/show-id/show notes/post-show notes/incident notes.
+- Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`; Playwright smoke opened details, confirmed the edit action is icon-only with one SVG, opened the editor dialog, and captured `sources/12-show-log-table-detail-pencil.png`.

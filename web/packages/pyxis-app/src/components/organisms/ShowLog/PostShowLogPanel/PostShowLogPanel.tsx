@@ -1,9 +1,7 @@
-import { useMemo, useState } from 'react';
-import { Button } from 'pyxis-components';
+import { Fragment, useMemo, useState } from 'react';
+import { Button, Icon } from 'pyxis-components';
 import type { ShowLogEntry, ShowLogStatus, ShowLogUpdateInput } from '../../../../api/appApi';
 import { AppEmptyState } from '../../../molecules/AppEmptyState';
-import { MetadataStrip } from '../../../molecules/MetadataStrip';
-import { NoteBlock } from '../../../molecules/NoteBlock';
 import { StatusBadge, type StatusBadgeTone } from '../../../molecules/StatusBadge';
 import { Panel } from '../../Panel';
 import { appPart } from '../../../parts';
@@ -86,17 +84,17 @@ export function PostShowLogPanel({ entries, activeFilter = 'all', search = '', s
               <tbody>{visibleEntries.map((entry) => {
                 const expanded = expandedShowId === entry.showId;
                 return (
-                  <>
-                    <tr key={`${entry.showId}-row`} className="app-table-row app-post-show-log-row" data-expanded={expanded || undefined} {...appPart('post-show-log-row')}>
+                  <Fragment key={entry.showId}>
+                    <tr className="app-table-row app-post-show-log-row" data-expanded={expanded || undefined} {...appPart('post-show-log-row')}>
                       <td data-cell="date"><div className="app-post-show-log-date"><strong>{formatShortDate(entry.date)}</strong><span>{formatLongDate(entry.date)}</span></div></td>
                       <td data-cell="artist"><strong>{entry.artist}</strong><span>{entry.genre || 'Genre not set'}</span></td>
                       <td data-cell="status"><StatusBadge label={statusLabel(entry)} tone={statusTone(entry)} /></td>
                       <td data-cell="draw">{entry.draw && entry.draw > 0 ? entry.draw : '—'}</td>
                       <td data-cell="incident"><span data-incident={entry.incident || undefined}>{entry.incident ? 'Yes' : 'No'}</span></td>
-                      <td data-cell="actions"><div className="app-post-show-log-row__actions"><button className="app-row-edit app-post-show-log-edit" aria-label={`${actionLabel(entry)} ${entry.artist}`} onClick={() => setEditingShowId(entry.showId)}>{actionLabel(entry)}</button><Button size="sm" variant="ghost" aria-expanded={expanded} onClick={() => setExpandedShowId(expanded ? undefined : entry.showId)}>{expanded ? 'Hide' : 'Details'}</Button></div></td>
+                      <td data-cell="actions"><div className="app-post-show-log-row__actions"><button className="app-row-edit app-post-show-log-edit" title={actionLabel(entry)} aria-label={`${actionLabel(entry)} ${entry.artist}`} onClick={() => setEditingShowId(entry.showId)}><Icon name="edit" size={14} /></button><Button size="sm" variant="ghost" aria-expanded={expanded} onClick={() => setExpandedShowId(expanded ? undefined : entry.showId)}>{expanded ? 'Hide' : 'Details'}</Button></div></td>
                     </tr>
-                    {expanded && <tr key={`${entry.showId}-detail`} className="app-post-show-log-detail-row"><td colSpan={6}><div className="app-post-show-log-detail"><MetadataStrip items={[{ label: 'Updated', value: entry.loggedByName || entry.updatedAt || '—', tone: entry.updatedAt ? 'default' : 'muted' }, { label: 'Show ID', value: `#${entry.showId}` }]} /><NoteBlock label="Show notes" value={entry.showNotes} empty="No show notes." tone="muted" /><NoteBlock label="Post-show notes" value={entry.postShowNotes} empty="No post-show notes yet." /><NoteBlock label="Incident notes" value={entry.incidentNotes} empty="No incident notes." tone={entry.incident ? 'danger' : 'muted'} /></div></td></tr>}
-                  </>
+                    {expanded && <tr className="app-post-show-log-detail-row"><td colSpan={6}><table className="app-post-show-log-detail-table" aria-label={`Details for ${entry.artist}`}><tbody><tr><th scope="row">Updated</th><td>{entry.loggedByName || entry.updatedAt || '—'}</td><th scope="row">Show ID</th><td>#{entry.showId}</td></tr><tr><th scope="row">Show notes</th><td colSpan={3}>{entry.showNotes || 'No show notes.'}</td></tr><tr><th scope="row">Post-show notes</th><td colSpan={3}>{entry.postShowNotes || 'No post-show notes yet.'}</td></tr><tr><th scope="row">Incident notes</th><td colSpan={3} data-incident={entry.incident || undefined}>{entry.incidentNotes || 'No incident notes.'}</td></tr></tbody></table></td></tr>}
+                  </Fragment>
                 );
               })}</tbody>
             </table>

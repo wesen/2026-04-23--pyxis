@@ -402,3 +402,12 @@ Validation passed with TypeScript, then a Playwright smoke logged in through dev
 ## 2026-04-30: Empty age badge fallback
 
 The Shows table could render an empty age badge when a show had no age text. I updated the shared `AgeBadge` atom to normalize blank string children to `—`, so all existing age-badge call sites get the fallback without per-table conditionals. TypeScript validation passed.
+
+
+## 2026-04-30: Show log edit icon and detail density
+
+The `/show-log` table still used text buttons (`Log`, `Review`, `Edit`) for the row editor action, unlike the Shows table's square pencil icon. I changed the action to reuse the same `app-row-edit` button class with `Icon name="edit"`, keeping the semantic accessible label (`Log Artist`, `Review Artist`, or `Edit Artist`) for screen readers and tests.
+
+The expanded details area also used a vertical stack of `MetadataStrip` and `NoteBlock` cards, which wasted space in a row-oriented table. I replaced that detail content with a compact nested table containing Updated, Show ID, Show notes, Post-show notes, and Incident notes.
+
+A Playwright smoke logged in through dev auth, opened `/show-log`, expanded Details, waited for the details table, verified the edit button has no text and one SVG, clicked it, and waited for the editor dialog. Evidence is in `sources/12-show-log-table-detail-pencil.png` and `sources/13-show-log-table-detail-pencil-validation.txt`.
