@@ -30,3 +30,8 @@
 - 2026-04-29: Merged follow-up doc-triggered GitOps PRs #52/#53 and confirmed Argo CD returned to Synced/Healthy on image `sha-edf2dcb`.
 - 2026-04-29: Added Phase 7 tasks for bundling/serving the staff admin app under `/app` and Phase 8 tasks for safe production DB/flyer seeding; recorded seed fixture drift from `attendance_logs` to `show_logs`.
 - 2026-04-29: Implemented staff app bundling under `/app`, including Vite base, React Router basename, dual Go SPA handlers, Docker/build-web packaging, local HTTP smoke, and Docker build validation; fixed seed command/dev fixture drift to use `show_logs`.
+
+## 2026-04-30 — CI generator tool installation
+
+- Updated `.github/workflows/push.yml` so the generated-code check installs `sqlc`, `buf`, and `protoc-gen-go` before running `make generate`.
+- Validation: local `make generate` succeeds with no generated-code drift.

@@ -31,6 +31,11 @@ jobs:
           cache-dependency-path: web/pnpm-lock.yaml
       - name: Install web dependencies
         run: pnpm --dir web install --frozen-lockfile
+      - name: Install code generators
+        run: |
+          go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.30.0
+          go install github.com/bufbuild/buf/cmd/buf@v1.50.0
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
       - name: Generate sqlc and protobuf code
         run: make generate
       - name: Check generated code is committed

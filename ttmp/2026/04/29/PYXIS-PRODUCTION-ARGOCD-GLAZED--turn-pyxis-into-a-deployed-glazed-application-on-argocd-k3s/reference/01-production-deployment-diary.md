@@ -1429,3 +1429,16 @@ sources/11-seed-showlog-drift-fix.txt
 ## Discord OAuth production validation confirmed
 
 The operator confirmed that production Discord login works. This closes the earlier production rollout caveat where the app had returned Discord `Unknown Guild` / bot guild count issues before guild/bot/secrets were corrected. Marked production task `T608` complete.
+
+
+## 2026-04-30: GitHub Actions generator prerequisites
+
+A GitHub Actions run failed in the generated-code check because the runner did not have `sqlc` installed before `make generate`. I updated `.github/workflows/push.yml` to install the generator toolchain explicitly before the generate step:
+
+```text
+go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.30.0
+go install github.com/bufbuild/buf/cmd/buf@v1.50.0
+go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
+```
+
+I included `buf` and `protoc-gen-go` because the same `make generate` step runs protobuf generation immediately after sqlc, and `buf.gen.yaml` uses the local Go plugin. Local `make generate` passed and produced no generated-code drift.
