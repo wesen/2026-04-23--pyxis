@@ -81,3 +81,8 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Changed `Needs flyer` to reuse the shared `StatusPill`/`Badge` widget family so it visually matches the `Confirmed` status pill style.
 - Added a flyer preview modal on the Shows overview using the shared `Modal` component and existing `Button`.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`; Playwright smoke captured `sources/10-shows-flyer-preview.png` and `sources/11-shows-flyer-preview-validation.txt`.
+
+## 2026-04-30 — Empty age badge fallback
+
+- Updated `AgeBadge` so blank string children render as an em dash (`—`) instead of an empty badge.
+- Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.

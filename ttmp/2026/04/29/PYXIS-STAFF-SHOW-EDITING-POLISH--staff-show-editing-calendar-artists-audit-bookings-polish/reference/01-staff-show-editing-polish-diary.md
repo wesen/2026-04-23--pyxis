@@ -397,3 +397,8 @@ After flyer readiness was fixed, the overview still had two UX issues: flyer-rea
 I threaded `onPreviewFlyer` through `ShowsConfirmedPanel` and `ShowsTable`, then added a preview in `ShowsPage` using the shared `Modal` component from `pyxis-components` and the existing `Button` for the footer close action.
 
 Validation passed with TypeScript, then a Playwright smoke logged in through dev auth, opened `/shows`, clicked `Preview flyer for Open Mic Night`, waited for the dialog, confirmed there are no literal `Ready` labels, and captured `sources/10-shows-flyer-preview.png`.
+
+
+## 2026-04-30: Empty age badge fallback
+
+The Shows table could render an empty age badge when a show had no age text. I updated the shared `AgeBadge` atom to normalize blank string children to `—`, so all existing age-badge call sites get the fallback without per-table conditionals. TypeScript validation passed.

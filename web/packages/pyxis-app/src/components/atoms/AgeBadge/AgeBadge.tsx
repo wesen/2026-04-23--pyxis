@@ -8,5 +8,6 @@ export type AgeBadgeProps = {
 };
 
 export function AgeBadge({ children }: AgeBadgeProps) {
-  return <Tag className="app-age-badge" rootProps={appPart('age-badge') as HTMLAttributes<HTMLSpanElement>}>{children}</Tag>;
+  const label = typeof children === 'string' && children.trim() === '' ? '—' : children;
+  return <Tag className="app-age-badge" rootProps={appPart('age-badge') as HTMLAttributes<HTMLSpanElement>}>{label}</Tag>;
 }
