@@ -97,3 +97,7 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 
 - Removed the cream/filled background from expanded `/show-log` details; the compact table detail area is transparent again for the lighter look.
 - Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
+
+## 2026-04-30 — Staff backend UI guidelines
+
+- Added `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` with concise conventions for staff/admin pages, modals, tables, badges, buttons, forms, flyer UI, component reuse, folder structure, and review checks.

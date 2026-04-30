@@ -416,3 +416,8 @@ A Playwright smoke logged in through dev auth, opened `/show-log`, expanded Deta
 ## 2026-04-30: Show log detail background refinement
 
 User feedback: the cream background added to the compact show-log note details made the area feel less elegant than before. I removed the filled background from the expanded detail row and nested detail table while keeping the table-like layout and borders. TypeScript validation passed.
+
+
+## 2026-04-30: Staff backend UI guidelines
+
+I wrote `docs/playbooks/11-pyxis-staff-backend-page-ui-guidelines.md` to capture the consistency lessons from recent staff page polish. It records which shared components to reuse for shell, panels, tables, modals, badges, row edit buttons, forms, flyer previews, missing data fallbacks, and when a compact detail table is preferable to stacked cards. The document also includes a pre-merge review checklist for staff backend page changes.
