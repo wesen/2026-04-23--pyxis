@@ -90,8 +90,8 @@ export const appApi = createApi({
       query: () => endpoints.shows,
       transformResponse: (response: unknown) => {
         const list = fromJson(ShowListSchema, response as any);
-        return list.shows.map((show) =>
-          create(AppShowSchema, {
+        return list.shows.map((show) => {
+          const appShow = create(AppShowSchema, {
             id: show.id,
             artist: show.artist,
             date: show.date,
@@ -105,11 +105,13 @@ export const appApi = createApi({
             pinned: false,
             notes: show.notes,
             reserveTicketEnabled: show.reserveTicketEnabled,
-            // Staff list rows need flyer readiness even though the generated
-            // AppShow view model does not yet carry it in protobuf.
-            flyerUrl: show.flyerUrl,
-          } as AppShow & { flyerUrl: string })
-        );
+          }) as AppShow & { flyerUrl?: string };
+          // Staff list rows need flyer readiness even though the generated
+          // AppShow view model does not yet carry it in protobuf. Assign after
+          // create() because protobuf message construction drops unknown fields.
+          appShow.flyerUrl = show.flyerUrl;
+          return appShow;
+        });
       },
       providesTags: (result) =>
         result

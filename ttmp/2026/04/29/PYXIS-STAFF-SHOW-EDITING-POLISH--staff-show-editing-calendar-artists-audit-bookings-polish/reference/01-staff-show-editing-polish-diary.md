@@ -370,3 +370,17 @@ Validation passed:
 go test ./pkg/service ./pkg/server -count=1
 pnpm --dir web --filter pyxis-app exec tsc --noEmit
 ```
+
+
+## 2026-04-30: Shows overview still said Needs flyer
+
+After fixing confirmed-show saves, the `/shows` overview still displayed `Needs flyer` for rows whose edit view displayed a flyer. The cause was in the staff API adapter: `getShows` builds an `AppShow` generated protobuf message with `create(AppShowSchema, ...)`, but `AppShow` does not currently define `flyer_url`. I had tried to include `flyerUrl` in that object literal with a TypeScript cast, but protobuf `create()` drops unknown fields at runtime.
+
+I fixed the mapping by first creating the generated `AppShow`, then assigning the local UI-only `flyerUrl` property afterward:
+
+```ts
+const appShow = create(AppShowSchema, { ... }) as AppShow & { flyerUrl?: string };
+appShow.flyerUrl = show.flyerUrl;
+```
+
+This keeps the current lightweight UI model while allowing `ShowTableRow` to render `Ready` and the thumbnail. A cleaner future schema change would add `flyer_url` to `AppShow` and regenerate types.

@@ -69,3 +69,8 @@ LastUpdated: 2026-04-29T16:45:00-04:00
 - Fixed show detail saves after rail flyer upload by preserving the locally visible flyer URL when the refetched `show.flyerUrl` has not caught up yet.
 - Changed the confirmed-without-flyer backend error to wrap `service.ErrValidation`, so API responses classify it as `VALIDATION_ERROR`/400 instead of `INTERNAL_ERROR`/500.
 - Validation: `go test ./pkg/service ./pkg/server -count=1`; `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
+
+## 2026-04-30 — Shows overview flyer readiness mapping fix
+
+- Fixed staff `/shows` list flyer readiness by assigning `flyerUrl` after protobuf `create(AppShowSchema, ...)`; generated protobuf construction drops unknown fields, so the previous inline `flyerUrl` addition never reached `ShowTableRow`.
+- Validation: `pnpm --dir web --filter pyxis-app exec tsc --noEmit`.
