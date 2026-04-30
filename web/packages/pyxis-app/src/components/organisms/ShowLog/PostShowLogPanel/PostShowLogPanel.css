@@ -15,8 +15,8 @@
 .app-post-show-log-row td[data-cell='incident'] span[data-incident='true'] { color: #b42318; font-weight: 800; }
 .app-post-show-log-row__actions { align-items: center; display: inline-flex; gap: 6px; justify-content: flex-end; }
 .app-post-show-log-edit { flex: 0 0 auto; }
-.app-post-show-log-detail-row > td { background: color-mix(in srgb, var(--app-surface-muted) 55%, transparent); border-top: 0; padding: 0 12px 15px 130px; }
-.app-post-show-log-detail-table { width: 100%; border-collapse: collapse; border: 1px solid var(--app-rule); background: var(--app-surface); font-size: 12px; line-height: 1.45; }
+.app-post-show-log-detail-row > td { background: transparent; border-top: 0; padding: 0 12px 15px 130px; }
+.app-post-show-log-detail-table { width: 100%; border-collapse: collapse; border: 1px solid var(--app-rule); background: transparent; font-size: 12px; line-height: 1.45; }
 .app-post-show-log-detail-table th,
 .app-post-show-log-detail-table td { border-top: 1px solid var(--app-rule); padding: 7px 10px; text-align: left; vertical-align: top; }
 .app-post-show-log-detail-table tr:first-child th,

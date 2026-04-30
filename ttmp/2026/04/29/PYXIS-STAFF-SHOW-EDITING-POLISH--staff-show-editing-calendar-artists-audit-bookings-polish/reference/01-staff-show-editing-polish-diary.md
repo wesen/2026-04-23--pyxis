@@ -411,3 +411,8 @@ The `/show-log` table still used text buttons (`Log`, `Review`, `Edit`) for the 
 The expanded details area also used a vertical stack of `MetadataStrip` and `NoteBlock` cards, which wasted space in a row-oriented table. I replaced that detail content with a compact nested table containing Updated, Show ID, Show notes, Post-show notes, and Incident notes.
 
 A Playwright smoke logged in through dev auth, opened `/show-log`, expanded Details, waited for the details table, verified the edit button has no text and one SVG, clicked it, and waited for the editor dialog. Evidence is in `sources/12-show-log-table-detail-pencil.png` and `sources/13-show-log-table-detail-pencil-validation.txt`.
+
+
+## 2026-04-30: Show log detail background refinement
+
+User feedback: the cream background added to the compact show-log note details made the area feel less elegant than before. I removed the filled background from the expanded detail row and nested detail table while keeping the table-like layout and borders. TypeScript validation passed.
