@@ -12,7 +12,7 @@ import (
 )
 
 const getSettings = `-- name: GetSettings :one
-SELECT id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required FROM settings WHERE id = 1
+SELECT id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required, google_cal_enabled, google_cal_id, external_calendars FROM settings WHERE id = 1
 `
 
 func (q *Queries) GetSettings(ctx context.Context) (Setting, error) {
@@ -38,6 +38,9 @@ func (q *Queries) GetSettings(ctx context.Context) (Setting, error) {
 		&i.AutoArchive,
 		&i.DiscordPosting,
 		&i.SafeSpaceRequired,
+		&i.GoogleCalEnabled,
+		&i.GoogleCalID,
+		&i.ExternalCalendars,
 	)
 	return i, err
 }
@@ -61,9 +64,12 @@ SET space_name = COALESCE($1, space_name),
     auto_archive = COALESCE($15, auto_archive),
     discord_posting = COALESCE($16, discord_posting),
     safe_space_required = COALESCE($17, safe_space_required),
+    google_cal_enabled = COALESCE($18, google_cal_enabled),
+    google_cal_id = COALESCE($19, google_cal_id),
+    external_calendars = COALESCE($20, external_calendars),
     updated_at = NOW()
 WHERE id = 1
-RETURNING id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required
+RETURNING id, space_name, tagline, address, capacity, contact_email, website, discord_guild_id, discord_ch_upcoming, discord_ch_announcements, discord_ch_staff, discord_ch_bookings, setup_complete, updated_at, timezone, booking_email, auto_archive, discord_posting, safe_space_required, google_cal_enabled, google_cal_id, external_calendars
 `
 
 type UpdateSettingsParams struct {
@@ -84,6 +90,9 @@ type UpdateSettingsParams struct {
 	AutoArchive            pgtype.Bool `json:"autoArchive"`
 	DiscordPosting         pgtype.Bool `json:"discordPosting"`
 	SafeSpaceRequired      pgtype.Bool `json:"safeSpaceRequired"`
+	GoogleCalEnabled       bool        `json:"googleCalEnabled"`
+	GoogleCalID            string      `json:"googleCalId"`
+	ExternalCalendars      []byte      `json:"externalCalendars"`
 }
 
 func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) (Setting, error) {
@@ -105,6 +114,9 @@ func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) 
 		arg.AutoArchive,
 		arg.DiscordPosting,
 		arg.SafeSpaceRequired,
+		arg.GoogleCalEnabled,
+		arg.GoogleCalID,
+		arg.ExternalCalendars,
 	)
 	var i Setting
 	err := row.Scan(
@@ -127,6 +139,9 @@ func (q *Queries) UpdateSettings(ctx context.Context, arg UpdateSettingsParams) 
 		&i.AutoArchive,
 		&i.DiscordPosting,
 		&i.SafeSpaceRequired,
+		&i.GoogleCalEnabled,
+		&i.GoogleCalID,
+		&i.ExternalCalendars,
 	)
 	return i, err
 }

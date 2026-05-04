@@ -8,14 +8,18 @@ import (
 
 	"github.com/go-go-golems/pyxis/pkg/discord"
 	"github.com/go-go-golems/pyxis/pkg/domain"
+	"github.com/go-go-golems/pyxis/pkg/gcal"
 	"github.com/go-go-golems/pyxis/pkg/repository"
+	"github.com/rs/zerolog/log"
 )
 
 // ShowService provides business logic for shows.
 type ShowService struct {
-	shows   repository.ShowRepository
-	audit   AuditService
-	discord discord.Client
+	shows       repository.ShowRepository
+	audit       AuditService
+	discord     discord.Client
+	gcalClient  *gcal.Client
+	settings    repository.SettingsRepository
 }
 
 // NewShowService creates a new ShowService.
@@ -24,6 +28,16 @@ func NewShowService(shows repository.ShowRepository, audit AuditService, discord
 		discordClient = &discord.NoOpClient{}
 	}
 	return &ShowService{shows: shows, audit: audit, discord: discordClient}
+}
+
+// SetGoogleCalClient sets the Google Calendar client for show sync.
+func (s *ShowService) SetGoogleCalClient(client *gcal.Client) {
+	s.gcalClient = client
+}
+
+// SetSettingsRepo sets the settings repository for sync.
+func (s *ShowService) SetSettingsRepo(settings repository.SettingsRepository) {
+	s.settings = settings
 }
 
 // ListUpcoming returns confirmed shows that are ready for the public site.
@@ -95,6 +109,11 @@ func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int
 		"status": show.Status,
 	})
 
+	// Sync to Google Calendar (only for confirmed shows)
+	if created.Status == domain.StatusConfirmed {
+		go s.syncShowToGCal(context.Background(), created)
+	}
+
 	return created, nil
 }
 
@@ -113,6 +132,13 @@ func (s *ShowService) Update(ctx context.Context, show *domain.Show, actorID int
 		"date":   show.Date.Format("2006-01-02"),
 		"status": show.Status,
 	})
+
+	// Sync to Google Calendar
+	if updated.Status == domain.StatusConfirmed {
+		go s.syncShowToGCal(context.Background(), updated)
+	} else if updated.Status == domain.StatusCancelled && updated.GoogleCalEventID != "" {
+		go s.deleteGCalEvent(context.Background(), updated.GoogleCalEventID, updated.ID)
+	}
 
 	return updated, nil
 }
@@ -133,6 +159,11 @@ func (s *ShowService) Cancel(ctx context.Context, id int, actorID int, actorName
 	_ = s.audit.Log(ctx, actorID, actorName, "show.cancel", "show", &id, map[string]interface{}{
 		"artist": show.Artist,
 	})
+
+	// Delete from Google Calendar
+	if updated.GoogleCalEventID != "" {
+		go s.deleteGCalEvent(context.Background(), updated.GoogleCalEventID, id)
+	}
 
 	return updated, nil
 }
@@ -200,3 +231,53 @@ func (s *ShowService) GetArchiveStats(ctx context.Context) (*domain.ArchiveStats
 
 // ErrNotFound is returned when an entity is not found.
 var ErrNotFound = fmt.Errorf("not found")
+
+// syncShowToGCal syncs a show to Google Calendar if the integration is enabled.
+// It's designed to be called after a successful DB write — errors are logged but
+// do NOT fail the overall operation.
+func (s *ShowService) syncShowToGCal(ctx context.Context, show *domain.Show) {
+	if s.gcalClient == nil {
+		return
+	}
+
+	settings, err := s.settings.Get(ctx)
+	if err != nil {
+		log.Warn().Err(err).Msg("gcal sync: failed to get settings")
+		return
+	}
+
+	event := gcal.ShowToEvent(show, settings.SpaceName, settings.Address, settings.Website)
+
+	if show.GoogleCalEventID != "" {
+		_, err = s.gcalClient.UpdateEvent(ctx, show.GoogleCalEventID, event)
+		if err != nil {
+			log.Error().Err(err).Int("showId", show.ID).Msg("gcal sync: update failed")
+			return
+		}
+		log.Info().Int("showId", show.ID).Msg("gcal sync: updated event")
+	} else {
+		result, err := s.gcalClient.CreateEvent(ctx, event)
+		if err != nil {
+			log.Error().Err(err).Int("showId", show.ID).Msg("gcal sync: create failed")
+			return
+		}
+		// Store the Google Calendar event ID on the show
+		_, err = s.shows.UpdateGoogleCalSync(ctx, show.ID, result.EventID, result.SyncedAt)
+		if err != nil {
+			log.Error().Err(err).Int("showId", show.ID).Msg("gcal sync: failed to save event ID")
+		}
+		log.Info().Int("showId", show.ID).Str("eventId", result.EventID).Msg("gcal sync: created event")
+	}
+}
+
+// deleteGCalEvent removes a show's event from Google Calendar.
+func (s *ShowService) deleteGCalEvent(ctx context.Context, eventID string, showID int) {
+	if s.gcalClient == nil {
+		return
+	}
+	if err := s.gcalClient.DeleteEvent(ctx, eventID); err != nil {
+		log.Error().Err(err).Int("showId", showID).Str("eventId", eventID).Msg("gcal sync: delete failed")
+	} else {
+		log.Info().Int("showId", showID).Msg("gcal sync: deleted event")
+	}
+}

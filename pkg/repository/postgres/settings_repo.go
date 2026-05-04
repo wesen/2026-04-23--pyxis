@@ -2,6 +2,8 @@ package postgres
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/go-go-golems/pyxis/pkg/domain"
@@ -69,6 +71,18 @@ func (r *SettingsRepo) Update(ctx context.Context, settings *domain.Settings) (*
 	params.DiscordPosting = pgtype.Bool{Bool: settings.DiscordPosting, Valid: true}
 	params.SafeSpaceRequired = pgtype.Bool{Bool: settings.SafeSpaceRequired, Valid: true}
 
+	params.GoogleCalEnabled = settings.GoogleCalEnabled
+	params.GoogleCalID = settings.GoogleCalID
+	if len(settings.ExternalCalendars) > 0 {
+		externalJSON, err := json.Marshal(settings.ExternalCalendars)
+		if err != nil {
+			return nil, fmt.Errorf("marshal external calendars: %w", err)
+		}
+		params.ExternalCalendars = externalJSON
+	} else {
+		params.ExternalCalendars = []byte("[]")
+	}
+
 	row, err := r.queries.UpdateSettings(ctx, params)
 	if err != nil {
 		return nil, err
@@ -96,10 +110,15 @@ func dbSettingsToDomain(row db.Setting) *domain.Settings {
 		DiscordPosting:         row.DiscordPosting.Bool,
 		SafeSpaceRequired:      row.SafeSpaceRequired.Bool,
 		UpdatedAt:              row.UpdatedAt.Time,
+		GoogleCalEnabled:       row.GoogleCalEnabled,
+		GoogleCalID:            row.GoogleCalID,
 	}
 	if row.Capacity.Valid {
 		v := int(row.Capacity.Int32)
 		settings.Capacity = &v
+	}
+	if len(row.ExternalCalendars) > 0 {
+		_ = json.Unmarshal(row.ExternalCalendars, &settings.ExternalCalendars)
 	}
 	return settings
 }

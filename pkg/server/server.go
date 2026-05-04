@@ -4,11 +4,14 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/go-go-golems/pyxis/internal/web"
 	"github.com/go-go-golems/pyxis/pkg/config"
 	"github.com/go-go-golems/pyxis/pkg/db"
 	"github.com/go-go-golems/pyxis/pkg/discord"
+	"github.com/go-go-golems/pyxis/pkg/gcal"
 	"github.com/go-go-golems/pyxis/pkg/repository/postgres"
 	"github.com/go-go-golems/pyxis/pkg/service"
 	"github.com/go-go-golems/pyxis/pkg/storage"
@@ -17,17 +20,19 @@ import (
 
 // Server holds the HTTP handler and dependencies.
 type Server struct {
-	cfg               *config.Config
-	handler           http.Handler
-	showService       *service.ShowService
-	submissionService *service.SubmissionService
-	artistService     *service.ArtistService
-	calendarService   *service.CalendarService
-	showLogService    *service.ShowLogService
-	settingsService   *service.SettingsService
-	auditService      service.AuditService
-	authService       *service.AuthService
-	flyerStore        storage.FlyerStore
+	cfg                  *config.Config
+	handler              http.Handler
+	showService          *service.ShowService
+	submissionService    *service.SubmissionService
+	artistService        *service.ArtistService
+	calendarService      *service.CalendarService
+	showLogService       *service.ShowLogService
+	settingsService      *service.SettingsService
+	auditService         service.AuditService
+	authService          *service.AuthService
+	flyerStore           storage.FlyerStore
+	gcalClient           *gcal.Client
+	externalEventsCache  *cachedExternalEvents
 }
 
 // New creates a new Server with routes wired.
@@ -69,6 +74,38 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 		submissionRepo, showRepo, artistRepo, s.auditService, database.Pool,
 	)
 
+	// Wire settings repo to show service for gcal sync
+	s.showService.SetSettingsRepo(settingsRepo)
+
+	// Initialize Google Calendar client if configured
+	if cfg != nil && cfg.GoogleCalEnabled {
+		var credentialsJSON []byte
+		var err error
+
+		if cfg.GoogleCalCredentialsFile != "" {
+			credentialsJSON, err = os.ReadFile(cfg.GoogleCalCredentialsFile)
+			if err != nil {
+				log.Warn().Err(err).Str("path", cfg.GoogleCalCredentialsFile).Msg("failed to read Google Calendar credentials file")
+			}
+		} else if cfg.GoogleCalCredentials != "" {
+			credentialsJSON = []byte(cfg.GoogleCalCredentials)
+		}
+
+		if len(credentialsJSON) > 0 {
+			gcalClient, err := gcal.NewClient(context.Background(), credentialsJSON, cfg.GoogleCalID)
+			if err != nil {
+				log.Error().Err(err).Msg("failed to initialize Google Calendar client")
+			} else if gcalClient != nil {
+				log.Info().Str("calendarId", cfg.GoogleCalID).Msg("Google Calendar integration enabled")
+				s.gcalClient = gcalClient
+				s.showService.SetGoogleCalClient(gcalClient)
+				s.externalEventsCache = &cachedExternalEvents{ttl: 5 * time.Minute}
+			} else {
+				log.Warn().Msg("Google Calendar enabled but no client created")
+			}
+		}
+	}
+
 	// Auth service (uses placeholder config; override in production)
 	s.authService = service.NewAuthService(queries, service.DiscordOAuthConfig{
 		ClientID:     cfg.DiscordClientID,
@@ -95,6 +132,9 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.HandleFunc("GET /api/public/archive/stats", s.handleGetArchiveStats)
 	mux.HandleFunc("GET /api/public/settings", s.handleGetPublicSettings)
 	mux.HandleFunc("POST /api/public/submissions", s.handleCreateSubmission)
+
+	// Public external calendar events (Google Calendar import)
+	mux.HandleFunc("GET /api/public/external-events", s.handleListExternalEvents)
 
 	// Auth
 	mux.HandleFunc("POST /auth/dev-login", s.handleDevLogin)

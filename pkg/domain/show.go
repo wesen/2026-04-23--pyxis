@@ -37,6 +37,10 @@ type Show struct {
 	CreatedBy            *int
 	CreatedAt            time.Time
 	UpdatedAt            time.Time
+
+	// Google Calendar sync fields
+	GoogleCalEventID  string
+	GoogleCalSyncedAt *time.Time
 }
 
 // LineupEntry represents one act in a show lineup.

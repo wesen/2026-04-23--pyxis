@@ -119,6 +119,14 @@ func (r *fakeShowRepo) SearchArchive(ctx context.Context, query string) ([]domai
 func (r *fakeShowRepo) GetArchiveStats(ctx context.Context) (*domain.ArchiveStats, error) {
 	return nil, nil
 }
+func (r *fakeShowRepo) UpdateGoogleCalSync(ctx context.Context, id int, eventID string, syncedAt time.Time) (*domain.Show, error) {
+	if r.show == nil {
+		return nil, ErrNotFound
+	}
+	r.show.GoogleCalEventID = eventID
+	r.show.GoogleCalSyncedAt = &syncedAt
+	return r.show, nil
+}
 
 type noopAudit struct{}
 

@@ -21,6 +21,13 @@ type Config struct {
 	DiscordAdminRoleID  string
 	DiscordBookerRoleID string
 	DiscordDoorRoleID   string
+
+	// Google Calendar integration
+	GoogleCalEnabled         bool
+	GoogleCalID              string
+	GoogleCalCredentials     string // JSON string of service account credentials
+	GoogleCalCredentialsFile string // OR path to JSON file
+	GoogleCalExternal        string // JSON array of external calendar configs
 }
 
 // DefaultConfig returns a Config with sensible defaults for local development.

@@ -80,6 +80,9 @@ type Setting struct {
 	AutoArchive            pgtype.Bool        `json:"autoArchive"`
 	DiscordPosting         pgtype.Bool        `json:"discordPosting"`
 	SafeSpaceRequired      pgtype.Bool        `json:"safeSpaceRequired"`
+	GoogleCalEnabled       bool               `json:"googleCalEnabled"`
+	GoogleCalID            string             `json:"googleCalId"`
+	ExternalCalendars      []byte             `json:"externalCalendars"`
 }
 
 type Show struct {
@@ -105,6 +108,8 @@ type Show struct {
 	Draw                 pgtype.Int4        `json:"draw"`
 	Capacity             pgtype.Int4        `json:"capacity"`
 	ReserveTicketEnabled bool               `json:"reserveTicketEnabled"`
+	GoogleCalEventID     string             `json:"googleCalEventId"`
+	GoogleCalSyncedAt    pgtype.Timestamptz `json:"googleCalSyncedAt"`
 }
 
 type ShowLineup struct {

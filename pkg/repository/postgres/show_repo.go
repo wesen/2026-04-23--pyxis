@@ -256,6 +256,19 @@ func (r *ShowRepo) Archive(ctx context.Context, id int) error {
 	return err
 }
 
+// UpdateGoogleCalSync stores the Google Calendar event ID and sync timestamp on a show.
+func (r *ShowRepo) UpdateGoogleCalSync(ctx context.Context, id int, eventID string, syncedAt time.Time) (*domain.Show, error) {
+	row, err := r.queries.UpdateShowGoogleCalSync(ctx, db.UpdateShowGoogleCalSyncParams{
+		ID:                int32(id),
+		GoogleCalEventID:  eventID,
+		GoogleCalSyncedAt: pgtype.Timestamptz{Time: syncedAt, Valid: true},
+	})
+	if err != nil {
+		return nil, err
+	}
+	return rowToShow(row), nil
+}
+
 // SearchArchive returns archived shows matching the query.
 func (r *ShowRepo) SearchArchive(ctx context.Context, query string) ([]domain.ArchivedShow, error) {
 	rows, err := r.queries.SearchArchive(ctx, query)
@@ -355,6 +368,7 @@ func rowWithLineupToShow(row db.GetShowWithLineupRow) (*domain.Show, error) {
 		Status:               row.Status,
 		CreatedAt:            row.CreatedAt.Time,
 		UpdatedAt:            row.UpdatedAt.Time,
+		GoogleCalEventID:     row.GoogleCalEventID,
 	}
 	if row.SubmissionID.Valid {
 		v := int(row.SubmissionID.Int32)
@@ -367,6 +381,10 @@ func rowWithLineupToShow(row db.GetShowWithLineupRow) (*domain.Show, error) {
 	if row.CreatedBy.Valid {
 		v := int(row.CreatedBy.Int32)
 		show.CreatedBy = &v
+	}
+	if row.GoogleCalSyncedAt.Valid {
+		t := row.GoogleCalSyncedAt.Time
+		show.GoogleCalSyncedAt = &t
 	}
 	lineup, err := decodeLineup(row.Lineup)
 	if err != nil {
@@ -397,6 +415,7 @@ func rowToShow(row db.Show) *domain.Show {
 		Status:               row.Status,
 		CreatedAt:            row.CreatedAt.Time,
 		UpdatedAt:            row.UpdatedAt.Time,
+		GoogleCalEventID:     row.GoogleCalEventID,
 	}
 	if row.SubmissionID.Valid {
 		v := int(row.SubmissionID.Int32)
@@ -409,6 +428,10 @@ func rowToShow(row db.Show) *domain.Show {
 	if row.CreatedBy.Valid {
 		v := int(row.CreatedBy.Int32)
 		show.CreatedBy = &v
+	}
+	if row.GoogleCalSyncedAt.Valid {
+		t := row.GoogleCalSyncedAt.Time
+		show.GoogleCalSyncedAt = &t
 	}
 	return show
 }

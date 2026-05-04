@@ -52,6 +52,7 @@ type Querier interface {
 	UpdateArtist(ctx context.Context, arg UpdateArtistParams) (Artist, error)
 	UpdateSettings(ctx context.Context, arg UpdateSettingsParams) (Setting, error)
 	UpdateShow(ctx context.Context, arg UpdateShowParams) (Show, error)
+	UpdateShowGoogleCalSync(ctx context.Context, arg UpdateShowGoogleCalSyncParams) (Show, error)
 	UpdateSubmissionDetails(ctx context.Context, arg UpdateSubmissionDetailsParams) (Submission, error)
 	UpsertBookingReview(ctx context.Context, arg UpsertBookingReviewParams) (BookingReview, error)
 	UpsertDevUser(ctx context.Context, arg UpsertDevUserParams) (User, error)

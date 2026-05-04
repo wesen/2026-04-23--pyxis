@@ -92,3 +92,11 @@ WHERE s.status = 'archived';
 
 -- name: ListAllShows :many
 SELECT * FROM shows ORDER BY date DESC;
+
+-- name: UpdateShowGoogleCalSync :one
+UPDATE shows
+SET google_cal_event_id = $2,
+    google_cal_synced_at = $3,
+    updated_at = NOW()
+WHERE id = $1
+RETURNING *;

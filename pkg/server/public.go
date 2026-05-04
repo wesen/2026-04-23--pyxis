@@ -6,13 +6,17 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
 	"github.com/go-go-golems/pyxis/pkg/domain"
+	"github.com/go-go-golems/pyxis/pkg/gcal"
 	"github.com/go-go-golems/pyxis/pkg/service"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
@@ -396,6 +400,111 @@ func respondJSON(w http.ResponseWriter, status int, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(b)
+}
+
+// cachedExternalEvents provides in-memory caching for external Google Calendar events.
+type cachedExternalEvents struct {
+	mu      sync.RWMutex
+	events  []gcal.ExternalEvent
+	fetched time.Time
+	ttl     time.Duration
+}
+
+func (c *cachedExternalEvents) Get() ([]gcal.ExternalEvent, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if c.events == nil || time.Since(c.fetched) > c.ttl {
+		return nil, false
+	}
+	return c.events, true
+}
+
+func (c *cachedExternalEvents) Set(events []gcal.ExternalEvent) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.events = events
+	c.fetched = time.Now()
+}
+
+func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	if s.gcalClient == nil {
+		respondJSON(w, http.StatusOK, []interface{}{})
+		return
+	}
+
+	// Check cache first
+	if s.externalEventsCache != nil {
+		if cached, ok := s.externalEventsCache.Get(); ok {
+			respondJSON(w, http.StatusOK, cached)
+			return
+		}
+	}
+
+	// Parse date range
+	fromStr := r.URL.Query().Get("from")
+	toStr := r.URL.Query().Get("to")
+
+	from := time.Now().Truncate(24 * time.Hour)
+	to := from.Add(30 * 24 * time.Hour)
+
+	if fromStr != "" {
+		if t, err := time.Parse("2006-01-02", fromStr); err == nil {
+			from = t
+		}
+	}
+	if toStr != "" {
+		if t, err := time.Parse("2006-01-02", toStr); err == nil {
+			to = t
+		}
+	}
+
+	// Cap date range to 90 days
+	if to.Sub(from) > 90*24*time.Hour {
+		to = from.Add(90 * 24 * time.Hour)
+	}
+
+	// Get settings with external calendar config
+	settings, err := s.settingsService.Get(ctx)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	if len(settings.ExternalCalendars) == 0 {
+		respondJSON(w, http.StatusOK, []interface{}{})
+		return
+	}
+
+	// Fetch events from each enabled external calendar
+	var allEvents []gcal.ExternalEvent
+	for _, cal := range settings.ExternalCalendars {
+		if !cal.Enabled {
+			continue
+		}
+		events, err := s.gcalClient.ListExternalEvents(ctx, cal.ID, from, to)
+		if err != nil {
+			log.Warn().Err(err).Str("calendar", cal.ID).Msg("failed to fetch external calendar")
+			continue // skip this calendar, don't fail the whole request
+		}
+		for i := range events {
+			events[i].CalendarName = cal.Name
+		}
+		allEvents = append(allEvents, events...)
+	}
+
+	// Sort by start time
+	sort.Slice(allEvents, func(i, j int) bool {
+		return allEvents[i].Start.Before(allEvents[j].Start)
+	})
+
+	// Update cache
+	if s.externalEventsCache != nil {
+		s.externalEventsCache.Set(allEvents)
+	}
+
+	respondJSON(w, http.StatusOK, allEvents)
 }
 
 func respondError(w http.ResponseWriter, err error) {
