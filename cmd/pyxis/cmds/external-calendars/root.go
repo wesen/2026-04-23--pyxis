@@ -51,7 +51,12 @@ Examples:
 		return nil, err
 	}
 
-	for _, cmd := range []cmds.Command{listCmd, setCmd, removeCmd} {
+	syncShowCmd, err := newSyncShowCommand(dbURLFlag)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, cmd := range []cmds.Command{listCmd, setCmd, removeCmd, syncShowCmd} {
 		cobraCmd, err := cli.BuildCobraCommandFromCommand(cmd)
 		if err != nil {
 			return nil, err
