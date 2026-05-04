@@ -44,7 +44,7 @@ from a single Go binary with PostgreSQL persistence.`,
 	}
 	help_cmd.SetupCobraRootCommand(helpSystem, rootCmd)
 
-	commands, err := cmdtools.NewCommandGroup()
+	commands, groups, err := cmdtools.NewCommandGroup()
 	if err != nil {
 		return err
 	}
@@ -55,6 +55,10 @@ from a single Go binary with PostgreSQL persistence.`,
 			return err
 		}
 		rootCmd.AddCommand(cobraCmd)
+	}
+
+	for _, group := range groups {
+		rootCmd.AddCommand(group.Cmd)
 	}
 
 	ctx := context.Background()
