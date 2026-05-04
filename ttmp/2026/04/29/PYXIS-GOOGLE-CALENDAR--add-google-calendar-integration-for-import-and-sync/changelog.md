@@ -26,3 +26,12 @@ Implemented backend infrastructure: pkg/gcal client, DB migrations (shows + sett
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go — Added handleListExternalEvents with in-memory caching
 - /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — Added sync hooks in Create/Update/Cancel + SetGoogleCalClient + SetSettingsRepo
 
+
+## 2026-05-04
+
+Phase 1 complete: Google Calendar API enabled, service account pyxis-calendar-sync created, JSON credentials downloaded, calendar shared with write access, full CRUD verified (create+delete test passed). Playbook written in playbooks/01-create-service-account.md.
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/data/gcal/credentials.json — Service account credentials (gitignored)
+

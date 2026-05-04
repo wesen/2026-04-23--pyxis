@@ -8,12 +8,12 @@ LastUpdated: 2026-04-29
 
 ## Phase 1: Infrastructure & Authentication
 
-- [ ] 1.1 Create Google Cloud project and enable Calendar API
-- [ ] 1.2 Create service account and download credentials JSON
-- [ ] 1.3 Share venue's Google Calendar with the service account email
+- [x] 1.1 Create Google Cloud project and enable Calendar API
+- [x] 1.2 Create service account and download credentials JSON
+- [x] 1.3 Share venue's Google Calendar with the service account email
 - [x] 1.4 Add `google.golang.org/api/calendar/v3` dependency
 - [x] 1.5 Create `pkg/gcal/client.go` with service account auth
-- [ ] 1.6 Test authentication (call calendarList.List)
+- [x] 1.6 Test authentication (call calendarList.List)
 
 ## Phase 2: Database Migrations
 

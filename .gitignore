@@ -42,3 +42,4 @@ Thumbs.db
 # devctl state
 .devctl/
 .playwright-mcp
+data/gcal/
