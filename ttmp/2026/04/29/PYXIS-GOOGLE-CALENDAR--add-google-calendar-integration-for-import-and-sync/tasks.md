@@ -27,8 +27,8 @@ LastUpdated: 2026-05-04
 - [x] 3.1 Create `pkg/gcal/client.go` (CreateEvent, UpdateEvent, DeleteEvent)
 - [x] 3.2 Create `pkg/gcal/show_to_event.go` (Show → calendar.Event conversion)
 - [x] 3.3 Add sync hooks to ShowService (Create, Update, Cancel)
-- [ ] 3.4 Add unit tests for ShowToEvent and sync hooks
-- [ ] 3.5 Manual test: create show → verify GCal event appears
+- [x] 3.4 Add unit tests for ShowToEvent and sync hooks
+- [x] 3.5 Manual test: create show → verify GCal event appears
 
 ## Phase 4: Pull — Import External Calendars
 
@@ -36,23 +36,23 @@ LastUpdated: 2026-05-04
 - [x] 4.2 Add `GET /api/public/external-events` route and handler
 - [x] 4.3 Implement in-memory caching (5 min TTL)
 - [x] 4.4 Add config parsing for external_calendars JSON
-- [ ] 4.5 Add `ExternalEvent` and `ExternalEventList` to `proto/pyxis/v1/show.proto`
-- [ ] 4.6 Run `buf generate` to regenerate Go + TS types
-- [ ] 4.7 Convert handler from `respondJSON` to `respondProtoJSON` using proto types
+- [x] 4.5 Add `ExternalEvent` and `ExternalEventList` to `proto/pyxis/v1/show.proto`
+- [x] 4.6 Run `buf generate` to regenerate Go + TS types
+- [x] 4.7 Convert handler from `respondJSON` to `respondProtoJSON` using proto types
 - [ ] 4.8 Unit and integration tests (including proto serialization round-trip)
 - [ ] 4.9 Manual test: configure external calendar → verify events appear
 
 ## Phase 5: Frontend
 
-- [ ] 5.1 Re-export `ExternalEvent` / `ExternalEventList` schemas from `pyxis-types`
-- [ ] 5.2 Add `externalEvents` endpoint to `endpoints.ts`
-- [ ] 5.3 Add `getExternalEvents` RTK Query endpoint in `publicApi.ts` (with `fromJson(ExternalEventListSchema, ...)`)
-- [ ] 5.4 Add `useExternalEvents()` wrapper hook in `api/hooks.ts`
-- [ ] 5.5 Create `ExternalEventCard` molecule in `pyxis-components`
-- [ ] 5.6 Create `ExternalEventList` organism in `pyxis-components`
-- [ ] 5.7 Add external events section to `ShowsPage/Page.tsx`
-- [ ] 5.8 Storybook stories for `ExternalEventCard` and `ExternalEventList`
-- [ ] 5.9 Responsive styling and CSS
+- [x] 5.1 Re-export `ExternalEvent` / `ExternalEventList` schemas from `pyxis-types`
+- [x] 5.2 Add `externalEvents` endpoint to `endpoints.ts`
+- [x] 5.3 Add `getExternalEvents` RTK Query endpoint in `publicApi.ts` (with `fromJson(ExternalEventListSchema, ...)`)
+- [x] 5.4 Add `useExternalEvents()` wrapper hook in `api/hooks.ts`
+- [x] 5.5 Create `ExternalEventCard` molecule in `pyxis-components`
+- [x] 5.6 Create `ExternalEventList` organism in `pyxis-components`
+- [x] 5.7 Add external events section to `ShowsPage/Page.tsx`
+- [x] 5.8 Storybook stories for `ExternalEventCard` and `ExternalEventList`
+- [x] 5.9 Responsive styling and CSS
 
 ## Phase 4.5-4.6 note: Proto-first for external events
 

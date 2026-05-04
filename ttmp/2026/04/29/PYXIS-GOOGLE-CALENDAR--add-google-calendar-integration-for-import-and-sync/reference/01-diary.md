@@ -21,6 +21,216 @@ Chronological record of implementing Google Calendar integration (push shows to 
 
 ### Prompt Context
 
+**User prompt (verbatim):** (see session summary)
+
+**Assistant interpretation:** Read the full design doc (2048 lines), understand the codebase architecture, and implement the backend code for Google Calendar integration.
+
+**Inferred user intent:** Get the Google Calendar integration built end-to-end, starting with infrastructure/auth and working through the phases.
+
+*(Full details recorded in prior session — Step 1 through Step 4 documented previously.)*
+
+---
+
+## Step 5: Unit tests for ShowToEvent and firstNonEmpty
+
+### Prompt Context
+
+**User prompt (verbatim):** "Continue with the next phases, keep a diary (read skills), catch up by reading the diary so far. Commit at appropriate intervals"
+
+**Assistant interpretation:** Continue implementation from where we left off (Phase 3.4 unit tests → proto → frontend). Read diary skill first, then catch up on diary state before proceeding.
+
+**Inferred user intent:** Autonomously push through the remaining phases with proper documentation.
+
+**Commit (code):** `3298d03` — "test(gcal): add ShowToEvent, description, and firstNonEmpty unit tests"
+
+### What I did
+
+- Read diary skill, caught up on existing diary (Steps 1-4)
+- Created `pkg/gcal/client_test.go` with 3 test functions:
+  - `TestShowToEvent` — 5 cases: basic show, doors time preference, no space name, default 19:00 start, lineup in description
+  - `TestShowToEventDescription` — 3 cases: description+price+age+genre, lineup entries, minimal empty show
+  - `TestFirstNonEmpty` — 5 cases covering empty strings, fallbacks, default value
+- Fixed test cases where empty `want*` fields were being checked against actual values (added explicit expected values for End, Location, Summary)
+
+### Why
+
+Phase 3.4 — prove ShowToEvent converts shows correctly before wiring the full sync chain.
+
+### What worked
+
+- Test structure matches existing patterns in `show_service_test.go` (table-driven tests)
+- All 13 test cases pass on first real run after fixing the empty-expectation bug
+
+### What didn't work
+
+- Initial test had empty `wantEnd`, `wantLocation`, `wantSummary` fields that the test logic checked against actual values — failing on cases where those fields are expected to be non-empty. Fixed by providing explicit expected values.
+
+### What I learned
+
+- The `firstNonEmpty` helper defaults to `"19:00"` when all options are empty — tested that edge case explicitly
+
+### What was tricky to build
+
+- Deciding which ShowToEvent fields to assert per test case — using empty-string to mean "skip check" was error-prone, switched to always providing explicit expectations
+
+### What warrants a second pair of eyes
+
+- The description test uses a simple `contains` helper instead of exact match — description formatting could drift without test failure
+
+### What should be done in the future
+
+- Add sync hook integration tests (mocking gcal.Client) — currently only ShowToEvent is unit-tested
+- Test the `externalEventToProto` converter (added in Step 6)
+
+---
+
+## Step 6: Proto-first external events — add ExternalEvent to proto, convert handler to respondProtoJSON
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 5)
+
+**Assistant interpretation:** User confirmed the proto-first approach (from prior discussion about keeping all API responses protobuf). Implement the proto schema changes, regenerate, and convert the handler.
+
+**Inferred user intent:** Make the external-events endpoint consistent with all other public endpoints by using protobuf serialization.
+
+**Commit (code):** `fedd482` — "feat(gcal): proto-first external events — add ExternalEvent to proto, convert handler to respondProtoJSON"
+
+### What I did
+
+- Added `ExternalEvent` and `ExternalEventList` messages to `proto/pyxis/v1/show.proto`
+- Ran `buf generate` — regenerated Go (`show.pb.go`) and TypeScript (`show_pb.ts`)
+- Re-exported `ExternalEvent`, `ExternalEventSchema`, `ExternalEventList`, `ExternalEventListSchema` from `pyxis-types/src/index.ts`
+- Added `externalEventToProto()` converter function in `pkg/server/public.go`
+- Converted `handleListExternalEvents` from 4x `respondJSON` calls to `respondProtoJSON` with `ExternalEventList`
+- Cache hit path also converts via `externalEventToProto` before responding
+
+### Why
+
+User correctly pointed out that skipping protobuf for this endpoint would be inconsistent with every other public endpoint. The proto-first approach means the frontend uses the same `fromJson(ExternalEventListSchema, ...)` pattern as shows/archive.
+
+### What worked
+
+- `buf generate` ran cleanly — no conflicts with existing proto messages
+- Go build and all tests pass after conversion
+- The `externalEventToProto` function is straightforward — one-to-one field mapping
+
+### What didn't work
+
+- Nothing — all steps completed without errors
+
+### What I learned
+
+- The codebase convention is to use `string` for timestamps (RFC 3339) in proto, not `google.protobuf.Timestamp` — consistent with how `created_at`/`updated_at` are handled elsewhere
+- The design doc originally had `google.protobuf.Timestamp` for `google_cal_synced_at` — corrected to `string` to match convention
+
+### What was tricky to build
+
+- The cache hit path needed its own proto conversion — couldn't just return cached `[]gcal.ExternalEvent` anymore, had to convert to `[]*pyxisv1.ExternalEvent` inline
+
+### What warrants a second pair of eyes
+
+- The `externalEventToProto` function converts `time.Time` to RFC 3339 string — verify this matches what the frontend `fromJson` expects
+
+### What should be done in the future
+
+- The show log endpoints also use raw `respondJSON` — documented as deferred cleanup (Section 12.6 in design doc)
+
+---
+
+## Step 7: Frontend — API layer, ExternalEventCard, ExternalEventList, ShowsPage integration, stories
+
+### Prompt Context
+
+**User prompt (verbatim):** (see Step 5)
+
+**Assistant interpretation:** Continue with Phase 5 frontend implementation using the proto-generated types.
+
+**Inferred user intent:** Complete the full frontend stack: API hook → components → page integration → stories.
+
+**Commit (code):** `1da1ab0` — "feat(gcal): add frontend — ExternalEventCard, ExternalEventList, API hook, ShowsPage section, stories"
+
+### What I did
+
+**API layer (3 files):**
+- `endpoints.ts` — added `externalEvents: '/api/public/external-events'`
+- `publicApi.ts` — added `getExternalEvents` RTK Query endpoint with `fromJson(ExternalEventListSchema, ...)`, added `ExternalEvent` tag type, exported `useGetExternalEventsQuery`
+- `hooks.ts` — added `useExternalEvents()` compatibility wrapper, imported `useGetExternalEventsQuery` in top import block
+
+**Components (4 files):**
+- `ExternalEventCard.tsx` — molecule with date block, summary, location, calendar badge, external link. Responsive grid layout (3-column on desktop, stacked on mobile).
+- `ExternalEventCard.css` — styled with CSS variables for theming, responsive breakpoint at 600px
+- `ExternalEventList.tsx` — organism that maps over events array
+- `ExternalEventList.css` — simple flex column layout
+
+**Page integration:**
+- `ShowsPage/Page.tsx` — added `useExternalEvents()` hook, added "Events Nearby" section below MailingListCTA (only renders when events exist)
+
+**Barrel exports:**
+- `pyxis-components/src/index.ts` — exported `ExternalEventCard` and `ExternalEventList`
+
+**Stories:**
+- `ExternalEventCard.stories.tsx` — 6 stories: Default, AllDay, WithLocation, WithoutCalendarBadge, WithoutLink, LongSummary
+- `ExternalEventList.stories.tsx` — 4 stories: FewEvents, ManyEvents, MixedCalendars, Empty
+
+### Why
+
+Complete the full frontend stack so external calendar events appear on the public shows page.
+
+### What worked
+
+- All components compile and build clean (`pnpm run build` succeeds)
+- Proto-generated types flow through the entire chain: Go handler → `respondProtoJSON` → RTK Query → `fromJson(ExternalEventListSchema)` → React components
+- Storybook stories use `create()` from `@bufbuild/protobuf` to make mock data, matching existing patterns
+- The CSS uses `pyxisPart()` data attributes for component identification
+
+### What didn't work
+
+- First build attempt failed: `pyxis-types` needed to be rebuilt (`pnpm --filter pyxis-types build`) before `pyxis-user-site` could see the new exports
+- `ExternalEventList` was imported as a value in `publicApi.ts` but only used as a type — TS flagged it as unused. Removed the value import, kept only `ExternalEventListSchema` (which is used in `fromJson`)
+- The `useGetExternalEventsQuery` export was missing from both the `publicApi.ts` destructured export AND the `hooks.ts` top import block — had to add it in both places
+
+### What I learned
+
+- In this monorepo, `pyxis-types` must be rebuilt before downstream packages can see new exports — `pnpm run build` only builds the user-site, not the types package
+- RTK Query auto-generates hook names from endpoint names: `getExternalEvents` → `useGetExternalEventsQuery`
+- The `pyxisPart()` utility adds `data-part` attributes for component styling hooks — consistent with existing components
+
+### What was tricky to build
+
+- The pnpm workspace dependency chain: `pyxis-types` → `pyxis-components` → `pyxis-user-site`. Changes to proto-generated types require rebuilding each layer. Had to rebuild `pyxis-types` explicitly.
+- The import chain for RTK Query hooks: the generated hook must be exported from `publicApi.ts` AND imported in `hooks.ts` AND re-exported from the bottom of `hooks.ts`
+
+### What warrants a second pair of eyes
+
+- The `ExternalEventCard` CSS uses fallback values for all CSS variables (`var(--pyxis-color-border, #e8e4de)`) — verify these match the actual theme tokens
+- The ShowsPage renders external events below the mailing list CTA — verify this placement makes sense UX-wise (could also be above the CTA or between shows and CTA)
+
+### What should be done in the future
+
+- Move the "Events Nearby" section above the mailing list CTA (or make it configurable)
+- Add a "View all events" link that opens the external calendar
+- Consider filtering out events that overlap with Pyxis shows (avoid showing the same event twice)
+- Add loading skeleton for external events section
+
+### Code review instructions
+
+- Start with `web/packages/pyxis-types/src/index.ts` — verify the re-exports
+- Then `web/packages/pyxis-user-site/src/api/publicApi.ts` — verify the RTK Query endpoint
+- Then `web/packages/pyxis-components/src/public/molecules/ExternalEventCard/ExternalEventCard.tsx` — verify the component
+- Then `web/packages/pyxis-user-site/src/pages/ShowsPage/Page.tsx` — verify the integration
+- Verify with: `cd web && pnpm run build`
+
+### Technical details
+
+- Commit: `1da1ab0` — 17 files changed, 469 insertions, 7 deletions
+- Key new files: `ExternalEventCard.tsx`, `ExternalEventCard.css`, `ExternalEventCard.stories.tsx`, `ExternalEventList.tsx`, `ExternalEventList.css`, `ExternalEventList.stories.tsx`
+- Key modified files: `publicApi.ts`, `hooks.ts`, `endpoints.ts`, `ShowsPage/Page.tsx`, `pyxis-components/src/index.ts`, `pyxis-types/src/index.ts`
+
+## Step 1: Backend code — pkg/gcal, migrations, domain types, sync hooks, routes, CLI flags
+
+### Prompt Context
+
 **User prompt (verbatim):** "Let's work on docmgr ticket @ttmp/2026/04/29/PYXIS-GOOGLE-CALENDAR--add-google-calendar-integration-for-import-and-sync/ Read the the diary / docmgr skills, read the design doc, and start working on the tasks. Use playwright and loop me in when creating the gcal service account."
 
 **Assistant interpretation:** Read the full design doc (2048 lines), understand the codebase architecture, and implement the backend code for Google Calendar integration. Defer the interactive Google Cloud Console steps for when the user is available.

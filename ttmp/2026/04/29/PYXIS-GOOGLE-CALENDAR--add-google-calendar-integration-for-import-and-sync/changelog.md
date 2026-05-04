@@ -35,3 +35,8 @@ Phase 1 complete: Google Calendar API enabled, service account pyxis-calendar-sy
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/data/gcal/credentials.json — Service account credentials (gitignored)
 
+
+## 2026-05-04
+
+Phase 3.4: Unit tests for ShowToEvent (5 cases), description, firstNonEmpty (commit 3298d03). Phase 4.5-4.7: Added ExternalEvent/ExternalEventList to proto, buf generate, converted handler to respondProtoJSON (commit fedd482). Phase 5: Full frontend — ExternalEventCard molecule, ExternalEventList organism, RTK Query endpoint, useExternalEvents hook, ShowsPage integration, Storybook stories (commit 1da1ab0).
+
