@@ -68,12 +68,15 @@ also use raw `respondJSON` with ad-hoc structs. These are staff-only internal
 endpoints — converting them to proto is a separate cleanup task, not part of
 this ticket.
 
-## Phase 6: Staff UI (Optional)
+## Phase 6: Staff UI — Widgets, Stories, MSW
 
-- [ ] 6.1 Google Calendar settings section in staff settings
-- [ ] 6.2 Add/remove external calendars from UI
-- [ ] 6.3 Show sync status on show detail page
-- [ ] 6.4 Manual "Sync to Google Calendar" button
+- [ ] 6.1 Create `GCalSettingsSection` organism (toggle, calendar ID input, external calendars list)
+- [ ] 6.2 Create `ShowGCalSyncStatus` molecule (sync status badge + manual sync button)
+- [ ] 6.3 Storybook stories for both components
+- [ ] 6.4 MSW mock data updates (settings with gcal fields, shows with sync status)
+- [ ] 6.5 Wire `GCalSettingsSection` into `SettingsPanel`
+- [ ] 6.6 Wire `ShowGCalSyncStatus` into `ShowDetailInfoPanel`
+- [ ] 6.7 RTK Query mutation for manual sync trigger
 
 ## Phase 7: Deploy & Polish
 
