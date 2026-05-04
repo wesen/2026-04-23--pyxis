@@ -736,3 +736,82 @@ Phase 6 is now fully wired: the settings page has a GCal section, the show detai
 - Commit: `f731fb2` — 13 files changed, 235 insertions, 12 deletions
 - Proto field numbers: Show 30-31 (gcal), Settings 20-22 (gcal)
 - New endpoint: `POST /api/app/shows/{id}/sync-gcal`
+
+---
+
+## Step 11: External events on staff calendar board
+
+### Prompt Context
+
+**User prompt (verbatim):** "external calendars are meant to be shown on the internal calendar to show what might otherwise be happening"
+
+**Assistant interpretation:** External calendar events should appear on the staff Calendar page (CalendarBoard) alongside shows, holds, and blocked days, so staff can see what's happening at nearby venues when planning their own calendar.
+
+**Inferred user intent:** The staff calendar is the primary planning tool — external events belong there, not just on the public site.
+
+**Commit (code):** `0c1a59c` — "feat(calendar): show external calendar events on staff calendar board — new EXTERNAL kind, purple styling, day inspector info-only"
+
+### What I did
+
+**Proto:**
+- Added `CALENDAR_EVENT_KIND_EXTERNAL = 4` to `CalendarEventKind` enum
+- Ran `buf generate`
+
+**Backend:**
+- Updated `handleListCalendar` in `app.go` — after loading shows/holds/blocked, fetches external events from Google Calendar (if gcal client + settings configured). Looks back 1 month, forward 3 months. Each external event becomes a `CalendarEvent` with kind=EXTERNAL, label="Event Name (Calendar Name)".
+- Added `zerolog/log` import to app.go
+
+**Frontend:**
+- `CalendarEventChip.tsx` — rewrote to handle the EXTERNAL kind with `kindToTone()` helper. External events get `data-kind='external'` attribute and purple dot.
+- `CalendarEventChip.css` — added `.app-calendar-event-chip[data-kind='external']` style: purple background tint, purple text, italic.
+- `CalendarDayInspector.tsx` — external events show "External" label and "Info only" hint instead of "Open/Edit" or "Remove" button. Not clickable/removable.
+- `CalendarDayInspector.css` — added `.app-calendar-day-external-hint` style.
+- `mockData.ts` — added 2 sample external events to calendar mock: "Art Opening (Neighbor Venue)" on May 5, "RISD Music Showcase (City Arts)" on May 20.
+
+### Why
+
+The staff calendar is the primary scheduling tool. External events from neighboring venues help staff avoid double-booking and plan around competing events.
+
+### What worked
+
+- The `CalendarEvent` proto type already had a `kind` enum — extending it with EXTERNAL was clean
+- The `CalendarEventChip` already accepted any `CalendarEvent`, so just needed kind-aware rendering
+- The backend calendar handler already fetched shows/holds/blocked — adding external events was a natural append
+
+### What didn't work
+
+- Initial build failed with `undefined: log` — `zerolog/log` wasn't imported in `app.go` (other files use it but app.go didn't)
+
+### What I learned
+
+- The calendar response format (`CalendarEventList`) is a flat list of `CalendarEvent` with different `kind` values — the frontend sorts them by kind for styling
+- External events use `id: 0` since they have no internal database ID — the key in the list is `kind-label-date`
+
+### What was tricky to build
+
+- Deciding the label format: `"Event Name (Calendar Name)"` bundles both pieces of info into the existing `label` field without changing the proto. The alternative (adding a `calendarName` field to CalendarEvent) felt like over-engineering for now.
+
+### What warrants a second pair of eyes
+
+- The external events fetch is inline in the calendar handler — if GCal API is slow, the whole calendar response is delayed. Consider fetching from the cache used by the public external-events endpoint instead of making fresh API calls.
+- The 1-month-lookback / 3-month-forward window is hardcoded — should it be configurable?
+
+### What should be done in the future
+
+- Use the cached external events instead of making fresh GCal API calls in the calendar handler
+- Add a legend entry in the calendar UI explaining the purple/external style
+- Make the date range configurable or derived from the visible month
+
+### Code review instructions
+
+- `pkg/server/app.go` — `handleListCalendar` — verify the external events fetch
+- `CalendarEventChip.tsx` — verify kind-aware rendering
+- `CalendarDayInspector.tsx` — verify external events are non-interactive
+- `mockData.ts` — verify mock data
+- Verify with: `go build ./...` and `cd web && pnpm --filter pyxis-app build`
+
+### Technical details
+
+- Commit: `0c1a59c` — 9 files changed, 73 insertions, 8 deletions
+- New proto value: `CALENDAR_EVENT_KIND_EXTERNAL = 4`
+- External event styling: purple (#7b1fa2), italic, "Info only" hint

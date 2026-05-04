@@ -55,3 +55,8 @@ Step 9: CLI sync-show verb (commit 6567fed). Phase 6 staff widgets: GCalSettings
 
 Step 10: Wired Phase 6 — added gcal fields to Show/Settings proto, POST /api/app/shows/{id}/sync-gcal endpoint, RTK syncShowToGCal mutation, GCalSettingsSection in SettingsPanel, ShowGCalSyncStatus in ShowEditMain, MSW mock data with gcal fields (commit f731fb2).
 
+
+## 2026-05-04
+
+Step 11: External calendar events now appear on the staff calendar board. Added CALENDAR_EVENT_KIND_EXTERNAL to proto, backend merges GCal events into calendar response, CalendarEventChip shows purple italic styling, CalendarDayInspector shows 'Info only' for external items, MSW mock data includes 2 sample external events (commit 0c1a59c).
+
