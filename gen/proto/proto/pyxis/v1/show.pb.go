@@ -2416,6 +2416,166 @@ func (x *FlyerUploadResponse) GetUrl() string {
 	return ""
 }
 
+type ExternalEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	CalendarId    string                 `protobuf:"bytes,2,opt,name=calendar_id,json=calendarId,proto3" json:"calendar_id,omitempty"`
+	CalendarName  string                 `protobuf:"bytes,3,opt,name=calendar_name,json=calendarName,proto3" json:"calendar_name,omitempty"`
+	Summary       string                 `protobuf:"bytes,4,opt,name=summary,proto3" json:"summary,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Location      string                 `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
+	Start         string                 `protobuf:"bytes,7,opt,name=start,proto3" json:"start,omitempty"`
+	End           string                 `protobuf:"bytes,8,opt,name=end,proto3" json:"end,omitempty"`
+	Url           string                 `protobuf:"bytes,9,opt,name=url,proto3" json:"url,omitempty"`
+	IsAllDay      bool                   `protobuf:"varint,10,opt,name=is_all_day,json=isAllDay,proto3" json:"is_all_day,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExternalEvent) Reset() {
+	*x = ExternalEvent{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalEvent) ProtoMessage() {}
+
+func (x *ExternalEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExternalEvent.ProtoReflect.Descriptor instead.
+func (*ExternalEvent) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ExternalEvent) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetCalendarId() string {
+	if x != nil {
+		return x.CalendarId
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetCalendarName() string {
+	if x != nil {
+		return x.CalendarName
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetSummary() string {
+	if x != nil {
+		return x.Summary
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetLocation() string {
+	if x != nil {
+		return x.Location
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetStart() string {
+	if x != nil {
+		return x.Start
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetEnd() string {
+	if x != nil {
+		return x.End
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *ExternalEvent) GetIsAllDay() bool {
+	if x != nil {
+		return x.IsAllDay
+	}
+	return false
+}
+
+type ExternalEventList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Events        []*ExternalEvent       `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExternalEventList) Reset() {
+	*x = ExternalEventList{}
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalEventList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalEventList) ProtoMessage() {}
+
+func (x *ExternalEventList) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExternalEventList.ProtoReflect.Descriptor instead.
+func (*ExternalEventList) Descriptor() ([]byte, []int) {
+	return file_proto_pyxis_v1_show_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ExternalEventList) GetEvents() []*ExternalEvent {
+	if x != nil {
+		return x.Events
+	}
+	return nil
+}
+
 type Show_LineupEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Artist        string                 `protobuf:"bytes,1,opt,name=artist,proto3" json:"artist,omitempty"`
@@ -2428,7 +2588,7 @@ type Show_LineupEntry struct {
 
 func (x *Show_LineupEntry) Reset() {
 	*x = Show_LineupEntry{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[28]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2440,7 +2600,7 @@ func (x *Show_LineupEntry) String() string {
 func (*Show_LineupEntry) ProtoMessage() {}
 
 func (x *Show_LineupEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[28]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2494,7 +2654,7 @@ type ErrorResponse_Error struct {
 
 func (x *ErrorResponse_Error) Reset() {
 	*x = ErrorResponse_Error{}
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[29]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2506,7 +2666,7 @@ func (x *ErrorResponse_Error) String() string {
 func (*ErrorResponse_Error) ProtoMessage() {}
 
 func (x *ErrorResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_pyxis_v1_show_proto_msgTypes[29]
+	mi := &file_proto_pyxis_v1_show_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2762,7 +2922,23 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"'\n" +
 	"\x13FlyerUploadResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url*\xbf\x01\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"\x95\x02\n" +
+	"\rExternalEvent\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\vcalendar_id\x18\x02 \x01(\tR\n" +
+	"calendarId\x12#\n" +
+	"\rcalendar_name\x18\x03 \x01(\tR\fcalendarName\x12\x18\n" +
+	"\asummary\x18\x04 \x01(\tR\asummary\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\blocation\x18\x06 \x01(\tR\blocation\x12\x14\n" +
+	"\x05start\x18\a \x01(\tR\x05start\x12\x10\n" +
+	"\x03end\x18\b \x01(\tR\x03end\x12\x10\n" +
+	"\x03url\x18\t \x01(\tR\x03url\x12\x1c\n" +
+	"\n" +
+	"is_all_day\x18\n" +
+	" \x01(\bR\bisAllDay\"D\n" +
+	"\x11ExternalEventList\x12/\n" +
+	"\x06events\x18\x01 \x03(\v2\x17.pyxis.v1.ExternalEventR\x06events*\xbf\x01\n" +
 	"\n" +
 	"ShowStatus\x12\x1b\n" +
 	"\x17SHOW_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
@@ -2798,7 +2974,7 @@ func file_proto_pyxis_v1_show_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_pyxis_v1_show_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_proto_pyxis_v1_show_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(ShowStatus)(0),             // 0: pyxis.v1.ShowStatus
 	(SubmissionStatus)(0),       // 1: pyxis.v1.SubmissionStatus
@@ -2831,11 +3007,13 @@ var file_proto_pyxis_v1_show_proto_goTypes = []any{
 	(*SuccessResponse)(nil),     // 28: pyxis.v1.SuccessResponse
 	(*ErrorResponse)(nil),       // 29: pyxis.v1.ErrorResponse
 	(*FlyerUploadResponse)(nil), // 30: pyxis.v1.FlyerUploadResponse
-	(*Show_LineupEntry)(nil),    // 31: pyxis.v1.Show.LineupEntry
-	(*ErrorResponse_Error)(nil), // 32: pyxis.v1.ErrorResponse.Error
+	(*ExternalEvent)(nil),       // 31: pyxis.v1.ExternalEvent
+	(*ExternalEventList)(nil),   // 32: pyxis.v1.ExternalEventList
+	(*Show_LineupEntry)(nil),    // 33: pyxis.v1.Show.LineupEntry
+	(*ErrorResponse_Error)(nil), // 34: pyxis.v1.ErrorResponse.Error
 }
 var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
-	31, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
+	33, // 0: pyxis.v1.Show.lineup:type_name -> pyxis.v1.Show.LineupEntry
 	0,  // 1: pyxis.v1.Show.status:type_name -> pyxis.v1.ShowStatus
 	0,  // 2: pyxis.v1.AppShow.status:type_name -> pyxis.v1.ShowStatus
 	3,  // 3: pyxis.v1.ShowList.shows:type_name -> pyxis.v1.Show
@@ -2851,12 +3029,13 @@ var file_proto_pyxis_v1_show_proto_depIdxs = []int32{
 	19, // 13: pyxis.v1.CalendarResponse.blocked:type_name -> pyxis.v1.CalendarBlocked
 	23, // 14: pyxis.v1.AttendanceLogList.logs:type_name -> pyxis.v1.AttendanceLog
 	25, // 15: pyxis.v1.AuditLogEntryList.entries:type_name -> pyxis.v1.AuditLogEntry
-	32, // 16: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	34, // 16: pyxis.v1.ErrorResponse.error:type_name -> pyxis.v1.ErrorResponse.Error
+	31, // 17: pyxis.v1.ExternalEventList.events:type_name -> pyxis.v1.ExternalEvent
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_proto_pyxis_v1_show_proto_init() }
@@ -2870,7 +3049,7 @@ func file_proto_pyxis_v1_show_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_pyxis_v1_show_proto_rawDesc), len(file_proto_pyxis_v1_show_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   30,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

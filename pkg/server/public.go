@@ -430,14 +430,18 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 	ctx := r.Context()
 
 	if s.gcalClient == nil {
-		respondJSON(w, http.StatusOK, []interface{}{})
+		respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{})
 		return
 	}
 
 	// Check cache first
 	if s.externalEventsCache != nil {
 		if cached, ok := s.externalEventsCache.Get(); ok {
-			respondJSON(w, http.StatusOK, cached)
+			pbCached := make([]*pyxisv1.ExternalEvent, len(cached))
+			for i, e := range cached {
+				pbCached[i] = externalEventToProto(&e)
+			}
+			respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{Events: pbCached})
 			return
 		}
 	}
@@ -473,7 +477,7 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 	}
 
 	if len(settings.ExternalCalendars) == 0 {
-		respondJSON(w, http.StatusOK, []interface{}{})
+		respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{})
 		return
 	}
 
@@ -504,7 +508,27 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 		s.externalEventsCache.Set(allEvents)
 	}
 
-	respondJSON(w, http.StatusOK, allEvents)
+	// Convert to proto and respond
+	pbEvents := make([]*pyxisv1.ExternalEvent, len(allEvents))
+	for i, e := range allEvents {
+		pbEvents[i] = externalEventToProto(&e)
+	}
+	respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{Events: pbEvents})
+}
+
+func externalEventToProto(e *gcal.ExternalEvent) *pyxisv1.ExternalEvent {
+	return &pyxisv1.ExternalEvent{
+		Id:           e.ID,
+		CalendarId:   e.CalendarID,
+		CalendarName: e.CalendarName,
+		Summary:      e.Summary,
+		Description:  e.Description,
+		Location:     e.Location,
+		Start:        e.Start.Format(time.RFC3339),
+		End:          e.End.Format(time.RFC3339),
+		Url:          e.URL,
+		IsAllDay:     e.IsAllDay,
+	}
 }
 
 func respondError(w http.ResponseWriter, err error) {
