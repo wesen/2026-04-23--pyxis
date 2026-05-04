@@ -70,13 +70,13 @@ this ticket.
 
 ## Phase 6: Staff UI — Widgets, Stories, MSW
 
-- [ ] 6.1 Create `GCalSettingsSection` organism (toggle, calendar ID input, external calendars list)
-- [ ] 6.2 Create `ShowGCalSyncStatus` molecule (sync status badge + manual sync button)
-- [ ] 6.3 Storybook stories for both components
-- [ ] 6.4 MSW mock data updates (settings with gcal fields, shows with sync status)
-- [ ] 6.5 Wire `GCalSettingsSection` into `SettingsPanel`
-- [ ] 6.6 Wire `ShowGCalSyncStatus` into `ShowDetailInfoPanel`
-- [ ] 6.7 RTK Query mutation for manual sync trigger
+- [x] 6.1 Create `GCalSettingsSection` organism (toggle, calendar ID input, external calendars list)
+- [x] 6.2 Create `ShowGCalSyncStatus` molecule (sync status badge + manual sync button)
+- [x] 6.3 Storybook stories for both components
+- [x] 6.4 MSW mock data updates (settings with gcal fields, shows with sync status)
+- [x] 6.5 Wire `GCalSettingsSection` into `SettingsPanel`
+- [x] 6.6 Wire `ShowGCalSyncStatus` into `ShowDetailInfoPanel`
+- [x] 6.7 RTK Query mutation for manual sync trigger
 
 ## Phase 7: Deploy & Polish
 

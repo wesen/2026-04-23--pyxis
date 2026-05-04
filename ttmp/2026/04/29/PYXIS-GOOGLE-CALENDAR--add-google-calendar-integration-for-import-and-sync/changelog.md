@@ -50,3 +50,8 @@ Step 8: Added pyxis external-calendars CLI command group (list/set/remove) using
 
 Step 9: CLI sync-show verb (commit 6567fed). Phase 6 staff widgets: GCalSettingsSection + ShowGCalSyncStatus with Storybook stories (commit 6ec34f7). Updated Phase 6 tasks with 7 subtasks.
 
+
+## 2026-05-04
+
+Step 10: Wired Phase 6 — added gcal fields to Show/Settings proto, POST /api/app/shows/{id}/sync-gcal endpoint, RTK syncShowToGCal mutation, GCalSettingsSection in SettingsPanel, ShowGCalSyncStatus in ShowEditMain, MSW mock data with gcal fields (commit f731fb2).
+

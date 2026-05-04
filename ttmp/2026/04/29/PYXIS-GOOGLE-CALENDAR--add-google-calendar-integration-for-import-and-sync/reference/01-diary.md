@@ -647,3 +647,92 @@ The sync-show CLI provides operational control for debugging/re-syncing without 
 
 - Commits: `6567fed` (sync-show CLI, 2 files), `6ec34f7` (staff widgets + stories, 9 files)
 - Key new files: `sync_show.go`, `GCalSettingsSection.tsx/css/stories.tsx`, `ShowGCalSyncStatus.tsx/css/stories.tsx`
+
+---
+
+## Step 10: Wire Phase 6 — proto fields, sync endpoint, widget integration
+
+### Prompt Context
+
+**User prompt (verbatim):** "Ok, continue"
+
+**Assistant interpretation:** Continue with the remaining Phase 6 work: add gcal fields to proto, create backend sync endpoint, update MSW, and wire widgets into actual pages.
+
+**Inferred user intent:** Complete the full Phase 6 wiring so the staff UI is functional.
+
+**Commit (code):** `f731fb2` — "feat(gcal): wire Phase 6 — proto gcal fields on Show/Settings, sync endpoint, MSW, SettingsPanel + ShowEditMain integration"
+
+### What I did
+
+**Proto changes:**
+- Added `google_cal_event_id` (30) and `google_cal_synced_at` (31) to `Show` message
+- Added `google_cal_enabled` (20), `google_cal_id` (21), `external_calendars_json` (22) to `Settings` message
+- Ran `buf generate` — regenerated Go and TS
+
+**Backend:**
+- `POST /api/app/shows/{id}/sync-gcal` — new staff endpoint (admin/booker auth). Loads show, calls `SyncShowToGCalSync` (synchronous), returns updated show with event ID.
+- `SyncShowToGCalSync` — new public method on ShowService that calls the private `syncShowToGCal` synchronously
+- Updated `showToProto` — populates `GoogleCalEventId` and `GoogleCalSyncedAt` from domain
+- Updated `settingsToProto` — populates `GoogleCalEnabled`, `GoogleCalId`, `ExternalCalendarsJson`
+- Updated `handleUpdateSettings` — parses `googleCalEnabled`, `googleCalId`, `externalCalendarsJson` from request body
+
+**Frontend:**
+- `appApi.ts` — added `syncShowToGCal` RTK mutation, exported `useSyncShowToGCalMutation`
+- `endpoints.ts` — added `showSyncGCal`
+- `mockData.ts` — settings mock now includes `googleCalEnabled`, `googleCalId`, `externalCalendarsJson` with 2 sample calendars
+- `SettingsPanel.tsx` — integrated `GCalSettingsSection` with callbacks for toggle, calendar ID update, add/remove/toggle external calendars. Added `parseExternalCalendars` helper. Added `onSaveGCalSettings` prop.
+- `ShowEditMain.tsx` — integrated `ShowGCalSyncStatus` with sync button. Added `onSyncGCal` and `isSyncingGCal` props.
+- `ShowDetailPage/Page.tsx` — wired `useSyncShowToGCalMutation` and passes `onSyncGCal`/`isSyncingGCal` to `ShowEditMain`
+
+### Why
+
+Phase 6 is now fully wired: the settings page has a GCal section, the show detail page shows sync status with a manual re-sync button, and the backend supports both the sync endpoint and persisting gcal settings.
+
+### What worked
+
+- Proto additions were backward-compatible — existing fields unchanged, new fields appended at high numbers (30, 31, 20-22)
+- The `externalCalendarsJson` approach (string field in proto containing JSON) avoids needing a separate proto message for external calendars while keeping the data serializable
+- The synchronous sync endpoint returns the full updated show, so the RTK cache auto-invalidates
+
+### What didn't work
+
+- Import paths for `GCalSettingsSection` and `ShowGCalSyncStatus` were wrong on first attempt — `SettingsPanel` is nested two levels deep (`Settings/SettingsPanel/`), `ShowEditMain` is also nested (`ShowEdit/ShowEditMain/`)
+- The `Settings` proto didn't have `googleCalEnabled`/`googleCalId` fields initially — had to add them alongside the Show proto changes
+
+### What I learned
+
+- The `Settings` update handler uses a plain Go struct (not proto) to parse the request body — so gcal fields needed to be added there as separate JSON-tagged fields
+- The `externalCalendarsJson` string field means the client sends raw JSON inside a proto JSON payload — protobuf just treats it as an opaque string
+- RTK Query's `invalidatesTags` with a function `(result, error, id) => [{ type: 'Show', id }]` works well for invalidating a single show after sync
+
+### What was tricky to build
+
+- Deciding the gcal settings persistence strategy: the `GCalSettingsSection` calls `onSaveGCalSettings` with the full gcal state, and the parent is responsible for merging it into the settings update. This means each toggle/calendar change triggers a full settings PATCH.
+- The `ShowEditMain` now has `onSyncGCal`/`isSyncingGCal` props that need to be threaded from `ShowDetailPage` — added to the prop type and passed through.
+
+### What warrants a second pair of eyes
+
+- Every external calendar add/remove/toggle triggers a full settings PATCH — could be debounced or batched if the user makes rapid changes
+- The sync endpoint runs synchronously — if GCal API is slow, the HTTP request hangs. Consider a timeout or async pattern for production.
+
+### What should be done in the future
+
+- Add loading/error states for the GCal settings save in SettingsPanel
+- Add a "Sync all pending shows" admin endpoint
+- Debounce the external calendar toggle changes
+- Add a "Test connection" button that verifies the service account can access the configured calendar
+
+### Code review instructions
+
+- Start with `proto/pyxis/v1/show.proto` — the new fields
+- Then `pkg/server/app.go` — `handleSyncShowToGCal` and `handleUpdateSettings` changes
+- Then `pkg/server/public.go` — `showToProto` and `settingsToProto` gcal fields
+- Then `web/packages/pyxis-app/src/api/appApi.ts` — the mutation
+- Then `SettingsPanel.tsx` → `ShowEditMain.tsx` → `ShowDetailPage/Page.tsx` — the wiring
+- Verify with: `go build ./...` and `cd web && pnpm --filter pyxis-app build`
+
+### Technical details
+
+- Commit: `f731fb2` — 13 files changed, 235 insertions, 12 deletions
+- Proto field numbers: Show 30-31 (gcal), Settings 20-22 (gcal)
+- New endpoint: `POST /api/app/shows/{id}/sync-gcal`
