@@ -147,6 +147,7 @@ const (
 	CalendarEventKind_CALENDAR_EVENT_KIND_SHOW        CalendarEventKind = 1
 	CalendarEventKind_CALENDAR_EVENT_KIND_HOLD        CalendarEventKind = 2
 	CalendarEventKind_CALENDAR_EVENT_KIND_BLOCKED     CalendarEventKind = 3
+	CalendarEventKind_CALENDAR_EVENT_KIND_EXTERNAL    CalendarEventKind = 4
 )
 
 // Enum value maps for CalendarEventKind.
@@ -156,12 +157,14 @@ var (
 		1: "CALENDAR_EVENT_KIND_SHOW",
 		2: "CALENDAR_EVENT_KIND_HOLD",
 		3: "CALENDAR_EVENT_KIND_BLOCKED",
+		4: "CALENDAR_EVENT_KIND_EXTERNAL",
 	}
 	CalendarEventKind_value = map[string]int32{
 		"CALENDAR_EVENT_KIND_UNSPECIFIED": 0,
 		"CALENDAR_EVENT_KIND_SHOW":        1,
 		"CALENDAR_EVENT_KIND_HOLD":        2,
 		"CALENDAR_EVENT_KIND_BLOCKED":     3,
+		"CALENDAR_EVENT_KIND_EXTERNAL":    4,
 	}
 )
 
@@ -3001,12 +3004,13 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\x1aSUBMISSION_STATUS_APPROVED\x10\x02\x12\x1e\n" +
 	"\x1aSUBMISSION_STATUS_DECLINED\x10\x03\x12\x1a\n" +
 	"\x16SUBMISSION_STATUS_HOLD\x10\x04\x12\x1f\n" +
-	"\x1bSUBMISSION_STATUS_CANCELLED\x10\x05*\x95\x01\n" +
+	"\x1bSUBMISSION_STATUS_CANCELLED\x10\x05*\xb7\x01\n" +
 	"\x11CalendarEventKind\x12#\n" +
 	"\x1fCALENDAR_EVENT_KIND_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18CALENDAR_EVENT_KIND_SHOW\x10\x01\x12\x1c\n" +
 	"\x18CALENDAR_EVENT_KIND_HOLD\x10\x02\x12\x1f\n" +
-	"\x1bCALENDAR_EVENT_KIND_BLOCKED\x10\x03B:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
+	"\x1bCALENDAR_EVENT_KIND_BLOCKED\x10\x03\x12 \n" +
+	"\x1cCALENDAR_EVENT_KIND_EXTERNAL\x10\x04B:Z8github.com/go-go-golems/pyxis/gen/proto/pyxis/v1;pyxisv1b\x06proto3"
 
 var (
 	file_proto_pyxis_v1_show_proto_rawDescOnce sync.Once

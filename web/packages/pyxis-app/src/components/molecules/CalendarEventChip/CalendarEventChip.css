@@ -3,3 +3,4 @@
 .app-calendar-month-grid .app-calendar-event-chip .app-status-dot { display: none; }
 .app-calendar-month-grid .app-calendar-event-chip[data-status='hold'] { background: rgba(var(--app-info-rgb), .10); color: var(--app-info); }
 .app-calendar-month-grid .app-calendar-event-chip[data-status='blocked'] { background: var(--app-surface-muted); color: var(--app-muted); }
+.app-calendar-month-grid .app-calendar-event-chip[data-kind='external'] { background: rgba(156, 39, 176, 0.10); color: #7b1fa2; font-style: italic; }

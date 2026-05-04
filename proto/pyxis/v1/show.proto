@@ -191,6 +191,7 @@ enum CalendarEventKind {
   CALENDAR_EVENT_KIND_SHOW        = 1;
   CALENDAR_EVENT_KIND_HOLD        = 2;
   CALENDAR_EVENT_KIND_BLOCKED     = 3;
+  CALENDAR_EVENT_KIND_EXTERNAL    = 4;
 }
 
 message CalendarEvent {

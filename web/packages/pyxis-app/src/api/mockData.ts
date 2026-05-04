@@ -61,6 +61,8 @@ export const calendarEvents: CalendarEvent[] = [
   create(CalendarEventSchema, { id: 45, date: '2025-05-23', label: 'Open Mic', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
   create(CalendarEventSchema, { id: 201, date: '2025-05-26', label: 'Closed', status: ShowStatus.BLOCKED, kind: CalendarEventKind.BLOCKED }),
   create(CalendarEventSchema, { id: 47, date: '2025-05-30', label: 'Basement Freq.', status: ShowStatus.CONFIRMED, kind: CalendarEventKind.SHOW }),
+  create(CalendarEventSchema, { id: 0, date: '2025-05-05', label: 'Art Opening (Neighbor Venue)', status: 0, kind: CalendarEventKind.EXTERNAL }),
+  create(CalendarEventSchema, { id: 0, date: '2025-05-20', label: 'RISD Music Showcase (City Arts)', status: 0, kind: CalendarEventKind.EXTERNAL }),
 ];
 
 export const showLogs = [

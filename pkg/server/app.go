@@ -15,6 +15,7 @@ import (
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
 	"github.com/go-go-golems/pyxis/pkg/domain"
 	"github.com/go-go-golems/pyxis/pkg/service"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -763,6 +764,34 @@ func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 	}
 	for i := range blocked {
 		events = append(events, calendarBlockedToEvent(&blocked[i]))
+	}
+
+	// Add external calendar events
+	if s.gcalClient != nil && s.settingsService != nil {
+		settings, err := s.settingsService.Get(ctx)
+		if err == nil && len(settings.ExternalCalendars) > 0 {
+			from := time.Now().AddDate(0, -1, 0)
+			to := time.Now().AddDate(0, 3, 0)
+			for _, cal := range settings.ExternalCalendars {
+				if !cal.Enabled {
+					continue
+				}
+				extEvents, err := s.gcalClient.ListExternalEvents(ctx, cal.ID, from, to)
+				if err != nil {
+					log.Warn().Err(err).Str("calendar", cal.ID).Msg("calendar: failed to fetch external events")
+					continue
+				}
+				for _, e := range extEvents {
+					events = append(events, &pyxisv1.CalendarEvent{
+						Id:     0, // no internal ID for external events
+						Date:   e.Start.Format(time.DateOnly),
+						Label:  fmt.Sprintf("%s (%s)", e.Summary, cal.Name),
+						Status: pyxisv1.ShowStatus_SHOW_STATUS_UNSPECIFIED,
+						Kind:   pyxisv1.CalendarEventKind_CALENDAR_EVENT_KIND_EXTERNAL,
+					})
+				}
+			}
+		}
 	}
 
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.CalendarEventList{Events: events})
