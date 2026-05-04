@@ -49,6 +49,10 @@ topics:
       description: Ship/no-ship validation, launch checklists, and production readiness planning.
     - slug: auth
       description: Authentication, authorization, identity providers, sessions, roles, and login flows.
+    - slug: visual-diff
+      description: Visual diff and screenshot comparison workflows for frontend implementation
+    - slug: automation
+      description: Automation scripts, CLI workflows, and repeatable tooling
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes

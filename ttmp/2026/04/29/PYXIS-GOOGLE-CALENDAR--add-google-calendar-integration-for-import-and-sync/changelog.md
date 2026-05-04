@@ -13,3 +13,16 @@ Created detailed design doc (01-google-calendar-integration-guide.md, 80KB, 2048
 
 - /home/manuel/code/wesen/2026-04-23--pyxis/ttmp/2026/04/29/PYXIS-GOOGLE-CALENDAR--add-google-calendar-integration-for-import-and-sync/design/01-google-calendar-integration-guide.md — Main design document
 
+
+## 2026-05-04
+
+Implemented backend infrastructure: pkg/gcal client, DB migrations (shows + settings), domain types, sqlc queries, ShowService sync hooks, external-events endpoint with cache, CLI flags (commit 3765fed)
+
+### Related Files
+
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/migrations/000007_add_google_cal_fields_to_shows.up.sql — Migration adding google_cal_event_id and google_cal_synced_at to shows
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/db/migrations/000008_add_google_cal_fields_to_settings.up.sql — Migration adding google_cal_enabled
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/gcal/client.go — Google Calendar API client with CRUD + ListExternalEvents
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/server/public.go — Added handleListExternalEvents with in-memory caching
+- /home/manuel/code/wesen/2026-04-23--pyxis/pkg/service/show_service.go — Added sync hooks in Create/Update/Cancel + SetGoogleCalClient + SetSettingsRepo
+

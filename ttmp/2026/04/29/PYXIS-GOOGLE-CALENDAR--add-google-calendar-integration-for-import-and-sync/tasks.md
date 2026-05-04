@@ -11,31 +11,31 @@ LastUpdated: 2026-04-29
 - [ ] 1.1 Create Google Cloud project and enable Calendar API
 - [ ] 1.2 Create service account and download credentials JSON
 - [ ] 1.3 Share venue's Google Calendar with the service account email
-- [ ] 1.4 Add `google.golang.org/api/calendar/v3` dependency
-- [ ] 1.5 Create `pkg/gcal/client.go` with service account auth
+- [x] 1.4 Add `google.golang.org/api/calendar/v3` dependency
+- [x] 1.5 Create `pkg/gcal/client.go` with service account auth
 - [ ] 1.6 Test authentication (call calendarList.List)
 
 ## Phase 2: Database Migrations
 
-- [ ] 2.1 Migration: add `google_cal_event_id`, `google_cal_synced_at` to `shows`
-- [ ] 2.2 Migration: add `google_cal_enabled`, `google_cal_id`, `external_calendars` to `settings`
-- [ ] 2.3 Update domain types (`show.go`, `settings.go`)
-- [ ] 2.4 Update sqlc queries and regenerate
+- [x] 2.1 Migration: add `google_cal_event_id`, `google_cal_synced_at` to `shows`
+- [x] 2.2 Migration: add `google_cal_enabled`, `google_cal_id`, `external_calendars` to `settings`
+- [x] 2.3 Update domain types (`show.go`, `settings.go`)
+- [x] 2.4 Update sqlc queries and regenerate
 
 ## Phase 3: Push — Export Shows to Google Calendar
 
-- [ ] 3.1 Create `pkg/gcal/client.go` (CreateEvent, UpdateEvent, DeleteEvent)
-- [ ] 3.2 Create `pkg/gcal/show_to_event.go` (Show → calendar.Event conversion)
-- [ ] 3.3 Add sync hooks to ShowService (Create, Update, Cancel)
+- [x] 3.1 Create `pkg/gcal/client.go` (CreateEvent, UpdateEvent, DeleteEvent)
+- [x] 3.2 Create `pkg/gcal/show_to_event.go` (Show → calendar.Event conversion)
+- [x] 3.3 Add sync hooks to ShowService (Create, Update, Cancel)
 - [ ] 3.4 Add unit tests for ShowToEvent and sync hooks
 - [ ] 3.5 Manual test: create show → verify GCal event appears
 
 ## Phase 4: Pull — Import External Calendars
 
-- [ ] 4.1 Add `ListExternalEvents` to gcal client
-- [ ] 4.2 Add `GET /api/public/external-events` route and handler
-- [ ] 4.3 Implement in-memory caching (5 min TTL)
-- [ ] 4.4 Add config parsing for external_calendars JSON
+- [x] 4.1 Add `ListExternalEvents` to gcal client
+- [x] 4.2 Add `GET /api/public/external-events` route and handler
+- [x] 4.3 Implement in-memory caching (5 min TTL)
+- [x] 4.4 Add config parsing for external_calendars JSON
 - [ ] 4.5 Unit and integration tests
 - [ ] 4.6 Manual test: configure external calendar → verify events appear
 
