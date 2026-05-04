@@ -7,6 +7,7 @@ import {
   useGetShowQuery,
   useCreateShowMutation,
   useDeleteShowFlyerMutation,
+  useSyncShowToGCalMutation,
   useUpdateShowMutation,
   useUploadShowFlyerMutation,
 } from '../../api/appApi';
@@ -26,6 +27,7 @@ export function ShowDetailPage() {
   const [updateShow, updateState] = useUpdateShowMutation();
   const [uploadFlyer, uploadState] = useUploadShowFlyerMutation();
   const [deleteFlyer, deleteFlyerState] = useDeleteShowFlyerMutation();
+  const [syncGCal, syncGCalState] = useSyncShowToGCalMutation();
   const [isEditorOpen, setEditorOpen] = useState(false);
   const [confirmAction, setConfirmAction] = useState<'archive' | 'cancel' | 'delete-flyer' | null>(null);
   const [actionError, setActionError] = useState<string | undefined>();
@@ -196,7 +198,7 @@ export function ShowDetailPage() {
               onAnnounce={handleAnnounceShow}
               onOpenPost={openDiscordPost}
             />
-            <ShowEditMain show={show} />
+            <ShowEditMain show={show} onSyncGCal={() => syncGCal(show.id)} isSyncingGCal={syncGCalState.isLoading} />
           </div>
 
           <div className="app-detail-actions">

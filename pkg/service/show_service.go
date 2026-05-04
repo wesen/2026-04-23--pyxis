@@ -281,3 +281,9 @@ func (s *ShowService) deleteGCalEvent(ctx context.Context, eventID string, showI
 		log.Info().Int("showId", showID).Msg("gcal sync: deleted event")
 	}
 }
+
+// SyncShowToGCalSync is the synchronous version of syncShowToGCal.
+// Used by the manual sync endpoint so the response includes the updated event ID.
+func (s *ShowService) SyncShowToGCalSync(ctx context.Context, show *domain.Show) {
+	s.syncShowToGCal(ctx, show)
+}

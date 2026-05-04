@@ -1,14 +1,17 @@
 import type { Show } from 'pyxis-types';
+import { ShowGCalSyncStatus } from '../../../molecules/ShowGCalSyncStatus';
 import { appPart } from '../../../parts';
 import './ShowEditMain.css';
 
 export type ShowEditMainProps = {
   show: Show;
+  onSyncGCal?: () => void;
+  isSyncingGCal?: boolean;
 };
 
 const dash = (value?: string | number) => (value === undefined || value === '' || value === 0 ? '—' : value);
 
-export function ShowEditMain({ show }: ShowEditMainProps) {
+export function ShowEditMain({ show, onSyncGCal, isSyncingGCal }: ShowEditMainProps) {
   return (
     <div className="app-show-edit-main" {...appPart('show-edit-main')}>
       <section className="app-show-edit-card" data-section="show-edit-basics">
@@ -35,6 +38,17 @@ export function ShowEditMain({ show }: ShowEditMainProps) {
           <div className="app-show-edit-field"><span>Genre</span><b>{dash(show.genre)}</b></div>
         </div>
         <div className="app-show-edit-field app-show-edit-field--full"><span>Reserve ticket</span><b>{show.reserveTicketEnabled ? 'Enabled' : 'Off'}</b></div>
+      </section>
+
+      <section className="app-show-edit-card" data-section="show-edit-gcal">
+        <h2>Google Calendar</h2>
+        <ShowGCalSyncStatus
+          synced={!!show.googleCalEventId}
+          eventId={show.googleCalEventId || undefined}
+          syncedAt={show.googleCalSyncedAt || undefined}
+          onSync={onSyncGCal}
+          isSyncing={isSyncingGCal}
+        />
       </section>
 
       <section className="app-show-edit-card" data-section="show-edit-lineup">

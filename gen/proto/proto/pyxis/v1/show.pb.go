@@ -216,8 +216,11 @@ type Show struct {
 	ArtistId             int32                  `protobuf:"varint,14,opt,name=artist_id,json=artistId,proto3" json:"artist_id,omitempty"`
 	CreatedAt            string                 `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string                 `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Google Calendar sync status (staff-only)
+	GoogleCalEventId  string `protobuf:"bytes,30,opt,name=google_cal_event_id,json=googleCalEventId,proto3" json:"google_cal_event_id,omitempty"`
+	GoogleCalSyncedAt string `protobuf:"bytes,31,opt,name=google_cal_synced_at,json=googleCalSyncedAt,proto3" json:"google_cal_synced_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Show) Reset() {
@@ -400,6 +403,20 @@ func (x *Show) GetCreatedAt() string {
 func (x *Show) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
+	}
+	return ""
+}
+
+func (x *Show) GetGoogleCalEventId() string {
+	if x != nil {
+		return x.GoogleCalEventId
+	}
+	return ""
+}
+
+func (x *Show) GetGoogleCalSyncedAt() string {
+	if x != nil {
+		return x.GoogleCalSyncedAt
 	}
 	return ""
 }
@@ -2117,8 +2134,12 @@ type Settings struct {
 	AutoArchive            bool                   `protobuf:"varint,17,opt,name=auto_archive,json=autoArchive,proto3" json:"auto_archive,omitempty"`
 	DiscordPosting         bool                   `protobuf:"varint,18,opt,name=discord_posting,json=discordPosting,proto3" json:"discord_posting,omitempty"`
 	SafeSpaceRequired      bool                   `protobuf:"varint,19,opt,name=safe_space_required,json=safeSpaceRequired,proto3" json:"safe_space_required,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Google Calendar integration (staff-only)
+	GoogleCalEnabled      bool   `protobuf:"varint,20,opt,name=google_cal_enabled,json=googleCalEnabled,proto3" json:"google_cal_enabled,omitempty"`
+	GoogleCalId           string `protobuf:"bytes,21,opt,name=google_cal_id,json=googleCalId,proto3" json:"google_cal_id,omitempty"`
+	ExternalCalendarsJson string `protobuf:"bytes,22,opt,name=external_calendars_json,json=externalCalendarsJson,proto3" json:"external_calendars_json,omitempty"` // JSON array of ExternalCalendarConfig
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Settings) Reset() {
@@ -2282,6 +2303,27 @@ func (x *Settings) GetSafeSpaceRequired() bool {
 		return x.SafeSpaceRequired
 	}
 	return false
+}
+
+func (x *Settings) GetGoogleCalEnabled() bool {
+	if x != nil {
+		return x.GoogleCalEnabled
+	}
+	return false
+}
+
+func (x *Settings) GetGoogleCalId() string {
+	if x != nil {
+		return x.GoogleCalId
+	}
+	return ""
+}
+
+func (x *Settings) GetExternalCalendarsJson() string {
+	if x != nil {
+		return x.ExternalCalendarsJson
+	}
+	return ""
 }
 
 type SuccessResponse struct {
@@ -2700,7 +2742,7 @@ var File_proto_pyxis_v1_show_proto protoreflect.FileDescriptor
 
 const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\xac\x06\n" +
+	"\x19proto/pyxis/v1/show.proto\x12\bpyxis.v1\"\x8c\a\n" +
 	"\x04Show\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x16\n" +
 	"\x06artist\x18\x02 \x01(\tR\x06artist\x12\x12\n" +
@@ -2728,7 +2770,9 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\tR\tupdatedAt\x1as\n" +
+	"updated_at\x18\x10 \x01(\tR\tupdatedAt\x12-\n" +
+	"\x13google_cal_event_id\x18\x1e \x01(\tR\x10googleCalEventId\x12/\n" +
+	"\x14google_cal_synced_at\x18\x1f \x01(\tR\x11googleCalSyncedAt\x1as\n" +
 	"\vLineupEntry\x12\x16\n" +
 	"\x06artist\x18\x01 \x01(\tR\x06artist\x12\x12\n" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1d\n" +
@@ -2890,7 +2934,7 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\tR\tcreatedAt\"F\n" +
 	"\x11AuditLogEntryList\x121\n" +
-	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xb9\x05\n" +
+	"\aentries\x18\x01 \x03(\v2\x17.pyxis.v1.AuditLogEntryR\aentries\"\xc3\x06\n" +
 	"\bSettings\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1d\n" +
 	"\n" +
@@ -2913,7 +2957,10 @@ const file_proto_pyxis_v1_show_proto_rawDesc = "" +
 	"\rbooking_email\x18\x10 \x01(\tR\fbookingEmail\x12!\n" +
 	"\fauto_archive\x18\x11 \x01(\bR\vautoArchive\x12'\n" +
 	"\x0fdiscord_posting\x18\x12 \x01(\bR\x0ediscordPosting\x12.\n" +
-	"\x13safe_space_required\x18\x13 \x01(\bR\x11safeSpaceRequired\"+\n" +
+	"\x13safe_space_required\x18\x13 \x01(\bR\x11safeSpaceRequired\x12,\n" +
+	"\x12google_cal_enabled\x18\x14 \x01(\bR\x10googleCalEnabled\x12\"\n" +
+	"\rgoogle_cal_id\x18\x15 \x01(\tR\vgoogleCalId\x126\n" +
+	"\x17external_calendars_json\x18\x16 \x01(\tR\x15externalCalendarsJson\"+\n" +
 	"\x0fSuccessResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"{\n" +
 	"\rErrorResponse\x123\n" +

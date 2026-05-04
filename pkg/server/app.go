@@ -615,6 +615,35 @@ func (s *Server) handleAnnounceShow(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.SuccessResponse{Success: true})
 }
 
+func (s *Server) handleSyncShowToGCal(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	show, err := s.showService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	// Run sync synchronously (not fire-and-forget) so we can return the result
+	s.showService.SyncShowToGCalSync(ctx, show)
+
+	// Reload to get the updated event ID
+	show, err = s.showService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, showToProto(show))
+}
+
 func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -1135,6 +1164,11 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		AutoArchive            bool   `json:"autoArchive"`
 		DiscordPosting         bool   `json:"discordPosting"`
 		SafeSpaceRequired      bool   `json:"safeSpaceRequired"`
+
+		// Google Calendar
+		GoogleCalEnabled       bool   `json:"googleCalEnabled"`
+		GoogleCalID            string `json:"googleCalId"`
+		ExternalCalendarsJSON  string `json:"externalCalendarsJson"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))
@@ -1144,6 +1178,12 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 	discordGuildID := req.DiscordGuildID
 	if s.cfg != nil && s.cfg.DiscordGuildID != "" {
 		discordGuildID = ""
+	}
+
+	// Parse external calendars JSON
+	var externalCalendars []domain.ExternalCalendarConfig
+	if req.ExternalCalendarsJSON != "" {
+		_ = json.Unmarshal([]byte(req.ExternalCalendarsJSON), &externalCalendars)
 	}
 
 	updated, err := s.settingsService.Update(ctx, &domain.Settings{
@@ -1164,6 +1204,10 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		AutoArchive:            req.AutoArchive,
 		DiscordPosting:         req.DiscordPosting,
 		SafeSpaceRequired:      req.SafeSpaceRequired,
+
+		GoogleCalEnabled:  req.GoogleCalEnabled,
+		GoogleCalID:       req.GoogleCalID,
+		ExternalCalendars: externalCalendars,
 	})
 	if err != nil {
 		respondError(w, err)

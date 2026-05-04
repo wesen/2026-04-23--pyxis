@@ -97,6 +97,12 @@ export const settings = create(SettingsSchema, {
   discordPosting: true,
   safeSpaceRequired: true,
   updatedAt: '',
+  googleCalEnabled: true,
+  googleCalId: '84196aa707aae9c09527763c2773c338a98a200bd8a816cc50beeebb41ce0757@group.calendar.google.com',
+  externalCalendarsJson: JSON.stringify([
+    { id: 'neighbor-venue@group.calendar.google.com', name: 'Neighbor Venue', enabled: true },
+    { id: 'city-arts@group.calendar.google.com', name: 'City Arts Council', enabled: false },
+  ]),
 });
 
 export const mockUser = create(UserSchema, {

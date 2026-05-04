@@ -218,6 +218,11 @@ func showToProto(show *domain.Show) *pyxisv1.Show {
 			EndTime:   entry.EndTime,
 		})
 	}
+	// Google Calendar sync status
+	pb.GoogleCalEventId = show.GoogleCalEventID
+	if show.GoogleCalSyncedAt != nil {
+		pb.GoogleCalSyncedAt = show.GoogleCalSyncedAt.Format(time.RFC3339)
+	}
 	return pb
 }
 
@@ -376,6 +381,13 @@ func settingsToProto(settings *domain.Settings) *pyxisv1.Settings {
 	}
 	if settings.Capacity != nil {
 		pb.Capacity = int32(*settings.Capacity)
+	}
+	// Google Calendar integration
+	pb.GoogleCalEnabled = settings.GoogleCalEnabled
+	pb.GoogleCalId = settings.GoogleCalID
+	if len(settings.ExternalCalendars) > 0 {
+		extJSON, _ := json.Marshal(settings.ExternalCalendars)
+		pb.ExternalCalendarsJson = string(extJSON)
 	}
 	return pb
 }

@@ -155,6 +155,9 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux.Handle("PATCH /api/app/shows/{id}/archive", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleArchiveShow))))
 	mux.Handle("POST /api/app/shows/{id}/announce", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleAnnounceShow))))
 
+	// Staff GCal sync endpoint
+	mux.Handle("POST /api/app/shows/{id}/sync-gcal", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleSyncShowToGCal))))
+
 	// Staff flyer endpoints
 	mux.Handle("POST /api/app/shows/{id}/flyer", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleUploadFlyer))))
 	mux.Handle("DELETE /api/app/shows/{id}/flyer", s.requireAuth(s.requireRole("admin", "booker")(http.HandlerFunc(s.handleDeleteFlyer))))
