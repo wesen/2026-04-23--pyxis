@@ -45,3 +45,8 @@ Phase 3.4: Unit tests for ShowToEvent (5 cases), description, firstNonEmpty (com
 
 Step 8: Added pyxis external-calendars CLI command group (list/set/remove) using Glazed framework. Supports --db-url, --calendar id=name (repeatable), --replace, --calendar-id (commit 2f44bac).
 
+
+## 2026-05-04
+
+Step 9: CLI sync-show verb (commit 6567fed). Phase 6 staff widgets: GCalSettingsSection + ShowGCalSyncStatus with Storybook stories (commit 6ec34f7). Updated Phase 6 tasks with 7 subtasks.
+

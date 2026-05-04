@@ -570,3 +570,80 @@ The design doc assumed external calendars would be configured via SQL or staff A
 - Commit: `2f44bac` — 6 files changed, 458 insertions, 12 deletions
 - Key new files: `root.go`, `list.go`, `set.go`, `remove.go` in `cmd/pyxis/cmds/external-calendars/`
 - Key modified files: `pkg/cmdtools/root.go`, `cmd/pyxis/main.go`
+
+---
+
+## Step 9: CLI sync-show verb + Phase 6 staff widgets
+
+### Prompt Context
+
+**User prompt (verbatim):** "add CLI verb for sync. Then create the widgets + storybook stories + msw + slice for phase 6 (add tasks to ticket) so I can view the widget style before moving on."
+
+**Assistant interpretation:** Add a `sync-show` CLI command that manually triggers GCal sync for a specific show. Then build the staff UI widgets (GCalSettingsSection for settings page, ShowGCalSyncStatus for show detail page) with Storybook stories so the user can visually review the components before wiring them into the app.
+
+**Inferred user intent:** Complete the operational tooling (CLI sync) and preview the staff UI components before committing to the full integration.
+
+**Commit (code):** `6567fed` — sync-show CLI verb, `6ec34f7` — staff UI widgets + stories
+
+### What I did
+
+**CLI sync-show verb:**
+- Created `cmd/pyxis/cmds/external-calendars/sync_show.go`
+- Connects to DB, loads show + settings, creates GCal client from credentials file
+- Creates or updates the Google Calendar event, saves event ID back to DB
+- Registered in root.go alongside list/set/remove
+- Flags: `--show-id`, `--credentials-file` (default `data/gcal/credentials.json`), `--calendar-id` (overrides settings)
+
+**Phase 6 staff widgets:**
+- `GCalSettingsSection` organism: toggle for GCal enable, calendar ID input, external calendars list with add/remove/toggle. 5 stories: Default, Disabled, NoExternalCalendars, ReadOnly, ManyCalendars.
+- `ShowGCalSyncStatus` molecule: sync status dot + label, event ID badge, manual sync button. 5 stories: Synced, NotSynced, Syncing, ReadOnly, NoEventId.
+- Both use existing app patterns: `appPart()`, `SettingsToggleRow`, `Button` from pyxis-components.
+- Updated tasks with detailed Phase 6 breakdown (6.1-6.7).
+
+### Why
+
+The sync-show CLI provides operational control for debugging/re-syncing without running the full server. The staff widgets let the user visually review the UI before committing to the full wiring (RTK mutations, settings panel integration).
+
+### What worked
+
+- Both components compile and build clean
+- Stories use the same pattern as existing staff app stories
+- The sync-show CLI reuses existing `gcal.NewClient` + `gcal.ShowToEvent` — no code duplication
+
+### What didn't work
+
+- The `os.ReadFile` import was needed (not a custom `domain.ReadFile`) — corrected during initial write
+
+### What I learned
+
+- The staff app (`pyxis-app`) is a separate workspace package from the public site (`pyxis-user-site`) — different build pipelines, different component patterns
+- Staff app uses `appPart()` instead of `pyxisPart()` for data attributes
+- The staff app doesn't use proto-generated gcal fields in Settings yet — the stories pass data as props, not from the API
+
+### What was tricky to build
+
+- Deciding the GCal settings scope: the `GCalSettingsSection` manages external calendars client-side (add/remove/toggle) but the actual persist happens via the settings update mutation. The component doesn't own state persistence — it just renders and calls callbacks.
+
+### What warrants a second pair of eyes
+
+- The `GCalSettingsSection` expects `onAddExternalCalendar`, `onRemoveExternalCalendar`, `onToggleExternalCalendar` callbacks — the parent is responsible for building the updated `externalCalendars` array and persisting it
+- The `ShowGCalSyncStatus` doesn't have a backend mutation yet — the `onSync` callback is just a placeholder
+
+### What should be done in the future
+
+- Wire GCalSettingsSection into SettingsPanel (6.5)
+- Wire ShowGCalSyncStatus into ShowDetailInfoPanel (6.6)
+- Add RTK Query mutation for sync trigger (6.7)
+- Add gcal fields to Settings proto or handle them as extra JSON fields
+
+### Code review instructions
+
+- CLI: `cmd/pyxis/cmds/external-calendars/sync_show.go` — verify auth, error handling, event ID storage
+- Widgets: `GCalSettingsSection.tsx` → `ShowGCalSyncStatus.tsx` — verify component API
+- Stories: verify visual appearance in Storybook
+- Verify with: `go build ./...` and `cd web && pnpm run build`
+
+### Technical details
+
+- Commits: `6567fed` (sync-show CLI, 2 files), `6ec34f7` (staff widgets + stories, 9 files)
+- Key new files: `sync_show.go`, `GCalSettingsSection.tsx/css/stories.tsx`, `ShowGCalSyncStatus.tsx/css/stories.tsx`
