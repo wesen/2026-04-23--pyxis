@@ -15,6 +15,8 @@ import {
   BookingFormDataSchema,
   Settings,
   SettingsSchema,
+  ExternalEventListSchema,
+  type ExternalEvent,
 } from 'pyxis-types';
 import { endpoints } from './endpoints';
 
@@ -29,7 +31,7 @@ export const publicApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Archive', 'Show', 'Settings', 'Submission'],
+  tagTypes: ['Archive', 'Show', 'Settings', 'Submission', 'ExternalEvent'],
   endpoints: (builder) => ({
     getUpcomingShows: builder.query<Show[], void>({
       query: () => endpoints.shows,
@@ -84,6 +86,19 @@ export const publicApi = createApi({
       transformResponse: (response: unknown) => fromJson(BookingConfirmationSchema, response as any),
       invalidatesTags: [{ type: 'Submission', id: 'LIST' }],
     }),
+
+    getExternalEvents: builder.query<ExternalEvent[], { from?: string; to?: string } | void>({
+      query: (params) => ({
+        url: endpoints.externalEvents,
+        params: params ? { from: params.from, to: params.to } : undefined,
+      }),
+      transformResponse: (response: unknown) => {
+        const list = fromJson(ExternalEventListSchema, response as any);
+        return list.events;
+      },
+      keepUnusedDataFor: 5 * 60,
+      providesTags: [{ type: 'ExternalEvent', id: 'LIST' }],
+    }),
   }),
 });
 
@@ -94,4 +109,5 @@ export const {
   useGetPublicSettingsQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,
+  useGetExternalEventsQuery,
 } = publicApi;

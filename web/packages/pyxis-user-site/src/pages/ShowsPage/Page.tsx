@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { Empty, MailingListCTA, PublicPageHeader, ShowGrid } from 'pyxis-components';
+import { Empty, MailingListCTA, PublicPageHeader, ShowGrid, ExternalEventList } from 'pyxis-components';
 import { getApiErrorMessage } from '../../api/errors';
-import { usePublicSettings, useUpcomingShows } from '../../api/hooks';
+import { usePublicSettings, useUpcomingShows, useExternalEvents } from '../../api/hooks';
 import './Page.css';
 
 export function Shows() {
   const navigate = useNavigate();
   const { data: shows, isLoading, isError, error } = useUpcomingShows();
   const { data: settings } = usePublicSettings();
+  const { data: externalEvents } = useExternalEvents();
 
   if (isLoading) return <ShowsSkeleton />;
   if (isError || !shows) return <ShowsError error={error} />;
@@ -35,6 +36,18 @@ export function Shows() {
         <section className="pyxis-shows-page__mailing-list" data-section="mailing-list">
           <MailingListCTA />
         </section>
+
+        {externalEvents && externalEvents.length > 0 && (
+          <section className="pyxis-shows-page__external-events" data-section="external-events">
+            <header className="pyxis-shows-page__external-events-header">
+              <PublicPageHeader
+                kicker="Community"
+                title="Events Nearby"
+              />
+            </header>
+            <ExternalEventList events={externalEvents} />
+          </section>
+        )}
       </div>
     </main>
   );

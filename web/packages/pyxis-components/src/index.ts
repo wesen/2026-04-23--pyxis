@@ -101,6 +101,10 @@ export { CollectiveList } from './public/organisms/CollectiveList';
 export type { CollectiveListProps } from './public/organisms/CollectiveList';
 export { FindUsBlock } from './public/organisms/FindUsBlock';
 export type { FindUsBlockProps } from './public/organisms/FindUsBlock';
+export { ExternalEventCard } from './public/molecules/ExternalEventCard';
+export type { ExternalEventCardProps } from './public/molecules/ExternalEventCard';
+export { ExternalEventList } from './public/organisms/ExternalEventList';
+export type { ExternalEventListProps } from './public/organisms/ExternalEventList';
 
 // Tokens
 export {

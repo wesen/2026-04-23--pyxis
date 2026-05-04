@@ -11,6 +11,7 @@ export const endpoints = {
   archiveStats: '/api/public/archive/stats',
   settings:     '/api/public/settings',
   submissions:  '/api/public/submissions',
+  externalEvents: '/api/public/external-events',
 } as const;
 
 export type Endpoint = typeof endpoints[keyof typeof endpoints];
