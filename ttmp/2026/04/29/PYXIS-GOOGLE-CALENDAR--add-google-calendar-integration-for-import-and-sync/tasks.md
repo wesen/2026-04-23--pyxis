@@ -1,7 +1,7 @@
 ---
 DocType: tasks
 Ticket: PYXIS-GOOGLE-CALENDAR
-LastUpdated: 2026-04-29
+LastUpdated: 2026-05-04
 ---
 
 # Tasks
@@ -36,16 +36,37 @@ LastUpdated: 2026-04-29
 - [x] 4.2 Add `GET /api/public/external-events` route and handler
 - [x] 4.3 Implement in-memory caching (5 min TTL)
 - [x] 4.4 Add config parsing for external_calendars JSON
-- [ ] 4.5 Unit and integration tests
-- [ ] 4.6 Manual test: configure external calendar → verify events appear
+- [ ] 4.5 Add `ExternalEvent` and `ExternalEventList` to `proto/pyxis/v1/show.proto`
+- [ ] 4.6 Run `buf generate` to regenerate Go + TS types
+- [ ] 4.7 Convert handler from `respondJSON` to `respondProtoJSON` using proto types
+- [ ] 4.8 Unit and integration tests (including proto serialization round-trip)
+- [ ] 4.9 Manual test: configure external calendar → verify events appear
 
 ## Phase 5: Frontend
 
-- [ ] 5.1 Add `useExternalEvents` hook
-- [ ] 5.2 Create `ExternalEventCard` component
-- [ ] 5.3 Add external events section to ShowsPage
-- [ ] 5.4 Storybook stories
-- [ ] 5.5 Responsive styling
+- [ ] 5.1 Re-export `ExternalEvent` / `ExternalEventList` schemas from `pyxis-types`
+- [ ] 5.2 Add `externalEvents` endpoint to `endpoints.ts`
+- [ ] 5.3 Add `getExternalEvents` RTK Query endpoint in `publicApi.ts` (with `fromJson(ExternalEventListSchema, ...)`)
+- [ ] 5.4 Add `useExternalEvents()` wrapper hook in `api/hooks.ts`
+- [ ] 5.5 Create `ExternalEventCard` molecule in `pyxis-components`
+- [ ] 5.6 Create `ExternalEventList` organism in `pyxis-components`
+- [ ] 5.7 Add external events section to `ShowsPage/Page.tsx`
+- [ ] 5.8 Storybook stories for `ExternalEventCard` and `ExternalEventList`
+- [ ] 5.9 Responsive styling and CSS
+
+## Phase 4.5-4.6 note: Proto-first for external events
+
+The external-events endpoint must use protobuf like every other public API endpoint.
+This means adding messages to `show.proto`, running `buf generate`, and converting
+the handler from raw JSON to `respondProtoJSON`. The frontend then uses the
+generated `ExternalEventListSchema` with `fromJson`, same pattern as shows/archive.
+
+### Also noted: non-proto staff endpoints (deferred)
+
+The show log endpoints (`handleListShowLog`, `handleGetShowLog`, `handleUpsertShowLog`)
+also use raw `respondJSON` with ad-hoc structs. These are staff-only internal
+endpoints — converting them to proto is a separate cleanup task, not part of
+this ticket.
 
 ## Phase 6: Staff UI (Optional)
 

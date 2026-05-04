@@ -1048,12 +1048,17 @@ Each entry has:
 - `from` — start date (default: today)
 - `to` — end date (default: 30 days from now)
 
+**Protobuf response:** The endpoint returns `ExternalEventList` (defined in `show.proto`),
+serialized via `respondProtoJSON` — same as every other public endpoint.
+This ensures the frontend can use the generated `ExternalEventListSchema` with
+`fromJson`, avoiding manual type matching.
+
 **Handler pseudocode:**
 
 ```
 function handleListExternalEvents(w, r):
     if gcalClient is nil:
-        respond with 200 and empty list  // not an error
+        respond with 200 and empty ExternalEventList  // not an error
         return
 
     // Parse date range from query params
@@ -1073,13 +1078,13 @@ function handleListExternalEvents(w, r):
         events = gcalClient.ListExternalEvents(ctx, cal.ID, from, to)
         for each event in events:
             event.CalendarName = cal.Name
-            event.CalendarColor = cal.Color
         allEvents = append(allEvents, events...)
 
     // Sort by start time
     sort allEvents by Start time
 
-    respond with 200 and allEvents as JSON
+    // Convert to proto and respond
+    respond with 200 and ExternalEventList{Events: allEvents}
 ```
 
 **Actual Go code:**
@@ -1089,7 +1094,7 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
     ctx := r.Context()
 
     if s.gcalClient == nil {
-        respondJSON(w, http.StatusOK, []interface{}{})
+        respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{})
         return
     }
 
@@ -1119,7 +1124,7 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
     }
 
     if len(settings.ExternalCalendars) == 0 {
-        respondJSON(w, http.StatusOK, []interface{}{})
+        respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{})
         return
     }
 
@@ -1145,7 +1150,12 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
         return allEvents[i].Start.Before(allEvents[j].Start)
     })
 
-    respondJSON(w, http.StatusOK, allEvents)
+    // Convert to proto
+    pbEvents := make([]*pyxisv1.ExternalEvent, len(allEvents))
+    for i, e := range allEvents {
+        pbEvents[i] = externalEventToProto(&e)
+    }
+    respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{Events: pbEvents})
 }
 ```
 
@@ -1198,43 +1208,58 @@ This is important because we don't control external calendars. If the neighbor v
 
 ## 10. Frontend Implementation — External Calendar Display
 
-### 10.1 API Hook
+### 10.1 API Hook (proto-first)
 
-Add a React Query hook to fetch external events:
+The external events endpoint uses protobuf, same as every other public API.
+The generated `ExternalEventList` type and `ExternalEventListSchema` live in
+`pyxis-types` (codegenned via `buf generate`). The RTK Query endpoint uses
+`fromJson` to deserialize, exactly like shows and archive.
 
-```typescript
-// web/packages/pyxis-user-site/src/api/hooks.ts
+**Proto definition** (added to `proto/pyxis/v1/show.proto`):
 
-import { useQuery } from '@tanstack/react-query';
-
-interface ExternalEvent {
-  id: string;
-  calendarId: string;
-  calendarName: string;
-  summary: string;
-  description: string;
-  location: string;
-  start: string;  // ISO 8601
-  end: string;
-  url: string;
-  isAllDay: boolean;
+```protobuf
+message ExternalEvent {
+  string id            = 1;
+  string calendar_id   = 2;
+  string calendar_name = 3;
+  string summary       = 4;
+  string description   = 5;
+  string location      = 6;
+  string start         = 7;  // RFC 3339
+  string end           = 8;  // RFC 3339
+  string url           = 9;
+  bool   is_all_day    = 10;
 }
 
-export function useExternalEvents(from?: string, to?: string) {
-  const params = new URLSearchParams();
-  if (from) params.set('from', from);
-  if (to) params.set('to', to);
+message ExternalEventList {
+  repeated ExternalEvent events = 1;
+}
+```
 
-  return useQuery<ExternalEvent[]>({
-    queryKey: ['external-events', from, to],
-    queryFn: async () => {
-      const response = await fetch(`/api/public/external-events?${params}`);
-      if (!response.ok) return []; // graceful fallback
-      return response.json();
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes (matches server cache)
-    retry: 1, // only retry once
-  });
+**RTK Query endpoint** (in `publicApi.ts`):
+
+```typescript
+import { ExternalEventList, ExternalEventListSchema } from 'pyxis-types';
+
+// Inside createApi endpoints:
+getExternalEvents: builder.query<ExternalEvent[], ExternalEventsParams | void>({
+  query: (params) => ({
+    url: endpoints.externalEvents,
+    params: params ? { from: params.from, to: params.to } : undefined,
+  }),
+  transformResponse: (response: unknown) => {
+    const list = fromJson(ExternalEventListSchema, response as any);
+    return list.events;
+  },
+  keepUnusedDataFor: 5 * 60, // 5 minutes (matches server cache)
+}),
+```
+
+**Compatibility hook** (in `api/hooks.ts`):
+
+```typescript
+export function useExternalEvents(params?: { from?: string; to?: string }) {
+  return useGetExternalEventsQuery(params);
 }
 ```
 
@@ -1545,11 +1570,49 @@ message Show {
 
   // Google Calendar sync status (staff-only, not exposed on public API)
   string google_cal_event_id = 30;
-  google.protobuf.Timestamp google_cal_synced_at = 31;
+  string google_cal_synced_at = 31;  // RFC 3339 timestamp
 }
 ```
 
 These fields should only be included in staff API responses (not public), since fans don't need to know about the Google Calendar integration.
+
+Add ExternalEvent messages for the public external-events endpoint:
+
+```protobuf
+// proto/pyxis/v1/show.proto
+
+message ExternalEvent {
+  string id            = 1;
+  string calendar_id   = 2;
+  string calendar_name = 3;
+  string summary       = 4;
+  string description   = 5;
+  string location      = 6;
+  string start         = 7;  // RFC 3339
+  string end           = 8;  // RFC 3339
+  string url           = 9;
+  bool   is_all_day    = 10;
+}
+
+message ExternalEventList {
+  repeated ExternalEvent events = 1;
+}
+```
+
+After editing the proto, run `buf generate` to regenerate:
+- Go: `gen/proto/proto/pyxis/v1/show.pb.go`
+- TypeScript: `web/packages/pyxis-types/src/generated/proto/pyxis/v1/show_pb.ts`
+
+The handler (`handleListExternalEvents`) must use `respondProtoJSON` with
+`ExternalEventList`, not raw `respondJSON`. The frontend uses `fromJson`
+with `ExternalEventListSchema`, consistent with all other public endpoints.
+
+### 12.6 Non-proto staff endpoints (deferred)
+
+The show log endpoints (`handleListShowLog`, `handleGetShowLog`, `handleUpsertShowLog`)
+currently use raw `respondJSON` with ad-hoc Go structs instead of protobuf.
+Converting these is a separate cleanup task — they are staff-only internal
+endpoints and not part of this ticket.
 
 ***
 ## 13. Testing Strategy
