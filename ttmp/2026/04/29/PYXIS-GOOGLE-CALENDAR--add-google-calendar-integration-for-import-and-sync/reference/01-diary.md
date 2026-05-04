@@ -494,3 +494,79 @@ Proving end-to-end auth before moving to frontend work avoids discovering auth i
 - Test calendar: Pyxis Fake (`84196aa...@group.calendar.google.com`)
 - Test event: "🧪 Pyxis Auth Test — delete me" — created then deleted
 - Commit: `3007a48` — "docs(gcal): add service account playbook, update tasks/changelog, gitignore credentials"
+
+---
+
+## Step 8: CLI verb for managing external calendars
+
+### Prompt Context
+
+**User prompt (verbatim):** "add a CLI verb to get/update the external calendars in the DB. Use the glazed command framework."
+
+**Assistant interpretation:** Add a `pyxis external-calendars` command group with `list`, `set`, and `remove` subcommands, using the Glazed command framework (fields, sections, processor pattern) consistent with existing commands like `migrate` and `serve`.
+
+**Inferred user intent:** Make external calendar configuration easy without direct SQL or hitting the staff API — a CLI tool the venue operator can use.
+
+**Commit (code):** `2f44bac` — "feat(cli): add external-calendars command group (list/set/remove) with Glazed framework"
+
+### What I did
+
+- Created `cmd/pyxis/cmds/external-calendars/` directory with 4 files:
+  - `root.go` — `NewCommand()` returns a `*cobra.Command` group with 3 subcommands. Shares a `--db-url` flag definition and common sections (glazed output + logging).
+  - `list.go` — `ListCommand` connects to DB, loads settings, emits one row per external calendar. Shows "(none configured)" when empty.
+  - `set.go` — `SetCommand` accepts `--calendar id=name` (repeatable) and `--replace` flag. Appends by default (skipping duplicates), or replaces entire list.
+  - `remove.go` — `RemoveCommand` removes a single calendar by `--calendar-id`. Errors if ID not found.
+- Updated `pkg/cmdtools/root.go` to return `([]glazedcmds.Command, []CobraCommandGroup, error)` — the external-calendars group is a plain cobra command, not a glazed Command.
+- Updated `cmd/pyxis/main.go` to handle both glazed commands and cobra groups.
+- Helper functions: `loadSettings()` (connect + get settings), `parseCalendarEntry()` (parse `id=name`), `externalCalendarsToJSON()` (debug output).
+
+### Why
+
+The design doc assumed external calendars would be configured via SQL or staff API. A CLI verb is more ergonomic and consistent with the project's Glazed-based tooling.
+
+### What worked
+
+- The Glazed pattern (CommandDescription → RunIntoGlazeProcessor → types.NewRow) works cleanly for DB read/write operations
+- The `list` command outputs via Glazed's table/json/yaml output formats for free
+- `--db-url` flag with default matches other commands (`migrate`, `seed`, `export`)
+
+### What didn't work
+
+- Initial build failed on type mismatches: `fields.FieldDefinition` → `fields.Definition`, `glazedcmds.Section` → `schema.Section`, `db.New(database)` → `db.New(database.Pool)`. These are API differences between the skill doc (which describes a newer glazed version) and the actual glazed v1.0.0 used in this project.
+- The ` CobraCommandGroup` wrapper was needed because `external-calendars` is a cobra group (not a single Glazed command), so it can't go through `cli.BuildCobraCommandFromCommand`.
+
+### What I learned
+
+- In glazed v1.0.0, `fields.New()` returns `*fields.Definition` (not `FieldDefinition`)
+- `schema.Section` is the interface type (not `glazedcmds.Section`)
+- `db.Pool` wraps `pgxpool.Pool` — pass `database.Pool` to `db.New()`, not `database` directly
+
+### What was tricky to build
+
+- The return type change for `cmdtools.NewCommandGroup()` — needed a way to mix Glazed commands and plain Cobra commands. Created a `CobraCommandGroup` wrapper type.
+- Ensuring `--calendar` is repeatable: glazed handles `stringList` fields natively, but `[]string` in the settings struct required `fields.TypeString` with repeated flag usage.
+
+### What warrants a second pair of eyes
+
+- The `--calendar` flag uses `fields.TypeString` (single string) but is meant to be repeated — verify glazed handles repeatable string flags correctly with `[]string` in the struct
+- No transaction wrapping on the update — if two CLI runs happen concurrently, last-write-wins
+
+### What should be done in the future
+
+- Add a `--enable/--disable` toggle command for individual calendars without removing them
+- Add input validation for calendar IDs (must contain `@group.calendar.google.com` or `@calendar.google.com`)
+- Add a `show` subcommand to display events from a configured calendar (useful for debugging)
+
+### Code review instructions
+
+- Start with `cmd/pyxis/cmds/external-calendars/root.go` — the group wiring
+- Then `list.go` → `set.go` → `remove.go` — the three subcommands
+- Then `pkg/cmdtools/root.go` — the new return type
+- Then `cmd/pyxis/main.go` — the group registration
+- Verify with: `go build ./...` and `go run ./cmd/pyxis external-calendars --help`
+
+### Technical details
+
+- Commit: `2f44bac` — 6 files changed, 458 insertions, 12 deletions
+- Key new files: `root.go`, `list.go`, `set.go`, `remove.go` in `cmd/pyxis/cmds/external-calendars/`
+- Key modified files: `pkg/cmdtools/root.go`, `cmd/pyxis/main.go`

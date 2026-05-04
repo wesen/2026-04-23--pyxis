@@ -40,3 +40,8 @@ Phase 1 complete: Google Calendar API enabled, service account pyxis-calendar-sy
 
 Phase 3.4: Unit tests for ShowToEvent (5 cases), description, firstNonEmpty (commit 3298d03). Phase 4.5-4.7: Added ExternalEvent/ExternalEventList to proto, buf generate, converted handler to respondProtoJSON (commit fedd482). Phase 5: Full frontend — ExternalEventCard molecule, ExternalEventList organism, RTK Query endpoint, useExternalEvents hook, ShowsPage integration, Storybook stories (commit 1da1ab0).
 
+
+## 2026-05-04
+
+Step 8: Added pyxis external-calendars CLI command group (list/set/remove) using Glazed framework. Supports --db-url, --calendar id=name (repeatable), --replace, --calendar-id (commit 2f44bac).
+
