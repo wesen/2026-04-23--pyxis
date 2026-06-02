@@ -53,6 +53,10 @@ topics:
       description: Visual diff and screenshot comparison workflows for frontend implementation
     - slug: automation
       description: Automation scripts, CLI workflows, and repeatable tooling
+    - slug: gcal
+      description: Google Calendar integration and synchronization behavior
+    - slug: code-review
+      description: Follow-up work created from code review comments
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes
