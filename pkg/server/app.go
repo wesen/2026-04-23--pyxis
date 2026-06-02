@@ -229,6 +229,8 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 
 func submissionStatusToString(status pyxisv1.SubmissionStatus) string {
 	switch status {
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_UNSPECIFIED:
+		return ""
 	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_PENDING:
 		return "pending"
 	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_APPROVED:
@@ -246,6 +248,8 @@ func submissionStatusToString(status pyxisv1.SubmissionStatus) string {
 
 func showStatusToString(status pyxisv1.ShowStatus) string {
 	switch status {
+	case pyxisv1.ShowStatus_SHOW_STATUS_UNSPECIFIED:
+		return domain.StatusDraft
 	case pyxisv1.ShowStatus_SHOW_STATUS_CONFIRMED:
 		return domain.StatusConfirmed
 	case pyxisv1.ShowStatus_SHOW_STATUS_CANCELLED:
@@ -660,6 +664,8 @@ func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	r.Body = http.MaxBytesReader(w, r.Body, 11<<20)
+	// #nosec G120 -- request body is bounded by MaxBytesReader before multipart parsing.
 	if err := r.ParseMultipartForm(10 << 20); err != nil {
 		respondError(w, fmt.Errorf("parse form: %w", err))
 		return
@@ -966,10 +972,10 @@ func buildShowLogEntry(show *domain.Show, log *domain.ShowLog) showLogEntryRespo
 	entry.Incident = log.Incident
 	entry.IncidentNotes = log.IncidentNotes
 	entry.LoggedBy = log.LoggedBy
-	if log.CreatedAt.IsZero() == false {
+	if !log.CreatedAt.IsZero() {
 		entry.LoggedAt = log.CreatedAt.Format(time.RFC3339)
 	}
-	if log.UpdatedAt.IsZero() == false {
+	if !log.UpdatedAt.IsZero() {
 		entry.UpdatedAt = log.UpdatedAt.Format(time.RFC3339)
 	}
 	if log.Incident {
@@ -1144,9 +1150,9 @@ func (s *Server) settingsWithRuntimeConfig(settings *domain.Settings) *domain.Se
 	if settings == nil || s.cfg == nil || s.cfg.DiscordGuildID == "" {
 		return settings
 	}
-	copy := *settings
-	copy.DiscordGuildID = s.cfg.DiscordGuildID
-	return &copy
+	settingsCopy := *settings
+	settingsCopy.DiscordGuildID = s.cfg.DiscordGuildID
+	return &settingsCopy
 }
 
 func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
@@ -1195,9 +1201,9 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		SafeSpaceRequired      bool   `json:"safeSpaceRequired"`
 
 		// Google Calendar
-		GoogleCalEnabled       bool   `json:"googleCalEnabled"`
-		GoogleCalID            string `json:"googleCalId"`
-		ExternalCalendarsJSON  string `json:"externalCalendarsJson"`
+		GoogleCalEnabled      bool   `json:"googleCalEnabled"`
+		GoogleCalID           string `json:"googleCalId"`
+		ExternalCalendarsJSON string `json:"externalCalendarsJson"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))

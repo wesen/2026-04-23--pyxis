@@ -13,6 +13,8 @@ type ExternalEvent struct {
 	Location     string    `json:"location"`
 	Start        time.Time `json:"start"`
 	End          time.Time `json:"end"`
+	StartDate    string    `json:"startDate"`
+	EndDate      string    `json:"endDate"`
 	URL          string    `json:"url"`
 	IsAllDay     bool      `json:"isAllDay"`
 }

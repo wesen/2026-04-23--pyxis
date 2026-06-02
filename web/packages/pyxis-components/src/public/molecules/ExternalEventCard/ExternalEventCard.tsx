@@ -8,9 +8,16 @@ export type ExternalEventCardProps = {
   className?: string;
 };
 
+const parseAllDayDate = (dateStr: string): Date | null => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
 const formatEventDate = (dateStr: string, isAllDay: boolean): string => {
   if (!dateStr) return '';
-  const d = new Date(dateStr);
+  const d = isAllDay ? parseAllDayDate(dateStr) ?? new Date(dateStr) : new Date(dateStr);
   if (isNaN(d.getTime())) return dateStr;
   if (isAllDay) {
     return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });

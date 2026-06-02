@@ -103,13 +103,13 @@ func runDagger(ctx context.Context, repoRoot string) error {
 	if err != nil {
 		return fmt.Errorf("create public temp dist dir: %w", err)
 	}
-	defer os.RemoveAll(publicTmpDir)
+	defer func() { _ = os.RemoveAll(publicTmpDir) }()
 
 	appTmpDir, err := os.MkdirTemp("", "pyxis-app-dist-")
 	if err != nil {
 		return fmt.Errorf("create staff app temp dist dir: %w", err)
 	}
-	defer os.RemoveAll(appTmpDir)
+	defer func() { _ = os.RemoveAll(appTmpDir) }()
 
 	if _, err := container.Directory("/src/packages/pyxis-user-site/dist").Export(ctx, publicTmpDir); err != nil {
 		return fmt.Errorf("export public site dist from Dagger: %w", err)
@@ -266,11 +266,12 @@ func copyTree(src, dst string) error {
 			return os.MkdirAll(target, 0o755)
 		}
 
+		// #nosec G122 -- path is constrained to the trusted Vite dist tree being copied into the embed tree.
 		in, err := os.Open(path)
 		if err != nil {
 			return err
 		}
-		defer in.Close()
+		defer func() { _ = in.Close() }()
 
 		if err := os.MkdirAll(filepath.Dir(target), 0o755); err != nil {
 			return err
@@ -279,7 +280,7 @@ func copyTree(src, dst string) error {
 		if err != nil {
 			return err
 		}
-		defer out.Close()
+		defer func() { _ = out.Close() }()
 
 		if _, err := io.Copy(out, in); err != nil {
 			return err

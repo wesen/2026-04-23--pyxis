@@ -11,12 +11,18 @@ export type CoreSettingsDraft = Pick<Settings,
   'autoArchive' | 'discordPosting' | 'safeSpaceRequired' | 'setupComplete'
 >;
 
+export type GCalSettingsDraft = {
+  enabled: boolean;
+  calendarId: string;
+  externalCalendars: ExternalCalendarEntry[];
+};
+
 export type SettingsPanelProps = {
   settings: Settings;
   onSaveCoreSettings?: (draft: CoreSettingsDraft) => void;
   isUpdating?: boolean;
   canEdit?: boolean;
-  onSaveGCalSettings?: (gcal: { enabled: boolean; calendarId: string; externalCalendars: ExternalCalendarEntry[] }) => void;
+  onSaveGCalSettings?: (gcal: GCalSettingsDraft) => void;
 };
 
 function draftFromSettings(settings: Settings): CoreSettingsDraft {

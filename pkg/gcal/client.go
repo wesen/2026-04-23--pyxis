@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/domain"
+	"golang.org/x/oauth2/google"
 	"google.golang.org/api/calendar/v3"
 	"google.golang.org/api/option"
-	"golang.org/x/oauth2/google"
 )
 
 const calendarScope = "https://www.googleapis.com/auth/calendar"
@@ -103,8 +103,9 @@ func (c *Client) ListExternalEvents(ctx context.Context, calID string, timeMin, 
 				ext.Start = t
 			}
 			if e.Start.Date != "" {
-				t, _ := time.Parse("2006-01-02", e.Start.Date)
+				t, _ := time.Parse(time.DateOnly, e.Start.Date)
 				ext.Start = t
+				ext.StartDate = e.Start.Date
 				ext.IsAllDay = true
 			}
 		}
@@ -114,8 +115,9 @@ func (c *Client) ListExternalEvents(ctx context.Context, calID string, timeMin, 
 				ext.End = t
 			}
 			if e.End.Date != "" {
-				t, _ := time.Parse("2006-01-02", e.End.Date)
+				t, _ := time.Parse(time.DateOnly, e.End.Date)
 				ext.End = t
+				ext.EndDate = e.End.Date
 			}
 		}
 

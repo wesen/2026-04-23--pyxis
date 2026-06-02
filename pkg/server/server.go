@@ -20,19 +20,19 @@ import (
 
 // Server holds the HTTP handler and dependencies.
 type Server struct {
-	cfg                  *config.Config
-	handler              http.Handler
-	showService          *service.ShowService
-	submissionService    *service.SubmissionService
-	artistService        *service.ArtistService
-	calendarService      *service.CalendarService
-	showLogService       *service.ShowLogService
-	settingsService      *service.SettingsService
-	auditService         service.AuditService
-	authService          *service.AuthService
-	flyerStore           storage.FlyerStore
-	gcalClient           *gcal.Client
-	externalEventsCache  *cachedExternalEvents
+	cfg                 *config.Config
+	handler             http.Handler
+	showService         *service.ShowService
+	submissionService   *service.SubmissionService
+	artistService       *service.ArtistService
+	calendarService     *service.CalendarService
+	showLogService      *service.ShowLogService
+	settingsService     *service.SettingsService
+	auditService        service.AuditService
+	authService         *service.AuthService
+	flyerStore          storage.FlyerStore
+	gcalClient          *gcal.Client
+	externalEventsCache *cachedExternalEvents
 }
 
 // New creates a new Server with routes wired.
@@ -122,7 +122,7 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status":"ok"}`))
+		_, _ = w.Write([]byte(`{"status":"ok"}`))
 	})
 
 	// Public API (no auth)
@@ -221,14 +221,17 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 func (s *Server) Start(ctx context.Context, bind string) error {
 	log.Info().Str("bind", bind).Msg("starting HTTP server")
 	srv := &http.Server{
-		Addr:    bind,
-		Handler: s.handler,
+		Addr:              bind,
+		Handler:           s.handler,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	go func() {
 		<-ctx.Done()
 		log.Info().Msg("shutting down HTTP server")
-		_ = srv.Shutdown(context.Background())
+		shutdownCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 10*time.Second)
+		defer cancel()
+		_ = srv.Shutdown(shutdownCtx)
 	}()
 
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {

@@ -400,7 +400,7 @@ func respondProtoJSON(w http.ResponseWriter, status int, msg proto.Message) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	w.Write(b)
+	_, _ = w.Write(b)
 }
 
 func respondJSON(w http.ResponseWriter, status int, v interface{}) {
@@ -411,7 +411,7 @@ func respondJSON(w http.ResponseWriter, status int, v interface{}) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	w.Write(b)
+	_, _ = w.Write(b)
 }
 
 // cachedExternalEvents provides in-memory caching for external Google Calendar events.
@@ -529,6 +529,17 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 }
 
 func externalEventToProto(e *gcal.ExternalEvent) *pyxisv1.ExternalEvent {
+	start := e.Start.Format(time.RFC3339)
+	end := e.End.Format(time.RFC3339)
+	if e.IsAllDay {
+		if e.StartDate != "" {
+			start = e.StartDate
+		}
+		if e.EndDate != "" {
+			end = e.EndDate
+		}
+	}
+
 	return &pyxisv1.ExternalEvent{
 		Id:           e.ID,
 		CalendarId:   e.CalendarID,
@@ -536,8 +547,8 @@ func externalEventToProto(e *gcal.ExternalEvent) *pyxisv1.ExternalEvent {
 		Summary:      e.Summary,
 		Description:  e.Description,
 		Location:     e.Location,
-		Start:        e.Start.Format(time.RFC3339),
-		End:          e.End.Format(time.RFC3339),
+		Start:        start,
+		End:          end,
 		Url:          e.URL,
 		IsAllDay:     e.IsAllDay,
 	}
@@ -577,5 +588,5 @@ func respondError(w http.ResponseWriter, err error) {
 	})
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	w.Write(b)
+	_, _ = w.Write(b)
 }

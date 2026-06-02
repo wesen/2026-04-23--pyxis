@@ -50,7 +50,7 @@ func (p *Pool) MigrateUp() error {
 	if err != nil {
 		return fmt.Errorf("open sql db: %w", err)
 	}
-	defer sqlDB.Close()
+	defer func() { _ = sqlDB.Close() }()
 
 	src, err := iofs.New(Migrations, "migrations")
 	if err != nil {
@@ -82,7 +82,7 @@ func (p *Pool) MigrateDown() error {
 	if err != nil {
 		return fmt.Errorf("open sql db: %w", err)
 	}
-	defer sqlDB.Close()
+	defer func() { _ = sqlDB.Close() }()
 
 	src, err := iofs.New(Migrations, "migrations")
 	if err != nil {

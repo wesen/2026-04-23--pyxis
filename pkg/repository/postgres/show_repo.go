@@ -127,7 +127,7 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 	if err != nil {
 		return nil, fmt.Errorf("begin create show transaction: %w", err)
 	}
-	defer tx.Rollback(ctx)
+	defer func() { _ = tx.Rollback(ctx) }()
 
 	q := r.queries.WithTx(tx)
 	row, err := q.CreateShow(ctx, params)
@@ -196,7 +196,7 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 	if err != nil {
 		return nil, fmt.Errorf("begin update show transaction: %w", err)
 	}
-	defer tx.Rollback(ctx)
+	defer func() { _ = tx.Rollback(ctx) }()
 
 	q := r.queries.WithTx(tx)
 	row, err := q.UpdateShow(ctx, params)

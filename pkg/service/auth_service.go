@@ -78,7 +78,7 @@ type discordGuildMember struct {
 }
 
 // ExchangeCode exchanges an OAuth code for a user and creates a session.
-func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionToken string, user *db.User, err error) {
+func (s *AuthService) ExchangeCode(ctx context.Context, code string) (string, *db.User, error) {
 	log.Debug().Bool("role_mapping_configured", s.hasRoleMappingConfig()).Msg("discord oauth: exchanging callback code")
 	token, err := s.oauth.Exchange(ctx, code)
 	if err != nil {
@@ -130,7 +130,7 @@ func (s *AuthService) ExchangeCode(ctx context.Context, code string) (sessionTok
 	}
 
 	// Create session
-	sessionToken, err = s.createSession(ctx, row.ID)
+	sessionToken, err := s.createSession(ctx, row.ID)
 	if err != nil {
 		log.Warn().Err(err).Int32("user_id", row.ID).Msg("discord oauth: create session failed")
 		return "", nil, fmt.Errorf("create session: %w", err)
@@ -267,7 +267,7 @@ func (s *AuthService) ValidateSession(ctx context.Context, token string) (*db.Us
 
 // CreateDevSession creates or updates a local development user and returns a
 // session token. It is intended for explicit PYXIS_DEV_AUTH=1 workflows only.
-func (s *AuthService) CreateDevSession(ctx context.Context, username, role string) (sessionToken string, user *db.User, err error) {
+func (s *AuthService) CreateDevSession(ctx context.Context, username, role string) (string, *db.User, error) {
 	if username == "" {
 		username = "dev-admin"
 	}
@@ -285,7 +285,7 @@ func (s *AuthService) CreateDevSession(ctx context.Context, username, role strin
 		return "", nil, fmt.Errorf("upsert dev user: %w", err)
 	}
 
-	sessionToken, err = s.createSession(ctx, row.ID)
+	sessionToken, err := s.createSession(ctx, row.ID)
 	if err != nil {
 		return "", nil, fmt.Errorf("create dev session: %w", err)
 	}

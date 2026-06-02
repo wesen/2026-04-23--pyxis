@@ -111,7 +111,7 @@ func (s *SubmissionService) Approve(ctx context.Context, id int, actorID int, ac
 	if err != nil {
 		return nil, fmt.Errorf("begin tx: %w", err)
 	}
-	defer tx.Rollback(ctx)
+	defer func() { _ = tx.Rollback(ctx) }()
 
 	qtx := db.New(tx)
 	subRepoTx := postgres.NewSubmissionRepo(qtx)

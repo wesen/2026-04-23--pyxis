@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ExternalEventCard } from './ExternalEventCard';
-import type { ExternalEvent } from 'pyxis-types';
-import { create } from '@bufbuild/protobuf';
+import { create, type ExternalEvent, ExternalEventSchema } from 'pyxis-types';
 
 const meta: Meta<typeof ExternalEventCard> = {
   title: 'Public/Molecules/ExternalEventCard',
@@ -13,7 +12,7 @@ export default meta;
 type Story = StoryObj<typeof ExternalEventCard>;
 
 const makeEvent = (overrides: Partial<ExternalEvent> = {}): ExternalEvent =>
-  create({
+  create(ExternalEventSchema, {
     id: 'evt-1',
     calendarId: 'cal-123@group.calendar.google.com',
     calendarName: 'Neighbor Venue',
@@ -35,8 +34,8 @@ export const AllDay: Story = {
   args: {
     event: makeEvent({
       id: 'evt-2',
-      start: '2026-06-20T00:00:00-04:00',
-      end: '2026-06-20T00:00:00-04:00',
+      start: '2026-06-20',
+      end: '2026-06-21',
       isAllDay: true,
       summary: 'Arts Festival',
     }),

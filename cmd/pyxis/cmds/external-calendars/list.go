@@ -11,8 +11,8 @@ import (
 	"github.com/go-go-golems/glazed/pkg/middlewares"
 	"github.com/go-go-golems/glazed/pkg/types"
 	"github.com/go-go-golems/pyxis/pkg/db"
-	pgsettings "github.com/go-go-golems/pyxis/pkg/repository/postgres"
 	"github.com/go-go-golems/pyxis/pkg/domain"
+	pgsettings "github.com/go-go-golems/pyxis/pkg/repository/postgres"
 )
 
 type ListCommand struct {
@@ -108,7 +108,7 @@ func loadSettings(ctx context.Context, dbURL string) (*domain.Settings, *pgsetti
 }
 
 // parseCalendarEntry parses a "calendar-id=display-name" string.
-func parseCalendarEntry(raw string) (id, name string, err error) {
+func parseCalendarEntry(raw string) (string, string, error) {
 	for i, ch := range raw {
 		if ch == '=' {
 			return raw[:i], raw[i+1:], nil

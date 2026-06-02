@@ -15,11 +15,11 @@ import (
 
 // ShowService provides business logic for shows.
 type ShowService struct {
-	shows       repository.ShowRepository
-	audit       AuditService
-	discord     discord.Client
-	gcalClient  *gcal.Client
-	settings    repository.SettingsRepository
+	shows      repository.ShowRepository
+	audit      AuditService
+	discord    discord.Client
+	gcalClient *gcal.Client
+	settings   repository.SettingsRepository
 }
 
 // NewShowService creates a new ShowService.
@@ -111,7 +111,7 @@ func (s *ShowService) Create(ctx context.Context, show *domain.Show, actorID int
 
 	// Sync to Google Calendar (only for confirmed shows)
 	if created.Status == domain.StatusConfirmed {
-		go s.syncShowToGCal(context.Background(), created)
+		go s.syncShowToGCal(context.WithoutCancel(ctx), created)
 	}
 
 	return created, nil
@@ -135,9 +135,9 @@ func (s *ShowService) Update(ctx context.Context, show *domain.Show, actorID int
 
 	// Sync to Google Calendar
 	if updated.Status == domain.StatusConfirmed {
-		go s.syncShowToGCal(context.Background(), updated)
+		go s.syncShowToGCal(context.WithoutCancel(ctx), updated)
 	} else if updated.Status == domain.StatusCancelled && updated.GoogleCalEventID != "" {
-		go s.deleteGCalEvent(context.Background(), updated.GoogleCalEventID, updated.ID)
+		go s.deleteGCalEvent(context.WithoutCancel(ctx), updated.GoogleCalEventID, updated.ID)
 	}
 
 	return updated, nil
@@ -162,7 +162,7 @@ func (s *ShowService) Cancel(ctx context.Context, id int, actorID int, actorName
 
 	// Delete from Google Calendar
 	if updated.GoogleCalEventID != "" {
-		go s.deleteGCalEvent(context.Background(), updated.GoogleCalEventID, id)
+		go s.deleteGCalEvent(context.WithoutCancel(ctx), updated.GoogleCalEventID, id)
 	}
 
 	return updated, nil
@@ -236,13 +236,17 @@ var ErrNotFound = fmt.Errorf("not found")
 // It's designed to be called after a successful DB write — errors are logged but
 // do NOT fail the overall operation.
 func (s *ShowService) syncShowToGCal(ctx context.Context, show *domain.Show) {
-	if s.gcalClient == nil {
+	if s.gcalClient == nil || s.settings == nil {
 		return
 	}
 
 	settings, err := s.settings.Get(ctx)
 	if err != nil {
 		log.Warn().Err(err).Msg("gcal sync: failed to get settings")
+		return
+	}
+	if !settings.GoogleCalEnabled {
+		log.Debug().Int("showId", show.ID).Msg("gcal sync: disabled in settings")
 		return
 	}
 

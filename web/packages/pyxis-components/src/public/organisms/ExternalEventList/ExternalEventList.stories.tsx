@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ExternalEventList } from './ExternalEventList';
-import type { ExternalEvent } from 'pyxis-types';
-import { create } from '@bufbuild/protobuf';
+import { create, type ExternalEvent, ExternalEventSchema } from 'pyxis-types';
 
 const meta: Meta<typeof ExternalEventList> = {
   title: 'Public/Organisms/ExternalEventList',
@@ -14,7 +13,7 @@ type Story = StoryObj<typeof ExternalEventList>;
 
 const makeEvents = (count: number, calendar = 'Neighbor Venue'): ExternalEvent[] =>
   Array.from({ length: count }, (_, i) =>
-    create({
+    create(ExternalEventSchema, {
       id: `evt-${i + 1}`,
       calendarId: 'cal-123@group.calendar.google.com',
       calendarName: calendar,

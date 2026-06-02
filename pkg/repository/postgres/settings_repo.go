@@ -122,10 +122,3 @@ func dbSettingsToDomain(row db.Setting) *domain.Settings {
 	}
 	return settings
 }
-
-func strPtrToPgtypeText(s *string) pgtype.Text {
-	if s == nil || *s == "" {
-		return pgtype.Text{Valid: false}
-	}
-	return pgtype.Text{String: *s, Valid: true}
-}
