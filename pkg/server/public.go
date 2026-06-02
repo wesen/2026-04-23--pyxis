@@ -417,25 +417,36 @@ func respondJSON(w http.ResponseWriter, status int, v interface{}) {
 // cachedExternalEvents provides in-memory caching for external Google Calendar events.
 type cachedExternalEvents struct {
 	mu      sync.RWMutex
-	events  []gcal.ExternalEvent
-	fetched time.Time
+	entries map[string]cachedExternalEventsEntry
 	ttl     time.Duration
 }
 
-func (c *cachedExternalEvents) Get() ([]gcal.ExternalEvent, bool) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	if c.events == nil || time.Since(c.fetched) > c.ttl {
-		return nil, false
-	}
-	return c.events, true
+type cachedExternalEventsEntry struct {
+	events  []gcal.ExternalEvent
+	fetched time.Time
 }
 
-func (c *cachedExternalEvents) Set(events []gcal.ExternalEvent) {
+func externalEventsCacheKey(from, to time.Time) string {
+	return from.Format(time.DateOnly) + ":" + to.Format(time.DateOnly)
+}
+
+func (c *cachedExternalEvents) Get(key string) ([]gcal.ExternalEvent, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	entry, ok := c.entries[key]
+	if !ok || time.Since(entry.fetched) > c.ttl {
+		return nil, false
+	}
+	return entry.events, true
+}
+
+func (c *cachedExternalEvents) Set(key string, events []gcal.ExternalEvent) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	c.events = events
-	c.fetched = time.Now()
+	if c.entries == nil {
+		c.entries = map[string]cachedExternalEventsEntry{}
+	}
+	c.entries[key] = cachedExternalEventsEntry{events: events, fetched: time.Now()}
 }
 
 func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request) {
@@ -444,18 +455,6 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 	if s.gcalClient == nil {
 		respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{})
 		return
-	}
-
-	// Check cache first
-	if s.externalEventsCache != nil {
-		if cached, ok := s.externalEventsCache.Get(); ok {
-			pbCached := make([]*pyxisv1.ExternalEvent, len(cached))
-			for i, e := range cached {
-				pbCached[i] = externalEventToProto(&e)
-			}
-			respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{Events: pbCached})
-			return
-		}
 	}
 
 	// Parse date range
@@ -479,6 +478,18 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 	// Cap date range to 90 days
 	if to.Sub(from) > 90*24*time.Hour {
 		to = from.Add(90 * 24 * time.Hour)
+	}
+
+	cacheKey := externalEventsCacheKey(from, to)
+	if s.externalEventsCache != nil {
+		if cached, ok := s.externalEventsCache.Get(cacheKey); ok {
+			pbCached := make([]*pyxisv1.ExternalEvent, len(cached))
+			for i, e := range cached {
+				pbCached[i] = externalEventToProto(&e)
+			}
+			respondProtoJSON(w, http.StatusOK, &pyxisv1.ExternalEventList{Events: pbCached})
+			return
+		}
 	}
 
 	// Get settings with external calendar config
@@ -517,7 +528,7 @@ func (s *Server) handleListExternalEvents(w http.ResponseWriter, r *http.Request
 
 	// Update cache
 	if s.externalEventsCache != nil {
-		s.externalEventsCache.Set(allEvents)
+		s.externalEventsCache.Set(cacheKey, allEvents)
 	}
 
 	// Convert to proto and respond

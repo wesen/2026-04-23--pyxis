@@ -249,6 +249,11 @@ func (s *ShowService) syncShowToGCal(ctx context.Context, show *domain.Show) {
 		log.Debug().Int("showId", show.ID).Msg("gcal sync: disabled in settings")
 		return
 	}
+	if strings.TrimSpace(settings.GoogleCalID) == "" {
+		log.Warn().Int("showId", show.ID).Msg("gcal sync: enabled but calendar ID is empty")
+		return
+	}
+	s.gcalClient.SetCalendarID(settings.GoogleCalID)
 
 	event := gcal.ShowToEvent(show, settings.SpaceName, settings.Address, settings.Website)
 
@@ -276,14 +281,29 @@ func (s *ShowService) syncShowToGCal(ctx context.Context, show *domain.Show) {
 
 // deleteGCalEvent removes a show's event from Google Calendar.
 func (s *ShowService) deleteGCalEvent(ctx context.Context, eventID string, showID int) {
-	if s.gcalClient == nil {
+	if s.gcalClient == nil || s.settings == nil {
 		return
 	}
+	settings, err := s.settings.Get(ctx)
+	if err != nil {
+		log.Warn().Err(err).Msg("gcal sync: failed to get settings before delete")
+		return
+	}
+	if strings.TrimSpace(settings.GoogleCalID) == "" {
+		log.Warn().Int("showId", showID).Str("eventId", eventID).Msg("gcal sync: delete skipped because calendar ID is empty")
+		return
+	}
+	s.gcalClient.SetCalendarID(settings.GoogleCalID)
+
 	if err := s.gcalClient.DeleteEvent(ctx, eventID); err != nil {
 		log.Error().Err(err).Int("showId", showID).Str("eventId", eventID).Msg("gcal sync: delete failed")
-	} else {
-		log.Info().Int("showId", showID).Msg("gcal sync: deleted event")
+		return
 	}
+	if _, err := s.shows.ClearGoogleCalSync(ctx, showID); err != nil {
+		log.Error().Err(err).Int("showId", showID).Str("eventId", eventID).Msg("gcal sync: failed to clear event ID")
+		return
+	}
+	log.Info().Int("showId", showID).Msg("gcal sync: deleted event")
 }
 
 // SyncShowToGCalSync is the synchronous version of syncShowToGCal.

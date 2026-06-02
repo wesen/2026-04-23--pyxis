@@ -127,6 +127,14 @@ func (r *fakeShowRepo) UpdateGoogleCalSync(ctx context.Context, id int, eventID 
 	r.show.GoogleCalSyncedAt = &syncedAt
 	return r.show, nil
 }
+func (r *fakeShowRepo) ClearGoogleCalSync(ctx context.Context, id int) (*domain.Show, error) {
+	if r.show == nil {
+		return nil, ErrNotFound
+	}
+	r.show.GoogleCalEventID = ""
+	r.show.GoogleCalSyncedAt = nil
+	return r.show, nil
+}
 
 type noopAudit struct{}
 

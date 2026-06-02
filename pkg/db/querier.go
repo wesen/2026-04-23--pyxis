@@ -14,6 +14,7 @@ type Querier interface {
 	ApproveSubmission(ctx context.Context, arg ApproveSubmissionParams) (Submission, error)
 	ArchiveShow(ctx context.Context, id int32) (Show, error)
 	AttachDiscordMessageToShow(ctx context.Context, arg AttachDiscordMessageToShowParams) (Show, error)
+	ClearShowGoogleCalSync(ctx context.Context, id int32) (Show, error)
 	CreateArtist(ctx context.Context, arg CreateArtistParams) (Artist, error)
 	CreateAuditLog(ctx context.Context, arg CreateAuditLogParams) (AuditLog, error)
 	CreateCalendarBlocked(ctx context.Context, arg CreateCalendarBlockedParams) (CalendarBlocked, error)

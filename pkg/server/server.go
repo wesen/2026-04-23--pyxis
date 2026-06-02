@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/go-go-golems/pyxis/internal/web"
@@ -77,8 +78,9 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 	// Wire settings repo to show service for gcal sync
 	s.showService.SetSettingsRepo(settingsRepo)
 
-	// Initialize Google Calendar client if configured
-	if cfg != nil && cfg.GoogleCalEnabled {
+	// Initialize Google Calendar client when credentials are present and either
+	// runtime config or persisted settings indicate GCal functionality is in use.
+	if cfg != nil {
 		var credentialsJSON []byte
 		var err error
 
@@ -91,17 +93,25 @@ func New(cfg *config.Config, database *db.Pool) *Server {
 			credentialsJSON = []byte(cfg.GoogleCalCredentials)
 		}
 
-		if len(credentialsJSON) > 0 {
-			gcalClient, err := gcal.NewClient(context.Background(), credentialsJSON, cfg.GoogleCalID)
+		settings, settingsErr := settingsRepo.Get(context.Background())
+		if settingsErr != nil {
+			log.Warn().Err(settingsErr).Msg("failed to load settings for Google Calendar startup")
+		}
+		calendarID := strings.TrimSpace(cfg.GoogleCalID)
+		if calendarID == "" && settings != nil {
+			calendarID = strings.TrimSpace(settings.GoogleCalID)
+		}
+		gcalInUse := cfg.GoogleCalEnabled || (settings != nil && (settings.GoogleCalEnabled || len(settings.ExternalCalendars) > 0))
+
+		if len(credentialsJSON) > 0 && gcalInUse {
+			gcalClient, err := gcal.NewClient(context.Background(), credentialsJSON, calendarID)
 			if err != nil {
 				log.Error().Err(err).Msg("failed to initialize Google Calendar client")
 			} else if gcalClient != nil {
-				log.Info().Str("calendarId", cfg.GoogleCalID).Msg("Google Calendar integration enabled")
+				log.Info().Str("calendarId", calendarID).Msg("Google Calendar integration enabled")
 				s.gcalClient = gcalClient
 				s.showService.SetGoogleCalClient(gcalClient)
 				s.externalEventsCache = &cachedExternalEvents{ttl: 5 * time.Minute}
-			} else {
-				log.Warn().Msg("Google Calendar enabled but no client created")
 			}
 		}
 	}

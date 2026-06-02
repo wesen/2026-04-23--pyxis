@@ -3,11 +3,13 @@ package gcal
 import (
 	"context"
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/domain"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/calendar/v3"
+	"google.golang.org/api/googleapi"
 	"google.golang.org/api/option"
 )
 
@@ -15,14 +17,15 @@ const calendarScope = "https://www.googleapis.com/auth/calendar"
 
 // Client wraps the Google Calendar API service.
 type Client struct {
-	svc        *calendar.Service
-	calendarID string // the venue's own calendar
+	svc          *calendar.Service
+	calendarIDMu sync.RWMutex
+	calendarID   string // the venue's own calendar
 }
 
 // NewClient creates a Google Calendar client using service account credentials.
 // Returns nil if credentialsJSON is empty (feature disabled).
 func NewClient(ctx context.Context, credentialsJSON []byte, calendarID string) (*Client, error) {
-	if len(credentialsJSON) == 0 || calendarID == "" {
+	if len(credentialsJSON) == 0 {
 		return nil, nil // not an error — feature is disabled
 	}
 
@@ -41,12 +44,21 @@ func NewClient(ctx context.Context, credentialsJSON []byte, calendarID string) (
 
 // CalendarID returns the venue's Google Calendar ID.
 func (c *Client) CalendarID() string {
+	c.calendarIDMu.RLock()
+	defer c.calendarIDMu.RUnlock()
 	return c.calendarID
+}
+
+// SetCalendarID updates the venue calendar target used by create/update/delete calls.
+func (c *Client) SetCalendarID(calendarID string) {
+	c.calendarIDMu.Lock()
+	defer c.calendarIDMu.Unlock()
+	c.calendarID = calendarID
 }
 
 // CreateEvent creates a new event on the venue's Google Calendar.
 func (c *Client) CreateEvent(ctx context.Context, event *calendar.Event) (*SyncResult, error) {
-	created, err := c.svc.Events.Insert(c.calendarID, event).Context(ctx).Do()
+	created, err := c.svc.Events.Insert(c.CalendarID(), event).Context(ctx).Do()
 	if err != nil {
 		return nil, fmt.Errorf("create calendar event: %w", err)
 	}
@@ -55,7 +67,7 @@ func (c *Client) CreateEvent(ctx context.Context, event *calendar.Event) (*SyncR
 
 // UpdateEvent updates an existing event on the venue's Google Calendar.
 func (c *Client) UpdateEvent(ctx context.Context, eventID string, event *calendar.Event) (*SyncResult, error) {
-	updated, err := c.svc.Events.Update(c.calendarID, eventID, event).Context(ctx).Do()
+	updated, err := c.svc.Events.Update(c.CalendarID(), eventID, event).Context(ctx).Do()
 	if err != nil {
 		return nil, fmt.Errorf("update calendar event: %w", err)
 	}
@@ -65,8 +77,11 @@ func (c *Client) UpdateEvent(ctx context.Context, eventID string, event *calenda
 // DeleteEvent removes an event from the venue's Google Calendar.
 // Returns nil for 404 (event already gone).
 func (c *Client) DeleteEvent(ctx context.Context, eventID string) error {
-	err := c.svc.Events.Delete(c.calendarID, eventID).Context(ctx).Do()
+	err := c.svc.Events.Delete(c.CalendarID(), eventID).Context(ctx).Do()
 	if err != nil {
+		if apiErr, ok := err.(*googleapi.Error); ok && apiErr.Code == 404 {
+			return nil
+		}
 		return fmt.Errorf("delete calendar event: %w", err)
 	}
 	return nil

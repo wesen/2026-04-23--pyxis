@@ -15,6 +15,7 @@ type ShowRepository interface {
 	Create(ctx context.Context, show *domain.Show) (*domain.Show, error)
 	Update(ctx context.Context, show *domain.Show) (*domain.Show, error)
 	UpdateGoogleCalSync(ctx context.Context, id int, eventID string, syncedAt time.Time) (*domain.Show, error)
+	ClearGoogleCalSync(ctx context.Context, id int) (*domain.Show, error)
 	AttachDiscordMessage(ctx context.Context, id int, channelID, messageID string) (*domain.Show, error)
 	GetByDiscordMessage(ctx context.Context, channelID, messageID string) (*domain.Show, error)
 	ListExpiredConfirmed(ctx context.Context, before time.Time) ([]domain.Show, error)

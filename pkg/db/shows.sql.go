@@ -92,6 +92,47 @@ func (q *Queries) AttachDiscordMessageToShow(ctx context.Context, arg AttachDisc
 	return i, err
 }
 
+const clearShowGoogleCalSync = `-- name: ClearShowGoogleCalSync :one
+UPDATE shows
+SET google_cal_event_id = '',
+    google_cal_synced_at = NULL,
+    updated_at = NOW()
+WHERE id = $1
+RETURNING id, artist, date, doors_time, start_time, age, price, genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, submission_id, artist_id, created_by, created_at, updated_at, draw, capacity, reserve_ticket_enabled, google_cal_event_id, google_cal_synced_at
+`
+
+func (q *Queries) ClearShowGoogleCalSync(ctx context.Context, id int32) (Show, error) {
+	row := q.db.QueryRow(ctx, clearShowGoogleCalSync, id)
+	var i Show
+	err := row.Scan(
+		&i.ID,
+		&i.Artist,
+		&i.Date,
+		&i.DoorsTime,
+		&i.StartTime,
+		&i.Age,
+		&i.Price,
+		&i.Genre,
+		&i.Description,
+		&i.Notes,
+		&i.Status,
+		&i.FlyerUrl,
+		&i.DiscordMessageID,
+		&i.DiscordChannelID,
+		&i.SubmissionID,
+		&i.ArtistID,
+		&i.CreatedBy,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.Draw,
+		&i.Capacity,
+		&i.ReserveTicketEnabled,
+		&i.GoogleCalEventID,
+		&i.GoogleCalSyncedAt,
+	)
+	return i, err
+}
+
 const createShow = `-- name: CreateShow :one
 INSERT INTO shows (artist, date, doors_time, start_time, age, price,
                    genre, description, notes, status, flyer_url, discord_message_id, discord_channel_id, reserve_ticket_enabled, draw, capacity,

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/go-go-golems/pyxis/pkg/db"
@@ -53,7 +54,11 @@ func (r *ShowRepo) ListAll(ctx context.Context) ([]domain.Show, error) {
 
 // GetByID returns a single show by ID.
 func (r *ShowRepo) GetByID(ctx context.Context, id int) (*domain.Show, error) {
-	row, err := r.queries.GetShowWithLineup(ctx, int32(id))
+	dbID, err := intToInt32(id, "show ID")
+	if err != nil {
+		return nil, err
+	}
+	row, err := r.queries.GetShowWithLineup(ctx, dbID)
 	if err != nil {
 		return nil, err
 	}
@@ -94,16 +99,36 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 		params.FlyerUrl = pgtype.Text{String: show.FlyerURL, Valid: true}
 	}
 	params.ReserveTicketEnabled = show.ReserveTicketEnabled
-	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
-	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
+	draw, err := intToInt32(show.Draw, "draw")
+	if err != nil {
+		return nil, err
+	}
+	capacity, err := intToInt32(show.Capacity, "capacity")
+	if err != nil {
+		return nil, err
+	}
+	params.Draw = pgtype.Int4{Int32: draw, Valid: true}
+	params.Capacity = pgtype.Int4{Int32: capacity, Valid: true}
 	if show.SubmissionID != nil {
-		params.SubmissionID = pgtype.Int4{Int32: int32(*show.SubmissionID), Valid: true}
+		submissionID, err := intToInt32(*show.SubmissionID, "submission ID")
+		if err != nil {
+			return nil, err
+		}
+		params.SubmissionID = pgtype.Int4{Int32: submissionID, Valid: true}
 	}
 	if show.ArtistID != nil {
-		params.ArtistID = pgtype.Int4{Int32: int32(*show.ArtistID), Valid: true}
+		artistID, err := intToInt32(*show.ArtistID, "artist ID")
+		if err != nil {
+			return nil, err
+		}
+		params.ArtistID = pgtype.Int4{Int32: artistID, Valid: true}
 	}
 	if show.CreatedBy != nil {
-		params.CreatedBy = pgtype.Int4{Int32: int32(*show.CreatedBy), Valid: true}
+		createdBy, err := intToInt32(*show.CreatedBy, "created by")
+		if err != nil {
+			return nil, err
+		}
+		params.CreatedBy = pgtype.Int4{Int32: createdBy, Valid: true}
 	}
 	if show.DiscordMessageID != "" {
 		params.DiscordMessageID = pgtype.Text{String: show.DiscordMessageID, Valid: true}
@@ -145,8 +170,12 @@ func (r *ShowRepo) Create(ctx context.Context, show *domain.Show) (*domain.Show,
 
 // Update modifies an existing show.
 func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show, error) {
+	dbID, err := intToInt32(show.ID, "show ID")
+	if err != nil {
+		return nil, err
+	}
 	params := db.UpdateShowParams{
-		ID:     int32(show.ID),
+		ID:     dbID,
 		Artist: show.Artist,
 		Status: show.Status,
 	}
@@ -178,8 +207,16 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 	params.DiscordMessageID = pgtype.Text{String: show.DiscordMessageID, Valid: show.DiscordMessageID != ""}
 	params.DiscordChannelID = pgtype.Text{String: show.DiscordChannelID, Valid: show.DiscordChannelID != ""}
 	params.ReserveTicketEnabled = show.ReserveTicketEnabled
-	params.Draw = pgtype.Int4{Int32: int32(show.Draw), Valid: true}
-	params.Capacity = pgtype.Int4{Int32: int32(show.Capacity), Valid: true}
+	draw, err := intToInt32(show.Draw, "draw")
+	if err != nil {
+		return nil, err
+	}
+	capacity, err := intToInt32(show.Capacity, "capacity")
+	if err != nil {
+		return nil, err
+	}
+	params.Draw = pgtype.Int4{Int32: draw, Valid: true}
+	params.Capacity = pgtype.Int4{Int32: capacity, Valid: true}
 
 	if r.pool == nil {
 		row, err := r.queries.UpdateShow(ctx, params)
@@ -214,8 +251,12 @@ func (r *ShowRepo) Update(ctx context.Context, show *domain.Show) (*domain.Show,
 
 // AttachDiscordMessage stores the Discord channel/message IDs for a show.
 func (r *ShowRepo) AttachDiscordMessage(ctx context.Context, id int, channelID, messageID string) (*domain.Show, error) {
+	dbID, err := intToInt32(id, "show ID")
+	if err != nil {
+		return nil, err
+	}
 	row, err := r.queries.AttachDiscordMessageToShow(ctx, db.AttachDiscordMessageToShowParams{
-		ID:               int32(id),
+		ID:               dbID,
 		DiscordChannelID: pgtype.Text{String: channelID, Valid: channelID != ""},
 		DiscordMessageID: pgtype.Text{String: messageID, Valid: messageID != ""},
 	})
@@ -252,17 +293,38 @@ func (r *ShowRepo) ListExpiredConfirmed(ctx context.Context, before time.Time) (
 
 // Archive marks a show as archived.
 func (r *ShowRepo) Archive(ctx context.Context, id int) error {
-	_, err := r.queries.ArchiveShow(ctx, int32(id))
+	dbID, err := intToInt32(id, "show ID")
+	if err != nil {
+		return err
+	}
+	_, err = r.queries.ArchiveShow(ctx, dbID)
 	return err
 }
 
 // UpdateGoogleCalSync stores the Google Calendar event ID and sync timestamp on a show.
 func (r *ShowRepo) UpdateGoogleCalSync(ctx context.Context, id int, eventID string, syncedAt time.Time) (*domain.Show, error) {
+	dbID, err := intToInt32(id, "show ID")
+	if err != nil {
+		return nil, err
+	}
 	row, err := r.queries.UpdateShowGoogleCalSync(ctx, db.UpdateShowGoogleCalSyncParams{
-		ID:                int32(id),
+		ID:                dbID,
 		GoogleCalEventID:  eventID,
 		GoogleCalSyncedAt: pgtype.Timestamptz{Time: syncedAt, Valid: true},
 	})
+	if err != nil {
+		return nil, err
+	}
+	return rowToShow(row), nil
+}
+
+// ClearGoogleCalSync removes the stored Google Calendar event ID after a remote delete.
+func (r *ShowRepo) ClearGoogleCalSync(ctx context.Context, id int) (*domain.Show, error) {
+	dbID, err := intToInt32(id, "show ID")
+	if err != nil {
+		return nil, err
+	}
+	row, err := r.queries.ClearShowGoogleCalSync(ctx, dbID)
 	if err != nil {
 		return nil, err
 	}
@@ -437,18 +499,26 @@ func rowToShow(row db.Show) *domain.Show {
 }
 
 func replaceShowLineup(ctx context.Context, q *db.Queries, showID int, lineup []domain.LineupEntry) error {
-	if err := q.DeleteShowLineup(ctx, int32(showID)); err != nil {
+	dbShowID, err := intToInt32(showID, "show ID")
+	if err != nil {
+		return err
+	}
+	if err := q.DeleteShowLineup(ctx, dbShowID); err != nil {
 		return err
 	}
 	for i, entry := range lineup {
 		if entry.Artist == "" {
 			continue
 		}
+		sortOrder, err := intToInt32(i, "lineup sort order")
+		if err != nil {
+			return err
+		}
 		params := db.CreateShowLineupEntryParams{
-			ShowID:    int32(showID),
+			ShowID:    dbShowID,
 			Artist:    entry.Artist,
 			Role:      entry.Role,
-			SortOrder: int32(i),
+			SortOrder: sortOrder,
 		}
 		if params.Role == "" {
 			params.Role = "support"
@@ -464,6 +534,13 @@ func replaceShowLineup(ctx context.Context, q *db.Queries, showID int, lineup []
 		}
 	}
 	return nil
+}
+
+func intToInt32(value int, label string) (int32, error) {
+	if value < math.MinInt32 || value > math.MaxInt32 {
+		return 0, fmt.Errorf("%s %d is outside int32 range", label, value)
+	}
+	return int32(value), nil
 }
 
 func decodeLineup(raw interface{}) ([]domain.LineupEntry, error) {

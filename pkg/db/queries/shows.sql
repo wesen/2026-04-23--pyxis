@@ -100,3 +100,11 @@ SET google_cal_event_id = $2,
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;
+
+-- name: ClearShowGoogleCalSync :one
+UPDATE shows
+SET google_cal_event_id = '',
+    google_cal_synced_at = NULL,
+    updated_at = NOW()
+WHERE id = $1
+RETURNING *;
