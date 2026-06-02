@@ -47,6 +47,10 @@ message Show {
   string created_at    = 15;
   string updated_at    = 16;
 
+  // Google Calendar sync status (staff-only)
+  string google_cal_event_id   = 30;
+  string google_cal_synced_at  = 31;
+
   message LineupEntry {
     string artist     = 1;
     string role       = 2;
@@ -187,6 +191,7 @@ enum CalendarEventKind {
   CALENDAR_EVENT_KIND_SHOW        = 1;
   CALENDAR_EVENT_KIND_HOLD        = 2;
   CALENDAR_EVENT_KIND_BLOCKED     = 3;
+  CALENDAR_EVENT_KIND_EXTERNAL    = 4;
 }
 
 message CalendarEvent {
@@ -259,6 +264,11 @@ message Settings {
   bool   auto_archive             = 17;
   bool   discord_posting          = 18;
   bool   safe_space_required      = 19;
+
+  // Google Calendar integration (staff-only)
+  bool   google_cal_enabled       = 20;
+  string google_cal_id            = 21;
+  string external_calendars_json  = 22;  // JSON array of ExternalCalendarConfig
 }
 
 message SuccessResponse {
@@ -275,5 +285,22 @@ message ErrorResponse {
 
 message FlyerUploadResponse {
   string url = 1;
+}
+
+message ExternalEvent {
+  string id            = 1;
+  string calendar_id   = 2;
+  string calendar_name = 3;
+  string summary       = 4;
+  string description   = 5;
+  string location      = 6;
+  string start         = 7;
+  string end           = 8;
+  string url           = 9;
+  bool   is_all_day    = 10;
+}
+
+message ExternalEventList {
+  repeated ExternalEvent events = 1;
 }
 

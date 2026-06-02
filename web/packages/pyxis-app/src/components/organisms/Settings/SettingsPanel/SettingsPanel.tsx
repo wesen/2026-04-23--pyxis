@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Settings } from 'pyxis-types';
 import { Button } from 'pyxis-components';
+import { GCalSettingsSection, type ExternalCalendarEntry } from '../../GCalSettingsSection';
 import { appPart } from '../../../parts';
 import './SettingsPanel.css';
 
@@ -10,11 +11,18 @@ export type CoreSettingsDraft = Pick<Settings,
   'autoArchive' | 'discordPosting' | 'safeSpaceRequired' | 'setupComplete'
 >;
 
+export type GCalSettingsDraft = {
+  enabled: boolean;
+  calendarId: string;
+  externalCalendars: ExternalCalendarEntry[];
+};
+
 export type SettingsPanelProps = {
   settings: Settings;
   onSaveCoreSettings?: (draft: CoreSettingsDraft) => void;
   isUpdating?: boolean;
   canEdit?: boolean;
+  onSaveGCalSettings?: (gcal: GCalSettingsDraft) => void;
 };
 
 function draftFromSettings(settings: Settings): CoreSettingsDraft {
@@ -39,7 +47,7 @@ function draftFromSettings(settings: Settings): CoreSettingsDraft {
   };
 }
 
-export function SettingsPanel({ settings, onSaveCoreSettings, isUpdating, canEdit = true }: SettingsPanelProps) {
+export function SettingsPanel({ settings, onSaveCoreSettings, isUpdating, canEdit = true, onSaveGCalSettings }: SettingsPanelProps) {
   const [draft, setDraft] = useState<CoreSettingsDraft>(draftFromSettings(settings));
 
   useEffect(() => { setDraft(draftFromSettings(settings)); }, [settings]);
@@ -86,7 +94,46 @@ export function SettingsPanel({ settings, onSaveCoreSettings, isUpdating, canEdi
         </section>
       </div>
       {draft.capacity < 0 && <div className="app-action-error" role="alert">Capacity cannot be negative.</div>}
+
+      <GCalSettingsSection
+        enabled={settings.googleCalEnabled}
+        calendarId={settings.googleCalId}
+        externalCalendars={parseExternalCalendars(settings.externalCalendarsJson)}
+        canEdit={canEdit}
+        onToggleEnabled={() => onSaveGCalSettings?.({
+          enabled: !settings.googleCalEnabled,
+          calendarId: settings.googleCalId,
+          externalCalendars: parseExternalCalendars(settings.externalCalendarsJson),
+        })}
+        onUpdateCalendarId={(id) => onSaveGCalSettings?.({
+          enabled: settings.googleCalEnabled,
+          calendarId: id,
+          externalCalendars: parseExternalCalendars(settings.externalCalendarsJson),
+        })}
+        onAddExternalCalendar={(id, name) => {
+          const cals = [...parseExternalCalendars(settings.externalCalendarsJson), { id, name, enabled: true }];
+          onSaveGCalSettings?.({ enabled: settings.googleCalEnabled, calendarId: settings.googleCalId, externalCalendars: cals });
+        }}
+        onRemoveExternalCalendar={(id) => {
+          const cals = parseExternalCalendars(settings.externalCalendarsJson).filter(c => c.id !== id);
+          onSaveGCalSettings?.({ enabled: settings.googleCalEnabled, calendarId: settings.googleCalId, externalCalendars: cals });
+        }}
+        onToggleExternalCalendar={(id, enabled) => {
+          const cals = parseExternalCalendars(settings.externalCalendarsJson).map(c => c.id === id ? { ...c, enabled } : c);
+          onSaveGCalSettings?.({ enabled: settings.googleCalEnabled, calendarId: settings.googleCalId, externalCalendars: cals });
+        }}
+      />
+
       <div className="app-detail-actions"><Button onClick={() => onSaveCoreSettings?.(draft)} isLoading={isUpdating} disabled={!canEdit || invalid}>Save settings</Button></div>
     </div>
   );
+}
+
+function parseExternalCalendars(json: string): ExternalCalendarEntry[] {
+  if (!json) return [];
+  try {
+    return JSON.parse(json);
+  } catch {
+    return [];
+  }
 }

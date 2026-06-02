@@ -20,6 +20,9 @@ SET space_name = COALESCE($1, space_name),
     auto_archive = COALESCE($15, auto_archive),
     discord_posting = COALESCE($16, discord_posting),
     safe_space_required = COALESCE($17, safe_space_required),
+    google_cal_enabled = COALESCE($18, google_cal_enabled),
+    google_cal_id = COALESCE($19, google_cal_id),
+    external_calendars = COALESCE($20, external_calendars),
     updated_at = NOW()
 WHERE id = 1
 RETURNING *;

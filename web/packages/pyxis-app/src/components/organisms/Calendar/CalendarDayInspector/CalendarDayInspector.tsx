@@ -27,8 +27,12 @@ export function CalendarDayInspector({ selectedDate, events, onCreateShow, onAdd
         <div className="app-calendar-day-list">
           {events.map((event) => (
             <div key={`${event.kind}-${event.id}`} className="app-calendar-day-item" data-kind={event.kind}>
-              <div><strong>{event.label}</strong><span>{event.kind === CalendarEventKind.SHOW ? 'Show' : event.kind === CalendarEventKind.HOLD ? 'Hold' : 'Blocked'} · {event.date}</span></div>
-              <button className="app-panel-link-action" type="button" onClick={() => event.kind === CalendarEventKind.SHOW ? onOpenShow?.(event) : onRemoveItem?.(event)}>{event.kind === CalendarEventKind.SHOW ? 'Open/Edit' : 'Remove'}</button>
+              <div><strong>{event.label}</strong><span>{event.kind === CalendarEventKind.SHOW ? 'Show' : event.kind === CalendarEventKind.HOLD ? 'Hold' : event.kind === CalendarEventKind.EXTERNAL ? 'External' : 'Blocked'} · {event.date}</span></div>
+              {event.kind === CalendarEventKind.EXTERNAL ? (
+                <span className="app-calendar-day-external-hint">Info only</span>
+              ) : (
+                <button className="app-panel-link-action" type="button" onClick={() => event.kind === CalendarEventKind.SHOW ? onOpenShow?.(event) : onRemoveItem?.(event)}>{event.kind === CalendarEventKind.SHOW ? 'Open/Edit' : 'Remove'}</button>
+              )}
             </div>
           ))}
         </div>

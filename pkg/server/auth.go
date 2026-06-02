@@ -152,7 +152,7 @@ func (s *Server) handleLogout(w http.ResponseWriter, r *http.Request) {
 
 	s.clearSessionCookie(w, r)
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"success":true}`))
+	_, _ = w.Write([]byte(`{"success":true}`))
 }
 
 func (s *Server) handleGetSession(w http.ResponseWriter, r *http.Request) {
@@ -235,6 +235,7 @@ func (s *Server) sessionCookieName() string {
 }
 
 func (s *Server) setSessionCookie(w http.ResponseWriter, r *http.Request, token string) {
+	// #nosec G124 -- Secure is enabled automatically for HTTPS/proxied HTTPS and intentionally relaxed for local HTTP development.
 	http.SetCookie(w, &http.Cookie{
 		Name:     s.sessionCookieName(),
 		Value:    token,
@@ -247,6 +248,7 @@ func (s *Server) setSessionCookie(w http.ResponseWriter, r *http.Request, token 
 }
 
 func (s *Server) clearSessionCookie(w http.ResponseWriter, r *http.Request) {
+	// #nosec G124 -- Secure is enabled automatically for HTTPS/proxied HTTPS and intentionally relaxed for local HTTP development.
 	http.SetCookie(w, &http.Cookie{
 		Name:     s.sessionCookieName(),
 		Value:    "",
@@ -327,6 +329,7 @@ func hostWithoutPort(value string) string {
 }
 
 func setShortLivedCookie(w http.ResponseWriter, name, value string, secure bool) {
+	// #nosec G124 -- caller passes the HTTPS/proxied-HTTPS cookie policy; local HTTP development is intentionally supported.
 	http.SetCookie(w, &http.Cookie{
 		Name:     name,
 		Value:    value,
@@ -339,6 +342,7 @@ func setShortLivedCookie(w http.ResponseWriter, name, value string, secure bool)
 }
 
 func clearCookie(w http.ResponseWriter, name string, secure bool) {
+	// #nosec G124 -- caller passes the HTTPS/proxied-HTTPS cookie policy; local HTTP development is intentionally supported.
 	http.SetCookie(w, &http.Cookie{
 		Name:     name,
 		Value:    "",

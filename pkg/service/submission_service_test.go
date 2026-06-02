@@ -60,10 +60,10 @@ type fakeSubmissionRepo struct {
 }
 
 func (r *fakeSubmissionRepo) Create(ctx context.Context, s *domain.Submission) (*domain.Submission, error) {
-	copy := *s
-	copy.ID = 123
-	r.created = &copy
-	return &copy, nil
+	submissionCopy := *s
+	submissionCopy.ID = 123
+	r.created = &submissionCopy
+	return &submissionCopy, nil
 }
 func (r *fakeSubmissionRepo) GetByID(ctx context.Context, id int) (*domain.Submission, error) {
 	return nil, nil

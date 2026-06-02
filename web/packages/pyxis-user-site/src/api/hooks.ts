@@ -6,6 +6,7 @@ import {
   useGetShowQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,
+  useGetExternalEventsQuery,
 } from './publicApi';
 
 /**
@@ -46,6 +47,10 @@ export function useSubmitBooking() {
   };
 }
 
+export function useExternalEvents(params?: { from?: string; to?: string }) {
+  return useGetExternalEventsQuery(params);
+}
+
 export {
   useGetArchiveQuery,
   useGetArchiveStatsQuery,
@@ -53,4 +58,5 @@ export {
   useGetShowQuery,
   useGetUpcomingShowsQuery,
   useSubmitBookingMutation,
+  useGetExternalEventsQuery,
 } from './publicApi';

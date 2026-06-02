@@ -303,6 +303,12 @@ export const appApi = createApi({
       transformResponse: (response: unknown) => fromJson(SettingsSchema, response as any),
       invalidatesTags: ['Settings', 'AuditLog'],
     }),
+
+    syncShowToGCal: builder.mutation<Show, number>({
+      query: (id) => ({ url: endpoints.showSyncGCal(id), method: 'POST' }),
+      transformResponse: (response: unknown) => fromJson(ShowSchema, response as any),
+      invalidatesTags: (_result, _error, id) => [{ type: 'Show', id }],
+    }),
   }),
 });
 
@@ -336,6 +342,7 @@ export const {
   useUpdateBookingMutation,
   useUpdateBookingReviewMutation,
   useUpdateSettingsMutation,
+  useSyncShowToGCalMutation,
   useUpdateShowLogMutation,
   useUpdateShowMutation,
   useUploadShowFlyerMutation,

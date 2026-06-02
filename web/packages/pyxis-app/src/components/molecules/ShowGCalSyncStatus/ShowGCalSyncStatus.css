@@ -1,0 +1,43 @@
+.app-gcal-sync-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+}
+
+.app-gcal-sync-status__indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.app-gcal-sync-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--app-color-text-muted, #8e887e);
+}
+
+.app-gcal-sync-status[data-synced="true"] .app-gcal-sync-status__dot {
+  background: #4caf50;
+}
+
+.app-gcal-sync-status__label {
+  color: var(--app-color-text-muted, #8e887e);
+}
+
+.app-gcal-sync-status[data-synced="true"] .app-gcal-sync-status__label {
+  color: #2e7d32;
+}
+
+.app-gcal-sync-status__event-id {
+  font-size: 0.7rem;
+  color: var(--app-color-text-muted, #8e887e);
+  font-family: monospace;
+}
+
+.app-gcal-sync-status__button {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+}

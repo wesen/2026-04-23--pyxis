@@ -40,8 +40,12 @@ func (r *PyxisRegistrar) ID() string { return "pyxis" }
 func (r *PyxisRegistrar) RegisterRuntimeModules(_ *engine.RuntimeModuleContext, reg *require.Registry) error {
 	reg.RegisterNativeModule("pyxis", func(vm *goja.Runtime, moduleObj *goja.Object) {
 		exports := moduleObj.Get("exports").ToObject(vm)
-		exports.Set("shows", r.showsObject(vm))
-		exports.Set("settings", r.settingsObject(vm))
+		if err := exports.Set("shows", r.showsObject(vm)); err != nil {
+			panic(vm.ToValue(err.Error()))
+		}
+		if err := exports.Set("settings", r.settingsObject(vm)); err != nil {
+			panic(vm.ToValue(err.Error()))
+		}
 	})
 	return nil
 }

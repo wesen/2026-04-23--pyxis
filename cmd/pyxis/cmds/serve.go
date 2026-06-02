@@ -45,6 +45,12 @@ type ServeSettings struct {
 	DiscordAdminRoleID  string `glazed:"discord-admin-role-id"`
 	DiscordBookerRoleID string `glazed:"discord-booker-role-id"`
 	DiscordDoorRoleID   string `glazed:"discord-door-role-id"`
+
+	// Google Calendar integration
+	GoogleCalEnabled         bool   `glazed:"google-cal-enabled"`
+	GoogleCalID              string `glazed:"google-cal-id"`
+	GoogleCalCredentials     string `glazed:"google-cal-credentials"`
+	GoogleCalCredentialsFile string `glazed:"google-cal-credentials-file"`
 }
 
 func NewServeCommand() (*ServeCommand, error) {
@@ -171,6 +177,30 @@ func NewServeCommand() (*ServeCommand, error) {
 				fields.WithDefault(envOr("DISCORD_DOOR_ROLE_ID", "")),
 				fields.WithHelp("Discord role ID mapped to the Pyxis door role"),
 			),
+			fields.New(
+				"google-cal-enabled",
+				fields.TypeBool,
+				fields.WithDefault(envOrBool("PYXIS_GOOGLE_CAL_ENABLED", false)),
+				fields.WithHelp("Enable Google Calendar integration for show sync"),
+			),
+			fields.New(
+				"google-cal-id",
+				fields.TypeString,
+				fields.WithDefault(envOr("PYXIS_GOOGLE_CAL_ID", "")),
+				fields.WithHelp("Google Calendar ID (email) for the venue calendar"),
+			),
+			fields.New(
+				"google-cal-credentials",
+				fields.TypeString,
+				fields.WithDefault(envOr("PYXIS_GOOGLE_CAL_CREDENTIALS", "")),
+				fields.WithHelp("Google service account credentials JSON (inline)"),
+			),
+			fields.New(
+				"google-cal-credentials-file",
+				fields.TypeString,
+				fields.WithDefault(envOr("PYXIS_GOOGLE_CAL_CREDENTIALS_FILE", "")),
+				fields.WithHelp("Path to Google service account credentials JSON file"),
+			),
 		),
 		cmds.WithSections(glazedSection, loggingSection),
 	)
@@ -222,6 +252,12 @@ func (c *ServeCommand) RunIntoGlazeProcessor(
 	if err := validateDiscordOAuthConfig(cfg); err != nil {
 		return err
 	}
+
+	// Google Calendar config
+	cfg.GoogleCalEnabled = s.GoogleCalEnabled
+	cfg.GoogleCalID = strings.TrimSpace(s.GoogleCalID)
+	cfg.GoogleCalCredentials = strings.TrimSpace(s.GoogleCalCredentials)
+	cfg.GoogleCalCredentialsFile = strings.TrimSpace(s.GoogleCalCredentialsFile)
 
 	srv := server.New(cfg, database)
 	if !s.DiscordBot {

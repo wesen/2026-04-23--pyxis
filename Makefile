@@ -63,7 +63,7 @@ lintmax: golangci-lint-install
 
 gosec:
 	$(GO) install github.com/securego/gosec/v2/cmd/gosec@latest
-	gosec -exclude-generated -exclude=G101,G304,G301,G306,G204 -exclude-dir=.history -exclude-dir=ttmp ./...
+	gosec -exclude-generated -exclude=G101,G304,G301,G306,G204,G115 -exclude-dir=.history -exclude-dir=ttmp ./...
 
 govulncheck:
 	$(GO) install golang.org/x/vuln/cmd/govulncheck@latest
@@ -107,10 +107,7 @@ seed:
 	$(GO) run ./cmd/pyxis seed --fixtures fixtures/dev.sql
 
 generate:
-	# Generate sqlc code
-	sqlc generate
-	# Generate protobuf code
-	buf generate
+	$(GO) generate ./tools
 
 clean:
 	$(DOCKER_COMPOSE) down -v

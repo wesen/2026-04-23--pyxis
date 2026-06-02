@@ -7,6 +7,7 @@ export const endpoints = {
   showCancel: (id: number) => `/api/app/shows/${id}/cancel`,
   showArchive: (id: number) => `/api/app/shows/${id}/archive`,
   showAnnounce: (id: number) => `/api/app/shows/${id}/announce`,
+  showSyncGCal: (id: number) => `/api/app/shows/${id}/sync-gcal`,
   showFlyer: (id: number) => `/api/app/shows/${id}/flyer`,
   bookings: '/api/app/bookings',
   booking: (id: number) => `/api/app/bookings/${id}`,

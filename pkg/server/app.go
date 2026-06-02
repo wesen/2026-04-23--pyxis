@@ -15,6 +15,7 @@ import (
 	"github.com/go-go-golems/pyxis/gen/proto/proto/pyxis/v1"
 	"github.com/go-go-golems/pyxis/pkg/domain"
 	"github.com/go-go-golems/pyxis/pkg/service"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -228,6 +229,8 @@ func protoToDomainShow(pb *pyxisv1.Show) *domain.Show {
 
 func submissionStatusToString(status pyxisv1.SubmissionStatus) string {
 	switch status {
+	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_UNSPECIFIED:
+		return ""
 	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_PENDING:
 		return "pending"
 	case pyxisv1.SubmissionStatus_SUBMISSION_STATUS_APPROVED:
@@ -245,6 +248,8 @@ func submissionStatusToString(status pyxisv1.SubmissionStatus) string {
 
 func showStatusToString(status pyxisv1.ShowStatus) string {
 	switch status {
+	case pyxisv1.ShowStatus_SHOW_STATUS_UNSPECIFIED:
+		return domain.StatusDraft
 	case pyxisv1.ShowStatus_SHOW_STATUS_CONFIRMED:
 		return domain.StatusConfirmed
 	case pyxisv1.ShowStatus_SHOW_STATUS_CANCELLED:
@@ -615,6 +620,35 @@ func (s *Server) handleAnnounceShow(w http.ResponseWriter, r *http.Request) {
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.SuccessResponse{Success: true})
 }
 
+func (s *Server) handleSyncShowToGCal(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		respondError(w, fmt.Errorf("invalid show ID: %w", err))
+		return
+	}
+
+	show, err := s.showService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	// Run sync synchronously (not fire-and-forget) so we can return the result
+	s.showService.SyncShowToGCalSync(ctx, show)
+
+	// Reload to get the updated event ID
+	show, err = s.showService.GetByID(ctx, id)
+	if err != nil {
+		respondError(w, err)
+		return
+	}
+
+	respondProtoJSON(w, http.StatusOK, showToProto(show))
+}
+
 func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	user := s.userFromContext(ctx)
@@ -630,6 +664,8 @@ func (s *Server) handleUploadFlyer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	r.Body = http.MaxBytesReader(w, r.Body, 11<<20)
+	// #nosec G120 -- request body is bounded by MaxBytesReader before multipart parsing.
 	if err := r.ParseMultipartForm(10 << 20); err != nil {
 		respondError(w, fmt.Errorf("parse form: %w", err))
 		return
@@ -734,6 +770,34 @@ func (s *Server) handleListCalendar(w http.ResponseWriter, r *http.Request) {
 	}
 	for i := range blocked {
 		events = append(events, calendarBlockedToEvent(&blocked[i]))
+	}
+
+	// Add external calendar events
+	if s.gcalClient != nil && s.settingsService != nil {
+		settings, err := s.settingsService.Get(ctx)
+		if err == nil && len(settings.ExternalCalendars) > 0 {
+			from := time.Now().AddDate(0, -1, 0)
+			to := time.Now().AddDate(0, 3, 0)
+			for _, cal := range settings.ExternalCalendars {
+				if !cal.Enabled {
+					continue
+				}
+				extEvents, err := s.gcalClient.ListExternalEvents(ctx, cal.ID, from, to)
+				if err != nil {
+					log.Warn().Err(err).Str("calendar", cal.ID).Msg("calendar: failed to fetch external events")
+					continue
+				}
+				for _, e := range extEvents {
+					events = append(events, &pyxisv1.CalendarEvent{
+						Id:     0, // no internal ID for external events
+						Date:   e.Start.Format(time.DateOnly),
+						Label:  fmt.Sprintf("%s (%s)", e.Summary, cal.Name),
+						Status: pyxisv1.ShowStatus_SHOW_STATUS_UNSPECIFIED,
+						Kind:   pyxisv1.CalendarEventKind_CALENDAR_EVENT_KIND_EXTERNAL,
+					})
+				}
+			}
+		}
 	}
 
 	respondProtoJSON(w, http.StatusOK, &pyxisv1.CalendarEventList{Events: events})
@@ -908,10 +972,10 @@ func buildShowLogEntry(show *domain.Show, log *domain.ShowLog) showLogEntryRespo
 	entry.Incident = log.Incident
 	entry.IncidentNotes = log.IncidentNotes
 	entry.LoggedBy = log.LoggedBy
-	if log.CreatedAt.IsZero() == false {
+	if !log.CreatedAt.IsZero() {
 		entry.LoggedAt = log.CreatedAt.Format(time.RFC3339)
 	}
-	if log.UpdatedAt.IsZero() == false {
+	if !log.UpdatedAt.IsZero() {
 		entry.UpdatedAt = log.UpdatedAt.Format(time.RFC3339)
 	}
 	if log.Incident {
@@ -1086,9 +1150,9 @@ func (s *Server) settingsWithRuntimeConfig(settings *domain.Settings) *domain.Se
 	if settings == nil || s.cfg == nil || s.cfg.DiscordGuildID == "" {
 		return settings
 	}
-	copy := *settings
-	copy.DiscordGuildID = s.cfg.DiscordGuildID
-	return &copy
+	settingsCopy := *settings
+	settingsCopy.DiscordGuildID = s.cfg.DiscordGuildID
+	return &settingsCopy
 }
 
 func (s *Server) handleGetSettings(w http.ResponseWriter, r *http.Request) {
@@ -1135,6 +1199,11 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		AutoArchive            bool   `json:"autoArchive"`
 		DiscordPosting         bool   `json:"discordPosting"`
 		SafeSpaceRequired      bool   `json:"safeSpaceRequired"`
+
+		// Google Calendar
+		GoogleCalEnabled      bool   `json:"googleCalEnabled"`
+		GoogleCalID           string `json:"googleCalId"`
+		ExternalCalendarsJSON string `json:"externalCalendarsJson"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		respondError(w, fmt.Errorf("invalid request body: %w", err))
@@ -1144,6 +1213,12 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 	discordGuildID := req.DiscordGuildID
 	if s.cfg != nil && s.cfg.DiscordGuildID != "" {
 		discordGuildID = ""
+	}
+
+	// Parse external calendars JSON
+	var externalCalendars []domain.ExternalCalendarConfig
+	if req.ExternalCalendarsJSON != "" {
+		_ = json.Unmarshal([]byte(req.ExternalCalendarsJSON), &externalCalendars)
 	}
 
 	updated, err := s.settingsService.Update(ctx, &domain.Settings{
@@ -1164,6 +1239,10 @@ func (s *Server) handleUpdateSettings(w http.ResponseWriter, r *http.Request) {
 		AutoArchive:            req.AutoArchive,
 		DiscordPosting:         req.DiscordPosting,
 		SafeSpaceRequired:      req.SafeSpaceRequired,
+
+		GoogleCalEnabled:  req.GoogleCalEnabled,
+		GoogleCalID:       req.GoogleCalID,
+		ExternalCalendars: externalCalendars,
 	})
 	if err != nil {
 		respondError(w, err)

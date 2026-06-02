@@ -3,3 +3,4 @@
 .app-calendar-day-item { align-items: center; border: 1px solid var(--app-rule); border-radius: var(--app-radius-sm); display: flex; gap: 12px; justify-content: space-between; padding: 10px 12px; }
 .app-calendar-day-item strong { display: block; }
 .app-calendar-day-item span { color: var(--app-muted); font-size: 12px; }
+.app-calendar-day-external-hint { font-size: 11px; color: #7b1fa2; font-style: italic; }
