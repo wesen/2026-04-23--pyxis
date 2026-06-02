@@ -107,10 +107,7 @@ seed:
 	$(GO) run ./cmd/pyxis seed --fixtures fixtures/dev.sql
 
 generate:
-	# Generate sqlc code
-	sqlc generate
-	# Generate protobuf code
-	buf generate
+	$(GO) generate ./tools
 
 clean:
 	$(DOCKER_COMPOSE) down -v

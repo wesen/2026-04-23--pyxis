@@ -1,3 +1,3 @@
 package web
 
-//go:generate go run ../../cmd/build-web
+//go:generate env GOWORK=off go run ../../cmd/build-web
