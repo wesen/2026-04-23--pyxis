@@ -3,7 +3,7 @@ module github.com/go-go-golems/pyxis
 go 1.26.3
 
 require (
-	dagger.io/dagger v0.20.6
+	dagger.io/dagger v0.21.3
 	github.com/dop251/goja v0.0.0-20260311135729-065cd970411c
 	github.com/dop251/goja_nodejs v0.0.0-20260212111938-1f56ff5bcf14
 	github.com/go-go-golems/discord-bot v0.1.1
@@ -84,6 +84,7 @@ require (
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/cubicdaiya/gonp v1.0.4 // indirect
+	github.com/dagger/querybuilder v0.0.0-20260402040506-574a5e81cb59 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/dlclark/regexp2 v1.11.5 // indirect
