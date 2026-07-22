@@ -19,9 +19,9 @@
     "clean": "pnpm -r clean"
   },
   "devDependencies": {
-    "@types/node": "^20.11.0",
-    "playwright": "^1.59.1",
-    "typescript": "^5.4.0"
+    "@types/node": "^26.1.1",
+    "playwright": "^1.61.1",
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">=20.0.0",
